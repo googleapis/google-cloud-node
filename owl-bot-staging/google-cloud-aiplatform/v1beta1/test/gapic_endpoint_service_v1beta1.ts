@@ -4193,6 +4193,106 @@ describe('v1beta1.EndpointServiceClient', () => {
             });
         });
 
+        describe('ragCorpus', () => {
+            const fakePath = "/rendered/path/ragCorpus";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                rag_corpus: "ragCorpusValue",
+            };
+            const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            client.pathTemplates.ragCorpusPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.ragCorpusPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('ragCorpusPath', () => {
+                const result = client.ragCorpusPath("projectValue", "locationValue", "ragCorpusValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.ragCorpusPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromRagCorpusName', () => {
+                const result = client.matchProjectFromRagCorpusName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.ragCorpusPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromRagCorpusName', () => {
+                const result = client.matchLocationFromRagCorpusName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.ragCorpusPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRagCorpusFromRagCorpusName', () => {
+                const result = client.matchRagCorpusFromRagCorpusName(fakePath);
+                assert.strictEqual(result, "ragCorpusValue");
+                assert((client.pathTemplates.ragCorpusPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('ragFile', () => {
+            const fakePath = "/rendered/path/ragFile";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                rag_corpus: "ragCorpusValue",
+                rag_file: "ragFileValue",
+            };
+            const client = new endpointserviceModule.v1beta1.EndpointServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            client.pathTemplates.ragFilePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.ragFilePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('ragFilePath', () => {
+                const result = client.ragFilePath("projectValue", "locationValue", "ragCorpusValue", "ragFileValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.ragFilePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromRagFileName', () => {
+                const result = client.matchProjectFromRagFileName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.ragFilePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromRagFileName', () => {
+                const result = client.matchLocationFromRagFileName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.ragFilePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRagCorpusFromRagFileName', () => {
+                const result = client.matchRagCorpusFromRagFileName(fakePath);
+                assert.strictEqual(result, "ragCorpusValue");
+                assert((client.pathTemplates.ragFilePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRagFileFromRagFileName', () => {
+                const result = client.matchRagFileFromRagFileName(fakePath);
+                assert.strictEqual(result, "ragFileValue");
+                assert((client.pathTemplates.ragFilePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('reasoningEngine', () => {
             const fakePath = "/rendered/path/reasoningEngine";
             const expectedParameters = {

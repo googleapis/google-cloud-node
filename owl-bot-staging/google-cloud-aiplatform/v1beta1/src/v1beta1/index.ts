@@ -45,4 +45,6 @@ export {ReasoningEngineServiceClient} from './reasoning_engine_service_client';
 export {ScheduleServiceClient} from './schedule_service_client';
 export {SpecialistPoolServiceClient} from './specialist_pool_service_client';
 export {TensorboardServiceClient} from './tensorboard_service_client';
+export {VertexRagDataServiceClient} from './vertex_rag_data_service_client';
+export {VertexRagServiceClient} from './vertex_rag_service_client';
 export {VizierServiceClient} from './vizier_service_client';

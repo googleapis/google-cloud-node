@@ -1205,6 +1205,103 @@ describe('v1beta1.PredictionServiceClient', () => {
         });
     });
 
+    describe('chatCompletions', () => {
+        it('invokes chatCompletions without error', async () => {
+            const client = new predictionserviceModule.v1beta1.PredictionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.ChatCompletionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ChatCompletionsRequest', ['endpoint']);
+            request.endpoint = defaultValue1;
+            const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.api.HttpBody()
+            );
+            client.innerApiCalls.chatCompletions = stubServerStreamingCall(expectedResponse);
+            const stream = client.chatCompletions(request);
+            const promise = new Promise((resolve, reject) => {
+                stream.on('data', (response: protos.google.api.HttpBody) => {
+                    resolve(response);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.chatCompletions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.chatCompletions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes chatCompletions with error', async () => {
+            const client = new predictionserviceModule.v1beta1.PredictionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.ChatCompletionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ChatCompletionsRequest', ['endpoint']);
+            request.endpoint = defaultValue1;
+            const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.chatCompletions = stubServerStreamingCall(undefined, expectedError);
+            const stream = client.chatCompletions(request);
+            const promise = new Promise((resolve, reject) => {
+                stream.on('data', (response: protos.google.api.HttpBody) => {
+                    resolve(response);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            const actualRequest = (client.innerApiCalls.chatCompletions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.chatCompletions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes chatCompletions with closed client', async () => {
+            const client = new predictionserviceModule.v1beta1.PredictionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.ChatCompletionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ChatCompletionsRequest', ['endpoint']);
+            request.endpoint = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close();
+            const stream = client.chatCompletions(request, {retryRequestOptions: {noResponseRetries: 0}});
+            const promise = new Promise((resolve, reject) => {
+                stream.on('data', (response: protos.google.api.HttpBody) => {
+                    resolve(response);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+        });
+    });
+
     describe('streamDirectPredict', () => {
         it('invokes streamDirectPredict without error', async () => {
             const client = new predictionserviceModule.v1beta1.PredictionServiceClient({
@@ -3847,6 +3944,106 @@ describe('v1beta1.PredictionServiceClient', () => {
                 const result = client.matchModelFromPublisherModelName(fakePath);
                 assert.strictEqual(result, "modelValue");
                 assert((client.pathTemplates.publisherModelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('ragCorpus', () => {
+            const fakePath = "/rendered/path/ragCorpus";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                rag_corpus: "ragCorpusValue",
+            };
+            const client = new predictionserviceModule.v1beta1.PredictionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            client.pathTemplates.ragCorpusPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.ragCorpusPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('ragCorpusPath', () => {
+                const result = client.ragCorpusPath("projectValue", "locationValue", "ragCorpusValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.ragCorpusPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromRagCorpusName', () => {
+                const result = client.matchProjectFromRagCorpusName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.ragCorpusPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromRagCorpusName', () => {
+                const result = client.matchLocationFromRagCorpusName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.ragCorpusPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRagCorpusFromRagCorpusName', () => {
+                const result = client.matchRagCorpusFromRagCorpusName(fakePath);
+                assert.strictEqual(result, "ragCorpusValue");
+                assert((client.pathTemplates.ragCorpusPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('ragFile', () => {
+            const fakePath = "/rendered/path/ragFile";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                rag_corpus: "ragCorpusValue",
+                rag_file: "ragFileValue",
+            };
+            const client = new predictionserviceModule.v1beta1.PredictionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            client.pathTemplates.ragFilePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.ragFilePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('ragFilePath', () => {
+                const result = client.ragFilePath("projectValue", "locationValue", "ragCorpusValue", "ragFileValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.ragFilePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromRagFileName', () => {
+                const result = client.matchProjectFromRagFileName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.ragFilePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromRagFileName', () => {
+                const result = client.matchLocationFromRagFileName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.ragFilePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRagCorpusFromRagFileName', () => {
+                const result = client.matchRagCorpusFromRagFileName(fakePath);
+                assert.strictEqual(result, "ragCorpusValue");
+                assert((client.pathTemplates.ragFilePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRagFileFromRagFileName', () => {
+                const result = client.matchRagFileFromRagFileName(fakePath);
+                assert.strictEqual(result, "ragFileValue");
+                assert((client.pathTemplates.ragFilePathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

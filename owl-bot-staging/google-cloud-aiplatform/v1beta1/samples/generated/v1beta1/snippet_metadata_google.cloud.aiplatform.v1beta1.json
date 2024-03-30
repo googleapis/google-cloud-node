@@ -1518,7 +1518,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 152,
+          "end": 144,
           "type": "FULL"
         }
       ],
@@ -1560,10 +1560,6 @@
             "type": ".google.cloud.aiplatform.v1beta1.FulfillmentInput"
           },
           {
-            "name": "response_recall_input",
-            "type": ".google.cloud.aiplatform.v1beta1.ResponseRecallInput"
-          },
-          {
             "name": "summarization_quality_input",
             "type": ".google.cloud.aiplatform.v1beta1.SummarizationQualityInput"
           },
@@ -1598,10 +1594,6 @@
           {
             "name": "question_answering_correctness_input",
             "type": ".google.cloud.aiplatform.v1beta1.QuestionAnsweringCorrectnessInput"
-          },
-          {
-            "name": "rag_context_recall_input",
-            "type": ".google.cloud.aiplatform.v1beta1.RagContextRecallInput"
           },
           {
             "name": "tool_call_valid_input",
@@ -11062,7 +11054,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 84,
+          "end": 91,
           "type": "FULL"
         }
       ],
@@ -11078,6 +11070,10 @@
           {
             "name": "contents",
             "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "system_instruction",
+            "type": ".google.cloud.aiplatform.v1beta1.Content"
           },
           {
             "name": "tools",
@@ -11122,7 +11118,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 86,
+          "end": 93,
           "type": "FULL"
         }
       ],
@@ -11138,6 +11134,10 @@
           {
             "name": "contents",
             "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "system_instruction",
+            "type": ".google.cloud.aiplatform.v1beta1.Content"
           },
           {
             "name": "tools",
@@ -11164,6 +11164,50 @@
         "method": {
           "shortName": "StreamGenerateContent",
           "fullName": "google.cloud.aiplatform.v1beta1.PredictionService.StreamGenerateContent",
+          "service": {
+            "shortName": "PredictionService",
+            "fullName": "google.cloud.aiplatform.v1beta1.PredictionService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_PredictionService_ChatCompletions_async",
+      "title": "DatasetService chatCompletions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Exposes an OpenAI-compatible endpoint for chat completions.",
+      "canonical": true,
+      "file": "prediction_service.chat_completions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ChatCompletions",
+        "fullName": "google.cloud.aiplatform.v1beta1.PredictionService.ChatCompletions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "endpoint",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "http_body",
+            "type": ".google.api.HttpBody"
+          }
+        ],
+        "resultType": ".google.api.HttpBody",
+        "client": {
+          "shortName": "PredictionServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.PredictionServiceClient"
+        },
+        "method": {
+          "shortName": "ChatCompletions",
+          "fullName": "google.cloud.aiplatform.v1beta1.PredictionService.ChatCompletions",
           "service": {
             "shortName": "PredictionService",
             "fullName": "google.cloud.aiplatform.v1beta1.PredictionService"
@@ -13291,6 +13335,450 @@
           "service": {
             "shortName": "TensorboardService",
             "fullName": "google.cloud.aiplatform.v1beta1.TensorboardService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_VertexRagDataService_CreateRagCorpus_async",
+      "title": "DatasetService createRagCorpus Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a RagCorpus.",
+      "canonical": true,
+      "file": "vertex_rag_data_service.create_rag_corpus.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateRagCorpus",
+        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.CreateRagCorpus",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "rag_corpus",
+            "type": ".google.cloud.aiplatform.v1beta1.RagCorpus"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "VertexRagDataServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataServiceClient"
+        },
+        "method": {
+          "shortName": "CreateRagCorpus",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.CreateRagCorpus",
+          "service": {
+            "shortName": "VertexRagDataService",
+            "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_VertexRagDataService_GetRagCorpus_async",
+      "title": "DatasetService getRagCorpus Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a RagCorpus.",
+      "canonical": true,
+      "file": "vertex_rag_data_service.get_rag_corpus.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetRagCorpus",
+        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.GetRagCorpus",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.aiplatform.v1beta1.RagCorpus",
+        "client": {
+          "shortName": "VertexRagDataServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataServiceClient"
+        },
+        "method": {
+          "shortName": "GetRagCorpus",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.GetRagCorpus",
+          "service": {
+            "shortName": "VertexRagDataService",
+            "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_VertexRagDataService_ListRagCorpora_async",
+      "title": "DatasetService listRagCorpora Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists RagCorpora in a Location.",
+      "canonical": true,
+      "file": "vertex_rag_data_service.list_rag_corpora.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListRagCorpora",
+        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.ListRagCorpora",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.aiplatform.v1beta1.ListRagCorporaResponse",
+        "client": {
+          "shortName": "VertexRagDataServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataServiceClient"
+        },
+        "method": {
+          "shortName": "ListRagCorpora",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.ListRagCorpora",
+          "service": {
+            "shortName": "VertexRagDataService",
+            "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_VertexRagDataService_DeleteRagCorpus_async",
+      "title": "DatasetService deleteRagCorpus Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a RagCorpus.",
+      "canonical": true,
+      "file": "vertex_rag_data_service.delete_rag_corpus.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteRagCorpus",
+        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.DeleteRagCorpus",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "VertexRagDataServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteRagCorpus",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.DeleteRagCorpus",
+          "service": {
+            "shortName": "VertexRagDataService",
+            "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_VertexRagDataService_UploadRagFile_async",
+      "title": "DatasetService uploadRagFile Sample",
+      "origin": "API_DEFINITION",
+      "description": " Upload a file into a RagCorpus.",
+      "canonical": true,
+      "file": "vertex_rag_data_service.upload_rag_file.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UploadRagFile",
+        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.UploadRagFile",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "rag_file",
+            "type": ".google.cloud.aiplatform.v1beta1.RagFile"
+          },
+          {
+            "name": "upload_rag_file_config",
+            "type": ".google.cloud.aiplatform.v1beta1.UploadRagFileConfig"
+          }
+        ],
+        "resultType": ".google.cloud.aiplatform.v1beta1.UploadRagFileResponse",
+        "client": {
+          "shortName": "VertexRagDataServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataServiceClient"
+        },
+        "method": {
+          "shortName": "UploadRagFile",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.UploadRagFile",
+          "service": {
+            "shortName": "VertexRagDataService",
+            "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_VertexRagDataService_ImportRagFiles_async",
+      "title": "DatasetService importRagFiles Sample",
+      "origin": "API_DEFINITION",
+      "description": " Import files from Google Cloud Storage or Google Drive into a RagCorpus.",
+      "canonical": true,
+      "file": "vertex_rag_data_service.import_rag_files.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ImportRagFiles",
+        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.ImportRagFiles",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "import_rag_files_config",
+            "type": ".google.cloud.aiplatform.v1beta1.ImportRagFilesConfig"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "VertexRagDataServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataServiceClient"
+        },
+        "method": {
+          "shortName": "ImportRagFiles",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.ImportRagFiles",
+          "service": {
+            "shortName": "VertexRagDataService",
+            "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_VertexRagDataService_GetRagFile_async",
+      "title": "DatasetService getRagFile Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a RagFile.",
+      "canonical": true,
+      "file": "vertex_rag_data_service.get_rag_file.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetRagFile",
+        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.GetRagFile",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.aiplatform.v1beta1.RagFile",
+        "client": {
+          "shortName": "VertexRagDataServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataServiceClient"
+        },
+        "method": {
+          "shortName": "GetRagFile",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.GetRagFile",
+          "service": {
+            "shortName": "VertexRagDataService",
+            "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_VertexRagDataService_ListRagFiles_async",
+      "title": "DatasetService listRagFiles Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists RagFiles in a RagCorpus.",
+      "canonical": true,
+      "file": "vertex_rag_data_service.list_rag_files.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListRagFiles",
+        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.ListRagFiles",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.aiplatform.v1beta1.ListRagFilesResponse",
+        "client": {
+          "shortName": "VertexRagDataServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataServiceClient"
+        },
+        "method": {
+          "shortName": "ListRagFiles",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.ListRagFiles",
+          "service": {
+            "shortName": "VertexRagDataService",
+            "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_VertexRagDataService_DeleteRagFile_async",
+      "title": "DatasetService deleteRagFile Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a RagFile.",
+      "canonical": true,
+      "file": "vertex_rag_data_service.delete_rag_file.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteRagFile",
+        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.DeleteRagFile",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "VertexRagDataServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteRagFile",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.DeleteRagFile",
+          "service": {
+            "shortName": "VertexRagDataService",
+            "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_VertexRagService_RetrieveContexts_async",
+      "title": "DatasetService retrieveContexts Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves relevant contexts for a query.",
+      "canonical": true,
+      "file": "vertex_rag_service.retrieve_contexts.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RetrieveContexts",
+        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagService.RetrieveContexts",
+        "async": true,
+        "parameters": [
+          {
+            "name": "vertex_rag_store",
+            "type": ".google.cloud.aiplatform.v1beta1.RetrieveContextsRequest.VertexRagStore"
+          },
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "query",
+            "type": ".google.cloud.aiplatform.v1beta1.RagQuery"
+          }
+        ],
+        "resultType": ".google.cloud.aiplatform.v1beta1.RetrieveContextsResponse",
+        "client": {
+          "shortName": "VertexRagServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagServiceClient"
+        },
+        "method": {
+          "shortName": "RetrieveContexts",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagService.RetrieveContexts",
+          "service": {
+            "shortName": "VertexRagService",
+            "fullName": "google.cloud.aiplatform.v1beta1.VertexRagService"
           }
         }
       }

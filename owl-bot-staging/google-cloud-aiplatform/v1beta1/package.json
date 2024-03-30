@@ -50,6 +50,8 @@
     "schedule service",
     "specialist pool service",
     "tensorboard service",
+    "vertex rag data service",
+    "vertex rag service",
     "vizier service"
   ],
   "scripts": {

@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {DatasetServiceClient, DeploymentResourcePoolServiceClient, EndpointServiceClient, EvaluationServiceClient, ExtensionExecutionServiceClient, ExtensionRegistryServiceClient, FeatureOnlineStoreAdminServiceClient, FeatureOnlineStoreServiceClient, FeatureRegistryServiceClient, FeaturestoreOnlineServingServiceClient, FeaturestoreServiceClient, IndexEndpointServiceClient, IndexServiceClient, JobServiceClient, LlmUtilityServiceClient, MatchServiceClient, MetadataServiceClient, MigrationServiceClient, ModelGardenServiceClient, ModelServiceClient, NotebookServiceClient, PersistentResourceServiceClient, PipelineServiceClient, PredictionServiceClient, ReasoningEngineExecutionServiceClient, ReasoningEngineServiceClient, ScheduleServiceClient, SpecialistPoolServiceClient, TensorboardServiceClient, VizierServiceClient} from '@google-cloud/aiplatform';
+import {DatasetServiceClient, DeploymentResourcePoolServiceClient, EndpointServiceClient, EvaluationServiceClient, ExtensionExecutionServiceClient, ExtensionRegistryServiceClient, FeatureOnlineStoreAdminServiceClient, FeatureOnlineStoreServiceClient, FeatureRegistryServiceClient, FeaturestoreOnlineServingServiceClient, FeaturestoreServiceClient, IndexEndpointServiceClient, IndexServiceClient, JobServiceClient, LlmUtilityServiceClient, MatchServiceClient, MetadataServiceClient, MigrationServiceClient, ModelGardenServiceClient, ModelServiceClient, NotebookServiceClient, PersistentResourceServiceClient, PipelineServiceClient, PredictionServiceClient, ReasoningEngineExecutionServiceClient, ReasoningEngineServiceClient, ScheduleServiceClient, SpecialistPoolServiceClient, TensorboardServiceClient, VertexRagDataServiceClient, VertexRagServiceClient, VizierServiceClient} from '@google-cloud/aiplatform';
 
 // check that the client class type name can be used
 function doStuffWithDatasetServiceClient(client: DatasetServiceClient) {
@@ -104,6 +104,12 @@ function doStuffWithSpecialistPoolServiceClient(client: SpecialistPoolServiceCli
   client.close();
 }
 function doStuffWithTensorboardServiceClient(client: TensorboardServiceClient) {
+  client.close();
+}
+function doStuffWithVertexRagDataServiceClient(client: VertexRagDataServiceClient) {
+  client.close();
+}
+function doStuffWithVertexRagServiceClient(client: VertexRagServiceClient) {
   client.close();
 }
 function doStuffWithVizierServiceClient(client: VizierServiceClient) {
@@ -198,6 +204,12 @@ function main() {
   // check that the client instance can be created
   const tensorboardServiceClient = new TensorboardServiceClient();
   doStuffWithTensorboardServiceClient(tensorboardServiceClient);
+  // check that the client instance can be created
+  const vertexRagDataServiceClient = new VertexRagDataServiceClient();
+  doStuffWithVertexRagDataServiceClient(vertexRagDataServiceClient);
+  // check that the client instance can be created
+  const vertexRagServiceClient = new VertexRagServiceClient();
+  doStuffWithVertexRagServiceClient(vertexRagServiceClient);
   // check that the client instance can be created
   const vizierServiceClient = new VizierServiceClient();
   doStuffWithVizierServiceClient(vizierServiceClient);
