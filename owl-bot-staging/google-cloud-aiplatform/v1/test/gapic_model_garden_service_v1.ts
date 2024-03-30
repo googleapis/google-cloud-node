@@ -2246,6 +2246,98 @@ describe('v1.ModelGardenServiceClient', () => {
             });
         });
 
+        describe('notebookRuntime', () => {
+            const fakePath = "/rendered/path/notebookRuntime";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                notebook_runtime: "notebookRuntimeValue",
+            };
+            const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            client.pathTemplates.notebookRuntimePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.notebookRuntimePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('notebookRuntimePath', () => {
+                const result = client.notebookRuntimePath("projectValue", "locationValue", "notebookRuntimeValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.notebookRuntimePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromNotebookRuntimeName', () => {
+                const result = client.matchProjectFromNotebookRuntimeName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.notebookRuntimePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromNotebookRuntimeName', () => {
+                const result = client.matchLocationFromNotebookRuntimeName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.notebookRuntimePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchNotebookRuntimeFromNotebookRuntimeName', () => {
+                const result = client.matchNotebookRuntimeFromNotebookRuntimeName(fakePath);
+                assert.strictEqual(result, "notebookRuntimeValue");
+                assert((client.pathTemplates.notebookRuntimePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('notebookRuntimeTemplate', () => {
+            const fakePath = "/rendered/path/notebookRuntimeTemplate";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                notebook_runtime_template: "notebookRuntimeTemplateValue",
+            };
+            const client = new modelgardenserviceModule.v1.ModelGardenServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            client.pathTemplates.notebookRuntimeTemplatePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.notebookRuntimeTemplatePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('notebookRuntimeTemplatePath', () => {
+                const result = client.notebookRuntimeTemplatePath("projectValue", "locationValue", "notebookRuntimeTemplateValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.notebookRuntimeTemplatePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromNotebookRuntimeTemplateName', () => {
+                const result = client.matchProjectFromNotebookRuntimeTemplateName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.notebookRuntimeTemplatePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromNotebookRuntimeTemplateName', () => {
+                const result = client.matchLocationFromNotebookRuntimeTemplateName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.notebookRuntimeTemplatePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchNotebookRuntimeTemplateFromNotebookRuntimeTemplateName', () => {
+                const result = client.matchNotebookRuntimeTemplateFromNotebookRuntimeTemplateName(fakePath);
+                assert.strictEqual(result, "notebookRuntimeTemplateValue");
+                assert((client.pathTemplates.notebookRuntimeTemplatePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('pipelineJob', () => {
             const fakePath = "/rendered/path/pipelineJob";
             const expectedParameters = {

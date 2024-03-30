@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {DatasetServiceClient, DeploymentResourcePoolServiceClient, EndpointServiceClient, FeatureOnlineStoreAdminServiceClient, FeatureOnlineStoreServiceClient, FeatureRegistryServiceClient, FeaturestoreOnlineServingServiceClient, FeaturestoreServiceClient, IndexEndpointServiceClient, IndexServiceClient, JobServiceClient, LlmUtilityServiceClient, MatchServiceClient, MetadataServiceClient, MigrationServiceClient, ModelGardenServiceClient, ModelServiceClient, PipelineServiceClient, PredictionServiceClient, ScheduleServiceClient, SpecialistPoolServiceClient, TensorboardServiceClient, VizierServiceClient} from '@google-cloud/aiplatform';
+import {DatasetServiceClient, DeploymentResourcePoolServiceClient, EndpointServiceClient, FeatureOnlineStoreAdminServiceClient, FeatureOnlineStoreServiceClient, FeatureRegistryServiceClient, FeaturestoreOnlineServingServiceClient, FeaturestoreServiceClient, IndexEndpointServiceClient, IndexServiceClient, JobServiceClient, LlmUtilityServiceClient, MatchServiceClient, MetadataServiceClient, MigrationServiceClient, ModelGardenServiceClient, ModelServiceClient, NotebookServiceClient, PipelineServiceClient, PredictionServiceClient, ScheduleServiceClient, SpecialistPoolServiceClient, TensorboardServiceClient, VizierServiceClient} from '@google-cloud/aiplatform';
 
 // check that the client class type name can be used
 function doStuffWithDatasetServiceClient(client: DatasetServiceClient) {
@@ -68,6 +68,9 @@ function doStuffWithModelGardenServiceClient(client: ModelGardenServiceClient) {
   client.close();
 }
 function doStuffWithModelServiceClient(client: ModelServiceClient) {
+  client.close();
+}
+function doStuffWithNotebookServiceClient(client: NotebookServiceClient) {
   client.close();
 }
 function doStuffWithPipelineServiceClient(client: PipelineServiceClient) {
@@ -141,6 +144,9 @@ function main() {
   // check that the client instance can be created
   const modelServiceClient = new ModelServiceClient();
   doStuffWithModelServiceClient(modelServiceClient);
+  // check that the client instance can be created
+  const notebookServiceClient = new NotebookServiceClient();
+  doStuffWithNotebookServiceClient(notebookServiceClient);
   // check that the client instance can be created
   const pipelineServiceClient = new PipelineServiceClient();
   doStuffWithPipelineServiceClient(pipelineServiceClient);

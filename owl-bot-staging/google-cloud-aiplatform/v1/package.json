@@ -38,6 +38,7 @@
     "migration service",
     "model garden service",
     "model service",
+    "notebook service",
     "pipeline service",
     "prediction service",
     "schedule service",
