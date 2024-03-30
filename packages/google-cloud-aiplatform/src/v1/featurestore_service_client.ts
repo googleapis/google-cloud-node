@@ -308,6 +308,9 @@ export class FeaturestoreServiceClient {
       notebookRuntimeTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/notebookRuntimeTemplates/{notebook_runtime_template}'
       ),
+      persistentResourcePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/persistentResources/{persistent_resource}'
+      ),
       pipelineJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/pipelineJobs/{pipeline_job}'
       ),
@@ -622,6 +625,9 @@ export class FeaturestoreServiceClient {
               post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',
             },
             {
+              post: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
+            },
+            {
               post: '/ui/{name=projects/*/locations/*/studies/*/operations/*}:cancel',
             },
             {
@@ -723,6 +729,9 @@ export class FeaturestoreServiceClient {
             },
             {
               post: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
             },
             {
               post: '/v1/{name=projects/*/locations/*/studies/*/operations/*}:cancel',
@@ -864,6 +873,10 @@ export class FeaturestoreServiceClient {
             {
               delete:
                 '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',
             },
             {
               delete:
@@ -1025,6 +1038,10 @@ export class FeaturestoreServiceClient {
             },
             {
               delete:
+                '/v1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
             },
             {
@@ -1152,6 +1169,9 @@ export class FeaturestoreServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
             },
+            {
+              get: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',
+            },
             {get: '/ui/{name=projects/*/locations/*/studies/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
@@ -1261,6 +1281,9 @@ export class FeaturestoreServiceClient {
             },
             {
               get: '/v1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
             },
             {
               get: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
@@ -1375,6 +1398,9 @@ export class FeaturestoreServiceClient {
               get: '/ui/{name=projects/*/locations/*/trainingPipelines/*}/operations',
             },
             {
+              get: '/ui/{name=projects/*/locations/*/persistentResources/*}/operations',
+            },
+            {
               get: '/ui/{name=projects/*/locations/*/pipelineJobs/*}/operations',
             },
             {get: '/ui/{name=projects/*/locations/*/schedules/*}/operations'},
@@ -1439,7 +1465,7 @@ export class FeaturestoreServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',
             },
-            {get: '/ui/{name=projects/*/locations/*/tuningJobs/*}/operations'},
+            {get: '/v1/{name=projects/*/locations/*/tuningJobs/*}/operations'},
             {get: '/v1/{name=projects/*/locations/*/indexes/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/indexEndpoints/*}/operations',
@@ -1472,6 +1498,9 @@ export class FeaturestoreServiceClient {
             },
             {
               get: '/v1/{name=projects/*/locations/*/trainingPipelines/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/persistentResources/*}/operations',
             },
             {
               get: '/v1/{name=projects/*/locations/*/pipelineJobs/*}/operations',
@@ -1604,6 +1633,9 @@ export class FeaturestoreServiceClient {
               post: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:wait',
             },
             {
+              post: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',
+            },
+            {
               post: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',
             },
             {
@@ -1714,6 +1746,9 @@ export class FeaturestoreServiceClient {
             },
             {
               post: '/v1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',
             },
             {
               post: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',
@@ -8229,6 +8264,67 @@ export class FeaturestoreServiceClient {
     return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(
       notebookRuntimeTemplateName
     ).notebook_runtime_template;
+  }
+
+  /**
+   * Return a fully-qualified persistentResource resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} persistent_resource
+   * @returns {string} Resource name string.
+   */
+  persistentResourcePath(
+    project: string,
+    location: string,
+    persistentResource: string
+  ) {
+    return this.pathTemplates.persistentResourcePathTemplate.render({
+      project: project,
+      location: location,
+      persistent_resource: persistentResource,
+    });
+  }
+
+  /**
+   * Parse the project from PersistentResource resource.
+   *
+   * @param {string} persistentResourceName
+   *   A fully-qualified path representing PersistentResource resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromPersistentResourceName(persistentResourceName: string) {
+    return this.pathTemplates.persistentResourcePathTemplate.match(
+      persistentResourceName
+    ).project;
+  }
+
+  /**
+   * Parse the location from PersistentResource resource.
+   *
+   * @param {string} persistentResourceName
+   *   A fully-qualified path representing PersistentResource resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromPersistentResourceName(persistentResourceName: string) {
+    return this.pathTemplates.persistentResourcePathTemplate.match(
+      persistentResourceName
+    ).location;
+  }
+
+  /**
+   * Parse the persistent_resource from PersistentResource resource.
+   *
+   * @param {string} persistentResourceName
+   *   A fully-qualified path representing PersistentResource resource.
+   * @returns {string} A string representing the persistent_resource.
+   */
+  matchPersistentResourceFromPersistentResourceName(
+    persistentResourceName: string
+  ) {
+    return this.pathTemplates.persistentResourcePathTemplate.match(
+      persistentResourceName
+    ).persistent_resource;
   }
 
   /**

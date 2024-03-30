@@ -35,6 +35,7 @@ import {
   ModelGardenServiceClient,
   ModelServiceClient,
   NotebookServiceClient,
+  PersistentResourceServiceClient,
   PipelineServiceClient,
   PredictionServiceClient,
   ScheduleServiceClient,
@@ -110,6 +111,11 @@ function doStuffWithModelServiceClient(client: ModelServiceClient) {
   client.close();
 }
 function doStuffWithNotebookServiceClient(client: NotebookServiceClient) {
+  client.close();
+}
+function doStuffWithPersistentResourceServiceClient(
+  client: PersistentResourceServiceClient
+) {
   client.close();
 }
 function doStuffWithPipelineServiceClient(client: PipelineServiceClient) {
@@ -197,6 +203,9 @@ function main() {
   // check that the client instance can be created
   const notebookServiceClient = new NotebookServiceClient();
   doStuffWithNotebookServiceClient(notebookServiceClient);
+  // check that the client instance can be created
+  const persistentResourceServiceClient = new PersistentResourceServiceClient();
+  doStuffWithPersistentResourceServiceClient(persistentResourceServiceClient);
   // check that the client instance can be created
   const pipelineServiceClient = new PipelineServiceClient();
   doStuffWithPipelineServiceClient(pipelineServiceClient);

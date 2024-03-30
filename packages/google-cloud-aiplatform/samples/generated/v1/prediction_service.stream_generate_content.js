@@ -42,6 +42,12 @@ function main(model, contents) {
    */
   // const contents = [1,2,3,4]
   /**
+   *  Optional. The user provided system instructions for the model.
+   *  Note: only text should be used in parts and content in each part will be in
+   *  a separate paragraph.
+   */
+  // const systemInstruction = {}
+  /**
    *  Optional. A list of `Tools` the model may use to generate the next
    *  response.
    *  A `Tool` is a piece of code that enables the system to interact with

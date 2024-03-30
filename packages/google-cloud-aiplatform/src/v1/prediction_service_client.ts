@@ -300,6 +300,9 @@ export class PredictionServiceClient {
       notebookRuntimeTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/notebookRuntimeTemplates/{notebook_runtime_template}'
       ),
+      persistentResourcePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/persistentResources/{persistent_resource}'
+      ),
       pipelineJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/pipelineJobs/{pipeline_job}'
       ),
@@ -1132,6 +1135,10 @@ export class PredictionServiceClient {
    *   For single-turn queries, this is a single instance. For multi-turn queries,
    *   this is a repeated field that contains conversation history + latest
    *   request.
+   * @param {google.cloud.aiplatform.v1.Content} [request.systemInstruction]
+   *   Optional. The user provided system instructions for the model.
+   *   Note: only text should be used in parts and content in each part will be in
+   *   a separate paragraph.
    * @param {number[]} [request.tools]
    *   Optional. A list of `Tools` the model may use to generate the next
    *   response.
@@ -1397,6 +1404,10 @@ export class PredictionServiceClient {
    *   For single-turn queries, this is a single instance. For multi-turn queries,
    *   this is a repeated field that contains conversation history + latest
    *   request.
+   * @param {google.cloud.aiplatform.v1.Content} [request.systemInstruction]
+   *   Optional. The user provided system instructions for the model.
+   *   Note: only text should be used in parts and content in each part will be in
+   *   a separate paragraph.
    * @param {number[]} [request.tools]
    *   Optional. A list of `Tools` the model may use to generate the next
    *   response.
@@ -3654,6 +3665,67 @@ export class PredictionServiceClient {
     return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(
       notebookRuntimeTemplateName
     ).notebook_runtime_template;
+  }
+
+  /**
+   * Return a fully-qualified persistentResource resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} persistent_resource
+   * @returns {string} Resource name string.
+   */
+  persistentResourcePath(
+    project: string,
+    location: string,
+    persistentResource: string
+  ) {
+    return this.pathTemplates.persistentResourcePathTemplate.render({
+      project: project,
+      location: location,
+      persistent_resource: persistentResource,
+    });
+  }
+
+  /**
+   * Parse the project from PersistentResource resource.
+   *
+   * @param {string} persistentResourceName
+   *   A fully-qualified path representing PersistentResource resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromPersistentResourceName(persistentResourceName: string) {
+    return this.pathTemplates.persistentResourcePathTemplate.match(
+      persistentResourceName
+    ).project;
+  }
+
+  /**
+   * Parse the location from PersistentResource resource.
+   *
+   * @param {string} persistentResourceName
+   *   A fully-qualified path representing PersistentResource resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromPersistentResourceName(persistentResourceName: string) {
+    return this.pathTemplates.persistentResourcePathTemplate.match(
+      persistentResourceName
+    ).location;
+  }
+
+  /**
+   * Parse the persistent_resource from PersistentResource resource.
+   *
+   * @param {string} persistentResourceName
+   *   A fully-qualified path representing PersistentResource resource.
+   * @returns {string} A string representing the persistent_resource.
+   */
+  matchPersistentResourceFromPersistentResourceName(
+    persistentResourceName: string
+  ) {
+    return this.pathTemplates.persistentResourcePathTemplate.match(
+      persistentResourceName
+    ).persistent_resource;
   }
 
   /**
