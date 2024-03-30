@@ -18,7 +18,14 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -97,20 +104,41 @@ export class FileServiceClient {
    *     const client = new FileServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof FileServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'generativelanguage.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -136,7 +164,7 @@ export class FileServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -150,10 +178,7 @@ export class FileServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -177,21 +202,15 @@ export class FileServiceClient {
       chunkPathTemplate: new this._gaxModule.PathTemplate(
         'corpora/{corpus}/documents/{document}/chunks/{chunk}'
       ),
-      corpusPathTemplate: new this._gaxModule.PathTemplate(
-        'corpora/{corpus}'
-      ),
+      corpusPathTemplate: new this._gaxModule.PathTemplate('corpora/{corpus}'),
       corpusPermissionPathTemplate: new this._gaxModule.PathTemplate(
         'corpora/{corpus}/permissions/{permission}'
       ),
       documentPathTemplate: new this._gaxModule.PathTemplate(
         'corpora/{corpus}/documents/{document}'
       ),
-      filePathTemplate: new this._gaxModule.PathTemplate(
-        'files/{file}'
-      ),
-      modelPathTemplate: new this._gaxModule.PathTemplate(
-        'models/{model}'
-      ),
+      filePathTemplate: new this._gaxModule.PathTemplate('files/{file}'),
+      modelPathTemplate: new this._gaxModule.PathTemplate('models/{model}'),
       tunedModelPathTemplate: new this._gaxModule.PathTemplate(
         'tunedModels/{tuned_model}'
       ),
@@ -204,14 +223,20 @@ export class FileServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listFiles:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'files')
+      listFiles: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'files'
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.ai.generativelanguage.v1beta.FileService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.ai.generativelanguage.v1beta.FileService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      {'x-goog-api-client': clientHeader.join(' ')}
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -242,32 +267,40 @@ export class FileServiceClient {
     // Put together the "service stub" for
     // google.ai.generativelanguage.v1beta.FileService.
     this.fileServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.ai.generativelanguage.v1beta.FileService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.ai.generativelanguage.v1beta.FileService'
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.ai.generativelanguage.v1beta.FileService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const fileServiceStubMethods =
-        ['createFile', 'listFiles', 'getFile', 'deleteFile'];
+    const fileServiceStubMethods = [
+      'createFile',
+      'listFiles',
+      'getFile',
+      'deleteFile',
+    ];
     for (const methodName of fileServiceStubMethods) {
       const callPromise = this.fileServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        }
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -287,8 +320,14 @@ export class FileServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
     }
     return 'generativelanguage.googleapis.com';
   }
@@ -299,8 +338,14 @@ export class FileServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
     }
     return 'generativelanguage.googleapis.com';
   }
@@ -340,8 +385,9 @@ export class FileServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -352,63 +398,84 @@ export class FileServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Creates a `File`.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.ai.generativelanguage.v1beta.File} [request.file]
- *   Optional. Metadata for the file to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.CreateFileResponse|CreateFileResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/file_service.create_file.js</caption>
- * region_tag:generativelanguage_v1beta_generated_FileService_CreateFile_async
- */
+  /**
+   * Creates a `File`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.ai.generativelanguage.v1beta.File} [request.file]
+   *   Optional. Metadata for the file to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.CreateFileResponse|CreateFileResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/file_service.create_file.js</caption>
+   * region_tag:generativelanguage_v1beta_generated_FileService_CreateFile_async
+   */
   createFile(
-      request?: protos.google.ai.generativelanguage.v1beta.ICreateFileRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.ai.generativelanguage.v1beta.ICreateFileResponse,
-        protos.google.ai.generativelanguage.v1beta.ICreateFileRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.ai.generativelanguage.v1beta.ICreateFileRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.ai.generativelanguage.v1beta.ICreateFileResponse,
+      protos.google.ai.generativelanguage.v1beta.ICreateFileRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   createFile(
-      request: protos.google.ai.generativelanguage.v1beta.ICreateFileRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.ai.generativelanguage.v1beta.ICreateFileResponse,
-          protos.google.ai.generativelanguage.v1beta.ICreateFileRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ai.generativelanguage.v1beta.ICreateFileRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ai.generativelanguage.v1beta.ICreateFileResponse,
+      | protos.google.ai.generativelanguage.v1beta.ICreateFileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createFile(
-      request: protos.google.ai.generativelanguage.v1beta.ICreateFileRequest,
-      callback: Callback<
-          protos.google.ai.generativelanguage.v1beta.ICreateFileResponse,
-          protos.google.ai.generativelanguage.v1beta.ICreateFileRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ai.generativelanguage.v1beta.ICreateFileRequest,
+    callback: Callback<
+      protos.google.ai.generativelanguage.v1beta.ICreateFileResponse,
+      | protos.google.ai.generativelanguage.v1beta.ICreateFileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createFile(
-      request?: protos.google.ai.generativelanguage.v1beta.ICreateFileRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.ai.generativelanguage.v1beta.ICreateFileRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.ai.generativelanguage.v1beta.ICreateFileResponse,
-          protos.google.ai.generativelanguage.v1beta.ICreateFileRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.ai.generativelanguage.v1beta.ICreateFileResponse,
-          protos.google.ai.generativelanguage.v1beta.ICreateFileRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.ai.generativelanguage.v1beta.ICreateFileResponse,
-        protos.google.ai.generativelanguage.v1beta.ICreateFileRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.ai.generativelanguage.v1beta.ICreateFileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ai.generativelanguage.v1beta.ICreateFileResponse,
+      | protos.google.ai.generativelanguage.v1beta.ICreateFileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.ai.generativelanguage.v1beta.ICreateFileResponse,
+      protos.google.ai.generativelanguage.v1beta.ICreateFileRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
@@ -417,214 +484,273 @@ export class FileServiceClient {
     this.initialize();
     return this.innerApiCalls.createFile(request, options, callback);
   }
-/**
- * Gets the metadata for the given `File`.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the `File` to get.
- *   Example: `files/abc-123`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.File|File}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/file_service.get_file.js</caption>
- * region_tag:generativelanguage_v1beta_generated_FileService_GetFile_async
- */
+  /**
+   * Gets the metadata for the given `File`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the `File` to get.
+   *   Example: `files/abc-123`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.File|File}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/file_service.get_file.js</caption>
+   * region_tag:generativelanguage_v1beta_generated_FileService_GetFile_async
+   */
   getFile(
-      request?: protos.google.ai.generativelanguage.v1beta.IGetFileRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.ai.generativelanguage.v1beta.IFile,
-        protos.google.ai.generativelanguage.v1beta.IGetFileRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.ai.generativelanguage.v1beta.IGetFileRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.ai.generativelanguage.v1beta.IFile,
+      protos.google.ai.generativelanguage.v1beta.IGetFileRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getFile(
-      request: protos.google.ai.generativelanguage.v1beta.IGetFileRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.ai.generativelanguage.v1beta.IFile,
-          protos.google.ai.generativelanguage.v1beta.IGetFileRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ai.generativelanguage.v1beta.IGetFileRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ai.generativelanguage.v1beta.IFile,
+      | protos.google.ai.generativelanguage.v1beta.IGetFileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getFile(
-      request: protos.google.ai.generativelanguage.v1beta.IGetFileRequest,
-      callback: Callback<
-          protos.google.ai.generativelanguage.v1beta.IFile,
-          protos.google.ai.generativelanguage.v1beta.IGetFileRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ai.generativelanguage.v1beta.IGetFileRequest,
+    callback: Callback<
+      protos.google.ai.generativelanguage.v1beta.IFile,
+      | protos.google.ai.generativelanguage.v1beta.IGetFileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getFile(
-      request?: protos.google.ai.generativelanguage.v1beta.IGetFileRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.ai.generativelanguage.v1beta.IGetFileRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.ai.generativelanguage.v1beta.IFile,
-          protos.google.ai.generativelanguage.v1beta.IGetFileRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.ai.generativelanguage.v1beta.IFile,
-          protos.google.ai.generativelanguage.v1beta.IGetFileRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.ai.generativelanguage.v1beta.IFile,
-        protos.google.ai.generativelanguage.v1beta.IGetFileRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.ai.generativelanguage.v1beta.IGetFileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ai.generativelanguage.v1beta.IFile,
+      | protos.google.ai.generativelanguage.v1beta.IGetFileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.ai.generativelanguage.v1beta.IFile,
+      protos.google.ai.generativelanguage.v1beta.IGetFileRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     this.initialize();
     return this.innerApiCalls.getFile(request, options, callback);
   }
-/**
- * Deletes the `File`.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the `File` to delete.
- *   Example: `files/abc-123`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/file_service.delete_file.js</caption>
- * region_tag:generativelanguage_v1beta_generated_FileService_DeleteFile_async
- */
+  /**
+   * Deletes the `File`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the `File` to delete.
+   *   Example: `files/abc-123`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/file_service.delete_file.js</caption>
+   * region_tag:generativelanguage_v1beta_generated_FileService_DeleteFile_async
+   */
   deleteFile(
-      request?: protos.google.ai.generativelanguage.v1beta.IDeleteFileRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.ai.generativelanguage.v1beta.IDeleteFileRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.ai.generativelanguage.v1beta.IDeleteFileRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.ai.generativelanguage.v1beta.IDeleteFileRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteFile(
-      request: protos.google.ai.generativelanguage.v1beta.IDeleteFileRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.ai.generativelanguage.v1beta.IDeleteFileRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ai.generativelanguage.v1beta.IDeleteFileRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.ai.generativelanguage.v1beta.IDeleteFileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   deleteFile(
-      request: protos.google.ai.generativelanguage.v1beta.IDeleteFileRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.ai.generativelanguage.v1beta.IDeleteFileRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ai.generativelanguage.v1beta.IDeleteFileRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.ai.generativelanguage.v1beta.IDeleteFileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   deleteFile(
-      request?: protos.google.ai.generativelanguage.v1beta.IDeleteFileRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.ai.generativelanguage.v1beta.IDeleteFileRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.ai.generativelanguage.v1beta.IDeleteFileRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.ai.generativelanguage.v1beta.IDeleteFileRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.ai.generativelanguage.v1beta.IDeleteFileRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.ai.generativelanguage.v1beta.IDeleteFileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.ai.generativelanguage.v1beta.IDeleteFileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.ai.generativelanguage.v1beta.IDeleteFileRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     this.initialize();
     return this.innerApiCalls.deleteFile(request, options, callback);
   }
 
- /**
- * Lists the metadata for `File`s owned by the requesting project.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of `File`s to return per page.
- *   If unspecified, defaults to 10. Maximum `page_size` is 100.
- * @param {string} [request.pageToken]
- *   Optional. A page token from a previous `ListFiles` call.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.ai.generativelanguage.v1beta.File|File}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listFilesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists the metadata for `File`s owned by the requesting project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of `File`s to return per page.
+   *   If unspecified, defaults to 10. Maximum `page_size` is 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token from a previous `ListFiles` call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.ai.generativelanguage.v1beta.File|File}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listFilesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listFiles(
-      request?: protos.google.ai.generativelanguage.v1beta.IListFilesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.ai.generativelanguage.v1beta.IFile[],
-        protos.google.ai.generativelanguage.v1beta.IListFilesRequest|null,
-        protos.google.ai.generativelanguage.v1beta.IListFilesResponse
-      ]>;
+    request?: protos.google.ai.generativelanguage.v1beta.IListFilesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.ai.generativelanguage.v1beta.IFile[],
+      protos.google.ai.generativelanguage.v1beta.IListFilesRequest | null,
+      protos.google.ai.generativelanguage.v1beta.IListFilesResponse,
+    ]
+  >;
   listFiles(
-      request: protos.google.ai.generativelanguage.v1beta.IListFilesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.ai.generativelanguage.v1beta.IListFilesRequest,
-          protos.google.ai.generativelanguage.v1beta.IListFilesResponse|null|undefined,
-          protos.google.ai.generativelanguage.v1beta.IFile>): void;
+    request: protos.google.ai.generativelanguage.v1beta.IListFilesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.ai.generativelanguage.v1beta.IListFilesRequest,
+      | protos.google.ai.generativelanguage.v1beta.IListFilesResponse
+      | null
+      | undefined,
+      protos.google.ai.generativelanguage.v1beta.IFile
+    >
+  ): void;
   listFiles(
-      request: protos.google.ai.generativelanguage.v1beta.IListFilesRequest,
-      callback: PaginationCallback<
-          protos.google.ai.generativelanguage.v1beta.IListFilesRequest,
-          protos.google.ai.generativelanguage.v1beta.IListFilesResponse|null|undefined,
-          protos.google.ai.generativelanguage.v1beta.IFile>): void;
+    request: protos.google.ai.generativelanguage.v1beta.IListFilesRequest,
+    callback: PaginationCallback<
+      protos.google.ai.generativelanguage.v1beta.IListFilesRequest,
+      | protos.google.ai.generativelanguage.v1beta.IListFilesResponse
+      | null
+      | undefined,
+      protos.google.ai.generativelanguage.v1beta.IFile
+    >
+  ): void;
   listFiles(
-      request?: protos.google.ai.generativelanguage.v1beta.IListFilesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.ai.generativelanguage.v1beta.IListFilesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.ai.generativelanguage.v1beta.IListFilesRequest,
-          protos.google.ai.generativelanguage.v1beta.IListFilesResponse|null|undefined,
-          protos.google.ai.generativelanguage.v1beta.IFile>,
-      callback?: PaginationCallback<
-          protos.google.ai.generativelanguage.v1beta.IListFilesRequest,
-          protos.google.ai.generativelanguage.v1beta.IListFilesResponse|null|undefined,
-          protos.google.ai.generativelanguage.v1beta.IFile>):
-      Promise<[
-        protos.google.ai.generativelanguage.v1beta.IFile[],
-        protos.google.ai.generativelanguage.v1beta.IListFilesRequest|null,
-        protos.google.ai.generativelanguage.v1beta.IListFilesResponse
-      ]>|void {
+          | protos.google.ai.generativelanguage.v1beta.IListFilesResponse
+          | null
+          | undefined,
+          protos.google.ai.generativelanguage.v1beta.IFile
+        >,
+    callback?: PaginationCallback<
+      protos.google.ai.generativelanguage.v1beta.IListFilesRequest,
+      | protos.google.ai.generativelanguage.v1beta.IListFilesResponse
+      | null
+      | undefined,
+      protos.google.ai.generativelanguage.v1beta.IFile
+    >
+  ): Promise<
+    [
+      protos.google.ai.generativelanguage.v1beta.IFile[],
+      protos.google.ai.generativelanguage.v1beta.IListFilesRequest | null,
+      protos.google.ai.generativelanguage.v1beta.IListFilesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
@@ -634,30 +760,30 @@ export class FileServiceClient {
     return this.innerApiCalls.listFiles(request, options, callback);
   }
 
-/**
- * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of `File`s to return per page.
- *   If unspecified, defaults to 10. Maximum `page_size` is 100.
- * @param {string} [request.pageToken]
- *   Optional. A page token from a previous `ListFiles` call.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.ai.generativelanguage.v1beta.File|File} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listFilesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of `File`s to return per page.
+   *   If unspecified, defaults to 10. Maximum `page_size` is 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token from a previous `ListFiles` call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.ai.generativelanguage.v1beta.File|File} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listFilesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listFilesStream(
-      request?: protos.google.ai.generativelanguage.v1beta.IListFilesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.ai.generativelanguage.v1beta.IListFilesRequest,
+    options?: CallOptions
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -672,33 +798,33 @@ export class FileServiceClient {
     );
   }
 
-/**
- * Equivalent to `listFiles`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of `File`s to return per page.
- *   If unspecified, defaults to 10. Maximum `page_size` is 100.
- * @param {string} [request.pageToken]
- *   Optional. A page token from a previous `ListFiles` call.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.ai.generativelanguage.v1beta.File|File}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/file_service.list_files.js</caption>
- * region_tag:generativelanguage_v1beta_generated_FileService_ListFiles_async
- */
+  /**
+   * Equivalent to `listFiles`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of `File`s to return per page.
+   *   If unspecified, defaults to 10. Maximum `page_size` is 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token from a previous `ListFiles` call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.ai.generativelanguage.v1beta.File|File}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/file_service.list_files.js</caption>
+   * region_tag:generativelanguage_v1beta_generated_FileService_ListFiles_async
+   */
   listFilesAsync(
-      request?: protos.google.ai.generativelanguage.v1beta.IListFilesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.ai.generativelanguage.v1beta.IFile>{
+    request?: protos.google.ai.generativelanguage.v1beta.IListFilesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.ai.generativelanguage.v1beta.IFile> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -724,7 +850,7 @@ export class FileServiceClient {
    * @param {string} chunk
    * @returns {string} Resource name string.
    */
-  chunkPath(corpus:string,document:string,chunk:string) {
+  chunkPath(corpus: string, document: string, chunk: string) {
     return this.pathTemplates.chunkPathTemplate.render({
       corpus: corpus,
       document: document,
@@ -771,7 +897,7 @@ export class FileServiceClient {
    * @param {string} corpus
    * @returns {string} Resource name string.
    */
-  corpusPath(corpus:string) {
+  corpusPath(corpus: string) {
     return this.pathTemplates.corpusPathTemplate.render({
       corpus: corpus,
     });
@@ -795,7 +921,7 @@ export class FileServiceClient {
    * @param {string} permission
    * @returns {string} Resource name string.
    */
-  corpusPermissionPath(corpus:string,permission:string) {
+  corpusPermissionPath(corpus: string, permission: string) {
     return this.pathTemplates.corpusPermissionPathTemplate.render({
       corpus: corpus,
       permission: permission,
@@ -810,7 +936,9 @@ export class FileServiceClient {
    * @returns {string} A string representing the corpus.
    */
   matchCorpusFromCorpusPermissionName(corpusPermissionName: string) {
-    return this.pathTemplates.corpusPermissionPathTemplate.match(corpusPermissionName).corpus;
+    return this.pathTemplates.corpusPermissionPathTemplate.match(
+      corpusPermissionName
+    ).corpus;
   }
 
   /**
@@ -821,7 +949,9 @@ export class FileServiceClient {
    * @returns {string} A string representing the permission.
    */
   matchPermissionFromCorpusPermissionName(corpusPermissionName: string) {
-    return this.pathTemplates.corpusPermissionPathTemplate.match(corpusPermissionName).permission;
+    return this.pathTemplates.corpusPermissionPathTemplate.match(
+      corpusPermissionName
+    ).permission;
   }
 
   /**
@@ -831,7 +961,7 @@ export class FileServiceClient {
    * @param {string} document
    * @returns {string} Resource name string.
    */
-  documentPath(corpus:string,document:string) {
+  documentPath(corpus: string, document: string) {
     return this.pathTemplates.documentPathTemplate.render({
       corpus: corpus,
       document: document,
@@ -866,7 +996,7 @@ export class FileServiceClient {
    * @param {string} file
    * @returns {string} Resource name string.
    */
-  filePath(file:string) {
+  filePath(file: string) {
     return this.pathTemplates.filePathTemplate.render({
       file: file,
     });
@@ -889,7 +1019,7 @@ export class FileServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  modelPath(model:string) {
+  modelPath(model: string) {
     return this.pathTemplates.modelPathTemplate.render({
       model: model,
     });
@@ -912,7 +1042,7 @@ export class FileServiceClient {
    * @param {string} tuned_model
    * @returns {string} Resource name string.
    */
-  tunedModelPath(tunedModel:string) {
+  tunedModelPath(tunedModel: string) {
     return this.pathTemplates.tunedModelPathTemplate.render({
       tuned_model: tunedModel,
     });
@@ -926,7 +1056,8 @@ export class FileServiceClient {
    * @returns {string} A string representing the tuned_model.
    */
   matchTunedModelFromTunedModelName(tunedModelName: string) {
-    return this.pathTemplates.tunedModelPathTemplate.match(tunedModelName).tuned_model;
+    return this.pathTemplates.tunedModelPathTemplate.match(tunedModelName)
+      .tuned_model;
   }
 
   /**
@@ -936,7 +1067,7 @@ export class FileServiceClient {
    * @param {string} permission
    * @returns {string} Resource name string.
    */
-  tunedModelPermissionPath(tunedModel:string,permission:string) {
+  tunedModelPermissionPath(tunedModel: string, permission: string) {
     return this.pathTemplates.tunedModelPermissionPathTemplate.render({
       tuned_model: tunedModel,
       permission: permission,
@@ -950,8 +1081,12 @@ export class FileServiceClient {
    *   A fully-qualified path representing tuned_model_permission resource.
    * @returns {string} A string representing the tuned_model.
    */
-  matchTunedModelFromTunedModelPermissionName(tunedModelPermissionName: string) {
-    return this.pathTemplates.tunedModelPermissionPathTemplate.match(tunedModelPermissionName).tuned_model;
+  matchTunedModelFromTunedModelPermissionName(
+    tunedModelPermissionName: string
+  ) {
+    return this.pathTemplates.tunedModelPermissionPathTemplate.match(
+      tunedModelPermissionName
+    ).tuned_model;
   }
 
   /**
@@ -961,8 +1096,12 @@ export class FileServiceClient {
    *   A fully-qualified path representing tuned_model_permission resource.
    * @returns {string} A string representing the permission.
    */
-  matchPermissionFromTunedModelPermissionName(tunedModelPermissionName: string) {
-    return this.pathTemplates.tunedModelPermissionPathTemplate.match(tunedModelPermissionName).permission;
+  matchPermissionFromTunedModelPermissionName(
+    tunedModelPermissionName: string
+  ) {
+    return this.pathTemplates.tunedModelPermissionPathTemplate.match(
+      tunedModelPermissionName
+    ).permission;
   }
 
   /**
