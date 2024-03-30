@@ -199,6 +199,16 @@
   * [Model_service.update_explanation_dataset](#model_service.update_explanation_dataset)
   * [Model_service.update_model](#model_service.update_model)
   * [Model_service.upload_model](#model_service.upload_model)
+  * [Notebook_service.assign_notebook_runtime](#notebook_service.assign_notebook_runtime)
+  * [Notebook_service.create_notebook_runtime_template](#notebook_service.create_notebook_runtime_template)
+  * [Notebook_service.delete_notebook_runtime](#notebook_service.delete_notebook_runtime)
+  * [Notebook_service.delete_notebook_runtime_template](#notebook_service.delete_notebook_runtime_template)
+  * [Notebook_service.get_notebook_runtime](#notebook_service.get_notebook_runtime)
+  * [Notebook_service.get_notebook_runtime_template](#notebook_service.get_notebook_runtime_template)
+  * [Notebook_service.list_notebook_runtime_templates](#notebook_service.list_notebook_runtime_templates)
+  * [Notebook_service.list_notebook_runtimes](#notebook_service.list_notebook_runtimes)
+  * [Notebook_service.start_notebook_runtime](#notebook_service.start_notebook_runtime)
+  * [Notebook_service.upgrade_notebook_runtime](#notebook_service.upgrade_notebook_runtime)
   * [Pipeline_service.batch_cancel_pipeline_jobs](#pipeline_service.batch_cancel_pipeline_jobs)
   * [Pipeline_service.batch_delete_pipeline_jobs](#pipeline_service.batch_delete_pipeline_jobs)
   * [Pipeline_service.cancel_pipeline_job](#pipeline_service.cancel_pipeline_job)
@@ -478,6 +488,16 @@
   * [Model_service.update_explanation_dataset](#model_service.update_explanation_dataset)
   * [Model_service.update_model](#model_service.update_model)
   * [Model_service.upload_model](#model_service.upload_model)
+  * [Notebook_service.assign_notebook_runtime](#notebook_service.assign_notebook_runtime)
+  * [Notebook_service.create_notebook_runtime_template](#notebook_service.create_notebook_runtime_template)
+  * [Notebook_service.delete_notebook_runtime](#notebook_service.delete_notebook_runtime)
+  * [Notebook_service.delete_notebook_runtime_template](#notebook_service.delete_notebook_runtime_template)
+  * [Notebook_service.get_notebook_runtime](#notebook_service.get_notebook_runtime)
+  * [Notebook_service.get_notebook_runtime_template](#notebook_service.get_notebook_runtime_template)
+  * [Notebook_service.list_notebook_runtime_templates](#notebook_service.list_notebook_runtime_templates)
+  * [Notebook_service.list_notebook_runtimes](#notebook_service.list_notebook_runtimes)
+  * [Notebook_service.start_notebook_runtime](#notebook_service.start_notebook_runtime)
+  * [Notebook_service.upgrade_notebook_runtime](#notebook_service.upgrade_notebook_runtime)
   * [Persistent_resource_service.create_persistent_resource](#persistent_resource_service.create_persistent_resource)
   * [Persistent_resource_service.delete_persistent_resource](#persistent_resource_service.delete_persistent_resource)
   * [Persistent_resource_service.get_persistent_resource](#persistent_resource_service.get_persistent_resource)
@@ -3759,6 +3779,176 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1/model_service.upload_model.js`
+
+
+-----
+
+
+
+
+### Notebook_service.assign_notebook_runtime
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.assign_notebook_runtime.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.assign_notebook_runtime.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.assign_notebook_runtime.js`
+
+
+-----
+
+
+
+
+### Notebook_service.create_notebook_runtime_template
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.create_notebook_runtime_template.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.create_notebook_runtime_template.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.create_notebook_runtime_template.js`
+
+
+-----
+
+
+
+
+### Notebook_service.delete_notebook_runtime
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.delete_notebook_runtime.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.delete_notebook_runtime.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.delete_notebook_runtime.js`
+
+
+-----
+
+
+
+
+### Notebook_service.delete_notebook_runtime_template
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.delete_notebook_runtime_template.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.delete_notebook_runtime_template.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.delete_notebook_runtime_template.js`
+
+
+-----
+
+
+
+
+### Notebook_service.get_notebook_runtime
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.get_notebook_runtime.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.get_notebook_runtime.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.get_notebook_runtime.js`
+
+
+-----
+
+
+
+
+### Notebook_service.get_notebook_runtime_template
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.get_notebook_runtime_template.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.get_notebook_runtime_template.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.get_notebook_runtime_template.js`
+
+
+-----
+
+
+
+
+### Notebook_service.list_notebook_runtime_templates
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.list_notebook_runtime_templates.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.list_notebook_runtime_templates.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.list_notebook_runtime_templates.js`
+
+
+-----
+
+
+
+
+### Notebook_service.list_notebook_runtimes
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.list_notebook_runtimes.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.list_notebook_runtimes.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.list_notebook_runtimes.js`
+
+
+-----
+
+
+
+
+### Notebook_service.start_notebook_runtime
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.start_notebook_runtime.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.start_notebook_runtime.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.start_notebook_runtime.js`
+
+
+-----
+
+
+
+
+### Notebook_service.upgrade_notebook_runtime
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.upgrade_notebook_runtime.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.upgrade_notebook_runtime.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.upgrade_notebook_runtime.js`
 
 
 -----
@@ -8502,6 +8692,176 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.upload_model.js`
+
+
+-----
+
+
+
+
+### Notebook_service.assign_notebook_runtime
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.assign_notebook_runtime.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.assign_notebook_runtime.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.assign_notebook_runtime.js`
+
+
+-----
+
+
+
+
+### Notebook_service.create_notebook_runtime_template
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.create_notebook_runtime_template.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.create_notebook_runtime_template.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.create_notebook_runtime_template.js`
+
+
+-----
+
+
+
+
+### Notebook_service.delete_notebook_runtime
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.delete_notebook_runtime.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.delete_notebook_runtime.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.delete_notebook_runtime.js`
+
+
+-----
+
+
+
+
+### Notebook_service.delete_notebook_runtime_template
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.delete_notebook_runtime_template.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.delete_notebook_runtime_template.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.delete_notebook_runtime_template.js`
+
+
+-----
+
+
+
+
+### Notebook_service.get_notebook_runtime
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.get_notebook_runtime.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.get_notebook_runtime.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.get_notebook_runtime.js`
+
+
+-----
+
+
+
+
+### Notebook_service.get_notebook_runtime_template
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.get_notebook_runtime_template.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.get_notebook_runtime_template.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.get_notebook_runtime_template.js`
+
+
+-----
+
+
+
+
+### Notebook_service.list_notebook_runtime_templates
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.list_notebook_runtime_templates.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.list_notebook_runtime_templates.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.list_notebook_runtime_templates.js`
+
+
+-----
+
+
+
+
+### Notebook_service.list_notebook_runtimes
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.list_notebook_runtimes.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.list_notebook_runtimes.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.list_notebook_runtimes.js`
+
+
+-----
+
+
+
+
+### Notebook_service.start_notebook_runtime
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.start_notebook_runtime.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.start_notebook_runtime.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.start_notebook_runtime.js`
+
+
+-----
+
+
+
+
+### Notebook_service.upgrade_notebook_runtime
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.upgrade_notebook_runtime.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.upgrade_notebook_runtime.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.upgrade_notebook_runtime.js`
 
 
 -----

@@ -303,6 +303,12 @@ export class DeploymentResourcePoolServiceClient {
       nasTrialDetailPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/nasJobs/{nas_job}/nasTrialDetails/{nas_trial_detail}'
       ),
+      notebookRuntimePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/notebookRuntimes/{notebook_runtime}'
+      ),
+      notebookRuntimeTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/notebookRuntimeTemplates/{notebook_runtime_template}'
+      ),
       pipelineJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/pipelineJobs/{pipeline_job}'
       ),
@@ -5070,6 +5076,130 @@ export class DeploymentResourcePoolServiceClient {
     return this.pathTemplates.nasTrialDetailPathTemplate.match(
       nasTrialDetailName
     ).nas_trial_detail;
+  }
+
+  /**
+   * Return a fully-qualified notebookRuntime resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} notebook_runtime
+   * @returns {string} Resource name string.
+   */
+  notebookRuntimePath(
+    project: string,
+    location: string,
+    notebookRuntime: string
+  ) {
+    return this.pathTemplates.notebookRuntimePathTemplate.render({
+      project: project,
+      location: location,
+      notebook_runtime: notebookRuntime,
+    });
+  }
+
+  /**
+   * Parse the project from NotebookRuntime resource.
+   *
+   * @param {string} notebookRuntimeName
+   *   A fully-qualified path representing NotebookRuntime resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNotebookRuntimeName(notebookRuntimeName: string) {
+    return this.pathTemplates.notebookRuntimePathTemplate.match(
+      notebookRuntimeName
+    ).project;
+  }
+
+  /**
+   * Parse the location from NotebookRuntime resource.
+   *
+   * @param {string} notebookRuntimeName
+   *   A fully-qualified path representing NotebookRuntime resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromNotebookRuntimeName(notebookRuntimeName: string) {
+    return this.pathTemplates.notebookRuntimePathTemplate.match(
+      notebookRuntimeName
+    ).location;
+  }
+
+  /**
+   * Parse the notebook_runtime from NotebookRuntime resource.
+   *
+   * @param {string} notebookRuntimeName
+   *   A fully-qualified path representing NotebookRuntime resource.
+   * @returns {string} A string representing the notebook_runtime.
+   */
+  matchNotebookRuntimeFromNotebookRuntimeName(notebookRuntimeName: string) {
+    return this.pathTemplates.notebookRuntimePathTemplate.match(
+      notebookRuntimeName
+    ).notebook_runtime;
+  }
+
+  /**
+   * Return a fully-qualified notebookRuntimeTemplate resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} notebook_runtime_template
+   * @returns {string} Resource name string.
+   */
+  notebookRuntimeTemplatePath(
+    project: string,
+    location: string,
+    notebookRuntimeTemplate: string
+  ) {
+    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.render({
+      project: project,
+      location: location,
+      notebook_runtime_template: notebookRuntimeTemplate,
+    });
+  }
+
+  /**
+   * Parse the project from NotebookRuntimeTemplate resource.
+   *
+   * @param {string} notebookRuntimeTemplateName
+   *   A fully-qualified path representing NotebookRuntimeTemplate resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNotebookRuntimeTemplateName(
+    notebookRuntimeTemplateName: string
+  ) {
+    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(
+      notebookRuntimeTemplateName
+    ).project;
+  }
+
+  /**
+   * Parse the location from NotebookRuntimeTemplate resource.
+   *
+   * @param {string} notebookRuntimeTemplateName
+   *   A fully-qualified path representing NotebookRuntimeTemplate resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromNotebookRuntimeTemplateName(
+    notebookRuntimeTemplateName: string
+  ) {
+    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(
+      notebookRuntimeTemplateName
+    ).location;
+  }
+
+  /**
+   * Parse the notebook_runtime_template from NotebookRuntimeTemplate resource.
+   *
+   * @param {string} notebookRuntimeTemplateName
+   *   A fully-qualified path representing NotebookRuntimeTemplate resource.
+   * @returns {string} A string representing the notebook_runtime_template.
+   */
+  matchNotebookRuntimeTemplateFromNotebookRuntimeTemplateName(
+    notebookRuntimeTemplateName: string
+  ) {
+    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(
+      notebookRuntimeTemplateName
+    ).notebook_runtime_template;
   }
 
   /**

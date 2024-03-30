@@ -43,6 +43,7 @@ function main() {
   const migrationServiceClient = new aiplatform.MigrationServiceClient();
   const modelGardenServiceClient = new aiplatform.ModelGardenServiceClient();
   const modelServiceClient = new aiplatform.ModelServiceClient();
+  const notebookServiceClient = new aiplatform.NotebookServiceClient();
   const pipelineServiceClient = new aiplatform.PipelineServiceClient();
   const predictionServiceClient = new aiplatform.PredictionServiceClient();
   const scheduleServiceClient = new aiplatform.ScheduleServiceClient();

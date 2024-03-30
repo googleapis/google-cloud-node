@@ -34,6 +34,7 @@ import {
   MigrationServiceClient,
   ModelGardenServiceClient,
   ModelServiceClient,
+  NotebookServiceClient,
   PipelineServiceClient,
   PredictionServiceClient,
   ScheduleServiceClient,
@@ -106,6 +107,9 @@ function doStuffWithModelGardenServiceClient(client: ModelGardenServiceClient) {
   client.close();
 }
 function doStuffWithModelServiceClient(client: ModelServiceClient) {
+  client.close();
+}
+function doStuffWithNotebookServiceClient(client: NotebookServiceClient) {
   client.close();
 }
 function doStuffWithPipelineServiceClient(client: PipelineServiceClient) {
@@ -190,6 +194,9 @@ function main() {
   // check that the client instance can be created
   const modelServiceClient = new ModelServiceClient();
   doStuffWithModelServiceClient(modelServiceClient);
+  // check that the client instance can be created
+  const notebookServiceClient = new NotebookServiceClient();
+  doStuffWithNotebookServiceClient(notebookServiceClient);
   // check that the client instance can be created
   const pipelineServiceClient = new PipelineServiceClient();
   doStuffWithPipelineServiceClient(pipelineServiceClient);

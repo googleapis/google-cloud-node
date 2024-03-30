@@ -21,7 +21,7 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as extensionregistryserviceModule from '../src';
+import * as notebookserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
@@ -165,18 +165,16 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1beta1.ExtensionRegistryServiceClient', () => {
+describe('v1beta1.NotebookServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient();
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
     });
 
     it('has universeDomain', () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient();
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -188,8 +186,7 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const servicePath =
-          extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient
-            .servicePath;
+          notebookserviceModule.v1beta1.NotebookServiceClient.servicePath;
         assert.strictEqual(servicePath, 'aiplatform.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -198,27 +195,24 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const apiEndpoint =
-          extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient
-            .apiEndpoint;
+          notebookserviceModule.v1beta1.NotebookServiceClient.apiEndpoint;
         assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
         assert(stub.called);
         stub.restore();
       });
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {universeDomain: 'example.com'}
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        universeDomain: 'example.com',
+      });
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'aiplatform.example.com');
     });
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {universe_domain: 'example.com'}
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        universe_domain: 'example.com',
+      });
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'aiplatform.example.com');
     });
@@ -229,7 +223,7 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient();
+            new notebookserviceModule.v1beta1.NotebookServiceClient();
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'aiplatform.example.com');
           if (saved) {
@@ -243,9 +237,9 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-              {universeDomain: 'configured.example.com'}
-            );
+            new notebookserviceModule.v1beta1.NotebookServiceClient({
+              universeDomain: 'configured.example.com',
+            });
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'aiplatform.configured.example.com');
           if (saved) {
@@ -258,73 +252,59 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {universe_domain: 'example.com', universeDomain: 'example.net'}
-        );
+        new notebookserviceModule.v1beta1.NotebookServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
       });
     });
 
     it('has port', () => {
-      const port =
-        extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient
-          .port;
+      const port = notebookserviceModule.v1beta1.NotebookServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient();
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            fallback: true,
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        fallback: true,
+      });
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      assert.strictEqual(client.extensionRegistryServiceStub, undefined);
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.notebookServiceStub, undefined);
       await client.initialize();
-      assert(client.extensionRegistryServiceStub);
+      assert(client.notebookServiceStub);
     });
 
     it('has close method for the initialized client', done => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
-      assert(client.extensionRegistryServiceStub);
+      assert(client.notebookServiceStub);
       client.close().then(() => {
         done();
       });
     });
 
     it('has close method for the non-initialized client', done => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      assert.strictEqual(client.extensionRegistryServiceStub, undefined);
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.notebookServiceStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -332,13 +312,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
       const result = await client.getProjectId();
       assert.strictEqual(result, fakeProjectId);
@@ -347,13 +324,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.auth.getProjectId = sinon
         .stub()
         .callsArgWith(0, null, fakeProjectId);
@@ -371,70 +345,65 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
     });
   });
 
-  describe('getExtension', () => {
-    it('invokes getExtension without error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+  describe('getNotebookRuntimeTemplate', () => {
+    it('invokes getNotebookRuntimeTemplate without error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.GetExtensionRequest()
+        new protos.google.cloud.aiplatform.v1beta1.GetNotebookRuntimeTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.GetExtensionRequest',
+        '.google.cloud.aiplatform.v1beta1.GetNotebookRuntimeTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.Extension()
+        new protos.google.cloud.aiplatform.v1beta1.NotebookRuntimeTemplate()
       );
-      client.innerApiCalls.getExtension = stubSimpleCall(expectedResponse);
-      const [response] = await client.getExtension(request);
+      client.innerApiCalls.getNotebookRuntimeTemplate =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getNotebookRuntimeTemplate(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getExtension as SinonStub
+        client.innerApiCalls.getNotebookRuntimeTemplate as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getExtension as SinonStub
+        client.innerApiCalls.getNotebookRuntimeTemplate as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getExtension without error using callback', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+    it('invokes getNotebookRuntimeTemplate without error using callback', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.GetExtensionRequest()
+        new protos.google.cloud.aiplatform.v1beta1.GetNotebookRuntimeTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.GetExtensionRequest',
+        '.google.cloud.aiplatform.v1beta1.GetNotebookRuntimeTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.Extension()
+        new protos.google.cloud.aiplatform.v1beta1.NotebookRuntimeTemplate()
       );
-      client.innerApiCalls.getExtension =
+      client.innerApiCalls.getNotebookRuntimeTemplate =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.getExtension(
+        client.getNotebookRuntimeTemplate(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1beta1.IExtension | null
+            result?: protos.google.cloud.aiplatform.v1beta1.INotebookRuntimeTemplate | null
           ) => {
             if (err) {
               reject(err);
@@ -447,138 +416,131 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getExtension as SinonStub
+        client.innerApiCalls.getNotebookRuntimeTemplate as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getExtension as SinonStub
+        client.innerApiCalls.getNotebookRuntimeTemplate as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getExtension with error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+    it('invokes getNotebookRuntimeTemplate with error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.GetExtensionRequest()
+        new protos.google.cloud.aiplatform.v1beta1.GetNotebookRuntimeTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.GetExtensionRequest',
+        '.google.cloud.aiplatform.v1beta1.GetNotebookRuntimeTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.getExtension = stubSimpleCall(
+      client.innerApiCalls.getNotebookRuntimeTemplate = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.getExtension(request), expectedError);
+      await assert.rejects(
+        client.getNotebookRuntimeTemplate(request),
+        expectedError
+      );
       const actualRequest = (
-        client.innerApiCalls.getExtension as SinonStub
+        client.innerApiCalls.getNotebookRuntimeTemplate as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getExtension as SinonStub
+        client.innerApiCalls.getNotebookRuntimeTemplate as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getExtension with closed client', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+    it('invokes getNotebookRuntimeTemplate with closed client', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.GetExtensionRequest()
+        new protos.google.cloud.aiplatform.v1beta1.GetNotebookRuntimeTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.GetExtensionRequest',
+        '.google.cloud.aiplatform.v1beta1.GetNotebookRuntimeTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.getExtension(request), expectedError);
+      await assert.rejects(
+        client.getNotebookRuntimeTemplate(request),
+        expectedError
+      );
     });
   });
 
-  describe('updateExtension', () => {
-    it('invokes updateExtension without error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+  describe('getNotebookRuntime', () => {
+    it('invokes getNotebookRuntime without error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.UpdateExtensionRequest()
+        new protos.google.cloud.aiplatform.v1beta1.GetNotebookRuntimeRequest()
       );
-      request.extension ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.UpdateExtensionRequest',
-        ['extension', 'name']
+        '.google.cloud.aiplatform.v1beta1.GetNotebookRuntimeRequest',
+        ['name']
       );
-      request.extension.name = defaultValue1;
-      const expectedHeaderRequestParams = `extension.name=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.Extension()
+        new protos.google.cloud.aiplatform.v1beta1.NotebookRuntime()
       );
-      client.innerApiCalls.updateExtension = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateExtension(request);
+      client.innerApiCalls.getNotebookRuntime =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getNotebookRuntime(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.updateExtension as SinonStub
+        client.innerApiCalls.getNotebookRuntime as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.updateExtension as SinonStub
+        client.innerApiCalls.getNotebookRuntime as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes updateExtension without error using callback', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+    it('invokes getNotebookRuntime without error using callback', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.UpdateExtensionRequest()
+        new protos.google.cloud.aiplatform.v1beta1.GetNotebookRuntimeRequest()
       );
-      request.extension ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.UpdateExtensionRequest',
-        ['extension', 'name']
+        '.google.cloud.aiplatform.v1beta1.GetNotebookRuntimeRequest',
+        ['name']
       );
-      request.extension.name = defaultValue1;
-      const expectedHeaderRequestParams = `extension.name=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.Extension()
+        new protos.google.cloud.aiplatform.v1beta1.NotebookRuntime()
       );
-      client.innerApiCalls.updateExtension =
+      client.innerApiCalls.getNotebookRuntime =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.updateExtension(
+        client.getNotebookRuntime(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1beta1.IExtension | null
+            result?: protos.google.cloud.aiplatform.v1beta1.INotebookRuntime | null
           ) => {
             if (err) {
               reject(err);
@@ -591,89 +553,78 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.updateExtension as SinonStub
+        client.innerApiCalls.getNotebookRuntime as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.updateExtension as SinonStub
+        client.innerApiCalls.getNotebookRuntime as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes updateExtension with error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+    it('invokes getNotebookRuntime with error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.UpdateExtensionRequest()
+        new protos.google.cloud.aiplatform.v1beta1.GetNotebookRuntimeRequest()
       );
-      request.extension ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.UpdateExtensionRequest',
-        ['extension', 'name']
+        '.google.cloud.aiplatform.v1beta1.GetNotebookRuntimeRequest',
+        ['name']
       );
-      request.extension.name = defaultValue1;
-      const expectedHeaderRequestParams = `extension.name=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.updateExtension = stubSimpleCall(
+      client.innerApiCalls.getNotebookRuntime = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.updateExtension(request), expectedError);
+      await assert.rejects(client.getNotebookRuntime(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.updateExtension as SinonStub
+        client.innerApiCalls.getNotebookRuntime as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.updateExtension as SinonStub
+        client.innerApiCalls.getNotebookRuntime as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes updateExtension with closed client', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+    it('invokes getNotebookRuntime with closed client', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.UpdateExtensionRequest()
+        new protos.google.cloud.aiplatform.v1beta1.GetNotebookRuntimeRequest()
       );
-      request.extension ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.UpdateExtensionRequest',
-        ['extension', 'name']
+        '.google.cloud.aiplatform.v1beta1.GetNotebookRuntimeRequest',
+        ['name']
       );
-      request.extension.name = defaultValue1;
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.updateExtension(request), expectedError);
+      await assert.rejects(client.getNotebookRuntime(request), expectedError);
     });
   });
 
-  describe('importExtension', () => {
-    it('invokes importExtension without error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+  describe('createNotebookRuntimeTemplate', () => {
+    it('invokes createNotebookRuntimeTemplate without error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ImportExtensionRequest()
+        new protos.google.cloud.aiplatform.v1beta1.CreateNotebookRuntimeTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.ImportExtensionRequest',
+        '.google.cloud.aiplatform.v1beta1.CreateNotebookRuntimeTemplateRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -681,35 +632,32 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.importExtension =
+      client.innerApiCalls.createNotebookRuntimeTemplate =
         stubLongRunningCall(expectedResponse);
-      const [operation] = await client.importExtension(request);
+      const [operation] = await client.createNotebookRuntimeTemplate(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.importExtension as SinonStub
+        client.innerApiCalls.createNotebookRuntimeTemplate as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.importExtension as SinonStub
+        client.innerApiCalls.createNotebookRuntimeTemplate as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes importExtension without error using callback', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+    it('invokes createNotebookRuntimeTemplate without error using callback', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ImportExtensionRequest()
+        new protos.google.cloud.aiplatform.v1beta1.CreateNotebookRuntimeTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.ImportExtensionRequest',
+        '.google.cloud.aiplatform.v1beta1.CreateNotebookRuntimeTemplateRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -717,16 +665,16 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.importExtension =
+      client.innerApiCalls.createNotebookRuntimeTemplate =
         stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.importExtension(
+        client.createNotebookRuntimeTemplate(
           request,
           (
             err?: Error | null,
             result?: LROperation<
-              protos.google.cloud.aiplatform.v1beta1.IExtension,
-              protos.google.cloud.aiplatform.v1beta1.IImportExtensionOperationMetadata
+              protos.google.cloud.aiplatform.v1beta1.INotebookRuntimeTemplate,
+              protos.google.cloud.aiplatform.v1beta1.ICreateNotebookRuntimeTemplateOperationMetadata
             > | null
           ) => {
             if (err) {
@@ -738,99 +686,93 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         );
       });
       const operation = (await promise) as LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IExtension,
-        protos.google.cloud.aiplatform.v1beta1.IImportExtensionOperationMetadata
+        protos.google.cloud.aiplatform.v1beta1.INotebookRuntimeTemplate,
+        protos.google.cloud.aiplatform.v1beta1.ICreateNotebookRuntimeTemplateOperationMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.importExtension as SinonStub
+        client.innerApiCalls.createNotebookRuntimeTemplate as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.importExtension as SinonStub
+        client.innerApiCalls.createNotebookRuntimeTemplate as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes importExtension with call error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+    it('invokes createNotebookRuntimeTemplate with call error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ImportExtensionRequest()
+        new protos.google.cloud.aiplatform.v1beta1.CreateNotebookRuntimeTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.ImportExtensionRequest',
+        '.google.cloud.aiplatform.v1beta1.CreateNotebookRuntimeTemplateRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.importExtension = stubLongRunningCall(
+      client.innerApiCalls.createNotebookRuntimeTemplate = stubLongRunningCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.importExtension(request), expectedError);
+      await assert.rejects(
+        client.createNotebookRuntimeTemplate(request),
+        expectedError
+      );
       const actualRequest = (
-        client.innerApiCalls.importExtension as SinonStub
+        client.innerApiCalls.createNotebookRuntimeTemplate as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.importExtension as SinonStub
+        client.innerApiCalls.createNotebookRuntimeTemplate as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes importExtension with LRO error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+    it('invokes createNotebookRuntimeTemplate with LRO error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ImportExtensionRequest()
+        new protos.google.cloud.aiplatform.v1beta1.CreateNotebookRuntimeTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.ImportExtensionRequest',
+        '.google.cloud.aiplatform.v1beta1.CreateNotebookRuntimeTemplateRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.importExtension = stubLongRunningCall(
+      client.innerApiCalls.createNotebookRuntimeTemplate = stubLongRunningCall(
         undefined,
         undefined,
         expectedError
       );
-      const [operation] = await client.importExtension(request);
+      const [operation] = await client.createNotebookRuntimeTemplate(request);
       await assert.rejects(operation.promise(), expectedError);
       const actualRequest = (
-        client.innerApiCalls.importExtension as SinonStub
+        client.innerApiCalls.createNotebookRuntimeTemplate as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.importExtension as SinonStub
+        client.innerApiCalls.createNotebookRuntimeTemplate as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes checkImportExtensionProgress without error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+    it('invokes checkCreateNotebookRuntimeTemplateProgress without error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -840,22 +782,20 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkImportExtensionProgress(
-        expectedResponse.name
-      );
+      const decodedOperation =
+        await client.checkCreateNotebookRuntimeTemplateProgress(
+          expectedResponse.name
+        );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
 
-    it('invokes checkImportExtensionProgress with error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+    it('invokes checkCreateNotebookRuntimeTemplateProgress with error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -864,28 +804,25 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         expectedError
       );
       await assert.rejects(
-        client.checkImportExtensionProgress(''),
+        client.checkCreateNotebookRuntimeTemplateProgress(''),
         expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
-  describe('deleteExtension', () => {
-    it('invokes deleteExtension without error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+  describe('deleteNotebookRuntimeTemplate', () => {
+    it('invokes deleteNotebookRuntimeTemplate without error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.DeleteExtensionRequest()
+        new protos.google.cloud.aiplatform.v1beta1.DeleteNotebookRuntimeTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.DeleteExtensionRequest',
+        '.google.cloud.aiplatform.v1beta1.DeleteNotebookRuntimeTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -893,35 +830,32 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteExtension =
+      client.innerApiCalls.deleteNotebookRuntimeTemplate =
         stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteExtension(request);
+      const [operation] = await client.deleteNotebookRuntimeTemplate(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.deleteExtension as SinonStub
+        client.innerApiCalls.deleteNotebookRuntimeTemplate as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteExtension as SinonStub
+        client.innerApiCalls.deleteNotebookRuntimeTemplate as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes deleteExtension without error using callback', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+    it('invokes deleteNotebookRuntimeTemplate without error using callback', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.DeleteExtensionRequest()
+        new protos.google.cloud.aiplatform.v1beta1.DeleteNotebookRuntimeTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.DeleteExtensionRequest',
+        '.google.cloud.aiplatform.v1beta1.DeleteNotebookRuntimeTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -929,10 +863,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteExtension =
+      client.innerApiCalls.deleteNotebookRuntimeTemplate =
         stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.deleteExtension(
+        client.deleteNotebookRuntimeTemplate(
           request,
           (
             err?: Error | null,
@@ -956,93 +890,87 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.deleteExtension as SinonStub
+        client.innerApiCalls.deleteNotebookRuntimeTemplate as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteExtension as SinonStub
+        client.innerApiCalls.deleteNotebookRuntimeTemplate as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes deleteExtension with call error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+    it('invokes deleteNotebookRuntimeTemplate with call error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.DeleteExtensionRequest()
+        new protos.google.cloud.aiplatform.v1beta1.DeleteNotebookRuntimeTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.DeleteExtensionRequest',
+        '.google.cloud.aiplatform.v1beta1.DeleteNotebookRuntimeTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.deleteExtension = stubLongRunningCall(
+      client.innerApiCalls.deleteNotebookRuntimeTemplate = stubLongRunningCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.deleteExtension(request), expectedError);
+      await assert.rejects(
+        client.deleteNotebookRuntimeTemplate(request),
+        expectedError
+      );
       const actualRequest = (
-        client.innerApiCalls.deleteExtension as SinonStub
+        client.innerApiCalls.deleteNotebookRuntimeTemplate as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteExtension as SinonStub
+        client.innerApiCalls.deleteNotebookRuntimeTemplate as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes deleteExtension with LRO error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+    it('invokes deleteNotebookRuntimeTemplate with LRO error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.DeleteExtensionRequest()
+        new protos.google.cloud.aiplatform.v1beta1.DeleteNotebookRuntimeTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.DeleteExtensionRequest',
+        '.google.cloud.aiplatform.v1beta1.DeleteNotebookRuntimeTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.deleteExtension = stubLongRunningCall(
+      client.innerApiCalls.deleteNotebookRuntimeTemplate = stubLongRunningCall(
         undefined,
         undefined,
         expectedError
       );
-      const [operation] = await client.deleteExtension(request);
+      const [operation] = await client.deleteNotebookRuntimeTemplate(request);
       await assert.rejects(operation.promise(), expectedError);
       const actualRequest = (
-        client.innerApiCalls.deleteExtension as SinonStub
+        client.innerApiCalls.deleteNotebookRuntimeTemplate as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteExtension as SinonStub
+        client.innerApiCalls.deleteNotebookRuntimeTemplate as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes checkDeleteExtensionProgress without error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+    it('invokes checkDeleteNotebookRuntimeTemplateProgress without error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -1052,22 +980,20 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteExtensionProgress(
-        expectedResponse.name
-      );
+      const decodedOperation =
+        await client.checkDeleteNotebookRuntimeTemplateProgress(
+          expectedResponse.name
+        );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
 
-    it('invokes checkDeleteExtensionProgress with error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+    it('invokes checkDeleteNotebookRuntimeTemplateProgress with error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -1076,93 +1002,875 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         expectedError
       );
       await assert.rejects(
-        client.checkDeleteExtensionProgress(''),
+        client.checkDeleteNotebookRuntimeTemplateProgress(''),
         expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
-  describe('listExtensions', () => {
-    it('invokes listExtensions without error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+  describe('assignNotebookRuntime', () => {
+    it('invokes assignNotebookRuntime without error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ListExtensionsRequest()
+        new protos.google.cloud.aiplatform.v1beta1.AssignNotebookRuntimeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.ListExtensionsRequest',
+        '.google.cloud.aiplatform.v1beta1.AssignNotebookRuntimeRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.Extension()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.Extension()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.Extension()
-        ),
-      ];
-      client.innerApiCalls.listExtensions = stubSimpleCall(expectedResponse);
-      const [response] = await client.listExtensions(request);
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.assignNotebookRuntime =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.assignNotebookRuntime(request);
+      const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.listExtensions as SinonStub
+        client.innerApiCalls.assignNotebookRuntime as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listExtensions as SinonStub
+        client.innerApiCalls.assignNotebookRuntime as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listExtensions without error using callback', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+    it('invokes assignNotebookRuntime without error using callback', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ListExtensionsRequest()
+        new protos.google.cloud.aiplatform.v1beta1.AssignNotebookRuntimeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.ListExtensionsRequest',
+        '.google.cloud.aiplatform.v1beta1.AssignNotebookRuntimeRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.assignNotebookRuntime =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.assignNotebookRuntime(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.aiplatform.v1beta1.INotebookRuntime,
+              protos.google.cloud.aiplatform.v1beta1.IAssignNotebookRuntimeOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.aiplatform.v1beta1.INotebookRuntime,
+        protos.google.cloud.aiplatform.v1beta1.IAssignNotebookRuntimeOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.assignNotebookRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.assignNotebookRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes assignNotebookRuntime with call error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.AssignNotebookRuntimeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.AssignNotebookRuntimeRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.assignNotebookRuntime = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.assignNotebookRuntime(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.assignNotebookRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.assignNotebookRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes assignNotebookRuntime with LRO error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.AssignNotebookRuntimeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.AssignNotebookRuntimeRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.assignNotebookRuntime = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.assignNotebookRuntime(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.assignNotebookRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.assignNotebookRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkAssignNotebookRuntimeProgress without error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkAssignNotebookRuntimeProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkAssignNotebookRuntimeProgress with error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkAssignNotebookRuntimeProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteNotebookRuntime', () => {
+    it('invokes deleteNotebookRuntime without error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DeleteNotebookRuntimeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteNotebookRuntimeRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteNotebookRuntime =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteNotebookRuntime(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteNotebookRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteNotebookRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteNotebookRuntime without error using callback', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DeleteNotebookRuntimeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteNotebookRuntimeRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteNotebookRuntime =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteNotebookRuntime(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteNotebookRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteNotebookRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteNotebookRuntime with call error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DeleteNotebookRuntimeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteNotebookRuntimeRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteNotebookRuntime = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.deleteNotebookRuntime(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.deleteNotebookRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteNotebookRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteNotebookRuntime with LRO error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DeleteNotebookRuntimeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteNotebookRuntimeRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteNotebookRuntime = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteNotebookRuntime(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteNotebookRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteNotebookRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteNotebookRuntimeProgress without error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteNotebookRuntimeProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteNotebookRuntimeProgress with error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteNotebookRuntimeProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('upgradeNotebookRuntime', () => {
+    it('invokes upgradeNotebookRuntime without error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpgradeNotebookRuntimeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpgradeNotebookRuntimeRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.upgradeNotebookRuntime =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.upgradeNotebookRuntime(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.upgradeNotebookRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.upgradeNotebookRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes upgradeNotebookRuntime without error using callback', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpgradeNotebookRuntimeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpgradeNotebookRuntimeRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.upgradeNotebookRuntime =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.upgradeNotebookRuntime(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.aiplatform.v1beta1.IUpgradeNotebookRuntimeResponse,
+              protos.google.cloud.aiplatform.v1beta1.IUpgradeNotebookRuntimeOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IUpgradeNotebookRuntimeResponse,
+        protos.google.cloud.aiplatform.v1beta1.IUpgradeNotebookRuntimeOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.upgradeNotebookRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.upgradeNotebookRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes upgradeNotebookRuntime with call error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpgradeNotebookRuntimeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpgradeNotebookRuntimeRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.upgradeNotebookRuntime = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.upgradeNotebookRuntime(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.upgradeNotebookRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.upgradeNotebookRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes upgradeNotebookRuntime with LRO error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpgradeNotebookRuntimeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpgradeNotebookRuntimeRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.upgradeNotebookRuntime = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.upgradeNotebookRuntime(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.upgradeNotebookRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.upgradeNotebookRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpgradeNotebookRuntimeProgress without error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpgradeNotebookRuntimeProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpgradeNotebookRuntimeProgress with error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpgradeNotebookRuntimeProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('startNotebookRuntime', () => {
+    it('invokes startNotebookRuntime without error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.StartNotebookRuntimeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.StartNotebookRuntimeRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.startNotebookRuntime =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.startNotebookRuntime(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.startNotebookRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startNotebookRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes startNotebookRuntime without error using callback', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.StartNotebookRuntimeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.StartNotebookRuntimeRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.startNotebookRuntime =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.startNotebookRuntime(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.aiplatform.v1beta1.IStartNotebookRuntimeResponse,
+              protos.google.cloud.aiplatform.v1beta1.IStartNotebookRuntimeOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IStartNotebookRuntimeResponse,
+        protos.google.cloud.aiplatform.v1beta1.IStartNotebookRuntimeOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.startNotebookRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startNotebookRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes startNotebookRuntime with call error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.StartNotebookRuntimeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.StartNotebookRuntimeRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.startNotebookRuntime = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.startNotebookRuntime(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.startNotebookRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startNotebookRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes startNotebookRuntime with LRO error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.StartNotebookRuntimeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.StartNotebookRuntimeRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.startNotebookRuntime = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.startNotebookRuntime(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.startNotebookRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startNotebookRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkStartNotebookRuntimeProgress without error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkStartNotebookRuntimeProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkStartNotebookRuntimeProgress with error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkStartNotebookRuntimeProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('listNotebookRuntimeTemplates', () => {
+    it('invokes listNotebookRuntimeTemplates without error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListNotebookRuntimeTemplatesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListNotebookRuntimeTemplatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.Extension()
+          new protos.google.cloud.aiplatform.v1beta1.NotebookRuntimeTemplate()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.Extension()
+          new protos.google.cloud.aiplatform.v1beta1.NotebookRuntimeTemplate()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.Extension()
+          new protos.google.cloud.aiplatform.v1beta1.NotebookRuntimeTemplate()
         ),
       ];
-      client.innerApiCalls.listExtensions =
+      client.innerApiCalls.listNotebookRuntimeTemplates =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listNotebookRuntimeTemplates(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listNotebookRuntimeTemplates as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listNotebookRuntimeTemplates as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listNotebookRuntimeTemplates without error using callback', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListNotebookRuntimeTemplatesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListNotebookRuntimeTemplatesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.NotebookRuntimeTemplate()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.NotebookRuntimeTemplate()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.NotebookRuntimeTemplate()
+        ),
+      ];
+      client.innerApiCalls.listNotebookRuntimeTemplates =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.listExtensions(
+        client.listNotebookRuntimeTemplates(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1beta1.IExtension[] | null
+            result?:
+              | protos.google.cloud.aiplatform.v1beta1.INotebookRuntimeTemplate[]
+              | null
           ) => {
             if (err) {
               reject(err);
@@ -1175,87 +1883,86 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.listExtensions as SinonStub
+        client.innerApiCalls.listNotebookRuntimeTemplates as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listExtensions as SinonStub
+        client.innerApiCalls.listNotebookRuntimeTemplates as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listExtensions with error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+    it('invokes listNotebookRuntimeTemplates with error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ListExtensionsRequest()
+        new protos.google.cloud.aiplatform.v1beta1.ListNotebookRuntimeTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.ListExtensionsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListNotebookRuntimeTemplatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.listExtensions = stubSimpleCall(
+      client.innerApiCalls.listNotebookRuntimeTemplates = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.listExtensions(request), expectedError);
+      await assert.rejects(
+        client.listNotebookRuntimeTemplates(request),
+        expectedError
+      );
       const actualRequest = (
-        client.innerApiCalls.listExtensions as SinonStub
+        client.innerApiCalls.listNotebookRuntimeTemplates as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listExtensions as SinonStub
+        client.innerApiCalls.listNotebookRuntimeTemplates as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listExtensionsStream without error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+    it('invokes listNotebookRuntimeTemplatesStream without error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ListExtensionsRequest()
+        new protos.google.cloud.aiplatform.v1beta1.ListNotebookRuntimeTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.ListExtensionsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListNotebookRuntimeTemplatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.Extension()
+          new protos.google.cloud.aiplatform.v1beta1.NotebookRuntimeTemplate()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.Extension()
+          new protos.google.cloud.aiplatform.v1beta1.NotebookRuntimeTemplate()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.Extension()
+          new protos.google.cloud.aiplatform.v1beta1.NotebookRuntimeTemplate()
         ),
       ];
-      client.descriptors.page.listExtensions.createStream =
+      client.descriptors.page.listNotebookRuntimeTemplates.createStream =
         stubPageStreamingCall(expectedResponse);
-      const stream = client.listExtensionsStream(request);
+      const stream = client.listNotebookRuntimeTemplatesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.Extension[] =
+        const responses: protos.google.cloud.aiplatform.v1beta1.NotebookRuntimeTemplate[] =
           [];
         stream.on(
           'data',
-          (response: protos.google.cloud.aiplatform.v1beta1.Extension) => {
+          (
+            response: protos.google.cloud.aiplatform.v1beta1.NotebookRuntimeTemplate
+          ) => {
             responses.push(response);
           }
         );
@@ -1269,47 +1976,55 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listExtensions.createStream as SinonStub)
+        (
+          client.descriptors.page.listNotebookRuntimeTemplates
+            .createStream as SinonStub
+        )
           .getCall(0)
-          .calledWith(client.innerApiCalls.listExtensions, request)
+          .calledWith(
+            client.innerApiCalls.listNotebookRuntimeTemplates,
+            request
+          )
       );
       assert(
-        (client.descriptors.page.listExtensions.createStream as SinonStub)
+        (
+          client.descriptors.page.listNotebookRuntimeTemplates
+            .createStream as SinonStub
+        )
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
-    it('invokes listExtensionsStream with error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+    it('invokes listNotebookRuntimeTemplatesStream with error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ListExtensionsRequest()
+        new protos.google.cloud.aiplatform.v1beta1.ListNotebookRuntimeTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.ListExtensionsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListNotebookRuntimeTemplatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.descriptors.page.listExtensions.createStream =
+      client.descriptors.page.listNotebookRuntimeTemplates.createStream =
         stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listExtensionsStream(request);
+      const stream = client.listNotebookRuntimeTemplatesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.Extension[] =
+        const responses: protos.google.cloud.aiplatform.v1beta1.NotebookRuntimeTemplate[] =
           [];
         stream.on(
           'data',
-          (response: protos.google.cloud.aiplatform.v1beta1.Extension) => {
+          (
+            response: protos.google.cloud.aiplatform.v1beta1.NotebookRuntimeTemplate
+          ) => {
             responses.push(response);
           }
         );
@@ -1322,95 +2037,103 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listExtensions.createStream as SinonStub)
+        (
+          client.descriptors.page.listNotebookRuntimeTemplates
+            .createStream as SinonStub
+        )
           .getCall(0)
-          .calledWith(client.innerApiCalls.listExtensions, request)
+          .calledWith(
+            client.innerApiCalls.listNotebookRuntimeTemplates,
+            request
+          )
       );
       assert(
-        (client.descriptors.page.listExtensions.createStream as SinonStub)
+        (
+          client.descriptors.page.listNotebookRuntimeTemplates
+            .createStream as SinonStub
+        )
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
-    it('uses async iteration with listExtensions without error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+    it('uses async iteration with listNotebookRuntimeTemplates without error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ListExtensionsRequest()
+        new protos.google.cloud.aiplatform.v1beta1.ListNotebookRuntimeTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.ListExtensionsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListNotebookRuntimeTemplatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.Extension()
+          new protos.google.cloud.aiplatform.v1beta1.NotebookRuntimeTemplate()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.Extension()
+          new protos.google.cloud.aiplatform.v1beta1.NotebookRuntimeTemplate()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.Extension()
+          new protos.google.cloud.aiplatform.v1beta1.NotebookRuntimeTemplate()
         ),
       ];
-      client.descriptors.page.listExtensions.asyncIterate =
+      client.descriptors.page.listNotebookRuntimeTemplates.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.aiplatform.v1beta1.IExtension[] = [];
-      const iterable = client.listExtensionsAsync(request);
+      const responses: protos.google.cloud.aiplatform.v1beta1.INotebookRuntimeTemplate[] =
+        [];
+      const iterable = client.listNotebookRuntimeTemplatesAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
         (
-          client.descriptors.page.listExtensions.asyncIterate as SinonStub
+          client.descriptors.page.listNotebookRuntimeTemplates
+            .asyncIterate as SinonStub
         ).getCall(0).args[1],
         request
       );
       assert(
-        (client.descriptors.page.listExtensions.asyncIterate as SinonStub)
+        (
+          client.descriptors.page.listNotebookRuntimeTemplates
+            .asyncIterate as SinonStub
+        )
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
-    it('uses async iteration with listExtensions with error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+    it('uses async iteration with listNotebookRuntimeTemplates with error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ListExtensionsRequest()
+        new protos.google.cloud.aiplatform.v1beta1.ListNotebookRuntimeTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.ListExtensionsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListNotebookRuntimeTemplatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.descriptors.page.listExtensions.asyncIterate =
+      client.descriptors.page.listNotebookRuntimeTemplates.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listExtensionsAsync(request);
+      const iterable = client.listNotebookRuntimeTemplatesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.IExtension[] =
+        const responses: protos.google.cloud.aiplatform.v1beta1.INotebookRuntimeTemplate[] =
           [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -1418,12 +2141,352 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
       });
       assert.deepStrictEqual(
         (
-          client.descriptors.page.listExtensions.asyncIterate as SinonStub
+          client.descriptors.page.listNotebookRuntimeTemplates
+            .asyncIterate as SinonStub
         ).getCall(0).args[1],
         request
       );
       assert(
-        (client.descriptors.page.listExtensions.asyncIterate as SinonStub)
+        (
+          client.descriptors.page.listNotebookRuntimeTemplates
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('listNotebookRuntimes', () => {
+    it('invokes listNotebookRuntimes without error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListNotebookRuntimesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListNotebookRuntimesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.NotebookRuntime()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.NotebookRuntime()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.NotebookRuntime()
+        ),
+      ];
+      client.innerApiCalls.listNotebookRuntimes =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listNotebookRuntimes(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listNotebookRuntimes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listNotebookRuntimes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listNotebookRuntimes without error using callback', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListNotebookRuntimesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListNotebookRuntimesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.NotebookRuntime()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.NotebookRuntime()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.NotebookRuntime()
+        ),
+      ];
+      client.innerApiCalls.listNotebookRuntimes =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listNotebookRuntimes(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.aiplatform.v1beta1.INotebookRuntime[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listNotebookRuntimes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listNotebookRuntimes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listNotebookRuntimes with error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListNotebookRuntimesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListNotebookRuntimesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listNotebookRuntimes = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listNotebookRuntimes(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listNotebookRuntimes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listNotebookRuntimes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listNotebookRuntimesStream without error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListNotebookRuntimesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListNotebookRuntimesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.NotebookRuntime()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.NotebookRuntime()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.NotebookRuntime()
+        ),
+      ];
+      client.descriptors.page.listNotebookRuntimes.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listNotebookRuntimesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.NotebookRuntime[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.aiplatform.v1beta1.NotebookRuntime
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listNotebookRuntimes.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listNotebookRuntimes, request)
+      );
+      assert(
+        (client.descriptors.page.listNotebookRuntimes.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes listNotebookRuntimesStream with error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListNotebookRuntimesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListNotebookRuntimesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listNotebookRuntimes.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listNotebookRuntimesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.NotebookRuntime[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.aiplatform.v1beta1.NotebookRuntime
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listNotebookRuntimes.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listNotebookRuntimes, request)
+      );
+      assert(
+        (client.descriptors.page.listNotebookRuntimes.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listNotebookRuntimes without error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListNotebookRuntimesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListNotebookRuntimesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.NotebookRuntime()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.NotebookRuntime()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.NotebookRuntime()
+        ),
+      ];
+      client.descriptors.page.listNotebookRuntimes.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.aiplatform.v1beta1.INotebookRuntime[] =
+        [];
+      const iterable = client.listNotebookRuntimesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listNotebookRuntimes.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listNotebookRuntimes.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listNotebookRuntimes with error', async () => {
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListNotebookRuntimesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListNotebookRuntimesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listNotebookRuntimes.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listNotebookRuntimesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.INotebookRuntime[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listNotebookRuntimes.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listNotebookRuntimes.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
@@ -1433,13 +2496,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
@@ -1466,13 +2526,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
       );
     });
     it('invokes getIamPolicy without error using callback', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
@@ -1513,13 +2570,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
       assert((client.iamClient.getIamPolicy as SinonStub).getCall(0));
     });
     it('invokes getIamPolicy with error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
@@ -1548,13 +2602,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
   });
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
@@ -1581,13 +2632,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
       );
     });
     it('invokes setIamPolicy without error using callback', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
@@ -1628,13 +2676,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
       assert((client.iamClient.setIamPolicy as SinonStub).getCall(0));
     });
     it('invokes setIamPolicy with error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
@@ -1663,13 +2708,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
   });
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
@@ -1699,13 +2741,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
       );
     });
     it('invokes testIamPermissions without error using callback', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
@@ -1746,13 +2785,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
       assert((client.iamClient.testIamPermissions as SinonStub).getCall(0));
     });
     it('invokes testIamPermissions with error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
@@ -1784,13 +2820,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -1817,13 +2850,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
       );
     });
     it('invokes getLocation without error using callback', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -1864,13 +2894,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
       assert((client.locationsClient.getLocation as SinonStub).getCall(0));
     });
     it('invokes getLocation with error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -1902,13 +2929,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
   });
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
@@ -1953,13 +2977,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
       );
     });
     it('uses async iteration with listLocations with error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
@@ -1997,13 +3018,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
   });
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
@@ -2021,13 +3039,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
       );
     });
     it('invokes getOperation without error using callback', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -2058,13 +3073,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
     it('invokes getOperation with error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -2085,13 +3097,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
   });
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
@@ -2110,13 +3119,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
       );
     });
     it('invokes cancelOperation without error using callback', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -2147,13 +3153,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
       assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
     });
     it('invokes cancelOperation with error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -2174,13 +3177,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
   });
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
@@ -2199,13 +3199,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
       );
     });
     it('invokes deleteOperation without error using callback', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -2236,13 +3233,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
       assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
     });
     it('invokes deleteOperation with error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -2263,13 +3257,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
   });
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -2302,13 +3293,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
       );
     });
     it('uses async iteration with listOperations with error', async () => {
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
@@ -2344,13 +3332,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         data_item: 'dataItemValue',
         annotation: 'annotationValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.annotationPathTemplate.render = sinon
         .stub()
@@ -2434,13 +3419,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         dataset: 'datasetValue',
         annotation_spec: 'annotationSpecValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.annotationSpecPathTemplate.render = sinon
         .stub()
@@ -2514,13 +3496,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         metadata_store: 'metadataStoreValue',
         artifact: 'artifactValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.artifactPathTemplate.render = sinon
         .stub()
@@ -2592,13 +3571,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         location: 'locationValue',
         batch_prediction_job: 'batchPredictionJobValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.batchPredictionJobPathTemplate.render = sinon
         .stub()
@@ -2673,13 +3649,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         metadata_store: 'metadataStoreValue',
         context: 'contextValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.contextPathTemplate.render = sinon
         .stub()
@@ -2751,13 +3724,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         location: 'locationValue',
         custom_job: 'customJobValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.customJobPathTemplate.render = sinon
         .stub()
@@ -2819,13 +3789,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         dataset: 'datasetValue',
         data_item: 'dataItemValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.dataItemPathTemplate.render = sinon
         .stub()
@@ -2897,13 +3864,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         location: 'locationValue',
         data_labeling_job: 'dataLabelingJobValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.dataLabelingJobPathTemplate.render = sinon
         .stub()
@@ -2965,13 +3929,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         location: 'locationValue',
         dataset: 'datasetValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.datasetPathTemplate.render = sinon
         .stub()
@@ -3033,13 +3994,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         dataset: 'datasetValue',
         dataset_version: 'datasetVersionValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.datasetVersionPathTemplate.render = sinon
         .stub()
@@ -3112,13 +4070,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         location: 'locationValue',
         deployment_resource_pool: 'deploymentResourcePoolValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.deploymentResourcePoolPathTemplate.render = sinon
         .stub()
@@ -3197,13 +4152,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         featurestore: 'featurestoreValue',
         entity_type: 'entityTypeValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.entityTypePathTemplate.render = sinon
         .stub()
@@ -3276,13 +4228,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         metadata_store: 'metadataStoreValue',
         execution: 'executionValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.executionPathTemplate.render = sinon
         .stub()
@@ -3354,13 +4303,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         location: 'locationValue',
         extension: 'extensionValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.extensionPathTemplate.render = sinon
         .stub()
@@ -3421,13 +4367,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         location: 'locationValue',
         feature_group: 'featureGroupValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.featureGroupPathTemplate.render = sinon
         .stub()
@@ -3488,13 +4431,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         location: 'locationValue',
         feature_online_store: 'featureOnlineStoreValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.featureOnlineStorePathTemplate.render = sinon
         .stub()
@@ -3569,13 +4509,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         feature_online_store: 'featureOnlineStoreValue',
         feature_view: 'featureViewValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.featureViewPathTemplate.render = sinon
         .stub()
@@ -3649,13 +4586,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         feature_online_store: 'featureOnlineStoreValue',
         feature_view: 'featureViewValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.featureViewSyncPathTemplate.render = sinon
         .stub()
@@ -3728,13 +4662,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         location: 'locationValue',
         featurestore: 'featurestoreValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.featurestorePathTemplate.render = sinon
         .stub()
@@ -3795,13 +4726,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         location: 'locationValue',
         hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.hyperparameterTuningJobPathTemplate.render = sinon
         .stub()
@@ -3879,13 +4807,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         location: 'locationValue',
         index: 'indexValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.indexPathTemplate.render = sinon
         .stub()
@@ -3946,13 +4871,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         location: 'locationValue',
         index_endpoint: 'indexEndpointValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.indexEndpointPathTemplate.render = sinon
         .stub()
@@ -4012,13 +4934,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         project: 'projectValue',
         location: 'locationValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
@@ -4066,13 +4985,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         metadata_store: 'metadataStoreValue',
         metadata_schema: 'metadataSchemaValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.metadataSchemaPathTemplate.render = sinon
         .stub()
@@ -4146,13 +5062,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         location: 'locationValue',
         metadata_store: 'metadataStoreValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.metadataStorePathTemplate.render = sinon
         .stub()
@@ -4213,13 +5126,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         location: 'locationValue',
         model: 'modelValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.modelPathTemplate.render = sinon
         .stub()
@@ -4280,13 +5190,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         location: 'locationValue',
         model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -4363,13 +5270,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         model: 'modelValue',
         evaluation: 'evaluationValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.modelEvaluationPathTemplate.render = sinon
         .stub()
@@ -4443,13 +5347,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         evaluation: 'evaluationValue',
         slice: 'sliceValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.modelEvaluationSlicePathTemplate.render = sinon
         .stub()
@@ -4553,13 +5454,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         location: 'locationValue',
         nas_job: 'nasJobValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.nasJobPathTemplate.render = sinon
         .stub()
@@ -4621,13 +5519,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         nas_job: 'nasJobValue',
         nas_trial_detail: 'nasTrialDetailValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.nasTrialDetailPathTemplate.render = sinon
         .stub()
@@ -4700,13 +5595,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         location: 'locationValue',
         notebook_runtime: 'notebookRuntimeValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.notebookRuntimePathTemplate.render = sinon
         .stub()
@@ -4768,13 +5660,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         location: 'locationValue',
         notebook_runtime_template: 'notebookRuntimeTemplateValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.notebookRuntimeTemplatePathTemplate.render = sinon
         .stub()
@@ -4852,13 +5741,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         location: 'locationValue',
         persistent_resource: 'persistentResourceValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.persistentResourcePathTemplate.render = sinon
         .stub()
@@ -4932,13 +5818,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         location: 'locationValue',
         pipeline_job: 'pipelineJobValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.pipelineJobPathTemplate.render = sinon
         .stub()
@@ -4999,13 +5882,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         location: 'locationValue',
         endpoint: 'endpointValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationEndpointPathTemplate.render = sinon
         .stub()
@@ -5082,13 +5962,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         feature_group: 'featureGroupValue',
         feature: 'featureValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -5188,13 +6065,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         entity_type: 'entityTypeValue',
         feature: 'featureValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -5315,13 +6189,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         publisher: 'publisherValue',
         model: 'modelValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationPublisherModelPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -5409,13 +6280,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         publisher: 'publisherValue',
         model: 'modelValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.publisherModelPathTemplate.render = sinon
         .stub()
@@ -5465,13 +6333,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         location: 'locationValue',
         reasoning_engine: 'reasoningEngineValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.reasoningEnginePathTemplate.render = sinon
         .stub()
@@ -5534,13 +6399,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         dataset: 'datasetValue',
         saved_query: 'savedQueryValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.savedQueryPathTemplate.render = sinon
         .stub()
@@ -5612,13 +6474,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         location: 'locationValue',
         schedule: 'scheduleValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.schedulePathTemplate.render = sinon
         .stub()
@@ -5679,13 +6538,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         location: 'locationValue',
         specialist_pool: 'specialistPoolValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.specialistPoolPathTemplate.render = sinon
         .stub()
@@ -5747,13 +6603,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         location: 'locationValue',
         study: 'studyValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.studyPathTemplate.render = sinon
         .stub()
@@ -5814,13 +6667,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         location: 'locationValue',
         tensorboard: 'tensorboardValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.tensorboardPathTemplate.render = sinon
         .stub()
@@ -5882,13 +6732,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         tensorboard: 'tensorboardValue',
         experiment: 'experimentValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.tensorboardExperimentPathTemplate.render = sinon
         .stub()
@@ -5981,13 +6828,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         experiment: 'experimentValue',
         run: 'runValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.tensorboardRunPathTemplate.render = sinon
         .stub()
@@ -6073,13 +6917,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         run: 'runValue',
         time_series: 'timeSeriesValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.tensorboardTimeSeriesPathTemplate.render = sinon
         .stub()
@@ -6199,13 +7040,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         location: 'locationValue',
         training_pipeline: 'trainingPipelineValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.trainingPipelinePathTemplate.render = sinon
         .stub()
@@ -6271,13 +7109,10 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         study: 'studyValue',
         trial: 'trialValue',
       };
-      const client =
-        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.trialPathTemplate.render = sinon
         .stub()

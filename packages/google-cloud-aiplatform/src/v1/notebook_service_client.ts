@@ -38,20 +38,18 @@ import jsonProtos = require('../../protos/protos.json');
 
 /**
  * Client JSON configuration object, loaded from
- * `src/v1beta1/pipeline_service_client_config.json`.
+ * `src/v1/notebook_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './pipeline_service_client_config.json';
+import * as gapicConfig from './notebook_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  A service for creating and managing Vertex AI's pipelines. This includes both
- *  `TrainingPipeline` resources (used for AutoML and custom training) and
- *  `PipelineJob` resources (used for Vertex AI Pipelines).
+ *  The interface for Vertex Notebook service (a.k.a. Colab on Workbench).
  * @class
- * @memberof v1beta1
+ * @memberof v1
  */
-export class PipelineServiceClient {
+export class NotebookServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -74,10 +72,10 @@ export class PipelineServiceClient {
   locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  pipelineServiceStub?: Promise<{[name: string]: Function}>;
+  notebookServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of PipelineServiceClient.
+   * Construct an instance of NotebookServiceClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -112,7 +110,7 @@ export class PipelineServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new PipelineServiceClient({fallback: true}, gax);
+   *     const client = new NotebookServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -120,7 +118,7 @@ export class PipelineServiceClient {
     gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof PipelineServiceClient;
+    const staticMembers = this.constructor as typeof NotebookServiceClient;
     if (
       opts?.universe_domain &&
       opts?.universeDomain &&
@@ -252,9 +250,6 @@ export class PipelineServiceClient {
       executionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/metadataStores/{metadata_store}/executions/{execution}'
       ),
-      extensionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/extensions/{extension}'
-      ),
       featureGroupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/featureGroups/{feature_group}'
       ),
@@ -313,14 +308,8 @@ export class PipelineServiceClient {
       notebookRuntimeTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/notebookRuntimeTemplates/{notebook_runtime_template}'
       ),
-      persistentResourcePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/persistentResources/{persistent_resource}'
-      ),
       pipelineJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/pipelineJobs/{pipeline_job}'
-      ),
-      projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
       ),
       projectLocationEndpointPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/endpoints/{endpoint}'
@@ -339,9 +328,6 @@ export class PipelineServiceClient {
         ),
       publisherModelPathTemplate: new this._gaxModule.PathTemplate(
         'publishers/{publisher}/models/{model}'
-      ),
-      reasoningEnginePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}'
       ),
       savedQueryPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}'
@@ -379,15 +365,15 @@ export class PipelineServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listTrainingPipelines: new this._gaxModule.PageDescriptor(
+      listNotebookRuntimeTemplates: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'trainingPipelines'
+        'notebookRuntimeTemplates'
       ),
-      listPipelineJobs: new this._gaxModule.PageDescriptor(
+      listNotebookRuntimes: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'pipelineJobs'
+        'notebookRuntimes'
       ),
     };
 
@@ -405,40 +391,25 @@ export class PipelineServiceClient {
         {
           selector: 'google.cloud.location.Locations.GetLocation',
           get: '/ui/{name=projects/*/locations/*}',
-          additional_bindings: [
-            {get: '/v1beta1/{name=projects/*/locations/*}'},
-          ],
+          additional_bindings: [{get: '/v1/{name=projects/*/locations/*}'}],
         },
         {
           selector: 'google.cloud.location.Locations.ListLocations',
           get: '/ui/{name=projects/*}/locations',
-          additional_bindings: [{get: '/v1beta1/{name=projects/*}/locations'}],
+          additional_bindings: [{get: '/v1/{name=projects/*}/locations'}],
         },
         {
           selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
-          post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
-          body: '*',
+          post: '/v1/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
           additional_bindings: [
             {
-              post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
+              post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
             },
             {
-              post: '/v1beta1/{resource=projects/*/locations/*/models/*}:getIamPolicy',
+              post: '/v1/{resource=projects/*/locations/*/models/*}:getIamPolicy',
             },
             {
-              post: '/v1beta1/{resource=projects/*/locations/*/endpoints/*}:getIamPolicy',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/publishers/*/models/*}:getIamPolicy',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*}:getIamPolicy',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:getIamPolicy',
+              post: '/v1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
@@ -468,31 +439,19 @@ export class PipelineServiceClient {
         },
         {
           selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
-          post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
+          post: '/v1/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
           body: '*',
           additional_bindings: [
             {
-              post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',
+              post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',
               body: '*',
             },
             {
-              post: '/v1beta1/{resource=projects/*/locations/*/models/*}:setIamPolicy',
+              post: '/v1/{resource=projects/*/locations/*/models/*}:setIamPolicy',
               body: '*',
             },
             {
-              post: '/v1beta1/{resource=projects/*/locations/*/endpoints/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:setIamPolicy',
+              post: '/v1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:setIamPolicy',
               body: '*',
             },
             {
@@ -527,26 +486,16 @@ export class PipelineServiceClient {
         },
         {
           selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
-          post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
-          body: '*',
+          post: '/v1/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
           additional_bindings: [
             {
-              post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
+              post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
             },
             {
-              post: '/v1beta1/{resource=projects/*/locations/*/models/*}:testIamPermissions',
+              post: '/v1/{resource=projects/*/locations/*/models/*}:testIamPermissions',
             },
             {
-              post: '/v1beta1/{resource=projects/*/locations/*/endpoints/*}:testIamPermissions',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*}:testIamPermissions',
-            },
-            {
-              post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:testIamPermissions',
+              post: '/v1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
@@ -689,137 +638,108 @@ export class PipelineServiceClient {
             {
               post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',
             },
+            {post: '/v1/{name=projects/*/locations/*/operations/*}:cancel'},
             {
-              post: '/v1beta1/{name=projects/*/locations/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/edgeDevices/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/customJobs/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/tuningJobs/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/customJobs/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/metadataStores/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/indexes/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/models/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/studies/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/models/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/tensorboards/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:cancel',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',
+              post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',
             },
           ],
         },
@@ -988,202 +908,151 @@ export class PipelineServiceClient {
               delete:
                 '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
-            {delete: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
+            {delete: '/v1/{name=projects/*/locations/*/operations/*}'},
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/datasets/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/edgeDevices/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/customJobs/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/customJobs/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/indexes/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/metadataStores/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/indexes/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}',
+            },
+            {delete: '/v1/{name=projects/*/locations/*/models/*/operations/*}'},
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/metadataStores/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/studies/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/schedules/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/tensorboards/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/models/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/featureGroups/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/solvers/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/tensorboards/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/featureGroups/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
-            },
-            {
-              delete:
-                '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
+                '/v1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
           ],
         },
@@ -1308,153 +1177,108 @@ export class PipelineServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
             },
-            {get: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
+            {get: '/v1/{name=projects/*/locations/*/operations/*}'},
+            {get: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}'},
             {
-              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',
+            },
+            {get: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}'},
+            {
+              get: '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/edgeDevices/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/customJobs/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/tuningJobs/*/operations/*}',
+            },
+            {get: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}'},
+            {
+              get: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/metadataStores/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/customJobs/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}',
+            },
+            {get: '/v1/{name=projects/*/locations/*/models/*/operations/*}'},
+            {
+              get: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
+            },
+            {get: '/v1/{name=projects/*/locations/*/studies/*/operations/*}'},
+            {
+              get: '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
+            },
+            {get: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}'},
+            {
+              get: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/indexes/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/tensorboards/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/featureGroups/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/models/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/solvers/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/operations/*}',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
             },
           ],
         },
@@ -1568,153 +1392,105 @@ export class PipelineServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
             },
-            {get: '/v1beta1/{name=projects/*/locations/*}/operations'},
+            {get: '/v1/{name=projects/*/locations/*}/operations'},
+            {get: '/v1/{name=projects/*/locations/*/datasets/*}/operations'},
             {
-              get: '/v1beta1/{name=projects/*/locations/*/datasets/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*}/operations',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*}/operations',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*}/operations',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*}/operations',
+            },
+            {get: '/v1/{name=projects/*/locations/*/endpoints/*}/operations'},
+            {
+              get: '/v1/{name=projects/*/locations/*/featurestores/*}/operations',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*}/operations',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/edgeDevices/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*}/operations',
+            },
+            {get: '/v1/{name=projects/*/locations/*/customJobs/*}/operations'},
+            {
+              get: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*}/operations',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/endpoints/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/exampleStores/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/extensions/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featurestores/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/customJobs/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/indexes/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/migratableResources/*}/operations',
-            },
-            {get: '/v1beta1/{name=projects/*/locations/*/models/*}/operations'},
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/solvers/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/studies/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/schedules/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',
             },
             {get: '/ui/{name=projects/*/locations/*/tuningJobs/*}/operations'},
+            {get: '/v1/{name=projects/*/locations/*/indexes/*}/operations'},
+            {
+              get: '/v1/{name=projects/*/locations/*/indexEndpoints/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/metadataStores/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/metadataStores/*/artifacts/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/metadataStores/*/contexts/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/metadataStores/*/executions/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/migratableResources/*}/operations',
+            },
+            {get: '/v1/{name=projects/*/locations/*/models/*}/operations'},
+            {
+              get: '/v1/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
+            },
+            {get: '/v1/{name=projects/*/locations/*/studies/*}/operations'},
+            {
+              get: '/v1/{name=projects/*/locations/*/studies/*/trials/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/trainingPipelines/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/pipelineJobs/*}/operations',
+            },
+            {get: '/v1/{name=projects/*/locations/*/schedules/*}/operations'},
+            {
+              get: '/v1/{name=projects/*/locations/*/specialistPools/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/tensorboards/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
+            },
           ],
         },
         {
@@ -1847,150 +1623,117 @@ export class PipelineServiceClient {
             {
               post: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
             },
-            {post: '/v1beta1/{name=projects/*/locations/*/operations/*}:wait'},
+            {post: '/v1/{name=projects/*/locations/*/operations/*}:wait'},
             {
-              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/edgeDevices/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/customJobs/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/metadataStores/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/customJobs/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/indexes/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/models/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/studies/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/models/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/tensorboards/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
+              post: '/v1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
             },
           ],
         },
@@ -1999,69 +1742,95 @@ export class PipelineServiceClient {
     this.operationsClient = this._gaxModule
       .lro(lroOptions)
       .operationsClient(opts);
-    const deleteTrainingPipelineResponse = protoFilesRoot.lookup(
+    const createNotebookRuntimeTemplateResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.NotebookRuntimeTemplate'
+    ) as gax.protobuf.Type;
+    const createNotebookRuntimeTemplateMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.CreateNotebookRuntimeTemplateOperationMetadata'
+    ) as gax.protobuf.Type;
+    const deleteNotebookRuntimeTemplateResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
-    const deleteTrainingPipelineMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata'
+    const deleteNotebookRuntimeTemplateMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.DeleteOperationMetadata'
     ) as gax.protobuf.Type;
-    const deletePipelineJobResponse = protoFilesRoot.lookup(
+    const assignNotebookRuntimeResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.NotebookRuntime'
+    ) as gax.protobuf.Type;
+    const assignNotebookRuntimeMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.AssignNotebookRuntimeOperationMetadata'
+    ) as gax.protobuf.Type;
+    const deleteNotebookRuntimeResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
-    const deletePipelineJobMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata'
+    const deleteNotebookRuntimeMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.DeleteOperationMetadata'
     ) as gax.protobuf.Type;
-    const batchDeletePipelineJobsResponse = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.BatchDeletePipelineJobsResponse'
+    const upgradeNotebookRuntimeResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.UpgradeNotebookRuntimeResponse'
     ) as gax.protobuf.Type;
-    const batchDeletePipelineJobsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata'
+    const upgradeNotebookRuntimeMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.UpgradeNotebookRuntimeOperationMetadata'
     ) as gax.protobuf.Type;
-    const batchCancelPipelineJobsResponse = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.BatchCancelPipelineJobsResponse'
+    const startNotebookRuntimeResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.StartNotebookRuntimeResponse'
     ) as gax.protobuf.Type;
-    const batchCancelPipelineJobsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.BatchCancelPipelineJobsOperationMetadata'
+    const startNotebookRuntimeMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.StartNotebookRuntimeOperationMetadata'
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
-      deleteTrainingPipeline: new this._gaxModule.LongrunningDescriptor(
+      createNotebookRuntimeTemplate: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteTrainingPipelineResponse.decode.bind(
-          deleteTrainingPipelineResponse
+        createNotebookRuntimeTemplateResponse.decode.bind(
+          createNotebookRuntimeTemplateResponse
         ),
-        deleteTrainingPipelineMetadata.decode.bind(
-          deleteTrainingPipelineMetadata
+        createNotebookRuntimeTemplateMetadata.decode.bind(
+          createNotebookRuntimeTemplateMetadata
         )
       ),
-      deletePipelineJob: new this._gaxModule.LongrunningDescriptor(
+      deleteNotebookRuntimeTemplate: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deletePipelineJobResponse.decode.bind(deletePipelineJobResponse),
-        deletePipelineJobMetadata.decode.bind(deletePipelineJobMetadata)
-      ),
-      batchDeletePipelineJobs: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        batchDeletePipelineJobsResponse.decode.bind(
-          batchDeletePipelineJobsResponse
+        deleteNotebookRuntimeTemplateResponse.decode.bind(
+          deleteNotebookRuntimeTemplateResponse
         ),
-        batchDeletePipelineJobsMetadata.decode.bind(
-          batchDeletePipelineJobsMetadata
+        deleteNotebookRuntimeTemplateMetadata.decode.bind(
+          deleteNotebookRuntimeTemplateMetadata
         )
       ),
-      batchCancelPipelineJobs: new this._gaxModule.LongrunningDescriptor(
+      assignNotebookRuntime: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        batchCancelPipelineJobsResponse.decode.bind(
-          batchCancelPipelineJobsResponse
+        assignNotebookRuntimeResponse.decode.bind(
+          assignNotebookRuntimeResponse
         ),
-        batchCancelPipelineJobsMetadata.decode.bind(
-          batchCancelPipelineJobsMetadata
+        assignNotebookRuntimeMetadata.decode.bind(assignNotebookRuntimeMetadata)
+      ),
+      deleteNotebookRuntime: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteNotebookRuntimeResponse.decode.bind(
+          deleteNotebookRuntimeResponse
+        ),
+        deleteNotebookRuntimeMetadata.decode.bind(deleteNotebookRuntimeMetadata)
+      ),
+      upgradeNotebookRuntime: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        upgradeNotebookRuntimeResponse.decode.bind(
+          upgradeNotebookRuntimeResponse
+        ),
+        upgradeNotebookRuntimeMetadata.decode.bind(
+          upgradeNotebookRuntimeMetadata
         )
+      ),
+      startNotebookRuntime: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        startNotebookRuntimeResponse.decode.bind(startNotebookRuntimeResponse),
+        startNotebookRuntimeMetadata.decode.bind(startNotebookRuntimeMetadata)
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.aiplatform.v1beta1.PipelineService',
+      'google.cloud.aiplatform.v1.NotebookService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -2089,41 +1858,39 @@ export class PipelineServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.pipelineServiceStub) {
-      return this.pipelineServiceStub;
+    if (this.notebookServiceStub) {
+      return this.notebookServiceStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.aiplatform.v1beta1.PipelineService.
-    this.pipelineServiceStub = this._gaxGrpc.createStub(
+    // google.cloud.aiplatform.v1.NotebookService.
+    this.notebookServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.aiplatform.v1beta1.PipelineService'
+            'google.cloud.aiplatform.v1.NotebookService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.aiplatform.v1beta1.PipelineService,
+          (this._protos as any).google.cloud.aiplatform.v1.NotebookService,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const pipelineServiceStubMethods = [
-      'createTrainingPipeline',
-      'getTrainingPipeline',
-      'listTrainingPipelines',
-      'deleteTrainingPipeline',
-      'cancelTrainingPipeline',
-      'createPipelineJob',
-      'getPipelineJob',
-      'listPipelineJobs',
-      'deletePipelineJob',
-      'batchDeletePipelineJobs',
-      'cancelPipelineJob',
-      'batchCancelPipelineJobs',
+    const notebookServiceStubMethods = [
+      'createNotebookRuntimeTemplate',
+      'getNotebookRuntimeTemplate',
+      'listNotebookRuntimeTemplates',
+      'deleteNotebookRuntimeTemplate',
+      'assignNotebookRuntime',
+      'getNotebookRuntime',
+      'listNotebookRuntimes',
+      'deleteNotebookRuntime',
+      'upgradeNotebookRuntime',
+      'startNotebookRuntime',
     ];
-    for (const methodName of pipelineServiceStubMethods) {
-      const callPromise = this.pipelineServiceStub.then(
+    for (const methodName of notebookServiceStubMethods) {
+      const callPromise = this.notebookServiceStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -2151,7 +1918,7 @@ export class PipelineServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.pipelineServiceStub;
+    return this.notebookServiceStub;
   }
 
   /**
@@ -2239,82 +2006,80 @@ export class PipelineServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Creates a TrainingPipeline. A created TrainingPipeline right away will be
-   * attempted to be run.
+   * Gets a NotebookRuntimeTemplate.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the Location to create the TrainingPipeline
-   *   in. Format: `projects/{project}/locations/{location}`
-   * @param {google.cloud.aiplatform.v1beta1.TrainingPipeline} request.trainingPipeline
-   *   Required. The TrainingPipeline to create.
+   * @param {string} request.name
+   *   Required. The name of the NotebookRuntimeTemplate resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/notebookRuntimeTemplates/{notebook_runtime_template}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.TrainingPipeline|TrainingPipeline}.
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.NotebookRuntimeTemplate|NotebookRuntimeTemplate}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/pipeline_service.create_training_pipeline.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_PipelineService_CreateTrainingPipeline_async
+   * @example <caption>include:samples/generated/v1/notebook_service.get_notebook_runtime_template.js</caption>
+   * region_tag:aiplatform_v1_generated_NotebookService_GetNotebookRuntimeTemplate_async
    */
-  createTrainingPipeline(
-    request?: protos.google.cloud.aiplatform.v1beta1.ICreateTrainingPipelineRequest,
+  getNotebookRuntimeTemplate(
+    request?: protos.google.cloud.aiplatform.v1.IGetNotebookRuntimeTemplateRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.aiplatform.v1beta1.ITrainingPipeline,
+      protos.google.cloud.aiplatform.v1.INotebookRuntimeTemplate,
       (
-        | protos.google.cloud.aiplatform.v1beta1.ICreateTrainingPipelineRequest
+        | protos.google.cloud.aiplatform.v1.IGetNotebookRuntimeTemplateRequest
         | undefined
       ),
       {} | undefined,
     ]
   >;
-  createTrainingPipeline(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateTrainingPipelineRequest,
+  getNotebookRuntimeTemplate(
+    request: protos.google.cloud.aiplatform.v1.IGetNotebookRuntimeTemplateRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.ITrainingPipeline,
-      | protos.google.cloud.aiplatform.v1beta1.ICreateTrainingPipelineRequest
+      protos.google.cloud.aiplatform.v1.INotebookRuntimeTemplate,
+      | protos.google.cloud.aiplatform.v1.IGetNotebookRuntimeTemplateRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  createTrainingPipeline(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateTrainingPipelineRequest,
+  getNotebookRuntimeTemplate(
+    request: protos.google.cloud.aiplatform.v1.IGetNotebookRuntimeTemplateRequest,
     callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.ITrainingPipeline,
-      | protos.google.cloud.aiplatform.v1beta1.ICreateTrainingPipelineRequest
+      protos.google.cloud.aiplatform.v1.INotebookRuntimeTemplate,
+      | protos.google.cloud.aiplatform.v1.IGetNotebookRuntimeTemplateRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  createTrainingPipeline(
-    request?: protos.google.cloud.aiplatform.v1beta1.ICreateTrainingPipelineRequest,
+  getNotebookRuntimeTemplate(
+    request?: protos.google.cloud.aiplatform.v1.IGetNotebookRuntimeTemplateRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.aiplatform.v1beta1.ITrainingPipeline,
-          | protos.google.cloud.aiplatform.v1beta1.ICreateTrainingPipelineRequest
+          protos.google.cloud.aiplatform.v1.INotebookRuntimeTemplate,
+          | protos.google.cloud.aiplatform.v1.IGetNotebookRuntimeTemplateRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.ITrainingPipeline,
-      | protos.google.cloud.aiplatform.v1beta1.ICreateTrainingPipelineRequest
+      protos.google.cloud.aiplatform.v1.INotebookRuntimeTemplate,
+      | protos.google.cloud.aiplatform.v1.IGetNotebookRuntimeTemplateRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.aiplatform.v1beta1.ITrainingPipeline,
+      protos.google.cloud.aiplatform.v1.INotebookRuntimeTemplate,
       (
-        | protos.google.cloud.aiplatform.v1beta1.ICreateTrainingPipelineRequest
+        | protos.google.cloud.aiplatform.v1.IGetNotebookRuntimeTemplateRequest
         | undefined
       ),
       {} | undefined,
@@ -2333,92 +2098,87 @@ export class PipelineServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
+        name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createTrainingPipeline(
+    return this.innerApiCalls.getNotebookRuntimeTemplate(
       request,
       options,
       callback
     );
   }
   /**
-   * Gets a TrainingPipeline.
+   * Gets a NotebookRuntime.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the TrainingPipeline resource.
-   *   Format:
-   *   `projects/{project}/locations/{location}/trainingPipelines/{training_pipeline}`
+   *   Required. The name of the NotebookRuntime resource.
+   *   Instead of checking whether the name is in valid NotebookRuntime resource
+   *   name format, directly throw NotFound exception if there is no such
+   *   NotebookRuntime in spanner.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.TrainingPipeline|TrainingPipeline}.
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.NotebookRuntime|NotebookRuntime}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/pipeline_service.get_training_pipeline.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_PipelineService_GetTrainingPipeline_async
+   * @example <caption>include:samples/generated/v1/notebook_service.get_notebook_runtime.js</caption>
+   * region_tag:aiplatform_v1_generated_NotebookService_GetNotebookRuntime_async
    */
-  getTrainingPipeline(
-    request?: protos.google.cloud.aiplatform.v1beta1.IGetTrainingPipelineRequest,
+  getNotebookRuntime(
+    request?: protos.google.cloud.aiplatform.v1.IGetNotebookRuntimeRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.aiplatform.v1beta1.ITrainingPipeline,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IGetTrainingPipelineRequest
-        | undefined
-      ),
+      protos.google.cloud.aiplatform.v1.INotebookRuntime,
+      protos.google.cloud.aiplatform.v1.IGetNotebookRuntimeRequest | undefined,
       {} | undefined,
     ]
   >;
-  getTrainingPipeline(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetTrainingPipelineRequest,
+  getNotebookRuntime(
+    request: protos.google.cloud.aiplatform.v1.IGetNotebookRuntimeRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.ITrainingPipeline,
-      | protos.google.cloud.aiplatform.v1beta1.IGetTrainingPipelineRequest
+      protos.google.cloud.aiplatform.v1.INotebookRuntime,
+      | protos.google.cloud.aiplatform.v1.IGetNotebookRuntimeRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  getTrainingPipeline(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetTrainingPipelineRequest,
+  getNotebookRuntime(
+    request: protos.google.cloud.aiplatform.v1.IGetNotebookRuntimeRequest,
     callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.ITrainingPipeline,
-      | protos.google.cloud.aiplatform.v1beta1.IGetTrainingPipelineRequest
+      protos.google.cloud.aiplatform.v1.INotebookRuntime,
+      | protos.google.cloud.aiplatform.v1.IGetNotebookRuntimeRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  getTrainingPipeline(
-    request?: protos.google.cloud.aiplatform.v1beta1.IGetTrainingPipelineRequest,
+  getNotebookRuntime(
+    request?: protos.google.cloud.aiplatform.v1.IGetNotebookRuntimeRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.aiplatform.v1beta1.ITrainingPipeline,
-          | protos.google.cloud.aiplatform.v1beta1.IGetTrainingPipelineRequest
+          protos.google.cloud.aiplatform.v1.INotebookRuntime,
+          | protos.google.cloud.aiplatform.v1.IGetNotebookRuntimeRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.ITrainingPipeline,
-      | protos.google.cloud.aiplatform.v1beta1.IGetTrainingPipelineRequest
+      protos.google.cloud.aiplatform.v1.INotebookRuntime,
+      | protos.google.cloud.aiplatform.v1.IGetNotebookRuntimeRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.aiplatform.v1beta1.ITrainingPipeline,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IGetTrainingPipelineRequest
-        | undefined
-      ),
+      protos.google.cloud.aiplatform.v1.INotebookRuntime,
+      protos.google.cloud.aiplatform.v1.IGetNotebookRuntimeRequest | undefined,
       {} | undefined,
     ]
   > | void {
@@ -2438,727 +2198,21 @@ export class PipelineServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getTrainingPipeline(request, options, callback);
-  }
-  /**
-   * Cancels a TrainingPipeline.
-   * Starts asynchronous cancellation on the TrainingPipeline. The server
-   * makes a best effort to cancel the pipeline, but success is not
-   * guaranteed. Clients can use
-   * {@link protos.google.cloud.aiplatform.v1beta1.PipelineService.GetTrainingPipeline|PipelineService.GetTrainingPipeline}
-   * or other methods to check whether the cancellation succeeded or whether the
-   * pipeline completed despite cancellation. On successful cancellation,
-   * the TrainingPipeline is not deleted; instead it becomes a pipeline with
-   * a
-   * {@link protos.google.cloud.aiplatform.v1beta1.TrainingPipeline.error|TrainingPipeline.error}
-   * value with a {@link protos.google.rpc.Status.code|google.rpc.Status.code} of 1,
-   * corresponding to `Code.CANCELLED`, and
-   * {@link protos.google.cloud.aiplatform.v1beta1.TrainingPipeline.state|TrainingPipeline.state}
-   * is set to `CANCELLED`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the TrainingPipeline to cancel.
-   *   Format:
-   *   `projects/{project}/locations/{location}/trainingPipelines/{training_pipeline}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/pipeline_service.cancel_training_pipeline.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_PipelineService_CancelTrainingPipeline_async
-   */
-  cancelTrainingPipeline(
-    request?: protos.google.cloud.aiplatform.v1beta1.ICancelTrainingPipelineRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.ICancelTrainingPipelineRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
-  cancelTrainingPipeline(
-    request: protos.google.cloud.aiplatform.v1beta1.ICancelTrainingPipelineRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.aiplatform.v1beta1.ICancelTrainingPipelineRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  cancelTrainingPipeline(
-    request: protos.google.cloud.aiplatform.v1beta1.ICancelTrainingPipelineRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.aiplatform.v1beta1.ICancelTrainingPipelineRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  cancelTrainingPipeline(
-    request?: protos.google.cloud.aiplatform.v1beta1.ICancelTrainingPipelineRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.aiplatform.v1beta1.ICancelTrainingPipelineRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.aiplatform.v1beta1.ICancelTrainingPipelineRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.ICancelTrainingPipelineRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.cancelTrainingPipeline(
-      request,
-      options,
-      callback
-    );
-  }
-  /**
-   * Creates a PipelineJob. A PipelineJob will run immediately when created.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the Location to create the PipelineJob in.
-   *   Format: `projects/{project}/locations/{location}`
-   * @param {google.cloud.aiplatform.v1beta1.PipelineJob} request.pipelineJob
-   *   Required. The PipelineJob to create.
-   * @param {string} request.pipelineJobId
-   *   The ID to use for the PipelineJob, which will become the final component of
-   *   the PipelineJob name. If not provided, an ID will be automatically
-   *   generated.
-   *
-   *   This value should be less than 128 characters, and valid characters
-   *   are `/{@link protos.0-9|a-z}-/`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.PipelineJob|PipelineJob}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/pipeline_service.create_pipeline_job.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_PipelineService_CreatePipelineJob_async
-   */
-  createPipelineJob(
-    request?: protos.google.cloud.aiplatform.v1beta1.ICreatePipelineJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IPipelineJob,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.ICreatePipelineJobRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
-  createPipelineJob(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreatePipelineJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IPipelineJob,
-      | protos.google.cloud.aiplatform.v1beta1.ICreatePipelineJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createPipelineJob(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreatePipelineJobRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IPipelineJob,
-      | protos.google.cloud.aiplatform.v1beta1.ICreatePipelineJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createPipelineJob(
-    request?: protos.google.cloud.aiplatform.v1beta1.ICreatePipelineJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.aiplatform.v1beta1.IPipelineJob,
-          | protos.google.cloud.aiplatform.v1beta1.ICreatePipelineJobRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IPipelineJob,
-      | protos.google.cloud.aiplatform.v1beta1.ICreatePipelineJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IPipelineJob,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.ICreatePipelineJobRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.createPipelineJob(request, options, callback);
-  }
-  /**
-   * Gets a PipelineJob.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the PipelineJob resource.
-   *   Format:
-   *   `projects/{project}/locations/{location}/pipelineJobs/{pipeline_job}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.PipelineJob|PipelineJob}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/pipeline_service.get_pipeline_job.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_PipelineService_GetPipelineJob_async
-   */
-  getPipelineJob(
-    request?: protos.google.cloud.aiplatform.v1beta1.IGetPipelineJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IPipelineJob,
-      protos.google.cloud.aiplatform.v1beta1.IGetPipelineJobRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  getPipelineJob(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetPipelineJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IPipelineJob,
-      | protos.google.cloud.aiplatform.v1beta1.IGetPipelineJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPipelineJob(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetPipelineJobRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IPipelineJob,
-      | protos.google.cloud.aiplatform.v1beta1.IGetPipelineJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPipelineJob(
-    request?: protos.google.cloud.aiplatform.v1beta1.IGetPipelineJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.aiplatform.v1beta1.IPipelineJob,
-          | protos.google.cloud.aiplatform.v1beta1.IGetPipelineJobRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IPipelineJob,
-      | protos.google.cloud.aiplatform.v1beta1.IGetPipelineJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IPipelineJob,
-      protos.google.cloud.aiplatform.v1beta1.IGetPipelineJobRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.getPipelineJob(request, options, callback);
-  }
-  /**
-   * Cancels a PipelineJob.
-   * Starts asynchronous cancellation on the PipelineJob. The server
-   * makes a best effort to cancel the pipeline, but success is not
-   * guaranteed. Clients can use
-   * {@link protos.google.cloud.aiplatform.v1beta1.PipelineService.GetPipelineJob|PipelineService.GetPipelineJob}
-   * or other methods to check whether the cancellation succeeded or whether the
-   * pipeline completed despite cancellation. On successful cancellation,
-   * the PipelineJob is not deleted; instead it becomes a pipeline with
-   * a {@link protos.google.cloud.aiplatform.v1beta1.PipelineJob.error|PipelineJob.error}
-   * value with a {@link protos.google.rpc.Status.code|google.rpc.Status.code} of 1,
-   * corresponding to `Code.CANCELLED`, and
-   * {@link protos.google.cloud.aiplatform.v1beta1.PipelineJob.state|PipelineJob.state} is
-   * set to `CANCELLED`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the PipelineJob to cancel.
-   *   Format:
-   *   `projects/{project}/locations/{location}/pipelineJobs/{pipeline_job}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/pipeline_service.cancel_pipeline_job.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_PipelineService_CancelPipelineJob_async
-   */
-  cancelPipelineJob(
-    request?: protos.google.cloud.aiplatform.v1beta1.ICancelPipelineJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.ICancelPipelineJobRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
-  cancelPipelineJob(
-    request: protos.google.cloud.aiplatform.v1beta1.ICancelPipelineJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.aiplatform.v1beta1.ICancelPipelineJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  cancelPipelineJob(
-    request: protos.google.cloud.aiplatform.v1beta1.ICancelPipelineJobRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.aiplatform.v1beta1.ICancelPipelineJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  cancelPipelineJob(
-    request?: protos.google.cloud.aiplatform.v1beta1.ICancelPipelineJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.aiplatform.v1beta1.ICancelPipelineJobRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.aiplatform.v1beta1.ICancelPipelineJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.ICancelPipelineJobRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.cancelPipelineJob(request, options, callback);
+    return this.innerApiCalls.getNotebookRuntime(request, options, callback);
   }
 
   /**
-   * Deletes a TrainingPipeline.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the TrainingPipeline resource to be deleted.
-   *   Format:
-   *   `projects/{project}/locations/{location}/trainingPipelines/{training_pipeline}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/pipeline_service.delete_training_pipeline.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_PipelineService_DeleteTrainingPipeline_async
-   */
-  deleteTrainingPipeline(
-    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteTrainingPipelineRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
-  deleteTrainingPipeline(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteTrainingPipelineRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteTrainingPipeline(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteTrainingPipelineRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteTrainingPipeline(
-    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteTrainingPipelineRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.deleteTrainingPipeline(
-      request,
-      options,
-      callback
-    );
-  }
-  /**
-   * Check the status of the long running operation returned by `deleteTrainingPipeline()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/pipeline_service.delete_training_pipeline.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_PipelineService_DeleteTrainingPipeline_async
-   */
-  async checkDeleteTrainingPipelineProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
-    >
-  > {
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteTrainingPipeline,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
-    >;
-  }
-  /**
-   * Deletes a PipelineJob.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the PipelineJob resource to be deleted.
-   *   Format:
-   *   `projects/{project}/locations/{location}/pipelineJobs/{pipeline_job}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/pipeline_service.delete_pipeline_job.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_PipelineService_DeletePipelineJob_async
-   */
-  deletePipelineJob(
-    request?: protos.google.cloud.aiplatform.v1beta1.IDeletePipelineJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
-  deletePipelineJob(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeletePipelineJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deletePipelineJob(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeletePipelineJobRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deletePipelineJob(
-    request?: protos.google.cloud.aiplatform.v1beta1.IDeletePipelineJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.deletePipelineJob(request, options, callback);
-  }
-  /**
-   * Check the status of the long running operation returned by `deletePipelineJob()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/pipeline_service.delete_pipeline_job.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_PipelineService_DeletePipelineJob_async
-   */
-  async checkDeletePipelineJobProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
-    >
-  > {
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deletePipelineJob,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
-    >;
-  }
-  /**
-   * Batch deletes PipelineJobs
-   * The Operation is atomic. If it fails, none of the PipelineJobs are deleted.
-   * If it succeeds, all of the PipelineJobs are deleted.
+   * Creates a NotebookRuntimeTemplate.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the PipelineJobs' parent resource.
-   *   Format: `projects/{project}/locations/{location}`
-   * @param {string[]} request.names
-   *   Required. The names of the PipelineJobs to delete.
-   *   A maximum of 32 PipelineJobs can be deleted in a batch.
-   *   Format:
-   *   `projects/{project}/locations/{location}/pipelineJobs/{pipelineJob}`
+   *   Required. The resource name of the Location to create the
+   *   NotebookRuntimeTemplate. Format: `projects/{project}/locations/{location}`
+   * @param {google.cloud.aiplatform.v1.NotebookRuntimeTemplate} request.notebookRuntimeTemplate
+   *   Required. The NotebookRuntimeTemplate to create.
+   * @param {string} [request.notebookRuntimeTemplateId]
+   *   Optional. User specified ID for the notebook runtime template.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3167,61 +2221,61 @@ export class PipelineServiceClient {
    *   you can `await` for.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/pipeline_service.batch_delete_pipeline_jobs.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_PipelineService_BatchDeletePipelineJobs_async
+   * @example <caption>include:samples/generated/v1/notebook_service.create_notebook_runtime_template.js</caption>
+   * region_tag:aiplatform_v1_generated_NotebookService_CreateNotebookRuntimeTemplate_async
    */
-  batchDeletePipelineJobs(
-    request?: protos.google.cloud.aiplatform.v1beta1.IBatchDeletePipelineJobsRequest,
+  createNotebookRuntimeTemplate(
+    request?: protos.google.cloud.aiplatform.v1.ICreateNotebookRuntimeTemplateRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IBatchDeletePipelineJobsResponse,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+        protos.google.cloud.aiplatform.v1.INotebookRuntimeTemplate,
+        protos.google.cloud.aiplatform.v1.ICreateNotebookRuntimeTemplateOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
     ]
   >;
-  batchDeletePipelineJobs(
-    request: protos.google.cloud.aiplatform.v1beta1.IBatchDeletePipelineJobsRequest,
+  createNotebookRuntimeTemplate(
+    request: protos.google.cloud.aiplatform.v1.ICreateNotebookRuntimeTemplateRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IBatchDeletePipelineJobsResponse,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+        protos.google.cloud.aiplatform.v1.INotebookRuntimeTemplate,
+        protos.google.cloud.aiplatform.v1.ICreateNotebookRuntimeTemplateOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  batchDeletePipelineJobs(
-    request: protos.google.cloud.aiplatform.v1beta1.IBatchDeletePipelineJobsRequest,
+  createNotebookRuntimeTemplate(
+    request: protos.google.cloud.aiplatform.v1.ICreateNotebookRuntimeTemplateRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IBatchDeletePipelineJobsResponse,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+        protos.google.cloud.aiplatform.v1.INotebookRuntimeTemplate,
+        protos.google.cloud.aiplatform.v1.ICreateNotebookRuntimeTemplateOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  batchDeletePipelineJobs(
-    request?: protos.google.cloud.aiplatform.v1beta1.IBatchDeletePipelineJobsRequest,
+  createNotebookRuntimeTemplate(
+    request?: protos.google.cloud.aiplatform.v1.ICreateNotebookRuntimeTemplateRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.aiplatform.v1beta1.IBatchDeletePipelineJobsResponse,
-            protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+            protos.google.cloud.aiplatform.v1.INotebookRuntimeTemplate,
+            protos.google.cloud.aiplatform.v1.ICreateNotebookRuntimeTemplateOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IBatchDeletePipelineJobsResponse,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+        protos.google.cloud.aiplatform.v1.INotebookRuntimeTemplate,
+        protos.google.cloud.aiplatform.v1.ICreateNotebookRuntimeTemplateOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -3229,8 +2283,8 @@ export class PipelineServiceClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IBatchDeletePipelineJobsResponse,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+        protos.google.cloud.aiplatform.v1.INotebookRuntimeTemplate,
+        protos.google.cloud.aiplatform.v1.ICreateNotebookRuntimeTemplateOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
@@ -3252,29 +2306,29 @@ export class PipelineServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.batchDeletePipelineJobs(
+    return this.innerApiCalls.createNotebookRuntimeTemplate(
       request,
       options,
       callback
     );
   }
   /**
-   * Check the status of the long running operation returned by `batchDeletePipelineJobs()`.
+   * Check the status of the long running operation returned by `createNotebookRuntimeTemplate()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/pipeline_service.batch_delete_pipeline_jobs.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_PipelineService_BatchDeletePipelineJobs_async
+   * @example <caption>include:samples/generated/v1/notebook_service.create_notebook_runtime_template.js</caption>
+   * region_tag:aiplatform_v1_generated_NotebookService_CreateNotebookRuntimeTemplate_async
    */
-  async checkBatchDeletePipelineJobsProgress(
+  async checkCreateNotebookRuntimeTemplateProgress(
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.aiplatform.v1beta1.BatchDeletePipelineJobsResponse,
-      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
+      protos.google.cloud.aiplatform.v1.NotebookRuntimeTemplate,
+      protos.google.cloud.aiplatform.v1.CreateNotebookRuntimeTemplateOperationMetadata
     >
   > {
     const request =
@@ -3284,33 +2338,23 @@ export class PipelineServiceClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
-      this.descriptors.longrunning.batchDeletePipelineJobs,
+      this.descriptors.longrunning.createNotebookRuntimeTemplate,
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.aiplatform.v1beta1.BatchDeletePipelineJobsResponse,
-      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
+      protos.google.cloud.aiplatform.v1.NotebookRuntimeTemplate,
+      protos.google.cloud.aiplatform.v1.CreateNotebookRuntimeTemplateOperationMetadata
     >;
   }
   /**
-   * Batch cancel PipelineJobs.
-   * Firstly the server will check if all the jobs are in non-terminal states,
-   * and skip the jobs that are already terminated.
-   * If the operation failed, none of the pipeline jobs are cancelled.
-   * The server will poll the states of all the pipeline jobs periodically
-   * to check the cancellation status.
-   * This operation will return an LRO.
+   * Deletes a NotebookRuntimeTemplate.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the PipelineJobs' parent resource.
-   *   Format: `projects/{project}/locations/{location}`
-   * @param {string[]} request.names
-   *   Required. The names of the PipelineJobs to cancel.
-   *   A maximum of 32 PipelineJobs can be cancelled in a batch.
+   * @param {string} request.name
+   *   Required. The name of the NotebookRuntimeTemplate resource to be deleted.
    *   Format:
-   *   `projects/{project}/locations/{location}/pipelineJobs/{pipelineJob}`
+   *   `projects/{project}/locations/{location}/notebookRuntimeTemplates/{notebook_runtime_template}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3319,61 +2363,61 @@ export class PipelineServiceClient {
    *   you can `await` for.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/pipeline_service.batch_cancel_pipeline_jobs.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_PipelineService_BatchCancelPipelineJobs_async
+   * @example <caption>include:samples/generated/v1/notebook_service.delete_notebook_runtime_template.js</caption>
+   * region_tag:aiplatform_v1_generated_NotebookService_DeleteNotebookRuntimeTemplate_async
    */
-  batchCancelPipelineJobs(
-    request?: protos.google.cloud.aiplatform.v1beta1.IBatchCancelPipelineJobsRequest,
+  deleteNotebookRuntimeTemplate(
+    request?: protos.google.cloud.aiplatform.v1.IDeleteNotebookRuntimeTemplateRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IBatchCancelPipelineJobsResponse,
-        protos.google.cloud.aiplatform.v1beta1.IBatchCancelPipelineJobsOperationMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
     ]
   >;
-  batchCancelPipelineJobs(
-    request: protos.google.cloud.aiplatform.v1beta1.IBatchCancelPipelineJobsRequest,
+  deleteNotebookRuntimeTemplate(
+    request: protos.google.cloud.aiplatform.v1.IDeleteNotebookRuntimeTemplateRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IBatchCancelPipelineJobsResponse,
-        protos.google.cloud.aiplatform.v1beta1.IBatchCancelPipelineJobsOperationMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  batchCancelPipelineJobs(
-    request: protos.google.cloud.aiplatform.v1beta1.IBatchCancelPipelineJobsRequest,
+  deleteNotebookRuntimeTemplate(
+    request: protos.google.cloud.aiplatform.v1.IDeleteNotebookRuntimeTemplateRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IBatchCancelPipelineJobsResponse,
-        protos.google.cloud.aiplatform.v1beta1.IBatchCancelPipelineJobsOperationMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  batchCancelPipelineJobs(
-    request?: protos.google.cloud.aiplatform.v1beta1.IBatchCancelPipelineJobsRequest,
+  deleteNotebookRuntimeTemplate(
+    request?: protos.google.cloud.aiplatform.v1.IDeleteNotebookRuntimeTemplateRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.aiplatform.v1beta1.IBatchCancelPipelineJobsResponse,
-            protos.google.cloud.aiplatform.v1beta1.IBatchCancelPipelineJobsOperationMetadata
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IBatchCancelPipelineJobsResponse,
-        protos.google.cloud.aiplatform.v1beta1.IBatchCancelPipelineJobsOperationMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -3381,8 +2425,158 @@ export class PipelineServiceClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IBatchCancelPipelineJobsResponse,
-        protos.google.cloud.aiplatform.v1beta1.IBatchCancelPipelineJobsOperationMetadata
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteNotebookRuntimeTemplate(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteNotebookRuntimeTemplate()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/notebook_service.delete_notebook_runtime_template.js</caption>
+   * region_tag:aiplatform_v1_generated_NotebookService_DeleteNotebookRuntimeTemplate_async
+   */
+  async checkDeleteNotebookRuntimeTemplateProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteNotebookRuntimeTemplate,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
+    >;
+  }
+  /**
+   * Assigns a NotebookRuntime to a user for a particular Notebook file. This
+   * method will either returns an existing assignment or generates a new one.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location to get the NotebookRuntime
+   *   assignment. Format: `projects/{project}/locations/{location}`
+   * @param {string} request.notebookRuntimeTemplate
+   *   Required. The resource name of the NotebookRuntimeTemplate based on which a
+   *   NotebookRuntime will be assigned (reuse or create a new one).
+   * @param {google.cloud.aiplatform.v1.NotebookRuntime} request.notebookRuntime
+   *   Required. Provide runtime specific information (e.g. runtime owner,
+   *   notebook id) used for NotebookRuntime assignment.
+   * @param {string} [request.notebookRuntimeId]
+   *   Optional. User specified ID for the notebook runtime.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/notebook_service.assign_notebook_runtime.js</caption>
+   * region_tag:aiplatform_v1_generated_NotebookService_AssignNotebookRuntime_async
+   */
+  assignNotebookRuntime(
+    request?: protos.google.cloud.aiplatform.v1.IAssignNotebookRuntimeRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1.INotebookRuntime,
+        protos.google.cloud.aiplatform.v1.IAssignNotebookRuntimeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  assignNotebookRuntime(
+    request: protos.google.cloud.aiplatform.v1.IAssignNotebookRuntimeRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.INotebookRuntime,
+        protos.google.cloud.aiplatform.v1.IAssignNotebookRuntimeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  assignNotebookRuntime(
+    request: protos.google.cloud.aiplatform.v1.IAssignNotebookRuntimeRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.INotebookRuntime,
+        protos.google.cloud.aiplatform.v1.IAssignNotebookRuntimeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  assignNotebookRuntime(
+    request?: protos.google.cloud.aiplatform.v1.IAssignNotebookRuntimeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.INotebookRuntime,
+            protos.google.cloud.aiplatform.v1.IAssignNotebookRuntimeOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.INotebookRuntime,
+        protos.google.cloud.aiplatform.v1.IAssignNotebookRuntimeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1.INotebookRuntime,
+        protos.google.cloud.aiplatform.v1.IAssignNotebookRuntimeOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
@@ -3404,29 +2598,25 @@ export class PipelineServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.batchCancelPipelineJobs(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls.assignNotebookRuntime(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by `batchCancelPipelineJobs()`.
+   * Check the status of the long running operation returned by `assignNotebookRuntime()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/pipeline_service.batch_cancel_pipeline_jobs.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_PipelineService_BatchCancelPipelineJobs_async
+   * @example <caption>include:samples/generated/v1/notebook_service.assign_notebook_runtime.js</caption>
+   * region_tag:aiplatform_v1_generated_NotebookService_AssignNotebookRuntime_async
    */
-  async checkBatchCancelPipelineJobsProgress(
+  async checkAssignNotebookRuntimeProgress(
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.aiplatform.v1beta1.BatchCancelPipelineJobsResponse,
-      protos.google.cloud.aiplatform.v1beta1.BatchCancelPipelineJobsOperationMetadata
+      protos.google.cloud.aiplatform.v1.NotebookRuntime,
+      protos.google.cloud.aiplatform.v1.AssignNotebookRuntimeOperationMetadata
     >
   > {
     const request =
@@ -3436,120 +2626,552 @@ export class PipelineServiceClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
-      this.descriptors.longrunning.batchCancelPipelineJobs,
+      this.descriptors.longrunning.assignNotebookRuntime,
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.aiplatform.v1beta1.BatchCancelPipelineJobsResponse,
-      protos.google.cloud.aiplatform.v1beta1.BatchCancelPipelineJobsOperationMetadata
+      protos.google.cloud.aiplatform.v1.NotebookRuntime,
+      protos.google.cloud.aiplatform.v1.AssignNotebookRuntimeOperationMetadata
     >;
   }
   /**
-   * Lists TrainingPipelines in a Location.
+   * Deletes a NotebookRuntime.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the NotebookRuntime resource to be deleted.
+   *   Instead of checking whether the name is in valid NotebookRuntime resource
+   *   name format, directly throw NotFound exception if there is no such
+   *   NotebookRuntime in spanner.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/notebook_service.delete_notebook_runtime.js</caption>
+   * region_tag:aiplatform_v1_generated_NotebookService_DeleteNotebookRuntime_async
+   */
+  deleteNotebookRuntime(
+    request?: protos.google.cloud.aiplatform.v1.IDeleteNotebookRuntimeRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteNotebookRuntime(
+    request: protos.google.cloud.aiplatform.v1.IDeleteNotebookRuntimeRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteNotebookRuntime(
+    request: protos.google.cloud.aiplatform.v1.IDeleteNotebookRuntimeRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteNotebookRuntime(
+    request?: protos.google.cloud.aiplatform.v1.IDeleteNotebookRuntimeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteNotebookRuntime(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteNotebookRuntime()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/notebook_service.delete_notebook_runtime.js</caption>
+   * region_tag:aiplatform_v1_generated_NotebookService_DeleteNotebookRuntime_async
+   */
+  async checkDeleteNotebookRuntimeProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteNotebookRuntime,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
+    >;
+  }
+  /**
+   * Upgrades a NotebookRuntime.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the NotebookRuntime resource to be upgrade.
+   *   Instead of checking whether the name is in valid NotebookRuntime resource
+   *   name format, directly throw NotFound exception if there is no such
+   *   NotebookRuntime in spanner.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/notebook_service.upgrade_notebook_runtime.js</caption>
+   * region_tag:aiplatform_v1_generated_NotebookService_UpgradeNotebookRuntime_async
+   */
+  upgradeNotebookRuntime(
+    request?: protos.google.cloud.aiplatform.v1.IUpgradeNotebookRuntimeRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IUpgradeNotebookRuntimeResponse,
+        protos.google.cloud.aiplatform.v1.IUpgradeNotebookRuntimeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  upgradeNotebookRuntime(
+    request: protos.google.cloud.aiplatform.v1.IUpgradeNotebookRuntimeRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IUpgradeNotebookRuntimeResponse,
+        protos.google.cloud.aiplatform.v1.IUpgradeNotebookRuntimeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  upgradeNotebookRuntime(
+    request: protos.google.cloud.aiplatform.v1.IUpgradeNotebookRuntimeRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IUpgradeNotebookRuntimeResponse,
+        protos.google.cloud.aiplatform.v1.IUpgradeNotebookRuntimeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  upgradeNotebookRuntime(
+    request?: protos.google.cloud.aiplatform.v1.IUpgradeNotebookRuntimeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IUpgradeNotebookRuntimeResponse,
+            protos.google.cloud.aiplatform.v1.IUpgradeNotebookRuntimeOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IUpgradeNotebookRuntimeResponse,
+        protos.google.cloud.aiplatform.v1.IUpgradeNotebookRuntimeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IUpgradeNotebookRuntimeResponse,
+        protos.google.cloud.aiplatform.v1.IUpgradeNotebookRuntimeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.upgradeNotebookRuntime(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `upgradeNotebookRuntime()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/notebook_service.upgrade_notebook_runtime.js</caption>
+   * region_tag:aiplatform_v1_generated_NotebookService_UpgradeNotebookRuntime_async
+   */
+  async checkUpgradeNotebookRuntimeProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1.UpgradeNotebookRuntimeResponse,
+      protos.google.cloud.aiplatform.v1.UpgradeNotebookRuntimeOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.upgradeNotebookRuntime,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1.UpgradeNotebookRuntimeResponse,
+      protos.google.cloud.aiplatform.v1.UpgradeNotebookRuntimeOperationMetadata
+    >;
+  }
+  /**
+   * Starts a NotebookRuntime.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the NotebookRuntime resource to be started.
+   *   Instead of checking whether the name is in valid NotebookRuntime resource
+   *   name format, directly throw NotFound exception if there is no such
+   *   NotebookRuntime in spanner.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/notebook_service.start_notebook_runtime.js</caption>
+   * region_tag:aiplatform_v1_generated_NotebookService_StartNotebookRuntime_async
+   */
+  startNotebookRuntime(
+    request?: protos.google.cloud.aiplatform.v1.IStartNotebookRuntimeRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IStartNotebookRuntimeResponse,
+        protos.google.cloud.aiplatform.v1.IStartNotebookRuntimeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  startNotebookRuntime(
+    request: protos.google.cloud.aiplatform.v1.IStartNotebookRuntimeRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IStartNotebookRuntimeResponse,
+        protos.google.cloud.aiplatform.v1.IStartNotebookRuntimeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  startNotebookRuntime(
+    request: protos.google.cloud.aiplatform.v1.IStartNotebookRuntimeRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IStartNotebookRuntimeResponse,
+        protos.google.cloud.aiplatform.v1.IStartNotebookRuntimeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  startNotebookRuntime(
+    request?: protos.google.cloud.aiplatform.v1.IStartNotebookRuntimeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IStartNotebookRuntimeResponse,
+            protos.google.cloud.aiplatform.v1.IStartNotebookRuntimeOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IStartNotebookRuntimeResponse,
+        protos.google.cloud.aiplatform.v1.IStartNotebookRuntimeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IStartNotebookRuntimeResponse,
+        protos.google.cloud.aiplatform.v1.IStartNotebookRuntimeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.startNotebookRuntime(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `startNotebookRuntime()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/notebook_service.start_notebook_runtime.js</caption>
+   * region_tag:aiplatform_v1_generated_NotebookService_StartNotebookRuntime_async
+   */
+  async checkStartNotebookRuntimeProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1.StartNotebookRuntimeResponse,
+      protos.google.cloud.aiplatform.v1.StartNotebookRuntimeOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.startNotebookRuntime,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1.StartNotebookRuntimeResponse,
+      protos.google.cloud.aiplatform.v1.StartNotebookRuntimeOperationMetadata
+    >;
+  }
+  /**
+   * Lists NotebookRuntimeTemplates in a Location.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Location to list the TrainingPipelines
-   *   from. Format: `projects/{project}/locations/{location}`
-   * @param {string} request.filter
-   *   The standard list filter.
+   *   Required. The resource name of the Location from which to list the
+   *   NotebookRuntimeTemplates.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request. For field
+   *   names both snake_case and camelCase are supported.
    *
-   *   Supported fields:
-   *
-   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
-   *     * `state` supports `=`, `!=` comparisons.
-   *     * `training_task_definition` `=`, `!=` comparisons, and `:` wildcard.
-   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
-   *       `create_time` must be in RFC 3339 format.
+   *     * `notebookRuntimeTemplate` supports = and !=. `notebookRuntimeTemplate`
+   *       represents the NotebookRuntimeTemplate ID,
+   *       i.e. the last segment of the NotebookRuntimeTemplate's [resource name]
+   *       [google.cloud.aiplatform.v1.NotebookRuntimeTemplate.name].
+   *     * `display_name` supports = and !=
    *     * `labels` supports general map functions that is:
-   *       `labels.key=value` - key:value equality
-   *       `labels.key:* - key existence
+   *       * `labels.key=value` - key:value equality
+   *       * `labels.key:* or labels:key - key existence
+   *       * A key including a space must be quoted. `labels."a key"`.
+   *     * `notebookRuntimeType` supports = and !=. notebookRuntimeType enum:
+   *     [USER_DEFINED, ONE_CLICK].
    *
-   *   Some examples of using the filter are:
+   *   Some examples:
    *
-   *     * `state="PIPELINE_STATE_SUCCEEDED" AND display_name:"my_pipeline_*"`
-   *     * `state!="PIPELINE_STATE_FAILED" OR display_name="my_pipeline"`
-   *     * `NOT display_name="my_pipeline"`
-   *     * `create_time>"2021-05-18T00:00:00Z"`
-   *     * `training_task_definition:"*automl_text_classification*"`
-   * @param {number} request.pageSize
-   *   The standard list page size.
-   * @param {string} request.pageToken
-   *   The standard list page token.
+   *     * `notebookRuntimeTemplate=notebookRuntimeTemplate123`
+   *     * `displayName="myDisplayName"`
+   *     * `labels.myKey="myValue"`
+   *     * `notebookRuntimeType=USER_DEFINED`
+   * @param {number} [request.pageSize]
+   *   Optional. The standard list page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard list page token.
    *   Typically obtained via
-   *   {@link protos.google.cloud.aiplatform.v1beta1.ListTrainingPipelinesResponse.next_page_token|ListTrainingPipelinesResponse.next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1.ListNotebookRuntimeTemplatesResponse.next_page_token|ListNotebookRuntimeTemplatesResponse.next_page_token}
    *   of the previous
-   *   {@link protos.google.cloud.aiplatform.v1beta1.PipelineService.ListTrainingPipelines|PipelineService.ListTrainingPipelines}
+   *   {@link protos.google.cloud.aiplatform.v1.NotebookService.ListNotebookRuntimeTemplates|NotebookService.ListNotebookRuntimeTemplates}
    *   call.
-   * @param {google.protobuf.FieldMask} request.readMask
-   *   Mask specifying which fields to read.
+   * @param {google.protobuf.FieldMask} [request.readMask]
+   *   Optional. Mask specifying which fields to read.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields to order by, sorted in ascending
+   *   order. Use "desc" after a field name for descending. Supported fields:
+   *
+   *     * `display_name`
+   *     * `create_time`
+   *     * `update_time`
+   *
+   *   Example: `display_name, create_time desc`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.TrainingPipeline|TrainingPipeline}.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.NotebookRuntimeTemplate|NotebookRuntimeTemplate}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
-   *   We recommend using `listTrainingPipelinesAsync()`
+   *   We recommend using `listNotebookRuntimeTemplatesAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
-  listTrainingPipelines(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListTrainingPipelinesRequest,
+  listNotebookRuntimeTemplates(
+    request?: protos.google.cloud.aiplatform.v1.IListNotebookRuntimeTemplatesRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.aiplatform.v1beta1.ITrainingPipeline[],
-      protos.google.cloud.aiplatform.v1beta1.IListTrainingPipelinesRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListTrainingPipelinesResponse,
+      protos.google.cloud.aiplatform.v1.INotebookRuntimeTemplate[],
+      protos.google.cloud.aiplatform.v1.IListNotebookRuntimeTemplatesRequest | null,
+      protos.google.cloud.aiplatform.v1.IListNotebookRuntimeTemplatesResponse,
     ]
   >;
-  listTrainingPipelines(
-    request: protos.google.cloud.aiplatform.v1beta1.IListTrainingPipelinesRequest,
+  listNotebookRuntimeTemplates(
+    request: protos.google.cloud.aiplatform.v1.IListNotebookRuntimeTemplatesRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListTrainingPipelinesRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListTrainingPipelinesResponse
+      protos.google.cloud.aiplatform.v1.IListNotebookRuntimeTemplatesRequest,
+      | protos.google.cloud.aiplatform.v1.IListNotebookRuntimeTemplatesResponse
       | null
       | undefined,
-      protos.google.cloud.aiplatform.v1beta1.ITrainingPipeline
+      protos.google.cloud.aiplatform.v1.INotebookRuntimeTemplate
     >
   ): void;
-  listTrainingPipelines(
-    request: protos.google.cloud.aiplatform.v1beta1.IListTrainingPipelinesRequest,
+  listNotebookRuntimeTemplates(
+    request: protos.google.cloud.aiplatform.v1.IListNotebookRuntimeTemplatesRequest,
     callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListTrainingPipelinesRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListTrainingPipelinesResponse
+      protos.google.cloud.aiplatform.v1.IListNotebookRuntimeTemplatesRequest,
+      | protos.google.cloud.aiplatform.v1.IListNotebookRuntimeTemplatesResponse
       | null
       | undefined,
-      protos.google.cloud.aiplatform.v1beta1.ITrainingPipeline
+      protos.google.cloud.aiplatform.v1.INotebookRuntimeTemplate
     >
   ): void;
-  listTrainingPipelines(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListTrainingPipelinesRequest,
+  listNotebookRuntimeTemplates(
+    request?: protos.google.cloud.aiplatform.v1.IListNotebookRuntimeTemplatesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.cloud.aiplatform.v1beta1.IListTrainingPipelinesRequest,
-          | protos.google.cloud.aiplatform.v1beta1.IListTrainingPipelinesResponse
+          protos.google.cloud.aiplatform.v1.IListNotebookRuntimeTemplatesRequest,
+          | protos.google.cloud.aiplatform.v1.IListNotebookRuntimeTemplatesResponse
           | null
           | undefined,
-          protos.google.cloud.aiplatform.v1beta1.ITrainingPipeline
+          protos.google.cloud.aiplatform.v1.INotebookRuntimeTemplate
         >,
     callback?: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListTrainingPipelinesRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListTrainingPipelinesResponse
+      protos.google.cloud.aiplatform.v1.IListNotebookRuntimeTemplatesRequest,
+      | protos.google.cloud.aiplatform.v1.IListNotebookRuntimeTemplatesResponse
       | null
       | undefined,
-      protos.google.cloud.aiplatform.v1beta1.ITrainingPipeline
+      protos.google.cloud.aiplatform.v1.INotebookRuntimeTemplate
     >
   ): Promise<
     [
-      protos.google.cloud.aiplatform.v1beta1.ITrainingPipeline[],
-      protos.google.cloud.aiplatform.v1beta1.IListTrainingPipelinesRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListTrainingPipelinesResponse,
+      protos.google.cloud.aiplatform.v1.INotebookRuntimeTemplate[],
+      protos.google.cloud.aiplatform.v1.IListNotebookRuntimeTemplatesRequest | null,
+      protos.google.cloud.aiplatform.v1.IListNotebookRuntimeTemplatesResponse,
     ]
   > | void {
     request = request || {};
@@ -3568,7 +3190,11 @@ export class PipelineServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listTrainingPipelines(request, options, callback);
+    return this.innerApiCalls.listNotebookRuntimeTemplates(
+      request,
+      options,
+      callback
+    );
   }
 
   /**
@@ -3576,53 +3202,64 @@ export class PipelineServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Location to list the TrainingPipelines
-   *   from. Format: `projects/{project}/locations/{location}`
-   * @param {string} request.filter
-   *   The standard list filter.
+   *   Required. The resource name of the Location from which to list the
+   *   NotebookRuntimeTemplates.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request. For field
+   *   names both snake_case and camelCase are supported.
    *
-   *   Supported fields:
-   *
-   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
-   *     * `state` supports `=`, `!=` comparisons.
-   *     * `training_task_definition` `=`, `!=` comparisons, and `:` wildcard.
-   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
-   *       `create_time` must be in RFC 3339 format.
+   *     * `notebookRuntimeTemplate` supports = and !=. `notebookRuntimeTemplate`
+   *       represents the NotebookRuntimeTemplate ID,
+   *       i.e. the last segment of the NotebookRuntimeTemplate's [resource name]
+   *       [google.cloud.aiplatform.v1.NotebookRuntimeTemplate.name].
+   *     * `display_name` supports = and !=
    *     * `labels` supports general map functions that is:
-   *       `labels.key=value` - key:value equality
-   *       `labels.key:* - key existence
+   *       * `labels.key=value` - key:value equality
+   *       * `labels.key:* or labels:key - key existence
+   *       * A key including a space must be quoted. `labels."a key"`.
+   *     * `notebookRuntimeType` supports = and !=. notebookRuntimeType enum:
+   *     [USER_DEFINED, ONE_CLICK].
    *
-   *   Some examples of using the filter are:
+   *   Some examples:
    *
-   *     * `state="PIPELINE_STATE_SUCCEEDED" AND display_name:"my_pipeline_*"`
-   *     * `state!="PIPELINE_STATE_FAILED" OR display_name="my_pipeline"`
-   *     * `NOT display_name="my_pipeline"`
-   *     * `create_time>"2021-05-18T00:00:00Z"`
-   *     * `training_task_definition:"*automl_text_classification*"`
-   * @param {number} request.pageSize
-   *   The standard list page size.
-   * @param {string} request.pageToken
-   *   The standard list page token.
+   *     * `notebookRuntimeTemplate=notebookRuntimeTemplate123`
+   *     * `displayName="myDisplayName"`
+   *     * `labels.myKey="myValue"`
+   *     * `notebookRuntimeType=USER_DEFINED`
+   * @param {number} [request.pageSize]
+   *   Optional. The standard list page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard list page token.
    *   Typically obtained via
-   *   {@link protos.google.cloud.aiplatform.v1beta1.ListTrainingPipelinesResponse.next_page_token|ListTrainingPipelinesResponse.next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1.ListNotebookRuntimeTemplatesResponse.next_page_token|ListNotebookRuntimeTemplatesResponse.next_page_token}
    *   of the previous
-   *   {@link protos.google.cloud.aiplatform.v1beta1.PipelineService.ListTrainingPipelines|PipelineService.ListTrainingPipelines}
+   *   {@link protos.google.cloud.aiplatform.v1.NotebookService.ListNotebookRuntimeTemplates|NotebookService.ListNotebookRuntimeTemplates}
    *   call.
-   * @param {google.protobuf.FieldMask} request.readMask
-   *   Mask specifying which fields to read.
+   * @param {google.protobuf.FieldMask} [request.readMask]
+   *   Optional. Mask specifying which fields to read.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields to order by, sorted in ascending
+   *   order. Use "desc" after a field name for descending. Supported fields:
+   *
+   *     * `display_name`
+   *     * `create_time`
+   *     * `update_time`
+   *
+   *   Example: `display_name, create_time desc`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.TrainingPipeline|TrainingPipeline} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.NotebookRuntimeTemplate|NotebookRuntimeTemplate} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listTrainingPipelinesAsync()`
+   *   We recommend using `listNotebookRuntimeTemplatesAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
-  listTrainingPipelinesStream(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListTrainingPipelinesRequest,
+  listNotebookRuntimeTemplatesStream(
+    request?: protos.google.cloud.aiplatform.v1.IListNotebookRuntimeTemplatesRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -3633,73 +3270,84 @@ export class PipelineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listTrainingPipelines'];
+    const defaultCallSettings = this._defaults['listNotebookRuntimeTemplates'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.listTrainingPipelines.createStream(
-      this.innerApiCalls.listTrainingPipelines as GaxCall,
+    return this.descriptors.page.listNotebookRuntimeTemplates.createStream(
+      this.innerApiCalls.listNotebookRuntimeTemplates as GaxCall,
       request,
       callSettings
     );
   }
 
   /**
-   * Equivalent to `listTrainingPipelines`, but returns an iterable object.
+   * Equivalent to `listNotebookRuntimeTemplates`, but returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Location to list the TrainingPipelines
-   *   from. Format: `projects/{project}/locations/{location}`
-   * @param {string} request.filter
-   *   The standard list filter.
+   *   Required. The resource name of the Location from which to list the
+   *   NotebookRuntimeTemplates.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request. For field
+   *   names both snake_case and camelCase are supported.
    *
-   *   Supported fields:
-   *
-   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
-   *     * `state` supports `=`, `!=` comparisons.
-   *     * `training_task_definition` `=`, `!=` comparisons, and `:` wildcard.
-   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
-   *       `create_time` must be in RFC 3339 format.
+   *     * `notebookRuntimeTemplate` supports = and !=. `notebookRuntimeTemplate`
+   *       represents the NotebookRuntimeTemplate ID,
+   *       i.e. the last segment of the NotebookRuntimeTemplate's [resource name]
+   *       [google.cloud.aiplatform.v1.NotebookRuntimeTemplate.name].
+   *     * `display_name` supports = and !=
    *     * `labels` supports general map functions that is:
-   *       `labels.key=value` - key:value equality
-   *       `labels.key:* - key existence
+   *       * `labels.key=value` - key:value equality
+   *       * `labels.key:* or labels:key - key existence
+   *       * A key including a space must be quoted. `labels."a key"`.
+   *     * `notebookRuntimeType` supports = and !=. notebookRuntimeType enum:
+   *     [USER_DEFINED, ONE_CLICK].
    *
-   *   Some examples of using the filter are:
+   *   Some examples:
    *
-   *     * `state="PIPELINE_STATE_SUCCEEDED" AND display_name:"my_pipeline_*"`
-   *     * `state!="PIPELINE_STATE_FAILED" OR display_name="my_pipeline"`
-   *     * `NOT display_name="my_pipeline"`
-   *     * `create_time>"2021-05-18T00:00:00Z"`
-   *     * `training_task_definition:"*automl_text_classification*"`
-   * @param {number} request.pageSize
-   *   The standard list page size.
-   * @param {string} request.pageToken
-   *   The standard list page token.
+   *     * `notebookRuntimeTemplate=notebookRuntimeTemplate123`
+   *     * `displayName="myDisplayName"`
+   *     * `labels.myKey="myValue"`
+   *     * `notebookRuntimeType=USER_DEFINED`
+   * @param {number} [request.pageSize]
+   *   Optional. The standard list page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard list page token.
    *   Typically obtained via
-   *   {@link protos.google.cloud.aiplatform.v1beta1.ListTrainingPipelinesResponse.next_page_token|ListTrainingPipelinesResponse.next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1.ListNotebookRuntimeTemplatesResponse.next_page_token|ListNotebookRuntimeTemplatesResponse.next_page_token}
    *   of the previous
-   *   {@link protos.google.cloud.aiplatform.v1beta1.PipelineService.ListTrainingPipelines|PipelineService.ListTrainingPipelines}
+   *   {@link protos.google.cloud.aiplatform.v1.NotebookService.ListNotebookRuntimeTemplates|NotebookService.ListNotebookRuntimeTemplates}
    *   call.
-   * @param {google.protobuf.FieldMask} request.readMask
-   *   Mask specifying which fields to read.
+   * @param {google.protobuf.FieldMask} [request.readMask]
+   *   Optional. Mask specifying which fields to read.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields to order by, sorted in ascending
+   *   order. Use "desc" after a field name for descending. Supported fields:
+   *
+   *     * `display_name`
+   *     * `create_time`
+   *     * `update_time`
+   *
+   *   Example: `display_name, create_time desc`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
    *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.aiplatform.v1beta1.TrainingPipeline|TrainingPipeline}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.aiplatform.v1.NotebookRuntimeTemplate|NotebookRuntimeTemplate}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/pipeline_service.list_training_pipelines.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_PipelineService_ListTrainingPipelines_async
+   * @example <caption>include:samples/generated/v1/notebook_service.list_notebook_runtime_templates.js</caption>
+   * region_tag:aiplatform_v1_generated_NotebookService_ListNotebookRuntimeTemplates_async
    */
-  listTrainingPipelinesAsync(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListTrainingPipelinesRequest,
+  listNotebookRuntimeTemplatesAsync(
+    request?: protos.google.cloud.aiplatform.v1.IListNotebookRuntimeTemplatesRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.aiplatform.v1beta1.ITrainingPipeline> {
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1.INotebookRuntimeTemplate> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -3708,149 +3356,146 @@ export class PipelineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listTrainingPipelines'];
+    const defaultCallSettings = this._defaults['listNotebookRuntimeTemplates'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.listTrainingPipelines.asyncIterate(
-      this.innerApiCalls['listTrainingPipelines'] as GaxCall,
+    return this.descriptors.page.listNotebookRuntimeTemplates.asyncIterate(
+      this.innerApiCalls['listNotebookRuntimeTemplates'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.ITrainingPipeline>;
+    ) as AsyncIterable<protos.google.cloud.aiplatform.v1.INotebookRuntimeTemplate>;
   }
   /**
-   * Lists PipelineJobs in a Location.
+   * Lists NotebookRuntimes in a Location.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Location to list the PipelineJobs from.
+   *   Required. The resource name of the Location from which to list the
+   *   NotebookRuntimes.
    *   Format: `projects/{project}/locations/{location}`
-   * @param {string} request.filter
-   *   Lists the PipelineJobs that match the filter expression. The following
-   *   fields are supported:
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request. For field
+   *   names both snake_case and camelCase are supported.
    *
-   *   * `pipeline_name`: Supports `=` and `!=` comparisons.
-   *   * `display_name`: Supports `=`, `!=` comparisons, and `:` wildcard.
-   *   * `pipeline_job_user_id`: Supports `=`, `!=` comparisons, and `:` wildcard.
-   *     for example, can check if pipeline's display_name contains *step* by
-   *     doing display_name:\"*step*\"
-   *   * `state`: Supports `=` and `!=` comparisons.
-   *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
-   *     Values must be in RFC 3339 format.
-   *   * `update_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
-   *     Values must be in RFC 3339 format.
-   *   * `end_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
-   *     Values must be in RFC 3339 format.
-   *   * `labels`: Supports key-value equality and key presence.
-   *   * `template_uri`: Supports `=`, `!=` comparisons, and `:` wildcard.
-   *   * `template_metadata.version`: Supports `=`, `!=` comparisons, and `:`
-   *     wildcard.
+   *     * `notebookRuntime` supports = and !=. `notebookRuntime` represents the
+   *       NotebookRuntime ID,
+   *       i.e. the last segment of the NotebookRuntime's [resource name]
+   *       [google.cloud.aiplatform.v1.NotebookRuntime.name].
+   *     * `displayName` supports = and != and regex.
+   *     * `notebookRuntimeTemplate` supports = and !=. `notebookRuntimeTemplate`
+   *       represents the NotebookRuntimeTemplate ID,
+   *       i.e. the last segment of the NotebookRuntimeTemplate's [resource name]
+   *       [google.cloud.aiplatform.v1.NotebookRuntimeTemplate.name].
+   *     * `healthState` supports = and !=. healthState enum: [HEALTHY, UNHEALTHY,
+   *     HEALTH_STATE_UNSPECIFIED].
+   *     * `runtimeState` supports = and !=. runtimeState enum:
+   *     [RUNTIME_STATE_UNSPECIFIED, RUNNING, BEING_STARTED, BEING_STOPPED,
+   *     STOPPED, BEING_UPGRADED, ERROR, INVALID].
+   *     * `runtimeUser` supports = and !=.
+   *     * API version is UI only: `uiState` supports = and !=. uiState enum:
+   *     [UI_RESOURCE_STATE_UNSPECIFIED, UI_RESOURCE_STATE_BEING_CREATED,
+   *     UI_RESOURCE_STATE_ACTIVE, UI_RESOURCE_STATE_BEING_DELETED,
+   *     UI_RESOURCE_STATE_CREATION_FAILED].
+   *     * `notebookRuntimeType` supports = and !=. notebookRuntimeType enum:
+   *     [USER_DEFINED, ONE_CLICK].
    *
-   *   Filter expressions can be combined together using logical operators
-   *   (`AND` & `OR`).
-   *   For example: `pipeline_name="test" AND create_time>"2020-05-18T13:30:00Z"`.
+   *   Some examples:
    *
-   *   The syntax to define filter expression is based on
-   *   https://google.aip.dev/160.
-   *
-   *   Examples:
-   *
-   *   * `create_time>"2021-05-18T00:00:00Z" OR
-   *     update_time>"2020-05-18T00:00:00Z"` PipelineJobs created or updated
-   *     after 2020-05-18 00:00:00 UTC.
-   *   * `labels.env = "prod"`
-   *     PipelineJobs with label "env" set to "prod".
-   * @param {number} request.pageSize
-   *   The standard list page size.
-   * @param {string} request.pageToken
-   *   The standard list page token.
+   *     * `notebookRuntime="notebookRuntime123"`
+   *     * `displayName="myDisplayName"` and `displayName=~"myDisplayNameRegex"`
+   *     * `notebookRuntimeTemplate="notebookRuntimeTemplate321"`
+   *     * `healthState=HEALTHY`
+   *     * `runtimeState=RUNNING`
+   *     * `runtimeUser="test@google.com"`
+   *     * `uiState=UI_RESOURCE_STATE_BEING_DELETED`
+   *     * `notebookRuntimeType=USER_DEFINED`
+   * @param {number} [request.pageSize]
+   *   Optional. The standard list page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard list page token.
    *   Typically obtained via
-   *   {@link protos.google.cloud.aiplatform.v1beta1.ListPipelineJobsResponse.next_page_token|ListPipelineJobsResponse.next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1.ListNotebookRuntimesResponse.next_page_token|ListNotebookRuntimesResponse.next_page_token}
    *   of the previous
-   *   {@link protos.google.cloud.aiplatform.v1beta1.PipelineService.ListPipelineJobs|PipelineService.ListPipelineJobs}
+   *   {@link protos.google.cloud.aiplatform.v1.NotebookService.ListNotebookRuntimes|NotebookService.ListNotebookRuntimes}
    *   call.
-   * @param {string} request.orderBy
-   *   A comma-separated list of fields to order by. The default sort order is in
-   *   ascending order. Use "desc" after a field name for descending. You can have
-   *   multiple order_by fields provided e.g. "create_time desc, end_time",
-   *   "end_time, start_time, update_time" For example, using "create_time desc,
-   *   end_time" will order results by create time in descending order, and if
-   *   there are multiple jobs having the same create time, order them by the end
-   *   time in ascending order. if order_by is not specified, it will order by
-   *   default order is create time in descending order. Supported fields:
+   * @param {google.protobuf.FieldMask} [request.readMask]
+   *   Optional. Mask specifying which fields to read.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields to order by, sorted in ascending
+   *   order. Use "desc" after a field name for descending. Supported fields:
    *
+   *     * `display_name`
    *     * `create_time`
    *     * `update_time`
-   *     * `end_time`
-   *     * `start_time`
-   * @param {google.protobuf.FieldMask} request.readMask
-   *   Mask specifying which fields to read.
+   *
+   *   Example: `display_name, create_time desc`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.PipelineJob|PipelineJob}.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.NotebookRuntime|NotebookRuntime}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
-   *   We recommend using `listPipelineJobsAsync()`
+   *   We recommend using `listNotebookRuntimesAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
-  listPipelineJobs(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListPipelineJobsRequest,
+  listNotebookRuntimes(
+    request?: protos.google.cloud.aiplatform.v1.IListNotebookRuntimesRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.aiplatform.v1beta1.IPipelineJob[],
-      protos.google.cloud.aiplatform.v1beta1.IListPipelineJobsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListPipelineJobsResponse,
+      protos.google.cloud.aiplatform.v1.INotebookRuntime[],
+      protos.google.cloud.aiplatform.v1.IListNotebookRuntimesRequest | null,
+      protos.google.cloud.aiplatform.v1.IListNotebookRuntimesResponse,
     ]
   >;
-  listPipelineJobs(
-    request: protos.google.cloud.aiplatform.v1beta1.IListPipelineJobsRequest,
+  listNotebookRuntimes(
+    request: protos.google.cloud.aiplatform.v1.IListNotebookRuntimesRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListPipelineJobsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListPipelineJobsResponse
+      protos.google.cloud.aiplatform.v1.IListNotebookRuntimesRequest,
+      | protos.google.cloud.aiplatform.v1.IListNotebookRuntimesResponse
       | null
       | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IPipelineJob
+      protos.google.cloud.aiplatform.v1.INotebookRuntime
     >
   ): void;
-  listPipelineJobs(
-    request: protos.google.cloud.aiplatform.v1beta1.IListPipelineJobsRequest,
+  listNotebookRuntimes(
+    request: protos.google.cloud.aiplatform.v1.IListNotebookRuntimesRequest,
     callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListPipelineJobsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListPipelineJobsResponse
+      protos.google.cloud.aiplatform.v1.IListNotebookRuntimesRequest,
+      | protos.google.cloud.aiplatform.v1.IListNotebookRuntimesResponse
       | null
       | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IPipelineJob
+      protos.google.cloud.aiplatform.v1.INotebookRuntime
     >
   ): void;
-  listPipelineJobs(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListPipelineJobsRequest,
+  listNotebookRuntimes(
+    request?: protos.google.cloud.aiplatform.v1.IListNotebookRuntimesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.cloud.aiplatform.v1beta1.IListPipelineJobsRequest,
-          | protos.google.cloud.aiplatform.v1beta1.IListPipelineJobsResponse
+          protos.google.cloud.aiplatform.v1.IListNotebookRuntimesRequest,
+          | protos.google.cloud.aiplatform.v1.IListNotebookRuntimesResponse
           | null
           | undefined,
-          protos.google.cloud.aiplatform.v1beta1.IPipelineJob
+          protos.google.cloud.aiplatform.v1.INotebookRuntime
         >,
     callback?: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListPipelineJobsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListPipelineJobsResponse
+      protos.google.cloud.aiplatform.v1.IListNotebookRuntimesRequest,
+      | protos.google.cloud.aiplatform.v1.IListNotebookRuntimesResponse
       | null
       | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IPipelineJob
+      protos.google.cloud.aiplatform.v1.INotebookRuntime
     >
   ): Promise<
     [
-      protos.google.cloud.aiplatform.v1beta1.IPipelineJob[],
-      protos.google.cloud.aiplatform.v1beta1.IListPipelineJobsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListPipelineJobsResponse,
+      protos.google.cloud.aiplatform.v1.INotebookRuntime[],
+      protos.google.cloud.aiplatform.v1.IListNotebookRuntimesRequest | null,
+      protos.google.cloud.aiplatform.v1.IListNotebookRuntimesResponse,
     ]
   > | void {
     request = request || {};
@@ -3869,7 +3514,7 @@ export class PipelineServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listPipelineJobs(request, options, callback);
+    return this.innerApiCalls.listNotebookRuntimes(request, options, callback);
   }
 
   /**
@@ -3877,81 +3522,78 @@ export class PipelineServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Location to list the PipelineJobs from.
+   *   Required. The resource name of the Location from which to list the
+   *   NotebookRuntimes.
    *   Format: `projects/{project}/locations/{location}`
-   * @param {string} request.filter
-   *   Lists the PipelineJobs that match the filter expression. The following
-   *   fields are supported:
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request. For field
+   *   names both snake_case and camelCase are supported.
    *
-   *   * `pipeline_name`: Supports `=` and `!=` comparisons.
-   *   * `display_name`: Supports `=`, `!=` comparisons, and `:` wildcard.
-   *   * `pipeline_job_user_id`: Supports `=`, `!=` comparisons, and `:` wildcard.
-   *     for example, can check if pipeline's display_name contains *step* by
-   *     doing display_name:\"*step*\"
-   *   * `state`: Supports `=` and `!=` comparisons.
-   *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
-   *     Values must be in RFC 3339 format.
-   *   * `update_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
-   *     Values must be in RFC 3339 format.
-   *   * `end_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
-   *     Values must be in RFC 3339 format.
-   *   * `labels`: Supports key-value equality and key presence.
-   *   * `template_uri`: Supports `=`, `!=` comparisons, and `:` wildcard.
-   *   * `template_metadata.version`: Supports `=`, `!=` comparisons, and `:`
-   *     wildcard.
+   *     * `notebookRuntime` supports = and !=. `notebookRuntime` represents the
+   *       NotebookRuntime ID,
+   *       i.e. the last segment of the NotebookRuntime's [resource name]
+   *       [google.cloud.aiplatform.v1.NotebookRuntime.name].
+   *     * `displayName` supports = and != and regex.
+   *     * `notebookRuntimeTemplate` supports = and !=. `notebookRuntimeTemplate`
+   *       represents the NotebookRuntimeTemplate ID,
+   *       i.e. the last segment of the NotebookRuntimeTemplate's [resource name]
+   *       [google.cloud.aiplatform.v1.NotebookRuntimeTemplate.name].
+   *     * `healthState` supports = and !=. healthState enum: [HEALTHY, UNHEALTHY,
+   *     HEALTH_STATE_UNSPECIFIED].
+   *     * `runtimeState` supports = and !=. runtimeState enum:
+   *     [RUNTIME_STATE_UNSPECIFIED, RUNNING, BEING_STARTED, BEING_STOPPED,
+   *     STOPPED, BEING_UPGRADED, ERROR, INVALID].
+   *     * `runtimeUser` supports = and !=.
+   *     * API version is UI only: `uiState` supports = and !=. uiState enum:
+   *     [UI_RESOURCE_STATE_UNSPECIFIED, UI_RESOURCE_STATE_BEING_CREATED,
+   *     UI_RESOURCE_STATE_ACTIVE, UI_RESOURCE_STATE_BEING_DELETED,
+   *     UI_RESOURCE_STATE_CREATION_FAILED].
+   *     * `notebookRuntimeType` supports = and !=. notebookRuntimeType enum:
+   *     [USER_DEFINED, ONE_CLICK].
    *
-   *   Filter expressions can be combined together using logical operators
-   *   (`AND` & `OR`).
-   *   For example: `pipeline_name="test" AND create_time>"2020-05-18T13:30:00Z"`.
+   *   Some examples:
    *
-   *   The syntax to define filter expression is based on
-   *   https://google.aip.dev/160.
-   *
-   *   Examples:
-   *
-   *   * `create_time>"2021-05-18T00:00:00Z" OR
-   *     update_time>"2020-05-18T00:00:00Z"` PipelineJobs created or updated
-   *     after 2020-05-18 00:00:00 UTC.
-   *   * `labels.env = "prod"`
-   *     PipelineJobs with label "env" set to "prod".
-   * @param {number} request.pageSize
-   *   The standard list page size.
-   * @param {string} request.pageToken
-   *   The standard list page token.
+   *     * `notebookRuntime="notebookRuntime123"`
+   *     * `displayName="myDisplayName"` and `displayName=~"myDisplayNameRegex"`
+   *     * `notebookRuntimeTemplate="notebookRuntimeTemplate321"`
+   *     * `healthState=HEALTHY`
+   *     * `runtimeState=RUNNING`
+   *     * `runtimeUser="test@google.com"`
+   *     * `uiState=UI_RESOURCE_STATE_BEING_DELETED`
+   *     * `notebookRuntimeType=USER_DEFINED`
+   * @param {number} [request.pageSize]
+   *   Optional. The standard list page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard list page token.
    *   Typically obtained via
-   *   {@link protos.google.cloud.aiplatform.v1beta1.ListPipelineJobsResponse.next_page_token|ListPipelineJobsResponse.next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1.ListNotebookRuntimesResponse.next_page_token|ListNotebookRuntimesResponse.next_page_token}
    *   of the previous
-   *   {@link protos.google.cloud.aiplatform.v1beta1.PipelineService.ListPipelineJobs|PipelineService.ListPipelineJobs}
+   *   {@link protos.google.cloud.aiplatform.v1.NotebookService.ListNotebookRuntimes|NotebookService.ListNotebookRuntimes}
    *   call.
-   * @param {string} request.orderBy
-   *   A comma-separated list of fields to order by. The default sort order is in
-   *   ascending order. Use "desc" after a field name for descending. You can have
-   *   multiple order_by fields provided e.g. "create_time desc, end_time",
-   *   "end_time, start_time, update_time" For example, using "create_time desc,
-   *   end_time" will order results by create time in descending order, and if
-   *   there are multiple jobs having the same create time, order them by the end
-   *   time in ascending order. if order_by is not specified, it will order by
-   *   default order is create time in descending order. Supported fields:
+   * @param {google.protobuf.FieldMask} [request.readMask]
+   *   Optional. Mask specifying which fields to read.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields to order by, sorted in ascending
+   *   order. Use "desc" after a field name for descending. Supported fields:
    *
+   *     * `display_name`
    *     * `create_time`
    *     * `update_time`
-   *     * `end_time`
-   *     * `start_time`
-   * @param {google.protobuf.FieldMask} request.readMask
-   *   Mask specifying which fields to read.
+   *
+   *   Example: `display_name, create_time desc`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.PipelineJob|PipelineJob} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.NotebookRuntime|NotebookRuntime} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listPipelineJobsAsync()`
+   *   We recommend using `listNotebookRuntimesAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
-  listPipelineJobsStream(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListPipelineJobsRequest,
+  listNotebookRuntimesStream(
+    request?: protos.google.cloud.aiplatform.v1.IListNotebookRuntimesRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -3962,101 +3604,98 @@ export class PipelineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listPipelineJobs'];
+    const defaultCallSettings = this._defaults['listNotebookRuntimes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.listPipelineJobs.createStream(
-      this.innerApiCalls.listPipelineJobs as GaxCall,
+    return this.descriptors.page.listNotebookRuntimes.createStream(
+      this.innerApiCalls.listNotebookRuntimes as GaxCall,
       request,
       callSettings
     );
   }
 
   /**
-   * Equivalent to `listPipelineJobs`, but returns an iterable object.
+   * Equivalent to `listNotebookRuntimes`, but returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Location to list the PipelineJobs from.
+   *   Required. The resource name of the Location from which to list the
+   *   NotebookRuntimes.
    *   Format: `projects/{project}/locations/{location}`
-   * @param {string} request.filter
-   *   Lists the PipelineJobs that match the filter expression. The following
-   *   fields are supported:
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request. For field
+   *   names both snake_case and camelCase are supported.
    *
-   *   * `pipeline_name`: Supports `=` and `!=` comparisons.
-   *   * `display_name`: Supports `=`, `!=` comparisons, and `:` wildcard.
-   *   * `pipeline_job_user_id`: Supports `=`, `!=` comparisons, and `:` wildcard.
-   *     for example, can check if pipeline's display_name contains *step* by
-   *     doing display_name:\"*step*\"
-   *   * `state`: Supports `=` and `!=` comparisons.
-   *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
-   *     Values must be in RFC 3339 format.
-   *   * `update_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
-   *     Values must be in RFC 3339 format.
-   *   * `end_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
-   *     Values must be in RFC 3339 format.
-   *   * `labels`: Supports key-value equality and key presence.
-   *   * `template_uri`: Supports `=`, `!=` comparisons, and `:` wildcard.
-   *   * `template_metadata.version`: Supports `=`, `!=` comparisons, and `:`
-   *     wildcard.
+   *     * `notebookRuntime` supports = and !=. `notebookRuntime` represents the
+   *       NotebookRuntime ID,
+   *       i.e. the last segment of the NotebookRuntime's [resource name]
+   *       [google.cloud.aiplatform.v1.NotebookRuntime.name].
+   *     * `displayName` supports = and != and regex.
+   *     * `notebookRuntimeTemplate` supports = and !=. `notebookRuntimeTemplate`
+   *       represents the NotebookRuntimeTemplate ID,
+   *       i.e. the last segment of the NotebookRuntimeTemplate's [resource name]
+   *       [google.cloud.aiplatform.v1.NotebookRuntimeTemplate.name].
+   *     * `healthState` supports = and !=. healthState enum: [HEALTHY, UNHEALTHY,
+   *     HEALTH_STATE_UNSPECIFIED].
+   *     * `runtimeState` supports = and !=. runtimeState enum:
+   *     [RUNTIME_STATE_UNSPECIFIED, RUNNING, BEING_STARTED, BEING_STOPPED,
+   *     STOPPED, BEING_UPGRADED, ERROR, INVALID].
+   *     * `runtimeUser` supports = and !=.
+   *     * API version is UI only: `uiState` supports = and !=. uiState enum:
+   *     [UI_RESOURCE_STATE_UNSPECIFIED, UI_RESOURCE_STATE_BEING_CREATED,
+   *     UI_RESOURCE_STATE_ACTIVE, UI_RESOURCE_STATE_BEING_DELETED,
+   *     UI_RESOURCE_STATE_CREATION_FAILED].
+   *     * `notebookRuntimeType` supports = and !=. notebookRuntimeType enum:
+   *     [USER_DEFINED, ONE_CLICK].
    *
-   *   Filter expressions can be combined together using logical operators
-   *   (`AND` & `OR`).
-   *   For example: `pipeline_name="test" AND create_time>"2020-05-18T13:30:00Z"`.
+   *   Some examples:
    *
-   *   The syntax to define filter expression is based on
-   *   https://google.aip.dev/160.
-   *
-   *   Examples:
-   *
-   *   * `create_time>"2021-05-18T00:00:00Z" OR
-   *     update_time>"2020-05-18T00:00:00Z"` PipelineJobs created or updated
-   *     after 2020-05-18 00:00:00 UTC.
-   *   * `labels.env = "prod"`
-   *     PipelineJobs with label "env" set to "prod".
-   * @param {number} request.pageSize
-   *   The standard list page size.
-   * @param {string} request.pageToken
-   *   The standard list page token.
+   *     * `notebookRuntime="notebookRuntime123"`
+   *     * `displayName="myDisplayName"` and `displayName=~"myDisplayNameRegex"`
+   *     * `notebookRuntimeTemplate="notebookRuntimeTemplate321"`
+   *     * `healthState=HEALTHY`
+   *     * `runtimeState=RUNNING`
+   *     * `runtimeUser="test@google.com"`
+   *     * `uiState=UI_RESOURCE_STATE_BEING_DELETED`
+   *     * `notebookRuntimeType=USER_DEFINED`
+   * @param {number} [request.pageSize]
+   *   Optional. The standard list page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard list page token.
    *   Typically obtained via
-   *   {@link protos.google.cloud.aiplatform.v1beta1.ListPipelineJobsResponse.next_page_token|ListPipelineJobsResponse.next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1.ListNotebookRuntimesResponse.next_page_token|ListNotebookRuntimesResponse.next_page_token}
    *   of the previous
-   *   {@link protos.google.cloud.aiplatform.v1beta1.PipelineService.ListPipelineJobs|PipelineService.ListPipelineJobs}
+   *   {@link protos.google.cloud.aiplatform.v1.NotebookService.ListNotebookRuntimes|NotebookService.ListNotebookRuntimes}
    *   call.
-   * @param {string} request.orderBy
-   *   A comma-separated list of fields to order by. The default sort order is in
-   *   ascending order. Use "desc" after a field name for descending. You can have
-   *   multiple order_by fields provided e.g. "create_time desc, end_time",
-   *   "end_time, start_time, update_time" For example, using "create_time desc,
-   *   end_time" will order results by create time in descending order, and if
-   *   there are multiple jobs having the same create time, order them by the end
-   *   time in ascending order. if order_by is not specified, it will order by
-   *   default order is create time in descending order. Supported fields:
+   * @param {google.protobuf.FieldMask} [request.readMask]
+   *   Optional. Mask specifying which fields to read.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields to order by, sorted in ascending
+   *   order. Use "desc" after a field name for descending. Supported fields:
    *
+   *     * `display_name`
    *     * `create_time`
    *     * `update_time`
-   *     * `end_time`
-   *     * `start_time`
-   * @param {google.protobuf.FieldMask} request.readMask
-   *   Mask specifying which fields to read.
+   *
+   *   Example: `display_name, create_time desc`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
    *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.aiplatform.v1beta1.PipelineJob|PipelineJob}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.aiplatform.v1.NotebookRuntime|NotebookRuntime}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/pipeline_service.list_pipeline_jobs.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_PipelineService_ListPipelineJobs_async
+   * @example <caption>include:samples/generated/v1/notebook_service.list_notebook_runtimes.js</caption>
+   * region_tag:aiplatform_v1_generated_NotebookService_ListNotebookRuntimes_async
    */
-  listPipelineJobsAsync(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListPipelineJobsRequest,
+  listNotebookRuntimesAsync(
+    request?: protos.google.cloud.aiplatform.v1.IListNotebookRuntimesRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IPipelineJob> {
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1.INotebookRuntime> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -4065,14 +3704,14 @@ export class PipelineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listPipelineJobs'];
+    const defaultCallSettings = this._defaults['listNotebookRuntimes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.listPipelineJobs.asyncIterate(
-      this.innerApiCalls['listPipelineJobs'] as GaxCall,
+    return this.descriptors.page.listNotebookRuntimes.asyncIterate(
+      this.innerApiCalls['listNotebookRuntimes'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IPipelineJob>;
+    ) as AsyncIterable<protos.google.cloud.aiplatform.v1.INotebookRuntime>;
   }
   /**
    * Gets the access control policy for a resource. Returns an empty policy
@@ -5338,58 +4977,6 @@ export class PipelineServiceClient {
   }
 
   /**
-   * Return a fully-qualified extension resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} extension
-   * @returns {string} Resource name string.
-   */
-  extensionPath(project: string, location: string, extension: string) {
-    return this.pathTemplates.extensionPathTemplate.render({
-      project: project,
-      location: location,
-      extension: extension,
-    });
-  }
-
-  /**
-   * Parse the project from Extension resource.
-   *
-   * @param {string} extensionName
-   *   A fully-qualified path representing Extension resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromExtensionName(extensionName: string) {
-    return this.pathTemplates.extensionPathTemplate.match(extensionName)
-      .project;
-  }
-
-  /**
-   * Parse the location from Extension resource.
-   *
-   * @param {string} extensionName
-   *   A fully-qualified path representing Extension resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromExtensionName(extensionName: string) {
-    return this.pathTemplates.extensionPathTemplate.match(extensionName)
-      .location;
-  }
-
-  /**
-   * Parse the extension from Extension resource.
-   *
-   * @param {string} extensionName
-   *   A fully-qualified path representing Extension resource.
-   * @returns {string} A string representing the extension.
-   */
-  matchExtensionFromExtensionName(extensionName: string) {
-    return this.pathTemplates.extensionPathTemplate.match(extensionName)
-      .extension;
-  }
-
-  /**
    * Return a fully-qualified featureGroup resource name string.
    *
    * @param {string} project
@@ -6560,67 +6147,6 @@ export class PipelineServiceClient {
   }
 
   /**
-   * Return a fully-qualified persistentResource resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} persistent_resource
-   * @returns {string} Resource name string.
-   */
-  persistentResourcePath(
-    project: string,
-    location: string,
-    persistentResource: string
-  ) {
-    return this.pathTemplates.persistentResourcePathTemplate.render({
-      project: project,
-      location: location,
-      persistent_resource: persistentResource,
-    });
-  }
-
-  /**
-   * Parse the project from PersistentResource resource.
-   *
-   * @param {string} persistentResourceName
-   *   A fully-qualified path representing PersistentResource resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromPersistentResourceName(persistentResourceName: string) {
-    return this.pathTemplates.persistentResourcePathTemplate.match(
-      persistentResourceName
-    ).project;
-  }
-
-  /**
-   * Parse the location from PersistentResource resource.
-   *
-   * @param {string} persistentResourceName
-   *   A fully-qualified path representing PersistentResource resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromPersistentResourceName(persistentResourceName: string) {
-    return this.pathTemplates.persistentResourcePathTemplate.match(
-      persistentResourceName
-    ).location;
-  }
-
-  /**
-   * Parse the persistent_resource from PersistentResource resource.
-   *
-   * @param {string} persistentResourceName
-   *   A fully-qualified path representing PersistentResource resource.
-   * @returns {string} A string representing the persistent_resource.
-   */
-  matchPersistentResourceFromPersistentResourceName(
-    persistentResourceName: string
-  ) {
-    return this.pathTemplates.persistentResourcePathTemplate.match(
-      persistentResourceName
-    ).persistent_resource;
-  }
-
-  /**
    * Return a fully-qualified pipelineJob resource name string.
    *
    * @param {string} project
@@ -6670,29 +6196,6 @@ export class PipelineServiceClient {
   matchPipelineJobFromPipelineJobName(pipelineJobName: string) {
     return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName)
       .pipeline_job;
-  }
-
-  /**
-   * Return a fully-qualified project resource name string.
-   *
-   * @param {string} project
-   * @returns {string} Resource name string.
-   */
-  projectPath(project: string) {
-    return this.pathTemplates.projectPathTemplate.render({
-      project: project,
-    });
-  }
-
-  /**
-   * Parse the project from Project resource.
-   *
-   * @param {string} projectName
-   *   A fully-qualified path representing Project resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectName(projectName: string) {
-    return this.pathTemplates.projectPathTemplate.match(projectName).project;
   }
 
   /**
@@ -7069,65 +6572,6 @@ export class PipelineServiceClient {
     return this.pathTemplates.publisherModelPathTemplate.match(
       publisherModelName
     ).model;
-  }
-
-  /**
-   * Return a fully-qualified reasoningEngine resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} reasoning_engine
-   * @returns {string} Resource name string.
-   */
-  reasoningEnginePath(
-    project: string,
-    location: string,
-    reasoningEngine: string
-  ) {
-    return this.pathTemplates.reasoningEnginePathTemplate.render({
-      project: project,
-      location: location,
-      reasoning_engine: reasoningEngine,
-    });
-  }
-
-  /**
-   * Parse the project from ReasoningEngine resource.
-   *
-   * @param {string} reasoningEngineName
-   *   A fully-qualified path representing ReasoningEngine resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromReasoningEngineName(reasoningEngineName: string) {
-    return this.pathTemplates.reasoningEnginePathTemplate.match(
-      reasoningEngineName
-    ).project;
-  }
-
-  /**
-   * Parse the location from ReasoningEngine resource.
-   *
-   * @param {string} reasoningEngineName
-   *   A fully-qualified path representing ReasoningEngine resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromReasoningEngineName(reasoningEngineName: string) {
-    return this.pathTemplates.reasoningEnginePathTemplate.match(
-      reasoningEngineName
-    ).location;
-  }
-
-  /**
-   * Parse the reasoning_engine from ReasoningEngine resource.
-   *
-   * @param {string} reasoningEngineName
-   *   A fully-qualified path representing ReasoningEngine resource.
-   * @returns {string} A string representing the reasoning_engine.
-   */
-  matchReasoningEngineFromReasoningEngineName(reasoningEngineName: string) {
-    return this.pathTemplates.reasoningEnginePathTemplate.match(
-      reasoningEngineName
-    ).reasoning_engine;
   }
 
   /**
@@ -7825,8 +7269,8 @@ export class PipelineServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.pipelineServiceStub && !this._terminated) {
-      return this.pipelineServiceStub.then(stub => {
+    if (this.notebookServiceStub && !this._terminated) {
+      return this.notebookServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.iamClient.close();
