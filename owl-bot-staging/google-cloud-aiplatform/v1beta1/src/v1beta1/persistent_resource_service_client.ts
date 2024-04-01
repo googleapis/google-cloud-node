@@ -385,6 +385,10 @@ export class PersistentResourceServiceClient {
       '.google.cloud.aiplatform.v1beta1.PersistentResource') as gax.protobuf.Type;
     const updatePersistentResourceMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1beta1.UpdatePersistentResourceOperationMetadata') as gax.protobuf.Type;
+    const rebootPersistentResourceResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.PersistentResource') as gax.protobuf.Type;
+    const rebootPersistentResourceMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.RebootPersistentResourceOperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createPersistentResource: new this._gaxModule.LongrunningDescriptor(
@@ -398,7 +402,11 @@ export class PersistentResourceServiceClient {
       updatePersistentResource: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updatePersistentResourceResponse.decode.bind(updatePersistentResourceResponse),
-        updatePersistentResourceMetadata.decode.bind(updatePersistentResourceMetadata))
+        updatePersistentResourceMetadata.decode.bind(updatePersistentResourceMetadata)),
+      rebootPersistentResource: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        rebootPersistentResourceResponse.decode.bind(rebootPersistentResourceResponse),
+        rebootPersistentResourceMetadata.decode.bind(rebootPersistentResourceMetadata))
     };
 
     // Put together the default options sent with requests.
@@ -444,7 +452,7 @@ export class PersistentResourceServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const persistentResourceServiceStubMethods =
-        ['createPersistentResource', 'getPersistentResource', 'listPersistentResources', 'deletePersistentResource', 'updatePersistentResource'];
+        ['createPersistentResource', 'getPersistentResource', 'listPersistentResources', 'deletePersistentResource', 'updatePersistentResource', 'rebootPersistentResource'];
     for (const methodName of persistentResourceServiceStubMethods) {
       const callPromise = this.persistentResourceServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -905,6 +913,97 @@ export class PersistentResourceServiceClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updatePersistentResource, this._gaxModule.createDefaultBackoffSettings());
     return decodeOperation as LROperation<protos.google.cloud.aiplatform.v1beta1.PersistentResource, protos.google.cloud.aiplatform.v1beta1.UpdatePersistentResourceOperationMetadata>;
+  }
+/**
+ * Reboots a PersistentResource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the PersistentResource resource.
+ *   Format:
+ *   `projects/{project_id_or_number}/locations/{location_id}/persistentResources/{persistent_resource_id}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/persistent_resource_service.reboot_persistent_resource.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_PersistentResourceService_RebootPersistentResource_async
+ */
+  rebootPersistentResource(
+      request?: protos.google.cloud.aiplatform.v1beta1.IRebootPersistentResourceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.aiplatform.v1beta1.IPersistentResource, protos.google.cloud.aiplatform.v1beta1.IRebootPersistentResourceOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  rebootPersistentResource(
+      request: protos.google.cloud.aiplatform.v1beta1.IRebootPersistentResourceRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IPersistentResource, protos.google.cloud.aiplatform.v1beta1.IRebootPersistentResourceOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  rebootPersistentResource(
+      request: protos.google.cloud.aiplatform.v1beta1.IRebootPersistentResourceRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IPersistentResource, protos.google.cloud.aiplatform.v1beta1.IRebootPersistentResourceOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  rebootPersistentResource(
+      request?: protos.google.cloud.aiplatform.v1beta1.IRebootPersistentResourceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IPersistentResource, protos.google.cloud.aiplatform.v1beta1.IRebootPersistentResourceOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IPersistentResource, protos.google.cloud.aiplatform.v1beta1.IRebootPersistentResourceOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.aiplatform.v1beta1.IPersistentResource, protos.google.cloud.aiplatform.v1beta1.IRebootPersistentResourceOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize();
+    return this.innerApiCalls.rebootPersistentResource(request, options, callback);
+  }
+/**
+ * Check the status of the long running operation returned by `rebootPersistentResource()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/persistent_resource_service.reboot_persistent_resource.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_PersistentResourceService_RebootPersistentResource_async
+ */
+  async checkRebootPersistentResourceProgress(name: string): Promise<LROperation<protos.google.cloud.aiplatform.v1beta1.PersistentResource, protos.google.cloud.aiplatform.v1beta1.RebootPersistentResourceOperationMetadata>>{
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.rebootPersistentResource, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.aiplatform.v1beta1.PersistentResource, protos.google.cloud.aiplatform.v1beta1.RebootPersistentResourceOperationMetadata>;
   }
  /**
  * Lists PersistentResources in a Location.

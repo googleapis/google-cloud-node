@@ -24001,7 +24001,9 @@
                             "PROVISIONING": 1,
                             "RUNNING": 3,
                             "STOPPING": 4,
-                            "ERROR": 5
+                            "ERROR": 5,
+                            "REBOOTING": 6,
+                            "UPDATING": 7
                           }
                         }
                       }
@@ -24317,6 +24319,34 @@
                               }
                             }
                           ]
+                        },
+                        "RebootPersistentResource": {
+                          "requestType": "RebootPersistentResourceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/persistentResources/*}:reboot",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "PersistentResource",
+                            "(google.longrunning.operation_info).metadata_type": "RebootPersistentResourceOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/persistentResources/*}:reboot",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "PersistentResource",
+                                "metadata_type": "RebootPersistentResourceOperationMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -24359,6 +24389,18 @@
                       }
                     },
                     "UpdatePersistentResourceOperationMetadata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
+                        },
+                        "progressMessage": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "RebootPersistentResourceOperationMetadata": {
                       "fields": {
                         "genericMetadata": {
                           "type": "GenericOperationMetadata",
@@ -24447,6 +24489,18 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "RebootPersistentResourceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/PersistentResource"
                           }
                         }
                       }

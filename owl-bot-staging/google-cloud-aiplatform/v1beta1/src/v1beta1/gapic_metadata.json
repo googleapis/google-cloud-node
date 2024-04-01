@@ -2542,6 +2542,11 @@
                 "updatePersistentResource"
               ]
             },
+            "RebootPersistentResource": {
+              "methods": [
+                "rebootPersistentResource"
+              ]
+            },
             "ListPersistentResources": {
               "methods": [
                 "listPersistentResources",
@@ -2572,6 +2577,11 @@
             "UpdatePersistentResource": {
               "methods": [
                 "updatePersistentResource"
+              ]
+            },
+            "RebootPersistentResource": {
+              "methods": [
+                "rebootPersistentResource"
               ]
             },
             "ListPersistentResources": {
