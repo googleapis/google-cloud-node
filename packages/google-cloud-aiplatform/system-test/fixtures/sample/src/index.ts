@@ -25,6 +25,7 @@ import {
   FeatureRegistryServiceClient,
   FeaturestoreOnlineServingServiceClient,
   FeaturestoreServiceClient,
+  GenAiTuningServiceClient,
   IndexEndpointServiceClient,
   IndexServiceClient,
   JobServiceClient,
@@ -79,6 +80,9 @@ function doStuffWithFeaturestoreOnlineServingServiceClient(
 function doStuffWithFeaturestoreServiceClient(
   client: FeaturestoreServiceClient
 ) {
+  client.close();
+}
+function doStuffWithGenAiTuningServiceClient(client: GenAiTuningServiceClient) {
   client.close();
 }
 function doStuffWithIndexEndpointServiceClient(
@@ -173,6 +177,9 @@ function main() {
   // check that the client instance can be created
   const featurestoreServiceClient = new FeaturestoreServiceClient();
   doStuffWithFeaturestoreServiceClient(featurestoreServiceClient);
+  // check that the client instance can be created
+  const genAiTuningServiceClient = new GenAiTuningServiceClient();
+  doStuffWithGenAiTuningServiceClient(genAiTuningServiceClient);
   // check that the client instance can be created
   const indexEndpointServiceClient = new IndexEndpointServiceClient();
   doStuffWithIndexEndpointServiceClient(indexEndpointServiceClient);

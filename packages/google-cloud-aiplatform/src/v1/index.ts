@@ -24,6 +24,7 @@ export {FeatureOnlineStoreServiceClient} from './feature_online_store_service_cl
 export {FeatureRegistryServiceClient} from './feature_registry_service_client';
 export {FeaturestoreOnlineServingServiceClient} from './featurestore_online_serving_service_client';
 export {FeaturestoreServiceClient} from './featurestore_service_client';
+export {GenAiTuningServiceClient} from './gen_ai_tuning_service_client';
 export {IndexEndpointServiceClient} from './index_endpoint_service_client';
 export {IndexServiceClient} from './index_service_client';
 export {JobServiceClient} from './job_service_client';

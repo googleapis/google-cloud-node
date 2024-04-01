@@ -9968,6 +9968,46 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1beta1_generated_PersistentResourceService_RebootPersistentResource_async",
+            "title": "DatasetService rebootPersistentResource Sample",
+            "origin": "API_DEFINITION",
+            "description": " Reboots a PersistentResource.",
+            "canonical": true,
+            "file": "persistent_resource_service.reboot_persistent_resource.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RebootPersistentResource",
+                "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceService.RebootPersistentResource",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "PersistentResourceServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceServiceClient"
+                },
+                "method": {
+                    "shortName": "RebootPersistentResource",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceService.RebootPersistentResource",
+                    "service": {
+                        "shortName": "PersistentResourceService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1beta1_generated_PipelineService_CreateTrainingPipeline_async",
             "title": "DatasetService createTrainingPipeline Sample",
             "origin": "API_DEFINITION",

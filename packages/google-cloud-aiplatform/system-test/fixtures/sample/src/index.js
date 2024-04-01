@@ -33,6 +33,7 @@ function main() {
   const featurestoreOnlineServingServiceClient =
     new aiplatform.FeaturestoreOnlineServingServiceClient();
   const featurestoreServiceClient = new aiplatform.FeaturestoreServiceClient();
+  const genAiTuningServiceClient = new aiplatform.GenAiTuningServiceClient();
   const indexEndpointServiceClient =
     new aiplatform.IndexEndpointServiceClient();
   const indexServiceClient = new aiplatform.IndexServiceClient();
