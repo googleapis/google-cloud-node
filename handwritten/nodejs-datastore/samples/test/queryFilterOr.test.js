@@ -81,6 +81,6 @@ describe('Creating a union query', () => {
   });
 
   it('should get a combination of items from the Datastore', async () => {
-    assert.strictEqual(execSync(`node ./queryFilterOr.js`), 'Entity found: Feed cats\nEntity found: Buy milk\n');
+    assert.strictEqual(execSync(`node ./queryFilterOr.js`), 'Entity found: Buy milk\nEntity found: Feed cats\n');
   });
 });
