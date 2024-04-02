@@ -670,6 +670,18 @@
                         "value": {
                           "type": "int64",
                           "id": 1
+                        },
+                        "rolloutInfo": {
+                          "type": "RolloutInfo",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "RolloutInfo": {
+                      "fields": {
+                        "ongoingRollout": {
+                          "type": "bool",
+                          "id": 1
                         }
                       }
                     }
