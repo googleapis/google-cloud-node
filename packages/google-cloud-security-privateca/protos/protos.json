@@ -281,6 +281,22 @@
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
+                                },
+                                "encodingFormat": {
+                                  "type": "EncodingFormat",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "EncodingFormat": {
+                                  "values": {
+                                    "ENCODING_FORMAT_UNSPECIFIED": 0,
+                                    "PEM": 1,
+                                    "DER": 2
+                                  }
                                 }
                               }
                             },
