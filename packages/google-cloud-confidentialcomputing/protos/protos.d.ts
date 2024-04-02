@@ -103,7 +103,9 @@ export namespace google {
                 /** TokenType enum. */
                 enum TokenType {
                     TOKEN_TYPE_UNSPECIFIED = 0,
-                    TOKEN_TYPE_OIDC = 1
+                    TOKEN_TYPE_OIDC = 1,
+                    TOKEN_TYPE_PKI = 2,
+                    TOKEN_TYPE_LIMITED_AWS = 3
                 }
 
                 /** Properties of a Challenge. */

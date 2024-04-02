@@ -191,11 +191,15 @@
                      * @enum {number}
                      * @property {number} TOKEN_TYPE_UNSPECIFIED=0 TOKEN_TYPE_UNSPECIFIED value
                      * @property {number} TOKEN_TYPE_OIDC=1 TOKEN_TYPE_OIDC value
+                     * @property {number} TOKEN_TYPE_PKI=2 TOKEN_TYPE_PKI value
+                     * @property {number} TOKEN_TYPE_LIMITED_AWS=3 TOKEN_TYPE_LIMITED_AWS value
                      */
                     v1.TokenType = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
                         values[valuesById[0] = "TOKEN_TYPE_UNSPECIFIED"] = 0;
                         values[valuesById[1] = "TOKEN_TYPE_OIDC"] = 1;
+                        values[valuesById[2] = "TOKEN_TYPE_PKI"] = 2;
+                        values[valuesById[3] = "TOKEN_TYPE_LIMITED_AWS"] = 3;
                         return values;
                     })();
     
@@ -1701,6 +1705,8 @@
                                     return "tokenType: enum value expected";
                                 case 0:
                                 case 1:
+                                case 2:
+                                case 3:
                                     break;
                                 }
                             return null;
@@ -1741,6 +1747,14 @@
                             case "TOKEN_TYPE_OIDC":
                             case 1:
                                 message.tokenType = 1;
+                                break;
+                            case "TOKEN_TYPE_PKI":
+                            case 2:
+                                message.tokenType = 2;
+                                break;
+                            case "TOKEN_TYPE_LIMITED_AWS":
+                            case 3:
+                                message.tokenType = 3;
                                 break;
                             }
                             return message;
