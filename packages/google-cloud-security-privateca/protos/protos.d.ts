@@ -602,6 +602,9 @@ export namespace google {
 
                             /** PublishingOptions publishCrl */
                             publishCrl?: (boolean|null);
+
+                            /** PublishingOptions encodingFormat */
+                            encodingFormat?: (google.cloud.security.privateca.v1.CaPool.PublishingOptions.EncodingFormat|keyof typeof google.cloud.security.privateca.v1.CaPool.PublishingOptions.EncodingFormat|null);
                         }
 
                         /** Represents a PublishingOptions. */
@@ -618,6 +621,9 @@ export namespace google {
 
                             /** PublishingOptions publishCrl. */
                             public publishCrl: boolean;
+
+                            /** PublishingOptions encodingFormat. */
+                            public encodingFormat: (google.cloud.security.privateca.v1.CaPool.PublishingOptions.EncodingFormat|keyof typeof google.cloud.security.privateca.v1.CaPool.PublishingOptions.EncodingFormat);
 
                             /**
                              * Creates a new PublishingOptions instance using the specified properties.
@@ -695,6 +701,16 @@ export namespace google {
                              * @returns The default type url
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace PublishingOptions {
+
+                            /** EncodingFormat enum. */
+                            enum EncodingFormat {
+                                ENCODING_FORMAT_UNSPECIFIED = 0,
+                                PEM = 1,
+                                DER = 2
+                            }
                         }
 
                         /** Properties of an IssuancePolicy. */

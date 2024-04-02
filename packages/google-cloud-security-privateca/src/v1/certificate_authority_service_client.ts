@@ -1543,7 +1543,7 @@ export class CertificateAuthorityServiceClient {
   /**
    * FetchCaCerts returns the current trust anchor for the
    * {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool}. This will include CA
-   * certificate chains for all Certificate Authorities in the ENABLED,
+   * certificate chains for all certificate authorities in the ENABLED,
    * DISABLED, or STAGED states.
    *
    * @param {Object} request
@@ -2229,7 +2229,7 @@ export class CertificateAuthorityServiceClient {
    * @param {boolean} [request.ignoreDependentResources]
    *   Optional. This field allows this CA to be disabled even if it's being
    *   depended on by another resource. However, doing so may result in unintended
-   *   and unrecoverable effects on any dependent resource(s) since the CA will
+   *   and unrecoverable effects on any dependent resources since the CA will
    *   no longer be able to issue certificates.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -2711,9 +2711,9 @@ export class CertificateAuthorityServiceClient {
    *   soon as possible without a 30-day grace period where undeletion would have
    *   been allowed. If you proceed, there will be no way to recover this CA.
    * @param {boolean} [request.ignoreDependentResources]
-   *   Optional. This field allows this ca to be deleted even if it's being
+   *   Optional. This field allows this CA to be deleted even if it's being
    *   depended on by another resource. However, doing so may result in unintended
-   *   and unrecoverable effects on any dependent resource(s) since the CA will
+   *   and unrecoverable effects on any dependent resources since the CA will
    *   no longer be able to issue certificates.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -3344,7 +3344,7 @@ export class CertificateAuthorityServiceClient {
    * @param {boolean} [request.ignoreDependentResources]
    *   Optional. This field allows this pool to be deleted even if it's being
    *   depended on by another resource. However, doing so may result in unintended
-   *   and unrecoverable effects on any dependent resource(s) since the pool will
+   *   and unrecoverable effects on any dependent resources since the pool will
    *   no longer be able to issue certificates.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
