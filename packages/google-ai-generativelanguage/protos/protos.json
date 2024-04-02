@@ -956,7 +956,8 @@
                             "text",
                             "inlineData",
                             "functionCall",
-                            "functionResponse"
+                            "functionResponse",
+                            "fileData"
                           ]
                         }
                       },
@@ -976,6 +977,10 @@
                         "functionResponse": {
                           "type": "FunctionResponse",
                           "id": 5
+                        },
+                        "fileData": {
+                          "type": "FileData",
+                          "id": 6
                         }
                       }
                     },
@@ -991,6 +996,24 @@
                         }
                       }
                     },
+                    "FileData": {
+                      "fields": {
+                        "mimeType": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "fileUri": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "Tool": {
                       "fields": {
                         "functionDeclarations": {
@@ -999,6 +1022,46 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ToolConfig": {
+                      "fields": {
+                        "functionCallingConfig": {
+                          "type": "FunctionCallingConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "FunctionCallingConfig": {
+                      "fields": {
+                        "mode": {
+                          "type": "Mode",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "allowedFunctionNames": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Mode": {
+                          "values": {
+                            "MODE_UNSPECIFIED": 0,
+                            "AUTO": 1,
+                            "ANY": 2,
+                            "NONE": 3
                           }
                         }
                       }
@@ -1536,6 +1599,226 @@
                         }
                       }
                     },
+                    "File": {
+                      "options": {
+                        "(google.api.resource).type": "generativelanguage.googleapis.com/File",
+                        "(google.api.resource).pattern": "files/{file}",
+                        "(google.api.resource).plural": "files",
+                        "(google.api.resource).singular": "file"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "mimeType": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "sizeBytes": {
+                          "type": "int64",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "expirationTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "sha256Hash": {
+                          "type": "bytes",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "FileService": {
+                      "options": {
+                        "(google.api.default_host)": "generativelanguage.googleapis.com"
+                      },
+                      "methods": {
+                        "CreateFile": {
+                          "requestType": "CreateFileRequest",
+                          "responseType": "CreateFileResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/files",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/files",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "ListFiles": {
+                          "requestType": "ListFilesRequest",
+                          "responseType": "ListFilesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta/files"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/files"
+                              }
+                            }
+                          ]
+                        },
+                        "GetFile": {
+                          "requestType": "GetFileRequest",
+                          "responseType": "File",
+                          "options": {
+                            "(google.api.http).get": "/v1beta/{name=files/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{name=files/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "DeleteFile": {
+                          "requestType": "DeleteFileRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta/{name=files/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta/{name=files/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "CreateFileRequest": {
+                      "fields": {
+                        "file": {
+                          "type": "File",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CreateFileResponse": {
+                      "fields": {
+                        "file": {
+                          "type": "File",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ListFilesRequest": {
+                      "fields": {
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListFilesResponse": {
+                      "fields": {
+                        "files": {
+                          "rule": "repeated",
+                          "type": "File",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetFileRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "generativelanguage.googleapis.com/File"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteFileRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "generativelanguage.googleapis.com/File"
+                          }
+                        }
+                      }
+                    },
                     "GenerativeService": {
                       "options": {
                         "(google.api.default_host)": "generativelanguage.googleapis.com"
@@ -1682,6 +1965,11 @@
                     },
                     "GenerateContentRequest": {
                       "oneofs": {
+                        "_systemInstruction": {
+                          "oneof": [
+                            "systemInstruction"
+                          ]
+                        },
                         "_generationConfig": {
                           "oneof": [
                             "generationConfig"
@@ -1697,6 +1985,14 @@
                             "(google.api.resource_reference).type": "generativelanguage.googleapis.com/Model"
                           }
                         },
+                        "systemInstruction": {
+                          "type": "Content",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
                         "contents": {
                           "rule": "repeated",
                           "type": "Content",
@@ -1709,6 +2005,13 @@
                           "rule": "repeated",
                           "type": "Tool",
                           "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "toolConfig": {
+                          "type": "ToolConfig",
+                          "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -9396,6 +9699,9 @@
                 }
               }
             },
+            "Empty": {
+              "fields": {}
+            },
             "Any": {
               "fields": {
                 "type_url": {
@@ -9407,9 +9713,6 @@
                   "id": 2
                 }
               }
-            },
-            "Empty": {
-              "fields": {}
             },
             "FieldMask": {
               "fields": {
