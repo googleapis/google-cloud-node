@@ -4125,6 +4125,8 @@ export namespace google {
                     REPORTING_CONTEXT_ENUM_UNSPECIFIED = 0,
                     SHOPPING_ADS = 1,
                     DISCOVERY_ADS = 2,
+                    DEMAND_GEN_ADS = 13,
+                    DEMAND_GEN_ADS_DISCOVER_SURFACE = 14,
                     VIDEO_ADS = 3,
                     DISPLAY_ADS = 4,
                     LOCAL_INVENTORY_ADS = 5,

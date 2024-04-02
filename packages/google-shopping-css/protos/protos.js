@@ -10790,6 +10790,8 @@
                      * @property {number} REPORTING_CONTEXT_ENUM_UNSPECIFIED=0 REPORTING_CONTEXT_ENUM_UNSPECIFIED value
                      * @property {number} SHOPPING_ADS=1 SHOPPING_ADS value
                      * @property {number} DISCOVERY_ADS=2 DISCOVERY_ADS value
+                     * @property {number} DEMAND_GEN_ADS=13 DEMAND_GEN_ADS value
+                     * @property {number} DEMAND_GEN_ADS_DISCOVER_SURFACE=14 DEMAND_GEN_ADS_DISCOVER_SURFACE value
                      * @property {number} VIDEO_ADS=3 VIDEO_ADS value
                      * @property {number} DISPLAY_ADS=4 DISPLAY_ADS value
                      * @property {number} LOCAL_INVENTORY_ADS=5 LOCAL_INVENTORY_ADS value
@@ -10806,6 +10808,8 @@
                         values[valuesById[0] = "REPORTING_CONTEXT_ENUM_UNSPECIFIED"] = 0;
                         values[valuesById[1] = "SHOPPING_ADS"] = 1;
                         values[valuesById[2] = "DISCOVERY_ADS"] = 2;
+                        values[valuesById[13] = "DEMAND_GEN_ADS"] = 13;
+                        values[valuesById[14] = "DEMAND_GEN_ADS_DISCOVER_SURFACE"] = 14;
                         values[valuesById[3] = "VIDEO_ADS"] = 3;
                         values[valuesById[4] = "DISPLAY_ADS"] = 4;
                         values[valuesById[5] = "LOCAL_INVENTORY_ADS"] = 5;
