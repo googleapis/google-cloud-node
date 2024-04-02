@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/bigquery-reservation",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "description": "BigQuery Reservation client for Node.js",
   "repository": {
     "type": "git",
