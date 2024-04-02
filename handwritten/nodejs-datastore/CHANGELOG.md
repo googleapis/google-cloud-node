@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [8.7.0](https://github.com/googleapis/nodejs-datastore/compare/v8.6.0...v8.7.0) (2024-04-02)
+
+
+### Features
+
+* Add several fields to manage state of database encryption update ([#1243](https://github.com/googleapis/nodejs-datastore/issues/1243)) ([5d28cda](https://github.com/googleapis/nodejs-datastore/commit/5d28cda744c3bb11da5e72ea8a0f7d8d8e85c4b0))
+
 ## [8.6.0](https://github.com/googleapis/nodejs-datastore/compare/v8.5.0...v8.6.0) (2024-03-25)
 
 
