@@ -44,7 +44,7 @@
   },
   "devDependencies": {
     "@types/extend": "^3.0.0",
-    "@types/long": "^4.0.0",
+    "@types/long": "^5.0.0",
     "@types/mocha": "^9.0.0",
     "@types/nock": "^11.0.0",
     "@types/node": "^20.4.9",
