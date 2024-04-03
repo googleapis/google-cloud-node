@@ -27144,6 +27144,12 @@ export namespace google {
 
                     /** Document revisions */
                     revisions?: (google.cloud.documentai.v1beta3.Document.IRevision[]|null);
+
+                    /** Document documentLayout */
+                    documentLayout?: (google.cloud.documentai.v1beta3.Document.IDocumentLayout|null);
+
+                    /** Document chunkedDocument */
+                    chunkedDocument?: (google.cloud.documentai.v1beta3.Document.IChunkedDocument|null);
                 }
 
                 /** Represents a Document. */
@@ -27190,6 +27196,12 @@ export namespace google {
 
                     /** Document revisions. */
                     public revisions: google.cloud.documentai.v1beta3.Document.IRevision[];
+
+                    /** Document documentLayout. */
+                    public documentLayout?: (google.cloud.documentai.v1beta3.Document.IDocumentLayout|null);
+
+                    /** Document chunkedDocument. */
+                    public chunkedDocument?: (google.cloud.documentai.v1beta3.Document.IChunkedDocument|null);
 
                     /** Document source. */
                     public source?: ("uri"|"content");
@@ -31577,6 +31589,1281 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+
+                    /** Properties of a DocumentLayout. */
+                    interface IDocumentLayout {
+
+                        /** DocumentLayout blocks */
+                        blocks?: (google.cloud.documentai.v1beta3.Document.DocumentLayout.IDocumentLayoutBlock[]|null);
+                    }
+
+                    /** Represents a DocumentLayout. */
+                    class DocumentLayout implements IDocumentLayout {
+
+                        /**
+                         * Constructs a new DocumentLayout.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.documentai.v1beta3.Document.IDocumentLayout);
+
+                        /** DocumentLayout blocks. */
+                        public blocks: google.cloud.documentai.v1beta3.Document.DocumentLayout.IDocumentLayoutBlock[];
+
+                        /**
+                         * Creates a new DocumentLayout instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DocumentLayout instance
+                         */
+                        public static create(properties?: google.cloud.documentai.v1beta3.Document.IDocumentLayout): google.cloud.documentai.v1beta3.Document.DocumentLayout;
+
+                        /**
+                         * Encodes the specified DocumentLayout message. Does not implicitly {@link google.cloud.documentai.v1beta3.Document.DocumentLayout.verify|verify} messages.
+                         * @param message DocumentLayout message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.documentai.v1beta3.Document.IDocumentLayout, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DocumentLayout message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.Document.DocumentLayout.verify|verify} messages.
+                         * @param message DocumentLayout message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.documentai.v1beta3.Document.IDocumentLayout, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DocumentLayout message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DocumentLayout
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.Document.DocumentLayout;
+
+                        /**
+                         * Decodes a DocumentLayout message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DocumentLayout
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.Document.DocumentLayout;
+
+                        /**
+                         * Verifies a DocumentLayout message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DocumentLayout message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DocumentLayout
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.Document.DocumentLayout;
+
+                        /**
+                         * Creates a plain object from a DocumentLayout message. Also converts values to other types if specified.
+                         * @param message DocumentLayout
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.documentai.v1beta3.Document.DocumentLayout, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DocumentLayout to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DocumentLayout
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace DocumentLayout {
+
+                        /** Properties of a DocumentLayoutBlock. */
+                        interface IDocumentLayoutBlock {
+
+                            /** DocumentLayoutBlock textBlock */
+                            textBlock?: (google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutTextBlock|null);
+
+                            /** DocumentLayoutBlock tableBlock */
+                            tableBlock?: (google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutTableBlock|null);
+
+                            /** DocumentLayoutBlock listBlock */
+                            listBlock?: (google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutListBlock|null);
+
+                            /** DocumentLayoutBlock blockId */
+                            blockId?: (string|null);
+
+                            /** DocumentLayoutBlock pageSpan */
+                            pageSpan?: (google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutPageSpan|null);
+                        }
+
+                        /** Represents a DocumentLayoutBlock. */
+                        class DocumentLayoutBlock implements IDocumentLayoutBlock {
+
+                            /**
+                             * Constructs a new DocumentLayoutBlock.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.documentai.v1beta3.Document.DocumentLayout.IDocumentLayoutBlock);
+
+                            /** DocumentLayoutBlock textBlock. */
+                            public textBlock?: (google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutTextBlock|null);
+
+                            /** DocumentLayoutBlock tableBlock. */
+                            public tableBlock?: (google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutTableBlock|null);
+
+                            /** DocumentLayoutBlock listBlock. */
+                            public listBlock?: (google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutListBlock|null);
+
+                            /** DocumentLayoutBlock blockId. */
+                            public blockId: string;
+
+                            /** DocumentLayoutBlock pageSpan. */
+                            public pageSpan?: (google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutPageSpan|null);
+
+                            /** DocumentLayoutBlock block. */
+                            public block?: ("textBlock"|"tableBlock"|"listBlock");
+
+                            /**
+                             * Creates a new DocumentLayoutBlock instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DocumentLayoutBlock instance
+                             */
+                            public static create(properties?: google.cloud.documentai.v1beta3.Document.DocumentLayout.IDocumentLayoutBlock): google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock;
+
+                            /**
+                             * Encodes the specified DocumentLayoutBlock message. Does not implicitly {@link google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.verify|verify} messages.
+                             * @param message DocumentLayoutBlock message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.documentai.v1beta3.Document.DocumentLayout.IDocumentLayoutBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DocumentLayoutBlock message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.verify|verify} messages.
+                             * @param message DocumentLayoutBlock message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.documentai.v1beta3.Document.DocumentLayout.IDocumentLayoutBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DocumentLayoutBlock message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DocumentLayoutBlock
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock;
+
+                            /**
+                             * Decodes a DocumentLayoutBlock message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DocumentLayoutBlock
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock;
+
+                            /**
+                             * Verifies a DocumentLayoutBlock message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DocumentLayoutBlock message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DocumentLayoutBlock
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock;
+
+                            /**
+                             * Creates a plain object from a DocumentLayoutBlock message. Also converts values to other types if specified.
+                             * @param message DocumentLayoutBlock
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DocumentLayoutBlock to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DocumentLayoutBlock
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace DocumentLayoutBlock {
+
+                            /** Properties of a LayoutPageSpan. */
+                            interface ILayoutPageSpan {
+
+                                /** LayoutPageSpan pageStart */
+                                pageStart?: (number|null);
+
+                                /** LayoutPageSpan pageEnd */
+                                pageEnd?: (number|null);
+                            }
+
+                            /** Represents a LayoutPageSpan. */
+                            class LayoutPageSpan implements ILayoutPageSpan {
+
+                                /**
+                                 * Constructs a new LayoutPageSpan.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutPageSpan);
+
+                                /** LayoutPageSpan pageStart. */
+                                public pageStart: number;
+
+                                /** LayoutPageSpan pageEnd. */
+                                public pageEnd: number;
+
+                                /**
+                                 * Creates a new LayoutPageSpan instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns LayoutPageSpan instance
+                                 */
+                                public static create(properties?: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutPageSpan): google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutPageSpan;
+
+                                /**
+                                 * Encodes the specified LayoutPageSpan message. Does not implicitly {@link google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutPageSpan.verify|verify} messages.
+                                 * @param message LayoutPageSpan message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutPageSpan, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified LayoutPageSpan message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutPageSpan.verify|verify} messages.
+                                 * @param message LayoutPageSpan message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutPageSpan, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a LayoutPageSpan message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns LayoutPageSpan
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutPageSpan;
+
+                                /**
+                                 * Decodes a LayoutPageSpan message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns LayoutPageSpan
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutPageSpan;
+
+                                /**
+                                 * Verifies a LayoutPageSpan message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a LayoutPageSpan message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns LayoutPageSpan
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutPageSpan;
+
+                                /**
+                                 * Creates a plain object from a LayoutPageSpan message. Also converts values to other types if specified.
+                                 * @param message LayoutPageSpan
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutPageSpan, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this LayoutPageSpan to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for LayoutPageSpan
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of a LayoutTextBlock. */
+                            interface ILayoutTextBlock {
+
+                                /** LayoutTextBlock text */
+                                text?: (string|null);
+
+                                /** LayoutTextBlock type */
+                                type?: (string|null);
+
+                                /** LayoutTextBlock blocks */
+                                blocks?: (google.cloud.documentai.v1beta3.Document.DocumentLayout.IDocumentLayoutBlock[]|null);
+                            }
+
+                            /** Represents a LayoutTextBlock. */
+                            class LayoutTextBlock implements ILayoutTextBlock {
+
+                                /**
+                                 * Constructs a new LayoutTextBlock.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutTextBlock);
+
+                                /** LayoutTextBlock text. */
+                                public text: string;
+
+                                /** LayoutTextBlock type. */
+                                public type: string;
+
+                                /** LayoutTextBlock blocks. */
+                                public blocks: google.cloud.documentai.v1beta3.Document.DocumentLayout.IDocumentLayoutBlock[];
+
+                                /**
+                                 * Creates a new LayoutTextBlock instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns LayoutTextBlock instance
+                                 */
+                                public static create(properties?: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutTextBlock): google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutTextBlock;
+
+                                /**
+                                 * Encodes the specified LayoutTextBlock message. Does not implicitly {@link google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutTextBlock.verify|verify} messages.
+                                 * @param message LayoutTextBlock message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutTextBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified LayoutTextBlock message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutTextBlock.verify|verify} messages.
+                                 * @param message LayoutTextBlock message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutTextBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a LayoutTextBlock message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns LayoutTextBlock
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutTextBlock;
+
+                                /**
+                                 * Decodes a LayoutTextBlock message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns LayoutTextBlock
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutTextBlock;
+
+                                /**
+                                 * Verifies a LayoutTextBlock message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a LayoutTextBlock message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns LayoutTextBlock
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutTextBlock;
+
+                                /**
+                                 * Creates a plain object from a LayoutTextBlock message. Also converts values to other types if specified.
+                                 * @param message LayoutTextBlock
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutTextBlock, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this LayoutTextBlock to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for LayoutTextBlock
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of a LayoutTableBlock. */
+                            interface ILayoutTableBlock {
+
+                                /** LayoutTableBlock headerRows */
+                                headerRows?: (google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutTableRow[]|null);
+
+                                /** LayoutTableBlock bodyRows */
+                                bodyRows?: (google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutTableRow[]|null);
+
+                                /** LayoutTableBlock caption */
+                                caption?: (string|null);
+                            }
+
+                            /** Represents a LayoutTableBlock. */
+                            class LayoutTableBlock implements ILayoutTableBlock {
+
+                                /**
+                                 * Constructs a new LayoutTableBlock.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutTableBlock);
+
+                                /** LayoutTableBlock headerRows. */
+                                public headerRows: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutTableRow[];
+
+                                /** LayoutTableBlock bodyRows. */
+                                public bodyRows: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutTableRow[];
+
+                                /** LayoutTableBlock caption. */
+                                public caption: string;
+
+                                /**
+                                 * Creates a new LayoutTableBlock instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns LayoutTableBlock instance
+                                 */
+                                public static create(properties?: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutTableBlock): google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutTableBlock;
+
+                                /**
+                                 * Encodes the specified LayoutTableBlock message. Does not implicitly {@link google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutTableBlock.verify|verify} messages.
+                                 * @param message LayoutTableBlock message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutTableBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified LayoutTableBlock message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutTableBlock.verify|verify} messages.
+                                 * @param message LayoutTableBlock message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutTableBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a LayoutTableBlock message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns LayoutTableBlock
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutTableBlock;
+
+                                /**
+                                 * Decodes a LayoutTableBlock message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns LayoutTableBlock
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutTableBlock;
+
+                                /**
+                                 * Verifies a LayoutTableBlock message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a LayoutTableBlock message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns LayoutTableBlock
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutTableBlock;
+
+                                /**
+                                 * Creates a plain object from a LayoutTableBlock message. Also converts values to other types if specified.
+                                 * @param message LayoutTableBlock
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutTableBlock, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this LayoutTableBlock to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for LayoutTableBlock
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of a LayoutTableRow. */
+                            interface ILayoutTableRow {
+
+                                /** LayoutTableRow cells */
+                                cells?: (google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutTableCell[]|null);
+                            }
+
+                            /** Represents a LayoutTableRow. */
+                            class LayoutTableRow implements ILayoutTableRow {
+
+                                /**
+                                 * Constructs a new LayoutTableRow.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutTableRow);
+
+                                /** LayoutTableRow cells. */
+                                public cells: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutTableCell[];
+
+                                /**
+                                 * Creates a new LayoutTableRow instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns LayoutTableRow instance
+                                 */
+                                public static create(properties?: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutTableRow): google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutTableRow;
+
+                                /**
+                                 * Encodes the specified LayoutTableRow message. Does not implicitly {@link google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutTableRow.verify|verify} messages.
+                                 * @param message LayoutTableRow message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutTableRow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified LayoutTableRow message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutTableRow.verify|verify} messages.
+                                 * @param message LayoutTableRow message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutTableRow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a LayoutTableRow message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns LayoutTableRow
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutTableRow;
+
+                                /**
+                                 * Decodes a LayoutTableRow message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns LayoutTableRow
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutTableRow;
+
+                                /**
+                                 * Verifies a LayoutTableRow message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a LayoutTableRow message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns LayoutTableRow
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutTableRow;
+
+                                /**
+                                 * Creates a plain object from a LayoutTableRow message. Also converts values to other types if specified.
+                                 * @param message LayoutTableRow
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutTableRow, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this LayoutTableRow to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for LayoutTableRow
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of a LayoutTableCell. */
+                            interface ILayoutTableCell {
+
+                                /** LayoutTableCell blocks */
+                                blocks?: (google.cloud.documentai.v1beta3.Document.DocumentLayout.IDocumentLayoutBlock[]|null);
+
+                                /** LayoutTableCell rowSpan */
+                                rowSpan?: (number|null);
+
+                                /** LayoutTableCell colSpan */
+                                colSpan?: (number|null);
+                            }
+
+                            /** Represents a LayoutTableCell. */
+                            class LayoutTableCell implements ILayoutTableCell {
+
+                                /**
+                                 * Constructs a new LayoutTableCell.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutTableCell);
+
+                                /** LayoutTableCell blocks. */
+                                public blocks: google.cloud.documentai.v1beta3.Document.DocumentLayout.IDocumentLayoutBlock[];
+
+                                /** LayoutTableCell rowSpan. */
+                                public rowSpan: number;
+
+                                /** LayoutTableCell colSpan. */
+                                public colSpan: number;
+
+                                /**
+                                 * Creates a new LayoutTableCell instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns LayoutTableCell instance
+                                 */
+                                public static create(properties?: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutTableCell): google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutTableCell;
+
+                                /**
+                                 * Encodes the specified LayoutTableCell message. Does not implicitly {@link google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutTableCell.verify|verify} messages.
+                                 * @param message LayoutTableCell message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutTableCell, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified LayoutTableCell message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutTableCell.verify|verify} messages.
+                                 * @param message LayoutTableCell message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutTableCell, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a LayoutTableCell message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns LayoutTableCell
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutTableCell;
+
+                                /**
+                                 * Decodes a LayoutTableCell message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns LayoutTableCell
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutTableCell;
+
+                                /**
+                                 * Verifies a LayoutTableCell message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a LayoutTableCell message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns LayoutTableCell
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutTableCell;
+
+                                /**
+                                 * Creates a plain object from a LayoutTableCell message. Also converts values to other types if specified.
+                                 * @param message LayoutTableCell
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutTableCell, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this LayoutTableCell to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for LayoutTableCell
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of a LayoutListBlock. */
+                            interface ILayoutListBlock {
+
+                                /** LayoutListBlock listEntries */
+                                listEntries?: (google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutListEntry[]|null);
+
+                                /** LayoutListBlock type */
+                                type?: (string|null);
+                            }
+
+                            /** Represents a LayoutListBlock. */
+                            class LayoutListBlock implements ILayoutListBlock {
+
+                                /**
+                                 * Constructs a new LayoutListBlock.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutListBlock);
+
+                                /** LayoutListBlock listEntries. */
+                                public listEntries: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutListEntry[];
+
+                                /** LayoutListBlock type. */
+                                public type: string;
+
+                                /**
+                                 * Creates a new LayoutListBlock instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns LayoutListBlock instance
+                                 */
+                                public static create(properties?: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutListBlock): google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutListBlock;
+
+                                /**
+                                 * Encodes the specified LayoutListBlock message. Does not implicitly {@link google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutListBlock.verify|verify} messages.
+                                 * @param message LayoutListBlock message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutListBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified LayoutListBlock message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutListBlock.verify|verify} messages.
+                                 * @param message LayoutListBlock message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutListBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a LayoutListBlock message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns LayoutListBlock
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutListBlock;
+
+                                /**
+                                 * Decodes a LayoutListBlock message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns LayoutListBlock
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutListBlock;
+
+                                /**
+                                 * Verifies a LayoutListBlock message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a LayoutListBlock message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns LayoutListBlock
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutListBlock;
+
+                                /**
+                                 * Creates a plain object from a LayoutListBlock message. Also converts values to other types if specified.
+                                 * @param message LayoutListBlock
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutListBlock, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this LayoutListBlock to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for LayoutListBlock
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of a LayoutListEntry. */
+                            interface ILayoutListEntry {
+
+                                /** LayoutListEntry blocks */
+                                blocks?: (google.cloud.documentai.v1beta3.Document.DocumentLayout.IDocumentLayoutBlock[]|null);
+                            }
+
+                            /** Represents a LayoutListEntry. */
+                            class LayoutListEntry implements ILayoutListEntry {
+
+                                /**
+                                 * Constructs a new LayoutListEntry.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutListEntry);
+
+                                /** LayoutListEntry blocks. */
+                                public blocks: google.cloud.documentai.v1beta3.Document.DocumentLayout.IDocumentLayoutBlock[];
+
+                                /**
+                                 * Creates a new LayoutListEntry instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns LayoutListEntry instance
+                                 */
+                                public static create(properties?: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutListEntry): google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutListEntry;
+
+                                /**
+                                 * Encodes the specified LayoutListEntry message. Does not implicitly {@link google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutListEntry.verify|verify} messages.
+                                 * @param message LayoutListEntry message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutListEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified LayoutListEntry message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutListEntry.verify|verify} messages.
+                                 * @param message LayoutListEntry message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.ILayoutListEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a LayoutListEntry message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns LayoutListEntry
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutListEntry;
+
+                                /**
+                                 * Decodes a LayoutListEntry message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns LayoutListEntry
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutListEntry;
+
+                                /**
+                                 * Verifies a LayoutListEntry message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a LayoutListEntry message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns LayoutListEntry
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutListEntry;
+
+                                /**
+                                 * Creates a plain object from a LayoutListEntry message. Also converts values to other types if specified.
+                                 * @param message LayoutListEntry
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.documentai.v1beta3.Document.DocumentLayout.DocumentLayoutBlock.LayoutListEntry, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this LayoutListEntry to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for LayoutListEntry
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+                    }
+
+                    /** Properties of a ChunkedDocument. */
+                    interface IChunkedDocument {
+
+                        /** ChunkedDocument chunks */
+                        chunks?: (google.cloud.documentai.v1beta3.Document.ChunkedDocument.IChunk[]|null);
+                    }
+
+                    /** Represents a ChunkedDocument. */
+                    class ChunkedDocument implements IChunkedDocument {
+
+                        /**
+                         * Constructs a new ChunkedDocument.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.documentai.v1beta3.Document.IChunkedDocument);
+
+                        /** ChunkedDocument chunks. */
+                        public chunks: google.cloud.documentai.v1beta3.Document.ChunkedDocument.IChunk[];
+
+                        /**
+                         * Creates a new ChunkedDocument instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ChunkedDocument instance
+                         */
+                        public static create(properties?: google.cloud.documentai.v1beta3.Document.IChunkedDocument): google.cloud.documentai.v1beta3.Document.ChunkedDocument;
+
+                        /**
+                         * Encodes the specified ChunkedDocument message. Does not implicitly {@link google.cloud.documentai.v1beta3.Document.ChunkedDocument.verify|verify} messages.
+                         * @param message ChunkedDocument message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.documentai.v1beta3.Document.IChunkedDocument, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ChunkedDocument message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.Document.ChunkedDocument.verify|verify} messages.
+                         * @param message ChunkedDocument message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.documentai.v1beta3.Document.IChunkedDocument, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ChunkedDocument message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ChunkedDocument
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.Document.ChunkedDocument;
+
+                        /**
+                         * Decodes a ChunkedDocument message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ChunkedDocument
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.Document.ChunkedDocument;
+
+                        /**
+                         * Verifies a ChunkedDocument message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ChunkedDocument message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ChunkedDocument
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.Document.ChunkedDocument;
+
+                        /**
+                         * Creates a plain object from a ChunkedDocument message. Also converts values to other types if specified.
+                         * @param message ChunkedDocument
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.documentai.v1beta3.Document.ChunkedDocument, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ChunkedDocument to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ChunkedDocument
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ChunkedDocument {
+
+                        /** Properties of a Chunk. */
+                        interface IChunk {
+
+                            /** Chunk chunkId */
+                            chunkId?: (string|null);
+
+                            /** Chunk sourceBlockIds */
+                            sourceBlockIds?: (string[]|null);
+
+                            /** Chunk content */
+                            content?: (string|null);
+
+                            /** Chunk pageSpan */
+                            pageSpan?: (google.cloud.documentai.v1beta3.Document.ChunkedDocument.Chunk.IChunkPageSpan|null);
+                        }
+
+                        /** Represents a Chunk. */
+                        class Chunk implements IChunk {
+
+                            /**
+                             * Constructs a new Chunk.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.documentai.v1beta3.Document.ChunkedDocument.IChunk);
+
+                            /** Chunk chunkId. */
+                            public chunkId: string;
+
+                            /** Chunk sourceBlockIds. */
+                            public sourceBlockIds: string[];
+
+                            /** Chunk content. */
+                            public content: string;
+
+                            /** Chunk pageSpan. */
+                            public pageSpan?: (google.cloud.documentai.v1beta3.Document.ChunkedDocument.Chunk.IChunkPageSpan|null);
+
+                            /**
+                             * Creates a new Chunk instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Chunk instance
+                             */
+                            public static create(properties?: google.cloud.documentai.v1beta3.Document.ChunkedDocument.IChunk): google.cloud.documentai.v1beta3.Document.ChunkedDocument.Chunk;
+
+                            /**
+                             * Encodes the specified Chunk message. Does not implicitly {@link google.cloud.documentai.v1beta3.Document.ChunkedDocument.Chunk.verify|verify} messages.
+                             * @param message Chunk message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.documentai.v1beta3.Document.ChunkedDocument.IChunk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Chunk message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.Document.ChunkedDocument.Chunk.verify|verify} messages.
+                             * @param message Chunk message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.documentai.v1beta3.Document.ChunkedDocument.IChunk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Chunk message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Chunk
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.Document.ChunkedDocument.Chunk;
+
+                            /**
+                             * Decodes a Chunk message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Chunk
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.Document.ChunkedDocument.Chunk;
+
+                            /**
+                             * Verifies a Chunk message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Chunk message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Chunk
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.Document.ChunkedDocument.Chunk;
+
+                            /**
+                             * Creates a plain object from a Chunk message. Also converts values to other types if specified.
+                             * @param message Chunk
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.documentai.v1beta3.Document.ChunkedDocument.Chunk, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Chunk to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Chunk
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace Chunk {
+
+                            /** Properties of a ChunkPageSpan. */
+                            interface IChunkPageSpan {
+
+                                /** ChunkPageSpan pageStart */
+                                pageStart?: (number|null);
+
+                                /** ChunkPageSpan pageEnd */
+                                pageEnd?: (number|null);
+                            }
+
+                            /** Represents a ChunkPageSpan. */
+                            class ChunkPageSpan implements IChunkPageSpan {
+
+                                /**
+                                 * Constructs a new ChunkPageSpan.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.documentai.v1beta3.Document.ChunkedDocument.Chunk.IChunkPageSpan);
+
+                                /** ChunkPageSpan pageStart. */
+                                public pageStart: number;
+
+                                /** ChunkPageSpan pageEnd. */
+                                public pageEnd: number;
+
+                                /**
+                                 * Creates a new ChunkPageSpan instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns ChunkPageSpan instance
+                                 */
+                                public static create(properties?: google.cloud.documentai.v1beta3.Document.ChunkedDocument.Chunk.IChunkPageSpan): google.cloud.documentai.v1beta3.Document.ChunkedDocument.Chunk.ChunkPageSpan;
+
+                                /**
+                                 * Encodes the specified ChunkPageSpan message. Does not implicitly {@link google.cloud.documentai.v1beta3.Document.ChunkedDocument.Chunk.ChunkPageSpan.verify|verify} messages.
+                                 * @param message ChunkPageSpan message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.documentai.v1beta3.Document.ChunkedDocument.Chunk.IChunkPageSpan, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified ChunkPageSpan message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.Document.ChunkedDocument.Chunk.ChunkPageSpan.verify|verify} messages.
+                                 * @param message ChunkPageSpan message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.documentai.v1beta3.Document.ChunkedDocument.Chunk.IChunkPageSpan, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a ChunkPageSpan message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns ChunkPageSpan
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.Document.ChunkedDocument.Chunk.ChunkPageSpan;
+
+                                /**
+                                 * Decodes a ChunkPageSpan message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns ChunkPageSpan
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.Document.ChunkedDocument.Chunk.ChunkPageSpan;
+
+                                /**
+                                 * Verifies a ChunkPageSpan message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a ChunkPageSpan message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns ChunkPageSpan
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.Document.ChunkedDocument.Chunk.ChunkPageSpan;
+
+                                /**
+                                 * Creates a plain object from a ChunkPageSpan message. Also converts values to other types if specified.
+                                 * @param message ChunkPageSpan
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.documentai.v1beta3.Document.ChunkedDocument.Chunk.ChunkPageSpan, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this ChunkPageSpan to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for ChunkPageSpan
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+                    }
                 }
 
                 /** Properties of a RevisionRef. */
@@ -34725,6 +36012,9 @@ export namespace google {
                     /** ProcessOptions ocrConfig */
                     ocrConfig?: (google.cloud.documentai.v1beta3.IOcrConfig|null);
 
+                    /** ProcessOptions layoutConfig */
+                    layoutConfig?: (google.cloud.documentai.v1beta3.ProcessOptions.ILayoutConfig|null);
+
                     /** ProcessOptions schemaOverride */
                     schemaOverride?: (google.cloud.documentai.v1beta3.IDocumentSchema|null);
                 }
@@ -34749,6 +36039,9 @@ export namespace google {
 
                     /** ProcessOptions ocrConfig. */
                     public ocrConfig?: (google.cloud.documentai.v1beta3.IOcrConfig|null);
+
+                    /** ProcessOptions layoutConfig. */
+                    public layoutConfig?: (google.cloud.documentai.v1beta3.ProcessOptions.ILayoutConfig|null);
 
                     /** ProcessOptions schemaOverride. */
                     public schemaOverride?: (google.cloud.documentai.v1beta3.IDocumentSchema|null);
@@ -34835,6 +36128,221 @@ export namespace google {
                 }
 
                 namespace ProcessOptions {
+
+                    /** Properties of a LayoutConfig. */
+                    interface ILayoutConfig {
+
+                        /** LayoutConfig chunkingConfig */
+                        chunkingConfig?: (google.cloud.documentai.v1beta3.ProcessOptions.LayoutConfig.IChunkingConfig|null);
+                    }
+
+                    /** Represents a LayoutConfig. */
+                    class LayoutConfig implements ILayoutConfig {
+
+                        /**
+                         * Constructs a new LayoutConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.documentai.v1beta3.ProcessOptions.ILayoutConfig);
+
+                        /** LayoutConfig chunkingConfig. */
+                        public chunkingConfig?: (google.cloud.documentai.v1beta3.ProcessOptions.LayoutConfig.IChunkingConfig|null);
+
+                        /**
+                         * Creates a new LayoutConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LayoutConfig instance
+                         */
+                        public static create(properties?: google.cloud.documentai.v1beta3.ProcessOptions.ILayoutConfig): google.cloud.documentai.v1beta3.ProcessOptions.LayoutConfig;
+
+                        /**
+                         * Encodes the specified LayoutConfig message. Does not implicitly {@link google.cloud.documentai.v1beta3.ProcessOptions.LayoutConfig.verify|verify} messages.
+                         * @param message LayoutConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.documentai.v1beta3.ProcessOptions.ILayoutConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LayoutConfig message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.ProcessOptions.LayoutConfig.verify|verify} messages.
+                         * @param message LayoutConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.documentai.v1beta3.ProcessOptions.ILayoutConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LayoutConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LayoutConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.ProcessOptions.LayoutConfig;
+
+                        /**
+                         * Decodes a LayoutConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LayoutConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.ProcessOptions.LayoutConfig;
+
+                        /**
+                         * Verifies a LayoutConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LayoutConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LayoutConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.ProcessOptions.LayoutConfig;
+
+                        /**
+                         * Creates a plain object from a LayoutConfig message. Also converts values to other types if specified.
+                         * @param message LayoutConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.documentai.v1beta3.ProcessOptions.LayoutConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LayoutConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for LayoutConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace LayoutConfig {
+
+                        /** Properties of a ChunkingConfig. */
+                        interface IChunkingConfig {
+
+                            /** ChunkingConfig chunkSize */
+                            chunkSize?: (number|null);
+
+                            /** ChunkingConfig includeAncestorHeadings */
+                            includeAncestorHeadings?: (boolean|null);
+
+                            /** ChunkingConfig semanticChunkingGroupSize */
+                            semanticChunkingGroupSize?: (boolean|null);
+
+                            /** ChunkingConfig breakpointPercentileThreshold */
+                            breakpointPercentileThreshold?: (number|null);
+                        }
+
+                        /** Represents a ChunkingConfig. */
+                        class ChunkingConfig implements IChunkingConfig {
+
+                            /**
+                             * Constructs a new ChunkingConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.documentai.v1beta3.ProcessOptions.LayoutConfig.IChunkingConfig);
+
+                            /** ChunkingConfig chunkSize. */
+                            public chunkSize: number;
+
+                            /** ChunkingConfig includeAncestorHeadings. */
+                            public includeAncestorHeadings: boolean;
+
+                            /** ChunkingConfig semanticChunkingGroupSize. */
+                            public semanticChunkingGroupSize: boolean;
+
+                            /** ChunkingConfig breakpointPercentileThreshold. */
+                            public breakpointPercentileThreshold: number;
+
+                            /**
+                             * Creates a new ChunkingConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ChunkingConfig instance
+                             */
+                            public static create(properties?: google.cloud.documentai.v1beta3.ProcessOptions.LayoutConfig.IChunkingConfig): google.cloud.documentai.v1beta3.ProcessOptions.LayoutConfig.ChunkingConfig;
+
+                            /**
+                             * Encodes the specified ChunkingConfig message. Does not implicitly {@link google.cloud.documentai.v1beta3.ProcessOptions.LayoutConfig.ChunkingConfig.verify|verify} messages.
+                             * @param message ChunkingConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.documentai.v1beta3.ProcessOptions.LayoutConfig.IChunkingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ChunkingConfig message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.ProcessOptions.LayoutConfig.ChunkingConfig.verify|verify} messages.
+                             * @param message ChunkingConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.documentai.v1beta3.ProcessOptions.LayoutConfig.IChunkingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ChunkingConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ChunkingConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.ProcessOptions.LayoutConfig.ChunkingConfig;
+
+                            /**
+                             * Decodes a ChunkingConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ChunkingConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.ProcessOptions.LayoutConfig.ChunkingConfig;
+
+                            /**
+                             * Verifies a ChunkingConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ChunkingConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ChunkingConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.ProcessOptions.LayoutConfig.ChunkingConfig;
+
+                            /**
+                             * Creates a plain object from a ChunkingConfig message. Also converts values to other types if specified.
+                             * @param message ChunkingConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.documentai.v1beta3.ProcessOptions.LayoutConfig.ChunkingConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ChunkingConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ChunkingConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
 
                     /** Properties of an IndividualPageSelector. */
                     interface IIndividualPageSelector {
