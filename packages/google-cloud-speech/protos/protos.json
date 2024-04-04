@@ -3485,6 +3485,17 @@
                         }
                       }
                     },
+                    "TranslationConfig": {
+                      "fields": {
+                        "targetLanguage": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "SpeechAdaptation": {
                       "fields": {
                         "phraseSets": {
@@ -3568,6 +3579,13 @@
                         "transcriptNormalization": {
                           "type": "TranscriptNormalization",
                           "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "translationConfig": {
+                          "type": "TranslationConfig",
+                          "id": 15,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
