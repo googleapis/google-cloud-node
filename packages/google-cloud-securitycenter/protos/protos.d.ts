@@ -3824,6 +3824,9 @@ export namespace google {
 
                     /** Finding loadBalancers */
                     loadBalancers?: (google.cloud.securitycenter.v1.ILoadBalancer[]|null);
+
+                    /** Finding notebook */
+                    notebook?: (google.cloud.securitycenter.v1.INotebook|null);
                 }
 
                 /** Represents a Finding. */
@@ -3966,6 +3969,9 @@ export namespace google {
 
                     /** Finding loadBalancers. */
                     public loadBalancers: google.cloud.securitycenter.v1.ILoadBalancer[];
+
+                    /** Finding notebook. */
+                    public notebook?: (google.cloud.securitycenter.v1.INotebook|null);
 
                     /**
                      * Creates a new Finding instance using the specified properties.
@@ -6468,6 +6474,121 @@ export namespace google {
                         SCANNING_IP_BLOCKS = 2,
                         CONTAINER_AND_RESOURCE_DISCOVERY = 57
                     }
+                }
+
+                /** Properties of a Notebook. */
+                interface INotebook {
+
+                    /** Notebook name */
+                    name?: (string|null);
+
+                    /** Notebook service */
+                    service?: (string|null);
+
+                    /** Notebook lastAuthor */
+                    lastAuthor?: (string|null);
+
+                    /** Notebook notebookUpdateTime */
+                    notebookUpdateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a Notebook. */
+                class Notebook implements INotebook {
+
+                    /**
+                     * Constructs a new Notebook.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.INotebook);
+
+                    /** Notebook name. */
+                    public name: string;
+
+                    /** Notebook service. */
+                    public service: string;
+
+                    /** Notebook lastAuthor. */
+                    public lastAuthor: string;
+
+                    /** Notebook notebookUpdateTime. */
+                    public notebookUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new Notebook instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Notebook instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.INotebook): google.cloud.securitycenter.v1.Notebook;
+
+                    /**
+                     * Encodes the specified Notebook message. Does not implicitly {@link google.cloud.securitycenter.v1.Notebook.verify|verify} messages.
+                     * @param message Notebook message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.INotebook, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Notebook message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Notebook.verify|verify} messages.
+                     * @param message Notebook message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.INotebook, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Notebook message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Notebook
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Notebook;
+
+                    /**
+                     * Decodes a Notebook message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Notebook
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Notebook;
+
+                    /**
+                     * Verifies a Notebook message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Notebook message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Notebook
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Notebook;
+
+                    /**
+                     * Creates a plain object from a Notebook message. Also converts values to other types if specified.
+                     * @param message Notebook
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.Notebook, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Notebook to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Notebook
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an OrgPolicy. */
