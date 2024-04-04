@@ -1931,6 +1931,29 @@ async.each(
         });
       });
       describe('transactions', () => {
+        before(async () => {
+          // This 'sleep' function is used to ensure that when data is saved to datastore,
+          // the time on the server is far enough ahead to be sure to be later than timeBeforeDataCreation
+          // so that when we read at timeBeforeDataCreation we get a snapshot of data before the save.
+          const key = datastore.key(['Company', 'Google']);
+          function sleep(ms: number) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+          }
+          // Save for a key so that a read time can be accessed for snapshot reads.
+          const emptyData = {
+            key,
+            data: {},
+          };
+          await datastore.save(emptyData);
+          // Sleep for 10 seconds to ensure timeBeforeDataCreation includes the empty data
+          await sleep(10000);
+          timeBeforeDataCreation = await getReadTime([
+            {kind: 'Company', name: 'Google'},
+          ]);
+          // Sleep for 10 seconds so that any future reads will be later than timeBeforeDataCreation.
+          await sleep(10000);
+        });
+
         it('should run in a transaction', async () => {
           const key = datastore.key(['Company', 'Google']);
           const obj = {
@@ -2028,6 +2051,25 @@ async.each(
             return;
           }
           assert(entities!.length > 0);
+          await transaction.commit();
+        });
+
+        it('should query within a transaction at a previous read time', async () => {
+          const transaction = datastore.transaction();
+          await transaction.run();
+          const query = transaction.createQuery('Company');
+          let entitiesBefore;
+          let entitiesNow;
+          try {
+            [entitiesBefore] = await query.run({
+              readTime: timeBeforeDataCreation,
+            });
+            [entitiesNow] = await query.run({});
+          } catch (e) {
+            await transaction.rollback();
+            return;
+          }
+          assert(entitiesBefore!.length < entitiesNow!.length);
           await transaction.commit();
         });
 
