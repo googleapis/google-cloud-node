@@ -5,6 +5,499 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "a4e7673543b979083c46ddfe4938c4170594ec4a",
+          "message": "[chat] Launch AccessoryAction for GA",
+          "issues": [
+            "5197"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "ee1de750-f955-4c20-9408-653381b2f222",
+      "createTime": "2024-04-05T13:49:30.081Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b569fbe1472d0fd71c1bfb58d0b1661814ac5727",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5190"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/parallelstore",
+      "id": "f9afc2ef-53be-4d78-8605-e83b5ed7c6aa",
+      "createTime": "2024-04-05T13:49:30.065Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b569fbe1472d0fd71c1bfb58d0b1661814ac5727",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5190"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis-cluster",
+      "id": "d79c86c8-443e-468e-8986-c075ba47a39f",
+      "createTime": "2024-04-05T13:49:30.052Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "39da4b1b5e02da47dd449420bfd215461bec4801",
+          "message": "[cloudquotas] Add `rollout_info` field to `QuotaDetails` message",
+          "issues": [
+            "5194"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudquotas",
+      "id": "b0787ce2-a292-4dc9-828f-7ae9649d778f",
+      "createTime": "2024-04-05T13:49:30.039Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "632f7f4789bc8b05587b42ee986f5101ef003614",
+          "message": "[container] add several fields to manage state of database encryption update",
+          "issues": [
+            "5184"
+          ]
+        }
+      ],
+      "version": "5.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "f3106e3b-1e98-4a74-a7e4-9a23f34d8f6f",
+      "createTime": "2024-04-05T13:49:30.010Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c86ddd006109322a7ba7ae9d28c49bea3993cb1f",
+          "message": "Add `translation_config` in `RecognitionConfig` message",
+          "issues": [
+            "5216"
+          ]
+        }
+      ],
+      "version": "6.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "9758979d-09ab-4a3e-b1af-26bcb5473d6c",
+      "createTime": "2024-04-05T13:49:29.992Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b569fbe1472d0fd71c1bfb58d0b1661814ac5727",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5190"
+          ]
+        }
+      ],
+      "version": "1.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/run",
+      "id": "6ecc1698-9a7c-4e89-bcec-d430c7568821",
+      "createTime": "2024-04-05T13:49:29.963Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b569fbe1472d0fd71c1bfb58d0b1661814ac5727",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5190"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/retail",
+      "id": "19b9f7bf-4724-48a1-864e-9e03d20a6d25",
+      "createTime": "2024-04-05T13:49:29.916Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b569fbe1472d0fd71c1bfb58d0b1661814ac5727",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5190"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/resource-settings",
+      "id": "f6a01cf2-50a6-4acc-8db1-5292600e91d1",
+      "createTime": "2024-04-05T13:49:29.832Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b569fbe1472d0fd71c1bfb58d0b1661814ac5727",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5190"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/resource-manager",
+      "id": "b5ceb239-7231-44c4-8d2d-a28b1ddbfaeb",
+      "createTime": "2024-04-05T13:49:29.800Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b569fbe1472d0fd71c1bfb58d0b1661814ac5727",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5190"
+          ]
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis",
+      "id": "bc00edc2-cc40-49d8-933e-aef930eedd67",
+      "createTime": "2024-04-05T13:49:29.659Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b569fbe1472d0fd71c1bfb58d0b1661814ac5727",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5190"
+          ]
+        }
+      ],
+      "version": "6.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recommender",
+      "id": "430e3c8b-77a7-4700-ab46-e6c92f14815a",
+      "createTime": "2024-04-05T13:49:29.638Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b569fbe1472d0fd71c1bfb58d0b1661814ac5727",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5190"
+          ]
+        }
+      ],
+      "version": "5.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recaptcha-enterprise",
+      "id": "fff4573e-7b4a-4187-9d2e-b108bd1aa753",
+      "createTime": "2024-04-05T13:49:29.614Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b569fbe1472d0fd71c1bfb58d0b1661814ac5727",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5190"
+          ]
+        }
+      ],
+      "version": "1.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/rapidmigrationassessment",
+      "id": "9d42a4e2-61ca-48d7-94c0-b20d4131fbae",
+      "createTime": "2024-04-05T13:49:29.597Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b569fbe1472d0fd71c1bfb58d0b1661814ac5727",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5190"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/private-catalog",
+      "id": "864acde6-111b-42e0-acb4-4f52c34f49e8",
+      "createTime": "2024-04-05T13:49:29.578Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b569fbe1472d0fd71c1bfb58d0b1661814ac5727",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5190"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policy-troubleshooter-iam",
+      "id": "5a2c7e8d-8578-404c-8356-e98e3c5ccaa1",
+      "createTime": "2024-04-05T13:49:29.565Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b569fbe1472d0fd71c1bfb58d0b1661814ac5727",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5190"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policy-troubleshooter",
+      "id": "19fd4dff-b844-4941-a35d-5ecec8547bde",
+      "createTime": "2024-04-05T13:49:29.549Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b569fbe1472d0fd71c1bfb58d0b1661814ac5727",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5190"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policysimulator",
+      "id": "dbfbf0a7-3338-42b5-b068-c05cff3953c6",
+      "createTime": "2024-04-05T13:49:29.533Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b569fbe1472d0fd71c1bfb58d0b1661814ac5727",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5190"
+          ]
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/phishing-protection",
+      "id": "2b9f992f-ca1e-442f-9f8b-b800fff6428a",
+      "createTime": "2024-04-05T13:49:29.518Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b569fbe1472d0fd71c1bfb58d0b1661814ac5727",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5190"
+          ]
+        }
+      ],
+      "version": "5.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-login",
+      "id": "682c6298-cf55-438a-84f8-f748602087a0",
+      "createTime": "2024-04-05T13:49:29.490Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b569fbe1472d0fd71c1bfb58d0b1661814ac5727",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5190"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-config",
+      "id": "3110c592-d677-4cd2-950f-719cabaf4691",
+      "createTime": "2024-04-05T13:49:29.479Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b569fbe1472d0fd71c1bfb58d0b1661814ac5727",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5190"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/org-policy",
+      "id": "04bc375c-1fdd-45c6-9cd7-230611f0bb90",
+      "createTime": "2024-04-05T13:49:29.467Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b569fbe1472d0fd71c1bfb58d0b1661814ac5727",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5190"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/orchestration-airflow",
+      "id": "0d810b23-f834-400f-9afe-5a81f6452a14",
+      "createTime": "2024-04-05T13:49:29.450Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b569fbe1472d0fd71c1bfb58d0b1661814ac5727",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5190"
+          ]
+        }
+      ],
+      "version": "3.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/optimization",
+      "id": "f582091e-538b-4959-a114-c63923fef4e7",
+      "createTime": "2024-04-05T13:49:29.432Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ab38a590d9dba7d7b1f97de8c278fa408606003f",
+          "message": "[documentai] Support a new Layout Processor in Document AI",
+          "issues": [
+            "5213"
+          ]
+        }
+      ],
+      "version": "8.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "5acfd09d-be3f-4a7f-800e-0d36fb5737a5",
+      "createTime": "2024-04-05T13:49:29.409Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cc25e935f087526738303cd94c406bd352a7b595",
+          "message": "[discoveryengine] support import data from Cloud Spanner, BigTable, SQL and Firestore",
+          "issues": [
+            "5218"
+          ]
+        }
+      ],
+      "version": "1.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "c6f23638-0ea5-4e9a-b920-d95534ff5827",
+      "createTime": "2024-04-05T13:49:29.392Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e81cd492d2c3cef915d89b095852aa9a7ae64160",
+          "message": "[dialogflow-cx] added support for DataStoreConnection, DataStoreConnectionSettings",
+          "issues": [
+            "5196"
+          ]
+        }
+      ],
+      "version": "4.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "9f4106f7-79ed-4756-90d4-b5309485fd8f",
+      "createTime": "2024-04-05T13:49:29.380Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a39de9b2eb05fa9968a0e222e7b067015150ea30",
+          "message": "[advisorynotifications] add GetSettings and UpdateSettings methods at the Project-level to advisorynotifications.googleapis.com",
+          "issues": [
+            "5215"
+          ]
+        }
+      ],
+      "version": "1.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/advisorynotifications",
+      "id": "3c7b8295-9218-4113-89d3-ad86a6665a3e",
+      "createTime": "2024-04-05T13:49:29.365Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "54c5762d6ea9ac57d14271e651c03353326f15ac",
+          "message": "[generativelanguage] Add system instructions",
+          "issues": [
+            "5208"
+          ]
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ai/generativelanguage",
+      "id": "a03b3f67-aa20-42ae-9544-5cc1da048235",
+      "createTime": "2024-04-05T13:49:29.346Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "333b40951a255ecfab249bd6e7ace5877270ec85",
           "message": "[Many APIs] add several fields to manage state of database encryption update",
           "issues": [
@@ -27297,5 +27790,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-03-29T22:09:57.674Z"
+  "updateTime": "2024-04-05T13:49:30.081Z"
 }
