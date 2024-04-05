@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/redis-v4.1.0...redis-v4.2.0) (2024-04-05)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5190](https://github.com/googleapis/google-cloud-node/issues/5190)) ([b569fbe](https://github.com/googleapis/google-cloud-node/commit/b569fbe1472d0fd71c1bfb58d0b1661814ac5727))
+
 ## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/redis-v4.0.1...redis-v4.1.0) (2024-02-09)
 
 

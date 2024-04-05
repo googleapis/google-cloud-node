@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [5.12.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.11.0...container-v5.12.0) (2024-04-05)
+
+
+### Features
+
+* [container] add several fields to manage state of database encryption update ([#5184](https://github.com/googleapis/google-cloud-node/issues/5184)) ([632f7f4](https://github.com/googleapis/google-cloud-node/commit/632f7f4789bc8b05587b42ee986f5101ef003614))
+
 ## [5.11.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.10.0...container-v5.11.0) (2024-03-26)
 
 
