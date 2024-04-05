@@ -29708,6 +29708,209 @@
                         return TranscriptNormalization;
                     })();
     
+                    v2.TranslationConfig = (function() {
+    
+                        /**
+                         * Properties of a TranslationConfig.
+                         * @memberof google.cloud.speech.v2
+                         * @interface ITranslationConfig
+                         * @property {string|null} [targetLanguage] TranslationConfig targetLanguage
+                         */
+    
+                        /**
+                         * Constructs a new TranslationConfig.
+                         * @memberof google.cloud.speech.v2
+                         * @classdesc Represents a TranslationConfig.
+                         * @implements ITranslationConfig
+                         * @constructor
+                         * @param {google.cloud.speech.v2.ITranslationConfig=} [properties] Properties to set
+                         */
+                        function TranslationConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TranslationConfig targetLanguage.
+                         * @member {string} targetLanguage
+                         * @memberof google.cloud.speech.v2.TranslationConfig
+                         * @instance
+                         */
+                        TranslationConfig.prototype.targetLanguage = "";
+    
+                        /**
+                         * Creates a new TranslationConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v2.TranslationConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.ITranslationConfig=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v2.TranslationConfig} TranslationConfig instance
+                         */
+                        TranslationConfig.create = function create(properties) {
+                            return new TranslationConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TranslationConfig message. Does not implicitly {@link google.cloud.speech.v2.TranslationConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v2.TranslationConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.ITranslationConfig} message TranslationConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TranslationConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.targetLanguage != null && Object.hasOwnProperty.call(message, "targetLanguage"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.targetLanguage);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TranslationConfig message, length delimited. Does not implicitly {@link google.cloud.speech.v2.TranslationConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v2.TranslationConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.ITranslationConfig} message TranslationConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TranslationConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TranslationConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v2.TranslationConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v2.TranslationConfig} TranslationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TranslationConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v2.TranslationConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.targetLanguage = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TranslationConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v2.TranslationConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v2.TranslationConfig} TranslationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TranslationConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TranslationConfig message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v2.TranslationConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TranslationConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.targetLanguage != null && message.hasOwnProperty("targetLanguage"))
+                                if (!$util.isString(message.targetLanguage))
+                                    return "targetLanguage: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TranslationConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v2.TranslationConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v2.TranslationConfig} TranslationConfig
+                         */
+                        TranslationConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v2.TranslationConfig)
+                                return object;
+                            var message = new $root.google.cloud.speech.v2.TranslationConfig();
+                            if (object.targetLanguage != null)
+                                message.targetLanguage = String(object.targetLanguage);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TranslationConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v2.TranslationConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.TranslationConfig} message TranslationConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TranslationConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.targetLanguage = "";
+                            if (message.targetLanguage != null && message.hasOwnProperty("targetLanguage"))
+                                object.targetLanguage = message.targetLanguage;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TranslationConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v2.TranslationConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TranslationConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TranslationConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.speech.v2.TranslationConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TranslationConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.speech.v2.TranslationConfig";
+                        };
+    
+                        return TranslationConfig;
+                    })();
+    
                     v2.SpeechAdaptation = (function() {
     
                         /**
@@ -30246,6 +30449,7 @@
                          * @property {google.cloud.speech.v2.IRecognitionFeatures|null} [features] RecognitionConfig features
                          * @property {google.cloud.speech.v2.ISpeechAdaptation|null} [adaptation] RecognitionConfig adaptation
                          * @property {google.cloud.speech.v2.ITranscriptNormalization|null} [transcriptNormalization] RecognitionConfig transcriptNormalization
+                         * @property {google.cloud.speech.v2.ITranslationConfig|null} [translationConfig] RecognitionConfig translationConfig
                          */
     
                         /**
@@ -30320,6 +30524,14 @@
                          */
                         RecognitionConfig.prototype.transcriptNormalization = null;
     
+                        /**
+                         * RecognitionConfig translationConfig.
+                         * @member {google.cloud.speech.v2.ITranslationConfig|null|undefined} translationConfig
+                         * @memberof google.cloud.speech.v2.RecognitionConfig
+                         * @instance
+                         */
+                        RecognitionConfig.prototype.translationConfig = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -30373,6 +30585,8 @@
                                     writer.uint32(/* id 10, wireType 2 =*/82).string(message.languageCodes[i]);
                             if (message.transcriptNormalization != null && Object.hasOwnProperty.call(message, "transcriptNormalization"))
                                 $root.google.cloud.speech.v2.TranscriptNormalization.encode(message.transcriptNormalization, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.translationConfig != null && Object.hasOwnProperty.call(message, "translationConfig"))
+                                $root.google.cloud.speech.v2.TranslationConfig.encode(message.translationConfig, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                             return writer;
                         };
     
@@ -30435,6 +30649,10 @@
                                     }
                                 case 11: {
                                         message.transcriptNormalization = $root.google.cloud.speech.v2.TranscriptNormalization.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 15: {
+                                        message.translationConfig = $root.google.cloud.speech.v2.TranslationConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -30516,6 +30734,11 @@
                                 if (error)
                                     return "transcriptNormalization." + error;
                             }
+                            if (message.translationConfig != null && message.hasOwnProperty("translationConfig")) {
+                                var error = $root.google.cloud.speech.v2.TranslationConfig.verify(message.translationConfig);
+                                if (error)
+                                    return "translationConfig." + error;
+                            }
                             return null;
                         };
     
@@ -30565,6 +30788,11 @@
                                     throw TypeError(".google.cloud.speech.v2.RecognitionConfig.transcriptNormalization: object expected");
                                 message.transcriptNormalization = $root.google.cloud.speech.v2.TranscriptNormalization.fromObject(object.transcriptNormalization);
                             }
+                            if (object.translationConfig != null) {
+                                if (typeof object.translationConfig !== "object")
+                                    throw TypeError(".google.cloud.speech.v2.RecognitionConfig.translationConfig: object expected");
+                                message.translationConfig = $root.google.cloud.speech.v2.TranslationConfig.fromObject(object.translationConfig);
+                            }
                             return message;
                         };
     
@@ -30588,6 +30816,7 @@
                                 object.adaptation = null;
                                 object.model = "";
                                 object.transcriptNormalization = null;
+                                object.translationConfig = null;
                             }
                             if (message.features != null && message.hasOwnProperty("features"))
                                 object.features = $root.google.cloud.speech.v2.RecognitionFeatures.toObject(message.features, options);
@@ -30612,6 +30841,8 @@
                             }
                             if (message.transcriptNormalization != null && message.hasOwnProperty("transcriptNormalization"))
                                 object.transcriptNormalization = $root.google.cloud.speech.v2.TranscriptNormalization.toObject(message.transcriptNormalization, options);
+                            if (message.translationConfig != null && message.hasOwnProperty("translationConfig"))
+                                object.translationConfig = $root.google.cloud.speech.v2.TranslationConfig.toObject(message.translationConfig, options);
                             return object;
                         };
     

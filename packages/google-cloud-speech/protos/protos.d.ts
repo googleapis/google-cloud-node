@@ -12157,6 +12157,103 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a TranslationConfig. */
+                interface ITranslationConfig {
+
+                    /** TranslationConfig targetLanguage */
+                    targetLanguage?: (string|null);
+                }
+
+                /** Represents a TranslationConfig. */
+                class TranslationConfig implements ITranslationConfig {
+
+                    /**
+                     * Constructs a new TranslationConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.speech.v2.ITranslationConfig);
+
+                    /** TranslationConfig targetLanguage. */
+                    public targetLanguage: string;
+
+                    /**
+                     * Creates a new TranslationConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TranslationConfig instance
+                     */
+                    public static create(properties?: google.cloud.speech.v2.ITranslationConfig): google.cloud.speech.v2.TranslationConfig;
+
+                    /**
+                     * Encodes the specified TranslationConfig message. Does not implicitly {@link google.cloud.speech.v2.TranslationConfig.verify|verify} messages.
+                     * @param message TranslationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.speech.v2.ITranslationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TranslationConfig message, length delimited. Does not implicitly {@link google.cloud.speech.v2.TranslationConfig.verify|verify} messages.
+                     * @param message TranslationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.speech.v2.ITranslationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TranslationConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TranslationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.speech.v2.TranslationConfig;
+
+                    /**
+                     * Decodes a TranslationConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TranslationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.speech.v2.TranslationConfig;
+
+                    /**
+                     * Verifies a TranslationConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TranslationConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TranslationConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.speech.v2.TranslationConfig;
+
+                    /**
+                     * Creates a plain object from a TranslationConfig message. Also converts values to other types if specified.
+                     * @param message TranslationConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.speech.v2.TranslationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TranslationConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TranslationConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a SpeechAdaptation. */
                 interface ISpeechAdaptation {
 
@@ -12392,6 +12489,9 @@ export namespace google {
 
                     /** RecognitionConfig transcriptNormalization */
                     transcriptNormalization?: (google.cloud.speech.v2.ITranscriptNormalization|null);
+
+                    /** RecognitionConfig translationConfig */
+                    translationConfig?: (google.cloud.speech.v2.ITranslationConfig|null);
                 }
 
                 /** Represents a RecognitionConfig. */
@@ -12423,6 +12523,9 @@ export namespace google {
 
                     /** RecognitionConfig transcriptNormalization. */
                     public transcriptNormalization?: (google.cloud.speech.v2.ITranscriptNormalization|null);
+
+                    /** RecognitionConfig translationConfig. */
+                    public translationConfig?: (google.cloud.speech.v2.ITranslationConfig|null);
 
                     /** RecognitionConfig decodingConfig. */
                     public decodingConfig?: ("autoDecodingConfig"|"explicitDecodingConfig");
