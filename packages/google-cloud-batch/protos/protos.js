@@ -25239,6 +25239,7 @@
                          * @property {boolean|null} [requireHostsFile] TaskGroup requireHostsFile
                          * @property {boolean|null} [permissiveSsh] TaskGroup permissiveSsh
                          * @property {boolean|null} [runAsNonRoot] TaskGroup runAsNonRoot
+                         * @property {google.cloud.batch.v1alpha.IServiceAccount|null} [serviceAccount] TaskGroup serviceAccount
                          */
     
                         /**
@@ -25355,6 +25356,14 @@
                         TaskGroup.prototype.runAsNonRoot = false;
     
                         /**
+                         * TaskGroup serviceAccount.
+                         * @member {google.cloud.batch.v1alpha.IServiceAccount|null|undefined} serviceAccount
+                         * @memberof google.cloud.batch.v1alpha.TaskGroup
+                         * @instance
+                         */
+                        TaskGroup.prototype.serviceAccount = null;
+    
+                        /**
                          * Creates a new TaskGroup instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.batch.v1alpha.TaskGroup
@@ -25404,6 +25413,8 @@
                                 writer.uint32(/* id 12, wireType 0 =*/96).bool(message.permissiveSsh);
                             if (message.runAsNonRoot != null && Object.hasOwnProperty.call(message, "runAsNonRoot"))
                                 writer.uint32(/* id 14, wireType 0 =*/112).bool(message.runAsNonRoot);
+                            if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
+                                $root.google.cloud.batch.v1alpha.ServiceAccount.encode(message.serviceAccount, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                             return writer;
                         };
     
@@ -25507,6 +25518,10 @@
                                         message.runAsNonRoot = reader.bool();
                                         break;
                                     }
+                                case 15: {
+                                        message.serviceAccount = $root.google.cloud.batch.v1alpha.ServiceAccount.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -25599,6 +25614,11 @@
                             if (message.runAsNonRoot != null && message.hasOwnProperty("runAsNonRoot"))
                                 if (typeof message.runAsNonRoot !== "boolean")
                                     return "runAsNonRoot: boolean expected";
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount")) {
+                                var error = $root.google.cloud.batch.v1alpha.ServiceAccount.verify(message.serviceAccount);
+                                if (error)
+                                    return "serviceAccount." + error;
+                            }
                             return null;
                         };
     
@@ -25696,6 +25716,11 @@
                                 message.permissiveSsh = Boolean(object.permissiveSsh);
                             if (object.runAsNonRoot != null)
                                 message.runAsNonRoot = Boolean(object.runAsNonRoot);
+                            if (object.serviceAccount != null) {
+                                if (typeof object.serviceAccount !== "object")
+                                    throw TypeError(".google.cloud.batch.v1alpha.TaskGroup.serviceAccount: object expected");
+                                message.serviceAccount = $root.google.cloud.batch.v1alpha.ServiceAccount.fromObject(object.serviceAccount);
+                            }
                             return message;
                         };
     
@@ -25739,6 +25764,7 @@
                                 object.requireHostsFile = false;
                                 object.permissiveSsh = false;
                                 object.runAsNonRoot = false;
+                                object.serviceAccount = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -25780,6 +25806,8 @@
                                 object.permissiveSsh = message.permissiveSsh;
                             if (message.runAsNonRoot != null && message.hasOwnProperty("runAsNonRoot"))
                                 object.runAsNonRoot = message.runAsNonRoot;
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                object.serviceAccount = $root.google.cloud.batch.v1alpha.ServiceAccount.toObject(message.serviceAccount, options);
                             return object;
                         };
     
@@ -33269,19 +33297,44 @@
     
                             /**
                              * LimitStatus limit.
-                             * @member {number} limit
+                             * @member {number|null|undefined} limit
                              * @memberof google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.LimitStatus
                              * @instance
                              */
-                            LimitStatus.prototype.limit = 0;
+                            LimitStatus.prototype.limit = null;
     
                             /**
                              * LimitStatus consumed.
-                             * @member {number} consumed
+                             * @member {number|null|undefined} consumed
                              * @memberof google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.LimitStatus
                              * @instance
                              */
-                            LimitStatus.prototype.consumed = 0;
+                            LimitStatus.prototype.consumed = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * LimitStatus _limit.
+                             * @member {"limit"|undefined} _limit
+                             * @memberof google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.LimitStatus
+                             * @instance
+                             */
+                            Object.defineProperty(LimitStatus.prototype, "_limit", {
+                                get: $util.oneOfGetter($oneOfFields = ["limit"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * LimitStatus _consumed.
+                             * @member {"consumed"|undefined} _consumed
+                             * @memberof google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.LimitStatus
+                             * @instance
+                             */
+                            Object.defineProperty(LimitStatus.prototype, "_consumed", {
+                                get: $util.oneOfGetter($oneOfFields = ["consumed"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
     
                             /**
                              * Creates a new LimitStatus instance using the specified properties.
@@ -33394,17 +33447,22 @@
                             LimitStatus.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                var properties = {};
                                 if (message.consumptionInterval != null && message.hasOwnProperty("consumptionInterval")) {
                                     var error = $root.google.type.Interval.verify(message.consumptionInterval);
                                     if (error)
                                         return "consumptionInterval." + error;
                                 }
-                                if (message.limit != null && message.hasOwnProperty("limit"))
+                                if (message.limit != null && message.hasOwnProperty("limit")) {
+                                    properties._limit = 1;
                                     if (typeof message.limit !== "number")
                                         return "limit: number expected";
-                                if (message.consumed != null && message.hasOwnProperty("consumed"))
+                                }
+                                if (message.consumed != null && message.hasOwnProperty("consumed")) {
+                                    properties._consumed = 1;
                                     if (typeof message.consumed !== "number")
                                         return "consumed: number expected";
+                                }
                                 return null;
                             };
     
@@ -33445,17 +33503,20 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults) {
+                                if (options.defaults)
                                     object.consumptionInterval = null;
-                                    object.limit = 0;
-                                    object.consumed = 0;
-                                }
                                 if (message.consumptionInterval != null && message.hasOwnProperty("consumptionInterval"))
                                     object.consumptionInterval = $root.google.type.Interval.toObject(message.consumptionInterval, options);
-                                if (message.limit != null && message.hasOwnProperty("limit"))
+                                if (message.limit != null && message.hasOwnProperty("limit")) {
                                     object.limit = options.json && !isFinite(message.limit) ? String(message.limit) : message.limit;
-                                if (message.consumed != null && message.hasOwnProperty("consumed"))
+                                    if (options.oneofs)
+                                        object._limit = "limit";
+                                }
+                                if (message.consumed != null && message.hasOwnProperty("consumed")) {
                                     object.consumed = options.json && !isFinite(message.consumed) ? String(message.consumed) : message.consumed;
+                                    if (options.oneofs)
+                                        object._consumed = "consumed";
+                                }
                                 return object;
                             };
     
@@ -33523,11 +33584,25 @@
     
                             /**
                              * PeriodConsumption consumed.
-                             * @member {number} consumed
+                             * @member {number|null|undefined} consumed
                              * @memberof google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.PeriodConsumption
                              * @instance
                              */
-                            PeriodConsumption.prototype.consumed = 0;
+                            PeriodConsumption.prototype.consumed = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * PeriodConsumption _consumed.
+                             * @member {"consumed"|undefined} _consumed
+                             * @memberof google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.PeriodConsumption
+                             * @instance
+                             */
+                            Object.defineProperty(PeriodConsumption.prototype, "_consumed", {
+                                get: $util.oneOfGetter($oneOfFields = ["consumed"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
     
                             /**
                              * Creates a new PeriodConsumption instance using the specified properties.
@@ -33634,14 +33709,17 @@
                             PeriodConsumption.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                var properties = {};
                                 if (message.consumptionInterval != null && message.hasOwnProperty("consumptionInterval")) {
                                     var error = $root.google.type.Interval.verify(message.consumptionInterval);
                                     if (error)
                                         return "consumptionInterval." + error;
                                 }
-                                if (message.consumed != null && message.hasOwnProperty("consumed"))
+                                if (message.consumed != null && message.hasOwnProperty("consumed")) {
+                                    properties._consumed = 1;
                                     if (typeof message.consumed !== "number")
                                         return "consumed: number expected";
+                                }
                                 return null;
                             };
     
@@ -33680,14 +33758,15 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults) {
+                                if (options.defaults)
                                     object.consumptionInterval = null;
-                                    object.consumed = 0;
-                                }
                                 if (message.consumptionInterval != null && message.hasOwnProperty("consumptionInterval"))
                                     object.consumptionInterval = $root.google.type.Interval.toObject(message.consumptionInterval, options);
-                                if (message.consumed != null && message.hasOwnProperty("consumed"))
+                                if (message.consumed != null && message.hasOwnProperty("consumed")) {
                                     object.consumed = options.json && !isFinite(message.consumed) ? String(message.consumed) : message.consumed;
+                                    if (options.oneofs)
+                                        object._consumed = "consumed";
+                                }
                                 return object;
                             };
     
