@@ -389,7 +389,7 @@ export class ReportServiceClient {
    *   fields.
    * @param {number} [request.pageSize]
    *   Optional. Number of `ReportRows` to retrieve in a single page. Defaults to
-   *   the maximum of 1000. Values above 1000 are coerced to 1000.
+   *   1000. Values above 5000 are coerced to 5000.
    * @param {string} [request.pageToken]
    *   Optional. Token of the page to retrieve. If not specified, the first page
    *   of results is returned. In order to request the next page of results, the
@@ -497,7 +497,7 @@ export class ReportServiceClient {
    *   fields.
    * @param {number} [request.pageSize]
    *   Optional. Number of `ReportRows` to retrieve in a single page. Defaults to
-   *   the maximum of 1000. Values above 1000 are coerced to 1000.
+   *   1000. Values above 5000 are coerced to 5000.
    * @param {string} [request.pageToken]
    *   Optional. Token of the page to retrieve. If not specified, the first page
    *   of results is returned. In order to request the next page of results, the
@@ -553,7 +553,7 @@ export class ReportServiceClient {
    *   fields.
    * @param {number} [request.pageSize]
    *   Optional. Number of `ReportRows` to retrieve in a single page. Defaults to
-   *   the maximum of 1000. Values above 1000 are coerced to 1000.
+   *   1000. Values above 5000 are coerced to 5000.
    * @param {string} [request.pageToken]
    *   Optional. Token of the page to retrieve. If not specified, the first page
    *   of results is returned. In order to request the next page of results, the
