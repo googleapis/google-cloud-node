@@ -25,9 +25,29 @@
                 "getTask"
               ]
             },
+            "CreateResourceAllowance": {
+              "methods": [
+                "createResourceAllowance"
+              ]
+            },
+            "GetResourceAllowance": {
+              "methods": [
+                "getResourceAllowance"
+              ]
+            },
+            "UpdateResourceAllowance": {
+              "methods": [
+                "updateResourceAllowance"
+              ]
+            },
             "DeleteJob": {
               "methods": [
                 "deleteJob"
+              ]
+            },
+            "DeleteResourceAllowance": {
+              "methods": [
+                "deleteResourceAllowance"
               ]
             },
             "ListJobs": {
@@ -42,6 +62,13 @@
                 "listTasks",
                 "listTasksStream",
                 "listTasksAsync"
+              ]
+            },
+            "ListResourceAllowances": {
+              "methods": [
+                "listResourceAllowances",
+                "listResourceAllowancesStream",
+                "listResourceAllowancesAsync"
               ]
             }
           }
@@ -64,9 +91,29 @@
                 "getTask"
               ]
             },
+            "CreateResourceAllowance": {
+              "methods": [
+                "createResourceAllowance"
+              ]
+            },
+            "GetResourceAllowance": {
+              "methods": [
+                "getResourceAllowance"
+              ]
+            },
+            "UpdateResourceAllowance": {
+              "methods": [
+                "updateResourceAllowance"
+              ]
+            },
             "DeleteJob": {
               "methods": [
                 "deleteJob"
+              ]
+            },
+            "DeleteResourceAllowance": {
+              "methods": [
+                "deleteResourceAllowance"
               ]
             },
             "ListJobs": {
@@ -81,6 +128,13 @@
                 "listTasks",
                 "listTasksStream",
                 "listTasksAsync"
+              ]
+            },
+            "ListResourceAllowances": {
+              "methods": [
+                "listResourceAllowances",
+                "listResourceAllowancesStream",
+                "listResourceAllowancesAsync"
               ]
             }
           }

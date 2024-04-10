@@ -17863,6 +17863,15 @@ export namespace google {
 
                 /** DatabaseEncryption state */
                 state?: (google.container.v1.DatabaseEncryption.State|keyof typeof google.container.v1.DatabaseEncryption.State|null);
+
+                /** DatabaseEncryption currentState */
+                currentState?: (google.container.v1.DatabaseEncryption.CurrentState|keyof typeof google.container.v1.DatabaseEncryption.CurrentState|null);
+
+                /** DatabaseEncryption decryptionKeys */
+                decryptionKeys?: (string[]|null);
+
+                /** DatabaseEncryption lastOperationErrors */
+                lastOperationErrors?: (google.container.v1.DatabaseEncryption.IOperationError[]|null);
             }
 
             /** Represents a DatabaseEncryption. */
@@ -17879,6 +17888,18 @@ export namespace google {
 
                 /** DatabaseEncryption state. */
                 public state: (google.container.v1.DatabaseEncryption.State|keyof typeof google.container.v1.DatabaseEncryption.State);
+
+                /** DatabaseEncryption currentState. */
+                public currentState?: (google.container.v1.DatabaseEncryption.CurrentState|keyof typeof google.container.v1.DatabaseEncryption.CurrentState|null);
+
+                /** DatabaseEncryption decryptionKeys. */
+                public decryptionKeys: string[];
+
+                /** DatabaseEncryption lastOperationErrors. */
+                public lastOperationErrors: google.container.v1.DatabaseEncryption.IOperationError[];
+
+                /** DatabaseEncryption _currentState. */
+                public _currentState?: "currentState";
 
                 /**
                  * Creates a new DatabaseEncryption instance using the specified properties.
@@ -17965,6 +17986,126 @@ export namespace google {
                     UNKNOWN = 0,
                     ENCRYPTED = 1,
                     DECRYPTED = 2
+                }
+
+                /** CurrentState enum. */
+                enum CurrentState {
+                    CURRENT_STATE_UNSPECIFIED = 0,
+                    CURRENT_STATE_ENCRYPTED = 7,
+                    CURRENT_STATE_DECRYPTED = 2,
+                    CURRENT_STATE_ENCRYPTION_PENDING = 3,
+                    CURRENT_STATE_ENCRYPTION_ERROR = 4,
+                    CURRENT_STATE_DECRYPTION_PENDING = 5,
+                    CURRENT_STATE_DECRYPTION_ERROR = 6
+                }
+
+                /** Properties of an OperationError. */
+                interface IOperationError {
+
+                    /** OperationError keyName */
+                    keyName?: (string|null);
+
+                    /** OperationError errorMessage */
+                    errorMessage?: (string|null);
+
+                    /** OperationError timestamp */
+                    timestamp?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents an OperationError. */
+                class OperationError implements IOperationError {
+
+                    /**
+                     * Constructs a new OperationError.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.container.v1.DatabaseEncryption.IOperationError);
+
+                    /** OperationError keyName. */
+                    public keyName: string;
+
+                    /** OperationError errorMessage. */
+                    public errorMessage: string;
+
+                    /** OperationError timestamp. */
+                    public timestamp?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new OperationError instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OperationError instance
+                     */
+                    public static create(properties?: google.container.v1.DatabaseEncryption.IOperationError): google.container.v1.DatabaseEncryption.OperationError;
+
+                    /**
+                     * Encodes the specified OperationError message. Does not implicitly {@link google.container.v1.DatabaseEncryption.OperationError.verify|verify} messages.
+                     * @param message OperationError message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.container.v1.DatabaseEncryption.IOperationError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OperationError message, length delimited. Does not implicitly {@link google.container.v1.DatabaseEncryption.OperationError.verify|verify} messages.
+                     * @param message OperationError message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.container.v1.DatabaseEncryption.IOperationError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OperationError message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OperationError
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.DatabaseEncryption.OperationError;
+
+                    /**
+                     * Decodes an OperationError message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OperationError
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.DatabaseEncryption.OperationError;
+
+                    /**
+                     * Verifies an OperationError message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OperationError message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OperationError
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.container.v1.DatabaseEncryption.OperationError;
+
+                    /**
+                     * Creates a plain object from an OperationError message. Also converts values to other types if specified.
+                     * @param message OperationError
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.container.v1.DatabaseEncryption.OperationError, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OperationError to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OperationError
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
 
@@ -41690,6 +41831,15 @@ export namespace google {
 
                 /** DatabaseEncryption state */
                 state?: (google.container.v1beta1.DatabaseEncryption.State|keyof typeof google.container.v1beta1.DatabaseEncryption.State|null);
+
+                /** DatabaseEncryption currentState */
+                currentState?: (google.container.v1beta1.DatabaseEncryption.CurrentState|keyof typeof google.container.v1beta1.DatabaseEncryption.CurrentState|null);
+
+                /** DatabaseEncryption decryptionKeys */
+                decryptionKeys?: (string[]|null);
+
+                /** DatabaseEncryption lastOperationErrors */
+                lastOperationErrors?: (google.container.v1beta1.DatabaseEncryption.IOperationError[]|null);
             }
 
             /** Represents a DatabaseEncryption. */
@@ -41706,6 +41856,18 @@ export namespace google {
 
                 /** DatabaseEncryption state. */
                 public state: (google.container.v1beta1.DatabaseEncryption.State|keyof typeof google.container.v1beta1.DatabaseEncryption.State);
+
+                /** DatabaseEncryption currentState. */
+                public currentState?: (google.container.v1beta1.DatabaseEncryption.CurrentState|keyof typeof google.container.v1beta1.DatabaseEncryption.CurrentState|null);
+
+                /** DatabaseEncryption decryptionKeys. */
+                public decryptionKeys: string[];
+
+                /** DatabaseEncryption lastOperationErrors. */
+                public lastOperationErrors: google.container.v1beta1.DatabaseEncryption.IOperationError[];
+
+                /** DatabaseEncryption _currentState. */
+                public _currentState?: "currentState";
 
                 /**
                  * Creates a new DatabaseEncryption instance using the specified properties.
@@ -41792,6 +41954,126 @@ export namespace google {
                     UNKNOWN = 0,
                     ENCRYPTED = 1,
                     DECRYPTED = 2
+                }
+
+                /** CurrentState enum. */
+                enum CurrentState {
+                    CURRENT_STATE_UNSPECIFIED = 0,
+                    CURRENT_STATE_ENCRYPTED = 7,
+                    CURRENT_STATE_DECRYPTED = 2,
+                    CURRENT_STATE_ENCRYPTION_PENDING = 3,
+                    CURRENT_STATE_ENCRYPTION_ERROR = 4,
+                    CURRENT_STATE_DECRYPTION_PENDING = 5,
+                    CURRENT_STATE_DECRYPTION_ERROR = 6
+                }
+
+                /** Properties of an OperationError. */
+                interface IOperationError {
+
+                    /** OperationError keyName */
+                    keyName?: (string|null);
+
+                    /** OperationError errorMessage */
+                    errorMessage?: (string|null);
+
+                    /** OperationError timestamp */
+                    timestamp?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents an OperationError. */
+                class OperationError implements IOperationError {
+
+                    /**
+                     * Constructs a new OperationError.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.container.v1beta1.DatabaseEncryption.IOperationError);
+
+                    /** OperationError keyName. */
+                    public keyName: string;
+
+                    /** OperationError errorMessage. */
+                    public errorMessage: string;
+
+                    /** OperationError timestamp. */
+                    public timestamp?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new OperationError instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OperationError instance
+                     */
+                    public static create(properties?: google.container.v1beta1.DatabaseEncryption.IOperationError): google.container.v1beta1.DatabaseEncryption.OperationError;
+
+                    /**
+                     * Encodes the specified OperationError message. Does not implicitly {@link google.container.v1beta1.DatabaseEncryption.OperationError.verify|verify} messages.
+                     * @param message OperationError message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.container.v1beta1.DatabaseEncryption.IOperationError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OperationError message, length delimited. Does not implicitly {@link google.container.v1beta1.DatabaseEncryption.OperationError.verify|verify} messages.
+                     * @param message OperationError message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.container.v1beta1.DatabaseEncryption.IOperationError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OperationError message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OperationError
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.DatabaseEncryption.OperationError;
+
+                    /**
+                     * Decodes an OperationError message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OperationError
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.DatabaseEncryption.OperationError;
+
+                    /**
+                     * Verifies an OperationError message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OperationError message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OperationError
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.container.v1beta1.DatabaseEncryption.OperationError;
+
+                    /**
+                     * Creates a plain object from an OperationError message. Also converts values to other types if specified.
+                     * @param message OperationError
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.container.v1beta1.DatabaseEncryption.OperationError, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OperationError to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OperationError
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
 

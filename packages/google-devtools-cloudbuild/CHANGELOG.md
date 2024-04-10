@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v4.3.0...cloudbuild-v4.4.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5192](https://github.com/googleapis/google-cloud-node/issues/5192)) ([b926f13](https://github.com/googleapis/google-cloud-node/commit/b926f1326ea4df73c411dbeb7e529f8d9ccc3642))
+
 ## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v4.2.0...cloudbuild-v4.3.0) (2024-03-23)
 
 

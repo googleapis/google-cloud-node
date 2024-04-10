@@ -5906,9 +5906,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5957,9 +5957,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6002,9 +6002,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6044,9 +6044,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -6221,9 +6221,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listEntitlements.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6272,9 +6272,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listEntitlements.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6317,9 +6317,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listEntitlements.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6359,9 +6359,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listEntitlements.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -6555,9 +6555,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listTransferableSkus.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6606,9 +6606,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listTransferableSkus.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6657,9 +6657,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listTransferableSkus.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6699,9 +6699,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listTransferableSkus.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -8368,9 +8368,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listSkuGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -8419,9 +8419,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listSkuGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -8464,9 +8464,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listSkuGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -8506,9 +8506,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listSkuGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -9239,9 +9239,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listSkus.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -9289,9 +9289,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listSkus.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -9333,9 +9333,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listSkus.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -9376,9 +9376,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listSkus.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -9550,9 +9550,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listOffers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -9600,9 +9600,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listOffers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -9645,9 +9645,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listOffers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -9689,9 +9689,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listOffers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -9885,9 +9885,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listPurchasableSkus.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -9936,9 +9936,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listPurchasableSkus.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -9987,9 +9987,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listPurchasableSkus.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -10029,9 +10029,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listPurchasableSkus.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -10552,9 +10552,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listSubscribers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -10600,9 +10600,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listSubscribers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -10641,9 +10641,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listSubscribers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -10683,9 +10683,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listSubscribers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });

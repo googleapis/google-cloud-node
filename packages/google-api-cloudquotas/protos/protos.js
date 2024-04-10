@@ -4605,6 +4605,7 @@
                          * @memberof google.api.cloudquotas.v1
                          * @interface IQuotaDetails
                          * @property {number|Long|null} [value] QuotaDetails value
+                         * @property {google.api.cloudquotas.v1.IRolloutInfo|null} [rolloutInfo] QuotaDetails rolloutInfo
                          */
     
                         /**
@@ -4629,6 +4630,14 @@
                          * @instance
                          */
                         QuotaDetails.prototype.value = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * QuotaDetails rolloutInfo.
+                         * @member {google.api.cloudquotas.v1.IRolloutInfo|null|undefined} rolloutInfo
+                         * @memberof google.api.cloudquotas.v1.QuotaDetails
+                         * @instance
+                         */
+                        QuotaDetails.prototype.rolloutInfo = null;
     
                         /**
                          * Creates a new QuotaDetails instance using the specified properties.
@@ -4656,6 +4665,8 @@
                                 writer = $Writer.create();
                             if (message.value != null && Object.hasOwnProperty.call(message, "value"))
                                 writer.uint32(/* id 1, wireType 0 =*/8).int64(message.value);
+                            if (message.rolloutInfo != null && Object.hasOwnProperty.call(message, "rolloutInfo"))
+                                $root.google.api.cloudquotas.v1.RolloutInfo.encode(message.rolloutInfo, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -4692,6 +4703,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.value = reader.int64();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.rolloutInfo = $root.google.api.cloudquotas.v1.RolloutInfo.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -4732,6 +4747,11 @@
                             if (message.value != null && message.hasOwnProperty("value"))
                                 if (!$util.isInteger(message.value) && !(message.value && $util.isInteger(message.value.low) && $util.isInteger(message.value.high)))
                                     return "value: integer|Long expected";
+                            if (message.rolloutInfo != null && message.hasOwnProperty("rolloutInfo")) {
+                                var error = $root.google.api.cloudquotas.v1.RolloutInfo.verify(message.rolloutInfo);
+                                if (error)
+                                    return "rolloutInfo." + error;
+                            }
                             return null;
                         };
     
@@ -4756,6 +4776,11 @@
                                     message.value = object.value;
                                 else if (typeof object.value === "object")
                                     message.value = new $util.LongBits(object.value.low >>> 0, object.value.high >>> 0).toNumber();
+                            if (object.rolloutInfo != null) {
+                                if (typeof object.rolloutInfo !== "object")
+                                    throw TypeError(".google.api.cloudquotas.v1.QuotaDetails.rolloutInfo: object expected");
+                                message.rolloutInfo = $root.google.api.cloudquotas.v1.RolloutInfo.fromObject(object.rolloutInfo);
+                            }
                             return message;
                         };
     
@@ -4772,17 +4797,21 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 if ($util.Long) {
                                     var long = new $util.Long(0, 0, false);
                                     object.value = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                                 } else
                                     object.value = options.longs === String ? "0" : 0;
+                                object.rolloutInfo = null;
+                            }
                             if (message.value != null && message.hasOwnProperty("value"))
                                 if (typeof message.value === "number")
                                     object.value = options.longs === String ? String(message.value) : message.value;
                                 else
                                     object.value = options.longs === String ? $util.Long.prototype.toString.call(message.value) : options.longs === Number ? new $util.LongBits(message.value.low >>> 0, message.value.high >>> 0).toNumber() : message.value;
+                            if (message.rolloutInfo != null && message.hasOwnProperty("rolloutInfo"))
+                                object.rolloutInfo = $root.google.api.cloudquotas.v1.RolloutInfo.toObject(message.rolloutInfo, options);
                             return object;
                         };
     
@@ -4813,6 +4842,209 @@
                         };
     
                         return QuotaDetails;
+                    })();
+    
+                    v1.RolloutInfo = (function() {
+    
+                        /**
+                         * Properties of a RolloutInfo.
+                         * @memberof google.api.cloudquotas.v1
+                         * @interface IRolloutInfo
+                         * @property {boolean|null} [ongoingRollout] RolloutInfo ongoingRollout
+                         */
+    
+                        /**
+                         * Constructs a new RolloutInfo.
+                         * @memberof google.api.cloudquotas.v1
+                         * @classdesc Represents a RolloutInfo.
+                         * @implements IRolloutInfo
+                         * @constructor
+                         * @param {google.api.cloudquotas.v1.IRolloutInfo=} [properties] Properties to set
+                         */
+                        function RolloutInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RolloutInfo ongoingRollout.
+                         * @member {boolean} ongoingRollout
+                         * @memberof google.api.cloudquotas.v1.RolloutInfo
+                         * @instance
+                         */
+                        RolloutInfo.prototype.ongoingRollout = false;
+    
+                        /**
+                         * Creates a new RolloutInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.api.cloudquotas.v1.RolloutInfo
+                         * @static
+                         * @param {google.api.cloudquotas.v1.IRolloutInfo=} [properties] Properties to set
+                         * @returns {google.api.cloudquotas.v1.RolloutInfo} RolloutInfo instance
+                         */
+                        RolloutInfo.create = function create(properties) {
+                            return new RolloutInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RolloutInfo message. Does not implicitly {@link google.api.cloudquotas.v1.RolloutInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.api.cloudquotas.v1.RolloutInfo
+                         * @static
+                         * @param {google.api.cloudquotas.v1.IRolloutInfo} message RolloutInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RolloutInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.ongoingRollout != null && Object.hasOwnProperty.call(message, "ongoingRollout"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.ongoingRollout);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RolloutInfo message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1.RolloutInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.api.cloudquotas.v1.RolloutInfo
+                         * @static
+                         * @param {google.api.cloudquotas.v1.IRolloutInfo} message RolloutInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RolloutInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RolloutInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.api.cloudquotas.v1.RolloutInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.api.cloudquotas.v1.RolloutInfo} RolloutInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RolloutInfo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.cloudquotas.v1.RolloutInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.ongoingRollout = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RolloutInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.api.cloudquotas.v1.RolloutInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.api.cloudquotas.v1.RolloutInfo} RolloutInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RolloutInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RolloutInfo message.
+                         * @function verify
+                         * @memberof google.api.cloudquotas.v1.RolloutInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RolloutInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.ongoingRollout != null && message.hasOwnProperty("ongoingRollout"))
+                                if (typeof message.ongoingRollout !== "boolean")
+                                    return "ongoingRollout: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RolloutInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.api.cloudquotas.v1.RolloutInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.api.cloudquotas.v1.RolloutInfo} RolloutInfo
+                         */
+                        RolloutInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.api.cloudquotas.v1.RolloutInfo)
+                                return object;
+                            var message = new $root.google.api.cloudquotas.v1.RolloutInfo();
+                            if (object.ongoingRollout != null)
+                                message.ongoingRollout = Boolean(object.ongoingRollout);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RolloutInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.api.cloudquotas.v1.RolloutInfo
+                         * @static
+                         * @param {google.api.cloudquotas.v1.RolloutInfo} message RolloutInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RolloutInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.ongoingRollout = false;
+                            if (message.ongoingRollout != null && message.hasOwnProperty("ongoingRollout"))
+                                object.ongoingRollout = message.ongoingRollout;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RolloutInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.api.cloudquotas.v1.RolloutInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RolloutInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RolloutInfo
+                         * @function getTypeUrl
+                         * @memberof google.api.cloudquotas.v1.RolloutInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RolloutInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.api.cloudquotas.v1.RolloutInfo";
+                        };
+    
+                        return RolloutInfo;
                     })();
     
                     return v1;

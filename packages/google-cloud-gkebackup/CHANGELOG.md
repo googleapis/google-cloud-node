@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/gke-backup-v1.1.0...gke-backup-v1.2.0) (2024-03-29)
+
+
+### Features
+
+* [gkebackup] add smart scheduling ([#5175](https://github.com/googleapis/google-cloud-node/issues/5175)) ([46ad0d7](https://github.com/googleapis/google-cloud-node/commit/46ad0d7e0b831c7a80dbadc91600c4d8aa268356))
+
 ## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/gke-backup-v1.0.1...gke-backup-v1.1.0) (2024-02-09)
 
 

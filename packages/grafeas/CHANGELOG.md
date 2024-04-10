@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/grafeas-v5.2.0...grafeas-v5.3.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5193](https://github.com/googleapis/google-cloud-node/issues/5193)) ([333b409](https://github.com/googleapis/google-cloud-node/commit/333b40951a255ecfab249bd6e7ace5877270ec85))
+
 ## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/grafeas-v5.1.0...grafeas-v5.2.0) (2024-03-23)
 
 

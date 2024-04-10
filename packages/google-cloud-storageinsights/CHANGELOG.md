@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/storageinsights-v1.1.0...storageinsights-v1.2.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5191](https://github.com/googleapis/google-cloud-node/issues/5191)) ([57567db](https://github.com/googleapis/google-cloud-node/commit/57567db36033ca53ae2f54e6517b8cd12145bb82))
+
 ## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/storageinsights-v1.0.1...storageinsights-v1.1.0) (2024-02-09)
 
 

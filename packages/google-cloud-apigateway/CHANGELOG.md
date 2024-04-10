@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/api-gateway-v3.1.0...api-gateway-v3.2.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5186](https://github.com/googleapis/google-cloud-node/issues/5186)) ([97c7951](https://github.com/googleapis/google-cloud-node/commit/97c7951481ef70d8f49c3d218f7c22ce00df9174))
+
 ## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/api-gateway-v3.0.1...api-gateway-v3.1.0) (2024-02-09)
 
 

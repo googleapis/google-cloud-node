@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/networkservices-v0.4.0...networkservices-v0.5.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5189](https://github.com/googleapis/google-cloud-node/issues/5189)) ([64b5a75](https://github.com/googleapis/google-cloud-node/commit/64b5a759caa979837199086c2d546a565ad2b3b1))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/networkservices-v0.3.1...networkservices-v0.4.0) (2024-03-26)
 
 

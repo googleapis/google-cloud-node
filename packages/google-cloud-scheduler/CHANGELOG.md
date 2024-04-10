@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/scheduler?activeTab=versions
 
+## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/scheduler-v4.1.0...scheduler-v4.2.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5191](https://github.com/googleapis/google-cloud-node/issues/5191)) ([57567db](https://github.com/googleapis/google-cloud-node/commit/57567db36033ca53ae2f54e6517b8cd12145bb82))
+
 ## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/scheduler-v4.0.1...scheduler-v4.1.0) (2024-02-09)
 
 

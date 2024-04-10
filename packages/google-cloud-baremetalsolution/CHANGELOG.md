@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/bare-metal-solution-v1.2.0...bare-metal-solution-v1.3.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5186](https://github.com/googleapis/google-cloud-node/issues/5186)) ([97c7951](https://github.com/googleapis/google-cloud-node/commit/97c7951481ef70d8f49c3d218f7c22ce00df9174))
+
 ## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/bare-metal-solution-v1.1.1...bare-metal-solution-v1.2.0) (2024-02-09)
 
 

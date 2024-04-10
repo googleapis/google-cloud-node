@@ -21,6 +21,10 @@
   * [Model_service.list_models](#model_service.list_models)
   * [Discuss_service.count_message_tokens](#discuss_service.count_message_tokens)
   * [Discuss_service.generate_message](#discuss_service.generate_message)
+  * [File_service.create_file](#file_service.create_file)
+  * [File_service.delete_file](#file_service.delete_file)
+  * [File_service.get_file](#file_service.get_file)
+  * [File_service.list_files](#file_service.list_files)
   * [Generative_service.batch_embed_contents](#generative_service.batch_embed_contents)
   * [Generative_service.count_tokens](#generative_service.count_tokens)
   * [Generative_service.embed_content](#generative_service.embed_content)
@@ -252,6 +256,74 @@ __Usage:__
 
 
 `node packages/google-ai-generativelanguage/samples/generated/v1beta/discuss_service.generate_message.js`
+
+
+-----
+
+
+
+
+### File_service.create_file
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/generated/v1beta/file_service.create_file.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/generated/v1beta/file_service.create_file.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ai-generativelanguage/samples/generated/v1beta/file_service.create_file.js`
+
+
+-----
+
+
+
+
+### File_service.delete_file
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/generated/v1beta/file_service.delete_file.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/generated/v1beta/file_service.delete_file.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ai-generativelanguage/samples/generated/v1beta/file_service.delete_file.js`
+
+
+-----
+
+
+
+
+### File_service.get_file
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/generated/v1beta/file_service.get_file.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/generated/v1beta/file_service.get_file.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ai-generativelanguage/samples/generated/v1beta/file_service.get_file.js`
+
+
+-----
+
+
+
+
+### File_service.list_files
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/generated/v1beta/file_service.list_files.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/generated/v1beta/file_service.list_files.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ai-generativelanguage/samples/generated/v1beta/file_service.list_files.js`
 
 
 -----

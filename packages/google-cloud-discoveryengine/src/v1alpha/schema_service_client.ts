@@ -125,8 +125,15 @@ export class SchemaServiceClient {
         'Please set either universe_domain or universeDomain, but not both.'
       );
     }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
     this._universeDomain =
-      opts?.universeDomain ?? opts?.universe_domain ?? 'googleapis.com';
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'discoveryengine.' + this._universeDomain;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || this._servicePath;
@@ -182,7 +189,7 @@ export class SchemaServiceClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -347,6 +354,9 @@ export class SchemaServiceClient {
             },
             {
               get: '/v1alpha/{name=projects/*/locations/*/dataStores/*/operations/*}',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/evaluations/*/operations/*}',
             },
             {get: '/v1alpha/{name=projects/*/locations/*/operations/*}'},
             {get: '/v1alpha/{name=projects/*/operations/*}'},
@@ -531,7 +541,7 @@ export class SchemaServiceClient {
    */
   static get servicePath() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -549,7 +559,7 @@ export class SchemaServiceClient {
    */
   static get apiEndpoint() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(

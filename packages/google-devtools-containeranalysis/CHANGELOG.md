@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v5.3.0...containeranalysis-v5.4.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5192](https://github.com/googleapis/google-cloud-node/issues/5192)) ([b926f13](https://github.com/googleapis/google-cloud-node/commit/b926f1326ea4df73c411dbeb7e529f8d9ccc3642))
+
 ## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v5.2.0...containeranalysis-v5.3.0) (2024-03-23)
 
 

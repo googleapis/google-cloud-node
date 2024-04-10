@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-cloud/workstations": "^1.2.0"
+    "@google-cloud/workstations": "^1.3.0"
   },
   "devDependencies": {
     "c8": "^9.0.0",
