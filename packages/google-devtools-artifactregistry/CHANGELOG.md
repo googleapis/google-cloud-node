@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/artifact-registry-v3.2.0...artifact-registry-v3.3.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5192](https://github.com/googleapis/google-cloud-node/issues/5192)) ([b926f13](https://github.com/googleapis/google-cloud-node/commit/b926f1326ea4df73c411dbeb7e529f8d9ccc3642))
+
 ## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/artifact-registry-v3.1.1...artifact-registry-v3.2.0) (2024-02-09)
 
 

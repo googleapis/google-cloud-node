@@ -6111,6 +6111,7 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 100:
                                 case 101:
                                     break;
                                 }
@@ -6191,6 +6192,10 @@
                             case "NETWORK_REGIONAL_FIREWALL_POLICY_RULE":
                             case 6:
                                 message.firewallRuleType = 6;
+                                break;
+                            case "UNSUPPORTED_FIREWALL_POLICY_RULE":
+                            case 100:
+                                message.firewallRuleType = 100;
                                 break;
                             case "TRACKING_STATE":
                             case 101:
@@ -6293,6 +6298,7 @@
                          * @property {number} SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE=4 SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE value
                          * @property {number} NETWORK_FIREWALL_POLICY_RULE=5 NETWORK_FIREWALL_POLICY_RULE value
                          * @property {number} NETWORK_REGIONAL_FIREWALL_POLICY_RULE=6 NETWORK_REGIONAL_FIREWALL_POLICY_RULE value
+                         * @property {number} UNSUPPORTED_FIREWALL_POLICY_RULE=100 UNSUPPORTED_FIREWALL_POLICY_RULE value
                          * @property {number} TRACKING_STATE=101 TRACKING_STATE value
                          */
                         FirewallInfo.FirewallRuleType = (function() {
@@ -6304,6 +6310,7 @@
                             values[valuesById[4] = "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE"] = 4;
                             values[valuesById[5] = "NETWORK_FIREWALL_POLICY_RULE"] = 5;
                             values[valuesById[6] = "NETWORK_REGIONAL_FIREWALL_POLICY_RULE"] = 6;
+                            values[valuesById[100] = "UNSUPPORTED_FIREWALL_POLICY_RULE"] = 100;
                             values[valuesById[101] = "TRACKING_STATE"] = 101;
                             return values;
                         })();
@@ -23388,6 +23395,7 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 100:
                                 case 101:
                                     break;
                                 }
@@ -23468,6 +23476,10 @@
                             case "NETWORK_REGIONAL_FIREWALL_POLICY_RULE":
                             case 6:
                                 message.firewallRuleType = 6;
+                                break;
+                            case "UNSUPPORTED_FIREWALL_POLICY_RULE":
+                            case 100:
+                                message.firewallRuleType = 100;
                                 break;
                             case "TRACKING_STATE":
                             case 101:
@@ -23570,6 +23582,7 @@
                          * @property {number} SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE=4 SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE value
                          * @property {number} NETWORK_FIREWALL_POLICY_RULE=5 NETWORK_FIREWALL_POLICY_RULE value
                          * @property {number} NETWORK_REGIONAL_FIREWALL_POLICY_RULE=6 NETWORK_REGIONAL_FIREWALL_POLICY_RULE value
+                         * @property {number} UNSUPPORTED_FIREWALL_POLICY_RULE=100 UNSUPPORTED_FIREWALL_POLICY_RULE value
                          * @property {number} TRACKING_STATE=101 TRACKING_STATE value
                          */
                         FirewallInfo.FirewallRuleType = (function() {
@@ -23581,6 +23594,7 @@
                             values[valuesById[4] = "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE"] = 4;
                             values[valuesById[5] = "NETWORK_FIREWALL_POLICY_RULE"] = 5;
                             values[valuesById[6] = "NETWORK_REGIONAL_FIREWALL_POLICY_RULE"] = 6;
+                            values[valuesById[100] = "UNSUPPORTED_FIREWALL_POLICY_RULE"] = 100;
                             values[valuesById[101] = "TRACKING_STATE"] = 101;
                             return values;
                         })();

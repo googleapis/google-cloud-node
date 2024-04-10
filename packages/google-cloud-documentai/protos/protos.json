@@ -5930,6 +5930,14 @@
                           "rule": "repeated",
                           "type": "Revision",
                           "id": 13
+                        },
+                        "documentLayout": {
+                          "type": "DocumentLayout",
+                          "id": 17
+                        },
+                        "chunkedDocument": {
+                          "type": "ChunkedDocument",
+                          "id": 18
                         }
                       },
                       "nested": {
@@ -6917,6 +6925,193 @@
                               "id": 3,
                               "options": {
                                 "deprecated": true
+                              }
+                            }
+                          }
+                        },
+                        "DocumentLayout": {
+                          "fields": {
+                            "blocks": {
+                              "rule": "repeated",
+                              "type": "DocumentLayoutBlock",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "DocumentLayoutBlock": {
+                              "oneofs": {
+                                "block": {
+                                  "oneof": [
+                                    "textBlock",
+                                    "tableBlock",
+                                    "listBlock"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "textBlock": {
+                                  "type": "LayoutTextBlock",
+                                  "id": 2
+                                },
+                                "tableBlock": {
+                                  "type": "LayoutTableBlock",
+                                  "id": 3
+                                },
+                                "listBlock": {
+                                  "type": "LayoutListBlock",
+                                  "id": 4
+                                },
+                                "blockId": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "pageSpan": {
+                                  "type": "LayoutPageSpan",
+                                  "id": 5
+                                }
+                              },
+                              "nested": {
+                                "LayoutPageSpan": {
+                                  "fields": {
+                                    "pageStart": {
+                                      "type": "int32",
+                                      "id": 1
+                                    },
+                                    "pageEnd": {
+                                      "type": "int32",
+                                      "id": 2
+                                    }
+                                  }
+                                },
+                                "LayoutTextBlock": {
+                                  "fields": {
+                                    "text": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "type": {
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "blocks": {
+                                      "rule": "repeated",
+                                      "type": "DocumentLayoutBlock",
+                                      "id": 3
+                                    }
+                                  }
+                                },
+                                "LayoutTableBlock": {
+                                  "fields": {
+                                    "headerRows": {
+                                      "rule": "repeated",
+                                      "type": "LayoutTableRow",
+                                      "id": 1
+                                    },
+                                    "bodyRows": {
+                                      "rule": "repeated",
+                                      "type": "LayoutTableRow",
+                                      "id": 2
+                                    },
+                                    "caption": {
+                                      "type": "string",
+                                      "id": 3
+                                    }
+                                  }
+                                },
+                                "LayoutTableRow": {
+                                  "fields": {
+                                    "cells": {
+                                      "rule": "repeated",
+                                      "type": "LayoutTableCell",
+                                      "id": 1
+                                    }
+                                  }
+                                },
+                                "LayoutTableCell": {
+                                  "fields": {
+                                    "blocks": {
+                                      "rule": "repeated",
+                                      "type": "DocumentLayoutBlock",
+                                      "id": 1
+                                    },
+                                    "rowSpan": {
+                                      "type": "int32",
+                                      "id": 2
+                                    },
+                                    "colSpan": {
+                                      "type": "int32",
+                                      "id": 3
+                                    }
+                                  }
+                                },
+                                "LayoutListBlock": {
+                                  "fields": {
+                                    "listEntries": {
+                                      "rule": "repeated",
+                                      "type": "LayoutListEntry",
+                                      "id": 1
+                                    },
+                                    "type": {
+                                      "type": "string",
+                                      "id": 2
+                                    }
+                                  }
+                                },
+                                "LayoutListEntry": {
+                                  "fields": {
+                                    "blocks": {
+                                      "rule": "repeated",
+                                      "type": "DocumentLayoutBlock",
+                                      "id": 1
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "ChunkedDocument": {
+                          "fields": {
+                            "chunks": {
+                              "rule": "repeated",
+                              "type": "Chunk",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "Chunk": {
+                              "fields": {
+                                "chunkId": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "sourceBlockIds": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "content": {
+                                  "type": "string",
+                                  "id": 3
+                                },
+                                "pageSpan": {
+                                  "type": "ChunkPageSpan",
+                                  "id": 4
+                                }
+                              },
+                              "nested": {
+                                "ChunkPageSpan": {
+                                  "fields": {
+                                    "pageStart": {
+                                      "type": "int32",
+                                      "id": 1
+                                    },
+                                    "pageEnd": {
+                                      "type": "int32",
+                                      "id": 2
+                                    }
+                                  }
+                                }
                               }
                             }
                           }
@@ -7927,6 +8122,13 @@
                           "type": "OcrConfig",
                           "id": 1
                         },
+                        "layoutConfig": {
+                          "type": "LayoutConfig",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "schemaOverride": {
                           "type": "DocumentSchema",
                           "id": 8,
@@ -7936,6 +8138,51 @@
                         }
                       },
                       "nested": {
+                        "LayoutConfig": {
+                          "fields": {
+                            "chunkingConfig": {
+                              "type": "ChunkingConfig",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "ChunkingConfig": {
+                              "fields": {
+                                "chunkSize": {
+                                  "type": "int32",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "includeAncestorHeadings": {
+                                  "type": "bool",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "semanticChunkingGroupSize": {
+                                  "type": "bool",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "breakpointPercentileThreshold": {
+                                  "type": "int32",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
                         "IndividualPageSelector": {
                           "fields": {
                             "pages": {
@@ -9187,7 +9434,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
                         },
                         "displayName": {
                           "type": "string",
@@ -9199,7 +9449,10 @@
                         },
                         "state": {
                           "type": "State",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",

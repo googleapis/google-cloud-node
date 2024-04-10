@@ -123,8 +123,15 @@ export class PredictionServiceClient {
         'Please set either universe_domain or universeDomain, but not both.'
       );
     }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
     this._universeDomain =
-      opts?.universeDomain ?? opts?.universe_domain ?? 'googleapis.com';
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'aiplatform.' + this._universeDomain;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || this._servicePath;
@@ -179,7 +186,7 @@ export class PredictionServiceClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -238,6 +245,9 @@ export class PredictionServiceClient {
       executionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/metadataStores/{metadata_store}/executions/{execution}'
       ),
+      extensionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/extensions/{extension}'
+      ),
       featureGroupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/featureGroups/{feature_group}'
       ),
@@ -287,6 +297,12 @@ export class PredictionServiceClient {
       nasTrialDetailPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/nasJobs/{nas_job}/nasTrialDetails/{nas_trial_detail}'
       ),
+      notebookRuntimePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/notebookRuntimes/{notebook_runtime}'
+      ),
+      notebookRuntimeTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/notebookRuntimeTemplates/{notebook_runtime_template}'
+      ),
       persistentResourcePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/persistentResources/{persistent_resource}'
       ),
@@ -310,6 +326,12 @@ export class PredictionServiceClient {
         ),
       publisherModelPathTemplate: new this._gaxModule.PathTemplate(
         'publishers/{publisher}/models/{model}'
+      ),
+      ragCorpusPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}'
+      ),
+      ragFilePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragFiles/{rag_file}'
       ),
       reasoningEnginePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}'
@@ -375,6 +397,11 @@ export class PredictionServiceClient {
         /* gaxStreamingRetries: */ false
       ),
       streamGenerateContent: new this._gaxModule.StreamDescriptor(
+        this._gaxModule.StreamType.SERVER_STREAMING,
+        !!opts.fallback,
+        /* gaxStreamingRetries: */ false
+      ),
+      chatCompletions: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.SERVER_STREAMING,
         !!opts.fallback,
         /* gaxStreamingRetries: */ false
@@ -445,6 +472,7 @@ export class PredictionServiceClient {
       'countTokens',
       'generateContent',
       'streamGenerateContent',
+      'chatCompletions',
     ];
     for (const methodName of predictionServiceStubMethods) {
       const callPromise = this.predictionServiceStub.then(
@@ -494,7 +522,7 @@ export class PredictionServiceClient {
    */
   static get servicePath() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -512,7 +540,7 @@ export class PredictionServiceClient {
    */
   static get apiEndpoint() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -1248,6 +1276,10 @@ export class PredictionServiceClient {
    *   For single-turn queries, this is a single instance. For multi-turn queries,
    *   this is a repeated field that contains conversation history + latest
    *   request.
+   * @param {google.cloud.aiplatform.v1beta1.Content} [request.systemInstruction]
+   *   Optional. The user provided system instructions for the model.
+   *   Note: only text should be used in parts and content in each part will be in
+   *   a separate paragraph.
    * @param {number[]} [request.tools]
    *   Optional. A list of `Tools` the model may use to generate the next
    *   response.
@@ -1256,7 +1288,8 @@ export class PredictionServiceClient {
    *   external systems to perform an action, or set of actions, outside of
    *   knowledge and scope of the model.
    * @param {google.cloud.aiplatform.v1beta1.ToolConfig} [request.toolConfig]
-   *   Tool config. This config is shared for all tools provided in the request.
+   *   Optional. Tool config. This config is shared for all tools provided in the
+   *   request.
    * @param {number[]} [request.safetySettings]
    *   Optional. Per request settings for blocking unsafe content.
    *   Enforced on GenerateContentResponse.candidates.
@@ -1485,6 +1518,10 @@ export class PredictionServiceClient {
    *   For single-turn queries, this is a single instance. For multi-turn queries,
    *   this is a repeated field that contains conversation history + latest
    *   request.
+   * @param {google.cloud.aiplatform.v1beta1.Content} [request.systemInstruction]
+   *   Optional. The user provided system instructions for the model.
+   *   Note: only text should be used in parts and content in each part will be in
+   *   a separate paragraph.
    * @param {number[]} [request.tools]
    *   Optional. A list of `Tools` the model may use to generate the next
    *   response.
@@ -1493,7 +1530,8 @@ export class PredictionServiceClient {
    *   external systems to perform an action, or set of actions, outside of
    *   knowledge and scope of the model.
    * @param {google.cloud.aiplatform.v1beta1.ToolConfig} [request.toolConfig]
-   *   Tool config. This config is shared for all tools provided in the request.
+   *   Optional. Tool config. This config is shared for all tools provided in the
+   *   request.
    * @param {number[]} [request.safetySettings]
    *   Optional. Per request settings for blocking unsafe content.
    *   Enforced on GenerateContentResponse.candidates.
@@ -1522,6 +1560,43 @@ export class PredictionServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.streamGenerateContent(request, options);
+  }
+
+  /**
+   * Exposes an OpenAI-compatible endpoint for chat completions.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.endpoint
+   *   Required. The name of the Endpoint requested to serve the prediction.
+   *   Format:
+   *   `projects/{project}/locations/{location}/endpoints/openapi`
+   * @param {google.api.HttpBody} [request.httpBody]
+   *   Optional. The prediction input. Supports HTTP headers and arbitrary data
+   *   payload.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits {@link protos.google.api.HttpBody|HttpBody} on 'data' event.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/prediction_service.chat_completions.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_PredictionService_ChatCompletions_async
+   */
+  chatCompletions(
+    request?: protos.google.cloud.aiplatform.v1beta1.IChatCompletionsRequest,
+    options?: CallOptions
+  ): gax.CancellableStream {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        endpoint: request.endpoint ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.chatCompletions(request, options);
   }
 
   /**
@@ -2613,6 +2688,58 @@ export class PredictionServiceClient {
   }
 
   /**
+   * Return a fully-qualified extension resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} extension
+   * @returns {string} Resource name string.
+   */
+  extensionPath(project: string, location: string, extension: string) {
+    return this.pathTemplates.extensionPathTemplate.render({
+      project: project,
+      location: location,
+      extension: extension,
+    });
+  }
+
+  /**
+   * Parse the project from Extension resource.
+   *
+   * @param {string} extensionName
+   *   A fully-qualified path representing Extension resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromExtensionName(extensionName: string) {
+    return this.pathTemplates.extensionPathTemplate.match(extensionName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Extension resource.
+   *
+   * @param {string} extensionName
+   *   A fully-qualified path representing Extension resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromExtensionName(extensionName: string) {
+    return this.pathTemplates.extensionPathTemplate.match(extensionName)
+      .location;
+  }
+
+  /**
+   * Parse the extension from Extension resource.
+   *
+   * @param {string} extensionName
+   *   A fully-qualified path representing Extension resource.
+   * @returns {string} A string representing the extension.
+   */
+  matchExtensionFromExtensionName(extensionName: string) {
+    return this.pathTemplates.extensionPathTemplate.match(extensionName)
+      .extension;
+  }
+
+  /**
    * Return a fully-qualified featureGroup resource name string.
    *
    * @param {string} project
@@ -3623,6 +3750,130 @@ export class PredictionServiceClient {
   }
 
   /**
+   * Return a fully-qualified notebookRuntime resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} notebook_runtime
+   * @returns {string} Resource name string.
+   */
+  notebookRuntimePath(
+    project: string,
+    location: string,
+    notebookRuntime: string
+  ) {
+    return this.pathTemplates.notebookRuntimePathTemplate.render({
+      project: project,
+      location: location,
+      notebook_runtime: notebookRuntime,
+    });
+  }
+
+  /**
+   * Parse the project from NotebookRuntime resource.
+   *
+   * @param {string} notebookRuntimeName
+   *   A fully-qualified path representing NotebookRuntime resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNotebookRuntimeName(notebookRuntimeName: string) {
+    return this.pathTemplates.notebookRuntimePathTemplate.match(
+      notebookRuntimeName
+    ).project;
+  }
+
+  /**
+   * Parse the location from NotebookRuntime resource.
+   *
+   * @param {string} notebookRuntimeName
+   *   A fully-qualified path representing NotebookRuntime resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromNotebookRuntimeName(notebookRuntimeName: string) {
+    return this.pathTemplates.notebookRuntimePathTemplate.match(
+      notebookRuntimeName
+    ).location;
+  }
+
+  /**
+   * Parse the notebook_runtime from NotebookRuntime resource.
+   *
+   * @param {string} notebookRuntimeName
+   *   A fully-qualified path representing NotebookRuntime resource.
+   * @returns {string} A string representing the notebook_runtime.
+   */
+  matchNotebookRuntimeFromNotebookRuntimeName(notebookRuntimeName: string) {
+    return this.pathTemplates.notebookRuntimePathTemplate.match(
+      notebookRuntimeName
+    ).notebook_runtime;
+  }
+
+  /**
+   * Return a fully-qualified notebookRuntimeTemplate resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} notebook_runtime_template
+   * @returns {string} Resource name string.
+   */
+  notebookRuntimeTemplatePath(
+    project: string,
+    location: string,
+    notebookRuntimeTemplate: string
+  ) {
+    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.render({
+      project: project,
+      location: location,
+      notebook_runtime_template: notebookRuntimeTemplate,
+    });
+  }
+
+  /**
+   * Parse the project from NotebookRuntimeTemplate resource.
+   *
+   * @param {string} notebookRuntimeTemplateName
+   *   A fully-qualified path representing NotebookRuntimeTemplate resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNotebookRuntimeTemplateName(
+    notebookRuntimeTemplateName: string
+  ) {
+    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(
+      notebookRuntimeTemplateName
+    ).project;
+  }
+
+  /**
+   * Parse the location from NotebookRuntimeTemplate resource.
+   *
+   * @param {string} notebookRuntimeTemplateName
+   *   A fully-qualified path representing NotebookRuntimeTemplate resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromNotebookRuntimeTemplateName(
+    notebookRuntimeTemplateName: string
+  ) {
+    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(
+      notebookRuntimeTemplateName
+    ).location;
+  }
+
+  /**
+   * Parse the notebook_runtime_template from NotebookRuntimeTemplate resource.
+   *
+   * @param {string} notebookRuntimeTemplateName
+   *   A fully-qualified path representing NotebookRuntimeTemplate resource.
+   * @returns {string} A string representing the notebook_runtime_template.
+   */
+  matchNotebookRuntimeTemplateFromNotebookRuntimeTemplateName(
+    notebookRuntimeTemplateName: string
+  ) {
+    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(
+      notebookRuntimeTemplateName
+    ).notebook_runtime_template;
+  }
+
+  /**
    * Return a fully-qualified persistentResource resource name string.
    *
    * @param {string} project
@@ -4109,6 +4360,125 @@ export class PredictionServiceClient {
     return this.pathTemplates.publisherModelPathTemplate.match(
       publisherModelName
     ).model;
+  }
+
+  /**
+   * Return a fully-qualified ragCorpus resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} rag_corpus
+   * @returns {string} Resource name string.
+   */
+  ragCorpusPath(project: string, location: string, ragCorpus: string) {
+    return this.pathTemplates.ragCorpusPathTemplate.render({
+      project: project,
+      location: location,
+      rag_corpus: ragCorpus,
+    });
+  }
+
+  /**
+   * Parse the project from RagCorpus resource.
+   *
+   * @param {string} ragCorpusName
+   *   A fully-qualified path representing RagCorpus resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRagCorpusName(ragCorpusName: string) {
+    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName)
+      .project;
+  }
+
+  /**
+   * Parse the location from RagCorpus resource.
+   *
+   * @param {string} ragCorpusName
+   *   A fully-qualified path representing RagCorpus resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRagCorpusName(ragCorpusName: string) {
+    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName)
+      .location;
+  }
+
+  /**
+   * Parse the rag_corpus from RagCorpus resource.
+   *
+   * @param {string} ragCorpusName
+   *   A fully-qualified path representing RagCorpus resource.
+   * @returns {string} A string representing the rag_corpus.
+   */
+  matchRagCorpusFromRagCorpusName(ragCorpusName: string) {
+    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName)
+      .rag_corpus;
+  }
+
+  /**
+   * Return a fully-qualified ragFile resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} rag_corpus
+   * @param {string} rag_file
+   * @returns {string} Resource name string.
+   */
+  ragFilePath(
+    project: string,
+    location: string,
+    ragCorpus: string,
+    ragFile: string
+  ) {
+    return this.pathTemplates.ragFilePathTemplate.render({
+      project: project,
+      location: location,
+      rag_corpus: ragCorpus,
+      rag_file: ragFile,
+    });
+  }
+
+  /**
+   * Parse the project from RagFile resource.
+   *
+   * @param {string} ragFileName
+   *   A fully-qualified path representing RagFile resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRagFileName(ragFileName: string) {
+    return this.pathTemplates.ragFilePathTemplate.match(ragFileName).project;
+  }
+
+  /**
+   * Parse the location from RagFile resource.
+   *
+   * @param {string} ragFileName
+   *   A fully-qualified path representing RagFile resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRagFileName(ragFileName: string) {
+    return this.pathTemplates.ragFilePathTemplate.match(ragFileName).location;
+  }
+
+  /**
+   * Parse the rag_corpus from RagFile resource.
+   *
+   * @param {string} ragFileName
+   *   A fully-qualified path representing RagFile resource.
+   * @returns {string} A string representing the rag_corpus.
+   */
+  matchRagCorpusFromRagFileName(ragFileName: string) {
+    return this.pathTemplates.ragFilePathTemplate.match(ragFileName).rag_corpus;
+  }
+
+  /**
+   * Parse the rag_file from RagFile resource.
+   *
+   * @param {string} ragFileName
+   *   A fully-qualified path representing RagFile resource.
+   * @returns {string} A string representing the rag_file.
+   */
+  matchRagFileFromRagFileName(ragFileName: string) {
+    return this.pathTemplates.ragFilePathTemplate.match(ragFileName).rag_file;
   }
 
   /**

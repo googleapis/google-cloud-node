@@ -166,12 +166,6 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1alpha1.TelcoAutomationClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient();
-      const servicePath = client.servicePath;
-      assert.strictEqual(servicePath, 'telcoautomation.googleapis.com');
-    });
-
     it('has apiEndpoint', () => {
       const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient();
       const apiEndpoint = client.apiEndpoint;
@@ -185,7 +179,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
     });
 
     if (
-      typeof process !== 'undefined' &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       it('throws DeprecationWarning if static servicePath is used', () => {
@@ -206,21 +200,58 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         stub.restore();
       });
     }
-    it('sets servicePath according to universe domain camelCase', () => {
+    it('sets apiEndpoint according to universe domain camelCase', () => {
       const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
         universeDomain: 'example.com',
       });
-      const servicePath = client.servicePath;
+      const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'telcoautomation.example.com');
     });
 
-    it('sets servicePath according to universe domain snakeCase', () => {
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client = new telcoautomationModule.v1alpha1.TelcoAutomationClient({
         universe_domain: 'example.com',
       });
-      const servicePath = client.servicePath;
+      const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'telcoautomation.example.com');
     });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new telcoautomationModule.v1alpha1.TelcoAutomationClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'telcoautomation.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new telcoautomationModule.v1alpha1.TelcoAutomationClient({
+              universeDomain: 'configured.example.com',
+            });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(
+            servicePath,
+            'telcoautomation.configured.example.com'
+          );
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new telcoautomationModule.v1alpha1.TelcoAutomationClient({

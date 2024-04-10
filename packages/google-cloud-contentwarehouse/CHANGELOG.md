@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v1.5.0...contentwarehouse-v1.6.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5187](https://github.com/googleapis/google-cloud-node/issues/5187)) ([1952fbe](https://github.com/googleapis/google-cloud-node/commit/1952fbe432b96115278d42e5c1dbdbc7de39036b))
+
 ## [1.5.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v1.4.0...contentwarehouse-v1.5.0) (2024-02-22)
 
 

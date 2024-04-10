@@ -5209,6 +5209,13 @@
                   }
                 },
                 "DatabaseEncryption": {
+                  "oneofs": {
+                    "_currentState": {
+                      "oneof": [
+                        "currentState"
+                      ]
+                    }
+                  },
                   "fields": {
                     "keyName": {
                       "type": "string",
@@ -5217,6 +5224,30 @@
                     "state": {
                       "type": "State",
                       "id": 2
+                    },
+                    "currentState": {
+                      "type": "CurrentState",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY",
+                        "proto3_optional": true
+                      }
+                    },
+                    "decryptionKeys": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "lastOperationErrors": {
+                      "rule": "repeated",
+                      "type": "OperationError",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   },
                   "nested": {
@@ -5225,6 +5256,33 @@
                         "UNKNOWN": 0,
                         "ENCRYPTED": 1,
                         "DECRYPTED": 2
+                      }
+                    },
+                    "CurrentState": {
+                      "values": {
+                        "CURRENT_STATE_UNSPECIFIED": 0,
+                        "CURRENT_STATE_ENCRYPTED": 7,
+                        "CURRENT_STATE_DECRYPTED": 2,
+                        "CURRENT_STATE_ENCRYPTION_PENDING": 3,
+                        "CURRENT_STATE_ENCRYPTION_ERROR": 4,
+                        "CURRENT_STATE_DECRYPTION_PENDING": 5,
+                        "CURRENT_STATE_DECRYPTION_ERROR": 6
+                      }
+                    },
+                    "OperationError": {
+                      "fields": {
+                        "keyName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "errorMessage": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "timestamp": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        }
                       }
                     }
                   }
@@ -11621,6 +11679,13 @@
                   }
                 },
                 "DatabaseEncryption": {
+                  "oneofs": {
+                    "_currentState": {
+                      "oneof": [
+                        "currentState"
+                      ]
+                    }
+                  },
                   "fields": {
                     "keyName": {
                       "type": "string",
@@ -11629,6 +11694,30 @@
                     "state": {
                       "type": "State",
                       "id": 2
+                    },
+                    "currentState": {
+                      "type": "CurrentState",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY",
+                        "proto3_optional": true
+                      }
+                    },
+                    "decryptionKeys": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "lastOperationErrors": {
+                      "rule": "repeated",
+                      "type": "OperationError",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   },
                   "nested": {
@@ -11637,6 +11726,33 @@
                         "UNKNOWN": 0,
                         "ENCRYPTED": 1,
                         "DECRYPTED": 2
+                      }
+                    },
+                    "CurrentState": {
+                      "values": {
+                        "CURRENT_STATE_UNSPECIFIED": 0,
+                        "CURRENT_STATE_ENCRYPTED": 7,
+                        "CURRENT_STATE_DECRYPTED": 2,
+                        "CURRENT_STATE_ENCRYPTION_PENDING": 3,
+                        "CURRENT_STATE_ENCRYPTION_ERROR": 4,
+                        "CURRENT_STATE_DECRYPTION_PENDING": 5,
+                        "CURRENT_STATE_DECRYPTION_ERROR": 6
+                      }
+                    },
+                    "OperationError": {
+                      "fields": {
+                        "keyName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "errorMessage": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "timestamp": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        }
                       }
                     }
                   }

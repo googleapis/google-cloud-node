@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.18.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.17.0...aiplatform-v3.18.0) (2024-04-10)
+
+
+### Features
+
+* Add Persistent Resource reboot api call to v1beta1 ([#5182](https://github.com/googleapis/google-cloud-node/issues/5182)) ([c271d54](https://github.com/googleapis/google-cloud-node/commit/c271d54547cf657eabd674ace50842d22005fb67))
+
 ## [3.17.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.16.0...aiplatform-v3.17.0) (2024-03-26)
 
 

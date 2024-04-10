@@ -180,7 +180,7 @@ describe('v2.BareMetalSolutionClient', () => {
     });
 
     if (
-      typeof process !== 'undefined' &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       it('throws DeprecationWarning if static servicePath is used', () => {
@@ -216,6 +216,42 @@ describe('v2.BareMetalSolutionClient', () => {
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'baremetalsolution.example.com');
     });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new baremetalsolutionModule.v2.BareMetalSolutionClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'baremetalsolution.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new baremetalsolutionModule.v2.BareMetalSolutionClient(
+            {universeDomain: 'configured.example.com'}
+          );
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(
+            servicePath,
+            'baremetalsolution.configured.example.com'
+          );
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new baremetalsolutionModule.v2.BareMetalSolutionClient({
@@ -6092,9 +6128,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6142,9 +6178,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6192,9 +6228,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6233,9 +6269,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -6420,9 +6456,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listSSHKeys.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6471,9 +6507,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listSSHKeys.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6520,9 +6556,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listSSHKeys.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6563,9 +6599,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listSSHKeys.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -6750,9 +6786,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listVolumes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6801,9 +6837,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listVolumes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6850,9 +6886,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listVolumes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6893,9 +6929,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listVolumes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -7081,9 +7117,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listNetworks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7133,9 +7169,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listNetworks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7182,9 +7218,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listNetworks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7223,9 +7259,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listNetworks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -7416,9 +7452,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listVolumeSnapshots.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7468,9 +7504,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listVolumeSnapshots.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7518,9 +7554,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listVolumeSnapshots.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7559,9 +7595,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listVolumeSnapshots.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -7743,9 +7779,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listLuns.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7794,9 +7830,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listLuns.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7842,9 +7878,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listLuns.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7883,9 +7919,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listLuns.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -8071,9 +8107,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listNfsShares.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -8121,9 +8157,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listNfsShares.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -8171,9 +8207,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listNfsShares.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -8212,9 +8248,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listNfsShares.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -8759,9 +8795,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listOSImages.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -8811,9 +8847,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listOSImages.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -8860,9 +8896,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listOSImages.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -8901,9 +8937,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listOSImages.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });

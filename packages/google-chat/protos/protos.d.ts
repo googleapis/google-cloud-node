@@ -12397,6 +12397,9 @@ export namespace google {
 
                 /** Message attachedGifs */
                 attachedGifs?: (google.chat.v1.IAttachedGif[]|null);
+
+                /** Message accessoryWidgets */
+                accessoryWidgets?: (google.chat.v1.IAccessoryWidget[]|null);
             }
 
             /** Represents a Message. */
@@ -12482,6 +12485,9 @@ export namespace google {
 
                 /** Message attachedGifs. */
                 public attachedGifs: google.chat.v1.IAttachedGif[];
+
+                /** Message accessoryWidgets. */
+                public accessoryWidgets: google.chat.v1.IAccessoryWidget[];
 
                 /**
                  * Creates a new Message instance using the specified properties.
@@ -13194,6 +13200,106 @@ export namespace google {
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
+            }
+
+            /** Properties of an AccessoryWidget. */
+            interface IAccessoryWidget {
+
+                /** AccessoryWidget buttonList */
+                buttonList?: (google.apps.card.v1.IButtonList|null);
+            }
+
+            /** Represents an AccessoryWidget. */
+            class AccessoryWidget implements IAccessoryWidget {
+
+                /**
+                 * Constructs a new AccessoryWidget.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IAccessoryWidget);
+
+                /** AccessoryWidget buttonList. */
+                public buttonList?: (google.apps.card.v1.IButtonList|null);
+
+                /** AccessoryWidget action. */
+                public action?: "buttonList";
+
+                /**
+                 * Creates a new AccessoryWidget instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns AccessoryWidget instance
+                 */
+                public static create(properties?: google.chat.v1.IAccessoryWidget): google.chat.v1.AccessoryWidget;
+
+                /**
+                 * Encodes the specified AccessoryWidget message. Does not implicitly {@link google.chat.v1.AccessoryWidget.verify|verify} messages.
+                 * @param message AccessoryWidget message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IAccessoryWidget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified AccessoryWidget message, length delimited. Does not implicitly {@link google.chat.v1.AccessoryWidget.verify|verify} messages.
+                 * @param message AccessoryWidget message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IAccessoryWidget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an AccessoryWidget message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns AccessoryWidget
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.AccessoryWidget;
+
+                /**
+                 * Decodes an AccessoryWidget message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns AccessoryWidget
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.AccessoryWidget;
+
+                /**
+                 * Verifies an AccessoryWidget message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an AccessoryWidget message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns AccessoryWidget
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.AccessoryWidget;
+
+                /**
+                 * Creates a plain object from an AccessoryWidget message. Also converts values to other types if specified.
+                 * @param message AccessoryWidget
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.AccessoryWidget, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this AccessoryWidget to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for AccessoryWidget
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
             /** Properties of a GetMessageRequest. */

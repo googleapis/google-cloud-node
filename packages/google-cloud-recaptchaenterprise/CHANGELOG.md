@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [5.7.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.6.0...recaptcha-enterprise-v5.7.0) (2024-04-05)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5190](https://github.com/googleapis/google-cloud-node/issues/5190)) ([b569fbe](https://github.com/googleapis/google-cloud-node/commit/b569fbe1472d0fd71c1bfb58d0b1661814ac5727))
+
 ## [5.6.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.5.0...recaptcha-enterprise-v5.6.0) (2024-03-26)
 
 

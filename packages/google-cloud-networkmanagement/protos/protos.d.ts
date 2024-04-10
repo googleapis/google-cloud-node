@@ -2102,6 +2102,7 @@ export namespace google {
                         SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE = 4,
                         NETWORK_FIREWALL_POLICY_RULE = 5,
                         NETWORK_REGIONAL_FIREWALL_POLICY_RULE = 6,
+                        UNSUPPORTED_FIREWALL_POLICY_RULE = 100,
                         TRACKING_STATE = 101
                     }
                 }
@@ -8287,6 +8288,7 @@ export namespace google {
                         SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE = 4,
                         NETWORK_FIREWALL_POLICY_RULE = 5,
                         NETWORK_REGIONAL_FIREWALL_POLICY_RULE = 6,
+                        UNSUPPORTED_FIREWALL_POLICY_RULE = 100,
                         TRACKING_STATE = 101
                     }
                 }

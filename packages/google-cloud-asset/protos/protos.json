@@ -2628,6 +2628,11 @@
                             "tagKey"
                           ]
                         },
+                        "_tagKeyId": {
+                          "oneof": [
+                            "tagKeyId"
+                          ]
+                        },
                         "_tagValue": {
                           "oneof": [
                             "tagValue"
@@ -2643,6 +2648,13 @@
                         "tagKey": {
                           "type": "string",
                           "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "tagKeyId": {
+                          "type": "string",
+                          "id": 2,
                           "options": {
                             "proto3_optional": true
                           }

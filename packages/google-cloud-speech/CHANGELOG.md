@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [6.5.0](https://github.com/googleapis/google-cloud-node/compare/speech-v6.4.0...speech-v6.5.0) (2024-04-05)
+
+
+### Features
+
+* Add `translation_config` in `RecognitionConfig` message ([#5216](https://github.com/googleapis/google-cloud-node/issues/5216)) ([c86ddd0](https://github.com/googleapis/google-cloud-node/commit/c86ddd006109322a7ba7ae9d28c49bea3993cb1f))
+
+## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/speech-v6.3.0...speech-v6.4.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5191](https://github.com/googleapis/google-cloud-node/issues/5191)) ([57567db](https://github.com/googleapis/google-cloud-node/commit/57567db36033ca53ae2f54e6517b8cd12145bb82))
+
 ## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/speech-v6.2.0...speech-v6.3.0) (2024-02-22)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.4.1...discoveryengine-v1.5.0) (2024-04-05)
+
+
+### Features
+
+* [discoveryengine] support import data from Cloud Spanner, BigTable, SQL and Firestore ([#5218](https://github.com/googleapis/google-cloud-node/issues/5218)) ([cc25e93](https://github.com/googleapis/google-cloud-node/commit/cc25e935f087526738303cd94c406bd352a7b595))
+
 ## [1.4.1](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.4.0...discoveryengine-v1.4.1) (2024-03-12)
 
 

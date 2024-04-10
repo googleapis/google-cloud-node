@@ -13,4 +13,3 @@ system-test/*key.json
 package-lock.json
 __pycache__
 esm/**/*.d.ts
-esm/**/*.d.cts

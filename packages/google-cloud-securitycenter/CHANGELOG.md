@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [8.6.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v8.5.0...security-center-v8.6.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5191](https://github.com/googleapis/google-cloud-node/issues/5191)) ([57567db](https://github.com/googleapis/google-cloud-node/commit/57567db36033ca53ae2f54e6517b8cd12145bb82))
+
 ## [8.5.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v8.4.0...security-center-v8.5.0) (2024-03-12)
 
 

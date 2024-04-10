@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/monitoring-dashboards-v3.1.0...monitoring-dashboards-v3.2.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5193](https://github.com/googleapis/google-cloud-node/issues/5193)) ([333b409](https://github.com/googleapis/google-cloud-node/commit/333b40951a255ecfab249bd6e7ace5877270ec85))
+
 ## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/monitoring-dashboards-v3.0.1...monitoring-dashboards-v3.1.0) (2024-02-09)
 
 
