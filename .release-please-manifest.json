@@ -11,7 +11,7 @@
   "packages/google-area120-tables": "3.1.0",
   "packages/google-cloud-accessapproval": "3.1.0",
   "packages/google-cloud-advisorynotifications": "1.3.0",
-  "packages/google-cloud-aiplatform": "3.17.0",
+  "packages/google-cloud-aiplatform": "3.18.0",
   "packages/google-cloud-alloydb": "1.7.0",
   "packages/google-cloud-apigateway": "3.2.0",
   "packages/google-cloud-apigeeconnect": "3.2.0",

@@ -5,6 +5,23 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "c271d54547cf657eabd674ace50842d22005fb67",
+          "message": "Add Persistent Resource reboot api call to v1beta1",
+          "issues": [
+            "5182"
+          ]
+        }
+      ],
+      "version": "3.18.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "ee78ec33-e09a-4abe-b4dd-17f055b7dd5f",
+      "createTime": "2024-04-10T18:09:03.511Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "a4e7673543b979083c46ddfe4938c4170594ec4a",
           "message": "[chat] Launch AccessoryAction for GA",
           "issues": [
@@ -27790,5 +27807,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-04-05T13:49:30.081Z"
+  "updateTime": "2024-04-10T18:09:03.511Z"
 }
