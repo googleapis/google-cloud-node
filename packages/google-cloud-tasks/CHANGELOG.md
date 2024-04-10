@@ -4,6 +4,27 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/tasks-v5.2.1...tasks-v5.3.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5191](https://github.com/googleapis/google-cloud-node/issues/5191)) ([57567db](https://github.com/googleapis/google-cloud-node/commit/57567db36033ca53ae2f54e6517b8cd12145bb82))
+
+## [5.2.1](https://github.com/googleapis/google-cloud-node/compare/tasks-v5.2.0...tasks-v5.2.1) (2024-03-26)
+
+
+### Bug Fixes
+
+* [tasks] issue with ambiguous naming in protos ([#5173](https://github.com/googleapis/google-cloud-node/issues/5173)) ([28e1ffd](https://github.com/googleapis/google-cloud-node/commit/28e1ffd2cf64aafe72d4f993fa0b313722682c04))
+
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/tasks-v5.1.1...tasks-v5.2.0) (2024-03-23)
+
+
+### Features
+
+* Add initial files for google.chat.v1 ([#5091](https://github.com/googleapis/google-cloud-node/issues/5091)) ([0aab044](https://github.com/googleapis/google-cloud-node/commit/0aab0441677cb4cc037c2adc08b10f3556e9f459))
+
 ## [5.1.1](https://github.com/googleapis/google-cloud-node/compare/tasks-v5.1.0...tasks-v5.1.1) (2024-02-27)
 
 

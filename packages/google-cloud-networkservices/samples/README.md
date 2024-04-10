@@ -12,6 +12,16 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Dep_service.create_lb_route_extension](#dep_service.create_lb_route_extension)
+  * [Dep_service.create_lb_traffic_extension](#dep_service.create_lb_traffic_extension)
+  * [Dep_service.delete_lb_route_extension](#dep_service.delete_lb_route_extension)
+  * [Dep_service.delete_lb_traffic_extension](#dep_service.delete_lb_traffic_extension)
+  * [Dep_service.get_lb_route_extension](#dep_service.get_lb_route_extension)
+  * [Dep_service.get_lb_traffic_extension](#dep_service.get_lb_traffic_extension)
+  * [Dep_service.list_lb_route_extensions](#dep_service.list_lb_route_extensions)
+  * [Dep_service.list_lb_traffic_extensions](#dep_service.list_lb_traffic_extensions)
+  * [Dep_service.update_lb_route_extension](#dep_service.update_lb_route_extension)
+  * [Dep_service.update_lb_traffic_extension](#dep_service.update_lb_traffic_extension)
   * [Network_services.create_endpoint_policy](#network_services.create_endpoint_policy)
   * [Network_services.create_gateway](#network_services.create_gateway)
   * [Network_services.create_grpc_route](#network_services.create_grpc_route)
@@ -80,6 +90,176 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Dep_service.create_lb_route_extension
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/dep_service.create_lb_route_extension.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/dep_service.create_lb_route_extension.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/dep_service.create_lb_route_extension.js`
+
+
+-----
+
+
+
+
+### Dep_service.create_lb_traffic_extension
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/dep_service.create_lb_traffic_extension.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/dep_service.create_lb_traffic_extension.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/dep_service.create_lb_traffic_extension.js`
+
+
+-----
+
+
+
+
+### Dep_service.delete_lb_route_extension
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/dep_service.delete_lb_route_extension.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/dep_service.delete_lb_route_extension.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/dep_service.delete_lb_route_extension.js`
+
+
+-----
+
+
+
+
+### Dep_service.delete_lb_traffic_extension
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/dep_service.delete_lb_traffic_extension.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/dep_service.delete_lb_traffic_extension.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/dep_service.delete_lb_traffic_extension.js`
+
+
+-----
+
+
+
+
+### Dep_service.get_lb_route_extension
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/dep_service.get_lb_route_extension.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/dep_service.get_lb_route_extension.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/dep_service.get_lb_route_extension.js`
+
+
+-----
+
+
+
+
+### Dep_service.get_lb_traffic_extension
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/dep_service.get_lb_traffic_extension.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/dep_service.get_lb_traffic_extension.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/dep_service.get_lb_traffic_extension.js`
+
+
+-----
+
+
+
+
+### Dep_service.list_lb_route_extensions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/dep_service.list_lb_route_extensions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/dep_service.list_lb_route_extensions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/dep_service.list_lb_route_extensions.js`
+
+
+-----
+
+
+
+
+### Dep_service.list_lb_traffic_extensions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/dep_service.list_lb_traffic_extensions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/dep_service.list_lb_traffic_extensions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/dep_service.list_lb_traffic_extensions.js`
+
+
+-----
+
+
+
+
+### Dep_service.update_lb_route_extension
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/dep_service.update_lb_route_extension.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/dep_service.update_lb_route_extension.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/dep_service.update_lb_route_extension.js`
+
+
+-----
+
+
+
+
+### Dep_service.update_lb_traffic_extension
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/dep_service.update_lb_traffic_extension.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/dep_service.update_lb_traffic_extension.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/dep_service.update_lb_traffic_extension.js`
+
+
+-----
+
 
 
 

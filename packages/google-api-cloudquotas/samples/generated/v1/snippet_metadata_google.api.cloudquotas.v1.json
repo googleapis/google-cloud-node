@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-cloudquotas",
-        "version": "0.2.0",
+        "version": "0.3.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -110,7 +110,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 89,
+                    "end": 87,
                     "type": "FULL"
                 }
             ],

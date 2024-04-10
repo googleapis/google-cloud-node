@@ -855,6 +855,8 @@ export class ParticipantsClient {
    *   An input event to send to Dialogflow.
    * @param {google.cloud.dialogflow.v2beta1.SuggestionInput} request.suggestionInput
    *   An input representing the selection of a suggestion.
+   * @param {google.cloud.dialogflow.v2beta1.IntentInput} request.intentInput
+   *   The intent to be triggered on V3 agent.
    * @param {google.cloud.dialogflow.v2beta1.OutputAudioConfig} request.replyAudioConfig
    *   Speech synthesis configuration.
    *   The speech synthesis settings for a virtual agent that may be configured

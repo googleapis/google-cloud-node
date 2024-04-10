@@ -992,6 +992,10 @@
                           "rule": "repeated",
                           "type": "LoadBalancer",
                           "id": 58
+                        },
+                        "notebook": {
+                          "type": "Notebook",
+                          "id": 63
                         }
                       },
                       "nested": {
@@ -1555,6 +1559,26 @@
                             "SCANNING_IP_BLOCKS": 2,
                             "CONTAINER_AND_RESOURCE_DISCOVERY": 57
                           }
+                        }
+                      }
+                    },
+                    "Notebook": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "service": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "lastAuthor": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "notebookUpdateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
                         }
                       }
                     },

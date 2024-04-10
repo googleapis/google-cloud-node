@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/routing-v1.1.0...routing-v1.2.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5193](https://github.com/googleapis/google-cloud-node/issues/5193)) ([333b409](https://github.com/googleapis/google-cloud-node/commit/333b40951a255ecfab249bd6e7ace5877270ec85))
+
 ## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/routing-v1.0.2...routing-v1.1.0) (2024-02-09)
 
 

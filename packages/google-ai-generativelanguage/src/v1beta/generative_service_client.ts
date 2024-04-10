@@ -118,8 +118,15 @@ export class GenerativeServiceClient {
         'Please set either universe_domain or universeDomain, but not both.'
       );
     }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
     this._universeDomain =
-      opts?.universeDomain ?? opts?.universe_domain ?? 'googleapis.com';
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'generativelanguage.' + this._universeDomain;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || this._servicePath;
@@ -171,7 +178,7 @@ export class GenerativeServiceClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -201,6 +208,7 @@ export class GenerativeServiceClient {
       documentPathTemplate: new this._gaxModule.PathTemplate(
         'corpora/{corpus}/documents/{document}'
       ),
+      filePathTemplate: new this._gaxModule.PathTemplate('files/{file}'),
       modelPathTemplate: new this._gaxModule.PathTemplate('models/{model}'),
       tunedModelPathTemplate: new this._gaxModule.PathTemplate(
         'tunedModels/{tuned_model}'
@@ -326,7 +334,7 @@ export class GenerativeServiceClient {
    */
   static get servicePath() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -344,7 +352,7 @@ export class GenerativeServiceClient {
    */
   static get apiEndpoint() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -413,6 +421,8 @@ export class GenerativeServiceClient {
    *   Required. The name of the `Model` to use for generating the completion.
    *
    *   Format: `name=models/{model}`.
+   * @param {google.ai.generativelanguage.v1beta.Content} [request.systemInstruction]
+   *   Optional. Developer set system instruction. Currently, text only.
    * @param {number[]} request.contents
    *   Required. The content of the current conversation with the model.
    *
@@ -427,6 +437,8 @@ export class GenerativeServiceClient {
    *   external systems to perform an action, or set of actions, outside of
    *   knowledge and scope of the model. The only supported tool is currently
    *   `Function`.
+   * @param {google.ai.generativelanguage.v1beta.ToolConfig} [request.toolConfig]
+   *   Optional. Tool configuration for any `Tool` specified in the request.
    * @param {number[]} [request.safetySettings]
    *   Optional. A list of unique `SafetySetting` instances for blocking unsafe
    *   content.
@@ -568,7 +580,9 @@ export class GenerativeServiceClient {
    *   overrides the default settings for each `SafetyCategory` specified in the
    *   safety_settings. If there is no `SafetySetting` for a given
    *   `SafetyCategory` provided in the list, the API will use the default safety
-   *   setting for that category.
+   *   setting for that category. Harm categories HARM_CATEGORY_HATE_SPEECH,
+   *   HARM_CATEGORY_SEXUALLY_EXPLICIT, HARM_CATEGORY_DANGEROUS_CONTENT,
+   *   HARM_CATEGORY_HARASSMENT are supported.
    * @param {number} [request.temperature]
    *   Optional. Controls the randomness of the output.
    *
@@ -998,6 +1012,8 @@ export class GenerativeServiceClient {
    *   Required. The name of the `Model` to use for generating the completion.
    *
    *   Format: `name=models/{model}`.
+   * @param {google.ai.generativelanguage.v1beta.Content} [request.systemInstruction]
+   *   Optional. Developer set system instruction. Currently, text only.
    * @param {number[]} request.contents
    *   Required. The content of the current conversation with the model.
    *
@@ -1012,6 +1028,8 @@ export class GenerativeServiceClient {
    *   external systems to perform an action, or set of actions, outside of
    *   knowledge and scope of the model. The only supported tool is currently
    *   `Function`.
+   * @param {google.ai.generativelanguage.v1beta.ToolConfig} [request.toolConfig]
+   *   Optional. Tool configuration for any `Tool` specified in the request.
    * @param {number[]} [request.safetySettings]
    *   Optional. A list of unique `SafetySetting` instances for blocking unsafe
    *   content.
@@ -1203,6 +1221,29 @@ export class GenerativeServiceClient {
    */
   matchDocumentFromDocumentName(documentName: string) {
     return this.pathTemplates.documentPathTemplate.match(documentName).document;
+  }
+
+  /**
+   * Return a fully-qualified file resource name string.
+   *
+   * @param {string} file
+   * @returns {string} Resource name string.
+   */
+  filePath(file: string) {
+    return this.pathTemplates.filePathTemplate.render({
+      file: file,
+    });
+  }
+
+  /**
+   * Parse the file from File resource.
+   *
+   * @param {string} fileName
+   *   A fully-qualified path representing File resource.
+   * @returns {string} A string representing the file.
+   */
+  matchFileFromFileName(fileName: string) {
+    return this.pathTemplates.filePathTemplate.match(fileName).file;
   }
 
   /**

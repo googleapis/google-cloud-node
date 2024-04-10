@@ -34,6 +34,10 @@ function main(model, contents) {
    */
   // const model = 'abc123'
   /**
+   *  Optional. Developer set system instruction. Currently, text only.
+   */
+  // const systemInstruction = {}
+  /**
    *  Required. The content of the current conversation with the model.
    *  For single-turn queries, this is a single instance. For multi-turn queries,
    *  this is a repeated field that contains conversation history + latest
@@ -49,6 +53,10 @@ function main(model, contents) {
    *  `Function`.
    */
   // const tools = [1,2,3,4]
+  /**
+   *  Optional. Tool configuration for any `Tool` specified in the request.
+   */
+  // const toolConfig = {}
   /**
    *  Optional. A list of unique `SafetySetting` instances for blocking unsafe
    *  content.

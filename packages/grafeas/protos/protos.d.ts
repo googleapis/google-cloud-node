@@ -436,7 +436,8 @@ export namespace grafeas {
             UPGRADE = 8,
             COMPLIANCE = 9,
             DSSE_ATTESTATION = 10,
-            VULNERABILITY_ASSESSMENT = 11
+            VULNERABILITY_ASSESSMENT = 11,
+            SBOM_REFERENCE = 12
         }
 
         /** Properties of a RelatedUrl. */
@@ -1271,6 +1272,9 @@ export namespace grafeas {
 
             /** BuildOccurrence intotoStatement */
             intotoStatement?: (grafeas.v1.IInTotoStatement|null);
+
+            /** BuildOccurrence inTotoSlsaProvenanceV1 */
+            inTotoSlsaProvenanceV1?: (grafeas.v1.IInTotoSlsaProvenanceV1|null);
         }
 
         /** Represents a BuildOccurrence. */
@@ -1293,6 +1297,9 @@ export namespace grafeas {
 
             /** BuildOccurrence intotoStatement. */
             public intotoStatement?: (grafeas.v1.IInTotoStatement|null);
+
+            /** BuildOccurrence inTotoSlsaProvenanceV1. */
+            public inTotoSlsaProvenanceV1?: (grafeas.v1.IInTotoSlsaProvenanceV1|null);
 
             /**
              * Creates a new BuildOccurrence instance using the specified properties.
@@ -2166,6 +2173,802 @@ export namespace grafeas {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an InTotoSlsaProvenanceV1. */
+        interface IInTotoSlsaProvenanceV1 {
+
+            /** InTotoSlsaProvenanceV1 type */
+            type?: (string|null);
+
+            /** InTotoSlsaProvenanceV1 subject */
+            subject?: (grafeas.v1.ISubject[]|null);
+
+            /** InTotoSlsaProvenanceV1 predicateType */
+            predicateType?: (string|null);
+
+            /** InTotoSlsaProvenanceV1 predicate */
+            predicate?: (grafeas.v1.InTotoSlsaProvenanceV1.ISlsaProvenanceV1|null);
+        }
+
+        /** Represents an InTotoSlsaProvenanceV1. */
+        class InTotoSlsaProvenanceV1 implements IInTotoSlsaProvenanceV1 {
+
+            /**
+             * Constructs a new InTotoSlsaProvenanceV1.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IInTotoSlsaProvenanceV1);
+
+            /** InTotoSlsaProvenanceV1 type. */
+            public type: string;
+
+            /** InTotoSlsaProvenanceV1 subject. */
+            public subject: grafeas.v1.ISubject[];
+
+            /** InTotoSlsaProvenanceV1 predicateType. */
+            public predicateType: string;
+
+            /** InTotoSlsaProvenanceV1 predicate. */
+            public predicate?: (grafeas.v1.InTotoSlsaProvenanceV1.ISlsaProvenanceV1|null);
+
+            /**
+             * Creates a new InTotoSlsaProvenanceV1 instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns InTotoSlsaProvenanceV1 instance
+             */
+            public static create(properties?: grafeas.v1.IInTotoSlsaProvenanceV1): grafeas.v1.InTotoSlsaProvenanceV1;
+
+            /**
+             * Encodes the specified InTotoSlsaProvenanceV1 message. Does not implicitly {@link grafeas.v1.InTotoSlsaProvenanceV1.verify|verify} messages.
+             * @param message InTotoSlsaProvenanceV1 message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IInTotoSlsaProvenanceV1, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified InTotoSlsaProvenanceV1 message, length delimited. Does not implicitly {@link grafeas.v1.InTotoSlsaProvenanceV1.verify|verify} messages.
+             * @param message InTotoSlsaProvenanceV1 message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IInTotoSlsaProvenanceV1, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an InTotoSlsaProvenanceV1 message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns InTotoSlsaProvenanceV1
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.InTotoSlsaProvenanceV1;
+
+            /**
+             * Decodes an InTotoSlsaProvenanceV1 message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns InTotoSlsaProvenanceV1
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.InTotoSlsaProvenanceV1;
+
+            /**
+             * Verifies an InTotoSlsaProvenanceV1 message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an InTotoSlsaProvenanceV1 message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns InTotoSlsaProvenanceV1
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.InTotoSlsaProvenanceV1;
+
+            /**
+             * Creates a plain object from an InTotoSlsaProvenanceV1 message. Also converts values to other types if specified.
+             * @param message InTotoSlsaProvenanceV1
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.InTotoSlsaProvenanceV1, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this InTotoSlsaProvenanceV1 to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for InTotoSlsaProvenanceV1
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace InTotoSlsaProvenanceV1 {
+
+            /** Properties of a SlsaProvenanceV1. */
+            interface ISlsaProvenanceV1 {
+
+                /** SlsaProvenanceV1 buildDefinition */
+                buildDefinition?: (grafeas.v1.InTotoSlsaProvenanceV1.IBuildDefinition|null);
+
+                /** SlsaProvenanceV1 runDetails */
+                runDetails?: (grafeas.v1.InTotoSlsaProvenanceV1.IRunDetails|null);
+            }
+
+            /** Represents a SlsaProvenanceV1. */
+            class SlsaProvenanceV1 implements ISlsaProvenanceV1 {
+
+                /**
+                 * Constructs a new SlsaProvenanceV1.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: grafeas.v1.InTotoSlsaProvenanceV1.ISlsaProvenanceV1);
+
+                /** SlsaProvenanceV1 buildDefinition. */
+                public buildDefinition?: (grafeas.v1.InTotoSlsaProvenanceV1.IBuildDefinition|null);
+
+                /** SlsaProvenanceV1 runDetails. */
+                public runDetails?: (grafeas.v1.InTotoSlsaProvenanceV1.IRunDetails|null);
+
+                /**
+                 * Creates a new SlsaProvenanceV1 instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns SlsaProvenanceV1 instance
+                 */
+                public static create(properties?: grafeas.v1.InTotoSlsaProvenanceV1.ISlsaProvenanceV1): grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1;
+
+                /**
+                 * Encodes the specified SlsaProvenanceV1 message. Does not implicitly {@link grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1.verify|verify} messages.
+                 * @param message SlsaProvenanceV1 message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: grafeas.v1.InTotoSlsaProvenanceV1.ISlsaProvenanceV1, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SlsaProvenanceV1 message, length delimited. Does not implicitly {@link grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1.verify|verify} messages.
+                 * @param message SlsaProvenanceV1 message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: grafeas.v1.InTotoSlsaProvenanceV1.ISlsaProvenanceV1, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SlsaProvenanceV1 message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SlsaProvenanceV1
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1;
+
+                /**
+                 * Decodes a SlsaProvenanceV1 message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SlsaProvenanceV1
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1;
+
+                /**
+                 * Verifies a SlsaProvenanceV1 message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SlsaProvenanceV1 message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SlsaProvenanceV1
+                 */
+                public static fromObject(object: { [k: string]: any }): grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1;
+
+                /**
+                 * Creates a plain object from a SlsaProvenanceV1 message. Also converts values to other types if specified.
+                 * @param message SlsaProvenanceV1
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SlsaProvenanceV1 to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for SlsaProvenanceV1
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a BuildDefinition. */
+            interface IBuildDefinition {
+
+                /** BuildDefinition buildType */
+                buildType?: (string|null);
+
+                /** BuildDefinition externalParameters */
+                externalParameters?: (google.protobuf.IStruct|null);
+
+                /** BuildDefinition internalParameters */
+                internalParameters?: (google.protobuf.IStruct|null);
+
+                /** BuildDefinition resolvedDependencies */
+                resolvedDependencies?: (grafeas.v1.InTotoSlsaProvenanceV1.IResourceDescriptor[]|null);
+            }
+
+            /** Represents a BuildDefinition. */
+            class BuildDefinition implements IBuildDefinition {
+
+                /**
+                 * Constructs a new BuildDefinition.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: grafeas.v1.InTotoSlsaProvenanceV1.IBuildDefinition);
+
+                /** BuildDefinition buildType. */
+                public buildType: string;
+
+                /** BuildDefinition externalParameters. */
+                public externalParameters?: (google.protobuf.IStruct|null);
+
+                /** BuildDefinition internalParameters. */
+                public internalParameters?: (google.protobuf.IStruct|null);
+
+                /** BuildDefinition resolvedDependencies. */
+                public resolvedDependencies: grafeas.v1.InTotoSlsaProvenanceV1.IResourceDescriptor[];
+
+                /**
+                 * Creates a new BuildDefinition instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns BuildDefinition instance
+                 */
+                public static create(properties?: grafeas.v1.InTotoSlsaProvenanceV1.IBuildDefinition): grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition;
+
+                /**
+                 * Encodes the specified BuildDefinition message. Does not implicitly {@link grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition.verify|verify} messages.
+                 * @param message BuildDefinition message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: grafeas.v1.InTotoSlsaProvenanceV1.IBuildDefinition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified BuildDefinition message, length delimited. Does not implicitly {@link grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition.verify|verify} messages.
+                 * @param message BuildDefinition message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: grafeas.v1.InTotoSlsaProvenanceV1.IBuildDefinition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a BuildDefinition message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns BuildDefinition
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition;
+
+                /**
+                 * Decodes a BuildDefinition message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns BuildDefinition
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition;
+
+                /**
+                 * Verifies a BuildDefinition message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a BuildDefinition message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns BuildDefinition
+                 */
+                public static fromObject(object: { [k: string]: any }): grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition;
+
+                /**
+                 * Creates a plain object from a BuildDefinition message. Also converts values to other types if specified.
+                 * @param message BuildDefinition
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this BuildDefinition to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for BuildDefinition
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ResourceDescriptor. */
+            interface IResourceDescriptor {
+
+                /** ResourceDescriptor name */
+                name?: (string|null);
+
+                /** ResourceDescriptor uri */
+                uri?: (string|null);
+
+                /** ResourceDescriptor digest */
+                digest?: ({ [k: string]: string }|null);
+
+                /** ResourceDescriptor content */
+                content?: (Uint8Array|string|null);
+
+                /** ResourceDescriptor downloadLocation */
+                downloadLocation?: (string|null);
+
+                /** ResourceDescriptor mediaType */
+                mediaType?: (string|null);
+
+                /** ResourceDescriptor annotations */
+                annotations?: ({ [k: string]: google.protobuf.IValue }|null);
+            }
+
+            /** Represents a ResourceDescriptor. */
+            class ResourceDescriptor implements IResourceDescriptor {
+
+                /**
+                 * Constructs a new ResourceDescriptor.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: grafeas.v1.InTotoSlsaProvenanceV1.IResourceDescriptor);
+
+                /** ResourceDescriptor name. */
+                public name: string;
+
+                /** ResourceDescriptor uri. */
+                public uri: string;
+
+                /** ResourceDescriptor digest. */
+                public digest: { [k: string]: string };
+
+                /** ResourceDescriptor content. */
+                public content: (Uint8Array|string);
+
+                /** ResourceDescriptor downloadLocation. */
+                public downloadLocation: string;
+
+                /** ResourceDescriptor mediaType. */
+                public mediaType: string;
+
+                /** ResourceDescriptor annotations. */
+                public annotations: { [k: string]: google.protobuf.IValue };
+
+                /**
+                 * Creates a new ResourceDescriptor instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ResourceDescriptor instance
+                 */
+                public static create(properties?: grafeas.v1.InTotoSlsaProvenanceV1.IResourceDescriptor): grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor;
+
+                /**
+                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor.verify|verify} messages.
+                 * @param message ResourceDescriptor message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: grafeas.v1.InTotoSlsaProvenanceV1.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor.verify|verify} messages.
+                 * @param message ResourceDescriptor message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: grafeas.v1.InTotoSlsaProvenanceV1.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor;
+
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor;
+
+                /**
+                 * Verifies a ResourceDescriptor message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ResourceDescriptor
+                 */
+                public static fromObject(object: { [k: string]: any }): grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor;
+
+                /**
+                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+                 * @param message ResourceDescriptor
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ResourceDescriptor to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ResourceDescriptor
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a RunDetails. */
+            interface IRunDetails {
+
+                /** RunDetails builder */
+                builder?: (grafeas.v1.InTotoSlsaProvenanceV1.IProvenanceBuilder|null);
+
+                /** RunDetails metadata */
+                metadata?: (grafeas.v1.InTotoSlsaProvenanceV1.IBuildMetadata|null);
+
+                /** RunDetails byproducts */
+                byproducts?: (grafeas.v1.InTotoSlsaProvenanceV1.IResourceDescriptor[]|null);
+            }
+
+            /** Represents a RunDetails. */
+            class RunDetails implements IRunDetails {
+
+                /**
+                 * Constructs a new RunDetails.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: grafeas.v1.InTotoSlsaProvenanceV1.IRunDetails);
+
+                /** RunDetails builder. */
+                public builder?: (grafeas.v1.InTotoSlsaProvenanceV1.IProvenanceBuilder|null);
+
+                /** RunDetails metadata. */
+                public metadata?: (grafeas.v1.InTotoSlsaProvenanceV1.IBuildMetadata|null);
+
+                /** RunDetails byproducts. */
+                public byproducts: grafeas.v1.InTotoSlsaProvenanceV1.IResourceDescriptor[];
+
+                /**
+                 * Creates a new RunDetails instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns RunDetails instance
+                 */
+                public static create(properties?: grafeas.v1.InTotoSlsaProvenanceV1.IRunDetails): grafeas.v1.InTotoSlsaProvenanceV1.RunDetails;
+
+                /**
+                 * Encodes the specified RunDetails message. Does not implicitly {@link grafeas.v1.InTotoSlsaProvenanceV1.RunDetails.verify|verify} messages.
+                 * @param message RunDetails message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: grafeas.v1.InTotoSlsaProvenanceV1.IRunDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified RunDetails message, length delimited. Does not implicitly {@link grafeas.v1.InTotoSlsaProvenanceV1.RunDetails.verify|verify} messages.
+                 * @param message RunDetails message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: grafeas.v1.InTotoSlsaProvenanceV1.IRunDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a RunDetails message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns RunDetails
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.InTotoSlsaProvenanceV1.RunDetails;
+
+                /**
+                 * Decodes a RunDetails message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns RunDetails
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.InTotoSlsaProvenanceV1.RunDetails;
+
+                /**
+                 * Verifies a RunDetails message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a RunDetails message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns RunDetails
+                 */
+                public static fromObject(object: { [k: string]: any }): grafeas.v1.InTotoSlsaProvenanceV1.RunDetails;
+
+                /**
+                 * Creates a plain object from a RunDetails message. Also converts values to other types if specified.
+                 * @param message RunDetails
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: grafeas.v1.InTotoSlsaProvenanceV1.RunDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this RunDetails to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for RunDetails
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ProvenanceBuilder. */
+            interface IProvenanceBuilder {
+
+                /** ProvenanceBuilder id */
+                id?: (string|null);
+
+                /** ProvenanceBuilder version */
+                version?: ({ [k: string]: string }|null);
+
+                /** ProvenanceBuilder builderDependencies */
+                builderDependencies?: (grafeas.v1.InTotoSlsaProvenanceV1.IResourceDescriptor[]|null);
+            }
+
+            /** Represents a ProvenanceBuilder. */
+            class ProvenanceBuilder implements IProvenanceBuilder {
+
+                /**
+                 * Constructs a new ProvenanceBuilder.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: grafeas.v1.InTotoSlsaProvenanceV1.IProvenanceBuilder);
+
+                /** ProvenanceBuilder id. */
+                public id: string;
+
+                /** ProvenanceBuilder version. */
+                public version: { [k: string]: string };
+
+                /** ProvenanceBuilder builderDependencies. */
+                public builderDependencies: grafeas.v1.InTotoSlsaProvenanceV1.IResourceDescriptor[];
+
+                /**
+                 * Creates a new ProvenanceBuilder instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ProvenanceBuilder instance
+                 */
+                public static create(properties?: grafeas.v1.InTotoSlsaProvenanceV1.IProvenanceBuilder): grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder;
+
+                /**
+                 * Encodes the specified ProvenanceBuilder message. Does not implicitly {@link grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder.verify|verify} messages.
+                 * @param message ProvenanceBuilder message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: grafeas.v1.InTotoSlsaProvenanceV1.IProvenanceBuilder, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ProvenanceBuilder message, length delimited. Does not implicitly {@link grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder.verify|verify} messages.
+                 * @param message ProvenanceBuilder message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: grafeas.v1.InTotoSlsaProvenanceV1.IProvenanceBuilder, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ProvenanceBuilder message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ProvenanceBuilder
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder;
+
+                /**
+                 * Decodes a ProvenanceBuilder message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ProvenanceBuilder
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder;
+
+                /**
+                 * Verifies a ProvenanceBuilder message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ProvenanceBuilder message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ProvenanceBuilder
+                 */
+                public static fromObject(object: { [k: string]: any }): grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder;
+
+                /**
+                 * Creates a plain object from a ProvenanceBuilder message. Also converts values to other types if specified.
+                 * @param message ProvenanceBuilder
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ProvenanceBuilder to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ProvenanceBuilder
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a BuildMetadata. */
+            interface IBuildMetadata {
+
+                /** BuildMetadata invocationId */
+                invocationId?: (string|null);
+
+                /** BuildMetadata startedOn */
+                startedOn?: (google.protobuf.ITimestamp|null);
+
+                /** BuildMetadata finishedOn */
+                finishedOn?: (google.protobuf.ITimestamp|null);
+            }
+
+            /** Represents a BuildMetadata. */
+            class BuildMetadata implements IBuildMetadata {
+
+                /**
+                 * Constructs a new BuildMetadata.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: grafeas.v1.InTotoSlsaProvenanceV1.IBuildMetadata);
+
+                /** BuildMetadata invocationId. */
+                public invocationId: string;
+
+                /** BuildMetadata startedOn. */
+                public startedOn?: (google.protobuf.ITimestamp|null);
+
+                /** BuildMetadata finishedOn. */
+                public finishedOn?: (google.protobuf.ITimestamp|null);
+
+                /**
+                 * Creates a new BuildMetadata instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns BuildMetadata instance
+                 */
+                public static create(properties?: grafeas.v1.InTotoSlsaProvenanceV1.IBuildMetadata): grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata;
+
+                /**
+                 * Encodes the specified BuildMetadata message. Does not implicitly {@link grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata.verify|verify} messages.
+                 * @param message BuildMetadata message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: grafeas.v1.InTotoSlsaProvenanceV1.IBuildMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified BuildMetadata message, length delimited. Does not implicitly {@link grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata.verify|verify} messages.
+                 * @param message BuildMetadata message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: grafeas.v1.InTotoSlsaProvenanceV1.IBuildMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a BuildMetadata message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns BuildMetadata
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata;
+
+                /**
+                 * Decodes a BuildMetadata message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns BuildMetadata
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata;
+
+                /**
+                 * Verifies a BuildMetadata message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a BuildMetadata message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns BuildMetadata
+                 */
+                public static fromObject(object: { [k: string]: any }): grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata;
+
+                /**
+                 * Creates a plain object from a BuildMetadata message. Also converts values to other types if specified.
+                 * @param message BuildMetadata
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this BuildMetadata to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for BuildMetadata
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of a SlsaProvenance. */
@@ -5132,6 +5935,9 @@ export namespace grafeas {
 
             /** ComplianceNote scanInstructions */
             scanInstructions?: (Uint8Array|string|null);
+
+            /** ComplianceNote impact */
+            impact?: (string|null);
         }
 
         /** Represents a ComplianceNote. */
@@ -5164,8 +5970,14 @@ export namespace grafeas {
             /** ComplianceNote scanInstructions. */
             public scanInstructions: (Uint8Array|string);
 
+            /** ComplianceNote impact. */
+            public impact?: (string|null);
+
             /** ComplianceNote complianceType. */
             public complianceType?: "cisBenchmark";
+
+            /** ComplianceNote potentialImpact. */
+            public potentialImpact?: "impact";
 
             /**
              * Creates a new ComplianceNote instance using the specified properties.
@@ -6482,6 +7294,9 @@ export namespace grafeas {
 
             /** DiscoveryOccurrence archiveTime */
             archiveTime?: (google.protobuf.ITimestamp|null);
+
+            /** DiscoveryOccurrence sbomStatus */
+            sbomStatus?: (grafeas.v1.DiscoveryOccurrence.ISBOMStatus|null);
         }
 
         /** Represents a DiscoveryOccurrence. */
@@ -6516,6 +7331,9 @@ export namespace grafeas {
 
             /** DiscoveryOccurrence archiveTime. */
             public archiveTime?: (google.protobuf.ITimestamp|null);
+
+            /** DiscoveryOccurrence sbomStatus. */
+            public sbomStatus?: (grafeas.v1.DiscoveryOccurrence.ISBOMStatus|null);
 
             /**
              * Creates a new DiscoveryOccurrence instance using the specified properties.
@@ -6710,6 +7528,119 @@ export namespace grafeas {
                  * @returns The default type url
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a SBOMStatus. */
+            interface ISBOMStatus {
+
+                /** SBOMStatus sbomState */
+                sbomState?: (grafeas.v1.DiscoveryOccurrence.SBOMStatus.SBOMState|keyof typeof grafeas.v1.DiscoveryOccurrence.SBOMStatus.SBOMState|null);
+
+                /** SBOMStatus error */
+                error?: (string|null);
+            }
+
+            /** Represents a SBOMStatus. */
+            class SBOMStatus implements ISBOMStatus {
+
+                /**
+                 * Constructs a new SBOMStatus.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: grafeas.v1.DiscoveryOccurrence.ISBOMStatus);
+
+                /** SBOMStatus sbomState. */
+                public sbomState: (grafeas.v1.DiscoveryOccurrence.SBOMStatus.SBOMState|keyof typeof grafeas.v1.DiscoveryOccurrence.SBOMStatus.SBOMState);
+
+                /** SBOMStatus error. */
+                public error: string;
+
+                /**
+                 * Creates a new SBOMStatus instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns SBOMStatus instance
+                 */
+                public static create(properties?: grafeas.v1.DiscoveryOccurrence.ISBOMStatus): grafeas.v1.DiscoveryOccurrence.SBOMStatus;
+
+                /**
+                 * Encodes the specified SBOMStatus message. Does not implicitly {@link grafeas.v1.DiscoveryOccurrence.SBOMStatus.verify|verify} messages.
+                 * @param message SBOMStatus message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: grafeas.v1.DiscoveryOccurrence.ISBOMStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SBOMStatus message, length delimited. Does not implicitly {@link grafeas.v1.DiscoveryOccurrence.SBOMStatus.verify|verify} messages.
+                 * @param message SBOMStatus message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: grafeas.v1.DiscoveryOccurrence.ISBOMStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SBOMStatus message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SBOMStatus
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.DiscoveryOccurrence.SBOMStatus;
+
+                /**
+                 * Decodes a SBOMStatus message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SBOMStatus
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.DiscoveryOccurrence.SBOMStatus;
+
+                /**
+                 * Verifies a SBOMStatus message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SBOMStatus message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SBOMStatus
+                 */
+                public static fromObject(object: { [k: string]: any }): grafeas.v1.DiscoveryOccurrence.SBOMStatus;
+
+                /**
+                 * Creates a plain object from a SBOMStatus message. Also converts values to other types if specified.
+                 * @param message SBOMStatus
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: grafeas.v1.DiscoveryOccurrence.SBOMStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SBOMStatus to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for SBOMStatus
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace SBOMStatus {
+
+                /** SBOMState enum. */
+                enum SBOMState {
+                    SBOM_STATE_UNSPECIFIED = 0,
+                    PENDING = 1,
+                    COMPLETE = 2
+                }
             }
         }
 
@@ -7388,6 +8319,9 @@ export namespace grafeas {
             /** Occurrence dsseAttestation */
             dsseAttestation?: (grafeas.v1.IDSSEAttestationOccurrence|null);
 
+            /** Occurrence sbomReference */
+            sbomReference?: (grafeas.v1.ISBOMReferenceOccurrence|null);
+
             /** Occurrence envelope */
             envelope?: (grafeas.v1.IEnvelope|null);
         }
@@ -7452,11 +8386,14 @@ export namespace grafeas {
             /** Occurrence dsseAttestation. */
             public dsseAttestation?: (grafeas.v1.IDSSEAttestationOccurrence|null);
 
+            /** Occurrence sbomReference. */
+            public sbomReference?: (grafeas.v1.ISBOMReferenceOccurrence|null);
+
             /** Occurrence envelope. */
             public envelope?: (grafeas.v1.IEnvelope|null);
 
             /** Occurrence details. */
-            public details?: ("vulnerability"|"build"|"image"|"package"|"deployment"|"discovery"|"attestation"|"upgrade"|"compliance"|"dsseAttestation");
+            public details?: ("vulnerability"|"build"|"image"|"package"|"deployment"|"discovery"|"attestation"|"upgrade"|"compliance"|"dsseAttestation"|"sbomReference");
 
             /**
              * Creates a new Occurrence instance using the specified properties.
@@ -7598,6 +8535,9 @@ export namespace grafeas {
 
             /** Note vulnerabilityAssessment */
             vulnerabilityAssessment?: (grafeas.v1.IVulnerabilityAssessmentNote|null);
+
+            /** Note sbomReference */
+            sbomReference?: (grafeas.v1.ISBOMReferenceNote|null);
         }
 
         /** Represents a Note. */
@@ -7669,8 +8609,11 @@ export namespace grafeas {
             /** Note vulnerabilityAssessment. */
             public vulnerabilityAssessment?: (grafeas.v1.IVulnerabilityAssessmentNote|null);
 
+            /** Note sbomReference. */
+            public sbomReference?: (grafeas.v1.ISBOMReferenceNote|null);
+
             /** Note type. */
-            public type?: ("vulnerability"|"build"|"image"|"package"|"deployment"|"discovery"|"attestation"|"upgrade"|"compliance"|"dsseAttestation"|"vulnerabilityAssessment");
+            public type?: ("vulnerability"|"build"|"image"|"package"|"deployment"|"discovery"|"attestation"|"upgrade"|"compliance"|"dsseAttestation"|"vulnerabilityAssessment"|"sbomReference");
 
             /**
              * Creates a new Note instance using the specified properties.
@@ -10820,6 +11763,448 @@ export namespace grafeas {
             }
         }
 
+        /** Properties of a SBOMReferenceNote. */
+        interface ISBOMReferenceNote {
+
+            /** SBOMReferenceNote format */
+            format?: (string|null);
+
+            /** SBOMReferenceNote version */
+            version?: (string|null);
+        }
+
+        /** Represents a SBOMReferenceNote. */
+        class SBOMReferenceNote implements ISBOMReferenceNote {
+
+            /**
+             * Constructs a new SBOMReferenceNote.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.ISBOMReferenceNote);
+
+            /** SBOMReferenceNote format. */
+            public format: string;
+
+            /** SBOMReferenceNote version. */
+            public version: string;
+
+            /**
+             * Creates a new SBOMReferenceNote instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SBOMReferenceNote instance
+             */
+            public static create(properties?: grafeas.v1.ISBOMReferenceNote): grafeas.v1.SBOMReferenceNote;
+
+            /**
+             * Encodes the specified SBOMReferenceNote message. Does not implicitly {@link grafeas.v1.SBOMReferenceNote.verify|verify} messages.
+             * @param message SBOMReferenceNote message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.ISBOMReferenceNote, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SBOMReferenceNote message, length delimited. Does not implicitly {@link grafeas.v1.SBOMReferenceNote.verify|verify} messages.
+             * @param message SBOMReferenceNote message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.ISBOMReferenceNote, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a SBOMReferenceNote message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns SBOMReferenceNote
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.SBOMReferenceNote;
+
+            /**
+             * Decodes a SBOMReferenceNote message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SBOMReferenceNote
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.SBOMReferenceNote;
+
+            /**
+             * Verifies a SBOMReferenceNote message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SBOMReferenceNote message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SBOMReferenceNote
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.SBOMReferenceNote;
+
+            /**
+             * Creates a plain object from a SBOMReferenceNote message. Also converts values to other types if specified.
+             * @param message SBOMReferenceNote
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.SBOMReferenceNote, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SBOMReferenceNote to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SBOMReferenceNote
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a SBOMReferenceOccurrence. */
+        interface ISBOMReferenceOccurrence {
+
+            /** SBOMReferenceOccurrence payload */
+            payload?: (grafeas.v1.ISbomReferenceIntotoPayload|null);
+
+            /** SBOMReferenceOccurrence payloadType */
+            payloadType?: (string|null);
+
+            /** SBOMReferenceOccurrence signatures */
+            signatures?: (grafeas.v1.IEnvelopeSignature[]|null);
+        }
+
+        /** Represents a SBOMReferenceOccurrence. */
+        class SBOMReferenceOccurrence implements ISBOMReferenceOccurrence {
+
+            /**
+             * Constructs a new SBOMReferenceOccurrence.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.ISBOMReferenceOccurrence);
+
+            /** SBOMReferenceOccurrence payload. */
+            public payload?: (grafeas.v1.ISbomReferenceIntotoPayload|null);
+
+            /** SBOMReferenceOccurrence payloadType. */
+            public payloadType: string;
+
+            /** SBOMReferenceOccurrence signatures. */
+            public signatures: grafeas.v1.IEnvelopeSignature[];
+
+            /**
+             * Creates a new SBOMReferenceOccurrence instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SBOMReferenceOccurrence instance
+             */
+            public static create(properties?: grafeas.v1.ISBOMReferenceOccurrence): grafeas.v1.SBOMReferenceOccurrence;
+
+            /**
+             * Encodes the specified SBOMReferenceOccurrence message. Does not implicitly {@link grafeas.v1.SBOMReferenceOccurrence.verify|verify} messages.
+             * @param message SBOMReferenceOccurrence message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.ISBOMReferenceOccurrence, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SBOMReferenceOccurrence message, length delimited. Does not implicitly {@link grafeas.v1.SBOMReferenceOccurrence.verify|verify} messages.
+             * @param message SBOMReferenceOccurrence message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.ISBOMReferenceOccurrence, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a SBOMReferenceOccurrence message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns SBOMReferenceOccurrence
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.SBOMReferenceOccurrence;
+
+            /**
+             * Decodes a SBOMReferenceOccurrence message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SBOMReferenceOccurrence
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.SBOMReferenceOccurrence;
+
+            /**
+             * Verifies a SBOMReferenceOccurrence message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SBOMReferenceOccurrence message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SBOMReferenceOccurrence
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.SBOMReferenceOccurrence;
+
+            /**
+             * Creates a plain object from a SBOMReferenceOccurrence message. Also converts values to other types if specified.
+             * @param message SBOMReferenceOccurrence
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.SBOMReferenceOccurrence, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SBOMReferenceOccurrence to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SBOMReferenceOccurrence
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a SbomReferenceIntotoPayload. */
+        interface ISbomReferenceIntotoPayload {
+
+            /** SbomReferenceIntotoPayload type */
+            type?: (string|null);
+
+            /** SbomReferenceIntotoPayload predicateType */
+            predicateType?: (string|null);
+
+            /** SbomReferenceIntotoPayload subject */
+            subject?: (grafeas.v1.ISubject[]|null);
+
+            /** SbomReferenceIntotoPayload predicate */
+            predicate?: (grafeas.v1.ISbomReferenceIntotoPredicate|null);
+        }
+
+        /** Represents a SbomReferenceIntotoPayload. */
+        class SbomReferenceIntotoPayload implements ISbomReferenceIntotoPayload {
+
+            /**
+             * Constructs a new SbomReferenceIntotoPayload.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.ISbomReferenceIntotoPayload);
+
+            /** SbomReferenceIntotoPayload type. */
+            public type: string;
+
+            /** SbomReferenceIntotoPayload predicateType. */
+            public predicateType: string;
+
+            /** SbomReferenceIntotoPayload subject. */
+            public subject: grafeas.v1.ISubject[];
+
+            /** SbomReferenceIntotoPayload predicate. */
+            public predicate?: (grafeas.v1.ISbomReferenceIntotoPredicate|null);
+
+            /**
+             * Creates a new SbomReferenceIntotoPayload instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SbomReferenceIntotoPayload instance
+             */
+            public static create(properties?: grafeas.v1.ISbomReferenceIntotoPayload): grafeas.v1.SbomReferenceIntotoPayload;
+
+            /**
+             * Encodes the specified SbomReferenceIntotoPayload message. Does not implicitly {@link grafeas.v1.SbomReferenceIntotoPayload.verify|verify} messages.
+             * @param message SbomReferenceIntotoPayload message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.ISbomReferenceIntotoPayload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SbomReferenceIntotoPayload message, length delimited. Does not implicitly {@link grafeas.v1.SbomReferenceIntotoPayload.verify|verify} messages.
+             * @param message SbomReferenceIntotoPayload message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.ISbomReferenceIntotoPayload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a SbomReferenceIntotoPayload message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns SbomReferenceIntotoPayload
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.SbomReferenceIntotoPayload;
+
+            /**
+             * Decodes a SbomReferenceIntotoPayload message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SbomReferenceIntotoPayload
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.SbomReferenceIntotoPayload;
+
+            /**
+             * Verifies a SbomReferenceIntotoPayload message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SbomReferenceIntotoPayload message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SbomReferenceIntotoPayload
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.SbomReferenceIntotoPayload;
+
+            /**
+             * Creates a plain object from a SbomReferenceIntotoPayload message. Also converts values to other types if specified.
+             * @param message SbomReferenceIntotoPayload
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.SbomReferenceIntotoPayload, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SbomReferenceIntotoPayload to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SbomReferenceIntotoPayload
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a SbomReferenceIntotoPredicate. */
+        interface ISbomReferenceIntotoPredicate {
+
+            /** SbomReferenceIntotoPredicate referrerId */
+            referrerId?: (string|null);
+
+            /** SbomReferenceIntotoPredicate location */
+            location?: (string|null);
+
+            /** SbomReferenceIntotoPredicate mimeType */
+            mimeType?: (string|null);
+
+            /** SbomReferenceIntotoPredicate digest */
+            digest?: ({ [k: string]: string }|null);
+        }
+
+        /** Represents a SbomReferenceIntotoPredicate. */
+        class SbomReferenceIntotoPredicate implements ISbomReferenceIntotoPredicate {
+
+            /**
+             * Constructs a new SbomReferenceIntotoPredicate.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.ISbomReferenceIntotoPredicate);
+
+            /** SbomReferenceIntotoPredicate referrerId. */
+            public referrerId: string;
+
+            /** SbomReferenceIntotoPredicate location. */
+            public location: string;
+
+            /** SbomReferenceIntotoPredicate mimeType. */
+            public mimeType: string;
+
+            /** SbomReferenceIntotoPredicate digest. */
+            public digest: { [k: string]: string };
+
+            /**
+             * Creates a new SbomReferenceIntotoPredicate instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SbomReferenceIntotoPredicate instance
+             */
+            public static create(properties?: grafeas.v1.ISbomReferenceIntotoPredicate): grafeas.v1.SbomReferenceIntotoPredicate;
+
+            /**
+             * Encodes the specified SbomReferenceIntotoPredicate message. Does not implicitly {@link grafeas.v1.SbomReferenceIntotoPredicate.verify|verify} messages.
+             * @param message SbomReferenceIntotoPredicate message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.ISbomReferenceIntotoPredicate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SbomReferenceIntotoPredicate message, length delimited. Does not implicitly {@link grafeas.v1.SbomReferenceIntotoPredicate.verify|verify} messages.
+             * @param message SbomReferenceIntotoPredicate message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.ISbomReferenceIntotoPredicate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a SbomReferenceIntotoPredicate message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns SbomReferenceIntotoPredicate
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.SbomReferenceIntotoPredicate;
+
+            /**
+             * Decodes a SbomReferenceIntotoPredicate message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SbomReferenceIntotoPredicate
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.SbomReferenceIntotoPredicate;
+
+            /**
+             * Verifies a SbomReferenceIntotoPredicate message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SbomReferenceIntotoPredicate message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SbomReferenceIntotoPredicate
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.SbomReferenceIntotoPredicate;
+
+            /**
+             * Creates a plain object from a SbomReferenceIntotoPredicate message. Also converts values to other types if specified.
+             * @param message SbomReferenceIntotoPredicate
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.SbomReferenceIntotoPredicate, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SbomReferenceIntotoPredicate to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SbomReferenceIntotoPredicate
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of an UpgradeNote. */
         interface IUpgradeNote {
 
@@ -11869,6 +13254,9 @@ export namespace grafeas {
                 /** Assessment cve */
                 cve?: (string|null);
 
+                /** Assessment vulnerabilityId */
+                vulnerabilityId?: (string|null);
+
                 /** Assessment shortDescription */
                 shortDescription?: (string|null);
 
@@ -11902,6 +13290,9 @@ export namespace grafeas {
 
                 /** Assessment cve. */
                 public cve: string;
+
+                /** Assessment vulnerabilityId. */
+                public vulnerabilityId: string;
 
                 /** Assessment shortDescription. */
                 public shortDescription: string;
@@ -12832,6 +14223,9 @@ export namespace grafeas {
 
             /** VulnerabilityOccurrence vexAssessment */
             vexAssessment?: (grafeas.v1.VulnerabilityOccurrence.IVexAssessment|null);
+
+            /** VulnerabilityOccurrence extraDetails */
+            extraDetails?: (string|null);
         }
 
         /** Represents a VulnerabilityOccurrence. */
@@ -12881,6 +14275,9 @@ export namespace grafeas {
 
             /** VulnerabilityOccurrence vexAssessment. */
             public vexAssessment?: (grafeas.v1.VulnerabilityOccurrence.IVexAssessment|null);
+
+            /** VulnerabilityOccurrence extraDetails. */
+            public extraDetails: string;
 
             /**
              * Creates a new VulnerabilityOccurrence instance using the specified properties.
@@ -13119,6 +14516,9 @@ export namespace grafeas {
                 /** VexAssessment cve */
                 cve?: (string|null);
 
+                /** VexAssessment vulnerabilityId */
+                vulnerabilityId?: (string|null);
+
                 /** VexAssessment relatedUris */
                 relatedUris?: (grafeas.v1.IRelatedUrl[]|null);
 
@@ -13149,6 +14549,9 @@ export namespace grafeas {
 
                 /** VexAssessment cve. */
                 public cve: string;
+
+                /** VexAssessment vulnerabilityId. */
+                public vulnerabilityId: string;
 
                 /** VexAssessment relatedUris. */
                 public relatedUris: grafeas.v1.IRelatedUrl[];
@@ -13887,6 +15290,21 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
+        /** Edition enum. */
+        enum Edition {
+            EDITION_UNKNOWN = 0,
+            EDITION_PROTO2 = 998,
+            EDITION_PROTO3 = 999,
+            EDITION_2023 = 1000,
+            EDITION_2024 = 1001,
+            EDITION_1_TEST_ONLY = 1,
+            EDITION_2_TEST_ONLY = 2,
+            EDITION_99997_TEST_ONLY = 99997,
+            EDITION_99998_TEST_ONLY = 99998,
+            EDITION_99999_TEST_ONLY = 99999,
+            EDITION_MAX = 2147483647
+        }
+
         /** Properties of a FileDescriptorProto. */
         interface IFileDescriptorProto {
 
@@ -13927,7 +15345,7 @@ export namespace google {
             syntax?: (string|null);
 
             /** FileDescriptorProto edition */
-            edition?: (string|null);
+            edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
         }
 
         /** Represents a FileDescriptorProto. */
@@ -13976,7 +15394,7 @@ export namespace google {
             public syntax: string;
 
             /** FileDescriptorProto edition. */
-            public edition: string;
+            public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
             /**
              * Creates a new FileDescriptorProto instance using the specified properties.
@@ -14427,6 +15845,15 @@ export namespace google {
 
             /** ExtensionRangeOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** ExtensionRangeOptions declaration */
+            declaration?: (google.protobuf.ExtensionRangeOptions.IDeclaration[]|null);
+
+            /** ExtensionRangeOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
+            /** ExtensionRangeOptions verification */
+            verification?: (google.protobuf.ExtensionRangeOptions.VerificationState|keyof typeof google.protobuf.ExtensionRangeOptions.VerificationState|null);
         }
 
         /** Represents an ExtensionRangeOptions. */
@@ -14440,6 +15867,15 @@ export namespace google {
 
             /** ExtensionRangeOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
+
+            /** ExtensionRangeOptions declaration. */
+            public declaration: google.protobuf.ExtensionRangeOptions.IDeclaration[];
+
+            /** ExtensionRangeOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
+
+            /** ExtensionRangeOptions verification. */
+            public verification: (google.protobuf.ExtensionRangeOptions.VerificationState|keyof typeof google.protobuf.ExtensionRangeOptions.VerificationState);
 
             /**
              * Creates a new ExtensionRangeOptions instance using the specified properties.
@@ -14517,6 +15953,136 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace ExtensionRangeOptions {
+
+            /** Properties of a Declaration. */
+            interface IDeclaration {
+
+                /** Declaration number */
+                number?: (number|null);
+
+                /** Declaration fullName */
+                fullName?: (string|null);
+
+                /** Declaration type */
+                type?: (string|null);
+
+                /** Declaration reserved */
+                reserved?: (boolean|null);
+
+                /** Declaration repeated */
+                repeated?: (boolean|null);
+            }
+
+            /** Represents a Declaration. */
+            class Declaration implements IDeclaration {
+
+                /**
+                 * Constructs a new Declaration.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.ExtensionRangeOptions.IDeclaration);
+
+                /** Declaration number. */
+                public number: number;
+
+                /** Declaration fullName. */
+                public fullName: string;
+
+                /** Declaration type. */
+                public type: string;
+
+                /** Declaration reserved. */
+                public reserved: boolean;
+
+                /** Declaration repeated. */
+                public repeated: boolean;
+
+                /**
+                 * Creates a new Declaration instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Declaration instance
+                 */
+                public static create(properties?: google.protobuf.ExtensionRangeOptions.IDeclaration): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Encodes the specified Declaration message. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
+                 * @param message Declaration message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.ExtensionRangeOptions.IDeclaration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Declaration message, length delimited. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
+                 * @param message Declaration message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.ExtensionRangeOptions.IDeclaration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Declaration message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Declaration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Decodes a Declaration message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Declaration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Verifies a Declaration message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Declaration message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Declaration
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Creates a plain object from a Declaration message. Also converts values to other types if specified.
+                 * @param message Declaration
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.ExtensionRangeOptions.Declaration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Declaration to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Declaration
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** VerificationState enum. */
+            enum VerificationState {
+                DECLARATION = 0,
+                UNVERIFIED = 1
+            }
         }
 
         /** Properties of a FieldDescriptorProto. */
@@ -14703,8 +16269,8 @@ export namespace google {
             /** Label enum. */
             enum Label {
                 LABEL_OPTIONAL = 1,
-                LABEL_REQUIRED = 2,
-                LABEL_REPEATED = 3
+                LABEL_REPEATED = 3,
+                LABEL_REQUIRED = 2
             }
         }
 
@@ -15416,9 +16982,6 @@ export namespace google {
             /** FileOptions pyGenericServices */
             pyGenericServices?: (boolean|null);
 
-            /** FileOptions phpGenericServices */
-            phpGenericServices?: (boolean|null);
-
             /** FileOptions deprecated */
             deprecated?: (boolean|null);
 
@@ -15445,6 +17008,9 @@ export namespace google {
 
             /** FileOptions rubyPackage */
             rubyPackage?: (string|null);
+
+            /** FileOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
 
             /** FileOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -15492,9 +17058,6 @@ export namespace google {
             /** FileOptions pyGenericServices. */
             public pyGenericServices: boolean;
 
-            /** FileOptions phpGenericServices. */
-            public phpGenericServices: boolean;
-
             /** FileOptions deprecated. */
             public deprecated: boolean;
 
@@ -15521,6 +17084,9 @@ export namespace google {
 
             /** FileOptions rubyPackage. */
             public rubyPackage: string;
+
+            /** FileOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** FileOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -15631,6 +17197,9 @@ export namespace google {
             /** MessageOptions deprecatedLegacyJsonFieldConflicts */
             deprecatedLegacyJsonFieldConflicts?: (boolean|null);
 
+            /** MessageOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** MessageOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -15661,6 +17230,9 @@ export namespace google {
 
             /** MessageOptions deprecatedLegacyJsonFieldConflicts. */
             public deprecatedLegacyJsonFieldConflicts: boolean;
+
+            /** MessageOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** MessageOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -15773,8 +17345,14 @@ export namespace google {
             /** FieldOptions retention */
             retention?: (google.protobuf.FieldOptions.OptionRetention|keyof typeof google.protobuf.FieldOptions.OptionRetention|null);
 
-            /** FieldOptions target */
-            target?: (google.protobuf.FieldOptions.OptionTargetType|keyof typeof google.protobuf.FieldOptions.OptionTargetType|null);
+            /** FieldOptions targets */
+            targets?: (google.protobuf.FieldOptions.OptionTargetType[]|null);
+
+            /** FieldOptions editionDefaults */
+            editionDefaults?: (google.protobuf.FieldOptions.IEditionDefault[]|null);
+
+            /** FieldOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
 
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -15822,8 +17400,14 @@ export namespace google {
             /** FieldOptions retention. */
             public retention: (google.protobuf.FieldOptions.OptionRetention|keyof typeof google.protobuf.FieldOptions.OptionRetention);
 
-            /** FieldOptions target. */
-            public target: (google.protobuf.FieldOptions.OptionTargetType|keyof typeof google.protobuf.FieldOptions.OptionTargetType);
+            /** FieldOptions targets. */
+            public targets: google.protobuf.FieldOptions.OptionTargetType[];
+
+            /** FieldOptions editionDefaults. */
+            public editionDefaults: google.protobuf.FieldOptions.IEditionDefault[];
+
+            /** FieldOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -15942,10 +17526,116 @@ export namespace google {
                 TARGET_TYPE_SERVICE = 8,
                 TARGET_TYPE_METHOD = 9
             }
+
+            /** Properties of an EditionDefault. */
+            interface IEditionDefault {
+
+                /** EditionDefault edition */
+                edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** EditionDefault value */
+                value?: (string|null);
+            }
+
+            /** Represents an EditionDefault. */
+            class EditionDefault implements IEditionDefault {
+
+                /**
+                 * Constructs a new EditionDefault.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IEditionDefault);
+
+                /** EditionDefault edition. */
+                public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** EditionDefault value. */
+                public value: string;
+
+                /**
+                 * Creates a new EditionDefault instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns EditionDefault instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IEditionDefault): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Encodes the specified EditionDefault message. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
+                 * @param message EditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified EditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
+                 * @param message EditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an EditionDefault message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns EditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Decodes an EditionDefault message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns EditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Verifies an EditionDefault message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an EditionDefault message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns EditionDefault
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Creates a plain object from an EditionDefault message. Also converts values to other types if specified.
+                 * @param message EditionDefault
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.EditionDefault, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this EditionDefault to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of an OneofOptions. */
         interface IOneofOptions {
+
+            /** OneofOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
 
             /** OneofOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -15959,6 +17649,9 @@ export namespace google {
              * @param [properties] Properties to set
              */
             constructor(properties?: google.protobuf.IOneofOptions);
+
+            /** OneofOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** OneofOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -16053,6 +17746,9 @@ export namespace google {
             /** EnumOptions deprecatedLegacyJsonFieldConflicts */
             deprecatedLegacyJsonFieldConflicts?: (boolean|null);
 
+            /** EnumOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** EnumOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -16074,6 +17770,9 @@ export namespace google {
 
             /** EnumOptions deprecatedLegacyJsonFieldConflicts. */
             public deprecatedLegacyJsonFieldConflicts: boolean;
+
+            /** EnumOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** EnumOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -16162,6 +17861,12 @@ export namespace google {
             /** EnumValueOptions deprecated */
             deprecated?: (boolean|null);
 
+            /** EnumValueOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
+            /** EnumValueOptions debugRedact */
+            debugRedact?: (boolean|null);
+
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -16177,6 +17882,12 @@ export namespace google {
 
             /** EnumValueOptions deprecated. */
             public deprecated: boolean;
+
+            /** EnumValueOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
+
+            /** EnumValueOptions debugRedact. */
+            public debugRedact: boolean;
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -16262,6 +17973,9 @@ export namespace google {
         /** Properties of a ServiceOptions. */
         interface IServiceOptions {
 
+            /** ServiceOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** ServiceOptions deprecated */
             deprecated?: (boolean|null);
 
@@ -16283,6 +17997,9 @@ export namespace google {
              * @param [properties] Properties to set
              */
             constructor(properties?: google.protobuf.IServiceOptions);
+
+            /** ServiceOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** ServiceOptions deprecated. */
             public deprecated: boolean;
@@ -16377,6 +18094,9 @@ export namespace google {
             /** MethodOptions idempotencyLevel */
             idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel|null);
 
+            /** MethodOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** MethodOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -16401,6 +18121,9 @@ export namespace google {
 
             /** MethodOptions idempotencyLevel. */
             public idempotencyLevel: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel);
+
+            /** MethodOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** MethodOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -16725,6 +18448,394 @@ export namespace google {
 
                 /**
                  * Gets the default type url for NamePart
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+        }
+
+        /** Properties of a FeatureSet. */
+        interface IFeatureSet {
+
+            /** FeatureSet fieldPresence */
+            fieldPresence?: (google.protobuf.FeatureSet.FieldPresence|keyof typeof google.protobuf.FeatureSet.FieldPresence|null);
+
+            /** FeatureSet enumType */
+            enumType?: (google.protobuf.FeatureSet.EnumType|keyof typeof google.protobuf.FeatureSet.EnumType|null);
+
+            /** FeatureSet repeatedFieldEncoding */
+            repeatedFieldEncoding?: (google.protobuf.FeatureSet.RepeatedFieldEncoding|keyof typeof google.protobuf.FeatureSet.RepeatedFieldEncoding|null);
+
+            /** FeatureSet utf8Validation */
+            utf8Validation?: (google.protobuf.FeatureSet.Utf8Validation|keyof typeof google.protobuf.FeatureSet.Utf8Validation|null);
+
+            /** FeatureSet messageEncoding */
+            messageEncoding?: (google.protobuf.FeatureSet.MessageEncoding|keyof typeof google.protobuf.FeatureSet.MessageEncoding|null);
+
+            /** FeatureSet jsonFormat */
+            jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+        }
+
+        /** Represents a FeatureSet. */
+        class FeatureSet implements IFeatureSet {
+
+            /**
+             * Constructs a new FeatureSet.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFeatureSet);
+
+            /** FeatureSet fieldPresence. */
+            public fieldPresence: (google.protobuf.FeatureSet.FieldPresence|keyof typeof google.protobuf.FeatureSet.FieldPresence);
+
+            /** FeatureSet enumType. */
+            public enumType: (google.protobuf.FeatureSet.EnumType|keyof typeof google.protobuf.FeatureSet.EnumType);
+
+            /** FeatureSet repeatedFieldEncoding. */
+            public repeatedFieldEncoding: (google.protobuf.FeatureSet.RepeatedFieldEncoding|keyof typeof google.protobuf.FeatureSet.RepeatedFieldEncoding);
+
+            /** FeatureSet utf8Validation. */
+            public utf8Validation: (google.protobuf.FeatureSet.Utf8Validation|keyof typeof google.protobuf.FeatureSet.Utf8Validation);
+
+            /** FeatureSet messageEncoding. */
+            public messageEncoding: (google.protobuf.FeatureSet.MessageEncoding|keyof typeof google.protobuf.FeatureSet.MessageEncoding);
+
+            /** FeatureSet jsonFormat. */
+            public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /**
+             * Creates a new FeatureSet instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FeatureSet instance
+             */
+            public static create(properties?: google.protobuf.IFeatureSet): google.protobuf.FeatureSet;
+
+            /**
+             * Encodes the specified FeatureSet message. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
+             * @param message FeatureSet message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFeatureSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FeatureSet message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
+             * @param message FeatureSet message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFeatureSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FeatureSet message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FeatureSet
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet;
+
+            /**
+             * Decodes a FeatureSet message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FeatureSet
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet;
+
+            /**
+             * Verifies a FeatureSet message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FeatureSet message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FeatureSet
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet;
+
+            /**
+             * Creates a plain object from a FeatureSet message. Also converts values to other types if specified.
+             * @param message FeatureSet
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FeatureSet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FeatureSet to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FeatureSet
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FeatureSet {
+
+            /** FieldPresence enum. */
+            enum FieldPresence {
+                FIELD_PRESENCE_UNKNOWN = 0,
+                EXPLICIT = 1,
+                IMPLICIT = 2,
+                LEGACY_REQUIRED = 3
+            }
+
+            /** EnumType enum. */
+            enum EnumType {
+                ENUM_TYPE_UNKNOWN = 0,
+                OPEN = 1,
+                CLOSED = 2
+            }
+
+            /** RepeatedFieldEncoding enum. */
+            enum RepeatedFieldEncoding {
+                REPEATED_FIELD_ENCODING_UNKNOWN = 0,
+                PACKED = 1,
+                EXPANDED = 2
+            }
+
+            /** Utf8Validation enum. */
+            enum Utf8Validation {
+                UTF8_VALIDATION_UNKNOWN = 0,
+                VERIFY = 2,
+                NONE = 3
+            }
+
+            /** MessageEncoding enum. */
+            enum MessageEncoding {
+                MESSAGE_ENCODING_UNKNOWN = 0,
+                LENGTH_PREFIXED = 1,
+                DELIMITED = 2
+            }
+
+            /** JsonFormat enum. */
+            enum JsonFormat {
+                JSON_FORMAT_UNKNOWN = 0,
+                ALLOW = 1,
+                LEGACY_BEST_EFFORT = 2
+            }
+        }
+
+        /** Properties of a FeatureSetDefaults. */
+        interface IFeatureSetDefaults {
+
+            /** FeatureSetDefaults defaults */
+            defaults?: (google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault[]|null);
+
+            /** FeatureSetDefaults minimumEdition */
+            minimumEdition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+            /** FeatureSetDefaults maximumEdition */
+            maximumEdition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+        }
+
+        /** Represents a FeatureSetDefaults. */
+        class FeatureSetDefaults implements IFeatureSetDefaults {
+
+            /**
+             * Constructs a new FeatureSetDefaults.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFeatureSetDefaults);
+
+            /** FeatureSetDefaults defaults. */
+            public defaults: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault[];
+
+            /** FeatureSetDefaults minimumEdition. */
+            public minimumEdition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+            /** FeatureSetDefaults maximumEdition. */
+            public maximumEdition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+            /**
+             * Creates a new FeatureSetDefaults instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FeatureSetDefaults instance
+             */
+            public static create(properties?: google.protobuf.IFeatureSetDefaults): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Encodes the specified FeatureSetDefaults message. Does not implicitly {@link google.protobuf.FeatureSetDefaults.verify|verify} messages.
+             * @param message FeatureSetDefaults message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFeatureSetDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FeatureSetDefaults message, length delimited. Does not implicitly {@link google.protobuf.FeatureSetDefaults.verify|verify} messages.
+             * @param message FeatureSetDefaults message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFeatureSetDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FeatureSetDefaults message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FeatureSetDefaults
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Decodes a FeatureSetDefaults message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FeatureSetDefaults
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Verifies a FeatureSetDefaults message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FeatureSetDefaults message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FeatureSetDefaults
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Creates a plain object from a FeatureSetDefaults message. Also converts values to other types if specified.
+             * @param message FeatureSetDefaults
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FeatureSetDefaults, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FeatureSetDefaults to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FeatureSetDefaults
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FeatureSetDefaults {
+
+            /** Properties of a FeatureSetEditionDefault. */
+            interface IFeatureSetEditionDefault {
+
+                /** FeatureSetEditionDefault edition */
+                edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSetEditionDefault features */
+                features?: (google.protobuf.IFeatureSet|null);
+            }
+
+            /** Represents a FeatureSetEditionDefault. */
+            class FeatureSetEditionDefault implements IFeatureSetEditionDefault {
+
+                /**
+                 * Constructs a new FeatureSetEditionDefault.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault);
+
+                /** FeatureSetEditionDefault edition. */
+                public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSetEditionDefault features. */
+                public features?: (google.protobuf.IFeatureSet|null);
+
+                /**
+                 * Creates a new FeatureSetEditionDefault instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSetEditionDefault instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Encodes the specified FeatureSetEditionDefault message. Does not implicitly {@link google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify|verify} messages.
+                 * @param message FeatureSetEditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSetEditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify|verify} messages.
+                 * @param message FeatureSetEditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSetEditionDefault message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSetEditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Decodes a FeatureSetEditionDefault message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSetEditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Verifies a FeatureSetEditionDefault message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSetEditionDefault message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSetEditionDefault
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Creates a plain object from a FeatureSetEditionDefault message. Also converts values to other types if specified.
+                 * @param message FeatureSetEditionDefault
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSetEditionDefault to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSetEditionDefault
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -17488,7 +19599,8 @@ export namespace google {
             INPUT_ONLY = 4,
             IMMUTABLE = 5,
             UNORDERED_LIST = 6,
-            NON_EMPTY_DEFAULT = 7
+            NON_EMPTY_DEFAULT = 7,
+            IDENTIFIER = 8
         }
 
         /** Properties of a Http. */
@@ -18140,6 +20252,9 @@ export namespace google {
 
             /** Publishing librarySettings */
             librarySettings?: (google.api.IClientLibrarySettings[]|null);
+
+            /** Publishing protoReferenceDocumentationUri */
+            protoReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -18177,6 +20292,9 @@ export namespace google {
 
             /** Publishing librarySettings. */
             public librarySettings: google.api.IClientLibrarySettings[];
+
+            /** Publishing protoReferenceDocumentationUri. */
+            public protoReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -18758,6 +20876,21 @@ export namespace google {
 
             /** DotnetSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** DotnetSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
+
+            /** DotnetSettings renamedResources */
+            renamedResources?: ({ [k: string]: string }|null);
+
+            /** DotnetSettings ignoredResources */
+            ignoredResources?: (string[]|null);
+
+            /** DotnetSettings forcedNamespaceAliases */
+            forcedNamespaceAliases?: (string[]|null);
+
+            /** DotnetSettings handwrittenSignatures */
+            handwrittenSignatures?: (string[]|null);
         }
 
         /** Represents a DotnetSettings. */
@@ -18771,6 +20904,21 @@ export namespace google {
 
             /** DotnetSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** DotnetSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
+
+            /** DotnetSettings renamedResources. */
+            public renamedResources: { [k: string]: string };
+
+            /** DotnetSettings ignoredResources. */
+            public ignoredResources: string[];
+
+            /** DotnetSettings forcedNamespaceAliases. */
+            public forcedNamespaceAliases: string[];
+
+            /** DotnetSettings handwrittenSignatures. */
+            public handwrittenSignatures: string[];
 
             /**
              * Creates a new DotnetSettings instance using the specified properties.
@@ -19052,6 +21200,9 @@ export namespace google {
 
             /** MethodSettings longRunning */
             longRunning?: (google.api.MethodSettings.ILongRunning|null);
+
+            /** MethodSettings autoPopulatedFields */
+            autoPopulatedFields?: (string[]|null);
         }
 
         /** Represents a MethodSettings. */
@@ -19068,6 +21219,9 @@ export namespace google {
 
             /** MethodSettings longRunning. */
             public longRunning?: (google.api.MethodSettings.ILongRunning|null);
+
+            /** MethodSettings autoPopulatedFields. */
+            public autoPopulatedFields: string[];
 
             /**
              * Creates a new MethodSettings instance using the specified properties.
@@ -19271,7 +21425,10 @@ export namespace google {
             CLOUD = 1,
             ADS = 2,
             PHOTOS = 3,
-            STREET_VIEW = 4
+            STREET_VIEW = 4,
+            SHOPPING = 5,
+            GEO = 6,
+            GENERATIVE_AI = 7
         }
 
         /** ClientLibraryDestination enum. */

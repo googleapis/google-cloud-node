@@ -155,7 +155,7 @@ describe('v1.BackendServicesClient', () => {
     });
 
     if (
-      typeof process !== 'undefined' &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       it('throws DeprecationWarning if static servicePath is used', () => {
@@ -191,6 +191,38 @@ describe('v1.BackendServicesClient', () => {
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'compute.example.com');
     });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new backendservicesModule.v1.BackendServicesClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'compute.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new backendservicesModule.v1.BackendServicesClient({
+            universeDomain: 'configured.example.com',
+          });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'compute.configured.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new backendservicesModule.v1.BackendServicesClient({

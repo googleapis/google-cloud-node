@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.3.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v8.2.0...documentai-v8.3.0) (2024-04-05)
+
+
+### Features
+
+* [documentai] Support a new Layout Processor in Document AI ([#5213](https://github.com/googleapis/google-cloud-node/issues/5213)) ([ab38a59](https://github.com/googleapis/google-cloud-node/commit/ab38a590d9dba7d7b1f97de8c278fa408606003f))
+
 ## [8.2.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v8.1.2...documentai-v8.2.0) (2024-02-07)
 
 

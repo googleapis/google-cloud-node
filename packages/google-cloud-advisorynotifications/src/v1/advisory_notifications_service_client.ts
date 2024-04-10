@@ -120,8 +120,15 @@ export class AdvisoryNotificationsServiceClient {
         'Please set either universe_domain or universeDomain, but not both.'
       );
     }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
     this._universeDomain =
-      opts?.universeDomain ?? opts?.universe_domain ?? 'googleapis.com';
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'advisorynotifications.' + this._universeDomain;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || this._servicePath;
@@ -173,7 +180,7 @@ export class AdvisoryNotificationsServiceClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -200,11 +207,15 @@ export class AdvisoryNotificationsServiceClient {
         new this._gaxModule.PathTemplate(
           'organizations/{organization}/locations/{location}/notifications/{notification}'
         ),
+      organizationLocationSettingsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/settings'
+        ),
       projectLocationNotificationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/notifications/{notification}'
       ),
-      settingsPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/settings'
+      projectLocationSettingsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/settings'
       ),
     };
 
@@ -311,7 +322,7 @@ export class AdvisoryNotificationsServiceClient {
    */
   static get servicePath() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -329,7 +340,7 @@ export class AdvisoryNotificationsServiceClient {
    */
   static get apiEndpoint() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -501,7 +512,8 @@ export class AdvisoryNotificationsServiceClient {
    * @param {string} request.name
    *   Required. The resource name of the settings to retrieve.
    *   Format:
-   *   organizations/{organization}/locations/{location}/settings.
+   *   organizations/{organization}/locations/{location}/settings or
+   *   projects/{projects}/locations/{location}/settings.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -696,7 +708,7 @@ export class AdvisoryNotificationsServiceClient {
    * @param {string} request.parent
    *   Required. The parent, which owns this collection of notifications.
    *   Must be of the form "organizations/{organization}/locations/{location}"
-   *   or "projects/{project}/locations/{location}"
+   *   or "projects/{project}/locations/{location}".
    * @param {number} request.pageSize
    *   The maximum number of notifications to return. The service may return
    *   fewer than this value. If unspecified or equal to 0, at most 50
@@ -809,7 +821,7 @@ export class AdvisoryNotificationsServiceClient {
    * @param {string} request.parent
    *   Required. The parent, which owns this collection of notifications.
    *   Must be of the form "organizations/{organization}/locations/{location}"
-   *   or "projects/{project}/locations/{location}"
+   *   or "projects/{project}/locations/{location}".
    * @param {number} request.pageSize
    *   The maximum number of notifications to return. The service may return
    *   fewer than this value. If unspecified or equal to 0, at most 50
@@ -870,7 +882,7 @@ export class AdvisoryNotificationsServiceClient {
    * @param {string} request.parent
    *   Required. The parent, which owns this collection of notifications.
    *   Must be of the form "organizations/{organization}/locations/{location}"
-   *   or "projects/{project}/locations/{location}"
+   *   or "projects/{project}/locations/{location}".
    * @param {number} request.pageSize
    *   The maximum number of notifications to return. The service may return
    *   fewer than this value. If unspecified or equal to 0, at most 50
@@ -1036,6 +1048,50 @@ export class AdvisoryNotificationsServiceClient {
   }
 
   /**
+   * Return a fully-qualified organizationLocationSettings resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  organizationLocationSettingsPath(organization: string, location: string) {
+    return this.pathTemplates.organizationLocationSettingsPathTemplate.render({
+      organization: organization,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationSettings resource.
+   *
+   * @param {string} organizationLocationSettingsName
+   *   A fully-qualified path representing organization_location_settings resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationSettingsName(
+    organizationLocationSettingsName: string
+  ) {
+    return this.pathTemplates.organizationLocationSettingsPathTemplate.match(
+      organizationLocationSettingsName
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationSettings resource.
+   *
+   * @param {string} organizationLocationSettingsName
+   *   A fully-qualified path representing organization_location_settings resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationSettingsName(
+    organizationLocationSettingsName: string
+  ) {
+    return this.pathTemplates.organizationLocationSettingsPathTemplate.match(
+      organizationLocationSettingsName
+    ).location;
+  }
+
+  /**
    * Return a fully-qualified projectLocationNotification resource name string.
    *
    * @param {string} project
@@ -1101,40 +1157,47 @@ export class AdvisoryNotificationsServiceClient {
   }
 
   /**
-   * Return a fully-qualified settings resource name string.
+   * Return a fully-qualified projectLocationSettings resource name string.
    *
-   * @param {string} organization
+   * @param {string} project
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  settingsPath(organization: string, location: string) {
-    return this.pathTemplates.settingsPathTemplate.render({
-      organization: organization,
+  projectLocationSettingsPath(project: string, location: string) {
+    return this.pathTemplates.projectLocationSettingsPathTemplate.render({
+      project: project,
       location: location,
     });
   }
 
   /**
-   * Parse the organization from Settings resource.
+   * Parse the project from ProjectLocationSettings resource.
    *
-   * @param {string} settingsName
-   *   A fully-qualified path representing Settings resource.
-   * @returns {string} A string representing the organization.
+   * @param {string} projectLocationSettingsName
+   *   A fully-qualified path representing project_location_settings resource.
+   * @returns {string} A string representing the project.
    */
-  matchOrganizationFromSettingsName(settingsName: string) {
-    return this.pathTemplates.settingsPathTemplate.match(settingsName)
-      .organization;
+  matchProjectFromProjectLocationSettingsName(
+    projectLocationSettingsName: string
+  ) {
+    return this.pathTemplates.projectLocationSettingsPathTemplate.match(
+      projectLocationSettingsName
+    ).project;
   }
 
   /**
-   * Parse the location from Settings resource.
+   * Parse the location from ProjectLocationSettings resource.
    *
-   * @param {string} settingsName
-   *   A fully-qualified path representing Settings resource.
+   * @param {string} projectLocationSettingsName
+   *   A fully-qualified path representing project_location_settings resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromSettingsName(settingsName: string) {
-    return this.pathTemplates.settingsPathTemplate.match(settingsName).location;
+  matchLocationFromProjectLocationSettingsName(
+    projectLocationSettingsName: string
+  ) {
+    return this.pathTemplates.projectLocationSettingsPathTemplate.match(
+      projectLocationSettingsName
+    ).location;
   }
 
   /**

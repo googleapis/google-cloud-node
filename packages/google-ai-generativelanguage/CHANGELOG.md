@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.1.1...generativelanguage-v2.2.0) (2024-04-05)
+
+
+### Features
+
+* [generativelanguage] Add system instructions ([#5208](https://github.com/googleapis/google-cloud-node/issues/5208)) ([54c5762](https://github.com/googleapis/google-cloud-node/commit/54c5762d6ea9ac57d14271e651c03353326f15ac))
+
+## [2.1.1](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.1.0...generativelanguage-v2.1.1) (2024-03-26)
+
+
+### Bug Fixes
+
+* [generativelanguage] make learning rate a one-of ([#5142](https://github.com/googleapis/google-cloud-node/issues/5142)) ([b2a5f9d](https://github.com/googleapis/google-cloud-node/commit/b2a5f9d476c5cc5bbf9eb47f0dc605284943d8c5))
+
 ## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.0.1...generativelanguage-v2.1.0) (2024-02-09)
 
 

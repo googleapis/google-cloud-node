@@ -181,7 +181,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
     });
 
     if (
-      typeof process !== 'undefined' &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       it('throws DeprecationWarning if static servicePath is used', () => {
@@ -217,6 +217,43 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'artifactregistry.example.com');
     });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new artifactregistryModule.v1beta2.ArtifactRegistryClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'artifactregistry.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new artifactregistryModule.v1beta2.ArtifactRegistryClient({
+              universeDomain: 'configured.example.com',
+            });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(
+            servicePath,
+            'artifactregistry.configured.example.com'
+          );
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new artifactregistryModule.v1beta2.ArtifactRegistryClient({
@@ -3488,9 +3525,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listRepositories.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3540,9 +3577,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listRepositories.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3590,9 +3627,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listRepositories.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3631,9 +3668,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listRepositories.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -3823,9 +3860,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listPackages.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3877,9 +3914,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listPackages.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3927,9 +3964,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listPackages.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3968,9 +4005,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listPackages.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -4160,9 +4197,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4214,9 +4251,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4264,9 +4301,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4305,9 +4342,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -4492,9 +4529,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listFiles.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4544,9 +4581,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listFiles.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4593,9 +4630,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listFiles.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4635,9 +4672,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listFiles.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -4822,9 +4859,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listTags.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4874,9 +4911,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listTags.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4923,9 +4960,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listTags.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4965,9 +5002,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       assert(
         (client.descriptors.page.listTags.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });

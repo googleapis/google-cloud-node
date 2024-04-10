@@ -82,6 +82,7 @@
   * [Document_service.create_document](#document_service.create_document)
   * [Document_service.delete_document](#document_service.delete_document)
   * [Document_service.get_document](#document_service.get_document)
+  * [Document_service.get_processed_document](#document_service.get_processed_document)
   * [Document_service.import_documents](#document_service.import_documents)
   * [Document_service.list_documents](#document_service.list_documents)
   * [Document_service.purge_documents](#document_service.purge_documents)
@@ -95,6 +96,7 @@
   * [Engine_service.tune_engine](#engine_service.tune_engine)
   * [Engine_service.update_engine](#engine_service.update_engine)
   * [Estimate_billing_service.estimate_data_size](#estimate_billing_service.estimate_data_size)
+  * [Rank_service.rank](#rank_service.rank)
   * [Recommendation_service.recommend](#recommendation_service.recommend)
   * [Schema_service.create_schema](#schema_service.create_schema)
   * [Schema_service.delete_schema](#schema_service.delete_schema)
@@ -1381,6 +1383,23 @@ __Usage:__
 
 
 
+### Document_service.get_processed_document
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.get_processed_document.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.get_processed_document.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.get_processed_document.js`
+
+
+-----
+
+
+
+
 ### Document_service.import_documents
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.import_documents.js).
@@ -1595,6 +1614,23 @@ __Usage:__
 
 
 `node packages/google-cloud-discoveryengine/samples/generated/v1alpha/estimate_billing_service.estimate_data_size.js`
+
+
+-----
+
+
+
+
+### Rank_service.rank
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/rank_service.rank.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/rank_service.rank.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1alpha/rank_service.rank.js`
 
 
 -----

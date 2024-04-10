@@ -168,7 +168,10 @@
     "packages/google-cloud-telcoautomation": {},
     "packages/google-cloud-cloudcontrolspartner": {},
     "packages/google-apps-meet": {},
-    "packages/google-cloud-parallelstore": {}
+    "packages/google-cloud-parallelstore": {},
+    "packages/google-chat": {},
+    "packages/google-cloud-apphub": {},
+    "packages/google-shopping-merchant-quota": {}
   },
   "plugins": [
     {

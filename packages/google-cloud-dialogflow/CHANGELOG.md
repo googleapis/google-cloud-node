@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [6.5.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.4.0...dialogflow-v6.5.0) (2024-03-23)
+
+
+### Features
+
+* [dialogflow] added text sections to the submitted summary ([#5130](https://github.com/googleapis/google-cloud-node/issues/5130)) ([f930cd2](https://github.com/googleapis/google-cloud-node/commit/f930cd21e4f3dba436281a1db4f65714d795fb6c))
+
 ## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.3.1...dialogflow-v6.4.0) (2024-03-12)
 
 

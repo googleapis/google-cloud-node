@@ -119,8 +119,15 @@ export class PermissionServiceClient {
         'Please set either universe_domain or universeDomain, but not both.'
       );
     }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
     this._universeDomain =
-      opts?.universeDomain ?? opts?.universe_domain ?? 'googleapis.com';
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'generativelanguage.' + this._universeDomain;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || this._servicePath;
@@ -172,7 +179,7 @@ export class PermissionServiceClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -202,6 +209,7 @@ export class PermissionServiceClient {
       documentPathTemplate: new this._gaxModule.PathTemplate(
         'corpora/{corpus}/documents/{document}'
       ),
+      filePathTemplate: new this._gaxModule.PathTemplate('files/{file}'),
       modelPathTemplate: new this._gaxModule.PathTemplate('models/{model}'),
       tunedModelPathTemplate: new this._gaxModule.PathTemplate(
         'tunedModels/{tuned_model}'
@@ -316,7 +324,7 @@ export class PermissionServiceClient {
    */
   static get servicePath() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -334,7 +342,7 @@ export class PermissionServiceClient {
    */
   static get apiEndpoint() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -1276,6 +1284,29 @@ export class PermissionServiceClient {
    */
   matchDocumentFromDocumentName(documentName: string) {
     return this.pathTemplates.documentPathTemplate.match(documentName).document;
+  }
+
+  /**
+   * Return a fully-qualified file resource name string.
+   *
+   * @param {string} file
+   * @returns {string} Resource name string.
+   */
+  filePath(file: string) {
+    return this.pathTemplates.filePathTemplate.render({
+      file: file,
+    });
+  }
+
+  /**
+   * Parse the file from File resource.
+   *
+   * @param {string} fileName
+   *   A fully-qualified path representing File resource.
+   * @returns {string} A string representing the file.
+   */
+  matchFileFromFileName(fileName: string) {
+    return this.pathTemplates.filePathTemplate.match(fileName).file;
   }
 
   /**

@@ -34,7 +34,7 @@ function main(restorePlan) {
    */
   // const restorePlan = {}
   /**
-   *  This is used to specify the fields to be overwritten in the
+   *  Optional. This is used to specify the fields to be overwritten in the
    *  RestorePlan targeted for update. The values for each of these
    *  updated fields will be taken from the `restore_plan` provided
    *  with this request. Field names are relative to the root of the resource.

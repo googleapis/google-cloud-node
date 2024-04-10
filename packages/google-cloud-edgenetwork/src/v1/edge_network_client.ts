@@ -714,6 +714,7 @@ export class EdgeNetworkClient {
     return this.innerApiCalls.initializeZone(request, options, callback);
   }
   /**
+   * Deprecated: not implemented.
    * Gets details of a single Zone.
    *
    * @param {Object} request
@@ -728,6 +729,7 @@ export class EdgeNetworkClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/edge_network.get_zone.js</caption>
    * region_tag:edgenetwork_v1_generated_EdgeNetwork_GetZone_async
+   * @deprecated GetZone is deprecated and may be removed in a future version.
    */
   getZone(
     request?: protos.google.cloud.edgenetwork.v1.IGetZoneRequest,
@@ -793,6 +795,11 @@ export class EdgeNetworkClient {
         name: request.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$EdgeNetwork-$GetZone',
+      'GetZone is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.getZone(request, options, callback);
   }
   /**
@@ -3059,6 +3066,7 @@ export class EdgeNetworkClient {
     >;
   }
   /**
+   * Deprecated: not implemented.
    * Lists Zones in a given project and location.
    *
    * @param {Object} request
@@ -3085,6 +3093,7 @@ export class EdgeNetworkClient {
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
+   * @deprecated ListZones is deprecated and may be removed in a future version.
    */
   listZones(
     request?: protos.google.cloud.edgenetwork.v1.IListZonesRequest,
@@ -3152,6 +3161,11 @@ export class EdgeNetworkClient {
         parent: request.parent ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$EdgeNetwork-$ListZones',
+      'ListZones is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.listZones(request, options, callback);
   }
 
@@ -3180,6 +3194,7 @@ export class EdgeNetworkClient {
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
+   * @deprecated ListZones is deprecated and may be removed in a future version.
    */
   listZonesStream(
     request?: protos.google.cloud.edgenetwork.v1.IListZonesRequest,
@@ -3196,6 +3211,11 @@ export class EdgeNetworkClient {
     const defaultCallSettings = this._defaults['listZones'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this.warn(
+      'DEP$EdgeNetwork-$ListZones',
+      'ListZones is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.descriptors.page.listZones.createStream(
       this.innerApiCalls.listZones as GaxCall,
       request,
@@ -3231,6 +3251,7 @@ export class EdgeNetworkClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/edge_network.list_zones.js</caption>
    * region_tag:edgenetwork_v1_generated_EdgeNetwork_ListZones_async
+   * @deprecated ListZones is deprecated and may be removed in a future version.
    */
   listZonesAsync(
     request?: protos.google.cloud.edgenetwork.v1.IListZonesRequest,
@@ -3247,6 +3268,11 @@ export class EdgeNetworkClient {
     const defaultCallSettings = this._defaults['listZones'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this.warn(
+      'DEP$EdgeNetwork-$ListZones',
+      'ListZones is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.descriptors.page.listZones.asyncIterate(
       this.innerApiCalls['listZones'] as GaxCall,
       request as {},

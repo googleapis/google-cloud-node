@@ -5,6 +5,128 @@
   "protoPackage": "google.cloud.networkservices.v1",
   "libraryPackage": "@google-cloud/networkservices",
   "services": {
+    "DepService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DepServiceClient",
+          "rpcs": {
+            "GetLbTrafficExtension": {
+              "methods": [
+                "getLbTrafficExtension"
+              ]
+            },
+            "GetLbRouteExtension": {
+              "methods": [
+                "getLbRouteExtension"
+              ]
+            },
+            "CreateLbTrafficExtension": {
+              "methods": [
+                "createLbTrafficExtension"
+              ]
+            },
+            "UpdateLbTrafficExtension": {
+              "methods": [
+                "updateLbTrafficExtension"
+              ]
+            },
+            "DeleteLbTrafficExtension": {
+              "methods": [
+                "deleteLbTrafficExtension"
+              ]
+            },
+            "CreateLbRouteExtension": {
+              "methods": [
+                "createLbRouteExtension"
+              ]
+            },
+            "UpdateLbRouteExtension": {
+              "methods": [
+                "updateLbRouteExtension"
+              ]
+            },
+            "DeleteLbRouteExtension": {
+              "methods": [
+                "deleteLbRouteExtension"
+              ]
+            },
+            "ListLbTrafficExtensions": {
+              "methods": [
+                "listLbTrafficExtensions",
+                "listLbTrafficExtensionsStream",
+                "listLbTrafficExtensionsAsync"
+              ]
+            },
+            "ListLbRouteExtensions": {
+              "methods": [
+                "listLbRouteExtensions",
+                "listLbRouteExtensionsStream",
+                "listLbRouteExtensionsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DepServiceClient",
+          "rpcs": {
+            "GetLbTrafficExtension": {
+              "methods": [
+                "getLbTrafficExtension"
+              ]
+            },
+            "GetLbRouteExtension": {
+              "methods": [
+                "getLbRouteExtension"
+              ]
+            },
+            "CreateLbTrafficExtension": {
+              "methods": [
+                "createLbTrafficExtension"
+              ]
+            },
+            "UpdateLbTrafficExtension": {
+              "methods": [
+                "updateLbTrafficExtension"
+              ]
+            },
+            "DeleteLbTrafficExtension": {
+              "methods": [
+                "deleteLbTrafficExtension"
+              ]
+            },
+            "CreateLbRouteExtension": {
+              "methods": [
+                "createLbRouteExtension"
+              ]
+            },
+            "UpdateLbRouteExtension": {
+              "methods": [
+                "updateLbRouteExtension"
+              ]
+            },
+            "DeleteLbRouteExtension": {
+              "methods": [
+                "deleteLbRouteExtension"
+              ]
+            },
+            "ListLbTrafficExtensions": {
+              "methods": [
+                "listLbTrafficExtensions",
+                "listLbTrafficExtensionsStream",
+                "listLbTrafficExtensionsAsync"
+              ]
+            },
+            "ListLbRouteExtensions": {
+              "methods": [
+                "listLbRouteExtensions",
+                "listLbRouteExtensionsStream",
+                "listLbRouteExtensionsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "NetworkServices": {
       "clients": {
         "grpc": {

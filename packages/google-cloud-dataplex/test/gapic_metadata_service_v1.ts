@@ -1346,9 +1346,9 @@ describe('v1.MetadataServiceClient', () => {
       assert(
         (client.descriptors.page.listEntities.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1397,9 +1397,9 @@ describe('v1.MetadataServiceClient', () => {
       assert(
         (client.descriptors.page.listEntities.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1440,9 +1440,9 @@ describe('v1.MetadataServiceClient', () => {
       assert(
         (client.descriptors.page.listEntities.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1480,9 +1480,9 @@ describe('v1.MetadataServiceClient', () => {
       assert(
         (client.descriptors.page.listEntities.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -1649,9 +1649,9 @@ describe('v1.MetadataServiceClient', () => {
       assert(
         (client.descriptors.page.listPartitions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1698,9 +1698,9 @@ describe('v1.MetadataServiceClient', () => {
       assert(
         (client.descriptors.page.listPartitions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1741,9 +1741,9 @@ describe('v1.MetadataServiceClient', () => {
       assert(
         (client.descriptors.page.listPartitions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1781,9 +1781,9 @@ describe('v1.MetadataServiceClient', () => {
       assert(
         (client.descriptors.page.listPartitions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -2292,6 +2292,70 @@ describe('v1.MetadataServiceClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('aspectType', () => {
+      const fakePath = '/rendered/path/aspectType';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        aspect_type: 'aspectTypeValue',
+      };
+      const client = new metadataserviceModule.v1.MetadataServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.aspectTypePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.aspectTypePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('aspectTypePath', () => {
+        const result = client.aspectTypePath(
+          'projectValue',
+          'locationValue',
+          'aspectTypeValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.aspectTypePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromAspectTypeName', () => {
+        const result = client.matchProjectFromAspectTypeName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.aspectTypePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromAspectTypeName', () => {
+        const result = client.matchLocationFromAspectTypeName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.aspectTypePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAspectTypeFromAspectTypeName', () => {
+        const result = client.matchAspectTypeFromAspectTypeName(fakePath);
+        assert.strictEqual(result, 'aspectTypeValue');
+        assert(
+          (client.pathTemplates.aspectTypePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('asset', () => {
       const fakePath = '/rendered/path/asset';
       const expectedParameters = {
@@ -2900,6 +2964,210 @@ describe('v1.MetadataServiceClient', () => {
         assert.strictEqual(result, 'entityValue');
         assert(
           (client.pathTemplates.entityPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('entry', () => {
+      const fakePath = '/rendered/path/entry';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        entry_group: 'entryGroupValue',
+        entry: 'entryValue',
+      };
+      const client = new metadataserviceModule.v1.MetadataServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.entryPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.entryPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('entryPath', () => {
+        const result = client.entryPath(
+          'projectValue',
+          'locationValue',
+          'entryGroupValue',
+          'entryValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.entryPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromEntryName', () => {
+        const result = client.matchProjectFromEntryName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.entryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromEntryName', () => {
+        const result = client.matchLocationFromEntryName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.entryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEntryGroupFromEntryName', () => {
+        const result = client.matchEntryGroupFromEntryName(fakePath);
+        assert.strictEqual(result, 'entryGroupValue');
+        assert(
+          (client.pathTemplates.entryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEntryFromEntryName', () => {
+        const result = client.matchEntryFromEntryName(fakePath);
+        assert.strictEqual(result, 'entryValue');
+        assert(
+          (client.pathTemplates.entryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('entryGroup', () => {
+      const fakePath = '/rendered/path/entryGroup';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        entry_group: 'entryGroupValue',
+      };
+      const client = new metadataserviceModule.v1.MetadataServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.entryGroupPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.entryGroupPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('entryGroupPath', () => {
+        const result = client.entryGroupPath(
+          'projectValue',
+          'locationValue',
+          'entryGroupValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.entryGroupPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromEntryGroupName', () => {
+        const result = client.matchProjectFromEntryGroupName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.entryGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromEntryGroupName', () => {
+        const result = client.matchLocationFromEntryGroupName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.entryGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEntryGroupFromEntryGroupName', () => {
+        const result = client.matchEntryGroupFromEntryGroupName(fakePath);
+        assert.strictEqual(result, 'entryGroupValue');
+        assert(
+          (client.pathTemplates.entryGroupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('entryType', () => {
+      const fakePath = '/rendered/path/entryType';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        entry_type: 'entryTypeValue',
+      };
+      const client = new metadataserviceModule.v1.MetadataServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.entryTypePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.entryTypePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('entryTypePath', () => {
+        const result = client.entryTypePath(
+          'projectValue',
+          'locationValue',
+          'entryTypeValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.entryTypePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromEntryTypeName', () => {
+        const result = client.matchProjectFromEntryTypeName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.entryTypePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromEntryTypeName', () => {
+        const result = client.matchLocationFromEntryTypeName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.entryTypePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEntryTypeFromEntryTypeName', () => {
+        const result = client.matchEntryTypeFromEntryTypeName(fakePath);
+        assert.strictEqual(result, 'entryTypeValue');
+        assert(
+          (client.pathTemplates.entryTypePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/run-v1.1.0...run-v1.2.0) (2024-04-05)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5190](https://github.com/googleapis/google-cloud-node/issues/5190)) ([b569fbe](https://github.com/googleapis/google-cloud-node/commit/b569fbe1472d0fd71c1bfb58d0b1661814ac5727))
+
 ## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/run-v1.0.2...run-v1.1.0) (2024-02-09)
 
 

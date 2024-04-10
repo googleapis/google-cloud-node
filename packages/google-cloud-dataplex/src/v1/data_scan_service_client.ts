@@ -204,6 +204,9 @@ export class DataScanServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      aspectTypePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/aspectTypes/{aspect_type}'
+      ),
       assetPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/assets/{asset}'
       ),
@@ -227,6 +230,15 @@ export class DataScanServiceClient {
       ),
       entityPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity}'
+      ),
+      entryPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}'
+      ),
+      entryGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/entryGroups/{entry_group}'
+      ),
+      entryTypePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/entryTypes/{entry_type}'
       ),
       environmentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/environments/{environment}'
@@ -569,6 +581,7 @@ export class DataScanServiceClient {
       'runDataScan',
       'getDataScanJob',
       'listDataScanJobs',
+      'generateDataQualityRules',
     ];
     for (const methodName of dataScanServiceStubMethods) {
       const callPromise = this.dataScanServiceStub.then(
@@ -952,6 +965,109 @@ export class DataScanServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.getDataScanJob(request, options, callback);
+  }
+  /**
+   * Generates recommended DataQualityRule from a data profiling DataScan.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name should be either
+   *   * the name of a datascan with at least one successful completed data
+   *   profiling job, or
+   *   * the name of a successful completed data profiling datascan job.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.GenerateDataQualityRulesResponse|GenerateDataQualityRulesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_scan_service.generate_data_quality_rules.js</caption>
+   * region_tag:dataplex_v1_generated_DataScanService_GenerateDataQualityRules_async
+   */
+  generateDataQualityRules(
+    request?: protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesResponse,
+      (
+        | protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  generateDataQualityRules(
+    request: protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesResponse,
+      | protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  generateDataQualityRules(
+    request: protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesResponse,
+      | protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  generateDataQualityRules(
+    request?: protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesResponse,
+          | protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesResponse,
+      | protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesResponse,
+      (
+        | protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.generateDataQualityRules(
+      request,
+      options,
+      callback
+    );
   }
 
   /**
@@ -2132,6 +2248,58 @@ export class DataScanServiceClient {
   // --------------------
 
   /**
+   * Return a fully-qualified aspectType resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} aspect_type
+   * @returns {string} Resource name string.
+   */
+  aspectTypePath(project: string, location: string, aspectType: string) {
+    return this.pathTemplates.aspectTypePathTemplate.render({
+      project: project,
+      location: location,
+      aspect_type: aspectType,
+    });
+  }
+
+  /**
+   * Parse the project from AspectType resource.
+   *
+   * @param {string} aspectTypeName
+   *   A fully-qualified path representing AspectType resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAspectTypeName(aspectTypeName: string) {
+    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName)
+      .project;
+  }
+
+  /**
+   * Parse the location from AspectType resource.
+   *
+   * @param {string} aspectTypeName
+   *   A fully-qualified path representing AspectType resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAspectTypeName(aspectTypeName: string) {
+    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName)
+      .location;
+  }
+
+  /**
+   * Parse the aspect_type from AspectType resource.
+   *
+   * @param {string} aspectTypeName
+   *   A fully-qualified path representing AspectType resource.
+   * @returns {string} A string representing the aspect_type.
+   */
+  matchAspectTypeFromAspectTypeName(aspectTypeName: string) {
+    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName)
+      .aspect_type;
+  }
+
+  /**
    * Return a fully-qualified asset resource name string.
    *
    * @param {string} project
@@ -2662,6 +2830,177 @@ export class DataScanServiceClient {
    */
   matchEntityFromEntityName(entityName: string) {
     return this.pathTemplates.entityPathTemplate.match(entityName).entity;
+  }
+
+  /**
+   * Return a fully-qualified entry resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} entry_group
+   * @param {string} entry
+   * @returns {string} Resource name string.
+   */
+  entryPath(
+    project: string,
+    location: string,
+    entryGroup: string,
+    entry: string
+  ) {
+    return this.pathTemplates.entryPathTemplate.render({
+      project: project,
+      location: location,
+      entry_group: entryGroup,
+      entry: entry,
+    });
+  }
+
+  /**
+   * Parse the project from Entry resource.
+   *
+   * @param {string} entryName
+   *   A fully-qualified path representing Entry resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEntryName(entryName: string) {
+    return this.pathTemplates.entryPathTemplate.match(entryName).project;
+  }
+
+  /**
+   * Parse the location from Entry resource.
+   *
+   * @param {string} entryName
+   *   A fully-qualified path representing Entry resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEntryName(entryName: string) {
+    return this.pathTemplates.entryPathTemplate.match(entryName).location;
+  }
+
+  /**
+   * Parse the entry_group from Entry resource.
+   *
+   * @param {string} entryName
+   *   A fully-qualified path representing Entry resource.
+   * @returns {string} A string representing the entry_group.
+   */
+  matchEntryGroupFromEntryName(entryName: string) {
+    return this.pathTemplates.entryPathTemplate.match(entryName).entry_group;
+  }
+
+  /**
+   * Parse the entry from Entry resource.
+   *
+   * @param {string} entryName
+   *   A fully-qualified path representing Entry resource.
+   * @returns {string} A string representing the entry.
+   */
+  matchEntryFromEntryName(entryName: string) {
+    return this.pathTemplates.entryPathTemplate.match(entryName).entry;
+  }
+
+  /**
+   * Return a fully-qualified entryGroup resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} entry_group
+   * @returns {string} Resource name string.
+   */
+  entryGroupPath(project: string, location: string, entryGroup: string) {
+    return this.pathTemplates.entryGroupPathTemplate.render({
+      project: project,
+      location: location,
+      entry_group: entryGroup,
+    });
+  }
+
+  /**
+   * Parse the project from EntryGroup resource.
+   *
+   * @param {string} entryGroupName
+   *   A fully-qualified path representing EntryGroup resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEntryGroupName(entryGroupName: string) {
+    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName)
+      .project;
+  }
+
+  /**
+   * Parse the location from EntryGroup resource.
+   *
+   * @param {string} entryGroupName
+   *   A fully-qualified path representing EntryGroup resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEntryGroupName(entryGroupName: string) {
+    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName)
+      .location;
+  }
+
+  /**
+   * Parse the entry_group from EntryGroup resource.
+   *
+   * @param {string} entryGroupName
+   *   A fully-qualified path representing EntryGroup resource.
+   * @returns {string} A string representing the entry_group.
+   */
+  matchEntryGroupFromEntryGroupName(entryGroupName: string) {
+    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName)
+      .entry_group;
+  }
+
+  /**
+   * Return a fully-qualified entryType resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} entry_type
+   * @returns {string} Resource name string.
+   */
+  entryTypePath(project: string, location: string, entryType: string) {
+    return this.pathTemplates.entryTypePathTemplate.render({
+      project: project,
+      location: location,
+      entry_type: entryType,
+    });
+  }
+
+  /**
+   * Parse the project from EntryType resource.
+   *
+   * @param {string} entryTypeName
+   *   A fully-qualified path representing EntryType resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEntryTypeName(entryTypeName: string) {
+    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName)
+      .project;
+  }
+
+  /**
+   * Parse the location from EntryType resource.
+   *
+   * @param {string} entryTypeName
+   *   A fully-qualified path representing EntryType resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEntryTypeName(entryTypeName: string) {
+    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName)
+      .location;
+  }
+
+  /**
+   * Parse the entry_type from EntryType resource.
+   *
+   * @param {string} entryTypeName
+   *   A fully-qualified path representing EntryType resource.
+   * @returns {string} A string representing the entry_type.
+   */
+  matchEntryTypeFromEntryTypeName(entryTypeName: string) {
+    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName)
+      .entry_type;
   }
 
   /**

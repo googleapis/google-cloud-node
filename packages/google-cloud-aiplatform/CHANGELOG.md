@@ -1,5 +1,27 @@
 # Changelog
 
+## [3.18.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.17.0...aiplatform-v3.18.0) (2024-04-10)
+
+
+### Features
+
+* Add Persistent Resource reboot api call to v1beta1 ([#5182](https://github.com/googleapis/google-cloud-node/issues/5182)) ([c271d54](https://github.com/googleapis/google-cloud-node/commit/c271d54547cf657eabd674ace50842d22005fb67))
+
+## [3.17.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.16.0...aiplatform-v3.17.0) (2024-03-26)
+
+
+### Features
+
+* Add Optimized feature store proto ([#5153](https://github.com/googleapis/google-cloud-node/issues/5153)) ([1f5d99c](https://github.com/googleapis/google-cloud-node/commit/1f5d99c3fec4d7c0c84da22fc780e4e76af57548))
+* Evaluation Service aiplatform v1beta1 initial release ([#5172](https://github.com/googleapis/google-cloud-node/issues/5172)) ([6827acc](https://github.com/googleapis/google-cloud-node/commit/6827accaabc06bffa6a154189c18cd8e3bc7ed82))
+
+## [3.16.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.15.0...aiplatform-v3.16.0) (2024-03-23)
+
+
+### Features
+
+* Add v1beta1 StreamingFetchFeatureValues API ([#5128](https://github.com/googleapis/google-cloud-node/issues/5128)) ([4849a58](https://github.com/googleapis/google-cloud-node/commit/4849a58a9761a0123f3232f33651bd6972e6fd3a))
+
 ## [3.15.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.14.0...aiplatform-v3.15.0) (2024-03-12)
 
 

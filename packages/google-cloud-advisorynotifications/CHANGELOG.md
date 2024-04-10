@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/advisorynotifications-v1.2.0...advisorynotifications-v1.3.0) (2024-04-05)
+
+
+### Features
+
+* [advisorynotifications] add GetSettings and UpdateSettings methods at the Project-level to advisorynotifications.googleapis.com ([#5215](https://github.com/googleapis/google-cloud-node/issues/5215)) ([a39de9b](https://github.com/googleapis/google-cloud-node/commit/a39de9b2eb05fa9968a0e222e7b067015150ea30))
+
 ## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/advisorynotifications-v1.1.0...advisorynotifications-v1.2.0) (2024-02-09)
 
 

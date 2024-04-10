@@ -51,7 +51,7 @@ function main(name) {
   /**
    *  Optional. This field allows this CA to be disabled even if it's being
    *  depended on by another resource. However, doing so may result in unintended
-   *  and unrecoverable effects on any dependent resource(s) since the CA will
+   *  and unrecoverable effects on any dependent resources since the CA will
    *  no longer be able to issue certificates.
    */
   // const ignoreDependentResources = true

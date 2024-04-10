@@ -21,6 +21,7 @@
   * [Backup_for_g_k_e.delete_restore](#backup_for_g_k_e.delete_restore)
   * [Backup_for_g_k_e.delete_restore_plan](#backup_for_g_k_e.delete_restore_plan)
   * [Backup_for_g_k_e.get_backup](#backup_for_g_k_e.get_backup)
+  * [Backup_for_g_k_e.get_backup_index_download_url](#backup_for_g_k_e.get_backup_index_download_url)
   * [Backup_for_g_k_e.get_backup_plan](#backup_for_g_k_e.get_backup_plan)
   * [Backup_for_g_k_e.get_restore](#backup_for_g_k_e.get_restore)
   * [Backup_for_g_k_e.get_restore_plan](#backup_for_g_k_e.get_restore_plan)
@@ -199,6 +200,23 @@ __Usage:__
 
 
 `node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_backup.js`
+
+
+-----
+
+
+
+
+### Backup_for_g_k_e.get_backup_index_download_url
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_backup_index_download_url.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_backup_index_download_url.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_backup_index_download_url.js`
 
 
 -----

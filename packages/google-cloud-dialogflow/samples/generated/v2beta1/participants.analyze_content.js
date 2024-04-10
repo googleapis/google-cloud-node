@@ -51,6 +51,10 @@ function main(participant) {
    */
   // const suggestionInput = {}
   /**
+   *  The intent to be triggered on V3 agent.
+   */
+  // const intentInput = {}
+  /**
    *  Speech synthesis configuration.
    *  The speech synthesis settings for a virtual agent that may be configured
    *  for the associated conversation profile are not used when calling
