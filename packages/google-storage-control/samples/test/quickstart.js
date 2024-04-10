@@ -34,7 +34,7 @@ describe('Quickstart', () => {
 
   it('should run quickstart', async () => {
     const output = execSync(
-      `node ./quickstart.js storage-control-test-monorepo`,
+      'node ./quickstart.js storage-control-test-monorepo',
       {cwd}
     );
     assert(output !== null);
