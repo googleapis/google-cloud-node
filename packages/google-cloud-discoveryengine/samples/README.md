@@ -127,12 +127,19 @@
   * [Completion_service.complete_query](#completion_service.complete_query)
   * [Completion_service.import_suggestion_deny_list_entries](#completion_service.import_suggestion_deny_list_entries)
   * [Completion_service.purge_suggestion_deny_list_entries](#completion_service.purge_suggestion_deny_list_entries)
+  * [Conversational_search_service.answer_query](#conversational_search_service.answer_query)
   * [Conversational_search_service.converse_conversation](#conversational_search_service.converse_conversation)
   * [Conversational_search_service.create_conversation](#conversational_search_service.create_conversation)
+  * [Conversational_search_service.create_session](#conversational_search_service.create_session)
   * [Conversational_search_service.delete_conversation](#conversational_search_service.delete_conversation)
+  * [Conversational_search_service.delete_session](#conversational_search_service.delete_session)
+  * [Conversational_search_service.get_answer](#conversational_search_service.get_answer)
   * [Conversational_search_service.get_conversation](#conversational_search_service.get_conversation)
+  * [Conversational_search_service.get_session](#conversational_search_service.get_session)
   * [Conversational_search_service.list_conversations](#conversational_search_service.list_conversations)
+  * [Conversational_search_service.list_sessions](#conversational_search_service.list_sessions)
   * [Conversational_search_service.update_conversation](#conversational_search_service.update_conversation)
+  * [Conversational_search_service.update_session](#conversational_search_service.update_session)
   * [Data_store_service.create_data_store](#data_store_service.create_data_store)
   * [Data_store_service.delete_data_store](#data_store_service.delete_data_store)
   * [Data_store_service.get_data_store](#data_store_service.get_data_store)
@@ -149,7 +156,12 @@
   * [Engine_service.delete_engine](#engine_service.delete_engine)
   * [Engine_service.get_engine](#engine_service.get_engine)
   * [Engine_service.list_engines](#engine_service.list_engines)
+  * [Engine_service.pause_engine](#engine_service.pause_engine)
+  * [Engine_service.resume_engine](#engine_service.resume_engine)
+  * [Engine_service.tune_engine](#engine_service.tune_engine)
   * [Engine_service.update_engine](#engine_service.update_engine)
+  * [Grounded_generation_service.check_grounding](#grounded_generation_service.check_grounding)
+  * [Rank_service.rank](#rank_service.rank)
   * [Recommendation_service.recommend](#recommendation_service.recommend)
   * [Schema_service.create_schema](#schema_service.create_schema)
   * [Schema_service.delete_schema](#schema_service.delete_schema)
@@ -2148,6 +2160,23 @@ __Usage:__
 
 
 
+### Conversational_search_service.answer_query
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.answer_query.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.answer_query.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.answer_query.js`
+
+
+-----
+
+
+
+
 ### Conversational_search_service.converse_conversation
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.converse_conversation.js).
@@ -2182,6 +2211,23 @@ __Usage:__
 
 
 
+### Conversational_search_service.create_session
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.create_session.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.create_session.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.create_session.js`
+
+
+-----
+
+
+
+
 ### Conversational_search_service.delete_conversation
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.delete_conversation.js).
@@ -2192,6 +2238,40 @@ __Usage:__
 
 
 `node packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.delete_conversation.js`
+
+
+-----
+
+
+
+
+### Conversational_search_service.delete_session
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.delete_session.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.delete_session.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.delete_session.js`
+
+
+-----
+
+
+
+
+### Conversational_search_service.get_answer
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.get_answer.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.get_answer.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.get_answer.js`
 
 
 -----
@@ -2216,6 +2296,23 @@ __Usage:__
 
 
 
+### Conversational_search_service.get_session
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.get_session.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.get_session.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.get_session.js`
+
+
+-----
+
+
+
+
 ### Conversational_search_service.list_conversations
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.list_conversations.js).
@@ -2233,6 +2330,23 @@ __Usage:__
 
 
 
+### Conversational_search_service.list_sessions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.list_sessions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.list_sessions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.list_sessions.js`
+
+
+-----
+
+
+
+
 ### Conversational_search_service.update_conversation
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.update_conversation.js).
@@ -2243,6 +2357,23 @@ __Usage:__
 
 
 `node packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.update_conversation.js`
+
+
+-----
+
+
+
+
+### Conversational_search_service.update_session
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.update_session.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.update_session.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.update_session.js`
 
 
 -----
@@ -2522,6 +2653,57 @@ __Usage:__
 
 
 
+### Engine_service.pause_engine
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.pause_engine.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.pause_engine.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.pause_engine.js`
+
+
+-----
+
+
+
+
+### Engine_service.resume_engine
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.resume_engine.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.resume_engine.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.resume_engine.js`
+
+
+-----
+
+
+
+
+### Engine_service.tune_engine
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.tune_engine.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.tune_engine.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.tune_engine.js`
+
+
+-----
+
+
+
+
 ### Engine_service.update_engine
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.update_engine.js).
@@ -2532,6 +2714,40 @@ __Usage:__
 
 
 `node packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.update_engine.js`
+
+
+-----
+
+
+
+
+### Grounded_generation_service.check_grounding
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/grounded_generation_service.check_grounding.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/grounded_generation_service.check_grounding.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/grounded_generation_service.check_grounding.js`
+
+
+-----
+
+
+
+
+### Rank_service.rank
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/rank_service.rank.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/rank_service.rank.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/rank_service.rank.js`
 
 
 -----

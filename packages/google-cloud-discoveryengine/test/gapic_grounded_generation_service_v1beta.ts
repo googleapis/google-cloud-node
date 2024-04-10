@@ -21,16 +21,9 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as schemaserviceModule from '../src';
+import * as groundedgenerationserviceModule from '../src';
 
-import {PassThrough} from 'stream';
-
-import {
-  protobuf,
-  LROperation,
-  operationsProtos,
-  LocationProtos,
-} from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -71,76 +64,6 @@ function stubSimpleCallWithCallback<ResponseType>(
     : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
-}
-
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
-}
-
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
-    }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
-    }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
-}
-
 function stubAsyncIterationCall<ResponseType>(
   responses?: ResponseType[],
   error?: Error
@@ -164,16 +87,18 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1beta.SchemaServiceClient', () => {
+describe('v1beta.GroundedGenerationServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient();
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'discoveryengine.googleapis.com');
     });
 
     it('has universeDomain', () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient();
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -185,7 +110,8 @@ describe('v1beta.SchemaServiceClient', () => {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const servicePath =
-          schemaserviceModule.v1beta.SchemaServiceClient.servicePath;
+          groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient
+            .servicePath;
         assert.strictEqual(servicePath, 'discoveryengine.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -194,24 +120,27 @@ describe('v1beta.SchemaServiceClient', () => {
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const apiEndpoint =
-          schemaserviceModule.v1beta.SchemaServiceClient.apiEndpoint;
+          groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient
+            .apiEndpoint;
         assert.strictEqual(apiEndpoint, 'discoveryengine.googleapis.com');
         assert(stub.called);
         stub.restore();
       });
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        universeDomain: 'example.com',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {universeDomain: 'example.com'}
+        );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'discoveryengine.example.com');
     });
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        universe_domain: 'example.com',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {universe_domain: 'example.com'}
+        );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'discoveryengine.example.com');
     });
@@ -221,7 +150,8 @@ describe('v1beta.SchemaServiceClient', () => {
         it('sets apiEndpoint from environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new schemaserviceModule.v1beta.SchemaServiceClient();
+          const client =
+            new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient();
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'discoveryengine.example.com');
           if (saved) {
@@ -234,9 +164,10 @@ describe('v1beta.SchemaServiceClient', () => {
         it('value configured in code has priority over environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-            universeDomain: 'configured.example.com',
-          });
+          const client =
+            new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+              {universeDomain: 'configured.example.com'}
+            );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
             servicePath,
@@ -252,59 +183,73 @@ describe('v1beta.SchemaServiceClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new schemaserviceModule.v1beta.SchemaServiceClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {universe_domain: 'example.com', universeDomain: 'example.net'}
+        );
       });
     });
 
     it('has port', () => {
-      const port = schemaserviceModule.v1beta.SchemaServiceClient.port;
+      const port =
+        groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient
+          .port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient();
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        fallback: true,
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            fallback: true,
+          }
+        );
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.schemaServiceStub, undefined);
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      assert.strictEqual(client.groundedGenerationServiceStub, undefined);
       await client.initialize();
-      assert(client.schemaServiceStub);
+      assert(client.groundedGenerationServiceStub);
     });
 
     it('has close method for the initialized client', done => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
-      assert(client.schemaServiceStub);
+      assert(client.groundedGenerationServiceStub);
       client.close().then(() => {
         done();
       });
     });
 
     it('has close method for the non-initialized client', done => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.schemaServiceStub, undefined);
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      assert.strictEqual(client.groundedGenerationServiceStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -312,10 +257,13 @@ describe('v1beta.SchemaServiceClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
       const result = await client.getProjectId();
       assert.strictEqual(result, fakeProjectId);
@@ -324,10 +272,13 @@ describe('v1beta.SchemaServiceClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.auth.getProjectId = sinon
         .stub()
         .callsArgWith(0, null, fakeProjectId);
@@ -345,64 +296,70 @@ describe('v1beta.SchemaServiceClient', () => {
     });
   });
 
-  describe('getSchema', () => {
-    it('invokes getSchema without error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+  describe('checkGrounding', () => {
+    it('invokes checkGrounding without error', async () => {
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.GetSchemaRequest()
+        new protos.google.cloud.discoveryengine.v1beta.CheckGroundingRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.GetSchemaRequest',
-        ['name']
+        '.google.cloud.discoveryengine.v1beta.CheckGroundingRequest',
+        ['groundingConfig']
       );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      request.groundingConfig = defaultValue1;
+      const expectedHeaderRequestParams = `grounding_config=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.Schema()
+        new protos.google.cloud.discoveryengine.v1beta.CheckGroundingResponse()
       );
-      client.innerApiCalls.getSchema = stubSimpleCall(expectedResponse);
-      const [response] = await client.getSchema(request);
+      client.innerApiCalls.checkGrounding = stubSimpleCall(expectedResponse);
+      const [response] = await client.checkGrounding(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getSchema as SinonStub
+        client.innerApiCalls.checkGrounding as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getSchema as SinonStub
+        client.innerApiCalls.checkGrounding as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getSchema without error using callback', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes checkGrounding without error using callback', async () => {
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.GetSchemaRequest()
+        new protos.google.cloud.discoveryengine.v1beta.CheckGroundingRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.GetSchemaRequest',
-        ['name']
+        '.google.cloud.discoveryengine.v1beta.CheckGroundingRequest',
+        ['groundingConfig']
       );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      request.groundingConfig = defaultValue1;
+      const expectedHeaderRequestParams = `grounding_config=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.Schema()
+        new protos.google.cloud.discoveryengine.v1beta.CheckGroundingResponse()
       );
-      client.innerApiCalls.getSchema =
+      client.innerApiCalls.checkGrounding =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.getSchema(
+        client.checkGrounding(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1beta.ISchema | null
+            result?: protos.google.cloud.discoveryengine.v1beta.ICheckGroundingResponse | null
           ) => {
             if (err) {
               reject(err);
@@ -415,975 +372,80 @@ describe('v1beta.SchemaServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getSchema as SinonStub
+        client.innerApiCalls.checkGrounding as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getSchema as SinonStub
+        client.innerApiCalls.checkGrounding as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getSchema with error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes checkGrounding with error', async () => {
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.GetSchemaRequest()
+        new protos.google.cloud.discoveryengine.v1beta.CheckGroundingRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.GetSchemaRequest',
-        ['name']
+        '.google.cloud.discoveryengine.v1beta.CheckGroundingRequest',
+        ['groundingConfig']
       );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      request.groundingConfig = defaultValue1;
+      const expectedHeaderRequestParams = `grounding_config=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.getSchema = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getSchema(request), expectedError);
+      client.innerApiCalls.checkGrounding = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkGrounding(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.getSchema as SinonStub
+        client.innerApiCalls.checkGrounding as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getSchema as SinonStub
+        client.innerApiCalls.checkGrounding as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getSchema with closed client', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes checkGrounding with closed client', async () => {
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.GetSchemaRequest()
+        new protos.google.cloud.discoveryengine.v1beta.CheckGroundingRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.GetSchemaRequest',
-        ['name']
+        '.google.cloud.discoveryengine.v1beta.CheckGroundingRequest',
+        ['groundingConfig']
       );
-      request.name = defaultValue1;
+      request.groundingConfig = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.getSchema(request), expectedError);
-    });
-  });
-
-  describe('createSchema', () => {
-    it('invokes createSchema without error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.CreateSchemaRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.CreateSchemaRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createSchema = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createSchema(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createSchema as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSchema as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createSchema without error using callback', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.CreateSchemaRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.CreateSchemaRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createSchema =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createSchema(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.discoveryengine.v1beta.ISchema,
-              protos.google.cloud.discoveryengine.v1beta.ICreateSchemaMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.discoveryengine.v1beta.ISchema,
-        protos.google.cloud.discoveryengine.v1beta.ICreateSchemaMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createSchema as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSchema as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createSchema with call error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.CreateSchemaRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.CreateSchemaRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createSchema = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createSchema(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createSchema as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSchema as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createSchema with LRO error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.CreateSchemaRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.CreateSchemaRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createSchema = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createSchema(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createSchema as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createSchema as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateSchemaProgress without error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateSchemaProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateSchemaProgress with error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkCreateSchemaProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateSchema', () => {
-    it('invokes updateSchema without error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.UpdateSchemaRequest()
-      );
-      request.schema ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.UpdateSchemaRequest',
-        ['schema', 'name']
-      );
-      request.schema.name = defaultValue1;
-      const expectedHeaderRequestParams = `schema.name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateSchema = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateSchema(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateSchema as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSchema as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSchema without error using callback', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.UpdateSchemaRequest()
-      );
-      request.schema ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.UpdateSchemaRequest',
-        ['schema', 'name']
-      );
-      request.schema.name = defaultValue1;
-      const expectedHeaderRequestParams = `schema.name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateSchema =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateSchema(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.discoveryengine.v1beta.ISchema,
-              protos.google.cloud.discoveryengine.v1beta.IUpdateSchemaMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.discoveryengine.v1beta.ISchema,
-        protos.google.cloud.discoveryengine.v1beta.IUpdateSchemaMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateSchema as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSchema as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSchema with call error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.UpdateSchemaRequest()
-      );
-      request.schema ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.UpdateSchemaRequest',
-        ['schema', 'name']
-      );
-      request.schema.name = defaultValue1;
-      const expectedHeaderRequestParams = `schema.name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateSchema = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateSchema(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateSchema as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSchema as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSchema with LRO error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.UpdateSchemaRequest()
-      );
-      request.schema ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.UpdateSchemaRequest',
-        ['schema', 'name']
-      );
-      request.schema.name = defaultValue1;
-      const expectedHeaderRequestParams = `schema.name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateSchema = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateSchema(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateSchema as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSchema as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateSchemaProgress without error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateSchemaProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateSchemaProgress with error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkUpdateSchemaProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteSchema', () => {
-    it('invokes deleteSchema without error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.DeleteSchemaRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.DeleteSchemaRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteSchema = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteSchema(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteSchema as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSchema as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteSchema without error using callback', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.DeleteSchemaRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.DeleteSchemaRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteSchema =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteSchema(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.discoveryengine.v1beta.IDeleteSchemaMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1beta.IDeleteSchemaMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteSchema as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSchema as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteSchema with call error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.DeleteSchemaRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.DeleteSchemaRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteSchema = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteSchema(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteSchema as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSchema as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteSchema with LRO error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.DeleteSchemaRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.DeleteSchemaRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteSchema = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteSchema(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteSchema as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteSchema as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteSchemaProgress without error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteSchemaProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteSchemaProgress with error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkDeleteSchemaProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listSchemas', () => {
-    it('invokes listSchemas without error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.ListSchemasRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.ListSchemasRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1beta.Schema()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1beta.Schema()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1beta.Schema()
-        ),
-      ];
-      client.innerApiCalls.listSchemas = stubSimpleCall(expectedResponse);
-      const [response] = await client.listSchemas(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listSchemas as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSchemas as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listSchemas without error using callback', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.ListSchemasRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.ListSchemasRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1beta.Schema()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1beta.Schema()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1beta.Schema()
-        ),
-      ];
-      client.innerApiCalls.listSchemas =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listSchemas(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1beta.ISchema[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listSchemas as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSchemas as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listSchemas with error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.ListSchemasRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.ListSchemasRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listSchemas = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listSchemas(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listSchemas as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSchemas as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listSchemasStream without error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.ListSchemasRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.ListSchemasRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1beta.Schema()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1beta.Schema()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1beta.Schema()
-        ),
-      ];
-      client.descriptors.page.listSchemas.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listSchemasStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.discoveryengine.v1beta.Schema[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.discoveryengine.v1beta.Schema) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listSchemas.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listSchemas, request)
-      );
-      assert(
-        (client.descriptors.page.listSchemas.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listSchemasStream with error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.ListSchemasRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.ListSchemasRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listSchemas.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listSchemasStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.discoveryengine.v1beta.Schema[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.discoveryengine.v1beta.Schema) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listSchemas.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listSchemas, request)
-      );
-      assert(
-        (client.descriptors.page.listSchemas.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listSchemas without error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.ListSchemasRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.ListSchemasRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1beta.Schema()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1beta.Schema()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1beta.Schema()
-        ),
-      ];
-      client.descriptors.page.listSchemas.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.discoveryengine.v1beta.ISchema[] =
-        [];
-      const iterable = client.listSchemasAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listSchemas.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listSchemas.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listSchemas with error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.ListSchemasRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.ListSchemasRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listSchemas.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listSchemasAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.discoveryengine.v1beta.ISchema[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listSchemas.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listSchemas.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+      await assert.rejects(client.checkGrounding(request), expectedError);
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -1410,10 +472,13 @@ describe('v1beta.SchemaServiceClient', () => {
       );
     });
     it('invokes getLocation without error using callback', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -1454,10 +519,13 @@ describe('v1beta.SchemaServiceClient', () => {
       assert((client.locationsClient.getLocation as SinonStub).getCall(0));
     });
     it('invokes getLocation with error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -1489,10 +557,13 @@ describe('v1beta.SchemaServiceClient', () => {
   });
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
@@ -1537,10 +608,13 @@ describe('v1beta.SchemaServiceClient', () => {
       );
     });
     it('uses async iteration with listLocations with error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
@@ -1576,311 +650,6 @@ describe('v1beta.SchemaServiceClient', () => {
       );
     });
   });
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const response = await client.getOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes getOperation without error using callback', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.getOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: operationsProtos.google.longrunning.Operation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-    it('invokes getOperation with error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes cancelOperation without error using callback', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.cancelOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
-    });
-    it('invokes cancelOperation with error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('deleteOperation', () => {
-    it('invokes deleteOperation without error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.deleteOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes deleteOperation without error using callback', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.deleteOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
-    });
-    it('invokes deleteOperation with error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.deleteOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('listOperationsAsync', () => {
-    it('uses async iteration with listOperations without error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-      ];
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-    it('uses async iteration with listOperations with error', async () => {
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
 
   describe('Path templates', () => {
     describe('engine', () => {
@@ -1891,10 +660,13 @@ describe('v1beta.SchemaServiceClient', () => {
         collection: 'collectionValue',
         engine: 'engineValue',
       };
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.enginePathTemplate.render = sinon
         .stub()
@@ -1959,6 +731,74 @@ describe('v1beta.SchemaServiceClient', () => {
       });
     });
 
+    describe('groundingConfig', () => {
+      const fakePath = '/rendered/path/groundingConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        grounding_config: 'groundingConfigValue',
+      };
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.groundingConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.groundingConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('groundingConfigPath', () => {
+        const result = client.groundingConfigPath(
+          'projectValue',
+          'locationValue',
+          'groundingConfigValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.groundingConfigPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromGroundingConfigName', () => {
+        const result = client.matchProjectFromGroundingConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.groundingConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromGroundingConfigName', () => {
+        const result = client.matchLocationFromGroundingConfigName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.groundingConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchGroundingConfigFromGroundingConfigName', () => {
+        const result =
+          client.matchGroundingConfigFromGroundingConfigName(fakePath);
+        assert.strictEqual(result, 'groundingConfigValue');
+        assert(
+          (client.pathTemplates.groundingConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('projectLocationCollectionDataStore', () => {
       const fakePath = '/rendered/path/projectLocationCollectionDataStore';
       const expectedParameters = {
@@ -1967,10 +807,13 @@ describe('v1beta.SchemaServiceClient', () => {
         collection: 'collectionValue',
         data_store: 'dataStoreValue',
       };
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStorePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2071,10 +914,13 @@ describe('v1beta.SchemaServiceClient', () => {
         branch: 'branchValue',
         document: 'documentValue',
       };
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2216,10 +1062,13 @@ describe('v1beta.SchemaServiceClient', () => {
         data_store: 'dataStoreValue',
         conversation: 'conversationValue',
       };
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2342,10 +1191,13 @@ describe('v1beta.SchemaServiceClient', () => {
         collection: 'collectionValue',
         data_store: 'dataStoreValue',
       };
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2451,10 +1303,13 @@ describe('v1beta.SchemaServiceClient', () => {
         data_store: 'dataStoreValue',
         schema: 'schemaValue',
       };
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2577,10 +1432,13 @@ describe('v1beta.SchemaServiceClient', () => {
         data_store: 'dataStoreValue',
         serving_config: 'servingConfigValue',
       };
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2704,10 +1562,13 @@ describe('v1beta.SchemaServiceClient', () => {
         data_store: 'dataStoreValue',
         session: 'sessionValue',
       };
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2831,10 +1692,13 @@ describe('v1beta.SchemaServiceClient', () => {
         session: 'sessionValue',
         answer: 'answerValue',
       };
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2975,10 +1839,13 @@ describe('v1beta.SchemaServiceClient', () => {
         collection: 'collectionValue',
         data_store: 'dataStoreValue',
       };
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3084,10 +1951,13 @@ describe('v1beta.SchemaServiceClient', () => {
         data_store: 'dataStoreValue',
         target_site: 'targetSiteValue',
       };
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3211,10 +2081,13 @@ describe('v1beta.SchemaServiceClient', () => {
         engine: 'engineValue',
         conversation: 'conversationValue',
       };
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3337,10 +2210,13 @@ describe('v1beta.SchemaServiceClient', () => {
         engine: 'engineValue',
         serving_config: 'servingConfigValue',
       };
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3462,10 +2338,13 @@ describe('v1beta.SchemaServiceClient', () => {
         engine: 'engineValue',
         session: 'sessionValue',
       };
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3589,10 +2468,13 @@ describe('v1beta.SchemaServiceClient', () => {
         session: 'sessionValue',
         answer: 'answerValue',
       };
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3730,10 +2612,13 @@ describe('v1beta.SchemaServiceClient', () => {
         location: 'locationValue',
         data_store: 'dataStoreValue',
       };
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationDataStorePathTemplate.render = sinon
         .stub()
@@ -3811,10 +2696,13 @@ describe('v1beta.SchemaServiceClient', () => {
         branch: 'branchValue',
         document: 'documentValue',
       };
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3935,10 +2823,13 @@ describe('v1beta.SchemaServiceClient', () => {
         data_store: 'dataStoreValue',
         conversation: 'conversationValue',
       };
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationDataStoreConversationPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -4041,10 +2932,13 @@ describe('v1beta.SchemaServiceClient', () => {
         location: 'locationValue',
         data_store: 'dataStoreValue',
       };
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -4130,10 +3024,13 @@ describe('v1beta.SchemaServiceClient', () => {
         data_store: 'dataStoreValue',
         schema: 'schemaValue',
       };
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationDataStoreSchemaPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -4223,10 +3120,13 @@ describe('v1beta.SchemaServiceClient', () => {
         data_store: 'dataStoreValue',
         serving_config: 'servingConfigValue',
       };
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -4329,10 +3229,13 @@ describe('v1beta.SchemaServiceClient', () => {
         data_store: 'dataStoreValue',
         session: 'sessionValue',
       };
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationDataStoreSessionPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -4425,10 +3328,13 @@ describe('v1beta.SchemaServiceClient', () => {
         session: 'sessionValue',
         answer: 'answerValue',
       };
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -4549,10 +3455,13 @@ describe('v1beta.SchemaServiceClient', () => {
         location: 'locationValue',
         data_store: 'dataStoreValue',
       };
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -4638,10 +3547,13 @@ describe('v1beta.SchemaServiceClient', () => {
         data_store: 'dataStoreValue',
         target_site: 'targetSiteValue',
       };
-      const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.render =
         sinon.stub().returns(fakePath);
