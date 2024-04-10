@@ -17,6 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 export {DiscussServiceClient} from './discuss_service_client';
+export {FileServiceClient} from './file_service_client';
 export {GenerativeServiceClient} from './generative_service_client';
 export {ModelServiceClient} from './model_service_client';
 export {PermissionServiceClient} from './permission_service_client';

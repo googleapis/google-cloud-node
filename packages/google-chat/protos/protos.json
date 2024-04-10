@@ -2381,13 +2381,13 @@
           "nested": {
             "v1": {
               "options": {
-                "csharp_namespace": "Google.Chat.V1",
+                "csharp_namespace": "Google.Apps.Chat.V1",
                 "go_package": "cloud.google.com/go/chat/apiv1/chatpb;chatpb",
                 "java_multiple_files": true,
                 "java_outer_classname": "SpaceSetupProto",
                 "java_package": "com.google.chat.v1",
-                "php_namespace": "Google\\Chat\\V1",
-                "ruby_package": "Google::Chat::V1"
+                "php_namespace": "Google\\Apps\\Chat\\V1",
+                "ruby_package": "Google::Apps::Chat::V1"
               },
               "nested": {
                 "ActionStatus": {
@@ -2412,7 +2412,8 @@
                     "metadata": {
                       "oneof": [
                         "userMention",
-                        "slashCommand"
+                        "slashCommand",
+                        "richLinkMetadata"
                       ]
                     }
                   },
@@ -2439,6 +2440,10 @@
                     "slashCommand": {
                       "type": "SlashCommandMetadata",
                       "id": 5
+                    },
+                    "richLinkMetadata": {
+                      "type": "RichLinkMetadata",
+                      "id": 6
                     }
                   }
                 },
@@ -2496,50 +2501,55 @@
                     }
                   }
                 },
+                "RichLinkMetadata": {
+                  "oneofs": {
+                    "data": {
+                      "oneof": [
+                        "driveLinkData"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "uri": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "richLinkType": {
+                      "type": "RichLinkType",
+                      "id": 2
+                    },
+                    "driveLinkData": {
+                      "type": "DriveLinkData",
+                      "id": 3
+                    }
+                  },
+                  "nested": {
+                    "RichLinkType": {
+                      "values": {
+                        "RICH_LINK_TYPE_UNSPECIFIED": 0,
+                        "DRIVE_FILE": 1
+                      }
+                    }
+                  }
+                },
+                "DriveLinkData": {
+                  "fields": {
+                    "driveDataRef": {
+                      "type": "DriveDataRef",
+                      "id": 1
+                    },
+                    "mimeType": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
                 "AnnotationType": {
                   "values": {
                     "ANNOTATION_TYPE_UNSPECIFIED": 0,
                     "USER_MENTION": 1,
-                    "SLASH_COMMAND": 2
-                  }
-                },
-                "User": {
-                  "fields": {
-                    "name": {
-                      "type": "string",
-                      "id": 1
-                    },
-                    "displayName": {
-                      "type": "string",
-                      "id": 2,
-                      "options": {
-                        "(google.api.field_behavior)": "OUTPUT_ONLY"
-                      }
-                    },
-                    "domainId": {
-                      "type": "string",
-                      "id": 6
-                    },
-                    "type": {
-                      "type": "Type",
-                      "id": 5
-                    },
-                    "isAnonymous": {
-                      "type": "bool",
-                      "id": 7,
-                      "options": {
-                        "(google.api.field_behavior)": "OUTPUT_ONLY"
-                      }
-                    }
-                  },
-                  "nested": {
-                    "Type": {
-                      "values": {
-                        "TYPE_UNSPECIFIED": 0,
-                        "HUMAN": 1,
-                        "BOT": 2
-                      }
-                    }
+                    "SLASH_COMMAND": 2,
+                    "RICH_LINK": 3
                   }
                 },
                 "Attachment": {
@@ -2673,6 +2683,45 @@
                     "attachmentDataRef": {
                       "type": "AttachmentDataRef",
                       "id": 1
+                    }
+                  }
+                },
+                "User": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "displayName": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "domainId": {
+                      "type": "string",
+                      "id": 6
+                    },
+                    "type": {
+                      "type": "Type",
+                      "id": 5
+                    },
+                    "isAnonymous": {
+                      "type": "bool",
+                      "id": 7,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    }
+                  },
+                  "nested": {
+                    "Type": {
+                      "values": {
+                        "TYPE_UNSPECIFIED": 0,
+                        "HUMAN": 1,
+                        "BOT": 2
+                      }
                     }
                   }
                 },
@@ -3440,6 +3489,11 @@
                       "options": {
                         "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
+                    },
+                    "accessoryWidgets": {
+                      "rule": "repeated",
+                      "type": "AccessoryWidget",
+                      "id": 44
                     }
                   }
                 },
@@ -3566,6 +3620,21 @@
                           "id": 2
                         }
                       }
+                    }
+                  }
+                },
+                "AccessoryWidget": {
+                  "oneofs": {
+                    "action": {
+                      "oneof": [
+                        "buttonList"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "buttonList": {
+                      "type": "google.apps.card.v1.ButtonList",
+                      "id": 1
                     }
                   }
                 },

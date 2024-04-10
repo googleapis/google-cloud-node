@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v3.4.0...binary-authorization-v3.5.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5187](https://github.com/googleapis/google-cloud-node/issues/5187)) ([1952fbe](https://github.com/googleapis/google-cloud-node/commit/1952fbe432b96115278d42e5c1dbdbc7de39036b))
+
+## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v3.3.0...binary-authorization-v3.4.0) (2024-03-23)
+
+
+### Features
+
+* [binaryauthorization] A new field `in_toto_slsa_provenance_v1` is added to message `BuildOccurrence` ([#5135](https://github.com/googleapis/google-cloud-node/issues/5135)) ([fbc2b48](https://github.com/googleapis/google-cloud-node/commit/fbc2b487f1f2c3eb9f7e95187e6acb28522b6753))
+
 ## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v3.2.0...binary-authorization-v3.3.0) (2024-02-09)
 
 

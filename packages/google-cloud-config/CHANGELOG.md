@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/config-v0.3.0...config-v0.4.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5187](https://github.com/googleapis/google-cloud-node/issues/5187)) ([1952fbe](https://github.com/googleapis/google-cloud-node/commit/1952fbe432b96115278d42e5c1dbdbc7de39036b))
+
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/config-v0.2.0...config-v0.3.0) (2024-03-26)
+
+
+### Features
+
+* [infra-manager] Infrastructure Manager supports the deployment of infrastructure from Terraform configurations in a private Git repository ([#5147](https://github.com/googleapis/google-cloud-node/issues/5147)) ([49a57d3](https://github.com/googleapis/google-cloud-node/commit/49a57d3cacc1cc96755f3fb7943e309639024c7d))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/config-v0.1.1...config-v0.2.0) (2024-01-15)
 
 

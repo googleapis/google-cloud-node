@@ -170,7 +170,8 @@
     "packages/google-cloud-parallelstore": {},
     "packages/google-chat": {},
     "packages/google-cloud-apphub": {},
-    "packages/google-storage-control": {}
+    "packages/google-storage-control": {},
+    "packages/google-shopping-merchant-quota": {}
   },
   "plugins": [
     {

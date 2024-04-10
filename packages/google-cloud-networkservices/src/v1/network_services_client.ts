@@ -127,8 +127,15 @@ export class NetworkServicesClient {
         'Please set either universe_domain or universeDomain, but not both.'
       );
     }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
     this._universeDomain =
-      opts?.universeDomain ?? opts?.universe_domain ?? 'googleapis.com';
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'networkservices.' + this._universeDomain;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || this._servicePath;
@@ -186,7 +193,7 @@ export class NetworkServicesClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -217,6 +224,12 @@ export class NetworkServicesClient {
       ),
       httpRoutePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/httpRoutes/{http_route}'
+      ),
+      lbRouteExtensionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/lbRouteExtensions/{lb_route_extension}'
+      ),
+      lbTrafficExtensionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/lbTrafficExtensions/{lb_traffic_extension}'
       ),
       meshPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/meshes/{mesh}'
@@ -791,7 +804,7 @@ export class NetworkServicesClient {
    */
   static get servicePath() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -809,7 +822,7 @@ export class NetworkServicesClient {
    */
   static get apiEndpoint() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -6990,6 +7003,126 @@ export class NetworkServicesClient {
   matchHttpRouteFromHttpRouteName(httpRouteName: string) {
     return this.pathTemplates.httpRoutePathTemplate.match(httpRouteName)
       .http_route;
+  }
+
+  /**
+   * Return a fully-qualified lbRouteExtension resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} lb_route_extension
+   * @returns {string} Resource name string.
+   */
+  lbRouteExtensionPath(
+    project: string,
+    location: string,
+    lbRouteExtension: string
+  ) {
+    return this.pathTemplates.lbRouteExtensionPathTemplate.render({
+      project: project,
+      location: location,
+      lb_route_extension: lbRouteExtension,
+    });
+  }
+
+  /**
+   * Parse the project from LbRouteExtension resource.
+   *
+   * @param {string} lbRouteExtensionName
+   *   A fully-qualified path representing LbRouteExtension resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLbRouteExtensionName(lbRouteExtensionName: string) {
+    return this.pathTemplates.lbRouteExtensionPathTemplate.match(
+      lbRouteExtensionName
+    ).project;
+  }
+
+  /**
+   * Parse the location from LbRouteExtension resource.
+   *
+   * @param {string} lbRouteExtensionName
+   *   A fully-qualified path representing LbRouteExtension resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromLbRouteExtensionName(lbRouteExtensionName: string) {
+    return this.pathTemplates.lbRouteExtensionPathTemplate.match(
+      lbRouteExtensionName
+    ).location;
+  }
+
+  /**
+   * Parse the lb_route_extension from LbRouteExtension resource.
+   *
+   * @param {string} lbRouteExtensionName
+   *   A fully-qualified path representing LbRouteExtension resource.
+   * @returns {string} A string representing the lb_route_extension.
+   */
+  matchLbRouteExtensionFromLbRouteExtensionName(lbRouteExtensionName: string) {
+    return this.pathTemplates.lbRouteExtensionPathTemplate.match(
+      lbRouteExtensionName
+    ).lb_route_extension;
+  }
+
+  /**
+   * Return a fully-qualified lbTrafficExtension resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} lb_traffic_extension
+   * @returns {string} Resource name string.
+   */
+  lbTrafficExtensionPath(
+    project: string,
+    location: string,
+    lbTrafficExtension: string
+  ) {
+    return this.pathTemplates.lbTrafficExtensionPathTemplate.render({
+      project: project,
+      location: location,
+      lb_traffic_extension: lbTrafficExtension,
+    });
+  }
+
+  /**
+   * Parse the project from LbTrafficExtension resource.
+   *
+   * @param {string} lbTrafficExtensionName
+   *   A fully-qualified path representing LbTrafficExtension resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLbTrafficExtensionName(lbTrafficExtensionName: string) {
+    return this.pathTemplates.lbTrafficExtensionPathTemplate.match(
+      lbTrafficExtensionName
+    ).project;
+  }
+
+  /**
+   * Parse the location from LbTrafficExtension resource.
+   *
+   * @param {string} lbTrafficExtensionName
+   *   A fully-qualified path representing LbTrafficExtension resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromLbTrafficExtensionName(lbTrafficExtensionName: string) {
+    return this.pathTemplates.lbTrafficExtensionPathTemplate.match(
+      lbTrafficExtensionName
+    ).location;
+  }
+
+  /**
+   * Parse the lb_traffic_extension from LbTrafficExtension resource.
+   *
+   * @param {string} lbTrafficExtensionName
+   *   A fully-qualified path representing LbTrafficExtension resource.
+   * @returns {string} A string representing the lb_traffic_extension.
+   */
+  matchLbTrafficExtensionFromLbTrafficExtensionName(
+    lbTrafficExtensionName: string
+  ) {
+    return this.pathTemplates.lbTrafficExtensionPathTemplate.match(
+      lbTrafficExtensionName
+    ).lb_traffic_extension;
   }
 
   /**

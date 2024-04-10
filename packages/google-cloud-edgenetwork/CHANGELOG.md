@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/googleapis/google-cloud-node/compare/edgenetwork-v0.3.0...edgenetwork-v0.3.1) (2024-03-26)
+
+
+### Bug Fixes
+
+* [edgenetwork] deprecate unimplemented Zone fields and methods ([#5148](https://github.com/googleapis/google-cloud-node/issues/5148)) ([115b695](https://github.com/googleapis/google-cloud-node/commit/115b6952af6016b1c88f1d706056b92cd8f41979))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/edgenetwork-v0.2.0...edgenetwork-v0.3.0) (2024-02-09)
 
 

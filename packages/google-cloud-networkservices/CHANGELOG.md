@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/networkservices-v0.4.0...networkservices-v0.5.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5189](https://github.com/googleapis/google-cloud-node/issues/5189)) ([64b5a75](https://github.com/googleapis/google-cloud-node/commit/64b5a759caa979837199086c2d546a565ad2b3b1))
+
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/networkservices-v0.3.1...networkservices-v0.4.0) (2024-03-26)
+
+
+### Features
+
+* [networkservices] publish DEP proto ([#5170](https://github.com/googleapis/google-cloud-node/issues/5170)) ([4c0690f](https://github.com/googleapis/google-cloud-node/commit/4c0690fc833c115159b83192d0ae72356a629dd8))
+
 ## [0.3.1](https://github.com/googleapis/google-cloud-node/compare/networkservices-v0.3.0...networkservices-v0.3.1) (2024-02-27)
 
 

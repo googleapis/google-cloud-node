@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/security-private-ca-v5.2.0...security-private-ca-v5.3.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5191](https://github.com/googleapis/google-cloud-node/issues/5191)) ([57567db](https://github.com/googleapis/google-cloud-node/commit/57567db36033ca53ae2f54e6517b8cd12145bb82))
+
 ## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/security-private-ca-v5.1.0...security-private-ca-v5.2.0) (2024-03-13)
 
 

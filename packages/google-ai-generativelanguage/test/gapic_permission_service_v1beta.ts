@@ -144,7 +144,7 @@ describe('v1beta.PermissionServiceClient', () => {
     });
 
     if (
-      typeof process !== 'undefined' &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       it('throws DeprecationWarning if static servicePath is used', () => {
@@ -180,6 +180,43 @@ describe('v1beta.PermissionServiceClient', () => {
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'generativelanguage.example.com');
     });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new permissionserviceModule.v1beta.PermissionServiceClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'generativelanguage.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new permissionserviceModule.v1beta.PermissionServiceClient({
+              universeDomain: 'configured.example.com',
+            });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(
+            servicePath,
+            'generativelanguage.configured.example.com'
+          );
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new permissionserviceModule.v1beta.PermissionServiceClient({
@@ -1173,9 +1210,9 @@ describe('v1beta.PermissionServiceClient', () => {
       assert(
         (client.descriptors.page.listPermissions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1225,9 +1262,9 @@ describe('v1beta.PermissionServiceClient', () => {
       assert(
         (client.descriptors.page.listPermissions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1277,9 +1314,9 @@ describe('v1beta.PermissionServiceClient', () => {
       assert(
         (client.descriptors.page.listPermissions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1320,9 +1357,9 @@ describe('v1beta.PermissionServiceClient', () => {
       assert(
         (client.descriptors.page.listPermissions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -1536,6 +1573,46 @@ describe('v1beta.PermissionServiceClient', () => {
         assert.strictEqual(result, 'documentValue');
         assert(
           (client.pathTemplates.documentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('file', () => {
+      const fakePath = '/rendered/path/file';
+      const expectedParameters = {
+        file: 'fileValue',
+      };
+      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      client.pathTemplates.filePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.filePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('filePath', () => {
+        const result = client.filePath('fileValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.filePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchFileFromFileName', () => {
+        const result = client.matchFileFromFileName(fakePath);
+        assert.strictEqual(result, 'fileValue');
+        assert(
+          (client.pathTemplates.filePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

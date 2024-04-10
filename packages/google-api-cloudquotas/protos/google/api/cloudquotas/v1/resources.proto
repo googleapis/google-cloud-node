@@ -126,15 +126,9 @@ message QuotaInfo {
   // on the total number of concurrent operations in flight at any given time.
   bool is_concurrent = 15;
 
-  // URI to the page where the user can request more quotas for the cloud
-  // service, such as
-  // https://docs.google.com/spreadsheet/viewform?formkey=abc123&entry_0={email}&entry_1={id}.
-  // Google Developers Console UI replace {email} with the current
-  // user's e-mail, {id} with the current project number, or organization ID
-  // with "organizations/" prefix. For example,
-  // https://docs.google.com/spreadsheet/viewform?formkey=abc123&entry_0=johndoe@gmail.com&entry_1=25463754,
-  // or
-  // https://docs.google.com/spreadsheet/viewform?formkey=abc123&entry_0=johndoe@gmail.com&entry_1=organizations/26474422.
+  // URI to the page where users can request more quota for the cloud
+  // service—for example,
+  // https://console.cloud.google.com/iam-admin/quotas.
   string service_request_quota_uri = 17;
 }
 
@@ -180,9 +174,9 @@ message QuotaPreference {
   // `projects/123/locations/global/quotaPreferences/my-config-for-us-east1`
   string name = 1;
 
-  // The dimensions that this quota preference applies to. The key of the map
-  // entry is the name of a dimension, such as "region", "zone", "network_id",
-  // and the value of the map entry is the dimension value.
+  // Immutable. The dimensions that this quota preference applies to. The key of
+  // the map entry is the name of a dimension, such as "region", "zone",
+  // "network_id", and the value of the map entry is the dimension value.
   //
   // If a dimension is missing from the map of dimensions, the quota preference
   // applies to all the dimension values except for those that have other quota
@@ -194,7 +188,7 @@ message QuotaPreference {
   //
   // Example: {"provider", "Foo Inc"} where "provider" is a service specific
   // dimension.
-  map<string, string> dimensions = 2;
+  map<string, string> dimensions = 2 [(google.api.field_behavior) = IMMUTABLE];
 
   // Required. Preferred quota configuration.
   QuotaConfig quota_config = 3 [(google.api.field_behavior) = REQUIRED];
@@ -227,17 +221,17 @@ message QuotaPreference {
   // The reason / justification for this quota preference.
   string justification = 11;
 
-  // Required. Input only. An email address that can be used for quota related
+  // Input only. An email address that can be used for quota related
   // communication between the Google Cloud and the user in case the Google
   // Cloud needs further information to make a decision on whether the user
   // preferred quota can be granted.
   //
+  // The email address is optional for decrease quota preferences. In another
+  // word, QuotaConfig.preferred_value is smaller than the
+  // QuotaDetails.reset_value. It is required for increase quota preferences.
   // The Google account for the email address must have quota update permission
   // for the project, folder or organization this quota preference is for.
-  string contact_email = 12 [
-    (google.api.field_behavior) = INPUT_ONLY,
-    (google.api.field_behavior) = REQUIRED
-  ];
+  string contact_email = 12 [(google.api.field_behavior) = INPUT_ONLY];
 }
 
 // The preferred quota configuration.
@@ -272,10 +266,10 @@ message QuotaConfig {
   // quota decrease requests do not have a trace id.
   string trace_id = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // The annotations map for clients to store small amounts of arbitrary data.
-  // Do not put PII or other sensitive information here.
-  // See https://google.aip.dev/128#annotations
-  map<string, string> annotations = 5;
+  // Optional. The annotations map for clients to store small amounts of
+  // arbitrary data. Do not put PII or other sensitive information here. See
+  // https://google.aip.dev/128#annotations
+  map<string, string> annotations = 5 [(google.api.field_behavior) = OPTIONAL];
 
   // Output only. The origin of the quota preference request.
   Origin request_origin = 6 [(google.api.field_behavior) = OUTPUT_ONLY];
@@ -308,4 +302,15 @@ message DimensionsInfo {
 message QuotaDetails {
   // The value currently in effect and being enforced.
   int64 value = 1;
+
+  // Rollout information of this quota.
+  // This field is present only if the effective limit will change due to the
+  // ongoing rollout of the service config.
+  RolloutInfo rollout_info = 3;
+}
+
+// [Output only] Rollout information of a quota.
+message RolloutInfo {
+  // Whether there is an ongoing rollout for a quota or not.
+  bool ongoing_rollout = 1;
 }

@@ -42,7 +42,7 @@ function main(message) {
    *  authentication (/chat/api/guides/auth/service-accounts).)
    *  - `cards_v2`  (Requires app
    *  authentication (/chat/api/guides/auth/service-accounts).)
-   *  - Developer Preview: `accessory_widgets`  (Requires app
+   *  - `accessory_widgets`  (Requires app
    *  authentication (/chat/api/guides/auth/service-accounts).)
    */
   // const updateMask = {}
@@ -55,7 +55,7 @@ function main(message) {
   // const allowMissing = true
 
   // Imports the Chat library
-  const {ChatServiceClient} = require('@google-apps/chat).v1;
+  const {ChatServiceClient} = require('@google-apps/chat').v1;
 
   // Instantiates a client
   const chatClient = new ChatServiceClient();

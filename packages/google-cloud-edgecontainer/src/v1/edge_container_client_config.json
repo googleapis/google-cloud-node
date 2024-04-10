@@ -52,6 +52,11 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "UpgradeCluster": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "DeleteCluster": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
@@ -59,8 +64,13 @@
         },
         "GenerateAccessToken": {
           "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "GenerateOfflineCredential": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "ListNodePools": {
           "timeout_millis": 60000,
@@ -116,6 +126,11 @@
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "GetServerConfig": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         }
       }
     }

@@ -2704,6 +2704,24 @@
     "support_documentation": "https://developers.google.com/analytics/trusted-testing/analytics-data/docs/getting-support"
   },
   {
+    "name": "chat",
+    "name_pretty": "Google Chat API",
+    "product_documentation": "https://developers.google.com/chat/concepts",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/chat/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-apps/chat",
+    "api_id": "chat.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "chat",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-chat",
+    "support_documentation": "https://developers.google.com/chat/concepts/docs/getting-support"
+  },
+  {
     "name": "routing",
     "name_pretty": "Google Maps Routing",
     "product_documentation": "",
@@ -2809,6 +2827,24 @@
     "api_shortname": "redis",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-redis-cluster",
     "support_documentation": "https://cloud.google.com/redis/docs/getting-support"
+  },
+  {
+    "name": "merchantapi",
+    "name_pretty": "Merchant API",
+    "product_documentation": "https://developers.google.com/merchant/api",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/merchantapi/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/quota",
+    "api_id": "merchantapi.googleapis.com",
+    "default_version": "v1beta",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "merchantapi",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-shopping-merchant-quota",
+    "support_documentation": "https://developers.google.com/merchant/api/docs/getting-support"
   },
   {
     "name": "migrationcenter",

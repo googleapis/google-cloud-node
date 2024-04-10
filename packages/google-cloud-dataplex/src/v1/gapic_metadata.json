@@ -5,6 +5,260 @@
   "protoPackage": "google.cloud.dataplex.v1",
   "libraryPackage": "@google-cloud/dataplex",
   "services": {
+    "CatalogService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "CatalogServiceClient",
+          "rpcs": {
+            "GetEntryType": {
+              "methods": [
+                "getEntryType"
+              ]
+            },
+            "GetAspectType": {
+              "methods": [
+                "getAspectType"
+              ]
+            },
+            "GetEntryGroup": {
+              "methods": [
+                "getEntryGroup"
+              ]
+            },
+            "CreateEntry": {
+              "methods": [
+                "createEntry"
+              ]
+            },
+            "UpdateEntry": {
+              "methods": [
+                "updateEntry"
+              ]
+            },
+            "DeleteEntry": {
+              "methods": [
+                "deleteEntry"
+              ]
+            },
+            "GetEntry": {
+              "methods": [
+                "getEntry"
+              ]
+            },
+            "LookupEntry": {
+              "methods": [
+                "lookupEntry"
+              ]
+            },
+            "CreateEntryType": {
+              "methods": [
+                "createEntryType"
+              ]
+            },
+            "UpdateEntryType": {
+              "methods": [
+                "updateEntryType"
+              ]
+            },
+            "DeleteEntryType": {
+              "methods": [
+                "deleteEntryType"
+              ]
+            },
+            "CreateAspectType": {
+              "methods": [
+                "createAspectType"
+              ]
+            },
+            "UpdateAspectType": {
+              "methods": [
+                "updateAspectType"
+              ]
+            },
+            "DeleteAspectType": {
+              "methods": [
+                "deleteAspectType"
+              ]
+            },
+            "CreateEntryGroup": {
+              "methods": [
+                "createEntryGroup"
+              ]
+            },
+            "UpdateEntryGroup": {
+              "methods": [
+                "updateEntryGroup"
+              ]
+            },
+            "DeleteEntryGroup": {
+              "methods": [
+                "deleteEntryGroup"
+              ]
+            },
+            "ListEntryTypes": {
+              "methods": [
+                "listEntryTypes",
+                "listEntryTypesStream",
+                "listEntryTypesAsync"
+              ]
+            },
+            "ListAspectTypes": {
+              "methods": [
+                "listAspectTypes",
+                "listAspectTypesStream",
+                "listAspectTypesAsync"
+              ]
+            },
+            "ListEntryGroups": {
+              "methods": [
+                "listEntryGroups",
+                "listEntryGroupsStream",
+                "listEntryGroupsAsync"
+              ]
+            },
+            "ListEntries": {
+              "methods": [
+                "listEntries",
+                "listEntriesStream",
+                "listEntriesAsync"
+              ]
+            },
+            "SearchEntries": {
+              "methods": [
+                "searchEntries",
+                "searchEntriesStream",
+                "searchEntriesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "CatalogServiceClient",
+          "rpcs": {
+            "GetEntryType": {
+              "methods": [
+                "getEntryType"
+              ]
+            },
+            "GetAspectType": {
+              "methods": [
+                "getAspectType"
+              ]
+            },
+            "GetEntryGroup": {
+              "methods": [
+                "getEntryGroup"
+              ]
+            },
+            "CreateEntry": {
+              "methods": [
+                "createEntry"
+              ]
+            },
+            "UpdateEntry": {
+              "methods": [
+                "updateEntry"
+              ]
+            },
+            "DeleteEntry": {
+              "methods": [
+                "deleteEntry"
+              ]
+            },
+            "GetEntry": {
+              "methods": [
+                "getEntry"
+              ]
+            },
+            "LookupEntry": {
+              "methods": [
+                "lookupEntry"
+              ]
+            },
+            "CreateEntryType": {
+              "methods": [
+                "createEntryType"
+              ]
+            },
+            "UpdateEntryType": {
+              "methods": [
+                "updateEntryType"
+              ]
+            },
+            "DeleteEntryType": {
+              "methods": [
+                "deleteEntryType"
+              ]
+            },
+            "CreateAspectType": {
+              "methods": [
+                "createAspectType"
+              ]
+            },
+            "UpdateAspectType": {
+              "methods": [
+                "updateAspectType"
+              ]
+            },
+            "DeleteAspectType": {
+              "methods": [
+                "deleteAspectType"
+              ]
+            },
+            "CreateEntryGroup": {
+              "methods": [
+                "createEntryGroup"
+              ]
+            },
+            "UpdateEntryGroup": {
+              "methods": [
+                "updateEntryGroup"
+              ]
+            },
+            "DeleteEntryGroup": {
+              "methods": [
+                "deleteEntryGroup"
+              ]
+            },
+            "ListEntryTypes": {
+              "methods": [
+                "listEntryTypes",
+                "listEntryTypesStream",
+                "listEntryTypesAsync"
+              ]
+            },
+            "ListAspectTypes": {
+              "methods": [
+                "listAspectTypes",
+                "listAspectTypesStream",
+                "listAspectTypesAsync"
+              ]
+            },
+            "ListEntryGroups": {
+              "methods": [
+                "listEntryGroups",
+                "listEntryGroupsStream",
+                "listEntryGroupsAsync"
+              ]
+            },
+            "ListEntries": {
+              "methods": [
+                "listEntries",
+                "listEntriesStream",
+                "listEntriesAsync"
+              ]
+            },
+            "SearchEntries": {
+              "methods": [
+                "searchEntries",
+                "searchEntriesStream",
+                "searchEntriesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ContentService": {
       "clients": {
         "grpc": {
@@ -507,6 +761,11 @@
                 "getDataScanJob"
               ]
             },
+            "GenerateDataQualityRules": {
+              "methods": [
+                "generateDataQualityRules"
+              ]
+            },
             "CreateDataScan": {
               "methods": [
                 "createDataScan"
@@ -554,6 +813,11 @@
             "GetDataScanJob": {
               "methods": [
                 "getDataScanJob"
+              ]
+            },
+            "GenerateDataQualityRules": {
+              "methods": [
+                "generateDataQualityRules"
               ]
             },
             "CreateDataScan": {

@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.3.0...dlp-v5.4.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5193](https://github.com/googleapis/google-cloud-node/issues/5193)) ([333b409](https://github.com/googleapis/google-cloud-node/commit/333b40951a255ecfab249bd6e7ace5877270ec85))
+
 ## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.2.0...dlp-v5.3.0) (2024-03-07)
 
 

@@ -9684,6 +9684,9 @@ export namespace google {
 
                 /** Annotation slashCommand */
                 slashCommand?: (google.chat.v1.ISlashCommandMetadata|null);
+
+                /** Annotation richLinkMetadata */
+                richLinkMetadata?: (google.chat.v1.IRichLinkMetadata|null);
             }
 
             /** Represents an Annotation. */
@@ -9710,11 +9713,14 @@ export namespace google {
                 /** Annotation slashCommand. */
                 public slashCommand?: (google.chat.v1.ISlashCommandMetadata|null);
 
+                /** Annotation richLinkMetadata. */
+                public richLinkMetadata?: (google.chat.v1.IRichLinkMetadata|null);
+
                 /** Annotation _startIndex. */
                 public _startIndex?: "startIndex";
 
                 /** Annotation metadata. */
-                public metadata?: ("userMention"|"slashCommand");
+                public metadata?: ("userMention"|"slashCommand"|"richLinkMetadata");
 
                 /**
                  * Creates a new Annotation instance using the specified properties.
@@ -10038,142 +10044,236 @@ export namespace google {
                 }
             }
 
-            /** AnnotationType enum. */
-            enum AnnotationType {
-                ANNOTATION_TYPE_UNSPECIFIED = 0,
-                USER_MENTION = 1,
-                SLASH_COMMAND = 2
+            /** Properties of a RichLinkMetadata. */
+            interface IRichLinkMetadata {
+
+                /** RichLinkMetadata uri */
+                uri?: (string|null);
+
+                /** RichLinkMetadata richLinkType */
+                richLinkType?: (google.chat.v1.RichLinkMetadata.RichLinkType|keyof typeof google.chat.v1.RichLinkMetadata.RichLinkType|null);
+
+                /** RichLinkMetadata driveLinkData */
+                driveLinkData?: (google.chat.v1.IDriveLinkData|null);
             }
 
-            /** Properties of a User. */
-            interface IUser {
-
-                /** User name */
-                name?: (string|null);
-
-                /** User displayName */
-                displayName?: (string|null);
-
-                /** User domainId */
-                domainId?: (string|null);
-
-                /** User type */
-                type?: (google.chat.v1.User.Type|keyof typeof google.chat.v1.User.Type|null);
-
-                /** User isAnonymous */
-                isAnonymous?: (boolean|null);
-            }
-
-            /** Represents a User. */
-            class User implements IUser {
+            /** Represents a RichLinkMetadata. */
+            class RichLinkMetadata implements IRichLinkMetadata {
 
                 /**
-                 * Constructs a new User.
+                 * Constructs a new RichLinkMetadata.
                  * @param [properties] Properties to set
                  */
-                constructor(properties?: google.chat.v1.IUser);
+                constructor(properties?: google.chat.v1.IRichLinkMetadata);
 
-                /** User name. */
-                public name: string;
+                /** RichLinkMetadata uri. */
+                public uri: string;
 
-                /** User displayName. */
-                public displayName: string;
+                /** RichLinkMetadata richLinkType. */
+                public richLinkType: (google.chat.v1.RichLinkMetadata.RichLinkType|keyof typeof google.chat.v1.RichLinkMetadata.RichLinkType);
 
-                /** User domainId. */
-                public domainId: string;
+                /** RichLinkMetadata driveLinkData. */
+                public driveLinkData?: (google.chat.v1.IDriveLinkData|null);
 
-                /** User type. */
-                public type: (google.chat.v1.User.Type|keyof typeof google.chat.v1.User.Type);
-
-                /** User isAnonymous. */
-                public isAnonymous: boolean;
+                /** RichLinkMetadata data. */
+                public data?: "driveLinkData";
 
                 /**
-                 * Creates a new User instance using the specified properties.
+                 * Creates a new RichLinkMetadata instance using the specified properties.
                  * @param [properties] Properties to set
-                 * @returns User instance
+                 * @returns RichLinkMetadata instance
                  */
-                public static create(properties?: google.chat.v1.IUser): google.chat.v1.User;
+                public static create(properties?: google.chat.v1.IRichLinkMetadata): google.chat.v1.RichLinkMetadata;
 
                 /**
-                 * Encodes the specified User message. Does not implicitly {@link google.chat.v1.User.verify|verify} messages.
-                 * @param message User message or plain object to encode
+                 * Encodes the specified RichLinkMetadata message. Does not implicitly {@link google.chat.v1.RichLinkMetadata.verify|verify} messages.
+                 * @param message RichLinkMetadata message or plain object to encode
                  * @param [writer] Writer to encode to
                  * @returns Writer
                  */
-                public static encode(message: google.chat.v1.IUser, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encode(message: google.chat.v1.IRichLinkMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
 
                 /**
-                 * Encodes the specified User message, length delimited. Does not implicitly {@link google.chat.v1.User.verify|verify} messages.
-                 * @param message User message or plain object to encode
+                 * Encodes the specified RichLinkMetadata message, length delimited. Does not implicitly {@link google.chat.v1.RichLinkMetadata.verify|verify} messages.
+                 * @param message RichLinkMetadata message or plain object to encode
                  * @param [writer] Writer to encode to
                  * @returns Writer
                  */
-                public static encodeDelimited(message: google.chat.v1.IUser, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encodeDelimited(message: google.chat.v1.IRichLinkMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
 
                 /**
-                 * Decodes a User message from the specified reader or buffer.
+                 * Decodes a RichLinkMetadata message from the specified reader or buffer.
                  * @param reader Reader or buffer to decode from
                  * @param [length] Message length if known beforehand
-                 * @returns User
+                 * @returns RichLinkMetadata
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.User;
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.RichLinkMetadata;
 
                 /**
-                 * Decodes a User message from the specified reader or buffer, length delimited.
+                 * Decodes a RichLinkMetadata message from the specified reader or buffer, length delimited.
                  * @param reader Reader or buffer to decode from
-                 * @returns User
+                 * @returns RichLinkMetadata
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.User;
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.RichLinkMetadata;
 
                 /**
-                 * Verifies a User message.
+                 * Verifies a RichLinkMetadata message.
                  * @param message Plain object to verify
                  * @returns `null` if valid, otherwise the reason why it is not
                  */
                 public static verify(message: { [k: string]: any }): (string|null);
 
                 /**
-                 * Creates a User message from a plain object. Also converts values to their respective internal types.
+                 * Creates a RichLinkMetadata message from a plain object. Also converts values to their respective internal types.
                  * @param object Plain object
-                 * @returns User
+                 * @returns RichLinkMetadata
                  */
-                public static fromObject(object: { [k: string]: any }): google.chat.v1.User;
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.RichLinkMetadata;
 
                 /**
-                 * Creates a plain object from a User message. Also converts values to other types if specified.
-                 * @param message User
+                 * Creates a plain object from a RichLinkMetadata message. Also converts values to other types if specified.
+                 * @param message RichLinkMetadata
                  * @param [options] Conversion options
                  * @returns Plain object
                  */
-                public static toObject(message: google.chat.v1.User, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                public static toObject(message: google.chat.v1.RichLinkMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                 /**
-                 * Converts this User to JSON.
+                 * Converts this RichLinkMetadata to JSON.
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
 
                 /**
-                 * Gets the default type url for User
+                 * Gets the default type url for RichLinkMetadata
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
-            namespace User {
+            namespace RichLinkMetadata {
 
-                /** Type enum. */
-                enum Type {
-                    TYPE_UNSPECIFIED = 0,
-                    HUMAN = 1,
-                    BOT = 2
+                /** RichLinkType enum. */
+                enum RichLinkType {
+                    RICH_LINK_TYPE_UNSPECIFIED = 0,
+                    DRIVE_FILE = 1
                 }
+            }
+
+            /** Properties of a DriveLinkData. */
+            interface IDriveLinkData {
+
+                /** DriveLinkData driveDataRef */
+                driveDataRef?: (google.chat.v1.IDriveDataRef|null);
+
+                /** DriveLinkData mimeType */
+                mimeType?: (string|null);
+            }
+
+            /** Represents a DriveLinkData. */
+            class DriveLinkData implements IDriveLinkData {
+
+                /**
+                 * Constructs a new DriveLinkData.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IDriveLinkData);
+
+                /** DriveLinkData driveDataRef. */
+                public driveDataRef?: (google.chat.v1.IDriveDataRef|null);
+
+                /** DriveLinkData mimeType. */
+                public mimeType: string;
+
+                /**
+                 * Creates a new DriveLinkData instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns DriveLinkData instance
+                 */
+                public static create(properties?: google.chat.v1.IDriveLinkData): google.chat.v1.DriveLinkData;
+
+                /**
+                 * Encodes the specified DriveLinkData message. Does not implicitly {@link google.chat.v1.DriveLinkData.verify|verify} messages.
+                 * @param message DriveLinkData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IDriveLinkData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified DriveLinkData message, length delimited. Does not implicitly {@link google.chat.v1.DriveLinkData.verify|verify} messages.
+                 * @param message DriveLinkData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IDriveLinkData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a DriveLinkData message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns DriveLinkData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.DriveLinkData;
+
+                /**
+                 * Decodes a DriveLinkData message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns DriveLinkData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.DriveLinkData;
+
+                /**
+                 * Verifies a DriveLinkData message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a DriveLinkData message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns DriveLinkData
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.DriveLinkData;
+
+                /**
+                 * Creates a plain object from a DriveLinkData message. Also converts values to other types if specified.
+                 * @param message DriveLinkData
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.DriveLinkData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this DriveLinkData to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for DriveLinkData
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** AnnotationType enum. */
+            enum AnnotationType {
+                ANNOTATION_TYPE_UNSPECIFIED = 0,
+                USER_MENTION = 1,
+                SLASH_COMMAND = 2,
+                RICH_LINK = 3
             }
 
             /** Properties of an Attachment. */
@@ -10823,6 +10923,137 @@ export namespace google {
                  * @returns The default type url
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a User. */
+            interface IUser {
+
+                /** User name */
+                name?: (string|null);
+
+                /** User displayName */
+                displayName?: (string|null);
+
+                /** User domainId */
+                domainId?: (string|null);
+
+                /** User type */
+                type?: (google.chat.v1.User.Type|keyof typeof google.chat.v1.User.Type|null);
+
+                /** User isAnonymous */
+                isAnonymous?: (boolean|null);
+            }
+
+            /** Represents a User. */
+            class User implements IUser {
+
+                /**
+                 * Constructs a new User.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IUser);
+
+                /** User name. */
+                public name: string;
+
+                /** User displayName. */
+                public displayName: string;
+
+                /** User domainId. */
+                public domainId: string;
+
+                /** User type. */
+                public type: (google.chat.v1.User.Type|keyof typeof google.chat.v1.User.Type);
+
+                /** User isAnonymous. */
+                public isAnonymous: boolean;
+
+                /**
+                 * Creates a new User instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns User instance
+                 */
+                public static create(properties?: google.chat.v1.IUser): google.chat.v1.User;
+
+                /**
+                 * Encodes the specified User message. Does not implicitly {@link google.chat.v1.User.verify|verify} messages.
+                 * @param message User message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IUser, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified User message, length delimited. Does not implicitly {@link google.chat.v1.User.verify|verify} messages.
+                 * @param message User message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IUser, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a User message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns User
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.User;
+
+                /**
+                 * Decodes a User message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns User
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.User;
+
+                /**
+                 * Verifies a User message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a User message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns User
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.User;
+
+                /**
+                 * Creates a plain object from a User message. Also converts values to other types if specified.
+                 * @param message User
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.User, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this User to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for User
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace User {
+
+                /** Type enum. */
+                enum Type {
+                    TYPE_UNSPECIFIED = 0,
+                    HUMAN = 1,
+                    BOT = 2
+                }
             }
 
             /** Represents a ChatService */
@@ -12166,6 +12397,9 @@ export namespace google {
 
                 /** Message attachedGifs */
                 attachedGifs?: (google.chat.v1.IAttachedGif[]|null);
+
+                /** Message accessoryWidgets */
+                accessoryWidgets?: (google.chat.v1.IAccessoryWidget[]|null);
             }
 
             /** Represents a Message. */
@@ -12251,6 +12485,9 @@ export namespace google {
 
                 /** Message attachedGifs. */
                 public attachedGifs: google.chat.v1.IAttachedGif[];
+
+                /** Message accessoryWidgets. */
+                public accessoryWidgets: google.chat.v1.IAccessoryWidget[];
 
                 /**
                  * Creates a new Message instance using the specified properties.
@@ -12963,6 +13200,106 @@ export namespace google {
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
+            }
+
+            /** Properties of an AccessoryWidget. */
+            interface IAccessoryWidget {
+
+                /** AccessoryWidget buttonList */
+                buttonList?: (google.apps.card.v1.IButtonList|null);
+            }
+
+            /** Represents an AccessoryWidget. */
+            class AccessoryWidget implements IAccessoryWidget {
+
+                /**
+                 * Constructs a new AccessoryWidget.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IAccessoryWidget);
+
+                /** AccessoryWidget buttonList. */
+                public buttonList?: (google.apps.card.v1.IButtonList|null);
+
+                /** AccessoryWidget action. */
+                public action?: "buttonList";
+
+                /**
+                 * Creates a new AccessoryWidget instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns AccessoryWidget instance
+                 */
+                public static create(properties?: google.chat.v1.IAccessoryWidget): google.chat.v1.AccessoryWidget;
+
+                /**
+                 * Encodes the specified AccessoryWidget message. Does not implicitly {@link google.chat.v1.AccessoryWidget.verify|verify} messages.
+                 * @param message AccessoryWidget message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IAccessoryWidget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified AccessoryWidget message, length delimited. Does not implicitly {@link google.chat.v1.AccessoryWidget.verify|verify} messages.
+                 * @param message AccessoryWidget message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IAccessoryWidget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an AccessoryWidget message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns AccessoryWidget
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.AccessoryWidget;
+
+                /**
+                 * Decodes an AccessoryWidget message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns AccessoryWidget
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.AccessoryWidget;
+
+                /**
+                 * Verifies an AccessoryWidget message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an AccessoryWidget message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns AccessoryWidget
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.AccessoryWidget;
+
+                /**
+                 * Creates a plain object from an AccessoryWidget message. Also converts values to other types if specified.
+                 * @param message AccessoryWidget
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.AccessoryWidget, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this AccessoryWidget to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for AccessoryWidget
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
             /** Properties of a GetMessageRequest. */

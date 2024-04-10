@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/data-fusion-v3.0.1...data-fusion-v3.1.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5187](https://github.com/googleapis/google-cloud-node/issues/5187)) ([1952fbe](https://github.com/googleapis/google-cloud-node/commit/1952fbe432b96115278d42e5c1dbdbc7de39036b))
+
 ## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/data-fusion-v3.0.0...data-fusion-v3.0.1) (2023-09-06)
 
 

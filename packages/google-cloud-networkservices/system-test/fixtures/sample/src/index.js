@@ -20,6 +20,7 @@
 const networkservices = require('@google-cloud/networkservices');
 
 function main() {
+  const depServiceClient = new networkservices.DepServiceClient();
   const networkServicesClient = new networkservices.NetworkServicesClient();
 }
 

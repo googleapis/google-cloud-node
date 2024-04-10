@@ -19,9 +19,11 @@
   * [Edge_container.delete_node_pool](#edge_container.delete_node_pool)
   * [Edge_container.delete_vpn_connection](#edge_container.delete_vpn_connection)
   * [Edge_container.generate_access_token](#edge_container.generate_access_token)
+  * [Edge_container.generate_offline_credential](#edge_container.generate_offline_credential)
   * [Edge_container.get_cluster](#edge_container.get_cluster)
   * [Edge_container.get_machine](#edge_container.get_machine)
   * [Edge_container.get_node_pool](#edge_container.get_node_pool)
+  * [Edge_container.get_server_config](#edge_container.get_server_config)
   * [Edge_container.get_vpn_connection](#edge_container.get_vpn_connection)
   * [Edge_container.list_clusters](#edge_container.list_clusters)
   * [Edge_container.list_machines](#edge_container.list_machines)
@@ -29,6 +31,7 @@
   * [Edge_container.list_vpn_connections](#edge_container.list_vpn_connections)
   * [Edge_container.update_cluster](#edge_container.update_cluster)
   * [Edge_container.update_node_pool](#edge_container.update_node_pool)
+  * [Edge_container.upgrade_cluster](#edge_container.upgrade_cluster)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -165,6 +168,23 @@ __Usage:__
 
 
 
+### Edge_container.generate_offline_credential
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgecontainer/samples/generated/v1/edge_container.generate_offline_credential.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgecontainer/samples/generated/v1/edge_container.generate_offline_credential.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-edgecontainer/samples/generated/v1/edge_container.generate_offline_credential.js`
+
+
+-----
+
+
+
+
 ### Edge_container.get_cluster
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgecontainer/samples/generated/v1/edge_container.get_cluster.js).
@@ -209,6 +229,23 @@ __Usage:__
 
 
 `node packages/google-cloud-edgecontainer/samples/generated/v1/edge_container.get_node_pool.js`
+
+
+-----
+
+
+
+
+### Edge_container.get_server_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgecontainer/samples/generated/v1/edge_container.get_server_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgecontainer/samples/generated/v1/edge_container.get_server_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-edgecontainer/samples/generated/v1/edge_container.get_server_config.js`
 
 
 -----
@@ -328,6 +365,23 @@ __Usage:__
 
 
 `node packages/google-cloud-edgecontainer/samples/generated/v1/edge_container.update_node_pool.js`
+
+
+-----
+
+
+
+
+### Edge_container.upgrade_cluster
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgecontainer/samples/generated/v1/edge_container.upgrade_cluster.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgecontainer/samples/generated/v1/edge_container.upgrade_cluster.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-edgecontainer/samples/generated/v1/edge_container.upgrade_cluster.js`
 
 
 -----

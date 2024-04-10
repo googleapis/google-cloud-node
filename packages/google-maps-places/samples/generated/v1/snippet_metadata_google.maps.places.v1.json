@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-places",
-        "version": "1.3.0",
+        "version": "1.4.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -234,7 +234,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 95,
+                    "end": 96,
                     "type": "FULL"
                 }
             ],
@@ -286,7 +286,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 142,
+                    "end": 143,
                     "type": "FULL"
                 }
             ],

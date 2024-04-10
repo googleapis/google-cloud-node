@@ -40,6 +40,11 @@
                 "getVolumeRestore"
               ]
             },
+            "GetBackupIndexDownloadUrl": {
+              "methods": [
+                "getBackupIndexDownloadUrl"
+              ]
+            },
             "CreateBackupPlan": {
               "methods": [
                 "createBackupPlan"
@@ -175,6 +180,11 @@
             "GetVolumeRestore": {
               "methods": [
                 "getVolumeRestore"
+              ]
+            },
+            "GetBackupIndexDownloadUrl": {
+              "methods": [
+                "getBackupIndexDownloadUrl"
               ]
             },
             "CreateBackupPlan": {

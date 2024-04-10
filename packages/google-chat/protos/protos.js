@@ -26163,6 +26163,7 @@
                      * @property {number|null} [length] Annotation length
                      * @property {google.chat.v1.IUserMentionMetadata|null} [userMention] Annotation userMention
                      * @property {google.chat.v1.ISlashCommandMetadata|null} [slashCommand] Annotation slashCommand
+                     * @property {google.chat.v1.IRichLinkMetadata|null} [richLinkMetadata] Annotation richLinkMetadata
                      */
     
                     /**
@@ -26220,6 +26221,14 @@
                      */
                     Annotation.prototype.slashCommand = null;
     
+                    /**
+                     * Annotation richLinkMetadata.
+                     * @member {google.chat.v1.IRichLinkMetadata|null|undefined} richLinkMetadata
+                     * @memberof google.chat.v1.Annotation
+                     * @instance
+                     */
+                    Annotation.prototype.richLinkMetadata = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -26236,12 +26245,12 @@
     
                     /**
                      * Annotation metadata.
-                     * @member {"userMention"|"slashCommand"|undefined} metadata
+                     * @member {"userMention"|"slashCommand"|"richLinkMetadata"|undefined} metadata
                      * @memberof google.chat.v1.Annotation
                      * @instance
                      */
                     Object.defineProperty(Annotation.prototype, "metadata", {
-                        get: $util.oneOfGetter($oneOfFields = ["userMention", "slashCommand"]),
+                        get: $util.oneOfGetter($oneOfFields = ["userMention", "slashCommand", "richLinkMetadata"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
@@ -26279,6 +26288,8 @@
                             $root.google.chat.v1.UserMentionMetadata.encode(message.userMention, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                         if (message.slashCommand != null && Object.hasOwnProperty.call(message, "slashCommand"))
                             $root.google.chat.v1.SlashCommandMetadata.encode(message.slashCommand, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                        if (message.richLinkMetadata != null && Object.hasOwnProperty.call(message, "richLinkMetadata"))
+                            $root.google.chat.v1.RichLinkMetadata.encode(message.richLinkMetadata, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                         return writer;
                     };
     
@@ -26333,6 +26344,10 @@
                                     message.slashCommand = $root.google.chat.v1.SlashCommandMetadata.decode(reader, reader.uint32());
                                     break;
                                 }
+                            case 6: {
+                                    message.richLinkMetadata = $root.google.chat.v1.RichLinkMetadata.decode(reader, reader.uint32());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -26376,6 +26391,7 @@
                             case 0:
                             case 1:
                             case 2:
+                            case 3:
                                 break;
                             }
                         if (message.startIndex != null && message.hasOwnProperty("startIndex")) {
@@ -26402,6 +26418,16 @@
                                 var error = $root.google.chat.v1.SlashCommandMetadata.verify(message.slashCommand);
                                 if (error)
                                     return "slashCommand." + error;
+                            }
+                        }
+                        if (message.richLinkMetadata != null && message.hasOwnProperty("richLinkMetadata")) {
+                            if (properties.metadata === 1)
+                                return "metadata: multiple values";
+                            properties.metadata = 1;
+                            {
+                                var error = $root.google.chat.v1.RichLinkMetadata.verify(message.richLinkMetadata);
+                                if (error)
+                                    return "richLinkMetadata." + error;
                             }
                         }
                         return null;
@@ -26438,6 +26464,10 @@
                         case 2:
                             message.type = 2;
                             break;
+                        case "RICH_LINK":
+                        case 3:
+                            message.type = 3;
+                            break;
                         }
                         if (object.startIndex != null)
                             message.startIndex = object.startIndex | 0;
@@ -26452,6 +26482,11 @@
                             if (typeof object.slashCommand !== "object")
                                 throw TypeError(".google.chat.v1.Annotation.slashCommand: object expected");
                             message.slashCommand = $root.google.chat.v1.SlashCommandMetadata.fromObject(object.slashCommand);
+                        }
+                        if (object.richLinkMetadata != null) {
+                            if (typeof object.richLinkMetadata !== "object")
+                                throw TypeError(".google.chat.v1.Annotation.richLinkMetadata: object expected");
+                            message.richLinkMetadata = $root.google.chat.v1.RichLinkMetadata.fromObject(object.richLinkMetadata);
                         }
                         return message;
                     };
@@ -26491,6 +26526,11 @@
                             object.slashCommand = $root.google.chat.v1.SlashCommandMetadata.toObject(message.slashCommand, options);
                             if (options.oneofs)
                                 object.metadata = "slashCommand";
+                        }
+                        if (message.richLinkMetadata != null && message.hasOwnProperty("richLinkMetadata")) {
+                            object.richLinkMetadata = $root.google.chat.v1.RichLinkMetadata.toObject(message.richLinkMetadata, options);
+                            if (options.oneofs)
+                                object.metadata = "richLinkMetadata";
                         }
                         return object;
                     };
@@ -27151,44 +27191,26 @@
                     return SlashCommandMetadata;
                 })();
     
-                /**
-                 * AnnotationType enum.
-                 * @name google.chat.v1.AnnotationType
-                 * @enum {number}
-                 * @property {number} ANNOTATION_TYPE_UNSPECIFIED=0 ANNOTATION_TYPE_UNSPECIFIED value
-                 * @property {number} USER_MENTION=1 USER_MENTION value
-                 * @property {number} SLASH_COMMAND=2 SLASH_COMMAND value
-                 */
-                v1.AnnotationType = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "ANNOTATION_TYPE_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "USER_MENTION"] = 1;
-                    values[valuesById[2] = "SLASH_COMMAND"] = 2;
-                    return values;
-                })();
-    
-                v1.User = (function() {
+                v1.RichLinkMetadata = (function() {
     
                     /**
-                     * Properties of a User.
+                     * Properties of a RichLinkMetadata.
                      * @memberof google.chat.v1
-                     * @interface IUser
-                     * @property {string|null} [name] User name
-                     * @property {string|null} [displayName] User displayName
-                     * @property {string|null} [domainId] User domainId
-                     * @property {google.chat.v1.User.Type|null} [type] User type
-                     * @property {boolean|null} [isAnonymous] User isAnonymous
+                     * @interface IRichLinkMetadata
+                     * @property {string|null} [uri] RichLinkMetadata uri
+                     * @property {google.chat.v1.RichLinkMetadata.RichLinkType|null} [richLinkType] RichLinkMetadata richLinkType
+                     * @property {google.chat.v1.IDriveLinkData|null} [driveLinkData] RichLinkMetadata driveLinkData
                      */
     
                     /**
-                     * Constructs a new User.
+                     * Constructs a new RichLinkMetadata.
                      * @memberof google.chat.v1
-                     * @classdesc Represents a User.
-                     * @implements IUser
+                     * @classdesc Represents a RichLinkMetadata.
+                     * @implements IRichLinkMetadata
                      * @constructor
-                     * @param {google.chat.v1.IUser=} [properties] Properties to set
+                     * @param {google.chat.v1.IRichLinkMetadata=} [properties] Properties to set
                      */
-                    function User(properties) {
+                    function RichLinkMetadata(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
@@ -27196,131 +27218,117 @@
                     }
     
                     /**
-                     * User name.
-                     * @member {string} name
-                     * @memberof google.chat.v1.User
+                     * RichLinkMetadata uri.
+                     * @member {string} uri
+                     * @memberof google.chat.v1.RichLinkMetadata
                      * @instance
                      */
-                    User.prototype.name = "";
+                    RichLinkMetadata.prototype.uri = "";
     
                     /**
-                     * User displayName.
-                     * @member {string} displayName
-                     * @memberof google.chat.v1.User
+                     * RichLinkMetadata richLinkType.
+                     * @member {google.chat.v1.RichLinkMetadata.RichLinkType} richLinkType
+                     * @memberof google.chat.v1.RichLinkMetadata
                      * @instance
                      */
-                    User.prototype.displayName = "";
+                    RichLinkMetadata.prototype.richLinkType = 0;
     
                     /**
-                     * User domainId.
-                     * @member {string} domainId
-                     * @memberof google.chat.v1.User
+                     * RichLinkMetadata driveLinkData.
+                     * @member {google.chat.v1.IDriveLinkData|null|undefined} driveLinkData
+                     * @memberof google.chat.v1.RichLinkMetadata
                      * @instance
                      */
-                    User.prototype.domainId = "";
+                    RichLinkMetadata.prototype.driveLinkData = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
     
                     /**
-                     * User type.
-                     * @member {google.chat.v1.User.Type} type
-                     * @memberof google.chat.v1.User
+                     * RichLinkMetadata data.
+                     * @member {"driveLinkData"|undefined} data
+                     * @memberof google.chat.v1.RichLinkMetadata
                      * @instance
                      */
-                    User.prototype.type = 0;
+                    Object.defineProperty(RichLinkMetadata.prototype, "data", {
+                        get: $util.oneOfGetter($oneOfFields = ["driveLinkData"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
     
                     /**
-                     * User isAnonymous.
-                     * @member {boolean} isAnonymous
-                     * @memberof google.chat.v1.User
-                     * @instance
-                     */
-                    User.prototype.isAnonymous = false;
-    
-                    /**
-                     * Creates a new User instance using the specified properties.
+                     * Creates a new RichLinkMetadata instance using the specified properties.
                      * @function create
-                     * @memberof google.chat.v1.User
+                     * @memberof google.chat.v1.RichLinkMetadata
                      * @static
-                     * @param {google.chat.v1.IUser=} [properties] Properties to set
-                     * @returns {google.chat.v1.User} User instance
+                     * @param {google.chat.v1.IRichLinkMetadata=} [properties] Properties to set
+                     * @returns {google.chat.v1.RichLinkMetadata} RichLinkMetadata instance
                      */
-                    User.create = function create(properties) {
-                        return new User(properties);
+                    RichLinkMetadata.create = function create(properties) {
+                        return new RichLinkMetadata(properties);
                     };
     
                     /**
-                     * Encodes the specified User message. Does not implicitly {@link google.chat.v1.User.verify|verify} messages.
+                     * Encodes the specified RichLinkMetadata message. Does not implicitly {@link google.chat.v1.RichLinkMetadata.verify|verify} messages.
                      * @function encode
-                     * @memberof google.chat.v1.User
+                     * @memberof google.chat.v1.RichLinkMetadata
                      * @static
-                     * @param {google.chat.v1.IUser} message User message or plain object to encode
+                     * @param {google.chat.v1.IRichLinkMetadata} message RichLinkMetadata message or plain object to encode
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    User.encode = function encode(message, writer) {
+                    RichLinkMetadata.encode = function encode(message, writer) {
                         if (!writer)
                             writer = $Writer.create();
-                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                        if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
-                        if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                            writer.uint32(/* id 5, wireType 0 =*/40).int32(message.type);
-                        if (message.domainId != null && Object.hasOwnProperty.call(message, "domainId"))
-                            writer.uint32(/* id 6, wireType 2 =*/50).string(message.domainId);
-                        if (message.isAnonymous != null && Object.hasOwnProperty.call(message, "isAnonymous"))
-                            writer.uint32(/* id 7, wireType 0 =*/56).bool(message.isAnonymous);
+                        if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                        if (message.richLinkType != null && Object.hasOwnProperty.call(message, "richLinkType"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.richLinkType);
+                        if (message.driveLinkData != null && Object.hasOwnProperty.call(message, "driveLinkData"))
+                            $root.google.chat.v1.DriveLinkData.encode(message.driveLinkData, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                         return writer;
                     };
     
                     /**
-                     * Encodes the specified User message, length delimited. Does not implicitly {@link google.chat.v1.User.verify|verify} messages.
+                     * Encodes the specified RichLinkMetadata message, length delimited. Does not implicitly {@link google.chat.v1.RichLinkMetadata.verify|verify} messages.
                      * @function encodeDelimited
-                     * @memberof google.chat.v1.User
+                     * @memberof google.chat.v1.RichLinkMetadata
                      * @static
-                     * @param {google.chat.v1.IUser} message User message or plain object to encode
+                     * @param {google.chat.v1.IRichLinkMetadata} message RichLinkMetadata message or plain object to encode
                      * @param {$protobuf.Writer} [writer] Writer to encode to
                      * @returns {$protobuf.Writer} Writer
                      */
-                    User.encodeDelimited = function encodeDelimited(message, writer) {
+                    RichLinkMetadata.encodeDelimited = function encodeDelimited(message, writer) {
                         return this.encode(message, writer).ldelim();
                     };
     
                     /**
-                     * Decodes a User message from the specified reader or buffer.
+                     * Decodes a RichLinkMetadata message from the specified reader or buffer.
                      * @function decode
-                     * @memberof google.chat.v1.User
+                     * @memberof google.chat.v1.RichLinkMetadata
                      * @static
                      * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                      * @param {number} [length] Message length if known beforehand
-                     * @returns {google.chat.v1.User} User
+                     * @returns {google.chat.v1.RichLinkMetadata} RichLinkMetadata
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    User.decode = function decode(reader, length) {
+                    RichLinkMetadata.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.User();
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.RichLinkMetadata();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
                             case 1: {
-                                    message.name = reader.string();
+                                    message.uri = reader.string();
                                     break;
                                 }
                             case 2: {
-                                    message.displayName = reader.string();
+                                    message.richLinkType = reader.int32();
                                     break;
                                 }
-                            case 6: {
-                                    message.domainId = reader.string();
-                                    break;
-                                }
-                            case 5: {
-                                    message.type = reader.int32();
-                                    break;
-                                }
-                            case 7: {
-                                    message.isAnonymous = reader.bool();
+                            case 3: {
+                                    message.driveLinkData = $root.google.chat.v1.DriveLinkData.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -27332,175 +27340,413 @@
                     };
     
                     /**
-                     * Decodes a User message from the specified reader or buffer, length delimited.
+                     * Decodes a RichLinkMetadata message from the specified reader or buffer, length delimited.
                      * @function decodeDelimited
-                     * @memberof google.chat.v1.User
+                     * @memberof google.chat.v1.RichLinkMetadata
                      * @static
                      * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.chat.v1.User} User
+                     * @returns {google.chat.v1.RichLinkMetadata} RichLinkMetadata
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    User.decodeDelimited = function decodeDelimited(reader) {
+                    RichLinkMetadata.decodeDelimited = function decodeDelimited(reader) {
                         if (!(reader instanceof $Reader))
                             reader = new $Reader(reader);
                         return this.decode(reader, reader.uint32());
                     };
     
                     /**
-                     * Verifies a User message.
+                     * Verifies a RichLinkMetadata message.
                      * @function verify
-                     * @memberof google.chat.v1.User
+                     * @memberof google.chat.v1.RichLinkMetadata
                      * @static
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    User.verify = function verify(message) {
+                    RichLinkMetadata.verify = function verify(message) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
-                        if (message.name != null && message.hasOwnProperty("name"))
-                            if (!$util.isString(message.name))
-                                return "name: string expected";
-                        if (message.displayName != null && message.hasOwnProperty("displayName"))
-                            if (!$util.isString(message.displayName))
-                                return "displayName: string expected";
-                        if (message.domainId != null && message.hasOwnProperty("domainId"))
-                            if (!$util.isString(message.domainId))
-                                return "domainId: string expected";
-                        if (message.type != null && message.hasOwnProperty("type"))
-                            switch (message.type) {
+                        var properties = {};
+                        if (message.uri != null && message.hasOwnProperty("uri"))
+                            if (!$util.isString(message.uri))
+                                return "uri: string expected";
+                        if (message.richLinkType != null && message.hasOwnProperty("richLinkType"))
+                            switch (message.richLinkType) {
                             default:
-                                return "type: enum value expected";
+                                return "richLinkType: enum value expected";
                             case 0:
                             case 1:
-                            case 2:
                                 break;
                             }
-                        if (message.isAnonymous != null && message.hasOwnProperty("isAnonymous"))
-                            if (typeof message.isAnonymous !== "boolean")
-                                return "isAnonymous: boolean expected";
+                        if (message.driveLinkData != null && message.hasOwnProperty("driveLinkData")) {
+                            properties.data = 1;
+                            {
+                                var error = $root.google.chat.v1.DriveLinkData.verify(message.driveLinkData);
+                                if (error)
+                                    return "driveLinkData." + error;
+                            }
+                        }
                         return null;
                     };
     
                     /**
-                     * Creates a User message from a plain object. Also converts values to their respective internal types.
+                     * Creates a RichLinkMetadata message from a plain object. Also converts values to their respective internal types.
                      * @function fromObject
-                     * @memberof google.chat.v1.User
+                     * @memberof google.chat.v1.RichLinkMetadata
                      * @static
                      * @param {Object.<string,*>} object Plain object
-                     * @returns {google.chat.v1.User} User
+                     * @returns {google.chat.v1.RichLinkMetadata} RichLinkMetadata
                      */
-                    User.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.chat.v1.User)
+                    RichLinkMetadata.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.RichLinkMetadata)
                             return object;
-                        var message = new $root.google.chat.v1.User();
-                        if (object.name != null)
-                            message.name = String(object.name);
-                        if (object.displayName != null)
-                            message.displayName = String(object.displayName);
-                        if (object.domainId != null)
-                            message.domainId = String(object.domainId);
-                        switch (object.type) {
+                        var message = new $root.google.chat.v1.RichLinkMetadata();
+                        if (object.uri != null)
+                            message.uri = String(object.uri);
+                        switch (object.richLinkType) {
                         default:
-                            if (typeof object.type === "number") {
-                                message.type = object.type;
+                            if (typeof object.richLinkType === "number") {
+                                message.richLinkType = object.richLinkType;
                                 break;
                             }
                             break;
-                        case "TYPE_UNSPECIFIED":
+                        case "RICH_LINK_TYPE_UNSPECIFIED":
                         case 0:
-                            message.type = 0;
+                            message.richLinkType = 0;
                             break;
-                        case "HUMAN":
+                        case "DRIVE_FILE":
                         case 1:
-                            message.type = 1;
-                            break;
-                        case "BOT":
-                        case 2:
-                            message.type = 2;
+                            message.richLinkType = 1;
                             break;
                         }
-                        if (object.isAnonymous != null)
-                            message.isAnonymous = Boolean(object.isAnonymous);
+                        if (object.driveLinkData != null) {
+                            if (typeof object.driveLinkData !== "object")
+                                throw TypeError(".google.chat.v1.RichLinkMetadata.driveLinkData: object expected");
+                            message.driveLinkData = $root.google.chat.v1.DriveLinkData.fromObject(object.driveLinkData);
+                        }
                         return message;
                     };
     
                     /**
-                     * Creates a plain object from a User message. Also converts values to other types if specified.
+                     * Creates a plain object from a RichLinkMetadata message. Also converts values to other types if specified.
                      * @function toObject
-                     * @memberof google.chat.v1.User
+                     * @memberof google.chat.v1.RichLinkMetadata
                      * @static
-                     * @param {google.chat.v1.User} message User
+                     * @param {google.chat.v1.RichLinkMetadata} message RichLinkMetadata
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    User.toObject = function toObject(message, options) {
+                    RichLinkMetadata.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
                         var object = {};
                         if (options.defaults) {
-                            object.name = "";
-                            object.displayName = "";
-                            object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
-                            object.domainId = "";
-                            object.isAnonymous = false;
+                            object.uri = "";
+                            object.richLinkType = options.enums === String ? "RICH_LINK_TYPE_UNSPECIFIED" : 0;
                         }
-                        if (message.name != null && message.hasOwnProperty("name"))
-                            object.name = message.name;
-                        if (message.displayName != null && message.hasOwnProperty("displayName"))
-                            object.displayName = message.displayName;
-                        if (message.type != null && message.hasOwnProperty("type"))
-                            object.type = options.enums === String ? $root.google.chat.v1.User.Type[message.type] === undefined ? message.type : $root.google.chat.v1.User.Type[message.type] : message.type;
-                        if (message.domainId != null && message.hasOwnProperty("domainId"))
-                            object.domainId = message.domainId;
-                        if (message.isAnonymous != null && message.hasOwnProperty("isAnonymous"))
-                            object.isAnonymous = message.isAnonymous;
+                        if (message.uri != null && message.hasOwnProperty("uri"))
+                            object.uri = message.uri;
+                        if (message.richLinkType != null && message.hasOwnProperty("richLinkType"))
+                            object.richLinkType = options.enums === String ? $root.google.chat.v1.RichLinkMetadata.RichLinkType[message.richLinkType] === undefined ? message.richLinkType : $root.google.chat.v1.RichLinkMetadata.RichLinkType[message.richLinkType] : message.richLinkType;
+                        if (message.driveLinkData != null && message.hasOwnProperty("driveLinkData")) {
+                            object.driveLinkData = $root.google.chat.v1.DriveLinkData.toObject(message.driveLinkData, options);
+                            if (options.oneofs)
+                                object.data = "driveLinkData";
+                        }
                         return object;
                     };
     
                     /**
-                     * Converts this User to JSON.
+                     * Converts this RichLinkMetadata to JSON.
                      * @function toJSON
-                     * @memberof google.chat.v1.User
+                     * @memberof google.chat.v1.RichLinkMetadata
                      * @instance
                      * @returns {Object.<string,*>} JSON object
                      */
-                    User.prototype.toJSON = function toJSON() {
+                    RichLinkMetadata.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
                     /**
-                     * Gets the default type url for User
+                     * Gets the default type url for RichLinkMetadata
                      * @function getTypeUrl
-                     * @memberof google.chat.v1.User
+                     * @memberof google.chat.v1.RichLinkMetadata
                      * @static
                      * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns {string} The default type url
                      */
-                    User.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    RichLinkMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
                         if (typeUrlPrefix === undefined) {
                             typeUrlPrefix = "type.googleapis.com";
                         }
-                        return typeUrlPrefix + "/google.chat.v1.User";
+                        return typeUrlPrefix + "/google.chat.v1.RichLinkMetadata";
                     };
     
                     /**
-                     * Type enum.
-                     * @name google.chat.v1.User.Type
+                     * RichLinkType enum.
+                     * @name google.chat.v1.RichLinkMetadata.RichLinkType
                      * @enum {number}
-                     * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
-                     * @property {number} HUMAN=1 HUMAN value
-                     * @property {number} BOT=2 BOT value
+                     * @property {number} RICH_LINK_TYPE_UNSPECIFIED=0 RICH_LINK_TYPE_UNSPECIFIED value
+                     * @property {number} DRIVE_FILE=1 DRIVE_FILE value
                      */
-                    User.Type = (function() {
+                    RichLinkMetadata.RichLinkType = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "HUMAN"] = 1;
-                        values[valuesById[2] = "BOT"] = 2;
+                        values[valuesById[0] = "RICH_LINK_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "DRIVE_FILE"] = 1;
                         return values;
                     })();
     
-                    return User;
+                    return RichLinkMetadata;
+                })();
+    
+                v1.DriveLinkData = (function() {
+    
+                    /**
+                     * Properties of a DriveLinkData.
+                     * @memberof google.chat.v1
+                     * @interface IDriveLinkData
+                     * @property {google.chat.v1.IDriveDataRef|null} [driveDataRef] DriveLinkData driveDataRef
+                     * @property {string|null} [mimeType] DriveLinkData mimeType
+                     */
+    
+                    /**
+                     * Constructs a new DriveLinkData.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a DriveLinkData.
+                     * @implements IDriveLinkData
+                     * @constructor
+                     * @param {google.chat.v1.IDriveLinkData=} [properties] Properties to set
+                     */
+                    function DriveLinkData(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * DriveLinkData driveDataRef.
+                     * @member {google.chat.v1.IDriveDataRef|null|undefined} driveDataRef
+                     * @memberof google.chat.v1.DriveLinkData
+                     * @instance
+                     */
+                    DriveLinkData.prototype.driveDataRef = null;
+    
+                    /**
+                     * DriveLinkData mimeType.
+                     * @member {string} mimeType
+                     * @memberof google.chat.v1.DriveLinkData
+                     * @instance
+                     */
+                    DriveLinkData.prototype.mimeType = "";
+    
+                    /**
+                     * Creates a new DriveLinkData instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.DriveLinkData
+                     * @static
+                     * @param {google.chat.v1.IDriveLinkData=} [properties] Properties to set
+                     * @returns {google.chat.v1.DriveLinkData} DriveLinkData instance
+                     */
+                    DriveLinkData.create = function create(properties) {
+                        return new DriveLinkData(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified DriveLinkData message. Does not implicitly {@link google.chat.v1.DriveLinkData.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.DriveLinkData
+                     * @static
+                     * @param {google.chat.v1.IDriveLinkData} message DriveLinkData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DriveLinkData.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.driveDataRef != null && Object.hasOwnProperty.call(message, "driveDataRef"))
+                            $root.google.chat.v1.DriveDataRef.encode(message.driveDataRef, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.mimeType != null && Object.hasOwnProperty.call(message, "mimeType"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.mimeType);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified DriveLinkData message, length delimited. Does not implicitly {@link google.chat.v1.DriveLinkData.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.DriveLinkData
+                     * @static
+                     * @param {google.chat.v1.IDriveLinkData} message DriveLinkData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DriveLinkData.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a DriveLinkData message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.DriveLinkData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.DriveLinkData} DriveLinkData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DriveLinkData.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.DriveLinkData();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.driveDataRef = $root.google.chat.v1.DriveDataRef.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 2: {
+                                    message.mimeType = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a DriveLinkData message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.DriveLinkData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.DriveLinkData} DriveLinkData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DriveLinkData.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a DriveLinkData message.
+                     * @function verify
+                     * @memberof google.chat.v1.DriveLinkData
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    DriveLinkData.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.driveDataRef != null && message.hasOwnProperty("driveDataRef")) {
+                            var error = $root.google.chat.v1.DriveDataRef.verify(message.driveDataRef);
+                            if (error)
+                                return "driveDataRef." + error;
+                        }
+                        if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                            if (!$util.isString(message.mimeType))
+                                return "mimeType: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a DriveLinkData message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.DriveLinkData
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.DriveLinkData} DriveLinkData
+                     */
+                    DriveLinkData.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.DriveLinkData)
+                            return object;
+                        var message = new $root.google.chat.v1.DriveLinkData();
+                        if (object.driveDataRef != null) {
+                            if (typeof object.driveDataRef !== "object")
+                                throw TypeError(".google.chat.v1.DriveLinkData.driveDataRef: object expected");
+                            message.driveDataRef = $root.google.chat.v1.DriveDataRef.fromObject(object.driveDataRef);
+                        }
+                        if (object.mimeType != null)
+                            message.mimeType = String(object.mimeType);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a DriveLinkData message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.DriveLinkData
+                     * @static
+                     * @param {google.chat.v1.DriveLinkData} message DriveLinkData
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    DriveLinkData.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.driveDataRef = null;
+                            object.mimeType = "";
+                        }
+                        if (message.driveDataRef != null && message.hasOwnProperty("driveDataRef"))
+                            object.driveDataRef = $root.google.chat.v1.DriveDataRef.toObject(message.driveDataRef, options);
+                        if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                            object.mimeType = message.mimeType;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this DriveLinkData to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.DriveLinkData
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    DriveLinkData.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for DriveLinkData
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.DriveLinkData
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    DriveLinkData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.DriveLinkData";
+                    };
+    
+                    return DriveLinkData;
+                })();
+    
+                /**
+                 * AnnotationType enum.
+                 * @name google.chat.v1.AnnotationType
+                 * @enum {number}
+                 * @property {number} ANNOTATION_TYPE_UNSPECIFIED=0 ANNOTATION_TYPE_UNSPECIFIED value
+                 * @property {number} USER_MENTION=1 USER_MENTION value
+                 * @property {number} SLASH_COMMAND=2 SLASH_COMMAND value
+                 * @property {number} RICH_LINK=3 RICH_LINK value
+                 */
+                v1.AnnotationType = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "ANNOTATION_TYPE_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "USER_MENTION"] = 1;
+                    values[valuesById[2] = "SLASH_COMMAND"] = 2;
+                    values[valuesById[3] = "RICH_LINK"] = 3;
+                    return values;
                 })();
     
                 v1.Attachment = (function() {
@@ -29011,6 +29257,342 @@
                     };
     
                     return UploadAttachmentResponse;
+                })();
+    
+                v1.User = (function() {
+    
+                    /**
+                     * Properties of a User.
+                     * @memberof google.chat.v1
+                     * @interface IUser
+                     * @property {string|null} [name] User name
+                     * @property {string|null} [displayName] User displayName
+                     * @property {string|null} [domainId] User domainId
+                     * @property {google.chat.v1.User.Type|null} [type] User type
+                     * @property {boolean|null} [isAnonymous] User isAnonymous
+                     */
+    
+                    /**
+                     * Constructs a new User.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a User.
+                     * @implements IUser
+                     * @constructor
+                     * @param {google.chat.v1.IUser=} [properties] Properties to set
+                     */
+                    function User(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * User name.
+                     * @member {string} name
+                     * @memberof google.chat.v1.User
+                     * @instance
+                     */
+                    User.prototype.name = "";
+    
+                    /**
+                     * User displayName.
+                     * @member {string} displayName
+                     * @memberof google.chat.v1.User
+                     * @instance
+                     */
+                    User.prototype.displayName = "";
+    
+                    /**
+                     * User domainId.
+                     * @member {string} domainId
+                     * @memberof google.chat.v1.User
+                     * @instance
+                     */
+                    User.prototype.domainId = "";
+    
+                    /**
+                     * User type.
+                     * @member {google.chat.v1.User.Type} type
+                     * @memberof google.chat.v1.User
+                     * @instance
+                     */
+                    User.prototype.type = 0;
+    
+                    /**
+                     * User isAnonymous.
+                     * @member {boolean} isAnonymous
+                     * @memberof google.chat.v1.User
+                     * @instance
+                     */
+                    User.prototype.isAnonymous = false;
+    
+                    /**
+                     * Creates a new User instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.User
+                     * @static
+                     * @param {google.chat.v1.IUser=} [properties] Properties to set
+                     * @returns {google.chat.v1.User} User instance
+                     */
+                    User.create = function create(properties) {
+                        return new User(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified User message. Does not implicitly {@link google.chat.v1.User.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.User
+                     * @static
+                     * @param {google.chat.v1.IUser} message User message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    User.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                        if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                            writer.uint32(/* id 5, wireType 0 =*/40).int32(message.type);
+                        if (message.domainId != null && Object.hasOwnProperty.call(message, "domainId"))
+                            writer.uint32(/* id 6, wireType 2 =*/50).string(message.domainId);
+                        if (message.isAnonymous != null && Object.hasOwnProperty.call(message, "isAnonymous"))
+                            writer.uint32(/* id 7, wireType 0 =*/56).bool(message.isAnonymous);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified User message, length delimited. Does not implicitly {@link google.chat.v1.User.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.User
+                     * @static
+                     * @param {google.chat.v1.IUser} message User message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    User.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a User message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.User
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.User} User
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    User.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.User();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.displayName = reader.string();
+                                    break;
+                                }
+                            case 6: {
+                                    message.domainId = reader.string();
+                                    break;
+                                }
+                            case 5: {
+                                    message.type = reader.int32();
+                                    break;
+                                }
+                            case 7: {
+                                    message.isAnonymous = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a User message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.User
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.User} User
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    User.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a User message.
+                     * @function verify
+                     * @memberof google.chat.v1.User
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    User.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.displayName != null && message.hasOwnProperty("displayName"))
+                            if (!$util.isString(message.displayName))
+                                return "displayName: string expected";
+                        if (message.domainId != null && message.hasOwnProperty("domainId"))
+                            if (!$util.isString(message.domainId))
+                                return "domainId: string expected";
+                        if (message.type != null && message.hasOwnProperty("type"))
+                            switch (message.type) {
+                            default:
+                                return "type: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        if (message.isAnonymous != null && message.hasOwnProperty("isAnonymous"))
+                            if (typeof message.isAnonymous !== "boolean")
+                                return "isAnonymous: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a User message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.User
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.User} User
+                     */
+                    User.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.User)
+                            return object;
+                        var message = new $root.google.chat.v1.User();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.displayName != null)
+                            message.displayName = String(object.displayName);
+                        if (object.domainId != null)
+                            message.domainId = String(object.domainId);
+                        switch (object.type) {
+                        default:
+                            if (typeof object.type === "number") {
+                                message.type = object.type;
+                                break;
+                            }
+                            break;
+                        case "TYPE_UNSPECIFIED":
+                        case 0:
+                            message.type = 0;
+                            break;
+                        case "HUMAN":
+                        case 1:
+                            message.type = 1;
+                            break;
+                        case "BOT":
+                        case 2:
+                            message.type = 2;
+                            break;
+                        }
+                        if (object.isAnonymous != null)
+                            message.isAnonymous = Boolean(object.isAnonymous);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a User message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.User
+                     * @static
+                     * @param {google.chat.v1.User} message User
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    User.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.name = "";
+                            object.displayName = "";
+                            object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                            object.domainId = "";
+                            object.isAnonymous = false;
+                        }
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.displayName != null && message.hasOwnProperty("displayName"))
+                            object.displayName = message.displayName;
+                        if (message.type != null && message.hasOwnProperty("type"))
+                            object.type = options.enums === String ? $root.google.chat.v1.User.Type[message.type] === undefined ? message.type : $root.google.chat.v1.User.Type[message.type] : message.type;
+                        if (message.domainId != null && message.hasOwnProperty("domainId"))
+                            object.domainId = message.domainId;
+                        if (message.isAnonymous != null && message.hasOwnProperty("isAnonymous"))
+                            object.isAnonymous = message.isAnonymous;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this User to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.User
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    User.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for User
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.User
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    User.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.User";
+                    };
+    
+                    /**
+                     * Type enum.
+                     * @name google.chat.v1.User.Type
+                     * @enum {number}
+                     * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                     * @property {number} HUMAN=1 HUMAN value
+                     * @property {number} BOT=2 BOT value
+                     */
+                    User.Type = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "HUMAN"] = 1;
+                        values[valuesById[2] = "BOT"] = 2;
+                        return values;
+                    })();
+    
+                    return User;
                 })();
     
                 v1.ChatService = (function() {
@@ -31689,6 +32271,7 @@
                      * @property {google.chat.v1.IDeletionMetadata|null} [deletionMetadata] Message deletionMetadata
                      * @property {google.chat.v1.IQuotedMessageMetadata|null} [quotedMessageMetadata] Message quotedMessageMetadata
                      * @property {Array.<google.chat.v1.IAttachedGif>|null} [attachedGifs] Message attachedGifs
+                     * @property {Array.<google.chat.v1.IAccessoryWidget>|null} [accessoryWidgets] Message accessoryWidgets
                      */
     
                     /**
@@ -31706,6 +32289,7 @@
                         this.attachment = [];
                         this.emojiReactionSummaries = [];
                         this.attachedGifs = [];
+                        this.accessoryWidgets = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
@@ -31913,6 +32497,14 @@
                     Message.prototype.attachedGifs = $util.emptyArray;
     
                     /**
+                     * Message accessoryWidgets.
+                     * @member {Array.<google.chat.v1.IAccessoryWidget>} accessoryWidgets
+                     * @memberof google.chat.v1.Message
+                     * @instance
+                     */
+                    Message.prototype.accessoryWidgets = $util.emptyArray;
+    
+                    /**
                      * Creates a new Message instance using the specified properties.
                      * @function create
                      * @memberof google.chat.v1.Message
@@ -31992,6 +32584,9 @@
                                 $root.google.chat.v1.AttachedGif.encode(message.attachedGifs[i], writer.uint32(/* id 42, wireType 2 =*/338).fork()).ldelim();
                         if (message.formattedText != null && Object.hasOwnProperty.call(message, "formattedText"))
                             writer.uint32(/* id 43, wireType 2 =*/346).string(message.formattedText);
+                        if (message.accessoryWidgets != null && message.accessoryWidgets.length)
+                            for (var i = 0; i < message.accessoryWidgets.length; ++i)
+                                $root.google.chat.v1.AccessoryWidget.encode(message.accessoryWidgets[i], writer.uint32(/* id 44, wireType 2 =*/354).fork()).ldelim();
                         return writer;
                     };
     
@@ -32136,6 +32731,12 @@
                                     if (!(message.attachedGifs && message.attachedGifs.length))
                                         message.attachedGifs = [];
                                     message.attachedGifs.push($root.google.chat.v1.AttachedGif.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 44: {
+                                    if (!(message.accessoryWidgets && message.accessoryWidgets.length))
+                                        message.accessoryWidgets = [];
+                                    message.accessoryWidgets.push($root.google.chat.v1.AccessoryWidget.decode(reader, reader.uint32()));
                                     break;
                                 }
                             default:
@@ -32308,6 +32909,15 @@
                                     return "attachedGifs." + error;
                             }
                         }
+                        if (message.accessoryWidgets != null && message.hasOwnProperty("accessoryWidgets")) {
+                            if (!Array.isArray(message.accessoryWidgets))
+                                return "accessoryWidgets: array expected";
+                            for (var i = 0; i < message.accessoryWidgets.length; ++i) {
+                                var error = $root.google.chat.v1.AccessoryWidget.verify(message.accessoryWidgets[i]);
+                                if (error)
+                                    return "accessoryWidgets." + error;
+                            }
+                        }
                         return null;
                     };
     
@@ -32457,6 +33067,16 @@
                                 message.attachedGifs[i] = $root.google.chat.v1.AttachedGif.fromObject(object.attachedGifs[i]);
                             }
                         }
+                        if (object.accessoryWidgets) {
+                            if (!Array.isArray(object.accessoryWidgets))
+                                throw TypeError(".google.chat.v1.Message.accessoryWidgets: array expected");
+                            message.accessoryWidgets = [];
+                            for (var i = 0; i < object.accessoryWidgets.length; ++i) {
+                                if (typeof object.accessoryWidgets[i] !== "object")
+                                    throw TypeError(".google.chat.v1.Message.accessoryWidgets: object expected");
+                                message.accessoryWidgets[i] = $root.google.chat.v1.AccessoryWidget.fromObject(object.accessoryWidgets[i]);
+                            }
+                        }
                         return message;
                     };
     
@@ -32480,6 +33100,7 @@
                             object.cardsV2 = [];
                             object.emojiReactionSummaries = [];
                             object.attachedGifs = [];
+                            object.accessoryWidgets = [];
                         }
                         if (options.defaults) {
                             object.name = "";
@@ -32570,6 +33191,11 @@
                         }
                         if (message.formattedText != null && message.hasOwnProperty("formattedText"))
                             object.formattedText = message.formattedText;
+                        if (message.accessoryWidgets && message.accessoryWidgets.length) {
+                            object.accessoryWidgets = [];
+                            for (var j = 0; j < message.accessoryWidgets.length; ++j)
+                                object.accessoryWidgets[j] = $root.google.chat.v1.AccessoryWidget.toObject(message.accessoryWidgets[j], options);
+                        }
                         return object;
                     };
     
@@ -34088,6 +34714,233 @@
                     })();
     
                     return ActionResponse;
+                })();
+    
+                v1.AccessoryWidget = (function() {
+    
+                    /**
+                     * Properties of an AccessoryWidget.
+                     * @memberof google.chat.v1
+                     * @interface IAccessoryWidget
+                     * @property {google.apps.card.v1.IButtonList|null} [buttonList] AccessoryWidget buttonList
+                     */
+    
+                    /**
+                     * Constructs a new AccessoryWidget.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents an AccessoryWidget.
+                     * @implements IAccessoryWidget
+                     * @constructor
+                     * @param {google.chat.v1.IAccessoryWidget=} [properties] Properties to set
+                     */
+                    function AccessoryWidget(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * AccessoryWidget buttonList.
+                     * @member {google.apps.card.v1.IButtonList|null|undefined} buttonList
+                     * @memberof google.chat.v1.AccessoryWidget
+                     * @instance
+                     */
+                    AccessoryWidget.prototype.buttonList = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * AccessoryWidget action.
+                     * @member {"buttonList"|undefined} action
+                     * @memberof google.chat.v1.AccessoryWidget
+                     * @instance
+                     */
+                    Object.defineProperty(AccessoryWidget.prototype, "action", {
+                        get: $util.oneOfGetter($oneOfFields = ["buttonList"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new AccessoryWidget instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.AccessoryWidget
+                     * @static
+                     * @param {google.chat.v1.IAccessoryWidget=} [properties] Properties to set
+                     * @returns {google.chat.v1.AccessoryWidget} AccessoryWidget instance
+                     */
+                    AccessoryWidget.create = function create(properties) {
+                        return new AccessoryWidget(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified AccessoryWidget message. Does not implicitly {@link google.chat.v1.AccessoryWidget.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.AccessoryWidget
+                     * @static
+                     * @param {google.chat.v1.IAccessoryWidget} message AccessoryWidget message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AccessoryWidget.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.buttonList != null && Object.hasOwnProperty.call(message, "buttonList"))
+                            $root.google.apps.card.v1.ButtonList.encode(message.buttonList, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified AccessoryWidget message, length delimited. Does not implicitly {@link google.chat.v1.AccessoryWidget.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.AccessoryWidget
+                     * @static
+                     * @param {google.chat.v1.IAccessoryWidget} message AccessoryWidget message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AccessoryWidget.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an AccessoryWidget message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.AccessoryWidget
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.AccessoryWidget} AccessoryWidget
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AccessoryWidget.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.AccessoryWidget();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.buttonList = $root.google.apps.card.v1.ButtonList.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an AccessoryWidget message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.AccessoryWidget
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.AccessoryWidget} AccessoryWidget
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AccessoryWidget.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an AccessoryWidget message.
+                     * @function verify
+                     * @memberof google.chat.v1.AccessoryWidget
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    AccessoryWidget.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.buttonList != null && message.hasOwnProperty("buttonList")) {
+                            properties.action = 1;
+                            {
+                                var error = $root.google.apps.card.v1.ButtonList.verify(message.buttonList);
+                                if (error)
+                                    return "buttonList." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an AccessoryWidget message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.AccessoryWidget
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.AccessoryWidget} AccessoryWidget
+                     */
+                    AccessoryWidget.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.AccessoryWidget)
+                            return object;
+                        var message = new $root.google.chat.v1.AccessoryWidget();
+                        if (object.buttonList != null) {
+                            if (typeof object.buttonList !== "object")
+                                throw TypeError(".google.chat.v1.AccessoryWidget.buttonList: object expected");
+                            message.buttonList = $root.google.apps.card.v1.ButtonList.fromObject(object.buttonList);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an AccessoryWidget message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.AccessoryWidget
+                     * @static
+                     * @param {google.chat.v1.AccessoryWidget} message AccessoryWidget
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    AccessoryWidget.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (message.buttonList != null && message.hasOwnProperty("buttonList")) {
+                            object.buttonList = $root.google.apps.card.v1.ButtonList.toObject(message.buttonList, options);
+                            if (options.oneofs)
+                                object.action = "buttonList";
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this AccessoryWidget to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.AccessoryWidget
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    AccessoryWidget.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for AccessoryWidget
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.AccessoryWidget
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    AccessoryWidget.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.AccessoryWidget";
+                    };
+    
+                    return AccessoryWidget;
                 })();
     
                 v1.GetMessageRequest = (function() {

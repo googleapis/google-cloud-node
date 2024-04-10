@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/inventories-v0.2.0...inventories-v0.3.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5193](https://github.com/googleapis/google-cloud-node/issues/5193)) ([333b409](https://github.com/googleapis/google-cloud-node/commit/333b40951a255ecfab249bd6e7ace5877270ec85))
+* [merchantapi] Add DEMAND_GEN_ADS and DEMAND_GEN_ADS_DISCOVER_SURFACE in ReportingContextEnum ([#5201](https://github.com/googleapis/google-cloud-node/issues/5201)) ([a944d07](https://github.com/googleapis/google-cloud-node/commit/a944d079e11c8d1cd0c24c9bbd495c21c6c1c15c))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/inventories-v0.1.0...inventories-v0.2.0) (2024-02-09)
 
 

@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-edgenetwork",
-        "version": "0.3.0",
+        "version": "0.3.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -55,7 +55,7 @@
             "regionTag": "edgenetwork_v1_generated_EdgeNetwork_ListZones_async",
             "title": "EdgeNetwork listZones Sample",
             "origin": "API_DEFINITION",
-            "description": " Lists Zones in a given project and location.",
+            "description": " Deprecated: not implemented. Lists Zones in a given project and location.",
             "canonical": true,
             "file": "edge_network.list_zones.js",
             "language": "JAVASCRIPT",
@@ -111,7 +111,7 @@
             "regionTag": "edgenetwork_v1_generated_EdgeNetwork_GetZone_async",
             "title": "EdgeNetwork getZone Sample",
             "origin": "API_DEFINITION",
-            "description": " Gets details of a single Zone.",
+            "description": " Deprecated: not implemented. Gets details of a single Zone.",
             "canonical": true,
             "file": "edge_network.get_zone.js",
             "language": "JAVASCRIPT",
