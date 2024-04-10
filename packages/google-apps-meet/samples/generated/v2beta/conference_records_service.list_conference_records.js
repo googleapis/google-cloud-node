@@ -51,7 +51,7 @@ function main() {
   // const filter = 'abc123'
 
   // Imports the Meet library
-  const {ConferenceRecordsServiceClient} = require('@google-cloud/meet').v2beta;
+  const {ConferenceRecordsServiceClient} = require('@google-apps/meet').v2beta;
 
   // Instantiates a client
   const meetClient = new ConferenceRecordsServiceClient();
