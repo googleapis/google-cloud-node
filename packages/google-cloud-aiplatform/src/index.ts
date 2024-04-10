@@ -105,7 +105,7 @@ export {
   DeploymentResourcePoolServiceClient,
   GenAiTuningServiceClient,
   NotebookServiceClient,
-  PersistentResourceServiceClient
+  PersistentResourceServiceClient,
 };
 export default {
   v1beta1,
@@ -135,7 +135,7 @@ export default {
   DeploymentResourcePoolServiceClient,
   GenAiTuningServiceClient,
   NotebookServiceClient,
-  PersistentResourceServiceClient
+  PersistentResourceServiceClient,
 };
 import * as protos from '../protos/protos';
 export {protos};
