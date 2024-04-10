@@ -417,6 +417,108 @@
         }
       }
     },
+    "ExtensionExecutionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ExtensionExecutionServiceClient",
+          "rpcs": {
+            "ExecuteExtension": {
+              "methods": [
+                "executeExtension"
+              ]
+            },
+            "QueryExtension": {
+              "methods": [
+                "queryExtension"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ExtensionExecutionServiceClient",
+          "rpcs": {
+            "ExecuteExtension": {
+              "methods": [
+                "executeExtension"
+              ]
+            },
+            "QueryExtension": {
+              "methods": [
+                "queryExtension"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ExtensionRegistryService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ExtensionRegistryServiceClient",
+          "rpcs": {
+            "GetExtension": {
+              "methods": [
+                "getExtension"
+              ]
+            },
+            "UpdateExtension": {
+              "methods": [
+                "updateExtension"
+              ]
+            },
+            "ImportExtension": {
+              "methods": [
+                "importExtension"
+              ]
+            },
+            "DeleteExtension": {
+              "methods": [
+                "deleteExtension"
+              ]
+            },
+            "ListExtensions": {
+              "methods": [
+                "listExtensions",
+                "listExtensionsStream",
+                "listExtensionsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ExtensionRegistryServiceClient",
+          "rpcs": {
+            "GetExtension": {
+              "methods": [
+                "getExtension"
+              ]
+            },
+            "UpdateExtension": {
+              "methods": [
+                "updateExtension"
+              ]
+            },
+            "ImportExtension": {
+              "methods": [
+                "importExtension"
+              ]
+            },
+            "DeleteExtension": {
+              "methods": [
+                "deleteExtension"
+              ]
+            },
+            "ListExtensions": {
+              "methods": [
+                "listExtensions",
+                "listExtensionsStream",
+                "listExtensionsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "FeatureOnlineStoreAdminService": {
       "clients": {
         "grpc": {
@@ -2293,6 +2395,128 @@
         }
       }
     },
+    "NotebookService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "NotebookServiceClient",
+          "rpcs": {
+            "GetNotebookRuntimeTemplate": {
+              "methods": [
+                "getNotebookRuntimeTemplate"
+              ]
+            },
+            "GetNotebookRuntime": {
+              "methods": [
+                "getNotebookRuntime"
+              ]
+            },
+            "CreateNotebookRuntimeTemplate": {
+              "methods": [
+                "createNotebookRuntimeTemplate"
+              ]
+            },
+            "DeleteNotebookRuntimeTemplate": {
+              "methods": [
+                "deleteNotebookRuntimeTemplate"
+              ]
+            },
+            "AssignNotebookRuntime": {
+              "methods": [
+                "assignNotebookRuntime"
+              ]
+            },
+            "DeleteNotebookRuntime": {
+              "methods": [
+                "deleteNotebookRuntime"
+              ]
+            },
+            "UpgradeNotebookRuntime": {
+              "methods": [
+                "upgradeNotebookRuntime"
+              ]
+            },
+            "StartNotebookRuntime": {
+              "methods": [
+                "startNotebookRuntime"
+              ]
+            },
+            "ListNotebookRuntimeTemplates": {
+              "methods": [
+                "listNotebookRuntimeTemplates",
+                "listNotebookRuntimeTemplatesStream",
+                "listNotebookRuntimeTemplatesAsync"
+              ]
+            },
+            "ListNotebookRuntimes": {
+              "methods": [
+                "listNotebookRuntimes",
+                "listNotebookRuntimesStream",
+                "listNotebookRuntimesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "NotebookServiceClient",
+          "rpcs": {
+            "GetNotebookRuntimeTemplate": {
+              "methods": [
+                "getNotebookRuntimeTemplate"
+              ]
+            },
+            "GetNotebookRuntime": {
+              "methods": [
+                "getNotebookRuntime"
+              ]
+            },
+            "CreateNotebookRuntimeTemplate": {
+              "methods": [
+                "createNotebookRuntimeTemplate"
+              ]
+            },
+            "DeleteNotebookRuntimeTemplate": {
+              "methods": [
+                "deleteNotebookRuntimeTemplate"
+              ]
+            },
+            "AssignNotebookRuntime": {
+              "methods": [
+                "assignNotebookRuntime"
+              ]
+            },
+            "DeleteNotebookRuntime": {
+              "methods": [
+                "deleteNotebookRuntime"
+              ]
+            },
+            "UpgradeNotebookRuntime": {
+              "methods": [
+                "upgradeNotebookRuntime"
+              ]
+            },
+            "StartNotebookRuntime": {
+              "methods": [
+                "startNotebookRuntime"
+              ]
+            },
+            "ListNotebookRuntimeTemplates": {
+              "methods": [
+                "listNotebookRuntimeTemplates",
+                "listNotebookRuntimeTemplatesStream",
+                "listNotebookRuntimeTemplatesAsync"
+              ]
+            },
+            "ListNotebookRuntimes": {
+              "methods": [
+                "listNotebookRuntimes",
+                "listNotebookRuntimesStream",
+                "listNotebookRuntimesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "PersistentResourceService": {
       "clients": {
         "grpc": {
@@ -2316,6 +2540,11 @@
             "UpdatePersistentResource": {
               "methods": [
                 "updatePersistentResource"
+              ]
+            },
+            "RebootPersistentResource": {
+              "methods": [
+                "rebootPersistentResource"
               ]
             },
             "ListPersistentResources": {
@@ -2348,6 +2577,11 @@
             "UpdatePersistentResource": {
               "methods": [
                 "updatePersistentResource"
+              ]
+            },
+            "RebootPersistentResource": {
+              "methods": [
+                "rebootPersistentResource"
               ]
             },
             "ListPersistentResources": {
@@ -2571,6 +2805,11 @@
             "StreamGenerateContent": {
               "methods": [
                 "streamGenerateContent"
+              ]
+            },
+            "ChatCompletions": {
+              "methods": [
+                "chatCompletions"
               ]
             }
           }
@@ -3178,6 +3417,142 @@
                 "exportTensorboardTimeSeriesData",
                 "exportTensorboardTimeSeriesDataStream",
                 "exportTensorboardTimeSeriesDataAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "VertexRagDataService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "VertexRagDataServiceClient",
+          "rpcs": {
+            "GetRagCorpus": {
+              "methods": [
+                "getRagCorpus"
+              ]
+            },
+            "UploadRagFile": {
+              "methods": [
+                "uploadRagFile"
+              ]
+            },
+            "GetRagFile": {
+              "methods": [
+                "getRagFile"
+              ]
+            },
+            "CreateRagCorpus": {
+              "methods": [
+                "createRagCorpus"
+              ]
+            },
+            "DeleteRagCorpus": {
+              "methods": [
+                "deleteRagCorpus"
+              ]
+            },
+            "ImportRagFiles": {
+              "methods": [
+                "importRagFiles"
+              ]
+            },
+            "DeleteRagFile": {
+              "methods": [
+                "deleteRagFile"
+              ]
+            },
+            "ListRagCorpora": {
+              "methods": [
+                "listRagCorpora",
+                "listRagCorporaStream",
+                "listRagCorporaAsync"
+              ]
+            },
+            "ListRagFiles": {
+              "methods": [
+                "listRagFiles",
+                "listRagFilesStream",
+                "listRagFilesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "VertexRagDataServiceClient",
+          "rpcs": {
+            "GetRagCorpus": {
+              "methods": [
+                "getRagCorpus"
+              ]
+            },
+            "UploadRagFile": {
+              "methods": [
+                "uploadRagFile"
+              ]
+            },
+            "GetRagFile": {
+              "methods": [
+                "getRagFile"
+              ]
+            },
+            "CreateRagCorpus": {
+              "methods": [
+                "createRagCorpus"
+              ]
+            },
+            "DeleteRagCorpus": {
+              "methods": [
+                "deleteRagCorpus"
+              ]
+            },
+            "ImportRagFiles": {
+              "methods": [
+                "importRagFiles"
+              ]
+            },
+            "DeleteRagFile": {
+              "methods": [
+                "deleteRagFile"
+              ]
+            },
+            "ListRagCorpora": {
+              "methods": [
+                "listRagCorpora",
+                "listRagCorporaStream",
+                "listRagCorporaAsync"
+              ]
+            },
+            "ListRagFiles": {
+              "methods": [
+                "listRagFiles",
+                "listRagFilesStream",
+                "listRagFilesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "VertexRagService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "VertexRagServiceClient",
+          "rpcs": {
+            "RetrieveContexts": {
+              "methods": [
+                "retrieveContexts"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "VertexRagServiceClient",
+          "rpcs": {
+            "RetrieveContexts": {
+              "methods": [
+                "retrieveContexts"
               ]
             }
           }

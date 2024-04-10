@@ -64,10 +64,6 @@ function main(location) {
    */
   // const fulfillmentInput = {}
   /**
-   *  Input for response recall metric.
-   */
-  // const responseRecallInput = {}
-  /**
    *  Input for summarization quality metric.
    */
   // const summarizationQualityInput = {}
@@ -105,10 +101,6 @@ function main(location) {
    *  metric.
    */
   // const questionAnsweringCorrectnessInput = {}
-  /**
-   *  Input for rag context recall metric.
-   */
-  // const ragContextRecallInput = {}
   /**
    *  Tool call metric instances.
    *  Input for tool call valid metric.

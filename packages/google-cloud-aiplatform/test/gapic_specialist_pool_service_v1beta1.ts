@@ -182,7 +182,7 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
     });
 
     if (
-      typeof process !== 'undefined' &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       it('throws DeprecationWarning if static servicePath is used', () => {
@@ -222,6 +222,40 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'aiplatform.example.com');
     });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'aiplatform.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient(
+              {universeDomain: 'configured.example.com'}
+            );
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'aiplatform.configured.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
@@ -3241,6 +3275,71 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       });
     });
 
+    describe('extension', () => {
+      const fakePath = '/rendered/path/extension';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        extension: 'extensionValue',
+      };
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.extensionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.extensionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('extensionPath', () => {
+        const result = client.extensionPath(
+          'projectValue',
+          'locationValue',
+          'extensionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.extensionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromExtensionName', () => {
+        const result = client.matchProjectFromExtensionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.extensionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromExtensionName', () => {
+        const result = client.matchLocationFromExtensionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.extensionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchExtensionFromExtensionName', () => {
+        const result = client.matchExtensionFromExtensionName(fakePath);
+        assert.strictEqual(result, 'extensionValue');
+        assert(
+          (client.pathTemplates.extensionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('featureGroup', () => {
       const fakePath = '/rendered/path/featureGroup';
       const expectedParameters = {
@@ -4486,6 +4585,154 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
       });
     });
 
+    describe('notebookRuntime', () => {
+      const fakePath = '/rendered/path/notebookRuntime';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        notebook_runtime: 'notebookRuntimeValue',
+      };
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.notebookRuntimePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.notebookRuntimePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('notebookRuntimePath', () => {
+        const result = client.notebookRuntimePath(
+          'projectValue',
+          'locationValue',
+          'notebookRuntimeValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.notebookRuntimePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromNotebookRuntimeName', () => {
+        const result = client.matchProjectFromNotebookRuntimeName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.notebookRuntimePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromNotebookRuntimeName', () => {
+        const result = client.matchLocationFromNotebookRuntimeName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.notebookRuntimePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNotebookRuntimeFromNotebookRuntimeName', () => {
+        const result =
+          client.matchNotebookRuntimeFromNotebookRuntimeName(fakePath);
+        assert.strictEqual(result, 'notebookRuntimeValue');
+        assert(
+          (client.pathTemplates.notebookRuntimePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('notebookRuntimeTemplate', () => {
+      const fakePath = '/rendered/path/notebookRuntimeTemplate';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        notebook_runtime_template: 'notebookRuntimeTemplateValue',
+      };
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.notebookRuntimeTemplatePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.notebookRuntimeTemplatePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('notebookRuntimeTemplatePath', () => {
+        const result = client.notebookRuntimeTemplatePath(
+          'projectValue',
+          'locationValue',
+          'notebookRuntimeTemplateValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.notebookRuntimeTemplatePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromNotebookRuntimeTemplateName', () => {
+        const result =
+          client.matchProjectFromNotebookRuntimeTemplateName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.notebookRuntimeTemplatePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromNotebookRuntimeTemplateName', () => {
+        const result =
+          client.matchLocationFromNotebookRuntimeTemplateName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.notebookRuntimeTemplatePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNotebookRuntimeTemplateFromNotebookRuntimeTemplateName', () => {
+        const result =
+          client.matchNotebookRuntimeTemplateFromNotebookRuntimeTemplateName(
+            fakePath
+          );
+        assert.strictEqual(result, 'notebookRuntimeTemplateValue');
+        assert(
+          (
+            client.pathTemplates.notebookRuntimeTemplatePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('persistentResource', () => {
       const fakePath = '/rendered/path/persistentResource';
       const expectedParameters = {
@@ -5079,6 +5326,148 @@ describe('v1beta1.SpecialistPoolServiceClient', () => {
         assert.strictEqual(result, 'modelValue');
         assert(
           (client.pathTemplates.publisherModelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('ragCorpus', () => {
+      const fakePath = '/rendered/path/ragCorpus';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        rag_corpus: 'ragCorpusValue',
+      };
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.ragCorpusPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.ragCorpusPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('ragCorpusPath', () => {
+        const result = client.ragCorpusPath(
+          'projectValue',
+          'locationValue',
+          'ragCorpusValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.ragCorpusPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromRagCorpusName', () => {
+        const result = client.matchProjectFromRagCorpusName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.ragCorpusPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromRagCorpusName', () => {
+        const result = client.matchLocationFromRagCorpusName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.ragCorpusPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRagCorpusFromRagCorpusName', () => {
+        const result = client.matchRagCorpusFromRagCorpusName(fakePath);
+        assert.strictEqual(result, 'ragCorpusValue');
+        assert(
+          (client.pathTemplates.ragCorpusPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('ragFile', () => {
+      const fakePath = '/rendered/path/ragFile';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        rag_corpus: 'ragCorpusValue',
+        rag_file: 'ragFileValue',
+      };
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.ragFilePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.ragFilePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('ragFilePath', () => {
+        const result = client.ragFilePath(
+          'projectValue',
+          'locationValue',
+          'ragCorpusValue',
+          'ragFileValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.ragFilePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromRagFileName', () => {
+        const result = client.matchProjectFromRagFileName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.ragFilePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromRagFileName', () => {
+        const result = client.matchLocationFromRagFileName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.ragFilePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRagCorpusFromRagFileName', () => {
+        const result = client.matchRagCorpusFromRagFileName(fakePath);
+        assert.strictEqual(result, 'ragCorpusValue');
+        assert(
+          (client.pathTemplates.ragFilePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRagFileFromRagFileName', () => {
+        const result = client.matchRagFileFromRagFileName(fakePath);
+        assert.strictEqual(result, 'ragFileValue');
+        assert(
+          (client.pathTemplates.ragFilePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

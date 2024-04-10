@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v4.4.0...dialogflow-cx-v4.5.0) (2024-04-05)
+
+
+### Features
+
+* [dialogflow-cx] added support for DataStoreConnection, DataStoreConnectionSettings ([#5196](https://github.com/googleapis/google-cloud-node/issues/5196)) ([e81cd49](https://github.com/googleapis/google-cloud-node/commit/e81cd492d2c3cef915d89b095852aa9a7ae64160))
+
 ## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v4.3.1...dialogflow-cx-v4.4.0) (2024-02-09)
 
 
