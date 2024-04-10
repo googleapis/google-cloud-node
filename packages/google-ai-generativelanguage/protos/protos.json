@@ -1960,7 +1960,9 @@
                         "RETRIEVAL_DOCUMENT": 2,
                         "SEMANTIC_SIMILARITY": 3,
                         "CLASSIFICATION": 4,
-                        "CLUSTERING": 5
+                        "CLUSTERING": 5,
+                        "QUESTION_ANSWERING": 6,
+                        "FACT_VERIFICATION": 7
                       }
                     },
                     "GenerateContentRequest": {
@@ -2109,6 +2111,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
+                          }
+                        },
+                        "responseMimeType": {
+                          "type": "string",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -2508,6 +2517,11 @@
                           "oneof": [
                             "title"
                           ]
+                        },
+                        "_outputDimensionality": {
+                          "oneof": [
+                            "outputDimensionality"
+                          ]
                         }
                       },
                       "fields": {
@@ -2537,6 +2551,14 @@
                         "title": {
                           "type": "string",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "outputDimensionality": {
+                          "type": "int32",
+                          "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
