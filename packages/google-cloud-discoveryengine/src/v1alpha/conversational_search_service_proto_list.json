@@ -18,7 +18,6 @@
   "../../protos/google/cloud/discoveryengine/v1alpha/estimate_billing_service.proto",
   "../../protos/google/cloud/discoveryengine/v1alpha/import_config.proto",
   "../../protos/google/cloud/discoveryengine/v1alpha/purge_config.proto",
-  "../../protos/google/cloud/discoveryengine/v1alpha/rank_service.proto",
   "../../protos/google/cloud/discoveryengine/v1alpha/recommendation_service.proto",
   "../../protos/google/cloud/discoveryengine/v1alpha/schema.proto",
   "../../protos/google/cloud/discoveryengine/v1alpha/schema_service.proto",
