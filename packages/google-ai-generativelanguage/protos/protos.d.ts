@@ -698,7 +698,9 @@ export namespace google {
                     RETRIEVAL_DOCUMENT = 2,
                     SEMANTIC_SIMILARITY = 3,
                     CLASSIFICATION = 4,
-                    CLUSTERING = 5
+                    CLUSTERING = 5,
+                    QUESTION_ANSWERING = 6,
+                    FACT_VERIFICATION = 7
                 }
 
                 /** Properties of a GenerateContentRequest. */
@@ -1337,6 +1339,9 @@ export namespace google {
 
                     /** EmbedContentRequest title */
                     title?: (string|null);
+
+                    /** EmbedContentRequest outputDimensionality */
+                    outputDimensionality?: (number|null);
                 }
 
                 /** Represents an EmbedContentRequest. */
@@ -1360,11 +1365,17 @@ export namespace google {
                     /** EmbedContentRequest title. */
                     public title?: (string|null);
 
+                    /** EmbedContentRequest outputDimensionality. */
+                    public outputDimensionality?: (number|null);
+
                     /** EmbedContentRequest _taskType. */
                     public _taskType?: "taskType";
 
                     /** EmbedContentRequest _title. */
                     public _title?: "title";
+
+                    /** EmbedContentRequest _outputDimensionality. */
+                    public _outputDimensionality?: "outputDimensionality";
 
                     /**
                      * Creates a new EmbedContentRequest instance using the specified properties.

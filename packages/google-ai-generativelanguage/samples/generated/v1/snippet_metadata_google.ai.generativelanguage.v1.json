@@ -126,7 +126,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 74,
+                    "end": 80,
                     "type": "FULL"
                 }
             ],
@@ -150,6 +150,10 @@
                     {
                         "name": "title",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "output_dimensionality",
+                        "type": "TYPE_INT32"
                     }
                 ],
                 "resultType": ".google.ai.generativelanguage.v1.EmbedContentResponse",
