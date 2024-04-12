@@ -54,9 +54,12 @@ function main(servingConfig) {
   // const imageQuery = {}
   /**
    *  Maximum number of Document google.cloud.discoveryengine.v1.Document s to
-   *  return. If unspecified, defaults to a reasonable value. The maximum allowed
-   *  value is 100. Values above 100 are coerced to 100.
-   *  If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   *  return. The maximum allowed value depends on the data type. Values above
+   *  the maximum value are coerced to the maximum value.
+   *  * Websites with basic indexing: Default `10`, Maximum `25`.
+   *  * Websites with advanced indexing: Default `25`, Maximum `50`.
+   *  * Other: Default `50`, Maximum `100`.
+   *  If this field is negative, an  `INVALID_ARGUMENT` is returned.
    */
   // const pageSize = 1234
   /**
@@ -79,6 +82,10 @@ function main(servingConfig) {
    *  If this field is negative, an  `INVALID_ARGUMENT`  is returned.
    */
   // const offset = 1234
+  /**
+   *  A list of data store specs to apply on a search call.
+   */
+  // const dataStoreSpecs = [1,2,3,4]
   /**
    *  The filter syntax consists of an expression language for constructing a
    *  predicate from one or more fields of the documents being filtered. Filter

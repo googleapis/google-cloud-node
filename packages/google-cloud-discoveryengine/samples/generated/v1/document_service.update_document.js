@@ -45,6 +45,11 @@ function main(document) {
    *  Document google.cloud.discoveryengine.v1.Document  will be created.
    */
   // const allowMissing = true
+  /**
+   *  Indicates which fields in the provided imported 'document' to update. If
+   *  not set, will by default update all fields.
+   */
+  // const updateMask = {}
 
   // Imports the Discoveryengine library
   const {DocumentServiceClient} = require('@google-cloud/discoveryengine').v1;

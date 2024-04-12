@@ -518,6 +518,10 @@ export class ConversationalSearchServiceClient {
    *   For more information about filtering including syntax and filter
    *   operators, see
    *   [Filter](https://cloud.google.com/generative-ai-app-builder/docs/filter-search-metadata)
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.BoostSpec} request.boostSpec
+   *   Boost specification to boost certain documents in search results which may
+   *   affect the converse response. For more information on boosting, see
+   *   [Boosting](https://cloud.google.com/retail/docs/boosting#boost)
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

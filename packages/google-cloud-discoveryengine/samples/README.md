@@ -38,6 +38,7 @@
   * [Engine_service.get_engine](#engine_service.get_engine)
   * [Engine_service.list_engines](#engine_service.list_engines)
   * [Engine_service.update_engine](#engine_service.update_engine)
+  * [Recommendation_service.recommend](#recommendation_service.recommend)
   * [Schema_service.create_schema](#schema_service.create_schema)
   * [Schema_service.delete_schema](#schema_service.delete_schema)
   * [Schema_service.get_schema](#schema_service.get_schema)
@@ -640,6 +641,23 @@ __Usage:__
 
 
 `node packages/google-cloud-discoveryengine/samples/generated/v1/engine_service.update_engine.js`
+
+
+-----
+
+
+
+
+### Recommendation_service.recommend
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/recommendation_service.recommend.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/recommendation_service.recommend.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/recommendation_service.recommend.js`
 
 
 -----
