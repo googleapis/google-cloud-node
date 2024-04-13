@@ -21,9 +21,17 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as evaluationserviceModule from '../src';
+import * as modelmonitoringserviceModule from '../src';
 
-import {protobuf, IamProtos, LocationProtos} from 'google-gax';
+import {PassThrough} from 'stream';
+
+import {
+  protobuf,
+  LROperation,
+  operationsProtos,
+  IamProtos,
+  LocationProtos,
+} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -64,6 +72,76 @@ function stubSimpleCallWithCallback<ResponseType>(
     : sinon.stub().callsArgWith(2, null, response);
 }
 
+function stubLongRunningCall<ResponseType>(
+  response?: ResponseType,
+  callError?: Error,
+  lroError?: Error
+) {
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
+  };
+  return callError
+    ? sinon.stub().rejects(callError)
+    : sinon.stub().resolves([mockOperation]);
+}
+
+function stubLongRunningCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  callError?: Error,
+  lroError?: Error
+) {
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
+  };
+  return callError
+    ? sinon.stub().callsArgWith(2, callError)
+    : sinon.stub().callsArgWith(2, null, mockOperation);
+}
+
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+    }
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
+    });
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
+  return sinon.stub().returns(mockStream);
+}
+
 function stubAsyncIterationCall<ResponseType>(
   responses?: ResponseType[],
   error?: Error
@@ -87,18 +165,18 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1beta1.EvaluationServiceClient', () => {
+describe('v1beta1.ModelMonitoringServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient();
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
     });
 
     it('has universeDomain', () => {
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient();
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -110,7 +188,8 @@ describe('v1beta1.EvaluationServiceClient', () => {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const servicePath =
-          evaluationserviceModule.v1beta1.EvaluationServiceClient.servicePath;
+          modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient
+            .servicePath;
         assert.strictEqual(servicePath, 'aiplatform.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -119,7 +198,8 @@ describe('v1beta1.EvaluationServiceClient', () => {
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const apiEndpoint =
-          evaluationserviceModule.v1beta1.EvaluationServiceClient.apiEndpoint;
+          modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient
+            .apiEndpoint;
         assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -127,7 +207,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           universeDomain: 'example.com',
         });
       const servicePath = client.apiEndpoint;
@@ -136,7 +216,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           universe_domain: 'example.com',
         });
       const servicePath = client.apiEndpoint;
@@ -149,7 +229,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new evaluationserviceModule.v1beta1.EvaluationServiceClient();
+            new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient();
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'aiplatform.example.com');
           if (saved) {
@@ -163,9 +243,9 @@ describe('v1beta1.EvaluationServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new evaluationserviceModule.v1beta1.EvaluationServiceClient({
-              universeDomain: 'configured.example.com',
-            });
+            new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient(
+              {universeDomain: 'configured.example.com'}
+            );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'aiplatform.configured.example.com');
           if (saved) {
@@ -178,7 +258,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           universe_domain: 'example.com',
           universeDomain: 'example.net',
         });
@@ -186,20 +266,21 @@ describe('v1beta1.EvaluationServiceClient', () => {
     });
 
     it('has port', () => {
-      const port = evaluationserviceModule.v1beta1.EvaluationServiceClient.port;
+      const port =
+        modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient();
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           fallback: true,
         });
       assert(client);
@@ -207,23 +288,23 @@ describe('v1beta1.EvaluationServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      assert.strictEqual(client.evaluationServiceStub, undefined);
+      assert.strictEqual(client.modelMonitoringServiceStub, undefined);
       await client.initialize();
-      assert(client.evaluationServiceStub);
+      assert(client.modelMonitoringServiceStub);
     });
 
     it('has close method for the initialized client', done => {
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
-      assert(client.evaluationServiceStub);
+      assert(client.modelMonitoringServiceStub);
       client.close().then(() => {
         done();
       });
@@ -231,11 +312,11 @@ describe('v1beta1.EvaluationServiceClient', () => {
 
     it('has close method for the non-initialized client', done => {
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      assert.strictEqual(client.evaluationServiceStub, undefined);
+      assert.strictEqual(client.modelMonitoringServiceStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -244,7 +325,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -257,7 +338,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -278,66 +359,66 @@ describe('v1beta1.EvaluationServiceClient', () => {
     });
   });
 
-  describe('evaluateInstances', () => {
-    it('invokes evaluateInstances without error', async () => {
+  describe('getModelMonitor', () => {
+    it('invokes getModelMonitor without error', async () => {
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.EvaluateInstancesRequest()
+        new protos.google.cloud.aiplatform.v1beta1.GetModelMonitorRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.EvaluateInstancesRequest',
-        ['location']
+        '.google.cloud.aiplatform.v1beta1.GetModelMonitorRequest',
+        ['name']
       );
-      request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.EvaluateInstancesResponse()
+        new protos.google.cloud.aiplatform.v1beta1.ModelMonitor()
       );
-      client.innerApiCalls.evaluateInstances = stubSimpleCall(expectedResponse);
-      const [response] = await client.evaluateInstances(request);
+      client.innerApiCalls.getModelMonitor = stubSimpleCall(expectedResponse);
+      const [response] = await client.getModelMonitor(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.evaluateInstances as SinonStub
+        client.innerApiCalls.getModelMonitor as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.evaluateInstances as SinonStub
+        client.innerApiCalls.getModelMonitor as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes evaluateInstances without error using callback', async () => {
+    it('invokes getModelMonitor without error using callback', async () => {
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.EvaluateInstancesRequest()
+        new protos.google.cloud.aiplatform.v1beta1.GetModelMonitorRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.EvaluateInstancesRequest',
-        ['location']
+        '.google.cloud.aiplatform.v1beta1.GetModelMonitorRequest',
+        ['name']
       );
-      request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.EvaluateInstancesResponse()
+        new protos.google.cloud.aiplatform.v1beta1.ModelMonitor()
       );
-      client.innerApiCalls.evaluateInstances =
+      client.innerApiCalls.getModelMonitor =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.evaluateInstances(
+        client.getModelMonitor(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1beta1.IEvaluateInstancesResponse | null
+            result?: protos.google.cloud.aiplatform.v1beta1.IModelMonitor | null
           ) => {
             if (err) {
               reject(err);
@@ -350,71 +431,2597 @@ describe('v1beta1.EvaluationServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.evaluateInstances as SinonStub
+        client.innerApiCalls.getModelMonitor as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.evaluateInstances as SinonStub
+        client.innerApiCalls.getModelMonitor as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes evaluateInstances with error', async () => {
+    it('invokes getModelMonitor with error', async () => {
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.EvaluateInstancesRequest()
+        new protos.google.cloud.aiplatform.v1beta1.GetModelMonitorRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.EvaluateInstancesRequest',
-        ['location']
+        '.google.cloud.aiplatform.v1beta1.GetModelMonitorRequest',
+        ['name']
       );
-      request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.evaluateInstances = stubSimpleCall(
+      client.innerApiCalls.getModelMonitor = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.evaluateInstances(request), expectedError);
+      await assert.rejects(client.getModelMonitor(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.evaluateInstances as SinonStub
+        client.innerApiCalls.getModelMonitor as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.evaluateInstances as SinonStub
+        client.innerApiCalls.getModelMonitor as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes evaluateInstances with closed client', async () => {
+    it('invokes getModelMonitor with closed client', async () => {
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.EvaluateInstancesRequest()
+        new protos.google.cloud.aiplatform.v1beta1.GetModelMonitorRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.EvaluateInstancesRequest',
-        ['location']
+        '.google.cloud.aiplatform.v1beta1.GetModelMonitorRequest',
+        ['name']
       );
-      request.location = defaultValue1;
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.evaluateInstances(request), expectedError);
+      await assert.rejects(client.getModelMonitor(request), expectedError);
+    });
+  });
+
+  describe('createModelMonitoringJob', () => {
+    it('invokes createModelMonitoringJob without error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.CreateModelMonitoringJobRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreateModelMonitoringJobRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringJob()
+      );
+      client.innerApiCalls.createModelMonitoringJob =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createModelMonitoringJob(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createModelMonitoringJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createModelMonitoringJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createModelMonitoringJob without error using callback', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.CreateModelMonitoringJobRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreateModelMonitoringJobRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringJob()
+      );
+      client.innerApiCalls.createModelMonitoringJob =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createModelMonitoringJob(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1beta1.IModelMonitoringJob | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createModelMonitoringJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createModelMonitoringJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createModelMonitoringJob with error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.CreateModelMonitoringJobRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreateModelMonitoringJobRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createModelMonitoringJob = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.createModelMonitoringJob(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.createModelMonitoringJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createModelMonitoringJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createModelMonitoringJob with closed client', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.CreateModelMonitoringJobRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreateModelMonitoringJobRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createModelMonitoringJob(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('getModelMonitoringJob', () => {
+    it('invokes getModelMonitoringJob without error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.GetModelMonitoringJobRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetModelMonitoringJobRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringJob()
+      );
+      client.innerApiCalls.getModelMonitoringJob =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getModelMonitoringJob(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getModelMonitoringJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getModelMonitoringJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getModelMonitoringJob without error using callback', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.GetModelMonitoringJobRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetModelMonitoringJobRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringJob()
+      );
+      client.innerApiCalls.getModelMonitoringJob =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getModelMonitoringJob(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1beta1.IModelMonitoringJob | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getModelMonitoringJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getModelMonitoringJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getModelMonitoringJob with error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.GetModelMonitoringJobRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetModelMonitoringJobRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getModelMonitoringJob = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getModelMonitoringJob(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.getModelMonitoringJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getModelMonitoringJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getModelMonitoringJob with closed client', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.GetModelMonitoringJobRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetModelMonitoringJobRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getModelMonitoringJob(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('createModelMonitor', () => {
+    it('invokes createModelMonitor without error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.CreateModelMonitorRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreateModelMonitorRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createModelMonitor =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createModelMonitor(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createModelMonitor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createModelMonitor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createModelMonitor without error using callback', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.CreateModelMonitorRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreateModelMonitorRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createModelMonitor =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createModelMonitor(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.aiplatform.v1beta1.IModelMonitor,
+              protos.google.cloud.aiplatform.v1beta1.ICreateModelMonitorOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IModelMonitor,
+        protos.google.cloud.aiplatform.v1beta1.ICreateModelMonitorOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createModelMonitor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createModelMonitor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createModelMonitor with call error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.CreateModelMonitorRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreateModelMonitorRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createModelMonitor = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createModelMonitor(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createModelMonitor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createModelMonitor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createModelMonitor with LRO error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.CreateModelMonitorRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreateModelMonitorRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createModelMonitor = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.createModelMonitor(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createModelMonitor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createModelMonitor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateModelMonitorProgress without error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateModelMonitorProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateModelMonitorProgress with error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreateModelMonitorProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updateModelMonitor', () => {
+    it('invokes updateModelMonitor without error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpdateModelMonitorRequest()
+      );
+      request.modelMonitor ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateModelMonitorRequest',
+        ['modelMonitor', 'name']
+      );
+      request.modelMonitor.name = defaultValue1;
+      const expectedHeaderRequestParams = `model_monitor.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateModelMonitor =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateModelMonitor(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateModelMonitor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateModelMonitor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateModelMonitor without error using callback', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpdateModelMonitorRequest()
+      );
+      request.modelMonitor ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateModelMonitorRequest',
+        ['modelMonitor', 'name']
+      );
+      request.modelMonitor.name = defaultValue1;
+      const expectedHeaderRequestParams = `model_monitor.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateModelMonitor =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateModelMonitor(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.aiplatform.v1beta1.IModelMonitor,
+              protos.google.cloud.aiplatform.v1beta1.IUpdateModelMonitorOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IModelMonitor,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateModelMonitorOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateModelMonitor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateModelMonitor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateModelMonitor with call error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpdateModelMonitorRequest()
+      );
+      request.modelMonitor ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateModelMonitorRequest',
+        ['modelMonitor', 'name']
+      );
+      request.modelMonitor.name = defaultValue1;
+      const expectedHeaderRequestParams = `model_monitor.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateModelMonitor = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateModelMonitor(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateModelMonitor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateModelMonitor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateModelMonitor with LRO error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpdateModelMonitorRequest()
+      );
+      request.modelMonitor ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateModelMonitorRequest',
+        ['modelMonitor', 'name']
+      );
+      request.modelMonitor.name = defaultValue1;
+      const expectedHeaderRequestParams = `model_monitor.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateModelMonitor = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.updateModelMonitor(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateModelMonitor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateModelMonitor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateModelMonitorProgress without error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateModelMonitorProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateModelMonitorProgress with error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdateModelMonitorProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteModelMonitor', () => {
+    it('invokes deleteModelMonitor without error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DeleteModelMonitorRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteModelMonitorRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteModelMonitor =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteModelMonitor(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteModelMonitor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteModelMonitor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteModelMonitor without error using callback', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DeleteModelMonitorRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteModelMonitorRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteModelMonitor =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteModelMonitor(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteModelMonitor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteModelMonitor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteModelMonitor with call error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DeleteModelMonitorRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteModelMonitorRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteModelMonitor = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteModelMonitor(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteModelMonitor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteModelMonitor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteModelMonitor with LRO error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DeleteModelMonitorRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteModelMonitorRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteModelMonitor = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteModelMonitor(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteModelMonitor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteModelMonitor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteModelMonitorProgress without error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteModelMonitorProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteModelMonitorProgress with error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteModelMonitorProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteModelMonitoringJob', () => {
+    it('invokes deleteModelMonitoringJob without error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DeleteModelMonitoringJobRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteModelMonitoringJobRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteModelMonitoringJob =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteModelMonitoringJob(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteModelMonitoringJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteModelMonitoringJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteModelMonitoringJob without error using callback', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DeleteModelMonitoringJobRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteModelMonitoringJobRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteModelMonitoringJob =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteModelMonitoringJob(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteModelMonitoringJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteModelMonitoringJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteModelMonitoringJob with call error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DeleteModelMonitoringJobRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteModelMonitoringJobRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteModelMonitoringJob = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.deleteModelMonitoringJob(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.deleteModelMonitoringJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteModelMonitoringJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteModelMonitoringJob with LRO error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DeleteModelMonitoringJobRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteModelMonitoringJobRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteModelMonitoringJob = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteModelMonitoringJob(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteModelMonitoringJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteModelMonitoringJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteModelMonitoringJobProgress without error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkDeleteModelMonitoringJobProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteModelMonitoringJobProgress with error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteModelMonitoringJobProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('listModelMonitors', () => {
+    it('invokes listModelMonitors without error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListModelMonitorsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListModelMonitorsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitor()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitor()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitor()
+        ),
+      ];
+      client.innerApiCalls.listModelMonitors = stubSimpleCall(expectedResponse);
+      const [response] = await client.listModelMonitors(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listModelMonitors as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listModelMonitors as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listModelMonitors without error using callback', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListModelMonitorsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListModelMonitorsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitor()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitor()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitor()
+        ),
+      ];
+      client.innerApiCalls.listModelMonitors =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listModelMonitors(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.aiplatform.v1beta1.IModelMonitor[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listModelMonitors as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listModelMonitors as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listModelMonitors with error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListModelMonitorsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListModelMonitorsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listModelMonitors = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listModelMonitors(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listModelMonitors as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listModelMonitors as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listModelMonitorsStream without error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListModelMonitorsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListModelMonitorsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitor()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitor()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitor()
+        ),
+      ];
+      client.descriptors.page.listModelMonitors.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listModelMonitorsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.ModelMonitor[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.aiplatform.v1beta1.ModelMonitor) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listModelMonitors.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listModelMonitors, request)
+      );
+      assert(
+        (client.descriptors.page.listModelMonitors.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes listModelMonitorsStream with error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListModelMonitorsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListModelMonitorsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listModelMonitors.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listModelMonitorsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.ModelMonitor[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.aiplatform.v1beta1.ModelMonitor) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listModelMonitors.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listModelMonitors, request)
+      );
+      assert(
+        (client.descriptors.page.listModelMonitors.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listModelMonitors without error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListModelMonitorsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListModelMonitorsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitor()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitor()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitor()
+        ),
+      ];
+      client.descriptors.page.listModelMonitors.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.aiplatform.v1beta1.IModelMonitor[] =
+        [];
+      const iterable = client.listModelMonitorsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listModelMonitors.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listModelMonitors.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listModelMonitors with error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListModelMonitorsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListModelMonitorsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listModelMonitors.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listModelMonitorsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.IModelMonitor[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listModelMonitors.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listModelMonitors.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+  });
+
+  describe('listModelMonitoringJobs', () => {
+    it('invokes listModelMonitoringJobs without error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListModelMonitoringJobsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListModelMonitoringJobsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringJob()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringJob()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringJob()
+        ),
+      ];
+      client.innerApiCalls.listModelMonitoringJobs =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listModelMonitoringJobs(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listModelMonitoringJobs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listModelMonitoringJobs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listModelMonitoringJobs without error using callback', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListModelMonitoringJobsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListModelMonitoringJobsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringJob()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringJob()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringJob()
+        ),
+      ];
+      client.innerApiCalls.listModelMonitoringJobs =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listModelMonitoringJobs(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.aiplatform.v1beta1.IModelMonitoringJob[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listModelMonitoringJobs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listModelMonitoringJobs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listModelMonitoringJobs with error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListModelMonitoringJobsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListModelMonitoringJobsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listModelMonitoringJobs = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listModelMonitoringJobs(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.listModelMonitoringJobs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listModelMonitoringJobs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listModelMonitoringJobsStream without error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListModelMonitoringJobsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListModelMonitoringJobsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringJob()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringJob()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringJob()
+        ),
+      ];
+      client.descriptors.page.listModelMonitoringJobs.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listModelMonitoringJobsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.ModelMonitoringJob[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.aiplatform.v1beta1.ModelMonitoringJob
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listModelMonitoringJobs
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listModelMonitoringJobs, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listModelMonitoringJobs
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listModelMonitoringJobsStream with error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListModelMonitoringJobsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListModelMonitoringJobsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listModelMonitoringJobs.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listModelMonitoringJobsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.ModelMonitoringJob[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.aiplatform.v1beta1.ModelMonitoringJob
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listModelMonitoringJobs
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listModelMonitoringJobs, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listModelMonitoringJobs
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listModelMonitoringJobs without error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListModelMonitoringJobsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListModelMonitoringJobsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringJob()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringJob()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringJob()
+        ),
+      ];
+      client.descriptors.page.listModelMonitoringJobs.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.aiplatform.v1beta1.IModelMonitoringJob[] =
+        [];
+      const iterable = client.listModelMonitoringJobsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listModelMonitoringJobs
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listModelMonitoringJobs
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listModelMonitoringJobs with error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListModelMonitoringJobsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListModelMonitoringJobsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listModelMonitoringJobs.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listModelMonitoringJobsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.IModelMonitoringJob[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listModelMonitoringJobs
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listModelMonitoringJobs
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('searchModelMonitoringStats', () => {
+    it('invokes searchModelMonitoringStats without error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.SearchModelMonitoringStatsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.SearchModelMonitoringStatsRequest',
+        ['modelMonitor']
+      );
+      request.modelMonitor = defaultValue1;
+      const expectedHeaderRequestParams = `model_monitor=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringStats()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringStats()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringStats()
+        ),
+      ];
+      client.innerApiCalls.searchModelMonitoringStats =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.searchModelMonitoringStats(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.searchModelMonitoringStats as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.searchModelMonitoringStats as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes searchModelMonitoringStats without error using callback', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.SearchModelMonitoringStatsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.SearchModelMonitoringStatsRequest',
+        ['modelMonitor']
+      );
+      request.modelMonitor = defaultValue1;
+      const expectedHeaderRequestParams = `model_monitor=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringStats()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringStats()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringStats()
+        ),
+      ];
+      client.innerApiCalls.searchModelMonitoringStats =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.searchModelMonitoringStats(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.aiplatform.v1beta1.IModelMonitoringStats[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.searchModelMonitoringStats as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.searchModelMonitoringStats as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes searchModelMonitoringStats with error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.SearchModelMonitoringStatsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.SearchModelMonitoringStatsRequest',
+        ['modelMonitor']
+      );
+      request.modelMonitor = defaultValue1;
+      const expectedHeaderRequestParams = `model_monitor=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.searchModelMonitoringStats = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.searchModelMonitoringStats(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.searchModelMonitoringStats as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.searchModelMonitoringStats as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes searchModelMonitoringStatsStream without error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.SearchModelMonitoringStatsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.SearchModelMonitoringStatsRequest',
+        ['modelMonitor']
+      );
+      request.modelMonitor = defaultValue1;
+      const expectedHeaderRequestParams = `model_monitor=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringStats()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringStats()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringStats()
+        ),
+      ];
+      client.descriptors.page.searchModelMonitoringStats.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.searchModelMonitoringStatsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.ModelMonitoringStats[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.aiplatform.v1beta1.ModelMonitoringStats
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.searchModelMonitoringStats
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.searchModelMonitoringStats, request)
+      );
+      assert(
+        (
+          client.descriptors.page.searchModelMonitoringStats
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes searchModelMonitoringStatsStream with error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.SearchModelMonitoringStatsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.SearchModelMonitoringStatsRequest',
+        ['modelMonitor']
+      );
+      request.modelMonitor = defaultValue1;
+      const expectedHeaderRequestParams = `model_monitor=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.searchModelMonitoringStats.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.searchModelMonitoringStatsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.ModelMonitoringStats[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.aiplatform.v1beta1.ModelMonitoringStats
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.searchModelMonitoringStats
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.searchModelMonitoringStats, request)
+      );
+      assert(
+        (
+          client.descriptors.page.searchModelMonitoringStats
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with searchModelMonitoringStats without error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.SearchModelMonitoringStatsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.SearchModelMonitoringStatsRequest',
+        ['modelMonitor']
+      );
+      request.modelMonitor = defaultValue1;
+      const expectedHeaderRequestParams = `model_monitor=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringStats()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringStats()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringStats()
+        ),
+      ];
+      client.descriptors.page.searchModelMonitoringStats.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.aiplatform.v1beta1.IModelMonitoringStats[] =
+        [];
+      const iterable = client.searchModelMonitoringStatsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.searchModelMonitoringStats
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.searchModelMonitoringStats
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with searchModelMonitoringStats with error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.SearchModelMonitoringStatsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.SearchModelMonitoringStatsRequest',
+        ['modelMonitor']
+      );
+      request.modelMonitor = defaultValue1;
+      const expectedHeaderRequestParams = `model_monitor=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.searchModelMonitoringStats.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.searchModelMonitoringStatsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.IModelMonitoringStats[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.searchModelMonitoringStats
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.searchModelMonitoringStats
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('searchModelMonitoringAlerts', () => {
+    it('invokes searchModelMonitoringAlerts without error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.SearchModelMonitoringAlertsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.SearchModelMonitoringAlertsRequest',
+        ['modelMonitor']
+      );
+      request.modelMonitor = defaultValue1;
+      const expectedHeaderRequestParams = `model_monitor=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringAlert()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringAlert()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringAlert()
+        ),
+      ];
+      client.innerApiCalls.searchModelMonitoringAlerts =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.searchModelMonitoringAlerts(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.searchModelMonitoringAlerts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.searchModelMonitoringAlerts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes searchModelMonitoringAlerts without error using callback', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.SearchModelMonitoringAlertsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.SearchModelMonitoringAlertsRequest',
+        ['modelMonitor']
+      );
+      request.modelMonitor = defaultValue1;
+      const expectedHeaderRequestParams = `model_monitor=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringAlert()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringAlert()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringAlert()
+        ),
+      ];
+      client.innerApiCalls.searchModelMonitoringAlerts =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.searchModelMonitoringAlerts(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.aiplatform.v1beta1.IModelMonitoringAlert[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.searchModelMonitoringAlerts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.searchModelMonitoringAlerts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes searchModelMonitoringAlerts with error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.SearchModelMonitoringAlertsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.SearchModelMonitoringAlertsRequest',
+        ['modelMonitor']
+      );
+      request.modelMonitor = defaultValue1;
+      const expectedHeaderRequestParams = `model_monitor=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.searchModelMonitoringAlerts = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.searchModelMonitoringAlerts(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.searchModelMonitoringAlerts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.searchModelMonitoringAlerts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes searchModelMonitoringAlertsStream without error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.SearchModelMonitoringAlertsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.SearchModelMonitoringAlertsRequest',
+        ['modelMonitor']
+      );
+      request.modelMonitor = defaultValue1;
+      const expectedHeaderRequestParams = `model_monitor=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringAlert()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringAlert()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringAlert()
+        ),
+      ];
+      client.descriptors.page.searchModelMonitoringAlerts.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.searchModelMonitoringAlertsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.ModelMonitoringAlert[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.aiplatform.v1beta1.ModelMonitoringAlert
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.searchModelMonitoringAlerts
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.searchModelMonitoringAlerts, request)
+      );
+      assert(
+        (
+          client.descriptors.page.searchModelMonitoringAlerts
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes searchModelMonitoringAlertsStream with error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.SearchModelMonitoringAlertsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.SearchModelMonitoringAlertsRequest',
+        ['modelMonitor']
+      );
+      request.modelMonitor = defaultValue1;
+      const expectedHeaderRequestParams = `model_monitor=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.searchModelMonitoringAlerts.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.searchModelMonitoringAlertsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.ModelMonitoringAlert[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.aiplatform.v1beta1.ModelMonitoringAlert
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.searchModelMonitoringAlerts
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.searchModelMonitoringAlerts, request)
+      );
+      assert(
+        (
+          client.descriptors.page.searchModelMonitoringAlerts
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with searchModelMonitoringAlerts without error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.SearchModelMonitoringAlertsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.SearchModelMonitoringAlertsRequest',
+        ['modelMonitor']
+      );
+      request.modelMonitor = defaultValue1;
+      const expectedHeaderRequestParams = `model_monitor=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringAlert()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringAlert()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringAlert()
+        ),
+      ];
+      client.descriptors.page.searchModelMonitoringAlerts.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.aiplatform.v1beta1.IModelMonitoringAlert[] =
+        [];
+      const iterable = client.searchModelMonitoringAlertsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.searchModelMonitoringAlerts
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.searchModelMonitoringAlerts
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with searchModelMonitoringAlerts with error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.SearchModelMonitoringAlertsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.SearchModelMonitoringAlertsRequest',
+        ['modelMonitor']
+      );
+      request.modelMonitor = defaultValue1;
+      const expectedHeaderRequestParams = `model_monitor=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.searchModelMonitoringAlerts.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.searchModelMonitoringAlertsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.IModelMonitoringAlert[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.searchModelMonitoringAlerts
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.searchModelMonitoringAlerts
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -445,7 +3052,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -490,7 +3097,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -523,7 +3130,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -554,7 +3161,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -599,7 +3206,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -632,7 +3239,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -666,7 +3273,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -711,7 +3318,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -747,7 +3354,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -778,7 +3385,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -823,7 +3430,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -859,7 +3466,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -908,7 +3515,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -947,6 +3554,322 @@ describe('v1beta1.EvaluationServiceClient', () => {
       );
     });
   });
+  describe('getOperation', () => {
+    it('invokes getOperation without error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const response = await client.getOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.getOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+    it('invokes getOperation without error using callback', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      client.operationsClient.getOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient.getOperation(
+          request,
+          undefined,
+          (
+            err?: Error | null,
+            result?: operationsProtos.google.longrunning.Operation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+    it('invokes getOperation with error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest()
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.getOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.getOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+  });
+  describe('cancelOperation', () => {
+    it('invokes cancelOperation without error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.operationsClient.cancelOperation =
+        stubSimpleCall(expectedResponse);
+      const response = await client.cancelOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.cancelOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+    it('invokes cancelOperation without error using callback', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.operationsClient.cancelOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient.cancelOperation(
+          request,
+          undefined,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.Empty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
+    });
+    it('invokes cancelOperation with error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest()
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.cancelOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.cancelOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.cancelOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+  });
+  describe('deleteOperation', () => {
+    it('invokes deleteOperation without error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.operationsClient.deleteOperation =
+        stubSimpleCall(expectedResponse);
+      const response = await client.deleteOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.deleteOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+    it('invokes deleteOperation without error using callback', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.operationsClient.deleteOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient.deleteOperation(
+          request,
+          undefined,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.Empty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
+    });
+    it('invokes deleteOperation with error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest()
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.deleteOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.deleteOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.deleteOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+  });
+  describe('listOperationsAsync', () => {
+    it('uses async iteration with listOperations without error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.ListOperationsRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse()
+        ),
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse()
+        ),
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse()
+        ),
+      ];
+      client.operationsClient.descriptor.listOperations.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
+        [];
+      const iterable = client.operationsClient.listOperationsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.operationsClient.descriptor.listOperations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+    });
+    it('uses async iteration with listOperations with error', async () => {
+      const client =
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.ListOperationsRequest()
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.descriptor.listOperations.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.operationsClient.listOperationsAsync(request);
+      await assert.rejects(async () => {
+        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.operationsClient.descriptor.listOperations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+    });
+  });
 
   describe('Path templates', () => {
     describe('annotation', () => {
@@ -959,7 +3882,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         annotation: 'annotationValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1047,7 +3970,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         annotation_spec: 'annotationSpecValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1125,7 +4048,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         artifact: 'artifactValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1201,7 +4124,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         batch_prediction_job: 'batchPredictionJobValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1280,7 +4203,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         context: 'contextValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1356,7 +4279,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         custom_job: 'customJobValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1422,7 +4345,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         data_item: 'dataItemValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1498,7 +4421,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         data_labeling_job: 'dataLabelingJobValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1564,7 +4487,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         dataset: 'datasetValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1630,7 +4553,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         dataset_version: 'datasetVersionValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1707,7 +4630,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         deployment_resource_pool: 'deploymentResourcePoolValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1790,7 +4713,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1867,7 +4790,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         execution: 'executionValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1943,7 +4866,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         extension: 'extensionValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2008,7 +4931,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         feature_group: 'featureGroupValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2073,7 +4996,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         feature_online_store: 'featureOnlineStoreValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2152,7 +5075,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2230,7 +5153,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2307,7 +5230,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         featurestore: 'featurestoreValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2372,7 +5295,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2454,7 +5377,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         index: 'indexValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2519,7 +5442,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         index_endpoint: 'indexEndpointValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2583,7 +5506,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         location: 'locationValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2635,7 +5558,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         metadata_schema: 'metadataSchemaValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2713,7 +5636,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         metadata_store: 'metadataStoreValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2778,7 +5701,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         model: 'modelValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2843,7 +5766,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2924,7 +5847,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3002,7 +5925,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         slice: 'sliceValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3110,7 +6033,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         model_monitor: 'modelMonitorValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3176,7 +6099,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         model_monitoring_job: 'modelMonitoringJobValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3269,7 +6192,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         nas_job: 'nasJobValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3335,7 +6258,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         nas_trial_detail: 'nasTrialDetailValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3412,7 +6335,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         notebook_runtime: 'notebookRuntimeValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3478,7 +6401,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         notebook_runtime_template: 'notebookRuntimeTemplateValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3560,7 +6483,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         persistent_resource: 'persistentResourceValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3638,7 +6561,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         pipeline_job: 'pipelineJobValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3703,7 +6626,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         endpoint: 'endpointValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3784,7 +6707,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         feature: 'featureValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3888,7 +6811,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         feature: 'featureValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4013,7 +6936,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         model: 'modelValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4105,7 +7028,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         model: 'modelValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4159,7 +7082,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         rag_corpus: 'ragCorpusValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4225,7 +7148,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         rag_file: 'ragFileValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4301,7 +7224,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         reasoning_engine: 'reasoningEngineValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4368,7 +7291,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         saved_query: 'savedQueryValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4444,7 +7367,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         schedule: 'scheduleValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4509,7 +7432,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         specialist_pool: 'specialistPoolValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4575,7 +7498,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         study: 'studyValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4640,7 +7563,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         tensorboard: 'tensorboardValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4706,7 +7629,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         experiment: 'experimentValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4803,7 +7726,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         run: 'runValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4893,7 +7816,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         time_series: 'timeSeriesValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -5017,7 +7940,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         training_pipeline: 'trainingPipelineValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -5087,7 +8010,7 @@ describe('v1beta1.EvaluationServiceClient', () => {
         trial: 'trialValue',
       };
       const client =
-        new evaluationserviceModule.v1beta1.EvaluationServiceClient({
+        new modelmonitoringserviceModule.v1beta1.ModelMonitoringServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
