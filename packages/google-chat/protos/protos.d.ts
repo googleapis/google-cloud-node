@@ -7873,6 +7873,9 @@ export namespace google {
                     /** Icon iconUrl */
                     iconUrl?: (string|null);
 
+                    /** Icon materialIcon */
+                    materialIcon?: (google.apps.card.v1.IMaterialIcon|null);
+
                     /** Icon altText */
                     altText?: (string|null);
 
@@ -7895,6 +7898,9 @@ export namespace google {
                     /** Icon iconUrl. */
                     public iconUrl?: (string|null);
 
+                    /** Icon materialIcon. */
+                    public materialIcon?: (google.apps.card.v1.IMaterialIcon|null);
+
                     /** Icon altText. */
                     public altText: string;
 
@@ -7902,7 +7908,7 @@ export namespace google {
                     public imageType: (google.apps.card.v1.Widget.ImageType|keyof typeof google.apps.card.v1.Widget.ImageType);
 
                     /** Icon icons. */
-                    public icons?: ("knownIcon"|"iconUrl");
+                    public icons?: ("knownIcon"|"iconUrl"|"materialIcon");
 
                     /**
                      * Creates a new Icon instance using the specified properties.
@@ -7976,6 +7982,121 @@ export namespace google {
 
                     /**
                      * Gets the default type url for Icon
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MaterialIcon. */
+                interface IMaterialIcon {
+
+                    /** MaterialIcon name */
+                    name?: (string|null);
+
+                    /** MaterialIcon fill */
+                    fill?: (boolean|null);
+
+                    /** MaterialIcon weight */
+                    weight?: (number|null);
+
+                    /** MaterialIcon grade */
+                    grade?: (number|null);
+                }
+
+                /** Represents a MaterialIcon. */
+                class MaterialIcon implements IMaterialIcon {
+
+                    /**
+                     * Constructs a new MaterialIcon.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.apps.card.v1.IMaterialIcon);
+
+                    /** MaterialIcon name. */
+                    public name: string;
+
+                    /** MaterialIcon fill. */
+                    public fill: boolean;
+
+                    /** MaterialIcon weight. */
+                    public weight: number;
+
+                    /** MaterialIcon grade. */
+                    public grade: number;
+
+                    /**
+                     * Creates a new MaterialIcon instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MaterialIcon instance
+                     */
+                    public static create(properties?: google.apps.card.v1.IMaterialIcon): google.apps.card.v1.MaterialIcon;
+
+                    /**
+                     * Encodes the specified MaterialIcon message. Does not implicitly {@link google.apps.card.v1.MaterialIcon.verify|verify} messages.
+                     * @param message MaterialIcon message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.apps.card.v1.IMaterialIcon, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MaterialIcon message, length delimited. Does not implicitly {@link google.apps.card.v1.MaterialIcon.verify|verify} messages.
+                     * @param message MaterialIcon message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.apps.card.v1.IMaterialIcon, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MaterialIcon message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MaterialIcon
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.apps.card.v1.MaterialIcon;
+
+                    /**
+                     * Decodes a MaterialIcon message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MaterialIcon
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.apps.card.v1.MaterialIcon;
+
+                    /**
+                     * Verifies a MaterialIcon message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MaterialIcon message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MaterialIcon
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.apps.card.v1.MaterialIcon;
+
+                    /**
+                     * Creates a plain object from a MaterialIcon message. Also converts values to other types if specified.
+                     * @param message MaterialIcon
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.apps.card.v1.MaterialIcon, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MaterialIcon to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MaterialIcon
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

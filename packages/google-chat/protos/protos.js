@@ -21346,6 +21346,7 @@
                          * @interface IIcon
                          * @property {string|null} [knownIcon] Icon knownIcon
                          * @property {string|null} [iconUrl] Icon iconUrl
+                         * @property {google.apps.card.v1.IMaterialIcon|null} [materialIcon] Icon materialIcon
                          * @property {string|null} [altText] Icon altText
                          * @property {google.apps.card.v1.Widget.ImageType|null} [imageType] Icon imageType
                          */
@@ -21382,6 +21383,14 @@
                         Icon.prototype.iconUrl = null;
     
                         /**
+                         * Icon materialIcon.
+                         * @member {google.apps.card.v1.IMaterialIcon|null|undefined} materialIcon
+                         * @memberof google.apps.card.v1.Icon
+                         * @instance
+                         */
+                        Icon.prototype.materialIcon = null;
+    
+                        /**
                          * Icon altText.
                          * @member {string} altText
                          * @memberof google.apps.card.v1.Icon
@@ -21402,12 +21411,12 @@
     
                         /**
                          * Icon icons.
-                         * @member {"knownIcon"|"iconUrl"|undefined} icons
+                         * @member {"knownIcon"|"iconUrl"|"materialIcon"|undefined} icons
                          * @memberof google.apps.card.v1.Icon
                          * @instance
                          */
                         Object.defineProperty(Icon.prototype, "icons", {
-                            get: $util.oneOfGetter($oneOfFields = ["knownIcon", "iconUrl"]),
+                            get: $util.oneOfGetter($oneOfFields = ["knownIcon", "iconUrl", "materialIcon"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -21443,6 +21452,8 @@
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.altText);
                             if (message.imageType != null && Object.hasOwnProperty.call(message, "imageType"))
                                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.imageType);
+                            if (message.materialIcon != null && Object.hasOwnProperty.call(message, "materialIcon"))
+                                $root.google.apps.card.v1.MaterialIcon.encode(message.materialIcon, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             return writer;
                         };
     
@@ -21483,6 +21494,10 @@
                                     }
                                 case 2: {
                                         message.iconUrl = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.materialIcon = $root.google.apps.card.v1.MaterialIcon.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 3: {
@@ -21541,6 +21556,16 @@
                                 if (!$util.isString(message.iconUrl))
                                     return "iconUrl: string expected";
                             }
+                            if (message.materialIcon != null && message.hasOwnProperty("materialIcon")) {
+                                if (properties.icons === 1)
+                                    return "icons: multiple values";
+                                properties.icons = 1;
+                                {
+                                    var error = $root.google.apps.card.v1.MaterialIcon.verify(message.materialIcon);
+                                    if (error)
+                                        return "materialIcon." + error;
+                                }
+                            }
                             if (message.altText != null && message.hasOwnProperty("altText"))
                                 if (!$util.isString(message.altText))
                                     return "altText: string expected";
@@ -21571,6 +21596,11 @@
                                 message.knownIcon = String(object.knownIcon);
                             if (object.iconUrl != null)
                                 message.iconUrl = String(object.iconUrl);
+                            if (object.materialIcon != null) {
+                                if (typeof object.materialIcon !== "object")
+                                    throw TypeError(".google.apps.card.v1.Icon.materialIcon: object expected");
+                                message.materialIcon = $root.google.apps.card.v1.MaterialIcon.fromObject(object.materialIcon);
+                            }
                             if (object.altText != null)
                                 message.altText = String(object.altText);
                             switch (object.imageType) {
@@ -21623,6 +21653,11 @@
                                 object.altText = message.altText;
                             if (message.imageType != null && message.hasOwnProperty("imageType"))
                                 object.imageType = options.enums === String ? $root.google.apps.card.v1.Widget.ImageType[message.imageType] === undefined ? message.imageType : $root.google.apps.card.v1.Widget.ImageType[message.imageType] : message.imageType;
+                            if (message.materialIcon != null && message.hasOwnProperty("materialIcon")) {
+                                object.materialIcon = $root.google.apps.card.v1.MaterialIcon.toObject(message.materialIcon, options);
+                                if (options.oneofs)
+                                    object.icons = "materialIcon";
+                            }
                             return object;
                         };
     
@@ -21653,6 +21688,279 @@
                         };
     
                         return Icon;
+                    })();
+    
+                    v1.MaterialIcon = (function() {
+    
+                        /**
+                         * Properties of a MaterialIcon.
+                         * @memberof google.apps.card.v1
+                         * @interface IMaterialIcon
+                         * @property {string|null} [name] MaterialIcon name
+                         * @property {boolean|null} [fill] MaterialIcon fill
+                         * @property {number|null} [weight] MaterialIcon weight
+                         * @property {number|null} [grade] MaterialIcon grade
+                         */
+    
+                        /**
+                         * Constructs a new MaterialIcon.
+                         * @memberof google.apps.card.v1
+                         * @classdesc Represents a MaterialIcon.
+                         * @implements IMaterialIcon
+                         * @constructor
+                         * @param {google.apps.card.v1.IMaterialIcon=} [properties] Properties to set
+                         */
+                        function MaterialIcon(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MaterialIcon name.
+                         * @member {string} name
+                         * @memberof google.apps.card.v1.MaterialIcon
+                         * @instance
+                         */
+                        MaterialIcon.prototype.name = "";
+    
+                        /**
+                         * MaterialIcon fill.
+                         * @member {boolean} fill
+                         * @memberof google.apps.card.v1.MaterialIcon
+                         * @instance
+                         */
+                        MaterialIcon.prototype.fill = false;
+    
+                        /**
+                         * MaterialIcon weight.
+                         * @member {number} weight
+                         * @memberof google.apps.card.v1.MaterialIcon
+                         * @instance
+                         */
+                        MaterialIcon.prototype.weight = 0;
+    
+                        /**
+                         * MaterialIcon grade.
+                         * @member {number} grade
+                         * @memberof google.apps.card.v1.MaterialIcon
+                         * @instance
+                         */
+                        MaterialIcon.prototype.grade = 0;
+    
+                        /**
+                         * Creates a new MaterialIcon instance using the specified properties.
+                         * @function create
+                         * @memberof google.apps.card.v1.MaterialIcon
+                         * @static
+                         * @param {google.apps.card.v1.IMaterialIcon=} [properties] Properties to set
+                         * @returns {google.apps.card.v1.MaterialIcon} MaterialIcon instance
+                         */
+                        MaterialIcon.create = function create(properties) {
+                            return new MaterialIcon(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MaterialIcon message. Does not implicitly {@link google.apps.card.v1.MaterialIcon.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.apps.card.v1.MaterialIcon
+                         * @static
+                         * @param {google.apps.card.v1.IMaterialIcon} message MaterialIcon message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MaterialIcon.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.fill != null && Object.hasOwnProperty.call(message, "fill"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.fill);
+                            if (message.weight != null && Object.hasOwnProperty.call(message, "weight"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.weight);
+                            if (message.grade != null && Object.hasOwnProperty.call(message, "grade"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.grade);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MaterialIcon message, length delimited. Does not implicitly {@link google.apps.card.v1.MaterialIcon.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.apps.card.v1.MaterialIcon
+                         * @static
+                         * @param {google.apps.card.v1.IMaterialIcon} message MaterialIcon message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MaterialIcon.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MaterialIcon message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.apps.card.v1.MaterialIcon
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.apps.card.v1.MaterialIcon} MaterialIcon
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MaterialIcon.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.MaterialIcon();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.fill = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.weight = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.grade = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MaterialIcon message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.apps.card.v1.MaterialIcon
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.apps.card.v1.MaterialIcon} MaterialIcon
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MaterialIcon.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MaterialIcon message.
+                         * @function verify
+                         * @memberof google.apps.card.v1.MaterialIcon
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MaterialIcon.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.fill != null && message.hasOwnProperty("fill"))
+                                if (typeof message.fill !== "boolean")
+                                    return "fill: boolean expected";
+                            if (message.weight != null && message.hasOwnProperty("weight"))
+                                if (!$util.isInteger(message.weight))
+                                    return "weight: integer expected";
+                            if (message.grade != null && message.hasOwnProperty("grade"))
+                                if (!$util.isInteger(message.grade))
+                                    return "grade: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MaterialIcon message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.apps.card.v1.MaterialIcon
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.apps.card.v1.MaterialIcon} MaterialIcon
+                         */
+                        MaterialIcon.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.apps.card.v1.MaterialIcon)
+                                return object;
+                            var message = new $root.google.apps.card.v1.MaterialIcon();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.fill != null)
+                                message.fill = Boolean(object.fill);
+                            if (object.weight != null)
+                                message.weight = object.weight | 0;
+                            if (object.grade != null)
+                                message.grade = object.grade | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MaterialIcon message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.apps.card.v1.MaterialIcon
+                         * @static
+                         * @param {google.apps.card.v1.MaterialIcon} message MaterialIcon
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MaterialIcon.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.fill = false;
+                                object.weight = 0;
+                                object.grade = 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.fill != null && message.hasOwnProperty("fill"))
+                                object.fill = message.fill;
+                            if (message.weight != null && message.hasOwnProperty("weight"))
+                                object.weight = message.weight;
+                            if (message.grade != null && message.hasOwnProperty("grade"))
+                                object.grade = message.grade;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MaterialIcon to JSON.
+                         * @function toJSON
+                         * @memberof google.apps.card.v1.MaterialIcon
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MaterialIcon.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MaterialIcon
+                         * @function getTypeUrl
+                         * @memberof google.apps.card.v1.MaterialIcon
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MaterialIcon.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.apps.card.v1.MaterialIcon";
+                        };
+    
+                        return MaterialIcon;
                     })();
     
                     v1.ImageCropStyle = (function() {

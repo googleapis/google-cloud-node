@@ -1983,7 +1983,8 @@
                         "icons": {
                           "oneof": [
                             "knownIcon",
-                            "iconUrl"
+                            "iconUrl",
+                            "materialIcon"
                           ]
                         }
                       },
@@ -1996,12 +1997,36 @@
                           "type": "string",
                           "id": 2
                         },
+                        "materialIcon": {
+                          "type": "MaterialIcon",
+                          "id": 5
+                        },
                         "altText": {
                           "type": "string",
                           "id": 3
                         },
                         "imageType": {
                           "type": "Widget.ImageType",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "MaterialIcon": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "fill": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "weight": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "grade": {
+                          "type": "int32",
                           "id": 4
                         }
                       }
