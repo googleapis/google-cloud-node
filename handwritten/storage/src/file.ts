@@ -2035,6 +2035,16 @@ class File extends ServiceObject<File, FileMetadata> {
         emitStream.write(chunk, encoding, cb);
       },
     });
+    // If the write stream, which is returned to the caller, catches an error we need to make sure that
+    // at least one of the streams in the pipeline below gets notified so that they
+    // all get cleaned up / destroyed.
+    writeStream.once('error', e => {
+      emitStream.destroy(e);
+    });
+    // If the write stream is closed, cleanup the pipeline below by calling destroy on one of the streams.
+    writeStream.once('close', () => {
+      emitStream.destroy();
+    });
 
     const transformStreams: Transform[] = [];
 
