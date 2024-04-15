@@ -27,10 +27,7 @@ describe('Quickstart', () => {
   it('should run quickstart', async () => {
     const bucketName = 'storage-control-test-monorepo';
 
-    const output = execSync(
-      `node ./quickstart.js ${bucketName}`,
-      {cwd}
-    );
+    const output = execSync(`node ./quickstart.js ${bucketName}`, {cwd});
     assert.match(output, new RegExp(`Bucket ${bucketName} has location type`));
   });
 });
