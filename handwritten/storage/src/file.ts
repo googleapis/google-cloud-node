@@ -479,6 +479,9 @@ export class RequestError extends Error {
 }
 
 const SEVEN_DAYS = 7 * 24 * 60 * 60;
+const GS_UTIL_URL_REGEX = /(gs):\/\/([a-z0-9_.-]+)\/(.+)/g;
+const HTTPS_PUBLIC_URL_REGEX =
+  /(https):\/\/(storage\.googleapis\.com)\/([a-z0-9_.-]+)\/(.+)/g;
 
 export enum FileExceptionMessages {
   EXPIRATION_TIME_NA = 'An expiration time is not available.',
@@ -2356,6 +2359,35 @@ class File extends ServiceObject<File, FileMetadata> {
     this.interceptors.push(this.encryptionKeyInterceptor!);
 
     return this;
+  }
+
+  /**
+   * Gets a reference to a Cloud Storage {@link File} file from the provided URL in string format.
+   * @param {string} publicUrlOrGsUrl the URL as a string. Must be of the format gs://bucket/file
+   *  or https://storage.googleapis.com/bucket/file.
+   * @param {Storage} storageInstance an instance of a Storage object.
+   * @param {FileOptions} [options] Configuration options
+   * @returns {File}
+   */
+  static from(
+    publicUrlOrGsUrl: string,
+    storageInstance: Storage,
+    options?: FileOptions
+  ): File {
+    const gsMatches = [...publicUrlOrGsUrl.matchAll(GS_UTIL_URL_REGEX)];
+    const httpsMatches = [...publicUrlOrGsUrl.matchAll(HTTPS_PUBLIC_URL_REGEX)];
+
+    if (gsMatches.length > 0) {
+      const bucket = new Bucket(storageInstance, gsMatches[0][1]);
+      return new File(bucket, gsMatches[0][2], options);
+    } else if (httpsMatches.length > 0) {
+      const bucket = new Bucket(storageInstance, httpsMatches[0][2]);
+      return new File(bucket, httpsMatches[0][3], options);
+    } else {
+      throw new Error(
+        'URL string must be of format gs://bucket/file or https://storage.googleapis.com/bucket/file'
+      );
+    }
   }
 
   get(options?: GetFileOptions): Promise<GetResponse<File>>;

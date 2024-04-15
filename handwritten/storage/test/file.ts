@@ -5168,4 +5168,49 @@ describe('File', () => {
       file.setUserProject(userProject);
     });
   });
+
+  describe('from', () => {
+    it('should create a File object from a gs:// formatted URL', () => {
+      const gsUrl = 'gs://mybucket/myfile';
+      const result = File.from(gsUrl, STORAGE);
+
+      assert(result);
+      assert(result.bucket.name, 'mybucket');
+      assert(result.name, 'myfile');
+    });
+
+    it('should create a File object from a gs:// formatted URL including a folder', () => {
+      const gsUrl = 'gs://mybucket/myfolder/myfile';
+      const result = File.from(gsUrl, STORAGE);
+
+      assert(result);
+      assert(result.bucket.name, 'mybucket');
+      assert(result.name, 'myfolder/myfile');
+    });
+
+    it('should create a File object from a https:// formatted URL', () => {
+      const httpsUrl = 'https://storage.googleapis.com/mybucket/myfile';
+      const result = File.from(httpsUrl, STORAGE);
+
+      assert(result);
+      assert(result.bucket.name, 'mybucket');
+      assert(result.name, 'myfile');
+    });
+
+    it('should create a File object from a https:// formatted URL including a folder', () => {
+      const httpsUrl =
+        'https://storage.googleapis.com/mybucket/myfolder/myfile';
+      const result = File.from(httpsUrl, STORAGE);
+
+      assert(result);
+      assert(result.bucket.name, 'mybucket');
+      assert(result.name, 'myfolder/myfile');
+    });
+
+    it('should throw an error when invoked with an incorrectly formatted URL', () => {
+      const invalidUrl = 'https://storage.com/mybucket/myfile';
+
+      assert.throws(() => File.from(invalidUrl, STORAGE));
+    });
+  });
 });
