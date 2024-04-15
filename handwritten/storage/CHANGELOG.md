@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [7.10.0](https://github.com/googleapis/nodejs-storage/compare/v7.9.0...v7.10.0) (2024-04-15)
+
+
+### Features
+
+* Add ability to create a File object from URL ([#2432](https://github.com/googleapis/nodejs-storage/issues/2432)) ([1b71fcc](https://github.com/googleapis/nodejs-storage/commit/1b71fcc7687fb8d66e04fb92b15671729f1407e7))
+* Allow setting contentEncoding during compose ([#2431](https://github.com/googleapis/nodejs-storage/issues/2431)) ([6e81e05](https://github.com/googleapis/nodejs-storage/commit/6e81e05b2615f1b8307fcca9a147362677e95e7f))
+
+
+### Bug Fixes
+
+* Destroy pipeline streams when returned stream errors ([#2437](https://github.com/googleapis/nodejs-storage/issues/2437)) ([fe1ac65](https://github.com/googleapis/nodejs-storage/commit/fe1ac655a8d321e225f4828c7adf57342c4a8455))
+* Remove extraneous mime-types package in favor of mime ([#2435](https://github.com/googleapis/nodejs-storage/issues/2435)) ([63a71f2](https://github.com/googleapis/nodejs-storage/commit/63a71f2e81181ad976e982ef79d6148913a87c1f))
+
 ## [7.9.0](https://github.com/googleapis/nodejs-storage/compare/v7.8.0...v7.9.0) (2024-03-18)
 
 
