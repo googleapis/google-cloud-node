@@ -30,6 +30,8 @@ const storage = new Storage();
 const cwd = path.join(__dirname, '..');
 const bucketName = generateName();
 const bucket = storage.bucket(bucketName);
+const objectRetentionBucketName = generateName();
+const objectRetentionBucket = storage.bucket(objectRetentionBucketName);
 const fileContents = 'these-are-my-contents';
 const fileName = 'test.txt';
 const memoryFileName = 'testmemory.txt';
@@ -574,6 +576,25 @@ describe('file', () => {
         })
         .exists();
       assert.strictEqual(exists, false);
+    });
+  });
+
+  describe('Object Retention', () => {
+    before(async () => {
+      await storage.createBucket(objectRetentionBucketName, {
+        enableObjectRetention: true,
+      });
+    });
+
+    it('should create a file with unlocked retention and then override it', async () => {
+      const output = execSync(
+        `node setObjectRetentionPolicy.js ${objectRetentionBucketName} ${fileName} ${fileContent}`
+      );
+      assert.include(output, 'Retention policy for file');
+      const file = objectRetentionBucket.file(fileName);
+      const [metadata] = await file.getMetadata();
+      assert(metadata.retention.retainUntilTime);
+      assert(metadata.retention.mode.toUpperCase(), 'UNLOCKED');
     });
   });
 });

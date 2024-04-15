@@ -29,6 +29,7 @@ const bucketNameDualRegion = `${samplesTestBucketPrefix}-b`;
 const bucketNameDualRegionTurbo = `${samplesTestBucketPrefix}-c`;
 const bucketNameWithClassAndLocation = `${samplesTestBucketPrefix}-d`;
 const bucketNameAutoclass = `${samplesTestBucketPrefix}-e`;
+const bucketNameObjectRetention = `${samplesTestBucketPrefix}-f`;
 const defaultKmsKeyName = process.env.GOOGLE_CLOUD_KMS_KEY_ASIA;
 const bucket = storage.bucket(bucketName);
 const bucketWithClassAndLocation = storage.bucket(
@@ -36,6 +37,7 @@ const bucketWithClassAndLocation = storage.bucket(
 );
 const dualRegionBucket = storage.bucket(bucketNameDualRegion);
 const dualRegionBucketTurbo = storage.bucket(bucketNameDualRegionTurbo);
+const objectRetentionBucket = storage.bucket(bucketNameObjectRetention);
 
 const PUBLIC_ACCESS_PREVENTION_INHERITED = 'inherited';
 const PUBLIC_ACCESS_PREVENTION_ENFORCED = 'enforced';
@@ -416,4 +418,17 @@ it('should delete a bucket', async () => {
   assert.match(output, new RegExp(`Bucket ${bucketName} deleted`));
   const [exists] = await bucket.exists();
   assert.strictEqual(exists, false);
+});
+
+it('should create a bucket with object retention enabled', async () => {
+  const output = execSync(
+    `node createBucketWithObjectRetention.js ${bucketNameObjectRetention}`
+  );
+  console.log(output);
+  assert.include(
+    output,
+    `Created '${bucketNameObjectRetention}' with object retention enabled setting: Enabled`
+  );
+  const [metadata] = await objectRetentionBucket.getMetadata();
+  assert.strictEqual(metadata.objectRetention.mode, 'Enabled');
 });
