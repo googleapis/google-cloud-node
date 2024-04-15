@@ -18,25 +18,19 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const {StorageControlClient} = require('@google-cloud/control').v2;
-const controlClient = new StorageControlClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const cwd = path.join(__dirname, '..');
 
 describe('Quickstart', () => {
-  let projectId;
-
-  before(async () => {
-    projectId = await controlClient.getProjectId();
-  });
-
   it('should run quickstart', async () => {
+    const bucketName = 'storage-control-test-monorepo';
+
     const output = execSync(
-      'node ./quickstart.js `projects/_/buckets/storage-control-test-monorepo`',
+      `node ./quickstart.js ${bucketName}`,
       {cwd}
     );
-    assert(output !== null);
+    assert.match(output, new RegExp(`Bucket ${bucketName} has location type`));
   });
 });

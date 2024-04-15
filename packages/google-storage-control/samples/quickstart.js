@@ -18,8 +18,8 @@
 
 'use strict';
 
-function main(parent) {
-  // [START storage_quickstart]
+function main(bucketName) {
+  // [START storage_control_quickstart_sample]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -27,49 +27,9 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the bucket in which to look for folders.
+   *  Required. Name of the bucket for which to get the layout
    */
-  // const parent = 'abc123'
-  /**
-   *  Optional. Maximum number of folders to return in a single response. The
-   *  service will use this parameter or 1,000 items, whichever is smaller.
-   */
-  // const pageSize = 1234
-  /**
-   *  Optional. A previously-returned page token representing part of the larger
-   *  set of results to view.
-   */
-  // const pageToken = 'abc123'
-  /**
-   *  Optional. Filter results to folders whose names begin with this prefix.
-   *  If set, the value must either be an empty string or end with a '/'.
-   */
-  // const prefix = 'abc123'
-  /**
-   *  Optional. If set, returns results in a directory-like mode. The results
-   *  will only include folders that either exactly match the above prefix, or
-   *  are one level below the prefix. The only supported value is '/'.
-   */
-  // const delimiter = 'abc123'
-  /**
-   *  Optional. Filter results to folders whose names are lexicographically equal
-   *  to or after lexicographic_start. If lexicographic_end is also set, the
-   *  folders listed have names between lexicographic_start (inclusive) and
-   *  lexicographic_end (exclusive).
-   */
-  // const lexicographicStart = 'abc123'
-  /**
-   *  Optional. Filter results to folders whose names are lexicographically
-   *  before lexicographic_end. If lexicographic_start is also set, the folders
-   *  listed have names between lexicographic_start (inclusive) and
-   *  lexicographic_end (exclusive).
-   */
-  // const lexicographicEnd = 'abc123'
-  /**
-   *  Optional. A unique identifier for this request. UUID is the recommended
-   *  format, but other formats are still accepted.
-   */
-  // const requestId = 'abc123'
+  // const bucketName = 'abc123'
 
   // Imports the Control library
   const {StorageControlClient} = require('@google-cloud/control').v2;
@@ -77,21 +37,21 @@ function main(parent) {
   // Instantiates a client
   const controlClient = new StorageControlClient();
 
-  async function callListFolders() {
+  async function callGetStorageLayout() {
     // Construct request
     const request = {
-      parent,
+      name: `projects/_/buckets/${bucketName}/storageLayout`,
     };
 
     // Run request
-    const iterable = controlClient.listFoldersAsync(request);
-    for await (const response of iterable) {
-      console.log(response);
-    }
+    const [layout] = await controlClient.getStorageLayout(request);
+    
+    // Use response
+    console.log(`Bucket ${bucketName} has location type ${layout.locationType}.`);
   }
 
-  callListFolders();
-  // [END storage_quickstart]
+  callGetStorageLayout();
+  // [END storage_control_quickstart_sample]
 }
 
 process.on('unhandledRejection', err => {
