@@ -22,7 +22,7 @@ import {
 import assert from 'assert';
 import * as fs from 'fs';
 import {describe, it, before, beforeEach, after, afterEach} from 'mocha';
-import * as mime from 'mime-types';
+import mime from 'mime';
 import pLimit from 'p-limit';
 import * as path from 'path';
 import proxyquire from 'proxyquire';
@@ -704,7 +704,7 @@ describe('Bucket', () => {
       destination.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(
           reqOpts.json.destination.contentType,
-          mime.contentType(destination.name)
+          mime.getType(destination.name)
         );
 
         done();
@@ -735,7 +735,7 @@ describe('Bucket', () => {
       destination.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(
           reqOpts.json.destination.contentType,
-          mime.contentType(destination.name)
+          mime.getType(destination.name)
         );
 
         done();
@@ -751,7 +751,10 @@ describe('Bucket', () => {
       destination.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.uri, '/compose');
         assert.deepStrictEqual(reqOpts.json, {
-          destination: {contentType: undefined, contentEncoding: undefined},
+          destination: {
+            contentType: mime.getType(destination.name) || undefined,
+            contentEncoding: undefined,
+          },
           sourceObjects: [{name: sources[0].name}, {name: sources[1].name}],
         });
 

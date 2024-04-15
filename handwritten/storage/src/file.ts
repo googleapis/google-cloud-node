@@ -24,7 +24,6 @@ import {
 } from './nodejs-common/index.js';
 import {promisifyAll} from '@google-cloud/promisify';
 
-import compressible from 'compressible';
 import * as crypto from 'crypto';
 import * as fs from 'fs';
 import mime from 'mime';
@@ -325,6 +324,27 @@ export const STORAGE_POST_POLICY_BASE_URL = 'https://storage.googleapis.com';
  * @private
  */
 const GS_URL_REGEXP = /^gs:\/\/([a-z0-9_.-]+)\/(.+)$/;
+
+/**
+ * @private
+ * This regex will match compressible content types. These are primarily text/*, +json, +text, +xml content types.
+ * This was based off of mime-db and may periodically need to be updated if new compressible content types become
+ * standards.
+ */
+const COMPRESSIBLE_MIME_REGEX = new RegExp(
+  [
+    /^text\/|application\/ecmascript|application\/javascript|application\/json/,
+    /|application\/postscript|application\/rtf|application\/toml|application\/vnd.dart/,
+    /|application\/vnd.ms-fontobject|application\/wasm|application\/x-httpd-php|application\/x-ns-proxy-autoconfig/,
+    /|application\/x-sh(?!ockwave-flash)|application\/x-tar|application\/x-virtualbox-hdd|application\/x-virtualbox-ova|application\/x-virtualbox-ovf/,
+    /|^application\/x-virtualbox-vbox$|application\/x-virtualbox-vdi|application\/x-virtualbox-vhd|application\/x-virtualbox-vmdk/,
+    /|application\/xml|application\/xml-dtd|font\/otf|font\/ttf|image\/bmp|image\/vnd.adobe.photoshop|image\/vnd.microsoft.icon/,
+    /|image\/vnd.ms-dds|image\/x-icon|image\/x-ms-bmp|message\/rfc822|model\/gltf-binary|\+json|\+text|\+xml|\+yaml/,
+  ]
+    .map(r => r.source)
+    .join(''),
+  'i'
+);
 
 export interface FileOptions {
   crc32cGenerator?: CRC32CValidatorGenerator;
@@ -1980,7 +2000,7 @@ class File extends ServiceObject<File, FileMetadata> {
     let gzip = options.gzip;
 
     if (gzip === 'auto') {
-      gzip = compressible(options!.metadata!.contentType || '');
+      gzip = COMPRESSIBLE_MIME_REGEX.test(options!.metadata!.contentType || '');
     }
 
     if (gzip) {

@@ -29,7 +29,7 @@ import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as fs from 'fs';
 import * as http from 'http';
-import * as mime from 'mime-types';
+import mime from 'mime';
 import * as path from 'path';
 import pLimit from 'p-limit';
 import {promisify} from 'util';
@@ -1625,7 +1625,8 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
     callback = callback || util.noop;
 
     if (!destinationFile.metadata.contentType) {
-      const destinationContentType = mime.contentType(destinationFile.name);
+      const destinationContentType =
+        mime.getType(destinationFile.name) || undefined;
 
       if (destinationContentType) {
         destinationFile.metadata.contentType = destinationContentType;
