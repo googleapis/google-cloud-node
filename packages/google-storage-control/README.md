@@ -84,7 +84,9 @@ async function callGetStorageLayout() {
   const [layout] = await controlClient.getStorageLayout(request);
 
   // Use response
-  console.log(`Bucket ${bucketName} has location type ${layout.locationType}.`);
+  console.log(
+    `Bucket ${bucketName} has location type ${layout.locationType}.`
+  );
 }
 
 callGetStorageLayout();
