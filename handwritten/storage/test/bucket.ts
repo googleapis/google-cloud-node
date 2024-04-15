@@ -745,13 +745,13 @@ describe('Bucket', () => {
     });
 
     it('should make correct API request', done => {
-      const sources = [bucket.file('1.txt'), bucket.file('2.txt')];
-      const destination = bucket.file('destination.txt');
+      const sources = [bucket.file('1.foo'), bucket.file('2.foo')];
+      const destination = bucket.file('destination.foo');
 
       destination.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.uri, '/compose');
         assert.deepStrictEqual(reqOpts.json, {
-          destination: {contentType: mime.contentType(destination.name)},
+          destination: {contentType: undefined, contentEncoding: undefined},
           sourceObjects: [{name: sources[0].name}, {name: sources[1].name}],
         });
 

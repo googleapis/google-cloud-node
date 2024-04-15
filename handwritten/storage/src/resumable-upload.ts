@@ -933,9 +933,8 @@ export class Upload extends Writable {
       // `Content-Length` for multiple chunk uploads is the size of the chunk,
       // not the overall object
       headers['Content-Length'] = bytesToUpload;
-      headers[
-        'Content-Range'
-      ] = `bytes ${this.offset}-${endingByte}/${totalObjectSize}`;
+      headers['Content-Range'] =
+        `bytes ${this.offset}-${endingByte}/${totalObjectSize}`;
     } else {
       headers['Content-Range'] = `bytes ${this.offset}-*/${this.contentLength}`;
     }

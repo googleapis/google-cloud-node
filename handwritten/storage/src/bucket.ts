@@ -1658,6 +1658,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
         json: {
           destination: {
             contentType: destinationFile.metadata.contentType,
+            contentEncoding: destinationFile.metadata.contentEncoding,
           },
           sourceObjects: (sources as File[]).map(source => {
             const sourceObject = {

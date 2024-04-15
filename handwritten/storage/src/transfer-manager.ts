@@ -223,9 +223,8 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
 
         // Prepend command feature to value, if not already there
         if (!value.includes(GCCL_GCS_CMD_FEATURE.UPLOAD_SHARDED)) {
-          headers[
-            key
-          ] = `${value} gccl-gcs-cmd/${GCCL_GCS_CMD_FEATURE.UPLOAD_SHARDED}`;
+          headers[key] =
+            `${value} gccl-gcs-cmd/${GCCL_GCS_CMD_FEATURE.UPLOAD_SHARDED}`;
         }
       } else if (key.toLocaleLowerCase().trim() === 'user-agent') {
         userAgentFound = true;
