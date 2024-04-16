@@ -31,3 +31,4 @@ export {SearchTuningServiceClient} from './search_tuning_service_client';
 export {ServingConfigServiceClient} from './serving_config_service_client';
 export {SiteSearchEngineServiceClient} from './site_search_engine_service_client';
 export {UserEventServiceClient} from './user_event_service_client';
+export {RankServiceClient} from './rank_service_client';
