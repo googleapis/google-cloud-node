@@ -174,7 +174,7 @@ describe('v1beta1.ServiceUsageClient', () => {
     });
 
     if (
-      typeof process !== 'undefined' &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       it('throws DeprecationWarning if static servicePath is used', () => {
@@ -210,6 +210,41 @@ describe('v1beta1.ServiceUsageClient', () => {
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'serviceusage.example.com');
     });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new serviceusageModule.v1beta1.ServiceUsageClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'serviceusage.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new serviceusageModule.v1beta1.ServiceUsageClient({
+            universeDomain: 'configured.example.com',
+          });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(
+            servicePath,
+            'serviceusage.configured.example.com'
+          );
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new serviceusageModule.v1beta1.ServiceUsageClient({
@@ -3286,9 +3321,9 @@ describe('v1beta1.ServiceUsageClient', () => {
       assert(
         (client.descriptors.page.listServices.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3339,9 +3374,9 @@ describe('v1beta1.ServiceUsageClient', () => {
       assert(
         (client.descriptors.page.listServices.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3390,9 +3425,9 @@ describe('v1beta1.ServiceUsageClient', () => {
       assert(
         (client.descriptors.page.listServices.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3432,9 +3467,9 @@ describe('v1beta1.ServiceUsageClient', () => {
       assert(
         (client.descriptors.page.listServices.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -3982,9 +4017,9 @@ describe('v1beta1.ServiceUsageClient', () => {
       assert(
         (client.descriptors.page.listAdminOverrides.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4032,9 +4067,9 @@ describe('v1beta1.ServiceUsageClient', () => {
       assert(
         (client.descriptors.page.listAdminOverrides.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4082,9 +4117,9 @@ describe('v1beta1.ServiceUsageClient', () => {
       assert(
         (client.descriptors.page.listAdminOverrides.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4123,9 +4158,9 @@ describe('v1beta1.ServiceUsageClient', () => {
       assert(
         (client.descriptors.page.listAdminOverrides.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
