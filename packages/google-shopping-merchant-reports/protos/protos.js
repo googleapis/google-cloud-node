@@ -2394,6 +2394,8 @@
                              * @property {google.type.IDate|null} [expirationDate] ProductView expirationDate
                              * @property {google.shopping.merchant.reports.v1beta.ProductView.AggregatedReportingContextStatus|null} [aggregatedReportingContextStatus] ProductView aggregatedReportingContextStatus
                              * @property {Array.<google.shopping.merchant.reports.v1beta.ProductView.IItemIssue>|null} [itemIssues] ProductView itemIssues
+                             * @property {google.shopping.merchant.reports.v1beta.ProductView.ClickPotential|null} [clickPotential] ProductView clickPotential
+                             * @property {number|Long|null} [clickPotentialRank] ProductView clickPotentialRank
                              */
     
                             /**
@@ -2636,6 +2638,22 @@
                              * @instance
                              */
                             ProductView.prototype.itemIssues = $util.emptyArray;
+    
+                            /**
+                             * ProductView clickPotential.
+                             * @member {google.shopping.merchant.reports.v1beta.ProductView.ClickPotential} clickPotential
+                             * @memberof google.shopping.merchant.reports.v1beta.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.clickPotential = 0;
+    
+                            /**
+                             * ProductView clickPotentialRank.
+                             * @member {number|Long|null|undefined} clickPotentialRank
+                             * @memberof google.shopping.merchant.reports.v1beta.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.clickPotentialRank = null;
     
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
@@ -2894,6 +2912,17 @@
                             });
     
                             /**
+                             * ProductView _clickPotentialRank.
+                             * @member {"clickPotentialRank"|undefined} _clickPotentialRank
+                             * @memberof google.shopping.merchant.reports.v1beta.ProductView
+                             * @instance
+                             */
+                            Object.defineProperty(ProductView.prototype, "_clickPotentialRank", {
+                                get: $util.oneOfGetter($oneOfFields = ["clickPotentialRank"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
                              * Creates a new ProductView instance using the specified properties.
                              * @function create
                              * @memberof google.shopping.merchant.reports.v1beta.ProductView
@@ -2975,6 +3004,10 @@
                                         $root.google.shopping.merchant.reports.v1beta.ProductView.ItemIssue.encode(message.itemIssues[i], writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
                                 if (message.channel != null && Object.hasOwnProperty.call(message, "channel"))
                                     writer.uint32(/* id 28, wireType 0 =*/224).int32(message.channel);
+                                if (message.clickPotential != null && Object.hasOwnProperty.call(message, "clickPotential"))
+                                    writer.uint32(/* id 29, wireType 0 =*/232).int32(message.clickPotential);
+                                if (message.clickPotentialRank != null && Object.hasOwnProperty.call(message, "clickPotentialRank"))
+                                    writer.uint32(/* id 30, wireType 0 =*/240).int64(message.clickPotentialRank);
                                 return writer;
                             };
     
@@ -3123,6 +3156,14 @@
                                             if (!(message.itemIssues && message.itemIssues.length))
                                                 message.itemIssues = [];
                                             message.itemIssues.push($root.google.shopping.merchant.reports.v1beta.ProductView.ItemIssue.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 29: {
+                                            message.clickPotential = reader.int32();
+                                            break;
+                                        }
+                                    case 30: {
+                                            message.clickPotentialRank = reader.int64();
                                             break;
                                         }
                                     default:
@@ -3321,6 +3362,21 @@
                                             return "itemIssues." + error;
                                     }
                                 }
+                                if (message.clickPotential != null && message.hasOwnProperty("clickPotential"))
+                                    switch (message.clickPotential) {
+                                    default:
+                                        return "clickPotential: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                if (message.clickPotentialRank != null && message.hasOwnProperty("clickPotentialRank")) {
+                                    properties._clickPotentialRank = 1;
+                                    if (!$util.isInteger(message.clickPotentialRank) && !(message.clickPotentialRank && $util.isInteger(message.clickPotentialRank.low) && $util.isInteger(message.clickPotentialRank.high)))
+                                        return "clickPotentialRank: integer|Long expected";
+                                }
                                 return null;
                             };
     
@@ -3458,6 +3514,39 @@
                                         message.itemIssues[i] = $root.google.shopping.merchant.reports.v1beta.ProductView.ItemIssue.fromObject(object.itemIssues[i]);
                                     }
                                 }
+                                switch (object.clickPotential) {
+                                default:
+                                    if (typeof object.clickPotential === "number") {
+                                        message.clickPotential = object.clickPotential;
+                                        break;
+                                    }
+                                    break;
+                                case "CLICK_POTENTIAL_UNSPECIFIED":
+                                case 0:
+                                    message.clickPotential = 0;
+                                    break;
+                                case "LOW":
+                                case 1:
+                                    message.clickPotential = 1;
+                                    break;
+                                case "MEDIUM":
+                                case 2:
+                                    message.clickPotential = 2;
+                                    break;
+                                case "HIGH":
+                                case 3:
+                                    message.clickPotential = 3;
+                                    break;
+                                }
+                                if (object.clickPotentialRank != null)
+                                    if ($util.Long)
+                                        (message.clickPotentialRank = $util.Long.fromValue(object.clickPotentialRank)).unsigned = false;
+                                    else if (typeof object.clickPotentialRank === "string")
+                                        message.clickPotentialRank = parseInt(object.clickPotentialRank, 10);
+                                    else if (typeof object.clickPotentialRank === "number")
+                                        message.clickPotentialRank = object.clickPotentialRank;
+                                    else if (typeof object.clickPotentialRank === "object")
+                                        message.clickPotentialRank = new $util.LongBits(object.clickPotentialRank.low >>> 0, object.clickPotentialRank.high >>> 0).toNumber();
                                 return message;
                             };
     
@@ -3482,6 +3571,7 @@
                                     object.price = null;
                                     object.creationTime = null;
                                     object.expirationDate = null;
+                                    object.clickPotential = options.enums === String ? "CLICK_POTENTIAL_UNSPECIFIED" : 0;
                                 }
                                 if (message.id != null && message.hasOwnProperty("id")) {
                                     object.id = message.id;
@@ -3613,6 +3703,16 @@
                                     object.channel = options.enums === String ? $root.google.shopping.type.Channel.ChannelEnum[message.channel] === undefined ? message.channel : $root.google.shopping.type.Channel.ChannelEnum[message.channel] : message.channel;
                                     if (options.oneofs)
                                         object._channel = "channel";
+                                }
+                                if (message.clickPotential != null && message.hasOwnProperty("clickPotential"))
+                                    object.clickPotential = options.enums === String ? $root.google.shopping.merchant.reports.v1beta.ProductView.ClickPotential[message.clickPotential] === undefined ? message.clickPotential : $root.google.shopping.merchant.reports.v1beta.ProductView.ClickPotential[message.clickPotential] : message.clickPotential;
+                                if (message.clickPotentialRank != null && message.hasOwnProperty("clickPotentialRank")) {
+                                    if (typeof message.clickPotentialRank === "number")
+                                        object.clickPotentialRank = options.longs === String ? String(message.clickPotentialRank) : message.clickPotentialRank;
+                                    else
+                                        object.clickPotentialRank = options.longs === String ? $util.Long.prototype.toString.call(message.clickPotentialRank) : options.longs === Number ? new $util.LongBits(message.clickPotentialRank.low >>> 0, message.clickPotentialRank.high >>> 0).toNumber() : message.clickPotentialRank;
+                                    if (options.oneofs)
+                                        object._clickPotentialRank = "clickPotentialRank";
                                 }
                                 return object;
                             };
@@ -4936,6 +5036,24 @@
                                 values[valuesById[2] = "PENDING"] = 2;
                                 values[valuesById[3] = "ELIGIBLE_LIMITED"] = 3;
                                 values[valuesById[4] = "ELIGIBLE"] = 4;
+                                return values;
+                            })();
+    
+                            /**
+                             * ClickPotential enum.
+                             * @name google.shopping.merchant.reports.v1beta.ProductView.ClickPotential
+                             * @enum {number}
+                             * @property {number} CLICK_POTENTIAL_UNSPECIFIED=0 CLICK_POTENTIAL_UNSPECIFIED value
+                             * @property {number} LOW=1 LOW value
+                             * @property {number} MEDIUM=2 MEDIUM value
+                             * @property {number} HIGH=3 HIGH value
+                             */
+                            ProductView.ClickPotential = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "CLICK_POTENTIAL_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "LOW"] = 1;
+                                values[valuesById[2] = "MEDIUM"] = 2;
+                                values[valuesById[3] = "HIGH"] = 3;
                                 return values;
                             })();
     

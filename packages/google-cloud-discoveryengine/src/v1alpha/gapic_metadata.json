@@ -312,11 +312,6 @@
                 "deleteDocument"
               ]
             },
-            "GetProcessedDocument": {
-              "methods": [
-                "getProcessedDocument"
-              ]
-            },
             "ImportDocuments": {
               "methods": [
                 "importDocuments"
@@ -357,11 +352,6 @@
             "DeleteDocument": {
               "methods": [
                 "deleteDocument"
-              ]
-            },
-            "GetProcessedDocument": {
-              "methods": [
-                "getProcessedDocument"
               ]
             },
             "ImportDocuments": {
@@ -501,30 +491,6 @@
             "EstimateDataSize": {
               "methods": [
                 "estimateDataSize"
-              ]
-            }
-          }
-        }
-      }
-    },
-    "RankService": {
-      "clients": {
-        "grpc": {
-          "libraryClient": "RankServiceClient",
-          "rpcs": {
-            "Rank": {
-              "methods": [
-                "rank"
-              ]
-            }
-          }
-        },
-        "grpc-fallback": {
-          "libraryClient": "RankServiceClient",
-          "rpcs": {
-            "Rank": {
-              "methods": [
-                "rank"
               ]
             }
           }

@@ -365,9 +365,6 @@ export class DocumentServiceClient {
             {
               get: '/v1alpha/{name=projects/*/locations/*/dataStores/*/operations/*}',
             },
-            {
-              get: '/v1alpha/{name=projects/*/locations/*/evaluations/*/operations/*}',
-            },
             {get: '/v1alpha/{name=projects/*/locations/*/operations/*}'},
             {get: '/v1alpha/{name=projects/*/operations/*}'},
           ],
@@ -502,7 +499,6 @@ export class DocumentServiceClient {
       'deleteDocument',
       'importDocuments',
       'purgeDocuments',
-      'getProcessedDocument',
     ];
     for (const methodName of documentServiceStubMethods) {
       const callPromise = this.documentServiceStub.then(
@@ -1061,116 +1057,6 @@ export class DocumentServiceClient {
     this.initialize();
     return this.innerApiCalls.deleteDocument(request, options, callback);
   }
-  /**
-   * Gets the parsed layout information for a
-   * {@link protos.google.cloud.discoveryengine.v1alpha.Document|Document}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Full resource name of
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.Document|Document}, such as
-   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}`.
-   *
-   *   If the caller does not have permission to access the
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.Document|Document}, regardless of
-   *   whether or not it exists, a `PERMISSION_DENIED` error is returned.
-   *
-   *   If the requested {@link protos.google.cloud.discoveryengine.v1alpha.Document|Document}
-   *   does not exist, a `NOT_FOUND` error is returned.
-   * @param {google.cloud.discoveryengine.v1alpha.GetProcessedDocumentRequest.ProcessedDocumentType} request.processedDocumentType
-   *   Required. What type of processing to return.
-   * @param {google.cloud.discoveryengine.v1alpha.GetProcessedDocumentRequest.ProcessedDocumentFormat} request.processedDocumentFormat
-   *   What format output should be.  If unspecified, defaults to JSON.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1alpha.ProcessedDocument|ProcessedDocument}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/document_service.get_processed_document.js</caption>
-   * region_tag:discoveryengine_v1alpha_generated_DocumentService_GetProcessedDocument_async
-   */
-  getProcessedDocument(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IGetProcessedDocumentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1alpha.IProcessedDocument,
-      (
-        | protos.google.cloud.discoveryengine.v1alpha.IGetProcessedDocumentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
-  getProcessedDocument(
-    request: protos.google.cloud.discoveryengine.v1alpha.IGetProcessedDocumentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1alpha.IProcessedDocument,
-      | protos.google.cloud.discoveryengine.v1alpha.IGetProcessedDocumentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getProcessedDocument(
-    request: protos.google.cloud.discoveryengine.v1alpha.IGetProcessedDocumentRequest,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1alpha.IProcessedDocument,
-      | protos.google.cloud.discoveryengine.v1alpha.IGetProcessedDocumentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getProcessedDocument(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IGetProcessedDocumentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.discoveryengine.v1alpha.IProcessedDocument,
-          | protos.google.cloud.discoveryengine.v1alpha.IGetProcessedDocumentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.discoveryengine.v1alpha.IProcessedDocument,
-      | protos.google.cloud.discoveryengine.v1alpha.IGetProcessedDocumentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1alpha.IProcessedDocument,
-      (
-        | protos.google.cloud.discoveryengine.v1alpha.IGetProcessedDocumentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.getProcessedDocument(request, options, callback);
-  }
 
   /**
    * Bulk import of multiple
@@ -1189,16 +1075,6 @@ export class DocumentServiceClient {
    *   Cloud Storage location for the input content.
    * @param {google.cloud.discoveryengine.v1alpha.BigQuerySource} request.bigquerySource
    *   BigQuery input source.
-   * @param {google.cloud.discoveryengine.v1alpha.FhirStoreSource} request.fhirStoreSource
-   *   FhirStore input source.
-   * @param {google.cloud.discoveryengine.v1alpha.SpannerSource} request.spannerSource
-   *   Spanner input source.
-   * @param {google.cloud.discoveryengine.v1alpha.CloudSqlSource} request.cloudSqlSource
-   *   Cloud SQL input source.
-   * @param {google.cloud.discoveryengine.v1alpha.FirestoreSource} request.firestoreSource
-   *   Firestore input source.
-   * @param {google.cloud.discoveryengine.v1alpha.BigtableSource} request.bigtableSource
-   *   Cloud Bigtable input source.
    * @param {string} request.parent
    *   Required. The parent branch resource name, such as
    *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`.
@@ -1209,9 +1085,6 @@ export class DocumentServiceClient {
    *   The mode of reconciliation between existing documents and the documents to
    *   be imported. Defaults to
    *   {@link protos.google.cloud.discoveryengine.v1alpha.ImportDocumentsRequest.ReconciliationMode.INCREMENTAL|ReconciliationMode.INCREMENTAL}.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Indicates which fields in the provided imported documents to update. If
-   *   not set, the default is to update all fields.
    * @param {boolean} request.autoGenerateIds
    *   Whether to automatically generate IDs for the documents if absent.
    *
@@ -1226,53 +1099,44 @@ export class DocumentServiceClient {
    *   {@link protos.google.cloud.discoveryengine.v1alpha.ImportDocumentsRequest.id_field|id_field},
    *   otherwise, documents without IDs fail to be imported.
    *
-   *   Supported data sources:
-   *
-   *   * {@link protos.google.cloud.discoveryengine.v1alpha.GcsSource|GcsSource}.
+   *   Only set this field when using
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.GcsSource|GcsSource} or
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.BigQuerySource|BigQuerySource}, and
+   *   when
    *   {@link protos.google.cloud.discoveryengine.v1alpha.GcsSource.data_schema|GcsSource.data_schema}
-   *   must be `custom` or `csv`. Otherwise, an INVALID_ARGUMENT error is thrown.
-   *   * {@link protos.google.cloud.discoveryengine.v1alpha.BigQuerySource|BigQuerySource}.
+   *   or
    *   {@link protos.google.cloud.discoveryengine.v1alpha.BigQuerySource.data_schema|BigQuerySource.data_schema}
-   *   must be `custom` or `csv`. Otherwise, an INVALID_ARGUMENT error is thrown.
-   *   * {@link protos.google.cloud.discoveryengine.v1alpha.SpannerSource|SpannerSource}.
-   *   * {@link protos.google.cloud.discoveryengine.v1alpha.CloudSqlSource|CloudSqlSource}.
-   *   * {@link protos.google.cloud.discoveryengine.v1alpha.FirestoreSource|FirestoreSource}.
-   *   * {@link protos.google.cloud.discoveryengine.v1alpha.BigtableSource|BigtableSource}.
+   *   is `custom` or `csv`. Otherwise, an INVALID_ARGUMENT error is thrown.
    * @param {string} request.idField
-   *   The field indicates the ID field or column to be used as unique IDs of
-   *   the documents.
+   *   The field in the Cloud Storage and BigQuery sources that indicates the
+   *   unique IDs of the documents.
    *
    *   For {@link protos.google.cloud.discoveryengine.v1alpha.GcsSource|GcsSource} it is the
    *   key of the JSON field. For instance, `my_id` for JSON `{"my_id":
-   *   "some_uuid"}`. For others, it may be the column name of the table where the
-   *   unique ids are stored.
+   *   "some_uuid"}`. For
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.BigQuerySource|BigQuerySource} it is
+   *   the column name of the BigQuery table where the unique ids are stored.
    *
-   *   The values of the JSON field or the table column are used as the
+   *   The values of the JSON field or the BigQuery column are used as the
    *   {@link protos.google.cloud.discoveryengine.v1alpha.Document.id|Document.id}s. The JSON
-   *   field or the table column must be of string type, and the values must be
+   *   field or the BigQuery column must be of string type, and the values must be
    *   set as valid strings conform to
    *   [RFC-1034](https://tools.ietf.org/html/rfc1034) with 1-63 characters.
    *   Otherwise, documents without valid IDs fail to be imported.
    *
-   *   Only set this field when
+   *   Only set this field when using
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.GcsSource|GcsSource} or
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.BigQuerySource|BigQuerySource}, and
+   *   when
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.GcsSource.data_schema|GcsSource.data_schema}
+   *   or
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.BigQuerySource.data_schema|BigQuerySource.data_schema}
+   *   is `custom`. And only set this field when
    *   {@link protos.google.cloud.discoveryengine.v1alpha.ImportDocumentsRequest.auto_generate_ids|auto_generate_ids}
    *   is unset or set as `false`. Otherwise, an INVALID_ARGUMENT error is thrown.
    *
    *   If it is unset, a default value `_id` is used when importing from the
    *   allowed data sources.
-   *
-   *   Supported data sources:
-   *
-   *   * {@link protos.google.cloud.discoveryengine.v1alpha.GcsSource|GcsSource}.
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.GcsSource.data_schema|GcsSource.data_schema}
-   *   must be `custom` or `csv`. Otherwise, an INVALID_ARGUMENT error is thrown.
-   *   * {@link protos.google.cloud.discoveryengine.v1alpha.BigQuerySource|BigQuerySource}.
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.BigQuerySource.data_schema|BigQuerySource.data_schema}
-   *   must be `custom` or `csv`. Otherwise, an INVALID_ARGUMENT error is thrown.
-   *   * {@link protos.google.cloud.discoveryengine.v1alpha.SpannerSource|SpannerSource}.
-   *   * {@link protos.google.cloud.discoveryengine.v1alpha.CloudSqlSource|CloudSqlSource}.
-   *   * {@link protos.google.cloud.discoveryengine.v1alpha.FirestoreSource|FirestoreSource}.
-   *   * {@link protos.google.cloud.discoveryengine.v1alpha.BigtableSource|BigtableSource}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

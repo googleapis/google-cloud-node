@@ -563,6 +563,11 @@
                               "oneof": [
                                 "aggregatedReportingContextStatus"
                               ]
+                            },
+                            "_clickPotentialRank": {
+                              "oneof": [
+                                "clickPotentialRank"
+                              ]
                             }
                           },
                           "fields": {
@@ -748,6 +753,17 @@
                               "rule": "repeated",
                               "type": "ItemIssue",
                               "id": 27
+                            },
+                            "clickPotential": {
+                              "type": "ClickPotential",
+                              "id": 29
+                            },
+                            "clickPotentialRank": {
+                              "type": "int64",
+                              "id": 30,
+                              "options": {
+                                "proto3_optional": true
+                              }
                             }
                           },
                           "nested": {
@@ -884,6 +900,14 @@
                                 "PENDING": 2,
                                 "ELIGIBLE_LIMITED": 3,
                                 "ELIGIBLE": 4
+                              }
+                            },
+                            "ClickPotential": {
+                              "values": {
+                                "CLICK_POTENTIAL_UNSPECIFIED": 0,
+                                "LOW": 1,
+                                "MEDIUM": 2,
+                                "HIGH": 3
                               }
                             }
                           }

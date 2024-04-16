@@ -42,7 +42,7 @@ function main(parent, query) {
   // const query = 'abc123'
   /**
    *  Optional. Number of `ReportRows` to retrieve in a single page. Defaults to
-   *  the maximum of 1000. Values above 1000 are coerced to 1000.
+   *  1000. Values above 5000 are coerced to 5000.
    */
   // const pageSize = 1234
   /**
