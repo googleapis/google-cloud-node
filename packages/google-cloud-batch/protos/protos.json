@@ -2495,6 +2495,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "serviceAccount": {
+                          "type": "ServiceAccount",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -3122,6 +3129,18 @@
                       },
                       "nested": {
                         "LimitStatus": {
+                          "oneofs": {
+                            "_limit": {
+                              "oneof": [
+                                "limit"
+                              ]
+                            },
+                            "_consumed": {
+                              "oneof": [
+                                "consumed"
+                              ]
+                            }
+                          },
                           "fields": {
                             "consumptionInterval": {
                               "type": "google.type.Interval",
@@ -3134,19 +3153,28 @@
                               "type": "double",
                               "id": 2,
                               "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
                               }
                             },
                             "consumed": {
                               "type": "double",
                               "id": 3,
                               "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
                               }
                             }
                           }
                         },
                         "PeriodConsumption": {
+                          "oneofs": {
+                            "_consumed": {
+                              "oneof": [
+                                "consumed"
+                              ]
+                            }
+                          },
                           "fields": {
                             "consumptionInterval": {
                               "type": "google.type.Interval",
@@ -3159,7 +3187,8 @@
                               "type": "double",
                               "id": 2,
                               "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
                               }
                             }
                           }
