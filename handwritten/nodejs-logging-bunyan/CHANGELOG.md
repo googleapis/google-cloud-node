@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+## [5.1.0](https://github.com/googleapis/nodejs-logging-bunyan/compare/v5.0.1...v5.1.0) (2024-01-31)
+
+
+### Features
+
+* Enable custom json fields truncation for bunyan ([#732](https://github.com/googleapis/nodejs-logging-bunyan/issues/732)) ([eb6fa66](https://github.com/googleapis/nodejs-logging-bunyan/commit/eb6fa6615cd43f192c07f69a5329a5d4ba159206))
+
+
+### Bug Fixes
+
+* Add speciel logging fields section in the doc ([#728](https://github.com/googleapis/nodejs-logging-bunyan/issues/728)) ([0b9ad2b](https://github.com/googleapis/nodejs-logging-bunyan/commit/0b9ad2b039ea282caf42284512aa61aaf2ed89e1))
+* Fix rest links with the correct gRPC links used by library. ([#724](https://github.com/googleapis/nodejs-logging-bunyan/issues/724)) ([555c33e](https://github.com/googleapis/nodejs-logging-bunyan/commit/555c33e858248b911a5aa405d11f64a2fb5942dd))
+
 ## [5.0.1](https://github.com/googleapis/nodejs-logging-bunyan/compare/v5.0.0...v5.0.1) (2023-10-30)
 
 
