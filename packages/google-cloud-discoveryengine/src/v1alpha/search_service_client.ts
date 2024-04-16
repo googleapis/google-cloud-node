@@ -501,15 +501,11 @@ export class SearchServiceClient {
    *   Raw image query.
    * @param {number} request.pageSize
    *   Maximum number of
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.Document|Document}s to return. The
-   *   maximum allowed value depends on the data type. Values above the maximum
-   *   value are coerced to the maximum value.
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.Document|Document}s to return. If
+   *   unspecified, defaults to a reasonable value. The maximum allowed value is
+   *   100. Values above 100 are coerced to 100.
    *
-   *   * Websites with basic indexing: Default `10`, Maximum `25`.
-   *   * Websites with advanced indexing: Default `25`, Maximum `50`.
-   *   * Other: Default `50`, Maximum `100`.
-   *
-   *   If this field is negative, an  `INVALID_ARGUMENT` is returned.
+   *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
    * @param {string} request.pageToken
    *   A page token received from a previous
    *   {@link protos.google.cloud.discoveryengine.v1alpha.SearchService.Search|SearchService.Search}
@@ -631,8 +627,7 @@ export class SearchServiceClient {
    *
    *   If
    *   {@link protos.google.cloud.discoveryengine.v1alpha.SearchRequest.EmbeddingSpec.EmbeddingVector.field_path|SearchRequest.EmbeddingSpec.EmbeddingVector.field_path}
-   *   is not provided, it will use
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.ServingConfig.embedding_config|ServingConfig.EmbeddingConfig.field_path}.
+   *   is not provided, it will use {@link protos.|ServingConfig.EmbeddingConfig.field_path}.
    * @param {string} request.rankingExpression
    *   The ranking expression controls the customized ranking on retrieval
    *   documents. This overrides
@@ -787,15 +782,11 @@ export class SearchServiceClient {
    *   Raw image query.
    * @param {number} request.pageSize
    *   Maximum number of
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.Document|Document}s to return. The
-   *   maximum allowed value depends on the data type. Values above the maximum
-   *   value are coerced to the maximum value.
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.Document|Document}s to return. If
+   *   unspecified, defaults to a reasonable value. The maximum allowed value is
+   *   100. Values above 100 are coerced to 100.
    *
-   *   * Websites with basic indexing: Default `10`, Maximum `25`.
-   *   * Websites with advanced indexing: Default `25`, Maximum `50`.
-   *   * Other: Default `50`, Maximum `100`.
-   *
-   *   If this field is negative, an  `INVALID_ARGUMENT` is returned.
+   *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
    * @param {string} request.pageToken
    *   A page token received from a previous
    *   {@link protos.google.cloud.discoveryengine.v1alpha.SearchService.Search|SearchService.Search}
@@ -917,8 +908,7 @@ export class SearchServiceClient {
    *
    *   If
    *   {@link protos.google.cloud.discoveryengine.v1alpha.SearchRequest.EmbeddingSpec.EmbeddingVector.field_path|SearchRequest.EmbeddingSpec.EmbeddingVector.field_path}
-   *   is not provided, it will use
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.ServingConfig.embedding_config|ServingConfig.EmbeddingConfig.field_path}.
+   *   is not provided, it will use {@link protos.|ServingConfig.EmbeddingConfig.field_path}.
    * @param {string} request.rankingExpression
    *   The ranking expression controls the customized ranking on retrieval
    *   documents. This overrides
@@ -1021,15 +1011,11 @@ export class SearchServiceClient {
    *   Raw image query.
    * @param {number} request.pageSize
    *   Maximum number of
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.Document|Document}s to return. The
-   *   maximum allowed value depends on the data type. Values above the maximum
-   *   value are coerced to the maximum value.
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.Document|Document}s to return. If
+   *   unspecified, defaults to a reasonable value. The maximum allowed value is
+   *   100. Values above 100 are coerced to 100.
    *
-   *   * Websites with basic indexing: Default `10`, Maximum `25`.
-   *   * Websites with advanced indexing: Default `25`, Maximum `50`.
-   *   * Other: Default `50`, Maximum `100`.
-   *
-   *   If this field is negative, an  `INVALID_ARGUMENT` is returned.
+   *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
    * @param {string} request.pageToken
    *   A page token received from a previous
    *   {@link protos.google.cloud.discoveryengine.v1alpha.SearchService.Search|SearchService.Search}
@@ -1151,8 +1137,7 @@ export class SearchServiceClient {
    *
    *   If
    *   {@link protos.google.cloud.discoveryengine.v1alpha.SearchRequest.EmbeddingSpec.EmbeddingVector.field_path|SearchRequest.EmbeddingSpec.EmbeddingVector.field_path}
-   *   is not provided, it will use
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.ServingConfig.embedding_config|ServingConfig.EmbeddingConfig.field_path}.
+   *   is not provided, it will use {@link protos.|ServingConfig.EmbeddingConfig.field_path}.
    * @param {string} request.rankingExpression
    *   The ranking expression controls the customized ranking on retrieval
    *   documents. This overrides

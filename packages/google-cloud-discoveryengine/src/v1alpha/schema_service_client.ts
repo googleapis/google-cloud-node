@@ -355,9 +355,6 @@ export class SchemaServiceClient {
             {
               get: '/v1alpha/{name=projects/*/locations/*/dataStores/*/operations/*}',
             },
-            {
-              get: '/v1alpha/{name=projects/*/locations/*/evaluations/*/operations/*}',
-            },
             {get: '/v1alpha/{name=projects/*/locations/*/operations/*}'},
             {get: '/v1alpha/{name=projects/*/operations/*}'},
           ],
