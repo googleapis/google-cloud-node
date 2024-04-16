@@ -857,6 +857,12 @@ export namespace google {
 
                         /** ProductView itemIssues */
                         itemIssues?: (google.shopping.merchant.reports.v1beta.ProductView.IItemIssue[]|null);
+
+                        /** ProductView clickPotential */
+                        clickPotential?: (google.shopping.merchant.reports.v1beta.ProductView.ClickPotential|keyof typeof google.shopping.merchant.reports.v1beta.ProductView.ClickPotential|null);
+
+                        /** ProductView clickPotentialRank */
+                        clickPotentialRank?: (number|Long|string|null);
                     }
 
                     /** Represents a ProductView. */
@@ -952,6 +958,12 @@ export namespace google {
                         /** ProductView itemIssues. */
                         public itemIssues: google.shopping.merchant.reports.v1beta.ProductView.IItemIssue[];
 
+                        /** ProductView clickPotential. */
+                        public clickPotential: (google.shopping.merchant.reports.v1beta.ProductView.ClickPotential|keyof typeof google.shopping.merchant.reports.v1beta.ProductView.ClickPotential);
+
+                        /** ProductView clickPotentialRank. */
+                        public clickPotentialRank?: (number|Long|string|null);
+
                         /** ProductView _id. */
                         public _id?: "id";
 
@@ -1020,6 +1032,9 @@ export namespace google {
 
                         /** ProductView _aggregatedReportingContextStatus. */
                         public _aggregatedReportingContextStatus?: "aggregatedReportingContextStatus";
+
+                        /** ProductView _clickPotentialRank. */
+                        public _clickPotentialRank?: "clickPotentialRank";
 
                         /**
                          * Creates a new ProductView instance using the specified properties.
@@ -1568,6 +1583,14 @@ export namespace google {
                             PENDING = 2,
                             ELIGIBLE_LIMITED = 3,
                             ELIGIBLE = 4
+                        }
+
+                        /** ClickPotential enum. */
+                        enum ClickPotential {
+                            CLICK_POTENTIAL_UNSPECIFIED = 0,
+                            LOW = 1,
+                            MEDIUM = 2,
+                            HIGH = 3
                         }
                     }
 
