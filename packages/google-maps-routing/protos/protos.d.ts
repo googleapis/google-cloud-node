@@ -9456,6 +9456,8 @@ export namespace google {
                     ID_E_TOLL = 16,
                     IN_FASTAG = 78,
                     IN_LOCAL_HP_PLATE_EXEMPT = 79,
+                    JP_ETC = 98,
+                    JP_ETC2 = 99,
                     MX_IAVE = 90,
                     MX_PASE = 91,
                     MX_QUICKPASS = 93,
@@ -9531,6 +9533,7 @@ export namespace google {
                     US_WA_GOOD_TO_GO = 1,
                     US_WV_EZPASSWV = 62,
                     US_WV_MEMORIAL_BRIDGE_TICKETS = 63,
+                    US_WV_MOV_PASS = 100,
                     US_WV_NEWELL_TOLL_BRIDGE_TICKET = 64
                 }
 
@@ -10065,6 +10068,9 @@ export namespace google {
                     /** ComputeRouteMatrixRequest regionCode */
                     regionCode?: (string|null);
 
+                    /** ComputeRouteMatrixRequest units */
+                    units?: (google.maps.routing.v2.Units|keyof typeof google.maps.routing.v2.Units|null);
+
                     /** ComputeRouteMatrixRequest extraComputations */
                     extraComputations?: (google.maps.routing.v2.ComputeRouteMatrixRequest.ExtraComputation[]|null);
 
@@ -10107,6 +10113,9 @@ export namespace google {
 
                     /** ComputeRouteMatrixRequest regionCode. */
                     public regionCode: string;
+
+                    /** ComputeRouteMatrixRequest units. */
+                    public units: (google.maps.routing.v2.Units|keyof typeof google.maps.routing.v2.Units);
 
                     /** ComputeRouteMatrixRequest extraComputations. */
                     public extraComputations: google.maps.routing.v2.ComputeRouteMatrixRequest.ExtraComputation[];

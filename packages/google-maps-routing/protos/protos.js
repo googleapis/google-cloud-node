@@ -25331,6 +25331,8 @@
                                     case 16:
                                     case 78:
                                     case 79:
+                                    case 98:
+                                    case 99:
                                     case 90:
                                     case 91:
                                     case 93:
@@ -25406,6 +25408,7 @@
                                     case 1:
                                     case 62:
                                     case 63:
+                                    case 100:
                                     case 64:
                                         break;
                                     }
@@ -25528,6 +25531,14 @@
                                     case "IN_LOCAL_HP_PLATE_EXEMPT":
                                     case 79:
                                         message.tollPasses[i] = 79;
+                                        break;
+                                    case "JP_ETC":
+                                    case 98:
+                                        message.tollPasses[i] = 98;
+                                        break;
+                                    case "JP_ETC2":
+                                    case 99:
+                                        message.tollPasses[i] = 99;
                                         break;
                                     case "MX_IAVE":
                                     case 90:
@@ -25829,6 +25840,10 @@
                                     case 63:
                                         message.tollPasses[i] = 63;
                                         break;
+                                    case "US_WV_MOV_PASS":
+                                    case 100:
+                                        message.tollPasses[i] = 100;
+                                        break;
                                     case "US_WV_NEWELL_TOLL_BRIDGE_TICKET":
                                     case 64:
                                         message.tollPasses[i] = 64;
@@ -25931,6 +25946,8 @@
                      * @property {number} ID_E_TOLL=16 ID_E_TOLL value
                      * @property {number} IN_FASTAG=78 IN_FASTAG value
                      * @property {number} IN_LOCAL_HP_PLATE_EXEMPT=79 IN_LOCAL_HP_PLATE_EXEMPT value
+                     * @property {number} JP_ETC=98 JP_ETC value
+                     * @property {number} JP_ETC2=99 JP_ETC2 value
                      * @property {number} MX_IAVE=90 MX_IAVE value
                      * @property {number} MX_PASE=91 MX_PASE value
                      * @property {number} MX_QUICKPASS=93 MX_QUICKPASS value
@@ -26006,6 +26023,7 @@
                      * @property {number} US_WA_GOOD_TO_GO=1 US_WA_GOOD_TO_GO value
                      * @property {number} US_WV_EZPASSWV=62 US_WV_EZPASSWV value
                      * @property {number} US_WV_MEMORIAL_BRIDGE_TICKETS=63 US_WV_MEMORIAL_BRIDGE_TICKETS value
+                     * @property {number} US_WV_MOV_PASS=100 US_WV_MOV_PASS value
                      * @property {number} US_WV_NEWELL_TOLL_BRIDGE_TICKET=64 US_WV_NEWELL_TOLL_BRIDGE_TICKET value
                      */
                     v2.TollPass = (function() {
@@ -26030,6 +26048,8 @@
                         values[valuesById[16] = "ID_E_TOLL"] = 16;
                         values[valuesById[78] = "IN_FASTAG"] = 78;
                         values[valuesById[79] = "IN_LOCAL_HP_PLATE_EXEMPT"] = 79;
+                        values[valuesById[98] = "JP_ETC"] = 98;
+                        values[valuesById[99] = "JP_ETC2"] = 99;
                         values[valuesById[90] = "MX_IAVE"] = 90;
                         values[valuesById[91] = "MX_PASE"] = 91;
                         values[valuesById[93] = "MX_QUICKPASS"] = 93;
@@ -26105,6 +26125,7 @@
                         values[valuesById[1] = "US_WA_GOOD_TO_GO"] = 1;
                         values[valuesById[62] = "US_WV_EZPASSWV"] = 62;
                         values[valuesById[63] = "US_WV_MEMORIAL_BRIDGE_TICKETS"] = 63;
+                        values[valuesById[100] = "US_WV_MOV_PASS"] = 100;
                         values[valuesById[64] = "US_WV_NEWELL_TOLL_BRIDGE_TICKET"] = 64;
                         return values;
                     })();
@@ -27738,6 +27759,7 @@
                          * @property {google.protobuf.ITimestamp|null} [arrivalTime] ComputeRouteMatrixRequest arrivalTime
                          * @property {string|null} [languageCode] ComputeRouteMatrixRequest languageCode
                          * @property {string|null} [regionCode] ComputeRouteMatrixRequest regionCode
+                         * @property {google.maps.routing.v2.Units|null} [units] ComputeRouteMatrixRequest units
                          * @property {Array.<google.maps.routing.v2.ComputeRouteMatrixRequest.ExtraComputation>|null} [extraComputations] ComputeRouteMatrixRequest extraComputations
                          * @property {google.maps.routing.v2.TrafficModel|null} [trafficModel] ComputeRouteMatrixRequest trafficModel
                          * @property {google.maps.routing.v2.ITransitPreferences|null} [transitPreferences] ComputeRouteMatrixRequest transitPreferences
@@ -27826,6 +27848,14 @@
                         ComputeRouteMatrixRequest.prototype.regionCode = "";
     
                         /**
+                         * ComputeRouteMatrixRequest units.
+                         * @member {google.maps.routing.v2.Units} units
+                         * @memberof google.maps.routing.v2.ComputeRouteMatrixRequest
+                         * @instance
+                         */
+                        ComputeRouteMatrixRequest.prototype.units = 0;
+    
+                        /**
                          * ComputeRouteMatrixRequest extraComputations.
                          * @member {Array.<google.maps.routing.v2.ComputeRouteMatrixRequest.ExtraComputation>} extraComputations
                          * @memberof google.maps.routing.v2.ComputeRouteMatrixRequest
@@ -27887,6 +27917,8 @@
                                 $root.google.protobuf.Timestamp.encode(message.departureTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.languageCode);
+                            if (message.units != null && Object.hasOwnProperty.call(message, "units"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.units);
                             if (message.extraComputations != null && message.extraComputations.length) {
                                 writer.uint32(/* id 8, wireType 2 =*/66).fork();
                                 for (var i = 0; i < message.extraComputations.length; ++i)
@@ -27969,6 +28001,10 @@
                                     }
                                 case 9: {
                                         message.regionCode = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.units = reader.int32();
                                         break;
                                     }
                                 case 8: {
@@ -28081,6 +28117,15 @@
                             if (message.regionCode != null && message.hasOwnProperty("regionCode"))
                                 if (!$util.isString(message.regionCode))
                                     return "regionCode: string expected";
+                            if (message.units != null && message.hasOwnProperty("units"))
+                                switch (message.units) {
+                                default:
+                                    return "units: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             if (message.extraComputations != null && message.hasOwnProperty("extraComputations")) {
                                 if (!Array.isArray(message.extraComputations))
                                     return "extraComputations: array expected";
@@ -28213,6 +28258,26 @@
                                 message.languageCode = String(object.languageCode);
                             if (object.regionCode != null)
                                 message.regionCode = String(object.regionCode);
+                            switch (object.units) {
+                            default:
+                                if (typeof object.units === "number") {
+                                    message.units = object.units;
+                                    break;
+                                }
+                                break;
+                            case "UNITS_UNSPECIFIED":
+                            case 0:
+                                message.units = 0;
+                                break;
+                            case "METRIC":
+                            case 1:
+                                message.units = 1;
+                                break;
+                            case "IMPERIAL":
+                            case 2:
+                                message.units = 2;
+                                break;
+                            }
                             if (object.extraComputations) {
                                 if (!Array.isArray(object.extraComputations))
                                     throw TypeError(".google.maps.routing.v2.ComputeRouteMatrixRequest.extraComputations: array expected");
@@ -28289,6 +28354,7 @@
                                 object.routingPreference = options.enums === String ? "ROUTING_PREFERENCE_UNSPECIFIED" : 0;
                                 object.departureTime = null;
                                 object.languageCode = "";
+                                object.units = options.enums === String ? "UNITS_UNSPECIFIED" : 0;
                                 object.regionCode = "";
                                 object.trafficModel = options.enums === String ? "TRAFFIC_MODEL_UNSPECIFIED" : 0;
                                 object.arrivalTime = null;
@@ -28312,6 +28378,8 @@
                                 object.departureTime = $root.google.protobuf.Timestamp.toObject(message.departureTime, options);
                             if (message.languageCode != null && message.hasOwnProperty("languageCode"))
                                 object.languageCode = message.languageCode;
+                            if (message.units != null && message.hasOwnProperty("units"))
+                                object.units = options.enums === String ? $root.google.maps.routing.v2.Units[message.units] === undefined ? message.units : $root.google.maps.routing.v2.Units[message.units] : message.units;
                             if (message.extraComputations && message.extraComputations.length) {
                                 object.extraComputations = [];
                                 for (var j = 0; j < message.extraComputations.length; ++j)
