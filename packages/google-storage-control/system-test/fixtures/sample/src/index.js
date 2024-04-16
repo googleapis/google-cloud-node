@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const control = require('@google-cloud/control');
+const control = require('@google-cloud/storage-control');
 
 function main() {
   const storageControlClient = new control.StorageControlClient();

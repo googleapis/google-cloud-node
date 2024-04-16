@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {StorageControlClient} from '@google-cloud/control';
+import {StorageControlClient} from '@google-cloud/storage-control';
 
 // check that the client class type name can be used
 function doStuffWithStorageControlClient(client: StorageControlClient) {

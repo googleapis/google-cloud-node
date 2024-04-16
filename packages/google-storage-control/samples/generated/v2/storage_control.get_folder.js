@@ -50,7 +50,7 @@ function main(name) {
   // const requestId = 'abc123'
 
   // Imports the Control library
-  const {StorageControlClient} = require('@google-cloud/control').v2;
+  const {StorageControlClient} = require('@google-cloud/storage-control').v2;
 
   // Instantiates a client
   const controlClient = new StorageControlClient();

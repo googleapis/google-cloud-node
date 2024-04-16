@@ -7,7 +7,7 @@
   "release_level": "preview",
   "language": "nodejs",
   "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/control",
+  "distribution_name": "@google-cloud/storage-control",
   "api_id": "storage.googleapis.com",
   "default_version": "v2",
   "requires_billing": true,
