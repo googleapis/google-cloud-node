@@ -13,7 +13,7 @@
     "test": "mocha test --timeout=800000"
   },
   "dependencies": {
-    "@google-cloud/vision": "^4.2.0",
+    "@google-cloud/vision": "^4.2.1",
     "natural": "^7.0.0",
     "pureimage": "^0.4.0",
     "redis": "~4.6.0",
