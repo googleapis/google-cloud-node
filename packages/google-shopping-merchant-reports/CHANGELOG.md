@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/reports-v0.3.0...reports-v0.4.0) (2024-04-16)
+
+
+### Features
+
+* [merchantapi] add click potential to Reports sub-API publication ([#5222](https://github.com/googleapis/google-cloud-node/issues/5222)) ([02719b6](https://github.com/googleapis/google-cloud-node/commit/02719b6945141a7b35256c6d96228280da5bda0f))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/reports-v0.2.0...reports-v0.3.0) (2024-03-29)
 
 

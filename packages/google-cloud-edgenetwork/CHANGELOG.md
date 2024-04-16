@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/edgenetwork-v0.3.1...edgenetwork-v0.4.0) (2024-04-16)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5188](https://github.com/googleapis/google-cloud-node/issues/5188)) ([c5ccdf9](https://github.com/googleapis/google-cloud-node/commit/c5ccdf93641e7bb6d0e5c636168fad0feafab6e3))
+
 ## [0.3.1](https://github.com/googleapis/google-cloud-node/compare/edgenetwork-v0.3.0...edgenetwork-v0.3.1) (2024-03-26)
 
 
