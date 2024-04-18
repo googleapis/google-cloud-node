@@ -21,9 +21,7 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as sitesearchengineserviceModule from '../src';
-
-import {PassThrough} from 'stream';
+import * as projectserviceModule from '../src';
 
 import {
   protobuf,
@@ -103,44 +101,6 @@ function stubLongRunningCallWithCallback<ResponseType>(
     : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
-    }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
-    }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
-}
-
 function stubAsyncIterationCall<ResponseType>(
   responses?: ResponseType[],
   error?: Error
@@ -164,18 +124,16 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1alpha.SiteSearchEngineServiceClient', () => {
+describe('v1alpha.ProjectServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient();
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'discoveryengine.googleapis.com');
     });
 
     it('has universeDomain', () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient();
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -187,8 +145,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const servicePath =
-          sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient
-            .servicePath;
+          projectserviceModule.v1alpha.ProjectServiceClient.servicePath;
         assert.strictEqual(servicePath, 'discoveryengine.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -197,27 +154,24 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const apiEndpoint =
-          sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient
-            .apiEndpoint;
+          projectserviceModule.v1alpha.ProjectServiceClient.apiEndpoint;
         assert.strictEqual(apiEndpoint, 'discoveryengine.googleapis.com');
         assert(stub.called);
         stub.restore();
       });
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {universeDomain: 'example.com'}
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        universeDomain: 'example.com',
+      });
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'discoveryengine.example.com');
     });
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {universe_domain: 'example.com'}
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        universe_domain: 'example.com',
+      });
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'discoveryengine.example.com');
     });
@@ -228,7 +182,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient();
+            new projectserviceModule.v1alpha.ProjectServiceClient();
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'discoveryengine.example.com');
           if (saved) {
@@ -241,10 +195,9 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         it('value configured in code has priority over environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-              {universeDomain: 'configured.example.com'}
-            );
+          const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+            universeDomain: 'configured.example.com',
+          });
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
             servicePath,
@@ -260,73 +213,59 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {universe_domain: 'example.com', universeDomain: 'example.net'}
-        );
+        new projectserviceModule.v1alpha.ProjectServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
       });
     });
 
     it('has port', () => {
-      const port =
-        sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient
-          .port;
+      const port = projectserviceModule.v1alpha.ProjectServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient();
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            fallback: true,
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        fallback: true,
+      });
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      assert.strictEqual(client.siteSearchEngineServiceStub, undefined);
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.projectServiceStub, undefined);
       await client.initialize();
-      assert(client.siteSearchEngineServiceStub);
+      assert(client.projectServiceStub);
     });
 
     it('has close method for the initialized client', done => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
-      assert(client.siteSearchEngineServiceStub);
+      assert(client.projectServiceStub);
       client.close().then(() => {
         done();
       });
     });
 
     it('has close method for the non-initialized client', done => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      assert.strictEqual(client.siteSearchEngineServiceStub, undefined);
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.projectServiceStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -334,13 +273,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
       const result = await client.getProjectId();
       assert.strictEqual(result, fakeProjectId);
@@ -349,13 +285,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.auth.getProjectId = sinon
         .stub()
         .callsArgWith(0, null, fakeProjectId);
@@ -373,71 +306,64 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
     });
   });
 
-  describe('getSiteSearchEngine', () => {
-    it('invokes getSiteSearchEngine without error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+  describe('getProject', () => {
+    it('invokes getProject without error', async () => {
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.GetSiteSearchEngineRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.GetProjectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.GetSiteSearchEngineRequest',
+        '.google.cloud.discoveryengine.v1alpha.GetProjectRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.SiteSearchEngine()
+        new protos.google.cloud.discoveryengine.v1alpha.Project()
       );
-      client.innerApiCalls.getSiteSearchEngine =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getSiteSearchEngine(request);
+      client.innerApiCalls.getProject = stubSimpleCall(expectedResponse);
+      const [response] = await client.getProject(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getSiteSearchEngine as SinonStub
+        client.innerApiCalls.getProject as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getSiteSearchEngine as SinonStub
+        client.innerApiCalls.getProject as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getSiteSearchEngine without error using callback', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+    it('invokes getProject without error using callback', async () => {
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.GetSiteSearchEngineRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.GetProjectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.GetSiteSearchEngineRequest',
+        '.google.cloud.discoveryengine.v1alpha.GetProjectRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.SiteSearchEngine()
+        new protos.google.cloud.discoveryengine.v1alpha.Project()
       );
-      client.innerApiCalls.getSiteSearchEngine =
+      client.innerApiCalls.getProject =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.getSiteSearchEngine(
+        client.getProject(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1alpha.ISiteSearchEngine | null
+            result?: protos.google.cloud.discoveryengine.v1alpha.IProject | null
           ) => {
             if (err) {
               reject(err);
@@ -450,136 +376,125 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getSiteSearchEngine as SinonStub
+        client.innerApiCalls.getProject as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getSiteSearchEngine as SinonStub
+        client.innerApiCalls.getProject as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getSiteSearchEngine with error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+    it('invokes getProject with error', async () => {
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.GetSiteSearchEngineRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.GetProjectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.GetSiteSearchEngineRequest',
+        '.google.cloud.discoveryengine.v1alpha.GetProjectRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.getSiteSearchEngine = stubSimpleCall(
+      client.innerApiCalls.getProject = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.getSiteSearchEngine(request), expectedError);
+      await assert.rejects(client.getProject(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.getSiteSearchEngine as SinonStub
+        client.innerApiCalls.getProject as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getSiteSearchEngine as SinonStub
+        client.innerApiCalls.getProject as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getSiteSearchEngine with closed client', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+    it('invokes getProject with closed client', async () => {
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.GetSiteSearchEngineRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.GetProjectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.GetSiteSearchEngineRequest',
+        '.google.cloud.discoveryengine.v1alpha.GetProjectRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.getSiteSearchEngine(request), expectedError);
+      await assert.rejects(client.getProject(request), expectedError);
     });
   });
 
-  describe('getTargetSite', () => {
-    it('invokes getTargetSite without error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+  describe('reportConsentChange', () => {
+    it('invokes reportConsentChange without error', async () => {
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.GetTargetSiteRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.ReportConsentChangeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.GetTargetSiteRequest',
-        ['name']
+        '.google.cloud.discoveryengine.v1alpha.ReportConsentChangeRequest',
+        ['project']
       );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      request.project = defaultValue1;
+      const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
+        new protos.google.cloud.discoveryengine.v1alpha.Project()
       );
-      client.innerApiCalls.getTargetSite = stubSimpleCall(expectedResponse);
-      const [response] = await client.getTargetSite(request);
+      client.innerApiCalls.reportConsentChange =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.reportConsentChange(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getTargetSite as SinonStub
+        client.innerApiCalls.reportConsentChange as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getTargetSite as SinonStub
+        client.innerApiCalls.reportConsentChange as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getTargetSite without error using callback', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+    it('invokes reportConsentChange without error using callback', async () => {
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.GetTargetSiteRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.ReportConsentChangeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.GetTargetSiteRequest',
-        ['name']
+        '.google.cloud.discoveryengine.v1alpha.ReportConsentChangeRequest',
+        ['project']
       );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      request.project = defaultValue1;
+      const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
+        new protos.google.cloud.discoveryengine.v1alpha.Project()
       );
-      client.innerApiCalls.getTargetSite =
+      client.innerApiCalls.reportConsentChange =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.getTargetSite(
+        client.reportConsentChange(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1alpha.ITargetSite | null
+            result?: protos.google.cloud.discoveryengine.v1alpha.IProject | null
           ) => {
             if (err) {
               reject(err);
@@ -592,730 +507,78 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getTargetSite as SinonStub
+        client.innerApiCalls.reportConsentChange as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getTargetSite as SinonStub
+        client.innerApiCalls.reportConsentChange as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getTargetSite with error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+    it('invokes reportConsentChange with error', async () => {
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.GetTargetSiteRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.ReportConsentChangeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.GetTargetSiteRequest',
-        ['name']
+        '.google.cloud.discoveryengine.v1alpha.ReportConsentChangeRequest',
+        ['project']
       );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      request.project = defaultValue1;
+      const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.getTargetSite = stubSimpleCall(
+      client.innerApiCalls.reportConsentChange = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.getTargetSite(request), expectedError);
+      await assert.rejects(client.reportConsentChange(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.getTargetSite as SinonStub
+        client.innerApiCalls.reportConsentChange as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getTargetSite as SinonStub
+        client.innerApiCalls.reportConsentChange as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getTargetSite with closed client', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+    it('invokes reportConsentChange with closed client', async () => {
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.GetTargetSiteRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.ReportConsentChangeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.GetTargetSiteRequest',
-        ['name']
+        '.google.cloud.discoveryengine.v1alpha.ReportConsentChangeRequest',
+        ['project']
       );
-      request.name = defaultValue1;
+      request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.getTargetSite(request), expectedError);
+      await assert.rejects(client.reportConsentChange(request), expectedError);
     });
   });
 
-  describe('createTargetSite', () => {
-    it('invokes createTargetSite without error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.CreateTargetSiteRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.CreateTargetSiteRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createTargetSite =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createTargetSite(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createTargetSite as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createTargetSite as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createTargetSite without error using callback', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.CreateTargetSiteRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.CreateTargetSiteRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createTargetSite =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createTargetSite(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.discoveryengine.v1alpha.ITargetSite,
-              protos.google.cloud.discoveryengine.v1alpha.ICreateTargetSiteMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
+  describe('provisionProject', () => {
+    it('invokes provisionProject without error', async () => {
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.discoveryengine.v1alpha.ITargetSite,
-        protos.google.cloud.discoveryengine.v1alpha.ICreateTargetSiteMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createTargetSite as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createTargetSite as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createTargetSite with call error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.CreateTargetSiteRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.ProvisionProjectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.CreateTargetSiteRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createTargetSite = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createTargetSite(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createTargetSite as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createTargetSite as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createTargetSite with LRO error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.CreateTargetSiteRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.CreateTargetSiteRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createTargetSite = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createTargetSite(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createTargetSite as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createTargetSite as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateTargetSiteProgress without error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateTargetSiteProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateTargetSiteProgress with error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateTargetSiteProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('batchCreateTargetSites', () => {
-    it('invokes batchCreateTargetSites without error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.BatchCreateTargetSitesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.BatchCreateTargetSitesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.batchCreateTargetSites =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.batchCreateTargetSites(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.batchCreateTargetSites as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchCreateTargetSites as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes batchCreateTargetSites without error using callback', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.BatchCreateTargetSitesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.BatchCreateTargetSitesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.batchCreateTargetSites =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.batchCreateTargetSites(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.discoveryengine.v1alpha.IBatchCreateTargetSitesResponse,
-              protos.google.cloud.discoveryengine.v1alpha.IBatchCreateTargetSiteMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.discoveryengine.v1alpha.IBatchCreateTargetSitesResponse,
-        protos.google.cloud.discoveryengine.v1alpha.IBatchCreateTargetSiteMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.batchCreateTargetSites as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchCreateTargetSites as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes batchCreateTargetSites with call error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.BatchCreateTargetSitesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.BatchCreateTargetSitesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.batchCreateTargetSites = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.batchCreateTargetSites(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.batchCreateTargetSites as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchCreateTargetSites as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes batchCreateTargetSites with LRO error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.BatchCreateTargetSitesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.BatchCreateTargetSitesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.batchCreateTargetSites = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.batchCreateTargetSites(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.batchCreateTargetSites as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchCreateTargetSites as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkBatchCreateTargetSitesProgress without error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkBatchCreateTargetSitesProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkBatchCreateTargetSitesProgress with error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkBatchCreateTargetSitesProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateTargetSite', () => {
-    it('invokes updateTargetSite without error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.UpdateTargetSiteRequest()
-      );
-      request.targetSite ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.UpdateTargetSiteRequest',
-        ['targetSite', 'name']
-      );
-      request.targetSite.name = defaultValue1;
-      const expectedHeaderRequestParams = `target_site.name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateTargetSite =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateTargetSite(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateTargetSite as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateTargetSite as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateTargetSite without error using callback', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.UpdateTargetSiteRequest()
-      );
-      request.targetSite ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.UpdateTargetSiteRequest',
-        ['targetSite', 'name']
-      );
-      request.targetSite.name = defaultValue1;
-      const expectedHeaderRequestParams = `target_site.name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateTargetSite =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateTargetSite(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.discoveryengine.v1alpha.ITargetSite,
-              protos.google.cloud.discoveryengine.v1alpha.IUpdateTargetSiteMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.discoveryengine.v1alpha.ITargetSite,
-        protos.google.cloud.discoveryengine.v1alpha.IUpdateTargetSiteMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateTargetSite as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateTargetSite as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateTargetSite with call error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.UpdateTargetSiteRequest()
-      );
-      request.targetSite ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.UpdateTargetSiteRequest',
-        ['targetSite', 'name']
-      );
-      request.targetSite.name = defaultValue1;
-      const expectedHeaderRequestParams = `target_site.name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateTargetSite = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateTargetSite(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateTargetSite as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateTargetSite as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateTargetSite with LRO error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.UpdateTargetSiteRequest()
-      );
-      request.targetSite ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.UpdateTargetSiteRequest',
-        ['targetSite', 'name']
-      );
-      request.targetSite.name = defaultValue1;
-      const expectedHeaderRequestParams = `target_site.name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateTargetSite = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateTargetSite(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateTargetSite as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateTargetSite as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateTargetSiteProgress without error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateTargetSiteProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateTargetSiteProgress with error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateTargetSiteProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteTargetSite', () => {
-    it('invokes deleteTargetSite without error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.DeleteTargetSiteRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.DeleteTargetSiteRequest',
+        '.google.cloud.discoveryengine.v1alpha.ProvisionProjectRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1323,35 +586,32 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteTargetSite =
+      client.innerApiCalls.provisionProject =
         stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteTargetSite(request);
+      const [operation] = await client.provisionProject(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.deleteTargetSite as SinonStub
+        client.innerApiCalls.provisionProject as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteTargetSite as SinonStub
+        client.innerApiCalls.provisionProject as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes deleteTargetSite without error using callback', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+    it('invokes provisionProject without error using callback', async () => {
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.DeleteTargetSiteRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.ProvisionProjectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.DeleteTargetSiteRequest',
+        '.google.cloud.discoveryengine.v1alpha.ProvisionProjectRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1359,16 +619,16 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteTargetSite =
+      client.innerApiCalls.provisionProject =
         stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.deleteTargetSite(
+        client.provisionProject(
           request,
           (
             err?: Error | null,
             result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.discoveryengine.v1alpha.IDeleteTargetSiteMetadata
+              protos.google.cloud.discoveryengine.v1alpha.IProject,
+              protos.google.cloud.discoveryengine.v1alpha.IProvisionProjectMetadata
             > | null
           ) => {
             if (err) {
@@ -1380,99 +640,90 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         );
       });
       const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1alpha.IDeleteTargetSiteMetadata
+        protos.google.cloud.discoveryengine.v1alpha.IProject,
+        protos.google.cloud.discoveryengine.v1alpha.IProvisionProjectMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.deleteTargetSite as SinonStub
+        client.innerApiCalls.provisionProject as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteTargetSite as SinonStub
+        client.innerApiCalls.provisionProject as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes deleteTargetSite with call error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+    it('invokes provisionProject with call error', async () => {
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.DeleteTargetSiteRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.ProvisionProjectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.DeleteTargetSiteRequest',
+        '.google.cloud.discoveryengine.v1alpha.ProvisionProjectRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.deleteTargetSite = stubLongRunningCall(
+      client.innerApiCalls.provisionProject = stubLongRunningCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.deleteTargetSite(request), expectedError);
+      await assert.rejects(client.provisionProject(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.deleteTargetSite as SinonStub
+        client.innerApiCalls.provisionProject as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteTargetSite as SinonStub
+        client.innerApiCalls.provisionProject as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes deleteTargetSite with LRO error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+    it('invokes provisionProject with LRO error', async () => {
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.DeleteTargetSiteRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.ProvisionProjectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.DeleteTargetSiteRequest',
+        '.google.cloud.discoveryengine.v1alpha.ProvisionProjectRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.deleteTargetSite = stubLongRunningCall(
+      client.innerApiCalls.provisionProject = stubLongRunningCall(
         undefined,
         undefined,
         expectedError
       );
-      const [operation] = await client.deleteTargetSite(request);
+      const [operation] = await client.provisionProject(request);
       await assert.rejects(operation.promise(), expectedError);
       const actualRequest = (
-        client.innerApiCalls.deleteTargetSite as SinonStub
+        client.innerApiCalls.provisionProject as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteTargetSite as SinonStub
+        client.innerApiCalls.provisionProject as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes checkDeleteTargetSiteProgress without error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+    it('invokes checkProvisionProjectProgress without error', async () => {
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -1482,7 +733,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteTargetSiteProgress(
+      const decodedOperation = await client.checkProvisionProjectProgress(
         expectedResponse.name
       );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
@@ -1490,14 +741,11 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
 
-    it('invokes checkDeleteTargetSiteProgress with error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+    it('invokes checkProvisionProjectProgress with error', async () => {
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -1506,1618 +754,18 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         expectedError
       );
       await assert.rejects(
-        client.checkDeleteTargetSiteProgress(''),
+        client.checkProvisionProjectProgress(''),
         expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('enableAdvancedSiteSearch', () => {
-    it('invokes enableAdvancedSiteSearch without error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.EnableAdvancedSiteSearchRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.EnableAdvancedSiteSearchRequest',
-        ['siteSearchEngine']
-      );
-      request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.enableAdvancedSiteSearch =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.enableAdvancedSiteSearch(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.enableAdvancedSiteSearch as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.enableAdvancedSiteSearch as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes enableAdvancedSiteSearch without error using callback', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.EnableAdvancedSiteSearchRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.EnableAdvancedSiteSearchRequest',
-        ['siteSearchEngine']
-      );
-      request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.enableAdvancedSiteSearch =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.enableAdvancedSiteSearch(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.discoveryengine.v1alpha.IEnableAdvancedSiteSearchResponse,
-              protos.google.cloud.discoveryengine.v1alpha.IEnableAdvancedSiteSearchMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.discoveryengine.v1alpha.IEnableAdvancedSiteSearchResponse,
-        protos.google.cloud.discoveryengine.v1alpha.IEnableAdvancedSiteSearchMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.enableAdvancedSiteSearch as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.enableAdvancedSiteSearch as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes enableAdvancedSiteSearch with call error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.EnableAdvancedSiteSearchRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.EnableAdvancedSiteSearchRequest',
-        ['siteSearchEngine']
-      );
-      request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.enableAdvancedSiteSearch = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.enableAdvancedSiteSearch(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.enableAdvancedSiteSearch as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.enableAdvancedSiteSearch as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes enableAdvancedSiteSearch with LRO error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.EnableAdvancedSiteSearchRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.EnableAdvancedSiteSearchRequest',
-        ['siteSearchEngine']
-      );
-      request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.enableAdvancedSiteSearch = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.enableAdvancedSiteSearch(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.enableAdvancedSiteSearch as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.enableAdvancedSiteSearch as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkEnableAdvancedSiteSearchProgress without error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation =
-        await client.checkEnableAdvancedSiteSearchProgress(
-          expectedResponse.name
-        );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkEnableAdvancedSiteSearchProgress with error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkEnableAdvancedSiteSearchProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('disableAdvancedSiteSearch', () => {
-    it('invokes disableAdvancedSiteSearch without error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.DisableAdvancedSiteSearchRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.DisableAdvancedSiteSearchRequest',
-        ['siteSearchEngine']
-      );
-      request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.disableAdvancedSiteSearch =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.disableAdvancedSiteSearch(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.disableAdvancedSiteSearch as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.disableAdvancedSiteSearch as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes disableAdvancedSiteSearch without error using callback', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.DisableAdvancedSiteSearchRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.DisableAdvancedSiteSearchRequest',
-        ['siteSearchEngine']
-      );
-      request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.disableAdvancedSiteSearch =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.disableAdvancedSiteSearch(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.discoveryengine.v1alpha.IDisableAdvancedSiteSearchResponse,
-              protos.google.cloud.discoveryengine.v1alpha.IDisableAdvancedSiteSearchMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.discoveryengine.v1alpha.IDisableAdvancedSiteSearchResponse,
-        protos.google.cloud.discoveryengine.v1alpha.IDisableAdvancedSiteSearchMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.disableAdvancedSiteSearch as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.disableAdvancedSiteSearch as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes disableAdvancedSiteSearch with call error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.DisableAdvancedSiteSearchRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.DisableAdvancedSiteSearchRequest',
-        ['siteSearchEngine']
-      );
-      request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.disableAdvancedSiteSearch = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.disableAdvancedSiteSearch(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.disableAdvancedSiteSearch as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.disableAdvancedSiteSearch as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes disableAdvancedSiteSearch with LRO error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.DisableAdvancedSiteSearchRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.DisableAdvancedSiteSearchRequest',
-        ['siteSearchEngine']
-      );
-      request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.disableAdvancedSiteSearch = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.disableAdvancedSiteSearch(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.disableAdvancedSiteSearch as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.disableAdvancedSiteSearch as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDisableAdvancedSiteSearchProgress without error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation =
-        await client.checkDisableAdvancedSiteSearchProgress(
-          expectedResponse.name
-        );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDisableAdvancedSiteSearchProgress with error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDisableAdvancedSiteSearchProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('recrawlUris', () => {
-    it('invokes recrawlUris without error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.RecrawlUrisRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.RecrawlUrisRequest',
-        ['siteSearchEngine']
-      );
-      request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.recrawlUris = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.recrawlUris(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.recrawlUris as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.recrawlUris as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes recrawlUris without error using callback', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.RecrawlUrisRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.RecrawlUrisRequest',
-        ['siteSearchEngine']
-      );
-      request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.recrawlUris =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.recrawlUris(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.discoveryengine.v1alpha.IRecrawlUrisResponse,
-              protos.google.cloud.discoveryengine.v1alpha.IRecrawlUrisMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.discoveryengine.v1alpha.IRecrawlUrisResponse,
-        protos.google.cloud.discoveryengine.v1alpha.IRecrawlUrisMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.recrawlUris as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.recrawlUris as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes recrawlUris with call error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.RecrawlUrisRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.RecrawlUrisRequest',
-        ['siteSearchEngine']
-      );
-      request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.recrawlUris = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.recrawlUris(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.recrawlUris as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.recrawlUris as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes recrawlUris with LRO error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.RecrawlUrisRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.RecrawlUrisRequest',
-        ['siteSearchEngine']
-      );
-      request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.recrawlUris = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.recrawlUris(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.recrawlUris as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.recrawlUris as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkRecrawlUrisProgress without error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkRecrawlUrisProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkRecrawlUrisProgress with error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkRecrawlUrisProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('batchVerifyTargetSites', () => {
-    it('invokes batchVerifyTargetSites without error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.BatchVerifyTargetSitesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.BatchVerifyTargetSitesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.batchVerifyTargetSites =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.batchVerifyTargetSites(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.batchVerifyTargetSites as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchVerifyTargetSites as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes batchVerifyTargetSites without error using callback', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.BatchVerifyTargetSitesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.BatchVerifyTargetSitesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.batchVerifyTargetSites =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.batchVerifyTargetSites(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.discoveryengine.v1alpha.IBatchVerifyTargetSitesResponse,
-              protos.google.cloud.discoveryengine.v1alpha.IBatchVerifyTargetSitesMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.discoveryengine.v1alpha.IBatchVerifyTargetSitesResponse,
-        protos.google.cloud.discoveryengine.v1alpha.IBatchVerifyTargetSitesMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.batchVerifyTargetSites as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchVerifyTargetSites as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes batchVerifyTargetSites with call error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.BatchVerifyTargetSitesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.BatchVerifyTargetSitesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.batchVerifyTargetSites = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.batchVerifyTargetSites(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.batchVerifyTargetSites as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchVerifyTargetSites as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes batchVerifyTargetSites with LRO error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.BatchVerifyTargetSitesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.BatchVerifyTargetSitesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.batchVerifyTargetSites = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.batchVerifyTargetSites(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.batchVerifyTargetSites as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchVerifyTargetSites as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkBatchVerifyTargetSitesProgress without error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkBatchVerifyTargetSitesProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkBatchVerifyTargetSitesProgress with error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkBatchVerifyTargetSitesProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listTargetSites', () => {
-    it('invokes listTargetSites without error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ListTargetSitesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ListTargetSitesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
-        ),
-      ];
-      client.innerApiCalls.listTargetSites = stubSimpleCall(expectedResponse);
-      const [response] = await client.listTargetSites(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listTargetSites as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listTargetSites as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listTargetSites without error using callback', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ListTargetSitesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ListTargetSitesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
-        ),
-      ];
-      client.innerApiCalls.listTargetSites =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listTargetSites(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.discoveryengine.v1alpha.ITargetSite[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listTargetSites as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listTargetSites as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listTargetSites with error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ListTargetSitesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ListTargetSitesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listTargetSites = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listTargetSites(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listTargetSites as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listTargetSites as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listTargetSitesStream without error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ListTargetSitesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ListTargetSitesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
-        ),
-      ];
-      client.descriptors.page.listTargetSites.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listTargetSitesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.discoveryengine.v1alpha.TargetSite[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.discoveryengine.v1alpha.TargetSite
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listTargetSites.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listTargetSites, request)
-      );
-      assert(
-        (client.descriptors.page.listTargetSites.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listTargetSitesStream with error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ListTargetSitesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ListTargetSitesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listTargetSites.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listTargetSitesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.discoveryengine.v1alpha.TargetSite[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.discoveryengine.v1alpha.TargetSite
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listTargetSites.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listTargetSites, request)
-      );
-      assert(
-        (client.descriptors.page.listTargetSites.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listTargetSites without error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ListTargetSitesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ListTargetSitesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
-        ),
-      ];
-      client.descriptors.page.listTargetSites.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.discoveryengine.v1alpha.ITargetSite[] =
-        [];
-      const iterable = client.listTargetSitesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listTargetSites.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listTargetSites.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listTargetSites with error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ListTargetSitesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ListTargetSitesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listTargetSites.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listTargetSitesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.discoveryengine.v1alpha.ITargetSite[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listTargetSites.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listTargetSites.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('fetchDomainVerificationStatus', () => {
-    it('invokes fetchDomainVerificationStatus without error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.FetchDomainVerificationStatusRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.FetchDomainVerificationStatusRequest',
-        ['siteSearchEngine']
-      );
-      request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
-        ),
-      ];
-      client.innerApiCalls.fetchDomainVerificationStatus =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.fetchDomainVerificationStatus(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.fetchDomainVerificationStatus as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.fetchDomainVerificationStatus as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes fetchDomainVerificationStatus without error using callback', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.FetchDomainVerificationStatusRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.FetchDomainVerificationStatusRequest',
-        ['siteSearchEngine']
-      );
-      request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
-        ),
-      ];
-      client.innerApiCalls.fetchDomainVerificationStatus =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.fetchDomainVerificationStatus(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.discoveryengine.v1alpha.ITargetSite[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.fetchDomainVerificationStatus as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.fetchDomainVerificationStatus as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes fetchDomainVerificationStatus with error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.FetchDomainVerificationStatusRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.FetchDomainVerificationStatusRequest',
-        ['siteSearchEngine']
-      );
-      request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.fetchDomainVerificationStatus = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.fetchDomainVerificationStatus(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.fetchDomainVerificationStatus as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.fetchDomainVerificationStatus as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes fetchDomainVerificationStatusStream without error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.FetchDomainVerificationStatusRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.FetchDomainVerificationStatusRequest',
-        ['siteSearchEngine']
-      );
-      request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
-        ),
-      ];
-      client.descriptors.page.fetchDomainVerificationStatus.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.fetchDomainVerificationStatusStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.discoveryengine.v1alpha.TargetSite[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.discoveryengine.v1alpha.TargetSite
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.fetchDomainVerificationStatus
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(
-            client.innerApiCalls.fetchDomainVerificationStatus,
-            request
-          )
-      );
-      assert(
-        (
-          client.descriptors.page.fetchDomainVerificationStatus
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('invokes fetchDomainVerificationStatusStream with error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.FetchDomainVerificationStatusRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.FetchDomainVerificationStatusRequest',
-        ['siteSearchEngine']
-      );
-      request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.fetchDomainVerificationStatus.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.fetchDomainVerificationStatusStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.discoveryengine.v1alpha.TargetSite[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.discoveryengine.v1alpha.TargetSite
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.fetchDomainVerificationStatus
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(
-            client.innerApiCalls.fetchDomainVerificationStatus,
-            request
-          )
-      );
-      assert(
-        (
-          client.descriptors.page.fetchDomainVerificationStatus
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with fetchDomainVerificationStatus without error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.FetchDomainVerificationStatusRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.FetchDomainVerificationStatusRequest',
-        ['siteSearchEngine']
-      );
-      request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.TargetSite()
-        ),
-      ];
-      client.descriptors.page.fetchDomainVerificationStatus.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.discoveryengine.v1alpha.ITargetSite[] =
-        [];
-      const iterable = client.fetchDomainVerificationStatusAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.fetchDomainVerificationStatus
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.fetchDomainVerificationStatus
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with fetchDomainVerificationStatus with error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.FetchDomainVerificationStatusRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.FetchDomainVerificationStatusRequest',
-        ['siteSearchEngine']
-      );
-      request.siteSearchEngine = defaultValue1;
-      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.fetchDomainVerificationStatus.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.fetchDomainVerificationStatusAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.discoveryengine.v1alpha.ITargetSite[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.fetchDomainVerificationStatus
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.fetchDomainVerificationStatus
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -3144,13 +792,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
       );
     });
     it('invokes getLocation without error using callback', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -3191,13 +836,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
       assert((client.locationsClient.getLocation as SinonStub).getCall(0));
     });
     it('invokes getLocation with error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -3229,13 +871,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
   });
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
@@ -3280,13 +919,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
       );
     });
     it('uses async iteration with listLocations with error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
@@ -3324,13 +960,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
   });
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
@@ -3348,13 +981,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
       );
     });
     it('invokes getOperation without error using callback', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -3385,13 +1015,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
     it('invokes getOperation with error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -3412,13 +1039,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
   });
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
@@ -3437,13 +1061,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
       );
     });
     it('invokes cancelOperation without error using callback', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -3474,13 +1095,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
       assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
     });
     it('invokes cancelOperation with error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -3501,13 +1119,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
   });
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
@@ -3526,13 +1141,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
       );
     });
     it('invokes deleteOperation without error using callback', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -3563,13 +1175,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
       assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
     });
     it('invokes deleteOperation with error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -3590,13 +1199,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
   });
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -3629,13 +1235,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
       );
     });
     it('uses async iteration with listOperations with error', async () => {
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
@@ -3668,13 +1271,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         project: 'projectValue',
         location: 'locationValue',
       };
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.aclConfigPathTemplate.render = sinon
         .stub()
@@ -3722,13 +1322,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         collection: 'collectionValue',
         engine: 'engineValue',
       };
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.enginePathTemplate.render = sinon
         .stub()
@@ -3798,13 +1395,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
       };
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
@@ -3842,13 +1436,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         collection: 'collectionValue',
         data_store: 'dataStoreValue',
       };
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStorePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3949,13 +1540,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         branch: 'branchValue',
         document: 'documentValue',
       };
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -4099,13 +1687,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         document: 'documentValue',
         chunk: 'chunkValue',
       };
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -4265,13 +1850,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         data_store: 'dataStoreValue',
         conversation: 'conversationValue',
       };
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -4394,13 +1976,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         collection: 'collectionValue',
         data_store: 'dataStoreValue',
       };
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -4506,13 +2085,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         data_store: 'dataStoreValue',
         schema: 'schemaValue',
       };
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -4635,13 +2211,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         data_store: 'dataStoreValue',
         serving_config: 'servingConfigValue',
       };
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -4765,13 +2338,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         data_store: 'dataStoreValue',
         session: 'sessionValue',
       };
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -4895,13 +2465,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         session: 'sessionValue',
         answer: 'answerValue',
       };
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -5042,13 +2609,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         collection: 'collectionValue',
         data_store: 'dataStoreValue',
       };
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -5154,13 +2718,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         data_store: 'dataStoreValue',
         target_site: 'targetSiteValue',
       };
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -5284,13 +2845,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         engine: 'engineValue',
         conversation: 'conversationValue',
       };
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -5413,13 +2971,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         engine: 'engineValue',
         serving_config: 'servingConfigValue',
       };
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -5541,13 +3096,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         engine: 'engineValue',
         session: 'sessionValue',
       };
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -5671,13 +3223,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         session: 'sessionValue',
         answer: 'answerValue',
       };
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -5815,13 +3364,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         location: 'locationValue',
         data_store: 'dataStoreValue',
       };
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationDataStorePathTemplate.render = sinon
         .stub()
@@ -5899,13 +3445,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         branch: 'branchValue',
         document: 'documentValue',
       };
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -6029,13 +3572,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         document: 'documentValue',
         chunk: 'chunkValue',
       };
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -6174,13 +3714,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         data_store: 'dataStoreValue',
         conversation: 'conversationValue',
       };
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationDataStoreConversationPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -6283,13 +3820,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         location: 'locationValue',
         data_store: 'dataStoreValue',
       };
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -6375,13 +3909,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         data_store: 'dataStoreValue',
         schema: 'schemaValue',
       };
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationDataStoreSchemaPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -6471,13 +4002,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         data_store: 'dataStoreValue',
         serving_config: 'servingConfigValue',
       };
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -6580,13 +4108,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         data_store: 'dataStoreValue',
         session: 'sessionValue',
       };
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationDataStoreSessionPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -6679,13 +4204,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         session: 'sessionValue',
         answer: 'answerValue',
       };
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -6806,13 +4328,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         location: 'locationValue',
         data_store: 'dataStoreValue',
       };
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -6898,13 +4417,10 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
         data_store: 'dataStoreValue',
         target_site: 'targetSiteValue',
       };
-      const client =
-        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+      const client = new projectserviceModule.v1alpha.ProjectServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.render =
         sinon.stub().returns(fakePath);
