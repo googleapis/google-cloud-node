@@ -2837,7 +2837,7 @@
     "release_level": "preview",
     "language": "nodejs",
     "repo": "googleapis/google-cloud-node",
-    "distribution_name": "@google-cloud/quota",
+    "distribution_name": "@google-shopping/quota",
     "api_id": "merchantapi.googleapis.com",
     "default_version": "v1beta",
     "requires_billing": true,

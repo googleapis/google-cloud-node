@@ -45,7 +45,7 @@ function main(parent) {
   // const pageToken = 'abc123'
 
   // Imports the Quota library
-  const {QuotaServiceClient} = require('@google-cloud/quota').v1beta;
+  const {QuotaServiceClient} = require('@google-shopping/quota').v1beta;
 
   // Instantiates a client
   const quotaClient = new QuotaServiceClient();
