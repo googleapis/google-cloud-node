@@ -35,6 +35,7 @@ export {MatchServiceClient} from './match_service_client';
 export {MetadataServiceClient} from './metadata_service_client';
 export {MigrationServiceClient} from './migration_service_client';
 export {ModelGardenServiceClient} from './model_garden_service_client';
+export {ModelMonitoringServiceClient} from './model_monitoring_service_client';
 export {ModelServiceClient} from './model_service_client';
 export {NotebookServiceClient} from './notebook_service_client';
 export {PersistentResourceServiceClient} from './persistent_resource_service_client';
