@@ -481,10 +481,14 @@ export class SearchServiceClient {
    *   Raw image query.
    * @param {number} request.pageSize
    *   Maximum number of {@link protos.google.cloud.discoveryengine.v1.Document|Document}s to
-   *   return. If unspecified, defaults to a reasonable value. The maximum allowed
-   *   value is 100. Values above 100 are coerced to 100.
+   *   return. The maximum allowed value depends on the data type. Values above
+   *   the maximum value are coerced to the maximum value.
    *
-   *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   *   * Websites with basic indexing: Default `10`, Maximum `25`.
+   *   * Websites with advanced indexing: Default `25`, Maximum `50`.
+   *   * Other: Default `50`, Maximum `100`.
+   *
+   *   If this field is negative, an  `INVALID_ARGUMENT` is returned.
    * @param {string} request.pageToken
    *   A page token received from a previous
    *   {@link protos.google.cloud.discoveryengine.v1.SearchService.Search|SearchService.Search}
@@ -503,6 +507,8 @@ export class SearchServiceClient {
    *   unset.
    *
    *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   * @param {number[]} request.dataStoreSpecs
+   *   A list of data store specs to apply on a search call.
    * @param {string} request.filter
    *   The filter syntax consists of an expression language for constructing a
    *   predicate from one or more fields of the documents being filtered. Filter
@@ -720,10 +726,14 @@ export class SearchServiceClient {
    *   Raw image query.
    * @param {number} request.pageSize
    *   Maximum number of {@link protos.google.cloud.discoveryengine.v1.Document|Document}s to
-   *   return. If unspecified, defaults to a reasonable value. The maximum allowed
-   *   value is 100. Values above 100 are coerced to 100.
+   *   return. The maximum allowed value depends on the data type. Values above
+   *   the maximum value are coerced to the maximum value.
    *
-   *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   *   * Websites with basic indexing: Default `10`, Maximum `25`.
+   *   * Websites with advanced indexing: Default `25`, Maximum `50`.
+   *   * Other: Default `50`, Maximum `100`.
+   *
+   *   If this field is negative, an  `INVALID_ARGUMENT` is returned.
    * @param {string} request.pageToken
    *   A page token received from a previous
    *   {@link protos.google.cloud.discoveryengine.v1.SearchService.Search|SearchService.Search}
@@ -742,6 +752,8 @@ export class SearchServiceClient {
    *   unset.
    *
    *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   * @param {number[]} request.dataStoreSpecs
+   *   A list of data store specs to apply on a search call.
    * @param {string} request.filter
    *   The filter syntax consists of an expression language for constructing a
    *   predicate from one or more fields of the documents being filtered. Filter
@@ -913,10 +925,14 @@ export class SearchServiceClient {
    *   Raw image query.
    * @param {number} request.pageSize
    *   Maximum number of {@link protos.google.cloud.discoveryengine.v1.Document|Document}s to
-   *   return. If unspecified, defaults to a reasonable value. The maximum allowed
-   *   value is 100. Values above 100 are coerced to 100.
+   *   return. The maximum allowed value depends on the data type. Values above
+   *   the maximum value are coerced to the maximum value.
    *
-   *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   *   * Websites with basic indexing: Default `10`, Maximum `25`.
+   *   * Websites with advanced indexing: Default `25`, Maximum `50`.
+   *   * Other: Default `50`, Maximum `100`.
+   *
+   *   If this field is negative, an  `INVALID_ARGUMENT` is returned.
    * @param {string} request.pageToken
    *   A page token received from a previous
    *   {@link protos.google.cloud.discoveryengine.v1.SearchService.Search|SearchService.Search}
@@ -935,6 +951,8 @@ export class SearchServiceClient {
    *   unset.
    *
    *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   * @param {number[]} request.dataStoreSpecs
+   *   A list of data store specs to apply on a search call.
    * @param {string} request.filter
    *   The filter syntax consists of an expression language for constructing a
    *   predicate from one or more fields of the documents being filtered. Filter

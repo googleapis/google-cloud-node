@@ -60,7 +60,7 @@ function main(parent, message) {
    *  * Is unique within a space. A Chat app can't use the same custom ID for
    *  different messages.
    *  For details, see Name a
-   *  message (https://developers.google.com/chat/api/guides/v1/messages/create#name_a_created_message).
+   *  message (https://developers.google.com/workspace/chat/create-messages#name_a_created_message).
    */
   // const messageId = 'abc123'
 

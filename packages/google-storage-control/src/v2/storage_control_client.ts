@@ -122,8 +122,15 @@ export class StorageControlClient {
         'Please set either universe_domain or universeDomain, but not both.'
       );
     }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
     this._universeDomain =
-      opts?.universeDomain ?? opts?.universe_domain ?? 'googleapis.com';
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'storage.' + this._universeDomain;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || this._servicePath;
@@ -175,7 +182,7 @@ export class StorageControlClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -201,6 +208,9 @@ export class StorageControlClient {
       folderPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/buckets/{bucket}/folders/{folder=**}'
       ),
+      managedFolderPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/buckets/{bucket}/managedFolders/{managedFolder=**}'
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
@@ -217,6 +227,11 @@ export class StorageControlClient {
         'pageToken',
         'nextPageToken',
         'folders'
+      ),
+      listManagedFolders: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'managedFolders'
       ),
     };
 
@@ -306,6 +321,10 @@ export class StorageControlClient {
       'listFolders',
       'renameFolder',
       'getStorageLayout',
+      'createManagedFolder',
+      'deleteManagedFolder',
+      'getManagedFolder',
+      'listManagedFolders',
     ];
     for (const methodName of storageControlStubMethods) {
       const callPromise = this.storageControlStub.then(
@@ -346,7 +365,7 @@ export class StorageControlClient {
    */
   static get servicePath() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -364,7 +383,7 @@ export class StorageControlClient {
    */
   static get apiEndpoint() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -442,7 +461,11 @@ export class StorageControlClient {
    *   fields, respectively. Populating those fields in `folder` will result in an
    *   error.
    * @param {string} request.folderId
-   *   Required. The absolute path of the folder, using a single `/` as delimiter.
+   *   Required. The full name of a folder, including all its parent folders.
+   *   Folders use single '/' characters as a delimiter.
+   *   The folder_id must end with a slash.
+   *   For example, the folder_id of "books/biographies/" would create a new
+   *   "biographies/" folder under the "books/" folder.
    * @param {boolean} [request.recursive]
    *   Optional. If true, parent folder doesn't have to be present and all missing
    *   ancestor folders will be created atomically.
@@ -864,6 +887,354 @@ export class StorageControlClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     this.initialize();
     return this.innerApiCalls.getStorageLayout(request, options, callback);
+  }
+  /**
+   * Creates a new managed folder.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the bucket this managed folder belongs to.
+   * @param {google.storage.control.v2.ManagedFolder} request.managedFolder
+   *   Required. Properties of the managed folder being created.
+   *   The bucket and managed folder names are specified in the `parent` and
+   *   `managed_folder_id` fields. Populating these fields in `managed_folder`
+   *   will result in an error.
+   * @param {string} request.managedFolderId
+   *   Required. The name of the managed folder. It uses a single `/` as delimiter
+   *   and leading and trailing `/` are allowed.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.ManagedFolder|ManagedFolder}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.create_managed_folder.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_CreateManagedFolder_async
+   */
+  createManagedFolder(
+    request?: protos.google.storage.control.v2.ICreateManagedFolderRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IManagedFolder,
+      protos.google.storage.control.v2.ICreateManagedFolderRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  createManagedFolder(
+    request: protos.google.storage.control.v2.ICreateManagedFolderRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.control.v2.IManagedFolder,
+      | protos.google.storage.control.v2.ICreateManagedFolderRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createManagedFolder(
+    request: protos.google.storage.control.v2.ICreateManagedFolderRequest,
+    callback: Callback<
+      protos.google.storage.control.v2.IManagedFolder,
+      | protos.google.storage.control.v2.ICreateManagedFolderRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createManagedFolder(
+    request?: protos.google.storage.control.v2.ICreateManagedFolderRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.storage.control.v2.IManagedFolder,
+          | protos.google.storage.control.v2.ICreateManagedFolderRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.storage.control.v2.IManagedFolder,
+      | protos.google.storage.control.v2.ICreateManagedFolderRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IManagedFolder,
+      protos.google.storage.control.v2.ICreateManagedFolderRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    if (!request.requestId) {
+      request.requestId = gax.makeUUID();
+    }
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.parent;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
+        if (match) {
+          const parameterValue = match.groups?.['bucket'] ?? fieldValue;
+          Object.assign(routingParameter, {bucket: parameterValue});
+        }
+      }
+    }
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize();
+    return this.innerApiCalls.createManagedFolder(request, options, callback);
+  }
+  /**
+   * Permanently deletes an empty managed folder.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the managed folder.
+   *   Format:
+   *   `projects/{project}/buckets/{bucket}/managedFolders/{managedFolder}`
+   * @param {number} request.ifMetagenerationMatch
+   *   The operation succeeds conditional on the managed folder's current
+   *   metageneration matching the value here specified.
+   * @param {number} request.ifMetagenerationNotMatch
+   *   The operation succeeds conditional on the managed folder's current
+   *   metageneration NOT matching the value here specified.
+   * @param {boolean} request.allowNonEmpty
+   *   Allows deletion of a managed folder even if it is not empty.
+   *   A managed folder is empty if it manages no child managed folders or
+   *   objects. Caller must have permission for
+   *   storage.managedFolders.setIamPolicy.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.delete_managed_folder.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_DeleteManagedFolder_async
+   */
+  deleteManagedFolder(
+    request?: protos.google.storage.control.v2.IDeleteManagedFolderRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.storage.control.v2.IDeleteManagedFolderRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteManagedFolder(
+    request: protos.google.storage.control.v2.IDeleteManagedFolderRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.storage.control.v2.IDeleteManagedFolderRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteManagedFolder(
+    request: protos.google.storage.control.v2.IDeleteManagedFolderRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.storage.control.v2.IDeleteManagedFolderRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteManagedFolder(
+    request?: protos.google.storage.control.v2.IDeleteManagedFolderRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.storage.control.v2.IDeleteManagedFolderRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.storage.control.v2.IDeleteManagedFolderRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.storage.control.v2.IDeleteManagedFolderRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    if (!request.requestId) {
+      request.requestId = gax.makeUUID();
+    }
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.name;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?'));
+        if (match) {
+          const parameterValue = match.groups?.['bucket'] ?? fieldValue;
+          Object.assign(routingParameter, {bucket: parameterValue});
+        }
+      }
+    }
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize();
+    return this.innerApiCalls.deleteManagedFolder(request, options, callback);
+  }
+  /**
+   * Returns metadata for the specified managed folder.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the managed folder.
+   *   Format:
+   *   `projects/{project}/buckets/{bucket}/managedFolders/{managedFolder}`
+   * @param {number} request.ifMetagenerationMatch
+   *   The operation succeeds conditional on the managed folder's current
+   *   metageneration matching the value here specified.
+   * @param {number} request.ifMetagenerationNotMatch
+   *   The operation succeeds conditional on the managed folder's current
+   *   metageneration NOT matching the value here specified.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.ManagedFolder|ManagedFolder}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.get_managed_folder.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_GetManagedFolder_async
+   */
+  getManagedFolder(
+    request?: protos.google.storage.control.v2.IGetManagedFolderRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IManagedFolder,
+      protos.google.storage.control.v2.IGetManagedFolderRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getManagedFolder(
+    request: protos.google.storage.control.v2.IGetManagedFolderRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.control.v2.IManagedFolder,
+      | protos.google.storage.control.v2.IGetManagedFolderRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getManagedFolder(
+    request: protos.google.storage.control.v2.IGetManagedFolderRequest,
+    callback: Callback<
+      protos.google.storage.control.v2.IManagedFolder,
+      | protos.google.storage.control.v2.IGetManagedFolderRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getManagedFolder(
+    request?: protos.google.storage.control.v2.IGetManagedFolderRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.storage.control.v2.IManagedFolder,
+          | protos.google.storage.control.v2.IGetManagedFolderRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.storage.control.v2.IManagedFolder,
+      | protos.google.storage.control.v2.IGetManagedFolderRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IManagedFolder,
+      protos.google.storage.control.v2.IGetManagedFolderRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    if (!request.requestId) {
+      request.requestId = gax.makeUUID();
+    }
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.name;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?'));
+        if (match) {
+          const parameterValue = match.groups?.['bucket'] ?? fieldValue;
+          Object.assign(routingParameter, {bucket: parameterValue});
+        }
+      }
+    }
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize();
+    return this.innerApiCalls.getManagedFolder(request, options, callback);
   }
 
   /**
@@ -1305,6 +1676,252 @@ export class StorageControlClient {
     ) as AsyncIterable<protos.google.storage.control.v2.IFolder>;
   }
   /**
+   * Retrieves a list of managed folders for a given bucket.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the bucket this managed folder belongs to.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of managed folders to return in a single response.
+   *   The service will use this parameter or 1,000 items, whichever is smaller.
+   * @param {string} [request.pageToken]
+   *   Optional. A previously-returned page token representing part of the larger
+   *   set of results to view.
+   * @param {string} [request.prefix]
+   *   Optional. Filter results to match managed folders with name starting with
+   *   this prefix.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.storage.control.v2.ManagedFolder|ManagedFolder}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listManagedFoldersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listManagedFolders(
+    request?: protos.google.storage.control.v2.IListManagedFoldersRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IManagedFolder[],
+      protos.google.storage.control.v2.IListManagedFoldersRequest | null,
+      protos.google.storage.control.v2.IListManagedFoldersResponse,
+    ]
+  >;
+  listManagedFolders(
+    request: protos.google.storage.control.v2.IListManagedFoldersRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.storage.control.v2.IListManagedFoldersRequest,
+      | protos.google.storage.control.v2.IListManagedFoldersResponse
+      | null
+      | undefined,
+      protos.google.storage.control.v2.IManagedFolder
+    >
+  ): void;
+  listManagedFolders(
+    request: protos.google.storage.control.v2.IListManagedFoldersRequest,
+    callback: PaginationCallback<
+      protos.google.storage.control.v2.IListManagedFoldersRequest,
+      | protos.google.storage.control.v2.IListManagedFoldersResponse
+      | null
+      | undefined,
+      protos.google.storage.control.v2.IManagedFolder
+    >
+  ): void;
+  listManagedFolders(
+    request?: protos.google.storage.control.v2.IListManagedFoldersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.storage.control.v2.IListManagedFoldersRequest,
+          | protos.google.storage.control.v2.IListManagedFoldersResponse
+          | null
+          | undefined,
+          protos.google.storage.control.v2.IManagedFolder
+        >,
+    callback?: PaginationCallback<
+      protos.google.storage.control.v2.IListManagedFoldersRequest,
+      | protos.google.storage.control.v2.IListManagedFoldersResponse
+      | null
+      | undefined,
+      protos.google.storage.control.v2.IManagedFolder
+    >
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IManagedFolder[],
+      protos.google.storage.control.v2.IListManagedFoldersRequest | null,
+      protos.google.storage.control.v2.IListManagedFoldersResponse,
+    ]
+  > | void {
+    request = request || {};
+    if (!request.requestId) {
+      request.requestId = gax.makeUUID();
+    }
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.parent;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
+        if (match) {
+          const parameterValue = match.groups?.['bucket'] ?? fieldValue;
+          Object.assign(routingParameter, {bucket: parameterValue});
+        }
+      }
+    }
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize();
+    return this.innerApiCalls.listManagedFolders(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the bucket this managed folder belongs to.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of managed folders to return in a single response.
+   *   The service will use this parameter or 1,000 items, whichever is smaller.
+   * @param {string} [request.pageToken]
+   *   Optional. A previously-returned page token representing part of the larger
+   *   set of results to view.
+   * @param {string} [request.prefix]
+   *   Optional. Filter results to match managed folders with name starting with
+   *   this prefix.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.storage.control.v2.ManagedFolder|ManagedFolder} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listManagedFoldersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listManagedFoldersStream(
+    request?: protos.google.storage.control.v2.IListManagedFoldersRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    if (!request.requestId) {
+      request.requestId = gax.makeUUID();
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.parent;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
+        if (match) {
+          const parameterValue = match.groups?.['bucket'] ?? fieldValue;
+          Object.assign(routingParameter, {bucket: parameterValue});
+        }
+      }
+    }
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    const defaultCallSettings = this._defaults['listManagedFolders'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listManagedFolders.createStream(
+      this.innerApiCalls.listManagedFolders as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listManagedFolders`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the bucket this managed folder belongs to.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of managed folders to return in a single response.
+   *   The service will use this parameter or 1,000 items, whichever is smaller.
+   * @param {string} [request.pageToken]
+   *   Optional. A previously-returned page token representing part of the larger
+   *   set of results to view.
+   * @param {string} [request.prefix]
+   *   Optional. Filter results to match managed folders with name starting with
+   *   this prefix.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.storage.control.v2.ManagedFolder|ManagedFolder}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.list_managed_folders.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_ListManagedFolders_async
+   */
+  listManagedFoldersAsync(
+    request?: protos.google.storage.control.v2.IListManagedFoldersRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.storage.control.v2.IManagedFolder> {
+    request = request || {};
+    if (!request.requestId) {
+      request.requestId = gax.makeUUID();
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.parent;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
+        if (match) {
+          const parameterValue = match.groups?.['bucket'] ?? fieldValue;
+          Object.assign(routingParameter, {bucket: parameterValue});
+        }
+      }
+    }
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    const defaultCallSettings = this._defaults['listManagedFolders'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listManagedFolders.asyncIterate(
+      this.innerApiCalls['listManagedFolders'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.storage.control.v2.IManagedFolder>;
+  }
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1566,6 +2183,58 @@ export class StorageControlClient {
    */
   matchFolderFromFolderName(folderName: string) {
     return this.pathTemplates.folderPathTemplate.match(folderName).folder;
+  }
+
+  /**
+   * Return a fully-qualified managedFolder resource name string.
+   *
+   * @param {string} project
+   * @param {string} bucket
+   * @param {string} managedFolder
+   * @returns {string} Resource name string.
+   */
+  managedFolderPath(project: string, bucket: string, managedFolder: string) {
+    return this.pathTemplates.managedFolderPathTemplate.render({
+      project: project,
+      bucket: bucket,
+      managedFolder: managedFolder,
+    });
+  }
+
+  /**
+   * Parse the project from ManagedFolder resource.
+   *
+   * @param {string} managedFolderName
+   *   A fully-qualified path representing ManagedFolder resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromManagedFolderName(managedFolderName: string) {
+    return this.pathTemplates.managedFolderPathTemplate.match(managedFolderName)
+      .project;
+  }
+
+  /**
+   * Parse the bucket from ManagedFolder resource.
+   *
+   * @param {string} managedFolderName
+   *   A fully-qualified path representing ManagedFolder resource.
+   * @returns {string} A string representing the bucket.
+   */
+  matchBucketFromManagedFolderName(managedFolderName: string) {
+    return this.pathTemplates.managedFolderPathTemplate.match(managedFolderName)
+      .bucket;
+  }
+
+  /**
+   * Parse the managedFolder from ManagedFolder resource.
+   *
+   * @param {string} managedFolderName
+   *   A fully-qualified path representing ManagedFolder resource.
+   * @returns {string} A string representing the managedFolder.
+   */
+  matchManagedFolderFromManagedFolderName(managedFolderName: string) {
+    return this.pathTemplates.managedFolderPathTemplate.match(managedFolderName)
+      .managedFolder;
   }
 
   /**

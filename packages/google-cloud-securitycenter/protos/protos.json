@@ -325,6 +325,94 @@
                         }
                       }
                     },
+                    "CloudArmor": {
+                      "fields": {
+                        "securityPolicy": {
+                          "type": "SecurityPolicy",
+                          "id": 1
+                        },
+                        "requests": {
+                          "type": "Requests",
+                          "id": 2
+                        },
+                        "adaptiveProtection": {
+                          "type": "AdaptiveProtection",
+                          "id": 3
+                        },
+                        "attack": {
+                          "type": "Attack",
+                          "id": 4
+                        },
+                        "threatVector": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "duration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "SecurityPolicy": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "type": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "preview": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "Requests": {
+                      "fields": {
+                        "ratio": {
+                          "type": "double",
+                          "id": 1
+                        },
+                        "shortTermAllowed": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "longTermAllowed": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "longTermDenied": {
+                          "type": "int32",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "AdaptiveProtection": {
+                      "fields": {
+                        "confidence": {
+                          "type": "double",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Attack": {
+                      "fields": {
+                        "volumePps": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "volumeBps": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "classification": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
                     "CloudDlpDataProfile": {
                       "fields": {
                         "dataProfile": {
@@ -992,6 +1080,10 @@
                           "rule": "repeated",
                           "type": "LoadBalancer",
                           "id": 58
+                        },
+                        "cloudArmor": {
+                          "type": "CloudArmor",
+                          "id": 59
                         },
                         "notebook": {
                           "type": "Notebook",
