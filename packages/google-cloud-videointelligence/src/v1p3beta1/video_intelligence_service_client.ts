@@ -206,41 +206,7 @@ export class VideoIntelligenceServiceClient {
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1p3beta1/{name=projects/*/locations/*}/operations',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1p3beta1/{name=projects/*/locations/*/operations/*}',
-          additional_bindings: [
-            {
-              get: '/v1p3beta1/operations/{name=projects/*/locations/*/operations/*}',
-            },
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1p3beta1/{name=projects/*/locations/*/operations/*}',
-          additional_bindings: [
-            {
-              delete:
-                '/v1p3beta1/operations/{name=projects/*/locations/*/operations/*}',
-            },
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1p3beta1/{name=projects/*/locations/*/operations/*}:cancel',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1p3beta1/operations/{name=projects/*/locations/*/operations/*}:cancel',
-            },
-          ],
-        },
-      ];
+      lroOptions.httpRules = [];
     }
     this.operationsClient = this._gaxModule
       .lro(lroOptions)

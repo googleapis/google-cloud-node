@@ -40,7 +40,11 @@ function main(parent, folder, folderId) {
    */
   // const folder = {}
   /**
-   *  Required. The absolute path of the folder, using a single `/` as delimiter.
+   *  Required. The full name of a folder, including all its parent folders.
+   *  Folders use single '/' characters as a delimiter.
+   *  The folder_id must end with a slash.
+   *  For example, the folder_id of "books/biographies/" would create a new
+   *  "biographies/" folder under the "books/" folder.
    */
   // const folderId = 'abc123'
   /**
