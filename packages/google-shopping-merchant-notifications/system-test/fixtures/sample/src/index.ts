@@ -16,10 +16,19 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import * as v1beta from './v1beta';
-const NotificationsApiServiceClient = v1beta.NotificationsApiServiceClient;
-type NotificationsApiServiceClient = v1beta.NotificationsApiServiceClient;
-export {v1beta, NotificationsApiServiceClient};
-export default {v1beta, NotificationsApiServiceClient};
-import * as protos from '../protos/protos';
-export {protos}
+import {NotificationsApiServiceClient} from '@google-cloud/notifications';
+
+// check that the client class type name can be used
+function doStuffWithNotificationsApiServiceClient(
+  client: NotificationsApiServiceClient
+) {
+  client.close();
+}
+
+function main() {
+  // check that the client instance can be created
+  const notificationsApiServiceClient = new NotificationsApiServiceClient();
+  doStuffWithNotificationsApiServiceClient(notificationsApiServiceClient);
+}
+
+main();
