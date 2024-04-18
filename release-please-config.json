@@ -173,6 +173,8 @@
     "packages/google-storage-control": {},
     "packages/google-shopping-merchant-quota": {},
     "packages/google-cloud-backupdr": {},
+    "packages/google-shopping-merchant-notifications": {},
+    "packages/google-shopping-merchant-lfp": {},
     "packages/google-cloud-securitycentermanagement": {}
   },
   "plugins": [

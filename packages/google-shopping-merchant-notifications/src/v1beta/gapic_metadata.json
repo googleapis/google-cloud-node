@@ -1,0 +1,77 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.shopping.merchant.notifications.v1beta",
+  "libraryPackage": "@google-shopping/notifications",
+  "services": {
+    "NotificationsApiService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "NotificationsApiServiceClient",
+          "rpcs": {
+            "GetNotificationSubscription": {
+              "methods": [
+                "getNotificationSubscription"
+              ]
+            },
+            "CreateNotificationSubscription": {
+              "methods": [
+                "createNotificationSubscription"
+              ]
+            },
+            "UpdateNotificationSubscription": {
+              "methods": [
+                "updateNotificationSubscription"
+              ]
+            },
+            "DeleteNotificationSubscription": {
+              "methods": [
+                "deleteNotificationSubscription"
+              ]
+            },
+            "ListNotificationSubscriptions": {
+              "methods": [
+                "listNotificationSubscriptions",
+                "listNotificationSubscriptionsStream",
+                "listNotificationSubscriptionsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "NotificationsApiServiceClient",
+          "rpcs": {
+            "GetNotificationSubscription": {
+              "methods": [
+                "getNotificationSubscription"
+              ]
+            },
+            "CreateNotificationSubscription": {
+              "methods": [
+                "createNotificationSubscription"
+              ]
+            },
+            "UpdateNotificationSubscription": {
+              "methods": [
+                "updateNotificationSubscription"
+              ]
+            },
+            "DeleteNotificationSubscription": {
+              "methods": [
+                "deleteNotificationSubscription"
+              ]
+            },
+            "ListNotificationSubscriptions": {
+              "methods": [
+                "listNotificationSubscriptions",
+                "listNotificationSubscriptionsStream",
+                "listNotificationSubscriptionsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
