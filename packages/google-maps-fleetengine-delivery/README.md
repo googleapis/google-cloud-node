@@ -112,7 +112,8 @@ npm install @googlemaps/fleetengine-delivery
 // const viewport = {}
 
 // Imports the Delivery library
-const {DeliveryServiceClient} = require('@googlemaps/fleetengine-delivery').v1;
+const {DeliveryServiceClient} =
+  require('@googlemaps/fleetengine-delivery').v1;
 
 // Instantiates a client
 const deliveryClient = new DeliveryServiceClient();
@@ -126,7 +127,7 @@ async function callListDeliveryVehicles() {
   // Run request
   const iterable = deliveryClient.listDeliveryVehiclesAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
