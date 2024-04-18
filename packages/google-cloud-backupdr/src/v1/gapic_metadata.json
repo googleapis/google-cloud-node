@@ -1,0 +1,67 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.backupdr.v1",
+  "libraryPackage": "@google-cloud/backupdr",
+  "services": {
+    "BackupDR": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "BackupDRClient",
+          "rpcs": {
+            "GetManagementServer": {
+              "methods": [
+                "getManagementServer"
+              ]
+            },
+            "CreateManagementServer": {
+              "methods": [
+                "createManagementServer"
+              ]
+            },
+            "DeleteManagementServer": {
+              "methods": [
+                "deleteManagementServer"
+              ]
+            },
+            "ListManagementServers": {
+              "methods": [
+                "listManagementServers",
+                "listManagementServersStream",
+                "listManagementServersAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "BackupDRClient",
+          "rpcs": {
+            "GetManagementServer": {
+              "methods": [
+                "getManagementServer"
+              ]
+            },
+            "CreateManagementServer": {
+              "methods": [
+                "createManagementServer"
+              ]
+            },
+            "DeleteManagementServer": {
+              "methods": [
+                "deleteManagementServer"
+              ]
+            },
+            "ListManagementServers": {
+              "methods": [
+                "listManagementServers",
+                "listManagementServersStream",
+                "listManagementServersAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
