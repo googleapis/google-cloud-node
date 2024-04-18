@@ -480,6 +480,17 @@
   * [Migration_service.search_migratable_resources](#migration_service.search_migratable_resources)
   * [Model_garden_service.get_publisher_model](#model_garden_service.get_publisher_model)
   * [Model_garden_service.list_publisher_models](#model_garden_service.list_publisher_models)
+  * [Model_monitoring_service.create_model_monitor](#model_monitoring_service.create_model_monitor)
+  * [Model_monitoring_service.create_model_monitoring_job](#model_monitoring_service.create_model_monitoring_job)
+  * [Model_monitoring_service.delete_model_monitor](#model_monitoring_service.delete_model_monitor)
+  * [Model_monitoring_service.delete_model_monitoring_job](#model_monitoring_service.delete_model_monitoring_job)
+  * [Model_monitoring_service.get_model_monitor](#model_monitoring_service.get_model_monitor)
+  * [Model_monitoring_service.get_model_monitoring_job](#model_monitoring_service.get_model_monitoring_job)
+  * [Model_monitoring_service.list_model_monitoring_jobs](#model_monitoring_service.list_model_monitoring_jobs)
+  * [Model_monitoring_service.list_model_monitors](#model_monitoring_service.list_model_monitors)
+  * [Model_monitoring_service.search_model_monitoring_alerts](#model_monitoring_service.search_model_monitoring_alerts)
+  * [Model_monitoring_service.search_model_monitoring_stats](#model_monitoring_service.search_model_monitoring_stats)
+  * [Model_monitoring_service.update_model_monitor](#model_monitoring_service.update_model_monitor)
   * [Model_service.batch_import_evaluated_annotations](#model_service.batch_import_evaluated_annotations)
   * [Model_service.batch_import_model_evaluation_slices](#model_service.batch_import_model_evaluation_slices)
   * [Model_service.copy_model](#model_service.copy_model)
@@ -8578,6 +8589,193 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/model_garden_service.list_publisher_models.js`
+
+
+-----
+
+
+
+
+### Model_monitoring_service.create_model_monitor
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.create_model_monitor.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.create_model_monitor.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.create_model_monitor.js`
+
+
+-----
+
+
+
+
+### Model_monitoring_service.create_model_monitoring_job
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.create_model_monitoring_job.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.create_model_monitoring_job.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.create_model_monitoring_job.js`
+
+
+-----
+
+
+
+
+### Model_monitoring_service.delete_model_monitor
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.delete_model_monitor.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.delete_model_monitor.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.delete_model_monitor.js`
+
+
+-----
+
+
+
+
+### Model_monitoring_service.delete_model_monitoring_job
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.delete_model_monitoring_job.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.delete_model_monitoring_job.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.delete_model_monitoring_job.js`
+
+
+-----
+
+
+
+
+### Model_monitoring_service.get_model_monitor
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.get_model_monitor.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.get_model_monitor.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.get_model_monitor.js`
+
+
+-----
+
+
+
+
+### Model_monitoring_service.get_model_monitoring_job
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.get_model_monitoring_job.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.get_model_monitoring_job.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.get_model_monitoring_job.js`
+
+
+-----
+
+
+
+
+### Model_monitoring_service.list_model_monitoring_jobs
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.list_model_monitoring_jobs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.list_model_monitoring_jobs.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.list_model_monitoring_jobs.js`
+
+
+-----
+
+
+
+
+### Model_monitoring_service.list_model_monitors
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.list_model_monitors.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.list_model_monitors.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.list_model_monitors.js`
+
+
+-----
+
+
+
+
+### Model_monitoring_service.search_model_monitoring_alerts
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.search_model_monitoring_alerts.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.search_model_monitoring_alerts.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.search_model_monitoring_alerts.js`
+
+
+-----
+
+
+
+
+### Model_monitoring_service.search_model_monitoring_stats
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.search_model_monitoring_stats.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.search_model_monitoring_stats.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.search_model_monitoring_stats.js`
+
+
+-----
+
+
+
+
+### Model_monitoring_service.update_model_monitor
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.update_model_monitor.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.update_model_monitor.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/model_monitoring_service.update_model_monitor.js`
 
 
 -----
