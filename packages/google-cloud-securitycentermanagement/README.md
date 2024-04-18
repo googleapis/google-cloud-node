@@ -82,7 +82,8 @@ npm install @google-cloud/securitycentermanagement
 // const pageToken = 'abc123'
 
 // Imports the Securitycentermanagement library
-const {SecurityCenterManagementClient} = require('@google-cloud/securitycentermanagement').v1;
+const {SecurityCenterManagementClient} =
+  require('@google-cloud/securitycentermanagement').v1;
 
 // Instantiates a client
 const securitycentermanagementClient = new SecurityCenterManagementClient();
@@ -94,9 +95,12 @@ async function callListEffectiveEventThreatDetectionCustomModules() {
   };
 
   // Run request
-  const iterable = securitycentermanagementClient.listEffectiveEventThreatDetectionCustomModulesAsync(request);
+  const iterable =
+    securitycentermanagementClient.listEffectiveEventThreatDetectionCustomModulesAsync(
+      request
+    );
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
