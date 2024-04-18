@@ -18,8 +18,11 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const {Client} = require('@google-cloud/securitycentermanagement').v1;
-const securitycentermanagementClient = new Client();
+const {SecurityCenterManagementClient} =
+require('@google-cloud/securitycentermanagement').v1;
+
+// Instantiates a client
+const securitycentermanagementClient = new SecurityCenterManagementClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
