@@ -4,6 +4,7 @@
   "../../protos/google/cloud/securitycenter/v1/asset.proto",
   "../../protos/google/cloud/securitycenter/v1/backup_disaster_recovery.proto",
   "../../protos/google/cloud/securitycenter/v1/bigquery_export.proto",
+  "../../protos/google/cloud/securitycenter/v1/cloud_armor.proto",
   "../../protos/google/cloud/securitycenter/v1/cloud_dlp_data_profile.proto",
   "../../protos/google/cloud/securitycenter/v1/cloud_dlp_inspection.proto",
   "../../protos/google/cloud/securitycenter/v1/compliance.proto",

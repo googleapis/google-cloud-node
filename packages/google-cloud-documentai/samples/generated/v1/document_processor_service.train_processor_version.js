@@ -33,9 +33,12 @@ function main(parent, processorVersion) {
    */
   // const customDocumentExtractionOptions = {}
   /**
-   *  Required. The parent (project, location and processor) to create the new
-   *  version for. Format:
-   *  `projects/{project}/locations/{location}/processors/{processor}`.
+   *  Options to control foundation model tuning of a processor.
+   */
+  // const foundationModelTuningOptions = {}
+  /**
+   *  Required. The parent (project, location and processor) to create the new version for.
+   *  Format: `projects/{project}/locations/{location}/processors/{processor}`.
    */
   // const parent = 'abc123'
   /**
@@ -47,13 +50,12 @@ function main(parent, processorVersion) {
    */
   // const documentSchema = {}
   /**
-   *  Optional. The input data used to train the
-   *  ProcessorVersion google.cloud.documentai.v1.ProcessorVersion.
+   *  Optional. The input data used to train the ProcessorVersion google.cloud.documentai.v1.ProcessorVersion.
    */
   // const inputData = {}
   /**
-   *  Optional. The processor version to use as a base for training. This
-   *  processor version must be a child of `parent`. Format:
+   *  Optional. The processor version to use as a base for training. This processor version
+   *  must be a child of `parent`. Format:
    *  `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`.
    */
   // const baseProcessorVersion = 'abc123'

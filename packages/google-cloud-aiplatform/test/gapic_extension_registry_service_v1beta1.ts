@@ -4546,6 +4546,169 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
       });
     });
 
+    describe('modelMonitor', () => {
+      const fakePath = '/rendered/path/modelMonitor';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        model_monitor: 'modelMonitorValue',
+      };
+      const client =
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.modelMonitorPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.modelMonitorPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('modelMonitorPath', () => {
+        const result = client.modelMonitorPath(
+          'projectValue',
+          'locationValue',
+          'modelMonitorValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.modelMonitorPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromModelMonitorName', () => {
+        const result = client.matchProjectFromModelMonitorName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.modelMonitorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromModelMonitorName', () => {
+        const result = client.matchLocationFromModelMonitorName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.modelMonitorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchModelMonitorFromModelMonitorName', () => {
+        const result = client.matchModelMonitorFromModelMonitorName(fakePath);
+        assert.strictEqual(result, 'modelMonitorValue');
+        assert(
+          (client.pathTemplates.modelMonitorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('modelMonitoringJob', () => {
+      const fakePath = '/rendered/path/modelMonitoringJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        model_monitor: 'modelMonitorValue',
+        model_monitoring_job: 'modelMonitoringJobValue',
+      };
+      const client =
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.modelMonitoringJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.modelMonitoringJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('modelMonitoringJobPath', () => {
+        const result = client.modelMonitoringJobPath(
+          'projectValue',
+          'locationValue',
+          'modelMonitorValue',
+          'modelMonitoringJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.modelMonitoringJobPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromModelMonitoringJobName', () => {
+        const result = client.matchProjectFromModelMonitoringJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.modelMonitoringJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromModelMonitoringJobName', () => {
+        const result = client.matchLocationFromModelMonitoringJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.modelMonitoringJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchModelMonitorFromModelMonitoringJobName', () => {
+        const result =
+          client.matchModelMonitorFromModelMonitoringJobName(fakePath);
+        assert.strictEqual(result, 'modelMonitorValue');
+        assert(
+          (
+            client.pathTemplates.modelMonitoringJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchModelMonitoringJobFromModelMonitoringJobName', () => {
+        const result =
+          client.matchModelMonitoringJobFromModelMonitoringJobName(fakePath);
+        assert.strictEqual(result, 'modelMonitoringJobValue');
+        assert(
+          (
+            client.pathTemplates.modelMonitoringJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('nasJob', () => {
       const fakePath = '/rendered/path/nasJob';
       const expectedParameters = {
