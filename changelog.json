@@ -5,6 +5,259 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "ec9d9d68e5329593ce8cd6a19fe0b3acd44427c2",
+          "message": "Add initial files for google.cloud.securitycentermanagement.v1",
+          "issues": [
+            "5254"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/securitycentermanagement",
+      "id": "c9ed3731-6189-4e04-9bb7-3d4802aaabc7",
+      "createTime": "2024-04-18T22:03:09.602Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "fb90a7401d631d8ba90207fcce59fa3255cf713f",
+          "message": "Add initial files for google.shopping.merchant.lfp.v1beta",
+          "issues": [
+            "5256"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/lfp",
+      "id": "05bfaf3e-c696-4808-990a-1d8248d8f7a7",
+      "createTime": "2024-04-18T22:03:09.588Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8a23a9076bf72d2f38fae0199735772aa650c57b",
+          "message": "Add initial files for google.shopping.merchant.notifications.v1beta",
+          "issues": [
+            "5257"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/notifications",
+      "id": "49deea5c-bdbb-4e0d-9c13-50759ac85121",
+      "createTime": "2024-04-18T22:03:09.575Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "644d63f0bdde9eda217a94e27d4e741a4e3c1b86",
+          "message": "Add initial files for google.cloud.securesourcemanager.v1",
+          "issues": [
+            "5253"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/securesourcemanager",
+      "id": "03db7ecf-39e8-41a6-92c5-7d809b478dfc",
+      "createTime": "2024-04-18T22:03:09.559Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1846891a677670f6bb5483be3c2f55b8af99002d",
+          "message": "Add initial files for google.cloud.backupdr.v1",
+          "issues": [
+            "5260"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/backupdr",
+      "id": "9f56f688-a9ec-4fd0-afd8-64893fe9f60e",
+      "createTime": "2024-04-18T22:03:09.531Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e67120f1626f494e9e1cf8548a8ce853f4117ba6",
+          "message": "Use @google-shopping namespace for publishing instead of google-cloud",
+          "issues": [
+            "5263"
+          ]
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/quota",
+      "id": "00cd3e6f-48a7-4476-a873-5beb05845799",
+      "createTime": "2024-04-18T22:03:09.517Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2a7934ab95ed017fd7ae84c96bc5dfcce501ab51",
+          "message": "[chat] add UpdateMembership API",
+          "issues": [
+            "5236"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "2eb35872-daf4-44e2-bcf0-643dad643810",
+      "createTime": "2024-04-18T22:03:09.505Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "773b2b684a2ac5f67b66fd47b55a240873e5f138",
+          "message": "[merchantapi] fix inventories sub-API publication by adding correct child_type in the API proto",
+          "issues": [
+            "5231"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/inventories",
+      "id": "e407890a-282b-4b49-ab0e-cc3b66e9ab08",
+      "createTime": "2024-04-18T22:03:09.484Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1ffd2461e581efe40f9cf950e3c0886e4613380c",
+          "message": "[securitycenter] Add cloud_armor field to finding's list of attributes",
+          "issues": [
+            "5245"
+          ]
+        }
+      ],
+      "version": "8.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-center",
+      "id": "8565af33-5420-43c2-941e-57e2092f4c3b",
+      "createTime": "2024-04-18T22:03:09.472Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "71b713900dbb596d42fe6f3dd9a9f328612fa955",
+          "message": "[documentai] A new message `FoundationModelTuningOptions` is added",
+          "issues": [
+            "5242"
+          ]
+        }
+      ],
+      "version": "8.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "e1772a4a-fd2c-4e9e-9ed8-eaedfd4cd3ee",
+      "createTime": "2024-04-18T22:03:09.456Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7d36b464c362985b7e8ffdf2bad1689da7a8661c",
+          "message": "[discoveryengine] add answer generation APIs",
+          "issues": []
+        }
+      ],
+      "version": "1.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "76e77a36-518f-4bba-8502-e41fec8ee5db",
+      "createTime": "2024-04-18T22:03:09.440Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "280a42e0b9e8559ca895f8545ed4f261c41dfaa3",
+          "message": "[contentwarehouse] A new message `FoundationModelTuningOptions` is added",
+          "issues": [
+            "5243"
+          ]
+        }
+      ],
+      "version": "1.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contentwarehouse",
+      "id": "c0e33ead-aaae-4460-98cd-87128ffeaaec",
+      "createTime": "2024-04-18T22:03:09.422Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "29c939f4bc270aa6063af26f79c55b4a7ae9b557",
+          "message": "[bigquery-datatransfer] mark parent/name fields with the REQUIRED field_behavior annotation",
+          "issues": [
+            "5233"
+          ]
+        }
+      ],
+      "version": "4.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-data-transfer",
+      "id": "473b41bf-89a0-4ebd-b6be-3f1b3a253a74",
+      "createTime": "2024-04-18T22:03:09.402Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cecd67c9f25e687c0a0081e4f424b70525604d72",
+          "message": "Add model_monitor resource and APIs to public v1beta1 client library",
+          "issues": [
+            "5234"
+          ]
+        }
+      ],
+      "version": "3.19.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "455fbb87-82dd-4de0-9966-b4bba53da33a",
+      "createTime": "2024-04-18T22:03:09.390Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b0ddbbecf97de696c7699efbb351e8f862f7d8cf",
+          "message": "[generativelanguage] Add rest binding for tuned models",
+          "issues": [
+            "5228"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ai/generativelanguage",
+      "id": "fdeb7a7b-4d37-4eb2-b9c7-9ae6897494ab",
+      "createTime": "2024-04-18T22:03:09.375Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "4c2848a9143d15be11155ed13cba9af9dcc5e6b7",
           "message": "Add initial files for google.storage.control.v2",
           "issues": [
@@ -28369,5 +28622,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-04-16T17:47:32.240Z"
+  "updateTime": "2024-04-18T22:03:09.602Z"
 }

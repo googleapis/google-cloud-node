@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.2.0...chat-v0.3.0) (2024-04-18)
+
+
+### Features
+
+* [chat] add UpdateMembership API ([#5236](https://github.com/googleapis/google-cloud-node/issues/5236)) ([2a7934a](https://github.com/googleapis/google-cloud-node/commit/2a7934ab95ed017fd7ae84c96bc5dfcce501ab51))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.1.0...chat-v0.2.0) (2024-04-05)
 
 
