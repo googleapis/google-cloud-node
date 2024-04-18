@@ -470,7 +470,7 @@ export interface FileMetadata extends BaseMetadata {
   md5Hash?: string;
   mediaLink?: string;
   metadata?: {
-    [key: string]: string;
+    [key: string]: string | boolean | number | null;
   };
   metageneration?: string | number;
   name?: string;
