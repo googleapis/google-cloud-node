@@ -5,7 +5,7 @@
 # [Merchant API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-shopping-merchant-notifications)
 
 [![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/@google-cloud/notifications.svg)](https://www.npmjs.org/package/@google-cloud/notifications)
+[![npm version](https://img.shields.io/npm/v/@google-shopping/notifications.svg)](https://www.npmjs.org/package/@google-shopping/notifications)
 
 
 
@@ -50,7 +50,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install @google-cloud/notifications
+npm install @google-shopping/notifications
 ```
 
 
@@ -82,7 +82,7 @@ npm install @google-cloud/notifications
 
 // Imports the Notifications library
 const {NotificationsApiServiceClient} =
-  require('@google-cloud/notifications').v1beta;
+  require('@google-shopping/notifications').v1beta;
 
 // Instantiates a client
 const notificationsClient = new NotificationsApiServiceClient();
@@ -143,7 +143,7 @@ best-efforts basis with the following warnings:
 Client libraries targeting some end-of-life versions of Node.js are available, and
 can be installed through npm [dist-tags](https://docs.npmjs.com/cli/dist-tag).
 The dist-tags follow the naming convention `legacy-(version)`.
-For example, `npm install @google-cloud/notifications@legacy-8` installs client libraries
+For example, `npm install @google-shopping/notifications@legacy-8` installs client libraries
 for versions compatible with Node.js 8.
 
 ## Versioning

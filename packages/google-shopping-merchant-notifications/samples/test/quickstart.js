@@ -20,7 +20,7 @@
 // const cp = require('child_process');
 // const {describe, it, before} = require('mocha');
 // const {NotificationsApiServiceClient} =
-//   require('@google-cloud/notifications').v1beta;
+//   require('@google-shopping/notifications').v1beta;
 // const merchantapiClient = new NotificationsApiServiceClient();
 
 // const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
