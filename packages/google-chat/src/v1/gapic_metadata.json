@@ -85,6 +85,11 @@
                 "createMembership"
               ]
             },
+            "UpdateMembership": {
+              "methods": [
+                "updateMembership"
+              ]
+            },
             "DeleteMembership": {
               "methods": [
                 "deleteMembership"
@@ -206,6 +211,11 @@
             "CreateMembership": {
               "methods": [
                 "createMembership"
+              ]
+            },
+            "UpdateMembership": {
+              "methods": [
+                "updateMembership"
               ]
             },
             "DeleteMembership": {

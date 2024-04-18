@@ -129,6 +129,62 @@ export namespace google {
                      * @returns Promise
                      */
                     public getStorageLayout(request: google.storage.control.v2.IGetStorageLayoutRequest): Promise<google.storage.control.v2.StorageLayout>;
+
+                    /**
+                     * Calls CreateManagedFolder.
+                     * @param request CreateManagedFolderRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ManagedFolder
+                     */
+                    public createManagedFolder(request: google.storage.control.v2.ICreateManagedFolderRequest, callback: google.storage.control.v2.StorageControl.CreateManagedFolderCallback): void;
+
+                    /**
+                     * Calls CreateManagedFolder.
+                     * @param request CreateManagedFolderRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createManagedFolder(request: google.storage.control.v2.ICreateManagedFolderRequest): Promise<google.storage.control.v2.ManagedFolder>;
+
+                    /**
+                     * Calls DeleteManagedFolder.
+                     * @param request DeleteManagedFolderRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteManagedFolder(request: google.storage.control.v2.IDeleteManagedFolderRequest, callback: google.storage.control.v2.StorageControl.DeleteManagedFolderCallback): void;
+
+                    /**
+                     * Calls DeleteManagedFolder.
+                     * @param request DeleteManagedFolderRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteManagedFolder(request: google.storage.control.v2.IDeleteManagedFolderRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls GetManagedFolder.
+                     * @param request GetManagedFolderRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ManagedFolder
+                     */
+                    public getManagedFolder(request: google.storage.control.v2.IGetManagedFolderRequest, callback: google.storage.control.v2.StorageControl.GetManagedFolderCallback): void;
+
+                    /**
+                     * Calls GetManagedFolder.
+                     * @param request GetManagedFolderRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getManagedFolder(request: google.storage.control.v2.IGetManagedFolderRequest): Promise<google.storage.control.v2.ManagedFolder>;
+
+                    /**
+                     * Calls ListManagedFolders.
+                     * @param request ListManagedFoldersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListManagedFoldersResponse
+                     */
+                    public listManagedFolders(request: google.storage.control.v2.IListManagedFoldersRequest, callback: google.storage.control.v2.StorageControl.ListManagedFoldersCallback): void;
+
+                    /**
+                     * Calls ListManagedFolders.
+                     * @param request ListManagedFoldersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listManagedFolders(request: google.storage.control.v2.IListManagedFoldersRequest): Promise<google.storage.control.v2.ListManagedFoldersResponse>;
                 }
 
                 namespace StorageControl {
@@ -174,6 +230,34 @@ export namespace google {
                      * @param [response] StorageLayout
                      */
                     type GetStorageLayoutCallback = (error: (Error|null), response?: google.storage.control.v2.StorageLayout) => void;
+
+                    /**
+                     * Callback as used by {@link google.storage.control.v2.StorageControl|createManagedFolder}.
+                     * @param error Error, if any
+                     * @param [response] ManagedFolder
+                     */
+                    type CreateManagedFolderCallback = (error: (Error|null), response?: google.storage.control.v2.ManagedFolder) => void;
+
+                    /**
+                     * Callback as used by {@link google.storage.control.v2.StorageControl|deleteManagedFolder}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteManagedFolderCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.storage.control.v2.StorageControl|getManagedFolder}.
+                     * @param error Error, if any
+                     * @param [response] ManagedFolder
+                     */
+                    type GetManagedFolderCallback = (error: (Error|null), response?: google.storage.control.v2.ManagedFolder) => void;
+
+                    /**
+                     * Callback as used by {@link google.storage.control.v2.StorageControl|listManagedFolders}.
+                     * @param error Error, if any
+                     * @param [response] ListManagedFoldersResponse
+                     */
+                    type ListManagedFoldersCallback = (error: (Error|null), response?: google.storage.control.v2.ListManagedFoldersResponse) => void;
                 }
 
                 /** Properties of a PendingRenameInfo. */
@@ -1783,6 +1867,708 @@ export namespace google {
 
                     /**
                      * Gets the default type url for GetStorageLayoutRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ManagedFolder. */
+                interface IManagedFolder {
+
+                    /** ManagedFolder name */
+                    name?: (string|null);
+
+                    /** ManagedFolder metageneration */
+                    metageneration?: (number|Long|string|null);
+
+                    /** ManagedFolder createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ManagedFolder updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a ManagedFolder. */
+                class ManagedFolder implements IManagedFolder {
+
+                    /**
+                     * Constructs a new ManagedFolder.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IManagedFolder);
+
+                    /** ManagedFolder name. */
+                    public name: string;
+
+                    /** ManagedFolder metageneration. */
+                    public metageneration: (number|Long|string);
+
+                    /** ManagedFolder createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ManagedFolder updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new ManagedFolder instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ManagedFolder instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IManagedFolder): google.storage.control.v2.ManagedFolder;
+
+                    /**
+                     * Encodes the specified ManagedFolder message. Does not implicitly {@link google.storage.control.v2.ManagedFolder.verify|verify} messages.
+                     * @param message ManagedFolder message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IManagedFolder, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ManagedFolder message, length delimited. Does not implicitly {@link google.storage.control.v2.ManagedFolder.verify|verify} messages.
+                     * @param message ManagedFolder message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IManagedFolder, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ManagedFolder message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ManagedFolder
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.ManagedFolder;
+
+                    /**
+                     * Decodes a ManagedFolder message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ManagedFolder
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.ManagedFolder;
+
+                    /**
+                     * Verifies a ManagedFolder message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ManagedFolder message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ManagedFolder
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.ManagedFolder;
+
+                    /**
+                     * Creates a plain object from a ManagedFolder message. Also converts values to other types if specified.
+                     * @param message ManagedFolder
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.ManagedFolder, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ManagedFolder to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ManagedFolder
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetManagedFolderRequest. */
+                interface IGetManagedFolderRequest {
+
+                    /** GetManagedFolderRequest name */
+                    name?: (string|null);
+
+                    /** GetManagedFolderRequest ifMetagenerationMatch */
+                    ifMetagenerationMatch?: (number|Long|string|null);
+
+                    /** GetManagedFolderRequest ifMetagenerationNotMatch */
+                    ifMetagenerationNotMatch?: (number|Long|string|null);
+
+                    /** GetManagedFolderRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a GetManagedFolderRequest. */
+                class GetManagedFolderRequest implements IGetManagedFolderRequest {
+
+                    /**
+                     * Constructs a new GetManagedFolderRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IGetManagedFolderRequest);
+
+                    /** GetManagedFolderRequest name. */
+                    public name: string;
+
+                    /** GetManagedFolderRequest ifMetagenerationMatch. */
+                    public ifMetagenerationMatch?: (number|Long|string|null);
+
+                    /** GetManagedFolderRequest ifMetagenerationNotMatch. */
+                    public ifMetagenerationNotMatch?: (number|Long|string|null);
+
+                    /** GetManagedFolderRequest requestId. */
+                    public requestId: string;
+
+                    /** GetManagedFolderRequest _ifMetagenerationMatch. */
+                    public _ifMetagenerationMatch?: "ifMetagenerationMatch";
+
+                    /** GetManagedFolderRequest _ifMetagenerationNotMatch. */
+                    public _ifMetagenerationNotMatch?: "ifMetagenerationNotMatch";
+
+                    /**
+                     * Creates a new GetManagedFolderRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetManagedFolderRequest instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IGetManagedFolderRequest): google.storage.control.v2.GetManagedFolderRequest;
+
+                    /**
+                     * Encodes the specified GetManagedFolderRequest message. Does not implicitly {@link google.storage.control.v2.GetManagedFolderRequest.verify|verify} messages.
+                     * @param message GetManagedFolderRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IGetManagedFolderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetManagedFolderRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.GetManagedFolderRequest.verify|verify} messages.
+                     * @param message GetManagedFolderRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IGetManagedFolderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetManagedFolderRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetManagedFolderRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.GetManagedFolderRequest;
+
+                    /**
+                     * Decodes a GetManagedFolderRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetManagedFolderRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.GetManagedFolderRequest;
+
+                    /**
+                     * Verifies a GetManagedFolderRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetManagedFolderRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetManagedFolderRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.GetManagedFolderRequest;
+
+                    /**
+                     * Creates a plain object from a GetManagedFolderRequest message. Also converts values to other types if specified.
+                     * @param message GetManagedFolderRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.GetManagedFolderRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetManagedFolderRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetManagedFolderRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateManagedFolderRequest. */
+                interface ICreateManagedFolderRequest {
+
+                    /** CreateManagedFolderRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateManagedFolderRequest managedFolder */
+                    managedFolder?: (google.storage.control.v2.IManagedFolder|null);
+
+                    /** CreateManagedFolderRequest managedFolderId */
+                    managedFolderId?: (string|null);
+
+                    /** CreateManagedFolderRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateManagedFolderRequest. */
+                class CreateManagedFolderRequest implements ICreateManagedFolderRequest {
+
+                    /**
+                     * Constructs a new CreateManagedFolderRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.ICreateManagedFolderRequest);
+
+                    /** CreateManagedFolderRequest parent. */
+                    public parent: string;
+
+                    /** CreateManagedFolderRequest managedFolder. */
+                    public managedFolder?: (google.storage.control.v2.IManagedFolder|null);
+
+                    /** CreateManagedFolderRequest managedFolderId. */
+                    public managedFolderId: string;
+
+                    /** CreateManagedFolderRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateManagedFolderRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateManagedFolderRequest instance
+                     */
+                    public static create(properties?: google.storage.control.v2.ICreateManagedFolderRequest): google.storage.control.v2.CreateManagedFolderRequest;
+
+                    /**
+                     * Encodes the specified CreateManagedFolderRequest message. Does not implicitly {@link google.storage.control.v2.CreateManagedFolderRequest.verify|verify} messages.
+                     * @param message CreateManagedFolderRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.ICreateManagedFolderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateManagedFolderRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.CreateManagedFolderRequest.verify|verify} messages.
+                     * @param message CreateManagedFolderRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.ICreateManagedFolderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateManagedFolderRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateManagedFolderRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.CreateManagedFolderRequest;
+
+                    /**
+                     * Decodes a CreateManagedFolderRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateManagedFolderRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.CreateManagedFolderRequest;
+
+                    /**
+                     * Verifies a CreateManagedFolderRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateManagedFolderRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateManagedFolderRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.CreateManagedFolderRequest;
+
+                    /**
+                     * Creates a plain object from a CreateManagedFolderRequest message. Also converts values to other types if specified.
+                     * @param message CreateManagedFolderRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.CreateManagedFolderRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateManagedFolderRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateManagedFolderRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteManagedFolderRequest. */
+                interface IDeleteManagedFolderRequest {
+
+                    /** DeleteManagedFolderRequest name */
+                    name?: (string|null);
+
+                    /** DeleteManagedFolderRequest ifMetagenerationMatch */
+                    ifMetagenerationMatch?: (number|Long|string|null);
+
+                    /** DeleteManagedFolderRequest ifMetagenerationNotMatch */
+                    ifMetagenerationNotMatch?: (number|Long|string|null);
+
+                    /** DeleteManagedFolderRequest allowNonEmpty */
+                    allowNonEmpty?: (boolean|null);
+
+                    /** DeleteManagedFolderRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteManagedFolderRequest. */
+                class DeleteManagedFolderRequest implements IDeleteManagedFolderRequest {
+
+                    /**
+                     * Constructs a new DeleteManagedFolderRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IDeleteManagedFolderRequest);
+
+                    /** DeleteManagedFolderRequest name. */
+                    public name: string;
+
+                    /** DeleteManagedFolderRequest ifMetagenerationMatch. */
+                    public ifMetagenerationMatch?: (number|Long|string|null);
+
+                    /** DeleteManagedFolderRequest ifMetagenerationNotMatch. */
+                    public ifMetagenerationNotMatch?: (number|Long|string|null);
+
+                    /** DeleteManagedFolderRequest allowNonEmpty. */
+                    public allowNonEmpty: boolean;
+
+                    /** DeleteManagedFolderRequest requestId. */
+                    public requestId: string;
+
+                    /** DeleteManagedFolderRequest _ifMetagenerationMatch. */
+                    public _ifMetagenerationMatch?: "ifMetagenerationMatch";
+
+                    /** DeleteManagedFolderRequest _ifMetagenerationNotMatch. */
+                    public _ifMetagenerationNotMatch?: "ifMetagenerationNotMatch";
+
+                    /**
+                     * Creates a new DeleteManagedFolderRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteManagedFolderRequest instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IDeleteManagedFolderRequest): google.storage.control.v2.DeleteManagedFolderRequest;
+
+                    /**
+                     * Encodes the specified DeleteManagedFolderRequest message. Does not implicitly {@link google.storage.control.v2.DeleteManagedFolderRequest.verify|verify} messages.
+                     * @param message DeleteManagedFolderRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IDeleteManagedFolderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteManagedFolderRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.DeleteManagedFolderRequest.verify|verify} messages.
+                     * @param message DeleteManagedFolderRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IDeleteManagedFolderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteManagedFolderRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteManagedFolderRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.DeleteManagedFolderRequest;
+
+                    /**
+                     * Decodes a DeleteManagedFolderRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteManagedFolderRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.DeleteManagedFolderRequest;
+
+                    /**
+                     * Verifies a DeleteManagedFolderRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteManagedFolderRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteManagedFolderRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.DeleteManagedFolderRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteManagedFolderRequest message. Also converts values to other types if specified.
+                     * @param message DeleteManagedFolderRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.DeleteManagedFolderRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteManagedFolderRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteManagedFolderRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListManagedFoldersRequest. */
+                interface IListManagedFoldersRequest {
+
+                    /** ListManagedFoldersRequest parent */
+                    parent?: (string|null);
+
+                    /** ListManagedFoldersRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListManagedFoldersRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListManagedFoldersRequest prefix */
+                    prefix?: (string|null);
+
+                    /** ListManagedFoldersRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a ListManagedFoldersRequest. */
+                class ListManagedFoldersRequest implements IListManagedFoldersRequest {
+
+                    /**
+                     * Constructs a new ListManagedFoldersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IListManagedFoldersRequest);
+
+                    /** ListManagedFoldersRequest parent. */
+                    public parent: string;
+
+                    /** ListManagedFoldersRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListManagedFoldersRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListManagedFoldersRequest prefix. */
+                    public prefix: string;
+
+                    /** ListManagedFoldersRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new ListManagedFoldersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListManagedFoldersRequest instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IListManagedFoldersRequest): google.storage.control.v2.ListManagedFoldersRequest;
+
+                    /**
+                     * Encodes the specified ListManagedFoldersRequest message. Does not implicitly {@link google.storage.control.v2.ListManagedFoldersRequest.verify|verify} messages.
+                     * @param message ListManagedFoldersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IListManagedFoldersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListManagedFoldersRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.ListManagedFoldersRequest.verify|verify} messages.
+                     * @param message ListManagedFoldersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IListManagedFoldersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListManagedFoldersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListManagedFoldersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.ListManagedFoldersRequest;
+
+                    /**
+                     * Decodes a ListManagedFoldersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListManagedFoldersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.ListManagedFoldersRequest;
+
+                    /**
+                     * Verifies a ListManagedFoldersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListManagedFoldersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListManagedFoldersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.ListManagedFoldersRequest;
+
+                    /**
+                     * Creates a plain object from a ListManagedFoldersRequest message. Also converts values to other types if specified.
+                     * @param message ListManagedFoldersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.ListManagedFoldersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListManagedFoldersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListManagedFoldersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListManagedFoldersResponse. */
+                interface IListManagedFoldersResponse {
+
+                    /** ListManagedFoldersResponse managedFolders */
+                    managedFolders?: (google.storage.control.v2.IManagedFolder[]|null);
+
+                    /** ListManagedFoldersResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListManagedFoldersResponse. */
+                class ListManagedFoldersResponse implements IListManagedFoldersResponse {
+
+                    /**
+                     * Constructs a new ListManagedFoldersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IListManagedFoldersResponse);
+
+                    /** ListManagedFoldersResponse managedFolders. */
+                    public managedFolders: google.storage.control.v2.IManagedFolder[];
+
+                    /** ListManagedFoldersResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListManagedFoldersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListManagedFoldersResponse instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IListManagedFoldersResponse): google.storage.control.v2.ListManagedFoldersResponse;
+
+                    /**
+                     * Encodes the specified ListManagedFoldersResponse message. Does not implicitly {@link google.storage.control.v2.ListManagedFoldersResponse.verify|verify} messages.
+                     * @param message ListManagedFoldersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IListManagedFoldersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListManagedFoldersResponse message, length delimited. Does not implicitly {@link google.storage.control.v2.ListManagedFoldersResponse.verify|verify} messages.
+                     * @param message ListManagedFoldersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IListManagedFoldersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListManagedFoldersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListManagedFoldersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.ListManagedFoldersResponse;
+
+                    /**
+                     * Decodes a ListManagedFoldersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListManagedFoldersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.ListManagedFoldersResponse;
+
+                    /**
+                     * Verifies a ListManagedFoldersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListManagedFoldersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListManagedFoldersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.ListManagedFoldersResponse;
+
+                    /**
+                     * Creates a plain object from a ListManagedFoldersResponse message. Also converts values to other types if specified.
+                     * @param message ListManagedFoldersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.ListManagedFoldersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListManagedFoldersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListManagedFoldersResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

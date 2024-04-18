@@ -351,6 +351,30 @@
         }
       }
     },
+    "RecommendationService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RecommendationServiceClient",
+          "rpcs": {
+            "Recommend": {
+              "methods": [
+                "recommend"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RecommendationServiceClient",
+          "rpcs": {
+            "Recommend": {
+              "methods": [
+                "recommend"
+              ]
+            }
+          }
+        }
+      }
+    },
     "SchemaService": {
       "clients": {
         "grpc": {

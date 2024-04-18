@@ -1372,6 +1372,563 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a CloudArmor. */
+                interface ICloudArmor {
+
+                    /** CloudArmor securityPolicy */
+                    securityPolicy?: (google.cloud.securitycenter.v1.ISecurityPolicy|null);
+
+                    /** CloudArmor requests */
+                    requests?: (google.cloud.securitycenter.v1.IRequests|null);
+
+                    /** CloudArmor adaptiveProtection */
+                    adaptiveProtection?: (google.cloud.securitycenter.v1.IAdaptiveProtection|null);
+
+                    /** CloudArmor attack */
+                    attack?: (google.cloud.securitycenter.v1.IAttack|null);
+
+                    /** CloudArmor threatVector */
+                    threatVector?: (string|null);
+
+                    /** CloudArmor duration */
+                    duration?: (google.protobuf.IDuration|null);
+                }
+
+                /** Represents a CloudArmor. */
+                class CloudArmor implements ICloudArmor {
+
+                    /**
+                     * Constructs a new CloudArmor.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.ICloudArmor);
+
+                    /** CloudArmor securityPolicy. */
+                    public securityPolicy?: (google.cloud.securitycenter.v1.ISecurityPolicy|null);
+
+                    /** CloudArmor requests. */
+                    public requests?: (google.cloud.securitycenter.v1.IRequests|null);
+
+                    /** CloudArmor adaptiveProtection. */
+                    public adaptiveProtection?: (google.cloud.securitycenter.v1.IAdaptiveProtection|null);
+
+                    /** CloudArmor attack. */
+                    public attack?: (google.cloud.securitycenter.v1.IAttack|null);
+
+                    /** CloudArmor threatVector. */
+                    public threatVector: string;
+
+                    /** CloudArmor duration. */
+                    public duration?: (google.protobuf.IDuration|null);
+
+                    /**
+                     * Creates a new CloudArmor instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CloudArmor instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.ICloudArmor): google.cloud.securitycenter.v1.CloudArmor;
+
+                    /**
+                     * Encodes the specified CloudArmor message. Does not implicitly {@link google.cloud.securitycenter.v1.CloudArmor.verify|verify} messages.
+                     * @param message CloudArmor message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.ICloudArmor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CloudArmor message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.CloudArmor.verify|verify} messages.
+                     * @param message CloudArmor message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.ICloudArmor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CloudArmor message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CloudArmor
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.CloudArmor;
+
+                    /**
+                     * Decodes a CloudArmor message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CloudArmor
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.CloudArmor;
+
+                    /**
+                     * Verifies a CloudArmor message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CloudArmor message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CloudArmor
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.CloudArmor;
+
+                    /**
+                     * Creates a plain object from a CloudArmor message. Also converts values to other types if specified.
+                     * @param message CloudArmor
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.CloudArmor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CloudArmor to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CloudArmor
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SecurityPolicy. */
+                interface ISecurityPolicy {
+
+                    /** SecurityPolicy name */
+                    name?: (string|null);
+
+                    /** SecurityPolicy type */
+                    type?: (string|null);
+
+                    /** SecurityPolicy preview */
+                    preview?: (boolean|null);
+                }
+
+                /** Represents a SecurityPolicy. */
+                class SecurityPolicy implements ISecurityPolicy {
+
+                    /**
+                     * Constructs a new SecurityPolicy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.ISecurityPolicy);
+
+                    /** SecurityPolicy name. */
+                    public name: string;
+
+                    /** SecurityPolicy type. */
+                    public type: string;
+
+                    /** SecurityPolicy preview. */
+                    public preview: boolean;
+
+                    /**
+                     * Creates a new SecurityPolicy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SecurityPolicy instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.ISecurityPolicy): google.cloud.securitycenter.v1.SecurityPolicy;
+
+                    /**
+                     * Encodes the specified SecurityPolicy message. Does not implicitly {@link google.cloud.securitycenter.v1.SecurityPolicy.verify|verify} messages.
+                     * @param message SecurityPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.ISecurityPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SecurityPolicy message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.SecurityPolicy.verify|verify} messages.
+                     * @param message SecurityPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.ISecurityPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SecurityPolicy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SecurityPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.SecurityPolicy;
+
+                    /**
+                     * Decodes a SecurityPolicy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SecurityPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.SecurityPolicy;
+
+                    /**
+                     * Verifies a SecurityPolicy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SecurityPolicy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SecurityPolicy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.SecurityPolicy;
+
+                    /**
+                     * Creates a plain object from a SecurityPolicy message. Also converts values to other types if specified.
+                     * @param message SecurityPolicy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.SecurityPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SecurityPolicy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SecurityPolicy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Requests. */
+                interface IRequests {
+
+                    /** Requests ratio */
+                    ratio?: (number|null);
+
+                    /** Requests shortTermAllowed */
+                    shortTermAllowed?: (number|null);
+
+                    /** Requests longTermAllowed */
+                    longTermAllowed?: (number|null);
+
+                    /** Requests longTermDenied */
+                    longTermDenied?: (number|null);
+                }
+
+                /** Represents a Requests. */
+                class Requests implements IRequests {
+
+                    /**
+                     * Constructs a new Requests.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IRequests);
+
+                    /** Requests ratio. */
+                    public ratio: number;
+
+                    /** Requests shortTermAllowed. */
+                    public shortTermAllowed: number;
+
+                    /** Requests longTermAllowed. */
+                    public longTermAllowed: number;
+
+                    /** Requests longTermDenied. */
+                    public longTermDenied: number;
+
+                    /**
+                     * Creates a new Requests instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Requests instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IRequests): google.cloud.securitycenter.v1.Requests;
+
+                    /**
+                     * Encodes the specified Requests message. Does not implicitly {@link google.cloud.securitycenter.v1.Requests.verify|verify} messages.
+                     * @param message Requests message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IRequests, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Requests message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Requests.verify|verify} messages.
+                     * @param message Requests message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IRequests, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Requests message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Requests
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Requests;
+
+                    /**
+                     * Decodes a Requests message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Requests
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Requests;
+
+                    /**
+                     * Verifies a Requests message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Requests message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Requests
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Requests;
+
+                    /**
+                     * Creates a plain object from a Requests message. Also converts values to other types if specified.
+                     * @param message Requests
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.Requests, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Requests to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Requests
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AdaptiveProtection. */
+                interface IAdaptiveProtection {
+
+                    /** AdaptiveProtection confidence */
+                    confidence?: (number|null);
+                }
+
+                /** Represents an AdaptiveProtection. */
+                class AdaptiveProtection implements IAdaptiveProtection {
+
+                    /**
+                     * Constructs a new AdaptiveProtection.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IAdaptiveProtection);
+
+                    /** AdaptiveProtection confidence. */
+                    public confidence: number;
+
+                    /**
+                     * Creates a new AdaptiveProtection instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AdaptiveProtection instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IAdaptiveProtection): google.cloud.securitycenter.v1.AdaptiveProtection;
+
+                    /**
+                     * Encodes the specified AdaptiveProtection message. Does not implicitly {@link google.cloud.securitycenter.v1.AdaptiveProtection.verify|verify} messages.
+                     * @param message AdaptiveProtection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IAdaptiveProtection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AdaptiveProtection message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.AdaptiveProtection.verify|verify} messages.
+                     * @param message AdaptiveProtection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IAdaptiveProtection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AdaptiveProtection message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AdaptiveProtection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.AdaptiveProtection;
+
+                    /**
+                     * Decodes an AdaptiveProtection message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AdaptiveProtection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.AdaptiveProtection;
+
+                    /**
+                     * Verifies an AdaptiveProtection message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AdaptiveProtection message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AdaptiveProtection
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.AdaptiveProtection;
+
+                    /**
+                     * Creates a plain object from an AdaptiveProtection message. Also converts values to other types if specified.
+                     * @param message AdaptiveProtection
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.AdaptiveProtection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AdaptiveProtection to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AdaptiveProtection
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an Attack. */
+                interface IAttack {
+
+                    /** Attack volumePps */
+                    volumePps?: (number|null);
+
+                    /** Attack volumeBps */
+                    volumeBps?: (number|null);
+
+                    /** Attack classification */
+                    classification?: (string|null);
+                }
+
+                /** Represents an Attack. */
+                class Attack implements IAttack {
+
+                    /**
+                     * Constructs a new Attack.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IAttack);
+
+                    /** Attack volumePps. */
+                    public volumePps: number;
+
+                    /** Attack volumeBps. */
+                    public volumeBps: number;
+
+                    /** Attack classification. */
+                    public classification: string;
+
+                    /**
+                     * Creates a new Attack instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Attack instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IAttack): google.cloud.securitycenter.v1.Attack;
+
+                    /**
+                     * Encodes the specified Attack message. Does not implicitly {@link google.cloud.securitycenter.v1.Attack.verify|verify} messages.
+                     * @param message Attack message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IAttack, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Attack message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Attack.verify|verify} messages.
+                     * @param message Attack message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IAttack, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Attack message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Attack
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Attack;
+
+                    /**
+                     * Decodes an Attack message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Attack
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Attack;
+
+                    /**
+                     * Verifies an Attack message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Attack message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Attack
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Attack;
+
+                    /**
+                     * Creates a plain object from an Attack message. Also converts values to other types if specified.
+                     * @param message Attack
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.Attack, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Attack to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Attack
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a CloudDlpDataProfile. */
                 interface ICloudDlpDataProfile {
 
@@ -3825,6 +4382,9 @@ export namespace google {
                     /** Finding loadBalancers */
                     loadBalancers?: (google.cloud.securitycenter.v1.ILoadBalancer[]|null);
 
+                    /** Finding cloudArmor */
+                    cloudArmor?: (google.cloud.securitycenter.v1.ICloudArmor|null);
+
                     /** Finding notebook */
                     notebook?: (google.cloud.securitycenter.v1.INotebook|null);
                 }
@@ -3969,6 +4529,9 @@ export namespace google {
 
                     /** Finding loadBalancers. */
                     public loadBalancers: google.cloud.securitycenter.v1.ILoadBalancer[];
+
+                    /** Finding cloudArmor. */
+                    public cloudArmor?: (google.cloud.securitycenter.v1.ICloudArmor|null);
 
                     /** Finding notebook. */
                     public notebook?: (google.cloud.securitycenter.v1.INotebook|null);
