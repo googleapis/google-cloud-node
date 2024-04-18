@@ -1137,7 +1137,7 @@ export class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Transfer configuration name in the form:
+   *   Required. Transfer configuration name in the form:
    *   `projects/{project_id}/transferConfigs/{config_id}` or
    *   `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`.
    * @param {google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest.TimeRange} request.requestedTimeRange
@@ -1553,7 +1553,8 @@ export class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The name of the project resource in the form: `projects/{project_id}`
+   *   Required. The name of the project resource in the form:
+   *   `projects/{project_id}`
    * @param {string[]} request.dataSourceIds
    *   Data sources that are enrolled. It is required to provide at least one
    *   data source id.
@@ -1656,7 +1657,8 @@ export class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The name of the project resource in the form: `projects/{project_id}`
+   *   Required. The name of the project resource in the form:
+   *   `projects/{project_id}`
    * @param {string[]} request.dataSourceIds
    *   Data sources that are unenrolled. It is required to provide at least one
    *   data source id.

@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main() {
+function main(name) {
   // [START bigquerydatatransfer_v1_generated_DataTransferService_UnenrollDataSources_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -29,7 +29,8 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The name of the project resource in the form: `projects/{project_id}`
+   *  Required. The name of the project resource in the form:
+   *  `projects/{project_id}`
    */
   // const name = 'abc123'
   /**
@@ -47,6 +48,7 @@ function main() {
   async function callUnenrollDataSources() {
     // Construct request
     const request = {
+      name,
     };
 
     // Run request

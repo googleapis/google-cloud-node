@@ -956,6 +956,7 @@
                               "type": "string",
                               "id": 1,
                               "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "bigquerydatatransfer.googleapis.com/TransferConfig"
                               }
                             },
@@ -996,7 +997,10 @@
                           "fields": {
                             "name": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             },
                             "dataSourceIds": {
                               "rule": "repeated",
@@ -1009,7 +1013,10 @@
                           "fields": {
                             "name": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             },
                             "dataSourceIds": {
                               "rule": "repeated",
@@ -1100,7 +1107,10 @@
                           "fields": {
                             "name": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IDENTIFIER"
+                              }
                             },
                             "destinationDatasetId": {
                               "type": "string",
@@ -1211,7 +1221,10 @@
                           "fields": {
                             "name": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IDENTIFIER"
+                              }
                             },
                             "scheduleTime": {
                               "type": "google.protobuf.Timestamp",
