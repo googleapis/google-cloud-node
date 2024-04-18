@@ -34,16 +34,16 @@ function main(name) {
    *  If you've set a custom ID for your message, you can use the value from the
    *  `clientAssignedMessageId` field for `{message}`. For details, see Name a
    *  message 
-   *  (https://developers.google.com/chat/api/guides/v1/messages/create#name_a_created_message).
+   *  (https://developers.google.com/workspace/chat/create-messages#name_a_created_message).
    */
   // const name = 'abc123'
   /**
    *  When `true`, deleting a message also deletes its threaded replies. When
    *  `false`, if a message has threaded replies, deletion fails.
    *  Only applies when authenticating as a
-   *  user (https://developers.google.com/chat/api/guides/auth/users). Has no
-   *  effect when authenticating as a Chat app 
-   *  (https://developers.google.com/chat/api/guides/auth/service-accounts).
+   *  user (https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+   *  Has no effect when authenticating as a Chat app 
+   *  (https://developers.google.com/workspace/chat/authenticate-authorize-chat-app).
    */
   // const force = true
 

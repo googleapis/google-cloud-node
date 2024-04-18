@@ -416,7 +416,8 @@ export class SecretManagerServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Creates a new {@link protos.google.cloud.secretmanager.v1.Secret|Secret} containing no {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersions}.
+   * Creates a new {@link protos.google.cloud.secretmanager.v1.Secret|Secret} containing no
+   * {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersions}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -430,7 +431,8 @@ export class SecretManagerServiceClient {
    *   contain uppercase and lowercase letters, numerals, and the hyphen (`-`) and
    *   underscore (`_`) characters.
    * @param {google.cloud.secretmanager.v1.Secret} request.secret
-   *   Required. A {@link protos.google.cloud.secretmanager.v1.Secret|Secret} with initial field values.
+   *   Required. A {@link protos.google.cloud.secretmanager.v1.Secret|Secret} with initial
+   *   field values.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -515,16 +517,20 @@ export class SecretManagerServiceClient {
     return this.innerApiCalls.createSecret(request, options, callback);
   }
   /**
-   * Creates a new {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} containing secret data and attaches
-   * it to an existing {@link protos.google.cloud.secretmanager.v1.Secret|Secret}.
+   * Creates a new {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}
+   * containing secret data and attaches it to an existing
+   * {@link protos.google.cloud.secretmanager.v1.Secret|Secret}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the {@link protos.google.cloud.secretmanager.v1.Secret|Secret} to associate with the
-   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} in the format `projects/* /secrets/*`.
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secret} to associate with the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} in the format
+   *   `projects/* /secrets/*`.
    * @param {google.cloud.secretmanager.v1.SecretPayload} request.payload
-   *   Required. The secret payload of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
+   *   Required. The secret payload of the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -614,7 +620,9 @@ export class SecretManagerServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the {@link protos.google.cloud.secretmanager.v1.Secret|Secret}, in the format `projects/* /secrets/*`.
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secret}, in the format
+   *   `projects/* /secrets/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -693,12 +701,14 @@ export class SecretManagerServiceClient {
     return this.innerApiCalls.getSecret(request, options, callback);
   }
   /**
-   * Updates metadata of an existing {@link protos.google.cloud.secretmanager.v1.Secret|Secret}.
+   * Updates metadata of an existing
+   * {@link protos.google.cloud.secretmanager.v1.Secret|Secret}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.secretmanager.v1.Secret} request.secret
-   *   Required. {@link protos.google.cloud.secretmanager.v1.Secret|Secret} with updated field values.
+   *   Required. {@link protos.google.cloud.secretmanager.v1.Secret|Secret} with updated field
+   *   values.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. Specifies the fields to be updated.
    * @param {object} [options]
@@ -790,12 +800,13 @@ export class SecretManagerServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the {@link protos.google.cloud.secretmanager.v1.Secret|Secret} to delete in the format
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secret} to delete in the format
    *   `projects/* /secrets/*`.
    * @param {string} [request.etag]
-   *   Optional. Etag of the {@link protos.google.cloud.secretmanager.v1.Secret|Secret}. The request succeeds if it matches
-   *   the etag of the currently stored secret object. If the etag is omitted,
-   *   the request succeeds.
+   *   Optional. Etag of the {@link protos.google.cloud.secretmanager.v1.Secret|Secret}. The
+   *   request succeeds if it matches the etag of the currently stored secret
+   *   object. If the etag is omitted, the request succeeds.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -880,7 +891,8 @@ export class SecretManagerServiceClient {
     return this.innerApiCalls.deleteSecret(request, options, callback);
   }
   /**
-   * Gets metadata for a {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
+   * Gets metadata for a
+   * {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
    *
    * `projects/* /secrets/* /versions/latest` is an alias to the most recently
    * created {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
@@ -888,7 +900,8 @@ export class SecretManagerServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} in the format
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} in the format
    *   `projects/* /secrets/* /versions/*`.
    *
    *   `projects/* /secrets/* /versions/latest` is an alias to the most recently
@@ -977,7 +990,8 @@ export class SecretManagerServiceClient {
     return this.innerApiCalls.getSecretVersion(request, options, callback);
   }
   /**
-   * Accesses a {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}. This call returns the secret data.
+   * Accesses a {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
+   * This call returns the secret data.
    *
    * `projects/* /secrets/* /versions/latest` is an alias to the most recently
    * created {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
@@ -985,7 +999,8 @@ export class SecretManagerServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} in the format
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} in the format
    *   `projects/* /secrets/* /versions/*`.
    *
    *   `projects/* /secrets/* /versions/latest` is an alias to the most recently
@@ -1082,18 +1097,21 @@ export class SecretManagerServiceClient {
   /**
    * Disables a {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
    *
-   * Sets the {@link protos.google.cloud.secretmanager.v1.SecretVersion.state|state} of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to
+   * Sets the {@link protos.google.cloud.secretmanager.v1.SecretVersion.state|state} of the
+   * {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to
    * {@link protos.google.cloud.secretmanager.v1.SecretVersion.State.DISABLED|DISABLED}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to disable in the format
-   *   `projects/* /secrets/* /versions/*`.
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to disable in
+   *   the format `projects/* /secrets/* /versions/*`.
    * @param {string} [request.etag]
-   *   Optional. Etag of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}. The request succeeds if it matches
-   *   the etag of the currently stored secret version object. If the etag is
-   *   omitted, the request succeeds.
+   *   Optional. Etag of the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}. The request
+   *   succeeds if it matches the etag of the currently stored secret version
+   *   object. If the etag is omitted, the request succeeds.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1186,18 +1204,21 @@ export class SecretManagerServiceClient {
   /**
    * Enables a {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
    *
-   * Sets the {@link protos.google.cloud.secretmanager.v1.SecretVersion.state|state} of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to
+   * Sets the {@link protos.google.cloud.secretmanager.v1.SecretVersion.state|state} of the
+   * {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to
    * {@link protos.google.cloud.secretmanager.v1.SecretVersion.State.ENABLED|ENABLED}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to enable in the format
-   *   `projects/* /secrets/* /versions/*`.
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to enable in
+   *   the format `projects/* /secrets/* /versions/*`.
    * @param {string} [request.etag]
-   *   Optional. Etag of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}. The request succeeds if it matches
-   *   the etag of the currently stored secret version object. If the etag is
-   *   omitted, the request succeeds.
+   *   Optional. Etag of the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}. The request
+   *   succeeds if it matches the etag of the currently stored secret version
+   *   object. If the etag is omitted, the request succeeds.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1290,19 +1311,22 @@ export class SecretManagerServiceClient {
   /**
    * Destroys a {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
    *
-   * Sets the {@link protos.google.cloud.secretmanager.v1.SecretVersion.state|state} of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to
-   * {@link protos.google.cloud.secretmanager.v1.SecretVersion.State.DESTROYED|DESTROYED} and irrevocably destroys the
-   * secret data.
+   * Sets the {@link protos.google.cloud.secretmanager.v1.SecretVersion.state|state} of the
+   * {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to
+   * {@link protos.google.cloud.secretmanager.v1.SecretVersion.State.DESTROYED|DESTROYED}
+   * and irrevocably destroys the secret data.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to destroy in the format
-   *   `projects/* /secrets/* /versions/*`.
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to destroy in
+   *   the format `projects/* /secrets/* /versions/*`.
    * @param {string} [request.etag]
-   *   Optional. Etag of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}. The request succeeds if it matches
-   *   the etag of the currently stored secret version object. If the etag is
-   *   omitted, the request succeeds.
+   *   Optional. Etag of the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}. The request
+   *   succeeds if it matches the etag of the currently stored secret version
+   *   object. If the etag is omitted, the request succeeds.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1396,8 +1420,10 @@ export class SecretManagerServiceClient {
    * Sets the access control policy on the specified secret. Replaces any
    * existing policy.
    *
-   * Permissions on {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersions} are enforced according
-   * to the policy set on the associated {@link protos.google.cloud.secretmanager.v1.Secret|Secret}.
+   * Permissions on
+   * {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersions} are enforced
+   * according to the policy set on the associated
+   * {@link protos.google.cloud.secretmanager.v1.Secret|Secret}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1679,7 +1705,8 @@ export class SecretManagerServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the project associated with the
-   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secrets}, in the format `projects/*`.
+   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secrets}, in the format
+   *   `projects/*`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to be returned in a single page. If
    *   set to 0, the server decides the number of results to return. If the
@@ -1786,7 +1813,8 @@ export class SecretManagerServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the project associated with the
-   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secrets}, in the format `projects/*`.
+   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secrets}, in the format
+   *   `projects/*`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to be returned in a single page. If
    *   set to 0, the server decides the number of results to return. If the
@@ -1841,7 +1869,8 @@ export class SecretManagerServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the project associated with the
-   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secrets}, in the format `projects/*`.
+   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secrets}, in the format
+   *   `projects/*`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to be returned in a single page. If
    *   set to 0, the server decides the number of results to return. If the
@@ -1889,15 +1918,16 @@ export class SecretManagerServiceClient {
     ) as AsyncIterable<protos.google.cloud.secretmanager.v1.ISecret>;
   }
   /**
-   * Lists {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersions}. This call does not return secret
-   * data.
+   * Lists {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersions}. This
+   * call does not return secret data.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the {@link protos.google.cloud.secretmanager.v1.Secret|Secret} associated with the
-   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersions} to list, in the format
-   *   `projects/* /secrets/*`.
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secret} associated with the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersions} to list, in
+   *   the format `projects/* /secrets/*`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to be returned in a single page. If
    *   set to 0, the server decides the number of results to return. If the
@@ -2003,9 +2033,10 @@ export class SecretManagerServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the {@link protos.google.cloud.secretmanager.v1.Secret|Secret} associated with the
-   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersions} to list, in the format
-   *   `projects/* /secrets/*`.
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secret} associated with the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersions} to list, in
+   *   the format `projects/* /secrets/*`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to be returned in a single page. If
    *   set to 0, the server decides the number of results to return. If the
@@ -2059,9 +2090,10 @@ export class SecretManagerServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the {@link protos.google.cloud.secretmanager.v1.Secret|Secret} associated with the
-   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersions} to list, in the format
-   *   `projects/* /secrets/*`.
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secret} associated with the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersions} to list, in
+   *   the format `projects/* /secrets/*`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to be returned in a single page. If
    *   set to 0, the server decides the number of results to return. If the
