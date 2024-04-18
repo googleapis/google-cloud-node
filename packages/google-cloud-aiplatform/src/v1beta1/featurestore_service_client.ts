@@ -299,6 +299,12 @@ export class FeaturestoreServiceClient {
       modelEvaluationSlicePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}/slices/{slice}'
       ),
+      modelMonitorPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/modelMonitors/{model_monitor}'
+      ),
+      modelMonitoringJobPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/modelMonitors/{model_monitor}/modelMonitoringJobs/{model_monitoring_job}'
+      ),
       nasJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/nasJobs/{nas_job}'
       ),
@@ -8325,6 +8331,135 @@ export class FeaturestoreServiceClient {
     return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
       modelEvaluationSliceName
     ).slice;
+  }
+
+  /**
+   * Return a fully-qualified modelMonitor resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} model_monitor
+   * @returns {string} Resource name string.
+   */
+  modelMonitorPath(project: string, location: string, modelMonitor: string) {
+    return this.pathTemplates.modelMonitorPathTemplate.render({
+      project: project,
+      location: location,
+      model_monitor: modelMonitor,
+    });
+  }
+
+  /**
+   * Parse the project from ModelMonitor resource.
+   *
+   * @param {string} modelMonitorName
+   *   A fully-qualified path representing ModelMonitor resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromModelMonitorName(modelMonitorName: string) {
+    return this.pathTemplates.modelMonitorPathTemplate.match(modelMonitorName)
+      .project;
+  }
+
+  /**
+   * Parse the location from ModelMonitor resource.
+   *
+   * @param {string} modelMonitorName
+   *   A fully-qualified path representing ModelMonitor resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromModelMonitorName(modelMonitorName: string) {
+    return this.pathTemplates.modelMonitorPathTemplate.match(modelMonitorName)
+      .location;
+  }
+
+  /**
+   * Parse the model_monitor from ModelMonitor resource.
+   *
+   * @param {string} modelMonitorName
+   *   A fully-qualified path representing ModelMonitor resource.
+   * @returns {string} A string representing the model_monitor.
+   */
+  matchModelMonitorFromModelMonitorName(modelMonitorName: string) {
+    return this.pathTemplates.modelMonitorPathTemplate.match(modelMonitorName)
+      .model_monitor;
+  }
+
+  /**
+   * Return a fully-qualified modelMonitoringJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} model_monitor
+   * @param {string} model_monitoring_job
+   * @returns {string} Resource name string.
+   */
+  modelMonitoringJobPath(
+    project: string,
+    location: string,
+    modelMonitor: string,
+    modelMonitoringJob: string
+  ) {
+    return this.pathTemplates.modelMonitoringJobPathTemplate.render({
+      project: project,
+      location: location,
+      model_monitor: modelMonitor,
+      model_monitoring_job: modelMonitoringJob,
+    });
+  }
+
+  /**
+   * Parse the project from ModelMonitoringJob resource.
+   *
+   * @param {string} modelMonitoringJobName
+   *   A fully-qualified path representing ModelMonitoringJob resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromModelMonitoringJobName(modelMonitoringJobName: string) {
+    return this.pathTemplates.modelMonitoringJobPathTemplate.match(
+      modelMonitoringJobName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ModelMonitoringJob resource.
+   *
+   * @param {string} modelMonitoringJobName
+   *   A fully-qualified path representing ModelMonitoringJob resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromModelMonitoringJobName(modelMonitoringJobName: string) {
+    return this.pathTemplates.modelMonitoringJobPathTemplate.match(
+      modelMonitoringJobName
+    ).location;
+  }
+
+  /**
+   * Parse the model_monitor from ModelMonitoringJob resource.
+   *
+   * @param {string} modelMonitoringJobName
+   *   A fully-qualified path representing ModelMonitoringJob resource.
+   * @returns {string} A string representing the model_monitor.
+   */
+  matchModelMonitorFromModelMonitoringJobName(modelMonitoringJobName: string) {
+    return this.pathTemplates.modelMonitoringJobPathTemplate.match(
+      modelMonitoringJobName
+    ).model_monitor;
+  }
+
+  /**
+   * Parse the model_monitoring_job from ModelMonitoringJob resource.
+   *
+   * @param {string} modelMonitoringJobName
+   *   A fully-qualified path representing ModelMonitoringJob resource.
+   * @returns {string} A string representing the model_monitoring_job.
+   */
+  matchModelMonitoringJobFromModelMonitoringJobName(
+    modelMonitoringJobName: string
+  ) {
+    return this.pathTemplates.modelMonitoringJobPathTemplate.match(
+      modelMonitoringJobName
+    ).model_monitoring_job;
   }
 
   /**
