@@ -18,8 +18,9 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const {Client} = require('@google-cloud/securesourcemanager').v1;
-const securesourcemanagerClient = new Client();
+const {SecureSourceManagerClient} =
+require('@google-cloud/securesourcemanager').v1;
+const securesourcemanagerClient = new SecureSourceManagerClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
