@@ -31,6 +31,7 @@
   * [Chat_service.list_reactions](#chat_service.list_reactions)
   * [Chat_service.list_spaces](#chat_service.list_spaces)
   * [Chat_service.set_up_space](#chat_service.set_up_space)
+  * [Chat_service.update_membership](#chat_service.update_membership)
   * [Chat_service.update_message](#chat_service.update_message)
   * [Chat_service.update_space](#chat_service.update_space)
   * [Chat_service.upload_attachment](#chat_service.upload_attachment)
@@ -367,6 +368,23 @@ __Usage:__
 
 
 `node packages/google-chat/samples/generated/v1/chat_service.set_up_space.js`
+
+
+-----
+
+
+
+
+### Chat_service.update_membership
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.update_membership.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-chat/samples/generated/v1/chat_service.update_membership.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-chat/samples/generated/v1/chat_service.update_membership.js`
 
 
 -----

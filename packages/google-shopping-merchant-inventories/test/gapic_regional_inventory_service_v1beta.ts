@@ -1079,6 +1079,58 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
       });
     });
 
+    describe('product', () => {
+      const fakePath = '/rendered/path/product';
+      const expectedParameters = {
+        account: 'accountValue',
+        product: 'productValue',
+      };
+      const client =
+        new regionalinventoryserviceModule.v1beta.RegionalInventoryServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.productPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.productPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('productPath', () => {
+        const result = client.productPath('accountValue', 'productValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.productPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchAccountFromProductName', () => {
+        const result = client.matchAccountFromProductName(fakePath);
+        assert.strictEqual(result, 'accountValue');
+        assert(
+          (client.pathTemplates.productPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchProductFromProductName', () => {
+        const result = client.matchProductFromProductName(fakePath);
+        assert.strictEqual(result, 'productValue');
+        assert(
+          (client.pathTemplates.productPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('regionalInventory', () => {
       const fakePath = '/rendered/path/regionalInventory';
       const expectedParameters = {

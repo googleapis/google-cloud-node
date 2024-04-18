@@ -29,7 +29,8 @@ function main(secret, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Secret google.cloud.secretmanager.v1.Secret  with updated field values.
+   *  Required. Secret google.cloud.secretmanager.v1.Secret  with updated field
+   *  values.
    */
   // const secret = {}
   /**

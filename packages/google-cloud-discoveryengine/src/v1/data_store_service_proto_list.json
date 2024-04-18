@@ -12,6 +12,7 @@
   "../../protos/google/cloud/discoveryengine/v1/engine_service.proto",
   "../../protos/google/cloud/discoveryengine/v1/import_config.proto",
   "../../protos/google/cloud/discoveryengine/v1/purge_config.proto",
+  "../../protos/google/cloud/discoveryengine/v1/recommendation_service.proto",
   "../../protos/google/cloud/discoveryengine/v1/schema.proto",
   "../../protos/google/cloud/discoveryengine/v1/schema_service.proto",
   "../../protos/google/cloud/discoveryengine/v1/search_service.proto",

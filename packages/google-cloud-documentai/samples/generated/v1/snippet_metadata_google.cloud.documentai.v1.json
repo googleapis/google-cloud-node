@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 98,
+                    "end": 93,
                     "type": "FULL"
                 }
             ],
@@ -90,7 +90,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 88,
+                    "end": 87,
                     "type": "FULL"
                 }
             ],
@@ -366,7 +366,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 80,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -378,6 +378,10 @@
                     {
                         "name": "custom_document_extraction_options",
                         "type": ".google.cloud.documentai.v1.TrainProcessorVersionRequest.CustomDocumentExtractionOptions"
+                    },
+                    {
+                        "name": "foundation_model_tuning_options",
+                        "type": ".google.cloud.documentai.v1.TrainProcessorVersionRequest.FoundationModelTuningOptions"
                     },
                     {
                         "name": "parent",
@@ -466,7 +470,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 68,
+                    "end": 67,
                     "type": "FULL"
                 }
             ],
@@ -634,7 +638,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 64,
+                    "end": 61,
                     "type": "FULL"
                 }
             ],
@@ -798,7 +802,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 64,
+                    "end": 61,
                     "type": "FULL"
                 }
             ],
@@ -842,7 +846,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 72,
+                    "end": 71,
                     "type": "FULL"
                 }
             ],
@@ -898,7 +902,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 62,
+                    "end": 60,
                     "type": "FULL"
                 }
             ],
@@ -942,7 +946,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 55,
+                    "end": 54,
                     "type": "FULL"
                 }
             ],
@@ -982,7 +986,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 69,
+                    "end": 67,
                     "type": "FULL"
                 }
             ],

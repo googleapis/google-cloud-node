@@ -14141,6 +14141,225 @@
                 return Duration;
             })();
     
+            protobuf.FieldMask = (function() {
+    
+                /**
+                 * Properties of a FieldMask.
+                 * @memberof google.protobuf
+                 * @interface IFieldMask
+                 * @property {Array.<string>|null} [paths] FieldMask paths
+                 */
+    
+                /**
+                 * Constructs a new FieldMask.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a FieldMask.
+                 * @implements IFieldMask
+                 * @constructor
+                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
+                 */
+                function FieldMask(properties) {
+                    this.paths = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FieldMask paths.
+                 * @member {Array.<string>} paths
+                 * @memberof google.protobuf.FieldMask
+                 * @instance
+                 */
+                FieldMask.prototype.paths = $util.emptyArray;
+    
+                /**
+                 * Creates a new FieldMask instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
+                 * @returns {google.protobuf.FieldMask} FieldMask instance
+                 */
+                FieldMask.create = function create(properties) {
+                    return new FieldMask(properties);
+                };
+    
+                /**
+                 * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldMask.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.paths != null && message.paths.length)
+                        for (var i = 0; i < message.paths.length; ++i)
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.paths[i]);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldMask.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FieldMask message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldMask.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.paths && message.paths.length))
+                                    message.paths = [];
+                                message.paths.push(reader.string());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FieldMask message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldMask.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FieldMask message.
+                 * @function verify
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FieldMask.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.paths != null && message.hasOwnProperty("paths")) {
+                        if (!Array.isArray(message.paths))
+                            return "paths: array expected";
+                        for (var i = 0; i < message.paths.length; ++i)
+                            if (!$util.isString(message.paths[i]))
+                                return "paths: string[] expected";
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 */
+                FieldMask.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.FieldMask)
+                        return object;
+                    var message = new $root.google.protobuf.FieldMask();
+                    if (object.paths) {
+                        if (!Array.isArray(object.paths))
+                            throw TypeError(".google.protobuf.FieldMask.paths: array expected");
+                        message.paths = [];
+                        for (var i = 0; i < object.paths.length; ++i)
+                            message.paths[i] = String(object.paths[i]);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.FieldMask} message FieldMask
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FieldMask.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.paths = [];
+                    if (message.paths && message.paths.length) {
+                        object.paths = [];
+                        for (var j = 0; j < message.paths.length; ++j)
+                            object.paths[j] = message.paths[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this FieldMask to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.FieldMask
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FieldMask.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FieldMask
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldMask.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FieldMask";
+                };
+    
+                return FieldMask;
+            })();
+    
             protobuf.Timestamp = (function() {
     
                 /**
@@ -14380,225 +14599,6 @@
                 };
     
                 return Timestamp;
-            })();
-    
-            protobuf.FieldMask = (function() {
-    
-                /**
-                 * Properties of a FieldMask.
-                 * @memberof google.protobuf
-                 * @interface IFieldMask
-                 * @property {Array.<string>|null} [paths] FieldMask paths
-                 */
-    
-                /**
-                 * Constructs a new FieldMask.
-                 * @memberof google.protobuf
-                 * @classdesc Represents a FieldMask.
-                 * @implements IFieldMask
-                 * @constructor
-                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
-                 */
-                function FieldMask(properties) {
-                    this.paths = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * FieldMask paths.
-                 * @member {Array.<string>} paths
-                 * @memberof google.protobuf.FieldMask
-                 * @instance
-                 */
-                FieldMask.prototype.paths = $util.emptyArray;
-    
-                /**
-                 * Creates a new FieldMask instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
-                 * @returns {google.protobuf.FieldMask} FieldMask instance
-                 */
-                FieldMask.create = function create(properties) {
-                    return new FieldMask(properties);
-                };
-    
-                /**
-                 * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                FieldMask.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.paths != null && message.paths.length)
-                        for (var i = 0; i < message.paths.length; ++i)
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.paths[i]);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                FieldMask.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a FieldMask message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.FieldMask} FieldMask
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                FieldMask.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                if (!(message.paths && message.paths.length))
-                                    message.paths = [];
-                                message.paths.push(reader.string());
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a FieldMask message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.FieldMask} FieldMask
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                FieldMask.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a FieldMask message.
-                 * @function verify
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                FieldMask.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.paths != null && message.hasOwnProperty("paths")) {
-                        if (!Array.isArray(message.paths))
-                            return "paths: array expected";
-                        for (var i = 0; i < message.paths.length; ++i)
-                            if (!$util.isString(message.paths[i]))
-                                return "paths: string[] expected";
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.FieldMask} FieldMask
-                 */
-                FieldMask.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.FieldMask)
-                        return object;
-                    var message = new $root.google.protobuf.FieldMask();
-                    if (object.paths) {
-                        if (!Array.isArray(object.paths))
-                            throw TypeError(".google.protobuf.FieldMask.paths: array expected");
-                        message.paths = [];
-                        for (var i = 0; i < object.paths.length; ++i)
-                            message.paths[i] = String(object.paths[i]);
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {google.protobuf.FieldMask} message FieldMask
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                FieldMask.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.paths = [];
-                    if (message.paths && message.paths.length) {
-                        object.paths = [];
-                        for (var j = 0; j < message.paths.length; ++j)
-                            object.paths[j] = message.paths[j];
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this FieldMask to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.FieldMask
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                FieldMask.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for FieldMask
-                 * @function getTypeUrl
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                FieldMask.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.protobuf.FieldMask";
-                };
-    
-                return FieldMask;
             })();
     
             protobuf.Empty = (function() {
@@ -21346,6 +21346,7 @@
                          * @interface IIcon
                          * @property {string|null} [knownIcon] Icon knownIcon
                          * @property {string|null} [iconUrl] Icon iconUrl
+                         * @property {google.apps.card.v1.IMaterialIcon|null} [materialIcon] Icon materialIcon
                          * @property {string|null} [altText] Icon altText
                          * @property {google.apps.card.v1.Widget.ImageType|null} [imageType] Icon imageType
                          */
@@ -21382,6 +21383,14 @@
                         Icon.prototype.iconUrl = null;
     
                         /**
+                         * Icon materialIcon.
+                         * @member {google.apps.card.v1.IMaterialIcon|null|undefined} materialIcon
+                         * @memberof google.apps.card.v1.Icon
+                         * @instance
+                         */
+                        Icon.prototype.materialIcon = null;
+    
+                        /**
                          * Icon altText.
                          * @member {string} altText
                          * @memberof google.apps.card.v1.Icon
@@ -21402,12 +21411,12 @@
     
                         /**
                          * Icon icons.
-                         * @member {"knownIcon"|"iconUrl"|undefined} icons
+                         * @member {"knownIcon"|"iconUrl"|"materialIcon"|undefined} icons
                          * @memberof google.apps.card.v1.Icon
                          * @instance
                          */
                         Object.defineProperty(Icon.prototype, "icons", {
-                            get: $util.oneOfGetter($oneOfFields = ["knownIcon", "iconUrl"]),
+                            get: $util.oneOfGetter($oneOfFields = ["knownIcon", "iconUrl", "materialIcon"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -21443,6 +21452,8 @@
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.altText);
                             if (message.imageType != null && Object.hasOwnProperty.call(message, "imageType"))
                                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.imageType);
+                            if (message.materialIcon != null && Object.hasOwnProperty.call(message, "materialIcon"))
+                                $root.google.apps.card.v1.MaterialIcon.encode(message.materialIcon, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             return writer;
                         };
     
@@ -21483,6 +21494,10 @@
                                     }
                                 case 2: {
                                         message.iconUrl = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.materialIcon = $root.google.apps.card.v1.MaterialIcon.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 3: {
@@ -21541,6 +21556,16 @@
                                 if (!$util.isString(message.iconUrl))
                                     return "iconUrl: string expected";
                             }
+                            if (message.materialIcon != null && message.hasOwnProperty("materialIcon")) {
+                                if (properties.icons === 1)
+                                    return "icons: multiple values";
+                                properties.icons = 1;
+                                {
+                                    var error = $root.google.apps.card.v1.MaterialIcon.verify(message.materialIcon);
+                                    if (error)
+                                        return "materialIcon." + error;
+                                }
+                            }
                             if (message.altText != null && message.hasOwnProperty("altText"))
                                 if (!$util.isString(message.altText))
                                     return "altText: string expected";
@@ -21571,6 +21596,11 @@
                                 message.knownIcon = String(object.knownIcon);
                             if (object.iconUrl != null)
                                 message.iconUrl = String(object.iconUrl);
+                            if (object.materialIcon != null) {
+                                if (typeof object.materialIcon !== "object")
+                                    throw TypeError(".google.apps.card.v1.Icon.materialIcon: object expected");
+                                message.materialIcon = $root.google.apps.card.v1.MaterialIcon.fromObject(object.materialIcon);
+                            }
                             if (object.altText != null)
                                 message.altText = String(object.altText);
                             switch (object.imageType) {
@@ -21623,6 +21653,11 @@
                                 object.altText = message.altText;
                             if (message.imageType != null && message.hasOwnProperty("imageType"))
                                 object.imageType = options.enums === String ? $root.google.apps.card.v1.Widget.ImageType[message.imageType] === undefined ? message.imageType : $root.google.apps.card.v1.Widget.ImageType[message.imageType] : message.imageType;
+                            if (message.materialIcon != null && message.hasOwnProperty("materialIcon")) {
+                                object.materialIcon = $root.google.apps.card.v1.MaterialIcon.toObject(message.materialIcon, options);
+                                if (options.oneofs)
+                                    object.icons = "materialIcon";
+                            }
                             return object;
                         };
     
@@ -21653,6 +21688,279 @@
                         };
     
                         return Icon;
+                    })();
+    
+                    v1.MaterialIcon = (function() {
+    
+                        /**
+                         * Properties of a MaterialIcon.
+                         * @memberof google.apps.card.v1
+                         * @interface IMaterialIcon
+                         * @property {string|null} [name] MaterialIcon name
+                         * @property {boolean|null} [fill] MaterialIcon fill
+                         * @property {number|null} [weight] MaterialIcon weight
+                         * @property {number|null} [grade] MaterialIcon grade
+                         */
+    
+                        /**
+                         * Constructs a new MaterialIcon.
+                         * @memberof google.apps.card.v1
+                         * @classdesc Represents a MaterialIcon.
+                         * @implements IMaterialIcon
+                         * @constructor
+                         * @param {google.apps.card.v1.IMaterialIcon=} [properties] Properties to set
+                         */
+                        function MaterialIcon(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MaterialIcon name.
+                         * @member {string} name
+                         * @memberof google.apps.card.v1.MaterialIcon
+                         * @instance
+                         */
+                        MaterialIcon.prototype.name = "";
+    
+                        /**
+                         * MaterialIcon fill.
+                         * @member {boolean} fill
+                         * @memberof google.apps.card.v1.MaterialIcon
+                         * @instance
+                         */
+                        MaterialIcon.prototype.fill = false;
+    
+                        /**
+                         * MaterialIcon weight.
+                         * @member {number} weight
+                         * @memberof google.apps.card.v1.MaterialIcon
+                         * @instance
+                         */
+                        MaterialIcon.prototype.weight = 0;
+    
+                        /**
+                         * MaterialIcon grade.
+                         * @member {number} grade
+                         * @memberof google.apps.card.v1.MaterialIcon
+                         * @instance
+                         */
+                        MaterialIcon.prototype.grade = 0;
+    
+                        /**
+                         * Creates a new MaterialIcon instance using the specified properties.
+                         * @function create
+                         * @memberof google.apps.card.v1.MaterialIcon
+                         * @static
+                         * @param {google.apps.card.v1.IMaterialIcon=} [properties] Properties to set
+                         * @returns {google.apps.card.v1.MaterialIcon} MaterialIcon instance
+                         */
+                        MaterialIcon.create = function create(properties) {
+                            return new MaterialIcon(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MaterialIcon message. Does not implicitly {@link google.apps.card.v1.MaterialIcon.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.apps.card.v1.MaterialIcon
+                         * @static
+                         * @param {google.apps.card.v1.IMaterialIcon} message MaterialIcon message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MaterialIcon.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.fill != null && Object.hasOwnProperty.call(message, "fill"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.fill);
+                            if (message.weight != null && Object.hasOwnProperty.call(message, "weight"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.weight);
+                            if (message.grade != null && Object.hasOwnProperty.call(message, "grade"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.grade);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MaterialIcon message, length delimited. Does not implicitly {@link google.apps.card.v1.MaterialIcon.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.apps.card.v1.MaterialIcon
+                         * @static
+                         * @param {google.apps.card.v1.IMaterialIcon} message MaterialIcon message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MaterialIcon.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MaterialIcon message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.apps.card.v1.MaterialIcon
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.apps.card.v1.MaterialIcon} MaterialIcon
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MaterialIcon.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.MaterialIcon();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.fill = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.weight = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.grade = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MaterialIcon message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.apps.card.v1.MaterialIcon
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.apps.card.v1.MaterialIcon} MaterialIcon
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MaterialIcon.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MaterialIcon message.
+                         * @function verify
+                         * @memberof google.apps.card.v1.MaterialIcon
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MaterialIcon.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.fill != null && message.hasOwnProperty("fill"))
+                                if (typeof message.fill !== "boolean")
+                                    return "fill: boolean expected";
+                            if (message.weight != null && message.hasOwnProperty("weight"))
+                                if (!$util.isInteger(message.weight))
+                                    return "weight: integer expected";
+                            if (message.grade != null && message.hasOwnProperty("grade"))
+                                if (!$util.isInteger(message.grade))
+                                    return "grade: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MaterialIcon message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.apps.card.v1.MaterialIcon
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.apps.card.v1.MaterialIcon} MaterialIcon
+                         */
+                        MaterialIcon.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.apps.card.v1.MaterialIcon)
+                                return object;
+                            var message = new $root.google.apps.card.v1.MaterialIcon();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.fill != null)
+                                message.fill = Boolean(object.fill);
+                            if (object.weight != null)
+                                message.weight = object.weight | 0;
+                            if (object.grade != null)
+                                message.grade = object.grade | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MaterialIcon message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.apps.card.v1.MaterialIcon
+                         * @static
+                         * @param {google.apps.card.v1.MaterialIcon} message MaterialIcon
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MaterialIcon.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.fill = false;
+                                object.weight = 0;
+                                object.grade = 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.fill != null && message.hasOwnProperty("fill"))
+                                object.fill = message.fill;
+                            if (message.weight != null && message.hasOwnProperty("weight"))
+                                object.weight = message.weight;
+                            if (message.grade != null && message.hasOwnProperty("grade"))
+                                object.grade = message.grade;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MaterialIcon to JSON.
+                         * @function toJSON
+                         * @memberof google.apps.card.v1.MaterialIcon
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MaterialIcon.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MaterialIcon
+                         * @function getTypeUrl
+                         * @memberof google.apps.card.v1.MaterialIcon
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MaterialIcon.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.apps.card.v1.MaterialIcon";
+                        };
+    
+                        return MaterialIcon;
                     })();
     
                     v1.ImageCropStyle = (function() {
@@ -30222,6 +30530,39 @@
                      */
     
                     /**
+                     * Callback as used by {@link google.chat.v1.ChatService|updateMembership}.
+                     * @memberof google.chat.v1.ChatService
+                     * @typedef UpdateMembershipCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.chat.v1.Membership} [response] Membership
+                     */
+    
+                    /**
+                     * Calls UpdateMembership.
+                     * @function updateMembership
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IUpdateMembershipRequest} request UpdateMembershipRequest message or plain object
+                     * @param {google.chat.v1.ChatService.UpdateMembershipCallback} callback Node-style callback called with the error, if any, and Membership
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(ChatService.prototype.updateMembership = function updateMembership(request, callback) {
+                        return this.rpcCall(updateMembership, $root.google.chat.v1.UpdateMembershipRequest, $root.google.chat.v1.Membership, request, callback);
+                    }, "name", { value: "UpdateMembership" });
+    
+                    /**
+                     * Calls UpdateMembership.
+                     * @function updateMembership
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IUpdateMembershipRequest} request UpdateMembershipRequest message or plain object
+                     * @returns {Promise<google.chat.v1.Membership>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
                      * Callback as used by {@link google.chat.v1.ChatService|deleteMembership}.
                      * @memberof google.chat.v1.ChatService
                      * @typedef DeleteMembershipCallback
@@ -31062,6 +31403,243 @@
                     };
     
                     return CreateMembershipRequest;
+                })();
+    
+                v1.UpdateMembershipRequest = (function() {
+    
+                    /**
+                     * Properties of an UpdateMembershipRequest.
+                     * @memberof google.chat.v1
+                     * @interface IUpdateMembershipRequest
+                     * @property {google.chat.v1.IMembership|null} [membership] UpdateMembershipRequest membership
+                     * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateMembershipRequest updateMask
+                     */
+    
+                    /**
+                     * Constructs a new UpdateMembershipRequest.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents an UpdateMembershipRequest.
+                     * @implements IUpdateMembershipRequest
+                     * @constructor
+                     * @param {google.chat.v1.IUpdateMembershipRequest=} [properties] Properties to set
+                     */
+                    function UpdateMembershipRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * UpdateMembershipRequest membership.
+                     * @member {google.chat.v1.IMembership|null|undefined} membership
+                     * @memberof google.chat.v1.UpdateMembershipRequest
+                     * @instance
+                     */
+                    UpdateMembershipRequest.prototype.membership = null;
+    
+                    /**
+                     * UpdateMembershipRequest updateMask.
+                     * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                     * @memberof google.chat.v1.UpdateMembershipRequest
+                     * @instance
+                     */
+                    UpdateMembershipRequest.prototype.updateMask = null;
+    
+                    /**
+                     * Creates a new UpdateMembershipRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.UpdateMembershipRequest
+                     * @static
+                     * @param {google.chat.v1.IUpdateMembershipRequest=} [properties] Properties to set
+                     * @returns {google.chat.v1.UpdateMembershipRequest} UpdateMembershipRequest instance
+                     */
+                    UpdateMembershipRequest.create = function create(properties) {
+                        return new UpdateMembershipRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified UpdateMembershipRequest message. Does not implicitly {@link google.chat.v1.UpdateMembershipRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.UpdateMembershipRequest
+                     * @static
+                     * @param {google.chat.v1.IUpdateMembershipRequest} message UpdateMembershipRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpdateMembershipRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.membership != null && Object.hasOwnProperty.call(message, "membership"))
+                            $root.google.chat.v1.Membership.encode(message.membership, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                            $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified UpdateMembershipRequest message, length delimited. Does not implicitly {@link google.chat.v1.UpdateMembershipRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.UpdateMembershipRequest
+                     * @static
+                     * @param {google.chat.v1.IUpdateMembershipRequest} message UpdateMembershipRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpdateMembershipRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an UpdateMembershipRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.UpdateMembershipRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.UpdateMembershipRequest} UpdateMembershipRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpdateMembershipRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.UpdateMembershipRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.membership = $root.google.chat.v1.Membership.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 2: {
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an UpdateMembershipRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.UpdateMembershipRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.UpdateMembershipRequest} UpdateMembershipRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpdateMembershipRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an UpdateMembershipRequest message.
+                     * @function verify
+                     * @memberof google.chat.v1.UpdateMembershipRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    UpdateMembershipRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.membership != null && message.hasOwnProperty("membership")) {
+                            var error = $root.google.chat.v1.Membership.verify(message.membership);
+                            if (error)
+                                return "membership." + error;
+                        }
+                        if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                            var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                            if (error)
+                                return "updateMask." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an UpdateMembershipRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.UpdateMembershipRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.UpdateMembershipRequest} UpdateMembershipRequest
+                     */
+                    UpdateMembershipRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.UpdateMembershipRequest)
+                            return object;
+                        var message = new $root.google.chat.v1.UpdateMembershipRequest();
+                        if (object.membership != null) {
+                            if (typeof object.membership !== "object")
+                                throw TypeError(".google.chat.v1.UpdateMembershipRequest.membership: object expected");
+                            message.membership = $root.google.chat.v1.Membership.fromObject(object.membership);
+                        }
+                        if (object.updateMask != null) {
+                            if (typeof object.updateMask !== "object")
+                                throw TypeError(".google.chat.v1.UpdateMembershipRequest.updateMask: object expected");
+                            message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an UpdateMembershipRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.UpdateMembershipRequest
+                     * @static
+                     * @param {google.chat.v1.UpdateMembershipRequest} message UpdateMembershipRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    UpdateMembershipRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.membership = null;
+                            object.updateMask = null;
+                        }
+                        if (message.membership != null && message.hasOwnProperty("membership"))
+                            object.membership = $root.google.chat.v1.Membership.toObject(message.membership, options);
+                        if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                            object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this UpdateMembershipRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.UpdateMembershipRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    UpdateMembershipRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for UpdateMembershipRequest
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.UpdateMembershipRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    UpdateMembershipRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.UpdateMembershipRequest";
+                    };
+    
+                    return UpdateMembershipRequest;
                 })();
     
                 v1.ListMembershipsRequest = (function() {

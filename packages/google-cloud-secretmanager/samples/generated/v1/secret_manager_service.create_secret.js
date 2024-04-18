@@ -41,7 +41,8 @@ function main(parent, secretId, secret) {
    */
   // const secretId = 'abc123'
   /**
-   *  Required. A Secret google.cloud.secretmanager.v1.Secret  with initial field values.
+   *  Required. A Secret google.cloud.secretmanager.v1.Secret  with initial
+   *  field values.
    */
   // const secret = {}
 
