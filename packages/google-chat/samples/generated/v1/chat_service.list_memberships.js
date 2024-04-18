@@ -38,8 +38,8 @@ function main(parent) {
    *  Optional. The maximum number of memberships to return. The service might
    *  return fewer than this value.
    *  If unspecified, at most 100 memberships are returned.
-   *  The maximum value is 1,000. If you use a value more than 1,000, it's
-   *  automatically changed to 1,000.
+   *  The maximum value is 1000. If you use a value more than 1000, it's
+   *  automatically changed to 1000.
    *  Negative values return an `INVALID_ARGUMENT` error.
    */
   // const pageSize = 1234
@@ -54,9 +54,9 @@ function main(parent) {
   /**
    *  Optional. A query filter.
    *  You can filter memberships by a member's role
-   *  (`role` (https://developers.google.com/chat/api/reference/rest/v1/spaces.members#membershiprole))
+   *  (`role` (https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.members#membershiprole))
    *  and type
-   *  (`member.type` (https://developers.google.com/chat/api/reference/rest/v1/User#type)).
+   *  (`member.type` (https://developers.google.com/workspace/chat/api/reference/rest/v1/User#type)).
    *  To filter by role, set `role` to `ROLE_MEMBER` or `ROLE_MANAGER`.
    *  To filter by type, set `member.type` to `HUMAN` or `BOT`.
    *  To filter by both role and type, use the `AND` operator. To filter by
@@ -92,7 +92,7 @@ function main(parent) {
    *  invited google.chat.v1.Membership.MembershipState.INVITED  memberships
    *  that don't match the filter criteria aren't returned.
    *  Currently requires user
-   *  authentication (https://developers.google.com/chat/api/guides/auth/users).
+   *  authentication (https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
    */
   // const showInvited = true
 

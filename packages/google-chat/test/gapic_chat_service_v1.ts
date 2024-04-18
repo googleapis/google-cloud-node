@@ -2118,6 +2118,140 @@ describe('v1.ChatServiceClient', () => {
     });
   });
 
+  describe('updateMembership', () => {
+    it('invokes updateMembership without error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.UpdateMembershipRequest()
+      );
+      request.membership ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.UpdateMembershipRequest',
+        ['membership', 'name']
+      );
+      request.membership.name = defaultValue1;
+      const expectedHeaderRequestParams = `membership.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.chat.v1.Membership()
+      );
+      client.innerApiCalls.updateMembership = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateMembership(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateMembership as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateMembership as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateMembership without error using callback', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.UpdateMembershipRequest()
+      );
+      request.membership ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.UpdateMembershipRequest',
+        ['membership', 'name']
+      );
+      request.membership.name = defaultValue1;
+      const expectedHeaderRequestParams = `membership.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.chat.v1.Membership()
+      );
+      client.innerApiCalls.updateMembership =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateMembership(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.chat.v1.IMembership | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateMembership as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateMembership as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateMembership with error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.UpdateMembershipRequest()
+      );
+      request.membership ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.UpdateMembershipRequest',
+        ['membership', 'name']
+      );
+      request.membership.name = defaultValue1;
+      const expectedHeaderRequestParams = `membership.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateMembership = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateMembership(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateMembership as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateMembership as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateMembership with closed client', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.UpdateMembershipRequest()
+      );
+      request.membership ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.UpdateMembershipRequest',
+        ['membership', 'name']
+      );
+      request.membership.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateMembership(request), expectedError);
+    });
+  });
+
   describe('deleteMembership', () => {
     it('invokes deleteMembership without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({

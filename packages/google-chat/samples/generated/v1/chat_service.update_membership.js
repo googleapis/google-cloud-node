@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START chat_v1_generated_ChatService_DeleteMessage_async]
+function main(membership, updateMask) {
+  // [START chat_v1_generated_ChatService_UpdateMembership_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,23 +29,17 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name of the message.
-   *  Format: `spaces/{space}/messages/{message}`
-   *  If you've set a custom ID for your message, you can use the value from the
-   *  `clientAssignedMessageId` field for `{message}`. For details, see Name a
-   *  message 
-   *  (https://developers.google.com/workspace/chat/create-messages#name_a_created_message).
+   *  Required. The membership to update. Only fields specified by `update_mask`
+   *  are updated.
    */
-  // const name = 'abc123'
+  // const membership = {}
   /**
-   *  When `true`, deleting a message also deletes its threaded replies. When
-   *  `false`, if a message has threaded replies, deletion fails.
-   *  Only applies when authenticating as a
-   *  user (https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
-   *  Has no effect when authenticating as a Chat app 
-   *  (https://developers.google.com/workspace/chat/authenticate-authorize-chat-app).
+   *  Required. The field paths to update. Separate multiple values with commas
+   *  or use `*` to update all field paths.
+   *  Currently supported field paths:
+   *  - `role`
    */
-  // const force = true
+  // const updateMask = {}
 
   // Imports the Chat library
   const {ChatServiceClient} = require('@google-apps/chat').v1;
@@ -53,19 +47,20 @@ function main(name) {
   // Instantiates a client
   const chatClient = new ChatServiceClient();
 
-  async function callDeleteMessage() {
+  async function callUpdateMembership() {
     // Construct request
     const request = {
-      name,
+      membership,
+      updateMask,
     };
 
     // Run request
-    const response = await chatClient.deleteMessage(request);
+    const response = await chatClient.updateMembership(request);
     console.log(response);
   }
 
-  callDeleteMessage();
-  // [END chat_v1_generated_ChatService_DeleteMessage_async]
+  callUpdateMembership();
+  // [END chat_v1_generated_ChatService_UpdateMembership_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -37,8 +37,8 @@ function main(parent) {
    *  The maximum number of messages returned. The service might return fewer
    *  messages than this value.
    *  If unspecified, at most 25 are returned.
-   *  The maximum value is 1,000. If you use a value more than 1,000, it's
-   *  automatically changed to 1,000.
+   *  The maximum value is 1000. If you use a value more than 1000, it's
+   *  automatically changed to 1000.
    *  Negative values return an `INVALID_ARGUMENT` error.
    */
   // const pageSize = 1234
