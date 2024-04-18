@@ -81,7 +81,8 @@ npm install @google-cloud/notifications
 // const pageToken = 'abc123'
 
 // Imports the Notifications library
-const {NotificationsApiServiceClient} = require('@google-cloud/notifications').v1beta;
+const {NotificationsApiServiceClient} =
+  require('@google-cloud/notifications').v1beta;
 
 // Instantiates a client
 const notificationsClient = new NotificationsApiServiceClient();
@@ -93,9 +94,10 @@ async function callListNotificationSubscriptions() {
   };
 
   // Run request
-  const iterable = notificationsClient.listNotificationSubscriptionsAsync(request);
+  const iterable =
+    notificationsClient.listNotificationSubscriptionsAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
