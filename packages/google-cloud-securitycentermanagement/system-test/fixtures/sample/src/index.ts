@@ -16,10 +16,19 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import * as v1 from './v1';
-const SecurityCenterManagementClient = v1.SecurityCenterManagementClient;
-type SecurityCenterManagementClient = v1.SecurityCenterManagementClient;
-export {v1, SecurityCenterManagementClient};
-export default {v1, SecurityCenterManagementClient};
-import * as protos from '../protos/protos';
-export {protos}
+import {SecurityCenterManagementClient} from '@google-cloud/securitycentermanagement';
+
+// check that the client class type name can be used
+function doStuffWithSecurityCenterManagementClient(
+  client: SecurityCenterManagementClient
+) {
+  client.close();
+}
+
+function main() {
+  // check that the client instance can be created
+  const securityCenterManagementClient = new SecurityCenterManagementClient();
+  doStuffWithSecurityCenterManagementClient(securityCenterManagementClient);
+}
+
+main();
