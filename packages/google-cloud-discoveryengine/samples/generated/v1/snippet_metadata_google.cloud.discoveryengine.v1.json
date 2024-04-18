@@ -166,7 +166,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 117,
+                    "end": 123,
                     "type": "FULL"
                 }
             ],
@@ -206,6 +206,10 @@
                     {
                         "name": "filter",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "boost_spec",
+                        "type": ".google.cloud.discoveryengine.v1.SearchRequest.BoostSpec"
                     }
                 ],
                 "resultType": ".google.cloud.discoveryengine.v1.ConverseConversationResponse",
@@ -822,7 +826,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 66,
+                    "end": 71,
                     "type": "FULL"
                 }
             ],
@@ -838,6 +842,10 @@
                     {
                         "name": "allow_missing",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
                     }
                 ],
                 "resultType": ".google.cloud.discoveryengine.v1.Document",
@@ -906,7 +914,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 125,
+                    "end": 159,
                     "type": "FULL"
                 }
             ],
@@ -928,6 +936,26 @@
                         "type": ".google.cloud.discoveryengine.v1.BigQuerySource"
                     },
                     {
+                        "name": "fhir_store_source",
+                        "type": ".google.cloud.discoveryengine.v1.FhirStoreSource"
+                    },
+                    {
+                        "name": "spanner_source",
+                        "type": ".google.cloud.discoveryengine.v1.SpannerSource"
+                    },
+                    {
+                        "name": "cloud_sql_source",
+                        "type": ".google.cloud.discoveryengine.v1.CloudSqlSource"
+                    },
+                    {
+                        "name": "firestore_source",
+                        "type": ".google.cloud.discoveryengine.v1.FirestoreSource"
+                    },
+                    {
+                        "name": "bigtable_source",
+                        "type": ".google.cloud.discoveryengine.v1.BigtableSource"
+                    },
+                    {
                         "name": "parent",
                         "type": "TYPE_STRING"
                     },
@@ -938,6 +966,10 @@
                     {
                         "name": "reconciliation_mode",
                         "type": ".google.cloud.discoveryengine.v1.ImportDocumentsRequest.ReconciliationMode"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
                     },
                     {
                         "name": "auto_generate_ids",
@@ -1236,6 +1268,70 @@
             }
         },
         {
+            "regionTag": "discoveryengine_v1_generated_RecommendationService_Recommend_async",
+            "title": "CompletionService recommend Sample",
+            "origin": "API_DEFINITION",
+            "description": " Makes a recommendation, which requires a contextual user event.",
+            "canonical": true,
+            "file": "recommendation_service.recommend.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 165,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Recommend",
+                "fullName": "google.cloud.discoveryengine.v1.RecommendationService.Recommend",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "serving_config",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "user_event",
+                        "type": ".google.cloud.discoveryengine.v1.UserEvent"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "validate_only",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "params",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "user_labels",
+                        "type": "TYPE_MESSAGE[]"
+                    }
+                ],
+                "resultType": ".google.cloud.discoveryengine.v1.RecommendResponse",
+                "client": {
+                    "shortName": "RecommendationServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1.RecommendationServiceClient"
+                },
+                "method": {
+                    "shortName": "Recommend",
+                    "fullName": "google.cloud.discoveryengine.v1.RecommendationService.Recommend",
+                    "service": {
+                        "shortName": "RecommendationService",
+                        "fullName": "google.cloud.discoveryengine.v1.RecommendationService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "discoveryengine_v1_generated_SchemaService_GetSchema_async",
             "title": "CompletionService getSchema Sample",
             "origin": "API_DEFINITION",
@@ -1466,7 +1562,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 225,
+                    "end": 232,
                     "type": "FULL"
                 }
             ],
@@ -1502,6 +1598,10 @@
                     {
                         "name": "offset",
                         "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "data_store_specs",
+                        "type": "TYPE_MESSAGE[]"
                     },
                     {
                         "name": "filter",

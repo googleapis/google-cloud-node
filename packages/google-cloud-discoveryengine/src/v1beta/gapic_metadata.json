@@ -79,11 +79,48 @@
                 "getConversation"
               ]
             },
+            "AnswerQuery": {
+              "methods": [
+                "answerQuery"
+              ]
+            },
+            "GetAnswer": {
+              "methods": [
+                "getAnswer"
+              ]
+            },
+            "CreateSession": {
+              "methods": [
+                "createSession"
+              ]
+            },
+            "DeleteSession": {
+              "methods": [
+                "deleteSession"
+              ]
+            },
+            "UpdateSession": {
+              "methods": [
+                "updateSession"
+              ]
+            },
+            "GetSession": {
+              "methods": [
+                "getSession"
+              ]
+            },
             "ListConversations": {
               "methods": [
                 "listConversations",
                 "listConversationsStream",
                 "listConversationsAsync"
+              ]
+            },
+            "ListSessions": {
+              "methods": [
+                "listSessions",
+                "listSessionsStream",
+                "listSessionsAsync"
               ]
             }
           }
@@ -116,11 +153,48 @@
                 "getConversation"
               ]
             },
+            "AnswerQuery": {
+              "methods": [
+                "answerQuery"
+              ]
+            },
+            "GetAnswer": {
+              "methods": [
+                "getAnswer"
+              ]
+            },
+            "CreateSession": {
+              "methods": [
+                "createSession"
+              ]
+            },
+            "DeleteSession": {
+              "methods": [
+                "deleteSession"
+              ]
+            },
+            "UpdateSession": {
+              "methods": [
+                "updateSession"
+              ]
+            },
+            "GetSession": {
+              "methods": [
+                "getSession"
+              ]
+            },
             "ListConversations": {
               "methods": [
                 "listConversations",
                 "listConversationsStream",
                 "listConversationsAsync"
+              ]
+            },
+            "ListSessions": {
+              "methods": [
+                "listSessions",
+                "listSessionsStream",
+                "listSessionsAsync"
               ]
             }
           }
@@ -298,6 +372,16 @@
                 "getEngine"
               ]
             },
+            "PauseEngine": {
+              "methods": [
+                "pauseEngine"
+              ]
+            },
+            "ResumeEngine": {
+              "methods": [
+                "resumeEngine"
+              ]
+            },
             "CreateEngine": {
               "methods": [
                 "createEngine"
@@ -306,6 +390,11 @@
             "DeleteEngine": {
               "methods": [
                 "deleteEngine"
+              ]
+            },
+            "TuneEngine": {
+              "methods": [
+                "tuneEngine"
               ]
             },
             "ListEngines": {
@@ -330,6 +419,16 @@
                 "getEngine"
               ]
             },
+            "PauseEngine": {
+              "methods": [
+                "pauseEngine"
+              ]
+            },
+            "ResumeEngine": {
+              "methods": [
+                "resumeEngine"
+              ]
+            },
             "CreateEngine": {
               "methods": [
                 "createEngine"
@@ -340,11 +439,64 @@
                 "deleteEngine"
               ]
             },
+            "TuneEngine": {
+              "methods": [
+                "tuneEngine"
+              ]
+            },
             "ListEngines": {
               "methods": [
                 "listEngines",
                 "listEnginesStream",
                 "listEnginesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "GroundedGenerationService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "GroundedGenerationServiceClient",
+          "rpcs": {
+            "CheckGrounding": {
+              "methods": [
+                "checkGrounding"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "GroundedGenerationServiceClient",
+          "rpcs": {
+            "CheckGrounding": {
+              "methods": [
+                "checkGrounding"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RankService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RankServiceClient",
+          "rpcs": {
+            "Rank": {
+              "methods": [
+                "rank"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RankServiceClient",
+          "rpcs": {
+            "Rank": {
+              "methods": [
+                "rank"
               ]
             }
           }

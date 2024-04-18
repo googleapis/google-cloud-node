@@ -816,6 +816,9 @@ export class DocumentServiceClient {
    *   If set to true, and the
    *   {@link protos.google.cloud.discoveryengine.v1.Document|Document} is not found, a new
    *   {@link protos.google.cloud.discoveryengine.v1.Document|Document} will be created.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Indicates which fields in the provided imported 'document' to update. If
+   *   not set, will by default update all fields.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1016,6 +1019,16 @@ export class DocumentServiceClient {
    *   Cloud Storage location for the input content.
    * @param {google.cloud.discoveryengine.v1.BigQuerySource} request.bigquerySource
    *   BigQuery input source.
+   * @param {google.cloud.discoveryengine.v1.FhirStoreSource} request.fhirStoreSource
+   *   FhirStore input source.
+   * @param {google.cloud.discoveryengine.v1.SpannerSource} request.spannerSource
+   *   Spanner input source.
+   * @param {google.cloud.discoveryengine.v1.CloudSqlSource} request.cloudSqlSource
+   *   Cloud SQL input source.
+   * @param {google.cloud.discoveryengine.v1.FirestoreSource} request.firestoreSource
+   *   Firestore input source.
+   * @param {google.cloud.discoveryengine.v1.BigtableSource} request.bigtableSource
+   *   Cloud Bigtable input source.
    * @param {string} request.parent
    *   Required. The parent branch resource name, such as
    *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`.
@@ -1026,6 +1039,9 @@ export class DocumentServiceClient {
    *   The mode of reconciliation between existing documents and the documents to
    *   be imported. Defaults to
    *   {@link protos.google.cloud.discoveryengine.v1.ImportDocumentsRequest.ReconciliationMode.INCREMENTAL|ReconciliationMode.INCREMENTAL}.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Indicates which fields in the provided imported documents to update. If
+   *   not set, the default is to update all fields.
    * @param {boolean} request.autoGenerateIds
    *   Whether to automatically generate IDs for the documents if absent.
    *
@@ -1040,41 +1056,53 @@ export class DocumentServiceClient {
    *   {@link protos.google.cloud.discoveryengine.v1.ImportDocumentsRequest.id_field|id_field},
    *   otherwise, documents without IDs fail to be imported.
    *
-   *   Only set this field when using
-   *   {@link protos.google.cloud.discoveryengine.v1.GcsSource|GcsSource} or
-   *   {@link protos.google.cloud.discoveryengine.v1.BigQuerySource|BigQuerySource}, and when
+   *   Supported data sources:
+   *
+   *   * {@link protos.google.cloud.discoveryengine.v1.GcsSource|GcsSource}.
    *   {@link protos.google.cloud.discoveryengine.v1.GcsSource.data_schema|GcsSource.data_schema}
-   *   or
+   *   must be `custom` or `csv`. Otherwise, an INVALID_ARGUMENT error is thrown.
+   *   * {@link protos.google.cloud.discoveryengine.v1.BigQuerySource|BigQuerySource}.
    *   {@link protos.google.cloud.discoveryengine.v1.BigQuerySource.data_schema|BigQuerySource.data_schema}
-   *   is `custom` or `csv`. Otherwise, an INVALID_ARGUMENT error is thrown.
+   *   must be `custom` or `csv`. Otherwise, an INVALID_ARGUMENT error is thrown.
+   *   * {@link protos.google.cloud.discoveryengine.v1.SpannerSource|SpannerSource}.
+   *   * {@link protos.google.cloud.discoveryengine.v1.CloudSqlSource|CloudSqlSource}.
+   *   * {@link protos.google.cloud.discoveryengine.v1.FirestoreSource|FirestoreSource}.
+   *   * {@link protos.google.cloud.discoveryengine.v1.BigtableSource|BigtableSource}.
    * @param {string} request.idField
-   *   The field in the Cloud Storage and BigQuery sources that indicates the
-   *   unique IDs of the documents.
+   *   The field indicates the ID field or column to be used as unique IDs of
+   *   the documents.
    *
    *   For {@link protos.google.cloud.discoveryengine.v1.GcsSource|GcsSource} it is the key of
    *   the JSON field. For instance, `my_id` for JSON `{"my_id": "some_uuid"}`.
-   *   For {@link protos.google.cloud.discoveryengine.v1.BigQuerySource|BigQuerySource} it is
-   *   the column name of the BigQuery table where the unique ids are stored.
+   *   For others, it may be the column name of the table where the unique ids are
+   *   stored.
    *
-   *   The values of the JSON field or the BigQuery column are used as the
+   *   The values of the JSON field or the table column are used as the
    *   {@link protos.google.cloud.discoveryengine.v1.Document.id|Document.id}s. The JSON field
-   *   or the BigQuery column must be of string type, and the values must be set
-   *   as valid strings conform to [RFC-1034](https://tools.ietf.org/html/rfc1034)
+   *   or the table column must be of string type, and the values must be set as
+   *   valid strings conform to [RFC-1034](https://tools.ietf.org/html/rfc1034)
    *   with 1-63 characters. Otherwise, documents without valid IDs fail to be
    *   imported.
    *
-   *   Only set this field when using
-   *   {@link protos.google.cloud.discoveryengine.v1.GcsSource|GcsSource} or
-   *   {@link protos.google.cloud.discoveryengine.v1.BigQuerySource|BigQuerySource}, and when
-   *   {@link protos.google.cloud.discoveryengine.v1.GcsSource.data_schema|GcsSource.data_schema}
-   *   or
-   *   {@link protos.google.cloud.discoveryengine.v1.BigQuerySource.data_schema|BigQuerySource.data_schema}
-   *   is `custom`. And only set this field when
+   *   Only set this field when
    *   {@link protos.google.cloud.discoveryengine.v1.ImportDocumentsRequest.auto_generate_ids|auto_generate_ids}
    *   is unset or set as `false`. Otherwise, an INVALID_ARGUMENT error is thrown.
    *
    *   If it is unset, a default value `_id` is used when importing from the
    *   allowed data sources.
+   *
+   *   Supported data sources:
+   *
+   *   * {@link protos.google.cloud.discoveryengine.v1.GcsSource|GcsSource}.
+   *   {@link protos.google.cloud.discoveryengine.v1.GcsSource.data_schema|GcsSource.data_schema}
+   *   must be `custom` or `csv`. Otherwise, an INVALID_ARGUMENT error is thrown.
+   *   * {@link protos.google.cloud.discoveryengine.v1.BigQuerySource|BigQuerySource}.
+   *   {@link protos.google.cloud.discoveryengine.v1.BigQuerySource.data_schema|BigQuerySource.data_schema}
+   *   must be `custom` or `csv`. Otherwise, an INVALID_ARGUMENT error is thrown.
+   *   * {@link protos.google.cloud.discoveryengine.v1.SpannerSource|SpannerSource}.
+   *   * {@link protos.google.cloud.discoveryengine.v1.CloudSqlSource|CloudSqlSource}.
+   *   * {@link protos.google.cloud.discoveryengine.v1.FirestoreSource|FirestoreSource}.
+   *   * {@link protos.google.cloud.discoveryengine.v1.BigtableSource|BigtableSource}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

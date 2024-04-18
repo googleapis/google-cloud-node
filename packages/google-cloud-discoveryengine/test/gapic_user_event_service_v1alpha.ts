@@ -1584,6 +1584,44 @@ describe('v1alpha.UserEventServiceClient', () => {
       });
     });
 
+    describe('project', () => {
+      const fakePath = '/rendered/path/project';
+      const expectedParameters = {
+        project: 'projectValue',
+      };
+      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectPath', () => {
+        const result = client.projectPath('projectValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectName', () => {
+        const result = client.matchProjectFromProjectName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('projectLocationCollectionDataStore', () => {
       const fakePath = '/rendered/path/projectLocationCollectionDataStore';
       const expectedParameters = {
@@ -2484,6 +2522,278 @@ describe('v1alpha.UserEventServiceClient', () => {
       });
     });
 
+    describe('projectLocationCollectionDataStoreSession', () => {
+      const fakePath =
+        '/rendered/path/projectLocationCollectionDataStoreSession';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        collection: 'collectionValue',
+        data_store: 'dataStoreValue',
+        session: 'sessionValue',
+      };
+      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationCollectionDataStoreSessionPath', () => {
+        const result = client.projectLocationCollectionDataStoreSessionPath(
+          'projectValue',
+          'locationValue',
+          'collectionValue',
+          'dataStoreValue',
+          'sessionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSessionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationCollectionDataStoreSessionName', () => {
+        const result =
+          client.matchProjectFromProjectLocationCollectionDataStoreSessionName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSessionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationCollectionDataStoreSessionName', () => {
+        const result =
+          client.matchLocationFromProjectLocationCollectionDataStoreSessionName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSessionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCollectionFromProjectLocationCollectionDataStoreSessionName', () => {
+        const result =
+          client.matchCollectionFromProjectLocationCollectionDataStoreSessionName(
+            fakePath
+          );
+        assert.strictEqual(result, 'collectionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSessionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStoreFromProjectLocationCollectionDataStoreSessionName', () => {
+        const result =
+          client.matchDataStoreFromProjectLocationCollectionDataStoreSessionName(
+            fakePath
+          );
+        assert.strictEqual(result, 'dataStoreValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSessionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSessionFromProjectLocationCollectionDataStoreSessionName', () => {
+        const result =
+          client.matchSessionFromProjectLocationCollectionDataStoreSessionName(
+            fakePath
+          );
+        assert.strictEqual(result, 'sessionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSessionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationCollectionDataStoreSessionAnswer', () => {
+      const fakePath =
+        '/rendered/path/projectLocationCollectionDataStoreSessionAnswer';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        collection: 'collectionValue',
+        data_store: 'dataStoreValue',
+        session: 'sessionValue',
+        answer: 'answerValue',
+      };
+      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationCollectionDataStoreSessionAnswerPath', () => {
+        const result =
+          client.projectLocationCollectionDataStoreSessionAnswerPath(
+            'projectValue',
+            'locationValue',
+            'collectionValue',
+            'dataStoreValue',
+            'sessionValue',
+            'answerValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSessionAnswerPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationCollectionDataStoreSessionAnswerName', () => {
+        const result =
+          client.matchProjectFromProjectLocationCollectionDataStoreSessionAnswerName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSessionAnswerPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationCollectionDataStoreSessionAnswerName', () => {
+        const result =
+          client.matchLocationFromProjectLocationCollectionDataStoreSessionAnswerName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSessionAnswerPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCollectionFromProjectLocationCollectionDataStoreSessionAnswerName', () => {
+        const result =
+          client.matchCollectionFromProjectLocationCollectionDataStoreSessionAnswerName(
+            fakePath
+          );
+        assert.strictEqual(result, 'collectionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSessionAnswerPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStoreFromProjectLocationCollectionDataStoreSessionAnswerName', () => {
+        const result =
+          client.matchDataStoreFromProjectLocationCollectionDataStoreSessionAnswerName(
+            fakePath
+          );
+        assert.strictEqual(result, 'dataStoreValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSessionAnswerPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSessionFromProjectLocationCollectionDataStoreSessionAnswerName', () => {
+        const result =
+          client.matchSessionFromProjectLocationCollectionDataStoreSessionAnswerName(
+            fakePath
+          );
+        assert.strictEqual(result, 'sessionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSessionAnswerPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAnswerFromProjectLocationCollectionDataStoreSessionAnswerName', () => {
+        const result =
+          client.matchAnswerFromProjectLocationCollectionDataStoreSessionAnswerName(
+            fakePath
+          );
+        assert.strictEqual(result, 'answerValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSessionAnswerPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('projectLocationCollectionDataStoreSiteSearchEngine', () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionDataStoreSiteSearchEngine';
@@ -2963,6 +3273,276 @@ describe('v1alpha.UserEventServiceClient', () => {
           (
             client.pathTemplates
               .projectLocationCollectionEngineServingConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationCollectionEngineSession', () => {
+      const fakePath = '/rendered/path/projectLocationCollectionEngineSession';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        collection: 'collectionValue',
+        engine: 'engineValue',
+        session: 'sessionValue',
+      };
+      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationCollectionEngineSessionPath', () => {
+        const result = client.projectLocationCollectionEngineSessionPath(
+          'projectValue',
+          'locationValue',
+          'collectionValue',
+          'engineValue',
+          'sessionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineSessionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationCollectionEngineSessionName', () => {
+        const result =
+          client.matchProjectFromProjectLocationCollectionEngineSessionName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineSessionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationCollectionEngineSessionName', () => {
+        const result =
+          client.matchLocationFromProjectLocationCollectionEngineSessionName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineSessionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCollectionFromProjectLocationCollectionEngineSessionName', () => {
+        const result =
+          client.matchCollectionFromProjectLocationCollectionEngineSessionName(
+            fakePath
+          );
+        assert.strictEqual(result, 'collectionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineSessionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEngineFromProjectLocationCollectionEngineSessionName', () => {
+        const result =
+          client.matchEngineFromProjectLocationCollectionEngineSessionName(
+            fakePath
+          );
+        assert.strictEqual(result, 'engineValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineSessionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSessionFromProjectLocationCollectionEngineSessionName', () => {
+        const result =
+          client.matchSessionFromProjectLocationCollectionEngineSessionName(
+            fakePath
+          );
+        assert.strictEqual(result, 'sessionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineSessionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationCollectionEngineSessionAnswer', () => {
+      const fakePath =
+        '/rendered/path/projectLocationCollectionEngineSessionAnswer';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        collection: 'collectionValue',
+        engine: 'engineValue',
+        session: 'sessionValue',
+        answer: 'answerValue',
+      };
+      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationCollectionEngineSessionAnswerPath', () => {
+        const result = client.projectLocationCollectionEngineSessionAnswerPath(
+          'projectValue',
+          'locationValue',
+          'collectionValue',
+          'engineValue',
+          'sessionValue',
+          'answerValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineSessionAnswerPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationCollectionEngineSessionAnswerName', () => {
+        const result =
+          client.matchProjectFromProjectLocationCollectionEngineSessionAnswerName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineSessionAnswerPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationCollectionEngineSessionAnswerName', () => {
+        const result =
+          client.matchLocationFromProjectLocationCollectionEngineSessionAnswerName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineSessionAnswerPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCollectionFromProjectLocationCollectionEngineSessionAnswerName', () => {
+        const result =
+          client.matchCollectionFromProjectLocationCollectionEngineSessionAnswerName(
+            fakePath
+          );
+        assert.strictEqual(result, 'collectionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineSessionAnswerPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEngineFromProjectLocationCollectionEngineSessionAnswerName', () => {
+        const result =
+          client.matchEngineFromProjectLocationCollectionEngineSessionAnswerName(
+            fakePath
+          );
+        assert.strictEqual(result, 'engineValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineSessionAnswerPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSessionFromProjectLocationCollectionEngineSessionAnswerName', () => {
+        const result =
+          client.matchSessionFromProjectLocationCollectionEngineSessionAnswerName(
+            fakePath
+          );
+        assert.strictEqual(result, 'sessionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineSessionAnswerPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAnswerFromProjectLocationCollectionEngineSessionAnswerName', () => {
+        const result =
+          client.matchAnswerFromProjectLocationCollectionEngineSessionAnswerName(
+            fakePath
+          );
+        assert.strictEqual(result, 'answerValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineSessionAnswerPathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -3706,6 +4286,226 @@ describe('v1alpha.UserEventServiceClient', () => {
           (
             client.pathTemplates
               .projectLocationDataStoreServingConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationDataStoreSession', () => {
+      const fakePath = '/rendered/path/projectLocationDataStoreSession';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        data_store: 'dataStoreValue',
+        session: 'sessionValue',
+      };
+      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationDataStoreSessionPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationDataStoreSessionPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationDataStoreSessionPath', () => {
+        const result = client.projectLocationDataStoreSessionPath(
+          'projectValue',
+          'locationValue',
+          'dataStoreValue',
+          'sessionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationDataStoreSessionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationDataStoreSessionName', () => {
+        const result =
+          client.matchProjectFromProjectLocationDataStoreSessionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationDataStoreSessionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationDataStoreSessionName', () => {
+        const result =
+          client.matchLocationFromProjectLocationDataStoreSessionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationDataStoreSessionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStoreFromProjectLocationDataStoreSessionName', () => {
+        const result =
+          client.matchDataStoreFromProjectLocationDataStoreSessionName(
+            fakePath
+          );
+        assert.strictEqual(result, 'dataStoreValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationDataStoreSessionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSessionFromProjectLocationDataStoreSessionName', () => {
+        const result =
+          client.matchSessionFromProjectLocationDataStoreSessionName(fakePath);
+        assert.strictEqual(result, 'sessionValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationDataStoreSessionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationDataStoreSessionAnswer', () => {
+      const fakePath = '/rendered/path/projectLocationDataStoreSessionAnswer';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        data_store: 'dataStoreValue',
+        session: 'sessionValue',
+        answer: 'answerValue',
+      };
+      const client = new usereventserviceModule.v1alpha.UserEventServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationDataStoreSessionAnswerPath', () => {
+        const result = client.projectLocationDataStoreSessionAnswerPath(
+          'projectValue',
+          'locationValue',
+          'dataStoreValue',
+          'sessionValue',
+          'answerValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSessionAnswerPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationDataStoreSessionAnswerName', () => {
+        const result =
+          client.matchProjectFromProjectLocationDataStoreSessionAnswerName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSessionAnswerPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationDataStoreSessionAnswerName', () => {
+        const result =
+          client.matchLocationFromProjectLocationDataStoreSessionAnswerName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSessionAnswerPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStoreFromProjectLocationDataStoreSessionAnswerName', () => {
+        const result =
+          client.matchDataStoreFromProjectLocationDataStoreSessionAnswerName(
+            fakePath
+          );
+        assert.strictEqual(result, 'dataStoreValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSessionAnswerPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSessionFromProjectLocationDataStoreSessionAnswerName', () => {
+        const result =
+          client.matchSessionFromProjectLocationDataStoreSessionAnswerName(
+            fakePath
+          );
+        assert.strictEqual(result, 'sessionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSessionAnswerPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAnswerFromProjectLocationDataStoreSessionAnswerName', () => {
+        const result =
+          client.matchAnswerFromProjectLocationDataStoreSessionAnswerName(
+            fakePath
+          );
+        assert.strictEqual(result, 'answerValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSessionAnswerPathTemplate
               .match as SinonStub
           )
             .getCall(-1)

@@ -30,6 +30,8 @@ const DocumentServiceClient = v1.DocumentServiceClient;
 type DocumentServiceClient = v1.DocumentServiceClient;
 const EngineServiceClient = v1.EngineServiceClient;
 type EngineServiceClient = v1.EngineServiceClient;
+const RecommendationServiceClient = v1.RecommendationServiceClient;
+type RecommendationServiceClient = v1.RecommendationServiceClient;
 const SchemaServiceClient = v1.SchemaServiceClient;
 type SchemaServiceClient = v1.SchemaServiceClient;
 const SearchServiceClient = v1.SearchServiceClient;
@@ -48,6 +50,7 @@ export {
   DataStoreServiceClient,
   DocumentServiceClient,
   EngineServiceClient,
+  RecommendationServiceClient,
   SchemaServiceClient,
   SearchServiceClient,
   SiteSearchEngineServiceClient,
@@ -62,6 +65,7 @@ export default {
   DataStoreServiceClient,
   DocumentServiceClient,
   EngineServiceClient,
+  RecommendationServiceClient,
   SchemaServiceClient,
   SearchServiceClient,
   SiteSearchEngineServiceClient,
