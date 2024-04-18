@@ -1,5 +1,5 @@
 {
-  "name": "@google-cloud/quota",
+  "name": "@google-shopping/quota",
   "version": "0.1.0",
   "description": "Merchant API client for Node.js",
   "repository": {
