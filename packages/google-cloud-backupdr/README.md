@@ -104,7 +104,7 @@ async function callListManagementServers() {
   // Run request
   const iterable = backupdrClient.listManagementServersAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
