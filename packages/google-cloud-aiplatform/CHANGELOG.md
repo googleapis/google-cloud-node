@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.19.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.18.0...aiplatform-v3.19.0) (2024-04-18)
+
+
+### Features
+
+* Add model_monitor resource and APIs to public v1beta1 client library ([#5234](https://github.com/googleapis/google-cloud-node/issues/5234)) ([cecd67c](https://github.com/googleapis/google-cloud-node/commit/cecd67c9f25e687c0a0081e4f424b70525604d72))
+
 ## [3.18.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.17.0...aiplatform-v3.18.0) (2024-04-10)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.2.0...generativelanguage-v2.3.0) (2024-04-18)
+
+
+### Features
+
+* [generativelanguage] Add rest binding for tuned models ([#5228](https://github.com/googleapis/google-cloud-node/issues/5228)) ([b0ddbbe](https://github.com/googleapis/google-cloud-node/commit/b0ddbbecf97de696c7699efbb351e8f862f7d8cf))
+
 ## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.1.1...generativelanguage-v2.2.0) (2024-04-05)
 
 

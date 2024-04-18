@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/inventories-v0.3.0...inventories-v0.4.0) (2024-04-18)
+
+
+### Features
+
+* [merchantapi] fix inventories sub-API publication by adding correct child_type in the API proto ([#5231](https://github.com/googleapis/google-cloud-node/issues/5231)) ([773b2b6](https://github.com/googleapis/google-cloud-node/commit/773b2b684a2ac5f67b66fd47b55a240873e5f138))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/inventories-v0.2.0...inventories-v0.3.0) (2024-03-29)
 
 

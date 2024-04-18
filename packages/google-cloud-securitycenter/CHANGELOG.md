@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [8.7.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v8.6.0...security-center-v8.7.0) (2024-04-18)
+
+
+### Features
+
+* [securitycenter] Add cloud_armor field to finding's list of attributes ([#5245](https://github.com/googleapis/google-cloud-node/issues/5245)) ([1ffd246](https://github.com/googleapis/google-cloud-node/commit/1ffd2461e581efe40f9cf950e3c0886e4613380c))
+
 ## [8.6.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v8.5.0...security-center-v8.6.0) (2024-03-29)
 
 

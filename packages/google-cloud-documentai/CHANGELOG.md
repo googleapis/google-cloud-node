@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.5.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v8.4.0...documentai-v8.5.0) (2024-04-18)
+
+
+### Features
+
+* [documentai] A new message `FoundationModelTuningOptions` is added ([#5242](https://github.com/googleapis/google-cloud-node/issues/5242)) ([71b7139](https://github.com/googleapis/google-cloud-node/commit/71b713900dbb596d42fe6f3dd9a9f328612fa955))
+
 ## [8.4.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v8.3.0...documentai-v8.4.0) (2024-04-16)
 
 
