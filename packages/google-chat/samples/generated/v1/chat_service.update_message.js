@@ -49,7 +49,7 @@ function main(message) {
   /**
    *  Optional. If `true` and the message isn't found, a new message is created
    *  and `updateMask` is ignored. The specified message ID must be
-   *  client-assigned (https://developers.google.com/chat/api/guides/v1/messages/create#name_a_created_message)
+   *  client-assigned (https://developers.google.com/workspace/chat/create-messages#name_a_created_message)
    *  or the request fails.
    */
   // const allowMissing = true

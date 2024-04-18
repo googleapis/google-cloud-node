@@ -538,6 +538,10 @@ export class GenerativeServiceClient {
    *
    *   Note: Specifying a `title` for `RETRIEVAL_DOCUMENT` provides better quality
    *   embeddings for retrieval.
+   * @param {number} [request.outputDimensionality]
+   *   Optional. Optional reduced dimension for the output embedding. If set,
+   *   excessive values in the output embedding are truncated from the end.
+   *   Supported by `models/text-embedding-latest`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

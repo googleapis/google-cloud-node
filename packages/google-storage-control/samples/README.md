@@ -13,10 +13,14 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Storage_control.create_folder](#storage_control.create_folder)
+  * [Storage_control.create_managed_folder](#storage_control.create_managed_folder)
   * [Storage_control.delete_folder](#storage_control.delete_folder)
+  * [Storage_control.delete_managed_folder](#storage_control.delete_managed_folder)
   * [Storage_control.get_folder](#storage_control.get_folder)
+  * [Storage_control.get_managed_folder](#storage_control.get_managed_folder)
   * [Storage_control.get_storage_layout](#storage_control.get_storage_layout)
   * [Storage_control.list_folders](#storage_control.list_folders)
+  * [Storage_control.list_managed_folders](#storage_control.list_managed_folders)
   * [Storage_control.rename_folder](#storage_control.rename_folder)
   * [Quickstart](#quickstart)
 
@@ -52,6 +56,23 @@ __Usage:__
 
 
 
+### Storage_control.create_managed_folder
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.create_managed_folder.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storage-control/samples/generated/v2/storage_control.create_managed_folder.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-storage-control/samples/generated/v2/storage_control.create_managed_folder.js`
+
+
+-----
+
+
+
+
 ### Storage_control.delete_folder
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.delete_folder.js).
@@ -69,6 +90,23 @@ __Usage:__
 
 
 
+### Storage_control.delete_managed_folder
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.delete_managed_folder.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storage-control/samples/generated/v2/storage_control.delete_managed_folder.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-storage-control/samples/generated/v2/storage_control.delete_managed_folder.js`
+
+
+-----
+
+
+
+
 ### Storage_control.get_folder
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.get_folder.js).
@@ -79,6 +117,23 @@ __Usage:__
 
 
 `node packages/google-storage-control/samples/generated/v2/storage_control.get_folder.js`
+
+
+-----
+
+
+
+
+### Storage_control.get_managed_folder
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.get_managed_folder.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storage-control/samples/generated/v2/storage_control.get_managed_folder.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-storage-control/samples/generated/v2/storage_control.get_managed_folder.js`
 
 
 -----
@@ -113,6 +168,23 @@ __Usage:__
 
 
 `node packages/google-storage-control/samples/generated/v2/storage_control.list_folders.js`
+
+
+-----
+
+
+
+
+### Storage_control.list_managed_folders
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.list_managed_folders.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storage-control/samples/generated/v2/storage_control.list_managed_folders.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-storage-control/samples/generated/v2/storage_control.list_managed_folders.js`
 
 
 -----

@@ -204,6 +204,9 @@ export class RegionalInventoryServiceClient {
       localInventoryPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/products/{product}/localInventories/{store_code}'
       ),
+      productPathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}/products/{product}'
+      ),
       regionalInventoryPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/products/{product}/regionalInventories/{region}'
       ),
@@ -893,6 +896,42 @@ export class RegionalInventoryServiceClient {
     return this.pathTemplates.localInventoryPathTemplate.match(
       localInventoryName
     ).store_code;
+  }
+
+  /**
+   * Return a fully-qualified product resource name string.
+   *
+   * @param {string} account
+   * @param {string} product
+   * @returns {string} Resource name string.
+   */
+  productPath(account: string, product: string) {
+    return this.pathTemplates.productPathTemplate.render({
+      account: account,
+      product: product,
+    });
+  }
+
+  /**
+   * Parse the account from Product resource.
+   *
+   * @param {string} productName
+   *   A fully-qualified path representing Product resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromProductName(productName: string) {
+    return this.pathTemplates.productPathTemplate.match(productName).account;
+  }
+
+  /**
+   * Parse the product from Product resource.
+   *
+   * @param {string} productName
+   *   A fully-qualified path representing Product resource.
+   * @returns {string} A string representing the product.
+   */
+  matchProductFromProductName(productName: string) {
+    return this.pathTemplates.productPathTemplate.match(productName).product;
   }
 
   /**

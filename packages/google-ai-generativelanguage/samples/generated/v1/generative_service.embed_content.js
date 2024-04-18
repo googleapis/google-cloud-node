@@ -52,6 +52,12 @@ function main(model, content) {
    *  embeddings for retrieval.
    */
   // const title = 'abc123'
+  /**
+   *  Optional. Optional reduced dimension for the output embedding. If set,
+   *  excessive values in the output embedding are truncated from the end.
+   *  Supported by `models/text-embedding-latest`.
+   */
+  // const outputDimensionality = 1234
 
   // Imports the Generativelanguage library
   const {GenerativeServiceClient} = require('@google-ai/generativelanguage').v1;

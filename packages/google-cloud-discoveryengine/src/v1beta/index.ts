@@ -21,6 +21,8 @@ export {ConversationalSearchServiceClient} from './conversational_search_service
 export {DataStoreServiceClient} from './data_store_service_client';
 export {DocumentServiceClient} from './document_service_client';
 export {EngineServiceClient} from './engine_service_client';
+export {GroundedGenerationServiceClient} from './grounded_generation_service_client';
+export {RankServiceClient} from './rank_service_client';
 export {RecommendationServiceClient} from './recommendation_service_client';
 export {SchemaServiceClient} from './schema_service_client';
 export {SearchServiceClient} from './search_service_client';

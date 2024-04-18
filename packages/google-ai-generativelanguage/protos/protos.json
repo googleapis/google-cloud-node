@@ -140,13 +140,19 @@
                           "options": {
                             "(google.api.http).post": "/v1/{model=models/*}:generateContent",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{model=tunedModels/*}:generateContent",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "model,contents"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1/{model=models/*}:generateContent",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{model=tunedModels/*}:generateContent",
+                                  "body": "*"
+                                }
                               }
                             },
                             {
@@ -244,7 +250,9 @@
                         "RETRIEVAL_DOCUMENT": 2,
                         "SEMANTIC_SIMILARITY": 3,
                         "CLASSIFICATION": 4,
-                        "CLUSTERING": 5
+                        "CLUSTERING": 5,
+                        "QUESTION_ANSWERING": 6,
+                        "FACT_VERIFICATION": 7
                       }
                     },
                     "GenerateContentRequest": {
@@ -484,6 +492,11 @@
                           "oneof": [
                             "title"
                           ]
+                        },
+                        "_outputDimensionality": {
+                          "oneof": [
+                            "outputDimensionality"
+                          ]
                         }
                       },
                       "fields": {
@@ -513,6 +526,14 @@
                         "title": {
                           "type": "string",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "outputDimensionality": {
+                          "type": "int32",
+                          "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
@@ -1960,7 +1981,9 @@
                         "RETRIEVAL_DOCUMENT": 2,
                         "SEMANTIC_SIMILARITY": 3,
                         "CLASSIFICATION": 4,
-                        "CLUSTERING": 5
+                        "CLUSTERING": 5,
+                        "QUESTION_ANSWERING": 6,
+                        "FACT_VERIFICATION": 7
                       }
                     },
                     "GenerateContentRequest": {
@@ -2109,6 +2132,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
+                          }
+                        },
+                        "responseMimeType": {
+                          "type": "string",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -2508,6 +2538,11 @@
                           "oneof": [
                             "title"
                           ]
+                        },
+                        "_outputDimensionality": {
+                          "oneof": [
+                            "outputDimensionality"
+                          ]
                         }
                       },
                       "fields": {
@@ -2537,6 +2572,14 @@
                         "title": {
                           "type": "string",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "outputDimensionality": {
+                          "type": "int32",
+                          "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true

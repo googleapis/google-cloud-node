@@ -30,6 +30,21 @@
                 "getStorageLayout"
               ]
             },
+            "CreateManagedFolder": {
+              "methods": [
+                "createManagedFolder"
+              ]
+            },
+            "DeleteManagedFolder": {
+              "methods": [
+                "deleteManagedFolder"
+              ]
+            },
+            "GetManagedFolder": {
+              "methods": [
+                "getManagedFolder"
+              ]
+            },
             "RenameFolder": {
               "methods": [
                 "renameFolder"
@@ -40,6 +55,13 @@
                 "listFolders",
                 "listFoldersStream",
                 "listFoldersAsync"
+              ]
+            },
+            "ListManagedFolders": {
+              "methods": [
+                "listManagedFolders",
+                "listManagedFoldersStream",
+                "listManagedFoldersAsync"
               ]
             }
           }
@@ -67,6 +89,21 @@
                 "getStorageLayout"
               ]
             },
+            "CreateManagedFolder": {
+              "methods": [
+                "createManagedFolder"
+              ]
+            },
+            "DeleteManagedFolder": {
+              "methods": [
+                "deleteManagedFolder"
+              ]
+            },
+            "GetManagedFolder": {
+              "methods": [
+                "getManagedFolder"
+              ]
+            },
             "RenameFolder": {
               "methods": [
                 "renameFolder"
@@ -77,6 +114,13 @@
                 "listFolders",
                 "listFoldersStream",
                 "listFoldersAsync"
+              ]
+            },
+            "ListManagedFolders": {
+              "methods": [
+                "listManagedFolders",
+                "listManagedFoldersStream",
+                "listManagedFoldersAsync"
               ]
             }
           }
