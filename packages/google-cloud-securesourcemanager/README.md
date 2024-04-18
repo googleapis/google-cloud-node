@@ -86,7 +86,8 @@ npm install @google-cloud/securesourcemanager
 // const orderBy = 'abc123'
 
 // Imports the Securesourcemanager library
-const {SecureSourceManagerClient} = require('@google-cloud/securesourcemanager').v1;
+const {SecureSourceManagerClient} =
+  require('@google-cloud/securesourcemanager').v1;
 
 // Instantiates a client
 const securesourcemanagerClient = new SecureSourceManagerClient();
@@ -100,7 +101,7 @@ async function callListInstances() {
   // Run request
   const iterable = securesourcemanagerClient.listInstancesAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
