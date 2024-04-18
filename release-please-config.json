@@ -172,7 +172,8 @@
     "packages/google-cloud-apphub": {},
     "packages/google-storage-control": {},
     "packages/google-shopping-merchant-quota": {},
-    "packages/google-cloud-securesourcemanager": {}
+    "packages/google-cloud-securesourcemanager": {},
+    "packages/google-cloud-securitycentermanagement": {}
   },
   "plugins": [
     {
