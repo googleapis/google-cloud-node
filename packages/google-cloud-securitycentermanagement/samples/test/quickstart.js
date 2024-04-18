@@ -19,7 +19,7 @@ const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
 const {SecurityCenterManagementClient} =
-require('@google-cloud/securitycentermanagement').v1;
+  require('@google-cloud/securitycentermanagement').v1;
 
 // Instantiates a client
 const securitycentermanagementClient = new SecurityCenterManagementClient();
