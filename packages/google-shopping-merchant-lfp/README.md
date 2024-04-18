@@ -85,7 +85,7 @@ npm install @google-cloud/lfp
  *  call. Provide the page token to retrieve the subsequent page. When
  *  paginating, all other parameters provided to `ListLfpStoresRequest` must
  *  match the call that provided the page token. The token returned as
- *  nextPageToken google.shopping.merchant.lfp.v1beta.ListLfpStoresResponse.next_page_token 
+ *  nextPageToken google.shopping.merchant.lfp.v1beta.ListLfpStoresResponse.next_page_token
  *  in the response to the previous request.
  */
 // const pageToken = 'abc123'
@@ -106,7 +106,7 @@ async function callListLfpStores() {
   // Run request
   const iterable = lfpClient.listLfpStoresAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
