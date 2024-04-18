@@ -25,29 +25,28 @@ import type {
   ClientOptions,
   GrpcClientOptions,
   LROperation,
-  PaginationCallback,
-  GaxCall,
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import {Transform} from 'stream';
+
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 
 /**
  * Client JSON configuration object, loaded from
- * `src/v1alpha/schema_service_client_config.json`.
+ * `src/v1alpha/project_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './schema_service_client_config.json';
+import * as gapicConfig from './project_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for managing {@link protos.google.cloud.discoveryengine.v1alpha.Schema|Schema}s.
+ *  Service for operations on the
+ *  {@link protos.google.cloud.discoveryengine.v1alpha.Project|Project}.
  * @class
  * @memberof v1alpha
  */
-export class SchemaServiceClient {
+export class ProjectServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -69,10 +68,10 @@ export class SchemaServiceClient {
   locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  schemaServiceStub?: Promise<{[name: string]: Function}>;
+  projectServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of SchemaServiceClient.
+   * Construct an instance of ProjectServiceClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -107,7 +106,7 @@ export class SchemaServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new SchemaServiceClient({fallback: true}, gax);
+   *     const client = new ProjectServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -115,7 +114,7 @@ export class SchemaServiceClient {
     gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof SchemaServiceClient;
+    const staticMembers = this.constructor as typeof ProjectServiceClient;
     if (
       opts?.universe_domain &&
       opts?.universeDomain &&
@@ -323,17 +322,6 @@ export class SchemaServiceClient {
         ),
     };
 
-    // Some of the methods on this service return "paged" results,
-    // (e.g. 50 results at a time, with tokens to get subsequent
-    // pages). Denote the keys used for pagination and results.
-    this.descriptors.page = {
-      listSchemas: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'schemas'
-      ),
-    };
-
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
@@ -435,46 +423,24 @@ export class SchemaServiceClient {
     this.operationsClient = this._gaxModule
       .lro(lroOptions)
       .operationsClient(opts);
-    const createSchemaResponse = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1alpha.Schema'
+    const provisionProjectResponse = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1alpha.Project'
     ) as gax.protobuf.Type;
-    const createSchemaMetadata = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1alpha.CreateSchemaMetadata'
-    ) as gax.protobuf.Type;
-    const updateSchemaResponse = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1alpha.Schema'
-    ) as gax.protobuf.Type;
-    const updateSchemaMetadata = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1alpha.UpdateSchemaMetadata'
-    ) as gax.protobuf.Type;
-    const deleteSchemaResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
-    const deleteSchemaMetadata = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1alpha.DeleteSchemaMetadata'
+    const provisionProjectMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1alpha.ProvisionProjectMetadata'
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
-      createSchema: new this._gaxModule.LongrunningDescriptor(
+      provisionProject: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createSchemaResponse.decode.bind(createSchemaResponse),
-        createSchemaMetadata.decode.bind(createSchemaMetadata)
-      ),
-      updateSchema: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        updateSchemaResponse.decode.bind(updateSchemaResponse),
-        updateSchemaMetadata.decode.bind(updateSchemaMetadata)
-      ),
-      deleteSchema: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        deleteSchemaResponse.decode.bind(deleteSchemaResponse),
-        deleteSchemaMetadata.decode.bind(deleteSchemaMetadata)
+        provisionProjectResponse.decode.bind(provisionProjectResponse),
+        provisionProjectMetadata.decode.bind(provisionProjectMetadata)
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.discoveryengine.v1alpha.SchemaService',
+      'google.cloud.discoveryengine.v1alpha.ProjectService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -502,35 +468,33 @@ export class SchemaServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.schemaServiceStub) {
-      return this.schemaServiceStub;
+    if (this.projectServiceStub) {
+      return this.projectServiceStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.discoveryengine.v1alpha.SchemaService.
-    this.schemaServiceStub = this._gaxGrpc.createStub(
+    // google.cloud.discoveryengine.v1alpha.ProjectService.
+    this.projectServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.discoveryengine.v1alpha.SchemaService'
+            'google.cloud.discoveryengine.v1alpha.ProjectService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.discoveryengine.v1alpha
-            .SchemaService,
+            .ProjectService,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const schemaServiceStubMethods = [
-      'getSchema',
-      'listSchemas',
-      'createSchema',
-      'updateSchema',
-      'deleteSchema',
+    const projectServiceStubMethods = [
+      'getProject',
+      'provisionProject',
+      'reportConsentChange',
     ];
-    for (const methodName of schemaServiceStubMethods) {
-      const callPromise = this.schemaServiceStub.then(
+    for (const methodName of projectServiceStubMethods) {
+      const callPromise = this.projectServiceStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -544,10 +508,7 @@ export class SchemaServiceClient {
         }
       );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        this.descriptors.longrunning[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.longrunning[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -558,7 +519,7 @@ export class SchemaServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.schemaServiceStub;
+    return this.projectServiceStub;
   }
 
   /**
@@ -646,75 +607,83 @@ export class SchemaServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Gets a {@link protos.google.cloud.discoveryengine.v1alpha.Schema|Schema}.
+   * Gets a {@link protos.google.cloud.discoveryengine.v1alpha.Project|Project}.
+   * Returns NOT_FOUND when the project is not yet created.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The full resource name of the schema, in the format of
-   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/schemas/{schema}`.
+   *   Required. Full resource name of a
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.Project|Project}, such as
+   *   `projects/{project_id_or_number}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1alpha.Schema|Schema}.
+   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1alpha.Project|Project}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/schema_service.get_schema.js</caption>
-   * region_tag:discoveryengine_v1alpha_generated_SchemaService_GetSchema_async
+   * @example <caption>include:samples/generated/v1alpha/project_service.get_project.js</caption>
+   * region_tag:discoveryengine_v1alpha_generated_ProjectService_GetProject_async
    */
-  getSchema(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IGetSchemaRequest,
+  getProject(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IGetProjectRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1alpha.ISchema,
-      protos.google.cloud.discoveryengine.v1alpha.IGetSchemaRequest | undefined,
+      protos.google.cloud.discoveryengine.v1alpha.IProject,
+      (
+        | protos.google.cloud.discoveryengine.v1alpha.IGetProjectRequest
+        | undefined
+      ),
       {} | undefined,
     ]
   >;
-  getSchema(
-    request: protos.google.cloud.discoveryengine.v1alpha.IGetSchemaRequest,
+  getProject(
+    request: protos.google.cloud.discoveryengine.v1alpha.IGetProjectRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.discoveryengine.v1alpha.ISchema,
-      | protos.google.cloud.discoveryengine.v1alpha.IGetSchemaRequest
+      protos.google.cloud.discoveryengine.v1alpha.IProject,
+      | protos.google.cloud.discoveryengine.v1alpha.IGetProjectRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  getSchema(
-    request: protos.google.cloud.discoveryengine.v1alpha.IGetSchemaRequest,
+  getProject(
+    request: protos.google.cloud.discoveryengine.v1alpha.IGetProjectRequest,
     callback: Callback<
-      protos.google.cloud.discoveryengine.v1alpha.ISchema,
-      | protos.google.cloud.discoveryengine.v1alpha.IGetSchemaRequest
+      protos.google.cloud.discoveryengine.v1alpha.IProject,
+      | protos.google.cloud.discoveryengine.v1alpha.IGetProjectRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  getSchema(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IGetSchemaRequest,
+  getProject(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IGetProjectRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.discoveryengine.v1alpha.ISchema,
-          | protos.google.cloud.discoveryengine.v1alpha.IGetSchemaRequest
+          protos.google.cloud.discoveryengine.v1alpha.IProject,
+          | protos.google.cloud.discoveryengine.v1alpha.IGetProjectRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.discoveryengine.v1alpha.ISchema,
-      | protos.google.cloud.discoveryengine.v1alpha.IGetSchemaRequest
+      protos.google.cloud.discoveryengine.v1alpha.IProject,
+      | protos.google.cloud.discoveryengine.v1alpha.IGetProjectRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1alpha.ISchema,
-      protos.google.cloud.discoveryengine.v1alpha.IGetSchemaRequest | undefined,
+      protos.google.cloud.discoveryengine.v1alpha.IProject,
+      (
+        | protos.google.cloud.discoveryengine.v1alpha.IGetProjectRequest
+        | undefined
+      ),
       {} | undefined,
     ]
   > | void {
@@ -734,308 +703,150 @@ export class SchemaServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getSchema(request, options, callback);
+    return this.innerApiCalls.getProject(request, options, callback);
+  }
+  /**
+   * Updates service terms for this project.
+   *
+   * This method can be used to retroactively accept the latest terms.
+   *
+   * Terms available for update:
+   * * [Terms for data use](https://cloud.google.com/retail/data-use-terms)
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.discoveryengine.v1alpha.ReportConsentChangeRequest.ConsentChangeAction} request.consentChangeAction
+   *   Required. Whether customer decides to accept or decline service term.
+   *
+   *   At this moment, only accept action is supported.
+   * @param {string} request.project
+   *   Required. Full resource name of a
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.Project|Project}, such as
+   *   `projects/{project_id_or_number}`.
+   * @param {string} request.serviceTermId
+   *   Required. The unique identifier of the terms of service to update.
+   *   Available term ids:
+   *   * `GA_DATA_USE_TERMS`: [Terms for data
+   *   use](https://cloud.google.com/retail/data-use-terms). When using this
+   *   service term id, the acceptable
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.ReportConsentChangeRequest.service_term_version|service_term_version}
+   *   to provide is `2022-11-23`.
+   * @param {string} request.serviceTermVersion
+   *   Required. The version string of the terms of service to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1alpha.Project|Project}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/project_service.report_consent_change.js</caption>
+   * region_tag:discoveryengine_v1alpha_generated_ProjectService_ReportConsentChange_async
+   */
+  reportConsentChange(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IReportConsentChangeRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1alpha.IProject,
+      (
+        | protos.google.cloud.discoveryengine.v1alpha.IReportConsentChangeRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  reportConsentChange(
+    request: protos.google.cloud.discoveryengine.v1alpha.IReportConsentChangeRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1alpha.IProject,
+      | protos.google.cloud.discoveryengine.v1alpha.IReportConsentChangeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  reportConsentChange(
+    request: protos.google.cloud.discoveryengine.v1alpha.IReportConsentChangeRequest,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1alpha.IProject,
+      | protos.google.cloud.discoveryengine.v1alpha.IReportConsentChangeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  reportConsentChange(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IReportConsentChangeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.discoveryengine.v1alpha.IProject,
+          | protos.google.cloud.discoveryengine.v1alpha.IReportConsentChangeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.discoveryengine.v1alpha.IProject,
+      | protos.google.cloud.discoveryengine.v1alpha.IReportConsentChangeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1alpha.IProject,
+      (
+        | protos.google.cloud.discoveryengine.v1alpha.IReportConsentChangeRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.reportConsentChange(request, options, callback);
   }
 
   /**
-   * Creates a {@link protos.google.cloud.discoveryengine.v1alpha.Schema|Schema}.
+   * Provisions the project resource. During the
+   * process, related systems will get prepared and initialized.
    *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent data store resource name, in the format of
-   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
-   * @param {google.cloud.discoveryengine.v1alpha.Schema} request.schema
-   *   Required. The {@link protos.google.cloud.discoveryengine.v1alpha.Schema|Schema} to
-   *   create.
-   * @param {string} request.schemaId
-   *   Required. The ID to use for the
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.Schema|Schema}, which will become
-   *   the final component of the
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.Schema.name|Schema.name}.
-   *
-   *   This field should conform to
-   *   [RFC-1034](https://tools.ietf.org/html/rfc1034) standard with a length
-   *   limit of 63 characters.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/schema_service.create_schema.js</caption>
-   * region_tag:discoveryengine_v1alpha_generated_SchemaService_CreateSchema_async
-   */
-  createSchema(
-    request?: protos.google.cloud.discoveryengine.v1alpha.ICreateSchemaRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.discoveryengine.v1alpha.ISchema,
-        protos.google.cloud.discoveryengine.v1alpha.ICreateSchemaMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
-  createSchema(
-    request: protos.google.cloud.discoveryengine.v1alpha.ICreateSchemaRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.discoveryengine.v1alpha.ISchema,
-        protos.google.cloud.discoveryengine.v1alpha.ICreateSchemaMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createSchema(
-    request: protos.google.cloud.discoveryengine.v1alpha.ICreateSchemaRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.discoveryengine.v1alpha.ISchema,
-        protos.google.cloud.discoveryengine.v1alpha.ICreateSchemaMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createSchema(
-    request?: protos.google.cloud.discoveryengine.v1alpha.ICreateSchemaRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.discoveryengine.v1alpha.ISchema,
-            protos.google.cloud.discoveryengine.v1alpha.ICreateSchemaMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.discoveryengine.v1alpha.ISchema,
-        protos.google.cloud.discoveryengine.v1alpha.ICreateSchemaMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.discoveryengine.v1alpha.ISchema,
-        protos.google.cloud.discoveryengine.v1alpha.ICreateSchemaMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.createSchema(request, options, callback);
-  }
-  /**
-   * Check the status of the long running operation returned by `createSchema()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/schema_service.create_schema.js</caption>
-   * region_tag:discoveryengine_v1alpha_generated_SchemaService_CreateSchema_async
-   */
-  async checkCreateSchemaProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.discoveryengine.v1alpha.Schema,
-      protos.google.cloud.discoveryengine.v1alpha.CreateSchemaMetadata
-    >
-  > {
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createSchema,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.discoveryengine.v1alpha.Schema,
-      protos.google.cloud.discoveryengine.v1alpha.CreateSchemaMetadata
-    >;
-  }
-  /**
-   * Updates a {@link protos.google.cloud.discoveryengine.v1alpha.Schema|Schema}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.discoveryengine.v1alpha.Schema} request.schema
-   *   Required. The {@link protos.google.cloud.discoveryengine.v1alpha.Schema|Schema} to
-   *   update.
-   * @param {boolean} request.allowMissing
-   *   If set to true, and the
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.Schema|Schema} is not found, a new
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.Schema|Schema} will be created. In
-   *   this situation, `update_mask` is ignored.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/schema_service.update_schema.js</caption>
-   * region_tag:discoveryengine_v1alpha_generated_SchemaService_UpdateSchema_async
-   */
-  updateSchema(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IUpdateSchemaRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.discoveryengine.v1alpha.ISchema,
-        protos.google.cloud.discoveryengine.v1alpha.IUpdateSchemaMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
-  updateSchema(
-    request: protos.google.cloud.discoveryengine.v1alpha.IUpdateSchemaRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.discoveryengine.v1alpha.ISchema,
-        protos.google.cloud.discoveryengine.v1alpha.IUpdateSchemaMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateSchema(
-    request: protos.google.cloud.discoveryengine.v1alpha.IUpdateSchemaRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.discoveryengine.v1alpha.ISchema,
-        protos.google.cloud.discoveryengine.v1alpha.IUpdateSchemaMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateSchema(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IUpdateSchemaRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.discoveryengine.v1alpha.ISchema,
-            protos.google.cloud.discoveryengine.v1alpha.IUpdateSchemaMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.discoveryengine.v1alpha.ISchema,
-        protos.google.cloud.discoveryengine.v1alpha.IUpdateSchemaMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.discoveryengine.v1alpha.ISchema,
-        protos.google.cloud.discoveryengine.v1alpha.IUpdateSchemaMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'schema.name': request.schema!.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.updateSchema(request, options, callback);
-  }
-  /**
-   * Check the status of the long running operation returned by `updateSchema()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/schema_service.update_schema.js</caption>
-   * region_tag:discoveryengine_v1alpha_generated_SchemaService_UpdateSchema_async
-   */
-  async checkUpdateSchemaProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.discoveryengine.v1alpha.Schema,
-      protos.google.cloud.discoveryengine.v1alpha.UpdateSchemaMetadata
-    >
-  > {
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateSchema,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.discoveryengine.v1alpha.Schema,
-      protos.google.cloud.discoveryengine.v1alpha.UpdateSchemaMetadata
-    >;
-  }
-  /**
-   * Deletes a {@link protos.google.cloud.discoveryengine.v1alpha.Schema|Schema}.
+   * Caller must read the [Terms for data
+   * use](https://cloud.google.com/retail/data-use-terms), and optionally
+   * specify in request to provide consent to that service terms.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The full resource name of the schema, in the format of
-   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/schemas/{schema}`.
+   *   Required. Full resource name of a
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.Project|Project}, such as
+   *   `projects/{project_id_or_number}`.
+   * @param {boolean} request.acceptDataUseTerms
+   *   Required. Set to `true` to specify that caller has read and would like to
+   *   give consent to the [Terms for data
+   *   use](https://cloud.google.com/retail/data-use-terms).
+   * @param {string} request.dataUseTermsVersion
+   *   Required. The version of the [Terms for data
+   *   use](https://cloud.google.com/retail/data-use-terms) that caller has read
+   *   and would like to give consent to.
+   *
+   *   Acceptable version is `2022-11-23`, and this may change over time.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1044,61 +855,61 @@ export class SchemaServiceClient {
    *   you can `await` for.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/schema_service.delete_schema.js</caption>
-   * region_tag:discoveryengine_v1alpha_generated_SchemaService_DeleteSchema_async
+   * @example <caption>include:samples/generated/v1alpha/project_service.provision_project.js</caption>
+   * region_tag:discoveryengine_v1alpha_generated_ProjectService_ProvisionProject_async
    */
-  deleteSchema(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IDeleteSchemaRequest,
+  provisionProject(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IProvisionProjectRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1alpha.IDeleteSchemaMetadata
+        protos.google.cloud.discoveryengine.v1alpha.IProject,
+        protos.google.cloud.discoveryengine.v1alpha.IProvisionProjectMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
     ]
   >;
-  deleteSchema(
-    request: protos.google.cloud.discoveryengine.v1alpha.IDeleteSchemaRequest,
+  provisionProject(
+    request: protos.google.cloud.discoveryengine.v1alpha.IProvisionProjectRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1alpha.IDeleteSchemaMetadata
+        protos.google.cloud.discoveryengine.v1alpha.IProject,
+        protos.google.cloud.discoveryengine.v1alpha.IProvisionProjectMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  deleteSchema(
-    request: protos.google.cloud.discoveryengine.v1alpha.IDeleteSchemaRequest,
+  provisionProject(
+    request: protos.google.cloud.discoveryengine.v1alpha.IProvisionProjectRequest,
     callback: Callback<
       LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1alpha.IDeleteSchemaMetadata
+        protos.google.cloud.discoveryengine.v1alpha.IProject,
+        protos.google.cloud.discoveryengine.v1alpha.IProvisionProjectMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  deleteSchema(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IDeleteSchemaRequest,
+  provisionProject(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IProvisionProjectRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.discoveryengine.v1alpha.IDeleteSchemaMetadata
+            protos.google.cloud.discoveryengine.v1alpha.IProject,
+            protos.google.cloud.discoveryengine.v1alpha.IProvisionProjectMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1alpha.IDeleteSchemaMetadata
+        protos.google.cloud.discoveryengine.v1alpha.IProject,
+        protos.google.cloud.discoveryengine.v1alpha.IProvisionProjectMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1106,8 +917,8 @@ export class SchemaServiceClient {
   ): Promise<
     [
       LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1alpha.IDeleteSchemaMetadata
+        protos.google.cloud.discoveryengine.v1alpha.IProject,
+        protos.google.cloud.discoveryengine.v1alpha.IProvisionProjectMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
@@ -1129,25 +940,25 @@ export class SchemaServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteSchema(request, options, callback);
+    return this.innerApiCalls.provisionProject(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by `deleteSchema()`.
+   * Check the status of the long running operation returned by `provisionProject()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/schema_service.delete_schema.js</caption>
-   * region_tag:discoveryengine_v1alpha_generated_SchemaService_DeleteSchema_async
+   * @example <caption>include:samples/generated/v1alpha/project_service.provision_project.js</caption>
+   * region_tag:discoveryengine_v1alpha_generated_ProjectService_ProvisionProject_async
    */
-  async checkDeleteSchemaProgress(
+  async checkProvisionProjectProgress(
     name: string
   ): Promise<
     LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.discoveryengine.v1alpha.DeleteSchemaMetadata
+      protos.google.cloud.discoveryengine.v1alpha.Project,
+      protos.google.cloud.discoveryengine.v1alpha.ProvisionProjectMetadata
     >
   > {
     const request =
@@ -1157,241 +968,13 @@ export class SchemaServiceClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
-      this.descriptors.longrunning.deleteSchema,
+      this.descriptors.longrunning.provisionProject,
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.discoveryengine.v1alpha.DeleteSchemaMetadata
+      protos.google.cloud.discoveryengine.v1alpha.Project,
+      protos.google.cloud.discoveryengine.v1alpha.ProvisionProjectMetadata
     >;
-  }
-  /**
-   * Gets a list of {@link protos.google.cloud.discoveryengine.v1alpha.Schema|Schema}s.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent data store resource name, in the format of
-   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
-   * @param {number} request.pageSize
-   *   The maximum number of
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.Schema|Schema}s to return. The
-   *   service may return fewer than this value.
-   *
-   *   If unspecified, at most 100
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.Schema|Schema}s will be returned.
-   *
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.SchemaService.ListSchemas|SchemaService.ListSchemas}
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.SchemaService.ListSchemas|SchemaService.ListSchemas}
-   *   must match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.discoveryengine.v1alpha.Schema|Schema}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listSchemasAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
-  listSchemas(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IListSchemasRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1alpha.ISchema[],
-      protos.google.cloud.discoveryengine.v1alpha.IListSchemasRequest | null,
-      protos.google.cloud.discoveryengine.v1alpha.IListSchemasResponse,
-    ]
-  >;
-  listSchemas(
-    request: protos.google.cloud.discoveryengine.v1alpha.IListSchemasRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.discoveryengine.v1alpha.IListSchemasRequest,
-      | protos.google.cloud.discoveryengine.v1alpha.IListSchemasResponse
-      | null
-      | undefined,
-      protos.google.cloud.discoveryengine.v1alpha.ISchema
-    >
-  ): void;
-  listSchemas(
-    request: protos.google.cloud.discoveryengine.v1alpha.IListSchemasRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.discoveryengine.v1alpha.IListSchemasRequest,
-      | protos.google.cloud.discoveryengine.v1alpha.IListSchemasResponse
-      | null
-      | undefined,
-      protos.google.cloud.discoveryengine.v1alpha.ISchema
-    >
-  ): void;
-  listSchemas(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IListSchemasRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
-          protos.google.cloud.discoveryengine.v1alpha.IListSchemasRequest,
-          | protos.google.cloud.discoveryengine.v1alpha.IListSchemasResponse
-          | null
-          | undefined,
-          protos.google.cloud.discoveryengine.v1alpha.ISchema
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.discoveryengine.v1alpha.IListSchemasRequest,
-      | protos.google.cloud.discoveryengine.v1alpha.IListSchemasResponse
-      | null
-      | undefined,
-      protos.google.cloud.discoveryengine.v1alpha.ISchema
-    >
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1alpha.ISchema[],
-      protos.google.cloud.discoveryengine.v1alpha.IListSchemasRequest | null,
-      protos.google.cloud.discoveryengine.v1alpha.IListSchemasResponse,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.listSchemas(request, options, callback);
-  }
-
-  /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent data store resource name, in the format of
-   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
-   * @param {number} request.pageSize
-   *   The maximum number of
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.Schema|Schema}s to return. The
-   *   service may return fewer than this value.
-   *
-   *   If unspecified, at most 100
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.Schema|Schema}s will be returned.
-   *
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.SchemaService.ListSchemas|SchemaService.ListSchemas}
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.SchemaService.ListSchemas|SchemaService.ListSchemas}
-   *   must match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.discoveryengine.v1alpha.Schema|Schema} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listSchemasAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
-  listSchemasStream(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IListSchemasRequest,
-    options?: CallOptions
-  ): Transform {
-    request = request || {};
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    const defaultCallSettings = this._defaults['listSchemas'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
-    return this.descriptors.page.listSchemas.createStream(
-      this.innerApiCalls.listSchemas as GaxCall,
-      request,
-      callSettings
-    );
-  }
-
-  /**
-   * Equivalent to `listSchemas`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent data store resource name, in the format of
-   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
-   * @param {number} request.pageSize
-   *   The maximum number of
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.Schema|Schema}s to return. The
-   *   service may return fewer than this value.
-   *
-   *   If unspecified, at most 100
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.Schema|Schema}s will be returned.
-   *
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.SchemaService.ListSchemas|SchemaService.ListSchemas}
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.SchemaService.ListSchemas|SchemaService.ListSchemas}
-   *   must match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.Schema|Schema}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/schema_service.list_schemas.js</caption>
-   * region_tag:discoveryengine_v1alpha_generated_SchemaService_ListSchemas_async
-   */
-  listSchemasAsync(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IListSchemasRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.discoveryengine.v1alpha.ISchema> {
-    request = request || {};
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    const defaultCallSettings = this._defaults['listSchemas'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
-    return this.descriptors.page.listSchemas.asyncIterate(
-      this.innerApiCalls['listSchemas'] as GaxCall,
-      request as {},
-      callSettings
-    ) as AsyncIterable<protos.google.cloud.discoveryengine.v1alpha.ISchema>;
   }
   /**
    * Gets information about a location.
@@ -4317,8 +3900,8 @@ export class SchemaServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.schemaServiceStub && !this._terminated) {
-      return this.schemaServiceStub.then(stub => {
+    if (this.projectServiceStub && !this._terminated) {
+      return this.projectServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.locationsClient.close();
