@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main() {
+function main(parent) {
   // [START bigquerydatatransfer_v1_generated_DataTransferService_StartManualTransferRuns_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -29,7 +29,7 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Transfer configuration name in the form:
+   *  Required. Transfer configuration name in the form:
    *  `projects/{project_id}/transferConfigs/{config_id}` or
    *  `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`.
    */
@@ -58,6 +58,7 @@ function main() {
   async function callStartManualTransferRuns() {
     // Construct request
     const request = {
+      parent,
     };
 
     // Run request
