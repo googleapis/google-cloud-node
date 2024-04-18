@@ -21,9 +21,7 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as chunkserviceModule from '../src';
-
-import {PassThrough} from 'stream';
+import * as groundedgenerationserviceModule from '../src';
 
 import {protobuf, LocationProtos} from 'google-gax';
 
@@ -66,44 +64,6 @@ function stubSimpleCallWithCallback<ResponseType>(
     : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
-    }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
-    }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
-}
-
 function stubAsyncIterationCall<ResponseType>(
   responses?: ResponseType[],
   error?: Error
@@ -127,16 +87,18 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1alpha.ChunkServiceClient', () => {
+describe('v1alpha.GroundedGenerationServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient();
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'discoveryengine.googleapis.com');
     });
 
     it('has universeDomain', () => {
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient();
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -148,7 +110,8 @@ describe('v1alpha.ChunkServiceClient', () => {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const servicePath =
-          chunkserviceModule.v1alpha.ChunkServiceClient.servicePath;
+          groundedgenerationserviceModule.v1alpha
+            .GroundedGenerationServiceClient.servicePath;
         assert.strictEqual(servicePath, 'discoveryengine.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -157,24 +120,27 @@ describe('v1alpha.ChunkServiceClient', () => {
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const apiEndpoint =
-          chunkserviceModule.v1alpha.ChunkServiceClient.apiEndpoint;
+          groundedgenerationserviceModule.v1alpha
+            .GroundedGenerationServiceClient.apiEndpoint;
         assert.strictEqual(apiEndpoint, 'discoveryengine.googleapis.com');
         assert(stub.called);
         stub.restore();
       });
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        universeDomain: 'example.com',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {universeDomain: 'example.com'}
+        );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'discoveryengine.example.com');
     });
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        universe_domain: 'example.com',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {universe_domain: 'example.com'}
+        );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'discoveryengine.example.com');
     });
@@ -184,7 +150,8 @@ describe('v1alpha.ChunkServiceClient', () => {
         it('sets apiEndpoint from environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new chunkserviceModule.v1alpha.ChunkServiceClient();
+          const client =
+            new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient();
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'discoveryengine.example.com');
           if (saved) {
@@ -197,9 +164,10 @@ describe('v1alpha.ChunkServiceClient', () => {
         it('value configured in code has priority over environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-            universeDomain: 'configured.example.com',
-          });
+          const client =
+            new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+              {universeDomain: 'configured.example.com'}
+            );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
             servicePath,
@@ -215,59 +183,73 @@ describe('v1alpha.ChunkServiceClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new chunkserviceModule.v1alpha.ChunkServiceClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {universe_domain: 'example.com', universeDomain: 'example.net'}
+        );
       });
     });
 
     it('has port', () => {
-      const port = chunkserviceModule.v1alpha.ChunkServiceClient.port;
+      const port =
+        groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient
+          .port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient();
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        fallback: true,
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            fallback: true,
+          }
+        );
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.chunkServiceStub, undefined);
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      assert.strictEqual(client.groundedGenerationServiceStub, undefined);
       await client.initialize();
-      assert(client.chunkServiceStub);
+      assert(client.groundedGenerationServiceStub);
     });
 
     it('has close method for the initialized client', done => {
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
-      assert(client.chunkServiceStub);
+      assert(client.groundedGenerationServiceStub);
       client.close().then(() => {
         done();
       });
     });
 
     it('has close method for the non-initialized client', done => {
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.chunkServiceStub, undefined);
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      assert.strictEqual(client.groundedGenerationServiceStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -275,10 +257,13 @@ describe('v1alpha.ChunkServiceClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
       const result = await client.getProjectId();
       assert.strictEqual(result, fakeProjectId);
@@ -287,10 +272,13 @@ describe('v1alpha.ChunkServiceClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.auth.getProjectId = sinon
         .stub()
         .callsArgWith(0, null, fakeProjectId);
@@ -308,64 +296,70 @@ describe('v1alpha.ChunkServiceClient', () => {
     });
   });
 
-  describe('getChunk', () => {
-    it('invokes getChunk without error', async () => {
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+  describe('checkGrounding', () => {
+    it('invokes checkGrounding without error', async () => {
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.GetChunkRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.CheckGroundingRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.GetChunkRequest',
-        ['name']
+        '.google.cloud.discoveryengine.v1alpha.CheckGroundingRequest',
+        ['groundingConfig']
       );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      request.groundingConfig = defaultValue1;
+      const expectedHeaderRequestParams = `grounding_config=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.Chunk()
+        new protos.google.cloud.discoveryengine.v1alpha.CheckGroundingResponse()
       );
-      client.innerApiCalls.getChunk = stubSimpleCall(expectedResponse);
-      const [response] = await client.getChunk(request);
+      client.innerApiCalls.checkGrounding = stubSimpleCall(expectedResponse);
+      const [response] = await client.checkGrounding(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getChunk as SinonStub
+        client.innerApiCalls.checkGrounding as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getChunk as SinonStub
+        client.innerApiCalls.checkGrounding as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getChunk without error using callback', async () => {
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes checkGrounding without error using callback', async () => {
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.GetChunkRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.CheckGroundingRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.GetChunkRequest',
-        ['name']
+        '.google.cloud.discoveryengine.v1alpha.CheckGroundingRequest',
+        ['groundingConfig']
       );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      request.groundingConfig = defaultValue1;
+      const expectedHeaderRequestParams = `grounding_config=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.Chunk()
+        new protos.google.cloud.discoveryengine.v1alpha.CheckGroundingResponse()
       );
-      client.innerApiCalls.getChunk =
+      client.innerApiCalls.checkGrounding =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.getChunk(
+        client.checkGrounding(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1alpha.IChunk | null
+            result?: protos.google.cloud.discoveryengine.v1alpha.ICheckGroundingResponse | null
           ) => {
             if (err) {
               reject(err);
@@ -378,401 +372,80 @@ describe('v1alpha.ChunkServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getChunk as SinonStub
+        client.innerApiCalls.checkGrounding as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getChunk as SinonStub
+        client.innerApiCalls.checkGrounding as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getChunk with error', async () => {
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes checkGrounding with error', async () => {
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.GetChunkRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.CheckGroundingRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.GetChunkRequest',
-        ['name']
+        '.google.cloud.discoveryengine.v1alpha.CheckGroundingRequest',
+        ['groundingConfig']
       );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      request.groundingConfig = defaultValue1;
+      const expectedHeaderRequestParams = `grounding_config=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.getChunk = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getChunk(request), expectedError);
+      client.innerApiCalls.checkGrounding = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkGrounding(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.getChunk as SinonStub
+        client.innerApiCalls.checkGrounding as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getChunk as SinonStub
+        client.innerApiCalls.checkGrounding as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getChunk with closed client', async () => {
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes checkGrounding with closed client', async () => {
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.GetChunkRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.CheckGroundingRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.GetChunkRequest',
-        ['name']
+        '.google.cloud.discoveryengine.v1alpha.CheckGroundingRequest',
+        ['groundingConfig']
       );
-      request.name = defaultValue1;
+      request.groundingConfig = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.getChunk(request), expectedError);
-    });
-  });
-
-  describe('listChunks', () => {
-    it('invokes listChunks without error', async () => {
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ListChunksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ListChunksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Chunk()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Chunk()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Chunk()
-        ),
-      ];
-      client.innerApiCalls.listChunks = stubSimpleCall(expectedResponse);
-      const [response] = await client.listChunks(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listChunks as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listChunks as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listChunks without error using callback', async () => {
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ListChunksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ListChunksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Chunk()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Chunk()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Chunk()
-        ),
-      ];
-      client.innerApiCalls.listChunks =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listChunks(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1alpha.IChunk[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listChunks as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listChunks as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listChunks with error', async () => {
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ListChunksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ListChunksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listChunks = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listChunks(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listChunks as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listChunks as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listChunksStream without error', async () => {
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ListChunksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ListChunksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Chunk()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Chunk()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Chunk()
-        ),
-      ];
-      client.descriptors.page.listChunks.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listChunksStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.discoveryengine.v1alpha.Chunk[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.discoveryengine.v1alpha.Chunk) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listChunks.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listChunks, request)
-      );
-      assert(
-        (client.descriptors.page.listChunks.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listChunksStream with error', async () => {
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ListChunksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ListChunksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listChunks.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listChunksStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.discoveryengine.v1alpha.Chunk[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.discoveryengine.v1alpha.Chunk) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listChunks.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listChunks, request)
-      );
-      assert(
-        (client.descriptors.page.listChunks.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listChunks without error', async () => {
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ListChunksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ListChunksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Chunk()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Chunk()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1alpha.Chunk()
-        ),
-      ];
-      client.descriptors.page.listChunks.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.discoveryengine.v1alpha.IChunk[] =
-        [];
-      const iterable = client.listChunksAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listChunks.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listChunks.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listChunks with error', async () => {
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.ListChunksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.ListChunksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listChunks.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listChunksAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.discoveryengine.v1alpha.IChunk[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listChunks.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listChunks.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+      await assert.rejects(client.checkGrounding(request), expectedError);
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -799,10 +472,13 @@ describe('v1alpha.ChunkServiceClient', () => {
       );
     });
     it('invokes getLocation without error using callback', async () => {
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -843,10 +519,13 @@ describe('v1alpha.ChunkServiceClient', () => {
       assert((client.locationsClient.getLocation as SinonStub).getCall(0));
     });
     it('invokes getLocation with error', async () => {
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -878,10 +557,13 @@ describe('v1alpha.ChunkServiceClient', () => {
   });
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
@@ -926,10 +608,13 @@ describe('v1alpha.ChunkServiceClient', () => {
       );
     });
     it('uses async iteration with listLocations with error', async () => {
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
@@ -973,10 +658,13 @@ describe('v1alpha.ChunkServiceClient', () => {
         project: 'projectValue',
         location: 'locationValue',
       };
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.aclConfigPathTemplate.render = sinon
         .stub()
@@ -1024,10 +712,13 @@ describe('v1alpha.ChunkServiceClient', () => {
         collection: 'collectionValue',
         engine: 'engineValue',
       };
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.enginePathTemplate.render = sinon
         .stub()
@@ -1092,15 +783,86 @@ describe('v1alpha.ChunkServiceClient', () => {
       });
     });
 
+    describe('groundingConfig', () => {
+      const fakePath = '/rendered/path/groundingConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        grounding_config: 'groundingConfigValue',
+      };
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.groundingConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.groundingConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('groundingConfigPath', () => {
+        const result = client.groundingConfigPath(
+          'projectValue',
+          'locationValue',
+          'groundingConfigValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.groundingConfigPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromGroundingConfigName', () => {
+        const result = client.matchProjectFromGroundingConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.groundingConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromGroundingConfigName', () => {
+        const result = client.matchLocationFromGroundingConfigName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.groundingConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchGroundingConfigFromGroundingConfigName', () => {
+        const result =
+          client.matchGroundingConfigFromGroundingConfigName(fakePath);
+        assert.strictEqual(result, 'groundingConfigValue');
+        assert(
+          (client.pathTemplates.groundingConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('project', () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
       };
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
@@ -1138,10 +900,13 @@ describe('v1alpha.ChunkServiceClient', () => {
         collection: 'collectionValue',
         data_store: 'dataStoreValue',
       };
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStorePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -1242,10 +1007,13 @@ describe('v1alpha.ChunkServiceClient', () => {
         branch: 'branchValue',
         document: 'documentValue',
       };
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -1389,10 +1157,13 @@ describe('v1alpha.ChunkServiceClient', () => {
         document: 'documentValue',
         chunk: 'chunkValue',
       };
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -1552,10 +1323,13 @@ describe('v1alpha.ChunkServiceClient', () => {
         data_store: 'dataStoreValue',
         conversation: 'conversationValue',
       };
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -1678,10 +1452,13 @@ describe('v1alpha.ChunkServiceClient', () => {
         collection: 'collectionValue',
         data_store: 'dataStoreValue',
       };
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -1787,10 +1564,13 @@ describe('v1alpha.ChunkServiceClient', () => {
         data_store: 'dataStoreValue',
         schema: 'schemaValue',
       };
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -1913,10 +1693,13 @@ describe('v1alpha.ChunkServiceClient', () => {
         data_store: 'dataStoreValue',
         serving_config: 'servingConfigValue',
       };
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2040,10 +1823,13 @@ describe('v1alpha.ChunkServiceClient', () => {
         data_store: 'dataStoreValue',
         session: 'sessionValue',
       };
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2167,10 +1953,13 @@ describe('v1alpha.ChunkServiceClient', () => {
         session: 'sessionValue',
         answer: 'answerValue',
       };
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2311,10 +2100,13 @@ describe('v1alpha.ChunkServiceClient', () => {
         collection: 'collectionValue',
         data_store: 'dataStoreValue',
       };
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2420,10 +2212,13 @@ describe('v1alpha.ChunkServiceClient', () => {
         data_store: 'dataStoreValue',
         target_site: 'targetSiteValue',
       };
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2547,10 +2342,13 @@ describe('v1alpha.ChunkServiceClient', () => {
         engine: 'engineValue',
         conversation: 'conversationValue',
       };
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2673,10 +2471,13 @@ describe('v1alpha.ChunkServiceClient', () => {
         engine: 'engineValue',
         serving_config: 'servingConfigValue',
       };
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2798,10 +2599,13 @@ describe('v1alpha.ChunkServiceClient', () => {
         engine: 'engineValue',
         session: 'sessionValue',
       };
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2925,10 +2729,13 @@ describe('v1alpha.ChunkServiceClient', () => {
         session: 'sessionValue',
         answer: 'answerValue',
       };
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3066,10 +2873,13 @@ describe('v1alpha.ChunkServiceClient', () => {
         location: 'locationValue',
         data_store: 'dataStoreValue',
       };
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationDataStorePathTemplate.render = sinon
         .stub()
@@ -3147,10 +2957,13 @@ describe('v1alpha.ChunkServiceClient', () => {
         branch: 'branchValue',
         document: 'documentValue',
       };
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3274,10 +3087,13 @@ describe('v1alpha.ChunkServiceClient', () => {
         document: 'documentValue',
         chunk: 'chunkValue',
       };
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3416,10 +3232,13 @@ describe('v1alpha.ChunkServiceClient', () => {
         data_store: 'dataStoreValue',
         conversation: 'conversationValue',
       };
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationDataStoreConversationPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3522,10 +3341,13 @@ describe('v1alpha.ChunkServiceClient', () => {
         location: 'locationValue',
         data_store: 'dataStoreValue',
       };
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3611,10 +3433,13 @@ describe('v1alpha.ChunkServiceClient', () => {
         data_store: 'dataStoreValue',
         schema: 'schemaValue',
       };
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationDataStoreSchemaPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3704,10 +3529,13 @@ describe('v1alpha.ChunkServiceClient', () => {
         data_store: 'dataStoreValue',
         serving_config: 'servingConfigValue',
       };
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3810,10 +3638,13 @@ describe('v1alpha.ChunkServiceClient', () => {
         data_store: 'dataStoreValue',
         session: 'sessionValue',
       };
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationDataStoreSessionPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3906,10 +3737,13 @@ describe('v1alpha.ChunkServiceClient', () => {
         session: 'sessionValue',
         answer: 'answerValue',
       };
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -4030,10 +3864,13 @@ describe('v1alpha.ChunkServiceClient', () => {
         location: 'locationValue',
         data_store: 'dataStoreValue',
       };
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -4119,10 +3956,13 @@ describe('v1alpha.ChunkServiceClient', () => {
         data_store: 'dataStoreValue',
         target_site: 'targetSiteValue',
       };
-      const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.render =
         sinon.stub().returns(fakePath);
