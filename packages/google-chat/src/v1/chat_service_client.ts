@@ -315,6 +315,7 @@ export class ChatServiceClient {
       'completeImportSpace',
       'findDirectMessage',
       'createMembership',
+      'updateMembership',
       'deleteMembership',
       'createReaction',
       'listReactions',
@@ -2102,6 +2103,97 @@ export class ChatServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.createMembership(request, options, callback);
+  }
+  /**
+   * Updates a membership. Requires [user
+   * authentication](https://developers.google.com/chat/api/guides/auth/users).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.chat.v1.Membership} request.membership
+   *   Required. The membership to update. Only fields specified by `update_mask`
+   *   are updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The field paths to update. Separate multiple values with commas
+   *   or use `*` to update all field paths.
+   *
+   *   Currently supported field paths:
+   *
+   *   - `role`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.chat.v1.Membership|Membership}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.update_membership.js</caption>
+   * region_tag:chat_v1_generated_ChatService_UpdateMembership_async
+   */
+  updateMembership(
+    request?: protos.google.chat.v1.IUpdateMembershipRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.chat.v1.IMembership,
+      protos.google.chat.v1.IUpdateMembershipRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateMembership(
+    request: protos.google.chat.v1.IUpdateMembershipRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.chat.v1.IMembership,
+      protos.google.chat.v1.IUpdateMembershipRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateMembership(
+    request: protos.google.chat.v1.IUpdateMembershipRequest,
+    callback: Callback<
+      protos.google.chat.v1.IMembership,
+      protos.google.chat.v1.IUpdateMembershipRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateMembership(
+    request?: protos.google.chat.v1.IUpdateMembershipRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.chat.v1.IMembership,
+          protos.google.chat.v1.IUpdateMembershipRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.chat.v1.IMembership,
+      protos.google.chat.v1.IUpdateMembershipRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.chat.v1.IMembership,
+      protos.google.chat.v1.IUpdateMembershipRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'membership.name': request.membership!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateMembership(request, options, callback);
   }
   /**
    * Deletes a membership. For an example, see

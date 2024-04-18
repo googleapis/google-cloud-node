@@ -1361,6 +1361,15 @@
                 }
               }
             },
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
             "Timestamp": {
               "fields": {
                 "seconds": {
@@ -1370,15 +1379,6 @@
                 "nanos": {
                   "type": "int32",
                   "id": 2
-                }
-              }
-            },
-            "FieldMask": {
-              "fields": {
-                "paths": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 1
                 }
               }
             },
@@ -3086,6 +3086,26 @@
                         }
                       ]
                     },
+                    "UpdateMembership": {
+                      "requestType": "UpdateMembershipRequest",
+                      "responseType": "Membership",
+                      "options": {
+                        "(google.api.http).patch": "/v1/{membership.name=spaces/*/members/*}",
+                        "(google.api.http).body": "membership",
+                        "(google.api.method_signature)": "membership,update_mask"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "patch": "/v1/{membership.name=spaces/*/members/*}",
+                            "body": "membership"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "membership,update_mask"
+                        }
+                      ]
+                    },
                     "DeleteMembership": {
                       "requestType": "DeleteMembershipRequest",
                       "responseType": "Membership",
@@ -3250,6 +3270,24 @@
                     },
                     "membership": {
                       "type": "Membership",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
+                },
+                "UpdateMembershipRequest": {
+                  "fields": {
+                    "membership": {
+                      "type": "Membership",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "updateMask": {
+                      "type": "google.protobuf.FieldMask",
                       "id": 2,
                       "options": {
                         "(google.api.field_behavior)": "REQUIRED"

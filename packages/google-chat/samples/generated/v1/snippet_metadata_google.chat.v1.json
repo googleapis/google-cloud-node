@@ -836,6 +836,50 @@
             }
         },
         {
+            "regionTag": "chat_v1_generated_ChatService_UpdateMembership_async",
+            "title": "ChatService updateMembership Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates a membership. Requires [user authentication](https://developers.google.com/chat/api/guides/auth/users).",
+            "canonical": true,
+            "file": "chat_service.update_membership.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateMembership",
+                "fullName": "google.chat.v1.ChatService.UpdateMembership",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "membership",
+                        "type": ".google.chat.v1.Membership"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.chat.v1.Membership",
+                "client": {
+                    "shortName": "ChatServiceClient",
+                    "fullName": "google.chat.v1.ChatServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateMembership",
+                    "fullName": "google.chat.v1.ChatService.UpdateMembership",
+                    "service": {
+                        "shortName": "ChatService",
+                        "fullName": "google.chat.v1.ChatService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "chat_v1_generated_ChatService_DeleteMembership_async",
             "title": "ChatService deleteMembership Sample",
             "origin": "API_DEFINITION",
