@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/edgecontainer-v0.2.0...edgecontainer-v0.3.0) (2024-04-16)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5188](https://github.com/googleapis/google-cloud-node/issues/5188)) ([c5ccdf9](https://github.com/googleapis/google-cloud-node/commit/c5ccdf93641e7bb6d0e5c636168fad0feafab6e3))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/edgecontainer-v0.1.0...edgecontainer-v0.2.0) (2024-03-26)
 
 
