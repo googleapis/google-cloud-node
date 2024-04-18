@@ -5,6 +5,568 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "4c2848a9143d15be11155ed13cba9af9dcc5e6b7",
+          "message": "Add initial files for google.storage.control.v2",
+          "issues": [
+            "5154"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-control",
+      "id": "03860f6b-6a93-4012-8fe9-d0f4e5542643",
+      "createTime": "2024-04-16T17:47:32.240Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cc54e98f7f51598e88277ac50310b07b778acbc7",
+          "message": "[Many APIs] support GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable",
+          "issues": [
+            "5185"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/meet",
+      "id": "72748c0e-af4b-4d9d-ac2e-bbae2a874974",
+      "createTime": "2024-04-16T17:47:32.227Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "02719b6945141a7b35256c6d96228280da5bda0f",
+          "message": "[merchantapi] add click potential to Reports sub-API publication",
+          "issues": [
+            "5222"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reports",
+      "id": "531dd801-c1c8-48fd-9d07-9aad61fd7fb6",
+      "createTime": "2024-04-16T17:47:32.208Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c5ccdf93641e7bb6d0e5c636168fad0feafab6e3",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5188"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/edgenetwork",
+      "id": "dec403dd-1523-4d25-8fb4-27fa731c7d59",
+      "createTime": "2024-04-16T17:47:32.196Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "dbc5e6713c9e733a10acd551a34494ae21a17110",
+          "message": "Update dependency natural to v7",
+          "issues": [
+            "5221"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "4.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vision",
+      "id": "44f873bd-bf51-4341-8a13-e11d07a3a5b3",
+      "createTime": "2024-04-16T17:47:32.182Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c5ccdf93641e7bb6d0e5c636168fad0feafab6e3",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5188"
+          ]
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-hub",
+      "id": "d7ec5494-2170-4532-9dee-66b93da51f67",
+      "createTime": "2024-04-16T17:47:32.169Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c5ccdf93641e7bb6d0e5c636168fad0feafab6e3",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5188"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-connect-gateway",
+      "id": "1c872132-f880-4938-98b3-2368c0e5581d",
+      "createTime": "2024-04-16T17:47:32.156Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c5ccdf93641e7bb6d0e5c636168fad0feafab6e3",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5188"
+          ]
+        }
+      ],
+      "version": "1.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-backup",
+      "id": "c0c54ed6-b20f-43e0-86fe-d570570dfa68",
+      "createTime": "2024-04-16T17:47:32.141Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c5ccdf93641e7bb6d0e5c636168fad0feafab6e3",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5188"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/functions",
+      "id": "1562ec35-1c77-4526-a688-3c57fcd84ddb",
+      "createTime": "2024-04-16T17:47:32.126Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c5ccdf93641e7bb6d0e5c636168fad0feafab6e3",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5188"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/filestore",
+      "id": "e570d114-f960-4977-b156-e1a0122a7685",
+      "createTime": "2024-04-16T17:47:32.110Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c5ccdf93641e7bb6d0e5c636168fad0feafab6e3",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5188"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc-publishing",
+      "id": "a04e5866-2592-421e-8463-c373c6c50e49",
+      "createTime": "2024-04-16T17:47:32.095Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c5ccdf93641e7bb6d0e5c636168fad0feafab6e3",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5188"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc",
+      "id": "1c21778c-03bd-4424-975d-edaf7eebc824",
+      "createTime": "2024-04-16T17:47:32.081Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c5ccdf93641e7bb6d0e5c636168fad0feafab6e3",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5188"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/essential-contacts",
+      "id": "683aaadf-1932-4eff-9bb0-4d583fbddcdb",
+      "createTime": "2024-04-16T17:47:32.068Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c5ccdf93641e7bb6d0e5c636168fad0feafab6e3",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5188"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/edgecontainer",
+      "id": "582ee9f2-c75e-4b29-9aa2-1ee9b2aa589e",
+      "createTime": "2024-04-16T17:47:32.056Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c5ccdf93641e7bb6d0e5c636168fad0feafab6e3",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5188"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/domains",
+      "id": "013c7ebf-1a19-41f5-a2ab-2fd4a8e29dbe",
+      "createTime": "2024-04-16T17:47:32.031Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c5ccdf93641e7bb6d0e5c636168fad0feafab6e3",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5188"
+          ]
+        }
+      ],
+      "version": "8.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "dd61dc23-b256-493a-a027-79c7016212fa",
+      "createTime": "2024-04-16T17:47:32.015Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c5ccdf93641e7bb6d0e5c636168fad0feafab6e3",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5188"
+          ]
+        }
+      ],
+      "version": "1.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "abb27de1-15b3-4049-bbb8-531dea4d1041",
+      "createTime": "2024-04-16T17:47:32.002Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c5ccdf93641e7bb6d0e5c636168fad0feafab6e3",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5188"
+          ]
+        }
+      ],
+      "version": "4.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "62d0c74e-ab19-453b-9f37-618ced60d2e5",
+      "createTime": "2024-04-16T17:47:31.987Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c5ccdf93641e7bb6d0e5c636168fad0feafab6e3",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5188"
+          ]
+        }
+      ],
+      "version": "6.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "da344e10-e18f-401b-a88d-7bb1786e1332",
+      "createTime": "2024-04-16T17:47:31.975Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c5ccdf93641e7bb6d0e5c636168fad0feafab6e3",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5188"
+          ]
+        }
+      ],
+      "version": "3.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/deploy",
+      "id": "382ca84c-4364-458f-a700-ce454037024a",
+      "createTime": "2024-04-16T17:47:31.962Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c5ccdf93641e7bb6d0e5c636168fad0feafab6e3",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5188"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datastream",
+      "id": "205ab307-1fde-4130-88d6-72939f07343b",
+      "createTime": "2024-04-16T17:47:31.950Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c5ccdf93641e7bb6d0e5c636168fad0feafab6e3",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5188"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/data-qna",
+      "id": "5d51d8ea-4429-48a7-afee-05919ccdc11f",
+      "createTime": "2024-04-16T17:47:31.936Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c5ccdf93641e7bb6d0e5c636168fad0feafab6e3",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5188"
+          ]
+        }
+      ],
+      "version": "5.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "a8ac7032-bd66-47ee-8792-3063a13958db",
+      "createTime": "2024-04-16T17:47:31.921Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c5ccdf93641e7bb6d0e5c636168fad0feafab6e3",
+          "message": "[Many APIs] add several fields to manage state of database encryption update",
+          "issues": [
+            "5188"
+          ]
+        }
+      ],
+      "version": "3.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "469f9658-c7f1-4395-a355-144f973f49fd",
+      "createTime": "2024-04-16T17:47:31.855Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cc54e98f7f51598e88277ac50310b07b778acbc7",
+          "message": "[Many APIs] support GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable",
+          "issues": [
+            "5185"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/access-approval",
+      "id": "aa0b01a3-8208-4afc-b3dd-74d021bd90a1",
+      "createTime": "2024-04-16T17:47:31.836Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cc54e98f7f51598e88277ac50310b07b778acbc7",
+          "message": "[Many APIs] support GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable",
+          "issues": [
+            "5185"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google/area120-tables",
+      "id": "41ecb587-720b-493e-bf6b-7853cf04230d",
+      "createTime": "2024-04-16T17:47:31.726Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cc54e98f7f51598e88277ac50310b07b778acbc7",
+          "message": "[Many APIs] support GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable",
+          "issues": [
+            "5185"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appengine-admin",
+      "id": "288e8291-aae2-414b-a43f-8d9a0fa64f35",
+      "createTime": "2024-04-16T17:47:31.697Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cc54e98f7f51598e88277ac50310b07b778acbc7",
+          "message": "[Many APIs] support GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable",
+          "issues": [
+            "5185"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-usage",
+      "id": "1a909af2-ba1c-42ef-a751-5e07bac2ff1d",
+      "createTime": "2024-04-16T17:47:31.582Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cc54e98f7f51598e88277ac50310b07b778acbc7",
+          "message": "[Many APIs] support GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable",
+          "issues": [
+            "5185"
+          ]
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-management",
+      "id": "211b45a1-5768-4f8e-a51d-96538a32449c",
+      "createTime": "2024-04-16T17:47:31.570Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cc54e98f7f51598e88277ac50310b07b778acbc7",
+          "message": "[Many APIs] support GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable",
+          "issues": [
+            "5185"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-control",
+      "id": "dc0105e6-0c4d-4a65-8ea8-de89a86c0af9",
+      "createTime": "2024-04-16T17:47:31.558Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cc54e98f7f51598e88277ac50310b07b778acbc7",
+          "message": "[Many APIs] support GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable",
+          "issues": [
+            "5185"
+          ]
+        }
+      ],
+      "version": "1.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apikeys",
+      "id": "1a809ab4-56ad-4509-a5a6-8d54f60d31bf",
+      "createTime": "2024-04-16T17:47:31.546Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cc54e98f7f51598e88277ac50310b07b778acbc7",
+          "message": "[Many APIs] support GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable",
+          "issues": [
+            "5185"
+          ]
+        }
+      ],
+      "version": "4.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/data",
+      "id": "6e7472ad-aa99-49c1-b68a-632a2dae41d6",
+      "createTime": "2024-04-16T17:47:31.532Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cc54e98f7f51598e88277ac50310b07b778acbc7",
+          "message": "[Many APIs] support GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable",
+          "issues": [
+            "5185"
+          ]
+        }
+      ],
+      "version": "7.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/admin",
+      "id": "9c6cec3a-4db4-40f2-8faf-0cf2b6c386dc",
+      "createTime": "2024-04-16T17:47:31.511Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "c271d54547cf657eabd674ace50842d22005fb67",
           "message": "Add Persistent Resource reboot api call to v1beta1",
           "issues": [
@@ -27807,5 +28369,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-04-10T18:09:03.511Z"
+  "updateTime": "2024-04-16T17:47:32.240Z"
 }

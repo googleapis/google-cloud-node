@@ -9791,6 +9791,9 @@ export namespace google {
 
                     /** TaskGroup runAsNonRoot */
                     runAsNonRoot?: (boolean|null);
+
+                    /** TaskGroup serviceAccount */
+                    serviceAccount?: (google.cloud.batch.v1alpha.IServiceAccount|null);
                 }
 
                 /** Represents a TaskGroup. */
@@ -9837,6 +9840,9 @@ export namespace google {
 
                     /** TaskGroup runAsNonRoot. */
                     public runAsNonRoot: boolean;
+
+                    /** TaskGroup serviceAccount. */
+                    public serviceAccount?: (google.cloud.batch.v1alpha.IServiceAccount|null);
 
                     /**
                      * Creates a new TaskGroup instance using the specified properties.
@@ -12801,10 +12807,16 @@ export namespace google {
                         public consumptionInterval?: (google.type.IInterval|null);
 
                         /** LimitStatus limit. */
-                        public limit: number;
+                        public limit?: (number|null);
 
                         /** LimitStatus consumed. */
-                        public consumed: number;
+                        public consumed?: (number|null);
+
+                        /** LimitStatus _limit. */
+                        public _limit?: "limit";
+
+                        /** LimitStatus _consumed. */
+                        public _consumed?: "consumed";
 
                         /**
                          * Creates a new LimitStatus instance using the specified properties.
@@ -12907,7 +12919,10 @@ export namespace google {
                         public consumptionInterval?: (google.type.IInterval|null);
 
                         /** PeriodConsumption consumed. */
-                        public consumed: number;
+                        public consumed?: (number|null);
+
+                        /** PeriodConsumption _consumed. */
+                        public _consumed?: "consumed";
 
                         /**
                          * Creates a new PeriodConsumption instance using the specified properties.

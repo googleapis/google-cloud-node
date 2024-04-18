@@ -41,8 +41,7 @@ import * as gapicConfig from './serving_config_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for operations related to
- *  {@link protos.google.cloud.discoveryengine.v1alpha.ServingConfig|ServingConfig}.
+ *  Service for operations related to {@link protos.|ServingConfig}.
  * @class
  * @memberof v1alpha
  */

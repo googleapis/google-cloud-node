@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-discoveryengine",
-        "version": "1.5.0",
+        "version": "1.6.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -1166,7 +1166,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 159,
+                    "end": 128,
                     "type": "FULL"
                 }
             ],
@@ -1188,26 +1188,6 @@
                         "type": ".google.cloud.discoveryengine.v1alpha.BigQuerySource"
                     },
                     {
-                        "name": "fhir_store_source",
-                        "type": ".google.cloud.discoveryengine.v1alpha.FhirStoreSource"
-                    },
-                    {
-                        "name": "spanner_source",
-                        "type": ".google.cloud.discoveryengine.v1alpha.SpannerSource"
-                    },
-                    {
-                        "name": "cloud_sql_source",
-                        "type": ".google.cloud.discoveryengine.v1alpha.CloudSqlSource"
-                    },
-                    {
-                        "name": "firestore_source",
-                        "type": ".google.cloud.discoveryengine.v1alpha.FirestoreSource"
-                    },
-                    {
-                        "name": "bigtable_source",
-                        "type": ".google.cloud.discoveryengine.v1alpha.BigtableSource"
-                    },
-                    {
                         "name": "parent",
                         "type": "TYPE_STRING"
                     },
@@ -1218,10 +1198,6 @@
                     {
                         "name": "reconciliation_mode",
                         "type": ".google.cloud.discoveryengine.v1alpha.ImportDocumentsRequest.ReconciliationMode"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
                     },
                     {
                         "name": "auto_generate_ids",
@@ -1296,54 +1272,6 @@
                 "method": {
                     "shortName": "PurgeDocuments",
                     "fullName": "google.cloud.discoveryengine.v1alpha.DocumentService.PurgeDocuments",
-                    "service": {
-                        "shortName": "DocumentService",
-                        "fullName": "google.cloud.discoveryengine.v1alpha.DocumentService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "discoveryengine_v1alpha_generated_DocumentService_GetProcessedDocument_async",
-            "title": "AclConfigService getProcessedDocument Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the parsed layout information for a [Document][google.cloud.discoveryengine.v1alpha.Document].",
-            "canonical": true,
-            "file": "document_service.get_processed_document.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetProcessedDocument",
-                "fullName": "google.cloud.discoveryengine.v1alpha.DocumentService.GetProcessedDocument",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "processed_document_type",
-                        "type": ".google.cloud.discoveryengine.v1alpha.GetProcessedDocumentRequest.ProcessedDocumentType"
-                    },
-                    {
-                        "name": "processed_document_format",
-                        "type": ".google.cloud.discoveryengine.v1alpha.GetProcessedDocumentRequest.ProcessedDocumentFormat"
-                    }
-                ],
-                "resultType": ".google.cloud.discoveryengine.v1alpha.ProcessedDocument",
-                "client": {
-                    "shortName": "DocumentServiceClient",
-                    "fullName": "google.cloud.discoveryengine.v1alpha.DocumentServiceClient"
-                },
-                "method": {
-                    "shortName": "GetProcessedDocument",
-                    "fullName": "google.cloud.discoveryengine.v1alpha.DocumentService.GetProcessedDocument",
                     "service": {
                         "shortName": "DocumentService",
                         "fullName": "google.cloud.discoveryengine.v1alpha.DocumentService"
@@ -1744,66 +1672,6 @@
             }
         },
         {
-            "regionTag": "discoveryengine_v1alpha_generated_RankService_Rank_async",
-            "title": "AclConfigService rank Sample",
-            "origin": "API_DEFINITION",
-            "description": " Ranks a list of text records based on the given input query.",
-            "canonical": true,
-            "file": "rank_service.rank.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 80,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "Rank",
-                "fullName": "google.cloud.discoveryengine.v1alpha.RankService.Rank",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "ranking_config",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "model",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "top_n",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "query",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "records",
-                        "type": "TYPE_MESSAGE[]"
-                    },
-                    {
-                        "name": "ignore_record_details_in_response",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.cloud.discoveryengine.v1alpha.RankResponse",
-                "client": {
-                    "shortName": "RankServiceClient",
-                    "fullName": "google.cloud.discoveryengine.v1alpha.RankServiceClient"
-                },
-                "method": {
-                    "shortName": "Rank",
-                    "fullName": "google.cloud.discoveryengine.v1alpha.RankService.Rank",
-                    "service": {
-                        "shortName": "RankService",
-                        "fullName": "google.cloud.discoveryengine.v1alpha.RankService"
-                    }
-                }
-            }
-        },
-        {
             "regionTag": "discoveryengine_v1alpha_generated_RecommendationService_Recommend_async",
             "title": "AclConfigService recommend Sample",
             "origin": "API_DEFINITION",
@@ -2098,7 +1966,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 271,
+                    "end": 267,
                     "type": "FULL"
                 }
             ],
