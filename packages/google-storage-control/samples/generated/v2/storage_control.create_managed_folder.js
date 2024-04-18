@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, folder, folderId) {
-  // [START storage_v2_generated_StorageControl_CreateFolder_async]
+function main(parent, managedFolder, managedFolderId) {
+  // [START storage_v2_generated_StorageControl_CreateManagedFolder_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,33 +29,24 @@ function main(parent, folder, folderId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the bucket in which the folder will reside.
+   *  Required. Name of the bucket this managed folder belongs to.
    */
   // const parent = 'abc123'
   /**
-   *  Required. Properties of the new folder being created.
-   *  The bucket and name of the folder are specified in the parent and folder_id
-   *  fields, respectively. Populating those fields in `folder` will result in an
-   *  error.
+   *  Required. Properties of the managed folder being created.
+   *  The bucket and managed folder names are specified in the `parent` and
+   *  `managed_folder_id` fields. Populating these fields in `managed_folder`
+   *  will result in an error.
    */
-  // const folder = {}
+  // const managedFolder = {}
   /**
-   *  Required. The full name of a folder, including all its parent folders.
-   *  Folders use single '/' characters as a delimiter.
-   *  The folder_id must end with a slash.
-   *  For example, the folder_id of "books/biographies/" would create a new
-   *  "biographies/" folder under the "books/" folder.
+   *  Required. The name of the managed folder. It uses a single `/` as delimiter
+   *  and leading and trailing `/` are allowed.
    */
-  // const folderId = 'abc123'
-  /**
-   *  Optional. If true, parent folder doesn't have to be present and all missing
-   *  ancestor folders will be created atomically.
-   */
-  // const recursive = true
+  // const managedFolderId = 'abc123'
   /**
    *  Optional. A unique identifier for this request. UUID is the recommended
-   *  format, but other formats are still accepted. This request is only
-   *  idempotent if a `request_id` is provided.
+   *  format, but other formats are still accepted.
    */
   // const requestId = 'abc123'
 
@@ -65,21 +56,21 @@ function main(parent, folder, folderId) {
   // Instantiates a client
   const controlClient = new StorageControlClient();
 
-  async function callCreateFolder() {
+  async function callCreateManagedFolder() {
     // Construct request
     const request = {
       parent,
-      folder,
-      folderId,
+      managedFolder,
+      managedFolderId,
     };
 
     // Run request
-    const response = await controlClient.createFolder(request);
+    const response = await controlClient.createManagedFolder(request);
     console.log(response);
   }
 
-  callCreateFolder();
-  // [END storage_v2_generated_StorageControl_CreateFolder_async]
+  callCreateManagedFolder();
+  // [END storage_v2_generated_StorageControl_CreateManagedFolder_async]
 }
 
 process.on('unhandledRejection', err => {

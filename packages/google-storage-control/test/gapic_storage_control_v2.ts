@@ -174,7 +174,7 @@ describe('v2.StorageControlClient', () => {
     });
 
     if (
-      typeof process !== 'undefined' &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       it('throws DeprecationWarning if static servicePath is used', () => {
@@ -210,6 +210,38 @@ describe('v2.StorageControlClient', () => {
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'storage.example.com');
     });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new storagecontrolModule.v2.StorageControlClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'storage.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new storagecontrolModule.v2.StorageControlClient({
+            universeDomain: 'configured.example.com',
+          });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'storage.configured.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new storagecontrolModule.v2.StorageControlClient({
@@ -843,6 +875,413 @@ describe('v2.StorageControlClient', () => {
     });
   });
 
+  describe('createManagedFolder', () => {
+    it('invokes createManagedFolder without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.CreateManagedFolderRequest()
+      );
+      // path template: {bucket=**}
+      request.parent = 'value';
+      const expectedHeaderRequestParams = 'bucket=value';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.ManagedFolder()
+      );
+      client.innerApiCalls.createManagedFolder =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createManagedFolder(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createManagedFolder as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createManagedFolder as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.createManagedFolder as SinonStub).getCall(0)
+          .args[0].requestId,
+        /[a-z0-9-]{36}/
+      );
+    });
+
+    it('invokes createManagedFolder without error using callback', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.CreateManagedFolderRequest()
+      );
+      // path template: {bucket=**}
+      request.parent = 'value';
+      const expectedHeaderRequestParams = 'bucket=value';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.ManagedFolder()
+      );
+      client.innerApiCalls.createManagedFolder =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createManagedFolder(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.storage.control.v2.IManagedFolder | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createManagedFolder as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createManagedFolder as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.createManagedFolder as SinonStub).getCall(0)
+          .args[0].requestId,
+        /[a-z0-9-]{36}/
+      );
+    });
+
+    it('invokes createManagedFolder with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.CreateManagedFolderRequest()
+      );
+      // path template: {bucket=**}
+      request.parent = 'value';
+      const expectedHeaderRequestParams = 'bucket=value';
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createManagedFolder = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createManagedFolder(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createManagedFolder as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createManagedFolder as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.createManagedFolder as SinonStub).getCall(0)
+          .args[0].requestId,
+        /[a-z0-9-]{36}/
+      );
+    });
+
+    it('invokes createManagedFolder with closed client', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.CreateManagedFolderRequest()
+      );
+      // path template: {bucket=**}
+      request.parent = 'value';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createManagedFolder(request), expectedError);
+    });
+  });
+
+  describe('deleteManagedFolder', () => {
+    it('invokes deleteManagedFolder without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.DeleteManagedFolderRequest()
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteManagedFolder =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteManagedFolder(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteManagedFolder as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteManagedFolder as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.deleteManagedFolder as SinonStub).getCall(0)
+          .args[0].requestId,
+        /[a-z0-9-]{36}/
+      );
+    });
+
+    it('invokes deleteManagedFolder without error using callback', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.DeleteManagedFolderRequest()
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteManagedFolder =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteManagedFolder(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteManagedFolder as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteManagedFolder as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.deleteManagedFolder as SinonStub).getCall(0)
+          .args[0].requestId,
+        /[a-z0-9-]{36}/
+      );
+    });
+
+    it('invokes deleteManagedFolder with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.DeleteManagedFolderRequest()
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteManagedFolder = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteManagedFolder(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteManagedFolder as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteManagedFolder as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.deleteManagedFolder as SinonStub).getCall(0)
+          .args[0].requestId,
+        /[a-z0-9-]{36}/
+      );
+    });
+
+    it('invokes deleteManagedFolder with closed client', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.DeleteManagedFolderRequest()
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteManagedFolder(request), expectedError);
+    });
+  });
+
+  describe('getManagedFolder', () => {
+    it('invokes getManagedFolder without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.GetManagedFolderRequest()
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.ManagedFolder()
+      );
+      client.innerApiCalls.getManagedFolder = stubSimpleCall(expectedResponse);
+      const [response] = await client.getManagedFolder(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getManagedFolder as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getManagedFolder as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.getManagedFolder as SinonStub).getCall(0).args[0]
+          .requestId,
+        /[a-z0-9-]{36}/
+      );
+    });
+
+    it('invokes getManagedFolder without error using callback', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.GetManagedFolderRequest()
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.ManagedFolder()
+      );
+      client.innerApiCalls.getManagedFolder =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getManagedFolder(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.storage.control.v2.IManagedFolder | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getManagedFolder as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getManagedFolder as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.getManagedFolder as SinonStub).getCall(0).args[0]
+          .requestId,
+        /[a-z0-9-]{36}/
+      );
+    });
+
+    it('invokes getManagedFolder with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.GetManagedFolderRequest()
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getManagedFolder = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getManagedFolder(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getManagedFolder as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getManagedFolder as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.getManagedFolder as SinonStub).getCall(0).args[0]
+          .requestId,
+        /[a-z0-9-]{36}/
+      );
+    });
+
+    it('invokes getManagedFolder with closed client', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.GetManagedFolderRequest()
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getManagedFolder(request), expectedError);
+    });
+  });
+
   describe('renameFolder', () => {
     it('invokes renameFolder without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
@@ -1328,6 +1767,338 @@ describe('v2.StorageControlClient', () => {
       );
     });
   });
+
+  describe('listManagedFolders', () => {
+    it('invokes listManagedFolders without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListManagedFoldersRequest()
+      );
+      // path template: {bucket=**}
+      request.parent = 'value';
+      const expectedHeaderRequestParams = 'bucket=value';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.storage.control.v2.ManagedFolder()
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.ManagedFolder()
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.ManagedFolder()
+        ),
+      ];
+      client.innerApiCalls.listManagedFolders =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listManagedFolders(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listManagedFolders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listManagedFolders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.listManagedFolders as SinonStub).getCall(0)
+          .args[0].requestId,
+        /[a-z0-9-]{36}/
+      );
+    });
+
+    it('invokes listManagedFolders without error using callback', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListManagedFoldersRequest()
+      );
+      // path template: {bucket=**}
+      request.parent = 'value';
+      const expectedHeaderRequestParams = 'bucket=value';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.storage.control.v2.ManagedFolder()
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.ManagedFolder()
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.ManagedFolder()
+        ),
+      ];
+      client.innerApiCalls.listManagedFolders =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listManagedFolders(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.storage.control.v2.IManagedFolder[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listManagedFolders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listManagedFolders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.listManagedFolders as SinonStub).getCall(0)
+          .args[0].requestId,
+        /[a-z0-9-]{36}/
+      );
+    });
+
+    it('invokes listManagedFolders with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListManagedFoldersRequest()
+      );
+      // path template: {bucket=**}
+      request.parent = 'value';
+      const expectedHeaderRequestParams = 'bucket=value';
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listManagedFolders = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listManagedFolders(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listManagedFolders as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listManagedFolders as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.listManagedFolders as SinonStub).getCall(0)
+          .args[0].requestId,
+        /[a-z0-9-]{36}/
+      );
+    });
+
+    it('invokes listManagedFoldersStream without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListManagedFoldersRequest()
+      );
+      // path template: {bucket=**}
+      request.parent = 'value';
+      const expectedHeaderRequestParams = 'bucket=value';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.storage.control.v2.ManagedFolder()
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.ManagedFolder()
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.ManagedFolder()
+        ),
+      ];
+      client.descriptors.page.listManagedFolders.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listManagedFoldersStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.storage.control.v2.ManagedFolder[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.storage.control.v2.ManagedFolder) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listManagedFolders.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listManagedFolders, request)
+      );
+      assert(
+        (client.descriptors.page.listManagedFolders.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes listManagedFoldersStream with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListManagedFoldersRequest()
+      );
+      // path template: {bucket=**}
+      request.parent = 'value';
+      const expectedHeaderRequestParams = 'bucket=value';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listManagedFolders.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listManagedFoldersStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.storage.control.v2.ManagedFolder[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.storage.control.v2.ManagedFolder) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listManagedFolders.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listManagedFolders, request)
+      );
+      assert(
+        (client.descriptors.page.listManagedFolders.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listManagedFolders without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListManagedFoldersRequest()
+      );
+      // path template: {bucket=**}
+      request.parent = 'value';
+      const expectedHeaderRequestParams = 'bucket=value';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.storage.control.v2.ManagedFolder()
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.ManagedFolder()
+        ),
+        generateSampleMessage(
+          new protos.google.storage.control.v2.ManagedFolder()
+        ),
+      ];
+      client.descriptors.page.listManagedFolders.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.storage.control.v2.IManagedFolder[] = [];
+      const iterable = client.listManagedFoldersAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listManagedFolders.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listManagedFolders.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+      assert.match(
+        (
+          client.descriptors.page.listManagedFolders.asyncIterate as SinonStub
+        ).getCall(0).args[1].requestId,
+        /[a-z0-9-]{36}/
+      );
+    });
+
+    it('uses async iteration with listManagedFolders with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.ListManagedFoldersRequest()
+      );
+      // path template: {bucket=**}
+      request.parent = 'value';
+      const expectedHeaderRequestParams = 'bucket=value';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listManagedFolders.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listManagedFoldersAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.storage.control.v2.IManagedFolder[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listManagedFolders.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listManagedFolders.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+      assert.match(
+        (
+          client.descriptors.page.listManagedFolders.asyncIterate as SinonStub
+        ).getCall(0).args[1].requestId,
+        /[a-z0-9-]{36}/
+      );
+    });
+  });
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
@@ -1742,6 +2513,70 @@ describe('v2.StorageControlClient', () => {
         assert.strictEqual(result, 'folderValue');
         assert(
           (client.pathTemplates.folderPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('managedFolder', () => {
+      const fakePath = '/rendered/path/managedFolder';
+      const expectedParameters = {
+        project: 'projectValue',
+        bucket: 'bucketValue',
+        managedFolder: 'managedFolderValue',
+      };
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.managedFolderPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.managedFolderPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('managedFolderPath', () => {
+        const result = client.managedFolderPath(
+          'projectValue',
+          'bucketValue',
+          'managedFolderValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.managedFolderPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromManagedFolderName', () => {
+        const result = client.matchProjectFromManagedFolderName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.managedFolderPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchBucketFromManagedFolderName', () => {
+        const result = client.matchBucketFromManagedFolderName(fakePath);
+        assert.strictEqual(result, 'bucketValue');
+        assert(
+          (client.pathTemplates.managedFolderPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchManagedFolderFromManagedFolderName', () => {
+        const result = client.matchManagedFolderFromManagedFolderName(fakePath);
+        assert.strictEqual(result, 'managedFolderValue');
+        assert(
+          (client.pathTemplates.managedFolderPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

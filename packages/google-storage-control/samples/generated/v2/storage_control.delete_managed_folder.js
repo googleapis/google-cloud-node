@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, folder, folderId) {
-  // [START storage_v2_generated_StorageControl_CreateFolder_async]
+function main(name) {
+  // [START storage_v2_generated_StorageControl_DeleteManagedFolder_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,33 +29,31 @@ function main(parent, folder, folderId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the bucket in which the folder will reside.
+   *  Required. Name of the managed folder.
+   *  Format:
+   *  `projects/{project}/buckets/{bucket}/managedFolders/{managedFolder}`
    */
-  // const parent = 'abc123'
+  // const name = 'abc123'
   /**
-   *  Required. Properties of the new folder being created.
-   *  The bucket and name of the folder are specified in the parent and folder_id
-   *  fields, respectively. Populating those fields in `folder` will result in an
-   *  error.
+   *  The operation succeeds conditional on the managed folder's current
+   *  metageneration matching the value here specified.
    */
-  // const folder = {}
+  // const ifMetagenerationMatch = 1234
   /**
-   *  Required. The full name of a folder, including all its parent folders.
-   *  Folders use single '/' characters as a delimiter.
-   *  The folder_id must end with a slash.
-   *  For example, the folder_id of "books/biographies/" would create a new
-   *  "biographies/" folder under the "books/" folder.
+   *  The operation succeeds conditional on the managed folder's current
+   *  metageneration NOT matching the value here specified.
    */
-  // const folderId = 'abc123'
+  // const ifMetagenerationNotMatch = 1234
   /**
-   *  Optional. If true, parent folder doesn't have to be present and all missing
-   *  ancestor folders will be created atomically.
+   *  Allows deletion of a managed folder even if it is not empty.
+   *  A managed folder is empty if it manages no child managed folders or
+   *  objects. Caller must have permission for
+   *  storage.managedFolders.setIamPolicy.
    */
-  // const recursive = true
+  // const allowNonEmpty = true
   /**
    *  Optional. A unique identifier for this request. UUID is the recommended
-   *  format, but other formats are still accepted. This request is only
-   *  idempotent if a `request_id` is provided.
+   *  format, but other formats are still accepted.
    */
   // const requestId = 'abc123'
 
@@ -65,21 +63,19 @@ function main(parent, folder, folderId) {
   // Instantiates a client
   const controlClient = new StorageControlClient();
 
-  async function callCreateFolder() {
+  async function callDeleteManagedFolder() {
     // Construct request
     const request = {
-      parent,
-      folder,
-      folderId,
+      name,
     };
 
     // Run request
-    const response = await controlClient.createFolder(request);
+    const response = await controlClient.deleteManagedFolder(request);
     console.log(response);
   }
 
-  callCreateFolder();
-  // [END storage_v2_generated_StorageControl_CreateFolder_async]
+  callDeleteManagedFolder();
+  // [END storage_v2_generated_StorageControl_DeleteManagedFolder_async]
 }
 
 process.on('unhandledRejection', err => {

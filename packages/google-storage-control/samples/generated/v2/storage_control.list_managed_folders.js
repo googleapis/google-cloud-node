@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, folder, folderId) {
-  // [START storage_v2_generated_StorageControl_CreateFolder_async]
+function main(parent) {
+  // [START storage_v2_generated_StorageControl_ListManagedFolders_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,33 +29,27 @@ function main(parent, folder, folderId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the bucket in which the folder will reside.
+   *  Required. Name of the bucket this managed folder belongs to.
    */
   // const parent = 'abc123'
   /**
-   *  Required. Properties of the new folder being created.
-   *  The bucket and name of the folder are specified in the parent and folder_id
-   *  fields, respectively. Populating those fields in `folder` will result in an
-   *  error.
+   *  Optional. Maximum number of managed folders to return in a single response.
+   *  The service will use this parameter or 1,000 items, whichever is smaller.
    */
-  // const folder = {}
+  // const pageSize = 1234
   /**
-   *  Required. The full name of a folder, including all its parent folders.
-   *  Folders use single '/' characters as a delimiter.
-   *  The folder_id must end with a slash.
-   *  For example, the folder_id of "books/biographies/" would create a new
-   *  "biographies/" folder under the "books/" folder.
+   *  Optional. A previously-returned page token representing part of the larger
+   *  set of results to view.
    */
-  // const folderId = 'abc123'
+  // const pageToken = 'abc123'
   /**
-   *  Optional. If true, parent folder doesn't have to be present and all missing
-   *  ancestor folders will be created atomically.
+   *  Optional. Filter results to match managed folders with name starting with
+   *  this prefix.
    */
-  // const recursive = true
+  // const prefix = 'abc123'
   /**
    *  Optional. A unique identifier for this request. UUID is the recommended
-   *  format, but other formats are still accepted. This request is only
-   *  idempotent if a `request_id` is provided.
+   *  format, but other formats are still accepted.
    */
   // const requestId = 'abc123'
 
@@ -65,21 +59,21 @@ function main(parent, folder, folderId) {
   // Instantiates a client
   const controlClient = new StorageControlClient();
 
-  async function callCreateFolder() {
+  async function callListManagedFolders() {
     // Construct request
     const request = {
       parent,
-      folder,
-      folderId,
     };
 
     // Run request
-    const response = await controlClient.createFolder(request);
-    console.log(response);
+    const iterable = controlClient.listManagedFoldersAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callCreateFolder();
-  // [END storage_v2_generated_StorageControl_CreateFolder_async]
+  callListManagedFolders();
+  // [END storage_v2_generated_StorageControl_ListManagedFolders_async]
 }
 
 process.on('unhandledRejection', err => {
