@@ -16,10 +16,16 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {LfpInventoryServiceClient, LfpSaleServiceClient, LfpStoreServiceClient} from '@google-cloud/lfp';
+import {
+  LfpInventoryServiceClient,
+  LfpSaleServiceClient,
+  LfpStoreServiceClient,
+} from '@google-cloud/lfp';
 
 // check that the client class type name can be used
-function doStuffWithLfpInventoryServiceClient(client: LfpInventoryServiceClient) {
+function doStuffWithLfpInventoryServiceClient(
+  client: LfpInventoryServiceClient
+) {
   client.close();
 }
 function doStuffWithLfpSaleServiceClient(client: LfpSaleServiceClient) {
