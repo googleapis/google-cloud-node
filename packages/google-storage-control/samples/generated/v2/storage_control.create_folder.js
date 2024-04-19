@@ -29,7 +29,8 @@ function main(parent, folder, folderId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the bucket in which the folder will reside.
+   *  Required. Name of the bucket in which the folder will reside. The bucket
+   *  must be a hierarchical namespace enabled bucket.
    */
   // const parent = 'abc123'
   /**
@@ -54,8 +55,7 @@ function main(parent, folder, folderId) {
   // const recursive = true
   /**
    *  Optional. A unique identifier for this request. UUID is the recommended
-   *  format, but other formats are still accepted. This request is only
-   *  idempotent if a `request_id` is provided.
+   *  format, but other formats are still accepted.
    */
   // const requestId = 'abc123'
 
