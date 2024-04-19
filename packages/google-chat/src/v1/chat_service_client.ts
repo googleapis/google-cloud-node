@@ -216,8 +216,14 @@ export class ChatServiceClient {
         'spaces/{space}/messages/{message}/reactions/{reaction}'
       ),
       spacePathTemplate: new this._gaxModule.PathTemplate('spaces/{space}'),
+      spaceReadStatePathTemplate: new this._gaxModule.PathTemplate(
+        'users/{user}/spaces/{space}/spaceReadState'
+      ),
       threadPathTemplate: new this._gaxModule.PathTemplate(
         'spaces/{space}/threads/{thread}'
+      ),
+      threadReadStatePathTemplate: new this._gaxModule.PathTemplate(
+        'users/{user}/spaces/{space}/threads/{thread}/threadReadState'
       ),
     };
 
@@ -320,6 +326,9 @@ export class ChatServiceClient {
       'createReaction',
       'listReactions',
       'deleteReaction',
+      'getSpaceReadState',
+      'updateSpaceReadState',
+      'getThreadReadState',
     ];
     for (const methodName of chatServiceStubMethods) {
       const callPromise = this.chatServiceStub.then(
@@ -428,6 +437,8 @@ export class ChatServiceClient {
       'https://www.googleapis.com/auth/chat.spaces',
       'https://www.googleapis.com/auth/chat.spaces.create',
       'https://www.googleapis.com/auth/chat.spaces.readonly',
+      'https://www.googleapis.com/auth/chat.users.readstate',
+      'https://www.googleapis.com/auth/chat.users.readstate.readonly',
     ];
   }
 
@@ -2475,6 +2486,321 @@ export class ChatServiceClient {
     this.initialize();
     return this.innerApiCalls.deleteReaction(request, options, callback);
   }
+  /**
+   * Returns details about a user's read state within a space, used to identify
+   * read and unread messages.
+   *
+   * Requires [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the space read state to retrieve.
+   *
+   *   Only supports getting read state for the calling user.
+   *
+   *   To refer to the calling user, set one of the following:
+   *
+   *   - The `me` alias. For example, `users/me/spaces/{space}/spaceReadState`.
+   *
+   *   - Their Workspace email address. For example,
+   *   `users/user@example.com/spaces/{space}/spaceReadState`.
+   *
+   *   - Their user id. For example,
+   *   `users/123456789/spaces/{space}/spaceReadState`.
+   *
+   *   Format: users/{user}/spaces/{space}/spaceReadState
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.chat.v1.SpaceReadState|SpaceReadState}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.get_space_read_state.js</caption>
+   * region_tag:chat_v1_generated_ChatService_GetSpaceReadState_async
+   */
+  getSpaceReadState(
+    request?: protos.google.chat.v1.IGetSpaceReadStateRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.chat.v1.ISpaceReadState,
+      protos.google.chat.v1.IGetSpaceReadStateRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getSpaceReadState(
+    request: protos.google.chat.v1.IGetSpaceReadStateRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.chat.v1.ISpaceReadState,
+      protos.google.chat.v1.IGetSpaceReadStateRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getSpaceReadState(
+    request: protos.google.chat.v1.IGetSpaceReadStateRequest,
+    callback: Callback<
+      protos.google.chat.v1.ISpaceReadState,
+      protos.google.chat.v1.IGetSpaceReadStateRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getSpaceReadState(
+    request?: protos.google.chat.v1.IGetSpaceReadStateRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.chat.v1.ISpaceReadState,
+          protos.google.chat.v1.IGetSpaceReadStateRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.chat.v1.ISpaceReadState,
+      protos.google.chat.v1.IGetSpaceReadStateRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.chat.v1.ISpaceReadState,
+      protos.google.chat.v1.IGetSpaceReadStateRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getSpaceReadState(request, options, callback);
+  }
+  /**
+   * Updates a user's read state within a space, used to identify read and
+   * unread messages.
+   *
+   * Requires [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.chat.v1.SpaceReadState} request.spaceReadState
+   *   Required. The space read state and fields to update.
+   *
+   *   Only supports updating read state for the calling user.
+   *
+   *   To refer to the calling user, set one of the following:
+   *
+   *   - The `me` alias. For example, `users/me/spaces/{space}/spaceReadState`.
+   *
+   *   - Their Workspace email address. For example,
+   *   `users/user@example.com/spaces/{space}/spaceReadState`.
+   *
+   *   - Their user id. For example,
+   *   `users/123456789/spaces/{space}/spaceReadState`.
+   *
+   *   Format: users/{user}/spaces/{space}/spaceReadState
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The field paths to update. Currently supported field paths:
+   *
+   *   - `last_read_time`
+   *
+   *   When the `last_read_time` is before the latest message create time, the
+   *   space appears as unread in the UI.
+   *
+   *   To mark the space as read, set `last_read_time` to any value later (larger)
+   *   than the latest message create time. The `last_read_time` is coerced to
+   *   match the latest message create time. Note that the space read state only
+   *   affects the read state of messages that are visible in the space's
+   *   top-level conversation. Replies in threads are unaffected by this
+   *   timestamp, and instead rely on the thread read state.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.chat.v1.SpaceReadState|SpaceReadState}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.update_space_read_state.js</caption>
+   * region_tag:chat_v1_generated_ChatService_UpdateSpaceReadState_async
+   */
+  updateSpaceReadState(
+    request?: protos.google.chat.v1.IUpdateSpaceReadStateRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.chat.v1.ISpaceReadState,
+      protos.google.chat.v1.IUpdateSpaceReadStateRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateSpaceReadState(
+    request: protos.google.chat.v1.IUpdateSpaceReadStateRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.chat.v1.ISpaceReadState,
+      protos.google.chat.v1.IUpdateSpaceReadStateRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateSpaceReadState(
+    request: protos.google.chat.v1.IUpdateSpaceReadStateRequest,
+    callback: Callback<
+      protos.google.chat.v1.ISpaceReadState,
+      protos.google.chat.v1.IUpdateSpaceReadStateRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateSpaceReadState(
+    request?: protos.google.chat.v1.IUpdateSpaceReadStateRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.chat.v1.ISpaceReadState,
+          protos.google.chat.v1.IUpdateSpaceReadStateRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.chat.v1.ISpaceReadState,
+      protos.google.chat.v1.IUpdateSpaceReadStateRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.chat.v1.ISpaceReadState,
+      protos.google.chat.v1.IUpdateSpaceReadStateRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'space_read_state.name': request.spaceReadState!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateSpaceReadState(request, options, callback);
+  }
+  /**
+   * Returns details about a user's read state within a thread, used to identify
+   * read and unread messages.
+   *
+   * Requires [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the thread read state to retrieve.
+   *
+   *   Only supports getting read state for the calling user.
+   *
+   *   To refer to the calling user, set one of the following:
+   *
+   *   - The `me` alias. For example,
+   *   `users/me/spaces/{space}/threads/{thread}/threadReadState`.
+   *
+   *   - Their Workspace email address. For example,
+   *   `users/user@example.com/spaces/{space}/threads/{thread}/threadReadState`.
+   *
+   *   - Their user id. For example,
+   *   `users/123456789/spaces/{space}/threads/{thread}/threadReadState`.
+   *
+   *   Format: users/{user}/spaces/{space}/threads/{thread}/threadReadState
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.chat.v1.ThreadReadState|ThreadReadState}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.get_thread_read_state.js</caption>
+   * region_tag:chat_v1_generated_ChatService_GetThreadReadState_async
+   */
+  getThreadReadState(
+    request?: protos.google.chat.v1.IGetThreadReadStateRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.chat.v1.IThreadReadState,
+      protos.google.chat.v1.IGetThreadReadStateRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getThreadReadState(
+    request: protos.google.chat.v1.IGetThreadReadStateRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.chat.v1.IThreadReadState,
+      protos.google.chat.v1.IGetThreadReadStateRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getThreadReadState(
+    request: protos.google.chat.v1.IGetThreadReadStateRequest,
+    callback: Callback<
+      protos.google.chat.v1.IThreadReadState,
+      protos.google.chat.v1.IGetThreadReadStateRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getThreadReadState(
+    request?: protos.google.chat.v1.IGetThreadReadStateRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.chat.v1.IThreadReadState,
+          protos.google.chat.v1.IGetThreadReadStateRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.chat.v1.IThreadReadState,
+      protos.google.chat.v1.IGetThreadReadStateRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.chat.v1.IThreadReadState,
+      protos.google.chat.v1.IGetThreadReadStateRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getThreadReadState(request, options, callback);
+  }
 
   /**
    * Lists messages in a space that the caller is a member of, including
@@ -4137,6 +4463,46 @@ export class ChatServiceClient {
   }
 
   /**
+   * Return a fully-qualified spaceReadState resource name string.
+   *
+   * @param {string} user
+   * @param {string} space
+   * @returns {string} Resource name string.
+   */
+  spaceReadStatePath(user: string, space: string) {
+    return this.pathTemplates.spaceReadStatePathTemplate.render({
+      user: user,
+      space: space,
+    });
+  }
+
+  /**
+   * Parse the user from SpaceReadState resource.
+   *
+   * @param {string} spaceReadStateName
+   *   A fully-qualified path representing SpaceReadState resource.
+   * @returns {string} A string representing the user.
+   */
+  matchUserFromSpaceReadStateName(spaceReadStateName: string) {
+    return this.pathTemplates.spaceReadStatePathTemplate.match(
+      spaceReadStateName
+    ).user;
+  }
+
+  /**
+   * Parse the space from SpaceReadState resource.
+   *
+   * @param {string} spaceReadStateName
+   *   A fully-qualified path representing SpaceReadState resource.
+   * @returns {string} A string representing the space.
+   */
+  matchSpaceFromSpaceReadStateName(spaceReadStateName: string) {
+    return this.pathTemplates.spaceReadStatePathTemplate.match(
+      spaceReadStateName
+    ).space;
+  }
+
+  /**
    * Return a fully-qualified thread resource name string.
    *
    * @param {string} space
@@ -4170,6 +4536,61 @@ export class ChatServiceClient {
    */
   matchThreadFromThreadName(threadName: string) {
     return this.pathTemplates.threadPathTemplate.match(threadName).thread;
+  }
+
+  /**
+   * Return a fully-qualified threadReadState resource name string.
+   *
+   * @param {string} user
+   * @param {string} space
+   * @param {string} thread
+   * @returns {string} Resource name string.
+   */
+  threadReadStatePath(user: string, space: string, thread: string) {
+    return this.pathTemplates.threadReadStatePathTemplate.render({
+      user: user,
+      space: space,
+      thread: thread,
+    });
+  }
+
+  /**
+   * Parse the user from ThreadReadState resource.
+   *
+   * @param {string} threadReadStateName
+   *   A fully-qualified path representing ThreadReadState resource.
+   * @returns {string} A string representing the user.
+   */
+  matchUserFromThreadReadStateName(threadReadStateName: string) {
+    return this.pathTemplates.threadReadStatePathTemplate.match(
+      threadReadStateName
+    ).user;
+  }
+
+  /**
+   * Parse the space from ThreadReadState resource.
+   *
+   * @param {string} threadReadStateName
+   *   A fully-qualified path representing ThreadReadState resource.
+   * @returns {string} A string representing the space.
+   */
+  matchSpaceFromThreadReadStateName(threadReadStateName: string) {
+    return this.pathTemplates.threadReadStatePathTemplate.match(
+      threadReadStateName
+    ).space;
+  }
+
+  /**
+   * Parse the thread from ThreadReadState resource.
+   *
+   * @param {string} threadReadStateName
+   *   A fully-qualified path representing ThreadReadState resource.
+   * @returns {string} A string representing the thread.
+   */
+  matchThreadFromThreadReadStateName(threadReadStateName: string) {
+    return this.pathTemplates.threadReadStatePathTemplate.match(
+      threadReadStateName
+    ).thread;
   }
 
   /**

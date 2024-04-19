@@ -30694,6 +30694,105 @@
                      * @variation 2
                      */
     
+                    /**
+                     * Callback as used by {@link google.chat.v1.ChatService|getSpaceReadState}.
+                     * @memberof google.chat.v1.ChatService
+                     * @typedef GetSpaceReadStateCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.chat.v1.SpaceReadState} [response] SpaceReadState
+                     */
+    
+                    /**
+                     * Calls GetSpaceReadState.
+                     * @function getSpaceReadState
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IGetSpaceReadStateRequest} request GetSpaceReadStateRequest message or plain object
+                     * @param {google.chat.v1.ChatService.GetSpaceReadStateCallback} callback Node-style callback called with the error, if any, and SpaceReadState
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(ChatService.prototype.getSpaceReadState = function getSpaceReadState(request, callback) {
+                        return this.rpcCall(getSpaceReadState, $root.google.chat.v1.GetSpaceReadStateRequest, $root.google.chat.v1.SpaceReadState, request, callback);
+                    }, "name", { value: "GetSpaceReadState" });
+    
+                    /**
+                     * Calls GetSpaceReadState.
+                     * @function getSpaceReadState
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IGetSpaceReadStateRequest} request GetSpaceReadStateRequest message or plain object
+                     * @returns {Promise<google.chat.v1.SpaceReadState>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.chat.v1.ChatService|updateSpaceReadState}.
+                     * @memberof google.chat.v1.ChatService
+                     * @typedef UpdateSpaceReadStateCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.chat.v1.SpaceReadState} [response] SpaceReadState
+                     */
+    
+                    /**
+                     * Calls UpdateSpaceReadState.
+                     * @function updateSpaceReadState
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IUpdateSpaceReadStateRequest} request UpdateSpaceReadStateRequest message or plain object
+                     * @param {google.chat.v1.ChatService.UpdateSpaceReadStateCallback} callback Node-style callback called with the error, if any, and SpaceReadState
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(ChatService.prototype.updateSpaceReadState = function updateSpaceReadState(request, callback) {
+                        return this.rpcCall(updateSpaceReadState, $root.google.chat.v1.UpdateSpaceReadStateRequest, $root.google.chat.v1.SpaceReadState, request, callback);
+                    }, "name", { value: "UpdateSpaceReadState" });
+    
+                    /**
+                     * Calls UpdateSpaceReadState.
+                     * @function updateSpaceReadState
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IUpdateSpaceReadStateRequest} request UpdateSpaceReadStateRequest message or plain object
+                     * @returns {Promise<google.chat.v1.SpaceReadState>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.chat.v1.ChatService|getThreadReadState}.
+                     * @memberof google.chat.v1.ChatService
+                     * @typedef GetThreadReadStateCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.chat.v1.ThreadReadState} [response] ThreadReadState
+                     */
+    
+                    /**
+                     * Calls GetThreadReadState.
+                     * @function getThreadReadState
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IGetThreadReadStateRequest} request GetThreadReadStateRequest message or plain object
+                     * @param {google.chat.v1.ChatService.GetThreadReadStateCallback} callback Node-style callback called with the error, if any, and ThreadReadState
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(ChatService.prototype.getThreadReadState = function getThreadReadState(request, callback) {
+                        return this.rpcCall(getThreadReadState, $root.google.chat.v1.GetThreadReadStateRequest, $root.google.chat.v1.ThreadReadState, request, callback);
+                    }, "name", { value: "GetThreadReadState" });
+    
+                    /**
+                     * Calls GetThreadReadState.
+                     * @function getThreadReadState
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IGetThreadReadStateRequest} request GetThreadReadStateRequest message or plain object
+                     * @returns {Promise<google.chat.v1.ThreadReadState>} Promise
+                     * @variation 2
+                     */
+    
                     return ChatService;
                 })();
     
@@ -47975,6 +48074,678 @@
                     return values;
                 })();
     
+                v1.SpaceReadState = (function() {
+    
+                    /**
+                     * Properties of a SpaceReadState.
+                     * @memberof google.chat.v1
+                     * @interface ISpaceReadState
+                     * @property {string|null} [name] SpaceReadState name
+                     * @property {google.protobuf.ITimestamp|null} [lastReadTime] SpaceReadState lastReadTime
+                     */
+    
+                    /**
+                     * Constructs a new SpaceReadState.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a SpaceReadState.
+                     * @implements ISpaceReadState
+                     * @constructor
+                     * @param {google.chat.v1.ISpaceReadState=} [properties] Properties to set
+                     */
+                    function SpaceReadState(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * SpaceReadState name.
+                     * @member {string} name
+                     * @memberof google.chat.v1.SpaceReadState
+                     * @instance
+                     */
+                    SpaceReadState.prototype.name = "";
+    
+                    /**
+                     * SpaceReadState lastReadTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} lastReadTime
+                     * @memberof google.chat.v1.SpaceReadState
+                     * @instance
+                     */
+                    SpaceReadState.prototype.lastReadTime = null;
+    
+                    /**
+                     * Creates a new SpaceReadState instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.SpaceReadState
+                     * @static
+                     * @param {google.chat.v1.ISpaceReadState=} [properties] Properties to set
+                     * @returns {google.chat.v1.SpaceReadState} SpaceReadState instance
+                     */
+                    SpaceReadState.create = function create(properties) {
+                        return new SpaceReadState(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified SpaceReadState message. Does not implicitly {@link google.chat.v1.SpaceReadState.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.SpaceReadState
+                     * @static
+                     * @param {google.chat.v1.ISpaceReadState} message SpaceReadState message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SpaceReadState.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.lastReadTime != null && Object.hasOwnProperty.call(message, "lastReadTime"))
+                            $root.google.protobuf.Timestamp.encode(message.lastReadTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified SpaceReadState message, length delimited. Does not implicitly {@link google.chat.v1.SpaceReadState.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.SpaceReadState
+                     * @static
+                     * @param {google.chat.v1.ISpaceReadState} message SpaceReadState message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SpaceReadState.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a SpaceReadState message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.SpaceReadState
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.SpaceReadState} SpaceReadState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SpaceReadState.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.SpaceReadState();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.lastReadTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a SpaceReadState message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.SpaceReadState
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.SpaceReadState} SpaceReadState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SpaceReadState.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a SpaceReadState message.
+                     * @function verify
+                     * @memberof google.chat.v1.SpaceReadState
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    SpaceReadState.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.lastReadTime != null && message.hasOwnProperty("lastReadTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.lastReadTime);
+                            if (error)
+                                return "lastReadTime." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a SpaceReadState message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.SpaceReadState
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.SpaceReadState} SpaceReadState
+                     */
+                    SpaceReadState.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.SpaceReadState)
+                            return object;
+                        var message = new $root.google.chat.v1.SpaceReadState();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.lastReadTime != null) {
+                            if (typeof object.lastReadTime !== "object")
+                                throw TypeError(".google.chat.v1.SpaceReadState.lastReadTime: object expected");
+                            message.lastReadTime = $root.google.protobuf.Timestamp.fromObject(object.lastReadTime);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a SpaceReadState message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.SpaceReadState
+                     * @static
+                     * @param {google.chat.v1.SpaceReadState} message SpaceReadState
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    SpaceReadState.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.name = "";
+                            object.lastReadTime = null;
+                        }
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.lastReadTime != null && message.hasOwnProperty("lastReadTime"))
+                            object.lastReadTime = $root.google.protobuf.Timestamp.toObject(message.lastReadTime, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this SpaceReadState to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.SpaceReadState
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    SpaceReadState.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for SpaceReadState
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.SpaceReadState
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    SpaceReadState.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.SpaceReadState";
+                    };
+    
+                    return SpaceReadState;
+                })();
+    
+                v1.GetSpaceReadStateRequest = (function() {
+    
+                    /**
+                     * Properties of a GetSpaceReadStateRequest.
+                     * @memberof google.chat.v1
+                     * @interface IGetSpaceReadStateRequest
+                     * @property {string|null} [name] GetSpaceReadStateRequest name
+                     */
+    
+                    /**
+                     * Constructs a new GetSpaceReadStateRequest.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a GetSpaceReadStateRequest.
+                     * @implements IGetSpaceReadStateRequest
+                     * @constructor
+                     * @param {google.chat.v1.IGetSpaceReadStateRequest=} [properties] Properties to set
+                     */
+                    function GetSpaceReadStateRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * GetSpaceReadStateRequest name.
+                     * @member {string} name
+                     * @memberof google.chat.v1.GetSpaceReadStateRequest
+                     * @instance
+                     */
+                    GetSpaceReadStateRequest.prototype.name = "";
+    
+                    /**
+                     * Creates a new GetSpaceReadStateRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.GetSpaceReadStateRequest
+                     * @static
+                     * @param {google.chat.v1.IGetSpaceReadStateRequest=} [properties] Properties to set
+                     * @returns {google.chat.v1.GetSpaceReadStateRequest} GetSpaceReadStateRequest instance
+                     */
+                    GetSpaceReadStateRequest.create = function create(properties) {
+                        return new GetSpaceReadStateRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified GetSpaceReadStateRequest message. Does not implicitly {@link google.chat.v1.GetSpaceReadStateRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.GetSpaceReadStateRequest
+                     * @static
+                     * @param {google.chat.v1.IGetSpaceReadStateRequest} message GetSpaceReadStateRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetSpaceReadStateRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified GetSpaceReadStateRequest message, length delimited. Does not implicitly {@link google.chat.v1.GetSpaceReadStateRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.GetSpaceReadStateRequest
+                     * @static
+                     * @param {google.chat.v1.IGetSpaceReadStateRequest} message GetSpaceReadStateRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetSpaceReadStateRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a GetSpaceReadStateRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.GetSpaceReadStateRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.GetSpaceReadStateRequest} GetSpaceReadStateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetSpaceReadStateRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.GetSpaceReadStateRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a GetSpaceReadStateRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.GetSpaceReadStateRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.GetSpaceReadStateRequest} GetSpaceReadStateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetSpaceReadStateRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a GetSpaceReadStateRequest message.
+                     * @function verify
+                     * @memberof google.chat.v1.GetSpaceReadStateRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    GetSpaceReadStateRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a GetSpaceReadStateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.GetSpaceReadStateRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.GetSpaceReadStateRequest} GetSpaceReadStateRequest
+                     */
+                    GetSpaceReadStateRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.GetSpaceReadStateRequest)
+                            return object;
+                        var message = new $root.google.chat.v1.GetSpaceReadStateRequest();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a GetSpaceReadStateRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.GetSpaceReadStateRequest
+                     * @static
+                     * @param {google.chat.v1.GetSpaceReadStateRequest} message GetSpaceReadStateRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    GetSpaceReadStateRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.name = "";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this GetSpaceReadStateRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.GetSpaceReadStateRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    GetSpaceReadStateRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for GetSpaceReadStateRequest
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.GetSpaceReadStateRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    GetSpaceReadStateRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.GetSpaceReadStateRequest";
+                    };
+    
+                    return GetSpaceReadStateRequest;
+                })();
+    
+                v1.UpdateSpaceReadStateRequest = (function() {
+    
+                    /**
+                     * Properties of an UpdateSpaceReadStateRequest.
+                     * @memberof google.chat.v1
+                     * @interface IUpdateSpaceReadStateRequest
+                     * @property {google.chat.v1.ISpaceReadState|null} [spaceReadState] UpdateSpaceReadStateRequest spaceReadState
+                     * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateSpaceReadStateRequest updateMask
+                     */
+    
+                    /**
+                     * Constructs a new UpdateSpaceReadStateRequest.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents an UpdateSpaceReadStateRequest.
+                     * @implements IUpdateSpaceReadStateRequest
+                     * @constructor
+                     * @param {google.chat.v1.IUpdateSpaceReadStateRequest=} [properties] Properties to set
+                     */
+                    function UpdateSpaceReadStateRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * UpdateSpaceReadStateRequest spaceReadState.
+                     * @member {google.chat.v1.ISpaceReadState|null|undefined} spaceReadState
+                     * @memberof google.chat.v1.UpdateSpaceReadStateRequest
+                     * @instance
+                     */
+                    UpdateSpaceReadStateRequest.prototype.spaceReadState = null;
+    
+                    /**
+                     * UpdateSpaceReadStateRequest updateMask.
+                     * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                     * @memberof google.chat.v1.UpdateSpaceReadStateRequest
+                     * @instance
+                     */
+                    UpdateSpaceReadStateRequest.prototype.updateMask = null;
+    
+                    /**
+                     * Creates a new UpdateSpaceReadStateRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.UpdateSpaceReadStateRequest
+                     * @static
+                     * @param {google.chat.v1.IUpdateSpaceReadStateRequest=} [properties] Properties to set
+                     * @returns {google.chat.v1.UpdateSpaceReadStateRequest} UpdateSpaceReadStateRequest instance
+                     */
+                    UpdateSpaceReadStateRequest.create = function create(properties) {
+                        return new UpdateSpaceReadStateRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified UpdateSpaceReadStateRequest message. Does not implicitly {@link google.chat.v1.UpdateSpaceReadStateRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.UpdateSpaceReadStateRequest
+                     * @static
+                     * @param {google.chat.v1.IUpdateSpaceReadStateRequest} message UpdateSpaceReadStateRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpdateSpaceReadStateRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.spaceReadState != null && Object.hasOwnProperty.call(message, "spaceReadState"))
+                            $root.google.chat.v1.SpaceReadState.encode(message.spaceReadState, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                            $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified UpdateSpaceReadStateRequest message, length delimited. Does not implicitly {@link google.chat.v1.UpdateSpaceReadStateRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.UpdateSpaceReadStateRequest
+                     * @static
+                     * @param {google.chat.v1.IUpdateSpaceReadStateRequest} message UpdateSpaceReadStateRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpdateSpaceReadStateRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an UpdateSpaceReadStateRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.UpdateSpaceReadStateRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.UpdateSpaceReadStateRequest} UpdateSpaceReadStateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpdateSpaceReadStateRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.UpdateSpaceReadStateRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.spaceReadState = $root.google.chat.v1.SpaceReadState.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 2: {
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an UpdateSpaceReadStateRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.UpdateSpaceReadStateRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.UpdateSpaceReadStateRequest} UpdateSpaceReadStateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpdateSpaceReadStateRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an UpdateSpaceReadStateRequest message.
+                     * @function verify
+                     * @memberof google.chat.v1.UpdateSpaceReadStateRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    UpdateSpaceReadStateRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.spaceReadState != null && message.hasOwnProperty("spaceReadState")) {
+                            var error = $root.google.chat.v1.SpaceReadState.verify(message.spaceReadState);
+                            if (error)
+                                return "spaceReadState." + error;
+                        }
+                        if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                            var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                            if (error)
+                                return "updateMask." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an UpdateSpaceReadStateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.UpdateSpaceReadStateRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.UpdateSpaceReadStateRequest} UpdateSpaceReadStateRequest
+                     */
+                    UpdateSpaceReadStateRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.UpdateSpaceReadStateRequest)
+                            return object;
+                        var message = new $root.google.chat.v1.UpdateSpaceReadStateRequest();
+                        if (object.spaceReadState != null) {
+                            if (typeof object.spaceReadState !== "object")
+                                throw TypeError(".google.chat.v1.UpdateSpaceReadStateRequest.spaceReadState: object expected");
+                            message.spaceReadState = $root.google.chat.v1.SpaceReadState.fromObject(object.spaceReadState);
+                        }
+                        if (object.updateMask != null) {
+                            if (typeof object.updateMask !== "object")
+                                throw TypeError(".google.chat.v1.UpdateSpaceReadStateRequest.updateMask: object expected");
+                            message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an UpdateSpaceReadStateRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.UpdateSpaceReadStateRequest
+                     * @static
+                     * @param {google.chat.v1.UpdateSpaceReadStateRequest} message UpdateSpaceReadStateRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    UpdateSpaceReadStateRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.spaceReadState = null;
+                            object.updateMask = null;
+                        }
+                        if (message.spaceReadState != null && message.hasOwnProperty("spaceReadState"))
+                            object.spaceReadState = $root.google.chat.v1.SpaceReadState.toObject(message.spaceReadState, options);
+                        if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                            object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this UpdateSpaceReadStateRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.UpdateSpaceReadStateRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    UpdateSpaceReadStateRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for UpdateSpaceReadStateRequest
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.UpdateSpaceReadStateRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    UpdateSpaceReadStateRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.UpdateSpaceReadStateRequest";
+                    };
+    
+                    return UpdateSpaceReadStateRequest;
+                })();
+    
                 v1.SetUpSpaceRequest = (function() {
     
                     /**
@@ -48250,6 +49021,441 @@
                     };
     
                     return SetUpSpaceRequest;
+                })();
+    
+                v1.ThreadReadState = (function() {
+    
+                    /**
+                     * Properties of a ThreadReadState.
+                     * @memberof google.chat.v1
+                     * @interface IThreadReadState
+                     * @property {string|null} [name] ThreadReadState name
+                     * @property {google.protobuf.ITimestamp|null} [lastReadTime] ThreadReadState lastReadTime
+                     */
+    
+                    /**
+                     * Constructs a new ThreadReadState.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a ThreadReadState.
+                     * @implements IThreadReadState
+                     * @constructor
+                     * @param {google.chat.v1.IThreadReadState=} [properties] Properties to set
+                     */
+                    function ThreadReadState(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ThreadReadState name.
+                     * @member {string} name
+                     * @memberof google.chat.v1.ThreadReadState
+                     * @instance
+                     */
+                    ThreadReadState.prototype.name = "";
+    
+                    /**
+                     * ThreadReadState lastReadTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} lastReadTime
+                     * @memberof google.chat.v1.ThreadReadState
+                     * @instance
+                     */
+                    ThreadReadState.prototype.lastReadTime = null;
+    
+                    /**
+                     * Creates a new ThreadReadState instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.ThreadReadState
+                     * @static
+                     * @param {google.chat.v1.IThreadReadState=} [properties] Properties to set
+                     * @returns {google.chat.v1.ThreadReadState} ThreadReadState instance
+                     */
+                    ThreadReadState.create = function create(properties) {
+                        return new ThreadReadState(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ThreadReadState message. Does not implicitly {@link google.chat.v1.ThreadReadState.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.ThreadReadState
+                     * @static
+                     * @param {google.chat.v1.IThreadReadState} message ThreadReadState message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ThreadReadState.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.lastReadTime != null && Object.hasOwnProperty.call(message, "lastReadTime"))
+                            $root.google.protobuf.Timestamp.encode(message.lastReadTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ThreadReadState message, length delimited. Does not implicitly {@link google.chat.v1.ThreadReadState.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.ThreadReadState
+                     * @static
+                     * @param {google.chat.v1.IThreadReadState} message ThreadReadState message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ThreadReadState.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ThreadReadState message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.ThreadReadState
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.ThreadReadState} ThreadReadState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ThreadReadState.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ThreadReadState();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.lastReadTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ThreadReadState message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.ThreadReadState
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.ThreadReadState} ThreadReadState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ThreadReadState.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ThreadReadState message.
+                     * @function verify
+                     * @memberof google.chat.v1.ThreadReadState
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ThreadReadState.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.lastReadTime != null && message.hasOwnProperty("lastReadTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.lastReadTime);
+                            if (error)
+                                return "lastReadTime." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ThreadReadState message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.ThreadReadState
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.ThreadReadState} ThreadReadState
+                     */
+                    ThreadReadState.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.ThreadReadState)
+                            return object;
+                        var message = new $root.google.chat.v1.ThreadReadState();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.lastReadTime != null) {
+                            if (typeof object.lastReadTime !== "object")
+                                throw TypeError(".google.chat.v1.ThreadReadState.lastReadTime: object expected");
+                            message.lastReadTime = $root.google.protobuf.Timestamp.fromObject(object.lastReadTime);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ThreadReadState message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.ThreadReadState
+                     * @static
+                     * @param {google.chat.v1.ThreadReadState} message ThreadReadState
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ThreadReadState.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.name = "";
+                            object.lastReadTime = null;
+                        }
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.lastReadTime != null && message.hasOwnProperty("lastReadTime"))
+                            object.lastReadTime = $root.google.protobuf.Timestamp.toObject(message.lastReadTime, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ThreadReadState to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.ThreadReadState
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ThreadReadState.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ThreadReadState
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.ThreadReadState
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ThreadReadState.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.ThreadReadState";
+                    };
+    
+                    return ThreadReadState;
+                })();
+    
+                v1.GetThreadReadStateRequest = (function() {
+    
+                    /**
+                     * Properties of a GetThreadReadStateRequest.
+                     * @memberof google.chat.v1
+                     * @interface IGetThreadReadStateRequest
+                     * @property {string|null} [name] GetThreadReadStateRequest name
+                     */
+    
+                    /**
+                     * Constructs a new GetThreadReadStateRequest.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a GetThreadReadStateRequest.
+                     * @implements IGetThreadReadStateRequest
+                     * @constructor
+                     * @param {google.chat.v1.IGetThreadReadStateRequest=} [properties] Properties to set
+                     */
+                    function GetThreadReadStateRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * GetThreadReadStateRequest name.
+                     * @member {string} name
+                     * @memberof google.chat.v1.GetThreadReadStateRequest
+                     * @instance
+                     */
+                    GetThreadReadStateRequest.prototype.name = "";
+    
+                    /**
+                     * Creates a new GetThreadReadStateRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.GetThreadReadStateRequest
+                     * @static
+                     * @param {google.chat.v1.IGetThreadReadStateRequest=} [properties] Properties to set
+                     * @returns {google.chat.v1.GetThreadReadStateRequest} GetThreadReadStateRequest instance
+                     */
+                    GetThreadReadStateRequest.create = function create(properties) {
+                        return new GetThreadReadStateRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified GetThreadReadStateRequest message. Does not implicitly {@link google.chat.v1.GetThreadReadStateRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.GetThreadReadStateRequest
+                     * @static
+                     * @param {google.chat.v1.IGetThreadReadStateRequest} message GetThreadReadStateRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetThreadReadStateRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified GetThreadReadStateRequest message, length delimited. Does not implicitly {@link google.chat.v1.GetThreadReadStateRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.GetThreadReadStateRequest
+                     * @static
+                     * @param {google.chat.v1.IGetThreadReadStateRequest} message GetThreadReadStateRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetThreadReadStateRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a GetThreadReadStateRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.GetThreadReadStateRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.GetThreadReadStateRequest} GetThreadReadStateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetThreadReadStateRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.GetThreadReadStateRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a GetThreadReadStateRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.GetThreadReadStateRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.GetThreadReadStateRequest} GetThreadReadStateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetThreadReadStateRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a GetThreadReadStateRequest message.
+                     * @function verify
+                     * @memberof google.chat.v1.GetThreadReadStateRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    GetThreadReadStateRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a GetThreadReadStateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.GetThreadReadStateRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.GetThreadReadStateRequest} GetThreadReadStateRequest
+                     */
+                    GetThreadReadStateRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.GetThreadReadStateRequest)
+                            return object;
+                        var message = new $root.google.chat.v1.GetThreadReadStateRequest();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a GetThreadReadStateRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.GetThreadReadStateRequest
+                     * @static
+                     * @param {google.chat.v1.GetThreadReadStateRequest} message GetThreadReadStateRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    GetThreadReadStateRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.name = "";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this GetThreadReadStateRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.GetThreadReadStateRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    GetThreadReadStateRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for GetThreadReadStateRequest
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.GetThreadReadStateRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    GetThreadReadStateRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.GetThreadReadStateRequest";
+                    };
+    
+                    return GetThreadReadStateRequest;
                 })();
     
                 return v1;
