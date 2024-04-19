@@ -86,7 +86,8 @@ npm install @google-cloud/conversions
 // const showDeleted = true
 
 // Imports the Conversions library
-const {ConversionSourcesServiceClient} = require('@google-cloud/conversions').v1beta;
+const {ConversionSourcesServiceClient} =
+  require('@google-cloud/conversions').v1beta;
 
 // Instantiates a client
 const conversionsClient = new ConversionSourcesServiceClient();
@@ -100,7 +101,7 @@ async function callListConversionSources() {
   // Run request
   const iterable = conversionsClient.listConversionSourcesAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
