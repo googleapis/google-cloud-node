@@ -16,10 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import * as v1beta from './v1beta';
-const ConversionSourcesServiceClient = v1beta.ConversionSourcesServiceClient;
-type ConversionSourcesServiceClient = v1beta.ConversionSourcesServiceClient;
-export {v1beta, ConversionSourcesServiceClient};
-export default {v1beta, ConversionSourcesServiceClient};
-import * as protos from '../protos/protos';
-export {protos}
+/* eslint-disable node/no-missing-require, no-unused-vars */
+const conversions = require('@google-cloud/conversions');
+
+function main() {
+  const conversionSourcesServiceClient =
+    new conversions.ConversionSourcesServiceClient();
+}
+
+main();
