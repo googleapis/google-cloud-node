@@ -35,7 +35,7 @@ function main(name) {
   // const name = 'abc123'
 
   // Imports the Conversions library
-  const {ConversionSourcesServiceClient} = require('@google-cloud/conversions').v1beta;
+  const {ConversionSourcesServiceClient} = require('@google-shopping/conversionsons').v1beta;
 
   // Instantiates a client
   const conversionsClient = new ConversionSourcesServiceClient();

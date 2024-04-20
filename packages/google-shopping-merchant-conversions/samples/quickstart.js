@@ -50,7 +50,7 @@ function main(parent) {
 
   // Imports the Conversions library
   const {ConversionSourcesServiceClient} =
-    require('@google-cloud/conversions').v1beta;
+    require('@google-shopping/conversions').v1beta;
 
   // Instantiates a client
   const conversionsClient = new ConversionSourcesServiceClient();
