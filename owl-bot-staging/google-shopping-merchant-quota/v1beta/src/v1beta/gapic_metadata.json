@@ -1,0 +1,37 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.shopping.merchant.quota.v1beta",
+  "libraryPackage": "@google-shopping/quota",
+  "services": {
+    "QuotaService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "QuotaServiceClient",
+          "rpcs": {
+            "ListQuotaGroups": {
+              "methods": [
+                "listQuotaGroups",
+                "listQuotaGroupsStream",
+                "listQuotaGroupsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "QuotaServiceClient",
+          "rpcs": {
+            "ListQuotaGroups": {
+              "methods": [
+                "listQuotaGroups",
+                "listQuotaGroupsStream",
+                "listQuotaGroupsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
