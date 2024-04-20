@@ -374,7 +374,10 @@ export class CloudRedisClient {
       'google.cloud.redis.v1beta1.CloudRedis',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' '), 'x-goog-api-version': '1234'}
+      {
+        'x-goog-api-client': clientHeader.join(' '),
+        'x-goog-api-version': '1234',
+      }
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
