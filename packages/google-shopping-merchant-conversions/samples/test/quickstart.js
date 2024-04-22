@@ -20,7 +20,7 @@
 // const cp = require('child_process');
 // const {describe, it, before} = require('mocha');
 // const {ConversionSourcesServiceClient} =
-//   require('@google-shopping/conversionsons').v1beta;
+//   require('@google-shopping/conversions').v1beta;
 // const merchantapiClient = new ConversionSourcesServiceClient();
 
 // const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});

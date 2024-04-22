@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const conversions = require('@google-shopping/conversionsonsons');
+const conversions = require('@google-shopping/conversionsons');
 
 function main() {
   const conversionSourcesServiceClient =
