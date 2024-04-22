@@ -7120,6 +7120,16 @@
                                 "pageSpan": {
                                   "type": "ChunkPageSpan",
                                   "id": 4
+                                },
+                                "pageHeaders": {
+                                  "rule": "repeated",
+                                  "type": "ChunkPageHeader",
+                                  "id": 5
+                                },
+                                "pageFooters": {
+                                  "rule": "repeated",
+                                  "type": "ChunkPageFooter",
+                                  "id": 6
                                 }
                               },
                               "nested": {
@@ -7131,6 +7141,30 @@
                                     },
                                     "pageEnd": {
                                       "type": "int32",
+                                      "id": 2
+                                    }
+                                  }
+                                },
+                                "ChunkPageHeader": {
+                                  "fields": {
+                                    "text": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "pageSpan": {
+                                      "type": "ChunkPageSpan",
+                                      "id": 2
+                                    }
+                                  }
+                                },
+                                "ChunkPageFooter": {
+                                  "fields": {
+                                    "text": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "pageSpan": {
+                                      "type": "ChunkPageSpan",
                                       "id": 2
                                     }
                                   }
