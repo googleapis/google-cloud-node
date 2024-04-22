@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [7.10.1](https://github.com/googleapis/nodejs-storage/compare/v7.10.0...v7.10.1) (2024-04-22)
+
+
+### Bug Fixes
+
+* Change copyoptions type ([#2439](https://github.com/googleapis/nodejs-storage/issues/2439)) ([2ebd7ac](https://github.com/googleapis/nodejs-storage/commit/2ebd7aca6c474147e5a1d1fb2a96b7d052a08a21))
+* Expand types of custom metadata within FileMetadata ([#2442](https://github.com/googleapis/nodejs-storage/issues/2442)) ([1d434a9](https://github.com/googleapis/nodejs-storage/commit/1d434a905392b00bb48ebbb812034e062ed27dd2))
+
 ## [7.10.0](https://github.com/googleapis/nodejs-storage/compare/v7.9.0...v7.10.0) (2024-04-15)
 
 
