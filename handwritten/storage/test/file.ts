@@ -545,12 +545,17 @@ describe('File', () => {
 
     it('should accept an options object', done => {
       const newFile = new File(BUCKET, 'name');
+      const METADATA = {
+        metadataKey: 'metadataValue',
+      };
       const options = {
         option: true,
+        metadata: METADATA,
       };
 
       file.request = (reqOpts: DecorateRequestOptions) => {
         assert.deepStrictEqual(reqOpts.json, options);
+        assert.strictEqual(reqOpts.json.metadata, METADATA);
         done();
       };
 

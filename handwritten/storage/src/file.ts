@@ -361,7 +361,9 @@ export interface CopyOptions {
   contentType?: string;
   contentDisposition?: string;
   destinationKmsKeyName?: string;
-  metadata?: FileMetadata;
+  metadata?: {
+    [key: string]: string | boolean | number | null;
+  };
   predefinedAcl?: string;
   token?: string;
   userProject?: string;
