@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.6.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v8.5.0...documentai-v8.6.0) (2024-04-23)
+
+
+### Features
+
+* [documentai] Support Chunk header and footer in Doc AI external proto ([#5275](https://github.com/googleapis/google-cloud-node/issues/5275)) ([b7ce5da](https://github.com/googleapis/google-cloud-node/commit/b7ce5da5f70503bccc08a8d8051afff521749fd0))
+
 ## [8.5.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v8.4.0...documentai-v8.5.0) (2024-04-18)
 
 
