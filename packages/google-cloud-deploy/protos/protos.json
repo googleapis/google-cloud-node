@@ -2363,7 +2363,8 @@
                         "source": {
                           "oneof": [
                             "git",
-                            "googleCloudStorage"
+                            "googleCloudStorage",
+                            "googleCloudBuildRepo"
                           ]
                         }
                       },
@@ -2383,6 +2384,10 @@
                         "googleCloudStorage": {
                           "type": "SkaffoldGCSSource",
                           "id": 3
+                        },
+                        "googleCloudBuildRepo": {
+                          "type": "SkaffoldGCBRepoSource",
+                          "id": 4
                         }
                       },
                       "nested": {
@@ -2423,6 +2428,32 @@
                             "path": {
                               "type": "string",
                               "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "SkaffoldGCBRepoSource": {
+                          "fields": {
+                            "repository": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "cloudbuild.googleapis.com/Repository"
+                              }
+                            },
+                            "path": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "ref": {
+                              "type": "string",
+                              "id": 3,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
