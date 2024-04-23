@@ -5,6 +5,57 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "467f31b6236e725a197ce33d30446afde98ba402",
+          "message": "Add initial files for google.shopping.merchant.conversions.v1beta",
+          "issues": [
+            "5269"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/conversions",
+      "id": "73a43b2e-ba63-46d9-8fc0-954561ca5093",
+      "createTime": "2024-04-23T19:14:32.204Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3b345ca4dc99ee0e41be86eea4d3c1e8d07ac924",
+          "message": "[chat] Add Chat read state APIs",
+          "issues": [
+            "5268"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "f642b791-3399-47f7-b5bc-dd5ee5ee5a2d",
+      "createTime": "2024-04-23T19:14:32.192Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "02c6ae60a3dbf8fa08d08abc1944afe48f2c4461",
+          "message": "[deploy] add Skaffold remote config support for GCB repos",
+          "issues": [
+            "5267"
+          ]
+        }
+      ],
+      "version": "3.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/deploy",
+      "id": "ab74386d-0753-4b03-8f56-e7a42f4a8861",
+      "createTime": "2024-04-23T19:14:32.178Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "ec9d9d68e5329593ce8cd6a19fe0b3acd44427c2",
           "message": "Add initial files for google.cloud.securitycentermanagement.v1",
           "issues": [
@@ -28622,5 +28673,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-04-18T22:03:09.602Z"
+  "updateTime": "2024-04-23T19:14:32.204Z"
 }

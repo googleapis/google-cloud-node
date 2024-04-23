@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.3.0...chat-v0.4.0) (2024-04-23)
+
+
+### Features
+
+* [chat] Add Chat read state APIs ([#5268](https://github.com/googleapis/google-cloud-node/issues/5268)) ([3b345ca](https://github.com/googleapis/google-cloud-node/commit/3b345ca4dc99ee0e41be86eea4d3c1e8d07ac924))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.2.0...chat-v0.3.0) (2024-04-18)
 
 
