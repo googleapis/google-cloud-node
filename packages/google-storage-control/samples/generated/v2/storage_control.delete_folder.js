@@ -45,8 +45,7 @@ function main(name) {
   // const ifMetagenerationNotMatch = 1234
   /**
    *  Optional. A unique identifier for this request. UUID is the recommended
-   *  format, but other formats are still accepted. This request is only
-   *  idempotent if a `request_id` is provided.
+   *  format, but other formats are still accepted.
    */
   // const requestId = 'abc123'
 
