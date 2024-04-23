@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v3.5.0...deploy-v3.6.0) (2024-04-23)
+
+
+### Features
+
+* [deploy] add Skaffold remote config support for GCB repos ([#5267](https://github.com/googleapis/google-cloud-node/issues/5267)) ([02c6ae6](https://github.com/googleapis/google-cloud-node/commit/02c6ae60a3dbf8fa08d08abc1944afe48f2c4461))
+
 ## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v3.4.0...deploy-v3.5.0) (2024-04-16)
 
 

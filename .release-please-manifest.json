@@ -55,7 +55,7 @@
   "packages/google-cloud-dataproc": "5.5.0",
   "packages/google-cloud-dataqna": "3.1.0",
   "packages/google-cloud-datastream": "3.1.0",
-  "packages/google-cloud-deploy": "3.5.0",
+  "packages/google-cloud-deploy": "3.6.0",
   "packages/google-cloud-dialogflow": "6.6.0",
   "packages/google-cloud-dialogflow-cx": "4.6.0",
   "packages/google-cloud-discoveryengine": "1.7.0",
@@ -168,12 +168,13 @@
   "packages/google-cloud-cloudcontrolspartner": "0.2.0",
   "packages/google-cloud-telcoautomation": "0.2.0",
   "packages/google-cloud-apphub": "0.2.0",
-  "packages/google-chat": "0.3.0",
+  "packages/google-chat": "0.4.0",
   "packages/google-shopping-merchant-quota": "0.1.1",
   "packages/google-storage-control": "0.1.0",
   "packages/google-cloud-backupdr": "0.1.0",
   "packages/google-cloud-securesourcemanager": "0.1.0",
   "packages/google-shopping-merchant-notifications": "0.1.0",
   "packages/google-shopping-merchant-lfp": "0.1.0",
-  "packages/google-cloud-securitycentermanagement": "0.1.0"
+  "packages/google-cloud-securitycentermanagement": "0.1.0",
+  "packages/google-shopping-merchant-conversions": "0.1.0"
 }
