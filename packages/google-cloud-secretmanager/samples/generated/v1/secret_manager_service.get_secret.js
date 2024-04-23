@@ -31,7 +31,7 @@ function main(name) {
   /**
    *  Required. The resource name of the
    *  Secret google.cloud.secretmanager.v1.Secret, in the format
-   *  `projects/* /secrets/*`.
+   *  `projects/* /secrets/*` or `projects/* /locations/* /secrets/*`.
    */
   // const name = 'abc123'
 

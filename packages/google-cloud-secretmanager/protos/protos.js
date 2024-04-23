@@ -83,6 +83,8 @@
                          * @property {google.cloud.secretmanager.v1.IRotation|null} [rotation] Secret rotation
                          * @property {Object.<string,number|Long>|null} [versionAliases] Secret versionAliases
                          * @property {Object.<string,string>|null} [annotations] Secret annotations
+                         * @property {google.protobuf.IDuration|null} [versionDestroyTtl] Secret versionDestroyTtl
+                         * @property {google.cloud.secretmanager.v1.ICustomerManagedEncryption|null} [customerManagedEncryption] Secret customerManagedEncryption
                          */
     
                         /**
@@ -192,6 +194,22 @@
                          */
                         Secret.prototype.annotations = $util.emptyObject;
     
+                        /**
+                         * Secret versionDestroyTtl.
+                         * @member {google.protobuf.IDuration|null|undefined} versionDestroyTtl
+                         * @memberof google.cloud.secretmanager.v1.Secret
+                         * @instance
+                         */
+                        Secret.prototype.versionDestroyTtl = null;
+    
+                        /**
+                         * Secret customerManagedEncryption.
+                         * @member {google.cloud.secretmanager.v1.ICustomerManagedEncryption|null|undefined} customerManagedEncryption
+                         * @memberof google.cloud.secretmanager.v1.Secret
+                         * @instance
+                         */
+                        Secret.prototype.customerManagedEncryption = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -256,6 +274,10 @@
                             if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
                                 for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 13, wireType 2 =*/106).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
+                            if (message.versionDestroyTtl != null && Object.hasOwnProperty.call(message, "versionDestroyTtl"))
+                                $root.google.protobuf.Duration.encode(message.versionDestroyTtl, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.customerManagedEncryption != null && Object.hasOwnProperty.call(message, "customerManagedEncryption"))
+                                $root.google.cloud.secretmanager.v1.CustomerManagedEncryption.encode(message.customerManagedEncryption, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                             return writer;
                         };
     
@@ -393,6 +415,14 @@
                                         message.annotations[key] = value;
                                         break;
                                     }
+                                case 14: {
+                                        message.versionDestroyTtl = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 15: {
+                                        message.customerManagedEncryption = $root.google.cloud.secretmanager.v1.CustomerManagedEncryption.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -501,6 +531,16 @@
                                     if (!$util.isString(message.annotations[key[i]]))
                                         return "annotations: string{k:string} expected";
                             }
+                            if (message.versionDestroyTtl != null && message.hasOwnProperty("versionDestroyTtl")) {
+                                var error = $root.google.protobuf.Duration.verify(message.versionDestroyTtl);
+                                if (error)
+                                    return "versionDestroyTtl." + error;
+                            }
+                            if (message.customerManagedEncryption != null && message.hasOwnProperty("customerManagedEncryption")) {
+                                var error = $root.google.cloud.secretmanager.v1.CustomerManagedEncryption.verify(message.customerManagedEncryption);
+                                if (error)
+                                    return "customerManagedEncryption." + error;
+                            }
                             return null;
                         };
     
@@ -583,6 +623,16 @@
                                 for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i)
                                     message.annotations[keys[i]] = String(object.annotations[keys[i]]);
                             }
+                            if (object.versionDestroyTtl != null) {
+                                if (typeof object.versionDestroyTtl !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1.Secret.versionDestroyTtl: object expected");
+                                message.versionDestroyTtl = $root.google.protobuf.Duration.fromObject(object.versionDestroyTtl);
+                            }
+                            if (object.customerManagedEncryption != null) {
+                                if (typeof object.customerManagedEncryption !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1.Secret.customerManagedEncryption: object expected");
+                                message.customerManagedEncryption = $root.google.cloud.secretmanager.v1.CustomerManagedEncryption.fromObject(object.customerManagedEncryption);
+                            }
                             return message;
                         };
     
@@ -612,6 +662,8 @@
                                 object.createTime = null;
                                 object.etag = "";
                                 object.rotation = null;
+                                object.versionDestroyTtl = null;
+                                object.customerManagedEncryption = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -657,6 +709,10 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.annotations[keys2[j]] = message.annotations[keys2[j]];
                             }
+                            if (message.versionDestroyTtl != null && message.hasOwnProperty("versionDestroyTtl"))
+                                object.versionDestroyTtl = $root.google.protobuf.Duration.toObject(message.versionDestroyTtl, options);
+                            if (message.customerManagedEncryption != null && message.hasOwnProperty("customerManagedEncryption"))
+                                object.customerManagedEncryption = $root.google.cloud.secretmanager.v1.CustomerManagedEncryption.toObject(message.customerManagedEncryption, options);
                             return object;
                         };
     
@@ -702,6 +758,8 @@
                          * @property {google.cloud.secretmanager.v1.IReplicationStatus|null} [replicationStatus] SecretVersion replicationStatus
                          * @property {string|null} [etag] SecretVersion etag
                          * @property {boolean|null} [clientSpecifiedPayloadChecksum] SecretVersion clientSpecifiedPayloadChecksum
+                         * @property {google.protobuf.ITimestamp|null} [scheduledDestroyTime] SecretVersion scheduledDestroyTime
+                         * @property {google.cloud.secretmanager.v1.ICustomerManagedEncryptionStatus|null} [customerManagedEncryption] SecretVersion customerManagedEncryption
                          */
     
                         /**
@@ -776,6 +834,22 @@
                         SecretVersion.prototype.clientSpecifiedPayloadChecksum = false;
     
                         /**
+                         * SecretVersion scheduledDestroyTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} scheduledDestroyTime
+                         * @memberof google.cloud.secretmanager.v1.SecretVersion
+                         * @instance
+                         */
+                        SecretVersion.prototype.scheduledDestroyTime = null;
+    
+                        /**
+                         * SecretVersion customerManagedEncryption.
+                         * @member {google.cloud.secretmanager.v1.ICustomerManagedEncryptionStatus|null|undefined} customerManagedEncryption
+                         * @memberof google.cloud.secretmanager.v1.SecretVersion
+                         * @instance
+                         */
+                        SecretVersion.prototype.customerManagedEncryption = null;
+    
+                        /**
                          * Creates a new SecretVersion instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.secretmanager.v1.SecretVersion
@@ -813,6 +887,10 @@
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.etag);
                             if (message.clientSpecifiedPayloadChecksum != null && Object.hasOwnProperty.call(message, "clientSpecifiedPayloadChecksum"))
                                 writer.uint32(/* id 7, wireType 0 =*/56).bool(message.clientSpecifiedPayloadChecksum);
+                            if (message.scheduledDestroyTime != null && Object.hasOwnProperty.call(message, "scheduledDestroyTime"))
+                                $root.google.protobuf.Timestamp.encode(message.scheduledDestroyTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.customerManagedEncryption != null && Object.hasOwnProperty.call(message, "customerManagedEncryption"))
+                                $root.google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus.encode(message.customerManagedEncryption, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             return writer;
                         };
     
@@ -873,6 +951,14 @@
                                     }
                                 case 7: {
                                         message.clientSpecifiedPayloadChecksum = reader.bool();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.scheduledDestroyTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.customerManagedEncryption = $root.google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -944,6 +1030,16 @@
                             if (message.clientSpecifiedPayloadChecksum != null && message.hasOwnProperty("clientSpecifiedPayloadChecksum"))
                                 if (typeof message.clientSpecifiedPayloadChecksum !== "boolean")
                                     return "clientSpecifiedPayloadChecksum: boolean expected";
+                            if (message.scheduledDestroyTime != null && message.hasOwnProperty("scheduledDestroyTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.scheduledDestroyTime);
+                                if (error)
+                                    return "scheduledDestroyTime." + error;
+                            }
+                            if (message.customerManagedEncryption != null && message.hasOwnProperty("customerManagedEncryption")) {
+                                var error = $root.google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus.verify(message.customerManagedEncryption);
+                                if (error)
+                                    return "customerManagedEncryption." + error;
+                            }
                             return null;
                         };
     
@@ -1004,6 +1100,16 @@
                                 message.etag = String(object.etag);
                             if (object.clientSpecifiedPayloadChecksum != null)
                                 message.clientSpecifiedPayloadChecksum = Boolean(object.clientSpecifiedPayloadChecksum);
+                            if (object.scheduledDestroyTime != null) {
+                                if (typeof object.scheduledDestroyTime !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1.SecretVersion.scheduledDestroyTime: object expected");
+                                message.scheduledDestroyTime = $root.google.protobuf.Timestamp.fromObject(object.scheduledDestroyTime);
+                            }
+                            if (object.customerManagedEncryption != null) {
+                                if (typeof object.customerManagedEncryption !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1.SecretVersion.customerManagedEncryption: object expected");
+                                message.customerManagedEncryption = $root.google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus.fromObject(object.customerManagedEncryption);
+                            }
                             return message;
                         };
     
@@ -1028,6 +1134,8 @@
                                 object.replicationStatus = null;
                                 object.etag = "";
                                 object.clientSpecifiedPayloadChecksum = false;
+                                object.scheduledDestroyTime = null;
+                                object.customerManagedEncryption = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -1043,6 +1151,10 @@
                                 object.etag = message.etag;
                             if (message.clientSpecifiedPayloadChecksum != null && message.hasOwnProperty("clientSpecifiedPayloadChecksum"))
                                 object.clientSpecifiedPayloadChecksum = message.clientSpecifiedPayloadChecksum;
+                            if (message.scheduledDestroyTime != null && message.hasOwnProperty("scheduledDestroyTime"))
+                                object.scheduledDestroyTime = $root.google.protobuf.Timestamp.toObject(message.scheduledDestroyTime, options);
+                            if (message.customerManagedEncryption != null && message.hasOwnProperty("customerManagedEncryption"))
+                                object.customerManagedEncryption = $root.google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus.toObject(message.customerManagedEncryption, options);
                             return object;
                         };
     
