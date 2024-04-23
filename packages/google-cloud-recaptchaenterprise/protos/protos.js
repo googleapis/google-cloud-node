@@ -3584,6 +3584,7 @@
                          * @property {boolean|null} [firewallPolicyEvaluation] Event firewallPolicyEvaluation
                          * @property {google.cloud.recaptchaenterprise.v1.ITransactionData|null} [transactionData] Event transactionData
                          * @property {google.cloud.recaptchaenterprise.v1.IUserInfo|null} [userInfo] Event userInfo
+                         * @property {google.cloud.recaptchaenterprise.v1.Event.FraudPrevention|null} [fraudPrevention] Event fraudPrevention
                          */
     
                         /**
@@ -3715,6 +3716,14 @@
                         Event.prototype.userInfo = null;
     
                         /**
+                         * Event fraudPrevention.
+                         * @member {google.cloud.recaptchaenterprise.v1.Event.FraudPrevention} fraudPrevention
+                         * @memberof google.cloud.recaptchaenterprise.v1.Event
+                         * @instance
+                         */
+                        Event.prototype.fraudPrevention = 0;
+    
+                        /**
                          * Creates a new Event instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.recaptchaenterprise.v1.Event
@@ -3767,6 +3776,8 @@
                                 writer.uint32(/* id 14, wireType 0 =*/112).bool(message.express);
                             if (message.userInfo != null && Object.hasOwnProperty.call(message, "userInfo"))
                                 $root.google.cloud.recaptchaenterprise.v1.UserInfo.encode(message.userInfo, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                            if (message.fraudPrevention != null && Object.hasOwnProperty.call(message, "fraudPrevention"))
+                                writer.uint32(/* id 17, wireType 0 =*/136).int32(message.fraudPrevention);
                             return writer;
                         };
     
@@ -3859,6 +3870,10 @@
                                         message.userInfo = $root.google.cloud.recaptchaenterprise.v1.UserInfo.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 17: {
+                                        message.fraudPrevention = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -3944,6 +3959,15 @@
                                 if (error)
                                     return "userInfo." + error;
                             }
+                            if (message.fraudPrevention != null && message.hasOwnProperty("fraudPrevention"))
+                                switch (message.fraudPrevention) {
+                                default:
+                                    return "fraudPrevention: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -4001,6 +4025,26 @@
                                     throw TypeError(".google.cloud.recaptchaenterprise.v1.Event.userInfo: object expected");
                                 message.userInfo = $root.google.cloud.recaptchaenterprise.v1.UserInfo.fromObject(object.userInfo);
                             }
+                            switch (object.fraudPrevention) {
+                            default:
+                                if (typeof object.fraudPrevention === "number") {
+                                    message.fraudPrevention = object.fraudPrevention;
+                                    break;
+                                }
+                                break;
+                            case "FRAUD_PREVENTION_UNSPECIFIED":
+                            case 0:
+                                message.fraudPrevention = 0;
+                                break;
+                            case "ENABLED":
+                            case 1:
+                                message.fraudPrevention = 1;
+                                break;
+                            case "DISABLED":
+                            case 2:
+                                message.fraudPrevention = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -4039,6 +4083,7 @@
                                 object.transactionData = null;
                                 object.express = false;
                                 object.userInfo = null;
+                                object.fraudPrevention = options.enums === String ? "FRAUD_PREVENTION_UNSPECIFIED" : 0;
                             }
                             if (message.token != null && message.hasOwnProperty("token"))
                                 object.token = message.token;
@@ -4071,6 +4116,8 @@
                                 object.express = message.express;
                             if (message.userInfo != null && message.hasOwnProperty("userInfo"))
                                 object.userInfo = $root.google.cloud.recaptchaenterprise.v1.UserInfo.toObject(message.userInfo, options);
+                            if (message.fraudPrevention != null && message.hasOwnProperty("fraudPrevention"))
+                                object.fraudPrevention = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.Event.FraudPrevention[message.fraudPrevention] === undefined ? message.fraudPrevention : $root.google.cloud.recaptchaenterprise.v1.Event.FraudPrevention[message.fraudPrevention] : message.fraudPrevention;
                             return object;
                         };
     
@@ -4099,6 +4146,22 @@
                             }
                             return typeUrlPrefix + "/google.cloud.recaptchaenterprise.v1.Event";
                         };
+    
+                        /**
+                         * FraudPrevention enum.
+                         * @name google.cloud.recaptchaenterprise.v1.Event.FraudPrevention
+                         * @enum {number}
+                         * @property {number} FRAUD_PREVENTION_UNSPECIFIED=0 FRAUD_PREVENTION_UNSPECIFIED value
+                         * @property {number} ENABLED=1 ENABLED value
+                         * @property {number} DISABLED=2 DISABLED value
+                         */
+                        Event.FraudPrevention = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "FRAUD_PREVENTION_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ENABLED"] = 1;
+                            values[valuesById[2] = "DISABLED"] = 2;
+                            return values;
+                        })();
     
                         return Event;
                     })();
