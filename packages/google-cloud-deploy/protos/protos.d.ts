@@ -6513,6 +6513,9 @@ export namespace google {
 
                     /** SkaffoldModules googleCloudStorage */
                     googleCloudStorage?: (google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGCSSource|null);
+
+                    /** SkaffoldModules googleCloudBuildRepo */
+                    googleCloudBuildRepo?: (google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGCBRepoSource|null);
                 }
 
                 /** Represents a SkaffoldModules. */
@@ -6533,8 +6536,11 @@ export namespace google {
                     /** SkaffoldModules googleCloudStorage. */
                     public googleCloudStorage?: (google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGCSSource|null);
 
+                    /** SkaffoldModules googleCloudBuildRepo. */
+                    public googleCloudBuildRepo?: (google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGCBRepoSource|null);
+
                     /** SkaffoldModules source. */
-                    public source?: ("git"|"googleCloudStorage");
+                    public source?: ("git"|"googleCloudStorage"|"googleCloudBuildRepo");
 
                     /**
                      * Creates a new SkaffoldModules instance using the specified properties.
@@ -6822,6 +6828,115 @@ export namespace google {
 
                         /**
                          * Gets the default type url for SkaffoldGCSSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SkaffoldGCBRepoSource. */
+                    interface ISkaffoldGCBRepoSource {
+
+                        /** SkaffoldGCBRepoSource repository */
+                        repository?: (string|null);
+
+                        /** SkaffoldGCBRepoSource path */
+                        path?: (string|null);
+
+                        /** SkaffoldGCBRepoSource ref */
+                        ref?: (string|null);
+                    }
+
+                    /** Represents a SkaffoldGCBRepoSource. */
+                    class SkaffoldGCBRepoSource implements ISkaffoldGCBRepoSource {
+
+                        /**
+                         * Constructs a new SkaffoldGCBRepoSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGCBRepoSource);
+
+                        /** SkaffoldGCBRepoSource repository. */
+                        public repository: string;
+
+                        /** SkaffoldGCBRepoSource path. */
+                        public path: string;
+
+                        /** SkaffoldGCBRepoSource ref. */
+                        public ref: string;
+
+                        /**
+                         * Creates a new SkaffoldGCBRepoSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SkaffoldGCBRepoSource instance
+                         */
+                        public static create(properties?: google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGCBRepoSource): google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource;
+
+                        /**
+                         * Encodes the specified SkaffoldGCBRepoSource message. Does not implicitly {@link google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource.verify|verify} messages.
+                         * @param message SkaffoldGCBRepoSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGCBRepoSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SkaffoldGCBRepoSource message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource.verify|verify} messages.
+                         * @param message SkaffoldGCBRepoSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGCBRepoSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SkaffoldGCBRepoSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SkaffoldGCBRepoSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource;
+
+                        /**
+                         * Decodes a SkaffoldGCBRepoSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SkaffoldGCBRepoSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource;
+
+                        /**
+                         * Verifies a SkaffoldGCBRepoSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SkaffoldGCBRepoSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SkaffoldGCBRepoSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource;
+
+                        /**
+                         * Creates a plain object from a SkaffoldGCBRepoSource message. Also converts values to other types if specified.
+                         * @param message SkaffoldGCBRepoSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SkaffoldGCBRepoSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SkaffoldGCBRepoSource
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
