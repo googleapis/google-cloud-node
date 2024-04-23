@@ -449,12 +449,15 @@ export class StorageControlClient {
   // -- Service calls --
   // -------------------
   /**
-   * Creates a new folder.
+   * Creates a new folder. This operation is only applicable to a hierarchical
+   * namespace enabled bucket.
+   * Hierarchical namespace buckets are in allowlist preview.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of the bucket in which the folder will reside.
+   *   Required. Name of the bucket in which the folder will reside. The bucket
+   *   must be a hierarchical namespace enabled bucket.
    * @param {google.storage.control.v2.Folder} request.folder
    *   Required. Properties of the new folder being created.
    *   The bucket and name of the folder are specified in the parent and folder_id
@@ -471,8 +474,7 @@ export class StorageControlClient {
    *   ancestor folders will be created atomically.
    * @param {string} [request.requestId]
    *   Optional. A unique identifier for this request. UUID is the recommended
-   *   format, but other formats are still accepted. This request is only
-   *   idempotent if a `request_id` is provided.
+   *   format, but other formats are still accepted.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -563,7 +565,9 @@ export class StorageControlClient {
     return this.innerApiCalls.createFolder(request, options, callback);
   }
   /**
-   * Permanently deletes an empty folder.
+   * Permanently deletes an empty folder. This operation is only applicable to a
+   * hierarchical namespace enabled bucket.
+   * Hierarchical namespace buckets are in allowlist preview.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -578,8 +582,7 @@ export class StorageControlClient {
    *   current metageneration does not match the given value.
    * @param {string} [request.requestId]
    *   Optional. A unique identifier for this request. UUID is the recommended
-   *   format, but other formats are still accepted. This request is only
-   *   idempotent if a `request_id` is provided.
+   *   format, but other formats are still accepted.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -672,7 +675,9 @@ export class StorageControlClient {
     return this.innerApiCalls.deleteFolder(request, options, callback);
   }
   /**
-   * Returns metadata for the specified folder.
+   * Returns metadata for the specified folder. This operation is only
+   * applicable to a hierarchical namespace enabled bucket.
+   * Hierarchical namespace buckets are in allowlist preview.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1238,9 +1243,11 @@ export class StorageControlClient {
   }
 
   /**
-   * Renames a source folder to a destination folder. During a rename, the
+   * Renames a source folder to a destination folder. This operation is only
+   * applicable to a hierarchical namespace enabled bucket. During a rename, the
    * source and destination folders are locked until the long running operation
    * completes.
+   * Hierarchical namespace buckets are in allowlist preview.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1403,12 +1410,15 @@ export class StorageControlClient {
     >;
   }
   /**
-   * Retrieves a list of folders for a given bucket.
+   * Retrieves a list of folders. This operation is only applicable to a
+   * hierarchical namespace enabled bucket.
+   * Hierarchical namespace buckets are in allowlist preview.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of the bucket in which to look for folders.
+   *   Required. Name of the bucket in which to look for folders. The bucket must
+   *   be a hierarchical namespace enabled bucket.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of folders to return in a single response. The
    *   service will use this parameter or 1,000 items, whichever is smaller.
@@ -1530,7 +1540,8 @@ export class StorageControlClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of the bucket in which to look for folders.
+   *   Required. Name of the bucket in which to look for folders. The bucket must
+   *   be a hierarchical namespace enabled bucket.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of folders to return in a single response. The
    *   service will use this parameter or 1,000 items, whichever is smaller.
@@ -1606,7 +1617,8 @@ export class StorageControlClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of the bucket in which to look for folders.
+   *   Required. Name of the bucket in which to look for folders. The bucket must
+   *   be a hierarchical namespace enabled bucket.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of folders to return in a single response. The
    *   service will use this parameter or 1,000 items, whichever is smaller.
