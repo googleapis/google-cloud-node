@@ -49518,10 +49518,6 @@
                           "rule": "repeated",
                           "type": "FieldSchema",
                           "id": 3
-                        },
-                        "instanceType": {
-                          "type": "string",
-                          "id": 4
                         }
                       },
                       "nested": {
