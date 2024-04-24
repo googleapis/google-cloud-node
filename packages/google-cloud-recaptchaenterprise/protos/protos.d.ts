@@ -9346,6 +9346,9 @@ export namespace google {
 
                     /** Event transactionData */
                     transactionData?: (google.cloud.recaptchaenterprise.v1beta1.ITransactionData|null);
+
+                    /** Event fraudPrevention */
+                    fraudPrevention?: (google.cloud.recaptchaenterprise.v1beta1.Event.FraudPrevention|keyof typeof google.cloud.recaptchaenterprise.v1beta1.Event.FraudPrevention|null);
                 }
 
                 /** Represents an Event. */
@@ -9377,6 +9380,9 @@ export namespace google {
 
                     /** Event transactionData. */
                     public transactionData?: (google.cloud.recaptchaenterprise.v1beta1.ITransactionData|null);
+
+                    /** Event fraudPrevention. */
+                    public fraudPrevention: (google.cloud.recaptchaenterprise.v1beta1.Event.FraudPrevention|keyof typeof google.cloud.recaptchaenterprise.v1beta1.Event.FraudPrevention);
 
                     /**
                      * Creates a new Event instance using the specified properties.
@@ -9454,6 +9460,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Event {
+
+                    /** FraudPrevention enum. */
+                    enum FraudPrevention {
+                        FRAUD_PREVENTION_UNSPECIFIED = 0,
+                        ENABLED = 1,
+                        DISABLED = 2
+                    }
                 }
 
                 /** Properties of a TransactionData. */
