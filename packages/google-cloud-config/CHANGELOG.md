@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/config-v0.4.0...config-v0.5.0) (2024-04-23)
+
+
+### Features
+
+* [infra-manager] Infrastructure manager supports 1.2.3, 1.3.10, 1.4.7, 1.5.7 versions of Terraform when creating a preview of a deployment ([#5277](https://github.com/googleapis/google-cloud-node/issues/5277)) ([3a5f53c](https://github.com/googleapis/google-cloud-node/commit/3a5f53c1e98875ff12d3da774c53fb81abb1b75c))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/config-v0.3.0...config-v0.4.0) (2024-03-29)
 
 
