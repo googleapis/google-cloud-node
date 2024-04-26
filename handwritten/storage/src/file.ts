@@ -2410,11 +2410,11 @@ class File extends ServiceObject<File, FileMetadata> {
     const httpsMatches = [...publicUrlOrGsUrl.matchAll(HTTPS_PUBLIC_URL_REGEX)];
 
     if (gsMatches.length > 0) {
-      const bucket = new Bucket(storageInstance, gsMatches[0][1]);
-      return new File(bucket, gsMatches[0][2], options);
+      const bucket = new Bucket(storageInstance, gsMatches[0][2]);
+      return new File(bucket, gsMatches[0][3], options);
     } else if (httpsMatches.length > 0) {
-      const bucket = new Bucket(storageInstance, httpsMatches[0][2]);
-      return new File(bucket, httpsMatches[0][3], options);
+      const bucket = new Bucket(storageInstance, httpsMatches[0][3]);
+      return new File(bucket, httpsMatches[0][4], options);
     } else {
       throw new Error(
         'URL string must be of format gs://bucket/file or https://storage.googleapis.com/bucket/file'

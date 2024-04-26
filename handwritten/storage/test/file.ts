@@ -5180,8 +5180,8 @@ describe('File', () => {
       const result = File.from(gsUrl, STORAGE);
 
       assert(result);
-      assert(result.bucket.name, 'mybucket');
-      assert(result.name, 'myfile');
+      assert.strictEqual(result.bucket.name, 'mybucket');
+      assert.strictEqual(result.name, 'myfile');
     });
 
     it('should create a File object from a gs:// formatted URL including a folder', () => {
@@ -5189,8 +5189,8 @@ describe('File', () => {
       const result = File.from(gsUrl, STORAGE);
 
       assert(result);
-      assert(result.bucket.name, 'mybucket');
-      assert(result.name, 'myfolder/myfile');
+      assert.strictEqual(result.bucket.name, 'mybucket');
+      assert.strictEqual(result.name, 'myfolder/myfile');
     });
 
     it('should create a File object from a https:// formatted URL', () => {
@@ -5198,8 +5198,8 @@ describe('File', () => {
       const result = File.from(httpsUrl, STORAGE);
 
       assert(result);
-      assert(result.bucket.name, 'mybucket');
-      assert(result.name, 'myfile');
+      assert.strictEqual(result.bucket.name, 'mybucket');
+      assert.strictEqual(result.name, 'myfile');
     });
 
     it('should create a File object from a https:// formatted URL including a folder', () => {
@@ -5208,8 +5208,8 @@ describe('File', () => {
       const result = File.from(httpsUrl, STORAGE);
 
       assert(result);
-      assert(result.bucket.name, 'mybucket');
-      assert(result.name, 'myfolder/myfile');
+      assert.strictEqual(result.bucket.name, 'mybucket');
+      assert.strictEqual(result.name, 'myfolder/myfile');
     });
 
     it('should throw an error when invoked with an incorrectly formatted URL', () => {
