@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [7.10.2](https://github.com/googleapis/nodejs-storage/compare/v7.10.1...v7.10.2) (2024-04-26)
+
+
+### Bug Fixes
+
+* Use correct indices for file.from and fix tests to verify names ([#2449](https://github.com/googleapis/nodejs-storage/issues/2449)) ([d4240fa](https://github.com/googleapis/nodejs-storage/commit/d4240fa5c8c0353de81cc8c052eea2915c3e383c))
+
 ## [7.10.1](https://github.com/googleapis/nodejs-storage/compare/v7.10.0...v7.10.1) (2024-04-22)
 
 
