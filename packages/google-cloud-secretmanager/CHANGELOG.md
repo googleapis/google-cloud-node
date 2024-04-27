@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v5.3.0...secret-manager-v5.4.0) (2024-04-23)
+
+
+### Features
+
+* [secretmanager] Add Secret Version Delayed Destroy changes for client libraries ([#5273](https://github.com/googleapis/google-cloud-node/issues/5273)) ([fcce43c](https://github.com/googleapis/google-cloud-node/commit/fcce43c5914b7ae7df6b7bb21196b64ccf7361c9))
+
 ## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v5.2.0...secret-manager-v5.3.0) (2024-03-29)
 
 

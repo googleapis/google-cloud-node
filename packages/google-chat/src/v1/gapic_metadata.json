@@ -105,6 +105,21 @@
                 "deleteReaction"
               ]
             },
+            "GetSpaceReadState": {
+              "methods": [
+                "getSpaceReadState"
+              ]
+            },
+            "UpdateSpaceReadState": {
+              "methods": [
+                "updateSpaceReadState"
+              ]
+            },
+            "GetThreadReadState": {
+              "methods": [
+                "getThreadReadState"
+              ]
+            },
             "ListMessages": {
               "methods": [
                 "listMessages",
@@ -231,6 +246,21 @@
             "DeleteReaction": {
               "methods": [
                 "deleteReaction"
+              ]
+            },
+            "GetSpaceReadState": {
+              "methods": [
+                "getSpaceReadState"
+              ]
+            },
+            "UpdateSpaceReadState": {
+              "methods": [
+                "updateSpaceReadState"
+              ]
+            },
+            "GetThreadReadState": {
+              "methods": [
+                "getThreadReadState"
               ]
             },
             "ListMessages": {

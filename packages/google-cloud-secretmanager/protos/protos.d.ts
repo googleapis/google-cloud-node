@@ -61,6 +61,12 @@ export namespace google {
 
                     /** Secret annotations */
                     annotations?: ({ [k: string]: string }|null);
+
+                    /** Secret versionDestroyTtl */
+                    versionDestroyTtl?: (google.protobuf.IDuration|null);
+
+                    /** Secret customerManagedEncryption */
+                    customerManagedEncryption?: (google.cloud.secretmanager.v1.ICustomerManagedEncryption|null);
                 }
 
                 /** Represents a Secret. */
@@ -104,6 +110,12 @@ export namespace google {
 
                     /** Secret annotations. */
                     public annotations: { [k: string]: string };
+
+                    /** Secret versionDestroyTtl. */
+                    public versionDestroyTtl?: (google.protobuf.IDuration|null);
+
+                    /** Secret customerManagedEncryption. */
+                    public customerManagedEncryption?: (google.cloud.secretmanager.v1.ICustomerManagedEncryption|null);
 
                     /** Secret expiration. */
                     public expiration?: ("expireTime"|"ttl");
@@ -209,6 +221,12 @@ export namespace google {
 
                     /** SecretVersion clientSpecifiedPayloadChecksum */
                     clientSpecifiedPayloadChecksum?: (boolean|null);
+
+                    /** SecretVersion scheduledDestroyTime */
+                    scheduledDestroyTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SecretVersion customerManagedEncryption */
+                    customerManagedEncryption?: (google.cloud.secretmanager.v1.ICustomerManagedEncryptionStatus|null);
                 }
 
                 /** Represents a SecretVersion. */
@@ -240,6 +258,12 @@ export namespace google {
 
                     /** SecretVersion clientSpecifiedPayloadChecksum. */
                     public clientSpecifiedPayloadChecksum: boolean;
+
+                    /** SecretVersion scheduledDestroyTime. */
+                    public scheduledDestroyTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SecretVersion customerManagedEncryption. */
+                    public customerManagedEncryption?: (google.cloud.secretmanager.v1.ICustomerManagedEncryptionStatus|null);
 
                     /**
                      * Creates a new SecretVersion instance using the specified properties.

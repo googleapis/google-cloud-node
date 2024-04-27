@@ -29,7 +29,8 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the bucket in which to look for folders.
+   *  Required. Name of the bucket in which to look for folders. The bucket must
+   *  be a hierarchical namespace enabled bucket.
    */
   // const parent = 'abc123'
   /**

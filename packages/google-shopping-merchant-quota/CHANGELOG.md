@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/googleapis/google-cloud-node/compare/quota-v0.1.0...quota-v0.1.1) (2024-04-18)
+
+
+### Bug Fixes
+
+* Use [@google-shopping](https://github.com/google-shopping) namespace for publishing instead of google-cloud ([#5263](https://github.com/googleapis/google-cloud-node/issues/5263)) ([e67120f](https://github.com/googleapis/google-cloud-node/commit/e67120f1626f494e9e1cf8548a8ce853f4117ba6))
+
 ## 0.1.0 (2024-03-29)
 
 

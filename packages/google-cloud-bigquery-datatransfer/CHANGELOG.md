@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery-data-transfer?activeTab=versions
 
+## [4.2.1](https://github.com/googleapis/google-cloud-node/compare/bigquery-data-transfer-v4.2.0...bigquery-data-transfer-v4.2.1) (2024-04-18)
+
+
+### Bug Fixes
+
+* [bigquery-datatransfer] mark parent/name fields with the REQUIRED field_behavior annotation ([#5233](https://github.com/googleapis/google-cloud-node/issues/5233)) ([29c939f](https://github.com/googleapis/google-cloud-node/commit/29c939f4bc270aa6063af26f79c55b4a7ae9b557))
+
 ## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-data-transfer-v4.1.0...bigquery-data-transfer-v4.2.0) (2024-03-29)
 
 

@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-cloud/contentwarehouse": "^1.6.0"
+    "@google-cloud/contentwarehouse": "^1.7.0"
   },
   "devDependencies": {
     "c8": "^9.0.0",

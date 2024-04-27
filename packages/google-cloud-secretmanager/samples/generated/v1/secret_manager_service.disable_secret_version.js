@@ -31,7 +31,8 @@ function main(name) {
   /**
    *  Required. The resource name of the
    *  SecretVersion google.cloud.secretmanager.v1.SecretVersion  to disable in
-   *  the format `projects/* /secrets/* /versions/*`.
+   *  the format `projects/* /secrets/* /versions/*` or
+   *  `projects/* /locations/* /secrets/* /versions/*`.
    */
   // const name = 'abc123'
   /**

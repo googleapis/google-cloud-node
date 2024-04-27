@@ -608,6 +608,9 @@ export namespace google {
 
                     /** Deployment quotaValidation */
                     quotaValidation?: (google.cloud.config.v1.QuotaValidation|keyof typeof google.cloud.config.v1.QuotaValidation|null);
+
+                    /** Deployment annotations */
+                    annotations?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a Deployment. */
@@ -684,6 +687,9 @@ export namespace google {
 
                     /** Deployment quotaValidation. */
                     public quotaValidation: (google.cloud.config.v1.QuotaValidation|keyof typeof google.cloud.config.v1.QuotaValidation);
+
+                    /** Deployment annotations. */
+                    public annotations: { [k: string]: string };
 
                     /** Deployment blueprint. */
                     public blueprint?: "terraformBlueprint";
@@ -4662,6 +4668,12 @@ export namespace google {
 
                     /** Preview logs */
                     logs?: (string|null);
+
+                    /** Preview tfVersion */
+                    tfVersion?: (string|null);
+
+                    /** Preview tfVersionConstraint */
+                    tfVersionConstraint?: (string|null);
                 }
 
                 /** Represents a Preview. */
@@ -4724,6 +4736,12 @@ export namespace google {
                     /** Preview logs. */
                     public logs: string;
 
+                    /** Preview tfVersion. */
+                    public tfVersion: string;
+
+                    /** Preview tfVersionConstraint. */
+                    public tfVersionConstraint?: (string|null);
+
                     /** Preview blueprint. */
                     public blueprint?: "terraformBlueprint";
 
@@ -4732,6 +4750,9 @@ export namespace google {
 
                     /** Preview _workerPool. */
                     public _workerPool?: "workerPool";
+
+                    /** Preview _tfVersionConstraint. */
+                    public _tfVersionConstraint?: "tfVersionConstraint";
 
                     /**
                      * Creates a new Preview instance using the specified properties.

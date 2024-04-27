@@ -845,6 +845,22 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "fraudPrevention": {
+                          "type": "FraudPrevention",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "FraudPrevention": {
+                          "values": {
+                            "FRAUD_PREVENTION_UNSPECIFIED": 0,
+                            "ENABLED": 1,
+                            "DISABLED": 2
+                          }
                         }
                       }
                     },
@@ -2734,6 +2750,22 @@
                           "id": 13,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "fraudPrevention": {
+                          "type": "FraudPrevention",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "FraudPrevention": {
+                          "values": {
+                            "FRAUD_PREVENTION_UNSPECIFIED": 0,
+                            "ENABLED": 1,
+                            "DISABLED": 2
                           }
                         }
                       }

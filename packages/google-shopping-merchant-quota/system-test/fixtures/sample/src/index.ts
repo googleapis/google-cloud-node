@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {QuotaServiceClient} from '@google-cloud/quota';
+import {QuotaServiceClient} from '@google-shopping/quota';
 
 // check that the client class type name can be used
 function doStuffWithQuotaServiceClient(client: QuotaServiceClient) {

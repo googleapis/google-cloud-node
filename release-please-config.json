@@ -171,7 +171,13 @@
     "packages/google-chat": {},
     "packages/google-cloud-apphub": {},
     "packages/google-storage-control": {},
-    "packages/google-shopping-merchant-quota": {}
+    "packages/google-shopping-merchant-quota": {},
+    "packages/google-cloud-backupdr": {},
+    "packages/google-cloud-securesourcemanager": {},
+    "packages/google-shopping-merchant-notifications": {},
+    "packages/google-shopping-merchant-lfp": {},
+    "packages/google-cloud-securitycentermanagement": {},
+    "packages/google-shopping-merchant-conversions": {}
   },
   "plugins": [
     {

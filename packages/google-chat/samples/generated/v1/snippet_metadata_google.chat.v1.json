@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-chat",
-        "version": "0.2.0",
+        "version": "0.4.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -1048,6 +1048,130 @@
                 "method": {
                     "shortName": "DeleteReaction",
                     "fullName": "google.chat.v1.ChatService.DeleteReaction",
+                    "service": {
+                        "shortName": "ChatService",
+                        "fullName": "google.chat.v1.ChatService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "chat_v1_generated_ChatService_GetSpaceReadState_async",
+            "title": "ChatService getSpaceReadState Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns details about a user's read state within a space, used to identify read and unread messages. Requires [user authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).",
+            "canonical": true,
+            "file": "chat_service.get_space_read_state.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 61,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetSpaceReadState",
+                "fullName": "google.chat.v1.ChatService.GetSpaceReadState",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.chat.v1.SpaceReadState",
+                "client": {
+                    "shortName": "ChatServiceClient",
+                    "fullName": "google.chat.v1.ChatServiceClient"
+                },
+                "method": {
+                    "shortName": "GetSpaceReadState",
+                    "fullName": "google.chat.v1.ChatService.GetSpaceReadState",
+                    "service": {
+                        "shortName": "ChatService",
+                        "fullName": "google.chat.v1.ChatService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "chat_v1_generated_ChatService_UpdateSpaceReadState_async",
+            "title": "ChatService updateSpaceReadState Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates a user's read state within a space, used to identify read and unread messages. Requires [user authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).",
+            "canonical": true,
+            "file": "chat_service.update_space_read_state.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 75,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateSpaceReadState",
+                "fullName": "google.chat.v1.ChatService.UpdateSpaceReadState",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "space_read_state",
+                        "type": ".google.chat.v1.SpaceReadState"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.chat.v1.SpaceReadState",
+                "client": {
+                    "shortName": "ChatServiceClient",
+                    "fullName": "google.chat.v1.ChatServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateSpaceReadState",
+                    "fullName": "google.chat.v1.ChatService.UpdateSpaceReadState",
+                    "service": {
+                        "shortName": "ChatService",
+                        "fullName": "google.chat.v1.ChatService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "chat_v1_generated_ChatService_GetThreadReadState_async",
+            "title": "ChatService getThreadReadState Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns details about a user's read state within a thread, used to identify read and unread messages. Requires [user authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).",
+            "canonical": true,
+            "file": "chat_service.get_thread_read_state.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetThreadReadState",
+                "fullName": "google.chat.v1.ChatService.GetThreadReadState",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.chat.v1.ThreadReadState",
+                "client": {
+                    "shortName": "ChatServiceClient",
+                    "fullName": "google.chat.v1.ChatServiceClient"
+                },
+                "method": {
+                    "shortName": "GetThreadReadState",
+                    "fullName": "google.chat.v1.ChatService.GetThreadReadState",
                     "service": {
                         "shortName": "ChatService",
                         "fullName": "google.chat.v1.ChatService"

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v1.6.0...contentwarehouse-v1.7.0) (2024-04-18)
+
+
+### Features
+
+* [contentwarehouse] A new message `FoundationModelTuningOptions` is added ([#5243](https://github.com/googleapis/google-cloud-node/issues/5243)) ([280a42e](https://github.com/googleapis/google-cloud-node/commit/280a42e0b9e8559ca895f8545ed4f261c41dfaa3))
+
 ## [1.6.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v1.5.0...contentwarehouse-v1.6.0) (2024-03-29)
 
 

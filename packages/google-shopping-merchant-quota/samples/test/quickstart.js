@@ -19,7 +19,7 @@
 // const path = require('path');
 // const cp = require('child_process');
 // const {describe, it, before} = require('mocha');
-// const {QuotaServiceClient} = require('@google-cloud/quota').v1beta;
+// const {QuotaServiceClient} = require('@google-shopping/quota').v1beta;
 // const merchantapiClient = new QuotaServiceClient();
 
 // const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});

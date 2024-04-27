@@ -11518,6 +11518,48 @@ export namespace google {
                  * @returns Promise
                  */
                 public deleteReaction(request: google.chat.v1.IDeleteReactionRequest): Promise<google.protobuf.Empty>;
+
+                /**
+                 * Calls GetSpaceReadState.
+                 * @param request GetSpaceReadStateRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and SpaceReadState
+                 */
+                public getSpaceReadState(request: google.chat.v1.IGetSpaceReadStateRequest, callback: google.chat.v1.ChatService.GetSpaceReadStateCallback): void;
+
+                /**
+                 * Calls GetSpaceReadState.
+                 * @param request GetSpaceReadStateRequest message or plain object
+                 * @returns Promise
+                 */
+                public getSpaceReadState(request: google.chat.v1.IGetSpaceReadStateRequest): Promise<google.chat.v1.SpaceReadState>;
+
+                /**
+                 * Calls UpdateSpaceReadState.
+                 * @param request UpdateSpaceReadStateRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and SpaceReadState
+                 */
+                public updateSpaceReadState(request: google.chat.v1.IUpdateSpaceReadStateRequest, callback: google.chat.v1.ChatService.UpdateSpaceReadStateCallback): void;
+
+                /**
+                 * Calls UpdateSpaceReadState.
+                 * @param request UpdateSpaceReadStateRequest message or plain object
+                 * @returns Promise
+                 */
+                public updateSpaceReadState(request: google.chat.v1.IUpdateSpaceReadStateRequest): Promise<google.chat.v1.SpaceReadState>;
+
+                /**
+                 * Calls GetThreadReadState.
+                 * @param request GetThreadReadStateRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and ThreadReadState
+                 */
+                public getThreadReadState(request: google.chat.v1.IGetThreadReadStateRequest, callback: google.chat.v1.ChatService.GetThreadReadStateCallback): void;
+
+                /**
+                 * Calls GetThreadReadState.
+                 * @param request GetThreadReadStateRequest message or plain object
+                 * @returns Promise
+                 */
+                public getThreadReadState(request: google.chat.v1.IGetThreadReadStateRequest): Promise<google.chat.v1.ThreadReadState>;
             }
 
             namespace ChatService {
@@ -11682,6 +11724,27 @@ export namespace google {
                  * @param [response] Empty
                  */
                 type DeleteReactionCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                /**
+                 * Callback as used by {@link google.chat.v1.ChatService|getSpaceReadState}.
+                 * @param error Error, if any
+                 * @param [response] SpaceReadState
+                 */
+                type GetSpaceReadStateCallback = (error: (Error|null), response?: google.chat.v1.SpaceReadState) => void;
+
+                /**
+                 * Callback as used by {@link google.chat.v1.ChatService|updateSpaceReadState}.
+                 * @param error Error, if any
+                 * @param [response] SpaceReadState
+                 */
+                type UpdateSpaceReadStateCallback = (error: (Error|null), response?: google.chat.v1.SpaceReadState) => void;
+
+                /**
+                 * Callback as used by {@link google.chat.v1.ChatService|getThreadReadState}.
+                 * @param error Error, if any
+                 * @param [response] ThreadReadState
+                 */
+                type GetThreadReadStateCallback = (error: (Error|null), response?: google.chat.v1.ThreadReadState) => void;
             }
 
             /** Properties of a Membership. */
@@ -18667,6 +18730,309 @@ export namespace google {
                 HISTORY_ON = 2
             }
 
+            /** Properties of a SpaceReadState. */
+            interface ISpaceReadState {
+
+                /** SpaceReadState name */
+                name?: (string|null);
+
+                /** SpaceReadState lastReadTime */
+                lastReadTime?: (google.protobuf.ITimestamp|null);
+            }
+
+            /** Represents a SpaceReadState. */
+            class SpaceReadState implements ISpaceReadState {
+
+                /**
+                 * Constructs a new SpaceReadState.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.ISpaceReadState);
+
+                /** SpaceReadState name. */
+                public name: string;
+
+                /** SpaceReadState lastReadTime. */
+                public lastReadTime?: (google.protobuf.ITimestamp|null);
+
+                /**
+                 * Creates a new SpaceReadState instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns SpaceReadState instance
+                 */
+                public static create(properties?: google.chat.v1.ISpaceReadState): google.chat.v1.SpaceReadState;
+
+                /**
+                 * Encodes the specified SpaceReadState message. Does not implicitly {@link google.chat.v1.SpaceReadState.verify|verify} messages.
+                 * @param message SpaceReadState message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.ISpaceReadState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SpaceReadState message, length delimited. Does not implicitly {@link google.chat.v1.SpaceReadState.verify|verify} messages.
+                 * @param message SpaceReadState message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.ISpaceReadState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SpaceReadState message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SpaceReadState
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.SpaceReadState;
+
+                /**
+                 * Decodes a SpaceReadState message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SpaceReadState
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.SpaceReadState;
+
+                /**
+                 * Verifies a SpaceReadState message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SpaceReadState message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SpaceReadState
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.SpaceReadState;
+
+                /**
+                 * Creates a plain object from a SpaceReadState message. Also converts values to other types if specified.
+                 * @param message SpaceReadState
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.SpaceReadState, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SpaceReadState to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for SpaceReadState
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a GetSpaceReadStateRequest. */
+            interface IGetSpaceReadStateRequest {
+
+                /** GetSpaceReadStateRequest name */
+                name?: (string|null);
+            }
+
+            /** Represents a GetSpaceReadStateRequest. */
+            class GetSpaceReadStateRequest implements IGetSpaceReadStateRequest {
+
+                /**
+                 * Constructs a new GetSpaceReadStateRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IGetSpaceReadStateRequest);
+
+                /** GetSpaceReadStateRequest name. */
+                public name: string;
+
+                /**
+                 * Creates a new GetSpaceReadStateRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns GetSpaceReadStateRequest instance
+                 */
+                public static create(properties?: google.chat.v1.IGetSpaceReadStateRequest): google.chat.v1.GetSpaceReadStateRequest;
+
+                /**
+                 * Encodes the specified GetSpaceReadStateRequest message. Does not implicitly {@link google.chat.v1.GetSpaceReadStateRequest.verify|verify} messages.
+                 * @param message GetSpaceReadStateRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IGetSpaceReadStateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified GetSpaceReadStateRequest message, length delimited. Does not implicitly {@link google.chat.v1.GetSpaceReadStateRequest.verify|verify} messages.
+                 * @param message GetSpaceReadStateRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IGetSpaceReadStateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a GetSpaceReadStateRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns GetSpaceReadStateRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.GetSpaceReadStateRequest;
+
+                /**
+                 * Decodes a GetSpaceReadStateRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns GetSpaceReadStateRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.GetSpaceReadStateRequest;
+
+                /**
+                 * Verifies a GetSpaceReadStateRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a GetSpaceReadStateRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns GetSpaceReadStateRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.GetSpaceReadStateRequest;
+
+                /**
+                 * Creates a plain object from a GetSpaceReadStateRequest message. Also converts values to other types if specified.
+                 * @param message GetSpaceReadStateRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.GetSpaceReadStateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this GetSpaceReadStateRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for GetSpaceReadStateRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an UpdateSpaceReadStateRequest. */
+            interface IUpdateSpaceReadStateRequest {
+
+                /** UpdateSpaceReadStateRequest spaceReadState */
+                spaceReadState?: (google.chat.v1.ISpaceReadState|null);
+
+                /** UpdateSpaceReadStateRequest updateMask */
+                updateMask?: (google.protobuf.IFieldMask|null);
+            }
+
+            /** Represents an UpdateSpaceReadStateRequest. */
+            class UpdateSpaceReadStateRequest implements IUpdateSpaceReadStateRequest {
+
+                /**
+                 * Constructs a new UpdateSpaceReadStateRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IUpdateSpaceReadStateRequest);
+
+                /** UpdateSpaceReadStateRequest spaceReadState. */
+                public spaceReadState?: (google.chat.v1.ISpaceReadState|null);
+
+                /** UpdateSpaceReadStateRequest updateMask. */
+                public updateMask?: (google.protobuf.IFieldMask|null);
+
+                /**
+                 * Creates a new UpdateSpaceReadStateRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns UpdateSpaceReadStateRequest instance
+                 */
+                public static create(properties?: google.chat.v1.IUpdateSpaceReadStateRequest): google.chat.v1.UpdateSpaceReadStateRequest;
+
+                /**
+                 * Encodes the specified UpdateSpaceReadStateRequest message. Does not implicitly {@link google.chat.v1.UpdateSpaceReadStateRequest.verify|verify} messages.
+                 * @param message UpdateSpaceReadStateRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IUpdateSpaceReadStateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified UpdateSpaceReadStateRequest message, length delimited. Does not implicitly {@link google.chat.v1.UpdateSpaceReadStateRequest.verify|verify} messages.
+                 * @param message UpdateSpaceReadStateRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IUpdateSpaceReadStateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an UpdateSpaceReadStateRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns UpdateSpaceReadStateRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.UpdateSpaceReadStateRequest;
+
+                /**
+                 * Decodes an UpdateSpaceReadStateRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns UpdateSpaceReadStateRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.UpdateSpaceReadStateRequest;
+
+                /**
+                 * Verifies an UpdateSpaceReadStateRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an UpdateSpaceReadStateRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns UpdateSpaceReadStateRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.UpdateSpaceReadStateRequest;
+
+                /**
+                 * Creates a plain object from an UpdateSpaceReadStateRequest message. Also converts values to other types if specified.
+                 * @param message UpdateSpaceReadStateRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.UpdateSpaceReadStateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this UpdateSpaceReadStateRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for UpdateSpaceReadStateRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
             /** Properties of a SetUpSpaceRequest. */
             interface ISetUpSpaceRequest {
 
@@ -18770,6 +19136,206 @@ export namespace google {
 
                 /**
                  * Gets the default type url for SetUpSpaceRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ThreadReadState. */
+            interface IThreadReadState {
+
+                /** ThreadReadState name */
+                name?: (string|null);
+
+                /** ThreadReadState lastReadTime */
+                lastReadTime?: (google.protobuf.ITimestamp|null);
+            }
+
+            /** Represents a ThreadReadState. */
+            class ThreadReadState implements IThreadReadState {
+
+                /**
+                 * Constructs a new ThreadReadState.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IThreadReadState);
+
+                /** ThreadReadState name. */
+                public name: string;
+
+                /** ThreadReadState lastReadTime. */
+                public lastReadTime?: (google.protobuf.ITimestamp|null);
+
+                /**
+                 * Creates a new ThreadReadState instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ThreadReadState instance
+                 */
+                public static create(properties?: google.chat.v1.IThreadReadState): google.chat.v1.ThreadReadState;
+
+                /**
+                 * Encodes the specified ThreadReadState message. Does not implicitly {@link google.chat.v1.ThreadReadState.verify|verify} messages.
+                 * @param message ThreadReadState message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IThreadReadState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ThreadReadState message, length delimited. Does not implicitly {@link google.chat.v1.ThreadReadState.verify|verify} messages.
+                 * @param message ThreadReadState message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IThreadReadState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ThreadReadState message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ThreadReadState
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.ThreadReadState;
+
+                /**
+                 * Decodes a ThreadReadState message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ThreadReadState
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.ThreadReadState;
+
+                /**
+                 * Verifies a ThreadReadState message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ThreadReadState message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ThreadReadState
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.ThreadReadState;
+
+                /**
+                 * Creates a plain object from a ThreadReadState message. Also converts values to other types if specified.
+                 * @param message ThreadReadState
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.ThreadReadState, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ThreadReadState to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ThreadReadState
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a GetThreadReadStateRequest. */
+            interface IGetThreadReadStateRequest {
+
+                /** GetThreadReadStateRequest name */
+                name?: (string|null);
+            }
+
+            /** Represents a GetThreadReadStateRequest. */
+            class GetThreadReadStateRequest implements IGetThreadReadStateRequest {
+
+                /**
+                 * Constructs a new GetThreadReadStateRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IGetThreadReadStateRequest);
+
+                /** GetThreadReadStateRequest name. */
+                public name: string;
+
+                /**
+                 * Creates a new GetThreadReadStateRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns GetThreadReadStateRequest instance
+                 */
+                public static create(properties?: google.chat.v1.IGetThreadReadStateRequest): google.chat.v1.GetThreadReadStateRequest;
+
+                /**
+                 * Encodes the specified GetThreadReadStateRequest message. Does not implicitly {@link google.chat.v1.GetThreadReadStateRequest.verify|verify} messages.
+                 * @param message GetThreadReadStateRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IGetThreadReadStateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified GetThreadReadStateRequest message, length delimited. Does not implicitly {@link google.chat.v1.GetThreadReadStateRequest.verify|verify} messages.
+                 * @param message GetThreadReadStateRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IGetThreadReadStateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a GetThreadReadStateRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns GetThreadReadStateRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.GetThreadReadStateRequest;
+
+                /**
+                 * Decodes a GetThreadReadStateRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns GetThreadReadStateRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.GetThreadReadStateRequest;
+
+                /**
+                 * Verifies a GetThreadReadStateRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a GetThreadReadStateRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns GetThreadReadStateRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.GetThreadReadStateRequest;
+
+                /**
+                 * Creates a plain object from a GetThreadReadStateRequest message. Also converts values to other types if specified.
+                 * @param message GetThreadReadStateRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.GetThreadReadStateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this GetThreadReadStateRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for GetThreadReadStateRequest
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.6.0...discoveryengine-v1.7.0) (2024-04-18)
+
+
+### Features
+
+* [discoveryengine] add answer generation APIs ([7d36b46](https://github.com/googleapis/google-cloud-node/commit/7d36b464c362985b7e8ffdf2bad1689da7a8661c))
+
 ## [1.6.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.5.0...discoveryengine-v1.6.0) (2024-04-16)
 
 
