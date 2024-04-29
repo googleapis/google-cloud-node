@@ -9839,6 +9839,301 @@
                  */
                 var type = {};
     
+                type.Weight = (function() {
+    
+                    /**
+                     * Properties of a Weight.
+                     * @memberof google.shopping.type
+                     * @interface IWeight
+                     * @property {number|Long|null} [amountMicros] Weight amountMicros
+                     * @property {google.shopping.type.Weight.WeightUnit|null} [unit] Weight unit
+                     */
+    
+                    /**
+                     * Constructs a new Weight.
+                     * @memberof google.shopping.type
+                     * @classdesc Represents a Weight.
+                     * @implements IWeight
+                     * @constructor
+                     * @param {google.shopping.type.IWeight=} [properties] Properties to set
+                     */
+                    function Weight(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Weight amountMicros.
+                     * @member {number|Long|null|undefined} amountMicros
+                     * @memberof google.shopping.type.Weight
+                     * @instance
+                     */
+                    Weight.prototype.amountMicros = null;
+    
+                    /**
+                     * Weight unit.
+                     * @member {google.shopping.type.Weight.WeightUnit} unit
+                     * @memberof google.shopping.type.Weight
+                     * @instance
+                     */
+                    Weight.prototype.unit = 0;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * Weight _amountMicros.
+                     * @member {"amountMicros"|undefined} _amountMicros
+                     * @memberof google.shopping.type.Weight
+                     * @instance
+                     */
+                    Object.defineProperty(Weight.prototype, "_amountMicros", {
+                        get: $util.oneOfGetter($oneOfFields = ["amountMicros"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new Weight instance using the specified properties.
+                     * @function create
+                     * @memberof google.shopping.type.Weight
+                     * @static
+                     * @param {google.shopping.type.IWeight=} [properties] Properties to set
+                     * @returns {google.shopping.type.Weight} Weight instance
+                     */
+                    Weight.create = function create(properties) {
+                        return new Weight(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Weight message. Does not implicitly {@link google.shopping.type.Weight.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.shopping.type.Weight
+                     * @static
+                     * @param {google.shopping.type.IWeight} message Weight message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Weight.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.amountMicros != null && Object.hasOwnProperty.call(message, "amountMicros"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int64(message.amountMicros);
+                        if (message.unit != null && Object.hasOwnProperty.call(message, "unit"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.unit);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Weight message, length delimited. Does not implicitly {@link google.shopping.type.Weight.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.shopping.type.Weight
+                     * @static
+                     * @param {google.shopping.type.IWeight} message Weight message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Weight.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Weight message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.shopping.type.Weight
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.shopping.type.Weight} Weight
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Weight.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.type.Weight();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.amountMicros = reader.int64();
+                                    break;
+                                }
+                            case 2: {
+                                    message.unit = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Weight message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.shopping.type.Weight
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.shopping.type.Weight} Weight
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Weight.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Weight message.
+                     * @function verify
+                     * @memberof google.shopping.type.Weight
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Weight.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.amountMicros != null && message.hasOwnProperty("amountMicros")) {
+                            properties._amountMicros = 1;
+                            if (!$util.isInteger(message.amountMicros) && !(message.amountMicros && $util.isInteger(message.amountMicros.low) && $util.isInteger(message.amountMicros.high)))
+                                return "amountMicros: integer|Long expected";
+                        }
+                        if (message.unit != null && message.hasOwnProperty("unit"))
+                            switch (message.unit) {
+                            default:
+                                return "unit: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Weight message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.shopping.type.Weight
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.shopping.type.Weight} Weight
+                     */
+                    Weight.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.shopping.type.Weight)
+                            return object;
+                        var message = new $root.google.shopping.type.Weight();
+                        if (object.amountMicros != null)
+                            if ($util.Long)
+                                (message.amountMicros = $util.Long.fromValue(object.amountMicros)).unsigned = false;
+                            else if (typeof object.amountMicros === "string")
+                                message.amountMicros = parseInt(object.amountMicros, 10);
+                            else if (typeof object.amountMicros === "number")
+                                message.amountMicros = object.amountMicros;
+                            else if (typeof object.amountMicros === "object")
+                                message.amountMicros = new $util.LongBits(object.amountMicros.low >>> 0, object.amountMicros.high >>> 0).toNumber();
+                        switch (object.unit) {
+                        default:
+                            if (typeof object.unit === "number") {
+                                message.unit = object.unit;
+                                break;
+                            }
+                            break;
+                        case "WEIGHT_UNIT_UNSPECIFIED":
+                        case 0:
+                            message.unit = 0;
+                            break;
+                        case "POUND":
+                        case 1:
+                            message.unit = 1;
+                            break;
+                        case "KILOGRAM":
+                        case 2:
+                            message.unit = 2;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Weight message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.shopping.type.Weight
+                     * @static
+                     * @param {google.shopping.type.Weight} message Weight
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Weight.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.unit = options.enums === String ? "WEIGHT_UNIT_UNSPECIFIED" : 0;
+                        if (message.amountMicros != null && message.hasOwnProperty("amountMicros")) {
+                            if (typeof message.amountMicros === "number")
+                                object.amountMicros = options.longs === String ? String(message.amountMicros) : message.amountMicros;
+                            else
+                                object.amountMicros = options.longs === String ? $util.Long.prototype.toString.call(message.amountMicros) : options.longs === Number ? new $util.LongBits(message.amountMicros.low >>> 0, message.amountMicros.high >>> 0).toNumber() : message.amountMicros;
+                            if (options.oneofs)
+                                object._amountMicros = "amountMicros";
+                        }
+                        if (message.unit != null && message.hasOwnProperty("unit"))
+                            object.unit = options.enums === String ? $root.google.shopping.type.Weight.WeightUnit[message.unit] === undefined ? message.unit : $root.google.shopping.type.Weight.WeightUnit[message.unit] : message.unit;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Weight to JSON.
+                     * @function toJSON
+                     * @memberof google.shopping.type.Weight
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Weight.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for Weight
+                     * @function getTypeUrl
+                     * @memberof google.shopping.type.Weight
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Weight.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.shopping.type.Weight";
+                    };
+    
+                    /**
+                     * WeightUnit enum.
+                     * @name google.shopping.type.Weight.WeightUnit
+                     * @enum {number}
+                     * @property {number} WEIGHT_UNIT_UNSPECIFIED=0 WEIGHT_UNIT_UNSPECIFIED value
+                     * @property {number} POUND=1 POUND value
+                     * @property {number} KILOGRAM=2 KILOGRAM value
+                     */
+                    Weight.WeightUnit = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "WEIGHT_UNIT_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "POUND"] = 1;
+                        values[valuesById[2] = "KILOGRAM"] = 2;
+                        return values;
+                    })();
+    
+                    return Weight;
+                })();
+    
                 type.Price = (function() {
     
                     /**

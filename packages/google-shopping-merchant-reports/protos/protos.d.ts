@@ -3556,6 +3556,122 @@ export namespace google {
         /** Namespace type. */
         namespace type {
 
+            /** Properties of a Weight. */
+            interface IWeight {
+
+                /** Weight amountMicros */
+                amountMicros?: (number|Long|string|null);
+
+                /** Weight unit */
+                unit?: (google.shopping.type.Weight.WeightUnit|keyof typeof google.shopping.type.Weight.WeightUnit|null);
+            }
+
+            /** Represents a Weight. */
+            class Weight implements IWeight {
+
+                /**
+                 * Constructs a new Weight.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.shopping.type.IWeight);
+
+                /** Weight amountMicros. */
+                public amountMicros?: (number|Long|string|null);
+
+                /** Weight unit. */
+                public unit: (google.shopping.type.Weight.WeightUnit|keyof typeof google.shopping.type.Weight.WeightUnit);
+
+                /** Weight _amountMicros. */
+                public _amountMicros?: "amountMicros";
+
+                /**
+                 * Creates a new Weight instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Weight instance
+                 */
+                public static create(properties?: google.shopping.type.IWeight): google.shopping.type.Weight;
+
+                /**
+                 * Encodes the specified Weight message. Does not implicitly {@link google.shopping.type.Weight.verify|verify} messages.
+                 * @param message Weight message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.shopping.type.IWeight, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Weight message, length delimited. Does not implicitly {@link google.shopping.type.Weight.verify|verify} messages.
+                 * @param message Weight message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.shopping.type.IWeight, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Weight message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Weight
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.type.Weight;
+
+                /**
+                 * Decodes a Weight message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Weight
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.type.Weight;
+
+                /**
+                 * Verifies a Weight message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Weight message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Weight
+                 */
+                public static fromObject(object: { [k: string]: any }): google.shopping.type.Weight;
+
+                /**
+                 * Creates a plain object from a Weight message. Also converts values to other types if specified.
+                 * @param message Weight
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.shopping.type.Weight, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Weight to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Weight
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace Weight {
+
+                /** WeightUnit enum. */
+                enum WeightUnit {
+                    WEIGHT_UNIT_UNSPECIFIED = 0,
+                    POUND = 1,
+                    KILOGRAM = 2
+                }
+            }
+
             /** Properties of a Price. */
             interface IPrice {
 

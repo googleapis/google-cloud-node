@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const notifications = require('@google-shopping/notifications');
+const notifications = require('@google-cloud/notifications');
 
 function main() {
   const notificationsApiServiceClient =
