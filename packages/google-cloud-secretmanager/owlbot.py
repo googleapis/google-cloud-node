@@ -30,6 +30,7 @@ s.replace('packages/google-cloud-secretmanager/src/v1/secret_manager_service_cli
   r"""// --------------------
   // -- Path templates --
   // --------------------
+  /**
    * Return a fully-qualified secret resource name string.
    *
    * @param {string} project
