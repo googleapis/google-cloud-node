@@ -1,0 +1,37 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.shopping.merchant.reports.v1beta",
+  "libraryPackage": "@google-shopping/reports",
+  "services": {
+    "ReportService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ReportServiceClient",
+          "rpcs": {
+            "Search": {
+              "methods": [
+                "search",
+                "searchStream",
+                "searchAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ReportServiceClient",
+          "rpcs": {
+            "Search": {
+              "methods": [
+                "search",
+                "searchStream",
+                "searchAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.shopping.merchant.inventories.v1beta",
+  "libraryPackage": "@google-shopping/inventories",
+  "services": {
+    "LocalInventoryService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "LocalInventoryServiceClient",
+          "rpcs": {
+            "InsertLocalInventory": {
+              "methods": [
+                "insertLocalInventory"
+              ]
+            },
+            "DeleteLocalInventory": {
+              "methods": [
+                "deleteLocalInventory"
+              ]
+            },
+            "ListLocalInventories": {
+              "methods": [
+                "listLocalInventories",
+                "listLocalInventoriesStream",
+                "listLocalInventoriesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "LocalInventoryServiceClient",
+          "rpcs": {
+            "InsertLocalInventory": {
+              "methods": [
+                "insertLocalInventory"
+              ]
+            },
+            "DeleteLocalInventory": {
+              "methods": [
+                "deleteLocalInventory"
+              ]
+            },
+            "ListLocalInventories": {
+              "methods": [
+                "listLocalInventories",
+                "listLocalInventoriesStream",
+                "listLocalInventoriesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionalInventoryService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RegionalInventoryServiceClient",
+          "rpcs": {
+            "InsertRegionalInventory": {
+              "methods": [
+                "insertRegionalInventory"
+              ]
+            },
+            "DeleteRegionalInventory": {
+              "methods": [
+                "deleteRegionalInventory"
+              ]
+            },
+            "ListRegionalInventories": {
+              "methods": [
+                "listRegionalInventories",
+                "listRegionalInventoriesStream",
+                "listRegionalInventoriesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RegionalInventoryServiceClient",
+          "rpcs": {
+            "InsertRegionalInventory": {
+              "methods": [
+                "insertRegionalInventory"
+              ]
+            },
+            "DeleteRegionalInventory": {
+              "methods": [
+                "deleteRegionalInventory"
+              ]
+            },
+            "ListRegionalInventories": {
+              "methods": [
+                "listRegionalInventories",
+                "listRegionalInventoriesStream",
+                "listRegionalInventoriesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
