@@ -112,4 +112,8 @@ s.replace('packages/google-cloud-secretmanager/src/v1/secret_manager_service_cli
    * @param {string} project
    * @returns {string} Resource name string.
    */
+  projectPath(project: string) {
+    return this.pathTemplates.projectPathTemplate.render({
+      project: project,
+    });
 """)
