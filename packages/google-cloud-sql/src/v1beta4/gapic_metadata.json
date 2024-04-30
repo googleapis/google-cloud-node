@@ -367,6 +367,16 @@
               "methods": [
                 "getLatestRecoveryTime"
               ]
+            },
+            "AcquireSsrsLease": {
+              "methods": [
+                "acquireSsrsLease"
+              ]
+            },
+            "ReleaseSsrsLease": {
+              "methods": [
+                "releaseSsrsLease"
+              ]
             }
           }
         },
@@ -531,6 +541,16 @@
             "GetLatestRecoveryTime": {
               "methods": [
                 "getLatestRecoveryTime"
+              ]
+            },
+            "AcquireSsrsLease": {
+              "methods": [
+                "acquireSsrsLease"
+              ]
+            },
+            "ReleaseSsrsLease": {
+              "methods": [
+                "releaseSsrsLease"
               ]
             }
           }
