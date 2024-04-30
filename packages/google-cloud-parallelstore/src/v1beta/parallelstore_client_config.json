@@ -39,6 +39,14 @@
         "DeleteInstance": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "ImportData": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ExportData": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }

@@ -1061,6 +1061,386 @@ describe('v1beta.ParallelstoreClient', () => {
     });
   });
 
+  describe('importData', () => {
+    it('invokes importData without error', async () => {
+      const client = new parallelstoreModule.v1beta.ParallelstoreClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parallelstore.v1beta.ImportDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parallelstore.v1beta.ImportDataRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.importData = stubLongRunningCall(expectedResponse);
+      const [operation] = await client.importData(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.importData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes importData without error using callback', async () => {
+      const client = new parallelstoreModule.v1beta.ParallelstoreClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parallelstore.v1beta.ImportDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parallelstore.v1beta.ImportDataRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.importData =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.importData(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.parallelstore.v1beta.IImportDataResponse,
+              protos.google.cloud.parallelstore.v1beta.IImportDataMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.parallelstore.v1beta.IImportDataResponse,
+        protos.google.cloud.parallelstore.v1beta.IImportDataMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.importData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes importData with call error', async () => {
+      const client = new parallelstoreModule.v1beta.ParallelstoreClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parallelstore.v1beta.ImportDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parallelstore.v1beta.ImportDataRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.importData = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.importData(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.importData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes importData with LRO error', async () => {
+      const client = new parallelstoreModule.v1beta.ParallelstoreClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parallelstore.v1beta.ImportDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parallelstore.v1beta.ImportDataRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.importData = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.importData(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.importData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkImportDataProgress without error', async () => {
+      const client = new parallelstoreModule.v1beta.ParallelstoreClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkImportDataProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkImportDataProgress with error', async () => {
+      const client = new parallelstoreModule.v1beta.ParallelstoreClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkImportDataProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('exportData', () => {
+    it('invokes exportData without error', async () => {
+      const client = new parallelstoreModule.v1beta.ParallelstoreClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parallelstore.v1beta.ExportDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parallelstore.v1beta.ExportDataRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.exportData = stubLongRunningCall(expectedResponse);
+      const [operation] = await client.exportData(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.exportData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes exportData without error using callback', async () => {
+      const client = new parallelstoreModule.v1beta.ParallelstoreClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parallelstore.v1beta.ExportDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parallelstore.v1beta.ExportDataRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.exportData =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.exportData(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.parallelstore.v1beta.IExportDataResponse,
+              protos.google.cloud.parallelstore.v1beta.IExportDataMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.parallelstore.v1beta.IExportDataResponse,
+        protos.google.cloud.parallelstore.v1beta.IExportDataMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.exportData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes exportData with call error', async () => {
+      const client = new parallelstoreModule.v1beta.ParallelstoreClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parallelstore.v1beta.ExportDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parallelstore.v1beta.ExportDataRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.exportData = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.exportData(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.exportData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes exportData with LRO error', async () => {
+      const client = new parallelstoreModule.v1beta.ParallelstoreClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.parallelstore.v1beta.ExportDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.parallelstore.v1beta.ExportDataRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.exportData = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.exportData(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.exportData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkExportDataProgress without error', async () => {
+      const client = new parallelstoreModule.v1beta.ParallelstoreClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkExportDataProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkExportDataProgress with error', async () => {
+      const client = new parallelstoreModule.v1beta.ParallelstoreClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkExportDataProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('listInstances', () => {
     it('invokes listInstances without error', async () => {
       const client = new parallelstoreModule.v1beta.ParallelstoreClient({
