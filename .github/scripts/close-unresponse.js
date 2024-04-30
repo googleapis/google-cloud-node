@@ -2,7 +2,7 @@ function labeledEvent(data) {
     return data.event === "labeled" && data.label.name === "needs more info";
   }
   
-  const numberOfDaysLimit = 30;
+  const numberOfDaysLimit = 15;
   const close_message = `This has been closed since a request for information has \
   not been answered for ${numberOfDaysLimit} days. It can be reopened when the \
   requested information is provided.`;
