@@ -1362,6 +1362,60 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
             });
         });
 
+        describe('conversation', () => {
+            const fakePath = "/rendered/path/conversation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                agent: "agentValue",
+                conversation: "conversationValue",
+            };
+            const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            client.pathTemplates.conversationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.conversationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('conversationPath', () => {
+                const result = client.conversationPath("projectValue", "locationValue", "agentValue", "conversationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.conversationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromConversationName', () => {
+                const result = client.matchProjectFromConversationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.conversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromConversationName', () => {
+                const result = client.matchLocationFromConversationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.conversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAgentFromConversationName', () => {
+                const result = client.matchAgentFromConversationName(fakePath);
+                assert.strictEqual(result, "agentValue");
+                assert((client.pathTemplates.conversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchConversationFromConversationName', () => {
+                const result = client.matchConversationFromConversationName(fakePath);
+                assert.strictEqual(result, "conversationValue");
+                assert((client.pathTemplates.conversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('deployment', () => {
             const fakePath = "/rendered/path/deployment";
             const expectedParameters = {

@@ -21,6 +21,8 @@ const AgentsClient = v3beta1.AgentsClient;
 type AgentsClient = v3beta1.AgentsClient;
 const ChangelogsClient = v3beta1.ChangelogsClient;
 type ChangelogsClient = v3beta1.ChangelogsClient;
+const ConversationHistoryClient = v3beta1.ConversationHistoryClient;
+type ConversationHistoryClient = v3beta1.ConversationHistoryClient;
 const DeploymentsClient = v3beta1.DeploymentsClient;
 type DeploymentsClient = v3beta1.DeploymentsClient;
 const EntityTypesClient = v3beta1.EntityTypesClient;
@@ -57,7 +59,7 @@ const VersionsClient = v3beta1.VersionsClient;
 type VersionsClient = v3beta1.VersionsClient;
 const WebhooksClient = v3beta1.WebhooksClient;
 type WebhooksClient = v3beta1.WebhooksClient;
-export {v3beta1, AgentsClient, ChangelogsClient, DeploymentsClient, EntityTypesClient, EnvironmentsClient, ExamplesClient, ExperimentsClient, FlowsClient, GeneratorsClient, IntentsClient, PagesClient, PlaybooksClient, SecuritySettingsServiceClient, SessionEntityTypesClient, SessionsClient, TestCasesClient, ToolsClient, TransitionRouteGroupsClient, VersionsClient, WebhooksClient};
-export default {v3beta1, AgentsClient, ChangelogsClient, DeploymentsClient, EntityTypesClient, EnvironmentsClient, ExamplesClient, ExperimentsClient, FlowsClient, GeneratorsClient, IntentsClient, PagesClient, PlaybooksClient, SecuritySettingsServiceClient, SessionEntityTypesClient, SessionsClient, TestCasesClient, ToolsClient, TransitionRouteGroupsClient, VersionsClient, WebhooksClient};
+export {v3beta1, AgentsClient, ChangelogsClient, ConversationHistoryClient, DeploymentsClient, EntityTypesClient, EnvironmentsClient, ExamplesClient, ExperimentsClient, FlowsClient, GeneratorsClient, IntentsClient, PagesClient, PlaybooksClient, SecuritySettingsServiceClient, SessionEntityTypesClient, SessionsClient, TestCasesClient, ToolsClient, TransitionRouteGroupsClient, VersionsClient, WebhooksClient};
+export default {v3beta1, AgentsClient, ChangelogsClient, ConversationHistoryClient, DeploymentsClient, EntityTypesClient, EnvironmentsClient, ExamplesClient, ExperimentsClient, FlowsClient, GeneratorsClient, IntentsClient, PagesClient, PlaybooksClient, SecuritySettingsServiceClient, SessionEntityTypesClient, SessionsClient, TestCasesClient, ToolsClient, TransitionRouteGroupsClient, VersionsClient, WebhooksClient};
 import * as protos from '../protos/protos';
 export {protos}

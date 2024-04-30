@@ -16,13 +16,16 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AgentsClient, ChangelogsClient, DeploymentsClient, EntityTypesClient, EnvironmentsClient, ExamplesClient, ExperimentsClient, FlowsClient, GeneratorsClient, IntentsClient, PagesClient, PlaybooksClient, SecuritySettingsServiceClient, SessionEntityTypesClient, SessionsClient, TestCasesClient, ToolsClient, TransitionRouteGroupsClient, VersionsClient, WebhooksClient} from '@google-cloud/dialogflow-cx';
+import {AgentsClient, ChangelogsClient, ConversationHistoryClient, DeploymentsClient, EntityTypesClient, EnvironmentsClient, ExamplesClient, ExperimentsClient, FlowsClient, GeneratorsClient, IntentsClient, PagesClient, PlaybooksClient, SecuritySettingsServiceClient, SessionEntityTypesClient, SessionsClient, TestCasesClient, ToolsClient, TransitionRouteGroupsClient, VersionsClient, WebhooksClient} from '@google-cloud/dialogflow-cx';
 
 // check that the client class type name can be used
 function doStuffWithAgentsClient(client: AgentsClient) {
   client.close();
 }
 function doStuffWithChangelogsClient(client: ChangelogsClient) {
+  client.close();
+}
+function doStuffWithConversationHistoryClient(client: ConversationHistoryClient) {
   client.close();
 }
 function doStuffWithDeploymentsClient(client: DeploymentsClient) {
@@ -87,6 +90,9 @@ function main() {
   // check that the client instance can be created
   const changelogsClient = new ChangelogsClient();
   doStuffWithChangelogsClient(changelogsClient);
+  // check that the client instance can be created
+  const conversationHistoryClient = new ConversationHistoryClient();
+  doStuffWithConversationHistoryClient(conversationHistoryClient);
   // check that the client instance can be created
   const deploymentsClient = new DeploymentsClient();
   doStuffWithDeploymentsClient(deploymentsClient);
