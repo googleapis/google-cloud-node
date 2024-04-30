@@ -2242,7 +2242,7 @@ export class SecretManagerServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-// --------------------
+  // --------------------
   // -- Path templates --
   // --------------------
   /**
