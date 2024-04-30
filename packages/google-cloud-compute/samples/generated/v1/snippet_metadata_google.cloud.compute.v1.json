@@ -19036,6 +19036,62 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_NodeGroups_PerformMaintenance_async",
+            "title": "AcceleratorTypes performMaintenance Sample",
+            "origin": "API_DEFINITION",
+            "description": " Perform maintenance on a subset of nodes in the node group.",
+            "canonical": true,
+            "file": "node_groups.perform_maintenance.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "PerformMaintenance",
+                "fullName": "google.cloud.compute.v1.NodeGroups.PerformMaintenance",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "node_group",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "node_groups_perform_maintenance_request_resource",
+                        "type": ".google.cloud.compute.v1.NodeGroupsPerformMaintenanceRequest"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "zone",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "NodeGroupsClient",
+                    "fullName": "google.cloud.compute.v1.NodeGroupsClient"
+                },
+                "method": {
+                    "shortName": "PerformMaintenance",
+                    "fullName": "google.cloud.compute.v1.NodeGroups.PerformMaintenance",
+                    "service": {
+                        "shortName": "NodeGroups",
+                        "fullName": "google.cloud.compute.v1.NodeGroups"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_NodeGroups_SetIamPolicy_async",
             "title": "AcceleratorTypes setIamPolicy Sample",
             "origin": "API_DEFINITION",

@@ -4311,6 +4311,11 @@
                 "patch"
               ]
             },
+            "PerformMaintenance": {
+              "methods": [
+                "performMaintenance"
+              ]
+            },
             "SetIamPolicy": {
               "methods": [
                 "setIamPolicy"
@@ -4390,6 +4395,11 @@
             "Patch": {
               "methods": [
                 "patch"
+              ]
+            },
+            "PerformMaintenance": {
+              "methods": [
+                "performMaintenance"
               ]
             },
             "SetIamPolicy": {
