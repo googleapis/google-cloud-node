@@ -93,16 +93,4 @@ s.replace('packages/google-cloud-secretmanager/src/v1/secret_manager_service_cli
     return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
       .project;
   }
-
-  /**
-   * Parse the secret from SecretVersion resource.
-   *
-   * @param {string} secretVersionName
-   *   A fully-qualified path representing SecretVersion resource.
-   * @returns {string} A string representing the secret.
-   */
-  matchSecretFromSecretVersionName(secretVersionName: string) {
-    return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
-      .secret;
-  }
 """)
