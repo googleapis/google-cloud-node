@@ -23,7 +23,7 @@ body:
           required: true
         - label: Check out our authentication guide: https://github.com/googleapis/google-auth-library-nodejs
           required: true
-        -  label: Check out handwritten samples for many of our APIs: https://github.com/GoogleCloudPlatform/nodejs-docs-samples
+        - label: Check out handwritten samples for many of our APIs: https://github.com/GoogleCloudPlatform/nodejs-docs-samples
           required: true
 
   - type: textarea
