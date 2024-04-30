@@ -21,7 +21,7 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as examplesModule from '../src';
+import * as conversationhistoryModule from '../src';
 
 import {PassThrough} from 'stream';
 
@@ -127,16 +127,18 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v3beta1.ExamplesClient', () => {
+describe('v3beta1.ConversationHistoryClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
-      const client = new examplesModule.v3beta1.ExamplesClient();
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'dialogflow.googleapis.com');
     });
 
     it('has universeDomain', () => {
-      const client = new examplesModule.v3beta1.ExamplesClient();
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -147,7 +149,9 @@ describe('v3beta1.ExamplesClient', () => {
     ) {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
-        const servicePath = examplesModule.v3beta1.ExamplesClient.servicePath;
+        const servicePath =
+          conversationhistoryModule.v3beta1.ConversationHistoryClient
+            .servicePath;
         assert.strictEqual(servicePath, 'dialogflow.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -155,24 +159,28 @@ describe('v3beta1.ExamplesClient', () => {
 
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint = examplesModule.v3beta1.ExamplesClient.apiEndpoint;
+        const apiEndpoint =
+          conversationhistoryModule.v3beta1.ConversationHistoryClient
+            .apiEndpoint;
         assert.strictEqual(apiEndpoint, 'dialogflow.googleapis.com');
         assert(stub.called);
         stub.restore();
       });
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        universeDomain: 'example.com',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          universeDomain: 'example.com',
+        });
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'dialogflow.example.com');
     });
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        universe_domain: 'example.com',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          universe_domain: 'example.com',
+        });
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'dialogflow.example.com');
     });
@@ -182,7 +190,8 @@ describe('v3beta1.ExamplesClient', () => {
         it('sets apiEndpoint from environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new examplesModule.v3beta1.ExamplesClient();
+          const client =
+            new conversationhistoryModule.v3beta1.ConversationHistoryClient();
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'dialogflow.example.com');
           if (saved) {
@@ -195,9 +204,10 @@ describe('v3beta1.ExamplesClient', () => {
         it('value configured in code has priority over environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new examplesModule.v3beta1.ExamplesClient({
-            universeDomain: 'configured.example.com',
-          });
+          const client =
+            new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+              universeDomain: 'configured.example.com',
+            });
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'dialogflow.configured.example.com');
           if (saved) {
@@ -210,7 +220,7 @@ describe('v3beta1.ExamplesClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new examplesModule.v3beta1.ExamplesClient({
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
           universe_domain: 'example.com',
           universeDomain: 'example.net',
         });
@@ -218,51 +228,57 @@ describe('v3beta1.ExamplesClient', () => {
     });
 
     it('has port', () => {
-      const port = examplesModule.v3beta1.ExamplesClient.port;
+      const port =
+        conversationhistoryModule.v3beta1.ConversationHistoryClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client = new examplesModule.v3beta1.ExamplesClient();
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        fallback: true,
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          fallback: true,
+        });
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.examplesStub, undefined);
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      assert.strictEqual(client.conversationHistoryStub, undefined);
       await client.initialize();
-      assert(client.examplesStub);
+      assert(client.conversationHistoryStub);
     });
 
     it('has close method for the initialized client', done => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
-      assert(client.examplesStub);
+      assert(client.conversationHistoryStub);
       client.close().then(() => {
         done();
       });
     });
 
     it('has close method for the non-initialized client', done => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.examplesStub, undefined);
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      assert.strictEqual(client.conversationHistoryStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -270,10 +286,11 @@ describe('v3beta1.ExamplesClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
       const result = await client.getProjectId();
       assert.strictEqual(result, fakeProjectId);
@@ -282,10 +299,11 @@ describe('v3beta1.ExamplesClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.auth.getProjectId = sinon
         .stub()
         .callsArgWith(0, null, fakeProjectId);
@@ -303,64 +321,66 @@ describe('v3beta1.ExamplesClient', () => {
     });
   });
 
-  describe('createExample', () => {
-    it('invokes createExample without error', async () => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+  describe('getConversation', () => {
+    it('invokes getConversation without error', async () => {
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.CreateExampleRequest()
+        new protos.google.cloud.dialogflow.cx.v3beta1.GetConversationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.CreateExampleRequest',
-        ['parent']
+        '.google.cloud.dialogflow.cx.v3beta1.GetConversationRequest',
+        ['name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.Example()
+        new protos.google.cloud.dialogflow.cx.v3beta1.Conversation()
       );
-      client.innerApiCalls.createExample = stubSimpleCall(expectedResponse);
-      const [response] = await client.createExample(request);
+      client.innerApiCalls.getConversation = stubSimpleCall(expectedResponse);
+      const [response] = await client.getConversation(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.createExample as SinonStub
+        client.innerApiCalls.getConversation as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.createExample as SinonStub
+        client.innerApiCalls.getConversation as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes createExample without error using callback', async () => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes getConversation without error using callback', async () => {
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.CreateExampleRequest()
+        new protos.google.cloud.dialogflow.cx.v3beta1.GetConversationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.CreateExampleRequest',
-        ['parent']
+        '.google.cloud.dialogflow.cx.v3beta1.GetConversationRequest',
+        ['name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.Example()
+        new protos.google.cloud.dialogflow.cx.v3beta1.Conversation()
       );
-      client.innerApiCalls.createExample =
+      client.innerApiCalls.getConversation =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.createExample(
+        client.getConversation(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.dialogflow.cx.v3beta1.IExample | null
+            result?: protos.google.cloud.dialogflow.cx.v3beta1.IConversation | null
           ) => {
             if (err) {
               reject(err);
@@ -373,78 +393,81 @@ describe('v3beta1.ExamplesClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.createExample as SinonStub
+        client.innerApiCalls.getConversation as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.createExample as SinonStub
+        client.innerApiCalls.getConversation as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes createExample with error', async () => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes getConversation with error', async () => {
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.CreateExampleRequest()
+        new protos.google.cloud.dialogflow.cx.v3beta1.GetConversationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.CreateExampleRequest',
-        ['parent']
+        '.google.cloud.dialogflow.cx.v3beta1.GetConversationRequest',
+        ['name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.createExample = stubSimpleCall(
+      client.innerApiCalls.getConversation = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.createExample(request), expectedError);
+      await assert.rejects(client.getConversation(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.createExample as SinonStub
+        client.innerApiCalls.getConversation as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.createExample as SinonStub
+        client.innerApiCalls.getConversation as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes createExample with closed client', async () => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes getConversation with closed client', async () => {
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.CreateExampleRequest()
+        new protos.google.cloud.dialogflow.cx.v3beta1.GetConversationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.CreateExampleRequest',
-        ['parent']
+        '.google.cloud.dialogflow.cx.v3beta1.GetConversationRequest',
+        ['name']
       );
-      request.parent = defaultValue1;
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.createExample(request), expectedError);
+      await assert.rejects(client.getConversation(request), expectedError);
     });
   });
 
-  describe('deleteExample', () => {
-    it('invokes deleteExample without error', async () => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+  describe('deleteConversation', () => {
+    it('invokes deleteConversation without error', async () => {
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.DeleteExampleRequest()
+        new protos.google.cloud.dialogflow.cx.v3beta1.DeleteConversationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.DeleteExampleRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.DeleteConversationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -452,30 +475,32 @@ describe('v3beta1.ExamplesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteExample = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteExample(request);
+      client.innerApiCalls.deleteConversation =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteConversation(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.deleteExample as SinonStub
+        client.innerApiCalls.deleteConversation as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteExample as SinonStub
+        client.innerApiCalls.deleteConversation as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes deleteExample without error using callback', async () => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes deleteConversation without error using callback', async () => {
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.DeleteExampleRequest()
+        new protos.google.cloud.dialogflow.cx.v3beta1.DeleteConversationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.DeleteExampleRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.DeleteConversationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -483,10 +508,10 @@ describe('v3beta1.ExamplesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteExample =
+      client.innerApiCalls.deleteConversation =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.deleteExample(
+        client.deleteConversation(
           request,
           (
             err?: Error | null,
@@ -503,124 +528,146 @@ describe('v3beta1.ExamplesClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.deleteExample as SinonStub
+        client.innerApiCalls.deleteConversation as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteExample as SinonStub
+        client.innerApiCalls.deleteConversation as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes deleteExample with error', async () => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes deleteConversation with error', async () => {
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.DeleteExampleRequest()
+        new protos.google.cloud.dialogflow.cx.v3beta1.DeleteConversationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.DeleteExampleRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.DeleteConversationRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.deleteExample = stubSimpleCall(
+      client.innerApiCalls.deleteConversation = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.deleteExample(request), expectedError);
+      await assert.rejects(client.deleteConversation(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.deleteExample as SinonStub
+        client.innerApiCalls.deleteConversation as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteExample as SinonStub
+        client.innerApiCalls.deleteConversation as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes deleteExample with closed client', async () => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes deleteConversation with closed client', async () => {
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.DeleteExampleRequest()
+        new protos.google.cloud.dialogflow.cx.v3beta1.DeleteConversationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.DeleteExampleRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.DeleteConversationRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.deleteExample(request), expectedError);
+      await assert.rejects(client.deleteConversation(request), expectedError);
     });
   });
 
-  describe('getExample', () => {
-    it('invokes getExample without error', async () => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+  describe('listConversations', () => {
+    it('invokes listConversations without error', async () => {
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.GetExampleRequest()
+        new protos.google.cloud.dialogflow.cx.v3beta1.ListConversationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.GetExampleRequest',
-        ['name']
+        '.google.cloud.dialogflow.cx.v3beta1.ListConversationsRequest',
+        ['parent']
       );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.Example()
-      );
-      client.innerApiCalls.getExample = stubSimpleCall(expectedResponse);
-      const [response] = await client.getExample(request);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.cx.v3beta1.Conversation()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.cx.v3beta1.Conversation()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.cx.v3beta1.Conversation()
+        ),
+      ];
+      client.innerApiCalls.listConversations = stubSimpleCall(expectedResponse);
+      const [response] = await client.listConversations(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getExample as SinonStub
+        client.innerApiCalls.listConversations as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getExample as SinonStub
+        client.innerApiCalls.listConversations as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getExample without error using callback', async () => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes listConversations without error using callback', async () => {
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.GetExampleRequest()
+        new protos.google.cloud.dialogflow.cx.v3beta1.ListConversationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.GetExampleRequest',
-        ['name']
+        '.google.cloud.dialogflow.cx.v3beta1.ListConversationsRequest',
+        ['parent']
       );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.Example()
-      );
-      client.innerApiCalls.getExample =
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.cx.v3beta1.Conversation()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.cx.v3beta1.Conversation()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.cx.v3beta1.Conversation()
+        ),
+      ];
+      client.innerApiCalls.listConversations =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.getExample(
+        client.listConversations(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.dialogflow.cx.v3beta1.IExample | null
+            result?:
+              | protos.google.cloud.dialogflow.cx.v3beta1.IConversation[]
+              | null
           ) => {
             if (err) {
               reject(err);
@@ -633,361 +680,85 @@ describe('v3beta1.ExamplesClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getExample as SinonStub
+        client.innerApiCalls.listConversations as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getExample as SinonStub
+        client.innerApiCalls.listConversations as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getExample with error', async () => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes listConversations with error', async () => {
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.GetExampleRequest()
+        new protos.google.cloud.dialogflow.cx.v3beta1.ListConversationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.GetExampleRequest',
-        ['name']
+        '.google.cloud.dialogflow.cx.v3beta1.ListConversationsRequest',
+        ['parent']
       );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.getExample = stubSimpleCall(
+      client.innerApiCalls.listConversations = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.getExample(request), expectedError);
+      await assert.rejects(client.listConversations(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.getExample as SinonStub
+        client.innerApiCalls.listConversations as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getExample as SinonStub
+        client.innerApiCalls.listConversations as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getExample with closed client', async () => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes listConversationsStream without error', async () => {
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.GetExampleRequest()
+        new protos.google.cloud.dialogflow.cx.v3beta1.ListConversationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.GetExampleRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getExample(request), expectedError);
-    });
-  });
-
-  describe('updateExample', () => {
-    it('invokes updateExample without error', async () => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.UpdateExampleRequest()
-      );
-      request.example ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.UpdateExampleRequest',
-        ['example', 'name']
-      );
-      request.example.name = defaultValue1;
-      const expectedHeaderRequestParams = `example.name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.Example()
-      );
-      client.innerApiCalls.updateExample = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateExample(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateExample as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateExample as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateExample without error using callback', async () => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.UpdateExampleRequest()
-      );
-      request.example ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.UpdateExampleRequest',
-        ['example', 'name']
-      );
-      request.example.name = defaultValue1;
-      const expectedHeaderRequestParams = `example.name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.Example()
-      );
-      client.innerApiCalls.updateExample =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateExample(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dialogflow.cx.v3beta1.IExample | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateExample as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateExample as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateExample with error', async () => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.UpdateExampleRequest()
-      );
-      request.example ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.UpdateExampleRequest',
-        ['example', 'name']
-      );
-      request.example.name = defaultValue1;
-      const expectedHeaderRequestParams = `example.name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateExample = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateExample(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateExample as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateExample as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateExample with closed client', async () => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.UpdateExampleRequest()
-      );
-      request.example ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.UpdateExampleRequest',
-        ['example', 'name']
-      );
-      request.example.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.updateExample(request), expectedError);
-    });
-  });
-
-  describe('listExamples', () => {
-    it('invokes listExamples without error', async () => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.ListExamplesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.ListExamplesRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.ListConversationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.Example()
+          new protos.google.cloud.dialogflow.cx.v3beta1.Conversation()
         ),
         generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.Example()
+          new protos.google.cloud.dialogflow.cx.v3beta1.Conversation()
         ),
         generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.Example()
+          new protos.google.cloud.dialogflow.cx.v3beta1.Conversation()
         ),
       ];
-      client.innerApiCalls.listExamples = stubSimpleCall(expectedResponse);
-      const [response] = await client.listExamples(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listExamples as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listExamples as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listExamples without error using callback', async () => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.ListExamplesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.ListExamplesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.Example()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.Example()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.Example()
-        ),
-      ];
-      client.innerApiCalls.listExamples =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listExamples(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dialogflow.cx.v3beta1.IExample[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listExamples as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listExamples as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listExamples with error', async () => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.ListExamplesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.ListExamplesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listExamples = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listExamples(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listExamples as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listExamples as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listExamplesStream without error', async () => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.ListExamplesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.ListExamplesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.Example()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.Example()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.Example()
-        ),
-      ];
-      client.descriptors.page.listExamples.createStream =
+      client.descriptors.page.listConversations.createStream =
         stubPageStreamingCall(expectedResponse);
-      const stream = client.listExamplesStream(request);
+      const stream = client.listConversationsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dialogflow.cx.v3beta1.Example[] =
+        const responses: protos.google.cloud.dialogflow.cx.v3beta1.Conversation[] =
           [];
         stream.on(
           'data',
-          (response: protos.google.cloud.dialogflow.cx.v3beta1.Example) => {
+          (
+            response: protos.google.cloud.dialogflow.cx.v3beta1.Conversation
+          ) => {
             responses.push(response);
           }
         );
@@ -1001,12 +772,12 @@ describe('v3beta1.ExamplesClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listExamples.createStream as SinonStub)
+        (client.descriptors.page.listConversations.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listExamples, request)
+          .calledWith(client.innerApiCalls.listConversations, request)
       );
       assert(
-        (client.descriptors.page.listExamples.createStream as SinonStub)
+        (client.descriptors.page.listConversations.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
@@ -1014,33 +785,34 @@ describe('v3beta1.ExamplesClient', () => {
       );
     });
 
-    it('invokes listExamplesStream with error', async () => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes listConversationsStream with error', async () => {
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.ListExamplesRequest()
+        new protos.google.cloud.dialogflow.cx.v3beta1.ListConversationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.ListExamplesRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.ListConversationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.descriptors.page.listExamples.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listExamplesStream(request);
+      client.descriptors.page.listConversations.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listConversationsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dialogflow.cx.v3beta1.Example[] =
+        const responses: protos.google.cloud.dialogflow.cx.v3beta1.Conversation[] =
           [];
         stream.on(
           'data',
-          (response: protos.google.cloud.dialogflow.cx.v3beta1.Example) => {
+          (
+            response: protos.google.cloud.dialogflow.cx.v3beta1.Conversation
+          ) => {
             responses.push(response);
           }
         );
@@ -1053,12 +825,12 @@ describe('v3beta1.ExamplesClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listExamples.createStream as SinonStub)
+        (client.descriptors.page.listConversations.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listExamples, request)
+          .calledWith(client.innerApiCalls.listConversations, request)
       );
       assert(
-        (client.descriptors.page.listExamples.createStream as SinonStub)
+        (client.descriptors.page.listConversations.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
@@ -1066,49 +838,50 @@ describe('v3beta1.ExamplesClient', () => {
       );
     });
 
-    it('uses async iteration with listExamples without error', async () => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('uses async iteration with listConversations without error', async () => {
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.ListExamplesRequest()
+        new protos.google.cloud.dialogflow.cx.v3beta1.ListConversationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.ListExamplesRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.ListConversationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.Example()
+          new protos.google.cloud.dialogflow.cx.v3beta1.Conversation()
         ),
         generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.Example()
+          new protos.google.cloud.dialogflow.cx.v3beta1.Conversation()
         ),
         generateSampleMessage(
-          new protos.google.cloud.dialogflow.cx.v3beta1.Example()
+          new protos.google.cloud.dialogflow.cx.v3beta1.Conversation()
         ),
       ];
-      client.descriptors.page.listExamples.asyncIterate =
+      client.descriptors.page.listConversations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.dialogflow.cx.v3beta1.IExample[] =
+      const responses: protos.google.cloud.dialogflow.cx.v3beta1.IConversation[] =
         [];
-      const iterable = client.listExamplesAsync(request);
+      const iterable = client.listConversationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
         (
-          client.descriptors.page.listExamples.asyncIterate as SinonStub
+          client.descriptors.page.listConversations.asyncIterate as SinonStub
         ).getCall(0).args[1],
         request
       );
       assert(
-        (client.descriptors.page.listExamples.asyncIterate as SinonStub)
+        (client.descriptors.page.listConversations.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
@@ -1116,27 +889,28 @@ describe('v3beta1.ExamplesClient', () => {
       );
     });
 
-    it('uses async iteration with listExamples with error', async () => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('uses async iteration with listConversations with error', async () => {
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dialogflow.cx.v3beta1.ListExamplesRequest()
+        new protos.google.cloud.dialogflow.cx.v3beta1.ListConversationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.dialogflow.cx.v3beta1.ListExamplesRequest',
+        '.google.cloud.dialogflow.cx.v3beta1.ListConversationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.descriptors.page.listExamples.asyncIterate =
+      client.descriptors.page.listConversations.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listExamplesAsync(request);
+      const iterable = client.listConversationsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.dialogflow.cx.v3beta1.IExample[] =
+        const responses: protos.google.cloud.dialogflow.cx.v3beta1.IConversation[] =
           [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -1144,12 +918,12 @@ describe('v3beta1.ExamplesClient', () => {
       });
       assert.deepStrictEqual(
         (
-          client.descriptors.page.listExamples.asyncIterate as SinonStub
+          client.descriptors.page.listConversations.asyncIterate as SinonStub
         ).getCall(0).args[1],
         request
       );
       assert(
-        (client.descriptors.page.listExamples.asyncIterate as SinonStub)
+        (client.descriptors.page.listConversations.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
@@ -1159,10 +933,11 @@ describe('v3beta1.ExamplesClient', () => {
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -1189,10 +964,11 @@ describe('v3beta1.ExamplesClient', () => {
       );
     });
     it('invokes getLocation without error using callback', async () => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -1233,10 +1009,11 @@ describe('v3beta1.ExamplesClient', () => {
       assert((client.locationsClient.getLocation as SinonStub).getCall(0));
     });
     it('invokes getLocation with error', async () => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -1268,10 +1045,11 @@ describe('v3beta1.ExamplesClient', () => {
   });
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
@@ -1316,10 +1094,11 @@ describe('v3beta1.ExamplesClient', () => {
       );
     });
     it('uses async iteration with listLocations with error', async () => {
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
@@ -1364,10 +1143,11 @@ describe('v3beta1.ExamplesClient', () => {
         location: 'locationValue',
         agent: 'agentValue',
       };
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.agentPathTemplate.render = sinon
         .stub()
@@ -1428,10 +1208,11 @@ describe('v3beta1.ExamplesClient', () => {
         location: 'locationValue',
         agent: 'agentValue',
       };
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.agentGenerativeSettingsPathTemplate.render = sinon
         .stub()
@@ -1507,10 +1288,11 @@ describe('v3beta1.ExamplesClient', () => {
         location: 'locationValue',
         agent: 'agentValue',
       };
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.agentValidationResultPathTemplate.render = sinon
         .stub()
@@ -1586,10 +1368,11 @@ describe('v3beta1.ExamplesClient', () => {
         agent: 'agentValue',
         changelog: 'changelogValue',
       };
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.changelogPathTemplate.render = sinon
         .stub()
@@ -1663,10 +1446,11 @@ describe('v3beta1.ExamplesClient', () => {
         environment: 'environmentValue',
         continuous_test_result: 'continuousTestResultValue',
       };
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.continuousTestResultPathTemplate.render = sinon
         .stub()
@@ -1774,10 +1558,11 @@ describe('v3beta1.ExamplesClient', () => {
         agent: 'agentValue',
         conversation: 'conversationValue',
       };
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.conversationPathTemplate.render = sinon
         .stub()
@@ -1851,10 +1636,11 @@ describe('v3beta1.ExamplesClient', () => {
         environment: 'environmentValue',
         deployment: 'deploymentValue',
       };
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.deploymentPathTemplate.render = sinon
         .stub()
@@ -1938,10 +1724,11 @@ describe('v3beta1.ExamplesClient', () => {
         agent: 'agentValue',
         entity_type: 'entityTypeValue',
       };
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.entityTypePathTemplate.render = sinon
         .stub()
@@ -2014,10 +1801,11 @@ describe('v3beta1.ExamplesClient', () => {
         agent: 'agentValue',
         environment: 'environmentValue',
       };
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.environmentPathTemplate.render = sinon
         .stub()
@@ -2091,10 +1879,11 @@ describe('v3beta1.ExamplesClient', () => {
         playbook: 'playbookValue',
         example: 'exampleValue',
       };
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.examplePathTemplate.render = sinon
         .stub()
@@ -2179,10 +1968,11 @@ describe('v3beta1.ExamplesClient', () => {
         environment: 'environmentValue',
         experiment: 'experimentValue',
       };
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.experimentPathTemplate.render = sinon
         .stub()
@@ -2266,10 +2056,11 @@ describe('v3beta1.ExamplesClient', () => {
         agent: 'agentValue',
         flow: 'flowValue',
       };
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.flowPathTemplate.render = sinon
         .stub()
@@ -2342,10 +2133,11 @@ describe('v3beta1.ExamplesClient', () => {
         agent: 'agentValue',
         flow: 'flowValue',
       };
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.flowValidationResultPathTemplate.render = sinon
         .stub()
@@ -2435,10 +2227,11 @@ describe('v3beta1.ExamplesClient', () => {
         agent: 'agentValue',
         generator: 'generatorValue',
       };
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.generatorPathTemplate.render = sinon
         .stub()
@@ -2511,10 +2304,11 @@ describe('v3beta1.ExamplesClient', () => {
         agent: 'agentValue',
         intent: 'intentValue',
       };
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.intentPathTemplate.render = sinon
         .stub()
@@ -2585,10 +2379,11 @@ describe('v3beta1.ExamplesClient', () => {
         project: 'projectValue',
         location: 'locationValue',
       };
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
@@ -2637,10 +2432,11 @@ describe('v3beta1.ExamplesClient', () => {
         flow: 'flowValue',
         page: 'pageValue',
       };
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.pagePathTemplate.render = sinon
         .stub()
@@ -2724,10 +2520,11 @@ describe('v3beta1.ExamplesClient', () => {
         agent: 'agentValue',
         playbook: 'playbookValue',
       };
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.playbookPathTemplate.render = sinon
         .stub()
@@ -2801,10 +2598,11 @@ describe('v3beta1.ExamplesClient', () => {
         playbook: 'playbookValue',
         version: 'versionValue',
       };
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.playbookVersionPathTemplate.render = sinon
         .stub()
@@ -2885,10 +2683,11 @@ describe('v3beta1.ExamplesClient', () => {
       const expectedParameters = {
         project: 'projectValue',
       };
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
@@ -2929,10 +2728,11 @@ describe('v3beta1.ExamplesClient', () => {
         session: 'sessionValue',
         entity_type: 'entityTypeValue',
       };
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3074,10 +2874,11 @@ describe('v3beta1.ExamplesClient', () => {
         flow: 'flowValue',
         transition_route_group: 'transitionRouteGroupValue',
       };
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3199,10 +3000,11 @@ describe('v3beta1.ExamplesClient', () => {
         session: 'sessionValue',
         entity_type: 'entityTypeValue',
       };
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3324,10 +3126,11 @@ describe('v3beta1.ExamplesClient', () => {
         agent: 'agentValue',
         transition_route_group: 'transitionRouteGroupValue',
       };
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3429,10 +3232,11 @@ describe('v3beta1.ExamplesClient', () => {
         location: 'locationValue',
         security_settings: 'securitySettingsValue',
       };
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.securitySettingsPathTemplate.render = sinon
         .stub()
@@ -3498,10 +3302,11 @@ describe('v3beta1.ExamplesClient', () => {
         agent: 'agentValue',
         test_case: 'testCaseValue',
       };
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.testCasePathTemplate.render = sinon
         .stub()
@@ -3575,10 +3380,11 @@ describe('v3beta1.ExamplesClient', () => {
         test_case: 'testCaseValue',
         result: 'resultValue',
       };
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.testCaseResultPathTemplate.render = sinon
         .stub()
@@ -3662,10 +3468,11 @@ describe('v3beta1.ExamplesClient', () => {
         agent: 'agentValue',
         tool: 'toolValue',
       };
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.toolPathTemplate.render = sinon
         .stub()
@@ -3739,10 +3546,11 @@ describe('v3beta1.ExamplesClient', () => {
         flow: 'flowValue',
         version: 'versionValue',
       };
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.versionPathTemplate.render = sinon
         .stub()
@@ -3826,10 +3634,11 @@ describe('v3beta1.ExamplesClient', () => {
         agent: 'agentValue',
         webhook: 'webhookValue',
       };
-      const client = new examplesModule.v3beta1.ExamplesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationhistoryModule.v3beta1.ConversationHistoryClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.webhookPathTemplate.render = sinon
         .stub()

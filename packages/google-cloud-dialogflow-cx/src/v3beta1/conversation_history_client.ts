@@ -23,8 +23,6 @@ import type {
   CallOptions,
   Descriptors,
   ClientOptions,
-  GrpcClientOptions,
-  LROperation,
   PaginationCallback,
   GaxCall,
   LocationsClient,
@@ -36,18 +34,18 @@ import jsonProtos = require('../../protos/protos.json');
 
 /**
  * Client JSON configuration object, loaded from
- * `src/v3beta1/flows_client_config.json`.
+ * `src/v3beta1/conversation_history_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './flows_client_config.json';
+import * as gapicConfig from './conversation_history_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for managing {@link protos.google.cloud.dialogflow.cx.v3beta1.Flow|Flows}.
+ *  Service for managing conversation history.
  * @class
  * @memberof v3beta1
  */
-export class FlowsClient {
+export class ConversationHistoryClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -68,11 +66,10 @@ export class FlowsClient {
   innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
-  operationsClient: gax.OperationsClient;
-  flowsStub?: Promise<{[name: string]: Function}>;
+  conversationHistoryStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of FlowsClient.
+   * Construct an instance of ConversationHistoryClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -107,7 +104,7 @@ export class FlowsClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new FlowsClient({fallback: true}, gax);
+   *     const client = new ConversationHistoryClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -115,7 +112,7 @@ export class FlowsClient {
     gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof FlowsClient;
+    const staticMembers = this.constructor as typeof ConversationHistoryClient;
     if (
       opts?.universe_domain &&
       opts?.universeDomain &&
@@ -309,100 +306,16 @@ export class FlowsClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listFlows: new this._gaxModule.PageDescriptor(
+      listConversations: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'flows'
-      ),
-    };
-
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
-    // This API contains "long-running operations", which return a
-    // an Operation object that allows for tracking of the operation,
-    // rather than holding a request open.
-    const lroOptions: GrpcClientOptions = {
-      auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
-    };
-    if (opts.fallback) {
-      lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v3beta1/{name=projects/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v3beta1/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v3beta1/{name=projects/*/operations/*}:cancel',
-          additional_bindings: [
-            {
-              post: '/v3beta1/{name=projects/*/locations/*/operations/*}:cancel',
-            },
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v3beta1/{name=projects/*/operations/*}',
-          additional_bindings: [
-            {get: '/v3beta1/{name=projects/*/locations/*/operations/*}'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v3beta1/{name=projects/*}/operations',
-          additional_bindings: [
-            {get: '/v3beta1/{name=projects/*/locations/*}/operations'},
-          ],
-        },
-      ];
-    }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
-    const trainFlowResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
-    const trainFlowMetadata = protoFilesRoot.lookup(
-      '.google.protobuf.Struct'
-    ) as gax.protobuf.Type;
-    const importFlowResponse = protoFilesRoot.lookup(
-      '.google.cloud.dialogflow.cx.v3beta1.ImportFlowResponse'
-    ) as gax.protobuf.Type;
-    const importFlowMetadata = protoFilesRoot.lookup(
-      '.google.protobuf.Struct'
-    ) as gax.protobuf.Type;
-    const exportFlowResponse = protoFilesRoot.lookup(
-      '.google.cloud.dialogflow.cx.v3beta1.ExportFlowResponse'
-    ) as gax.protobuf.Type;
-    const exportFlowMetadata = protoFilesRoot.lookup(
-      '.google.protobuf.Struct'
-    ) as gax.protobuf.Type;
-
-    this.descriptors.longrunning = {
-      trainFlow: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        trainFlowResponse.decode.bind(trainFlowResponse),
-        trainFlowMetadata.decode.bind(trainFlowMetadata)
-      ),
-      importFlow: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        importFlowResponse.decode.bind(importFlowResponse),
-        importFlowMetadata.decode.bind(importFlowMetadata)
-      ),
-      exportFlow: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        exportFlowResponse.decode.bind(exportFlowResponse),
-        exportFlowMetadata.decode.bind(exportFlowMetadata)
+        'conversations'
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.dialogflow.cx.v3beta1.Flows',
+      'google.cloud.dialogflow.cx.v3beta1.ConversationHistory',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -430,39 +343,33 @@ export class FlowsClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.flowsStub) {
-      return this.flowsStub;
+    if (this.conversationHistoryStub) {
+      return this.conversationHistoryStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.dialogflow.cx.v3beta1.Flows.
-    this.flowsStub = this._gaxGrpc.createStub(
+    // google.cloud.dialogflow.cx.v3beta1.ConversationHistory.
+    this.conversationHistoryStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.dialogflow.cx.v3beta1.Flows'
+            'google.cloud.dialogflow.cx.v3beta1.ConversationHistory'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.dialogflow.cx.v3beta1.Flows,
+          (this._protos as any).google.cloud.dialogflow.cx.v3beta1
+            .ConversationHistory,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const flowsStubMethods = [
-      'createFlow',
-      'deleteFlow',
-      'listFlows',
-      'getFlow',
-      'updateFlow',
-      'trainFlow',
-      'validateFlow',
-      'getFlowValidationResult',
-      'importFlow',
-      'exportFlow',
+    const conversationHistoryStubMethods = [
+      'listConversations',
+      'getConversation',
+      'deleteConversation',
     ];
-    for (const methodName of flowsStubMethods) {
-      const callPromise = this.flowsStub.then(
+    for (const methodName of conversationHistoryStubMethods) {
+      const callPromise = this.conversationHistoryStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -476,10 +383,7 @@ export class FlowsClient {
         }
       );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        this.descriptors.longrunning[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -490,7 +394,7 @@ export class FlowsClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.flowsStub;
+    return this.conversationHistoryStub;
   }
 
   /**
@@ -581,94 +485,82 @@ export class FlowsClient {
   // -- Service calls --
   // -------------------
   /**
-   * Creates a flow in the specified agent.
-   *
-   * Note: You should always train a flow prior to sending it queries. See the
-   * [training
-   * documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training).
+   * Retrieves the specified conversation.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The agent to create a flow for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
-   * @param {google.cloud.dialogflow.cx.v3beta1.Flow} request.flow
-   *   Required. The flow to create.
-   * @param {string} request.languageCode
-   *   The language of the following fields in `flow`:
-   *
-   *   *  `Flow.event_handlers.trigger_fulfillment.messages`
-   *   *  `Flow.event_handlers.trigger_fulfillment.conditional_cases`
-   *   *  `Flow.transition_routes.trigger_fulfillment.messages`
-   *   *  `Flow.transition_routes.trigger_fulfillment.conditional_cases`
-   *
-   *   If not specified, the agent's default language is used.
-   *   [Many
-   *   languages](https://cloud.google.com/dialogflow/cx/docs/reference/language)
-   *   are supported.
-   *   Note: languages must be enabled in the agent before they can be used.
+   * @param {string} request.name
+   *   Required. The name of the conversation.
+   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+   *   ID>/conversations/<Conversation ID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3beta1.Flow|Flow}.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3beta1.Conversation|Conversation}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v3beta1/flows.create_flow.js</caption>
-   * region_tag:dialogflow_v3beta1_generated_Flows_CreateFlow_async
+   * @example <caption>include:samples/generated/v3beta1/conversation_history.get_conversation.js</caption>
+   * region_tag:dialogflow_v3beta1_generated_ConversationHistory_GetConversation_async
    */
-  createFlow(
-    request?: protos.google.cloud.dialogflow.cx.v3beta1.ICreateFlowRequest,
+  getConversation(
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.dialogflow.cx.v3beta1.IFlow,
-      protos.google.cloud.dialogflow.cx.v3beta1.ICreateFlowRequest | undefined,
+      protos.google.cloud.dialogflow.cx.v3beta1.IConversation,
+      (
+        | protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest
+        | undefined
+      ),
       {} | undefined,
     ]
   >;
-  createFlow(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.ICreateFlowRequest,
+  getConversation(
+    request: protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.dialogflow.cx.v3beta1.IFlow,
-      | protos.google.cloud.dialogflow.cx.v3beta1.ICreateFlowRequest
+      protos.google.cloud.dialogflow.cx.v3beta1.IConversation,
+      | protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  createFlow(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.ICreateFlowRequest,
+  getConversation(
+    request: protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest,
     callback: Callback<
-      protos.google.cloud.dialogflow.cx.v3beta1.IFlow,
-      | protos.google.cloud.dialogflow.cx.v3beta1.ICreateFlowRequest
+      protos.google.cloud.dialogflow.cx.v3beta1.IConversation,
+      | protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  createFlow(
-    request?: protos.google.cloud.dialogflow.cx.v3beta1.ICreateFlowRequest,
+  getConversation(
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.dialogflow.cx.v3beta1.IFlow,
-          | protos.google.cloud.dialogflow.cx.v3beta1.ICreateFlowRequest
+          protos.google.cloud.dialogflow.cx.v3beta1.IConversation,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.dialogflow.cx.v3beta1.IFlow,
-      | protos.google.cloud.dialogflow.cx.v3beta1.ICreateFlowRequest
+      protos.google.cloud.dialogflow.cx.v3beta1.IConversation,
+      | protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.dialogflow.cx.v3beta1.IFlow,
-      protos.google.cloud.dialogflow.cx.v3beta1.ICreateFlowRequest | undefined,
+      protos.google.cloud.dialogflow.cx.v3beta1.IConversation,
+      (
+        | protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest
+        | undefined
+      ),
       {} | undefined,
     ]
   > | void {
@@ -685,85 +577,77 @@ export class FlowsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
+        name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createFlow(request, options, callback);
+    return this.innerApiCalls.getConversation(request, options, callback);
   }
   /**
-   * Deletes a specified flow.
+   * Deletes the specified conversation.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the flow to delete.
+   *   Required. The name of the conversation.
    *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>`.
-   * @param {boolean} request.force
-   *   This field has no effect for flows with no incoming transitions.
-   *   For flows with incoming transitions:
-   *
-   *   *  If `force` is set to false, an error will be returned with message
-   *      indicating the incoming transitions.
-   *   *  If `force` is set to true, Dialogflow will remove the flow, as well as
-   *      any transitions to the flow (i.e. [Target
-   *      flow][EventHandler.target_flow] in event handlers or [Target
-   *      flow][TransitionRoute.target_flow] in transition routes that point to
-   *      this flow will be cleared).
+   *   ID>/conversations/<Conversation ID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v3beta1/flows.delete_flow.js</caption>
-   * region_tag:dialogflow_v3beta1_generated_Flows_DeleteFlow_async
+   * @example <caption>include:samples/generated/v3beta1/conversation_history.delete_conversation.js</caption>
+   * region_tag:dialogflow_v3beta1_generated_ConversationHistory_DeleteConversation_async
    */
-  deleteFlow(
-    request?: protos.google.cloud.dialogflow.cx.v3beta1.IDeleteFlowRequest,
+  deleteConversation(
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest,
     options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
-      protos.google.cloud.dialogflow.cx.v3beta1.IDeleteFlowRequest | undefined,
+      (
+        | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest
+        | undefined
+      ),
       {} | undefined,
     ]
   >;
-  deleteFlow(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IDeleteFlowRequest,
+  deleteConversation(
+    request: protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest,
     options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteFlowRequest
+      | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  deleteFlow(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IDeleteFlowRequest,
+  deleteConversation(
+    request: protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest,
     callback: Callback<
       protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteFlowRequest
+      | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  deleteFlow(
-    request?: protos.google.cloud.dialogflow.cx.v3beta1.IDeleteFlowRequest,
+  deleteConversation(
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteFlowRequest
+          | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteFlowRequest
+      | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest
       | null
       | undefined,
       {} | null | undefined
@@ -771,323 +655,8 @@ export class FlowsClient {
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
-      protos.google.cloud.dialogflow.cx.v3beta1.IDeleteFlowRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.deleteFlow(request, options, callback);
-  }
-  /**
-   * Retrieves the specified flow.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the flow to get.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>`.
-   * @param {string} request.languageCode
-   *   The language to retrieve the flow for. The following fields are language
-   *   dependent:
-   *
-   *   *  `Flow.event_handlers.trigger_fulfillment.messages`
-   *   *  `Flow.event_handlers.trigger_fulfillment.conditional_cases`
-   *   *  `Flow.transition_routes.trigger_fulfillment.messages`
-   *   *  `Flow.transition_routes.trigger_fulfillment.conditional_cases`
-   *
-   *   If not specified, the agent's default language is used.
-   *   [Many
-   *   languages](https://cloud.google.com/dialogflow/cx/docs/reference/language)
-   *   are supported.
-   *   Note: languages must be enabled in the agent before they can be used.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3beta1.Flow|Flow}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3beta1/flows.get_flow.js</caption>
-   * region_tag:dialogflow_v3beta1_generated_Flows_GetFlow_async
-   */
-  getFlow(
-    request?: protos.google.cloud.dialogflow.cx.v3beta1.IGetFlowRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.cx.v3beta1.IFlow,
-      protos.google.cloud.dialogflow.cx.v3beta1.IGetFlowRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  getFlow(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IGetFlowRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dialogflow.cx.v3beta1.IFlow,
-      | protos.google.cloud.dialogflow.cx.v3beta1.IGetFlowRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getFlow(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IGetFlowRequest,
-    callback: Callback<
-      protos.google.cloud.dialogflow.cx.v3beta1.IFlow,
-      | protos.google.cloud.dialogflow.cx.v3beta1.IGetFlowRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getFlow(
-    request?: protos.google.cloud.dialogflow.cx.v3beta1.IGetFlowRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.dialogflow.cx.v3beta1.IFlow,
-          | protos.google.cloud.dialogflow.cx.v3beta1.IGetFlowRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dialogflow.cx.v3beta1.IFlow,
-      | protos.google.cloud.dialogflow.cx.v3beta1.IGetFlowRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.cx.v3beta1.IFlow,
-      protos.google.cloud.dialogflow.cx.v3beta1.IGetFlowRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.getFlow(request, options, callback);
-  }
-  /**
-   * Updates the specified flow.
-   *
-   * Note: You should always train a flow prior to sending it queries. See the
-   * [training
-   * documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.dialogflow.cx.v3beta1.Flow} request.flow
-   *   Required. The flow to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The mask to control which fields get updated. If the mask is not present,
-   *   all fields will be updated.
-   * @param {string} request.languageCode
-   *   The language of the following fields in `flow`:
-   *
-   *   *  `Flow.event_handlers.trigger_fulfillment.messages`
-   *   *  `Flow.event_handlers.trigger_fulfillment.conditional_cases`
-   *   *  `Flow.transition_routes.trigger_fulfillment.messages`
-   *   *  `Flow.transition_routes.trigger_fulfillment.conditional_cases`
-   *
-   *   If not specified, the agent's default language is used.
-   *   [Many
-   *   languages](https://cloud.google.com/dialogflow/cx/docs/reference/language)
-   *   are supported.
-   *   Note: languages must be enabled in the agent before they can be used.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3beta1.Flow|Flow}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3beta1/flows.update_flow.js</caption>
-   * region_tag:dialogflow_v3beta1_generated_Flows_UpdateFlow_async
-   */
-  updateFlow(
-    request?: protos.google.cloud.dialogflow.cx.v3beta1.IUpdateFlowRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.cx.v3beta1.IFlow,
-      protos.google.cloud.dialogflow.cx.v3beta1.IUpdateFlowRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  updateFlow(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IUpdateFlowRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dialogflow.cx.v3beta1.IFlow,
-      | protos.google.cloud.dialogflow.cx.v3beta1.IUpdateFlowRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateFlow(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IUpdateFlowRequest,
-    callback: Callback<
-      protos.google.cloud.dialogflow.cx.v3beta1.IFlow,
-      | protos.google.cloud.dialogflow.cx.v3beta1.IUpdateFlowRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateFlow(
-    request?: protos.google.cloud.dialogflow.cx.v3beta1.IUpdateFlowRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.dialogflow.cx.v3beta1.IFlow,
-          | protos.google.cloud.dialogflow.cx.v3beta1.IUpdateFlowRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dialogflow.cx.v3beta1.IFlow,
-      | protos.google.cloud.dialogflow.cx.v3beta1.IUpdateFlowRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.cx.v3beta1.IFlow,
-      protos.google.cloud.dialogflow.cx.v3beta1.IUpdateFlowRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'flow.name': request.flow!.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.updateFlow(request, options, callback);
-  }
-  /**
-   * Validates the specified flow and creates or updates validation results.
-   * Please call this API after the training is completed to get the complete
-   * validation results.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The flow to validate.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>`.
-   * @param {string} request.languageCode
-   *   If not specified, the agent's default language is used.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3beta1.FlowValidationResult|FlowValidationResult}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3beta1/flows.validate_flow.js</caption>
-   * region_tag:dialogflow_v3beta1_generated_Flows_ValidateFlow_async
-   */
-  validateFlow(
-    request?: protos.google.cloud.dialogflow.cx.v3beta1.IValidateFlowRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.cx.v3beta1.IFlowValidationResult,
       (
-        | protos.google.cloud.dialogflow.cx.v3beta1.IValidateFlowRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
-  validateFlow(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IValidateFlowRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dialogflow.cx.v3beta1.IFlowValidationResult,
-      | protos.google.cloud.dialogflow.cx.v3beta1.IValidateFlowRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  validateFlow(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IValidateFlowRequest,
-    callback: Callback<
-      protos.google.cloud.dialogflow.cx.v3beta1.IFlowValidationResult,
-      | protos.google.cloud.dialogflow.cx.v3beta1.IValidateFlowRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  validateFlow(
-    request?: protos.google.cloud.dialogflow.cx.v3beta1.IValidateFlowRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.dialogflow.cx.v3beta1.IFlowValidationResult,
-          | protos.google.cloud.dialogflow.cx.v3beta1.IValidateFlowRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dialogflow.cx.v3beta1.IFlowValidationResult,
-      | protos.google.cloud.dialogflow.cx.v3beta1.IValidateFlowRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.cx.v3beta1.IFlowValidationResult,
-      (
-        | protos.google.cloud.dialogflow.cx.v3beta1.IValidateFlowRequest
+        | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest
         | undefined
       ),
       {} | undefined,
@@ -1109,686 +678,101 @@ export class FlowsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.validateFlow(request, options, callback);
-  }
-  /**
-   * Gets the latest flow validation result. Flow validation is performed
-   * when ValidateFlow is called.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The flow name.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>/validationResult`.
-   * @param {string} request.languageCode
-   *   If not specified, the agent's default language is used.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3beta1.FlowValidationResult|FlowValidationResult}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3beta1/flows.get_flow_validation_result.js</caption>
-   * region_tag:dialogflow_v3beta1_generated_Flows_GetFlowValidationResult_async
-   */
-  getFlowValidationResult(
-    request?: protos.google.cloud.dialogflow.cx.v3beta1.IGetFlowValidationResultRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.cx.v3beta1.IFlowValidationResult,
-      (
-        | protos.google.cloud.dialogflow.cx.v3beta1.IGetFlowValidationResultRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
-  getFlowValidationResult(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IGetFlowValidationResultRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dialogflow.cx.v3beta1.IFlowValidationResult,
-      | protos.google.cloud.dialogflow.cx.v3beta1.IGetFlowValidationResultRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getFlowValidationResult(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IGetFlowValidationResultRequest,
-    callback: Callback<
-      protos.google.cloud.dialogflow.cx.v3beta1.IFlowValidationResult,
-      | protos.google.cloud.dialogflow.cx.v3beta1.IGetFlowValidationResultRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getFlowValidationResult(
-    request?: protos.google.cloud.dialogflow.cx.v3beta1.IGetFlowValidationResultRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.dialogflow.cx.v3beta1.IFlowValidationResult,
-          | protos.google.cloud.dialogflow.cx.v3beta1.IGetFlowValidationResultRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dialogflow.cx.v3beta1.IFlowValidationResult,
-      | protos.google.cloud.dialogflow.cx.v3beta1.IGetFlowValidationResultRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.cx.v3beta1.IFlowValidationResult,
-      (
-        | protos.google.cloud.dialogflow.cx.v3beta1.IGetFlowValidationResultRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.getFlowValidationResult(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls.deleteConversation(request, options, callback);
   }
 
   /**
-   * Trains the specified flow. Note that only the flow in 'draft' environment
-   * is trained.
-   *
-   * This method is a [long-running
-   * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
-   * The returned `Operation` type has the following method-specific fields:
-   *
-   * - `metadata`: An empty [Struct
-   *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
-   * - `response`: An [Empty
-   *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
-   *
-   * Note: You should always train a flow prior to sending it queries. See the
-   * [training
-   * documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The flow to train.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3beta1/flows.train_flow.js</caption>
-   * region_tag:dialogflow_v3beta1_generated_Flows_TrainFlow_async
-   */
-  trainFlow(
-    request?: protos.google.cloud.dialogflow.cx.v3beta1.ITrainFlowRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.protobuf.IStruct
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
-  trainFlow(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.ITrainFlowRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.protobuf.IStruct
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  trainFlow(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.ITrainFlowRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.protobuf.IStruct
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  trainFlow(
-    request?: protos.google.cloud.dialogflow.cx.v3beta1.ITrainFlowRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.protobuf.IStruct
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.protobuf.IStruct
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.protobuf.IStruct
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.trainFlow(request, options, callback);
-  }
-  /**
-   * Check the status of the long running operation returned by `trainFlow()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3beta1/flows.train_flow.js</caption>
-   * region_tag:dialogflow_v3beta1_generated_Flows_TrainFlow_async
-   */
-  async checkTrainFlowProgress(
-    name: string
-  ): Promise<
-    LROperation<protos.google.protobuf.Empty, protos.google.protobuf.Struct>
-  > {
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.trainFlow,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.protobuf.Struct
-    >;
-  }
-  /**
-   * Imports the specified flow to the specified agent from a binary file.
-   *
-   * This method is a [long-running
-   * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
-   * The returned `Operation` type has the following method-specific fields:
-   *
-   * - `metadata`: An empty [Struct
-   *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
-   * - `response`:
-   * {@link protos.google.cloud.dialogflow.cx.v3beta1.ImportFlowResponse|ImportFlowResponse}
-   *
-   * Note: You should always train a flow prior to sending it queries. See the
-   * [training
-   * documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training).
+   * Returns the list of all conversations.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The agent to import the flow into.
+   *   Required. The agent to list all conversations for.
    *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
-   * @param {string} request.flowUri
-   *   The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI
-   *   to import flow from. The format of this URI must be
-   *   `gs://<bucket-name>/<object-name>`.
-   *
-   *   Dialogflow performs a read operation for the Cloud Storage object
-   *   on the caller's behalf, so your request authentication must
-   *   have read permissions for the object. For more information, see
-   *   [Dialogflow access
-   *   control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
-   * @param {Buffer} request.flowContent
-   *   Uncompressed raw byte content for flow.
-   * @param {google.cloud.dialogflow.cx.v3beta1.ImportFlowRequest.ImportOption} request.importOption
-   *   Flow import mode. If not specified, `KEEP` is assumed.
-   * @param {google.cloud.dialogflow.cx.v3beta1.FlowImportStrategy} [request.flowImportStrategy]
-   *   Optional. Specifies the import strategy used when resolving resource
-   *   conflicts.
+   * @param {string} [request.filter]
+   *   Optional. The filter string. Supports filter by create_time,
+   *   metrics.has_end_interaction, metrics.has_live_agent_handoff,
+   *   intents.display_name, pages.display_name and flows.display_name. Timestamps
+   *   expect an {@link protos.https://datatracker.ietf.org/doc/html/rfc3339|RFC-3339}
+   *   formatted string (e.g. 2012-04-21T11:30:00-04:00). UTC offsets are
+   *   supported. Some examples:
+   *     1. By create time:
+   *          create_time > "2022-04-21T11:30:00-04:00"
+   *     2. By intent display name:
+   *          intents.display_name : "billing"
+   *     3. By end interaction signal:
+   *          metrics.has_end_interaction = true
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return in a single page. By
+   *   default 100 and at most 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value returned from a previous list request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3beta1/flows.import_flow.js</caption>
-   * region_tag:dialogflow_v3beta1_generated_Flows_ImportFlow_async
-   */
-  importFlow(
-    request?: protos.google.cloud.dialogflow.cx.v3beta1.IImportFlowRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dialogflow.cx.v3beta1.IImportFlowResponse,
-        protos.google.protobuf.IStruct
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
-  importFlow(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IImportFlowRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dialogflow.cx.v3beta1.IImportFlowResponse,
-        protos.google.protobuf.IStruct
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  importFlow(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IImportFlowRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dialogflow.cx.v3beta1.IImportFlowResponse,
-        protos.google.protobuf.IStruct
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  importFlow(
-    request?: protos.google.cloud.dialogflow.cx.v3beta1.IImportFlowRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.dialogflow.cx.v3beta1.IImportFlowResponse,
-            protos.google.protobuf.IStruct
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.dialogflow.cx.v3beta1.IImportFlowResponse,
-        protos.google.protobuf.IStruct
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dialogflow.cx.v3beta1.IImportFlowResponse,
-        protos.google.protobuf.IStruct
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.importFlow(request, options, callback);
-  }
-  /**
-   * Check the status of the long running operation returned by `importFlow()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3beta1/flows.import_flow.js</caption>
-   * region_tag:dialogflow_v3beta1_generated_Flows_ImportFlow_async
-   */
-  async checkImportFlowProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.dialogflow.cx.v3beta1.ImportFlowResponse,
-      protos.google.protobuf.Struct
-    >
-  > {
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.importFlow,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.dialogflow.cx.v3beta1.ImportFlowResponse,
-      protos.google.protobuf.Struct
-    >;
-  }
-  /**
-   * Exports the specified flow to a binary file.
-   *
-   * This method is a [long-running
-   * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
-   * The returned `Operation` type has the following method-specific fields:
-   *
-   * - `metadata`: An empty [Struct
-   *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
-   * - `response`:
-   * {@link protos.google.cloud.dialogflow.cx.v3beta1.ExportFlowResponse|ExportFlowResponse}
-   *
-   * Note that resources (e.g. intents, entities, webhooks) that the flow
-   * references will also be exported.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the flow to export.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>`.
-   * @param {string} [request.flowUri]
-   *   Optional. The [Google Cloud
-   *   Storage](https://cloud.google.com/storage/docs/) URI to export the flow to.
-   *   The format of this URI must be `gs://<bucket-name>/<object-name>`. If left
-   *   unspecified, the serialized flow is returned inline.
-   *
-   *   Dialogflow performs a write operation for the Cloud Storage object
-   *   on the caller's behalf, so your request authentication must
-   *   have write permissions for the object. For more information, see
-   *   [Dialogflow access
-   *   control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
-   * @param {boolean} [request.includeReferencedFlows]
-   *   Optional. Whether to export flows referenced by the specified flow.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3beta1/flows.export_flow.js</caption>
-   * region_tag:dialogflow_v3beta1_generated_Flows_ExportFlow_async
-   */
-  exportFlow(
-    request?: protos.google.cloud.dialogflow.cx.v3beta1.IExportFlowRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dialogflow.cx.v3beta1.IExportFlowResponse,
-        protos.google.protobuf.IStruct
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
-  exportFlow(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IExportFlowRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dialogflow.cx.v3beta1.IExportFlowResponse,
-        protos.google.protobuf.IStruct
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  exportFlow(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IExportFlowRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dialogflow.cx.v3beta1.IExportFlowResponse,
-        protos.google.protobuf.IStruct
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  exportFlow(
-    request?: protos.google.cloud.dialogflow.cx.v3beta1.IExportFlowRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.dialogflow.cx.v3beta1.IExportFlowResponse,
-            protos.google.protobuf.IStruct
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.dialogflow.cx.v3beta1.IExportFlowResponse,
-        protos.google.protobuf.IStruct
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dialogflow.cx.v3beta1.IExportFlowResponse,
-        protos.google.protobuf.IStruct
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.exportFlow(request, options, callback);
-  }
-  /**
-   * Check the status of the long running operation returned by `exportFlow()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3beta1/flows.export_flow.js</caption>
-   * region_tag:dialogflow_v3beta1_generated_Flows_ExportFlow_async
-   */
-  async checkExportFlowProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.dialogflow.cx.v3beta1.ExportFlowResponse,
-      protos.google.protobuf.Struct
-    >
-  > {
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.exportFlow,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.dialogflow.cx.v3beta1.ExportFlowResponse,
-      protos.google.protobuf.Struct
-    >;
-  }
-  /**
-   * Returns the list of all flows in the specified agent.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The agent containing the flows.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
-   * @param {number} request.pageSize
-   *   The maximum number of items to return in a single page. By default 100 and
-   *   at most 1000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request.
-   * @param {string} request.languageCode
-   *   The language to list flows for. The following fields are language
-   *   dependent:
-   *
-   *   *  `Flow.event_handlers.trigger_fulfillment.messages`
-   *   *  `Flow.event_handlers.trigger_fulfillment.conditional_cases`
-   *   *  `Flow.transition_routes.trigger_fulfillment.messages`
-   *   *  `Flow.transition_routes.trigger_fulfillment.conditional_cases`
-   *
-   *   If not specified, the agent's default language is used.
-   *   [Many
-   *   languages](https://cloud.google.com/dialogflow/cx/docs/reference/language)
-   *   are supported.
-   *   Note: languages must be enabled in the agent before they can be used.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.cx.v3beta1.Flow|Flow}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.cx.v3beta1.Conversation|Conversation}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
-   *   We recommend using `listFlowsAsync()`
+   *   We recommend using `listConversationsAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
-  listFlows(
-    request?: protos.google.cloud.dialogflow.cx.v3beta1.IListFlowsRequest,
+  listConversations(
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.dialogflow.cx.v3beta1.IFlow[],
-      protos.google.cloud.dialogflow.cx.v3beta1.IListFlowsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3beta1.IListFlowsResponse,
+      protos.google.cloud.dialogflow.cx.v3beta1.IConversation[],
+      protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest | null,
+      protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsResponse,
     ]
   >;
-  listFlows(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IListFlowsRequest,
+  listConversations(
+    request: protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.cloud.dialogflow.cx.v3beta1.IListFlowsRequest,
-      | protos.google.cloud.dialogflow.cx.v3beta1.IListFlowsResponse
+      protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest,
+      | protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsResponse
       | null
       | undefined,
-      protos.google.cloud.dialogflow.cx.v3beta1.IFlow
+      protos.google.cloud.dialogflow.cx.v3beta1.IConversation
     >
   ): void;
-  listFlows(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IListFlowsRequest,
+  listConversations(
+    request: protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest,
     callback: PaginationCallback<
-      protos.google.cloud.dialogflow.cx.v3beta1.IListFlowsRequest,
-      | protos.google.cloud.dialogflow.cx.v3beta1.IListFlowsResponse
+      protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest,
+      | protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsResponse
       | null
       | undefined,
-      protos.google.cloud.dialogflow.cx.v3beta1.IFlow
+      protos.google.cloud.dialogflow.cx.v3beta1.IConversation
     >
   ): void;
-  listFlows(
-    request?: protos.google.cloud.dialogflow.cx.v3beta1.IListFlowsRequest,
+  listConversations(
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.cloud.dialogflow.cx.v3beta1.IListFlowsRequest,
-          | protos.google.cloud.dialogflow.cx.v3beta1.IListFlowsResponse
+          protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsResponse
           | null
           | undefined,
-          protos.google.cloud.dialogflow.cx.v3beta1.IFlow
+          protos.google.cloud.dialogflow.cx.v3beta1.IConversation
         >,
     callback?: PaginationCallback<
-      protos.google.cloud.dialogflow.cx.v3beta1.IListFlowsRequest,
-      | protos.google.cloud.dialogflow.cx.v3beta1.IListFlowsResponse
+      protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest,
+      | protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsResponse
       | null
       | undefined,
-      protos.google.cloud.dialogflow.cx.v3beta1.IFlow
+      protos.google.cloud.dialogflow.cx.v3beta1.IConversation
     >
   ): Promise<
     [
-      protos.google.cloud.dialogflow.cx.v3beta1.IFlow[],
-      protos.google.cloud.dialogflow.cx.v3beta1.IListFlowsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3beta1.IListFlowsResponse,
+      protos.google.cloud.dialogflow.cx.v3beta1.IConversation[],
+      protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest | null,
+      protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsResponse,
     ]
   > | void {
     request = request || {};
@@ -1807,7 +791,7 @@ export class FlowsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listFlows(request, options, callback);
+    return this.innerApiCalls.listConversations(request, options, callback);
   }
 
   /**
@@ -1815,40 +799,39 @@ export class FlowsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The agent containing the flows.
+   *   Required. The agent to list all conversations for.
    *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
-   * @param {number} request.pageSize
-   *   The maximum number of items to return in a single page. By default 100 and
-   *   at most 1000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request.
-   * @param {string} request.languageCode
-   *   The language to list flows for. The following fields are language
-   *   dependent:
-   *
-   *   *  `Flow.event_handlers.trigger_fulfillment.messages`
-   *   *  `Flow.event_handlers.trigger_fulfillment.conditional_cases`
-   *   *  `Flow.transition_routes.trigger_fulfillment.messages`
-   *   *  `Flow.transition_routes.trigger_fulfillment.conditional_cases`
-   *
-   *   If not specified, the agent's default language is used.
-   *   [Many
-   *   languages](https://cloud.google.com/dialogflow/cx/docs/reference/language)
-   *   are supported.
-   *   Note: languages must be enabled in the agent before they can be used.
+   * @param {string} [request.filter]
+   *   Optional. The filter string. Supports filter by create_time,
+   *   metrics.has_end_interaction, metrics.has_live_agent_handoff,
+   *   intents.display_name, pages.display_name and flows.display_name. Timestamps
+   *   expect an {@link protos.https://datatracker.ietf.org/doc/html/rfc3339|RFC-3339}
+   *   formatted string (e.g. 2012-04-21T11:30:00-04:00). UTC offsets are
+   *   supported. Some examples:
+   *     1. By create time:
+   *          create_time > "2022-04-21T11:30:00-04:00"
+   *     2. By intent display name:
+   *          intents.display_name : "billing"
+   *     3. By end interaction signal:
+   *          metrics.has_end_interaction = true
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return in a single page. By
+   *   default 100 and at most 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value returned from a previous list request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.cx.v3beta1.Flow|Flow} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.cx.v3beta1.Conversation|Conversation} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listFlowsAsync()`
+   *   We recommend using `listConversationsAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
-  listFlowsStream(
-    request?: protos.google.cloud.dialogflow.cx.v3beta1.IListFlowsRequest,
+  listConversationsStream(
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -1859,60 +842,59 @@ export class FlowsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listFlows'];
+    const defaultCallSettings = this._defaults['listConversations'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.listFlows.createStream(
-      this.innerApiCalls.listFlows as GaxCall,
+    return this.descriptors.page.listConversations.createStream(
+      this.innerApiCalls.listConversations as GaxCall,
       request,
       callSettings
     );
   }
 
   /**
-   * Equivalent to `listFlows`, but returns an iterable object.
+   * Equivalent to `listConversations`, but returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The agent containing the flows.
+   *   Required. The agent to list all conversations for.
    *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
-   * @param {number} request.pageSize
-   *   The maximum number of items to return in a single page. By default 100 and
-   *   at most 1000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request.
-   * @param {string} request.languageCode
-   *   The language to list flows for. The following fields are language
-   *   dependent:
-   *
-   *   *  `Flow.event_handlers.trigger_fulfillment.messages`
-   *   *  `Flow.event_handlers.trigger_fulfillment.conditional_cases`
-   *   *  `Flow.transition_routes.trigger_fulfillment.messages`
-   *   *  `Flow.transition_routes.trigger_fulfillment.conditional_cases`
-   *
-   *   If not specified, the agent's default language is used.
-   *   [Many
-   *   languages](https://cloud.google.com/dialogflow/cx/docs/reference/language)
-   *   are supported.
-   *   Note: languages must be enabled in the agent before they can be used.
+   * @param {string} [request.filter]
+   *   Optional. The filter string. Supports filter by create_time,
+   *   metrics.has_end_interaction, metrics.has_live_agent_handoff,
+   *   intents.display_name, pages.display_name and flows.display_name. Timestamps
+   *   expect an {@link protos.https://datatracker.ietf.org/doc/html/rfc3339|RFC-3339}
+   *   formatted string (e.g. 2012-04-21T11:30:00-04:00). UTC offsets are
+   *   supported. Some examples:
+   *     1. By create time:
+   *          create_time > "2022-04-21T11:30:00-04:00"
+   *     2. By intent display name:
+   *          intents.display_name : "billing"
+   *     3. By end interaction signal:
+   *          metrics.has_end_interaction = true
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return in a single page. By
+   *   default 100 and at most 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value returned from a previous list request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
    *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.dialogflow.cx.v3beta1.Flow|Flow}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dialogflow.cx.v3beta1.Conversation|Conversation}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v3beta1/flows.list_flows.js</caption>
-   * region_tag:dialogflow_v3beta1_generated_Flows_ListFlows_async
+   * @example <caption>include:samples/generated/v3beta1/conversation_history.list_conversations.js</caption>
+   * region_tag:dialogflow_v3beta1_generated_ConversationHistory_ListConversations_async
    */
-  listFlowsAsync(
-    request?: protos.google.cloud.dialogflow.cx.v3beta1.IListFlowsRequest,
+  listConversationsAsync(
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.dialogflow.cx.v3beta1.IFlow> {
+  ): AsyncIterable<protos.google.cloud.dialogflow.cx.v3beta1.IConversation> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1921,14 +903,14 @@ export class FlowsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listFlows'];
+    const defaultCallSettings = this._defaults['listConversations'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.listFlows.asyncIterate(
-      this.innerApiCalls['listFlows'] as GaxCall,
+    return this.descriptors.page.listConversations.asyncIterate(
+      this.innerApiCalls['listConversations'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.cloud.dialogflow.cx.v3beta1.IFlow>;
+    ) as AsyncIterable<protos.google.cloud.dialogflow.cx.v3beta1.IConversation>;
   }
   /**
    * Gets information about a location.
@@ -2006,181 +988,6 @@ export class FlowsClient {
     options?: CallOptions
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
-  }
-
-  /**
-   * Gets the latest state of a long-running operation.  Clients can use this
-   * method to poll the operation result at intervals as recommended by the API
-   * service.
-   *
-   * @param {Object} request - The request object that will be sent.
-   * @param {string} request.name - The name of the operation resource.
-   * @param {Object=} options
-   *   Optional parameters. You can override the default settings for this call,
-   *   e.g, timeout, retries, paginations, etc. See {@link
-   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
-   *   for the details.
-   * @param {function(?Error, ?Object)=} callback
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing
-   *   {@link google.longrunning.Operation | google.longrunning.Operation}.
-   * @return {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   * {@link google.longrunning.Operation | google.longrunning.Operation}.
-   * The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   * @example
-   * ```
-   * const client = longrunning.operationsClient();
-   * const name = '';
-   * const [response] = await client.getOperation({name});
-   * // doThingsWith(response)
-   * ```
-   */
-  getOperation(
-    request: protos.google.longrunning.GetOperationRequest,
-    options?:
-      | gax.CallOptions
-      | Callback<
-          protos.google.longrunning.Operation,
-          protos.google.longrunning.GetOperationRequest,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.longrunning.Operation,
-      protos.google.longrunning.GetOperationRequest,
-      {} | null | undefined
-    >
-  ): Promise<[protos.google.longrunning.Operation]> {
-    return this.operationsClient.getOperation(request, options, callback);
-  }
-  /**
-   * Lists operations that match the specified filter in the request. If the
-   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
-   *
-   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
-   *
-   * @param {Object} request - The request object that will be sent.
-   * @param {string} request.name - The name of the operation collection.
-   * @param {string} request.filter - The standard list filter.
-   * @param {number=} request.pageSize -
-   *   The maximum number of resources contained in the underlying API
-   *   response. If page streaming is performed per-resource, this
-   *   parameter does not affect the return value. If page streaming is
-   *   performed per-page, this determines the maximum number of
-   *   resources in a page.
-   * @param {Object=} options
-   *   Optional parameters. You can override the default settings for this call,
-   *   e.g, timeout, retries, paginations, etc. See {@link
-   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
-   *   details.
-   * @returns {Object}
-   *   An iterable Object that conforms to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | iteration protocols}.
-   *
-   * @example
-   * ```
-   * const client = longrunning.operationsClient();
-   * for await (const response of client.listOperationsAsync(request));
-   * // doThingsWith(response)
-   * ```
-   */
-  listOperationsAsync(
-    request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
-    return this.operationsClient.listOperationsAsync(request, options);
-  }
-  /**
-   * Starts asynchronous cancellation on a long-running operation.  The server
-   * makes a best effort to cancel the operation, but success is not
-   * guaranteed.  If the server doesn't support this method, it returns
-   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
-   * {@link Operations.GetOperation} or
-   * other methods to check whether the cancellation succeeded or whether the
-   * operation completed despite cancellation. On successful cancellation,
-   * the operation is not deleted; instead, it becomes an operation with
-   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
-   * 1, corresponding to `Code.CANCELLED`.
-   *
-   * @param {Object} request - The request object that will be sent.
-   * @param {string} request.name - The name of the operation resource to be cancelled.
-   * @param {Object=} options
-   *   Optional parameters. You can override the default settings for this call,
-   * e.g, timeout, retries, paginations, etc. See {@link
-   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
-   * details.
-   * @param {function(?Error)=} callback
-   *   The function which will be called with the result of the API call.
-   * @return {Promise} - The promise which resolves when API call finishes.
-   *   The promise has a method named "cancel" which cancels the ongoing API
-   * call.
-   *
-   * @example
-   * ```
-   * const client = longrunning.operationsClient();
-   * await client.cancelOperation({name: ''});
-   * ```
-   */
-  cancelOperation(
-    request: protos.google.longrunning.CancelOperationRequest,
-    options?:
-      | gax.CallOptions
-      | Callback<
-          protos.google.protobuf.Empty,
-          protos.google.longrunning.CancelOperationRequest,
-          {} | undefined | null
-        >,
-    callback?: Callback<
-      protos.google.longrunning.CancelOperationRequest,
-      protos.google.protobuf.Empty,
-      {} | undefined | null
-    >
-  ): Promise<protos.google.protobuf.Empty> {
-    return this.operationsClient.cancelOperation(request, options, callback);
-  }
-
-  /**
-   * Deletes a long-running operation. This method indicates that the client is
-   * no longer interested in the operation result. It does not cancel the
-   * operation. If the server doesn't support this method, it returns
-   * `google.rpc.Code.UNIMPLEMENTED`.
-   *
-   * @param {Object} request - The request object that will be sent.
-   * @param {string} request.name - The name of the operation resource to be deleted.
-   * @param {Object=} options
-   *   Optional parameters. You can override the default settings for this call,
-   * e.g, timeout, retries, paginations, etc. See {@link
-   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
-   * for the details.
-   * @param {function(?Error)=} callback
-   *   The function which will be called with the result of the API call.
-   * @return {Promise} - The promise which resolves when API call finishes.
-   *   The promise has a method named "cancel" which cancels the ongoing API
-   * call.
-   *
-   * @example
-   * ```
-   * const client = longrunning.operationsClient();
-   * await client.deleteOperation({name: ''});
-   * ```
-   */
-  deleteOperation(
-    request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
-      | gax.CallOptions
-      | Callback<
-          protos.google.protobuf.Empty,
-          protos.google.longrunning.DeleteOperationRequest,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.Empty,
-      protos.google.longrunning.DeleteOperationRequest,
-      {} | null | undefined
-    >
-  ): Promise<protos.google.protobuf.Empty> {
-    return this.operationsClient.deleteOperation(request, options, callback);
   }
 
   // --------------------
@@ -4403,12 +3210,11 @@ export class FlowsClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.flowsStub && !this._terminated) {
-      return this.flowsStub.then(stub => {
+    if (this.conversationHistoryStub && !this._terminated) {
+      return this.conversationHistoryStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.locationsClient.close();
-        this.operationsClient.close();
       });
     }
     return Promise.resolve();
