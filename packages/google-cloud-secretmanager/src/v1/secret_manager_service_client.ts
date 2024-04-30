@@ -2242,9 +2242,10 @@ export class SecretManagerServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-// --------------------
+  // --------------------
   // -- Path templates --
   // --------------------
+  /**
    * Return a fully-qualified secret resource name string.
    *
    * @param {string} project
