@@ -24,7 +24,7 @@ node.owlbot_main(relative_dir="packages/google-cloud-secretmanager",
 )
 
 s.replace('packages/google-cloud-secretmanager/src/v1/secret_manager_service_client.ts',
-  r"""  // --------------------
+  r"""// --------------------
   // -- Path templates --
   // --------------------
 
