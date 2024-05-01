@@ -33,7 +33,8 @@
                         "NVIDIA_H100_80GB": 13,
                         "TPU_V2": 6,
                         "TPU_V3": 7,
-                        "TPU_V4_POD": 10
+                        "TPU_V4_POD": 10,
+                        "TPU_V5_LITEPOD": 12
                       }
                     },
                     "Annotation": {
@@ -2697,6 +2698,13 @@
                       }
                     },
                     "GroundingMetadata": {
+                      "oneofs": {
+                        "_searchEntryPoint": {
+                          "oneof": [
+                            "searchEntryPoint"
+                          ]
+                        }
+                      },
                       "fields": {
                         "webSearchQueries": {
                           "rule": "repeated",
@@ -2709,6 +2717,32 @@
                         "groundingAttributions": {
                           "rule": "repeated",
                           "type": "GroundingAttribution",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "searchEntryPoint": {
+                          "type": "SearchEntryPoint",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "SearchEntryPoint": {
+                      "fields": {
+                        "renderedContent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "sdkBlob": {
+                          "type": "bytes",
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
@@ -5418,6 +5452,13 @@
                             "deprecated": true
                           }
                         },
+                        "privateServiceConnectConfig": {
+                          "type": "PrivateServiceConnectConfig",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "modelDeploymentMonitoringJob": {
                           "type": "string",
                           "id": 14,
@@ -5564,6 +5605,38 @@
                         },
                         "bigqueryDestination": {
                           "type": "BigQueryDestination",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "PrivateServiceConnectConfig": {
+                      "fields": {
+                        "enablePrivateServiceConnect": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "projectAllowlist": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "PscAutomatedEndpoints": {
+                      "fields": {
+                        "projectId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "network": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "matchAddress": {
+                          "type": "string",
                           "id": 3
                         }
                       }
@@ -12376,38 +12449,6 @@
                         }
                       }
                     },
-                    "PrivateServiceConnectConfig": {
-                      "fields": {
-                        "enablePrivateServiceConnect": {
-                          "type": "bool",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "projectAllowlist": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "PscAutomatedEndpoints": {
-                      "fields": {
-                        "projectId": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "network": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "matchAddress": {
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
                     "IndexEndpointService": {
                       "options": {
                         "(google.api.default_host)": "aiplatform.googleapis.com",
@@ -13220,7 +13261,8 @@
                                 "OP_IN_DATAPOINT": 10,
                                 "MULTIPLE_VALUES": 11,
                                 "INVALID_NUMERIC_VALUE": 12,
-                                "INVALID_ENCODING": 13
+                                "INVALID_ENCODING": 13,
+                                "INVALID_TOKEN_VALUE": 15
                               }
                             }
                           }
@@ -19322,6 +19364,11 @@
                                     "automaticResources",
                                     "sharedResources"
                                   ]
+                                },
+                                "_deployTaskName": {
+                                  "oneof": [
+                                    "deployTaskName"
+                                  ]
                                 }
                               },
                               "fields": {
@@ -19363,6 +19410,14 @@
                                   "id": 4,
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "deployTaskName": {
+                                  "type": "string",
+                                  "id": 10,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
                                   }
                                 },
                                 "title": {
@@ -20484,10 +20539,7 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
+                          "id": 1
                         },
                         "displayName": {
                           "type": "string",
@@ -51772,6 +51824,144 @@
                         }
                       }
                     },
+                    "NotebookExecutionJob": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/NotebookExecutionJob",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/notebookExecutionJobs/{notebook_execution_job}",
+                        "(google.api.resource).plural": "notebookExecutionJobs",
+                        "(google.api.resource).singular": "notebookExecutionJob"
+                      },
+                      "oneofs": {
+                        "notebookSource": {
+                          "oneof": [
+                            "dataformRepositorySource",
+                            "gcsNotebookSource"
+                          ]
+                        },
+                        "environmentSpec": {
+                          "oneof": [
+                            "notebookRuntimeTemplateResourceName"
+                          ]
+                        },
+                        "executionSink": {
+                          "oneof": [
+                            "gcsOutputUri"
+                          ]
+                        },
+                        "executionIdentity": {
+                          "oneof": [
+                            "executionUser",
+                            "serviceAccount"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "dataformRepositorySource": {
+                          "type": "DataformRepositorySource",
+                          "id": 3
+                        },
+                        "gcsNotebookSource": {
+                          "type": "GcsNotebookSource",
+                          "id": 4
+                        },
+                        "notebookRuntimeTemplateResourceName": {
+                          "type": "string",
+                          "id": 14,
+                          "options": {
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/NotebookRuntimeTemplate"
+                          }
+                        },
+                        "gcsOutputUri": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "executionUser": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "serviceAccount": {
+                          "type": "string",
+                          "id": 18
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "executionTimeout": {
+                          "type": "google.protobuf.Duration",
+                          "id": 5
+                        },
+                        "scheduleResourceName": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Schedule"
+                          }
+                        },
+                        "jobState": {
+                          "type": "JobState",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "status": {
+                          "type": "google.rpc.Status",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "DataformRepositorySource": {
+                          "fields": {
+                            "dataformRepositoryResourceName": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "commitSha": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "GcsNotebookSource": {
+                          "fields": {
+                            "uri": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "generation": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
                     "NotebookIdleShutdownConfig": {
                       "fields": {
                         "idleTimeout": {
@@ -52302,7 +52492,76 @@
                               }
                             }
                           ]
+                        },
+                        "GetNotebookExecutionJob": {
+                          "requestType": "GetNotebookExecutionJobRequest",
+                          "responseType": "NotebookExecutionJob",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListNotebookExecutionJobs": {
+                          "requestType": "ListNotebookExecutionJobsRequest",
+                          "responseType": "ListNotebookExecutionJobsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*}/notebookExecutionJobs",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/*}/notebookExecutionJobs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "DeleteNotebookExecutionJob": {
+                          "requestType": "DeleteNotebookExecutionJobRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "DeleteOperationMetadata"
+                              }
+                            }
+                          ]
                         }
+                      }
+                    },
+                    "NotebookExecutionJobView": {
+                      "values": {
+                        "NOTEBOOK_EXECUTION_JOB_VIEW_UNSPECIFIED": 0,
+                        "NOTEBOOK_EXECUTION_JOB_VIEW_BASIC": 1,
+                        "NOTEBOOK_EXECUTION_JOB_VIEW_FULL": 2
                       }
                     },
                     "CreateNotebookRuntimeTemplateRequest": {
@@ -52606,6 +52865,97 @@
                     },
                     "StartNotebookRuntimeResponse": {
                       "fields": {}
+                    },
+                    "GetNotebookExecutionJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/NotebookExecutionJob"
+                          }
+                        },
+                        "view": {
+                          "type": "NotebookExecutionJobView",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListNotebookExecutionJobsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "view": {
+                          "type": "NotebookExecutionJobView",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListNotebookExecutionJobsResponse": {
+                      "fields": {
+                        "notebookExecutionJobs": {
+                          "rule": "repeated",
+                          "type": "NotebookExecutionJob",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteNotebookExecutionJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/NotebookExecutionJob"
+                          }
+                        }
+                      }
                     },
                     "PersistentResource": {
                       "options": {

@@ -511,10 +511,13 @@
   * [Model_service.upload_model](#model_service.upload_model)
   * [Notebook_service.assign_notebook_runtime](#notebook_service.assign_notebook_runtime)
   * [Notebook_service.create_notebook_runtime_template](#notebook_service.create_notebook_runtime_template)
+  * [Notebook_service.delete_notebook_execution_job](#notebook_service.delete_notebook_execution_job)
   * [Notebook_service.delete_notebook_runtime](#notebook_service.delete_notebook_runtime)
   * [Notebook_service.delete_notebook_runtime_template](#notebook_service.delete_notebook_runtime_template)
+  * [Notebook_service.get_notebook_execution_job](#notebook_service.get_notebook_execution_job)
   * [Notebook_service.get_notebook_runtime](#notebook_service.get_notebook_runtime)
   * [Notebook_service.get_notebook_runtime_template](#notebook_service.get_notebook_runtime_template)
+  * [Notebook_service.list_notebook_execution_jobs](#notebook_service.list_notebook_execution_jobs)
   * [Notebook_service.list_notebook_runtime_templates](#notebook_service.list_notebook_runtime_templates)
   * [Notebook_service.list_notebook_runtimes](#notebook_service.list_notebook_runtimes)
   * [Notebook_service.start_notebook_runtime](#notebook_service.start_notebook_runtime)
@@ -9123,6 +9126,23 @@ __Usage:__
 
 
 
+### Notebook_service.delete_notebook_execution_job
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.delete_notebook_execution_job.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.delete_notebook_execution_job.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.delete_notebook_execution_job.js`
+
+
+-----
+
+
+
+
 ### Notebook_service.delete_notebook_runtime
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.delete_notebook_runtime.js).
@@ -9157,6 +9177,23 @@ __Usage:__
 
 
 
+### Notebook_service.get_notebook_execution_job
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.get_notebook_execution_job.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.get_notebook_execution_job.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.get_notebook_execution_job.js`
+
+
+-----
+
+
+
+
 ### Notebook_service.get_notebook_runtime
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.get_notebook_runtime.js).
@@ -9184,6 +9221,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.get_notebook_runtime_template.js`
+
+
+-----
+
+
+
+
+### Notebook_service.list_notebook_execution_jobs
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.list_notebook_execution_jobs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.list_notebook_execution_jobs.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.list_notebook_execution_jobs.js`
 
 
 -----
