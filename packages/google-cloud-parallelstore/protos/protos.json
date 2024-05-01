@@ -142,7 +142,62 @@
                               }
                             }
                           ]
+                        },
+                        "ImportData": {
+                          "requestType": "ImportDataRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{name=projects/*/locations/*/instances/*}:importData",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "ImportDataResponse",
+                            "(google.longrunning.operation_info).metadata_type": "ImportDataMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{name=projects/*/locations/*/instances/*}:importData",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ImportDataResponse",
+                                "metadata_type": "ImportDataMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ExportData": {
+                          "requestType": "ExportDataRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{name=projects/*/locations/*/instances/*}:exportData",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "ExportDataResponse",
+                            "(google.longrunning.operation_info).metadata_type": "ExportDataMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{name=projects/*/locations/*/instances/*}:exportData",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ExportDataResponse",
+                                "metadata_type": "ExportDataMetadata"
+                              }
+                            }
+                          ]
                         }
+                      }
+                    },
+                    "TransferType": {
+                      "values": {
+                        "TRANSFER_TYPE_UNSPECIFIED": 0,
+                        "IMPORT": 1,
+                        "EXPORT": 2
                       }
                     },
                     "Instance": {
@@ -231,6 +286,14 @@
                           "id": 12,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/Address"
+                          }
+                        },
+                        "effectiveReservedIpRange": {
+                          "type": "string",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "(google.api.resource_reference).type": "compute.googleapis.com/Address"
                           }
                         }
@@ -444,6 +507,182 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        }
+                      }
+                    },
+                    "ImportDataRequest": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "sourceGcsUri"
+                          ]
+                        },
+                        "destination": {
+                          "oneof": [
+                            "destinationPath"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "sourceGcsUri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "destinationPath": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "parallelstore.googleapis.com/Instance"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ExportDataRequest": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "sourcePath"
+                          ]
+                        },
+                        "destination": {
+                          "oneof": [
+                            "destinationGcsUri"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "sourcePath": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "destinationGcsUri": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "parallelstore.googleapis.com/Instance"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ImportDataResponse": {
+                      "fields": {}
+                    },
+                    "ImportDataMetadata": {
+                      "fields": {
+                        "operationMetadata": {
+                          "type": "TransferOperationMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ExportDataResponse": {
+                      "fields": {}
+                    },
+                    "ExportDataMetadata": {
+                      "fields": {
+                        "operationMetadata": {
+                          "type": "TransferOperationMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "TransferOperationMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "counters": {
+                          "type": "TransferCounters",
+                          "id": 3
+                        },
+                        "source": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "destination": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "transferType": {
+                          "type": "TransferType",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "TransferCounters": {
+                      "fields": {
+                        "objectsFound": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "bytesFound": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "objectsSkipped": {
+                          "type": "int64",
+                          "id": 3
+                        },
+                        "bytesSkipped": {
+                          "type": "int64",
+                          "id": 4
+                        },
+                        "objectsCopied": {
+                          "type": "int64",
+                          "id": 5
+                        },
+                        "bytesCopied": {
+                          "type": "int64",
+                          "id": 6
                         }
                       }
                     }
