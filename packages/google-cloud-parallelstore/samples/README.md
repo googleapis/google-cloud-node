@@ -14,7 +14,9 @@
 * [Samples](#samples)
   * [Parallelstore.create_instance](#parallelstore.create_instance)
   * [Parallelstore.delete_instance](#parallelstore.delete_instance)
+  * [Parallelstore.export_data](#parallelstore.export_data)
   * [Parallelstore.get_instance](#parallelstore.get_instance)
+  * [Parallelstore.import_data](#parallelstore.import_data)
   * [Parallelstore.list_instances](#parallelstore.list_instances)
   * [Parallelstore.update_instance](#parallelstore.update_instance)
   * [Quickstart](#quickstart)
@@ -68,6 +70,23 @@ __Usage:__
 
 
 
+### Parallelstore.export_data
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.export_data.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.export_data.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.export_data.js`
+
+
+-----
+
+
+
+
 ### Parallelstore.get_instance
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.get_instance.js).
@@ -78,6 +97,23 @@ __Usage:__
 
 
 `node packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.get_instance.js`
+
+
+-----
+
+
+
+
+### Parallelstore.import_data
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.import_data.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.import_data.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-parallelstore/samples/generated/v1beta/parallelstore.import_data.js`
 
 
 -----
