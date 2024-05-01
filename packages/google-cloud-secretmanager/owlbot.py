@@ -24,17 +24,14 @@ node.owlbot_main(relative_dir="packages/google-cloud-secretmanager",
 )
 
 s.replace('packages/google-cloud-secretmanager/src/v1/secret_manager_service_client.ts',
-  r"""// --------------------
-  // -- Path templates --
-  // --------------------""",
-  r"""// --------------------
-  // -- Path templates --
-  // --------------------
+  r"return\sPromise\.resolve\(\);\s+}\s+}",
+  r"""return Promise.resolve();
+  }
+
   /**
-   * Return a fully-qualified secret resource name string.
+   * Return a fully-qualified project resource name string.
    *
    * @param {string} project
-   * @param {string} secret
    * @returns {string} Resource name string.
    */
   secretPath(project: string, secret: string) {
@@ -93,4 +90,6 @@ s.replace('packages/google-cloud-secretmanager/src/v1/secret_manager_service_cli
     return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
       .project;
   }
+  
+}
 """)
