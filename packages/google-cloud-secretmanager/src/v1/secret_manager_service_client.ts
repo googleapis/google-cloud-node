@@ -2629,6 +2629,4 @@ export class SecretManagerServiceClient {
     return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
       .project;
   }
-  
 }
-
