@@ -37,9 +37,11 @@ import {
   HealthChecksClient,
   ImageFamilyViewsClient,
   ImagesClient,
+  InstanceGroupManagerResizeRequestsClient,
   InstanceGroupManagersClient,
   InstanceGroupsClient,
   InstancesClient,
+  InstanceSettingsServiceClient,
   InstanceTemplatesClient,
   InstantSnapshotsClient,
   InterconnectAttachmentsClient,
@@ -97,6 +99,8 @@ import {
   SnapshotSettingsServiceClient,
   SslCertificatesClient,
   SslPoliciesClient,
+  StoragePoolsClient,
+  StoragePoolTypesClient,
   SubnetworksClient,
   TargetGrpcProxiesClient,
   TargetHttpProxiesClient,
@@ -184,6 +188,11 @@ function doStuffWithImageFamilyViewsClient(client: ImageFamilyViewsClient) {
 function doStuffWithImagesClient(client: ImagesClient) {
   client.close();
 }
+function doStuffWithInstanceGroupManagerResizeRequestsClient(
+  client: InstanceGroupManagerResizeRequestsClient
+) {
+  client.close();
+}
 function doStuffWithInstanceGroupManagersClient(
   client: InstanceGroupManagersClient
 ) {
@@ -193,6 +202,11 @@ function doStuffWithInstanceGroupsClient(client: InstanceGroupsClient) {
   client.close();
 }
 function doStuffWithInstancesClient(client: InstancesClient) {
+  client.close();
+}
+function doStuffWithInstanceSettingsServiceClient(
+  client: InstanceSettingsServiceClient
+) {
   client.close();
 }
 function doStuffWithInstanceTemplatesClient(client: InstanceTemplatesClient) {
@@ -412,6 +426,12 @@ function doStuffWithSslCertificatesClient(client: SslCertificatesClient) {
 function doStuffWithSslPoliciesClient(client: SslPoliciesClient) {
   client.close();
 }
+function doStuffWithStoragePoolsClient(client: StoragePoolsClient) {
+  client.close();
+}
+function doStuffWithStoragePoolTypesClient(client: StoragePoolTypesClient) {
+  client.close();
+}
 function doStuffWithSubnetworksClient(client: SubnetworksClient) {
   client.close();
 }
@@ -526,6 +546,12 @@ function main() {
   const imagesClient = new ImagesClient();
   doStuffWithImagesClient(imagesClient);
   // check that the client instance can be created
+  const instanceGroupManagerResizeRequestsClient =
+    new InstanceGroupManagerResizeRequestsClient();
+  doStuffWithInstanceGroupManagerResizeRequestsClient(
+    instanceGroupManagerResizeRequestsClient
+  );
+  // check that the client instance can be created
   const instanceGroupManagersClient = new InstanceGroupManagersClient();
   doStuffWithInstanceGroupManagersClient(instanceGroupManagersClient);
   // check that the client instance can be created
@@ -534,6 +560,9 @@ function main() {
   // check that the client instance can be created
   const instancesClient = new InstancesClient();
   doStuffWithInstancesClient(instancesClient);
+  // check that the client instance can be created
+  const instanceSettingsServiceClient = new InstanceSettingsServiceClient();
+  doStuffWithInstanceSettingsServiceClient(instanceSettingsServiceClient);
   // check that the client instance can be created
   const instanceTemplatesClient = new InstanceTemplatesClient();
   doStuffWithInstanceTemplatesClient(instanceTemplatesClient);
@@ -723,6 +752,12 @@ function main() {
   // check that the client instance can be created
   const sslPoliciesClient = new SslPoliciesClient();
   doStuffWithSslPoliciesClient(sslPoliciesClient);
+  // check that the client instance can be created
+  const storagePoolsClient = new StoragePoolsClient();
+  doStuffWithStoragePoolsClient(storagePoolsClient);
+  // check that the client instance can be created
+  const storagePoolTypesClient = new StoragePoolTypesClient();
+  doStuffWithStoragePoolTypesClient(storagePoolTypesClient);
   // check that the client instance can be created
   const subnetworksClient = new SubnetworksClient();
   doStuffWithSubnetworksClient(subnetworksClient);
