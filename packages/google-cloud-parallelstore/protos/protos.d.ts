@@ -115,6 +115,34 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteInstance(request: google.cloud.parallelstore.v1beta.IDeleteInstanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ImportData.
+                     * @param request ImportDataRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public importData(request: google.cloud.parallelstore.v1beta.IImportDataRequest, callback: google.cloud.parallelstore.v1beta.Parallelstore.ImportDataCallback): void;
+
+                    /**
+                     * Calls ImportData.
+                     * @param request ImportDataRequest message or plain object
+                     * @returns Promise
+                     */
+                    public importData(request: google.cloud.parallelstore.v1beta.IImportDataRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ExportData.
+                     * @param request ExportDataRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public exportData(request: google.cloud.parallelstore.v1beta.IExportDataRequest, callback: google.cloud.parallelstore.v1beta.Parallelstore.ExportDataCallback): void;
+
+                    /**
+                     * Calls ExportData.
+                     * @param request ExportDataRequest message or plain object
+                     * @returns Promise
+                     */
+                    public exportData(request: google.cloud.parallelstore.v1beta.IExportDataRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace Parallelstore {
@@ -153,6 +181,27 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DeleteInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.parallelstore.v1beta.Parallelstore|importData}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ImportDataCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.parallelstore.v1beta.Parallelstore|exportData}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ExportDataCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                }
+
+                /** TransferType enum. */
+                enum TransferType {
+                    TRANSFER_TYPE_UNSPECIFIED = 0,
+                    IMPORT = 1,
+                    EXPORT = 2
                 }
 
                 /** Properties of an Instance. */
@@ -190,6 +239,9 @@ export namespace google {
 
                     /** Instance reservedIpRange */
                     reservedIpRange?: (string|null);
+
+                    /** Instance effectiveReservedIpRange */
+                    effectiveReservedIpRange?: (string|null);
                 }
 
                 /** Represents an Instance. */
@@ -233,6 +285,9 @@ export namespace google {
 
                     /** Instance reservedIpRange. */
                     public reservedIpRange: string;
+
+                    /** Instance effectiveReservedIpRange. */
+                    public effectiveReservedIpRange: string;
 
                     /**
                      * Creates a new Instance instance using the specified properties.
@@ -1105,6 +1160,878 @@ export namespace google {
 
                     /**
                      * Gets the default type url for OperationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ImportDataRequest. */
+                interface IImportDataRequest {
+
+                    /** ImportDataRequest sourceGcsUri */
+                    sourceGcsUri?: (string|null);
+
+                    /** ImportDataRequest destinationPath */
+                    destinationPath?: (string|null);
+
+                    /** ImportDataRequest name */
+                    name?: (string|null);
+
+                    /** ImportDataRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an ImportDataRequest. */
+                class ImportDataRequest implements IImportDataRequest {
+
+                    /**
+                     * Constructs a new ImportDataRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parallelstore.v1beta.IImportDataRequest);
+
+                    /** ImportDataRequest sourceGcsUri. */
+                    public sourceGcsUri?: (string|null);
+
+                    /** ImportDataRequest destinationPath. */
+                    public destinationPath?: (string|null);
+
+                    /** ImportDataRequest name. */
+                    public name: string;
+
+                    /** ImportDataRequest requestId. */
+                    public requestId: string;
+
+                    /** ImportDataRequest source. */
+                    public source?: "sourceGcsUri";
+
+                    /** ImportDataRequest destination. */
+                    public destination?: "destinationPath";
+
+                    /**
+                     * Creates a new ImportDataRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportDataRequest instance
+                     */
+                    public static create(properties?: google.cloud.parallelstore.v1beta.IImportDataRequest): google.cloud.parallelstore.v1beta.ImportDataRequest;
+
+                    /**
+                     * Encodes the specified ImportDataRequest message. Does not implicitly {@link google.cloud.parallelstore.v1beta.ImportDataRequest.verify|verify} messages.
+                     * @param message ImportDataRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parallelstore.v1beta.IImportDataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportDataRequest message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1beta.ImportDataRequest.verify|verify} messages.
+                     * @param message ImportDataRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parallelstore.v1beta.IImportDataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportDataRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportDataRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parallelstore.v1beta.ImportDataRequest;
+
+                    /**
+                     * Decodes an ImportDataRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportDataRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parallelstore.v1beta.ImportDataRequest;
+
+                    /**
+                     * Verifies an ImportDataRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportDataRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportDataRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parallelstore.v1beta.ImportDataRequest;
+
+                    /**
+                     * Creates a plain object from an ImportDataRequest message. Also converts values to other types if specified.
+                     * @param message ImportDataRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parallelstore.v1beta.ImportDataRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportDataRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportDataRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExportDataRequest. */
+                interface IExportDataRequest {
+
+                    /** ExportDataRequest sourcePath */
+                    sourcePath?: (string|null);
+
+                    /** ExportDataRequest destinationGcsUri */
+                    destinationGcsUri?: (string|null);
+
+                    /** ExportDataRequest name */
+                    name?: (string|null);
+
+                    /** ExportDataRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an ExportDataRequest. */
+                class ExportDataRequest implements IExportDataRequest {
+
+                    /**
+                     * Constructs a new ExportDataRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parallelstore.v1beta.IExportDataRequest);
+
+                    /** ExportDataRequest sourcePath. */
+                    public sourcePath?: (string|null);
+
+                    /** ExportDataRequest destinationGcsUri. */
+                    public destinationGcsUri?: (string|null);
+
+                    /** ExportDataRequest name. */
+                    public name: string;
+
+                    /** ExportDataRequest requestId. */
+                    public requestId: string;
+
+                    /** ExportDataRequest source. */
+                    public source?: "sourcePath";
+
+                    /** ExportDataRequest destination. */
+                    public destination?: "destinationGcsUri";
+
+                    /**
+                     * Creates a new ExportDataRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportDataRequest instance
+                     */
+                    public static create(properties?: google.cloud.parallelstore.v1beta.IExportDataRequest): google.cloud.parallelstore.v1beta.ExportDataRequest;
+
+                    /**
+                     * Encodes the specified ExportDataRequest message. Does not implicitly {@link google.cloud.parallelstore.v1beta.ExportDataRequest.verify|verify} messages.
+                     * @param message ExportDataRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parallelstore.v1beta.IExportDataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportDataRequest message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1beta.ExportDataRequest.verify|verify} messages.
+                     * @param message ExportDataRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parallelstore.v1beta.IExportDataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportDataRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportDataRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parallelstore.v1beta.ExportDataRequest;
+
+                    /**
+                     * Decodes an ExportDataRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportDataRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parallelstore.v1beta.ExportDataRequest;
+
+                    /**
+                     * Verifies an ExportDataRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportDataRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportDataRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parallelstore.v1beta.ExportDataRequest;
+
+                    /**
+                     * Creates a plain object from an ExportDataRequest message. Also converts values to other types if specified.
+                     * @param message ExportDataRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parallelstore.v1beta.ExportDataRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportDataRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportDataRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ImportDataResponse. */
+                interface IImportDataResponse {
+                }
+
+                /** Represents an ImportDataResponse. */
+                class ImportDataResponse implements IImportDataResponse {
+
+                    /**
+                     * Constructs a new ImportDataResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parallelstore.v1beta.IImportDataResponse);
+
+                    /**
+                     * Creates a new ImportDataResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportDataResponse instance
+                     */
+                    public static create(properties?: google.cloud.parallelstore.v1beta.IImportDataResponse): google.cloud.parallelstore.v1beta.ImportDataResponse;
+
+                    /**
+                     * Encodes the specified ImportDataResponse message. Does not implicitly {@link google.cloud.parallelstore.v1beta.ImportDataResponse.verify|verify} messages.
+                     * @param message ImportDataResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parallelstore.v1beta.IImportDataResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportDataResponse message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1beta.ImportDataResponse.verify|verify} messages.
+                     * @param message ImportDataResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parallelstore.v1beta.IImportDataResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportDataResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportDataResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parallelstore.v1beta.ImportDataResponse;
+
+                    /**
+                     * Decodes an ImportDataResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportDataResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parallelstore.v1beta.ImportDataResponse;
+
+                    /**
+                     * Verifies an ImportDataResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportDataResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportDataResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parallelstore.v1beta.ImportDataResponse;
+
+                    /**
+                     * Creates a plain object from an ImportDataResponse message. Also converts values to other types if specified.
+                     * @param message ImportDataResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parallelstore.v1beta.ImportDataResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportDataResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportDataResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ImportDataMetadata. */
+                interface IImportDataMetadata {
+
+                    /** ImportDataMetadata operationMetadata */
+                    operationMetadata?: (google.cloud.parallelstore.v1beta.ITransferOperationMetadata|null);
+                }
+
+                /** Represents an ImportDataMetadata. */
+                class ImportDataMetadata implements IImportDataMetadata {
+
+                    /**
+                     * Constructs a new ImportDataMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parallelstore.v1beta.IImportDataMetadata);
+
+                    /** ImportDataMetadata operationMetadata. */
+                    public operationMetadata?: (google.cloud.parallelstore.v1beta.ITransferOperationMetadata|null);
+
+                    /**
+                     * Creates a new ImportDataMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportDataMetadata instance
+                     */
+                    public static create(properties?: google.cloud.parallelstore.v1beta.IImportDataMetadata): google.cloud.parallelstore.v1beta.ImportDataMetadata;
+
+                    /**
+                     * Encodes the specified ImportDataMetadata message. Does not implicitly {@link google.cloud.parallelstore.v1beta.ImportDataMetadata.verify|verify} messages.
+                     * @param message ImportDataMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parallelstore.v1beta.IImportDataMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportDataMetadata message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1beta.ImportDataMetadata.verify|verify} messages.
+                     * @param message ImportDataMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parallelstore.v1beta.IImportDataMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportDataMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportDataMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parallelstore.v1beta.ImportDataMetadata;
+
+                    /**
+                     * Decodes an ImportDataMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportDataMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parallelstore.v1beta.ImportDataMetadata;
+
+                    /**
+                     * Verifies an ImportDataMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportDataMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportDataMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parallelstore.v1beta.ImportDataMetadata;
+
+                    /**
+                     * Creates a plain object from an ImportDataMetadata message. Also converts values to other types if specified.
+                     * @param message ImportDataMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parallelstore.v1beta.ImportDataMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportDataMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportDataMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExportDataResponse. */
+                interface IExportDataResponse {
+                }
+
+                /** Represents an ExportDataResponse. */
+                class ExportDataResponse implements IExportDataResponse {
+
+                    /**
+                     * Constructs a new ExportDataResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parallelstore.v1beta.IExportDataResponse);
+
+                    /**
+                     * Creates a new ExportDataResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportDataResponse instance
+                     */
+                    public static create(properties?: google.cloud.parallelstore.v1beta.IExportDataResponse): google.cloud.parallelstore.v1beta.ExportDataResponse;
+
+                    /**
+                     * Encodes the specified ExportDataResponse message. Does not implicitly {@link google.cloud.parallelstore.v1beta.ExportDataResponse.verify|verify} messages.
+                     * @param message ExportDataResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parallelstore.v1beta.IExportDataResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportDataResponse message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1beta.ExportDataResponse.verify|verify} messages.
+                     * @param message ExportDataResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parallelstore.v1beta.IExportDataResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportDataResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportDataResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parallelstore.v1beta.ExportDataResponse;
+
+                    /**
+                     * Decodes an ExportDataResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportDataResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parallelstore.v1beta.ExportDataResponse;
+
+                    /**
+                     * Verifies an ExportDataResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportDataResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportDataResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parallelstore.v1beta.ExportDataResponse;
+
+                    /**
+                     * Creates a plain object from an ExportDataResponse message. Also converts values to other types if specified.
+                     * @param message ExportDataResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parallelstore.v1beta.ExportDataResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportDataResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportDataResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExportDataMetadata. */
+                interface IExportDataMetadata {
+
+                    /** ExportDataMetadata operationMetadata */
+                    operationMetadata?: (google.cloud.parallelstore.v1beta.ITransferOperationMetadata|null);
+                }
+
+                /** Represents an ExportDataMetadata. */
+                class ExportDataMetadata implements IExportDataMetadata {
+
+                    /**
+                     * Constructs a new ExportDataMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parallelstore.v1beta.IExportDataMetadata);
+
+                    /** ExportDataMetadata operationMetadata. */
+                    public operationMetadata?: (google.cloud.parallelstore.v1beta.ITransferOperationMetadata|null);
+
+                    /**
+                     * Creates a new ExportDataMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportDataMetadata instance
+                     */
+                    public static create(properties?: google.cloud.parallelstore.v1beta.IExportDataMetadata): google.cloud.parallelstore.v1beta.ExportDataMetadata;
+
+                    /**
+                     * Encodes the specified ExportDataMetadata message. Does not implicitly {@link google.cloud.parallelstore.v1beta.ExportDataMetadata.verify|verify} messages.
+                     * @param message ExportDataMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parallelstore.v1beta.IExportDataMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportDataMetadata message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1beta.ExportDataMetadata.verify|verify} messages.
+                     * @param message ExportDataMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parallelstore.v1beta.IExportDataMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportDataMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportDataMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parallelstore.v1beta.ExportDataMetadata;
+
+                    /**
+                     * Decodes an ExportDataMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportDataMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parallelstore.v1beta.ExportDataMetadata;
+
+                    /**
+                     * Verifies an ExportDataMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportDataMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportDataMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parallelstore.v1beta.ExportDataMetadata;
+
+                    /**
+                     * Creates a plain object from an ExportDataMetadata message. Also converts values to other types if specified.
+                     * @param message ExportDataMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parallelstore.v1beta.ExportDataMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportDataMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportDataMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TransferOperationMetadata. */
+                interface ITransferOperationMetadata {
+
+                    /** TransferOperationMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TransferOperationMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TransferOperationMetadata counters */
+                    counters?: (google.cloud.parallelstore.v1beta.ITransferCounters|null);
+
+                    /** TransferOperationMetadata source */
+                    source?: (string|null);
+
+                    /** TransferOperationMetadata destination */
+                    destination?: (string|null);
+
+                    /** TransferOperationMetadata transferType */
+                    transferType?: (google.cloud.parallelstore.v1beta.TransferType|keyof typeof google.cloud.parallelstore.v1beta.TransferType|null);
+                }
+
+                /** Represents a TransferOperationMetadata. */
+                class TransferOperationMetadata implements ITransferOperationMetadata {
+
+                    /**
+                     * Constructs a new TransferOperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parallelstore.v1beta.ITransferOperationMetadata);
+
+                    /** TransferOperationMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TransferOperationMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TransferOperationMetadata counters. */
+                    public counters?: (google.cloud.parallelstore.v1beta.ITransferCounters|null);
+
+                    /** TransferOperationMetadata source. */
+                    public source: string;
+
+                    /** TransferOperationMetadata destination. */
+                    public destination: string;
+
+                    /** TransferOperationMetadata transferType. */
+                    public transferType: (google.cloud.parallelstore.v1beta.TransferType|keyof typeof google.cloud.parallelstore.v1beta.TransferType);
+
+                    /**
+                     * Creates a new TransferOperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TransferOperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.parallelstore.v1beta.ITransferOperationMetadata): google.cloud.parallelstore.v1beta.TransferOperationMetadata;
+
+                    /**
+                     * Encodes the specified TransferOperationMetadata message. Does not implicitly {@link google.cloud.parallelstore.v1beta.TransferOperationMetadata.verify|verify} messages.
+                     * @param message TransferOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parallelstore.v1beta.ITransferOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TransferOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1beta.TransferOperationMetadata.verify|verify} messages.
+                     * @param message TransferOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parallelstore.v1beta.ITransferOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TransferOperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TransferOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parallelstore.v1beta.TransferOperationMetadata;
+
+                    /**
+                     * Decodes a TransferOperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TransferOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parallelstore.v1beta.TransferOperationMetadata;
+
+                    /**
+                     * Verifies a TransferOperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TransferOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TransferOperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parallelstore.v1beta.TransferOperationMetadata;
+
+                    /**
+                     * Creates a plain object from a TransferOperationMetadata message. Also converts values to other types if specified.
+                     * @param message TransferOperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parallelstore.v1beta.TransferOperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TransferOperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TransferOperationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TransferCounters. */
+                interface ITransferCounters {
+
+                    /** TransferCounters objectsFound */
+                    objectsFound?: (number|Long|string|null);
+
+                    /** TransferCounters bytesFound */
+                    bytesFound?: (number|Long|string|null);
+
+                    /** TransferCounters objectsSkipped */
+                    objectsSkipped?: (number|Long|string|null);
+
+                    /** TransferCounters bytesSkipped */
+                    bytesSkipped?: (number|Long|string|null);
+
+                    /** TransferCounters objectsCopied */
+                    objectsCopied?: (number|Long|string|null);
+
+                    /** TransferCounters bytesCopied */
+                    bytesCopied?: (number|Long|string|null);
+                }
+
+                /** Represents a TransferCounters. */
+                class TransferCounters implements ITransferCounters {
+
+                    /**
+                     * Constructs a new TransferCounters.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parallelstore.v1beta.ITransferCounters);
+
+                    /** TransferCounters objectsFound. */
+                    public objectsFound: (number|Long|string);
+
+                    /** TransferCounters bytesFound. */
+                    public bytesFound: (number|Long|string);
+
+                    /** TransferCounters objectsSkipped. */
+                    public objectsSkipped: (number|Long|string);
+
+                    /** TransferCounters bytesSkipped. */
+                    public bytesSkipped: (number|Long|string);
+
+                    /** TransferCounters objectsCopied. */
+                    public objectsCopied: (number|Long|string);
+
+                    /** TransferCounters bytesCopied. */
+                    public bytesCopied: (number|Long|string);
+
+                    /**
+                     * Creates a new TransferCounters instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TransferCounters instance
+                     */
+                    public static create(properties?: google.cloud.parallelstore.v1beta.ITransferCounters): google.cloud.parallelstore.v1beta.TransferCounters;
+
+                    /**
+                     * Encodes the specified TransferCounters message. Does not implicitly {@link google.cloud.parallelstore.v1beta.TransferCounters.verify|verify} messages.
+                     * @param message TransferCounters message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parallelstore.v1beta.ITransferCounters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TransferCounters message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1beta.TransferCounters.verify|verify} messages.
+                     * @param message TransferCounters message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parallelstore.v1beta.ITransferCounters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TransferCounters message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TransferCounters
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parallelstore.v1beta.TransferCounters;
+
+                    /**
+                     * Decodes a TransferCounters message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TransferCounters
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parallelstore.v1beta.TransferCounters;
+
+                    /**
+                     * Verifies a TransferCounters message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TransferCounters message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TransferCounters
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parallelstore.v1beta.TransferCounters;
+
+                    /**
+                     * Creates a plain object from a TransferCounters message. Also converts values to other types if specified.
+                     * @param message TransferCounters
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parallelstore.v1beta.TransferCounters, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TransferCounters to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TransferCounters
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

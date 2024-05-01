@@ -221,6 +221,9 @@ export class ExamplesClient {
       continuousTestResultPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/continuousTestResults/{continuous_test_result}'
       ),
+      conversationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/conversations/{conversation}'
+      ),
       deploymentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/deployments/{deployment}'
       ),
@@ -1498,6 +1501,77 @@ export class ExamplesClient {
     return this.pathTemplates.continuousTestResultPathTemplate.match(
       continuousTestResultName
     ).continuous_test_result;
+  }
+
+  /**
+   * Return a fully-qualified conversation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @param {string} conversation
+   * @returns {string} Resource name string.
+   */
+  conversationPath(
+    project: string,
+    location: string,
+    agent: string,
+    conversation: string
+  ) {
+    return this.pathTemplates.conversationPathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+      conversation: conversation,
+    });
+  }
+
+  /**
+   * Parse the project from Conversation resource.
+   *
+   * @param {string} conversationName
+   *   A fully-qualified path representing Conversation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromConversationName(conversationName: string) {
+    return this.pathTemplates.conversationPathTemplate.match(conversationName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Conversation resource.
+   *
+   * @param {string} conversationName
+   *   A fully-qualified path representing Conversation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromConversationName(conversationName: string) {
+    return this.pathTemplates.conversationPathTemplate.match(conversationName)
+      .location;
+  }
+
+  /**
+   * Parse the agent from Conversation resource.
+   *
+   * @param {string} conversationName
+   *   A fully-qualified path representing Conversation resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromConversationName(conversationName: string) {
+    return this.pathTemplates.conversationPathTemplate.match(conversationName)
+      .agent;
+  }
+
+  /**
+   * Parse the conversation from Conversation resource.
+   *
+   * @param {string} conversationName
+   *   A fully-qualified path representing Conversation resource.
+   * @returns {string} A string representing the conversation.
+   */
+  matchConversationFromConversationName(conversationName: string) {
+    return this.pathTemplates.conversationPathTemplate.match(conversationName)
+      .conversation;
   }
 
   /**

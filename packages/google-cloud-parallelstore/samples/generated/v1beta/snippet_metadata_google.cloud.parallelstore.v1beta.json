@@ -250,6 +250,110 @@
                     }
                 }
             }
+        },
+        {
+            "regionTag": "parallelstore_v1beta_generated_Parallelstore_ImportData_async",
+            "title": "Parallelstore importData Sample",
+            "origin": "API_DEFINITION",
+            "description": " ImportData copies data from Cloud Storage to Parallelstore.",
+            "canonical": true,
+            "file": "parallelstore.import_data.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 78,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ImportData",
+                "fullName": "google.cloud.parallelstore.v1beta.Parallelstore.ImportData",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "source_gcs_uri",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "destination_path",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ParallelstoreClient",
+                    "fullName": "google.cloud.parallelstore.v1beta.ParallelstoreClient"
+                },
+                "method": {
+                    "shortName": "ImportData",
+                    "fullName": "google.cloud.parallelstore.v1beta.Parallelstore.ImportData",
+                    "service": {
+                        "shortName": "Parallelstore",
+                        "fullName": "google.cloud.parallelstore.v1beta.Parallelstore"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "parallelstore_v1beta_generated_Parallelstore_ExportData_async",
+            "title": "Parallelstore exportData Sample",
+            "origin": "API_DEFINITION",
+            "description": " ExportData copies data from Parallelstore to Cloud Storage",
+            "canonical": true,
+            "file": "parallelstore.export_data.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 78,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ExportData",
+                "fullName": "google.cloud.parallelstore.v1beta.Parallelstore.ExportData",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "source_path",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "destination_gcs_uri",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ParallelstoreClient",
+                    "fullName": "google.cloud.parallelstore.v1beta.ParallelstoreClient"
+                },
+                "method": {
+                    "shortName": "ExportData",
+                    "fullName": "google.cloud.parallelstore.v1beta.Parallelstore.ExportData",
+                    "service": {
+                        "shortName": "Parallelstore",
+                        "fullName": "google.cloud.parallelstore.v1beta.Parallelstore"
+                    }
+                }
+            }
         }
     ]
 }
