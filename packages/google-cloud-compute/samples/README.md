@@ -168,6 +168,11 @@
   * [Images.set_iam_policy](#images.set_iam_policy)
   * [Images.set_labels](#images.set_labels)
   * [Images.test_iam_permissions](#images.test_iam_permissions)
+  * [Instance_group_manager_resize_requests.cancel](#instance_group_manager_resize_requests.cancel)
+  * [Instance_group_manager_resize_requests.delete](#instance_group_manager_resize_requests.delete)
+  * [Instance_group_manager_resize_requests.get](#instance_group_manager_resize_requests.get)
+  * [Instance_group_manager_resize_requests.insert](#instance_group_manager_resize_requests.insert)
+  * [Instance_group_manager_resize_requests.list](#instance_group_manager_resize_requests.list)
   * [Instance_group_managers.abandon_instances](#instance_group_managers.abandon_instances)
   * [Instance_group_managers.aggregated_list](#instance_group_managers.aggregated_list)
   * [Instance_group_managers.apply_updates_to_instances](#instance_group_managers.apply_updates_to_instances)
@@ -197,6 +202,8 @@
   * [Instance_groups.list_instances](#instance_groups.list_instances)
   * [Instance_groups.remove_instances](#instance_groups.remove_instances)
   * [Instance_groups.set_named_ports](#instance_groups.set_named_ports)
+  * [Instance_settings_service.get](#instance_settings_service.get)
+  * [Instance_settings_service.patch](#instance_settings_service.patch)
   * [Instance_templates.aggregated_list](#instance_templates.aggregated_list)
   * [Instance_templates.delete](#instance_templates.delete)
   * [Instance_templates.get](#instance_templates.get)
@@ -360,6 +367,7 @@
   * [Node_groups.list](#node_groups.list)
   * [Node_groups.list_nodes](#node_groups.list_nodes)
   * [Node_groups.patch](#node_groups.patch)
+  * [Node_groups.perform_maintenance](#node_groups.perform_maintenance)
   * [Node_groups.set_iam_policy](#node_groups.set_iam_policy)
   * [Node_groups.set_node_template](#node_groups.set_node_template)
   * [Node_groups.simulate_maintenance_event](#node_groups.simulate_maintenance_event)
@@ -654,6 +662,19 @@
   * [Ssl_policies.list](#ssl_policies.list)
   * [Ssl_policies.list_available_features](#ssl_policies.list_available_features)
   * [Ssl_policies.patch](#ssl_policies.patch)
+  * [Storage_pool_types.aggregated_list](#storage_pool_types.aggregated_list)
+  * [Storage_pool_types.get](#storage_pool_types.get)
+  * [Storage_pool_types.list](#storage_pool_types.list)
+  * [Storage_pools.aggregated_list](#storage_pools.aggregated_list)
+  * [Storage_pools.delete](#storage_pools.delete)
+  * [Storage_pools.get](#storage_pools.get)
+  * [Storage_pools.get_iam_policy](#storage_pools.get_iam_policy)
+  * [Storage_pools.insert](#storage_pools.insert)
+  * [Storage_pools.list](#storage_pools.list)
+  * [Storage_pools.list_disks](#storage_pools.list_disks)
+  * [Storage_pools.set_iam_policy](#storage_pools.set_iam_policy)
+  * [Storage_pools.test_iam_permissions](#storage_pools.test_iam_permissions)
+  * [Storage_pools.update](#storage_pools.update)
   * [Subnetworks.aggregated_list](#subnetworks.aggregated_list)
   * [Subnetworks.delete](#subnetworks.delete)
   * [Subnetworks.expand_ip_cidr_range](#subnetworks.expand_ip_cidr_range)
@@ -3433,6 +3454,91 @@ __Usage:__
 
 
 
+### Instance_group_manager_resize_requests.cancel
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/instance_group_manager_resize_requests.cancel.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/instance_group_manager_resize_requests.cancel.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/instance_group_manager_resize_requests.cancel.js`
+
+
+-----
+
+
+
+
+### Instance_group_manager_resize_requests.delete
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/instance_group_manager_resize_requests.delete.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/instance_group_manager_resize_requests.delete.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/instance_group_manager_resize_requests.delete.js`
+
+
+-----
+
+
+
+
+### Instance_group_manager_resize_requests.get
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/instance_group_manager_resize_requests.get.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/instance_group_manager_resize_requests.get.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/instance_group_manager_resize_requests.get.js`
+
+
+-----
+
+
+
+
+### Instance_group_manager_resize_requests.insert
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/instance_group_manager_resize_requests.insert.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/instance_group_manager_resize_requests.insert.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/instance_group_manager_resize_requests.insert.js`
+
+
+-----
+
+
+
+
+### Instance_group_manager_resize_requests.list
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/instance_group_manager_resize_requests.list.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/instance_group_manager_resize_requests.list.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/instance_group_manager_resize_requests.list.js`
+
+
+-----
+
+
+
+
 ### Instance_group_managers.abandon_instances
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/instance_group_managers.abandon_instances.js).
@@ -3919,6 +4025,40 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/instance_groups.set_named_ports.js`
+
+
+-----
+
+
+
+
+### Instance_settings_service.get
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/instance_settings_service.get.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/instance_settings_service.get.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/instance_settings_service.get.js`
+
+
+-----
+
+
+
+
+### Instance_settings_service.patch
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/instance_settings_service.patch.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/instance_settings_service.patch.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/instance_settings_service.patch.js`
 
 
 -----
@@ -6690,6 +6830,23 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/node_groups.patch.js`
+
+
+-----
+
+
+
+
+### Node_groups.perform_maintenance
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/node_groups.perform_maintenance.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/node_groups.perform_maintenance.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/node_groups.perform_maintenance.js`
 
 
 -----
@@ -11688,6 +11845,227 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/ssl_policies.patch.js`
+
+
+-----
+
+
+
+
+### Storage_pool_types.aggregated_list
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/storage_pool_types.aggregated_list.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/storage_pool_types.aggregated_list.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/storage_pool_types.aggregated_list.js`
+
+
+-----
+
+
+
+
+### Storage_pool_types.get
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/storage_pool_types.get.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/storage_pool_types.get.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/storage_pool_types.get.js`
+
+
+-----
+
+
+
+
+### Storage_pool_types.list
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/storage_pool_types.list.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/storage_pool_types.list.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/storage_pool_types.list.js`
+
+
+-----
+
+
+
+
+### Storage_pools.aggregated_list
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/storage_pools.aggregated_list.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/storage_pools.aggregated_list.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/storage_pools.aggregated_list.js`
+
+
+-----
+
+
+
+
+### Storage_pools.delete
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/storage_pools.delete.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/storage_pools.delete.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/storage_pools.delete.js`
+
+
+-----
+
+
+
+
+### Storage_pools.get
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/storage_pools.get.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/storage_pools.get.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/storage_pools.get.js`
+
+
+-----
+
+
+
+
+### Storage_pools.get_iam_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/storage_pools.get_iam_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/storage_pools.get_iam_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/storage_pools.get_iam_policy.js`
+
+
+-----
+
+
+
+
+### Storage_pools.insert
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/storage_pools.insert.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/storage_pools.insert.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/storage_pools.insert.js`
+
+
+-----
+
+
+
+
+### Storage_pools.list
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/storage_pools.list.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/storage_pools.list.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/storage_pools.list.js`
+
+
+-----
+
+
+
+
+### Storage_pools.list_disks
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/storage_pools.list_disks.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/storage_pools.list_disks.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/storage_pools.list_disks.js`
+
+
+-----
+
+
+
+
+### Storage_pools.set_iam_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/storage_pools.set_iam_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/storage_pools.set_iam_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/storage_pools.set_iam_policy.js`
+
+
+-----
+
+
+
+
+### Storage_pools.test_iam_permissions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/storage_pools.test_iam_permissions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/storage_pools.test_iam_permissions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/storage_pools.test_iam_permissions.js`
+
+
+-----
+
+
+
+
+### Storage_pools.update
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/storage_pools.update.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/storage_pools.update.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/storage_pools.update.js`
 
 
 -----
