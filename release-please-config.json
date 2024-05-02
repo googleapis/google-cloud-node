@@ -177,7 +177,8 @@
     "packages/google-shopping-merchant-notifications": {},
     "packages/google-shopping-merchant-lfp": {},
     "packages/google-cloud-securitycentermanagement": {},
-    "packages/google-shopping-merchant-conversions": {}
+    "packages/google-shopping-merchant-conversions": {},
+    "packages/google-maps-solar": {}
   },
   "plugins": [
     {
