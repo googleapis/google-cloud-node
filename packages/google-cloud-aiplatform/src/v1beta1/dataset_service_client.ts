@@ -311,6 +311,9 @@ export class DatasetServiceClient {
       nasTrialDetailPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/nasJobs/{nas_job}/nasTrialDetails/{nas_trial_detail}'
       ),
+      notebookExecutionJobPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/notebookExecutionJobs/{notebook_execution_job}'
+      ),
       notebookRuntimePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/notebookRuntimes/{notebook_runtime}'
       ),
@@ -756,9 +759,6 @@ export class DatasetServiceClient {
               post: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*/operations/*}:cancel',
-            },
-            {
               post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',
             },
             {
@@ -1093,10 +1093,6 @@ export class DatasetServiceClient {
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*/operations/*}',
-            },
-            {
-              delete:
                 '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
             },
             {
@@ -1383,9 +1379,6 @@ export class DatasetServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*/operations/*}',
-            },
-            {
               get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}',
             },
             {
@@ -1644,9 +1637,6 @@ export class DatasetServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/extensions/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/featurestores/*}/operations',
@@ -1927,9 +1917,6 @@ export class DatasetServiceClient {
               post: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*/operations/*}:wait',
-            },
-            {
               post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}:wait',
             },
             {
@@ -2193,6 +2180,7 @@ export class DatasetServiceClient {
       'importData',
       'exportData',
       'createDatasetVersion',
+      'updateDatasetVersion',
       'deleteDatasetVersion',
       'getDatasetVersion',
       'listDatasetVersions',
@@ -2509,6 +2497,108 @@ export class DatasetServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.updateDataset(request, options, callback);
+  }
+  /**
+   * Updates a DatasetVersion.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.aiplatform.v1beta1.DatasetVersion} request.datasetVersion
+   *   Required. The DatasetVersion which replaces the resource on the server.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The update mask applies to the resource.
+   *   For the `FieldMask` definition, see
+   *   {@link protos.google.protobuf.FieldMask|google.protobuf.FieldMask}. Updatable fields:
+   *
+   *     * `display_name`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.DatasetVersion|DatasetVersion}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataset_service.update_dataset_version.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_DatasetService_UpdateDatasetVersion_async
+   */
+  updateDatasetVersion(
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateDatasetVersionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IDatasetVersion,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IUpdateDatasetVersionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateDatasetVersion(
+    request: protos.google.cloud.aiplatform.v1beta1.IUpdateDatasetVersionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IDatasetVersion,
+      | protos.google.cloud.aiplatform.v1beta1.IUpdateDatasetVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateDatasetVersion(
+    request: protos.google.cloud.aiplatform.v1beta1.IUpdateDatasetVersionRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IDatasetVersion,
+      | protos.google.cloud.aiplatform.v1beta1.IUpdateDatasetVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateDatasetVersion(
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateDatasetVersionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1beta1.IDatasetVersion,
+          | protos.google.cloud.aiplatform.v1beta1.IUpdateDatasetVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IDatasetVersion,
+      | protos.google.cloud.aiplatform.v1beta1.IUpdateDatasetVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IDatasetVersion,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IUpdateDatasetVersionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'dataset_version.name': request.datasetVersion!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateDatasetVersion(request, options, callback);
   }
   /**
    * Gets a Dataset version.
@@ -7786,6 +7876,67 @@ export class DatasetServiceClient {
     return this.pathTemplates.nasTrialDetailPathTemplate.match(
       nasTrialDetailName
     ).nas_trial_detail;
+  }
+
+  /**
+   * Return a fully-qualified notebookExecutionJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} notebook_execution_job
+   * @returns {string} Resource name string.
+   */
+  notebookExecutionJobPath(
+    project: string,
+    location: string,
+    notebookExecutionJob: string
+  ) {
+    return this.pathTemplates.notebookExecutionJobPathTemplate.render({
+      project: project,
+      location: location,
+      notebook_execution_job: notebookExecutionJob,
+    });
+  }
+
+  /**
+   * Parse the project from NotebookExecutionJob resource.
+   *
+   * @param {string} notebookExecutionJobName
+   *   A fully-qualified path representing NotebookExecutionJob resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNotebookExecutionJobName(notebookExecutionJobName: string) {
+    return this.pathTemplates.notebookExecutionJobPathTemplate.match(
+      notebookExecutionJobName
+    ).project;
+  }
+
+  /**
+   * Parse the location from NotebookExecutionJob resource.
+   *
+   * @param {string} notebookExecutionJobName
+   *   A fully-qualified path representing NotebookExecutionJob resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromNotebookExecutionJobName(notebookExecutionJobName: string) {
+    return this.pathTemplates.notebookExecutionJobPathTemplate.match(
+      notebookExecutionJobName
+    ).location;
+  }
+
+  /**
+   * Parse the notebook_execution_job from NotebookExecutionJob resource.
+   *
+   * @param {string} notebookExecutionJobName
+   *   A fully-qualified path representing NotebookExecutionJob resource.
+   * @returns {string} A string representing the notebook_execution_job.
+   */
+  matchNotebookExecutionJobFromNotebookExecutionJobName(
+    notebookExecutionJobName: string
+  ) {
+    return this.pathTemplates.notebookExecutionJobPathTemplate.match(
+      notebookExecutionJobName
+    ).notebook_execution_job;
   }
 
   /**

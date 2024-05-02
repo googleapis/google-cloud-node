@@ -2220,7 +2220,7 @@ export class FeatureRegistryServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the Location to create FeatureGroups.
    *   Format:
-   *   `projects/{project}/locations/{location}'`
+   *   `projects/{project}/locations/{location}`
    * @param {google.cloud.aiplatform.v1.FeatureGroup} request.featureGroup
    *   Required. The FeatureGroup to create.
    * @param {string} request.featureGroupId
