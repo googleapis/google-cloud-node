@@ -1,6 +1,5 @@
-[//]: # 'This README.md file is auto-generated, all changes to this file will be lost.'
-[//]: # 'To regenerate it, use `python -m synthtool`.'
-
+[//]: # "This README.md file is auto-generated, all changes to this file will be lost."
+[//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
 # [Solar API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-maps-solar)
@@ -8,14 +7,18 @@
 [![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@googlemaps/solar.svg)](https://www.npmjs.org/package/@googlemaps/solar)
 
+
+
+
 Solar API client for Node.js
+
 
 A comprehensive list of changes in each version may be found in
 [the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-maps-solar/CHANGELOG.md).
 
-- [Solar API Node.js Client API Reference][client-docs]
-- [Solar API Documentation][product-docs]
-- [github.com/googleapis/google-cloud-node/packages/google-maps-solar](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-maps-solar)
+* [Solar API Node.js Client API Reference][client-docs]
+* [Solar API Documentation][product-docs]
+* [github.com/googleapis/google-cloud-node/packages/google-maps-solar](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-maps-solar)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -24,14 +27,15 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 **Table of contents:**
 
-- [Quickstart](#quickstart)
-  - [Before you begin](#before-you-begin)
-  - [Installing the client library](#installing-the-client-library)
-  - [Using the client library](#using-the-client-library)
-- [Samples](#samples)
-- [Versioning](#versioning)
-- [Contributing](#contributing)
-- [License](#license)
+
+* [Quickstart](#quickstart)
+  * [Before you begin](#before-you-begin)
+  * [Installing the client library](#installing-the-client-library)
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
+* [Versioning](#versioning)
+* [Contributing](#contributing)
+* [License](#license)
 
 ## Quickstart
 
@@ -49,6 +53,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 npm install @googlemaps/solar
 ```
 
+
 ### Using the client library
 
 ```javascript
@@ -59,9 +64,28 @@ npm install @googlemaps/solar
  * TODO(developer): Uncomment these variables before running the sample.
  */
 /**
- *  Required. The ID of the asset being requested.
+ *  Required. The longitude and latitude from which the API looks for the
+ *  nearest known building.
  */
-// const id = 'abc123'
+// const location = {
+//   latitude: 37.7900161,
+//   longitude: -122.3900146,
+// };
+/**
+ *  Optional. The minimum quality level allowed in the results. No result with
+ *  lower quality than this will be returned. Not specifying this is
+ *  equivalent to restricting to HIGH quality only.
+ */
+// const requiredQuality = {}
+/**
+ *  Optional. Whether to require exact quality of the imagery.
+ *  If set to false, the `required_quality` field is interpreted as the minimum
+ *  required quality, such that HIGH quality imagery may be returned when
+ *  `required_quality` is set to MEDIUM.  If set to true, `required_quality`
+ *  is interpreted as the exact required quality and only `MEDIUM` quality
+ *  imagery is returned if `required_quality` is set to `MEDIUM`.
+ */
+// const exactQualityRequired = true
 
 // Imports the Solar library
 const {SolarClient} = require('@googlemaps/solar').v1;
@@ -69,30 +93,37 @@ const {SolarClient} = require('@googlemaps/solar').v1;
 // Instantiates a client
 const solarClient = new SolarClient();
 
-async function callGetGeoTiff() {
+async function callFindClosestBuildingInsights() {
   // Construct request
   const request = {
-    id,
+    location,
+    requiredQuality,
+    exactQualityRequired,
   };
 
   // Run request
-  const response = await solarClient.getGeoTiff(request);
+  const response = await solarClient.findClosestBuildingInsights(request);
   console.log(response);
 }
 
-callGetGeoTiff();
+callFindClosestBuildingInsights();
+
 ```
+
+
 
 ## Samples
 
 Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-maps-solar/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
-| Sample                               | Source Code                                                                                                                                                      | Try it                                                                                                                                                                                                                                                                                                         |
-| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
 | Solar.find_closest_building_insights | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-solar/samples/generated/v1/solar.find_closest_building_insights.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-solar/samples/generated/v1/solar.find_closest_building_insights.js,packages/google-maps-solar/samples/README.md) |
-| Solar.get_data_layers                | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-solar/samples/generated/v1/solar.get_data_layers.js)                | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-solar/samples/generated/v1/solar.get_data_layers.js,packages/google-maps-solar/samples/README.md)                |
-| Solar.get_geo_tiff                   | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-solar/samples/generated/v1/solar.get_geo_tiff.js)                   | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-solar/samples/generated/v1/solar.get_geo_tiff.js,packages/google-maps-solar/samples/README.md)                   |
-| Quickstart                           | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-solar/samples/quickstart.js)                                        | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-solar/samples/quickstart.js,packages/google-maps-solar/samples/README.md)                                        |
+| Solar.get_data_layers | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-solar/samples/generated/v1/solar.get_data_layers.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-solar/samples/generated/v1/solar.get_data_layers.js,packages/google-maps-solar/samples/README.md) |
+| Solar.get_geo_tiff | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-solar/samples/generated/v1/solar.get_geo_tiff.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-solar/samples/generated/v1/solar.get_geo_tiff.js,packages/google-maps-solar/samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-solar/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-solar/samples/quickstart.js,packages/google-maps-solar/samples/README.md) |
+
+
 
 The [Solar API Node.js Client API Reference][client-docs] documentation
 also contains samples.
@@ -108,9 +139,9 @@ as soon as possible to an actively supported LTS version.
 Google's client libraries support legacy versions of Node.js runtimes on a
 best-efforts basis with the following warnings:
 
-- Legacy versions are not tested in continuous integration.
-- Some security patches and features cannot be backported.
-- Dependencies cannot be kept up-to-date.
+* Legacy versions are not tested in continuous integration.
+* Some security patches and features cannot be backported.
+* Dependencies cannot be kept up-to-date.
 
 Client libraries targeting some end-of-life versions of Node.js are available, and
 can be installed through npm [dist-tags](https://docs.npmjs.com/cli/dist-tag).
@@ -122,9 +153,16 @@ for versions compatible with Node.js 8.
 
 This library follows [Semantic Versioning](http://semver.org/).
 
+
+
+
+
+
+
 This library is considered to be in **preview**. This means it is still a
 work-in-progress and under active development. Any release is subject to
 backwards-incompatible changes at any time.
+
 
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
