@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.20.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.19.1...aiplatform-v3.20.0) (2024-05-02)
+
+
+### Features
+
+* A new field `search_entry_point` is added to message `.google.cloud.aiplatform.v1beta1.GroundingMetadata` ([#5285](https://github.com/googleapis/google-cloud-node/issues/5285)) ([fe2a4e3](https://github.com/googleapis/google-cloud-node/commit/fe2a4e3cb6f8714048b1e0c97e07c7afbfb25602))
+
 ## [3.19.1](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.19.0...aiplatform-v3.19.1) (2024-04-23)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/parallelstore-v0.2.0...parallelstore-v0.3.0) (2024-05-02)
+
+
+### Features
+
+* **parallelstore/v1beta:** [parallelstore] add ImportData and ExportData RPCs ([#5292](https://github.com/googleapis/google-cloud-node/issues/5292)) ([e769b8b](https://github.com/googleapis/google-cloud-node/commit/e769b8b67f6193a0624a7621b9522eedac86ed40))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/parallelstore-v0.1.0...parallelstore-v0.2.0) (2024-04-05)
 
 

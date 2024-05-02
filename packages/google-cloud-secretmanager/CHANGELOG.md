@@ -1,5 +1,17 @@
 # Changelog
 
+## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v5.4.0...secret-manager-v5.5.0) (2024-05-02)
+
+
+### Features
+
+* [shopping] add `Weight` to common types for Shopping APIs to be used for accounts bundle ([#5291](https://github.com/googleapis/google-cloud-node/issues/5291)) ([27a72a6](https://github.com/googleapis/google-cloud-node/commit/27a72a6d16079ff025b4a9ac702c6d1bffd017ce))
+
+
+### Bug Fixes
+
+* (secretmanaer) readd legacy path templates ([#5290](https://github.com/googleapis/google-cloud-node/issues/5290)) ([5e14553](https://github.com/googleapis/google-cloud-node/commit/5e145530c217cc87ee2d2e9f6124c5091534fc5e))
+
 ## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v5.3.0...secret-manager-v5.4.0) (2024-04-23)
 
 
