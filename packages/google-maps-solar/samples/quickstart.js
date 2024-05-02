@@ -18,7 +18,11 @@
 
 'use strict';
 
-function main(id) {
+function main(
+  location = {},
+  requiredQuality = {},
+  exactQualityRequired = false
+) {
   // [START solar_quickstart]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -27,9 +31,28 @@ function main(id) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The ID of the asset being requested.
+   *  Required. The longitude and latitude from which the API looks for the
+   *  nearest known building.
    */
-  // const id = 'abc123'
+  // const location = {
+  //   latitude: 37.7900161,
+  //   longitude: -122.3900146,
+  // };
+  /**
+   *  Optional. The minimum quality level allowed in the results. No result with
+   *  lower quality than this will be returned. Not specifying this is
+   *  equivalent to restricting to HIGH quality only.
+   */
+  // const requiredQuality = {}
+  /**
+   *  Optional. Whether to require exact quality of the imagery.
+   *  If set to false, the `required_quality` field is interpreted as the minimum
+   *  required quality, such that HIGH quality imagery may be returned when
+   *  `required_quality` is set to MEDIUM.  If set to true, `required_quality`
+   *  is interpreted as the exact required quality and only `MEDIUM` quality
+   *  imagery is returned if `required_quality` is set to `MEDIUM`.
+   */
+  // const exactQualityRequired = true
 
   // Imports the Solar library
   const {SolarClient} = require('@googlemaps/solar').v1;
@@ -37,18 +60,20 @@ function main(id) {
   // Instantiates a client
   const solarClient = new SolarClient();
 
-  async function callGetGeoTiff() {
+  async function callFindClosestBuildingInsights() {
     // Construct request
     const request = {
-      id,
+      location,
+      requiredQuality,
+      exactQualityRequired,
     };
 
     // Run request
-    const response = await solarClient.getGeoTiff(request);
+    const response = await solarClient.findClosestBuildingInsights(request);
     console.log(response);
   }
 
-  callGetGeoTiff();
+  callFindClosestBuildingInsights();
   // [END solar_quickstart]
 }
 
@@ -56,4 +81,6 @@ process.on('unhandledRejection', err => {
   console.error(err.message);
   process.exitCode = 1;
 });
-main(...process.argv.slice(2));
+
+// All args are JSON
+main(...process.argv.slice(2).map(item => JSON.parse(item)));

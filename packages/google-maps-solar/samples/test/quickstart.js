@@ -17,7 +17,7 @@
 const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
-const {describe, it, before} = require('mocha');
+const {describe, it} = require('mocha');
 const {Client} = require('@googlemaps/solar').v1;
 const solarClient = new Client();
 
@@ -26,15 +26,15 @@ const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
 describe('Quickstart', () => {
-  let projectId;
-
-  before(async () => {
-    projectId = await solarClient.getProjectId();
-  });
-
   it('should run quickstart', async () => {
+    // Google San Francisco - 345 Spear St
+    const location = {
+      latitude: 37.7900161,
+      longitude: -122.3900146,
+    };
+
     const output = execSync(
-      `node ./quickstart.js projects/${projectId}/locations/us-central1`,
+      `node ./quickstart.js '${JSON.stringify(location)}'`,
       {cwd}
     );
     assert(output !== null);
