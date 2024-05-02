@@ -18,7 +18,7 @@
 // const path = require('path');
 // const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-// const {CssProductsServiceClient} = require('@google-cloud/css').v1;
+// const {CssProductsServiceClient} = require('@google-shopping/css').v1;
 // const cssClient = new CssProductsServiceClient();
 
 // const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
