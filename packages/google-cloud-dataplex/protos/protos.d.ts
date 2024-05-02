@@ -9854,27 +9854,6 @@ export namespace google {
                 /** Properties of a SearchEntriesResult. */
                 interface ISearchEntriesResult {
 
-                    /** SearchEntriesResult entry */
-                    entry?: (string|null);
-
-                    /** SearchEntriesResult displayName */
-                    displayName?: (string|null);
-
-                    /** SearchEntriesResult entryType */
-                    entryType?: (string|null);
-
-                    /** SearchEntriesResult modifyTime */
-                    modifyTime?: (google.protobuf.ITimestamp|null);
-
-                    /** SearchEntriesResult fullyQualifiedName */
-                    fullyQualifiedName?: (string|null);
-
-                    /** SearchEntriesResult description */
-                    description?: (string|null);
-
-                    /** SearchEntriesResult relativeResource */
-                    relativeResource?: (string|null);
-
                     /** SearchEntriesResult linkedResource */
                     linkedResource?: (string|null);
 
@@ -9893,27 +9872,6 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.dataplex.v1.ISearchEntriesResult);
-
-                    /** SearchEntriesResult entry. */
-                    public entry: string;
-
-                    /** SearchEntriesResult displayName. */
-                    public displayName: string;
-
-                    /** SearchEntriesResult entryType. */
-                    public entryType: string;
-
-                    /** SearchEntriesResult modifyTime. */
-                    public modifyTime?: (google.protobuf.ITimestamp|null);
-
-                    /** SearchEntriesResult fullyQualifiedName. */
-                    public fullyQualifiedName: string;
-
-                    /** SearchEntriesResult description. */
-                    public description: string;
-
-                    /** SearchEntriesResult relativeResource. */
-                    public relativeResource: string;
 
                     /** SearchEntriesResult linkedResource. */
                     public linkedResource: string;
@@ -21204,6 +21162,9 @@ export namespace google {
 
                     /** DataQualityRuleResult failingRowsQuery */
                     failingRowsQuery?: (string|null);
+
+                    /** DataQualityRuleResult assertionRowCount */
+                    assertionRowCount?: (number|Long|string|null);
                 }
 
                 /** Represents a DataQualityRuleResult. */
@@ -21235,6 +21196,9 @@ export namespace google {
 
                     /** DataQualityRuleResult failingRowsQuery. */
                     public failingRowsQuery: string;
+
+                    /** DataQualityRuleResult assertionRowCount. */
+                    public assertionRowCount: (number|Long|string);
 
                     /**
                      * Creates a new DataQualityRuleResult instance using the specified properties.
@@ -21550,6 +21514,9 @@ export namespace google {
                     /** DataQualityRule tableConditionExpectation */
                     tableConditionExpectation?: (google.cloud.dataplex.v1.DataQualityRule.ITableConditionExpectation|null);
 
+                    /** DataQualityRule sqlAssertion */
+                    sqlAssertion?: (google.cloud.dataplex.v1.DataQualityRule.ISqlAssertion|null);
+
                     /** DataQualityRule column */
                     column?: (string|null);
 
@@ -21602,6 +21569,9 @@ export namespace google {
                     /** DataQualityRule tableConditionExpectation. */
                     public tableConditionExpectation?: (google.cloud.dataplex.v1.DataQualityRule.ITableConditionExpectation|null);
 
+                    /** DataQualityRule sqlAssertion. */
+                    public sqlAssertion?: (google.cloud.dataplex.v1.DataQualityRule.ISqlAssertion|null);
+
                     /** DataQualityRule column. */
                     public column: string;
 
@@ -21621,7 +21591,7 @@ export namespace google {
                     public description: string;
 
                     /** DataQualityRule ruleType. */
-                    public ruleType?: ("rangeExpectation"|"nonNullExpectation"|"setExpectation"|"regexExpectation"|"uniquenessExpectation"|"statisticRangeExpectation"|"rowConditionExpectation"|"tableConditionExpectation");
+                    public ruleType?: ("rangeExpectation"|"nonNullExpectation"|"setExpectation"|"regexExpectation"|"uniquenessExpectation"|"statisticRangeExpectation"|"rowConditionExpectation"|"tableConditionExpectation"|"sqlAssertion");
 
                     /**
                      * Creates a new DataQualityRule instance using the specified properties.
@@ -22514,6 +22484,103 @@ export namespace google {
 
                         /**
                          * Gets the default type url for TableConditionExpectation
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SqlAssertion. */
+                    interface ISqlAssertion {
+
+                        /** SqlAssertion sqlStatement */
+                        sqlStatement?: (string|null);
+                    }
+
+                    /** Represents a SqlAssertion. */
+                    class SqlAssertion implements ISqlAssertion {
+
+                        /**
+                         * Constructs a new SqlAssertion.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataplex.v1.DataQualityRule.ISqlAssertion);
+
+                        /** SqlAssertion sqlStatement. */
+                        public sqlStatement: string;
+
+                        /**
+                         * Creates a new SqlAssertion instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SqlAssertion instance
+                         */
+                        public static create(properties?: google.cloud.dataplex.v1.DataQualityRule.ISqlAssertion): google.cloud.dataplex.v1.DataQualityRule.SqlAssertion;
+
+                        /**
+                         * Encodes the specified SqlAssertion message. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRule.SqlAssertion.verify|verify} messages.
+                         * @param message SqlAssertion message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataplex.v1.DataQualityRule.ISqlAssertion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SqlAssertion message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRule.SqlAssertion.verify|verify} messages.
+                         * @param message SqlAssertion message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataplex.v1.DataQualityRule.ISqlAssertion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SqlAssertion message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SqlAssertion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DataQualityRule.SqlAssertion;
+
+                        /**
+                         * Decodes a SqlAssertion message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SqlAssertion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DataQualityRule.SqlAssertion;
+
+                        /**
+                         * Verifies a SqlAssertion message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SqlAssertion message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SqlAssertion
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DataQualityRule.SqlAssertion;
+
+                        /**
+                         * Creates a plain object from a SqlAssertion message. Also converts values to other types if specified.
+                         * @param message SqlAssertion
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataplex.v1.DataQualityRule.SqlAssertion, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SqlAssertion to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SqlAssertion
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -30125,6 +30192,9 @@ export namespace google {
 
                     /** DataQualityScanRuleResult nullRowCount */
                     nullRowCount?: (number|Long|string|null);
+
+                    /** DataQualityScanRuleResult assertionRowCount */
+                    assertionRowCount?: (number|Long|string|null);
                 }
 
                 /** Represents a DataQualityScanRuleResult. */
@@ -30171,6 +30241,9 @@ export namespace google {
 
                     /** DataQualityScanRuleResult nullRowCount. */
                     public nullRowCount: (number|Long|string);
+
+                    /** DataQualityScanRuleResult assertionRowCount. */
+                    public assertionRowCount: (number|Long|string);
 
                     /**
                      * Creates a new DataQualityScanRuleResult instance using the specified properties.
@@ -30262,7 +30335,8 @@ export namespace google {
                         SET_EXPECTATION = 5,
                         STATISTIC_RANGE_EXPECTATION = 6,
                         TABLE_CONDITION_EXPECTATION = 7,
-                        UNIQUENESS_EXPECTATION = 8
+                        UNIQUENESS_EXPECTATION = 8,
+                        SQL_ASSERTION = 9
                     }
 
                     /** EvaluationType enum. */
