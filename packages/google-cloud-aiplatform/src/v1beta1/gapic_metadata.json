@@ -20,6 +20,11 @@
                 "updateDataset"
               ]
             },
+            "UpdateDatasetVersion": {
+              "methods": [
+                "updateDatasetVersion"
+              ]
+            },
             "GetDatasetVersion": {
               "methods": [
                 "getDatasetVersion"
@@ -125,6 +130,11 @@
             "UpdateDataset": {
               "methods": [
                 "updateDataset"
+              ]
+            },
+            "UpdateDatasetVersion": {
+              "methods": [
+                "updateDatasetVersion"
               ]
             },
             "GetDatasetVersion": {
@@ -2979,11 +2989,6 @@
             "StreamGenerateContent": {
               "methods": [
                 "streamGenerateContent"
-              ]
-            },
-            "ChatCompletions": {
-              "methods": [
-                "chatCompletions"
               ]
             }
           }

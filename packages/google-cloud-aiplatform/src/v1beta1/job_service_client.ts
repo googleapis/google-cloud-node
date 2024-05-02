@@ -770,9 +770,6 @@ export class JobServiceClient {
               post: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*/operations/*}:cancel',
-            },
-            {
               post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',
             },
             {
@@ -1107,10 +1104,6 @@ export class JobServiceClient {
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*/operations/*}',
-            },
-            {
-              delete:
                 '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
             },
             {
@@ -1397,9 +1390,6 @@ export class JobServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*/operations/*}',
-            },
-            {
               get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}',
             },
             {
@@ -1658,9 +1648,6 @@ export class JobServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/extensions/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/featurestores/*}/operations',
@@ -1939,9 +1926,6 @@ export class JobServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*/operations/*}:wait',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}:wait',

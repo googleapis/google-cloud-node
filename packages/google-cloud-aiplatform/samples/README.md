@@ -319,6 +319,7 @@
   * [Dataset_service.restore_dataset_version](#dataset_service.restore_dataset_version)
   * [Dataset_service.search_data_items](#dataset_service.search_data_items)
   * [Dataset_service.update_dataset](#dataset_service.update_dataset)
+  * [Dataset_service.update_dataset_version](#dataset_service.update_dataset_version)
   * [Deployment_resource_pool_service.create_deployment_resource_pool](#deployment_resource_pool_service.create_deployment_resource_pool)
   * [Deployment_resource_pool_service.delete_deployment_resource_pool](#deployment_resource_pool_service.delete_deployment_resource_pool)
   * [Deployment_resource_pool_service.get_deployment_resource_pool](#deployment_resource_pool_service.get_deployment_resource_pool)
@@ -5855,6 +5856,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.update_dataset.js`
+
+
+-----
+
+
+
+
+### Dataset_service.update_dataset_version
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.update_dataset_version.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.update_dataset_version.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/dataset_service.update_dataset_version.js`
 
 
 -----
