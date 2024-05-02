@@ -34,7 +34,7 @@ function main(name) {
   // const name = 'abc123'
 
   // Imports the Notifications library
-  const {NotificationsApiServiceClient} = require('@google-cloud/notifications').v1beta;
+  const {NotificationsApiServiceClient} = require('@google-shopping/notifications').v1beta;
 
   // Instantiates a client
   const notificationsClient = new NotificationsApiServiceClient();

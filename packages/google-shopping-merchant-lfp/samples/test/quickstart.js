@@ -19,7 +19,7 @@
 // const path = require('path');
 // const cp = require('child_process');
 // const {describe, it, before} = require('mocha');
-// const {LfpStoreServiceClient} = require('@google-cloud/lfp').v1beta;
+// const {LfpStoreServiceClient} = require('@google-shopping/lfp').v1beta;
 // const merchantapiClient = new LfpStoreServiceClient();
 
 // const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
