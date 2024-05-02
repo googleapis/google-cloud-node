@@ -1506,122 +1506,6 @@ describe('v1beta1.PredictionServiceClient', () => {
     });
   });
 
-  describe('chatCompletions', () => {
-    it('invokes chatCompletions without error', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ChatCompletionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.ChatCompletionsRequest',
-        ['endpoint']
-      );
-      request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.api.HttpBody()
-      );
-      client.innerApiCalls.chatCompletions =
-        stubServerStreamingCall(expectedResponse);
-      const stream = client.chatCompletions(request);
-      const promise = new Promise((resolve, reject) => {
-        stream.on('data', (response: protos.google.api.HttpBody) => {
-          resolve(response);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.chatCompletions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.chatCompletions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes chatCompletions with error', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ChatCompletionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.ChatCompletionsRequest',
-        ['endpoint']
-      );
-      request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.chatCompletions = stubServerStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.chatCompletions(request);
-      const promise = new Promise((resolve, reject) => {
-        stream.on('data', (response: protos.google.api.HttpBody) => {
-          resolve(response);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      const actualRequest = (
-        client.innerApiCalls.chatCompletions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.chatCompletions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes chatCompletions with closed client', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ChatCompletionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.ChatCompletionsRequest',
-        ['endpoint']
-      );
-      request.endpoint = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      const stream = client.chatCompletions(request, {
-        retryRequestOptions: {noResponseRetries: 0},
-      });
-      const promise = new Promise((resolve, reject) => {
-        stream.on('data', (response: protos.google.api.HttpBody) => {
-          resolve(response);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-    });
-  });
-
   describe('streamDirectPredict', () => {
     it('invokes streamDirectPredict without error', async () => {
       const client =
@@ -4926,6 +4810,88 @@ describe('v1beta1.PredictionServiceClient', () => {
         assert.strictEqual(result, 'nasTrialDetailValue');
         assert(
           (client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('notebookExecutionJob', () => {
+      const fakePath = '/rendered/path/notebookExecutionJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        notebook_execution_job: 'notebookExecutionJobValue',
+      };
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.notebookExecutionJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.notebookExecutionJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('notebookExecutionJobPath', () => {
+        const result = client.notebookExecutionJobPath(
+          'projectValue',
+          'locationValue',
+          'notebookExecutionJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.notebookExecutionJobPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromNotebookExecutionJobName', () => {
+        const result =
+          client.matchProjectFromNotebookExecutionJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.notebookExecutionJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromNotebookExecutionJobName', () => {
+        const result =
+          client.matchLocationFromNotebookExecutionJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.notebookExecutionJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNotebookExecutionJobFromNotebookExecutionJobName', () => {
+        const result =
+          client.matchNotebookExecutionJobFromNotebookExecutionJobName(
+            fakePath
+          );
+        assert.strictEqual(result, 'notebookExecutionJobValue');
+        assert(
+          (
+            client.pathTemplates.notebookExecutionJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
