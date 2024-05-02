@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const solar = require('@google-cloud/solar');
+const solar = require('@googlemaps/solar');
 
 function main() {
   const solarClient = new solar.SolarClient();

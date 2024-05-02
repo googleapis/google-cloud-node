@@ -32,7 +32,7 @@ function main(id) {
   // const id = 'abc123'
 
   // Imports the Solar library
-  const {SolarClient} = require('@google-cloud/solar').v1;
+  const {SolarClient} = require('@googlemaps/solar').v1;
 
   // Instantiates a client
   const solarClient = new SolarClient();

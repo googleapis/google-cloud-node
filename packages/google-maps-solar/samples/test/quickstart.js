@@ -18,7 +18,7 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const {Client} = require('@google-cloud/solar').v1;
+const {Client} = require('@googlemaps/solar').v1;
 const solarClient = new Client();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});

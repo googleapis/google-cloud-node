@@ -7,11 +7,10 @@
   "release_level": "preview",
   "language": "nodejs",
   "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/solar",
+  "distribution_name": "@googlemaps/solar",
   "api_id": "solar.googleapis.com",
   "default_version": "v1",
   "requires_billing": true,
   "library_type": "GAPIC_AUTO",
   "api_shortname": "solar"
 }
-

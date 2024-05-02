@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.maps.solar.v1",
-  "libraryPackage": "@google-cloud/solar",
+  "libraryPackage": "@googlemaps/solar",
   "services": {
     "Solar": {
       "clients": {
@@ -11,19 +11,13 @@
           "libraryClient": "SolarClient",
           "rpcs": {
             "FindClosestBuildingInsights": {
-              "methods": [
-                "findClosestBuildingInsights"
-              ]
+              "methods": ["findClosestBuildingInsights"]
             },
             "GetDataLayers": {
-              "methods": [
-                "getDataLayers"
-              ]
+              "methods": ["getDataLayers"]
             },
             "GetGeoTiff": {
-              "methods": [
-                "getGeoTiff"
-              ]
+              "methods": ["getGeoTiff"]
             }
           }
         },
@@ -31,19 +25,13 @@
           "libraryClient": "SolarClient",
           "rpcs": {
             "FindClosestBuildingInsights": {
-              "methods": [
-                "findClosestBuildingInsights"
-              ]
+              "methods": ["findClosestBuildingInsights"]
             },
             "GetDataLayers": {
-              "methods": [
-                "getDataLayers"
-              ]
+              "methods": ["getDataLayers"]
             },
             "GetGeoTiff": {
-              "methods": [
-                "getGeoTiff"
-              ]
+              "methods": ["getGeoTiff"]
             }
           }
         }
