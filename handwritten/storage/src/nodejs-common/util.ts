@@ -22,7 +22,7 @@ import {
   replaceProjectIdToken,
   MissingProjectIdError,
 } from '@google-cloud/projectify';
-import * as ent from 'ent';
+import * as htmlEntities from 'html-entities';
 import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
 import {CredentialBody} from 'google-auth-library';
 import * as r from 'teeny-request';
@@ -311,7 +311,7 @@ export class ApiError extends Error {
     if (errors && errors.length) {
       errors.forEach(({message}) => messages.add(message!));
     } else if (err.response && err.response.body) {
-      messages.add(ent.decode(err.response.body.toString()));
+      messages.add(htmlEntities.decode(err.response.body.toString()));
     } else if (!err.message) {
       messages.add('A failure occurred during this request.');
     }
