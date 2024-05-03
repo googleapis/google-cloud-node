@@ -11,13 +11,19 @@
           "libraryClient": "SolarClient",
           "rpcs": {
             "FindClosestBuildingInsights": {
-              "methods": ["findClosestBuildingInsights"]
+              "methods": [
+                "findClosestBuildingInsights"
+              ]
             },
             "GetDataLayers": {
-              "methods": ["getDataLayers"]
+              "methods": [
+                "getDataLayers"
+              ]
             },
             "GetGeoTiff": {
-              "methods": ["getGeoTiff"]
+              "methods": [
+                "getGeoTiff"
+              ]
             }
           }
         },
@@ -25,13 +31,19 @@
           "libraryClient": "SolarClient",
           "rpcs": {
             "FindClosestBuildingInsights": {
-              "methods": ["findClosestBuildingInsights"]
+              "methods": [
+                "findClosestBuildingInsights"
+              ]
             },
             "GetDataLayers": {
-              "methods": ["getDataLayers"]
+              "methods": [
+                "getDataLayers"
+              ]
             },
             "GetGeoTiff": {
-              "methods": ["getGeoTiff"]
+              "methods": [
+                "getGeoTiff"
+              ]
             }
           }
         }
