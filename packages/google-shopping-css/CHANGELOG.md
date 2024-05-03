@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/css-v0.3.0...css-v0.4.0) (2024-05-02)
+
+
+### Features
+
+* [shopping] add `Weight` to common types for Shopping APIs to be used for accounts bundle ([#5291](https://github.com/googleapis/google-cloud-node/issues/5291)) ([27a72a6](https://github.com/googleapis/google-cloud-node/commit/27a72a6d16079ff025b4a9ac702c6d1bffd017ce))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/css-v0.2.0...css-v0.3.0) (2024-03-29)
 
 
