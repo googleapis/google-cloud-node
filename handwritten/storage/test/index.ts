@@ -923,6 +923,21 @@ describe('Storage', () => {
       storage.createBucket(BUCKET_NAME, {enableObjectRetention: true}, done);
     });
 
+    it('should allow enabling hierarchical namespace', done => {
+      storage.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function
+      ) => {
+        assert.strictEqual(reqOpts.json.hierarchicalNamespace.enabled, true);
+        callback();
+      };
+      storage.createBucket(
+        BUCKET_NAME,
+        {hierarchicalNamespace: {enabled: true}},
+        done
+      );
+    });
+
     describe('storage classes', () => {
       it('should expand metadata.archive', done => {
         storage.request = (reqOpts: DecorateRequestOptions) => {

@@ -308,6 +308,9 @@ export interface BucketMetadata extends BaseMetadata {
   encryption?: {
     defaultKmsKeyName?: string;
   } | null;
+  hierarchicalNamespace?: {
+    enabled?: boolean;
+  };
   iamConfiguration?: {
     publicAccessPrevention?: string;
     uniformBucketLevelAccess?: {

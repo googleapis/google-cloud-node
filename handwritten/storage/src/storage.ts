@@ -124,6 +124,16 @@ export interface CreateBucketRequest {
   customPlacementConfig?: CustomPlacementConfig;
   dra?: boolean;
   enableObjectRetention?: boolean;
+  hierarchicalNamespace?: {
+    enabled?: boolean;
+  };
+  iamConfiguration?: {
+    publicAccessPrevention?: string;
+    uniformBucketLevelAccess?: {
+      enabled?: boolean;
+      lockedTime?: string;
+    };
+  };
   location?: string;
   multiRegional?: boolean;
   nearline?: boolean;
@@ -868,6 +878,7 @@ export class Storage extends Service {
    * @property {boolean} [dra=false] Specify the storage class as Durable Reduced
    *     Availability.
    * @property {boolean} [enableObjectRetention=false] Specifiy whether or not object retention should be enabled on this bucket.
+   * @property {object} [hierarchicalNamespace.enabled=false] Specify whether or not to enable hierarchical namespace on this bucket.
    * @property {string} [location] Specify the bucket's location. If specifying
    *     a dual-region, the `customPlacementConfig` property should be set in conjunction.
    *     For more information, see {@link https://cloud.google.com/storage/docs/locations| Bucket Locations}.

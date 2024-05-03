@@ -1512,6 +1512,50 @@ describe('storage', function () {
     });
   });
 
+  describe('bucket hierarchical namespace', async () => {
+    let bucket: Bucket;
+
+    beforeEach(() => {
+      bucket = storage.bucket(generateName());
+    });
+
+    afterEach(async () => {
+      try {
+        await bucket.delete();
+      } catch {
+        //Ignore errors
+      }
+    });
+
+    it('should create a bucket without hierarchical namespace enabled (implicit)', async () => {
+      await storage.createBucket(bucket.name);
+      const [metadata] = await bucket.getMetadata();
+      assert.strictEqual(metadata.hierarchicalNamespace, undefined);
+    });
+
+    it('should create a bucket without hierarchical namespace enabled (explicit)', async () => {
+      await storage.createBucket(bucket.name, {
+        hierarchicalNamespace: {enabled: false},
+      });
+      const [metadata] = await bucket.getMetadata();
+      assert.strictEqual(metadata.hierarchicalNamespace, undefined);
+    });
+
+    it('should create a bucket with hierarchical namespace enabled', async () => {
+      await storage.createBucket(bucket.name, {
+        hierarchicalNamespace: {enabled: true},
+        iamConfiguration: {
+          uniformBucketLevelAccess: {
+            enabled: true,
+          },
+        },
+      });
+      const [metadata] = await bucket.getMetadata();
+      assert(metadata.hierarchicalNamespace);
+      assert.strictEqual(metadata.hierarchicalNamespace.enabled, true);
+    });
+  });
+
   describe('bucket retention policies', () => {
     describe('bucket', () => {
       it('should create a bucket with a retention policy', async () => {
