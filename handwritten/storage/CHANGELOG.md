@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [7.11.0](https://github.com/googleapis/nodejs-storage/compare/v7.10.2...v7.11.0) (2024-05-03)
+
+
+### Features
+
+* Add ability to enable hierarchical namespace on buckets ([#2453](https://github.com/googleapis/nodejs-storage/issues/2453)) ([4e5726f](https://github.com/googleapis/nodejs-storage/commit/4e5726fe60ecede6bec6508e4b4ec214f2e173dd))
+
 ## [7.10.2](https://github.com/googleapis/nodejs-storage/compare/v7.10.1...v7.10.2) (2024-04-26)
 
 
