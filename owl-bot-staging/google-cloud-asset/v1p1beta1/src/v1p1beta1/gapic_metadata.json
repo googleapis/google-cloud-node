@@ -1,0 +1,51 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.asset.v1p1beta1",
+  "libraryPackage": "@google-cloud/asset",
+  "services": {
+    "AssetService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AssetServiceClient",
+          "rpcs": {
+            "SearchAllResources": {
+              "methods": [
+                "searchAllResources",
+                "searchAllResourcesStream",
+                "searchAllResourcesAsync"
+              ]
+            },
+            "SearchAllIamPolicies": {
+              "methods": [
+                "searchAllIamPolicies",
+                "searchAllIamPoliciesStream",
+                "searchAllIamPoliciesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AssetServiceClient",
+          "rpcs": {
+            "SearchAllResources": {
+              "methods": [
+                "searchAllResources",
+                "searchAllResourcesStream",
+                "searchAllResourcesAsync"
+              ]
+            },
+            "SearchAllIamPolicies": {
+              "methods": [
+                "searchAllIamPolicies",
+                "searchAllIamPoliciesStream",
+                "searchAllIamPoliciesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
