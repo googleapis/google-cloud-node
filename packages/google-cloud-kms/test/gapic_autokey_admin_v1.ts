@@ -21,9 +21,7 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as ekmserviceModule from '../src';
-
-import {PassThrough} from 'stream';
+import * as autokeyadminModule from '../src';
 
 import {protobuf, IamProtos, LocationProtos} from 'google-gax';
 
@@ -66,44 +64,6 @@ function stubSimpleCallWithCallback<ResponseType>(
     : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
-    }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
-    }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
-}
-
 function stubAsyncIterationCall<ResponseType>(
   responses?: ResponseType[],
   error?: Error
@@ -127,16 +87,16 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1.EkmServiceClient', () => {
+describe('v1.AutokeyAdminClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient();
+      const client = new autokeyadminModule.v1.AutokeyAdminClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'cloudkms.googleapis.com');
     });
 
     it('has universeDomain', () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient();
+      const client = new autokeyadminModule.v1.AutokeyAdminClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -147,7 +107,8 @@ describe('v1.EkmServiceClient', () => {
     ) {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
-        const servicePath = ekmserviceModule.v1.EkmServiceClient.servicePath;
+        const servicePath =
+          autokeyadminModule.v1.AutokeyAdminClient.servicePath;
         assert.strictEqual(servicePath, 'cloudkms.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -155,14 +116,15 @@ describe('v1.EkmServiceClient', () => {
 
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint = ekmserviceModule.v1.EkmServiceClient.apiEndpoint;
+        const apiEndpoint =
+          autokeyadminModule.v1.AutokeyAdminClient.apiEndpoint;
         assert.strictEqual(apiEndpoint, 'cloudkms.googleapis.com');
         assert(stub.called);
         stub.restore();
       });
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         universeDomain: 'example.com',
       });
       const servicePath = client.apiEndpoint;
@@ -170,7 +132,7 @@ describe('v1.EkmServiceClient', () => {
     });
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         universe_domain: 'example.com',
       });
       const servicePath = client.apiEndpoint;
@@ -182,7 +144,7 @@ describe('v1.EkmServiceClient', () => {
         it('sets apiEndpoint from environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new ekmserviceModule.v1.EkmServiceClient();
+          const client = new autokeyadminModule.v1.AutokeyAdminClient();
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'cloudkms.example.com');
           if (saved) {
@@ -195,7 +157,7 @@ describe('v1.EkmServiceClient', () => {
         it('value configured in code has priority over environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new ekmserviceModule.v1.EkmServiceClient({
+          const client = new autokeyadminModule.v1.AutokeyAdminClient({
             universeDomain: 'configured.example.com',
           });
           const servicePath = client.apiEndpoint;
@@ -210,7 +172,7 @@ describe('v1.EkmServiceClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new ekmserviceModule.v1.EkmServiceClient({
+        new autokeyadminModule.v1.AutokeyAdminClient({
           universe_domain: 'example.com',
           universeDomain: 'example.net',
         });
@@ -218,51 +180,51 @@ describe('v1.EkmServiceClient', () => {
     });
 
     it('has port', () => {
-      const port = ekmserviceModule.v1.EkmServiceClient.port;
+      const port = autokeyadminModule.v1.AutokeyAdminClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient();
+      const client = new autokeyadminModule.v1.AutokeyAdminClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         fallback: true,
       });
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      assert.strictEqual(client.ekmServiceStub, undefined);
+      assert.strictEqual(client.autokeyAdminStub, undefined);
       await client.initialize();
-      assert(client.ekmServiceStub);
+      assert(client.autokeyAdminStub);
     });
 
     it('has close method for the initialized client', done => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
-      assert(client.ekmServiceStub);
+      assert(client.autokeyAdminStub);
       client.close().then(() => {
         done();
       });
     });
 
     it('has close method for the non-initialized client', done => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      assert.strictEqual(client.ekmServiceStub, undefined);
+      assert.strictEqual(client.autokeyAdminStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -270,7 +232,7 @@ describe('v1.EkmServiceClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -282,7 +244,7 @@ describe('v1.EkmServiceClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -303,195 +265,67 @@ describe('v1.EkmServiceClient', () => {
     });
   });
 
-  describe('getEkmConnection', () => {
-    it('invokes getEkmConnection without error', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+  describe('updateAutokeyConfig', () => {
+    it('invokes updateAutokeyConfig without error', async () => {
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.GetEkmConnectionRequest()
+        new protos.google.cloud.kms.v1.UpdateAutokeyConfigRequest()
       );
+      request.autokeyConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.GetEkmConnectionRequest',
-        ['name']
+        '.google.cloud.kms.v1.UpdateAutokeyConfigRequest',
+        ['autokeyConfig', 'name']
       );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      request.autokeyConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `autokey_config.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.kms.v1.EkmConnection()
+        new protos.google.cloud.kms.v1.AutokeyConfig()
       );
-      client.innerApiCalls.getEkmConnection = stubSimpleCall(expectedResponse);
-      const [response] = await client.getEkmConnection(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getEkmConnection as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEkmConnection as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEkmConnection without error using callback', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.GetEkmConnectionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.GetEkmConnectionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.kms.v1.EkmConnection()
-      );
-      client.innerApiCalls.getEkmConnection =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getEkmConnection(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.kms.v1.IEkmConnection | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getEkmConnection as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEkmConnection as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEkmConnection with error', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.GetEkmConnectionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.GetEkmConnectionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getEkmConnection = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getEkmConnection(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getEkmConnection as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEkmConnection as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEkmConnection with closed client', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.GetEkmConnectionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.GetEkmConnectionRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getEkmConnection(request), expectedError);
-    });
-  });
-
-  describe('createEkmConnection', () => {
-    it('invokes createEkmConnection without error', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.CreateEkmConnectionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.CreateEkmConnectionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.kms.v1.EkmConnection()
-      );
-      client.innerApiCalls.createEkmConnection =
+      client.innerApiCalls.updateAutokeyConfig =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.createEkmConnection(request);
+      const [response] = await client.updateAutokeyConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.createEkmConnection as SinonStub
+        client.innerApiCalls.updateAutokeyConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.createEkmConnection as SinonStub
+        client.innerApiCalls.updateAutokeyConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes createEkmConnection without error using callback', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+    it('invokes updateAutokeyConfig without error using callback', async () => {
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.CreateEkmConnectionRequest()
+        new protos.google.cloud.kms.v1.UpdateAutokeyConfigRequest()
       );
+      request.autokeyConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.CreateEkmConnectionRequest',
-        ['parent']
+        '.google.cloud.kms.v1.UpdateAutokeyConfigRequest',
+        ['autokeyConfig', 'name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      request.autokeyConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `autokey_config.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.kms.v1.EkmConnection()
+        new protos.google.cloud.kms.v1.AutokeyConfig()
       );
-      client.innerApiCalls.createEkmConnection =
+      client.innerApiCalls.updateAutokeyConfig =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.createEkmConnection(
+        client.updateAutokeyConfig(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.kms.v1.IEkmConnection | null
+            result?: protos.google.cloud.kms.v1.IAutokeyConfig | null
           ) => {
             if (err) {
               reject(err);
@@ -504,127 +338,257 @@ describe('v1.EkmServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.createEkmConnection as SinonStub
+        client.innerApiCalls.updateAutokeyConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.createEkmConnection as SinonStub
+        client.innerApiCalls.updateAutokeyConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes createEkmConnection with error', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+    it('invokes updateAutokeyConfig with error', async () => {
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.CreateEkmConnectionRequest()
+        new protos.google.cloud.kms.v1.UpdateAutokeyConfigRequest()
+      );
+      request.autokeyConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.UpdateAutokeyConfigRequest',
+        ['autokeyConfig', 'name']
+      );
+      request.autokeyConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `autokey_config.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateAutokeyConfig = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateAutokeyConfig(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateAutokeyConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAutokeyConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAutokeyConfig with closed client', async () => {
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.UpdateAutokeyConfigRequest()
+      );
+      request.autokeyConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.UpdateAutokeyConfigRequest',
+        ['autokeyConfig', 'name']
+      );
+      request.autokeyConfig.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateAutokeyConfig(request), expectedError);
+    });
+  });
+
+  describe('getAutokeyConfig', () => {
+    it('invokes getAutokeyConfig without error', async () => {
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.GetAutokeyConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.CreateEkmConnectionRequest',
+        '.google.cloud.kms.v1.GetAutokeyConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.kms.v1.AutokeyConfig()
+      );
+      client.innerApiCalls.getAutokeyConfig = stubSimpleCall(expectedResponse);
+      const [response] = await client.getAutokeyConfig(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAutokeyConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAutokeyConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAutokeyConfig without error using callback', async () => {
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.GetAutokeyConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.GetAutokeyConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.kms.v1.AutokeyConfig()
+      );
+      client.innerApiCalls.getAutokeyConfig =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getAutokeyConfig(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.kms.v1.IAutokeyConfig | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAutokeyConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAutokeyConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAutokeyConfig with error', async () => {
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.GetAutokeyConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.GetAutokeyConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getAutokeyConfig = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getAutokeyConfig(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getAutokeyConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAutokeyConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAutokeyConfig with closed client', async () => {
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.GetAutokeyConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.GetAutokeyConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getAutokeyConfig(request), expectedError);
+    });
+  });
+
+  describe('showEffectiveAutokeyConfig', () => {
+    it('invokes showEffectiveAutokeyConfig without error', async () => {
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.ShowEffectiveAutokeyConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ShowEffectiveAutokeyConfigRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createEkmConnection = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createEkmConnection(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createEkmConnection as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createEkmConnection as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createEkmConnection with closed client', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.CreateEkmConnectionRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.CreateEkmConnectionRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.createEkmConnection(request), expectedError);
-    });
-  });
-
-  describe('updateEkmConnection', () => {
-    it('invokes updateEkmConnection without error', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.UpdateEkmConnectionRequest()
-      );
-      request.ekmConnection ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.UpdateEkmConnectionRequest',
-        ['ekmConnection', 'name']
-      );
-      request.ekmConnection.name = defaultValue1;
-      const expectedHeaderRequestParams = `ekm_connection.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.kms.v1.EkmConnection()
+        new protos.google.cloud.kms.v1.ShowEffectiveAutokeyConfigResponse()
       );
-      client.innerApiCalls.updateEkmConnection =
+      client.innerApiCalls.showEffectiveAutokeyConfig =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.updateEkmConnection(request);
+      const [response] = await client.showEffectiveAutokeyConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.updateEkmConnection as SinonStub
+        client.innerApiCalls.showEffectiveAutokeyConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.updateEkmConnection as SinonStub
+        client.innerApiCalls.showEffectiveAutokeyConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes updateEkmConnection without error using callback', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+    it('invokes showEffectiveAutokeyConfig without error using callback', async () => {
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.UpdateEkmConnectionRequest()
+        new protos.google.cloud.kms.v1.ShowEffectiveAutokeyConfigRequest()
       );
-      request.ekmConnection ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.UpdateEkmConnectionRequest',
-        ['ekmConnection', 'name']
+        '.google.cloud.kms.v1.ShowEffectiveAutokeyConfigRequest',
+        ['parent']
       );
-      request.ekmConnection.name = defaultValue1;
-      const expectedHeaderRequestParams = `ekm_connection.name=${defaultValue1}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.kms.v1.EkmConnection()
+        new protos.google.cloud.kms.v1.ShowEffectiveAutokeyConfigResponse()
       );
-      client.innerApiCalls.updateEkmConnection =
+      client.innerApiCalls.showEffectiveAutokeyConfig =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.updateEkmConnection(
+        client.showEffectiveAutokeyConfig(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.kms.v1.IEkmConnection | null
+            result?: protos.google.cloud.kms.v1.IShowEffectiveAutokeyConfigResponse | null
           ) => {
             if (err) {
               reject(err);
@@ -637,767 +601,74 @@ describe('v1.EkmServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.updateEkmConnection as SinonStub
+        client.innerApiCalls.showEffectiveAutokeyConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.updateEkmConnection as SinonStub
+        client.innerApiCalls.showEffectiveAutokeyConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes updateEkmConnection with error', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+    it('invokes showEffectiveAutokeyConfig with error', async () => {
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.UpdateEkmConnectionRequest()
+        new protos.google.cloud.kms.v1.ShowEffectiveAutokeyConfigRequest()
       );
-      request.ekmConnection ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.UpdateEkmConnectionRequest',
-        ['ekmConnection', 'name']
+        '.google.cloud.kms.v1.ShowEffectiveAutokeyConfigRequest',
+        ['parent']
       );
-      request.ekmConnection.name = defaultValue1;
-      const expectedHeaderRequestParams = `ekm_connection.name=${defaultValue1}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.updateEkmConnection = stubSimpleCall(
+      client.innerApiCalls.showEffectiveAutokeyConfig = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.updateEkmConnection(request), expectedError);
+      await assert.rejects(
+        client.showEffectiveAutokeyConfig(request),
+        expectedError
+      );
       const actualRequest = (
-        client.innerApiCalls.updateEkmConnection as SinonStub
+        client.innerApiCalls.showEffectiveAutokeyConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.updateEkmConnection as SinonStub
+        client.innerApiCalls.showEffectiveAutokeyConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes updateEkmConnection with closed client', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+    it('invokes showEffectiveAutokeyConfig with closed client', async () => {
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.UpdateEkmConnectionRequest()
+        new protos.google.cloud.kms.v1.ShowEffectiveAutokeyConfigRequest()
       );
-      request.ekmConnection ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.UpdateEkmConnectionRequest',
-        ['ekmConnection', 'name']
+        '.google.cloud.kms.v1.ShowEffectiveAutokeyConfigRequest',
+        ['parent']
       );
-      request.ekmConnection.name = defaultValue1;
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.updateEkmConnection(request), expectedError);
-    });
-  });
-
-  describe('getEkmConfig', () => {
-    it('invokes getEkmConfig without error', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.GetEkmConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.GetEkmConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.kms.v1.EkmConfig()
-      );
-      client.innerApiCalls.getEkmConfig = stubSimpleCall(expectedResponse);
-      const [response] = await client.getEkmConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getEkmConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEkmConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEkmConfig without error using callback', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.GetEkmConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.GetEkmConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.kms.v1.EkmConfig()
-      );
-      client.innerApiCalls.getEkmConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getEkmConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.kms.v1.IEkmConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getEkmConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEkmConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEkmConfig with error', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.GetEkmConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.GetEkmConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getEkmConfig = stubSimpleCall(
-        undefined,
+      await assert.rejects(
+        client.showEffectiveAutokeyConfig(request),
         expectedError
-      );
-      await assert.rejects(client.getEkmConfig(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getEkmConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEkmConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEkmConfig with closed client', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.GetEkmConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.GetEkmConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getEkmConfig(request), expectedError);
-    });
-  });
-
-  describe('updateEkmConfig', () => {
-    it('invokes updateEkmConfig without error', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.UpdateEkmConfigRequest()
-      );
-      request.ekmConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.UpdateEkmConfigRequest',
-        ['ekmConfig', 'name']
-      );
-      request.ekmConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `ekm_config.name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.kms.v1.EkmConfig()
-      );
-      client.innerApiCalls.updateEkmConfig = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateEkmConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateEkmConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateEkmConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateEkmConfig without error using callback', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.UpdateEkmConfigRequest()
-      );
-      request.ekmConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.UpdateEkmConfigRequest',
-        ['ekmConfig', 'name']
-      );
-      request.ekmConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `ekm_config.name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.kms.v1.EkmConfig()
-      );
-      client.innerApiCalls.updateEkmConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateEkmConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.kms.v1.IEkmConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateEkmConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateEkmConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateEkmConfig with error', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.UpdateEkmConfigRequest()
-      );
-      request.ekmConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.UpdateEkmConfigRequest',
-        ['ekmConfig', 'name']
-      );
-      request.ekmConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `ekm_config.name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateEkmConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateEkmConfig(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateEkmConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateEkmConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateEkmConfig with closed client', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.UpdateEkmConfigRequest()
-      );
-      request.ekmConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.UpdateEkmConfigRequest',
-        ['ekmConfig', 'name']
-      );
-      request.ekmConfig.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.updateEkmConfig(request), expectedError);
-    });
-  });
-
-  describe('verifyConnectivity', () => {
-    it('invokes verifyConnectivity without error', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.VerifyConnectivityRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.VerifyConnectivityRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.kms.v1.VerifyConnectivityResponse()
-      );
-      client.innerApiCalls.verifyConnectivity =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.verifyConnectivity(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.verifyConnectivity as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.verifyConnectivity as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes verifyConnectivity without error using callback', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.VerifyConnectivityRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.VerifyConnectivityRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.kms.v1.VerifyConnectivityResponse()
-      );
-      client.innerApiCalls.verifyConnectivity =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.verifyConnectivity(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.kms.v1.IVerifyConnectivityResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.verifyConnectivity as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.verifyConnectivity as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes verifyConnectivity with error', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.VerifyConnectivityRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.VerifyConnectivityRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.verifyConnectivity = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.verifyConnectivity(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.verifyConnectivity as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.verifyConnectivity as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes verifyConnectivity with closed client', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.VerifyConnectivityRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.VerifyConnectivityRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.verifyConnectivity(request), expectedError);
-    });
-  });
-
-  describe('listEkmConnections', () => {
-    it('invokes listEkmConnections without error', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.ListEkmConnectionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.ListEkmConnectionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.kms.v1.EkmConnection()),
-        generateSampleMessage(new protos.google.cloud.kms.v1.EkmConnection()),
-        generateSampleMessage(new protos.google.cloud.kms.v1.EkmConnection()),
-      ];
-      client.innerApiCalls.listEkmConnections =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listEkmConnections(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listEkmConnections as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listEkmConnections as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listEkmConnections without error using callback', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.ListEkmConnectionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.ListEkmConnectionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.kms.v1.EkmConnection()),
-        generateSampleMessage(new protos.google.cloud.kms.v1.EkmConnection()),
-        generateSampleMessage(new protos.google.cloud.kms.v1.EkmConnection()),
-      ];
-      client.innerApiCalls.listEkmConnections =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listEkmConnections(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.kms.v1.IEkmConnection[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listEkmConnections as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listEkmConnections as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listEkmConnections with error', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.ListEkmConnectionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.ListEkmConnectionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listEkmConnections = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listEkmConnections(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listEkmConnections as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listEkmConnections as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listEkmConnectionsStream without error', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.ListEkmConnectionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.ListEkmConnectionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.kms.v1.EkmConnection()),
-        generateSampleMessage(new protos.google.cloud.kms.v1.EkmConnection()),
-        generateSampleMessage(new protos.google.cloud.kms.v1.EkmConnection()),
-      ];
-      client.descriptors.page.listEkmConnections.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listEkmConnectionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.kms.v1.EkmConnection[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.kms.v1.EkmConnection) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listEkmConnections.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listEkmConnections, request)
-      );
-      assert(
-        (client.descriptors.page.listEkmConnections.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listEkmConnectionsStream with error', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.ListEkmConnectionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.ListEkmConnectionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listEkmConnections.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listEkmConnectionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.kms.v1.EkmConnection[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.kms.v1.EkmConnection) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listEkmConnections.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listEkmConnections, request)
-      );
-      assert(
-        (client.descriptors.page.listEkmConnections.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listEkmConnections without error', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.ListEkmConnectionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.ListEkmConnectionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.kms.v1.EkmConnection()),
-        generateSampleMessage(new protos.google.cloud.kms.v1.EkmConnection()),
-        generateSampleMessage(new protos.google.cloud.kms.v1.EkmConnection()),
-      ];
-      client.descriptors.page.listEkmConnections.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.kms.v1.IEkmConnection[] = [];
-      const iterable = client.listEkmConnectionsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listEkmConnections.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listEkmConnections.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listEkmConnections with error', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.ListEkmConnectionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.kms.v1.ListEkmConnectionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listEkmConnections.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listEkmConnectionsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.kms.v1.IEkmConnection[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listEkmConnections.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listEkmConnections.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
       );
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1427,7 +698,7 @@ describe('v1.EkmServiceClient', () => {
       );
     });
     it('invokes getIamPolicy without error using callback', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1471,7 +742,7 @@ describe('v1.EkmServiceClient', () => {
       assert((client.iamClient.getIamPolicy as SinonStub).getCall(0));
     });
     it('invokes getIamPolicy with error', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1503,7 +774,7 @@ describe('v1.EkmServiceClient', () => {
   });
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1533,7 +804,7 @@ describe('v1.EkmServiceClient', () => {
       );
     });
     it('invokes setIamPolicy without error using callback', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1577,7 +848,7 @@ describe('v1.EkmServiceClient', () => {
       assert((client.iamClient.setIamPolicy as SinonStub).getCall(0));
     });
     it('invokes setIamPolicy with error', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1609,7 +880,7 @@ describe('v1.EkmServiceClient', () => {
   });
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1642,7 +913,7 @@ describe('v1.EkmServiceClient', () => {
       );
     });
     it('invokes testIamPermissions without error using callback', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1686,7 +957,7 @@ describe('v1.EkmServiceClient', () => {
       assert((client.iamClient.testIamPermissions as SinonStub).getCall(0));
     });
     it('invokes testIamPermissions with error', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1721,7 +992,7 @@ describe('v1.EkmServiceClient', () => {
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1751,7 +1022,7 @@ describe('v1.EkmServiceClient', () => {
       );
     });
     it('invokes getLocation without error using callback', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1795,7 +1066,7 @@ describe('v1.EkmServiceClient', () => {
       assert((client.locationsClient.getLocation as SinonStub).getCall(0));
     });
     it('invokes getLocation with error', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1830,7 +1101,7 @@ describe('v1.EkmServiceClient', () => {
   });
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1878,7 +1149,7 @@ describe('v1.EkmServiceClient', () => {
       );
     });
     it('uses async iteration with listLocations with error', async () => {
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1924,7 +1195,7 @@ describe('v1.EkmServiceClient', () => {
       const expectedParameters = {
         folder: 'folderValue',
       };
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1965,7 +1236,7 @@ describe('v1.EkmServiceClient', () => {
         key_ring: 'keyRingValue',
         crypto_key: 'cryptoKeyValue',
       };
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2042,7 +1313,7 @@ describe('v1.EkmServiceClient', () => {
         crypto_key: 'cryptoKeyValue',
         crypto_key_version: 'cryptoKeyVersionValue',
       };
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2131,7 +1402,7 @@ describe('v1.EkmServiceClient', () => {
         project: 'projectValue',
         location: 'locationValue',
       };
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2181,7 +1452,7 @@ describe('v1.EkmServiceClient', () => {
         location: 'locationValue',
         ekm_connection: 'ekmConnectionValue',
       };
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2246,7 +1517,7 @@ describe('v1.EkmServiceClient', () => {
         key_ring: 'keyRingValue',
         import_job: 'importJobValue',
       };
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2321,7 +1592,7 @@ describe('v1.EkmServiceClient', () => {
         location: 'locationValue',
         key_handle: 'keyHandleValue',
       };
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2385,7 +1656,7 @@ describe('v1.EkmServiceClient', () => {
         location: 'locationValue',
         key_ring: 'keyRingValue',
       };
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2442,49 +1713,38 @@ describe('v1.EkmServiceClient', () => {
       });
     });
 
-    describe('location', () => {
-      const fakePath = '/rendered/path/location';
+    describe('project', () => {
+      const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
-        location: 'locationValue',
       };
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.locationPathTemplate.render = sinon
+      client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
-      client.pathTemplates.locationPathTemplate.match = sinon
+      client.pathTemplates.projectPathTemplate.match = sinon
         .stub()
         .returns(expectedParameters);
 
-      it('locationPath', () => {
-        const result = client.locationPath('projectValue', 'locationValue');
+      it('projectPath', () => {
+        const result = client.projectPath('projectValue');
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.locationPathTemplate.render as SinonStub)
+          (client.pathTemplates.projectPathTemplate.render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
-      it('matchProjectFromLocationName', () => {
-        const result = client.matchProjectFromLocationName(fakePath);
+      it('matchProjectFromProjectName', () => {
+        const result = client.matchProjectFromProjectName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromLocationName', () => {
-        const result = client.matchLocationFromLocationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
+          (client.pathTemplates.projectPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2500,7 +1760,7 @@ describe('v1.EkmServiceClient', () => {
         crypto_key: 'cryptoKeyValue',
         crypto_key_version: 'cryptoKeyVersionValue',
       };
-      const client = new ekmserviceModule.v1.EkmServiceClient({
+      const client = new autokeyadminModule.v1.AutokeyAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });

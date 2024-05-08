@@ -8,17 +8,328 @@
               "nested": {
                 "v1": {
                   "options": {
-                    "cc_enable_arenas": true,
-                    "csharp_namespace": "Google.Cloud.Kms.V1",
                     "go_package": "cloud.google.com/go/kms/apiv1/kmspb;kmspb",
                     "java_multiple_files": true,
                     "java_outer_classname": "KmsProto",
                     "java_package": "com.google.cloud.kms.v1",
+                    "cc_enable_arenas": true,
+                    "csharp_namespace": "Google.Cloud.Kms.V1",
                     "php_namespace": "Google\\Cloud\\Kms\\V1",
                     "(google.api.resource_definition).type": "servicedirectory.googleapis.com/Service",
                     "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/namespaces/{namespace}/services/{service}"
                   },
                   "nested": {
+                    "Autokey": {
+                      "options": {
+                        "(google.api.default_host)": "cloudkms.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/cloudkms"
+                      },
+                      "methods": {
+                        "CreateKeyHandle": {
+                          "requestType": "CreateKeyHandleRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/keyHandles",
+                            "(google.api.http).body": "key_handle",
+                            "(google.api.method_signature)": "parent,key_handle,key_handle_id",
+                            "(google.longrunning.operation_info).response_type": "KeyHandle",
+                            "(google.longrunning.operation_info).metadata_type": "CreateKeyHandleMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/keyHandles",
+                                "body": "key_handle"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,key_handle,key_handle_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "KeyHandle",
+                                "metadata_type": "CreateKeyHandleMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetKeyHandle": {
+                          "requestType": "GetKeyHandleRequest",
+                          "responseType": "KeyHandle",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/keyHandles/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/keyHandles/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListKeyHandles": {
+                          "requestType": "ListKeyHandlesRequest",
+                          "responseType": "ListKeyHandlesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/keyHandles",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/keyHandles"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "CreateKeyHandleRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "keyHandleId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "keyHandle": {
+                          "type": "KeyHandle",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetKeyHandleRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/KeyHandle"
+                          }
+                        }
+                      }
+                    },
+                    "KeyHandle": {
+                      "options": {
+                        "(google.api.resource).type": "cloudkms.googleapis.com/KeyHandle",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/keyHandles/{key_handle}",
+                        "(google.api.resource).plural": "keyHandles",
+                        "(google.api.resource).singular": "keyHandle"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "kmsKey": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
+                        },
+                        "resourceTypeSelector": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CreateKeyHandleMetadata": {
+                      "fields": {}
+                    },
+                    "ListKeyHandlesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListKeyHandlesResponse": {
+                      "fields": {
+                        "keyHandles": {
+                          "rule": "repeated",
+                          "type": "KeyHandle",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AutokeyAdmin": {
+                      "options": {
+                        "(google.api.default_host)": "cloudkms.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/cloudkms"
+                      },
+                      "methods": {
+                        "UpdateAutokeyConfig": {
+                          "requestType": "UpdateAutokeyConfigRequest",
+                          "responseType": "AutokeyConfig",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{autokey_config.name=folders/*/autokeyConfig}",
+                            "(google.api.http).body": "autokey_config",
+                            "(google.api.method_signature)": "autokey_config,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{autokey_config.name=folders/*/autokeyConfig}",
+                                "body": "autokey_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "autokey_config,update_mask"
+                            }
+                          ]
+                        },
+                        "GetAutokeyConfig": {
+                          "requestType": "GetAutokeyConfigRequest",
+                          "responseType": "AutokeyConfig",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=folders/*/autokeyConfig}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=folders/*/autokeyConfig}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ShowEffectiveAutokeyConfig": {
+                          "requestType": "ShowEffectiveAutokeyConfigRequest",
+                          "responseType": "ShowEffectiveAutokeyConfigResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*}:showEffectiveAutokeyConfig",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*}:showEffectiveAutokeyConfig"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "UpdateAutokeyConfigRequest": {
+                      "fields": {
+                        "autokeyConfig": {
+                          "type": "AutokeyConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetAutokeyConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/AutokeyConfig"
+                          }
+                        }
+                      }
+                    },
+                    "AutokeyConfig": {
+                      "options": {
+                        "(google.api.resource).type": "cloudkms.googleapis.com/AutokeyConfig",
+                        "(google.api.resource).pattern": "folders/{folder}/autokeyConfig",
+                        "(google.api.resource).plural": "autokeyConfigs",
+                        "(google.api.resource).singular": "autokeyConfig"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "keyProject": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ShowEffectiveAutokeyConfigRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                          }
+                        }
+                      }
+                    },
+                    "ShowEffectiveAutokeyConfigResponse": {
+                      "fields": {
+                        "keyProject": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
                     "EkmService": {
                       "options": {
                         "(google.api.default_host)": "cloudkms.googleapis.com",
@@ -4475,6 +4786,21 @@
                 }
               }
             },
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
+                  "id": 2
+                }
+              }
+            },
+            "Empty": {
+              "fields": {}
+            },
             "FieldMask": {
               "fields": {
                 "paths": {
@@ -4565,6 +4891,251 @@
                 "value": {
                   "type": "bytes",
                   "id": 1
+                }
+              }
+            }
+          }
+        },
+        "longrunning": {
+          "options": {
+            "cc_enable_arenas": true,
+            "csharp_namespace": "Google.LongRunning",
+            "go_package": "cloud.google.com/go/longrunning/autogen/longrunningpb;longrunningpb",
+            "java_multiple_files": true,
+            "java_outer_classname": "OperationsProto",
+            "java_package": "com.google.longrunning",
+            "php_namespace": "Google\\LongRunning"
+          },
+          "nested": {
+            "operationInfo": {
+              "type": "google.longrunning.OperationInfo",
+              "id": 1049,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "Operations": {
+              "options": {
+                "(google.api.default_host)": "longrunning.googleapis.com"
+              },
+              "methods": {
+                "ListOperations": {
+                  "requestType": "ListOperationsRequest",
+                  "responseType": "ListOperationsResponse",
+                  "options": {
+                    "(google.api.http).get": "/v1/{name=operations}",
+                    "(google.api.method_signature)": "name,filter"
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name,filter"
+                    }
+                  ]
+                },
+                "GetOperation": {
+                  "requestType": "GetOperationRequest",
+                  "responseType": "Operation",
+                  "options": {
+                    "(google.api.http).get": "/v1/{name=operations/**}",
+                    "(google.api.method_signature)": "name"
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
+                },
+                "DeleteOperation": {
+                  "requestType": "DeleteOperationRequest",
+                  "responseType": "google.protobuf.Empty",
+                  "options": {
+                    "(google.api.http).delete": "/v1/{name=operations/**}",
+                    "(google.api.method_signature)": "name"
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "delete": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
+                },
+                "CancelOperation": {
+                  "requestType": "CancelOperationRequest",
+                  "responseType": "google.protobuf.Empty",
+                  "options": {
+                    "(google.api.http).post": "/v1/{name=operations/**}:cancel",
+                    "(google.api.http).body": "*",
+                    "(google.api.method_signature)": "name"
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "post": "/v1/{name=operations/**}:cancel",
+                        "body": "*"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
+                },
+                "WaitOperation": {
+                  "requestType": "WaitOperationRequest",
+                  "responseType": "Operation"
+                }
+              }
+            },
+            "Operation": {
+              "oneofs": {
+                "result": {
+                  "oneof": [
+                    "error",
+                    "response"
+                  ]
+                }
+              },
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "metadata": {
+                  "type": "google.protobuf.Any",
+                  "id": 2
+                },
+                "done": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "error": {
+                  "type": "google.rpc.Status",
+                  "id": 4
+                },
+                "response": {
+                  "type": "google.protobuf.Any",
+                  "id": 5
+                }
+              }
+            },
+            "GetOperationRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "ListOperationsRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 4
+                },
+                "filter": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pageSize": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "pageToken": {
+                  "type": "string",
+                  "id": 3
+                }
+              }
+            },
+            "ListOperationsResponse": {
+              "fields": {
+                "operations": {
+                  "rule": "repeated",
+                  "type": "Operation",
+                  "id": 1
+                },
+                "nextPageToken": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "CancelOperationRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "DeleteOperationRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "WaitOperationRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "timeout": {
+                  "type": "google.protobuf.Duration",
+                  "id": 2
+                }
+              }
+            },
+            "OperationInfo": {
+              "fields": {
+                "responseType": {
+                  "type": "string",
+                  "id": 1
+                },
+                "metadataType": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            }
+          }
+        },
+        "rpc": {
+          "options": {
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
+            "java_multiple_files": true,
+            "java_outer_classname": "StatusProto",
+            "java_package": "com.google.rpc",
+            "objc_class_prefix": "RPC"
+          },
+          "nested": {
+            "Status": {
+              "fields": {
+                "code": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "message": {
+                  "type": "string",
+                  "id": 2
+                },
+                "details": {
+                  "rule": "repeated",
+                  "type": "google.protobuf.Any",
+                  "id": 3
                 }
               }
             }
