@@ -1690,6 +1690,23 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "PROCESSING": 1,
+                            "ACTIVE": 2,
+                            "FAILED": 10
+                          }
                         }
                       }
                     },
@@ -2140,6 +2157,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "responseSchema": {
+                          "type": "Schema",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2207,6 +2231,13 @@
                         "promptFeedback": {
                           "type": "PromptFeedback",
                           "id": 2
+                        },
+                        "usageMetadata": {
+                          "type": "UsageMetadata",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -2232,6 +2263,22 @@
                                 "SAFETY": 1,
                                 "OTHER": 2
                               }
+                            }
+                          }
+                        },
+                        "UsageMetadata": {
+                          "fields": {
+                            "promptTokenCount": {
+                              "type": "int32",
+                              "id": 1
+                            },
+                            "candidatesTokenCount": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "totalTokenCount": {
+                              "type": "int32",
+                              "id": 3
                             }
                           }
                         }
@@ -2654,7 +2701,14 @@
                           "type": "Content",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "generateContentRequest": {
+                          "type": "GenerateContentRequest",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }

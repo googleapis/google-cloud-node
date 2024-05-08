@@ -283,7 +283,7 @@
             "regionTag": "generativelanguage_v1beta_generated_GenerativeService_GenerateContent_async",
             "title": "DiscussService generateContent Sample",
             "origin": "API_DEFINITION",
-            "description": " Generates a response from the model given an input `GenerateContentRequest`.",
+            "description": " Generates a response from the model given an input `GenerateContentRequest`. Input capabilities differ between models, including tuned models. See the [model guide](https://ai.google.dev/models/gemini) and [tuning guide](https://ai.google.dev/docs/model_tuning_guidance) for details.",
             "canonical": true,
             "file": "generative_service.generate_content.js",
             "language": "JAVASCRIPT",
@@ -482,7 +482,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 80,
+                    "end": 81,
                     "type": "FULL"
                 }
             ],
@@ -582,7 +582,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 61,
+                    "end": 65,
                     "type": "FULL"
                 }
             ],
@@ -598,6 +598,10 @@
                     {
                         "name": "contents",
                         "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "generate_content_request",
+                        "type": ".google.ai.generativelanguage.v1beta.GenerateContentRequest"
                     }
                 ],
                 "resultType": ".google.ai.generativelanguage.v1beta.CountTokensResponse",
