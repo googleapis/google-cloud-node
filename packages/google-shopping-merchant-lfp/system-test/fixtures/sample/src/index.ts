@@ -20,7 +20,7 @@ import {
   LfpInventoryServiceClient,
   LfpSaleServiceClient,
   LfpStoreServiceClient,
-} from '@google-shopping/lfp';
+} from '@google-cloud/lfp';
 
 // check that the client class type name can be used
 function doStuffWithLfpInventoryServiceClient(

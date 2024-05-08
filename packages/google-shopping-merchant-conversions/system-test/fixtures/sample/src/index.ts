@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {ConversionSourcesServiceClient} from '@google-shopping/conversions';
+import {ConversionSourcesServiceClient} from '@google-cloud/conversions';
 
 // check that the client class type name can be used
 function doStuffWithConversionSourcesServiceClient(

@@ -43,7 +43,7 @@ module.exports = {
     copyright: 'Copyright 2024 Google LLC',
     includeDate: false,
     sourceFiles: false,
-    systemName: '@google-shopping/conversions',
+    systemName: '@google-cloud/conversions',
     theme: 'lumen',
     default: {
       outputSourceFiles: false
