@@ -26,6 +26,1283 @@ export namespace google {
             /** Namespace v1. */
             namespace v1 {
 
+                /** Represents an Autokey */
+                class Autokey extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new Autokey service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new Autokey service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Autokey;
+
+                    /**
+                     * Calls CreateKeyHandle.
+                     * @param request CreateKeyHandleRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createKeyHandle(request: google.cloud.kms.v1.ICreateKeyHandleRequest, callback: google.cloud.kms.v1.Autokey.CreateKeyHandleCallback): void;
+
+                    /**
+                     * Calls CreateKeyHandle.
+                     * @param request CreateKeyHandleRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createKeyHandle(request: google.cloud.kms.v1.ICreateKeyHandleRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetKeyHandle.
+                     * @param request GetKeyHandleRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and KeyHandle
+                     */
+                    public getKeyHandle(request: google.cloud.kms.v1.IGetKeyHandleRequest, callback: google.cloud.kms.v1.Autokey.GetKeyHandleCallback): void;
+
+                    /**
+                     * Calls GetKeyHandle.
+                     * @param request GetKeyHandleRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getKeyHandle(request: google.cloud.kms.v1.IGetKeyHandleRequest): Promise<google.cloud.kms.v1.KeyHandle>;
+
+                    /**
+                     * Calls ListKeyHandles.
+                     * @param request ListKeyHandlesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListKeyHandlesResponse
+                     */
+                    public listKeyHandles(request: google.cloud.kms.v1.IListKeyHandlesRequest, callback: google.cloud.kms.v1.Autokey.ListKeyHandlesCallback): void;
+
+                    /**
+                     * Calls ListKeyHandles.
+                     * @param request ListKeyHandlesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listKeyHandles(request: google.cloud.kms.v1.IListKeyHandlesRequest): Promise<google.cloud.kms.v1.ListKeyHandlesResponse>;
+                }
+
+                namespace Autokey {
+
+                    /**
+                     * Callback as used by {@link google.cloud.kms.v1.Autokey|createKeyHandle}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateKeyHandleCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.kms.v1.Autokey|getKeyHandle}.
+                     * @param error Error, if any
+                     * @param [response] KeyHandle
+                     */
+                    type GetKeyHandleCallback = (error: (Error|null), response?: google.cloud.kms.v1.KeyHandle) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.kms.v1.Autokey|listKeyHandles}.
+                     * @param error Error, if any
+                     * @param [response] ListKeyHandlesResponse
+                     */
+                    type ListKeyHandlesCallback = (error: (Error|null), response?: google.cloud.kms.v1.ListKeyHandlesResponse) => void;
+                }
+
+                /** Properties of a CreateKeyHandleRequest. */
+                interface ICreateKeyHandleRequest {
+
+                    /** CreateKeyHandleRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateKeyHandleRequest keyHandleId */
+                    keyHandleId?: (string|null);
+
+                    /** CreateKeyHandleRequest keyHandle */
+                    keyHandle?: (google.cloud.kms.v1.IKeyHandle|null);
+                }
+
+                /** Represents a CreateKeyHandleRequest. */
+                class CreateKeyHandleRequest implements ICreateKeyHandleRequest {
+
+                    /**
+                     * Constructs a new CreateKeyHandleRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.ICreateKeyHandleRequest);
+
+                    /** CreateKeyHandleRequest parent. */
+                    public parent: string;
+
+                    /** CreateKeyHandleRequest keyHandleId. */
+                    public keyHandleId: string;
+
+                    /** CreateKeyHandleRequest keyHandle. */
+                    public keyHandle?: (google.cloud.kms.v1.IKeyHandle|null);
+
+                    /**
+                     * Creates a new CreateKeyHandleRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateKeyHandleRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.ICreateKeyHandleRequest): google.cloud.kms.v1.CreateKeyHandleRequest;
+
+                    /**
+                     * Encodes the specified CreateKeyHandleRequest message. Does not implicitly {@link google.cloud.kms.v1.CreateKeyHandleRequest.verify|verify} messages.
+                     * @param message CreateKeyHandleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.ICreateKeyHandleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateKeyHandleRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.CreateKeyHandleRequest.verify|verify} messages.
+                     * @param message CreateKeyHandleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.ICreateKeyHandleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateKeyHandleRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateKeyHandleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.CreateKeyHandleRequest;
+
+                    /**
+                     * Decodes a CreateKeyHandleRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateKeyHandleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.CreateKeyHandleRequest;
+
+                    /**
+                     * Verifies a CreateKeyHandleRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateKeyHandleRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateKeyHandleRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.CreateKeyHandleRequest;
+
+                    /**
+                     * Creates a plain object from a CreateKeyHandleRequest message. Also converts values to other types if specified.
+                     * @param message CreateKeyHandleRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.CreateKeyHandleRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateKeyHandleRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateKeyHandleRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetKeyHandleRequest. */
+                interface IGetKeyHandleRequest {
+
+                    /** GetKeyHandleRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetKeyHandleRequest. */
+                class GetKeyHandleRequest implements IGetKeyHandleRequest {
+
+                    /**
+                     * Constructs a new GetKeyHandleRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IGetKeyHandleRequest);
+
+                    /** GetKeyHandleRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetKeyHandleRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetKeyHandleRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IGetKeyHandleRequest): google.cloud.kms.v1.GetKeyHandleRequest;
+
+                    /**
+                     * Encodes the specified GetKeyHandleRequest message. Does not implicitly {@link google.cloud.kms.v1.GetKeyHandleRequest.verify|verify} messages.
+                     * @param message GetKeyHandleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IGetKeyHandleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetKeyHandleRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.GetKeyHandleRequest.verify|verify} messages.
+                     * @param message GetKeyHandleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IGetKeyHandleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetKeyHandleRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetKeyHandleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.GetKeyHandleRequest;
+
+                    /**
+                     * Decodes a GetKeyHandleRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetKeyHandleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.GetKeyHandleRequest;
+
+                    /**
+                     * Verifies a GetKeyHandleRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetKeyHandleRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetKeyHandleRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.GetKeyHandleRequest;
+
+                    /**
+                     * Creates a plain object from a GetKeyHandleRequest message. Also converts values to other types if specified.
+                     * @param message GetKeyHandleRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.GetKeyHandleRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetKeyHandleRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetKeyHandleRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a KeyHandle. */
+                interface IKeyHandle {
+
+                    /** KeyHandle name */
+                    name?: (string|null);
+
+                    /** KeyHandle kmsKey */
+                    kmsKey?: (string|null);
+
+                    /** KeyHandle resourceTypeSelector */
+                    resourceTypeSelector?: (string|null);
+                }
+
+                /** Represents a KeyHandle. */
+                class KeyHandle implements IKeyHandle {
+
+                    /**
+                     * Constructs a new KeyHandle.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IKeyHandle);
+
+                    /** KeyHandle name. */
+                    public name: string;
+
+                    /** KeyHandle kmsKey. */
+                    public kmsKey: string;
+
+                    /** KeyHandle resourceTypeSelector. */
+                    public resourceTypeSelector: string;
+
+                    /**
+                     * Creates a new KeyHandle instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns KeyHandle instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IKeyHandle): google.cloud.kms.v1.KeyHandle;
+
+                    /**
+                     * Encodes the specified KeyHandle message. Does not implicitly {@link google.cloud.kms.v1.KeyHandle.verify|verify} messages.
+                     * @param message KeyHandle message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IKeyHandle, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified KeyHandle message, length delimited. Does not implicitly {@link google.cloud.kms.v1.KeyHandle.verify|verify} messages.
+                     * @param message KeyHandle message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IKeyHandle, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a KeyHandle message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns KeyHandle
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.KeyHandle;
+
+                    /**
+                     * Decodes a KeyHandle message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns KeyHandle
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.KeyHandle;
+
+                    /**
+                     * Verifies a KeyHandle message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a KeyHandle message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns KeyHandle
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.KeyHandle;
+
+                    /**
+                     * Creates a plain object from a KeyHandle message. Also converts values to other types if specified.
+                     * @param message KeyHandle
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.KeyHandle, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this KeyHandle to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for KeyHandle
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateKeyHandleMetadata. */
+                interface ICreateKeyHandleMetadata {
+                }
+
+                /** Represents a CreateKeyHandleMetadata. */
+                class CreateKeyHandleMetadata implements ICreateKeyHandleMetadata {
+
+                    /**
+                     * Constructs a new CreateKeyHandleMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.ICreateKeyHandleMetadata);
+
+                    /**
+                     * Creates a new CreateKeyHandleMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateKeyHandleMetadata instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.ICreateKeyHandleMetadata): google.cloud.kms.v1.CreateKeyHandleMetadata;
+
+                    /**
+                     * Encodes the specified CreateKeyHandleMetadata message. Does not implicitly {@link google.cloud.kms.v1.CreateKeyHandleMetadata.verify|verify} messages.
+                     * @param message CreateKeyHandleMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.ICreateKeyHandleMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateKeyHandleMetadata message, length delimited. Does not implicitly {@link google.cloud.kms.v1.CreateKeyHandleMetadata.verify|verify} messages.
+                     * @param message CreateKeyHandleMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.ICreateKeyHandleMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateKeyHandleMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateKeyHandleMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.CreateKeyHandleMetadata;
+
+                    /**
+                     * Decodes a CreateKeyHandleMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateKeyHandleMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.CreateKeyHandleMetadata;
+
+                    /**
+                     * Verifies a CreateKeyHandleMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateKeyHandleMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateKeyHandleMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.CreateKeyHandleMetadata;
+
+                    /**
+                     * Creates a plain object from a CreateKeyHandleMetadata message. Also converts values to other types if specified.
+                     * @param message CreateKeyHandleMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.CreateKeyHandleMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateKeyHandleMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateKeyHandleMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListKeyHandlesRequest. */
+                interface IListKeyHandlesRequest {
+
+                    /** ListKeyHandlesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListKeyHandlesRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListKeyHandlesRequest. */
+                class ListKeyHandlesRequest implements IListKeyHandlesRequest {
+
+                    /**
+                     * Constructs a new ListKeyHandlesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IListKeyHandlesRequest);
+
+                    /** ListKeyHandlesRequest parent. */
+                    public parent: string;
+
+                    /** ListKeyHandlesRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListKeyHandlesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListKeyHandlesRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IListKeyHandlesRequest): google.cloud.kms.v1.ListKeyHandlesRequest;
+
+                    /**
+                     * Encodes the specified ListKeyHandlesRequest message. Does not implicitly {@link google.cloud.kms.v1.ListKeyHandlesRequest.verify|verify} messages.
+                     * @param message ListKeyHandlesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IListKeyHandlesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListKeyHandlesRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ListKeyHandlesRequest.verify|verify} messages.
+                     * @param message ListKeyHandlesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IListKeyHandlesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListKeyHandlesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListKeyHandlesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.ListKeyHandlesRequest;
+
+                    /**
+                     * Decodes a ListKeyHandlesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListKeyHandlesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.ListKeyHandlesRequest;
+
+                    /**
+                     * Verifies a ListKeyHandlesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListKeyHandlesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListKeyHandlesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.ListKeyHandlesRequest;
+
+                    /**
+                     * Creates a plain object from a ListKeyHandlesRequest message. Also converts values to other types if specified.
+                     * @param message ListKeyHandlesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.ListKeyHandlesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListKeyHandlesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListKeyHandlesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListKeyHandlesResponse. */
+                interface IListKeyHandlesResponse {
+
+                    /** ListKeyHandlesResponse keyHandles */
+                    keyHandles?: (google.cloud.kms.v1.IKeyHandle[]|null);
+                }
+
+                /** Represents a ListKeyHandlesResponse. */
+                class ListKeyHandlesResponse implements IListKeyHandlesResponse {
+
+                    /**
+                     * Constructs a new ListKeyHandlesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IListKeyHandlesResponse);
+
+                    /** ListKeyHandlesResponse keyHandles. */
+                    public keyHandles: google.cloud.kms.v1.IKeyHandle[];
+
+                    /**
+                     * Creates a new ListKeyHandlesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListKeyHandlesResponse instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IListKeyHandlesResponse): google.cloud.kms.v1.ListKeyHandlesResponse;
+
+                    /**
+                     * Encodes the specified ListKeyHandlesResponse message. Does not implicitly {@link google.cloud.kms.v1.ListKeyHandlesResponse.verify|verify} messages.
+                     * @param message ListKeyHandlesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IListKeyHandlesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListKeyHandlesResponse message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ListKeyHandlesResponse.verify|verify} messages.
+                     * @param message ListKeyHandlesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IListKeyHandlesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListKeyHandlesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListKeyHandlesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.ListKeyHandlesResponse;
+
+                    /**
+                     * Decodes a ListKeyHandlesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListKeyHandlesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.ListKeyHandlesResponse;
+
+                    /**
+                     * Verifies a ListKeyHandlesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListKeyHandlesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListKeyHandlesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.ListKeyHandlesResponse;
+
+                    /**
+                     * Creates a plain object from a ListKeyHandlesResponse message. Also converts values to other types if specified.
+                     * @param message ListKeyHandlesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.ListKeyHandlesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListKeyHandlesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListKeyHandlesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents an AutokeyAdmin */
+                class AutokeyAdmin extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new AutokeyAdmin service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new AutokeyAdmin service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): AutokeyAdmin;
+
+                    /**
+                     * Calls UpdateAutokeyConfig.
+                     * @param request UpdateAutokeyConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AutokeyConfig
+                     */
+                    public updateAutokeyConfig(request: google.cloud.kms.v1.IUpdateAutokeyConfigRequest, callback: google.cloud.kms.v1.AutokeyAdmin.UpdateAutokeyConfigCallback): void;
+
+                    /**
+                     * Calls UpdateAutokeyConfig.
+                     * @param request UpdateAutokeyConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateAutokeyConfig(request: google.cloud.kms.v1.IUpdateAutokeyConfigRequest): Promise<google.cloud.kms.v1.AutokeyConfig>;
+
+                    /**
+                     * Calls GetAutokeyConfig.
+                     * @param request GetAutokeyConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AutokeyConfig
+                     */
+                    public getAutokeyConfig(request: google.cloud.kms.v1.IGetAutokeyConfigRequest, callback: google.cloud.kms.v1.AutokeyAdmin.GetAutokeyConfigCallback): void;
+
+                    /**
+                     * Calls GetAutokeyConfig.
+                     * @param request GetAutokeyConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getAutokeyConfig(request: google.cloud.kms.v1.IGetAutokeyConfigRequest): Promise<google.cloud.kms.v1.AutokeyConfig>;
+
+                    /**
+                     * Calls ShowEffectiveAutokeyConfig.
+                     * @param request ShowEffectiveAutokeyConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ShowEffectiveAutokeyConfigResponse
+                     */
+                    public showEffectiveAutokeyConfig(request: google.cloud.kms.v1.IShowEffectiveAutokeyConfigRequest, callback: google.cloud.kms.v1.AutokeyAdmin.ShowEffectiveAutokeyConfigCallback): void;
+
+                    /**
+                     * Calls ShowEffectiveAutokeyConfig.
+                     * @param request ShowEffectiveAutokeyConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public showEffectiveAutokeyConfig(request: google.cloud.kms.v1.IShowEffectiveAutokeyConfigRequest): Promise<google.cloud.kms.v1.ShowEffectiveAutokeyConfigResponse>;
+                }
+
+                namespace AutokeyAdmin {
+
+                    /**
+                     * Callback as used by {@link google.cloud.kms.v1.AutokeyAdmin|updateAutokeyConfig}.
+                     * @param error Error, if any
+                     * @param [response] AutokeyConfig
+                     */
+                    type UpdateAutokeyConfigCallback = (error: (Error|null), response?: google.cloud.kms.v1.AutokeyConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.kms.v1.AutokeyAdmin|getAutokeyConfig}.
+                     * @param error Error, if any
+                     * @param [response] AutokeyConfig
+                     */
+                    type GetAutokeyConfigCallback = (error: (Error|null), response?: google.cloud.kms.v1.AutokeyConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.kms.v1.AutokeyAdmin|showEffectiveAutokeyConfig}.
+                     * @param error Error, if any
+                     * @param [response] ShowEffectiveAutokeyConfigResponse
+                     */
+                    type ShowEffectiveAutokeyConfigCallback = (error: (Error|null), response?: google.cloud.kms.v1.ShowEffectiveAutokeyConfigResponse) => void;
+                }
+
+                /** Properties of an UpdateAutokeyConfigRequest. */
+                interface IUpdateAutokeyConfigRequest {
+
+                    /** UpdateAutokeyConfigRequest autokeyConfig */
+                    autokeyConfig?: (google.cloud.kms.v1.IAutokeyConfig|null);
+
+                    /** UpdateAutokeyConfigRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateAutokeyConfigRequest. */
+                class UpdateAutokeyConfigRequest implements IUpdateAutokeyConfigRequest {
+
+                    /**
+                     * Constructs a new UpdateAutokeyConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IUpdateAutokeyConfigRequest);
+
+                    /** UpdateAutokeyConfigRequest autokeyConfig. */
+                    public autokeyConfig?: (google.cloud.kms.v1.IAutokeyConfig|null);
+
+                    /** UpdateAutokeyConfigRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateAutokeyConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateAutokeyConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IUpdateAutokeyConfigRequest): google.cloud.kms.v1.UpdateAutokeyConfigRequest;
+
+                    /**
+                     * Encodes the specified UpdateAutokeyConfigRequest message. Does not implicitly {@link google.cloud.kms.v1.UpdateAutokeyConfigRequest.verify|verify} messages.
+                     * @param message UpdateAutokeyConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IUpdateAutokeyConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateAutokeyConfigRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.UpdateAutokeyConfigRequest.verify|verify} messages.
+                     * @param message UpdateAutokeyConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IUpdateAutokeyConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateAutokeyConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateAutokeyConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.UpdateAutokeyConfigRequest;
+
+                    /**
+                     * Decodes an UpdateAutokeyConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateAutokeyConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.UpdateAutokeyConfigRequest;
+
+                    /**
+                     * Verifies an UpdateAutokeyConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateAutokeyConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateAutokeyConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.UpdateAutokeyConfigRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateAutokeyConfigRequest message. Also converts values to other types if specified.
+                     * @param message UpdateAutokeyConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.UpdateAutokeyConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateAutokeyConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateAutokeyConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetAutokeyConfigRequest. */
+                interface IGetAutokeyConfigRequest {
+
+                    /** GetAutokeyConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetAutokeyConfigRequest. */
+                class GetAutokeyConfigRequest implements IGetAutokeyConfigRequest {
+
+                    /**
+                     * Constructs a new GetAutokeyConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IGetAutokeyConfigRequest);
+
+                    /** GetAutokeyConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetAutokeyConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetAutokeyConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IGetAutokeyConfigRequest): google.cloud.kms.v1.GetAutokeyConfigRequest;
+
+                    /**
+                     * Encodes the specified GetAutokeyConfigRequest message. Does not implicitly {@link google.cloud.kms.v1.GetAutokeyConfigRequest.verify|verify} messages.
+                     * @param message GetAutokeyConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IGetAutokeyConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetAutokeyConfigRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.GetAutokeyConfigRequest.verify|verify} messages.
+                     * @param message GetAutokeyConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IGetAutokeyConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetAutokeyConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetAutokeyConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.GetAutokeyConfigRequest;
+
+                    /**
+                     * Decodes a GetAutokeyConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetAutokeyConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.GetAutokeyConfigRequest;
+
+                    /**
+                     * Verifies a GetAutokeyConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetAutokeyConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetAutokeyConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.GetAutokeyConfigRequest;
+
+                    /**
+                     * Creates a plain object from a GetAutokeyConfigRequest message. Also converts values to other types if specified.
+                     * @param message GetAutokeyConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.GetAutokeyConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetAutokeyConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetAutokeyConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AutokeyConfig. */
+                interface IAutokeyConfig {
+
+                    /** AutokeyConfig name */
+                    name?: (string|null);
+
+                    /** AutokeyConfig keyProject */
+                    keyProject?: (string|null);
+                }
+
+                /** Represents an AutokeyConfig. */
+                class AutokeyConfig implements IAutokeyConfig {
+
+                    /**
+                     * Constructs a new AutokeyConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IAutokeyConfig);
+
+                    /** AutokeyConfig name. */
+                    public name: string;
+
+                    /** AutokeyConfig keyProject. */
+                    public keyProject: string;
+
+                    /**
+                     * Creates a new AutokeyConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AutokeyConfig instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IAutokeyConfig): google.cloud.kms.v1.AutokeyConfig;
+
+                    /**
+                     * Encodes the specified AutokeyConfig message. Does not implicitly {@link google.cloud.kms.v1.AutokeyConfig.verify|verify} messages.
+                     * @param message AutokeyConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IAutokeyConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AutokeyConfig message, length delimited. Does not implicitly {@link google.cloud.kms.v1.AutokeyConfig.verify|verify} messages.
+                     * @param message AutokeyConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IAutokeyConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AutokeyConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AutokeyConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.AutokeyConfig;
+
+                    /**
+                     * Decodes an AutokeyConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AutokeyConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.AutokeyConfig;
+
+                    /**
+                     * Verifies an AutokeyConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AutokeyConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AutokeyConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.AutokeyConfig;
+
+                    /**
+                     * Creates a plain object from an AutokeyConfig message. Also converts values to other types if specified.
+                     * @param message AutokeyConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.AutokeyConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AutokeyConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AutokeyConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ShowEffectiveAutokeyConfigRequest. */
+                interface IShowEffectiveAutokeyConfigRequest {
+
+                    /** ShowEffectiveAutokeyConfigRequest parent */
+                    parent?: (string|null);
+                }
+
+                /** Represents a ShowEffectiveAutokeyConfigRequest. */
+                class ShowEffectiveAutokeyConfigRequest implements IShowEffectiveAutokeyConfigRequest {
+
+                    /**
+                     * Constructs a new ShowEffectiveAutokeyConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IShowEffectiveAutokeyConfigRequest);
+
+                    /** ShowEffectiveAutokeyConfigRequest parent. */
+                    public parent: string;
+
+                    /**
+                     * Creates a new ShowEffectiveAutokeyConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ShowEffectiveAutokeyConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IShowEffectiveAutokeyConfigRequest): google.cloud.kms.v1.ShowEffectiveAutokeyConfigRequest;
+
+                    /**
+                     * Encodes the specified ShowEffectiveAutokeyConfigRequest message. Does not implicitly {@link google.cloud.kms.v1.ShowEffectiveAutokeyConfigRequest.verify|verify} messages.
+                     * @param message ShowEffectiveAutokeyConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IShowEffectiveAutokeyConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ShowEffectiveAutokeyConfigRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ShowEffectiveAutokeyConfigRequest.verify|verify} messages.
+                     * @param message ShowEffectiveAutokeyConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IShowEffectiveAutokeyConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ShowEffectiveAutokeyConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ShowEffectiveAutokeyConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.ShowEffectiveAutokeyConfigRequest;
+
+                    /**
+                     * Decodes a ShowEffectiveAutokeyConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ShowEffectiveAutokeyConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.ShowEffectiveAutokeyConfigRequest;
+
+                    /**
+                     * Verifies a ShowEffectiveAutokeyConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ShowEffectiveAutokeyConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ShowEffectiveAutokeyConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.ShowEffectiveAutokeyConfigRequest;
+
+                    /**
+                     * Creates a plain object from a ShowEffectiveAutokeyConfigRequest message. Also converts values to other types if specified.
+                     * @param message ShowEffectiveAutokeyConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.ShowEffectiveAutokeyConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ShowEffectiveAutokeyConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ShowEffectiveAutokeyConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ShowEffectiveAutokeyConfigResponse. */
+                interface IShowEffectiveAutokeyConfigResponse {
+
+                    /** ShowEffectiveAutokeyConfigResponse keyProject */
+                    keyProject?: (string|null);
+                }
+
+                /** Represents a ShowEffectiveAutokeyConfigResponse. */
+                class ShowEffectiveAutokeyConfigResponse implements IShowEffectiveAutokeyConfigResponse {
+
+                    /**
+                     * Constructs a new ShowEffectiveAutokeyConfigResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IShowEffectiveAutokeyConfigResponse);
+
+                    /** ShowEffectiveAutokeyConfigResponse keyProject. */
+                    public keyProject: string;
+
+                    /**
+                     * Creates a new ShowEffectiveAutokeyConfigResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ShowEffectiveAutokeyConfigResponse instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IShowEffectiveAutokeyConfigResponse): google.cloud.kms.v1.ShowEffectiveAutokeyConfigResponse;
+
+                    /**
+                     * Encodes the specified ShowEffectiveAutokeyConfigResponse message. Does not implicitly {@link google.cloud.kms.v1.ShowEffectiveAutokeyConfigResponse.verify|verify} messages.
+                     * @param message ShowEffectiveAutokeyConfigResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IShowEffectiveAutokeyConfigResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ShowEffectiveAutokeyConfigResponse message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ShowEffectiveAutokeyConfigResponse.verify|verify} messages.
+                     * @param message ShowEffectiveAutokeyConfigResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IShowEffectiveAutokeyConfigResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ShowEffectiveAutokeyConfigResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ShowEffectiveAutokeyConfigResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.ShowEffectiveAutokeyConfigResponse;
+
+                    /**
+                     * Decodes a ShowEffectiveAutokeyConfigResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ShowEffectiveAutokeyConfigResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.ShowEffectiveAutokeyConfigResponse;
+
+                    /**
+                     * Verifies a ShowEffectiveAutokeyConfigResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ShowEffectiveAutokeyConfigResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ShowEffectiveAutokeyConfigResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.ShowEffectiveAutokeyConfigResponse;
+
+                    /**
+                     * Creates a plain object from a ShowEffectiveAutokeyConfigResponse message. Also converts values to other types if specified.
+                     * @param message ShowEffectiveAutokeyConfigResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.ShowEffectiveAutokeyConfigResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ShowEffectiveAutokeyConfigResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ShowEffectiveAutokeyConfigResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents an EkmService */
                 class EkmService extends $protobuf.rpc.Service {
 
@@ -2451,6 +3728,7 @@ export namespace google {
                         EC_SIGN_P256_SHA256 = 12,
                         EC_SIGN_P384_SHA384 = 13,
                         EC_SIGN_SECP256K1_SHA256 = 31,
+                        EC_SIGN_ED25519 = 40,
                         HMAC_SHA256 = 32,
                         HMAC_SHA1 = 33,
                         HMAC_SHA384 = 34,
@@ -13527,6 +14805,9 @@ export namespace google {
 
             /** MethodOptions .google.api.methodSignature */
             ".google.api.methodSignature"?: (string[]|null);
+
+            /** MethodOptions .google.longrunning.operationInfo */
+            ".google.longrunning.operationInfo"?: (google.longrunning.IOperationInfo|null);
         }
 
         /** Represents a MethodOptions. */
@@ -14820,6 +16101,200 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
+        /** Properties of an Any. */
+        interface IAny {
+
+            /** Any type_url */
+            type_url?: (string|null);
+
+            /** Any value */
+            value?: (Uint8Array|string|null);
+        }
+
+        /** Represents an Any. */
+        class Any implements IAny {
+
+            /**
+             * Constructs a new Any.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IAny);
+
+            /** Any type_url. */
+            public type_url: string;
+
+            /** Any value. */
+            public value: (Uint8Array|string);
+
+            /**
+             * Creates a new Any instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Any instance
+             */
+            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
+
+            /**
+             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
+
+            /**
+             * Verifies an Any message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Any message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Any
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
+
+            /**
+             * Creates a plain object from an Any message. Also converts values to other types if specified.
+             * @param message Any
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Any to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Any
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an Empty. */
+        interface IEmpty {
+        }
+
+        /** Represents an Empty. */
+        class Empty implements IEmpty {
+
+            /**
+             * Constructs a new Empty.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IEmpty);
+
+            /**
+             * Creates a new Empty instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Empty instance
+             */
+            public static create(properties?: google.protobuf.IEmpty): google.protobuf.Empty;
+
+            /**
+             * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+             * @param message Empty message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+             * @param message Empty message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Empty message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Empty
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Empty;
+
+            /**
+             * Decodes an Empty message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Empty
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Empty;
+
+            /**
+             * Verifies an Empty message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Empty message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Empty
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Empty;
+
+            /**
+             * Creates a plain object from an Empty message. Also converts values to other types if specified.
+             * @param message Empty
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Empty, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Empty to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Empty
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of a FieldMask. */
         interface IFieldMask {
 
@@ -15887,6 +17362,1091 @@ export namespace google {
 
             /**
              * Gets the default type url for BytesValue
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
+    /** Namespace longrunning. */
+    namespace longrunning {
+
+        /** Represents an Operations */
+        class Operations extends $protobuf.rpc.Service {
+
+            /**
+             * Constructs a new Operations service.
+             * @param rpcImpl RPC implementation
+             * @param [requestDelimited=false] Whether requests are length-delimited
+             * @param [responseDelimited=false] Whether responses are length-delimited
+             */
+            constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+            /**
+             * Creates new Operations service using the specified rpc implementation.
+             * @param rpcImpl RPC implementation
+             * @param [requestDelimited=false] Whether requests are length-delimited
+             * @param [responseDelimited=false] Whether responses are length-delimited
+             * @returns RPC service. Useful where requests and/or responses are streamed.
+             */
+            public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Operations;
+
+            /**
+             * Calls ListOperations.
+             * @param request ListOperationsRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and ListOperationsResponse
+             */
+            public listOperations(request: google.longrunning.IListOperationsRequest, callback: google.longrunning.Operations.ListOperationsCallback): void;
+
+            /**
+             * Calls ListOperations.
+             * @param request ListOperationsRequest message or plain object
+             * @returns Promise
+             */
+            public listOperations(request: google.longrunning.IListOperationsRequest): Promise<google.longrunning.ListOperationsResponse>;
+
+            /**
+             * Calls GetOperation.
+             * @param request GetOperationRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Operation
+             */
+            public getOperation(request: google.longrunning.IGetOperationRequest, callback: google.longrunning.Operations.GetOperationCallback): void;
+
+            /**
+             * Calls GetOperation.
+             * @param request GetOperationRequest message or plain object
+             * @returns Promise
+             */
+            public getOperation(request: google.longrunning.IGetOperationRequest): Promise<google.longrunning.Operation>;
+
+            /**
+             * Calls DeleteOperation.
+             * @param request DeleteOperationRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Empty
+             */
+            public deleteOperation(request: google.longrunning.IDeleteOperationRequest, callback: google.longrunning.Operations.DeleteOperationCallback): void;
+
+            /**
+             * Calls DeleteOperation.
+             * @param request DeleteOperationRequest message or plain object
+             * @returns Promise
+             */
+            public deleteOperation(request: google.longrunning.IDeleteOperationRequest): Promise<google.protobuf.Empty>;
+
+            /**
+             * Calls CancelOperation.
+             * @param request CancelOperationRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Empty
+             */
+            public cancelOperation(request: google.longrunning.ICancelOperationRequest, callback: google.longrunning.Operations.CancelOperationCallback): void;
+
+            /**
+             * Calls CancelOperation.
+             * @param request CancelOperationRequest message or plain object
+             * @returns Promise
+             */
+            public cancelOperation(request: google.longrunning.ICancelOperationRequest): Promise<google.protobuf.Empty>;
+
+            /**
+             * Calls WaitOperation.
+             * @param request WaitOperationRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Operation
+             */
+            public waitOperation(request: google.longrunning.IWaitOperationRequest, callback: google.longrunning.Operations.WaitOperationCallback): void;
+
+            /**
+             * Calls WaitOperation.
+             * @param request WaitOperationRequest message or plain object
+             * @returns Promise
+             */
+            public waitOperation(request: google.longrunning.IWaitOperationRequest): Promise<google.longrunning.Operation>;
+        }
+
+        namespace Operations {
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|listOperations}.
+             * @param error Error, if any
+             * @param [response] ListOperationsResponse
+             */
+            type ListOperationsCallback = (error: (Error|null), response?: google.longrunning.ListOperationsResponse) => void;
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|getOperation}.
+             * @param error Error, if any
+             * @param [response] Operation
+             */
+            type GetOperationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|deleteOperation}.
+             * @param error Error, if any
+             * @param [response] Empty
+             */
+            type DeleteOperationCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|cancelOperation}.
+             * @param error Error, if any
+             * @param [response] Empty
+             */
+            type CancelOperationCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|waitOperation}.
+             * @param error Error, if any
+             * @param [response] Operation
+             */
+            type WaitOperationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+        }
+
+        /** Properties of an Operation. */
+        interface IOperation {
+
+            /** Operation name */
+            name?: (string|null);
+
+            /** Operation metadata */
+            metadata?: (google.protobuf.IAny|null);
+
+            /** Operation done */
+            done?: (boolean|null);
+
+            /** Operation error */
+            error?: (google.rpc.IStatus|null);
+
+            /** Operation response */
+            response?: (google.protobuf.IAny|null);
+        }
+
+        /** Represents an Operation. */
+        class Operation implements IOperation {
+
+            /**
+             * Constructs a new Operation.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IOperation);
+
+            /** Operation name. */
+            public name: string;
+
+            /** Operation metadata. */
+            public metadata?: (google.protobuf.IAny|null);
+
+            /** Operation done. */
+            public done: boolean;
+
+            /** Operation error. */
+            public error?: (google.rpc.IStatus|null);
+
+            /** Operation response. */
+            public response?: (google.protobuf.IAny|null);
+
+            /** Operation result. */
+            public result?: ("error"|"response");
+
+            /**
+             * Creates a new Operation instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Operation instance
+             */
+            public static create(properties?: google.longrunning.IOperation): google.longrunning.Operation;
+
+            /**
+             * Encodes the specified Operation message. Does not implicitly {@link google.longrunning.Operation.verify|verify} messages.
+             * @param message Operation message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IOperation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Operation message, length delimited. Does not implicitly {@link google.longrunning.Operation.verify|verify} messages.
+             * @param message Operation message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IOperation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Operation message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Operation
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.Operation;
+
+            /**
+             * Decodes an Operation message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Operation
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.Operation;
+
+            /**
+             * Verifies an Operation message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Operation message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Operation
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.Operation;
+
+            /**
+             * Creates a plain object from an Operation message. Also converts values to other types if specified.
+             * @param message Operation
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.Operation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Operation to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Operation
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a GetOperationRequest. */
+        interface IGetOperationRequest {
+
+            /** GetOperationRequest name */
+            name?: (string|null);
+        }
+
+        /** Represents a GetOperationRequest. */
+        class GetOperationRequest implements IGetOperationRequest {
+
+            /**
+             * Constructs a new GetOperationRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IGetOperationRequest);
+
+            /** GetOperationRequest name. */
+            public name: string;
+
+            /**
+             * Creates a new GetOperationRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns GetOperationRequest instance
+             */
+            public static create(properties?: google.longrunning.IGetOperationRequest): google.longrunning.GetOperationRequest;
+
+            /**
+             * Encodes the specified GetOperationRequest message. Does not implicitly {@link google.longrunning.GetOperationRequest.verify|verify} messages.
+             * @param message GetOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IGetOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified GetOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.GetOperationRequest.verify|verify} messages.
+             * @param message GetOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IGetOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a GetOperationRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns GetOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.GetOperationRequest;
+
+            /**
+             * Decodes a GetOperationRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns GetOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.GetOperationRequest;
+
+            /**
+             * Verifies a GetOperationRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a GetOperationRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns GetOperationRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.GetOperationRequest;
+
+            /**
+             * Creates a plain object from a GetOperationRequest message. Also converts values to other types if specified.
+             * @param message GetOperationRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.GetOperationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this GetOperationRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for GetOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a ListOperationsRequest. */
+        interface IListOperationsRequest {
+
+            /** ListOperationsRequest name */
+            name?: (string|null);
+
+            /** ListOperationsRequest filter */
+            filter?: (string|null);
+
+            /** ListOperationsRequest pageSize */
+            pageSize?: (number|null);
+
+            /** ListOperationsRequest pageToken */
+            pageToken?: (string|null);
+        }
+
+        /** Represents a ListOperationsRequest. */
+        class ListOperationsRequest implements IListOperationsRequest {
+
+            /**
+             * Constructs a new ListOperationsRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IListOperationsRequest);
+
+            /** ListOperationsRequest name. */
+            public name: string;
+
+            /** ListOperationsRequest filter. */
+            public filter: string;
+
+            /** ListOperationsRequest pageSize. */
+            public pageSize: number;
+
+            /** ListOperationsRequest pageToken. */
+            public pageToken: string;
+
+            /**
+             * Creates a new ListOperationsRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ListOperationsRequest instance
+             */
+            public static create(properties?: google.longrunning.IListOperationsRequest): google.longrunning.ListOperationsRequest;
+
+            /**
+             * Encodes the specified ListOperationsRequest message. Does not implicitly {@link google.longrunning.ListOperationsRequest.verify|verify} messages.
+             * @param message ListOperationsRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IListOperationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ListOperationsRequest message, length delimited. Does not implicitly {@link google.longrunning.ListOperationsRequest.verify|verify} messages.
+             * @param message ListOperationsRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IListOperationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ListOperationsRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ListOperationsRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.ListOperationsRequest;
+
+            /**
+             * Decodes a ListOperationsRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ListOperationsRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.ListOperationsRequest;
+
+            /**
+             * Verifies a ListOperationsRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ListOperationsRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ListOperationsRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.ListOperationsRequest;
+
+            /**
+             * Creates a plain object from a ListOperationsRequest message. Also converts values to other types if specified.
+             * @param message ListOperationsRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.ListOperationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ListOperationsRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ListOperationsRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a ListOperationsResponse. */
+        interface IListOperationsResponse {
+
+            /** ListOperationsResponse operations */
+            operations?: (google.longrunning.IOperation[]|null);
+
+            /** ListOperationsResponse nextPageToken */
+            nextPageToken?: (string|null);
+        }
+
+        /** Represents a ListOperationsResponse. */
+        class ListOperationsResponse implements IListOperationsResponse {
+
+            /**
+             * Constructs a new ListOperationsResponse.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IListOperationsResponse);
+
+            /** ListOperationsResponse operations. */
+            public operations: google.longrunning.IOperation[];
+
+            /** ListOperationsResponse nextPageToken. */
+            public nextPageToken: string;
+
+            /**
+             * Creates a new ListOperationsResponse instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ListOperationsResponse instance
+             */
+            public static create(properties?: google.longrunning.IListOperationsResponse): google.longrunning.ListOperationsResponse;
+
+            /**
+             * Encodes the specified ListOperationsResponse message. Does not implicitly {@link google.longrunning.ListOperationsResponse.verify|verify} messages.
+             * @param message ListOperationsResponse message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IListOperationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ListOperationsResponse message, length delimited. Does not implicitly {@link google.longrunning.ListOperationsResponse.verify|verify} messages.
+             * @param message ListOperationsResponse message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IListOperationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ListOperationsResponse message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ListOperationsResponse
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.ListOperationsResponse;
+
+            /**
+             * Decodes a ListOperationsResponse message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ListOperationsResponse
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.ListOperationsResponse;
+
+            /**
+             * Verifies a ListOperationsResponse message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ListOperationsResponse message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ListOperationsResponse
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.ListOperationsResponse;
+
+            /**
+             * Creates a plain object from a ListOperationsResponse message. Also converts values to other types if specified.
+             * @param message ListOperationsResponse
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.ListOperationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ListOperationsResponse to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ListOperationsResponse
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a CancelOperationRequest. */
+        interface ICancelOperationRequest {
+
+            /** CancelOperationRequest name */
+            name?: (string|null);
+        }
+
+        /** Represents a CancelOperationRequest. */
+        class CancelOperationRequest implements ICancelOperationRequest {
+
+            /**
+             * Constructs a new CancelOperationRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.ICancelOperationRequest);
+
+            /** CancelOperationRequest name. */
+            public name: string;
+
+            /**
+             * Creates a new CancelOperationRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns CancelOperationRequest instance
+             */
+            public static create(properties?: google.longrunning.ICancelOperationRequest): google.longrunning.CancelOperationRequest;
+
+            /**
+             * Encodes the specified CancelOperationRequest message. Does not implicitly {@link google.longrunning.CancelOperationRequest.verify|verify} messages.
+             * @param message CancelOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.ICancelOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified CancelOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.CancelOperationRequest.verify|verify} messages.
+             * @param message CancelOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.ICancelOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a CancelOperationRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns CancelOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.CancelOperationRequest;
+
+            /**
+             * Decodes a CancelOperationRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns CancelOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.CancelOperationRequest;
+
+            /**
+             * Verifies a CancelOperationRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a CancelOperationRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns CancelOperationRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.CancelOperationRequest;
+
+            /**
+             * Creates a plain object from a CancelOperationRequest message. Also converts values to other types if specified.
+             * @param message CancelOperationRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.CancelOperationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this CancelOperationRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for CancelOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a DeleteOperationRequest. */
+        interface IDeleteOperationRequest {
+
+            /** DeleteOperationRequest name */
+            name?: (string|null);
+        }
+
+        /** Represents a DeleteOperationRequest. */
+        class DeleteOperationRequest implements IDeleteOperationRequest {
+
+            /**
+             * Constructs a new DeleteOperationRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IDeleteOperationRequest);
+
+            /** DeleteOperationRequest name. */
+            public name: string;
+
+            /**
+             * Creates a new DeleteOperationRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns DeleteOperationRequest instance
+             */
+            public static create(properties?: google.longrunning.IDeleteOperationRequest): google.longrunning.DeleteOperationRequest;
+
+            /**
+             * Encodes the specified DeleteOperationRequest message. Does not implicitly {@link google.longrunning.DeleteOperationRequest.verify|verify} messages.
+             * @param message DeleteOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IDeleteOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified DeleteOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.DeleteOperationRequest.verify|verify} messages.
+             * @param message DeleteOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IDeleteOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a DeleteOperationRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns DeleteOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.DeleteOperationRequest;
+
+            /**
+             * Decodes a DeleteOperationRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns DeleteOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.DeleteOperationRequest;
+
+            /**
+             * Verifies a DeleteOperationRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a DeleteOperationRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns DeleteOperationRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.DeleteOperationRequest;
+
+            /**
+             * Creates a plain object from a DeleteOperationRequest message. Also converts values to other types if specified.
+             * @param message DeleteOperationRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.DeleteOperationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this DeleteOperationRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for DeleteOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a WaitOperationRequest. */
+        interface IWaitOperationRequest {
+
+            /** WaitOperationRequest name */
+            name?: (string|null);
+
+            /** WaitOperationRequest timeout */
+            timeout?: (google.protobuf.IDuration|null);
+        }
+
+        /** Represents a WaitOperationRequest. */
+        class WaitOperationRequest implements IWaitOperationRequest {
+
+            /**
+             * Constructs a new WaitOperationRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IWaitOperationRequest);
+
+            /** WaitOperationRequest name. */
+            public name: string;
+
+            /** WaitOperationRequest timeout. */
+            public timeout?: (google.protobuf.IDuration|null);
+
+            /**
+             * Creates a new WaitOperationRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns WaitOperationRequest instance
+             */
+            public static create(properties?: google.longrunning.IWaitOperationRequest): google.longrunning.WaitOperationRequest;
+
+            /**
+             * Encodes the specified WaitOperationRequest message. Does not implicitly {@link google.longrunning.WaitOperationRequest.verify|verify} messages.
+             * @param message WaitOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IWaitOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified WaitOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.WaitOperationRequest.verify|verify} messages.
+             * @param message WaitOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IWaitOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a WaitOperationRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns WaitOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.WaitOperationRequest;
+
+            /**
+             * Decodes a WaitOperationRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns WaitOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.WaitOperationRequest;
+
+            /**
+             * Verifies a WaitOperationRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a WaitOperationRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns WaitOperationRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.WaitOperationRequest;
+
+            /**
+             * Creates a plain object from a WaitOperationRequest message. Also converts values to other types if specified.
+             * @param message WaitOperationRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.WaitOperationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this WaitOperationRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for WaitOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an OperationInfo. */
+        interface IOperationInfo {
+
+            /** OperationInfo responseType */
+            responseType?: (string|null);
+
+            /** OperationInfo metadataType */
+            metadataType?: (string|null);
+        }
+
+        /** Represents an OperationInfo. */
+        class OperationInfo implements IOperationInfo {
+
+            /**
+             * Constructs a new OperationInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IOperationInfo);
+
+            /** OperationInfo responseType. */
+            public responseType: string;
+
+            /** OperationInfo metadataType. */
+            public metadataType: string;
+
+            /**
+             * Creates a new OperationInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns OperationInfo instance
+             */
+            public static create(properties?: google.longrunning.IOperationInfo): google.longrunning.OperationInfo;
+
+            /**
+             * Encodes the specified OperationInfo message. Does not implicitly {@link google.longrunning.OperationInfo.verify|verify} messages.
+             * @param message OperationInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IOperationInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified OperationInfo message, length delimited. Does not implicitly {@link google.longrunning.OperationInfo.verify|verify} messages.
+             * @param message OperationInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IOperationInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an OperationInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns OperationInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.OperationInfo;
+
+            /**
+             * Decodes an OperationInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns OperationInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.OperationInfo;
+
+            /**
+             * Verifies an OperationInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an OperationInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns OperationInfo
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.OperationInfo;
+
+            /**
+             * Creates a plain object from an OperationInfo message. Also converts values to other types if specified.
+             * @param message OperationInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.OperationInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this OperationInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for OperationInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
+    /** Namespace rpc. */
+    namespace rpc {
+
+        /** Properties of a Status. */
+        interface IStatus {
+
+            /** Status code */
+            code?: (number|null);
+
+            /** Status message */
+            message?: (string|null);
+
+            /** Status details */
+            details?: (google.protobuf.IAny[]|null);
+        }
+
+        /** Represents a Status. */
+        class Status implements IStatus {
+
+            /**
+             * Constructs a new Status.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.rpc.IStatus);
+
+            /** Status code. */
+            public code: number;
+
+            /** Status message. */
+            public message: string;
+
+            /** Status details. */
+            public details: google.protobuf.IAny[];
+
+            /**
+             * Creates a new Status instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Status instance
+             */
+            public static create(properties?: google.rpc.IStatus): google.rpc.Status;
+
+            /**
+             * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+             * @param message Status message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+             * @param message Status message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Status message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Status
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.rpc.Status;
+
+            /**
+             * Decodes a Status message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Status
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.rpc.Status;
+
+            /**
+             * Verifies a Status message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Status message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Status
+             */
+            public static fromObject(object: { [k: string]: any }): google.rpc.Status;
+
+            /**
+             * Creates a plain object from a Status message. Also converts values to other types if specified.
+             * @param message Status
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.rpc.Status, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Status to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Status
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
