@@ -59,6 +59,9 @@ async function deleteAllBucketsAsync() {
 }
 
 after(deleteAllBucketsAsync);
+afterEach(async () => {
+  await new Promise(res => setTimeout(res, 1000));
+});
 
 it('should create a bucket', async () => {
   const output = execSync(`node createNewBucket.js ${bucketName}`);

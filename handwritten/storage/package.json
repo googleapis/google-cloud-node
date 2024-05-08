@@ -95,6 +95,7 @@
     "@grpc/grpc-js": "^1.0.3",
     "@grpc/proto-loader": "^0.7.0",
     "@types/async-retry": "^1.4.3",
+    "@types/duplexify": "^3.6.4",
     "@types/mime": "^3.0.0",
     "@types/mocha": "^9.1.1",
     "@types/mockery": "^1.4.29",
