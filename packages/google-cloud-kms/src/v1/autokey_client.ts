@@ -23,35 +23,47 @@ import type {
   CallOptions,
   Descriptors,
   ClientOptions,
-  PaginationCallback,
-  GaxCall,
+  GrpcClientOptions,
+  LROperation,
   IamClient,
   IamProtos,
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import {Transform} from 'stream';
+
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 
 /**
  * Client JSON configuration object, loaded from
- * `src/v1/ekm_service_client_config.json`.
+ * `src/v1/autokey_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './ekm_service_client_config.json';
+import * as gapicConfig from './autokey_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Google Cloud Key Management EKM Service
+ *  Provides interfaces for using Cloud KMS Autokey to provision new
+ *  {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKeys}, ready for Customer Managed
+ *  Encryption Key (CMEK) use, on-demand. To support certain client tooling, this
+ *  feature is modeled around a {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandle}
+ *  resource: creating a {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandle} in a resource
+ *  project and given location triggers Cloud KMS Autokey to provision a
+ *  {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey} in the configured key project and
+ *  the same location.
  *
- *  Manages external cryptographic keys and operations using those keys.
- *  Implements a REST model with the following objects:
- *  * {@link protos.google.cloud.kms.v1.EkmConnection|EkmConnection}
+ *  Prior to use in a given resource project,
+ *  {@link protos.google.cloud.kms.v1.AutokeyAdmin.UpdateAutokeyConfig|UpdateAutokeyConfig}
+ *  should have been called on an ancestor folder, setting the key project where
+ *  Cloud KMS Autokey should create new
+ *  {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKeys}. See documentation for additional
+ *  prerequisites. To check what key project, if any, is currently configured on
+ *  a resource project's ancestor folder, see
+ *  {@link protos.google.cloud.kms.v1.AutokeyAdmin.ShowEffectiveAutokeyConfig|ShowEffectiveAutokeyConfig}.
  * @class
  * @memberof v1
  */
-export class EkmServiceClient {
+export class AutokeyClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -73,10 +85,11 @@ export class EkmServiceClient {
   iamClient: IamClient;
   locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
-  ekmServiceStub?: Promise<{[name: string]: Function}>;
+  operationsClient: gax.OperationsClient;
+  autokeyStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of EkmServiceClient.
+   * Construct an instance of AutokeyClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -111,7 +124,7 @@ export class EkmServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new EkmServiceClient({fallback: true}, gax);
+   *     const client = new AutokeyClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -119,7 +132,7 @@ export class EkmServiceClient {
     gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof EkmServiceClient;
+    const staticMembers = this.constructor as typeof AutokeyClient;
     if (
       opts?.universe_domain &&
       opts?.universeDomain &&
@@ -247,20 +260,116 @@ export class EkmServiceClient {
       ),
     };
 
-    // Some of the methods on this service return "paged" results,
-    // (e.g. 50 results at a time, with tokens to get subsequent
-    // pages). Denote the keys used for pagination and results.
-    this.descriptors.page = {
-      listEkmConnections: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'ekmConnections'
+    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    // This API contains "long-running operations", which return a
+    // an Operation object that allows for tracking of the operation,
+    // rather than holding a request open.
+    const lroOptions: GrpcClientOptions = {
+      auth: this.auth,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+    };
+    if (opts.fallback) {
+      lroOptions.protoJson = protoFilesRoot;
+      lroOptions.httpRules = [
+        {
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/v1/{name=projects/*/locations/*}',
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/v1/{name=projects/*}/locations',
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
+          get: '/v1/{resource=projects/*/locations/*/keyRings/*}:getIamPolicy',
+          additional_bindings: [
+            {
+              get: '/v1/{resource=projects/*/locations/*/keyRings/*/cryptoKeys/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/keyRings/*/importJobs/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/ekmConfig}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/ekmConnections/*}:getIamPolicy',
+            },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
+          post: '/v1/{resource=projects/*/locations/*/keyRings/*}:setIamPolicy',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/*/keyRings/*/cryptoKeys/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/keyRings/*/importJobs/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/ekmConfig}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/ekmConnections/*}:setIamPolicy',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
+          post: '/v1/{resource=projects/*/locations/*/keyRings/*}:testIamPermissions',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/*/keyRings/*/cryptoKeys/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/keyRings/*/importJobs/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/ekmConfig}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/ekmConnections/*}:testIamPermissions',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1/{name=projects/*/locations/*/operations/*}',
+        },
+      ];
+    }
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
+    const createKeyHandleResponse = protoFilesRoot.lookup(
+      '.google.cloud.kms.v1.KeyHandle'
+    ) as gax.protobuf.Type;
+    const createKeyHandleMetadata = protoFilesRoot.lookup(
+      '.google.cloud.kms.v1.CreateKeyHandleMetadata'
+    ) as gax.protobuf.Type;
+
+    this.descriptors.longrunning = {
+      createKeyHandle: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createKeyHandleResponse.decode.bind(createKeyHandleResponse),
+        createKeyHandleMetadata.decode.bind(createKeyHandleMetadata)
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.kms.v1.EkmService',
+      'google.cloud.kms.v1.Autokey',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -288,36 +397,32 @@ export class EkmServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.ekmServiceStub) {
-      return this.ekmServiceStub;
+    if (this.autokeyStub) {
+      return this.autokeyStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.kms.v1.EkmService.
-    this.ekmServiceStub = this._gaxGrpc.createStub(
+    // google.cloud.kms.v1.Autokey.
+    this.autokeyStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.kms.v1.EkmService'
+            'google.cloud.kms.v1.Autokey'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.kms.v1.EkmService,
+          (this._protos as any).google.cloud.kms.v1.Autokey,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const ekmServiceStubMethods = [
-      'listEkmConnections',
-      'getEkmConnection',
-      'createEkmConnection',
-      'updateEkmConnection',
-      'getEkmConfig',
-      'updateEkmConfig',
-      'verifyConnectivity',
+    const autokeyStubMethods = [
+      'createKeyHandle',
+      'getKeyHandle',
+      'listKeyHandles',
     ];
-    for (const methodName of ekmServiceStubMethods) {
-      const callPromise = this.ekmServiceStub.then(
+    for (const methodName of autokeyStubMethods) {
+      const callPromise = this.autokeyStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -331,7 +436,7 @@ export class EkmServiceClient {
         }
       );
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor = this.descriptors.longrunning[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -342,7 +447,7 @@ export class EkmServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.ekmServiceStub;
+    return this.autokeyStub;
   }
 
   /**
@@ -433,70 +538,68 @@ export class EkmServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Returns metadata for a given
-   * {@link protos.google.cloud.kms.v1.EkmConnection|EkmConnection}.
+   * Returns the {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandle}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The {@link protos.google.cloud.kms.v1.EkmConnection.name|name} of the
-   *   {@link protos.google.cloud.kms.v1.EkmConnection|EkmConnection} to get.
+   *   Required. Name of the {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandle} resource,
+   *   e.g.
+   *   `projects/{PROJECT_ID}/locations/{LOCATION}/keyHandles/{KEY_HANDLE_ID}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.kms.v1.EkmConnection|EkmConnection}.
+   *   The first element of the array is an object representing {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandle}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/ekm_service.get_ekm_connection.js</caption>
-   * region_tag:cloudkms_v1_generated_EkmService_GetEkmConnection_async
+   * @example <caption>include:samples/generated/v1/autokey.get_key_handle.js</caption>
+   * region_tag:cloudkms_v1_generated_Autokey_GetKeyHandle_async
    */
-  getEkmConnection(
-    request?: protos.google.cloud.kms.v1.IGetEkmConnectionRequest,
+  getKeyHandle(
+    request?: protos.google.cloud.kms.v1.IGetKeyHandleRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.kms.v1.IEkmConnection,
-      protos.google.cloud.kms.v1.IGetEkmConnectionRequest | undefined,
+      protos.google.cloud.kms.v1.IKeyHandle,
+      protos.google.cloud.kms.v1.IGetKeyHandleRequest | undefined,
       {} | undefined,
     ]
   >;
-  getEkmConnection(
-    request: protos.google.cloud.kms.v1.IGetEkmConnectionRequest,
+  getKeyHandle(
+    request: protos.google.cloud.kms.v1.IGetKeyHandleRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.kms.v1.IEkmConnection,
-      protos.google.cloud.kms.v1.IGetEkmConnectionRequest | null | undefined,
+      protos.google.cloud.kms.v1.IKeyHandle,
+      protos.google.cloud.kms.v1.IGetKeyHandleRequest | null | undefined,
       {} | null | undefined
     >
   ): void;
-  getEkmConnection(
-    request: protos.google.cloud.kms.v1.IGetEkmConnectionRequest,
+  getKeyHandle(
+    request: protos.google.cloud.kms.v1.IGetKeyHandleRequest,
     callback: Callback<
-      protos.google.cloud.kms.v1.IEkmConnection,
-      protos.google.cloud.kms.v1.IGetEkmConnectionRequest | null | undefined,
+      protos.google.cloud.kms.v1.IKeyHandle,
+      protos.google.cloud.kms.v1.IGetKeyHandleRequest | null | undefined,
       {} | null | undefined
     >
   ): void;
-  getEkmConnection(
-    request?: protos.google.cloud.kms.v1.IGetEkmConnectionRequest,
+  getKeyHandle(
+    request?: protos.google.cloud.kms.v1.IGetKeyHandleRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.kms.v1.IEkmConnection,
-          | protos.google.cloud.kms.v1.IGetEkmConnectionRequest
-          | null
-          | undefined,
+          protos.google.cloud.kms.v1.IKeyHandle,
+          protos.google.cloud.kms.v1.IGetKeyHandleRequest | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.kms.v1.IEkmConnection,
-      protos.google.cloud.kms.v1.IGetEkmConnectionRequest | null | undefined,
+      protos.google.cloud.kms.v1.IKeyHandle,
+      protos.google.cloud.kms.v1.IGetKeyHandleRequest | null | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.kms.v1.IEkmConnection,
-      protos.google.cloud.kms.v1.IGetEkmConnectionRequest | undefined,
+      protos.google.cloud.kms.v1.IKeyHandle,
+      protos.google.cloud.kms.v1.IGetKeyHandleRequest | undefined,
       {} | undefined,
     ]
   > | void {
@@ -516,80 +619,75 @@ export class EkmServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getEkmConnection(request, options, callback);
+    return this.innerApiCalls.getKeyHandle(request, options, callback);
   }
   /**
-   * Creates a new {@link protos.google.cloud.kms.v1.EkmConnection|EkmConnection} in a given
-   * Project and Location.
+   * Lists {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandles}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the location associated with the
-   *   {@link protos.google.cloud.kms.v1.EkmConnection|EkmConnection}, in the format
-   *   `projects/* /locations/*`.
-   * @param {string} request.ekmConnectionId
-   *   Required. It must be unique within a location and match the regular
-   *   expression `[a-zA-Z0-9_-]{1,63}`.
-   * @param {google.cloud.kms.v1.EkmConnection} request.ekmConnection
-   *   Required. An {@link protos.google.cloud.kms.v1.EkmConnection|EkmConnection} with
-   *   initial field values.
+   *   Required. Name of the resource project and location from which to list
+   *   {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandles}, e.g.
+   *   `projects/{PROJECT_ID}/locations/{LOCATION}`.
+   * @param {string} [request.filter]
+   *   Optional. Filter to apply when listing
+   *   {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandles}, e.g.
+   *   `resource_type_selector="{SERVICE}.googleapis.com/{TYPE}"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.kms.v1.EkmConnection|EkmConnection}.
+   *   The first element of the array is an object representing {@link protos.google.cloud.kms.v1.ListKeyHandlesResponse|ListKeyHandlesResponse}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/ekm_service.create_ekm_connection.js</caption>
-   * region_tag:cloudkms_v1_generated_EkmService_CreateEkmConnection_async
+   * @example <caption>include:samples/generated/v1/autokey.list_key_handles.js</caption>
+   * region_tag:cloudkms_v1_generated_Autokey_ListKeyHandles_async
    */
-  createEkmConnection(
-    request?: protos.google.cloud.kms.v1.ICreateEkmConnectionRequest,
+  listKeyHandles(
+    request?: protos.google.cloud.kms.v1.IListKeyHandlesRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.kms.v1.IEkmConnection,
-      protos.google.cloud.kms.v1.ICreateEkmConnectionRequest | undefined,
+      protos.google.cloud.kms.v1.IListKeyHandlesResponse,
+      protos.google.cloud.kms.v1.IListKeyHandlesRequest | undefined,
       {} | undefined,
     ]
   >;
-  createEkmConnection(
-    request: protos.google.cloud.kms.v1.ICreateEkmConnectionRequest,
+  listKeyHandles(
+    request: protos.google.cloud.kms.v1.IListKeyHandlesRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.kms.v1.IEkmConnection,
-      protos.google.cloud.kms.v1.ICreateEkmConnectionRequest | null | undefined,
+      protos.google.cloud.kms.v1.IListKeyHandlesResponse,
+      protos.google.cloud.kms.v1.IListKeyHandlesRequest | null | undefined,
       {} | null | undefined
     >
   ): void;
-  createEkmConnection(
-    request: protos.google.cloud.kms.v1.ICreateEkmConnectionRequest,
+  listKeyHandles(
+    request: protos.google.cloud.kms.v1.IListKeyHandlesRequest,
     callback: Callback<
-      protos.google.cloud.kms.v1.IEkmConnection,
-      protos.google.cloud.kms.v1.ICreateEkmConnectionRequest | null | undefined,
+      protos.google.cloud.kms.v1.IListKeyHandlesResponse,
+      protos.google.cloud.kms.v1.IListKeyHandlesRequest | null | undefined,
       {} | null | undefined
     >
   ): void;
-  createEkmConnection(
-    request?: protos.google.cloud.kms.v1.ICreateEkmConnectionRequest,
+  listKeyHandles(
+    request?: protos.google.cloud.kms.v1.IListKeyHandlesRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.kms.v1.IEkmConnection,
-          | protos.google.cloud.kms.v1.ICreateEkmConnectionRequest
-          | null
-          | undefined,
+          protos.google.cloud.kms.v1.IListKeyHandlesResponse,
+          protos.google.cloud.kms.v1.IListKeyHandlesRequest | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.kms.v1.IEkmConnection,
-      protos.google.cloud.kms.v1.ICreateEkmConnectionRequest | null | undefined,
+      protos.google.cloud.kms.v1.IListKeyHandlesResponse,
+      protos.google.cloud.kms.v1.IListKeyHandlesRequest | null | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.kms.v1.IEkmConnection,
-      protos.google.cloud.kms.v1.ICreateEkmConnectionRequest | undefined,
+      protos.google.cloud.kms.v1.IListKeyHandlesResponse,
+      protos.google.cloud.kms.v1.IListKeyHandlesRequest | undefined,
       {} | undefined,
     ]
   > | void {
@@ -609,444 +707,105 @@ export class EkmServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createEkmConnection(request, options, callback);
-  }
-  /**
-   * Updates an {@link protos.google.cloud.kms.v1.EkmConnection|EkmConnection}'s metadata.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.kms.v1.EkmConnection} request.ekmConnection
-   *   Required. {@link protos.google.cloud.kms.v1.EkmConnection|EkmConnection} with updated
-   *   values.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. List of fields to be updated in this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.kms.v1.EkmConnection|EkmConnection}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/ekm_service.update_ekm_connection.js</caption>
-   * region_tag:cloudkms_v1_generated_EkmService_UpdateEkmConnection_async
-   */
-  updateEkmConnection(
-    request?: protos.google.cloud.kms.v1.IUpdateEkmConnectionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IEkmConnection,
-      protos.google.cloud.kms.v1.IUpdateEkmConnectionRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  updateEkmConnection(
-    request: protos.google.cloud.kms.v1.IUpdateEkmConnectionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IEkmConnection,
-      protos.google.cloud.kms.v1.IUpdateEkmConnectionRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateEkmConnection(
-    request: protos.google.cloud.kms.v1.IUpdateEkmConnectionRequest,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IEkmConnection,
-      protos.google.cloud.kms.v1.IUpdateEkmConnectionRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateEkmConnection(
-    request?: protos.google.cloud.kms.v1.IUpdateEkmConnectionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.kms.v1.IEkmConnection,
-          | protos.google.cloud.kms.v1.IUpdateEkmConnectionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.kms.v1.IEkmConnection,
-      protos.google.cloud.kms.v1.IUpdateEkmConnectionRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IEkmConnection,
-      protos.google.cloud.kms.v1.IUpdateEkmConnectionRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'ekm_connection.name': request.ekmConnection!.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.updateEkmConnection(request, options, callback);
-  }
-  /**
-   * Returns the {@link protos.google.cloud.kms.v1.EkmConfig|EkmConfig} singleton resource
-   * for a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The {@link protos.google.cloud.kms.v1.EkmConfig.name|name} of the
-   *   {@link protos.google.cloud.kms.v1.EkmConfig|EkmConfig} to get.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.kms.v1.EkmConfig|EkmConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/ekm_service.get_ekm_config.js</caption>
-   * region_tag:cloudkms_v1_generated_EkmService_GetEkmConfig_async
-   */
-  getEkmConfig(
-    request?: protos.google.cloud.kms.v1.IGetEkmConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IEkmConfig,
-      protos.google.cloud.kms.v1.IGetEkmConfigRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  getEkmConfig(
-    request: protos.google.cloud.kms.v1.IGetEkmConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IEkmConfig,
-      protos.google.cloud.kms.v1.IGetEkmConfigRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEkmConfig(
-    request: protos.google.cloud.kms.v1.IGetEkmConfigRequest,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IEkmConfig,
-      protos.google.cloud.kms.v1.IGetEkmConfigRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEkmConfig(
-    request?: protos.google.cloud.kms.v1.IGetEkmConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.kms.v1.IEkmConfig,
-          protos.google.cloud.kms.v1.IGetEkmConfigRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.kms.v1.IEkmConfig,
-      protos.google.cloud.kms.v1.IGetEkmConfigRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IEkmConfig,
-      protos.google.cloud.kms.v1.IGetEkmConfigRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.getEkmConfig(request, options, callback);
-  }
-  /**
-   * Updates the {@link protos.google.cloud.kms.v1.EkmConfig|EkmConfig} singleton resource
-   * for a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.kms.v1.EkmConfig} request.ekmConfig
-   *   Required. {@link protos.google.cloud.kms.v1.EkmConfig|EkmConfig} with updated values.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. List of fields to be updated in this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.kms.v1.EkmConfig|EkmConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/ekm_service.update_ekm_config.js</caption>
-   * region_tag:cloudkms_v1_generated_EkmService_UpdateEkmConfig_async
-   */
-  updateEkmConfig(
-    request?: protos.google.cloud.kms.v1.IUpdateEkmConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IEkmConfig,
-      protos.google.cloud.kms.v1.IUpdateEkmConfigRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  updateEkmConfig(
-    request: protos.google.cloud.kms.v1.IUpdateEkmConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IEkmConfig,
-      protos.google.cloud.kms.v1.IUpdateEkmConfigRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateEkmConfig(
-    request: protos.google.cloud.kms.v1.IUpdateEkmConfigRequest,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IEkmConfig,
-      protos.google.cloud.kms.v1.IUpdateEkmConfigRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateEkmConfig(
-    request?: protos.google.cloud.kms.v1.IUpdateEkmConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.kms.v1.IEkmConfig,
-          protos.google.cloud.kms.v1.IUpdateEkmConfigRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.kms.v1.IEkmConfig,
-      protos.google.cloud.kms.v1.IUpdateEkmConfigRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IEkmConfig,
-      protos.google.cloud.kms.v1.IUpdateEkmConfigRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'ekm_config.name': request.ekmConfig!.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.updateEkmConfig(request, options, callback);
-  }
-  /**
-   * Verifies that Cloud KMS can successfully connect to the external key
-   * manager specified by an {@link protos.google.cloud.kms.v1.EkmConnection|EkmConnection}.
-   * If there is an error connecting to the EKM, this method returns a
-   * FAILED_PRECONDITION status containing structured information as described
-   * at https://cloud.google.com/kms/docs/reference/ekm_errors.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The {@link protos.google.cloud.kms.v1.EkmConnection.name|name} of the
-   *   {@link protos.google.cloud.kms.v1.EkmConnection|EkmConnection} to verify.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.kms.v1.VerifyConnectivityResponse|VerifyConnectivityResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/ekm_service.verify_connectivity.js</caption>
-   * region_tag:cloudkms_v1_generated_EkmService_VerifyConnectivity_async
-   */
-  verifyConnectivity(
-    request?: protos.google.cloud.kms.v1.IVerifyConnectivityRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IVerifyConnectivityResponse,
-      protos.google.cloud.kms.v1.IVerifyConnectivityRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  verifyConnectivity(
-    request: protos.google.cloud.kms.v1.IVerifyConnectivityRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IVerifyConnectivityResponse,
-      protos.google.cloud.kms.v1.IVerifyConnectivityRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  verifyConnectivity(
-    request: protos.google.cloud.kms.v1.IVerifyConnectivityRequest,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IVerifyConnectivityResponse,
-      protos.google.cloud.kms.v1.IVerifyConnectivityRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  verifyConnectivity(
-    request?: protos.google.cloud.kms.v1.IVerifyConnectivityRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.kms.v1.IVerifyConnectivityResponse,
-          | protos.google.cloud.kms.v1.IVerifyConnectivityRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.kms.v1.IVerifyConnectivityResponse,
-      protos.google.cloud.kms.v1.IVerifyConnectivityRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IVerifyConnectivityResponse,
-      protos.google.cloud.kms.v1.IVerifyConnectivityRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.verifyConnectivity(request, options, callback);
+    return this.innerApiCalls.listKeyHandles(request, options, callback);
   }
 
   /**
-   * Lists {@link protos.google.cloud.kms.v1.EkmConnection|EkmConnections}.
+   * Creates a new {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandle}, triggering the
+   * provisioning of a new {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey} for CMEK
+   * use with the given resource type in the configured key project and the same
+   * location. {@link protos.Operations.GetOperation|GetOperation} should be used to resolve
+   * the resulting long-running operation and get the resulting
+   * {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandle} and
+   * {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the location associated with the
-   *   {@link protos.google.cloud.kms.v1.EkmConnection|EkmConnections} to list, in the format
-   *   `projects/* /locations/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of
-   *   {@link protos.google.cloud.kms.v1.EkmConnection|EkmConnections} to include in the
-   *   response. Further {@link protos.google.cloud.kms.v1.EkmConnection|EkmConnections} can
-   *   subsequently be obtained by including the
-   *   {@link protos.google.cloud.kms.v1.ListEkmConnectionsResponse.next_page_token|ListEkmConnectionsResponse.next_page_token}
-   *   in a subsequent request. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Optional pagination token, returned earlier via
-   *   {@link protos.google.cloud.kms.v1.ListEkmConnectionsResponse.next_page_token|ListEkmConnectionsResponse.next_page_token}.
-   * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response. For
-   *   more information, see
-   *   [Sorting and filtering list
-   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-   * @param {string} [request.orderBy]
-   *   Optional. Specify how the results should be sorted. If not specified, the
-   *   results will be sorted in the default order.  For more information, see
-   *   [Sorting and filtering list
-   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+   *   Required. Name of the resource project and location to create the
+   *   {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandle} in, e.g.
+   *   `projects/{PROJECT_ID}/locations/{LOCATION}`.
+   * @param {string} [request.keyHandleId]
+   *   Optional. Id of the {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandle}. Must be
+   *   unique to the resource project and location. If not provided by the caller,
+   *   a new UUID is used.
+   * @param {google.cloud.kms.v1.KeyHandle} request.keyHandle
+   *   Required. {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandle} to create.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.kms.v1.EkmConnection|EkmConnection}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listEkmConnectionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/autokey.create_key_handle.js</caption>
+   * region_tag:cloudkms_v1_generated_Autokey_CreateKeyHandle_async
    */
-  listEkmConnections(
-    request?: protos.google.cloud.kms.v1.IListEkmConnectionsRequest,
+  createKeyHandle(
+    request?: protos.google.cloud.kms.v1.ICreateKeyHandleRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.kms.v1.IEkmConnection[],
-      protos.google.cloud.kms.v1.IListEkmConnectionsRequest | null,
-      protos.google.cloud.kms.v1.IListEkmConnectionsResponse,
+      LROperation<
+        protos.google.cloud.kms.v1.IKeyHandle,
+        protos.google.cloud.kms.v1.ICreateKeyHandleMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
     ]
   >;
-  listEkmConnections(
-    request: protos.google.cloud.kms.v1.IListEkmConnectionsRequest,
+  createKeyHandle(
+    request: protos.google.cloud.kms.v1.ICreateKeyHandleRequest,
     options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.kms.v1.IListEkmConnectionsRequest,
-      protos.google.cloud.kms.v1.IListEkmConnectionsResponse | null | undefined,
-      protos.google.cloud.kms.v1.IEkmConnection
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.kms.v1.IKeyHandle,
+        protos.google.cloud.kms.v1.ICreateKeyHandleMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): void;
-  listEkmConnections(
-    request: protos.google.cloud.kms.v1.IListEkmConnectionsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.kms.v1.IListEkmConnectionsRequest,
-      protos.google.cloud.kms.v1.IListEkmConnectionsResponse | null | undefined,
-      protos.google.cloud.kms.v1.IEkmConnection
+  createKeyHandle(
+    request: protos.google.cloud.kms.v1.ICreateKeyHandleRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.kms.v1.IKeyHandle,
+        protos.google.cloud.kms.v1.ICreateKeyHandleMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): void;
-  listEkmConnections(
-    request?: protos.google.cloud.kms.v1.IListEkmConnectionsRequest,
+  createKeyHandle(
+    request?: protos.google.cloud.kms.v1.ICreateKeyHandleRequest,
     optionsOrCallback?:
       | CallOptions
-      | PaginationCallback<
-          protos.google.cloud.kms.v1.IListEkmConnectionsRequest,
-          | protos.google.cloud.kms.v1.IListEkmConnectionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.kms.v1.IEkmConnection
+      | Callback<
+          LROperation<
+            protos.google.cloud.kms.v1.IKeyHandle,
+            protos.google.cloud.kms.v1.ICreateKeyHandleMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
         >,
-    callback?: PaginationCallback<
-      protos.google.cloud.kms.v1.IListEkmConnectionsRequest,
-      protos.google.cloud.kms.v1.IListEkmConnectionsResponse | null | undefined,
-      protos.google.cloud.kms.v1.IEkmConnection
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.kms.v1.IKeyHandle,
+        protos.google.cloud.kms.v1.ICreateKeyHandleMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.kms.v1.IEkmConnection[],
-      protos.google.cloud.kms.v1.IListEkmConnectionsRequest | null,
-      protos.google.cloud.kms.v1.IListEkmConnectionsResponse,
+      LROperation<
+        protos.google.cloud.kms.v1.IKeyHandle,
+        protos.google.cloud.kms.v1.ICreateKeyHandleMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1065,134 +824,41 @@ export class EkmServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listEkmConnections(request, options, callback);
+    return this.innerApiCalls.createKeyHandle(request, options, callback);
   }
-
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the location associated with the
-   *   {@link protos.google.cloud.kms.v1.EkmConnection|EkmConnections} to list, in the format
-   *   `projects/* /locations/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of
-   *   {@link protos.google.cloud.kms.v1.EkmConnection|EkmConnections} to include in the
-   *   response. Further {@link protos.google.cloud.kms.v1.EkmConnection|EkmConnections} can
-   *   subsequently be obtained by including the
-   *   {@link protos.google.cloud.kms.v1.ListEkmConnectionsResponse.next_page_token|ListEkmConnectionsResponse.next_page_token}
-   *   in a subsequent request. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Optional pagination token, returned earlier via
-   *   {@link protos.google.cloud.kms.v1.ListEkmConnectionsResponse.next_page_token|ListEkmConnectionsResponse.next_page_token}.
-   * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response. For
-   *   more information, see
-   *   [Sorting and filtering list
-   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-   * @param {string} [request.orderBy]
-   *   Optional. Specify how the results should be sorted. If not specified, the
-   *   results will be sorted in the default order.  For more information, see
-   *   [Sorting and filtering list
-   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.kms.v1.EkmConnection|EkmConnection} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listEkmConnectionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   * Check the status of the long running operation returned by `createKeyHandle()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/autokey.create_key_handle.js</caption>
+   * region_tag:cloudkms_v1_generated_Autokey_CreateKeyHandle_async
    */
-  listEkmConnectionsStream(
-    request?: protos.google.cloud.kms.v1.IListEkmConnectionsRequest,
-    options?: CallOptions
-  ): Transform {
-    request = request || {};
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    const defaultCallSettings = this._defaults['listEkmConnections'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
-    return this.descriptors.page.listEkmConnections.createStream(
-      this.innerApiCalls.listEkmConnections as GaxCall,
-      request,
-      callSettings
+  async checkCreateKeyHandleProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.kms.v1.KeyHandle,
+      protos.google.cloud.kms.v1.CreateKeyHandleMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createKeyHandle,
+      this._gaxModule.createDefaultBackoffSettings()
     );
-  }
-
-  /**
-   * Equivalent to `listEkmConnections`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the location associated with the
-   *   {@link protos.google.cloud.kms.v1.EkmConnection|EkmConnections} to list, in the format
-   *   `projects/* /locations/*`.
-   * @param {number} [request.pageSize]
-   *   Optional. Optional limit on the number of
-   *   {@link protos.google.cloud.kms.v1.EkmConnection|EkmConnections} to include in the
-   *   response. Further {@link protos.google.cloud.kms.v1.EkmConnection|EkmConnections} can
-   *   subsequently be obtained by including the
-   *   {@link protos.google.cloud.kms.v1.ListEkmConnectionsResponse.next_page_token|ListEkmConnectionsResponse.next_page_token}
-   *   in a subsequent request. If unspecified, the server will pick an
-   *   appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. Optional pagination token, returned earlier via
-   *   {@link protos.google.cloud.kms.v1.ListEkmConnectionsResponse.next_page_token|ListEkmConnectionsResponse.next_page_token}.
-   * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response. For
-   *   more information, see
-   *   [Sorting and filtering list
-   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-   * @param {string} [request.orderBy]
-   *   Optional. Specify how the results should be sorted. If not specified, the
-   *   results will be sorted in the default order.  For more information, see
-   *   [Sorting and filtering list
-   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.kms.v1.EkmConnection|EkmConnection}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/ekm_service.list_ekm_connections.js</caption>
-   * region_tag:cloudkms_v1_generated_EkmService_ListEkmConnections_async
-   */
-  listEkmConnectionsAsync(
-    request?: protos.google.cloud.kms.v1.IListEkmConnectionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.kms.v1.IEkmConnection> {
-    request = request || {};
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    const defaultCallSettings = this._defaults['listEkmConnections'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
-    return this.descriptors.page.listEkmConnections.asyncIterate(
-      this.innerApiCalls['listEkmConnections'] as GaxCall,
-      request as {},
-      callSettings
-    ) as AsyncIterable<protos.google.cloud.kms.v1.IEkmConnection>;
+    return decodeOperation as LROperation<
+      protos.google.cloud.kms.v1.KeyHandle,
+      protos.google.cloud.kms.v1.CreateKeyHandleMetadata
+    >;
   }
   /**
    * Gets the access control policy for a resource. Returns an empty policy
@@ -1408,6 +1074,181 @@ export class EkmServiceClient {
     options?: CallOptions
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
+  }
+
+  /**
+   * Gets the latest state of a long-running operation.  Clients can use this
+   * method to poll the operation result at intervals as recommended by the API
+   * service.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   *   for the details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing
+   *   {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * @return {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   * {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * const name = '';
+   * const [response] = await client.getOperation({name});
+   * // doThingsWith(response)
+   * ```
+   */
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.Operation,
+          protos.google.longrunning.GetOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<[protos.google.longrunning.Operation]> {
+    return this.operationsClient.getOperation(request, options, callback);
+  }
+  /**
+   * Lists operations that match the specified filter in the request. If the
+   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
+   *
+   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation collection.
+   * @param {string} request.filter - The standard list filter.
+   * @param {number=} request.pageSize -
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   *   details.
+   * @returns {Object}
+   *   An iterable Object that conforms to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | iteration protocols}.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * for await (const response of client.listOperationsAsync(request));
+   * // doThingsWith(response)
+   * ```
+   */
+  listOperationsAsync(
+    request: protos.google.longrunning.ListOperationsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    return this.operationsClient.listOperationsAsync(request, options);
+  }
+  /**
+   * Starts asynchronous cancellation on a long-running operation.  The server
+   * makes a best effort to cancel the operation, but success is not
+   * guaranteed.  If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+   * {@link Operations.GetOperation} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * operation completed despite cancellation. On successful cancellation,
+   * the operation is not deleted; instead, it becomes an operation with
+   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
+   * 1, corresponding to `Code.CANCELLED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be cancelled.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.cancelOperation({name: ''});
+   * ```
+   */
+  cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.CancelOperationRequest,
+          {} | undefined | null
+        >,
+    callback?: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.cancelOperation(request, options, callback);
+  }
+
+  /**
+   * Deletes a long-running operation. This method indicates that the client is
+   * no longer interested in the operation result. It does not cancel the
+   * operation. If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be deleted.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   * for the details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.deleteOperation({name: ''});
+   * ```
+   */
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.DeleteOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.deleteOperation(request, options, callback);
   }
 
   // --------------------
@@ -1991,12 +1832,13 @@ export class EkmServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.ekmServiceStub && !this._terminated) {
-      return this.ekmServiceStub.then(stub => {
+    if (this.autokeyStub && !this._terminated) {
+      return this.autokeyStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.iamClient.close();
         this.locationsClient.close();
+        this.operationsClient.close();
       });
     }
     return Promise.resolve();
