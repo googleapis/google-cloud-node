@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.6.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.5.0...data-v4.6.0) (2024-05-08)
+
+
+### Features
+
+* Add `ReportTask`, `Metric`, `OrderBy`, `Cohort`, `CohortsRange`, `CohortReportSettings`, `ResponseMetaData`, `MetricAggregation`, `RestrictedMetricType` types to the Data API v1alpha ([#5318](https://github.com/googleapis/google-cloud-node/issues/5318)) ([76ae561](https://github.com/googleapis/google-cloud-node/commit/76ae561ee40d66cbba815cd7c9c964a6b92cc00c))
+
 ## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.4.0...data-v4.5.0) (2024-04-16)
 
 
