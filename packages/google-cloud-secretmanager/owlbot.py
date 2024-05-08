@@ -117,34 +117,8 @@ s.replace('packages/google-cloud-secretmanager/src/v1/secret_manager_service_cli
 """)
 
 s.replace('packages/google-cloud-secretmanager/src/v1/secret_manager_service_client.ts',
-  r"""    // This API contains "path templates"; forward-slash-separated
-    // identifiers to uniquely identify resources within the API.
-    // Create useful helper objects for these.
-    this.pathTemplates = {
-      projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
-      ),
-      projectLocationSecretPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/secrets/{secret}'
-      ),
-      projectLocationSecretSecretVersionPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/secrets/{secret}/versions/{secret_version}'
-        ),
-      projectSecretPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/secrets/{secret}'
-      ),
-      projectSecretSecretVersionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/secrets/{secret}/versions/{secret_version}'
-      ),
-      topicPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/topics/{topic}'
-      ),
-    };""",
-  r"""    // This API contains "path templates"; forward-slash-separated
-    // identifiers to uniquely identify resources within the API.
-    // Create useful helper objects for these.
-    this.pathTemplates = {
+  r"""this.pathTemplates = {""",
+  r"""this.pathTemplates = {
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
