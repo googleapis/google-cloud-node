@@ -269,6 +269,33 @@ export class SecretManagerServiceClient {
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
+      secretPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/secrets/{secret}'
+      ),
+      secretVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/secrets/{secret}/versions/{secret_version}'
+      ),
+      topicPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/topics/{topic}'
+      ),
+            projectLocationSecretPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/secrets/{secret}'
+      ),
+      projectLocationSecretSecretVersionPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/secrets/{secret}/versions/{secret_version}'
+        ),
+      projectSecretPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/secrets/{secret}'
+      ),
+      projectSecretSecretVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/secrets/{secret}/versions/{secret_version}'
+      ),
+    };
+
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
+      ),
       projectLocationSecretPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/secrets/{secret}'
       ),
