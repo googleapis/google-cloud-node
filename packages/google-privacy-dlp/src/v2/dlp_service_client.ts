@@ -214,6 +214,9 @@ export class DlpServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      connectionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/connections/{connection}'
+      ),
       discoveryConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/discoveryConfigs/{discovery_config}'
       ),
@@ -365,6 +368,16 @@ export class DlpServiceClient {
         'nextPageToken',
         'columnDataProfiles'
       ),
+      listConnections: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'connections'
+      ),
+      searchConnections: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'connections'
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -460,8 +473,15 @@ export class DlpServiceClient {
       'getProjectDataProfile',
       'getTableDataProfile',
       'getColumnDataProfile',
+      'deleteTableDataProfile',
       'hybridInspectDlpJob',
       'finishDlpJob',
+      'createConnection',
+      'getConnection',
+      'listConnections',
+      'searchConnections',
+      'deleteConnection',
+      'updateConnection',
     ];
     for (const methodName of dlpServiceStubMethods) {
       const callPromise = this.dlpServiceStub.then(
@@ -4035,6 +4055,101 @@ export class DlpServiceClient {
     return this.innerApiCalls.getColumnDataProfile(request, options, callback);
   }
   /**
+   * Delete a TableDataProfile. Will not prevent the profile from being
+   * regenerated if the table is still included in a discovery configuration.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the table data profile.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/dlp_service.delete_table_data_profile.js</caption>
+   * region_tag:dlp_v2_generated_DlpService_DeleteTableDataProfile_async
+   */
+  deleteTableDataProfile(
+    request?: protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteTableDataProfile(
+    request: protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteTableDataProfile(
+    request: protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteTableDataProfile(
+    request?: protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.IDeleteTableDataProfileRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteTableDataProfile(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
    * Inspect hybrid content and store findings to a job.
    * To review the findings, inspect the job. Inspection will occur
    * asynchronously.
@@ -4211,6 +4326,350 @@ export class DlpServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.finishDlpJob(request, options, callback);
+  }
+  /**
+   * Create a Connection to an external data source.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent resource name in the format:
+   *   `projects/{project}/locations/{location}`.
+   * @param {google.privacy.dlp.v2.Connection} request.connection
+   *   Required. The connection resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.Connection|Connection}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/dlp_service.create_connection.js</caption>
+   * region_tag:dlp_v2_generated_DlpService_CreateConnection_async
+   */
+  createConnection(
+    request?: protos.google.privacy.dlp.v2.ICreateConnectionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IConnection,
+      protos.google.privacy.dlp.v2.ICreateConnectionRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  createConnection(
+    request: protos.google.privacy.dlp.v2.ICreateConnectionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IConnection,
+      protos.google.privacy.dlp.v2.ICreateConnectionRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createConnection(
+    request: protos.google.privacy.dlp.v2.ICreateConnectionRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IConnection,
+      protos.google.privacy.dlp.v2.ICreateConnectionRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createConnection(
+    request?: protos.google.privacy.dlp.v2.ICreateConnectionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.privacy.dlp.v2.IConnection,
+          | protos.google.privacy.dlp.v2.ICreateConnectionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.privacy.dlp.v2.IConnection,
+      protos.google.privacy.dlp.v2.ICreateConnectionRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IConnection,
+      protos.google.privacy.dlp.v2.ICreateConnectionRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createConnection(request, options, callback);
+  }
+  /**
+   * Get a Connection by name.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name in the format:
+   *   `projects/{project}/locations/{location}/connections/{connection}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.Connection|Connection}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/dlp_service.get_connection.js</caption>
+   * region_tag:dlp_v2_generated_DlpService_GetConnection_async
+   */
+  getConnection(
+    request?: protos.google.privacy.dlp.v2.IGetConnectionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IConnection,
+      protos.google.privacy.dlp.v2.IGetConnectionRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getConnection(
+    request: protos.google.privacy.dlp.v2.IGetConnectionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IConnection,
+      protos.google.privacy.dlp.v2.IGetConnectionRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getConnection(
+    request: protos.google.privacy.dlp.v2.IGetConnectionRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IConnection,
+      protos.google.privacy.dlp.v2.IGetConnectionRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getConnection(
+    request?: protos.google.privacy.dlp.v2.IGetConnectionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.privacy.dlp.v2.IConnection,
+          protos.google.privacy.dlp.v2.IGetConnectionRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.privacy.dlp.v2.IConnection,
+      protos.google.privacy.dlp.v2.IGetConnectionRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IConnection,
+      protos.google.privacy.dlp.v2.IGetConnectionRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getConnection(request, options, callback);
+  }
+  /**
+   * Delete a Connection.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the Connection to be deleted, in the format:
+   *   `projects/{project}/locations/{location}/connections/{connection}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/dlp_service.delete_connection.js</caption>
+   * region_tag:dlp_v2_generated_DlpService_DeleteConnection_async
+   */
+  deleteConnection(
+    request?: protos.google.privacy.dlp.v2.IDeleteConnectionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.IDeleteConnectionRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteConnection(
+    request: protos.google.privacy.dlp.v2.IDeleteConnectionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.IDeleteConnectionRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteConnection(
+    request: protos.google.privacy.dlp.v2.IDeleteConnectionRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.IDeleteConnectionRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteConnection(
+    request?: protos.google.privacy.dlp.v2.IDeleteConnectionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.privacy.dlp.v2.IDeleteConnectionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.IDeleteConnectionRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.IDeleteConnectionRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteConnection(request, options, callback);
+  }
+  /**
+   * Update a Connection.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name in the format:
+   *   `projects/{project}/locations/{location}/connections/{connection}`.
+   * @param {google.privacy.dlp.v2.Connection} request.connection
+   *   Required. The connection with new values for the relevant fields.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Mask to control which fields get updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.Connection|Connection}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/dlp_service.update_connection.js</caption>
+   * region_tag:dlp_v2_generated_DlpService_UpdateConnection_async
+   */
+  updateConnection(
+    request?: protos.google.privacy.dlp.v2.IUpdateConnectionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IConnection,
+      protos.google.privacy.dlp.v2.IUpdateConnectionRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateConnection(
+    request: protos.google.privacy.dlp.v2.IUpdateConnectionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IConnection,
+      protos.google.privacy.dlp.v2.IUpdateConnectionRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateConnection(
+    request: protos.google.privacy.dlp.v2.IUpdateConnectionRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IConnection,
+      protos.google.privacy.dlp.v2.IUpdateConnectionRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateConnection(
+    request?: protos.google.privacy.dlp.v2.IUpdateConnectionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.privacy.dlp.v2.IConnection,
+          | protos.google.privacy.dlp.v2.IUpdateConnectionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.privacy.dlp.v2.IConnection,
+      protos.google.privacy.dlp.v2.IUpdateConnectionRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IConnection,
+      protos.google.privacy.dlp.v2.IUpdateConnectionRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateConnection(request, options, callback);
   }
 
   /**
@@ -6105,7 +6564,7 @@ export class DlpServiceClient {
     ) as AsyncIterable<protos.google.privacy.dlp.v2.IStoredInfoType>;
   }
   /**
-   * Lists data profiles for an organization.
+   * Lists project data profiles for an organization.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -6128,7 +6587,7 @@ export class DlpServiceClient {
    *
    *   Supported fields are:
    *
-   *   - `project_id`: GCP project ID
+   *   - `project_id`: Google Cloud project ID
    *   - `sensitivity_level`: How sensitive the data in a project is, at most.
    *   - `data_risk_level`: How much risk is associated with this data.
    *   - `profile_last_generated`: When the profile was last updated in epoch
@@ -6269,7 +6728,7 @@ export class DlpServiceClient {
    *
    *   Supported fields are:
    *
-   *   - `project_id`: GCP project ID
+   *   - `project_id`: Google Cloud project ID
    *   - `sensitivity_level`: How sensitive the data in a project is, at most.
    *   - `data_risk_level`: How much risk is associated with this data.
    *   - `profile_last_generated`: When the profile was last updated in epoch
@@ -6354,7 +6813,7 @@ export class DlpServiceClient {
    *
    *   Supported fields are:
    *
-   *   - `project_id`: GCP project ID
+   *   - `project_id`: Google Cloud project ID
    *   - `sensitivity_level`: How sensitive the data in a project is, at most.
    *   - `data_risk_level`: How much risk is associated with this data.
    *   - `profile_last_generated`: When the profile was last updated in epoch
@@ -6415,7 +6874,7 @@ export class DlpServiceClient {
     ) as AsyncIterable<protos.google.privacy.dlp.v2.IProjectDataProfile>;
   }
   /**
-   * Lists data profiles for an organization.
+   * Lists table data profiles for an organization.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -6441,7 +6900,7 @@ export class DlpServiceClient {
    *
    *   Supported fields are:
    *
-   *   - `project_id`: The GCP project ID.
+   *   - `project_id`: The Google Cloud project ID.
    *   - `dataset_id`: The ID of a BigQuery dataset.
    *   - `table_id`: The ID of a BigQuery table.
    *   - `sensitivity_level`: How sensitive the data in a table is, at most.
@@ -6461,7 +6920,7 @@ export class DlpServiceClient {
    *   sequence of restrictions implicitly uses `AND`.
    *   * A restriction has the form of `{field} {operator} {value}`.
    *   * Supported fields/values:
-   *       - `project_id` - The GCP project ID.
+   *       - `project_id` - The Google Cloud project ID.
    *       - `dataset_id` - The BigQuery dataset ID.
    *       - `table_id` - The ID of the BigQuery table.
    *       - `sensitivity_level` - HIGH|MODERATE|LOW
@@ -6591,7 +7050,7 @@ export class DlpServiceClient {
    *
    *   Supported fields are:
    *
-   *   - `project_id`: The GCP project ID.
+   *   - `project_id`: The Google Cloud project ID.
    *   - `dataset_id`: The ID of a BigQuery dataset.
    *   - `table_id`: The ID of a BigQuery table.
    *   - `sensitivity_level`: How sensitive the data in a table is, at most.
@@ -6611,7 +7070,7 @@ export class DlpServiceClient {
    *   sequence of restrictions implicitly uses `AND`.
    *   * A restriction has the form of `{field} {operator} {value}`.
    *   * Supported fields/values:
-   *       - `project_id` - The GCP project ID.
+   *       - `project_id` - The Google Cloud project ID.
    *       - `dataset_id` - The BigQuery dataset ID.
    *       - `table_id` - The ID of the BigQuery table.
    *       - `sensitivity_level` - HIGH|MODERATE|LOW
@@ -6689,7 +7148,7 @@ export class DlpServiceClient {
    *
    *   Supported fields are:
    *
-   *   - `project_id`: The GCP project ID.
+   *   - `project_id`: The Google Cloud project ID.
    *   - `dataset_id`: The ID of a BigQuery dataset.
    *   - `table_id`: The ID of a BigQuery table.
    *   - `sensitivity_level`: How sensitive the data in a table is, at most.
@@ -6709,7 +7168,7 @@ export class DlpServiceClient {
    *   sequence of restrictions implicitly uses `AND`.
    *   * A restriction has the form of `{field} {operator} {value}`.
    *   * Supported fields/values:
-   *       - `project_id` - The GCP project ID.
+   *       - `project_id` - The Google Cloud project ID.
    *       - `dataset_id` - The BigQuery dataset ID.
    *       - `table_id` - The ID of the BigQuery table.
    *       - `sensitivity_level` - HIGH|MODERATE|LOW
@@ -6760,7 +7219,7 @@ export class DlpServiceClient {
     ) as AsyncIterable<protos.google.privacy.dlp.v2.ITableDataProfile>;
   }
   /**
-   * Lists data profiles for an organization.
+   * Lists column data profiles for an organization.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -7112,6 +7571,402 @@ export class DlpServiceClient {
     ) as AsyncIterable<protos.google.privacy.dlp.v2.IColumnDataProfile>;
   }
   /**
+   * Lists Connections in a parent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent name, for example:
+   *   `projects/project-id/locations/global`.
+   * @param {number} [request.pageSize]
+   *   Optional. Number of results per page, max 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token from a previous page to return the next set of
+   *   results. If set, all other request fields must match the original request.
+   * @param {string} [request.filter]
+   *   Optional. * Supported fields/values
+   *       - `state` - MISSING|AVAILABLE|ERROR
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.privacy.dlp.v2.Connection|Connection}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listConnectionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listConnections(
+    request?: protos.google.privacy.dlp.v2.IListConnectionsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IConnection[],
+      protos.google.privacy.dlp.v2.IListConnectionsRequest | null,
+      protos.google.privacy.dlp.v2.IListConnectionsResponse,
+    ]
+  >;
+  listConnections(
+    request: protos.google.privacy.dlp.v2.IListConnectionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListConnectionsRequest,
+      protos.google.privacy.dlp.v2.IListConnectionsResponse | null | undefined,
+      protos.google.privacy.dlp.v2.IConnection
+    >
+  ): void;
+  listConnections(
+    request: protos.google.privacy.dlp.v2.IListConnectionsRequest,
+    callback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListConnectionsRequest,
+      protos.google.privacy.dlp.v2.IListConnectionsResponse | null | undefined,
+      protos.google.privacy.dlp.v2.IConnection
+    >
+  ): void;
+  listConnections(
+    request?: protos.google.privacy.dlp.v2.IListConnectionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.privacy.dlp.v2.IListConnectionsRequest,
+          | protos.google.privacy.dlp.v2.IListConnectionsResponse
+          | null
+          | undefined,
+          protos.google.privacy.dlp.v2.IConnection
+        >,
+    callback?: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListConnectionsRequest,
+      protos.google.privacy.dlp.v2.IListConnectionsResponse | null | undefined,
+      protos.google.privacy.dlp.v2.IConnection
+    >
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IConnection[],
+      protos.google.privacy.dlp.v2.IListConnectionsRequest | null,
+      protos.google.privacy.dlp.v2.IListConnectionsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listConnections(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent name, for example:
+   *   `projects/project-id/locations/global`.
+   * @param {number} [request.pageSize]
+   *   Optional. Number of results per page, max 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token from a previous page to return the next set of
+   *   results. If set, all other request fields must match the original request.
+   * @param {string} [request.filter]
+   *   Optional. * Supported fields/values
+   *       - `state` - MISSING|AVAILABLE|ERROR
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.privacy.dlp.v2.Connection|Connection} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listConnectionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listConnectionsStream(
+    request?: protos.google.privacy.dlp.v2.IListConnectionsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listConnections'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listConnections.createStream(
+      this.innerApiCalls.listConnections as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listConnections`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent name, for example:
+   *   `projects/project-id/locations/global`.
+   * @param {number} [request.pageSize]
+   *   Optional. Number of results per page, max 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token from a previous page to return the next set of
+   *   results. If set, all other request fields must match the original request.
+   * @param {string} [request.filter]
+   *   Optional. * Supported fields/values
+   *       - `state` - MISSING|AVAILABLE|ERROR
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.privacy.dlp.v2.Connection|Connection}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/dlp_service.list_connections.js</caption>
+   * region_tag:dlp_v2_generated_DlpService_ListConnections_async
+   */
+  listConnectionsAsync(
+    request?: protos.google.privacy.dlp.v2.IListConnectionsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.privacy.dlp.v2.IConnection> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listConnections'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listConnections.asyncIterate(
+      this.innerApiCalls['listConnections'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.privacy.dlp.v2.IConnection>;
+  }
+  /**
+   * Searches for Connections in a parent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent name, typically an organization, without location.
+   *   For example: `organizations/12345678`.
+   * @param {number} [request.pageSize]
+   *   Optional. Number of results per page, max 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token from a previous page to return the next set of
+   *   results. If set, all other request fields must match the original request.
+   * @param {string} [request.filter]
+   *   Optional. * Supported fields/values
+   *       - `state` - MISSING|AVAILABLE|ERROR
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.privacy.dlp.v2.Connection|Connection}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `searchConnectionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  searchConnections(
+    request?: protos.google.privacy.dlp.v2.ISearchConnectionsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IConnection[],
+      protos.google.privacy.dlp.v2.ISearchConnectionsRequest | null,
+      protos.google.privacy.dlp.v2.ISearchConnectionsResponse,
+    ]
+  >;
+  searchConnections(
+    request: protos.google.privacy.dlp.v2.ISearchConnectionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.privacy.dlp.v2.ISearchConnectionsRequest,
+      | protos.google.privacy.dlp.v2.ISearchConnectionsResponse
+      | null
+      | undefined,
+      protos.google.privacy.dlp.v2.IConnection
+    >
+  ): void;
+  searchConnections(
+    request: protos.google.privacy.dlp.v2.ISearchConnectionsRequest,
+    callback: PaginationCallback<
+      protos.google.privacy.dlp.v2.ISearchConnectionsRequest,
+      | protos.google.privacy.dlp.v2.ISearchConnectionsResponse
+      | null
+      | undefined,
+      protos.google.privacy.dlp.v2.IConnection
+    >
+  ): void;
+  searchConnections(
+    request?: protos.google.privacy.dlp.v2.ISearchConnectionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.privacy.dlp.v2.ISearchConnectionsRequest,
+          | protos.google.privacy.dlp.v2.ISearchConnectionsResponse
+          | null
+          | undefined,
+          protos.google.privacy.dlp.v2.IConnection
+        >,
+    callback?: PaginationCallback<
+      protos.google.privacy.dlp.v2.ISearchConnectionsRequest,
+      | protos.google.privacy.dlp.v2.ISearchConnectionsResponse
+      | null
+      | undefined,
+      protos.google.privacy.dlp.v2.IConnection
+    >
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IConnection[],
+      protos.google.privacy.dlp.v2.ISearchConnectionsRequest | null,
+      protos.google.privacy.dlp.v2.ISearchConnectionsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.searchConnections(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent name, typically an organization, without location.
+   *   For example: `organizations/12345678`.
+   * @param {number} [request.pageSize]
+   *   Optional. Number of results per page, max 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token from a previous page to return the next set of
+   *   results. If set, all other request fields must match the original request.
+   * @param {string} [request.filter]
+   *   Optional. * Supported fields/values
+   *       - `state` - MISSING|AVAILABLE|ERROR
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.privacy.dlp.v2.Connection|Connection} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `searchConnectionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  searchConnectionsStream(
+    request?: protos.google.privacy.dlp.v2.ISearchConnectionsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['searchConnections'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.searchConnections.createStream(
+      this.innerApiCalls.searchConnections as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `searchConnections`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent name, typically an organization, without location.
+   *   For example: `organizations/12345678`.
+   * @param {number} [request.pageSize]
+   *   Optional. Number of results per page, max 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token from a previous page to return the next set of
+   *   results. If set, all other request fields must match the original request.
+   * @param {string} [request.filter]
+   *   Optional. * Supported fields/values
+   *       - `state` - MISSING|AVAILABLE|ERROR
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.privacy.dlp.v2.Connection|Connection}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/dlp_service.search_connections.js</caption>
+   * region_tag:dlp_v2_generated_DlpService_SearchConnections_async
+   */
+  searchConnectionsAsync(
+    request?: protos.google.privacy.dlp.v2.ISearchConnectionsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.privacy.dlp.v2.IConnection> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['searchConnections'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.searchConnections.asyncIterate(
+      this.innerApiCalls['searchConnections'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.privacy.dlp.v2.IConnection>;
+  }
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -7192,6 +8047,58 @@ export class DlpServiceClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified connection resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} connection
+   * @returns {string} Resource name string.
+   */
+  connectionPath(project: string, location: string, connection: string) {
+    return this.pathTemplates.connectionPathTemplate.render({
+      project: project,
+      location: location,
+      connection: connection,
+    });
+  }
+
+  /**
+   * Parse the project from Connection resource.
+   *
+   * @param {string} connectionName
+   *   A fully-qualified path representing Connection resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromConnectionName(connectionName: string) {
+    return this.pathTemplates.connectionPathTemplate.match(connectionName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Connection resource.
+   *
+   * @param {string} connectionName
+   *   A fully-qualified path representing Connection resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromConnectionName(connectionName: string) {
+    return this.pathTemplates.connectionPathTemplate.match(connectionName)
+      .location;
+  }
+
+  /**
+   * Parse the connection from Connection resource.
+   *
+   * @param {string} connectionName
+   *   A fully-qualified path representing Connection resource.
+   * @returns {string} A string representing the connection.
+   */
+  matchConnectionFromConnectionName(connectionName: string) {
+    return this.pathTemplates.connectionPathTemplate.match(connectionName)
+      .connection;
+  }
 
   /**
    * Return a fully-qualified discoveryConfig resource name string.
