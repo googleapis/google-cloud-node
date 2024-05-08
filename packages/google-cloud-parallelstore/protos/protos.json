@@ -510,30 +510,71 @@
                         }
                       }
                     },
+                    "SourceGcsBucket": {
+                      "fields": {
+                        "uri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DestinationGcsBucket": {
+                      "fields": {
+                        "uri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SourceParallelstore": {
+                      "fields": {
+                        "path": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DestinationParallelstore": {
+                      "fields": {
+                        "path": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "ImportDataRequest": {
                       "oneofs": {
                         "source": {
                           "oneof": [
-                            "sourceGcsUri"
+                            "sourceGcsBucket"
                           ]
                         },
                         "destination": {
                           "oneof": [
-                            "destinationPath"
+                            "destinationParallelstore"
                           ]
                         }
                       },
                       "fields": {
-                        "sourceGcsUri": {
-                          "type": "string",
+                        "sourceGcsBucket": {
+                          "type": "SourceGcsBucket",
                           "id": 2
                         },
-                        "destinationPath": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
+                        "destinationParallelstore": {
+                          "type": "DestinationParallelstore",
+                          "id": 3
                         },
                         "name": {
                           "type": "string",
@@ -557,25 +598,22 @@
                       "oneofs": {
                         "source": {
                           "oneof": [
-                            "sourcePath"
+                            "sourceParallelstore"
                           ]
                         },
                         "destination": {
                           "oneof": [
-                            "destinationGcsUri"
+                            "destinationGcsBucket"
                           ]
                         }
                       },
                       "fields": {
-                        "sourcePath": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
+                        "sourceParallelstore": {
+                          "type": "SourceParallelstore",
+                          "id": 2
                         },
-                        "destinationGcsUri": {
-                          "type": "string",
+                        "destinationGcsBucket": {
+                          "type": "DestinationGcsBucket",
                           "id": 3
                         },
                         "name": {
