@@ -50,7 +50,7 @@ function main(parent) {
    *  * `project_id`
    *  * `sensitivity_level desc`
    *  Supported fields are:
-   *  - `project_id`: GCP project ID
+   *  - `project_id`: Google Cloud project ID
    *  - `sensitivity_level`: How sensitive the data in a project is, at most.
    *  - `data_risk_level`: How much risk is associated with this data.
    *  - `profile_last_generated`: When the profile was last updated in epoch

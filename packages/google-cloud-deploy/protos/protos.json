@@ -2000,6 +2000,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
                             "(google.api.resource_reference).type": "container.googleapis.com/Cluster"
                           }
                         },
@@ -2018,6 +2019,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
                             "(google.api.resource_reference).type": "gkehub.googleapis.com/Membership"
                           }
                         }
