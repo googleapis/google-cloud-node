@@ -303,6 +303,9 @@ export class PredictionServiceClient {
       nasTrialDetailPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/nasJobs/{nas_job}/nasTrialDetails/{nas_trial_detail}'
       ),
+      notebookExecutionJobPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/notebookExecutionJobs/{notebook_execution_job}'
+      ),
       notebookRuntimePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/notebookRuntimes/{notebook_runtime}'
       ),
@@ -407,11 +410,6 @@ export class PredictionServiceClient {
         !!opts.fallback,
         /* gaxStreamingRetries: */ false
       ),
-      chatCompletions: new this._gaxModule.StreamDescriptor(
-        this._gaxModule.StreamType.SERVER_STREAMING,
-        !!opts.fallback,
-        /* gaxStreamingRetries: */ false
-      ),
     };
 
     // Put together the default options sent with requests.
@@ -478,7 +476,6 @@ export class PredictionServiceClient {
       'countTokens',
       'generateContent',
       'streamGenerateContent',
-      'chatCompletions',
     ];
     for (const methodName of predictionServiceStubMethods) {
       const callPromise = this.predictionServiceStub.then(
@@ -1566,43 +1563,6 @@ export class PredictionServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.streamGenerateContent(request, options);
-  }
-
-  /**
-   * Exposes an OpenAI-compatible endpoint for chat completions.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.endpoint
-   *   Required. The name of the Endpoint requested to serve the prediction.
-   *   Format:
-   *   `projects/{project}/locations/{location}/endpoints/openapi`
-   * @param {google.api.HttpBody} [request.httpBody]
-   *   Optional. The prediction input. Supports HTTP headers and arbitrary data
-   *   payload.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits {@link protos.google.api.HttpBody|HttpBody} on 'data' event.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/prediction_service.chat_completions.js</caption>
-   * region_tag:aiplatform_v1beta1_generated_PredictionService_ChatCompletions_async
-   */
-  chatCompletions(
-    request?: protos.google.cloud.aiplatform.v1beta1.IChatCompletionsRequest,
-    options?: CallOptions
-  ): gax.CancellableStream {
-    request = request || {};
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        endpoint: request.endpoint ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.chatCompletions(request, options);
   }
 
   /**
@@ -3882,6 +3842,67 @@ export class PredictionServiceClient {
     return this.pathTemplates.nasTrialDetailPathTemplate.match(
       nasTrialDetailName
     ).nas_trial_detail;
+  }
+
+  /**
+   * Return a fully-qualified notebookExecutionJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} notebook_execution_job
+   * @returns {string} Resource name string.
+   */
+  notebookExecutionJobPath(
+    project: string,
+    location: string,
+    notebookExecutionJob: string
+  ) {
+    return this.pathTemplates.notebookExecutionJobPathTemplate.render({
+      project: project,
+      location: location,
+      notebook_execution_job: notebookExecutionJob,
+    });
+  }
+
+  /**
+   * Parse the project from NotebookExecutionJob resource.
+   *
+   * @param {string} notebookExecutionJobName
+   *   A fully-qualified path representing NotebookExecutionJob resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNotebookExecutionJobName(notebookExecutionJobName: string) {
+    return this.pathTemplates.notebookExecutionJobPathTemplate.match(
+      notebookExecutionJobName
+    ).project;
+  }
+
+  /**
+   * Parse the location from NotebookExecutionJob resource.
+   *
+   * @param {string} notebookExecutionJobName
+   *   A fully-qualified path representing NotebookExecutionJob resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromNotebookExecutionJobName(notebookExecutionJobName: string) {
+    return this.pathTemplates.notebookExecutionJobPathTemplate.match(
+      notebookExecutionJobName
+    ).location;
+  }
+
+  /**
+   * Parse the notebook_execution_job from NotebookExecutionJob resource.
+   *
+   * @param {string} notebookExecutionJobName
+   *   A fully-qualified path representing NotebookExecutionJob resource.
+   * @returns {string} A string representing the notebook_execution_job.
+   */
+  matchNotebookExecutionJobFromNotebookExecutionJobName(
+    notebookExecutionJobName: string
+  ) {
+    return this.pathTemplates.notebookExecutionJobPathTemplate.match(
+      notebookExecutionJobName
+    ).notebook_execution_job;
   }
 
   /**

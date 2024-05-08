@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.10.0...sql-v0.11.0) (2024-05-02)
+
+
+### Features
+
+* [sql] Support for the AcquireSsrsLease and ReleaseSsrsLease RPCs ([#5299](https://github.com/googleapis/google-cloud-node/issues/5299)) ([485ff29](https://github.com/googleapis/google-cloud-node/commit/485ff29f98a3b7d6b5c40f2bd3f4696c1a82115e))
+
 ## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.9.0...sql-v0.10.0) (2024-03-29)
 
 

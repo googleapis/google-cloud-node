@@ -20,6 +20,11 @@
                 "updateDataset"
               ]
             },
+            "UpdateDatasetVersion": {
+              "methods": [
+                "updateDatasetVersion"
+              ]
+            },
             "GetDatasetVersion": {
               "methods": [
                 "getDatasetVersion"
@@ -125,6 +130,11 @@
             "UpdateDataset": {
               "methods": [
                 "updateDataset"
+              ]
+            },
+            "UpdateDatasetVersion": {
+              "methods": [
+                "updateDatasetVersion"
               ]
             },
             "GetDatasetVersion": {
@@ -2550,6 +2560,11 @@
                 "getNotebookRuntime"
               ]
             },
+            "GetNotebookExecutionJob": {
+              "methods": [
+                "getNotebookExecutionJob"
+              ]
+            },
             "CreateNotebookRuntimeTemplate": {
               "methods": [
                 "createNotebookRuntimeTemplate"
@@ -2580,6 +2595,11 @@
                 "startNotebookRuntime"
               ]
             },
+            "DeleteNotebookExecutionJob": {
+              "methods": [
+                "deleteNotebookExecutionJob"
+              ]
+            },
             "ListNotebookRuntimeTemplates": {
               "methods": [
                 "listNotebookRuntimeTemplates",
@@ -2592,6 +2612,13 @@
                 "listNotebookRuntimes",
                 "listNotebookRuntimesStream",
                 "listNotebookRuntimesAsync"
+              ]
+            },
+            "ListNotebookExecutionJobs": {
+              "methods": [
+                "listNotebookExecutionJobs",
+                "listNotebookExecutionJobsStream",
+                "listNotebookExecutionJobsAsync"
               ]
             }
           }
@@ -2609,6 +2636,11 @@
                 "getNotebookRuntime"
               ]
             },
+            "GetNotebookExecutionJob": {
+              "methods": [
+                "getNotebookExecutionJob"
+              ]
+            },
             "CreateNotebookRuntimeTemplate": {
               "methods": [
                 "createNotebookRuntimeTemplate"
@@ -2639,6 +2671,11 @@
                 "startNotebookRuntime"
               ]
             },
+            "DeleteNotebookExecutionJob": {
+              "methods": [
+                "deleteNotebookExecutionJob"
+              ]
+            },
             "ListNotebookRuntimeTemplates": {
               "methods": [
                 "listNotebookRuntimeTemplates",
@@ -2651,6 +2688,13 @@
                 "listNotebookRuntimes",
                 "listNotebookRuntimesStream",
                 "listNotebookRuntimesAsync"
+              ]
+            },
+            "ListNotebookExecutionJobs": {
+              "methods": [
+                "listNotebookExecutionJobs",
+                "listNotebookExecutionJobsStream",
+                "listNotebookExecutionJobsAsync"
               ]
             }
           }
@@ -2945,11 +2989,6 @@
             "StreamGenerateContent": {
               "methods": [
                 "streamGenerateContent"
-              ]
-            },
-            "ChatCompletions": {
-              "methods": [
-                "chatCompletions"
               ]
             }
           }

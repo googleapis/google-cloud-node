@@ -5,6 +5,219 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "068507d889523e1cb9d1430bd53bf579dc1a5c9f",
+          "message": "Add initial files for google.maps.solar.v1",
+          "issues": [
+            "5305"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/solar",
+      "id": "0e7cd38f-9070-45e5-b7e9-b476102788da",
+      "createTime": "2024-05-02T23:29:09.819Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "27a72a6d16079ff025b4a9ac702c6d1bffd017ce",
+          "message": "[shopping] add `Weight` to common types for Shopping APIs to be used for accounts bundle",
+          "issues": [
+            "5291"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/lfp",
+      "id": "1fc9fa0a-a061-478a-9a12-119c3581b359",
+      "createTime": "2024-05-02T23:29:09.807Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "27a72a6d16079ff025b4a9ac702c6d1bffd017ce",
+          "message": "[shopping] add `Weight` to common types for Shopping APIs to be used for accounts bundle",
+          "issues": [
+            "5291"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/notifications",
+      "id": "f81d9648-9c56-48b9-9827-9fa839599e64",
+      "createTime": "2024-05-02T23:29:09.793Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e769b8b67f6193a0624a7621b9522eedac86ed40",
+          "message": "[parallelstore] add ImportData and ExportData RPCs",
+          "issues": [
+            "5292"
+          ],
+          "scope": "parallelstore/v1beta"
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/parallelstore",
+      "id": "38f784b8-7243-4209-b18d-88192c9474dc",
+      "createTime": "2024-05-02T23:29:09.724Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "27a72a6d16079ff025b4a9ac702c6d1bffd017ce",
+          "message": "[shopping] add `Weight` to common types for Shopping APIs to be used for accounts bundle",
+          "issues": [
+            "5291"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/css",
+      "id": "339c4de8-1ec0-4f85-8349-d98b95e2247d",
+      "createTime": "2024-05-02T23:29:09.712Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "27a72a6d16079ff025b4a9ac702c6d1bffd017ce",
+          "message": "[shopping] add `Weight` to common types for Shopping APIs to be used for accounts bundle",
+          "issues": [
+            "5291"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/inventories",
+      "id": "ef704b5d-263e-4858-8d4b-f96e57989e65",
+      "createTime": "2024-05-02T23:29:09.599Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "27a72a6d16079ff025b4a9ac702c6d1bffd017ce",
+          "message": "[shopping] add `Weight` to common types for Shopping APIs to be used for accounts bundle",
+          "issues": [
+            "5291"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reports",
+      "id": "f4f55107-6e1b-484f-a1a6-995c2f3adf79",
+      "createTime": "2024-05-02T23:29:09.535Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "485ff29f98a3b7d6b5c40f2bd3f4696c1a82115e",
+          "message": "[sql] Support for the AcquireSsrsLease and ReleaseSsrsLease RPCs",
+          "issues": [
+            "5299"
+          ]
+        }
+      ],
+      "version": "0.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "04a72bea-2822-4231-ac09-6d94afcf0422",
+      "createTime": "2024-05-02T23:29:09.521Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "27a72a6d16079ff025b4a9ac702c6d1bffd017ce",
+          "message": "[shopping] add `Weight` to common types for Shopping APIs to be used for accounts bundle",
+          "issues": [
+            "5291"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "5e145530c217cc87ee2d2e9f6124c5091534fc5e",
+          "message": "(secretmanaer) readd legacy path templates",
+          "issues": [
+            "5290"
+          ]
+        }
+      ],
+      "version": "5.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/secret-manager",
+      "id": "da0acf16-6908-4cca-9133-c3bb0fd13422",
+      "createTime": "2024-05-02T23:29:09.509Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9a2060a6a3baca737c6a6239512977149737154a",
+          "message": "[recaptchaenterprise]Add Fraud Prevention settings field",
+          "issues": [
+            "5281"
+          ]
+        }
+      ],
+      "version": "5.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recaptcha-enterprise",
+      "id": "38b45b80-3adc-4adb-841a-5353f4734f4b",
+      "createTime": "2024-05-02T23:29:09.497Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f3e0606bf7df59eb2c87b1d6743fa6a176235882",
+          "message": "[compute] Update Compute Engine API to revision 20240421 (#899)",
+          "issues": [
+            "5294"
+          ]
+        }
+      ],
+      "version": "4.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "a8d5ac39-e432-4156-8a21-56f3aaf34317",
+      "createTime": "2024-05-02T23:29:09.484Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "fe2a4e3cb6f8714048b1e0c97e07c7afbfb25602",
+          "message": "A new field `search_entry_point` is added to message `.google.cloud.aiplatform.v1beta1.GroundingMetadata`",
+          "issues": [
+            "5285"
+          ]
+        }
+      ],
+      "version": "3.20.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "a6dbfd2e-0319-4d53-b528-009c40a8cf81",
+      "createTime": "2024-05-02T23:29:09.471Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "467f31b6236e725a197ce33d30446afde98ba402",
           "message": "Add initial files for google.shopping.merchant.conversions.v1beta",
           "issues": [
@@ -28741,5 +28954,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-04-23T19:50:23.311Z"
+  "updateTime": "2024-05-02T23:29:09.819Z"
 }

@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [5.8.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.7.0...recaptcha-enterprise-v5.8.0) (2024-05-02)
+
+
+### Features
+
+* [recaptchaenterprise]Add Fraud Prevention settings field ([#5281](https://github.com/googleapis/google-cloud-node/issues/5281)) ([9a2060a](https://github.com/googleapis/google-cloud-node/commit/9a2060a6a3baca737c6a6239512977149737154a))
+
 ## [5.7.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.6.0...recaptcha-enterprise-v5.7.0) (2024-04-05)
 
 

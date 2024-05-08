@@ -79,6 +79,7 @@
   "../../protos/google/cloud/aiplatform/v1beta1/nas_job.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/network_spec.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/notebook_euc_config.proto",
+  "../../protos/google/cloud/aiplatform/v1beta1/notebook_execution_job.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/notebook_idle_shutdown_config.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/notebook_runtime.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/notebook_runtime_template_ref.proto",
