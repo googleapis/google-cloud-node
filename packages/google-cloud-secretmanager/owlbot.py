@@ -90,6 +90,85 @@ s.replace('packages/google-cloud-secretmanager/src/v1/secret_manager_service_cli
     return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
       .project;
   }
+  /**
+   * Parse the secret from SecretVersion resource.
+   *
+   * @param {string} secretVersionName
+   *   A fully-qualified path representing SecretVersion resource.
+   * @returns {string} A string representing the secret.
+   */
+    matchSecretFromSecretVersionName(secretVersionName: string) {
+    return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
+      .secret;
+  }
+
+  /**
+   * Parse the secret_version from SecretVersion resource.
+   *
+   * @param {string} secretVersionName
+   *   A fully-qualified path representing SecretVersion resource.
+   * @returns {string} A string representing the secret_version.
+   */
+  matchSecretVersionFromSecretVersionName(secretVersionName: string) {
+    return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
+      .secret_version;
   
 }
+""")
+
+s.replace('packages/google-cloud-secretmanager/src/v1/secret_manager_service_client.ts',
+  r"""    // This API contains "path templates"; forward-slash-separated
+    // identifiers to uniquely identify resources within the API.
+    // Create useful helper objects for these.
+    this.pathTemplates = {
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
+      ),
+      projectLocationSecretPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/secrets/{secret}'
+      ),
+      projectLocationSecretSecretVersionPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/secrets/{secret}/versions/{secret_version}'
+        ),
+      projectSecretPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/secrets/{secret}'
+      ),
+      projectSecretSecretVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/secrets/{secret}/versions/{secret_version}'
+      ),
+      topicPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/topics/{topic}'
+      ),
+    };""",
+  r"""    // This API contains "path templates"; forward-slash-separated
+    // identifiers to uniquely identify resources within the API.
+    // Create useful helper objects for these.
+    this.pathTemplates = {
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
+      ),
+      secretPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/secrets/{secret}'
+      ),
+      secretVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/secrets/{secret}/versions/{secret_version}'
+      ),
+      topicPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/topics/{topic}'
+      ),
+            projectLocationSecretPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/secrets/{secret}'
+      ),
+      projectLocationSecretSecretVersionPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/secrets/{secret}/versions/{secret_version}'
+        ),
+      projectSecretPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/secrets/{secret}'
+      ),
+      projectSecretSecretVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/secrets/{secret}/versions/{secret_version}'
+      ),
+    };
 """)
