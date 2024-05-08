@@ -715,7 +715,7 @@ export class Storage extends Service {
       customEndpoint = true;
     }
 
-    if (options.apiEndpoint) {
+    if (options.apiEndpoint && options.apiEndpoint !== apiEndpoint) {
       apiEndpoint = Storage.sanitizeEndpoint(options.apiEndpoint);
       customEndpoint = true;
     }

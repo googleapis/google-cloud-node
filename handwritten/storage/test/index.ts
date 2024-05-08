@@ -174,6 +174,30 @@ describe('Storage', () => {
       assert.strictEqual(calledWith.apiEndpoint, `${apiEndpoint}`);
     });
 
+    it('should not set `customEndpoint` if `apiEndpoint` matches default', () => {
+      const apiEndpoint = 'https://storage.googleapis.com';
+      const storage = new Storage({
+        apiEndpoint,
+      });
+
+      const calledWith = storage.calledWith_[0];
+      assert.strictEqual(calledWith.apiEndpoint, apiEndpoint);
+      assert.strictEqual(calledWith.customEndpoint, false);
+    });
+
+    it('should not set `customEndpoint` if `apiEndpoint` matches default (w/ universe domain)', () => {
+      const universeDomain = 'my.universe';
+      const apiEndpoint = `https://storage.${universeDomain}`;
+      const storage = new Storage({
+        apiEndpoint,
+        universeDomain,
+      });
+
+      const calledWith = storage.calledWith_[0];
+      assert.strictEqual(calledWith.apiEndpoint, apiEndpoint);
+      assert.strictEqual(calledWith.customEndpoint, false);
+    });
+
     it('should propagate the useAuthWithCustomEndpoint option', () => {
       const useAuthWithCustomEndpoint = true;
       const apiEndpoint = 'https://some.fake.endpoint';
