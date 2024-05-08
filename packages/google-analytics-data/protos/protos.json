@@ -1513,6 +1513,90 @@
                               "(google.api.method_signature)": "parent"
                             }
                           ]
+                        },
+                        "CreateReportTask": {
+                          "requestType": "CreateReportTaskRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{parent=properties/*}/reportTasks",
+                            "(google.api.http).body": "report_task",
+                            "(google.api.method_signature)": "parent,report_task",
+                            "(google.longrunning.operation_info).response_type": "ReportTask",
+                            "(google.longrunning.operation_info).metadata_type": "ReportTaskMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=properties/*}/reportTasks",
+                                "body": "report_task"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,report_task"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ReportTask",
+                                "metadata_type": "ReportTaskMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "QueryReportTask": {
+                          "requestType": "QueryReportTaskRequest",
+                          "responseType": "QueryReportTaskResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{name=properties/*/reportTasks/*}:query",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{name=properties/*/reportTasks/*}:query",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "GetReportTask": {
+                          "requestType": "GetReportTaskRequest",
+                          "responseType": "ReportTask",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=properties/*/reportTasks/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/reportTasks/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListReportTasks": {
+                          "requestType": "ListReportTasksRequest",
+                          "responseType": "ListReportTasksResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{parent=properties/*}/reportTasks",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=properties/*}/reportTasks"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         }
                       }
                     },
@@ -2215,6 +2299,370 @@
                         }
                       }
                     },
+                    "ReportTask": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsdata.googleapis.com/ReportTask",
+                        "(google.api.resource).pattern": "properties/{property}/reportTasks/{report_task}",
+                        "(google.api.resource).plural": "reportTasks",
+                        "(google.api.resource).singular": "reportTask"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "reportDefinition": {
+                          "type": "ReportDefinition",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "reportMetadata": {
+                          "type": "ReportMetadata",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ReportDefinition": {
+                          "fields": {
+                            "dimensions": {
+                              "rule": "repeated",
+                              "type": "Dimension",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "metrics": {
+                              "rule": "repeated",
+                              "type": "Metric",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "dateRanges": {
+                              "rule": "repeated",
+                              "type": "DateRange",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "dimensionFilter": {
+                              "type": "FilterExpression",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "metricFilter": {
+                              "type": "FilterExpression",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "offset": {
+                              "type": "int64",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "limit": {
+                              "type": "int64",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "metricAggregations": {
+                              "rule": "repeated",
+                              "type": "MetricAggregation",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "orderBys": {
+                              "rule": "repeated",
+                              "type": "OrderBy",
+                              "id": 10,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "currencyCode": {
+                              "type": "string",
+                              "id": 11,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "cohortSpec": {
+                              "type": "CohortSpec",
+                              "id": 12,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "keepEmptyRows": {
+                              "type": "bool",
+                              "id": 13,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "ReportMetadata": {
+                          "oneofs": {
+                            "_state": {
+                              "oneof": [
+                                "state"
+                              ]
+                            },
+                            "_beginCreatingTime": {
+                              "oneof": [
+                                "beginCreatingTime"
+                              ]
+                            },
+                            "_taskRowCount": {
+                              "oneof": [
+                                "taskRowCount"
+                              ]
+                            },
+                            "_errorMessage": {
+                              "oneof": [
+                                "errorMessage"
+                              ]
+                            },
+                            "_totalRowCount": {
+                              "oneof": [
+                                "totalRowCount"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "state": {
+                              "type": "State",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "beginCreatingTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "creationQuotaTokensCharged": {
+                              "type": "int32",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "taskRowCount": {
+                              "type": "int32",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "errorMessage": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "totalRowCount": {
+                              "type": "int32",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            }
+                          },
+                          "nested": {
+                            "State": {
+                              "values": {
+                                "STATE_UNSPECIFIED": 0,
+                                "CREATING": 1,
+                                "ACTIVE": 2,
+                                "FAILED": 3
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "CreateReportTaskRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsdata.googleapis.com/ReportTask"
+                          }
+                        },
+                        "reportTask": {
+                          "type": "ReportTask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ReportTaskMetadata": {
+                      "fields": {}
+                    },
+                    "QueryReportTaskRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "offset": {
+                          "type": "int64",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "limit": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "QueryReportTaskResponse": {
+                      "fields": {
+                        "dimensionHeaders": {
+                          "rule": "repeated",
+                          "type": "DimensionHeader",
+                          "id": 1
+                        },
+                        "metricHeaders": {
+                          "rule": "repeated",
+                          "type": "MetricHeader",
+                          "id": 2
+                        },
+                        "rows": {
+                          "rule": "repeated",
+                          "type": "Row",
+                          "id": 3
+                        },
+                        "totals": {
+                          "rule": "repeated",
+                          "type": "Row",
+                          "id": 4
+                        },
+                        "maximums": {
+                          "rule": "repeated",
+                          "type": "Row",
+                          "id": 5
+                        },
+                        "minimums": {
+                          "rule": "repeated",
+                          "type": "Row",
+                          "id": 6
+                        },
+                        "rowCount": {
+                          "type": "int32",
+                          "id": 7
+                        },
+                        "metadata": {
+                          "type": "ResponseMetaData",
+                          "id": 8
+                        }
+                      }
+                    },
+                    "GetReportTaskRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsdata.googleapis.com/ReportTask"
+                          }
+                        }
+                      }
+                    },
+                    "ListReportTasksRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsdata.googleapis.com/ReportTask"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListReportTasksResponse": {
+                      "oneofs": {
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "reportTasks": {
+                          "rule": "repeated",
+                          "type": "ReportTask",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "DateRange": {
                       "fields": {
                         "startDate": {
@@ -2288,6 +2736,22 @@
                               "id": 2
                             }
                           }
+                        }
+                      }
+                    },
+                    "Metric": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "expression": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "invisible": {
+                          "type": "bool",
+                          "id": 3
                         }
                       }
                     },
@@ -2430,6 +2894,62 @@
                         }
                       }
                     },
+                    "OrderBy": {
+                      "oneofs": {
+                        "oneOrderBy": {
+                          "oneof": [
+                            "metric",
+                            "dimension"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "metric": {
+                          "type": "MetricOrderBy",
+                          "id": 1
+                        },
+                        "dimension": {
+                          "type": "DimensionOrderBy",
+                          "id": 2
+                        },
+                        "desc": {
+                          "type": "bool",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "MetricOrderBy": {
+                          "fields": {
+                            "metricName": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "DimensionOrderBy": {
+                          "fields": {
+                            "dimensionName": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "orderType": {
+                              "type": "OrderType",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "OrderType": {
+                              "values": {
+                                "ORDER_TYPE_UNSPECIFIED": 0,
+                                "ALPHANUMERIC": 1,
+                                "CASE_INSENSITIVE_ALPHANUMERIC": 2,
+                                "NUMERIC": 3
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
                     "BetweenFilter": {
                       "fields": {
                         "fromValue": {
@@ -2459,6 +2979,179 @@
                         "doubleValue": {
                           "type": "double",
                           "id": 2
+                        }
+                      }
+                    },
+                    "CohortSpec": {
+                      "fields": {
+                        "cohorts": {
+                          "rule": "repeated",
+                          "type": "Cohort",
+                          "id": 1
+                        },
+                        "cohortsRange": {
+                          "type": "CohortsRange",
+                          "id": 2
+                        },
+                        "cohortReportSettings": {
+                          "type": "CohortReportSettings",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "Cohort": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "dimension": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "dateRange": {
+                          "type": "DateRange",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "CohortsRange": {
+                      "fields": {
+                        "granularity": {
+                          "type": "Granularity",
+                          "id": 1
+                        },
+                        "startOffset": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "endOffset": {
+                          "type": "int32",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "Granularity": {
+                          "values": {
+                            "GRANULARITY_UNSPECIFIED": 0,
+                            "DAILY": 1,
+                            "WEEKLY": 2,
+                            "MONTHLY": 3
+                          }
+                        }
+                      }
+                    },
+                    "CohortReportSettings": {
+                      "fields": {
+                        "accumulate": {
+                          "type": "bool",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ResponseMetaData": {
+                      "oneofs": {
+                        "_schemaRestrictionResponse": {
+                          "oneof": [
+                            "schemaRestrictionResponse"
+                          ]
+                        },
+                        "_currencyCode": {
+                          "oneof": [
+                            "currencyCode"
+                          ]
+                        },
+                        "_timeZone": {
+                          "oneof": [
+                            "timeZone"
+                          ]
+                        },
+                        "_emptyReason": {
+                          "oneof": [
+                            "emptyReason"
+                          ]
+                        },
+                        "_subjectToThresholding": {
+                          "oneof": [
+                            "subjectToThresholding"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "dataLossFromOtherRow": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "schemaRestrictionResponse": {
+                          "type": "SchemaRestrictionResponse",
+                          "id": 4,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "currencyCode": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "timeZone": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "emptyReason": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "subjectToThresholding": {
+                          "type": "bool",
+                          "id": 8,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SchemaRestrictionResponse": {
+                          "fields": {
+                            "activeMetricRestrictions": {
+                              "rule": "repeated",
+                              "type": "ActiveMetricRestriction",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "ActiveMetricRestriction": {
+                              "oneofs": {
+                                "_metricName": {
+                                  "oneof": [
+                                    "metricName"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "metricName": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "restrictedMetricTypes": {
+                                  "rule": "repeated",
+                                  "type": "RestrictedMetricType",
+                                  "id": 2
+                                }
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -3366,6 +4059,15 @@
                         }
                       }
                     },
+                    "MetricAggregation": {
+                      "values": {
+                        "METRIC_AGGREGATION_UNSPECIFIED": 0,
+                        "TOTAL": 1,
+                        "MINIMUM": 5,
+                        "MAXIMUM": 6,
+                        "COUNT": 4
+                      }
+                    },
                     "MetricType": {
                       "values": {
                         "METRIC_TYPE_UNSPECIFIED": 0,
@@ -3381,6 +4083,13 @@
                         "TYPE_MILES": 11,
                         "TYPE_METERS": 12,
                         "TYPE_KILOMETERS": 13
+                      }
+                    },
+                    "RestrictedMetricType": {
+                      "values": {
+                        "RESTRICTED_METRIC_TYPE_UNSPECIFIED": 0,
+                        "COST_DATA": 1,
+                        "REVENUE_DATA": 2
                       }
                     }
                   }
