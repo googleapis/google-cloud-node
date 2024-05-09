@@ -44,9 +44,10 @@ import {
   KeyProto,
   ResponseResult,
   Entities,
-  ValueProto,
 } from './entity';
 import {
+  ExplainMetrics,
+  ExplainOptions,
   Query,
   QueryProto,
   RunQueryInfo,
@@ -57,6 +58,100 @@ import {
 import {Datastore} from '.';
 import ITimestamp = google.protobuf.ITimestamp;
 import {AggregateQuery} from './aggregate';
+import * as protos from '../protos/protos';
+import {serializer} from 'google-gax';
+import * as gax from 'google-gax';
+type JSONValue =
+  | string
+  | number
+  | boolean
+  | null
+  | JSONValue[]
+  | {
+      [key: string]: JSONValue;
+    };
+
+const root = gax.protobuf.loadSync('google/protobuf/struct.proto');
+const Struct = root.lookupType('Struct');
+
+// This function decodes Struct proto values
+function decodeStruct(structValue: google.protobuf.IStruct): JSONValue {
+  return serializer.toProto3JSON(Struct.fromObject(structValue));
+}
+
+// This function gets a RunQueryInfo object that contains explain metrics that
+// were returned from the server.
+function getInfoFromStats(
+  resp:
+    | protos.google.datastore.v1.IRunQueryResponse
+    | protos.google.datastore.v1.IRunAggregationQueryResponse
+): RunQueryInfo {
+  // Decode struct values stored in planSummary and executionStats
+  const explainMetrics: ExplainMetrics = {};
+  if (
+    resp &&
+    resp.explainMetrics &&
+    resp.explainMetrics.planSummary &&
+    resp.explainMetrics.planSummary.indexesUsed
+  ) {
+    Object.assign(explainMetrics, {
+      planSummary: {
+        indexesUsed: resp.explainMetrics.planSummary.indexesUsed.map(
+          (index: google.protobuf.IStruct) => decodeStruct(index)
+        ),
+      },
+    });
+  }
+  if (resp && resp.explainMetrics && resp.explainMetrics.executionStats) {
+    const executionStats = {};
+    {
+      const resultsReturned =
+        resp.explainMetrics.executionStats.resultsReturned;
+      if (resultsReturned) {
+        Object.assign(executionStats, {
+          resultsReturned:
+            typeof resultsReturned === 'string'
+              ? parseInt(resultsReturned)
+              : resultsReturned,
+        });
+      }
+    }
+    {
+      const executionDuration =
+        resp.explainMetrics.executionStats.executionDuration;
+      if (executionDuration) {
+        Object.assign(executionStats, {
+          executionDuration:
+            typeof executionDuration === 'string'
+              ? parseInt(executionDuration)
+              : executionDuration,
+        });
+      }
+    }
+    {
+      const readOperations = resp.explainMetrics.executionStats.readOperations;
+      if (readOperations) {
+        Object.assign(executionStats, {
+          readOperations:
+            typeof readOperations === 'string'
+              ? parseInt(readOperations)
+              : readOperations,
+        });
+      }
+    }
+    {
+      const debugStats = resp.explainMetrics.executionStats.debugStats;
+      if (debugStats) {
+        Object.assign(executionStats, {debugStats: decodeStruct(debugStats)});
+      }
+    }
+    Object.assign(explainMetrics, {executionStats});
+  }
+  if (explainMetrics.planSummary || explainMetrics.executionStats) {
+    return {explainMetrics};
+  }
+  return {};
+}
 
 /**
  * A map of read consistency values to proto codes.
@@ -566,12 +661,15 @@ class DatastoreRequest {
   runAggregationQuery(
     query: AggregateQuery,
     options: RunQueryOptions,
-    callback: RequestCallback
+    callback: RunAggregationQueryCallback
   ): void;
-  runAggregationQuery(query: AggregateQuery, callback: RequestCallback): void;
   runAggregationQuery(
     query: AggregateQuery,
-    optionsOrCallback?: RunQueryOptions | RequestCallback,
+    callback: RunAggregationQueryCallback
+  ): void;
+  runAggregationQuery(
+    query: AggregateQuery,
+    optionsOrCallback?: RunQueryOptions | RunAggregationQueryCallback,
     cb?: RequestCallback
   ): void | Promise<RunQueryResponse> {
     const options =
@@ -605,6 +703,7 @@ class DatastoreRequest {
         gaxOpts: options.gaxOptions,
       },
       (err, res) => {
+        const info = getInfoFromStats(res);
         if (res && res.batch) {
           const results = res.batch.aggregationResults;
           const finalResults = results
@@ -621,9 +720,9 @@ class DatastoreRequest {
                 )
               )
             );
-          callback(err, finalResults);
+          callback(err, finalResults, info);
         } else {
-          callback(err, res);
+          callback(err, [], info);
         }
       }
     );
@@ -825,9 +924,16 @@ class DatastoreRequest {
         return;
       }
 
-      const info: RunQueryInfo = {
+      if (!resp.batch) {
+        // If there are no results then send any stats back and end the stream.
+        stream.emit('info', getInfoFromStats(resp));
+        stream.push(null);
+        return;
+      }
+
+      const info = Object.assign(getInfoFromStats(resp), {
         moreResults: resp.batch.moreResults,
-      };
+      });
 
       if (resp.batch.endCursor) {
         info.endCursor = resp.batch.endCursor.toString('base64');
@@ -908,6 +1014,9 @@ class DatastoreRequest {
     options: RunQueryStreamOptions = {}
   ): SharedQueryOptions {
     const sharedQueryOpts = this.getRequestOptions(options);
+    if (options.explainOptions) {
+      sharedQueryOpts.explainOptions = options.explainOptions;
+    }
     if (query.namespace) {
       sharedQueryOpts.partitionId = {
         namespaceId: query.namespace,
@@ -1161,6 +1270,14 @@ export interface RequestCallback {
     b?: any
   ): void;
 }
+export interface RunAggregationQueryCallback {
+  (
+    a?: Error | null,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    b?: any,
+    c?: RunQueryInfo
+  ): void;
+}
 export interface RequestConfig {
   client: string;
   gaxOpts?: CallOptions;
@@ -1170,6 +1287,7 @@ export interface RequestConfig {
 }
 export interface SharedQueryOptions {
   databaseId?: string;
+  explainOptions?: ExplainOptions;
   projectId?: string;
   partitionId?: google.datastore.v1.IPartitionId | null;
   readOptions?: {

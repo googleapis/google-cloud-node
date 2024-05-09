@@ -23,6 +23,7 @@ import {Transaction} from './transaction';
 import {CallOptions} from 'google-gax';
 import {RunQueryStreamOptions} from '../src/request';
 import * as gaxInstance from 'google-gax';
+import {google} from '../protos/protos';
 
 export type Operator =
   | '='
@@ -597,10 +598,15 @@ export interface IntegerTypeCastOptions {
   properties?: string | string[];
 }
 
+export interface ExplainOptions {
+  analyze?: boolean;
+}
+
 export interface RunQueryOptions {
   consistency?: 'strong' | 'eventual';
   readTime?: number;
   gaxOptions?: CallOptions;
+  explainOptions?: ExplainOptions;
   wrapNumbers?: boolean | IntegerTypeCastOptions;
 }
 
@@ -620,4 +626,24 @@ export interface RunQueryInfo {
     | 'MORE_RESULTS_AFTER_LIMIT'
     | 'MORE_RESULTS_AFTER_CURSOR'
     | 'NO_MORE_RESULTS';
+  explainMetrics?: ExplainMetrics;
+}
+
+export interface ExplainMetrics {
+  planSummary?: PlanSummary;
+  executionStats?: ExecutionStats;
+}
+export interface ExecutionStats {
+  resultsReturned?: number;
+  executionDuration?: google.protobuf.IDuration;
+  readOperations?: number;
+  debugStats?: {
+    [key: string]: any;
+  };
+}
+
+export interface PlanSummary {
+  indexesUsed: {
+    [key: string]: any;
+  }[];
 }
