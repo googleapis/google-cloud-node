@@ -462,7 +462,8 @@ export class ChatServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Creates a message in a Google Chat space. For an example, see [Send a
+   * Creates a message in a Google Chat space. The maximum message size,
+   * including text and cards, is 32,000 bytes. For an example, see [Send a
    * message](https://developers.google.com/workspace/chat/create-messages).
    *
    * Calling this method requires
@@ -606,8 +607,9 @@ export class ChatServiceClient {
    * @param {string} request.name
    *   Required. Resource name of the membership to retrieve.
    *
-   *   To get the app's own membership, you can optionally use
-   *   `spaces/{space}/members/app`.
+   *   To get the app's own membership [by using user
+   *   authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user),
+   *   you can optionally use `spaces/{space}/members/app`.
    *
    *   Format: `spaces/{space}/members/{member}` or `spaces/{space}/members/app`
    *
@@ -1408,17 +1410,17 @@ export class ChatServiceClient {
    * members](https://developers.google.com/workspace/chat/set-up-spaces).
    *
    * To specify the human members to add, add memberships with the appropriate
-   * `member.name` in the `SetUpSpaceRequest`. To add a human user, use
-   * `users/{user}`, where `{user}` can be the email address for the user. For
-   * users in the same Workspace organization `{user}` can also be the `id` for
-   * the person from the People API, or the `id` for the user in the Directory
-   * API. For example, if the People API Person profile ID for
-   * `user@example.com` is `123456789`, you can add the user to the space by
-   * setting the `membership.member.name` to `users/user@example.com` or
-   * `users/123456789`.
+   * `membership.member.name`. To add a human user, use `users/{user}`, where
+   * `{user}` can be the email address for the user. For users in the same
+   * Workspace organization `{user}` can also be the `id` for the person from
+   * the People API, or the `id` for the user in the Directory API. For example,
+   * if the People API Person profile ID for `user@example.com` is `123456789`,
+   * you can add the user to the space by setting the `membership.member.name`
+   * to `users/user@example.com` or `users/123456789`.
    *
-   * For a space or group chat, if the caller blocks or is blocked by some
-   * members, then those members aren't added to the created space.
+   * For a named space or group chat, if the caller blocks, or is blocked
+   * by some members, or doesn't have permission to add some members, then
+   * those members aren't added to the created space.
    *
    * To create a direct message (DM) between the calling user and another human
    * user, specify exactly one membership to represent the human user. If
@@ -1482,14 +1484,14 @@ export class ChatServiceClient {
    *
    *   The set currently allows up to 20 memberships (in addition to the caller).
    *
-   *   The `Membership.member` field must contain a `user` with `name` populated
-   *   (format: `users/{user}`) and `type` set to `User.Type.HUMAN`. You can only
-   *   add human users when setting up a space (adding Chat apps is only supported
-   *   for direct message setup with the calling app). You can also add members
-   *   using the user's email as an alias for {user}. For example, the `user.name`
-   *   can be `users/example@gmail.com`." To invite Gmail users or users from
-   *   external Google Workspace domains, user's email must be used for
-   *   `{user}`.
+   *   For human membership, the `Membership.member` field must contain a `user`
+   *   with `name` populated (format: `users/{user}`) and `type` set to
+   *   `User.Type.HUMAN`. You can only add human users when setting up a space
+   *   (adding Chat apps is only supported for direct message setup with the
+   *   calling app). You can also add members using the user's email as an alias
+   *   for {user}. For example, the `user.name` can be `users/example@gmail.com`.
+   *   To invite Gmail users or users from external Google Workspace domains,
+   *   user's email must be used for `{user}`.
    *
    *   Optional when setting `Space.spaceType` to `SPACE`.
    *
@@ -2001,8 +2003,8 @@ export class ChatServiceClient {
    * directly to the specified space. Requires [user
    * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
    *
-   * To specify the member to add, set the `membership.member.name` in the
-   * `CreateMembershipRequest`:
+   * To specify the member to add, set the `membership.member.name` for the
+   * human or app member.
    *
    * - To add the calling app to a space or a direct message between two human
    *   users, use `users/app`. Unable to add other
@@ -2116,8 +2118,11 @@ export class ChatServiceClient {
     return this.innerApiCalls.createMembership(request, options, callback);
   }
   /**
-   * Updates a membership. Requires [user
-   * authentication](https://developers.google.com/chat/api/guides/auth/users).
+   * Updates a membership. For an example, see [Update a user's membership in
+   * a space](https://developers.google.com/workspace/chat/update-members).
+   *
+   * Requires [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2488,7 +2493,9 @@ export class ChatServiceClient {
   }
   /**
    * Returns details about a user's read state within a space, used to identify
-   * read and unread messages.
+   * read and unread messages. For an example, see [Get details about a user's
+   * space read
+   * state](https://developers.google.com/workspace/chat/get-space-read-state).
    *
    * Requires [user
    * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
@@ -2588,7 +2595,8 @@ export class ChatServiceClient {
   }
   /**
    * Updates a user's read state within a space, used to identify read and
-   * unread messages.
+   * unread messages. For an example, see [Update a user's space read
+   * state](https://developers.google.com/workspace/chat/update-space-read-state).
    *
    * Requires [user
    * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
@@ -2702,7 +2710,9 @@ export class ChatServiceClient {
   }
   /**
    * Returns details about a user's read state within a thread, used to identify
-   * read and unread messages.
+   * read and unread messages. For an example, see [Get details about a user's
+   * thread read
+   * state](https://developers.google.com/workspace/chat/get-thread-read-state).
    *
    * Requires [user
    * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
@@ -3598,6 +3608,7 @@ export class ChatServiceClient {
    *
    * Lists spaces visible to the caller or authenticated user. Group chats
    * and DMs aren't listed until the first message is sent.
+   *
    *
    * @param {Object} request
    *   The request object that will be sent.
