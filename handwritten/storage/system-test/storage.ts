@@ -1530,7 +1530,9 @@ describe('storage', function () {
     it('should create a bucket without hierarchical namespace enabled (implicit)', async () => {
       await storage.createBucket(bucket.name);
       const [metadata] = await bucket.getMetadata();
-      assert.strictEqual(metadata.hierarchicalNamespace, undefined);
+      assert(
+        [undefined, false].includes(metadata?.hierarchicalNamespace?.enabled)
+      );
     });
 
     it('should create a bucket without hierarchical namespace enabled (explicit)', async () => {
@@ -1538,7 +1540,9 @@ describe('storage', function () {
         hierarchicalNamespace: {enabled: false},
       });
       const [metadata] = await bucket.getMetadata();
-      assert.strictEqual(metadata.hierarchicalNamespace, undefined);
+      assert(
+        [undefined, false].includes(metadata?.hierarchicalNamespace?.enabled)
+      );
     });
 
     it('should create a bucket with hierarchical namespace enabled', async () => {
