@@ -1344,7 +1344,10 @@ describe('Storage', () => {
     });
 
     it('should allow user options', done => {
-      const options = {};
+      const options = {
+        projectIdentifier: 'test-identifier',
+        userProject: 'test-user-project',
+      };
 
       storage.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.qs, options);

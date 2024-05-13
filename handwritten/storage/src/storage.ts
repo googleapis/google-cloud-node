@@ -33,6 +33,7 @@ import {DEFAULT_UNIVERSE} from 'google-auth-library';
 
 export interface GetServiceAccountOptions {
   userProject?: string;
+  projectIdentifier?: string;
 }
 export interface ServiceAccount {
   emailAddress?: string;
