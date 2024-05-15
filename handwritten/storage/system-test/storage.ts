@@ -3078,9 +3078,8 @@ describe('storage', function () {
 
     const delay = async (test: Mocha.Context, accessId: string) => {
       const retries = test.currentRetry();
-      if (retries === 0) return; // no retry on the first failure.
       // see: https://cloud.google.com/storage/docs/exponential-backoff:
-      const ms = Math.pow(2, retries) * 500 + Math.random() * 1000;
+      const ms = Math.pow(2, retries) * 1000 + Math.random() * 1000;
       return new Promise(done => {
         console.info(
           `retrying "${test.title}" with accessId ${accessId} in ${ms}ms`
@@ -3114,7 +3113,6 @@ describe('storage', function () {
     });
 
     it('should get metadata for an HMAC key', async function () {
-      this.retries(3);
       delay(this, accessId);
       const hmacKey = storage.hmacKey(accessId, {projectId: HMAC_PROJECT});
       const [metadata] = await hmacKey.getMetadata();
