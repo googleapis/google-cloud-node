@@ -1892,6 +1892,27 @@ export namespace google {
 
                     /** ImportDataMetadata operationMetadata */
                     operationMetadata?: (google.cloud.parallelstore.v1beta.ITransferOperationMetadata|null);
+
+                    /** ImportDataMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ImportDataMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ImportDataMetadata target */
+                    target?: (string|null);
+
+                    /** ImportDataMetadata verb */
+                    verb?: (string|null);
+
+                    /** ImportDataMetadata statusMessage */
+                    statusMessage?: (string|null);
+
+                    /** ImportDataMetadata requestedCancellation */
+                    requestedCancellation?: (boolean|null);
+
+                    /** ImportDataMetadata apiVersion */
+                    apiVersion?: (string|null);
                 }
 
                 /** Represents an ImportDataMetadata. */
@@ -1905,6 +1926,27 @@ export namespace google {
 
                     /** ImportDataMetadata operationMetadata. */
                     public operationMetadata?: (google.cloud.parallelstore.v1beta.ITransferOperationMetadata|null);
+
+                    /** ImportDataMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ImportDataMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ImportDataMetadata target. */
+                    public target: string;
+
+                    /** ImportDataMetadata verb. */
+                    public verb: string;
+
+                    /** ImportDataMetadata statusMessage. */
+                    public statusMessage: string;
+
+                    /** ImportDataMetadata requestedCancellation. */
+                    public requestedCancellation: boolean;
+
+                    /** ImportDataMetadata apiVersion. */
+                    public apiVersion: string;
 
                     /**
                      * Creates a new ImportDataMetadata instance using the specified properties.
@@ -2080,6 +2122,27 @@ export namespace google {
 
                     /** ExportDataMetadata operationMetadata */
                     operationMetadata?: (google.cloud.parallelstore.v1beta.ITransferOperationMetadata|null);
+
+                    /** ExportDataMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExportDataMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExportDataMetadata target */
+                    target?: (string|null);
+
+                    /** ExportDataMetadata verb */
+                    verb?: (string|null);
+
+                    /** ExportDataMetadata statusMessage */
+                    statusMessage?: (string|null);
+
+                    /** ExportDataMetadata requestedCancellation */
+                    requestedCancellation?: (boolean|null);
+
+                    /** ExportDataMetadata apiVersion */
+                    apiVersion?: (string|null);
                 }
 
                 /** Represents an ExportDataMetadata. */
@@ -2093,6 +2156,27 @@ export namespace google {
 
                     /** ExportDataMetadata operationMetadata. */
                     public operationMetadata?: (google.cloud.parallelstore.v1beta.ITransferOperationMetadata|null);
+
+                    /** ExportDataMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExportDataMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExportDataMetadata target. */
+                    public target: string;
+
+                    /** ExportDataMetadata verb. */
+                    public verb: string;
+
+                    /** ExportDataMetadata statusMessage. */
+                    public statusMessage: string;
+
+                    /** ExportDataMetadata requestedCancellation. */
+                    public requestedCancellation: boolean;
+
+                    /** ExportDataMetadata apiVersion. */
+                    public apiVersion: string;
 
                     /**
                      * Creates a new ExportDataMetadata instance using the specified properties.
@@ -2175,20 +2259,20 @@ export namespace google {
                 /** Properties of a TransferOperationMetadata. */
                 interface ITransferOperationMetadata {
 
-                    /** TransferOperationMetadata createTime */
-                    createTime?: (google.protobuf.ITimestamp|null);
+                    /** TransferOperationMetadata sourceParallelstore */
+                    sourceParallelstore?: (google.cloud.parallelstore.v1beta.ISourceParallelstore|null);
 
-                    /** TransferOperationMetadata endTime */
-                    endTime?: (google.protobuf.ITimestamp|null);
+                    /** TransferOperationMetadata sourceGcsBucket */
+                    sourceGcsBucket?: (google.cloud.parallelstore.v1beta.ISourceGcsBucket|null);
+
+                    /** TransferOperationMetadata destinationGcsBucket */
+                    destinationGcsBucket?: (google.cloud.parallelstore.v1beta.IDestinationGcsBucket|null);
+
+                    /** TransferOperationMetadata destinationParallelstore */
+                    destinationParallelstore?: (google.cloud.parallelstore.v1beta.IDestinationParallelstore|null);
 
                     /** TransferOperationMetadata counters */
                     counters?: (google.cloud.parallelstore.v1beta.ITransferCounters|null);
-
-                    /** TransferOperationMetadata source */
-                    source?: (string|null);
-
-                    /** TransferOperationMetadata destination */
-                    destination?: (string|null);
 
                     /** TransferOperationMetadata transferType */
                     transferType?: (google.cloud.parallelstore.v1beta.TransferType|keyof typeof google.cloud.parallelstore.v1beta.TransferType|null);
@@ -2203,23 +2287,29 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.parallelstore.v1beta.ITransferOperationMetadata);
 
-                    /** TransferOperationMetadata createTime. */
-                    public createTime?: (google.protobuf.ITimestamp|null);
+                    /** TransferOperationMetadata sourceParallelstore. */
+                    public sourceParallelstore?: (google.cloud.parallelstore.v1beta.ISourceParallelstore|null);
 
-                    /** TransferOperationMetadata endTime. */
-                    public endTime?: (google.protobuf.ITimestamp|null);
+                    /** TransferOperationMetadata sourceGcsBucket. */
+                    public sourceGcsBucket?: (google.cloud.parallelstore.v1beta.ISourceGcsBucket|null);
+
+                    /** TransferOperationMetadata destinationGcsBucket. */
+                    public destinationGcsBucket?: (google.cloud.parallelstore.v1beta.IDestinationGcsBucket|null);
+
+                    /** TransferOperationMetadata destinationParallelstore. */
+                    public destinationParallelstore?: (google.cloud.parallelstore.v1beta.IDestinationParallelstore|null);
 
                     /** TransferOperationMetadata counters. */
                     public counters?: (google.cloud.parallelstore.v1beta.ITransferCounters|null);
 
-                    /** TransferOperationMetadata source. */
-                    public source: string;
-
-                    /** TransferOperationMetadata destination. */
-                    public destination: string;
-
                     /** TransferOperationMetadata transferType. */
                     public transferType: (google.cloud.parallelstore.v1beta.TransferType|keyof typeof google.cloud.parallelstore.v1beta.TransferType);
+
+                    /** TransferOperationMetadata source. */
+                    public source?: ("sourceParallelstore"|"sourceGcsBucket");
+
+                    /** TransferOperationMetadata destination. */
+                    public destination?: ("destinationGcsBucket"|"destinationParallelstore");
 
                     /**
                      * Creates a new TransferOperationMetadata instance using the specified properties.

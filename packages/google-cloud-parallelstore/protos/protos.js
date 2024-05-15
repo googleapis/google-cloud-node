@@ -4472,6 +4472,13 @@
                          * @memberof google.cloud.parallelstore.v1beta
                          * @interface IImportDataMetadata
                          * @property {google.cloud.parallelstore.v1beta.ITransferOperationMetadata|null} [operationMetadata] ImportDataMetadata operationMetadata
+                         * @property {google.protobuf.ITimestamp|null} [createTime] ImportDataMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] ImportDataMetadata endTime
+                         * @property {string|null} [target] ImportDataMetadata target
+                         * @property {string|null} [verb] ImportDataMetadata verb
+                         * @property {string|null} [statusMessage] ImportDataMetadata statusMessage
+                         * @property {boolean|null} [requestedCancellation] ImportDataMetadata requestedCancellation
+                         * @property {string|null} [apiVersion] ImportDataMetadata apiVersion
                          */
     
                         /**
@@ -4496,6 +4503,62 @@
                          * @instance
                          */
                         ImportDataMetadata.prototype.operationMetadata = null;
+    
+                        /**
+                         * ImportDataMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.parallelstore.v1beta.ImportDataMetadata
+                         * @instance
+                         */
+                        ImportDataMetadata.prototype.createTime = null;
+    
+                        /**
+                         * ImportDataMetadata endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.parallelstore.v1beta.ImportDataMetadata
+                         * @instance
+                         */
+                        ImportDataMetadata.prototype.endTime = null;
+    
+                        /**
+                         * ImportDataMetadata target.
+                         * @member {string} target
+                         * @memberof google.cloud.parallelstore.v1beta.ImportDataMetadata
+                         * @instance
+                         */
+                        ImportDataMetadata.prototype.target = "";
+    
+                        /**
+                         * ImportDataMetadata verb.
+                         * @member {string} verb
+                         * @memberof google.cloud.parallelstore.v1beta.ImportDataMetadata
+                         * @instance
+                         */
+                        ImportDataMetadata.prototype.verb = "";
+    
+                        /**
+                         * ImportDataMetadata statusMessage.
+                         * @member {string} statusMessage
+                         * @memberof google.cloud.parallelstore.v1beta.ImportDataMetadata
+                         * @instance
+                         */
+                        ImportDataMetadata.prototype.statusMessage = "";
+    
+                        /**
+                         * ImportDataMetadata requestedCancellation.
+                         * @member {boolean} requestedCancellation
+                         * @memberof google.cloud.parallelstore.v1beta.ImportDataMetadata
+                         * @instance
+                         */
+                        ImportDataMetadata.prototype.requestedCancellation = false;
+    
+                        /**
+                         * ImportDataMetadata apiVersion.
+                         * @member {string} apiVersion
+                         * @memberof google.cloud.parallelstore.v1beta.ImportDataMetadata
+                         * @instance
+                         */
+                        ImportDataMetadata.prototype.apiVersion = "";
     
                         /**
                          * Creates a new ImportDataMetadata instance using the specified properties.
@@ -4523,6 +4586,20 @@
                                 writer = $Writer.create();
                             if (message.operationMetadata != null && Object.hasOwnProperty.call(message, "operationMetadata"))
                                 $root.google.cloud.parallelstore.v1beta.TransferOperationMetadata.encode(message.operationMetadata, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.target != null && Object.hasOwnProperty.call(message, "target"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.target);
+                            if (message.verb != null && Object.hasOwnProperty.call(message, "verb"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.verb);
+                            if (message.statusMessage != null && Object.hasOwnProperty.call(message, "statusMessage"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.statusMessage);
+                            if (message.requestedCancellation != null && Object.hasOwnProperty.call(message, "requestedCancellation"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.requestedCancellation);
+                            if (message.apiVersion != null && Object.hasOwnProperty.call(message, "apiVersion"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.apiVersion);
                             return writer;
                         };
     
@@ -4559,6 +4636,34 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.operationMetadata = $root.google.cloud.parallelstore.v1beta.TransferOperationMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.target = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.verb = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.statusMessage = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.requestedCancellation = reader.bool();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.apiVersion = reader.string();
                                         break;
                                     }
                                 default:
@@ -4601,6 +4706,31 @@
                                 if (error)
                                     return "operationMetadata." + error;
                             }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            if (message.target != null && message.hasOwnProperty("target"))
+                                if (!$util.isString(message.target))
+                                    return "target: string expected";
+                            if (message.verb != null && message.hasOwnProperty("verb"))
+                                if (!$util.isString(message.verb))
+                                    return "verb: string expected";
+                            if (message.statusMessage != null && message.hasOwnProperty("statusMessage"))
+                                if (!$util.isString(message.statusMessage))
+                                    return "statusMessage: string expected";
+                            if (message.requestedCancellation != null && message.hasOwnProperty("requestedCancellation"))
+                                if (typeof message.requestedCancellation !== "boolean")
+                                    return "requestedCancellation: boolean expected";
+                            if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
+                                if (!$util.isString(message.apiVersion))
+                                    return "apiVersion: string expected";
                             return null;
                         };
     
@@ -4621,6 +4751,26 @@
                                     throw TypeError(".google.cloud.parallelstore.v1beta.ImportDataMetadata.operationMetadata: object expected");
                                 message.operationMetadata = $root.google.cloud.parallelstore.v1beta.TransferOperationMetadata.fromObject(object.operationMetadata);
                             }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.parallelstore.v1beta.ImportDataMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.parallelstore.v1beta.ImportDataMetadata.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            if (object.target != null)
+                                message.target = String(object.target);
+                            if (object.verb != null)
+                                message.verb = String(object.verb);
+                            if (object.statusMessage != null)
+                                message.statusMessage = String(object.statusMessage);
+                            if (object.requestedCancellation != null)
+                                message.requestedCancellation = Boolean(object.requestedCancellation);
+                            if (object.apiVersion != null)
+                                message.apiVersion = String(object.apiVersion);
                             return message;
                         };
     
@@ -4637,10 +4787,32 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.operationMetadata = null;
+                                object.createTime = null;
+                                object.endTime = null;
+                                object.target = "";
+                                object.verb = "";
+                                object.statusMessage = "";
+                                object.requestedCancellation = false;
+                                object.apiVersion = "";
+                            }
                             if (message.operationMetadata != null && message.hasOwnProperty("operationMetadata"))
                                 object.operationMetadata = $root.google.cloud.parallelstore.v1beta.TransferOperationMetadata.toObject(message.operationMetadata, options);
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.target != null && message.hasOwnProperty("target"))
+                                object.target = message.target;
+                            if (message.verb != null && message.hasOwnProperty("verb"))
+                                object.verb = message.verb;
+                            if (message.statusMessage != null && message.hasOwnProperty("statusMessage"))
+                                object.statusMessage = message.statusMessage;
+                            if (message.requestedCancellation != null && message.hasOwnProperty("requestedCancellation"))
+                                object.requestedCancellation = message.requestedCancellation;
+                            if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
+                                object.apiVersion = message.apiVersion;
                             return object;
                         };
     
@@ -4855,6 +5027,13 @@
                          * @memberof google.cloud.parallelstore.v1beta
                          * @interface IExportDataMetadata
                          * @property {google.cloud.parallelstore.v1beta.ITransferOperationMetadata|null} [operationMetadata] ExportDataMetadata operationMetadata
+                         * @property {google.protobuf.ITimestamp|null} [createTime] ExportDataMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] ExportDataMetadata endTime
+                         * @property {string|null} [target] ExportDataMetadata target
+                         * @property {string|null} [verb] ExportDataMetadata verb
+                         * @property {string|null} [statusMessage] ExportDataMetadata statusMessage
+                         * @property {boolean|null} [requestedCancellation] ExportDataMetadata requestedCancellation
+                         * @property {string|null} [apiVersion] ExportDataMetadata apiVersion
                          */
     
                         /**
@@ -4879,6 +5058,62 @@
                          * @instance
                          */
                         ExportDataMetadata.prototype.operationMetadata = null;
+    
+                        /**
+                         * ExportDataMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.parallelstore.v1beta.ExportDataMetadata
+                         * @instance
+                         */
+                        ExportDataMetadata.prototype.createTime = null;
+    
+                        /**
+                         * ExportDataMetadata endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.parallelstore.v1beta.ExportDataMetadata
+                         * @instance
+                         */
+                        ExportDataMetadata.prototype.endTime = null;
+    
+                        /**
+                         * ExportDataMetadata target.
+                         * @member {string} target
+                         * @memberof google.cloud.parallelstore.v1beta.ExportDataMetadata
+                         * @instance
+                         */
+                        ExportDataMetadata.prototype.target = "";
+    
+                        /**
+                         * ExportDataMetadata verb.
+                         * @member {string} verb
+                         * @memberof google.cloud.parallelstore.v1beta.ExportDataMetadata
+                         * @instance
+                         */
+                        ExportDataMetadata.prototype.verb = "";
+    
+                        /**
+                         * ExportDataMetadata statusMessage.
+                         * @member {string} statusMessage
+                         * @memberof google.cloud.parallelstore.v1beta.ExportDataMetadata
+                         * @instance
+                         */
+                        ExportDataMetadata.prototype.statusMessage = "";
+    
+                        /**
+                         * ExportDataMetadata requestedCancellation.
+                         * @member {boolean} requestedCancellation
+                         * @memberof google.cloud.parallelstore.v1beta.ExportDataMetadata
+                         * @instance
+                         */
+                        ExportDataMetadata.prototype.requestedCancellation = false;
+    
+                        /**
+                         * ExportDataMetadata apiVersion.
+                         * @member {string} apiVersion
+                         * @memberof google.cloud.parallelstore.v1beta.ExportDataMetadata
+                         * @instance
+                         */
+                        ExportDataMetadata.prototype.apiVersion = "";
     
                         /**
                          * Creates a new ExportDataMetadata instance using the specified properties.
@@ -4906,6 +5141,20 @@
                                 writer = $Writer.create();
                             if (message.operationMetadata != null && Object.hasOwnProperty.call(message, "operationMetadata"))
                                 $root.google.cloud.parallelstore.v1beta.TransferOperationMetadata.encode(message.operationMetadata, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.target != null && Object.hasOwnProperty.call(message, "target"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.target);
+                            if (message.verb != null && Object.hasOwnProperty.call(message, "verb"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.verb);
+                            if (message.statusMessage != null && Object.hasOwnProperty.call(message, "statusMessage"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.statusMessage);
+                            if (message.requestedCancellation != null && Object.hasOwnProperty.call(message, "requestedCancellation"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.requestedCancellation);
+                            if (message.apiVersion != null && Object.hasOwnProperty.call(message, "apiVersion"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.apiVersion);
                             return writer;
                         };
     
@@ -4942,6 +5191,34 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.operationMetadata = $root.google.cloud.parallelstore.v1beta.TransferOperationMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.target = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.verb = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.statusMessage = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.requestedCancellation = reader.bool();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.apiVersion = reader.string();
                                         break;
                                     }
                                 default:
@@ -4984,6 +5261,31 @@
                                 if (error)
                                     return "operationMetadata." + error;
                             }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            if (message.target != null && message.hasOwnProperty("target"))
+                                if (!$util.isString(message.target))
+                                    return "target: string expected";
+                            if (message.verb != null && message.hasOwnProperty("verb"))
+                                if (!$util.isString(message.verb))
+                                    return "verb: string expected";
+                            if (message.statusMessage != null && message.hasOwnProperty("statusMessage"))
+                                if (!$util.isString(message.statusMessage))
+                                    return "statusMessage: string expected";
+                            if (message.requestedCancellation != null && message.hasOwnProperty("requestedCancellation"))
+                                if (typeof message.requestedCancellation !== "boolean")
+                                    return "requestedCancellation: boolean expected";
+                            if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
+                                if (!$util.isString(message.apiVersion))
+                                    return "apiVersion: string expected";
                             return null;
                         };
     
@@ -5004,6 +5306,26 @@
                                     throw TypeError(".google.cloud.parallelstore.v1beta.ExportDataMetadata.operationMetadata: object expected");
                                 message.operationMetadata = $root.google.cloud.parallelstore.v1beta.TransferOperationMetadata.fromObject(object.operationMetadata);
                             }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.parallelstore.v1beta.ExportDataMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.parallelstore.v1beta.ExportDataMetadata.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            if (object.target != null)
+                                message.target = String(object.target);
+                            if (object.verb != null)
+                                message.verb = String(object.verb);
+                            if (object.statusMessage != null)
+                                message.statusMessage = String(object.statusMessage);
+                            if (object.requestedCancellation != null)
+                                message.requestedCancellation = Boolean(object.requestedCancellation);
+                            if (object.apiVersion != null)
+                                message.apiVersion = String(object.apiVersion);
                             return message;
                         };
     
@@ -5020,10 +5342,32 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.operationMetadata = null;
+                                object.createTime = null;
+                                object.endTime = null;
+                                object.target = "";
+                                object.verb = "";
+                                object.statusMessage = "";
+                                object.requestedCancellation = false;
+                                object.apiVersion = "";
+                            }
                             if (message.operationMetadata != null && message.hasOwnProperty("operationMetadata"))
                                 object.operationMetadata = $root.google.cloud.parallelstore.v1beta.TransferOperationMetadata.toObject(message.operationMetadata, options);
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.target != null && message.hasOwnProperty("target"))
+                                object.target = message.target;
+                            if (message.verb != null && message.hasOwnProperty("verb"))
+                                object.verb = message.verb;
+                            if (message.statusMessage != null && message.hasOwnProperty("statusMessage"))
+                                object.statusMessage = message.statusMessage;
+                            if (message.requestedCancellation != null && message.hasOwnProperty("requestedCancellation"))
+                                object.requestedCancellation = message.requestedCancellation;
+                            if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
+                                object.apiVersion = message.apiVersion;
                             return object;
                         };
     
@@ -5062,11 +5406,11 @@
                          * Properties of a TransferOperationMetadata.
                          * @memberof google.cloud.parallelstore.v1beta
                          * @interface ITransferOperationMetadata
-                         * @property {google.protobuf.ITimestamp|null} [createTime] TransferOperationMetadata createTime
-                         * @property {google.protobuf.ITimestamp|null} [endTime] TransferOperationMetadata endTime
+                         * @property {google.cloud.parallelstore.v1beta.ISourceParallelstore|null} [sourceParallelstore] TransferOperationMetadata sourceParallelstore
+                         * @property {google.cloud.parallelstore.v1beta.ISourceGcsBucket|null} [sourceGcsBucket] TransferOperationMetadata sourceGcsBucket
+                         * @property {google.cloud.parallelstore.v1beta.IDestinationGcsBucket|null} [destinationGcsBucket] TransferOperationMetadata destinationGcsBucket
+                         * @property {google.cloud.parallelstore.v1beta.IDestinationParallelstore|null} [destinationParallelstore] TransferOperationMetadata destinationParallelstore
                          * @property {google.cloud.parallelstore.v1beta.ITransferCounters|null} [counters] TransferOperationMetadata counters
-                         * @property {string|null} [source] TransferOperationMetadata source
-                         * @property {string|null} [destination] TransferOperationMetadata destination
                          * @property {google.cloud.parallelstore.v1beta.TransferType|null} [transferType] TransferOperationMetadata transferType
                          */
     
@@ -5086,20 +5430,36 @@
                         }
     
                         /**
-                         * TransferOperationMetadata createTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * TransferOperationMetadata sourceParallelstore.
+                         * @member {google.cloud.parallelstore.v1beta.ISourceParallelstore|null|undefined} sourceParallelstore
                          * @memberof google.cloud.parallelstore.v1beta.TransferOperationMetadata
                          * @instance
                          */
-                        TransferOperationMetadata.prototype.createTime = null;
+                        TransferOperationMetadata.prototype.sourceParallelstore = null;
     
                         /**
-                         * TransferOperationMetadata endTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * TransferOperationMetadata sourceGcsBucket.
+                         * @member {google.cloud.parallelstore.v1beta.ISourceGcsBucket|null|undefined} sourceGcsBucket
                          * @memberof google.cloud.parallelstore.v1beta.TransferOperationMetadata
                          * @instance
                          */
-                        TransferOperationMetadata.prototype.endTime = null;
+                        TransferOperationMetadata.prototype.sourceGcsBucket = null;
+    
+                        /**
+                         * TransferOperationMetadata destinationGcsBucket.
+                         * @member {google.cloud.parallelstore.v1beta.IDestinationGcsBucket|null|undefined} destinationGcsBucket
+                         * @memberof google.cloud.parallelstore.v1beta.TransferOperationMetadata
+                         * @instance
+                         */
+                        TransferOperationMetadata.prototype.destinationGcsBucket = null;
+    
+                        /**
+                         * TransferOperationMetadata destinationParallelstore.
+                         * @member {google.cloud.parallelstore.v1beta.IDestinationParallelstore|null|undefined} destinationParallelstore
+                         * @memberof google.cloud.parallelstore.v1beta.TransferOperationMetadata
+                         * @instance
+                         */
+                        TransferOperationMetadata.prototype.destinationParallelstore = null;
     
                         /**
                          * TransferOperationMetadata counters.
@@ -5110,28 +5470,37 @@
                         TransferOperationMetadata.prototype.counters = null;
     
                         /**
-                         * TransferOperationMetadata source.
-                         * @member {string} source
-                         * @memberof google.cloud.parallelstore.v1beta.TransferOperationMetadata
-                         * @instance
-                         */
-                        TransferOperationMetadata.prototype.source = "";
-    
-                        /**
-                         * TransferOperationMetadata destination.
-                         * @member {string} destination
-                         * @memberof google.cloud.parallelstore.v1beta.TransferOperationMetadata
-                         * @instance
-                         */
-                        TransferOperationMetadata.prototype.destination = "";
-    
-                        /**
                          * TransferOperationMetadata transferType.
                          * @member {google.cloud.parallelstore.v1beta.TransferType} transferType
                          * @memberof google.cloud.parallelstore.v1beta.TransferOperationMetadata
                          * @instance
                          */
                         TransferOperationMetadata.prototype.transferType = 0;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * TransferOperationMetadata source.
+                         * @member {"sourceParallelstore"|"sourceGcsBucket"|undefined} source
+                         * @memberof google.cloud.parallelstore.v1beta.TransferOperationMetadata
+                         * @instance
+                         */
+                        Object.defineProperty(TransferOperationMetadata.prototype, "source", {
+                            get: $util.oneOfGetter($oneOfFields = ["sourceParallelstore", "sourceGcsBucket"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * TransferOperationMetadata destination.
+                         * @member {"destinationGcsBucket"|"destinationParallelstore"|undefined} destination
+                         * @memberof google.cloud.parallelstore.v1beta.TransferOperationMetadata
+                         * @instance
+                         */
+                        Object.defineProperty(TransferOperationMetadata.prototype, "destination", {
+                            get: $util.oneOfGetter($oneOfFields = ["destinationGcsBucket", "destinationParallelstore"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new TransferOperationMetadata instance using the specified properties.
@@ -5157,18 +5526,18 @@
                         TransferOperationMetadata.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
-                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
-                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
-                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.counters != null && Object.hasOwnProperty.call(message, "counters"))
                                 $root.google.cloud.parallelstore.v1beta.TransferCounters.encode(message.counters, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            if (message.source != null && Object.hasOwnProperty.call(message, "source"))
-                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.source);
-                            if (message.destination != null && Object.hasOwnProperty.call(message, "destination"))
-                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.destination);
                             if (message.transferType != null && Object.hasOwnProperty.call(message, "transferType"))
                                 writer.uint32(/* id 6, wireType 0 =*/48).int32(message.transferType);
+                            if (message.sourceParallelstore != null && Object.hasOwnProperty.call(message, "sourceParallelstore"))
+                                $root.google.cloud.parallelstore.v1beta.SourceParallelstore.encode(message.sourceParallelstore, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.sourceGcsBucket != null && Object.hasOwnProperty.call(message, "sourceGcsBucket"))
+                                $root.google.cloud.parallelstore.v1beta.SourceGcsBucket.encode(message.sourceGcsBucket, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.destinationGcsBucket != null && Object.hasOwnProperty.call(message, "destinationGcsBucket"))
+                                $root.google.cloud.parallelstore.v1beta.DestinationGcsBucket.encode(message.destinationGcsBucket, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.destinationParallelstore != null && Object.hasOwnProperty.call(message, "destinationParallelstore"))
+                                $root.google.cloud.parallelstore.v1beta.DestinationParallelstore.encode(message.destinationParallelstore, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             return writer;
                         };
     
@@ -5203,24 +5572,24 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1: {
-                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                case 7: {
+                                        message.sourceParallelstore = $root.google.cloud.parallelstore.v1beta.SourceParallelstore.decode(reader, reader.uint32());
                                         break;
                                     }
-                                case 2: {
-                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                case 8: {
+                                        message.sourceGcsBucket = $root.google.cloud.parallelstore.v1beta.SourceGcsBucket.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.destinationGcsBucket = $root.google.cloud.parallelstore.v1beta.DestinationGcsBucket.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.destinationParallelstore = $root.google.cloud.parallelstore.v1beta.DestinationParallelstore.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 3: {
                                         message.counters = $root.google.cloud.parallelstore.v1beta.TransferCounters.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 4: {
-                                        message.source = reader.string();
-                                        break;
-                                    }
-                                case 5: {
-                                        message.destination = reader.string();
                                         break;
                                     }
                                 case 6: {
@@ -5262,27 +5631,48 @@
                         TransferOperationMetadata.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
-                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
-                                if (error)
-                                    return "createTime." + error;
+                            var properties = {};
+                            if (message.sourceParallelstore != null && message.hasOwnProperty("sourceParallelstore")) {
+                                properties.source = 1;
+                                {
+                                    var error = $root.google.cloud.parallelstore.v1beta.SourceParallelstore.verify(message.sourceParallelstore);
+                                    if (error)
+                                        return "sourceParallelstore." + error;
+                                }
                             }
-                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
-                                if (error)
-                                    return "endTime." + error;
+                            if (message.sourceGcsBucket != null && message.hasOwnProperty("sourceGcsBucket")) {
+                                if (properties.source === 1)
+                                    return "source: multiple values";
+                                properties.source = 1;
+                                {
+                                    var error = $root.google.cloud.parallelstore.v1beta.SourceGcsBucket.verify(message.sourceGcsBucket);
+                                    if (error)
+                                        return "sourceGcsBucket." + error;
+                                }
+                            }
+                            if (message.destinationGcsBucket != null && message.hasOwnProperty("destinationGcsBucket")) {
+                                properties.destination = 1;
+                                {
+                                    var error = $root.google.cloud.parallelstore.v1beta.DestinationGcsBucket.verify(message.destinationGcsBucket);
+                                    if (error)
+                                        return "destinationGcsBucket." + error;
+                                }
+                            }
+                            if (message.destinationParallelstore != null && message.hasOwnProperty("destinationParallelstore")) {
+                                if (properties.destination === 1)
+                                    return "destination: multiple values";
+                                properties.destination = 1;
+                                {
+                                    var error = $root.google.cloud.parallelstore.v1beta.DestinationParallelstore.verify(message.destinationParallelstore);
+                                    if (error)
+                                        return "destinationParallelstore." + error;
+                                }
                             }
                             if (message.counters != null && message.hasOwnProperty("counters")) {
                                 var error = $root.google.cloud.parallelstore.v1beta.TransferCounters.verify(message.counters);
                                 if (error)
                                     return "counters." + error;
                             }
-                            if (message.source != null && message.hasOwnProperty("source"))
-                                if (!$util.isString(message.source))
-                                    return "source: string expected";
-                            if (message.destination != null && message.hasOwnProperty("destination"))
-                                if (!$util.isString(message.destination))
-                                    return "destination: string expected";
                             if (message.transferType != null && message.hasOwnProperty("transferType"))
                                 switch (message.transferType) {
                                 default:
@@ -5307,25 +5697,31 @@
                             if (object instanceof $root.google.cloud.parallelstore.v1beta.TransferOperationMetadata)
                                 return object;
                             var message = new $root.google.cloud.parallelstore.v1beta.TransferOperationMetadata();
-                            if (object.createTime != null) {
-                                if (typeof object.createTime !== "object")
-                                    throw TypeError(".google.cloud.parallelstore.v1beta.TransferOperationMetadata.createTime: object expected");
-                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            if (object.sourceParallelstore != null) {
+                                if (typeof object.sourceParallelstore !== "object")
+                                    throw TypeError(".google.cloud.parallelstore.v1beta.TransferOperationMetadata.sourceParallelstore: object expected");
+                                message.sourceParallelstore = $root.google.cloud.parallelstore.v1beta.SourceParallelstore.fromObject(object.sourceParallelstore);
                             }
-                            if (object.endTime != null) {
-                                if (typeof object.endTime !== "object")
-                                    throw TypeError(".google.cloud.parallelstore.v1beta.TransferOperationMetadata.endTime: object expected");
-                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            if (object.sourceGcsBucket != null) {
+                                if (typeof object.sourceGcsBucket !== "object")
+                                    throw TypeError(".google.cloud.parallelstore.v1beta.TransferOperationMetadata.sourceGcsBucket: object expected");
+                                message.sourceGcsBucket = $root.google.cloud.parallelstore.v1beta.SourceGcsBucket.fromObject(object.sourceGcsBucket);
+                            }
+                            if (object.destinationGcsBucket != null) {
+                                if (typeof object.destinationGcsBucket !== "object")
+                                    throw TypeError(".google.cloud.parallelstore.v1beta.TransferOperationMetadata.destinationGcsBucket: object expected");
+                                message.destinationGcsBucket = $root.google.cloud.parallelstore.v1beta.DestinationGcsBucket.fromObject(object.destinationGcsBucket);
+                            }
+                            if (object.destinationParallelstore != null) {
+                                if (typeof object.destinationParallelstore !== "object")
+                                    throw TypeError(".google.cloud.parallelstore.v1beta.TransferOperationMetadata.destinationParallelstore: object expected");
+                                message.destinationParallelstore = $root.google.cloud.parallelstore.v1beta.DestinationParallelstore.fromObject(object.destinationParallelstore);
                             }
                             if (object.counters != null) {
                                 if (typeof object.counters !== "object")
                                     throw TypeError(".google.cloud.parallelstore.v1beta.TransferOperationMetadata.counters: object expected");
                                 message.counters = $root.google.cloud.parallelstore.v1beta.TransferCounters.fromObject(object.counters);
                             }
-                            if (object.source != null)
-                                message.source = String(object.source);
-                            if (object.destination != null)
-                                message.destination = String(object.destination);
                             switch (object.transferType) {
                             default:
                                 if (typeof object.transferType === "number") {
@@ -5363,25 +5759,33 @@
                                 options = {};
                             var object = {};
                             if (options.defaults) {
-                                object.createTime = null;
-                                object.endTime = null;
                                 object.counters = null;
-                                object.source = "";
-                                object.destination = "";
                                 object.transferType = options.enums === String ? "TRANSFER_TYPE_UNSPECIFIED" : 0;
                             }
-                            if (message.createTime != null && message.hasOwnProperty("createTime"))
-                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
-                            if (message.endTime != null && message.hasOwnProperty("endTime"))
-                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
                             if (message.counters != null && message.hasOwnProperty("counters"))
                                 object.counters = $root.google.cloud.parallelstore.v1beta.TransferCounters.toObject(message.counters, options);
-                            if (message.source != null && message.hasOwnProperty("source"))
-                                object.source = message.source;
-                            if (message.destination != null && message.hasOwnProperty("destination"))
-                                object.destination = message.destination;
                             if (message.transferType != null && message.hasOwnProperty("transferType"))
                                 object.transferType = options.enums === String ? $root.google.cloud.parallelstore.v1beta.TransferType[message.transferType] === undefined ? message.transferType : $root.google.cloud.parallelstore.v1beta.TransferType[message.transferType] : message.transferType;
+                            if (message.sourceParallelstore != null && message.hasOwnProperty("sourceParallelstore")) {
+                                object.sourceParallelstore = $root.google.cloud.parallelstore.v1beta.SourceParallelstore.toObject(message.sourceParallelstore, options);
+                                if (options.oneofs)
+                                    object.source = "sourceParallelstore";
+                            }
+                            if (message.sourceGcsBucket != null && message.hasOwnProperty("sourceGcsBucket")) {
+                                object.sourceGcsBucket = $root.google.cloud.parallelstore.v1beta.SourceGcsBucket.toObject(message.sourceGcsBucket, options);
+                                if (options.oneofs)
+                                    object.source = "sourceGcsBucket";
+                            }
+                            if (message.destinationGcsBucket != null && message.hasOwnProperty("destinationGcsBucket")) {
+                                object.destinationGcsBucket = $root.google.cloud.parallelstore.v1beta.DestinationGcsBucket.toObject(message.destinationGcsBucket, options);
+                                if (options.oneofs)
+                                    object.destination = "destinationGcsBucket";
+                            }
+                            if (message.destinationParallelstore != null && message.hasOwnProperty("destinationParallelstore")) {
+                                object.destinationParallelstore = $root.google.cloud.parallelstore.v1beta.DestinationParallelstore.toObject(message.destinationParallelstore, options);
+                                if (options.oneofs)
+                                    object.destination = "destinationParallelstore";
+                            }
                             return object;
                         };
     
