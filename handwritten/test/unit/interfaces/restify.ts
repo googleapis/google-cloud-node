@@ -25,7 +25,7 @@ import {handlerSetup as restifyInterface} from '../../../src/interfaces/restify'
 if (!EventEmitter.prototype.listenerCount) {
   EventEmitter.prototype.listenerCount = function (this, eventName) {
     // eslint-disable-next-line node/no-deprecated-api
-    return EventEmitter.listenerCount(this, eventName);
+    return EventEmitter.listenerCount(this, eventName as string);
   };
 }
 
