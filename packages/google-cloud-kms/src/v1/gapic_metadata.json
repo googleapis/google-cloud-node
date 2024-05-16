@@ -5,6 +5,94 @@
   "protoPackage": "google.cloud.kms.v1",
   "libraryPackage": "@google-cloud/kms",
   "services": {
+    "Autokey": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AutokeyClient",
+          "rpcs": {
+            "GetKeyHandle": {
+              "methods": [
+                "getKeyHandle"
+              ]
+            },
+            "ListKeyHandles": {
+              "methods": [
+                "listKeyHandles"
+              ]
+            },
+            "CreateKeyHandle": {
+              "methods": [
+                "createKeyHandle"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AutokeyClient",
+          "rpcs": {
+            "GetKeyHandle": {
+              "methods": [
+                "getKeyHandle"
+              ]
+            },
+            "ListKeyHandles": {
+              "methods": [
+                "listKeyHandles"
+              ]
+            },
+            "CreateKeyHandle": {
+              "methods": [
+                "createKeyHandle"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "AutokeyAdmin": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AutokeyAdminClient",
+          "rpcs": {
+            "UpdateAutokeyConfig": {
+              "methods": [
+                "updateAutokeyConfig"
+              ]
+            },
+            "GetAutokeyConfig": {
+              "methods": [
+                "getAutokeyConfig"
+              ]
+            },
+            "ShowEffectiveAutokeyConfig": {
+              "methods": [
+                "showEffectiveAutokeyConfig"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AutokeyAdminClient",
+          "rpcs": {
+            "UpdateAutokeyConfig": {
+              "methods": [
+                "updateAutokeyConfig"
+              ]
+            },
+            "GetAutokeyConfig": {
+              "methods": [
+                "getAutokeyConfig"
+              ]
+            },
+            "ShowEffectiveAutokeyConfig": {
+              "methods": [
+                "showEffectiveAutokeyConfig"
+              ]
+            }
+          }
+        }
+      }
+    },
     "EkmService": {
       "clients": {
         "grpc": {

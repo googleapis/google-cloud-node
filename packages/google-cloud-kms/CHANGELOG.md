@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/kms-v4.2.0...kms-v4.3.0) (2024-05-08)
+
+
+### Features
+
+* [kms] add client library for KMS Autokey service, which enables automated KMS key provision and management ([#5313](https://github.com/googleapis/google-cloud-node/issues/5313)) ([0f199db](https://github.com/googleapis/google-cloud-node/commit/0f199db38fdfecf139a0f08a7cd629711dc392e3))
+
 ## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/kms-v4.1.0...kms-v4.2.0) (2024-03-29)
 
 

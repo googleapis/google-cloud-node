@@ -1919,6 +1919,44 @@ describe('v1.EkmServiceClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('autokeyConfig', () => {
+      const fakePath = '/rendered/path/autokeyConfig';
+      const expectedParameters = {
+        folder: 'folderValue',
+      };
+      const client = new ekmserviceModule.v1.EkmServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.autokeyConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.autokeyConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('autokeyConfigPath', () => {
+        const result = client.autokeyConfigPath('folderValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.autokeyConfigPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchFolderFromAutokeyConfigName', () => {
+        const result = client.matchFolderFromAutokeyConfigName(fakePath);
+        assert.strictEqual(result, 'folderValue');
+        assert(
+          (client.pathTemplates.autokeyConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('cryptoKey', () => {
       const fakePath = '/rendered/path/cryptoKey';
       const expectedParameters = {
@@ -2270,6 +2308,70 @@ describe('v1.EkmServiceClient', () => {
         assert.strictEqual(result, 'importJobValue');
         assert(
           (client.pathTemplates.importJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('keyHandle', () => {
+      const fakePath = '/rendered/path/keyHandle';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        key_handle: 'keyHandleValue',
+      };
+      const client = new ekmserviceModule.v1.EkmServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.keyHandlePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.keyHandlePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('keyHandlePath', () => {
+        const result = client.keyHandlePath(
+          'projectValue',
+          'locationValue',
+          'keyHandleValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.keyHandlePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromKeyHandleName', () => {
+        const result = client.matchProjectFromKeyHandleName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.keyHandlePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromKeyHandleName', () => {
+        const result = client.matchLocationFromKeyHandleName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.keyHandlePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchKeyHandleFromKeyHandleName', () => {
+        const result = client.matchKeyHandleFromKeyHandleName(fakePath);
+        assert.strictEqual(result, 'keyHandleValue');
+        assert(
+          (client.pathTemplates.keyHandlePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

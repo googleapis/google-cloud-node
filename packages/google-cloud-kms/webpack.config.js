@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'EkmService',
-    filename: './ekm-service.js',
+    library: 'Autokey',
+    filename: './autokey.js',
   },
   node: {
     child_process: 'empty',

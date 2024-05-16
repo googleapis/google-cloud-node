@@ -14,11 +14,15 @@
 * [Samples](#samples)
   * [Alpha_analytics_data.create_audience_list](#alpha_analytics_data.create_audience_list)
   * [Alpha_analytics_data.create_recurring_audience_list](#alpha_analytics_data.create_recurring_audience_list)
+  * [Alpha_analytics_data.create_report_task](#alpha_analytics_data.create_report_task)
   * [Alpha_analytics_data.get_audience_list](#alpha_analytics_data.get_audience_list)
   * [Alpha_analytics_data.get_recurring_audience_list](#alpha_analytics_data.get_recurring_audience_list)
+  * [Alpha_analytics_data.get_report_task](#alpha_analytics_data.get_report_task)
   * [Alpha_analytics_data.list_audience_lists](#alpha_analytics_data.list_audience_lists)
   * [Alpha_analytics_data.list_recurring_audience_lists](#alpha_analytics_data.list_recurring_audience_lists)
+  * [Alpha_analytics_data.list_report_tasks](#alpha_analytics_data.list_report_tasks)
   * [Alpha_analytics_data.query_audience_list](#alpha_analytics_data.query_audience_list)
+  * [Alpha_analytics_data.query_report_task](#alpha_analytics_data.query_report_task)
   * [Alpha_analytics_data.run_funnel_report](#alpha_analytics_data.run_funnel_report)
   * [Alpha_analytics_data.sheet_export_audience_list](#alpha_analytics_data.sheet_export_audience_list)
   * [Beta_analytics_data.batch_run_pivot_reports](#beta_analytics_data.batch_run_pivot_reports)
@@ -83,6 +87,23 @@ __Usage:__
 
 
 
+### Alpha_analytics_data.create_report_task
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.create_report_task.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.create_report_task.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.create_report_task.js`
+
+
+-----
+
+
+
+
 ### Alpha_analytics_data.get_audience_list
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.get_audience_list.js).
@@ -110,6 +131,23 @@ __Usage:__
 
 
 `node packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.get_recurring_audience_list.js`
+
+
+-----
+
+
+
+
+### Alpha_analytics_data.get_report_task
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.get_report_task.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.get_report_task.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.get_report_task.js`
 
 
 -----
@@ -151,6 +189,23 @@ __Usage:__
 
 
 
+### Alpha_analytics_data.list_report_tasks
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.list_report_tasks.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.list_report_tasks.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.list_report_tasks.js`
+
+
+-----
+
+
+
+
 ### Alpha_analytics_data.query_audience_list
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.query_audience_list.js).
@@ -161,6 +216,23 @@ __Usage:__
 
 
 `node packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.query_audience_list.js`
+
+
+-----
+
+
+
+
+### Alpha_analytics_data.query_report_task
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.query_report_task.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.query_report_task.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.query_report_task.js`
 
 
 -----
