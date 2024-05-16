@@ -1,0 +1,33 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.policytroubleshooter.v1",
+  "libraryPackage": "@google-cloud/policy-troubleshooter",
+  "services": {
+    "IamChecker": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "IamCheckerClient",
+          "rpcs": {
+            "TroubleshootIamPolicy": {
+              "methods": [
+                "troubleshootIamPolicy"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "IamCheckerClient",
+          "rpcs": {
+            "TroubleshootIamPolicy": {
+              "methods": [
+                "troubleshootIamPolicy"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
