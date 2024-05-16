@@ -117,10 +117,7 @@ s.replace('packages/google-cloud-secretmanager/src/v1/secret_manager_service_cli
 """)
 
 s.replace('packages/google-cloud-secretmanager/src/v1/secret_manager_service_client.ts',
-  r"""topicPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/topics/{topic}'
-      ),
-    };""",
+  r"topicPathTemplate:\s+new\s+this\._gaxModule\.PathTemplate\(\s+'projects\/{project}\/topics\/{topic}'\s+\),\s+};",
   r"""topicPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/topics/{topic}'
       ),
