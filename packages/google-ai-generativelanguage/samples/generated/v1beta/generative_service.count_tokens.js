@@ -36,7 +36,8 @@ function main(model) {
    */
   // const model = 'abc123'
   /**
-   *  Optional. The input given to the model as a prompt.
+   *  Optional. The input given to the model as a prompt. This field is ignored
+   *  when `generate_content_request` is set.
    */
   // const contents = [1,2,3,4]
   /**
