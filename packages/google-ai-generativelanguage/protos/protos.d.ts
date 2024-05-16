@@ -5815,6 +5815,9 @@ export namespace google {
 
                     /** File uri */
                     uri?: (string|null);
+
+                    /** File state */
+                    state?: (google.ai.generativelanguage.v1beta.File.State|keyof typeof google.ai.generativelanguage.v1beta.File.State|null);
                 }
 
                 /** Represents a File. */
@@ -5852,6 +5855,9 @@ export namespace google {
 
                     /** File uri. */
                     public uri: string;
+
+                    /** File state. */
+                    public state: (google.ai.generativelanguage.v1beta.File.State|keyof typeof google.ai.generativelanguage.v1beta.File.State);
 
                     /**
                      * Creates a new File instance using the specified properties.
@@ -5929,6 +5935,17 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace File {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        PROCESSING = 1,
+                        ACTIVE = 2,
+                        FAILED = 10
+                    }
                 }
 
                 /** Represents a FileService */
@@ -6957,6 +6974,9 @@ export namespace google {
 
                     /** GenerationConfig responseMimeType */
                     responseMimeType?: (string|null);
+
+                    /** GenerationConfig responseSchema */
+                    responseSchema?: (google.ai.generativelanguage.v1beta.ISchema|null);
                 }
 
                 /** Represents a GenerationConfig. */
@@ -6988,6 +7008,9 @@ export namespace google {
 
                     /** GenerationConfig responseMimeType. */
                     public responseMimeType: string;
+
+                    /** GenerationConfig responseSchema. */
+                    public responseSchema?: (google.ai.generativelanguage.v1beta.ISchema|null);
 
                     /** GenerationConfig _candidateCount. */
                     public _candidateCount?: "candidateCount";
@@ -7217,6 +7240,9 @@ export namespace google {
 
                     /** GenerateContentResponse promptFeedback */
                     promptFeedback?: (google.ai.generativelanguage.v1beta.GenerateContentResponse.IPromptFeedback|null);
+
+                    /** GenerateContentResponse usageMetadata */
+                    usageMetadata?: (google.ai.generativelanguage.v1beta.GenerateContentResponse.IUsageMetadata|null);
                 }
 
                 /** Represents a GenerateContentResponse. */
@@ -7233,6 +7259,9 @@ export namespace google {
 
                     /** GenerateContentResponse promptFeedback. */
                     public promptFeedback?: (google.ai.generativelanguage.v1beta.GenerateContentResponse.IPromptFeedback|null);
+
+                    /** GenerateContentResponse usageMetadata. */
+                    public usageMetadata?: (google.ai.generativelanguage.v1beta.GenerateContentResponse.IUsageMetadata|null);
 
                     /**
                      * Creates a new GenerateContentResponse instance using the specified properties.
@@ -7425,6 +7454,115 @@ export namespace google {
                             SAFETY = 1,
                             OTHER = 2
                         }
+                    }
+
+                    /** Properties of a UsageMetadata. */
+                    interface IUsageMetadata {
+
+                        /** UsageMetadata promptTokenCount */
+                        promptTokenCount?: (number|null);
+
+                        /** UsageMetadata candidatesTokenCount */
+                        candidatesTokenCount?: (number|null);
+
+                        /** UsageMetadata totalTokenCount */
+                        totalTokenCount?: (number|null);
+                    }
+
+                    /** Represents a UsageMetadata. */
+                    class UsageMetadata implements IUsageMetadata {
+
+                        /**
+                         * Constructs a new UsageMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.ai.generativelanguage.v1beta.GenerateContentResponse.IUsageMetadata);
+
+                        /** UsageMetadata promptTokenCount. */
+                        public promptTokenCount: number;
+
+                        /** UsageMetadata candidatesTokenCount. */
+                        public candidatesTokenCount: number;
+
+                        /** UsageMetadata totalTokenCount. */
+                        public totalTokenCount: number;
+
+                        /**
+                         * Creates a new UsageMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UsageMetadata instance
+                         */
+                        public static create(properties?: google.ai.generativelanguage.v1beta.GenerateContentResponse.IUsageMetadata): google.ai.generativelanguage.v1beta.GenerateContentResponse.UsageMetadata;
+
+                        /**
+                         * Encodes the specified UsageMetadata message. Does not implicitly {@link google.ai.generativelanguage.v1beta.GenerateContentResponse.UsageMetadata.verify|verify} messages.
+                         * @param message UsageMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.ai.generativelanguage.v1beta.GenerateContentResponse.IUsageMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UsageMetadata message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.GenerateContentResponse.UsageMetadata.verify|verify} messages.
+                         * @param message UsageMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.ai.generativelanguage.v1beta.GenerateContentResponse.IUsageMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a UsageMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UsageMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.GenerateContentResponse.UsageMetadata;
+
+                        /**
+                         * Decodes a UsageMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UsageMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.GenerateContentResponse.UsageMetadata;
+
+                        /**
+                         * Verifies a UsageMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a UsageMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UsageMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.GenerateContentResponse.UsageMetadata;
+
+                        /**
+                         * Creates a plain object from a UsageMetadata message. Also converts values to other types if specified.
+                         * @param message UsageMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.ai.generativelanguage.v1beta.GenerateContentResponse.UsageMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UsageMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UsageMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -8911,6 +9049,9 @@ export namespace google {
 
                     /** CountTokensRequest contents */
                     contents?: (google.ai.generativelanguage.v1beta.IContent[]|null);
+
+                    /** CountTokensRequest generateContentRequest */
+                    generateContentRequest?: (google.ai.generativelanguage.v1beta.IGenerateContentRequest|null);
                 }
 
                 /** Represents a CountTokensRequest. */
@@ -8927,6 +9068,9 @@ export namespace google {
 
                     /** CountTokensRequest contents. */
                     public contents: google.ai.generativelanguage.v1beta.IContent[];
+
+                    /** CountTokensRequest generateContentRequest. */
+                    public generateContentRequest?: (google.ai.generativelanguage.v1beta.IGenerateContentRequest|null);
 
                     /**
                      * Creates a new CountTokensRequest instance using the specified properties.

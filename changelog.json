@@ -4,6 +4,142 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "e8dd1b7aa0e455acf2179787b498e6b6a934672b",
+          "message": "[storage] An existing resource pattern value `projects/{project}/buckets/{bucket}/managedFolders/{managedFolder=**}` to resource definition `storage.googleapis.com/ManagedFolder` is removed",
+          "issues": [
+            "5311"
+          ]
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-control",
+      "id": "0a3c5ae8-fa00-4ec0-ac35-e810d010a603",
+      "createTime": "2024-05-08T21:34:11.780Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1cc5bc1379967a6845254db0131359964ed30ab8",
+          "message": "[dlp] add RPCs for deleting TableDataProfiles",
+          "issues": [
+            "5315"
+          ]
+        }
+      ],
+      "version": "5.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dlp",
+      "id": "72af2a2c-0b44-4f65-8246-2561c9042364",
+      "createTime": "2024-05-08T21:34:11.659Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a6da26277bac24fa82392cadb7602f61b64e67fb",
+          "message": "[kmsinventory] add client library for KMS Autokey service, which enables automated KMS key provision and management",
+          "issues": [
+            "5314"
+          ]
+        }
+      ],
+      "version": "1.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms-inventory",
+      "id": "c20308d5-2fde-4964-84dd-9b0f66bd88b4",
+      "createTime": "2024-05-08T21:34:11.603Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0f199db38fdfecf139a0f08a7cd629711dc392e3",
+          "message": "[kms] add client library for KMS Autokey service, which enables automated KMS key provision and management",
+          "issues": [
+            "5313"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms",
+      "id": "ce3f4706-5f44-4937-9808-9f43acc0bb3f",
+      "createTime": "2024-05-08T21:34:11.590Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3db1ac8ff587a919b35bd1131c495ce50f315d85",
+          "message": "[dataplex] updated client libraries for Dataplex Catalog: removed deprecated fields, updated comments",
+          "issues": [
+            "5306"
+          ]
+        }
+      ],
+      "version": "3.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "ae09155c-a3d3-4243-bb82-21ca4a3e1194",
+      "createTime": "2024-05-08T21:34:11.565Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7f22a197fbb5c377bf0d0404f64ad6c0a56f803a",
+          "message": "Update Compute Engine API to revision 20240430",
+          "issues": [
+            "5321"
+          ]
+        }
+      ],
+      "version": "4.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "3b69d3c1-a906-4729-95d8-62600222f0c9",
+      "createTime": "2024-05-08T21:34:11.550Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "76ae561ee40d66cbba815cd7c9c964a6b92cc00c",
+          "message": "Add `ReportTask`, `Metric`, `OrderBy`, `Cohort`, `CohortsRange`, `CohortReportSettings`, `ResponseMetaData`, `MetricAggregation`, `RestrictedMetricType` types to the Data API v1alpha",
+          "issues": [
+            "5318"
+          ]
+        }
+      ],
+      "version": "4.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/data",
+      "id": "0175fb31-797c-47d5-8803-8df44fb09ce4",
+      "createTime": "2024-05-08T21:34:11.534Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "01f4b533eab40cbc0868be66418bda716b998dc3",
+          "message": "Add FileState to File ",
+          "issues": [
+            "5312"
+          ]
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ai/generativelanguage",
+      "id": "ac432659-4206-45e9-8f24-080f28d009df",
+      "createTime": "2024-05-08T21:34:11.520Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "068507d889523e1cb9d1430bd53bf579dc1a5c9f",
           "message": "Add initial files for google.maps.solar.v1",
@@ -28954,5 +29090,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-05-02T23:29:09.819Z"
+  "updateTime": "2024-05-08T21:34:11.780Z"
 }

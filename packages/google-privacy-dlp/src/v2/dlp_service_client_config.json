@@ -235,6 +235,10 @@
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
+        "DeleteTableDataProfile": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "HybridInspectDlpJob": {
           "timeout_millis": 300000,
           "retry_codes_name": "non_idempotent",
@@ -242,6 +246,30 @@
         },
         "FinishDlpJob": {
           "timeout_millis": 300000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateConnection": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetConnection": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListConnections": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "SearchConnections": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteConnection": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateConnection": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }
