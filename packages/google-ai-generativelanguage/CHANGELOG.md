@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.3.0...generativelanguage-v2.4.0) (2024-05-08)
+
+
+### Features
+
+* Add FileState to File  ([#5312](https://github.com/googleapis/google-cloud-node/issues/5312)) ([01f4b53](https://github.com/googleapis/google-cloud-node/commit/01f4b533eab40cbc0868be66418bda716b998dc3))
+
 ## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.2.0...generativelanguage-v2.3.0) (2024-04-18)
 
 
