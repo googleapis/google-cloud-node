@@ -377,6 +377,35 @@ describe('v2.RoutesClient', () => {
       assert.deepStrictEqual(response, expectedResponse);
     });
 
+    it('invokes computeRouteMatrix without error and gaxServerStreamingRetries enabled', async () => {
+      const client = new routesModule.v2.RoutesClient({
+        gaxServerStreamingRetries: true,
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.maps.routing.v2.ComputeRouteMatrixRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.maps.routing.v2.RouteMatrixElement()
+      );
+      client.innerApiCalls.computeRouteMatrix =
+        stubServerStreamingCall(expectedResponse);
+      const stream = client.computeRouteMatrix(request);
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (response: protos.google.maps.routing.v2.RouteMatrixElement) => {
+            resolve(response);
+          }
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
     it('invokes computeRouteMatrix with error', async () => {
       const client = new routesModule.v2.RoutesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
@@ -432,6 +461,12 @@ describe('v2.RoutesClient', () => {
         });
       });
       await assert.rejects(promise, expectedError);
+    });
+    it('should create a client with gaxServerStreamingRetries enabled', () => {
+      const client = new routesModule.v2.RoutesClient({
+        gaxServerStreamingRetries: true,
+      });
+      assert(client);
     });
   });
 });
