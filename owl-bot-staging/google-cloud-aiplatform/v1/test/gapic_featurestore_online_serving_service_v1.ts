@@ -499,6 +499,39 @@ describe('v1.FeaturestoreOnlineServingServiceClient', () => {
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
+        it('invokes streamingReadFeatureValues without error and gaxServerStreamingRetries enabled', async () => {
+            const client = new featurestoreonlineservingserviceModule.v1.FeaturestoreOnlineServingServiceClient({gaxServerStreamingRetries: true});
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.StreamingReadFeatureValuesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1.StreamingReadFeatureValuesRequest', ['entityType']);
+            request.entityType = defaultValue1;
+            const expectedHeaderRequestParams = `entity_type=${defaultValue1}`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.ReadFeatureValuesResponse()
+            );
+            client.innerApiCalls.streamingReadFeatureValues = stubServerStreamingCall(expectedResponse);
+            const stream = client.streamingReadFeatureValues(request);
+            const promise = new Promise((resolve, reject) => {
+                stream.on('data', (response: protos.google.cloud.aiplatform.v1.ReadFeatureValuesResponse) => {
+                    resolve(response);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.streamingReadFeatureValues as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.streamingReadFeatureValues as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
         it('invokes streamingReadFeatureValues with error', async () => {
             const client = new featurestoreonlineservingserviceModule.v1.FeaturestoreOnlineServingServiceClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
@@ -556,6 +589,12 @@ describe('v1.FeaturestoreOnlineServingServiceClient', () => {
                 });
             });
             await assert.rejects(promise, expectedError);
+        });
+        it('should create a client with gaxServerStreamingRetries enabled', () => {
+            const client = new featurestoreonlineservingserviceModule.v1.FeaturestoreOnlineServingServiceClient({
+                gaxServerStreamingRetries: true,
+            });
+            assert(client);
         });
     });
     describe('getIamPolicy', () => {
