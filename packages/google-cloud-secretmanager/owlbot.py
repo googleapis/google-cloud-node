@@ -117,31 +117,17 @@ s.replace('packages/google-cloud-secretmanager/src/v1/secret_manager_service_cli
 """)
 
 s.replace('packages/google-cloud-secretmanager/src/v1/secret_manager_service_client.ts',
-  r"""this.pathTemplates = {""",
-  r"""this.pathTemplates = {
-      projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+  r"""topicPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/topics/{topic}'
+      ),
+    };""",
+  r"""topicPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/topics/{topic}'
       ),
       secretPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/secrets/{secret}'
       ),
       secretVersionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/secrets/{secret}/versions/{secret_version}'
-      ),
-      topicPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/topics/{topic}'
-      ),
-            projectLocationSecretPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/secrets/{secret}'
-      ),
-      projectLocationSecretSecretVersionPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/secrets/{secret}/versions/{secret_version}'
-        ),
-      projectSecretPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/secrets/{secret}'
-      ),
-      projectSecretSecretVersionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/secrets/{secret}/versions/{secret_version}'
       ),
     };
