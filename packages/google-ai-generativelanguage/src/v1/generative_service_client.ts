@@ -207,7 +207,7 @@ export class GenerativeServiceClient {
       streamGenerateContent: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.SERVER_STREAMING,
         !!opts.fallback,
-        /* gaxStreamingRetries: */ false
+        !!opts.gaxServerStreamingRetries
       ),
     };
 

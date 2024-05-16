@@ -1025,6 +1025,51 @@ describe('v1beta.GenerativeServiceClient', () => {
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
+    it('invokes streamGenerateContent without error and gaxServerStreamingRetries enabled', async () => {
+      const client = new generativeserviceModule.v1beta.GenerativeServiceClient(
+        {gaxServerStreamingRetries: true}
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ai.generativelanguage.v1beta.GenerateContentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ai.generativelanguage.v1beta.GenerateContentRequest',
+        ['model']
+      );
+      request.model = defaultValue1;
+      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ai.generativelanguage.v1beta.GenerateContentResponse()
+      );
+      client.innerApiCalls.streamGenerateContent =
+        stubServerStreamingCall(expectedResponse);
+      const stream = client.streamGenerateContent(request);
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.ai.generativelanguage.v1beta.GenerateContentResponse
+          ) => {
+            resolve(response);
+          }
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.streamGenerateContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.streamGenerateContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
     it('invokes streamGenerateContent with error', async () => {
       const client = new generativeserviceModule.v1beta.GenerativeServiceClient(
         {
@@ -1107,6 +1152,14 @@ describe('v1beta.GenerativeServiceClient', () => {
         });
       });
       await assert.rejects(promise, expectedError);
+    });
+    it('should create a client with gaxServerStreamingRetries enabled', () => {
+      const client = new generativeserviceModule.v1beta.GenerativeServiceClient(
+        {
+          gaxServerStreamingRetries: true,
+        }
+      );
+      assert(client);
     });
   });
 
