@@ -239,7 +239,6 @@ export class SecretManagerServiceClient {
       ),
     };
 
-
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
@@ -2574,13 +2573,13 @@ export class SecretManagerServiceClient {
     return Promise.resolve();
   }
 
-   /**
+  /**
    * Return a fully-qualified project resource name string.
    *
    * @param {string} project
    * @returns {string} Resource name string.
    */
-   secretPath(project: string, secret: string) {
+  secretPath(project: string, secret: string) {
     return this.pathTemplates.secretPathTemplate.render({
       project: project,
       secret: secret,
@@ -2643,7 +2642,7 @@ export class SecretManagerServiceClient {
    *   A fully-qualified path representing SecretVersion resource.
    * @returns {string} A string representing the secret.
    */
-    matchSecretFromSecretVersionName(secretVersionName: string) {
+  matchSecretFromSecretVersionName(secretVersionName: string) {
     return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
       .secret;
   }
@@ -2658,6 +2657,5 @@ export class SecretManagerServiceClient {
   matchSecretVersionFromSecretVersionName(secretVersionName: string) {
     return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
       .secret_version;
-  
   }
 }
