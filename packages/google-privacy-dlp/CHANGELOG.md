@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.4.0...dlp-v5.5.0) (2024-05-08)
+
+
+### Features
+
+* [dlp] add RPCs for deleting TableDataProfiles ([#5315](https://github.com/googleapis/google-cloud-node/issues/5315)) ([1cc5bc1](https://github.com/googleapis/google-cloud-node/commit/1cc5bc1379967a6845254db0131359964ed30ab8))
+
 ## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.3.0...dlp-v5.4.0) (2024-03-29)
 
 
