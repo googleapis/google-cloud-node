@@ -152,6 +152,54 @@
             }
         },
         {
+            "regionTag": "batch_v1alpha_generated_BatchService_UpdateJob_async",
+            "title": "BatchService updateJob Sample",
+            "origin": "API_DEFINITION",
+            "description": " Update a Job.",
+            "canonical": true,
+            "file": "batch_service.update_job.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 75,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateJob",
+                "fullName": "google.cloud.batch.v1alpha.BatchService.UpdateJob",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "job",
+                        "type": ".google.cloud.batch.v1alpha.Job"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.batch.v1alpha.Job",
+                "client": {
+                    "shortName": "BatchServiceClient",
+                    "fullName": "google.cloud.batch.v1alpha.BatchServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateJob",
+                    "fullName": "google.cloud.batch.v1alpha.BatchService.UpdateJob",
+                    "service": {
+                        "shortName": "BatchService",
+                        "fullName": "google.cloud.batch.v1alpha.BatchService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "batch_v1alpha_generated_BatchService_ListJobs_async",
             "title": "BatchService listJobs Sample",
             "origin": "API_DEFINITION",

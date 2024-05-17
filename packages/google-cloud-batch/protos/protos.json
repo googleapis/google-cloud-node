@@ -1360,6 +1360,26 @@
                             }
                           ]
                         },
+                        "UpdateJob": {
+                          "requestType": "UpdateJobRequest",
+                          "responseType": "Job",
+                          "options": {
+                            "(google.api.http).patch": "/v1alpha/{job.name=projects/*/locations/*/jobs/*}",
+                            "(google.api.http).body": "job",
+                            "(google.api.method_signature)": "job,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{job.name=projects/*/locations/*/jobs/*}",
+                                "body": "job"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "job,update_mask"
+                            }
+                          ]
+                        },
                         "ListJobs": {
                           "requestType": "ListJobsRequest",
                           "responseType": "ListJobsResponse",
@@ -1577,6 +1597,32 @@
                           "type": "string",
                           "id": 4,
                           "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateJobRequest": {
+                      "fields": {
+                        "job": {
+                          "type": "Job",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }

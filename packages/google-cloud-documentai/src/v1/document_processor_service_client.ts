@@ -667,17 +667,22 @@ export class DocumentProcessorServiceClient {
    * @param {google.cloud.documentai.v1.GcsDocument} request.gcsDocument
    *   A raw document on Google Cloud Storage.
    * @param {string} request.name
-   *   Required. The resource name of the {@link protos.google.cloud.documentai.v1.Processor|Processor} or
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.documentai.v1.Processor|Processor} or
    *   {@link protos.google.cloud.documentai.v1.ProcessorVersion|ProcessorVersion}
-   *   to use for processing. If a {@link protos.google.cloud.documentai.v1.Processor|Processor} is specified, the server will use
-   *   its {@link protos.google.cloud.documentai.v1.Processor.default_processor_version|default version}. Format:
-   *   `projects/{project}/locations/{location}/processors/{processor}`, or
+   *   to use for processing. If a
+   *   {@link protos.google.cloud.documentai.v1.Processor|Processor} is specified, the server
+   *   will use its [default
+   *   version][google.cloud.documentai.v1.Processor.default_processor_version].
+   *   Format: `projects/{project}/locations/{location}/processors/{processor}`,
+   *   or
    *   `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
    * @param {boolean} request.skipHumanReview
    *   Whether human review should be skipped for this request. Default to
    *   `false`.
    * @param {google.protobuf.FieldMask} request.fieldMask
-   *   Specifies which fields to include in the {@link protos.google.cloud.documentai.v1.ProcessResponse.document|ProcessResponse.document}
+   *   Specifies which fields to include in the
+   *   {@link protos.google.cloud.documentai.v1.ProcessResponse.document|ProcessResponse.document}
    *   output. Only supports top-level document and pages field, so it must be in
    *   the form of `{document_field_name}` or `pages.{page_field_name}`.
    * @param {google.cloud.documentai.v1.ProcessOptions} request.processOptions
@@ -765,7 +770,8 @@ export class DocumentProcessorServiceClient {
     return this.innerApiCalls.processDocument(request, options, callback);
   }
   /**
-   * Fetches processor types. Note that we don't use {@link protos.google.cloud.documentai.v1.DocumentProcessorService.ListProcessorTypes|ListProcessorTypes}
+   * Fetches processor types. Note that we don't use
+   * {@link protos.google.cloud.documentai.v1.DocumentProcessorService.ListProcessorTypes|ListProcessorTypes}
    * here, because it isn't paginated.
    *
    * @param {Object} request
@@ -1121,17 +1127,21 @@ export class DocumentProcessorServiceClient {
     return this.innerApiCalls.getProcessorVersion(request, options, callback);
   }
   /**
-   * Creates a processor from the {@link protos.google.cloud.documentai.v1.ProcessorType|ProcessorType} provided.
-   * The processor will be at `ENABLED` state by default after its creation.
+   * Creates a processor from the
+   * {@link protos.google.cloud.documentai.v1.ProcessorType|ProcessorType} provided. The
+   * processor will be at `ENABLED` state by default after its creation.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent (project and location) under which to create the processor.
-   *   Format: `projects/{project}/locations/{location}`
+   *   Required. The parent (project and location) under which to create the
+   *   processor. Format: `projects/{project}/locations/{location}`
    * @param {google.cloud.documentai.v1.Processor} request.processor
-   *   Required. The processor to be created, requires {@link protos.google.cloud.documentai.v1.Processor.type|Processor.type} and
-   *   {@link protos.google.cloud.documentai.v1.Processor.display_name|Processor.display_name} to be set. Also, the {@link protos.google.cloud.documentai.v1.Processor.kms_key_name|Processor.kms_key_name}
+   *   Required. The processor to be created, requires
+   *   {@link protos.google.cloud.documentai.v1.Processor.type|Processor.type} and
+   *   {@link protos.google.cloud.documentai.v1.Processor.display_name|Processor.display_name}
+   *   to be set. Also, the
+   *   {@link protos.google.cloud.documentai.v1.Processor.kms_key_name|Processor.kms_key_name}
    *   field must be set if the processor is under CMEK.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1222,7 +1232,8 @@ export class DocumentProcessorServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the {@link protos.google.cloud.documentai.v1.Evaluation|Evaluation} to get.
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.documentai.v1.Evaluation|Evaluation} to get.
    *   `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}/evaluations/{evaluation}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1315,7 +1326,8 @@ export class DocumentProcessorServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of {@link protos.google.cloud.documentai.v1.Processor|Processor} or
+   *   Required. The resource name of
+   *   {@link protos.google.cloud.documentai.v1.Processor|Processor} or
    *   {@link protos.google.cloud.documentai.v1.ProcessorVersion|ProcessorVersion}.
    *   Format: `projects/{project}/locations/{location}/processors/{processor}`,
    *   or
@@ -1481,17 +1493,19 @@ export class DocumentProcessorServiceClient {
    * @param {google.cloud.documentai.v1.TrainProcessorVersionRequest.FoundationModelTuningOptions} request.foundationModelTuningOptions
    *   Options to control foundation model tuning of a processor.
    * @param {string} request.parent
-   *   Required. The parent (project, location and processor) to create the new version for.
-   *   Format: `projects/{project}/locations/{location}/processors/{processor}`.
+   *   Required. The parent (project, location and processor) to create the new
+   *   version for. Format:
+   *   `projects/{project}/locations/{location}/processors/{processor}`.
    * @param {google.cloud.documentai.v1.ProcessorVersion} request.processorVersion
    *   Required. The processor version to be created.
    * @param {google.cloud.documentai.v1.DocumentSchema} [request.documentSchema]
    *   Optional. The schema the processor version will be trained with.
    * @param {google.cloud.documentai.v1.TrainProcessorVersionRequest.InputData} [request.inputData]
-   *   Optional. The input data used to train the {@link protos.google.cloud.documentai.v1.ProcessorVersion|ProcessorVersion}.
+   *   Optional. The input data used to train the
+   *   {@link protos.google.cloud.documentai.v1.ProcessorVersion|ProcessorVersion}.
    * @param {string} [request.baseProcessorVersion]
-   *   Optional. The processor version to use as a base for training. This processor version
-   *   must be a child of `parent`. Format:
+   *   Optional. The processor version to use as a base for training. This
+   *   processor version must be a child of `parent`. Format:
    *   `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -2453,17 +2467,22 @@ export class DocumentProcessorServiceClient {
     >;
   }
   /**
-   * Set the default (active) version of a {@link protos.google.cloud.documentai.v1.Processor|Processor} that will be used in
-   * {@link protos.google.cloud.documentai.v1.DocumentProcessorService.ProcessDocument|ProcessDocument} and
+   * Set the default (active) version of a
+   * {@link protos.google.cloud.documentai.v1.Processor|Processor} that will be used in
+   * {@link protos.google.cloud.documentai.v1.DocumentProcessorService.ProcessDocument|ProcessDocument}
+   * and
    * {@link protos.google.cloud.documentai.v1.DocumentProcessorService.BatchProcessDocuments|BatchProcessDocuments}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.processor
-   *   Required. The resource name of the {@link protos.google.cloud.documentai.v1.Processor|Processor} to change default version.
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.documentai.v1.Processor|Processor} to change default
+   *   version.
    * @param {string} request.defaultProcessorVersion
-   *   Required. The resource name of child {@link protos.google.cloud.documentai.v1.ProcessorVersion|ProcessorVersion} to use as default.
-   *   Format:
+   *   Required. The resource name of child
+   *   {@link protos.google.cloud.documentai.v1.ProcessorVersion|ProcessorVersion} to use as
+   *   default. Format:
    *   `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{version}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -2607,8 +2626,9 @@ export class DocumentProcessorServiceClient {
    * @param {google.cloud.documentai.v1.Document} request.inlineDocument
    *   An inline document proto.
    * @param {string} request.humanReviewConfig
-   *   Required. The resource name of the {@link protos.google.cloud.documentai.v1.HumanReviewConfig|HumanReviewConfig} that the document will be
-   *   reviewed with.
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.documentai.v1.HumanReviewConfig|HumanReviewConfig} that the
+   *   document will be reviewed with.
    * @param {boolean} request.enableSchemaValidation
    *   Whether the validation should be performed on the ad-hoc review request.
    * @param {google.cloud.documentai.v1.ReviewDocumentRequest.Priority} request.priority
@@ -2751,11 +2771,13 @@ export class DocumentProcessorServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.processorVersion
-   *   Required. The resource name of the {@link protos.google.cloud.documentai.v1.ProcessorVersion|ProcessorVersion} to evaluate.
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.documentai.v1.ProcessorVersion|ProcessorVersion} to
+   *   evaluate.
    *   `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
    * @param {google.cloud.documentai.v1.BatchDocumentsInputConfig} [request.evaluationDocuments]
-   *   Optional. The documents used in the evaluation. If unspecified, use the processor's
-   *   dataset as evaluation input.
+   *   Optional. The documents used in the evaluation. If unspecified, use the
+   *   processor's dataset as evaluation input.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3090,8 +3112,8 @@ export class DocumentProcessorServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent (project and location) which owns this collection of Processors.
-   *   Format: `projects/{project}/locations/{location}`
+   *   Required. The parent (project and location) which owns this collection of
+   *   Processors. Format: `projects/{project}/locations/{location}`
    * @param {number} request.pageSize
    *   The maximum number of processors to return.
    *   If unspecified, at most `50` processors will be returned.
@@ -3191,8 +3213,8 @@ export class DocumentProcessorServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent (project and location) which owns this collection of Processors.
-   *   Format: `projects/{project}/locations/{location}`
+   *   Required. The parent (project and location) which owns this collection of
+   *   Processors. Format: `projects/{project}/locations/{location}`
    * @param {number} request.pageSize
    *   The maximum number of processors to return.
    *   If unspecified, at most `50` processors will be returned.
@@ -3240,8 +3262,8 @@ export class DocumentProcessorServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent (project and location) which owns this collection of Processors.
-   *   Format: `projects/{project}/locations/{location}`
+   *   Required. The parent (project and location) which owns this collection of
+   *   Processors. Format: `projects/{project}/locations/{location}`
    * @param {number} request.pageSize
    *   The maximum number of processors to return.
    *   If unspecified, at most `50` processors will be returned.
@@ -3288,8 +3310,9 @@ export class DocumentProcessorServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent (project, location and processor) to list all versions.
-   *   Format: `projects/{project}/locations/{location}/processors/{processor}`
+   *   Required. The parent (project, location and processor) to list all
+   *   versions. Format:
+   *   `projects/{project}/locations/{location}/processors/{processor}`
    * @param {number} request.pageSize
    *   The maximum number of processor versions to return.
    *   If unspecified, at most `10` processor versions will be returned.
@@ -3389,8 +3412,9 @@ export class DocumentProcessorServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent (project, location and processor) to list all versions.
-   *   Format: `projects/{project}/locations/{location}/processors/{processor}`
+   *   Required. The parent (project, location and processor) to list all
+   *   versions. Format:
+   *   `projects/{project}/locations/{location}/processors/{processor}`
    * @param {number} request.pageSize
    *   The maximum number of processor versions to return.
    *   If unspecified, at most `10` processor versions will be returned.
@@ -3438,8 +3462,9 @@ export class DocumentProcessorServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent (project, location and processor) to list all versions.
-   *   Format: `projects/{project}/locations/{location}/processors/{processor}`
+   *   Required. The parent (project, location and processor) to list all
+   *   versions. Format:
+   *   `projects/{project}/locations/{location}/processors/{processor}`
    * @param {number} request.pageSize
    *   The maximum number of processor versions to return.
    *   If unspecified, at most `10` processor versions will be returned.
@@ -3486,7 +3511,9 @@ export class DocumentProcessorServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the {@link protos.google.cloud.documentai.v1.ProcessorVersion|ProcessorVersion} to list evaluations for.
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.documentai.v1.ProcessorVersion|ProcessorVersion} to list
+   *   evaluations for.
    *   `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
    * @param {number} request.pageSize
    *   The standard list page size.
@@ -3587,7 +3614,9 @@ export class DocumentProcessorServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the {@link protos.google.cloud.documentai.v1.ProcessorVersion|ProcessorVersion} to list evaluations for.
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.documentai.v1.ProcessorVersion|ProcessorVersion} to list
+   *   evaluations for.
    *   `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
    * @param {number} request.pageSize
    *   The standard list page size.
@@ -3636,7 +3665,9 @@ export class DocumentProcessorServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the {@link protos.google.cloud.documentai.v1.ProcessorVersion|ProcessorVersion} to list evaluations for.
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.documentai.v1.ProcessorVersion|ProcessorVersion} to list
+   *   evaluations for.
    *   `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
    * @param {number} request.pageSize
    *   The standard list page size.

@@ -90,6 +90,42 @@ s.replace('packages/google-cloud-secretmanager/src/v1/secret_manager_service_cli
     return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
       .project;
   }
+  /**
+   * Parse the secret from SecretVersion resource.
+   *
+   * @param {string} secretVersionName
+   *   A fully-qualified path representing SecretVersion resource.
+   * @returns {string} A string representing the secret.
+   */
+    matchSecretFromSecretVersionName(secretVersionName: string) {
+    return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
+      .secret;
+  }
+
+  /**
+   * Parse the secret_version from SecretVersion resource.
+   *
+   * @param {string} secretVersionName
+   *   A fully-qualified path representing SecretVersion resource.
+   * @returns {string} A string representing the secret_version.
+   */
+  matchSecretVersionFromSecretVersionName(secretVersionName: string) {
+    return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
+      .secret_version;
   
 }
+""")
+
+s.replace('packages/google-cloud-secretmanager/src/v1/secret_manager_service_client.ts',
+  r"topicPathTemplate:\s+new\s+this\._gaxModule\.PathTemplate\(\s+'projects\/{project}\/topics\/{topic}'\s+\),\s+};",
+  r"""topicPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/topics/{topic}'
+      ),
+      secretPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/secrets/{secret}'
+      ),
+      secretVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/secrets/{secret}/versions/{secret_version}'
+      ),
+    };
 """)

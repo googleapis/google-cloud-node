@@ -14405,6 +14405,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.batch.v1alpha.BatchService|updateJob}.
+                         * @memberof google.cloud.batch.v1alpha.BatchService
+                         * @typedef UpdateJobCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.batch.v1alpha.Job} [response] Job
+                         */
+    
+                        /**
+                         * Calls UpdateJob.
+                         * @function updateJob
+                         * @memberof google.cloud.batch.v1alpha.BatchService
+                         * @instance
+                         * @param {google.cloud.batch.v1alpha.IUpdateJobRequest} request UpdateJobRequest message or plain object
+                         * @param {google.cloud.batch.v1alpha.BatchService.UpdateJobCallback} callback Node-style callback called with the error, if any, and Job
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(BatchService.prototype.updateJob = function updateJob(request, callback) {
+                            return this.rpcCall(updateJob, $root.google.cloud.batch.v1alpha.UpdateJobRequest, $root.google.cloud.batch.v1alpha.Job, request, callback);
+                        }, "name", { value: "UpdateJob" });
+    
+                        /**
+                         * Calls UpdateJob.
+                         * @function updateJob
+                         * @memberof google.cloud.batch.v1alpha.BatchService
+                         * @instance
+                         * @param {google.cloud.batch.v1alpha.IUpdateJobRequest} request UpdateJobRequest message or plain object
+                         * @returns {Promise<google.cloud.batch.v1alpha.Job>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.batch.v1alpha.BatchService|listJobs}.
                          * @memberof google.cloud.batch.v1alpha.BatchService
                          * @typedef ListJobsCallback
@@ -15400,6 +15433,266 @@
                         };
     
                         return DeleteJobRequest;
+                    })();
+    
+                    v1alpha.UpdateJobRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateJobRequest.
+                         * @memberof google.cloud.batch.v1alpha
+                         * @interface IUpdateJobRequest
+                         * @property {google.cloud.batch.v1alpha.IJob|null} [job] UpdateJobRequest job
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateJobRequest updateMask
+                         * @property {string|null} [requestId] UpdateJobRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new UpdateJobRequest.
+                         * @memberof google.cloud.batch.v1alpha
+                         * @classdesc Represents an UpdateJobRequest.
+                         * @implements IUpdateJobRequest
+                         * @constructor
+                         * @param {google.cloud.batch.v1alpha.IUpdateJobRequest=} [properties] Properties to set
+                         */
+                        function UpdateJobRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateJobRequest job.
+                         * @member {google.cloud.batch.v1alpha.IJob|null|undefined} job
+                         * @memberof google.cloud.batch.v1alpha.UpdateJobRequest
+                         * @instance
+                         */
+                        UpdateJobRequest.prototype.job = null;
+    
+                        /**
+                         * UpdateJobRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.batch.v1alpha.UpdateJobRequest
+                         * @instance
+                         */
+                        UpdateJobRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateJobRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.batch.v1alpha.UpdateJobRequest
+                         * @instance
+                         */
+                        UpdateJobRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new UpdateJobRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.batch.v1alpha.UpdateJobRequest
+                         * @static
+                         * @param {google.cloud.batch.v1alpha.IUpdateJobRequest=} [properties] Properties to set
+                         * @returns {google.cloud.batch.v1alpha.UpdateJobRequest} UpdateJobRequest instance
+                         */
+                        UpdateJobRequest.create = function create(properties) {
+                            return new UpdateJobRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateJobRequest message. Does not implicitly {@link google.cloud.batch.v1alpha.UpdateJobRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.batch.v1alpha.UpdateJobRequest
+                         * @static
+                         * @param {google.cloud.batch.v1alpha.IUpdateJobRequest} message UpdateJobRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateJobRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.job != null && Object.hasOwnProperty.call(message, "job"))
+                                $root.google.cloud.batch.v1alpha.Job.encode(message.job, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateJobRequest message, length delimited. Does not implicitly {@link google.cloud.batch.v1alpha.UpdateJobRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.batch.v1alpha.UpdateJobRequest
+                         * @static
+                         * @param {google.cloud.batch.v1alpha.IUpdateJobRequest} message UpdateJobRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateJobRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateJobRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.batch.v1alpha.UpdateJobRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.batch.v1alpha.UpdateJobRequest} UpdateJobRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateJobRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.batch.v1alpha.UpdateJobRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.job = $root.google.cloud.batch.v1alpha.Job.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateJobRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.batch.v1alpha.UpdateJobRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.batch.v1alpha.UpdateJobRequest} UpdateJobRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateJobRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateJobRequest message.
+                         * @function verify
+                         * @memberof google.cloud.batch.v1alpha.UpdateJobRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateJobRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.job != null && message.hasOwnProperty("job")) {
+                                var error = $root.google.cloud.batch.v1alpha.Job.verify(message.job);
+                                if (error)
+                                    return "job." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateJobRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.batch.v1alpha.UpdateJobRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.batch.v1alpha.UpdateJobRequest} UpdateJobRequest
+                         */
+                        UpdateJobRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.batch.v1alpha.UpdateJobRequest)
+                                return object;
+                            var message = new $root.google.cloud.batch.v1alpha.UpdateJobRequest();
+                            if (object.job != null) {
+                                if (typeof object.job !== "object")
+                                    throw TypeError(".google.cloud.batch.v1alpha.UpdateJobRequest.job: object expected");
+                                message.job = $root.google.cloud.batch.v1alpha.Job.fromObject(object.job);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.batch.v1alpha.UpdateJobRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateJobRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.batch.v1alpha.UpdateJobRequest
+                         * @static
+                         * @param {google.cloud.batch.v1alpha.UpdateJobRequest} message UpdateJobRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateJobRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.job = null;
+                                object.updateMask = null;
+                                object.requestId = "";
+                            }
+                            if (message.job != null && message.hasOwnProperty("job"))
+                                object.job = $root.google.cloud.batch.v1alpha.Job.toObject(message.job, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateJobRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.batch.v1alpha.UpdateJobRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateJobRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateJobRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.batch.v1alpha.UpdateJobRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateJobRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.batch.v1alpha.UpdateJobRequest";
+                        };
+    
+                        return UpdateJobRequest;
                     })();
     
                     v1alpha.ListJobsRequest = (function() {

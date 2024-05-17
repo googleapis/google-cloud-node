@@ -2840,14 +2840,826 @@
                         return OperationMetadata;
                     })();
     
+                    v1beta.SourceGcsBucket = (function() {
+    
+                        /**
+                         * Properties of a SourceGcsBucket.
+                         * @memberof google.cloud.parallelstore.v1beta
+                         * @interface ISourceGcsBucket
+                         * @property {string|null} [uri] SourceGcsBucket uri
+                         */
+    
+                        /**
+                         * Constructs a new SourceGcsBucket.
+                         * @memberof google.cloud.parallelstore.v1beta
+                         * @classdesc Represents a SourceGcsBucket.
+                         * @implements ISourceGcsBucket
+                         * @constructor
+                         * @param {google.cloud.parallelstore.v1beta.ISourceGcsBucket=} [properties] Properties to set
+                         */
+                        function SourceGcsBucket(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SourceGcsBucket uri.
+                         * @member {string} uri
+                         * @memberof google.cloud.parallelstore.v1beta.SourceGcsBucket
+                         * @instance
+                         */
+                        SourceGcsBucket.prototype.uri = "";
+    
+                        /**
+                         * Creates a new SourceGcsBucket instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.parallelstore.v1beta.SourceGcsBucket
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.ISourceGcsBucket=} [properties] Properties to set
+                         * @returns {google.cloud.parallelstore.v1beta.SourceGcsBucket} SourceGcsBucket instance
+                         */
+                        SourceGcsBucket.create = function create(properties) {
+                            return new SourceGcsBucket(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SourceGcsBucket message. Does not implicitly {@link google.cloud.parallelstore.v1beta.SourceGcsBucket.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.parallelstore.v1beta.SourceGcsBucket
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.ISourceGcsBucket} message SourceGcsBucket message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SourceGcsBucket.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SourceGcsBucket message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1beta.SourceGcsBucket.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.parallelstore.v1beta.SourceGcsBucket
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.ISourceGcsBucket} message SourceGcsBucket message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SourceGcsBucket.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SourceGcsBucket message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.parallelstore.v1beta.SourceGcsBucket
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.parallelstore.v1beta.SourceGcsBucket} SourceGcsBucket
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SourceGcsBucket.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1beta.SourceGcsBucket();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.uri = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SourceGcsBucket message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.parallelstore.v1beta.SourceGcsBucket
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.parallelstore.v1beta.SourceGcsBucket} SourceGcsBucket
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SourceGcsBucket.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SourceGcsBucket message.
+                         * @function verify
+                         * @memberof google.cloud.parallelstore.v1beta.SourceGcsBucket
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SourceGcsBucket.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SourceGcsBucket message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.parallelstore.v1beta.SourceGcsBucket
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.parallelstore.v1beta.SourceGcsBucket} SourceGcsBucket
+                         */
+                        SourceGcsBucket.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.parallelstore.v1beta.SourceGcsBucket)
+                                return object;
+                            var message = new $root.google.cloud.parallelstore.v1beta.SourceGcsBucket();
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SourceGcsBucket message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.parallelstore.v1beta.SourceGcsBucket
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.SourceGcsBucket} message SourceGcsBucket
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SourceGcsBucket.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.uri = "";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SourceGcsBucket to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.parallelstore.v1beta.SourceGcsBucket
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SourceGcsBucket.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SourceGcsBucket
+                         * @function getTypeUrl
+                         * @memberof google.cloud.parallelstore.v1beta.SourceGcsBucket
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SourceGcsBucket.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.parallelstore.v1beta.SourceGcsBucket";
+                        };
+    
+                        return SourceGcsBucket;
+                    })();
+    
+                    v1beta.DestinationGcsBucket = (function() {
+    
+                        /**
+                         * Properties of a DestinationGcsBucket.
+                         * @memberof google.cloud.parallelstore.v1beta
+                         * @interface IDestinationGcsBucket
+                         * @property {string|null} [uri] DestinationGcsBucket uri
+                         */
+    
+                        /**
+                         * Constructs a new DestinationGcsBucket.
+                         * @memberof google.cloud.parallelstore.v1beta
+                         * @classdesc Represents a DestinationGcsBucket.
+                         * @implements IDestinationGcsBucket
+                         * @constructor
+                         * @param {google.cloud.parallelstore.v1beta.IDestinationGcsBucket=} [properties] Properties to set
+                         */
+                        function DestinationGcsBucket(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DestinationGcsBucket uri.
+                         * @member {string} uri
+                         * @memberof google.cloud.parallelstore.v1beta.DestinationGcsBucket
+                         * @instance
+                         */
+                        DestinationGcsBucket.prototype.uri = "";
+    
+                        /**
+                         * Creates a new DestinationGcsBucket instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.parallelstore.v1beta.DestinationGcsBucket
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.IDestinationGcsBucket=} [properties] Properties to set
+                         * @returns {google.cloud.parallelstore.v1beta.DestinationGcsBucket} DestinationGcsBucket instance
+                         */
+                        DestinationGcsBucket.create = function create(properties) {
+                            return new DestinationGcsBucket(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DestinationGcsBucket message. Does not implicitly {@link google.cloud.parallelstore.v1beta.DestinationGcsBucket.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.parallelstore.v1beta.DestinationGcsBucket
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.IDestinationGcsBucket} message DestinationGcsBucket message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DestinationGcsBucket.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DestinationGcsBucket message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1beta.DestinationGcsBucket.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.parallelstore.v1beta.DestinationGcsBucket
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.IDestinationGcsBucket} message DestinationGcsBucket message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DestinationGcsBucket.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DestinationGcsBucket message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.parallelstore.v1beta.DestinationGcsBucket
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.parallelstore.v1beta.DestinationGcsBucket} DestinationGcsBucket
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DestinationGcsBucket.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1beta.DestinationGcsBucket();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.uri = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DestinationGcsBucket message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.parallelstore.v1beta.DestinationGcsBucket
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.parallelstore.v1beta.DestinationGcsBucket} DestinationGcsBucket
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DestinationGcsBucket.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DestinationGcsBucket message.
+                         * @function verify
+                         * @memberof google.cloud.parallelstore.v1beta.DestinationGcsBucket
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DestinationGcsBucket.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DestinationGcsBucket message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.parallelstore.v1beta.DestinationGcsBucket
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.parallelstore.v1beta.DestinationGcsBucket} DestinationGcsBucket
+                         */
+                        DestinationGcsBucket.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.parallelstore.v1beta.DestinationGcsBucket)
+                                return object;
+                            var message = new $root.google.cloud.parallelstore.v1beta.DestinationGcsBucket();
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DestinationGcsBucket message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.parallelstore.v1beta.DestinationGcsBucket
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.DestinationGcsBucket} message DestinationGcsBucket
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DestinationGcsBucket.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.uri = "";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DestinationGcsBucket to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.parallelstore.v1beta.DestinationGcsBucket
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DestinationGcsBucket.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DestinationGcsBucket
+                         * @function getTypeUrl
+                         * @memberof google.cloud.parallelstore.v1beta.DestinationGcsBucket
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DestinationGcsBucket.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.parallelstore.v1beta.DestinationGcsBucket";
+                        };
+    
+                        return DestinationGcsBucket;
+                    })();
+    
+                    v1beta.SourceParallelstore = (function() {
+    
+                        /**
+                         * Properties of a SourceParallelstore.
+                         * @memberof google.cloud.parallelstore.v1beta
+                         * @interface ISourceParallelstore
+                         * @property {string|null} [path] SourceParallelstore path
+                         */
+    
+                        /**
+                         * Constructs a new SourceParallelstore.
+                         * @memberof google.cloud.parallelstore.v1beta
+                         * @classdesc Represents a SourceParallelstore.
+                         * @implements ISourceParallelstore
+                         * @constructor
+                         * @param {google.cloud.parallelstore.v1beta.ISourceParallelstore=} [properties] Properties to set
+                         */
+                        function SourceParallelstore(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SourceParallelstore path.
+                         * @member {string} path
+                         * @memberof google.cloud.parallelstore.v1beta.SourceParallelstore
+                         * @instance
+                         */
+                        SourceParallelstore.prototype.path = "";
+    
+                        /**
+                         * Creates a new SourceParallelstore instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.parallelstore.v1beta.SourceParallelstore
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.ISourceParallelstore=} [properties] Properties to set
+                         * @returns {google.cloud.parallelstore.v1beta.SourceParallelstore} SourceParallelstore instance
+                         */
+                        SourceParallelstore.create = function create(properties) {
+                            return new SourceParallelstore(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SourceParallelstore message. Does not implicitly {@link google.cloud.parallelstore.v1beta.SourceParallelstore.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.parallelstore.v1beta.SourceParallelstore
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.ISourceParallelstore} message SourceParallelstore message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SourceParallelstore.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.path != null && Object.hasOwnProperty.call(message, "path"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.path);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SourceParallelstore message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1beta.SourceParallelstore.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.parallelstore.v1beta.SourceParallelstore
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.ISourceParallelstore} message SourceParallelstore message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SourceParallelstore.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SourceParallelstore message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.parallelstore.v1beta.SourceParallelstore
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.parallelstore.v1beta.SourceParallelstore} SourceParallelstore
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SourceParallelstore.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1beta.SourceParallelstore();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.path = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SourceParallelstore message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.parallelstore.v1beta.SourceParallelstore
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.parallelstore.v1beta.SourceParallelstore} SourceParallelstore
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SourceParallelstore.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SourceParallelstore message.
+                         * @function verify
+                         * @memberof google.cloud.parallelstore.v1beta.SourceParallelstore
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SourceParallelstore.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.path != null && message.hasOwnProperty("path"))
+                                if (!$util.isString(message.path))
+                                    return "path: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SourceParallelstore message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.parallelstore.v1beta.SourceParallelstore
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.parallelstore.v1beta.SourceParallelstore} SourceParallelstore
+                         */
+                        SourceParallelstore.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.parallelstore.v1beta.SourceParallelstore)
+                                return object;
+                            var message = new $root.google.cloud.parallelstore.v1beta.SourceParallelstore();
+                            if (object.path != null)
+                                message.path = String(object.path);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SourceParallelstore message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.parallelstore.v1beta.SourceParallelstore
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.SourceParallelstore} message SourceParallelstore
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SourceParallelstore.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.path = "";
+                            if (message.path != null && message.hasOwnProperty("path"))
+                                object.path = message.path;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SourceParallelstore to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.parallelstore.v1beta.SourceParallelstore
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SourceParallelstore.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SourceParallelstore
+                         * @function getTypeUrl
+                         * @memberof google.cloud.parallelstore.v1beta.SourceParallelstore
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SourceParallelstore.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.parallelstore.v1beta.SourceParallelstore";
+                        };
+    
+                        return SourceParallelstore;
+                    })();
+    
+                    v1beta.DestinationParallelstore = (function() {
+    
+                        /**
+                         * Properties of a DestinationParallelstore.
+                         * @memberof google.cloud.parallelstore.v1beta
+                         * @interface IDestinationParallelstore
+                         * @property {string|null} [path] DestinationParallelstore path
+                         */
+    
+                        /**
+                         * Constructs a new DestinationParallelstore.
+                         * @memberof google.cloud.parallelstore.v1beta
+                         * @classdesc Represents a DestinationParallelstore.
+                         * @implements IDestinationParallelstore
+                         * @constructor
+                         * @param {google.cloud.parallelstore.v1beta.IDestinationParallelstore=} [properties] Properties to set
+                         */
+                        function DestinationParallelstore(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DestinationParallelstore path.
+                         * @member {string} path
+                         * @memberof google.cloud.parallelstore.v1beta.DestinationParallelstore
+                         * @instance
+                         */
+                        DestinationParallelstore.prototype.path = "";
+    
+                        /**
+                         * Creates a new DestinationParallelstore instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.parallelstore.v1beta.DestinationParallelstore
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.IDestinationParallelstore=} [properties] Properties to set
+                         * @returns {google.cloud.parallelstore.v1beta.DestinationParallelstore} DestinationParallelstore instance
+                         */
+                        DestinationParallelstore.create = function create(properties) {
+                            return new DestinationParallelstore(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DestinationParallelstore message. Does not implicitly {@link google.cloud.parallelstore.v1beta.DestinationParallelstore.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.parallelstore.v1beta.DestinationParallelstore
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.IDestinationParallelstore} message DestinationParallelstore message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DestinationParallelstore.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.path != null && Object.hasOwnProperty.call(message, "path"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.path);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DestinationParallelstore message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1beta.DestinationParallelstore.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.parallelstore.v1beta.DestinationParallelstore
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.IDestinationParallelstore} message DestinationParallelstore message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DestinationParallelstore.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DestinationParallelstore message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.parallelstore.v1beta.DestinationParallelstore
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.parallelstore.v1beta.DestinationParallelstore} DestinationParallelstore
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DestinationParallelstore.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1beta.DestinationParallelstore();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.path = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DestinationParallelstore message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.parallelstore.v1beta.DestinationParallelstore
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.parallelstore.v1beta.DestinationParallelstore} DestinationParallelstore
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DestinationParallelstore.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DestinationParallelstore message.
+                         * @function verify
+                         * @memberof google.cloud.parallelstore.v1beta.DestinationParallelstore
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DestinationParallelstore.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.path != null && message.hasOwnProperty("path"))
+                                if (!$util.isString(message.path))
+                                    return "path: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DestinationParallelstore message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.parallelstore.v1beta.DestinationParallelstore
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.parallelstore.v1beta.DestinationParallelstore} DestinationParallelstore
+                         */
+                        DestinationParallelstore.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.parallelstore.v1beta.DestinationParallelstore)
+                                return object;
+                            var message = new $root.google.cloud.parallelstore.v1beta.DestinationParallelstore();
+                            if (object.path != null)
+                                message.path = String(object.path);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DestinationParallelstore message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.parallelstore.v1beta.DestinationParallelstore
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.DestinationParallelstore} message DestinationParallelstore
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DestinationParallelstore.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.path = "";
+                            if (message.path != null && message.hasOwnProperty("path"))
+                                object.path = message.path;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DestinationParallelstore to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.parallelstore.v1beta.DestinationParallelstore
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DestinationParallelstore.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DestinationParallelstore
+                         * @function getTypeUrl
+                         * @memberof google.cloud.parallelstore.v1beta.DestinationParallelstore
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DestinationParallelstore.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.parallelstore.v1beta.DestinationParallelstore";
+                        };
+    
+                        return DestinationParallelstore;
+                    })();
+    
                     v1beta.ImportDataRequest = (function() {
     
                         /**
                          * Properties of an ImportDataRequest.
                          * @memberof google.cloud.parallelstore.v1beta
                          * @interface IImportDataRequest
-                         * @property {string|null} [sourceGcsUri] ImportDataRequest sourceGcsUri
-                         * @property {string|null} [destinationPath] ImportDataRequest destinationPath
+                         * @property {google.cloud.parallelstore.v1beta.ISourceGcsBucket|null} [sourceGcsBucket] ImportDataRequest sourceGcsBucket
+                         * @property {google.cloud.parallelstore.v1beta.IDestinationParallelstore|null} [destinationParallelstore] ImportDataRequest destinationParallelstore
                          * @property {string|null} [name] ImportDataRequest name
                          * @property {string|null} [requestId] ImportDataRequest requestId
                          */
@@ -2868,20 +3680,20 @@
                         }
     
                         /**
-                         * ImportDataRequest sourceGcsUri.
-                         * @member {string|null|undefined} sourceGcsUri
+                         * ImportDataRequest sourceGcsBucket.
+                         * @member {google.cloud.parallelstore.v1beta.ISourceGcsBucket|null|undefined} sourceGcsBucket
                          * @memberof google.cloud.parallelstore.v1beta.ImportDataRequest
                          * @instance
                          */
-                        ImportDataRequest.prototype.sourceGcsUri = null;
+                        ImportDataRequest.prototype.sourceGcsBucket = null;
     
                         /**
-                         * ImportDataRequest destinationPath.
-                         * @member {string|null|undefined} destinationPath
+                         * ImportDataRequest destinationParallelstore.
+                         * @member {google.cloud.parallelstore.v1beta.IDestinationParallelstore|null|undefined} destinationParallelstore
                          * @memberof google.cloud.parallelstore.v1beta.ImportDataRequest
                          * @instance
                          */
-                        ImportDataRequest.prototype.destinationPath = null;
+                        ImportDataRequest.prototype.destinationParallelstore = null;
     
                         /**
                          * ImportDataRequest name.
@@ -2904,23 +3716,23 @@
     
                         /**
                          * ImportDataRequest source.
-                         * @member {"sourceGcsUri"|undefined} source
+                         * @member {"sourceGcsBucket"|undefined} source
                          * @memberof google.cloud.parallelstore.v1beta.ImportDataRequest
                          * @instance
                          */
                         Object.defineProperty(ImportDataRequest.prototype, "source", {
-                            get: $util.oneOfGetter($oneOfFields = ["sourceGcsUri"]),
+                            get: $util.oneOfGetter($oneOfFields = ["sourceGcsBucket"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
                         /**
                          * ImportDataRequest destination.
-                         * @member {"destinationPath"|undefined} destination
+                         * @member {"destinationParallelstore"|undefined} destination
                          * @memberof google.cloud.parallelstore.v1beta.ImportDataRequest
                          * @instance
                          */
                         Object.defineProperty(ImportDataRequest.prototype, "destination", {
-                            get: $util.oneOfGetter($oneOfFields = ["destinationPath"]),
+                            get: $util.oneOfGetter($oneOfFields = ["destinationParallelstore"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -2950,10 +3762,10 @@
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                            if (message.sourceGcsUri != null && Object.hasOwnProperty.call(message, "sourceGcsUri"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.sourceGcsUri);
-                            if (message.destinationPath != null && Object.hasOwnProperty.call(message, "destinationPath"))
-                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.destinationPath);
+                            if (message.sourceGcsBucket != null && Object.hasOwnProperty.call(message, "sourceGcsBucket"))
+                                $root.google.cloud.parallelstore.v1beta.SourceGcsBucket.encode(message.sourceGcsBucket, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.destinationParallelstore != null && Object.hasOwnProperty.call(message, "destinationParallelstore"))
+                                $root.google.cloud.parallelstore.v1beta.DestinationParallelstore.encode(message.destinationParallelstore, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
                             return writer;
@@ -2991,11 +3803,11 @@
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
                                 case 2: {
-                                        message.sourceGcsUri = reader.string();
+                                        message.sourceGcsBucket = $root.google.cloud.parallelstore.v1beta.SourceGcsBucket.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 3: {
-                                        message.destinationPath = reader.string();
+                                        message.destinationParallelstore = $root.google.cloud.parallelstore.v1beta.DestinationParallelstore.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 1: {
@@ -3042,15 +3854,21 @@
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
                             var properties = {};
-                            if (message.sourceGcsUri != null && message.hasOwnProperty("sourceGcsUri")) {
+                            if (message.sourceGcsBucket != null && message.hasOwnProperty("sourceGcsBucket")) {
                                 properties.source = 1;
-                                if (!$util.isString(message.sourceGcsUri))
-                                    return "sourceGcsUri: string expected";
+                                {
+                                    var error = $root.google.cloud.parallelstore.v1beta.SourceGcsBucket.verify(message.sourceGcsBucket);
+                                    if (error)
+                                        return "sourceGcsBucket." + error;
+                                }
                             }
-                            if (message.destinationPath != null && message.hasOwnProperty("destinationPath")) {
+                            if (message.destinationParallelstore != null && message.hasOwnProperty("destinationParallelstore")) {
                                 properties.destination = 1;
-                                if (!$util.isString(message.destinationPath))
-                                    return "destinationPath: string expected";
+                                {
+                                    var error = $root.google.cloud.parallelstore.v1beta.DestinationParallelstore.verify(message.destinationParallelstore);
+                                    if (error)
+                                        return "destinationParallelstore." + error;
+                                }
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
@@ -3073,10 +3891,16 @@
                             if (object instanceof $root.google.cloud.parallelstore.v1beta.ImportDataRequest)
                                 return object;
                             var message = new $root.google.cloud.parallelstore.v1beta.ImportDataRequest();
-                            if (object.sourceGcsUri != null)
-                                message.sourceGcsUri = String(object.sourceGcsUri);
-                            if (object.destinationPath != null)
-                                message.destinationPath = String(object.destinationPath);
+                            if (object.sourceGcsBucket != null) {
+                                if (typeof object.sourceGcsBucket !== "object")
+                                    throw TypeError(".google.cloud.parallelstore.v1beta.ImportDataRequest.sourceGcsBucket: object expected");
+                                message.sourceGcsBucket = $root.google.cloud.parallelstore.v1beta.SourceGcsBucket.fromObject(object.sourceGcsBucket);
+                            }
+                            if (object.destinationParallelstore != null) {
+                                if (typeof object.destinationParallelstore !== "object")
+                                    throw TypeError(".google.cloud.parallelstore.v1beta.ImportDataRequest.destinationParallelstore: object expected");
+                                message.destinationParallelstore = $root.google.cloud.parallelstore.v1beta.DestinationParallelstore.fromObject(object.destinationParallelstore);
+                            }
                             if (object.name != null)
                                 message.name = String(object.name);
                             if (object.requestId != null)
@@ -3103,15 +3927,15 @@
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
-                            if (message.sourceGcsUri != null && message.hasOwnProperty("sourceGcsUri")) {
-                                object.sourceGcsUri = message.sourceGcsUri;
+                            if (message.sourceGcsBucket != null && message.hasOwnProperty("sourceGcsBucket")) {
+                                object.sourceGcsBucket = $root.google.cloud.parallelstore.v1beta.SourceGcsBucket.toObject(message.sourceGcsBucket, options);
                                 if (options.oneofs)
-                                    object.source = "sourceGcsUri";
+                                    object.source = "sourceGcsBucket";
                             }
-                            if (message.destinationPath != null && message.hasOwnProperty("destinationPath")) {
-                                object.destinationPath = message.destinationPath;
+                            if (message.destinationParallelstore != null && message.hasOwnProperty("destinationParallelstore")) {
+                                object.destinationParallelstore = $root.google.cloud.parallelstore.v1beta.DestinationParallelstore.toObject(message.destinationParallelstore, options);
                                 if (options.oneofs)
-                                    object.destination = "destinationPath";
+                                    object.destination = "destinationParallelstore";
                             }
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 object.requestId = message.requestId;
@@ -3153,8 +3977,8 @@
                          * Properties of an ExportDataRequest.
                          * @memberof google.cloud.parallelstore.v1beta
                          * @interface IExportDataRequest
-                         * @property {string|null} [sourcePath] ExportDataRequest sourcePath
-                         * @property {string|null} [destinationGcsUri] ExportDataRequest destinationGcsUri
+                         * @property {google.cloud.parallelstore.v1beta.ISourceParallelstore|null} [sourceParallelstore] ExportDataRequest sourceParallelstore
+                         * @property {google.cloud.parallelstore.v1beta.IDestinationGcsBucket|null} [destinationGcsBucket] ExportDataRequest destinationGcsBucket
                          * @property {string|null} [name] ExportDataRequest name
                          * @property {string|null} [requestId] ExportDataRequest requestId
                          */
@@ -3175,20 +3999,20 @@
                         }
     
                         /**
-                         * ExportDataRequest sourcePath.
-                         * @member {string|null|undefined} sourcePath
+                         * ExportDataRequest sourceParallelstore.
+                         * @member {google.cloud.parallelstore.v1beta.ISourceParallelstore|null|undefined} sourceParallelstore
                          * @memberof google.cloud.parallelstore.v1beta.ExportDataRequest
                          * @instance
                          */
-                        ExportDataRequest.prototype.sourcePath = null;
+                        ExportDataRequest.prototype.sourceParallelstore = null;
     
                         /**
-                         * ExportDataRequest destinationGcsUri.
-                         * @member {string|null|undefined} destinationGcsUri
+                         * ExportDataRequest destinationGcsBucket.
+                         * @member {google.cloud.parallelstore.v1beta.IDestinationGcsBucket|null|undefined} destinationGcsBucket
                          * @memberof google.cloud.parallelstore.v1beta.ExportDataRequest
                          * @instance
                          */
-                        ExportDataRequest.prototype.destinationGcsUri = null;
+                        ExportDataRequest.prototype.destinationGcsBucket = null;
     
                         /**
                          * ExportDataRequest name.
@@ -3211,23 +4035,23 @@
     
                         /**
                          * ExportDataRequest source.
-                         * @member {"sourcePath"|undefined} source
+                         * @member {"sourceParallelstore"|undefined} source
                          * @memberof google.cloud.parallelstore.v1beta.ExportDataRequest
                          * @instance
                          */
                         Object.defineProperty(ExportDataRequest.prototype, "source", {
-                            get: $util.oneOfGetter($oneOfFields = ["sourcePath"]),
+                            get: $util.oneOfGetter($oneOfFields = ["sourceParallelstore"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
                         /**
                          * ExportDataRequest destination.
-                         * @member {"destinationGcsUri"|undefined} destination
+                         * @member {"destinationGcsBucket"|undefined} destination
                          * @memberof google.cloud.parallelstore.v1beta.ExportDataRequest
                          * @instance
                          */
                         Object.defineProperty(ExportDataRequest.prototype, "destination", {
-                            get: $util.oneOfGetter($oneOfFields = ["destinationGcsUri"]),
+                            get: $util.oneOfGetter($oneOfFields = ["destinationGcsBucket"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -3257,10 +4081,10 @@
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                            if (message.sourcePath != null && Object.hasOwnProperty.call(message, "sourcePath"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.sourcePath);
-                            if (message.destinationGcsUri != null && Object.hasOwnProperty.call(message, "destinationGcsUri"))
-                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.destinationGcsUri);
+                            if (message.sourceParallelstore != null && Object.hasOwnProperty.call(message, "sourceParallelstore"))
+                                $root.google.cloud.parallelstore.v1beta.SourceParallelstore.encode(message.sourceParallelstore, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.destinationGcsBucket != null && Object.hasOwnProperty.call(message, "destinationGcsBucket"))
+                                $root.google.cloud.parallelstore.v1beta.DestinationGcsBucket.encode(message.destinationGcsBucket, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
                             return writer;
@@ -3298,11 +4122,11 @@
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
                                 case 2: {
-                                        message.sourcePath = reader.string();
+                                        message.sourceParallelstore = $root.google.cloud.parallelstore.v1beta.SourceParallelstore.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 3: {
-                                        message.destinationGcsUri = reader.string();
+                                        message.destinationGcsBucket = $root.google.cloud.parallelstore.v1beta.DestinationGcsBucket.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 1: {
@@ -3349,15 +4173,21 @@
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
                             var properties = {};
-                            if (message.sourcePath != null && message.hasOwnProperty("sourcePath")) {
+                            if (message.sourceParallelstore != null && message.hasOwnProperty("sourceParallelstore")) {
                                 properties.source = 1;
-                                if (!$util.isString(message.sourcePath))
-                                    return "sourcePath: string expected";
+                                {
+                                    var error = $root.google.cloud.parallelstore.v1beta.SourceParallelstore.verify(message.sourceParallelstore);
+                                    if (error)
+                                        return "sourceParallelstore." + error;
+                                }
                             }
-                            if (message.destinationGcsUri != null && message.hasOwnProperty("destinationGcsUri")) {
+                            if (message.destinationGcsBucket != null && message.hasOwnProperty("destinationGcsBucket")) {
                                 properties.destination = 1;
-                                if (!$util.isString(message.destinationGcsUri))
-                                    return "destinationGcsUri: string expected";
+                                {
+                                    var error = $root.google.cloud.parallelstore.v1beta.DestinationGcsBucket.verify(message.destinationGcsBucket);
+                                    if (error)
+                                        return "destinationGcsBucket." + error;
+                                }
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
@@ -3380,10 +4210,16 @@
                             if (object instanceof $root.google.cloud.parallelstore.v1beta.ExportDataRequest)
                                 return object;
                             var message = new $root.google.cloud.parallelstore.v1beta.ExportDataRequest();
-                            if (object.sourcePath != null)
-                                message.sourcePath = String(object.sourcePath);
-                            if (object.destinationGcsUri != null)
-                                message.destinationGcsUri = String(object.destinationGcsUri);
+                            if (object.sourceParallelstore != null) {
+                                if (typeof object.sourceParallelstore !== "object")
+                                    throw TypeError(".google.cloud.parallelstore.v1beta.ExportDataRequest.sourceParallelstore: object expected");
+                                message.sourceParallelstore = $root.google.cloud.parallelstore.v1beta.SourceParallelstore.fromObject(object.sourceParallelstore);
+                            }
+                            if (object.destinationGcsBucket != null) {
+                                if (typeof object.destinationGcsBucket !== "object")
+                                    throw TypeError(".google.cloud.parallelstore.v1beta.ExportDataRequest.destinationGcsBucket: object expected");
+                                message.destinationGcsBucket = $root.google.cloud.parallelstore.v1beta.DestinationGcsBucket.fromObject(object.destinationGcsBucket);
+                            }
                             if (object.name != null)
                                 message.name = String(object.name);
                             if (object.requestId != null)
@@ -3410,15 +4246,15 @@
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
-                            if (message.sourcePath != null && message.hasOwnProperty("sourcePath")) {
-                                object.sourcePath = message.sourcePath;
+                            if (message.sourceParallelstore != null && message.hasOwnProperty("sourceParallelstore")) {
+                                object.sourceParallelstore = $root.google.cloud.parallelstore.v1beta.SourceParallelstore.toObject(message.sourceParallelstore, options);
                                 if (options.oneofs)
-                                    object.source = "sourcePath";
+                                    object.source = "sourceParallelstore";
                             }
-                            if (message.destinationGcsUri != null && message.hasOwnProperty("destinationGcsUri")) {
-                                object.destinationGcsUri = message.destinationGcsUri;
+                            if (message.destinationGcsBucket != null && message.hasOwnProperty("destinationGcsBucket")) {
+                                object.destinationGcsBucket = $root.google.cloud.parallelstore.v1beta.DestinationGcsBucket.toObject(message.destinationGcsBucket, options);
                                 if (options.oneofs)
-                                    object.destination = "destinationGcsUri";
+                                    object.destination = "destinationGcsBucket";
                             }
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 object.requestId = message.requestId;
@@ -3636,6 +4472,13 @@
                          * @memberof google.cloud.parallelstore.v1beta
                          * @interface IImportDataMetadata
                          * @property {google.cloud.parallelstore.v1beta.ITransferOperationMetadata|null} [operationMetadata] ImportDataMetadata operationMetadata
+                         * @property {google.protobuf.ITimestamp|null} [createTime] ImportDataMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] ImportDataMetadata endTime
+                         * @property {string|null} [target] ImportDataMetadata target
+                         * @property {string|null} [verb] ImportDataMetadata verb
+                         * @property {string|null} [statusMessage] ImportDataMetadata statusMessage
+                         * @property {boolean|null} [requestedCancellation] ImportDataMetadata requestedCancellation
+                         * @property {string|null} [apiVersion] ImportDataMetadata apiVersion
                          */
     
                         /**
@@ -3660,6 +4503,62 @@
                          * @instance
                          */
                         ImportDataMetadata.prototype.operationMetadata = null;
+    
+                        /**
+                         * ImportDataMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.parallelstore.v1beta.ImportDataMetadata
+                         * @instance
+                         */
+                        ImportDataMetadata.prototype.createTime = null;
+    
+                        /**
+                         * ImportDataMetadata endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.parallelstore.v1beta.ImportDataMetadata
+                         * @instance
+                         */
+                        ImportDataMetadata.prototype.endTime = null;
+    
+                        /**
+                         * ImportDataMetadata target.
+                         * @member {string} target
+                         * @memberof google.cloud.parallelstore.v1beta.ImportDataMetadata
+                         * @instance
+                         */
+                        ImportDataMetadata.prototype.target = "";
+    
+                        /**
+                         * ImportDataMetadata verb.
+                         * @member {string} verb
+                         * @memberof google.cloud.parallelstore.v1beta.ImportDataMetadata
+                         * @instance
+                         */
+                        ImportDataMetadata.prototype.verb = "";
+    
+                        /**
+                         * ImportDataMetadata statusMessage.
+                         * @member {string} statusMessage
+                         * @memberof google.cloud.parallelstore.v1beta.ImportDataMetadata
+                         * @instance
+                         */
+                        ImportDataMetadata.prototype.statusMessage = "";
+    
+                        /**
+                         * ImportDataMetadata requestedCancellation.
+                         * @member {boolean} requestedCancellation
+                         * @memberof google.cloud.parallelstore.v1beta.ImportDataMetadata
+                         * @instance
+                         */
+                        ImportDataMetadata.prototype.requestedCancellation = false;
+    
+                        /**
+                         * ImportDataMetadata apiVersion.
+                         * @member {string} apiVersion
+                         * @memberof google.cloud.parallelstore.v1beta.ImportDataMetadata
+                         * @instance
+                         */
+                        ImportDataMetadata.prototype.apiVersion = "";
     
                         /**
                          * Creates a new ImportDataMetadata instance using the specified properties.
@@ -3687,6 +4586,20 @@
                                 writer = $Writer.create();
                             if (message.operationMetadata != null && Object.hasOwnProperty.call(message, "operationMetadata"))
                                 $root.google.cloud.parallelstore.v1beta.TransferOperationMetadata.encode(message.operationMetadata, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.target != null && Object.hasOwnProperty.call(message, "target"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.target);
+                            if (message.verb != null && Object.hasOwnProperty.call(message, "verb"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.verb);
+                            if (message.statusMessage != null && Object.hasOwnProperty.call(message, "statusMessage"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.statusMessage);
+                            if (message.requestedCancellation != null && Object.hasOwnProperty.call(message, "requestedCancellation"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.requestedCancellation);
+                            if (message.apiVersion != null && Object.hasOwnProperty.call(message, "apiVersion"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.apiVersion);
                             return writer;
                         };
     
@@ -3723,6 +4636,34 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.operationMetadata = $root.google.cloud.parallelstore.v1beta.TransferOperationMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.target = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.verb = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.statusMessage = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.requestedCancellation = reader.bool();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.apiVersion = reader.string();
                                         break;
                                     }
                                 default:
@@ -3765,6 +4706,31 @@
                                 if (error)
                                     return "operationMetadata." + error;
                             }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            if (message.target != null && message.hasOwnProperty("target"))
+                                if (!$util.isString(message.target))
+                                    return "target: string expected";
+                            if (message.verb != null && message.hasOwnProperty("verb"))
+                                if (!$util.isString(message.verb))
+                                    return "verb: string expected";
+                            if (message.statusMessage != null && message.hasOwnProperty("statusMessage"))
+                                if (!$util.isString(message.statusMessage))
+                                    return "statusMessage: string expected";
+                            if (message.requestedCancellation != null && message.hasOwnProperty("requestedCancellation"))
+                                if (typeof message.requestedCancellation !== "boolean")
+                                    return "requestedCancellation: boolean expected";
+                            if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
+                                if (!$util.isString(message.apiVersion))
+                                    return "apiVersion: string expected";
                             return null;
                         };
     
@@ -3785,6 +4751,26 @@
                                     throw TypeError(".google.cloud.parallelstore.v1beta.ImportDataMetadata.operationMetadata: object expected");
                                 message.operationMetadata = $root.google.cloud.parallelstore.v1beta.TransferOperationMetadata.fromObject(object.operationMetadata);
                             }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.parallelstore.v1beta.ImportDataMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.parallelstore.v1beta.ImportDataMetadata.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            if (object.target != null)
+                                message.target = String(object.target);
+                            if (object.verb != null)
+                                message.verb = String(object.verb);
+                            if (object.statusMessage != null)
+                                message.statusMessage = String(object.statusMessage);
+                            if (object.requestedCancellation != null)
+                                message.requestedCancellation = Boolean(object.requestedCancellation);
+                            if (object.apiVersion != null)
+                                message.apiVersion = String(object.apiVersion);
                             return message;
                         };
     
@@ -3801,10 +4787,32 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.operationMetadata = null;
+                                object.createTime = null;
+                                object.endTime = null;
+                                object.target = "";
+                                object.verb = "";
+                                object.statusMessage = "";
+                                object.requestedCancellation = false;
+                                object.apiVersion = "";
+                            }
                             if (message.operationMetadata != null && message.hasOwnProperty("operationMetadata"))
                                 object.operationMetadata = $root.google.cloud.parallelstore.v1beta.TransferOperationMetadata.toObject(message.operationMetadata, options);
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.target != null && message.hasOwnProperty("target"))
+                                object.target = message.target;
+                            if (message.verb != null && message.hasOwnProperty("verb"))
+                                object.verb = message.verb;
+                            if (message.statusMessage != null && message.hasOwnProperty("statusMessage"))
+                                object.statusMessage = message.statusMessage;
+                            if (message.requestedCancellation != null && message.hasOwnProperty("requestedCancellation"))
+                                object.requestedCancellation = message.requestedCancellation;
+                            if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
+                                object.apiVersion = message.apiVersion;
                             return object;
                         };
     
@@ -4019,6 +5027,13 @@
                          * @memberof google.cloud.parallelstore.v1beta
                          * @interface IExportDataMetadata
                          * @property {google.cloud.parallelstore.v1beta.ITransferOperationMetadata|null} [operationMetadata] ExportDataMetadata operationMetadata
+                         * @property {google.protobuf.ITimestamp|null} [createTime] ExportDataMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] ExportDataMetadata endTime
+                         * @property {string|null} [target] ExportDataMetadata target
+                         * @property {string|null} [verb] ExportDataMetadata verb
+                         * @property {string|null} [statusMessage] ExportDataMetadata statusMessage
+                         * @property {boolean|null} [requestedCancellation] ExportDataMetadata requestedCancellation
+                         * @property {string|null} [apiVersion] ExportDataMetadata apiVersion
                          */
     
                         /**
@@ -4043,6 +5058,62 @@
                          * @instance
                          */
                         ExportDataMetadata.prototype.operationMetadata = null;
+    
+                        /**
+                         * ExportDataMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.parallelstore.v1beta.ExportDataMetadata
+                         * @instance
+                         */
+                        ExportDataMetadata.prototype.createTime = null;
+    
+                        /**
+                         * ExportDataMetadata endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.parallelstore.v1beta.ExportDataMetadata
+                         * @instance
+                         */
+                        ExportDataMetadata.prototype.endTime = null;
+    
+                        /**
+                         * ExportDataMetadata target.
+                         * @member {string} target
+                         * @memberof google.cloud.parallelstore.v1beta.ExportDataMetadata
+                         * @instance
+                         */
+                        ExportDataMetadata.prototype.target = "";
+    
+                        /**
+                         * ExportDataMetadata verb.
+                         * @member {string} verb
+                         * @memberof google.cloud.parallelstore.v1beta.ExportDataMetadata
+                         * @instance
+                         */
+                        ExportDataMetadata.prototype.verb = "";
+    
+                        /**
+                         * ExportDataMetadata statusMessage.
+                         * @member {string} statusMessage
+                         * @memberof google.cloud.parallelstore.v1beta.ExportDataMetadata
+                         * @instance
+                         */
+                        ExportDataMetadata.prototype.statusMessage = "";
+    
+                        /**
+                         * ExportDataMetadata requestedCancellation.
+                         * @member {boolean} requestedCancellation
+                         * @memberof google.cloud.parallelstore.v1beta.ExportDataMetadata
+                         * @instance
+                         */
+                        ExportDataMetadata.prototype.requestedCancellation = false;
+    
+                        /**
+                         * ExportDataMetadata apiVersion.
+                         * @member {string} apiVersion
+                         * @memberof google.cloud.parallelstore.v1beta.ExportDataMetadata
+                         * @instance
+                         */
+                        ExportDataMetadata.prototype.apiVersion = "";
     
                         /**
                          * Creates a new ExportDataMetadata instance using the specified properties.
@@ -4070,6 +5141,20 @@
                                 writer = $Writer.create();
                             if (message.operationMetadata != null && Object.hasOwnProperty.call(message, "operationMetadata"))
                                 $root.google.cloud.parallelstore.v1beta.TransferOperationMetadata.encode(message.operationMetadata, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.target != null && Object.hasOwnProperty.call(message, "target"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.target);
+                            if (message.verb != null && Object.hasOwnProperty.call(message, "verb"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.verb);
+                            if (message.statusMessage != null && Object.hasOwnProperty.call(message, "statusMessage"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.statusMessage);
+                            if (message.requestedCancellation != null && Object.hasOwnProperty.call(message, "requestedCancellation"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.requestedCancellation);
+                            if (message.apiVersion != null && Object.hasOwnProperty.call(message, "apiVersion"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.apiVersion);
                             return writer;
                         };
     
@@ -4106,6 +5191,34 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.operationMetadata = $root.google.cloud.parallelstore.v1beta.TransferOperationMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.target = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.verb = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.statusMessage = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.requestedCancellation = reader.bool();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.apiVersion = reader.string();
                                         break;
                                     }
                                 default:
@@ -4148,6 +5261,31 @@
                                 if (error)
                                     return "operationMetadata." + error;
                             }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            if (message.target != null && message.hasOwnProperty("target"))
+                                if (!$util.isString(message.target))
+                                    return "target: string expected";
+                            if (message.verb != null && message.hasOwnProperty("verb"))
+                                if (!$util.isString(message.verb))
+                                    return "verb: string expected";
+                            if (message.statusMessage != null && message.hasOwnProperty("statusMessage"))
+                                if (!$util.isString(message.statusMessage))
+                                    return "statusMessage: string expected";
+                            if (message.requestedCancellation != null && message.hasOwnProperty("requestedCancellation"))
+                                if (typeof message.requestedCancellation !== "boolean")
+                                    return "requestedCancellation: boolean expected";
+                            if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
+                                if (!$util.isString(message.apiVersion))
+                                    return "apiVersion: string expected";
                             return null;
                         };
     
@@ -4168,6 +5306,26 @@
                                     throw TypeError(".google.cloud.parallelstore.v1beta.ExportDataMetadata.operationMetadata: object expected");
                                 message.operationMetadata = $root.google.cloud.parallelstore.v1beta.TransferOperationMetadata.fromObject(object.operationMetadata);
                             }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.parallelstore.v1beta.ExportDataMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.parallelstore.v1beta.ExportDataMetadata.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            if (object.target != null)
+                                message.target = String(object.target);
+                            if (object.verb != null)
+                                message.verb = String(object.verb);
+                            if (object.statusMessage != null)
+                                message.statusMessage = String(object.statusMessage);
+                            if (object.requestedCancellation != null)
+                                message.requestedCancellation = Boolean(object.requestedCancellation);
+                            if (object.apiVersion != null)
+                                message.apiVersion = String(object.apiVersion);
                             return message;
                         };
     
@@ -4184,10 +5342,32 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.operationMetadata = null;
+                                object.createTime = null;
+                                object.endTime = null;
+                                object.target = "";
+                                object.verb = "";
+                                object.statusMessage = "";
+                                object.requestedCancellation = false;
+                                object.apiVersion = "";
+                            }
                             if (message.operationMetadata != null && message.hasOwnProperty("operationMetadata"))
                                 object.operationMetadata = $root.google.cloud.parallelstore.v1beta.TransferOperationMetadata.toObject(message.operationMetadata, options);
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.target != null && message.hasOwnProperty("target"))
+                                object.target = message.target;
+                            if (message.verb != null && message.hasOwnProperty("verb"))
+                                object.verb = message.verb;
+                            if (message.statusMessage != null && message.hasOwnProperty("statusMessage"))
+                                object.statusMessage = message.statusMessage;
+                            if (message.requestedCancellation != null && message.hasOwnProperty("requestedCancellation"))
+                                object.requestedCancellation = message.requestedCancellation;
+                            if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
+                                object.apiVersion = message.apiVersion;
                             return object;
                         };
     
@@ -4226,11 +5406,11 @@
                          * Properties of a TransferOperationMetadata.
                          * @memberof google.cloud.parallelstore.v1beta
                          * @interface ITransferOperationMetadata
-                         * @property {google.protobuf.ITimestamp|null} [createTime] TransferOperationMetadata createTime
-                         * @property {google.protobuf.ITimestamp|null} [endTime] TransferOperationMetadata endTime
+                         * @property {google.cloud.parallelstore.v1beta.ISourceParallelstore|null} [sourceParallelstore] TransferOperationMetadata sourceParallelstore
+                         * @property {google.cloud.parallelstore.v1beta.ISourceGcsBucket|null} [sourceGcsBucket] TransferOperationMetadata sourceGcsBucket
+                         * @property {google.cloud.parallelstore.v1beta.IDestinationGcsBucket|null} [destinationGcsBucket] TransferOperationMetadata destinationGcsBucket
+                         * @property {google.cloud.parallelstore.v1beta.IDestinationParallelstore|null} [destinationParallelstore] TransferOperationMetadata destinationParallelstore
                          * @property {google.cloud.parallelstore.v1beta.ITransferCounters|null} [counters] TransferOperationMetadata counters
-                         * @property {string|null} [source] TransferOperationMetadata source
-                         * @property {string|null} [destination] TransferOperationMetadata destination
                          * @property {google.cloud.parallelstore.v1beta.TransferType|null} [transferType] TransferOperationMetadata transferType
                          */
     
@@ -4250,20 +5430,36 @@
                         }
     
                         /**
-                         * TransferOperationMetadata createTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * TransferOperationMetadata sourceParallelstore.
+                         * @member {google.cloud.parallelstore.v1beta.ISourceParallelstore|null|undefined} sourceParallelstore
                          * @memberof google.cloud.parallelstore.v1beta.TransferOperationMetadata
                          * @instance
                          */
-                        TransferOperationMetadata.prototype.createTime = null;
+                        TransferOperationMetadata.prototype.sourceParallelstore = null;
     
                         /**
-                         * TransferOperationMetadata endTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * TransferOperationMetadata sourceGcsBucket.
+                         * @member {google.cloud.parallelstore.v1beta.ISourceGcsBucket|null|undefined} sourceGcsBucket
                          * @memberof google.cloud.parallelstore.v1beta.TransferOperationMetadata
                          * @instance
                          */
-                        TransferOperationMetadata.prototype.endTime = null;
+                        TransferOperationMetadata.prototype.sourceGcsBucket = null;
+    
+                        /**
+                         * TransferOperationMetadata destinationGcsBucket.
+                         * @member {google.cloud.parallelstore.v1beta.IDestinationGcsBucket|null|undefined} destinationGcsBucket
+                         * @memberof google.cloud.parallelstore.v1beta.TransferOperationMetadata
+                         * @instance
+                         */
+                        TransferOperationMetadata.prototype.destinationGcsBucket = null;
+    
+                        /**
+                         * TransferOperationMetadata destinationParallelstore.
+                         * @member {google.cloud.parallelstore.v1beta.IDestinationParallelstore|null|undefined} destinationParallelstore
+                         * @memberof google.cloud.parallelstore.v1beta.TransferOperationMetadata
+                         * @instance
+                         */
+                        TransferOperationMetadata.prototype.destinationParallelstore = null;
     
                         /**
                          * TransferOperationMetadata counters.
@@ -4274,28 +5470,37 @@
                         TransferOperationMetadata.prototype.counters = null;
     
                         /**
-                         * TransferOperationMetadata source.
-                         * @member {string} source
-                         * @memberof google.cloud.parallelstore.v1beta.TransferOperationMetadata
-                         * @instance
-                         */
-                        TransferOperationMetadata.prototype.source = "";
-    
-                        /**
-                         * TransferOperationMetadata destination.
-                         * @member {string} destination
-                         * @memberof google.cloud.parallelstore.v1beta.TransferOperationMetadata
-                         * @instance
-                         */
-                        TransferOperationMetadata.prototype.destination = "";
-    
-                        /**
                          * TransferOperationMetadata transferType.
                          * @member {google.cloud.parallelstore.v1beta.TransferType} transferType
                          * @memberof google.cloud.parallelstore.v1beta.TransferOperationMetadata
                          * @instance
                          */
                         TransferOperationMetadata.prototype.transferType = 0;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * TransferOperationMetadata source.
+                         * @member {"sourceParallelstore"|"sourceGcsBucket"|undefined} source
+                         * @memberof google.cloud.parallelstore.v1beta.TransferOperationMetadata
+                         * @instance
+                         */
+                        Object.defineProperty(TransferOperationMetadata.prototype, "source", {
+                            get: $util.oneOfGetter($oneOfFields = ["sourceParallelstore", "sourceGcsBucket"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * TransferOperationMetadata destination.
+                         * @member {"destinationGcsBucket"|"destinationParallelstore"|undefined} destination
+                         * @memberof google.cloud.parallelstore.v1beta.TransferOperationMetadata
+                         * @instance
+                         */
+                        Object.defineProperty(TransferOperationMetadata.prototype, "destination", {
+                            get: $util.oneOfGetter($oneOfFields = ["destinationGcsBucket", "destinationParallelstore"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new TransferOperationMetadata instance using the specified properties.
@@ -4321,18 +5526,18 @@
                         TransferOperationMetadata.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
-                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
-                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
-                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.counters != null && Object.hasOwnProperty.call(message, "counters"))
                                 $root.google.cloud.parallelstore.v1beta.TransferCounters.encode(message.counters, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            if (message.source != null && Object.hasOwnProperty.call(message, "source"))
-                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.source);
-                            if (message.destination != null && Object.hasOwnProperty.call(message, "destination"))
-                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.destination);
                             if (message.transferType != null && Object.hasOwnProperty.call(message, "transferType"))
                                 writer.uint32(/* id 6, wireType 0 =*/48).int32(message.transferType);
+                            if (message.sourceParallelstore != null && Object.hasOwnProperty.call(message, "sourceParallelstore"))
+                                $root.google.cloud.parallelstore.v1beta.SourceParallelstore.encode(message.sourceParallelstore, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.sourceGcsBucket != null && Object.hasOwnProperty.call(message, "sourceGcsBucket"))
+                                $root.google.cloud.parallelstore.v1beta.SourceGcsBucket.encode(message.sourceGcsBucket, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.destinationGcsBucket != null && Object.hasOwnProperty.call(message, "destinationGcsBucket"))
+                                $root.google.cloud.parallelstore.v1beta.DestinationGcsBucket.encode(message.destinationGcsBucket, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.destinationParallelstore != null && Object.hasOwnProperty.call(message, "destinationParallelstore"))
+                                $root.google.cloud.parallelstore.v1beta.DestinationParallelstore.encode(message.destinationParallelstore, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             return writer;
                         };
     
@@ -4367,24 +5572,24 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 1: {
-                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                case 7: {
+                                        message.sourceParallelstore = $root.google.cloud.parallelstore.v1beta.SourceParallelstore.decode(reader, reader.uint32());
                                         break;
                                     }
-                                case 2: {
-                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                case 8: {
+                                        message.sourceGcsBucket = $root.google.cloud.parallelstore.v1beta.SourceGcsBucket.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.destinationGcsBucket = $root.google.cloud.parallelstore.v1beta.DestinationGcsBucket.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.destinationParallelstore = $root.google.cloud.parallelstore.v1beta.DestinationParallelstore.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 3: {
                                         message.counters = $root.google.cloud.parallelstore.v1beta.TransferCounters.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 4: {
-                                        message.source = reader.string();
-                                        break;
-                                    }
-                                case 5: {
-                                        message.destination = reader.string();
                                         break;
                                     }
                                 case 6: {
@@ -4426,27 +5631,48 @@
                         TransferOperationMetadata.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
-                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
-                                if (error)
-                                    return "createTime." + error;
+                            var properties = {};
+                            if (message.sourceParallelstore != null && message.hasOwnProperty("sourceParallelstore")) {
+                                properties.source = 1;
+                                {
+                                    var error = $root.google.cloud.parallelstore.v1beta.SourceParallelstore.verify(message.sourceParallelstore);
+                                    if (error)
+                                        return "sourceParallelstore." + error;
+                                }
                             }
-                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
-                                if (error)
-                                    return "endTime." + error;
+                            if (message.sourceGcsBucket != null && message.hasOwnProperty("sourceGcsBucket")) {
+                                if (properties.source === 1)
+                                    return "source: multiple values";
+                                properties.source = 1;
+                                {
+                                    var error = $root.google.cloud.parallelstore.v1beta.SourceGcsBucket.verify(message.sourceGcsBucket);
+                                    if (error)
+                                        return "sourceGcsBucket." + error;
+                                }
+                            }
+                            if (message.destinationGcsBucket != null && message.hasOwnProperty("destinationGcsBucket")) {
+                                properties.destination = 1;
+                                {
+                                    var error = $root.google.cloud.parallelstore.v1beta.DestinationGcsBucket.verify(message.destinationGcsBucket);
+                                    if (error)
+                                        return "destinationGcsBucket." + error;
+                                }
+                            }
+                            if (message.destinationParallelstore != null && message.hasOwnProperty("destinationParallelstore")) {
+                                if (properties.destination === 1)
+                                    return "destination: multiple values";
+                                properties.destination = 1;
+                                {
+                                    var error = $root.google.cloud.parallelstore.v1beta.DestinationParallelstore.verify(message.destinationParallelstore);
+                                    if (error)
+                                        return "destinationParallelstore." + error;
+                                }
                             }
                             if (message.counters != null && message.hasOwnProperty("counters")) {
                                 var error = $root.google.cloud.parallelstore.v1beta.TransferCounters.verify(message.counters);
                                 if (error)
                                     return "counters." + error;
                             }
-                            if (message.source != null && message.hasOwnProperty("source"))
-                                if (!$util.isString(message.source))
-                                    return "source: string expected";
-                            if (message.destination != null && message.hasOwnProperty("destination"))
-                                if (!$util.isString(message.destination))
-                                    return "destination: string expected";
                             if (message.transferType != null && message.hasOwnProperty("transferType"))
                                 switch (message.transferType) {
                                 default:
@@ -4471,25 +5697,31 @@
                             if (object instanceof $root.google.cloud.parallelstore.v1beta.TransferOperationMetadata)
                                 return object;
                             var message = new $root.google.cloud.parallelstore.v1beta.TransferOperationMetadata();
-                            if (object.createTime != null) {
-                                if (typeof object.createTime !== "object")
-                                    throw TypeError(".google.cloud.parallelstore.v1beta.TransferOperationMetadata.createTime: object expected");
-                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            if (object.sourceParallelstore != null) {
+                                if (typeof object.sourceParallelstore !== "object")
+                                    throw TypeError(".google.cloud.parallelstore.v1beta.TransferOperationMetadata.sourceParallelstore: object expected");
+                                message.sourceParallelstore = $root.google.cloud.parallelstore.v1beta.SourceParallelstore.fromObject(object.sourceParallelstore);
                             }
-                            if (object.endTime != null) {
-                                if (typeof object.endTime !== "object")
-                                    throw TypeError(".google.cloud.parallelstore.v1beta.TransferOperationMetadata.endTime: object expected");
-                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            if (object.sourceGcsBucket != null) {
+                                if (typeof object.sourceGcsBucket !== "object")
+                                    throw TypeError(".google.cloud.parallelstore.v1beta.TransferOperationMetadata.sourceGcsBucket: object expected");
+                                message.sourceGcsBucket = $root.google.cloud.parallelstore.v1beta.SourceGcsBucket.fromObject(object.sourceGcsBucket);
+                            }
+                            if (object.destinationGcsBucket != null) {
+                                if (typeof object.destinationGcsBucket !== "object")
+                                    throw TypeError(".google.cloud.parallelstore.v1beta.TransferOperationMetadata.destinationGcsBucket: object expected");
+                                message.destinationGcsBucket = $root.google.cloud.parallelstore.v1beta.DestinationGcsBucket.fromObject(object.destinationGcsBucket);
+                            }
+                            if (object.destinationParallelstore != null) {
+                                if (typeof object.destinationParallelstore !== "object")
+                                    throw TypeError(".google.cloud.parallelstore.v1beta.TransferOperationMetadata.destinationParallelstore: object expected");
+                                message.destinationParallelstore = $root.google.cloud.parallelstore.v1beta.DestinationParallelstore.fromObject(object.destinationParallelstore);
                             }
                             if (object.counters != null) {
                                 if (typeof object.counters !== "object")
                                     throw TypeError(".google.cloud.parallelstore.v1beta.TransferOperationMetadata.counters: object expected");
                                 message.counters = $root.google.cloud.parallelstore.v1beta.TransferCounters.fromObject(object.counters);
                             }
-                            if (object.source != null)
-                                message.source = String(object.source);
-                            if (object.destination != null)
-                                message.destination = String(object.destination);
                             switch (object.transferType) {
                             default:
                                 if (typeof object.transferType === "number") {
@@ -4527,25 +5759,33 @@
                                 options = {};
                             var object = {};
                             if (options.defaults) {
-                                object.createTime = null;
-                                object.endTime = null;
                                 object.counters = null;
-                                object.source = "";
-                                object.destination = "";
                                 object.transferType = options.enums === String ? "TRANSFER_TYPE_UNSPECIFIED" : 0;
                             }
-                            if (message.createTime != null && message.hasOwnProperty("createTime"))
-                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
-                            if (message.endTime != null && message.hasOwnProperty("endTime"))
-                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
                             if (message.counters != null && message.hasOwnProperty("counters"))
                                 object.counters = $root.google.cloud.parallelstore.v1beta.TransferCounters.toObject(message.counters, options);
-                            if (message.source != null && message.hasOwnProperty("source"))
-                                object.source = message.source;
-                            if (message.destination != null && message.hasOwnProperty("destination"))
-                                object.destination = message.destination;
                             if (message.transferType != null && message.hasOwnProperty("transferType"))
                                 object.transferType = options.enums === String ? $root.google.cloud.parallelstore.v1beta.TransferType[message.transferType] === undefined ? message.transferType : $root.google.cloud.parallelstore.v1beta.TransferType[message.transferType] : message.transferType;
+                            if (message.sourceParallelstore != null && message.hasOwnProperty("sourceParallelstore")) {
+                                object.sourceParallelstore = $root.google.cloud.parallelstore.v1beta.SourceParallelstore.toObject(message.sourceParallelstore, options);
+                                if (options.oneofs)
+                                    object.source = "sourceParallelstore";
+                            }
+                            if (message.sourceGcsBucket != null && message.hasOwnProperty("sourceGcsBucket")) {
+                                object.sourceGcsBucket = $root.google.cloud.parallelstore.v1beta.SourceGcsBucket.toObject(message.sourceGcsBucket, options);
+                                if (options.oneofs)
+                                    object.source = "sourceGcsBucket";
+                            }
+                            if (message.destinationGcsBucket != null && message.hasOwnProperty("destinationGcsBucket")) {
+                                object.destinationGcsBucket = $root.google.cloud.parallelstore.v1beta.DestinationGcsBucket.toObject(message.destinationGcsBucket, options);
+                                if (options.oneofs)
+                                    object.destination = "destinationGcsBucket";
+                            }
+                            if (message.destinationParallelstore != null && message.hasOwnProperty("destinationParallelstore")) {
+                                object.destinationParallelstore = $root.google.cloud.parallelstore.v1beta.DestinationParallelstore.toObject(message.destinationParallelstore, options);
+                                if (options.oneofs)
+                                    object.destination = "destinationParallelstore";
+                            }
                             return object;
                         };
     
