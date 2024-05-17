@@ -872,6 +872,51 @@ describe('v3beta1.SessionsClient', () => {
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
+    it('invokes serverStreamingDetectIntent without error and gaxServerStreamingRetries enabled', async () => {
+      const client = new sessionsModule.v3beta1.SessionsClient({
+        gaxServerStreamingRetries: true,
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.DetectIntentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.DetectIntentRequest',
+        ['session']
+      );
+      request.session = defaultValue1;
+      const expectedHeaderRequestParams = `session=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.DetectIntentResponse()
+      );
+      client.innerApiCalls.serverStreamingDetectIntent =
+        stubServerStreamingCall(expectedResponse);
+      const stream = client.serverStreamingDetectIntent(request);
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.dialogflow.cx.v3beta1.DetectIntentResponse
+          ) => {
+            resolve(response);
+          }
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.serverStreamingDetectIntent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.serverStreamingDetectIntent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
     it('invokes serverStreamingDetectIntent with error', async () => {
       const client = new sessionsModule.v3beta1.SessionsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
@@ -948,6 +993,12 @@ describe('v3beta1.SessionsClient', () => {
         });
       });
       await assert.rejects(promise, expectedError);
+    });
+    it('should create a client with gaxServerStreamingRetries enabled', () => {
+      const client = new sessionsModule.v3beta1.SessionsClient({
+        gaxServerStreamingRetries: true,
+      });
+      assert(client);
     });
   });
 
