@@ -2524,7 +2524,7 @@ describe('v2.StorageControlClient', () => {
       const expectedParameters = {
         project: 'projectValue',
         bucket: 'bucketValue',
-        managedFolder: 'managedFolderValue',
+        managed_folder: 'managedFolderValue',
       };
       const client = new storagecontrolModule.v2.StorageControlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},

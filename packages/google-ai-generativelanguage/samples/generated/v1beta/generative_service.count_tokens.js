@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(model, contents) {
+function main(model) {
   // [START generativelanguage_v1beta_generated_GenerativeService_CountTokens_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -36,9 +36,14 @@ function main(model, contents) {
    */
   // const model = 'abc123'
   /**
-   *  Required. The input given to the model as a prompt.
+   *  Optional. The input given to the model as a prompt.
    */
   // const contents = [1,2,3,4]
+  /**
+   *  Optional. The overall input given to the model. CountTokens will count
+   *  prompt, function calling, etc.
+   */
+  // const generateContentRequest = {}
 
   // Imports the Generativelanguage library
   const {GenerativeServiceClient} = require('@google-ai/generativelanguage').v1beta;
@@ -50,7 +55,6 @@ function main(model, contents) {
     // Construct request
     const request = {
       model,
-      contents,
     };
 
     // Run request

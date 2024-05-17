@@ -723,7 +723,7 @@
                     "ManagedFolder": {
                       "options": {
                         "(google.api.resource).type": "storage.googleapis.com/ManagedFolder",
-                        "(google.api.resource).pattern": "projects/{project}/buckets/{bucket}/managedFolders/{managedFolder=**}",
+                        "(google.api.resource).pattern": "projects/{project}/buckets/{bucket}/managedFolders/{managed_folder=**}",
                         "(google.api.resource).plural": "managedFolders",
                         "(google.api.resource).singular": "managedFolder"
                       },

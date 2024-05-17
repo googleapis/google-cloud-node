@@ -215,6 +215,9 @@ export class EkmServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      autokeyConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/autokeyConfig'
+      ),
       cryptoKeyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}'
       ),
@@ -229,6 +232,9 @@ export class EkmServiceClient {
       ),
       importJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/importJobs/{import_job}'
+      ),
+      keyHandlePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/keyHandles/{key_handle}'
       ),
       keyRingPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}'
@@ -1409,6 +1415,30 @@ export class EkmServiceClient {
   // --------------------
 
   /**
+   * Return a fully-qualified autokeyConfig resource name string.
+   *
+   * @param {string} folder
+   * @returns {string} Resource name string.
+   */
+  autokeyConfigPath(folder: string) {
+    return this.pathTemplates.autokeyConfigPathTemplate.render({
+      folder: folder,
+    });
+  }
+
+  /**
+   * Parse the folder from AutokeyConfig resource.
+   *
+   * @param {string} autokeyConfigName
+   *   A fully-qualified path representing AutokeyConfig resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromAutokeyConfigName(autokeyConfigName: string) {
+    return this.pathTemplates.autokeyConfigPathTemplate.match(autokeyConfigName)
+      .folder;
+  }
+
+  /**
    * Return a fully-qualified cryptoKey resource name string.
    *
    * @param {string} project
@@ -1729,6 +1759,58 @@ export class EkmServiceClient {
   matchImportJobFromImportJobName(importJobName: string) {
     return this.pathTemplates.importJobPathTemplate.match(importJobName)
       .import_job;
+  }
+
+  /**
+   * Return a fully-qualified keyHandle resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} key_handle
+   * @returns {string} Resource name string.
+   */
+  keyHandlePath(project: string, location: string, keyHandle: string) {
+    return this.pathTemplates.keyHandlePathTemplate.render({
+      project: project,
+      location: location,
+      key_handle: keyHandle,
+    });
+  }
+
+  /**
+   * Parse the project from KeyHandle resource.
+   *
+   * @param {string} keyHandleName
+   *   A fully-qualified path representing KeyHandle resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromKeyHandleName(keyHandleName: string) {
+    return this.pathTemplates.keyHandlePathTemplate.match(keyHandleName)
+      .project;
+  }
+
+  /**
+   * Parse the location from KeyHandle resource.
+   *
+   * @param {string} keyHandleName
+   *   A fully-qualified path representing KeyHandle resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromKeyHandleName(keyHandleName: string) {
+    return this.pathTemplates.keyHandlePathTemplate.match(keyHandleName)
+      .location;
+  }
+
+  /**
+   * Parse the key_handle from KeyHandle resource.
+   *
+   * @param {string} keyHandleName
+   *   A fully-qualified path representing KeyHandle resource.
+   * @returns {string} A string representing the key_handle.
+   */
+  matchKeyHandleFromKeyHandleName(keyHandleName: string) {
+    return this.pathTemplates.keyHandlePathTemplate.match(keyHandleName)
+      .key_handle;
   }
 
   /**

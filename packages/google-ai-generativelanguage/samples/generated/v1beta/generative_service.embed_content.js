@@ -55,7 +55,8 @@ function main(model, content) {
   /**
    *  Optional. Optional reduced dimension for the output embedding. If set,
    *  excessive values in the output embedding are truncated from the end.
-   *  Supported by `models/text-embedding-latest`.
+   *  Supported by newer models since 2024, and the earlier model
+   *  (`models/embedding-001`) cannot specify this value.
    */
   // const outputDimensionality = 1234
 

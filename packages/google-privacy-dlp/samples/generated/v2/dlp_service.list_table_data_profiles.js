@@ -53,7 +53,7 @@ function main(parent) {
    *  * `table_id`
    *  * `sensitivity_level desc`
    *  Supported fields are:
-   *  - `project_id`: The GCP project ID.
+   *  - `project_id`: The Google Cloud project ID.
    *  - `dataset_id`: The ID of a BigQuery dataset.
    *  - `table_id`: The ID of a BigQuery table.
    *  - `sensitivity_level`: How sensitive the data in a table is, at most.
@@ -73,7 +73,7 @@ function main(parent) {
    *  sequence of restrictions implicitly uses `AND`.
    *  * A restriction has the form of `{field} {operator} {value}`.
    *  * Supported fields/values:
-   *      - `project_id` - The GCP project ID.
+   *      - `project_id` - The Google Cloud project ID.
    *      - `dataset_id` - The BigQuery dataset ID.
    *      - `table_id` - The ID of the BigQuery table.
    *      - `sensitivity_level` - HIGH|MODERATE|LOW
