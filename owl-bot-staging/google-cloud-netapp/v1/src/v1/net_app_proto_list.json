@@ -1,0 +1,13 @@
+[
+  "../../protos/google/cloud/netapp/v1/active_directory.proto",
+  "../../protos/google/cloud/netapp/v1/backup.proto",
+  "../../protos/google/cloud/netapp/v1/backup_policy.proto",
+  "../../protos/google/cloud/netapp/v1/backup_vault.proto",
+  "../../protos/google/cloud/netapp/v1/cloud_netapp_service.proto",
+  "../../protos/google/cloud/netapp/v1/common.proto",
+  "../../protos/google/cloud/netapp/v1/kms.proto",
+  "../../protos/google/cloud/netapp/v1/replication.proto",
+  "../../protos/google/cloud/netapp/v1/snapshot.proto",
+  "../../protos/google/cloud/netapp/v1/storage_pool.proto",
+  "../../protos/google/cloud/netapp/v1/volume.proto"
+]
