@@ -1,0 +1,43 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.maps.routeoptimization.v1",
+  "libraryPackage": "@googlemaps/routeoptimization",
+  "services": {
+    "RouteOptimization": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RouteOptimizationClient",
+          "rpcs": {
+            "OptimizeTours": {
+              "methods": [
+                "optimizeTours"
+              ]
+            },
+            "BatchOptimizeTours": {
+              "methods": [
+                "batchOptimizeTours"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RouteOptimizationClient",
+          "rpcs": {
+            "OptimizeTours": {
+              "methods": [
+                "optimizeTours"
+              ]
+            },
+            "BatchOptimizeTours": {
+              "methods": [
+                "batchOptimizeTours"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
