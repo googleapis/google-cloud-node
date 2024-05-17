@@ -28,6 +28,7 @@
   * [Batch_service.list_jobs](#batch_service.list_jobs)
   * [Batch_service.list_resource_allowances](#batch_service.list_resource_allowances)
   * [Batch_service.list_tasks](#batch_service.list_tasks)
+  * [Batch_service.update_job](#batch_service.update_job)
   * [Batch_service.update_resource_allowance](#batch_service.update_resource_allowance)
   * [Quickstart](#quickstart)
 
@@ -311,6 +312,23 @@ __Usage:__
 
 
 `node packages/google-cloud-batch/samples/generated/v1alpha/batch_service.list_tasks.js`
+
+
+-----
+
+
+
+
+### Batch_service.update_job
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/samples/generated/v1alpha/batch_service.update_job.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-batch/samples/generated/v1alpha/batch_service.update_job.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-batch/samples/generated/v1alpha/batch_service.update_job.js`
 
 
 -----

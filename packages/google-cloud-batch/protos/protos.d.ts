@@ -5540,6 +5540,20 @@ export namespace google {
                     public deleteJob(request: google.cloud.batch.v1alpha.IDeleteJobRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls UpdateJob.
+                     * @param request UpdateJobRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Job
+                     */
+                    public updateJob(request: google.cloud.batch.v1alpha.IUpdateJobRequest, callback: google.cloud.batch.v1alpha.BatchService.UpdateJobCallback): void;
+
+                    /**
+                     * Calls UpdateJob.
+                     * @param request UpdateJobRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateJob(request: google.cloud.batch.v1alpha.IUpdateJobRequest): Promise<google.cloud.batch.v1alpha.Job>;
+
+                    /**
                      * Calls ListJobs.
                      * @param request ListJobsRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListJobsResponse
@@ -5674,6 +5688,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DeleteJobCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.batch.v1alpha.BatchService|updateJob}.
+                     * @param error Error, if any
+                     * @param [response] Job
+                     */
+                    type UpdateJobCallback = (error: (Error|null), response?: google.cloud.batch.v1alpha.Job) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.batch.v1alpha.BatchService|listJobs}.
@@ -6047,6 +6068,115 @@ export namespace google {
 
                     /**
                      * Gets the default type url for DeleteJobRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateJobRequest. */
+                interface IUpdateJobRequest {
+
+                    /** UpdateJobRequest job */
+                    job?: (google.cloud.batch.v1alpha.IJob|null);
+
+                    /** UpdateJobRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateJobRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateJobRequest. */
+                class UpdateJobRequest implements IUpdateJobRequest {
+
+                    /**
+                     * Constructs a new UpdateJobRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.batch.v1alpha.IUpdateJobRequest);
+
+                    /** UpdateJobRequest job. */
+                    public job?: (google.cloud.batch.v1alpha.IJob|null);
+
+                    /** UpdateJobRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateJobRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateJobRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateJobRequest instance
+                     */
+                    public static create(properties?: google.cloud.batch.v1alpha.IUpdateJobRequest): google.cloud.batch.v1alpha.UpdateJobRequest;
+
+                    /**
+                     * Encodes the specified UpdateJobRequest message. Does not implicitly {@link google.cloud.batch.v1alpha.UpdateJobRequest.verify|verify} messages.
+                     * @param message UpdateJobRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.batch.v1alpha.IUpdateJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateJobRequest message, length delimited. Does not implicitly {@link google.cloud.batch.v1alpha.UpdateJobRequest.verify|verify} messages.
+                     * @param message UpdateJobRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.batch.v1alpha.IUpdateJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateJobRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateJobRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.batch.v1alpha.UpdateJobRequest;
+
+                    /**
+                     * Decodes an UpdateJobRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateJobRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.batch.v1alpha.UpdateJobRequest;
+
+                    /**
+                     * Verifies an UpdateJobRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateJobRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateJobRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.batch.v1alpha.UpdateJobRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateJobRequest message. Also converts values to other types if specified.
+                     * @param message UpdateJobRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.batch.v1alpha.UpdateJobRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateJobRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateJobRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
