@@ -1090,12 +1090,10 @@ export class ParallelstoreClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.sourceGcsUri
-   *   URI to a Cloud Storage object in format:
-   *   'gs://<bucket_name>/<path_inside_bucket>'.
-   * @param {string} [request.destinationPath]
-   *   Optional. Root directory path to the Paralellstore filesystem, starting
-   *   with '/'. Sets to '/' if no value is set.
+   * @param {google.cloud.parallelstore.v1beta.SourceGcsBucket} request.sourceGcsBucket
+   *   Cloud Storage source.
+   * @param {google.cloud.parallelstore.v1beta.DestinationParallelstore} request.destinationParallelstore
+   *   Parallelstore destination.
    * @param {string} request.name
    *   Required. Name of the resource.
    * @param {string} [request.requestId]
@@ -1246,12 +1244,10 @@ export class ParallelstoreClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} [request.sourcePath]
-   *   Optional. Root directory path to the Paralellstore filesystem, starting
-   *   with '/'. Sets to '/' if no value is set.
-   * @param {string} request.destinationGcsUri
-   *   URI to a Cloud Storage object in format:
-   *   'gs://<bucket_name>/<path_inside_bucket>'.
+   * @param {google.cloud.parallelstore.v1beta.SourceParallelstore} request.sourceParallelstore
+   *   Parallelstore source.
+   * @param {google.cloud.parallelstore.v1beta.DestinationGcsBucket} request.destinationGcsBucket
+   *   Cloud Storage destination.
    * @param {string} request.name
    *   Required. Name of the resource.
    * @param {string} [request.requestId]
