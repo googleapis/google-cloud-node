@@ -111,7 +111,7 @@ npm install @googlemaps/routeoptimization
  *      <= vehicle_end_time`).
  *    * a shipment may only be performed on a vehicle that is allowed. A
  *      vehicle is allowed if
- *      Shipment.allowed_vehicle_indices google.maps.routeoptimization.v1.Shipment.allowed_vehicle_indices 
+ *      Shipment.allowed_vehicle_indices google.maps.routeoptimization.v1.Shipment.allowed_vehicle_indices
  *      is empty or its `vehicle_index` is included in
  *      Shipment.allowed_vehicle_indices google.maps.routeoptimization.v1.Shipment.allowed_vehicle_indices.
  *  If the injected solution is not feasible, a validation error is not
@@ -147,25 +147,25 @@ npm install @googlemaps/routeoptimization
 /**
  *  If true:
  *    * uses
- *    ShipmentRoute.vehicle_label google.maps.routeoptimization.v1.ShipmentRoute.vehicle_label 
+ *    ShipmentRoute.vehicle_label google.maps.routeoptimization.v1.ShipmentRoute.vehicle_label
  *    instead of `vehicle_index` to
  *      match routes in an injected solution with vehicles in the request;
  *      reuses the mapping of original
- *      ShipmentRoute.vehicle_index google.maps.routeoptimization.v1.ShipmentRoute.vehicle_index 
+ *      ShipmentRoute.vehicle_index google.maps.routeoptimization.v1.ShipmentRoute.vehicle_index
  *      to new
- *      ShipmentRoute.vehicle_index google.maps.routeoptimization.v1.ShipmentRoute.vehicle_index 
+ *      ShipmentRoute.vehicle_index google.maps.routeoptimization.v1.ShipmentRoute.vehicle_index
  *      to update
- *      ConstraintRelaxation.vehicle_indices google.maps.routeoptimization.v1.InjectedSolutionConstraint.ConstraintRelaxation.vehicle_indices 
+ *      ConstraintRelaxation.vehicle_indices google.maps.routeoptimization.v1.InjectedSolutionConstraint.ConstraintRelaxation.vehicle_indices
  *      if non-empty, but the mapping must be unambiguous (i.e., multiple
  *      `ShipmentRoute`s must not share the same original `vehicle_index`).
  *    * uses
- *    ShipmentRoute.Visit.shipment_label google.maps.routeoptimization.v1.ShipmentRoute.Visit.shipment_label 
+ *    ShipmentRoute.Visit.shipment_label google.maps.routeoptimization.v1.ShipmentRoute.Visit.shipment_label
  *    instead of `shipment_index`
  *      to match visits in an injected solution with shipments in the request;
  *    * uses
- *    SkippedShipment.label google.maps.routeoptimization.v1.SkippedShipment.label 
+ *    SkippedShipment.label google.maps.routeoptimization.v1.SkippedShipment.label
  *    instead of
- *    SkippedShipment.index google.maps.routeoptimization.v1.SkippedShipment.index 
+ *    SkippedShipment.index google.maps.routeoptimization.v1.SkippedShipment.index
  *    to
  *      match skipped shipments in the injected solution with request
  *      shipments.
@@ -189,7 +189,7 @@ npm install @googlemaps/routeoptimization
  *  along with its visits. If a `shipment_label` in the injected solution does
  *  not correspond to a request shipment, the corresponding visit is removed
  *  from the solution. If a
- *  SkippedShipment.label google.maps.routeoptimization.v1.SkippedShipment.label 
+ *  SkippedShipment.label google.maps.routeoptimization.v1.SkippedShipment.label
  *  in the injected solution does not correspond to a request shipment, the
  *  `SkippedShipment` is removed from the solution.
  *  Removing route visits or entire routes from an injected solution may
@@ -210,9 +210,9 @@ npm install @googlemaps/routeoptimization
  *  Transition.travel_duration google.maps.routeoptimization.v1.ShipmentRoute.Transition.travel_duration,
  *  Visit.start_time google.maps.routeoptimization.v1.ShipmentRoute.Visit.start_time,
  *  and `vehicle_end_time`; in setting the
- *  ShipmentRoute.has_traffic_infeasibilities google.maps.routeoptimization.v1.ShipmentRoute.has_traffic_infeasibilities 
+ *  ShipmentRoute.has_traffic_infeasibilities google.maps.routeoptimization.v1.ShipmentRoute.has_traffic_infeasibilities
  *  field, and in calculating the
- *  OptimizeToursResponse.total_cost google.maps.routeoptimization.v1.OptimizeToursResponse.total_cost 
+ *  OptimizeToursResponse.total_cost google.maps.routeoptimization.v1.OptimizeToursResponse.total_cost
  *  field.
  */
 // const considerRoadTraffic = true
@@ -250,7 +250,7 @@ npm install @googlemaps/routeoptimization
  *  typically attached to an INVALID_ARGUMENT error payload as a BadRequest
  *  error detail (https://cloud.google.com/apis/design/errors#error_details),
  *  unless solving_mode=VALIDATE_ONLY: see the
- *  OptimizeToursResponse.validation_errors google.maps.routeoptimization.v1.OptimizeToursResponse.validation_errors 
+ *  OptimizeToursResponse.validation_errors google.maps.routeoptimization.v1.OptimizeToursResponse.validation_errors
  *  field.
  *  This defaults to 100 and is capped at 10,000.
  */
