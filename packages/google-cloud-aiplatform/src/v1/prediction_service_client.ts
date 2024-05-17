@@ -365,37 +365,37 @@ export class PredictionServiceClient {
       streamRawPredict: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.SERVER_STREAMING,
         !!opts.fallback,
-        /* gaxStreamingRetries: */ false
+        !!opts.gaxServerStreamingRetries
       ),
       streamDirectPredict: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.BIDI_STREAMING,
         !!opts.fallback,
-        /* gaxStreamingRetries: */ false
+        !!opts.gaxServerStreamingRetries
       ),
       streamDirectRawPredict: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.BIDI_STREAMING,
         !!opts.fallback,
-        /* gaxStreamingRetries: */ false
+        !!opts.gaxServerStreamingRetries
       ),
       streamingPredict: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.BIDI_STREAMING,
         !!opts.fallback,
-        /* gaxStreamingRetries: */ false
+        !!opts.gaxServerStreamingRetries
       ),
       serverStreamingPredict: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.SERVER_STREAMING,
         !!opts.fallback,
-        /* gaxStreamingRetries: */ false
+        !!opts.gaxServerStreamingRetries
       ),
       streamingRawPredict: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.BIDI_STREAMING,
         !!opts.fallback,
-        /* gaxStreamingRetries: */ false
+        !!opts.gaxServerStreamingRetries
       ),
       streamGenerateContent: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.SERVER_STREAMING,
         !!opts.fallback,
-        /* gaxStreamingRetries: */ false
+        !!opts.gaxServerStreamingRetries
       ),
     };
 

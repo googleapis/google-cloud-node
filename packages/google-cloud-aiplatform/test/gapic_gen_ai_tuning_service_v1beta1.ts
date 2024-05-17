@@ -21,17 +21,11 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as deploymentresourcepoolserviceModule from '../src';
+import * as genaituningserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {
-  protobuf,
-  LROperation,
-  operationsProtos,
-  IamProtos,
-  LocationProtos,
-} from 'google-gax';
+import {protobuf, IamProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -70,38 +64,6 @@ function stubSimpleCallWithCallback<ResponseType>(
   return error
     ? sinon.stub().callsArgWith(2, error)
     : sinon.stub().callsArgWith(2, null, response);
-}
-
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
-}
-
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
 function stubPageStreamingCall<ResponseType>(
@@ -165,18 +127,18 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
+describe('v1beta1.GenAiTuningServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient();
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
     });
 
     it('has universeDomain', () => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient();
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -188,8 +150,7 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const servicePath =
-          deploymentresourcepoolserviceModule.v1beta1
-            .DeploymentResourcePoolServiceClient.servicePath;
+          genaituningserviceModule.v1beta1.GenAiTuningServiceClient.servicePath;
         assert.strictEqual(servicePath, 'aiplatform.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -198,8 +159,7 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const apiEndpoint =
-          deploymentresourcepoolserviceModule.v1beta1
-            .DeploymentResourcePoolServiceClient.apiEndpoint;
+          genaituningserviceModule.v1beta1.GenAiTuningServiceClient.apiEndpoint;
         assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -207,18 +167,18 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {universeDomain: 'example.com'}
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          universeDomain: 'example.com',
+        });
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'aiplatform.example.com');
     });
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {universe_domain: 'example.com'}
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          universe_domain: 'example.com',
+        });
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'aiplatform.example.com');
     });
@@ -229,7 +189,7 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient();
+            new genaituningserviceModule.v1beta1.GenAiTuningServiceClient();
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'aiplatform.example.com');
           if (saved) {
@@ -243,9 +203,9 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-              {universeDomain: 'configured.example.com'}
-            );
+            new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+              universeDomain: 'configured.example.com',
+            });
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'aiplatform.configured.example.com');
           if (saved) {
@@ -258,59 +218,53 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {universe_domain: 'example.com', universeDomain: 'example.net'}
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
       });
     });
 
     it('has port', () => {
       const port =
-        deploymentresourcepoolserviceModule.v1beta1
-          .DeploymentResourcePoolServiceClient.port;
+        genaituningserviceModule.v1beta1.GenAiTuningServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient();
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            fallback: true,
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          fallback: true,
+        });
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      assert.strictEqual(client.deploymentResourcePoolServiceStub, undefined);
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      assert.strictEqual(client.genAiTuningServiceStub, undefined);
       await client.initialize();
-      assert(client.deploymentResourcePoolServiceStub);
+      assert(client.genAiTuningServiceStub);
     });
 
     it('has close method for the initialized client', done => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
-      assert(client.deploymentResourcePoolServiceStub);
+      assert(client.genAiTuningServiceStub);
       client.close().then(() => {
         done();
       });
@@ -318,13 +272,11 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
 
     it('has close method for the non-initialized client', done => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      assert.strictEqual(client.deploymentResourcePoolServiceStub, undefined);
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      assert.strictEqual(client.genAiTuningServiceStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -333,12 +285,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
       const result = await client.getProjectId();
       assert.strictEqual(result, fakeProjectId);
@@ -348,12 +298,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.auth.getProjectId = sinon
         .stub()
         .callsArgWith(0, null, fakeProjectId);
@@ -371,71 +319,66 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
     });
   });
 
-  describe('getDeploymentResourcePool', () => {
-    it('invokes getDeploymentResourcePool without error', async () => {
+  describe('createTuningJob', () => {
+    it('invokes createTuningJob without error', async () => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.GetDeploymentResourcePoolRequest()
+        new protos.google.cloud.aiplatform.v1beta1.CreateTuningJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.GetDeploymentResourcePoolRequest',
-        ['name']
+        '.google.cloud.aiplatform.v1beta1.CreateTuningJobRequest',
+        ['parent']
       );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.DeploymentResourcePool()
+        new protos.google.cloud.aiplatform.v1beta1.TuningJob()
       );
-      client.innerApiCalls.getDeploymentResourcePool =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getDeploymentResourcePool(request);
+      client.innerApiCalls.createTuningJob = stubSimpleCall(expectedResponse);
+      const [response] = await client.createTuningJob(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getDeploymentResourcePool as SinonStub
+        client.innerApiCalls.createTuningJob as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getDeploymentResourcePool as SinonStub
+        client.innerApiCalls.createTuningJob as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getDeploymentResourcePool without error using callback', async () => {
+    it('invokes createTuningJob without error using callback', async () => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.GetDeploymentResourcePoolRequest()
+        new protos.google.cloud.aiplatform.v1beta1.CreateTuningJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.GetDeploymentResourcePoolRequest',
-        ['name']
+        '.google.cloud.aiplatform.v1beta1.CreateTuningJobRequest',
+        ['parent']
       );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.DeploymentResourcePool()
+        new protos.google.cloud.aiplatform.v1beta1.TuningJob()
       );
-      client.innerApiCalls.getDeploymentResourcePool =
+      client.innerApiCalls.createTuningJob =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.getDeploymentResourcePool(
+        client.createTuningJob(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1beta1.IDeploymentResourcePool | null
+            result?: protos.google.cloud.aiplatform.v1beta1.ITuningJob | null
           ) => {
             if (err) {
               reject(err);
@@ -448,593 +391,262 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getDeploymentResourcePool as SinonStub
+        client.innerApiCalls.createTuningJob as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getDeploymentResourcePool as SinonStub
+        client.innerApiCalls.createTuningJob as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getDeploymentResourcePool with error', async () => {
+    it('invokes createTuningJob with error', async () => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.GetDeploymentResourcePoolRequest()
+        new protos.google.cloud.aiplatform.v1beta1.CreateTuningJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.GetDeploymentResourcePoolRequest',
+        '.google.cloud.aiplatform.v1beta1.CreateTuningJobRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createTuningJob = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createTuningJob(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createTuningJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTuningJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createTuningJob with closed client', async () => {
+      const client =
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.CreateTuningJobRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreateTuningJobRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createTuningJob(request), expectedError);
+    });
+  });
+
+  describe('getTuningJob', () => {
+    it('invokes getTuningJob without error', async () => {
+      const client =
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.GetTuningJobRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetTuningJobRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.TuningJob()
+      );
+      client.innerApiCalls.getTuningJob = stubSimpleCall(expectedResponse);
+      const [response] = await client.getTuningJob(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getTuningJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTuningJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getTuningJob without error using callback', async () => {
+      const client =
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.GetTuningJobRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetTuningJobRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.TuningJob()
+      );
+      client.innerApiCalls.getTuningJob =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getTuningJob(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1beta1.ITuningJob | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getTuningJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTuningJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getTuningJob with error', async () => {
+      const client =
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.GetTuningJobRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetTuningJobRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.getDeploymentResourcePool = stubSimpleCall(
+      client.innerApiCalls.getTuningJob = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(
-        client.getDeploymentResourcePool(request),
-        expectedError
-      );
+      await assert.rejects(client.getTuningJob(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.getDeploymentResourcePool as SinonStub
+        client.innerApiCalls.getTuningJob as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getDeploymentResourcePool as SinonStub
+        client.innerApiCalls.getTuningJob as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getDeploymentResourcePool with closed client', async () => {
+    it('invokes getTuningJob with closed client', async () => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.GetDeploymentResourcePoolRequest()
+        new protos.google.cloud.aiplatform.v1beta1.GetTuningJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.GetDeploymentResourcePoolRequest',
+        '.google.cloud.aiplatform.v1beta1.GetTuningJobRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(
-        client.getDeploymentResourcePool(request),
-        expectedError
-      );
+      await assert.rejects(client.getTuningJob(request), expectedError);
     });
   });
 
-  describe('createDeploymentResourcePool', () => {
-    it('invokes createDeploymentResourcePool without error', async () => {
+  describe('cancelTuningJob', () => {
+    it('invokes cancelTuningJob without error', async () => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.CreateDeploymentResourcePoolRequest()
+        new protos.google.cloud.aiplatform.v1beta1.CancelTuningJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.CreateDeploymentResourcePoolRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createDeploymentResourcePool =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createDeploymentResourcePool(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createDeploymentResourcePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createDeploymentResourcePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createDeploymentResourcePool without error using callback', async () => {
-      const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.CreateDeploymentResourcePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.CreateDeploymentResourcePoolRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createDeploymentResourcePool =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createDeploymentResourcePool(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.aiplatform.v1beta1.IDeploymentResourcePool,
-              protos.google.cloud.aiplatform.v1beta1.ICreateDeploymentResourcePoolOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IDeploymentResourcePool,
-        protos.google.cloud.aiplatform.v1beta1.ICreateDeploymentResourcePoolOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createDeploymentResourcePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createDeploymentResourcePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createDeploymentResourcePool with call error', async () => {
-      const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.CreateDeploymentResourcePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.CreateDeploymentResourcePoolRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createDeploymentResourcePool = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.createDeploymentResourcePool(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.createDeploymentResourcePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createDeploymentResourcePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createDeploymentResourcePool with LRO error', async () => {
-      const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.CreateDeploymentResourcePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.CreateDeploymentResourcePoolRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createDeploymentResourcePool = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createDeploymentResourcePool(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createDeploymentResourcePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createDeploymentResourcePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateDeploymentResourcePoolProgress without error', async () => {
-      const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation =
-        await client.checkCreateDeploymentResourcePoolProgress(
-          expectedResponse.name
-        );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateDeploymentResourcePoolProgress with error', async () => {
-      const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateDeploymentResourcePoolProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteDeploymentResourcePool', () => {
-    it('invokes deleteDeploymentResourcePool without error', async () => {
-      const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.DeleteDeploymentResourcePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.DeleteDeploymentResourcePoolRequest',
+        '.google.cloud.aiplatform.v1beta1.CancelTuningJobRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
+        new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteDeploymentResourcePool =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteDeploymentResourcePool(request);
-      const [response] = await operation.promise();
+      client.innerApiCalls.cancelTuningJob = stubSimpleCall(expectedResponse);
+      const [response] = await client.cancelTuningJob(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.deleteDeploymentResourcePool as SinonStub
+        client.innerApiCalls.cancelTuningJob as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDeploymentResourcePool as SinonStub
+        client.innerApiCalls.cancelTuningJob as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes deleteDeploymentResourcePool without error using callback', async () => {
+    it('invokes cancelTuningJob without error using callback', async () => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.DeleteDeploymentResourcePoolRequest()
+        new protos.google.cloud.aiplatform.v1beta1.CancelTuningJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.DeleteDeploymentResourcePoolRequest',
+        '.google.cloud.aiplatform.v1beta1.CancelTuningJobRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
+        new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteDeploymentResourcePool =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteDeploymentResourcePool(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteDeploymentResourcePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDeploymentResourcePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteDeploymentResourcePool with call error', async () => {
-      const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.DeleteDeploymentResourcePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.DeleteDeploymentResourcePoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteDeploymentResourcePool = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.deleteDeploymentResourcePool(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.deleteDeploymentResourcePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDeploymentResourcePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteDeploymentResourcePool with LRO error', async () => {
-      const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.DeleteDeploymentResourcePoolRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.DeleteDeploymentResourcePoolRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteDeploymentResourcePool = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteDeploymentResourcePool(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteDeploymentResourcePool as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDeploymentResourcePool as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteDeploymentResourcePoolProgress without error', async () => {
-      const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation =
-        await client.checkDeleteDeploymentResourcePoolProgress(
-          expectedResponse.name
-        );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteDeploymentResourcePoolProgress with error', async () => {
-      const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteDeploymentResourcePoolProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listDeploymentResourcePools', () => {
-    it('invokes listDeploymentResourcePools without error', async () => {
-      const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ListDeploymentResourcePoolsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.ListDeploymentResourcePoolsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.DeploymentResourcePool()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.DeploymentResourcePool()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.DeploymentResourcePool()
-        ),
-      ];
-      client.innerApiCalls.listDeploymentResourcePools =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listDeploymentResourcePools(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listDeploymentResourcePools as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listDeploymentResourcePools as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listDeploymentResourcePools without error using callback', async () => {
-      const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ListDeploymentResourcePoolsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.ListDeploymentResourcePoolsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.DeploymentResourcePool()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.DeploymentResourcePool()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.DeploymentResourcePool()
-        ),
-      ];
-      client.innerApiCalls.listDeploymentResourcePools =
+      client.innerApiCalls.cancelTuningJob =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.listDeploymentResourcePools(
+        client.cancelTuningJob(
           request,
           (
             err?: Error | null,
-            result?:
-              | protos.google.cloud.aiplatform.v1beta1.IDeploymentResourcePool[]
-              | null
+            result?: protos.google.protobuf.IEmpty | null
           ) => {
             if (err) {
               reject(err);
@@ -1047,92 +659,233 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.listDeploymentResourcePools as SinonStub
+        client.innerApiCalls.cancelTuningJob as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listDeploymentResourcePools as SinonStub
+        client.innerApiCalls.cancelTuningJob as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listDeploymentResourcePools with error', async () => {
+    it('invokes cancelTuningJob with error', async () => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ListDeploymentResourcePoolsRequest()
+        new protos.google.cloud.aiplatform.v1beta1.CancelTuningJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.ListDeploymentResourcePoolsRequest',
-        ['parent']
+        '.google.cloud.aiplatform.v1beta1.CancelTuningJobRequest',
+        ['name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.listDeploymentResourcePools = stubSimpleCall(
+      client.innerApiCalls.cancelTuningJob = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(
-        client.listDeploymentResourcePools(request),
-        expectedError
-      );
+      await assert.rejects(client.cancelTuningJob(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.listDeploymentResourcePools as SinonStub
+        client.innerApiCalls.cancelTuningJob as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listDeploymentResourcePools as SinonStub
+        client.innerApiCalls.cancelTuningJob as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listDeploymentResourcePoolsStream without error', async () => {
+    it('invokes cancelTuningJob with closed client', async () => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ListDeploymentResourcePoolsRequest()
+        new protos.google.cloud.aiplatform.v1beta1.CancelTuningJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.ListDeploymentResourcePoolsRequest',
+        '.google.cloud.aiplatform.v1beta1.CancelTuningJobRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.cancelTuningJob(request), expectedError);
+    });
+  });
+
+  describe('listTuningJobs', () => {
+    it('invokes listTuningJobs without error', async () => {
+      const client =
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListTuningJobsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListTuningJobsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.DeploymentResourcePool()
+          new protos.google.cloud.aiplatform.v1beta1.TuningJob()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.DeploymentResourcePool()
+          new protos.google.cloud.aiplatform.v1beta1.TuningJob()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.DeploymentResourcePool()
+          new protos.google.cloud.aiplatform.v1beta1.TuningJob()
         ),
       ];
-      client.descriptors.page.listDeploymentResourcePools.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listDeploymentResourcePoolsStream(request);
+      client.innerApiCalls.listTuningJobs = stubSimpleCall(expectedResponse);
+      const [response] = await client.listTuningJobs(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listTuningJobs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTuningJobs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listTuningJobs without error using callback', async () => {
+      const client =
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListTuningJobsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListTuningJobsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.TuningJob()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.TuningJob()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.TuningJob()
+        ),
+      ];
+      client.innerApiCalls.listTuningJobs =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.DeploymentResourcePool[] =
+        client.listTuningJobs(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1beta1.ITuningJob[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listTuningJobs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTuningJobs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listTuningJobs with error', async () => {
+      const client =
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListTuningJobsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListTuningJobsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listTuningJobs = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listTuningJobs(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listTuningJobs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTuningJobs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listTuningJobsStream without error', async () => {
+      const client =
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListTuningJobsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListTuningJobsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.TuningJob()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.TuningJob()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.TuningJob()
+        ),
+      ];
+      client.descriptors.page.listTuningJobs.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listTuningJobsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.TuningJob[] =
           [];
         stream.on(
           'data',
-          (
-            response: protos.google.cloud.aiplatform.v1beta1.DeploymentResourcePool
-          ) => {
+          (response: protos.google.cloud.aiplatform.v1beta1.TuningJob) => {
             responses.push(response);
           }
         );
@@ -1146,55 +899,45 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (
-          client.descriptors.page.listDeploymentResourcePools
-            .createStream as SinonStub
-        )
+        (client.descriptors.page.listTuningJobs.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listDeploymentResourcePools, request)
+          .calledWith(client.innerApiCalls.listTuningJobs, request)
       );
       assert(
-        (
-          client.descriptors.page.listDeploymentResourcePools
-            .createStream as SinonStub
-        )
+        (client.descriptors.page.listTuningJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
-    it('invokes listDeploymentResourcePoolsStream with error', async () => {
+    it('invokes listTuningJobsStream with error', async () => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ListDeploymentResourcePoolsRequest()
+        new protos.google.cloud.aiplatform.v1beta1.ListTuningJobsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.ListDeploymentResourcePoolsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListTuningJobsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.descriptors.page.listDeploymentResourcePools.createStream =
+      client.descriptors.page.listTuningJobs.createStream =
         stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listDeploymentResourcePoolsStream(request);
+      const stream = client.listTuningJobsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.DeploymentResourcePool[] =
+        const responses: protos.google.cloud.aiplatform.v1beta1.TuningJob[] =
           [];
         stream.on(
           'data',
-          (
-            response: protos.google.cloud.aiplatform.v1beta1.DeploymentResourcePool
-          ) => {
+          (response: protos.google.cloud.aiplatform.v1beta1.TuningJob) => {
             responses.push(response);
           }
         );
@@ -1207,106 +950,91 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (
-          client.descriptors.page.listDeploymentResourcePools
-            .createStream as SinonStub
-        )
+        (client.descriptors.page.listTuningJobs.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listDeploymentResourcePools, request)
+          .calledWith(client.innerApiCalls.listTuningJobs, request)
       );
       assert(
-        (
-          client.descriptors.page.listDeploymentResourcePools
-            .createStream as SinonStub
-        )
+        (client.descriptors.page.listTuningJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
-    it('uses async iteration with listDeploymentResourcePools without error', async () => {
+    it('uses async iteration with listTuningJobs without error', async () => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ListDeploymentResourcePoolsRequest()
+        new protos.google.cloud.aiplatform.v1beta1.ListTuningJobsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.ListDeploymentResourcePoolsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListTuningJobsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.DeploymentResourcePool()
+          new protos.google.cloud.aiplatform.v1beta1.TuningJob()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.DeploymentResourcePool()
+          new protos.google.cloud.aiplatform.v1beta1.TuningJob()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.DeploymentResourcePool()
+          new protos.google.cloud.aiplatform.v1beta1.TuningJob()
         ),
       ];
-      client.descriptors.page.listDeploymentResourcePools.asyncIterate =
+      client.descriptors.page.listTuningJobs.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.aiplatform.v1beta1.IDeploymentResourcePool[] =
-        [];
-      const iterable = client.listDeploymentResourcePoolsAsync(request);
+      const responses: protos.google.cloud.aiplatform.v1beta1.ITuningJob[] = [];
+      const iterable = client.listTuningJobsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
         (
-          client.descriptors.page.listDeploymentResourcePools
-            .asyncIterate as SinonStub
+          client.descriptors.page.listTuningJobs.asyncIterate as SinonStub
         ).getCall(0).args[1],
         request
       );
       assert(
-        (
-          client.descriptors.page.listDeploymentResourcePools
-            .asyncIterate as SinonStub
-        )
+        (client.descriptors.page.listTuningJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
-    it('uses async iteration with listDeploymentResourcePools with error', async () => {
+    it('uses async iteration with listTuningJobs with error', async () => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ListDeploymentResourcePoolsRequest()
+        new protos.google.cloud.aiplatform.v1beta1.ListTuningJobsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.ListDeploymentResourcePoolsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListTuningJobsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.descriptors.page.listDeploymentResourcePools.asyncIterate =
+      client.descriptors.page.listTuningJobs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listDeploymentResourcePoolsAsync(request);
+      const iterable = client.listTuningJobsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.IDeploymentResourcePool[] =
+        const responses: protos.google.cloud.aiplatform.v1beta1.ITuningJob[] =
           [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -1314,369 +1042,12 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
       });
       assert.deepStrictEqual(
         (
-          client.descriptors.page.listDeploymentResourcePools
-            .asyncIterate as SinonStub
+          client.descriptors.page.listTuningJobs.asyncIterate as SinonStub
         ).getCall(0).args[1],
         request
       );
       assert(
-        (
-          client.descriptors.page.listDeploymentResourcePools
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-
-  describe('queryDeployedModels', () => {
-    it('invokes queryDeployedModels without error', async () => {
-      const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.QueryDeployedModelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.QueryDeployedModelsRequest',
-        ['deploymentResourcePool']
-      );
-      request.deploymentResourcePool = defaultValue1;
-      const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.DeployedModel()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.DeployedModel()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.DeployedModel()
-        ),
-      ];
-      client.innerApiCalls.queryDeployedModels =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.queryDeployedModels(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.queryDeployedModels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.queryDeployedModels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes queryDeployedModels without error using callback', async () => {
-      const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.QueryDeployedModelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.QueryDeployedModelsRequest',
-        ['deploymentResourcePool']
-      );
-      request.deploymentResourcePool = defaultValue1;
-      const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.DeployedModel()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.DeployedModel()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.DeployedModel()
-        ),
-      ];
-      client.innerApiCalls.queryDeployedModels =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.queryDeployedModels(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.aiplatform.v1beta1.IDeployedModel[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.queryDeployedModels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.queryDeployedModels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes queryDeployedModels with error', async () => {
-      const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.QueryDeployedModelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.QueryDeployedModelsRequest',
-        ['deploymentResourcePool']
-      );
-      request.deploymentResourcePool = defaultValue1;
-      const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.queryDeployedModels = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.queryDeployedModels(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.queryDeployedModels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.queryDeployedModels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes queryDeployedModelsStream without error', async () => {
-      const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.QueryDeployedModelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.QueryDeployedModelsRequest',
-        ['deploymentResourcePool']
-      );
-      request.deploymentResourcePool = defaultValue1;
-      const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.DeployedModel()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.DeployedModel()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.DeployedModel()
-        ),
-      ];
-      client.descriptors.page.queryDeployedModels.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.queryDeployedModelsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.DeployedModel[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.aiplatform.v1beta1.DeployedModel) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.queryDeployedModels.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.queryDeployedModels, request)
-      );
-      assert(
-        (client.descriptors.page.queryDeployedModels.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes queryDeployedModelsStream with error', async () => {
-      const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.QueryDeployedModelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.QueryDeployedModelsRequest',
-        ['deploymentResourcePool']
-      );
-      request.deploymentResourcePool = defaultValue1;
-      const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.queryDeployedModels.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.queryDeployedModelsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.DeployedModel[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.aiplatform.v1beta1.DeployedModel) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.queryDeployedModels.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.queryDeployedModels, request)
-      );
-      assert(
-        (client.descriptors.page.queryDeployedModels.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with queryDeployedModels without error', async () => {
-      const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.QueryDeployedModelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.QueryDeployedModelsRequest',
-        ['deploymentResourcePool']
-      );
-      request.deploymentResourcePool = defaultValue1;
-      const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.DeployedModel()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.DeployedModel()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1beta1.DeployedModel()
-        ),
-      ];
-      client.descriptors.page.queryDeployedModels.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.aiplatform.v1beta1.IDeployedModel[] =
-        [];
-      const iterable = client.queryDeployedModelsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.queryDeployedModels.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.queryDeployedModels.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with queryDeployedModels with error', async () => {
-      const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.QueryDeployedModelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.QueryDeployedModelsRequest',
-        ['deploymentResourcePool']
-      );
-      request.deploymentResourcePool = defaultValue1;
-      const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.queryDeployedModels.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.queryDeployedModelsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.IDeployedModel[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.queryDeployedModels.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.queryDeployedModels.asyncIterate as SinonStub)
+        (client.descriptors.page.listTuningJobs.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
@@ -1687,12 +1058,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
@@ -1720,12 +1089,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
@@ -1767,12 +1134,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
@@ -1802,12 +1167,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
@@ -1835,12 +1198,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
@@ -1882,12 +1243,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
@@ -1917,12 +1276,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
@@ -1953,12 +1310,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
@@ -2000,12 +1355,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
@@ -2038,12 +1391,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -2071,12 +1422,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -2118,12 +1467,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -2156,12 +1503,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
@@ -2207,12 +1552,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
@@ -2248,344 +1591,6 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
       );
     });
   });
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const response = await client.getOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes getOperation without error using callback', async () => {
-      const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.getOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: operationsProtos.google.longrunning.Operation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-    it('invokes getOperation with error', async () => {
-      const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes cancelOperation without error using callback', async () => {
-      const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.cancelOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
-    });
-    it('invokes cancelOperation with error', async () => {
-      const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('deleteOperation', () => {
-    it('invokes deleteOperation without error', async () => {
-      const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.deleteOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes deleteOperation without error using callback', async () => {
-      const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.deleteOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
-    });
-    it('invokes deleteOperation with error', async () => {
-      const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.deleteOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('listOperationsAsync', () => {
-    it('uses async iteration with listOperations without error', async () => {
-      const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-      ];
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-    it('uses async iteration with listOperations with error', async () => {
-      const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
 
   describe('Path templates', () => {
     describe('annotation', () => {
@@ -2598,12 +1603,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         annotation: 'annotationValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.annotationPathTemplate.render = sinon
         .stub()
@@ -2688,12 +1691,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         annotation_spec: 'annotationSpecValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.annotationSpecPathTemplate.render = sinon
         .stub()
@@ -2768,12 +1769,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         artifact: 'artifactValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.artifactPathTemplate.render = sinon
         .stub()
@@ -2846,12 +1845,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         batch_prediction_job: 'batchPredictionJobValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.batchPredictionJobPathTemplate.render = sinon
         .stub()
@@ -2927,12 +1924,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         context: 'contextValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.contextPathTemplate.render = sinon
         .stub()
@@ -3005,12 +2000,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         custom_job: 'customJobValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.customJobPathTemplate.render = sinon
         .stub()
@@ -3073,12 +2066,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         data_item: 'dataItemValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.dataItemPathTemplate.render = sinon
         .stub()
@@ -3151,12 +2142,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         data_labeling_job: 'dataLabelingJobValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.dataLabelingJobPathTemplate.render = sinon
         .stub()
@@ -3219,12 +2208,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         dataset: 'datasetValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.datasetPathTemplate.render = sinon
         .stub()
@@ -3287,12 +2274,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         dataset_version: 'datasetVersionValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.datasetVersionPathTemplate.render = sinon
         .stub()
@@ -3366,12 +2351,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         deployment_resource_pool: 'deploymentResourcePoolValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.deploymentResourcePoolPathTemplate.render = sinon
         .stub()
@@ -3451,12 +2434,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.entityTypePathTemplate.render = sinon
         .stub()
@@ -3530,12 +2511,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         execution: 'executionValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.executionPathTemplate.render = sinon
         .stub()
@@ -3608,12 +2587,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         extension: 'extensionValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.extensionPathTemplate.render = sinon
         .stub()
@@ -3675,12 +2652,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         feature_group: 'featureGroupValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.featureGroupPathTemplate.render = sinon
         .stub()
@@ -3742,12 +2717,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         feature_online_store: 'featureOnlineStoreValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.featureOnlineStorePathTemplate.render = sinon
         .stub()
@@ -3823,12 +2796,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.featureViewPathTemplate.render = sinon
         .stub()
@@ -3903,12 +2874,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.featureViewSyncPathTemplate.render = sinon
         .stub()
@@ -3982,12 +2951,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         featurestore: 'featurestoreValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.featurestorePathTemplate.render = sinon
         .stub()
@@ -4049,12 +3016,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.hyperparameterTuningJobPathTemplate.render = sinon
         .stub()
@@ -4133,12 +3098,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         index: 'indexValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.indexPathTemplate.render = sinon
         .stub()
@@ -4200,12 +3163,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         index_endpoint: 'indexEndpointValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.indexEndpointPathTemplate.render = sinon
         .stub()
@@ -4266,12 +3227,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         location: 'locationValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
@@ -4320,12 +3279,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         metadata_schema: 'metadataSchemaValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.metadataSchemaPathTemplate.render = sinon
         .stub()
@@ -4400,12 +3357,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         metadata_store: 'metadataStoreValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.metadataStorePathTemplate.render = sinon
         .stub()
@@ -4467,12 +3422,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         model: 'modelValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.modelPathTemplate.render = sinon
         .stub()
@@ -4534,12 +3487,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -4617,12 +3568,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.modelEvaluationPathTemplate.render = sinon
         .stub()
@@ -4697,12 +3646,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         slice: 'sliceValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.modelEvaluationSlicePathTemplate.render = sinon
         .stub()
@@ -4807,12 +3754,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         model_monitor: 'modelMonitorValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.modelMonitorPathTemplate.render = sinon
         .stub()
@@ -4875,12 +3820,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         model_monitoring_job: 'modelMonitoringJobValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.modelMonitoringJobPathTemplate.render = sinon
         .stub()
@@ -4970,12 +3913,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         nas_job: 'nasJobValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.nasJobPathTemplate.render = sinon
         .stub()
@@ -5038,12 +3979,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         nas_trial_detail: 'nasTrialDetailValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.nasTrialDetailPathTemplate.render = sinon
         .stub()
@@ -5117,12 +4056,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         notebook_execution_job: 'notebookExecutionJobValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.notebookExecutionJobPathTemplate.render = sinon
         .stub()
@@ -5201,12 +4138,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         notebook_runtime: 'notebookRuntimeValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.notebookRuntimePathTemplate.render = sinon
         .stub()
@@ -5269,12 +4204,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         notebook_runtime_template: 'notebookRuntimeTemplateValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.notebookRuntimeTemplatePathTemplate.render = sinon
         .stub()
@@ -5353,12 +4286,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         persistent_resource: 'persistentResourceValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.persistentResourcePathTemplate.render = sinon
         .stub()
@@ -5433,12 +4364,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         pipeline_job: 'pipelineJobValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.pipelineJobPathTemplate.render = sinon
         .stub()
@@ -5492,47 +4421,6 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
       });
     });
 
-    describe('project', () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
     describe('projectLocationEndpoint', () => {
       const fakePath = '/rendered/path/projectLocationEndpoint';
       const expectedParameters = {
@@ -5541,12 +4429,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         endpoint: 'endpointValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationEndpointPathTemplate.render = sinon
         .stub()
@@ -5624,12 +4510,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         feature: 'featureValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -5730,12 +4614,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         feature: 'featureValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -5857,12 +4739,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         model: 'modelValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationPublisherModelPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -5951,12 +4831,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         model: 'modelValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.publisherModelPathTemplate.render = sinon
         .stub()
@@ -6007,12 +4885,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         rag_corpus: 'ragCorpusValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.ragCorpusPathTemplate.render = sinon
         .stub()
@@ -6075,12 +4951,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         rag_file: 'ragFileValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.ragFilePathTemplate.render = sinon
         .stub()
@@ -6153,12 +5027,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         reasoning_engine: 'reasoningEngineValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.reasoningEnginePathTemplate.render = sinon
         .stub()
@@ -6222,12 +5094,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         saved_query: 'savedQueryValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.savedQueryPathTemplate.render = sinon
         .stub()
@@ -6300,12 +5170,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         schedule: 'scheduleValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.schedulePathTemplate.render = sinon
         .stub()
@@ -6367,12 +5235,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         specialist_pool: 'specialistPoolValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.specialistPoolPathTemplate.render = sinon
         .stub()
@@ -6435,12 +5301,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         study: 'studyValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.studyPathTemplate.render = sinon
         .stub()
@@ -6502,12 +5366,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         tensorboard: 'tensorboardValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.tensorboardPathTemplate.render = sinon
         .stub()
@@ -6570,12 +5432,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         experiment: 'experimentValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.tensorboardExperimentPathTemplate.render = sinon
         .stub()
@@ -6669,12 +5529,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         run: 'runValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.tensorboardRunPathTemplate.render = sinon
         .stub()
@@ -6761,12 +5619,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         time_series: 'timeSeriesValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.tensorboardTimeSeriesPathTemplate.render = sinon
         .stub()
@@ -6887,12 +5743,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         training_pipeline: 'trainingPipelineValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.trainingPipelinePathTemplate.render = sinon
         .stub()
@@ -6959,12 +5813,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         trial: 'trialValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.trialPathTemplate.render = sinon
         .stub()
@@ -7037,12 +5889,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         tuning_job: 'tuningJobValue',
       };
       const client =
-        new deploymentresourcepoolserviceModule.v1beta1.DeploymentResourcePoolServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new genaituningserviceModule.v1beta1.GenAiTuningServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.tuningJobPathTemplate.render = sinon
         .stub()
