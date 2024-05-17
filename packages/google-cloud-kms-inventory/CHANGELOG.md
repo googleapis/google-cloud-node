@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v1.2.0...kms-inventory-v1.3.0) (2024-05-08)
+
+
+### Features
+
+* [kmsinventory] add client library for KMS Autokey service, which enables automated KMS key provision and management ([#5314](https://github.com/googleapis/google-cloud-node/issues/5314)) ([a6da262](https://github.com/googleapis/google-cloud-node/commit/a6da26277bac24fa82392cadb7602f61b64e67fb))
+
 ## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v1.1.0...kms-inventory-v1.2.0) (2024-03-29)
 
 
