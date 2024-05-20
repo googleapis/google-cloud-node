@@ -199,7 +199,7 @@ export class StreamingVideoIntelligenceServiceClient {
       streamingAnnotateVideo: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.BIDI_STREAMING,
         !!opts.fallback,
-        /* gaxStreamingRetries: */ false
+        !!opts.gaxServerStreamingRetries
       ),
     };
 
