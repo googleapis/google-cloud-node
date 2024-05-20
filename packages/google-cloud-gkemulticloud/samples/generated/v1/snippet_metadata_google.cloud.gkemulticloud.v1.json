@@ -1634,7 +1634,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 86,
                     "type": "FULL"
                 }
             ],
@@ -1658,6 +1658,10 @@
                     {
                         "name": "etag",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "ignore_errors",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
@@ -1990,7 +1994,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 81,
+                    "end": 88,
                     "type": "FULL"
                 }
             ],
@@ -2014,6 +2018,10 @@
                     {
                         "name": "etag",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "ignore_errors",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",

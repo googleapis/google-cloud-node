@@ -1203,7 +1203,7 @@ export class AzureClustersClient {
    * @param {string} request.azureCluster
    *   Required. The AzureCluster, which owns the JsonWebKeys.
    *   Format:
-   *   projects/<project-id>/locations/<region>/azureClusters/<cluster-id>
+   *   `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2090,6 +2090,11 @@ export class AzureClustersClient {
    *
    *   If the provided etag does not match the current etag of the cluster,
    *   the request will fail and an ABORTED error will be returned.
+   * @param {boolean} [request.ignoreErrors]
+   *   Optional. If set to true, the deletion of
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureCluster|AzureCluster} resource will
+   *   succeed even if errors occur during deleting in cluster resources. Using
+   *   this parameter may result in orphaned resources in the cluster.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2573,6 +2578,11 @@ export class AzureClustersClient {
    *
    *   If the provided ETag does not match the current etag of the node pool,
    *   the request will fail and an ABORTED error will be returned.
+   * @param {boolean} [request.ignoreErrors]
+   *   Optional. If set to true, the deletion of
+   *   {@link protos.google.cloud.gkemulticloud.v1.AzureNodePool|AzureNodePool} resource will
+   *   succeed even if errors occur during deleting in node pool resources. Using
+   *   this parameter may result in orphaned resources in the node pool.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
