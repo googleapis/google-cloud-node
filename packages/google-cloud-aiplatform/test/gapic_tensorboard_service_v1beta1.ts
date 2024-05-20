@@ -4151,6 +4151,52 @@ describe('v1beta1.TensorboardServiceClient', () => {
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
+    it('invokes readTensorboardBlobData without error and gaxServerStreamingRetries enabled', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          gaxServerStreamingRetries: true,
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ReadTensorboardBlobDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ReadTensorboardBlobDataRequest',
+        ['timeSeries']
+      );
+      request.timeSeries = defaultValue1;
+      const expectedHeaderRequestParams = `time_series=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ReadTensorboardBlobDataResponse()
+      );
+      client.innerApiCalls.readTensorboardBlobData =
+        stubServerStreamingCall(expectedResponse);
+      const stream = client.readTensorboardBlobData(request);
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.aiplatform.v1beta1.ReadTensorboardBlobDataResponse
+          ) => {
+            resolve(response);
+          }
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.readTensorboardBlobData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.readTensorboardBlobData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
     it('invokes readTensorboardBlobData with error', async () => {
       const client =
         new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
@@ -4231,6 +4277,13 @@ describe('v1beta1.TensorboardServiceClient', () => {
         });
       });
       await assert.rejects(promise, expectedError);
+    });
+    it('should create a client with gaxServerStreamingRetries enabled', () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          gaxServerStreamingRetries: true,
+        });
+      assert(client);
     });
   });
 
@@ -11189,6 +11242,71 @@ describe('v1beta1.TensorboardServiceClient', () => {
         assert.strictEqual(result, 'trialValue');
         assert(
           (client.pathTemplates.trialPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('tuningJob', () => {
+      const fakePath = '/rendered/path/tuningJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        tuning_job: 'tuningJobValue',
+      };
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.tuningJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.tuningJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('tuningJobPath', () => {
+        const result = client.tuningJobPath(
+          'projectValue',
+          'locationValue',
+          'tuningJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.tuningJobPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTuningJobName', () => {
+        const result = client.matchProjectFromTuningJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.tuningJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTuningJobName', () => {
+        const result = client.matchLocationFromTuningJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.tuningJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTuningJobFromTuningJobName', () => {
+        const result = client.matchTuningJobFromTuningJobName(fakePath);
+        assert.strictEqual(result, 'tuningJobValue');
+        assert(
+          (client.pathTemplates.tuningJobPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

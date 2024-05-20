@@ -317,12 +317,12 @@ export class SessionsClient {
       serverStreamingDetectIntent: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.SERVER_STREAMING,
         !!opts.fallback,
-        /* gaxStreamingRetries: */ false
+        !!opts.gaxServerStreamingRetries
       ),
       streamingDetectIntent: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.BIDI_STREAMING,
         !!opts.fallback,
-        /* gaxStreamingRetries: */ false
+        !!opts.gaxServerStreamingRetries
       ),
     };
 

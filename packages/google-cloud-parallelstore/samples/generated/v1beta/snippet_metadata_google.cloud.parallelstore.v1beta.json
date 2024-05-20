@@ -262,7 +262,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 78,
+                    "end": 76,
                     "type": "FULL"
                 }
             ],
@@ -272,12 +272,12 @@
                 "async": true,
                 "parameters": [
                     {
-                        "name": "source_gcs_uri",
-                        "type": "TYPE_STRING"
+                        "name": "source_gcs_bucket",
+                        "type": ".google.cloud.parallelstore.v1beta.SourceGcsBucket"
                     },
                     {
-                        "name": "destination_path",
-                        "type": "TYPE_STRING"
+                        "name": "destination_parallelstore",
+                        "type": ".google.cloud.parallelstore.v1beta.DestinationParallelstore"
                     },
                     {
                         "name": "name",
@@ -314,7 +314,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 78,
+                    "end": 76,
                     "type": "FULL"
                 }
             ],
@@ -324,12 +324,12 @@
                 "async": true,
                 "parameters": [
                     {
-                        "name": "source_path",
-                        "type": "TYPE_STRING"
+                        "name": "source_parallelstore",
+                        "type": ".google.cloud.parallelstore.v1beta.SourceParallelstore"
                     },
                     {
-                        "name": "destination_gcs_uri",
-                        "type": "TYPE_STRING"
+                        "name": "destination_gcs_bucket",
+                        "type": ".google.cloud.parallelstore.v1beta.DestinationGcsBucket"
                     },
                     {
                         "name": "name",

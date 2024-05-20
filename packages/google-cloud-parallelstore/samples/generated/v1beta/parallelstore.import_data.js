@@ -29,15 +29,13 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  URI to a Cloud Storage object in format:
-   *  'gs://<bucket_name>/<path_inside_bucket>'.
+   *  Cloud Storage source.
    */
-  // const sourceGcsUri = 'abc123'
+  // const sourceGcsBucket = {}
   /**
-   *  Optional. Root directory path to the Paralellstore filesystem, starting
-   *  with '/'. Sets to '/' if no value is set.
+   *  Parallelstore destination.
    */
-  // const destinationPath = 'abc123'
+  // const destinationParallelstore = {}
   /**
    *  Required. Name of the resource.
    */

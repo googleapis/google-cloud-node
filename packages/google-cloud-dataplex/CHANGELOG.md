@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.8.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.7.0...dataplex-v3.8.0) (2024-05-08)
+
+
+### Features
+
+* [dataplex] updated client libraries for Dataplex Catalog: removed deprecated fields, updated comments ([#5306](https://github.com/googleapis/google-cloud-node/issues/5306)) ([3db1ac8](https://github.com/googleapis/google-cloud-node/commit/3db1ac8ff587a919b35bd1131c495ce50f315d85))
+
 ## [3.7.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.6.0...dataplex-v3.7.0) (2024-04-16)
 
 

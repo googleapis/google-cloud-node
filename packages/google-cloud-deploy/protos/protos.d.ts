@@ -4720,6 +4720,9 @@ export namespace google {
 
                     /** ExecutionConfig executionTimeout */
                     executionTimeout?: (google.protobuf.IDuration|null);
+
+                    /** ExecutionConfig verbose */
+                    verbose?: (boolean|null);
                 }
 
                 /** Represents an ExecutionConfig. */
@@ -4751,6 +4754,9 @@ export namespace google {
 
                     /** ExecutionConfig executionTimeout. */
                     public executionTimeout?: (google.protobuf.IDuration|null);
+
+                    /** ExecutionConfig verbose. */
+                    public verbose: boolean;
 
                     /** ExecutionConfig executionEnvironment. */
                     public executionEnvironment?: ("defaultPool"|"privatePool");

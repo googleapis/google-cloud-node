@@ -596,6 +596,137 @@ describe('v1alpha.BatchServiceClient', () => {
     });
   });
 
+  describe('updateJob', () => {
+    it('invokes updateJob without error', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.UpdateJobRequest()
+      );
+      request.job ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.UpdateJobRequest',
+        ['job', 'name']
+      );
+      request.job.name = defaultValue1;
+      const expectedHeaderRequestParams = `job.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.Job()
+      );
+      client.innerApiCalls.updateJob = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateJob(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateJob without error using callback', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.UpdateJobRequest()
+      );
+      request.job ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.UpdateJobRequest',
+        ['job', 'name']
+      );
+      request.job.name = defaultValue1;
+      const expectedHeaderRequestParams = `job.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.Job()
+      );
+      client.innerApiCalls.updateJob =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateJob(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.batch.v1alpha.IJob | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateJob with error', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.UpdateJobRequest()
+      );
+      request.job ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.UpdateJobRequest',
+        ['job', 'name']
+      );
+      request.job.name = defaultValue1;
+      const expectedHeaderRequestParams = `job.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateJob = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.updateJob(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateJob with closed client', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.UpdateJobRequest()
+      );
+      request.job ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.UpdateJobRequest',
+        ['job', 'name']
+      );
+      request.job.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateJob(request), expectedError);
+    });
+  });
+
   describe('getTask', () => {
     it('invokes getTask without error', async () => {
       const client = new batchserviceModule.v1alpha.BatchServiceClient({

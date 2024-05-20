@@ -3070,7 +3070,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
                         },
                         "displayName": {
                           "type": "string",
@@ -3082,7 +3085,10 @@
                         },
                         "state": {
                           "type": "State",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
