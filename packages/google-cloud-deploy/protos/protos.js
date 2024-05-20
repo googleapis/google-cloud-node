@@ -11364,6 +11364,7 @@
                          * @property {string|null} [serviceAccount] ExecutionConfig serviceAccount
                          * @property {string|null} [artifactStorage] ExecutionConfig artifactStorage
                          * @property {google.protobuf.IDuration|null} [executionTimeout] ExecutionConfig executionTimeout
+                         * @property {boolean|null} [verbose] ExecutionConfig verbose
                          */
     
                         /**
@@ -11438,6 +11439,14 @@
                          */
                         ExecutionConfig.prototype.executionTimeout = null;
     
+                        /**
+                         * ExecutionConfig verbose.
+                         * @member {boolean} verbose
+                         * @memberof google.cloud.deploy.v1.ExecutionConfig
+                         * @instance
+                         */
+                        ExecutionConfig.prototype.verbose = false;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -11494,6 +11503,8 @@
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.artifactStorage);
                             if (message.executionTimeout != null && Object.hasOwnProperty.call(message, "executionTimeout"))
                                 $root.google.protobuf.Duration.encode(message.executionTimeout, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.verbose != null && Object.hasOwnProperty.call(message, "verbose"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).bool(message.verbose);
                             return writer;
                         };
     
@@ -11561,6 +11572,10 @@
                                     }
                                 case 7: {
                                         message.executionTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.verbose = reader.bool();
                                         break;
                                     }
                                 default:
@@ -11647,6 +11662,9 @@
                                 if (error)
                                     return "executionTimeout." + error;
                             }
+                            if (message.verbose != null && message.hasOwnProperty("verbose"))
+                                if (typeof message.verbose !== "boolean")
+                                    return "verbose: boolean expected";
                             return null;
                         };
     
@@ -11720,6 +11738,8 @@
                                     throw TypeError(".google.cloud.deploy.v1.ExecutionConfig.executionTimeout: object expected");
                                 message.executionTimeout = $root.google.protobuf.Duration.fromObject(object.executionTimeout);
                             }
+                            if (object.verbose != null)
+                                message.verbose = Boolean(object.verbose);
                             return message;
                         };
     
@@ -11743,6 +11763,7 @@
                                 object.serviceAccount = "";
                                 object.artifactStorage = "";
                                 object.executionTimeout = null;
+                                object.verbose = false;
                             }
                             if (message.usages && message.usages.length) {
                                 object.usages = [];
@@ -11767,6 +11788,8 @@
                                 object.artifactStorage = message.artifactStorage;
                             if (message.executionTimeout != null && message.hasOwnProperty("executionTimeout"))
                                 object.executionTimeout = $root.google.protobuf.Duration.toObject(message.executionTimeout, options);
+                            if (message.verbose != null && message.hasOwnProperty("verbose"))
+                                object.verbose = message.verbose;
                             return object;
                         };
     

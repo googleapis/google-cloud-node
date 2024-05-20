@@ -391,6 +391,10 @@
   * [Featurestore_service.update_entity_type](#featurestore_service.update_entity_type)
   * [Featurestore_service.update_feature](#featurestore_service.update_feature)
   * [Featurestore_service.update_featurestore](#featurestore_service.update_featurestore)
+  * [Gen_ai_tuning_service.cancel_tuning_job](#gen_ai_tuning_service.cancel_tuning_job)
+  * [Gen_ai_tuning_service.create_tuning_job](#gen_ai_tuning_service.create_tuning_job)
+  * [Gen_ai_tuning_service.get_tuning_job](#gen_ai_tuning_service.get_tuning_job)
+  * [Gen_ai_tuning_service.list_tuning_jobs](#gen_ai_tuning_service.list_tuning_jobs)
   * [Index_endpoint_service.create_index_endpoint](#index_endpoint_service.create_index_endpoint)
   * [Index_endpoint_service.delete_index_endpoint](#index_endpoint_service.delete_index_endpoint)
   * [Index_endpoint_service.deploy_index](#index_endpoint_service.deploy_index)
@@ -7080,6 +7084,74 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.update_featurestore.js`
+
+
+-----
+
+
+
+
+### Gen_ai_tuning_service.cancel_tuning_job
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.cancel_tuning_job.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.cancel_tuning_job.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.cancel_tuning_job.js`
+
+
+-----
+
+
+
+
+### Gen_ai_tuning_service.create_tuning_job
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.create_tuning_job.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.create_tuning_job.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.create_tuning_job.js`
+
+
+-----
+
+
+
+
+### Gen_ai_tuning_service.get_tuning_job
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.get_tuning_job.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.get_tuning_job.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.get_tuning_job.js`
+
+
+-----
+
+
+
+
+### Gen_ai_tuning_service.list_tuning_jobs
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.list_tuning_jobs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.list_tuning_jobs.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.list_tuning_jobs.js`
 
 
 -----
