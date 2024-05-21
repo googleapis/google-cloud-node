@@ -4,6 +4,16 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [7.11.1](https://github.com/googleapis/nodejs-storage/compare/v7.11.0...v7.11.1) (2024-05-21)
+
+
+### Bug Fixes
+
+* Add missing projectIdentifier to GetServiceAccountOptions ([#2468](https://github.com/googleapis/nodejs-storage/issues/2468)) ([d49e9d2](https://github.com/googleapis/nodejs-storage/commit/d49e9d2cbab42eb2390eeeccc562e3283df6384c))
+* Allow files in directories to be downloaded onto local machine ([#2199](https://github.com/googleapis/nodejs-storage/issues/2199)) ([9f62429](https://github.com/googleapis/nodejs-storage/commit/9f62429dad234167dc6f0969b40c7942bab83aee))
+* Do not set `customEndpoint` if `apiEndpoint === default` ([#2460](https://github.com/googleapis/nodejs-storage/issues/2460)) ([b4dbd73](https://github.com/googleapis/nodejs-storage/commit/b4dbd73189b9fae4c23d614753670ee562bc717b))
+* Improve GetFilesResponse interface ([#2466](https://github.com/googleapis/nodejs-storage/issues/2466)) ([918db28](https://github.com/googleapis/nodejs-storage/commit/918db2818395488ff925324a9962879bb56368d7))
+
 ## [7.11.0](https://github.com/googleapis/nodejs-storage/compare/v7.10.2...v7.11.0) (2024-05-03)
 
 
