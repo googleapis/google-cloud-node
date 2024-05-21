@@ -19,6 +19,7 @@ import {
   Bucket,
   File,
   CRC32C,
+  DownloadCallback,
   DownloadOptions,
   IdempotencyStrategy,
   MultiPartHelperGenerator,
@@ -232,6 +233,78 @@ describe('Transfer Manager', () => {
       });
 
       await transferManager.downloadManyFiles([file]);
+    });
+
+    it('sets the destination correctly when provided a passthroughOptions.destination', async () => {
+      const passthroughOptions = {
+        destination: 'test-destination',
+      };
+      const filename = 'first.txt';
+      const expectedDestination = path.normalize(
+        `${passthroughOptions.destination}/${filename}`
+      );
+      const download = (optionsOrCb?: DownloadOptions | DownloadCallback) => {
+        if (typeof optionsOrCb === 'function') {
+          optionsOrCb(null, Buffer.alloc(0));
+        } else if (optionsOrCb) {
+          assert.strictEqual(optionsOrCb.destination, expectedDestination);
+        }
+        return Promise.resolve([Buffer.alloc(0)]) as Promise<DownloadResponse>;
+      };
+
+      const file = new File(bucket, filename);
+      file.download = download;
+      await transferManager.downloadManyFiles([file], {passthroughOptions});
+    });
+
+    it('does not set the destination when prefix, strip prefix and passthroughOptions.destination are not provided', async () => {
+      const options = {};
+      const filename = 'first.txt';
+      const download = (optionsOrCb?: DownloadOptions | DownloadCallback) => {
+        if (typeof optionsOrCb === 'function') {
+          optionsOrCb(null, Buffer.alloc(0));
+        } else if (optionsOrCb) {
+          assert.strictEqual(optionsOrCb.destination, undefined);
+        }
+        return Promise.resolve([Buffer.alloc(0)]) as Promise<DownloadResponse>;
+      };
+
+      const file = new File(bucket, filename);
+      file.download = download;
+      await transferManager.downloadManyFiles([file], options);
+    });
+
+    it('should recursively create directory and write file contents if destination path is nested', async () => {
+      const prefix = 'text-prefix';
+      const folder = 'nestedFolder/';
+      const file = 'first.txt';
+      const filesOrFolder = [folder, path.join(folder, file)];
+      const expectedFilePath = path.join(prefix, folder, file);
+      const expectedDir = path.join(prefix, folder);
+      const mkdirSpy = sandbox.spy(fsp, 'mkdir');
+      const download = (optionsOrCb?: DownloadOptions | DownloadCallback) => {
+        if (typeof optionsOrCb === 'function') {
+          optionsOrCb(null, Buffer.alloc(0));
+        } else if (optionsOrCb) {
+          assert.strictEqual(optionsOrCb.destination, expectedFilePath);
+        }
+        return Promise.resolve([Buffer.alloc(0)]) as Promise<DownloadResponse>;
+      };
+
+      sandbox.stub(bucket, 'file').callsFake(filename => {
+        const file = new File(bucket, filename);
+        file.download = download;
+        return file;
+      });
+      await transferManager.downloadManyFiles(filesOrFolder, {
+        prefix: prefix,
+      });
+      assert.strictEqual(
+        mkdirSpy.calledOnceWith(expectedDir, {
+          recursive: true,
+        }),
+        true
+      );
     });
   });
 

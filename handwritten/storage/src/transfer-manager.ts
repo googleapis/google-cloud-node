@@ -526,7 +526,9 @@ export class TransferManager {
    *
    * @param {array | string} [filesOrFolder] An array of file name strings or file objects to be downloaded. If
    * a string is provided this will be treated as a GCS prefix and all files with that prefix will be downloaded.
-   * @param {DownloadManyFilesOptions} [options] Configuration options.
+   * @param {DownloadManyFilesOptions} [options] Configuration options. Setting options.prefix or options.stripPrefix
+   * or options.passthroughOptions.destination will cause the downloaded files to be written to the file system
+   * instead of being returned as a buffer.
    * @returns {Promise<DownloadResponse[]>}
    *
    * @example
@@ -587,7 +589,7 @@ export class TransferManager {
         [GCCL_GCS_CMD_KEY]: GCCL_GCS_CMD_FEATURE.DOWNLOAD_MANY,
       };
 
-      if (options.prefix) {
+      if (options.prefix || passThroughOptionsCopy.destination) {
         passThroughOptionsCopy.destination = path.join(
           options.prefix || '',
           passThroughOptionsCopy.destination || '',
@@ -598,7 +600,19 @@ export class TransferManager {
         passThroughOptionsCopy.destination = file.name.replace(regex, '');
       }
 
-      promises.push(limit(() => file.download(passThroughOptionsCopy)));
+      promises.push(
+        limit(async () => {
+          const destination = passThroughOptionsCopy.destination;
+          if (destination && destination.endsWith(path.sep)) {
+            await fsp.mkdir(destination, {recursive: true});
+            return Promise.resolve([
+              Buffer.alloc(0),
+            ]) as Promise<DownloadResponse>;
+          }
+
+          return file.download(passThroughOptionsCopy);
+        })
+      );
     }
 
     return Promise.all(promises);

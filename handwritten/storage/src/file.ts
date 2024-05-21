@@ -2288,12 +2288,13 @@ class File extends ServiceObject<File, FileMetadata> {
 
     const fileStream = this.createReadStream(options);
     let receivedData = false;
+
     if (destination) {
       fileStream
         .on('error', callback)
         .once('data', data => {
-          // We know that the file exists the server - now we can truncate/write to a file
           receivedData = true;
+          // We know that the file exists the server - now we can truncate/write to a file
           const writable = fs.createWriteStream(destination);
           writable.write(data);
           fileStream

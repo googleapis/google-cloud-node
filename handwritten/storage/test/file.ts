@@ -28,6 +28,7 @@ import assert from 'assert';
 import * as crypto from 'crypto';
 import duplexify from 'duplexify';
 import * as fs from 'fs';
+import * as path from 'path';
 import proxyquire from 'proxyquire';
 import * as resumableUpload from '../src/resumable-upload.js';
 import * as sinon from 'sinon';
@@ -2571,6 +2572,12 @@ describe('File', () => {
     });
 
     describe('with destination', () => {
+      const sandbox = sinon.createSandbox();
+
+      afterEach(() => {
+        sandbox.restore();
+      });
+
       it('should write the file to a destination if provided', done => {
         tmp.setGracefulCleanup();
         tmp.file((err, tmpFilePath) => {
@@ -2690,6 +2697,29 @@ describe('File', () => {
 
           file.download({destination: tmpFilePath}, (err: Error) => {
             assert.strictEqual(err, error);
+            done();
+          });
+        });
+      });
+
+      it('should fail if provided destination directory does not exist', done => {
+        tmp.setGracefulCleanup();
+        tmp.dir(async (err, tmpDirPath) => {
+          assert.ifError(err);
+
+          const fileContents = 'nested-abcdefghijklmnopqrstuvwxyz';
+
+          Object.assign(fileReadStream, {
+            _read(this: Readable) {
+              this.push(fileContents);
+              this.push(null);
+            },
+          });
+
+          const nestedPath = path.join(tmpDirPath, 'a', 'b', 'c', 'file.txt');
+
+          file.download({destination: nestedPath}, (err: Error) => {
+            assert.ok(err);
             done();
           });
         });
