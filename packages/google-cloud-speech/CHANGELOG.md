@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [6.6.0](https://github.com/googleapis/google-cloud-node/compare/speech-v6.5.0...speech-v6.6.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5355](https://github.com/googleapis/google-cloud-node/issues/5355)) ([19f9d6d](https://github.com/googleapis/google-cloud-node/commit/19f9d6df9ea88283d3a3a476c58cca6521a3354d))
+
 ## [6.5.0](https://github.com/googleapis/google-cloud-node/compare/speech-v6.4.0...speech-v6.5.0) (2024-04-05)
 
 
