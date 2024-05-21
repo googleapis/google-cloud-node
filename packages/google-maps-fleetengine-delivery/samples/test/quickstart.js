@@ -19,7 +19,7 @@ const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
 const { DeliveryServiceClient } = require('@googlemaps/fleetengine-delivery').v1;
-const fleetengine-deliveryClient = new DeliveryServiceClient();
+const fleetengineDeliveryClient = new DeliveryServiceClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
@@ -29,7 +29,7 @@ describe('Quickstart', () => {
   let projectId;
 
   before(async () => {
-    projectId = await fleetengine-deliveryClient.getProjectId();
+    projectId = await fleetengineDeliveryClient.getProjectId();
   });
 
   it('should run quickstart', async () => {
