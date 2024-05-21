@@ -19851,6 +19851,737 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
+
+                /** Namespace v1beta. */
+                namespace v1beta {
+
+                    /** Properties of a MembershipSpec. */
+                    interface IMembershipSpec {
+
+                        /** MembershipSpec controlPlane */
+                        controlPlane?: (google.cloud.gkehub.servicemesh.v1beta.MembershipSpec.ControlPlaneManagement|keyof typeof google.cloud.gkehub.servicemesh.v1beta.MembershipSpec.ControlPlaneManagement|null);
+
+                        /** MembershipSpec management */
+                        management?: (google.cloud.gkehub.servicemesh.v1beta.MembershipSpec.Management|keyof typeof google.cloud.gkehub.servicemesh.v1beta.MembershipSpec.Management|null);
+                    }
+
+                    /** Represents a MembershipSpec. */
+                    class MembershipSpec implements IMembershipSpec {
+
+                        /**
+                         * Constructs a new MembershipSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.gkehub.servicemesh.v1beta.IMembershipSpec);
+
+                        /** MembershipSpec controlPlane. */
+                        public controlPlane: (google.cloud.gkehub.servicemesh.v1beta.MembershipSpec.ControlPlaneManagement|keyof typeof google.cloud.gkehub.servicemesh.v1beta.MembershipSpec.ControlPlaneManagement);
+
+                        /** MembershipSpec management. */
+                        public management: (google.cloud.gkehub.servicemesh.v1beta.MembershipSpec.Management|keyof typeof google.cloud.gkehub.servicemesh.v1beta.MembershipSpec.Management);
+
+                        /**
+                         * Creates a new MembershipSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MembershipSpec instance
+                         */
+                        public static create(properties?: google.cloud.gkehub.servicemesh.v1beta.IMembershipSpec): google.cloud.gkehub.servicemesh.v1beta.MembershipSpec;
+
+                        /**
+                         * Encodes the specified MembershipSpec message. Does not implicitly {@link google.cloud.gkehub.servicemesh.v1beta.MembershipSpec.verify|verify} messages.
+                         * @param message MembershipSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.gkehub.servicemesh.v1beta.IMembershipSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MembershipSpec message, length delimited. Does not implicitly {@link google.cloud.gkehub.servicemesh.v1beta.MembershipSpec.verify|verify} messages.
+                         * @param message MembershipSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.gkehub.servicemesh.v1beta.IMembershipSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MembershipSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MembershipSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.servicemesh.v1beta.MembershipSpec;
+
+                        /**
+                         * Decodes a MembershipSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MembershipSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.servicemesh.v1beta.MembershipSpec;
+
+                        /**
+                         * Verifies a MembershipSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MembershipSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MembershipSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.servicemesh.v1beta.MembershipSpec;
+
+                        /**
+                         * Creates a plain object from a MembershipSpec message. Also converts values to other types if specified.
+                         * @param message MembershipSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.gkehub.servicemesh.v1beta.MembershipSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MembershipSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MembershipSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace MembershipSpec {
+
+                        /** ControlPlaneManagement enum. */
+                        enum ControlPlaneManagement {
+                            CONTROL_PLANE_MANAGEMENT_UNSPECIFIED = 0,
+                            AUTOMATIC = 1,
+                            MANUAL = 2
+                        }
+
+                        /** Management enum. */
+                        enum Management {
+                            MANAGEMENT_UNSPECIFIED = 0,
+                            MANAGEMENT_AUTOMATIC = 1,
+                            MANAGEMENT_MANUAL = 2
+                        }
+                    }
+
+                    /** Properties of a MembershipState. */
+                    interface IMembershipState {
+
+                        /** MembershipState controlPlaneManagement */
+                        controlPlaneManagement?: (google.cloud.gkehub.servicemesh.v1beta.MembershipState.IControlPlaneManagement|null);
+
+                        /** MembershipState dataPlaneManagement */
+                        dataPlaneManagement?: (google.cloud.gkehub.servicemesh.v1beta.MembershipState.IDataPlaneManagement|null);
+
+                        /** MembershipState conditions */
+                        conditions?: (google.cloud.gkehub.servicemesh.v1beta.MembershipState.ICondition[]|null);
+                    }
+
+                    /** Represents a MembershipState. */
+                    class MembershipState implements IMembershipState {
+
+                        /**
+                         * Constructs a new MembershipState.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.gkehub.servicemesh.v1beta.IMembershipState);
+
+                        /** MembershipState controlPlaneManagement. */
+                        public controlPlaneManagement?: (google.cloud.gkehub.servicemesh.v1beta.MembershipState.IControlPlaneManagement|null);
+
+                        /** MembershipState dataPlaneManagement. */
+                        public dataPlaneManagement?: (google.cloud.gkehub.servicemesh.v1beta.MembershipState.IDataPlaneManagement|null);
+
+                        /** MembershipState conditions. */
+                        public conditions: google.cloud.gkehub.servicemesh.v1beta.MembershipState.ICondition[];
+
+                        /**
+                         * Creates a new MembershipState instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MembershipState instance
+                         */
+                        public static create(properties?: google.cloud.gkehub.servicemesh.v1beta.IMembershipState): google.cloud.gkehub.servicemesh.v1beta.MembershipState;
+
+                        /**
+                         * Encodes the specified MembershipState message. Does not implicitly {@link google.cloud.gkehub.servicemesh.v1beta.MembershipState.verify|verify} messages.
+                         * @param message MembershipState message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.gkehub.servicemesh.v1beta.IMembershipState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MembershipState message, length delimited. Does not implicitly {@link google.cloud.gkehub.servicemesh.v1beta.MembershipState.verify|verify} messages.
+                         * @param message MembershipState message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.gkehub.servicemesh.v1beta.IMembershipState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MembershipState message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MembershipState
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.servicemesh.v1beta.MembershipState;
+
+                        /**
+                         * Decodes a MembershipState message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MembershipState
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.servicemesh.v1beta.MembershipState;
+
+                        /**
+                         * Verifies a MembershipState message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MembershipState message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MembershipState
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.servicemesh.v1beta.MembershipState;
+
+                        /**
+                         * Creates a plain object from a MembershipState message. Also converts values to other types if specified.
+                         * @param message MembershipState
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.gkehub.servicemesh.v1beta.MembershipState, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MembershipState to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MembershipState
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace MembershipState {
+
+                        /** Properties of a ControlPlaneManagement. */
+                        interface IControlPlaneManagement {
+
+                            /** ControlPlaneManagement details */
+                            details?: (google.cloud.gkehub.servicemesh.v1beta.IStatusDetails[]|null);
+
+                            /** ControlPlaneManagement state */
+                            state?: (google.cloud.gkehub.servicemesh.v1beta.MembershipState.LifecycleState|keyof typeof google.cloud.gkehub.servicemesh.v1beta.MembershipState.LifecycleState|null);
+
+                            /** ControlPlaneManagement implementation */
+                            implementation?: (google.cloud.gkehub.servicemesh.v1beta.MembershipState.ControlPlaneManagement.Implementation|keyof typeof google.cloud.gkehub.servicemesh.v1beta.MembershipState.ControlPlaneManagement.Implementation|null);
+                        }
+
+                        /** Represents a ControlPlaneManagement. */
+                        class ControlPlaneManagement implements IControlPlaneManagement {
+
+                            /**
+                             * Constructs a new ControlPlaneManagement.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.gkehub.servicemesh.v1beta.MembershipState.IControlPlaneManagement);
+
+                            /** ControlPlaneManagement details. */
+                            public details: google.cloud.gkehub.servicemesh.v1beta.IStatusDetails[];
+
+                            /** ControlPlaneManagement state. */
+                            public state: (google.cloud.gkehub.servicemesh.v1beta.MembershipState.LifecycleState|keyof typeof google.cloud.gkehub.servicemesh.v1beta.MembershipState.LifecycleState);
+
+                            /** ControlPlaneManagement implementation. */
+                            public implementation: (google.cloud.gkehub.servicemesh.v1beta.MembershipState.ControlPlaneManagement.Implementation|keyof typeof google.cloud.gkehub.servicemesh.v1beta.MembershipState.ControlPlaneManagement.Implementation);
+
+                            /**
+                             * Creates a new ControlPlaneManagement instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ControlPlaneManagement instance
+                             */
+                            public static create(properties?: google.cloud.gkehub.servicemesh.v1beta.MembershipState.IControlPlaneManagement): google.cloud.gkehub.servicemesh.v1beta.MembershipState.ControlPlaneManagement;
+
+                            /**
+                             * Encodes the specified ControlPlaneManagement message. Does not implicitly {@link google.cloud.gkehub.servicemesh.v1beta.MembershipState.ControlPlaneManagement.verify|verify} messages.
+                             * @param message ControlPlaneManagement message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.gkehub.servicemesh.v1beta.MembershipState.IControlPlaneManagement, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ControlPlaneManagement message, length delimited. Does not implicitly {@link google.cloud.gkehub.servicemesh.v1beta.MembershipState.ControlPlaneManagement.verify|verify} messages.
+                             * @param message ControlPlaneManagement message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.gkehub.servicemesh.v1beta.MembershipState.IControlPlaneManagement, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ControlPlaneManagement message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ControlPlaneManagement
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.servicemesh.v1beta.MembershipState.ControlPlaneManagement;
+
+                            /**
+                             * Decodes a ControlPlaneManagement message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ControlPlaneManagement
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.servicemesh.v1beta.MembershipState.ControlPlaneManagement;
+
+                            /**
+                             * Verifies a ControlPlaneManagement message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ControlPlaneManagement message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ControlPlaneManagement
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.servicemesh.v1beta.MembershipState.ControlPlaneManagement;
+
+                            /**
+                             * Creates a plain object from a ControlPlaneManagement message. Also converts values to other types if specified.
+                             * @param message ControlPlaneManagement
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.gkehub.servicemesh.v1beta.MembershipState.ControlPlaneManagement, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ControlPlaneManagement to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ControlPlaneManagement
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace ControlPlaneManagement {
+
+                            /** Implementation enum. */
+                            enum Implementation {
+                                IMPLEMENTATION_UNSPECIFIED = 0,
+                                ISTIOD = 1,
+                                TRAFFIC_DIRECTOR = 2,
+                                UPDATING = 3
+                            }
+                        }
+
+                        /** Properties of a DataPlaneManagement. */
+                        interface IDataPlaneManagement {
+
+                            /** DataPlaneManagement state */
+                            state?: (google.cloud.gkehub.servicemesh.v1beta.MembershipState.LifecycleState|keyof typeof google.cloud.gkehub.servicemesh.v1beta.MembershipState.LifecycleState|null);
+
+                            /** DataPlaneManagement details */
+                            details?: (google.cloud.gkehub.servicemesh.v1beta.IStatusDetails[]|null);
+                        }
+
+                        /** Represents a DataPlaneManagement. */
+                        class DataPlaneManagement implements IDataPlaneManagement {
+
+                            /**
+                             * Constructs a new DataPlaneManagement.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.gkehub.servicemesh.v1beta.MembershipState.IDataPlaneManagement);
+
+                            /** DataPlaneManagement state. */
+                            public state: (google.cloud.gkehub.servicemesh.v1beta.MembershipState.LifecycleState|keyof typeof google.cloud.gkehub.servicemesh.v1beta.MembershipState.LifecycleState);
+
+                            /** DataPlaneManagement details. */
+                            public details: google.cloud.gkehub.servicemesh.v1beta.IStatusDetails[];
+
+                            /**
+                             * Creates a new DataPlaneManagement instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DataPlaneManagement instance
+                             */
+                            public static create(properties?: google.cloud.gkehub.servicemesh.v1beta.MembershipState.IDataPlaneManagement): google.cloud.gkehub.servicemesh.v1beta.MembershipState.DataPlaneManagement;
+
+                            /**
+                             * Encodes the specified DataPlaneManagement message. Does not implicitly {@link google.cloud.gkehub.servicemesh.v1beta.MembershipState.DataPlaneManagement.verify|verify} messages.
+                             * @param message DataPlaneManagement message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.gkehub.servicemesh.v1beta.MembershipState.IDataPlaneManagement, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DataPlaneManagement message, length delimited. Does not implicitly {@link google.cloud.gkehub.servicemesh.v1beta.MembershipState.DataPlaneManagement.verify|verify} messages.
+                             * @param message DataPlaneManagement message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.gkehub.servicemesh.v1beta.MembershipState.IDataPlaneManagement, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DataPlaneManagement message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DataPlaneManagement
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.servicemesh.v1beta.MembershipState.DataPlaneManagement;
+
+                            /**
+                             * Decodes a DataPlaneManagement message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DataPlaneManagement
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.servicemesh.v1beta.MembershipState.DataPlaneManagement;
+
+                            /**
+                             * Verifies a DataPlaneManagement message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DataPlaneManagement message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DataPlaneManagement
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.servicemesh.v1beta.MembershipState.DataPlaneManagement;
+
+                            /**
+                             * Creates a plain object from a DataPlaneManagement message. Also converts values to other types if specified.
+                             * @param message DataPlaneManagement
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.gkehub.servicemesh.v1beta.MembershipState.DataPlaneManagement, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DataPlaneManagement to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DataPlaneManagement
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a Condition. */
+                        interface ICondition {
+
+                            /** Condition code */
+                            code?: (google.cloud.gkehub.servicemesh.v1beta.MembershipState.Condition.Code|keyof typeof google.cloud.gkehub.servicemesh.v1beta.MembershipState.Condition.Code|null);
+
+                            /** Condition documentationLink */
+                            documentationLink?: (string|null);
+
+                            /** Condition details */
+                            details?: (string|null);
+
+                            /** Condition severity */
+                            severity?: (google.cloud.gkehub.servicemesh.v1beta.MembershipState.Condition.Severity|keyof typeof google.cloud.gkehub.servicemesh.v1beta.MembershipState.Condition.Severity|null);
+                        }
+
+                        /** Represents a Condition. */
+                        class Condition implements ICondition {
+
+                            /**
+                             * Constructs a new Condition.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.gkehub.servicemesh.v1beta.MembershipState.ICondition);
+
+                            /** Condition code. */
+                            public code: (google.cloud.gkehub.servicemesh.v1beta.MembershipState.Condition.Code|keyof typeof google.cloud.gkehub.servicemesh.v1beta.MembershipState.Condition.Code);
+
+                            /** Condition documentationLink. */
+                            public documentationLink: string;
+
+                            /** Condition details. */
+                            public details: string;
+
+                            /** Condition severity. */
+                            public severity: (google.cloud.gkehub.servicemesh.v1beta.MembershipState.Condition.Severity|keyof typeof google.cloud.gkehub.servicemesh.v1beta.MembershipState.Condition.Severity);
+
+                            /**
+                             * Creates a new Condition instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Condition instance
+                             */
+                            public static create(properties?: google.cloud.gkehub.servicemesh.v1beta.MembershipState.ICondition): google.cloud.gkehub.servicemesh.v1beta.MembershipState.Condition;
+
+                            /**
+                             * Encodes the specified Condition message. Does not implicitly {@link google.cloud.gkehub.servicemesh.v1beta.MembershipState.Condition.verify|verify} messages.
+                             * @param message Condition message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.gkehub.servicemesh.v1beta.MembershipState.ICondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Condition message, length delimited. Does not implicitly {@link google.cloud.gkehub.servicemesh.v1beta.MembershipState.Condition.verify|verify} messages.
+                             * @param message Condition message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.gkehub.servicemesh.v1beta.MembershipState.ICondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Condition message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Condition
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.servicemesh.v1beta.MembershipState.Condition;
+
+                            /**
+                             * Decodes a Condition message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Condition
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.servicemesh.v1beta.MembershipState.Condition;
+
+                            /**
+                             * Verifies a Condition message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Condition message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Condition
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.servicemesh.v1beta.MembershipState.Condition;
+
+                            /**
+                             * Creates a plain object from a Condition message. Also converts values to other types if specified.
+                             * @param message Condition
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.gkehub.servicemesh.v1beta.MembershipState.Condition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Condition to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Condition
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace Condition {
+
+                            /** Code enum. */
+                            enum Code {
+                                CODE_UNSPECIFIED = 0,
+                                MESH_IAM_PERMISSION_DENIED = 100,
+                                CNI_CONFIG_UNSUPPORTED = 201,
+                                GKE_SANDBOX_UNSUPPORTED = 202,
+                                NODEPOOL_WORKLOAD_IDENTITY_FEDERATION_REQUIRED = 203,
+                                CNI_INSTALLATION_FAILED = 204,
+                                CNI_POD_UNSCHEDULABLE = 205,
+                                UNSUPPORTED_MULTIPLE_CONTROL_PLANES = 301,
+                                VPCSC_GA_SUPPORTED = 302,
+                                CONFIG_APPLY_INTERNAL_ERROR = 401,
+                                CONFIG_VALIDATION_ERROR = 402,
+                                CONFIG_VALIDATION_WARNING = 403,
+                                QUOTA_EXCEEDED_BACKEND_SERVICES = 404,
+                                QUOTA_EXCEEDED_HEALTH_CHECKS = 405,
+                                QUOTA_EXCEEDED_HTTP_ROUTES = 406,
+                                QUOTA_EXCEEDED_TCP_ROUTES = 407,
+                                QUOTA_EXCEEDED_TLS_ROUTES = 408,
+                                QUOTA_EXCEEDED_TRAFFIC_POLICIES = 409,
+                                QUOTA_EXCEEDED_ENDPOINT_POLICIES = 410,
+                                QUOTA_EXCEEDED_GATEWAYS = 411,
+                                QUOTA_EXCEEDED_MESHES = 412,
+                                QUOTA_EXCEEDED_SERVER_TLS_POLICIES = 413,
+                                QUOTA_EXCEEDED_CLIENT_TLS_POLICIES = 414,
+                                QUOTA_EXCEEDED_SERVICE_LB_POLICIES = 415,
+                                QUOTA_EXCEEDED_HTTP_FILTERS = 416,
+                                QUOTA_EXCEEDED_TCP_FILTERS = 417,
+                                QUOTA_EXCEEDED_NETWORK_ENDPOINT_GROUPS = 418
+                            }
+
+                            /** Severity enum. */
+                            enum Severity {
+                                SEVERITY_UNSPECIFIED = 0,
+                                ERROR = 1,
+                                WARNING = 2,
+                                INFO = 3
+                            }
+                        }
+
+                        /** LifecycleState enum. */
+                        enum LifecycleState {
+                            LIFECYCLE_STATE_UNSPECIFIED = 0,
+                            DISABLED = 1,
+                            FAILED_PRECONDITION = 2,
+                            PROVISIONING = 3,
+                            ACTIVE = 4,
+                            STALLED = 5,
+                            NEEDS_ATTENTION = 6,
+                            DEGRADED = 7
+                        }
+                    }
+
+                    /** Properties of a StatusDetails. */
+                    interface IStatusDetails {
+
+                        /** StatusDetails code */
+                        code?: (string|null);
+
+                        /** StatusDetails details */
+                        details?: (string|null);
+                    }
+
+                    /** Represents a StatusDetails. */
+                    class StatusDetails implements IStatusDetails {
+
+                        /**
+                         * Constructs a new StatusDetails.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.gkehub.servicemesh.v1beta.IStatusDetails);
+
+                        /** StatusDetails code. */
+                        public code: string;
+
+                        /** StatusDetails details. */
+                        public details: string;
+
+                        /**
+                         * Creates a new StatusDetails instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns StatusDetails instance
+                         */
+                        public static create(properties?: google.cloud.gkehub.servicemesh.v1beta.IStatusDetails): google.cloud.gkehub.servicemesh.v1beta.StatusDetails;
+
+                        /**
+                         * Encodes the specified StatusDetails message. Does not implicitly {@link google.cloud.gkehub.servicemesh.v1beta.StatusDetails.verify|verify} messages.
+                         * @param message StatusDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.gkehub.servicemesh.v1beta.IStatusDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified StatusDetails message, length delimited. Does not implicitly {@link google.cloud.gkehub.servicemesh.v1beta.StatusDetails.verify|verify} messages.
+                         * @param message StatusDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.gkehub.servicemesh.v1beta.IStatusDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a StatusDetails message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns StatusDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.servicemesh.v1beta.StatusDetails;
+
+                        /**
+                         * Decodes a StatusDetails message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns StatusDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.servicemesh.v1beta.StatusDetails;
+
+                        /**
+                         * Verifies a StatusDetails message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a StatusDetails message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns StatusDetails
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.servicemesh.v1beta.StatusDetails;
+
+                        /**
+                         * Creates a plain object from a StatusDetails message. Also converts values to other types if specified.
+                         * @param message StatusDetails
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.gkehub.servicemesh.v1beta.StatusDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this StatusDetails to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for StatusDetails
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
             }
 
             /** Namespace v1alpha2. */
@@ -23325,6 +24056,9 @@ export namespace google {
 
                     /** MembershipFeatureSpec configmanagement */
                     configmanagement?: (google.cloud.gkehub.configmanagement.v1beta.IMembershipSpec|null);
+
+                    /** MembershipFeatureSpec mesh */
+                    mesh?: (google.cloud.gkehub.servicemesh.v1beta.IMembershipSpec|null);
                 }
 
                 /** Represents a MembershipFeatureSpec. */
@@ -23339,8 +24073,11 @@ export namespace google {
                     /** MembershipFeatureSpec configmanagement. */
                     public configmanagement?: (google.cloud.gkehub.configmanagement.v1beta.IMembershipSpec|null);
 
+                    /** MembershipFeatureSpec mesh. */
+                    public mesh?: (google.cloud.gkehub.servicemesh.v1beta.IMembershipSpec|null);
+
                     /** MembershipFeatureSpec featureSpec. */
-                    public featureSpec?: "configmanagement";
+                    public featureSpec?: ("configmanagement"|"mesh");
 
                     /**
                      * Creates a new MembershipFeatureSpec instance using the specified properties.
@@ -23423,6 +24160,9 @@ export namespace google {
                 /** Properties of a MembershipFeatureState. */
                 interface IMembershipFeatureState {
 
+                    /** MembershipFeatureState servicemesh */
+                    servicemesh?: (google.cloud.gkehub.servicemesh.v1beta.IMembershipState|null);
+
                     /** MembershipFeatureState metering */
                     metering?: (google.cloud.gkehub.metering.v1beta.IMembershipState|null);
 
@@ -23442,6 +24182,9 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.gkehub.v1beta.IMembershipFeatureState);
 
+                    /** MembershipFeatureState servicemesh. */
+                    public servicemesh?: (google.cloud.gkehub.servicemesh.v1beta.IMembershipState|null);
+
                     /** MembershipFeatureState metering. */
                     public metering?: (google.cloud.gkehub.metering.v1beta.IMembershipState|null);
 
@@ -23452,7 +24195,7 @@ export namespace google {
                     public state?: (google.cloud.gkehub.v1beta.IFeatureState|null);
 
                     /** MembershipFeatureState featureState. */
-                    public featureState?: ("metering"|"configmanagement");
+                    public featureState?: ("servicemesh"|"metering"|"configmanagement");
 
                     /**
                      * Creates a new MembershipFeatureState instance using the specified properties.
