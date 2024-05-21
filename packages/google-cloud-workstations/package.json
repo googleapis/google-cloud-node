@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/workstations",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Cloud Workstations API client for Node.js",
   "repository": {
     "type": "git",
