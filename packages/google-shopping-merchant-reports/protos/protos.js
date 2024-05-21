@@ -671,6 +671,7 @@
                              * @memberof google.shopping.merchant.reports.v1beta
                              * @interface IReportRow
                              * @property {google.shopping.merchant.reports.v1beta.IProductPerformanceView|null} [productPerformanceView] ReportRow productPerformanceView
+                             * @property {google.shopping.merchant.reports.v1beta.INonProductPerformanceView|null} [nonProductPerformanceView] ReportRow nonProductPerformanceView
                              * @property {google.shopping.merchant.reports.v1beta.IProductView|null} [productView] ReportRow productView
                              * @property {google.shopping.merchant.reports.v1beta.IPriceCompetitivenessProductView|null} [priceCompetitivenessProductView] ReportRow priceCompetitivenessProductView
                              * @property {google.shopping.merchant.reports.v1beta.IPriceInsightsProductView|null} [priceInsightsProductView] ReportRow priceInsightsProductView
@@ -703,6 +704,14 @@
                              * @instance
                              */
                             ReportRow.prototype.productPerformanceView = null;
+    
+                            /**
+                             * ReportRow nonProductPerformanceView.
+                             * @member {google.shopping.merchant.reports.v1beta.INonProductPerformanceView|null|undefined} nonProductPerformanceView
+                             * @memberof google.shopping.merchant.reports.v1beta.ReportRow
+                             * @instance
+                             */
+                            ReportRow.prototype.nonProductPerformanceView = null;
     
                             /**
                              * ReportRow productView.
@@ -804,6 +813,8 @@
                                     $root.google.shopping.merchant.reports.v1beta.BestSellersProductClusterView.encode(message.bestSellersProductClusterView, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                                 if (message.bestSellersBrandView != null && Object.hasOwnProperty.call(message, "bestSellersBrandView"))
                                     $root.google.shopping.merchant.reports.v1beta.BestSellersBrandView.encode(message.bestSellersBrandView, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.nonProductPerformanceView != null && Object.hasOwnProperty.call(message, "nonProductPerformanceView"))
+                                    $root.google.shopping.merchant.reports.v1beta.NonProductPerformanceView.encode(message.nonProductPerformanceView, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                                 if (message.competitiveVisibilityCompetitorView != null && Object.hasOwnProperty.call(message, "competitiveVisibilityCompetitorView"))
                                     $root.google.shopping.merchant.reports.v1beta.CompetitiveVisibilityCompetitorView.encode(message.competitiveVisibilityCompetitorView, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                                 if (message.competitiveVisibilityTopMerchantView != null && Object.hasOwnProperty.call(message, "competitiveVisibilityTopMerchantView"))
@@ -846,6 +857,10 @@
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.productPerformanceView = $root.google.shopping.merchant.reports.v1beta.ProductPerformanceView.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.nonProductPerformanceView = $root.google.shopping.merchant.reports.v1beta.NonProductPerformanceView.decode(reader, reader.uint32());
                                             break;
                                         }
                                     case 2: {
@@ -920,6 +935,11 @@
                                     if (error)
                                         return "productPerformanceView." + error;
                                 }
+                                if (message.nonProductPerformanceView != null && message.hasOwnProperty("nonProductPerformanceView")) {
+                                    var error = $root.google.shopping.merchant.reports.v1beta.NonProductPerformanceView.verify(message.nonProductPerformanceView);
+                                    if (error)
+                                        return "nonProductPerformanceView." + error;
+                                }
                                 if (message.productView != null && message.hasOwnProperty("productView")) {
                                     var error = $root.google.shopping.merchant.reports.v1beta.ProductView.verify(message.productView);
                                     if (error)
@@ -979,6 +999,11 @@
                                     if (typeof object.productPerformanceView !== "object")
                                         throw TypeError(".google.shopping.merchant.reports.v1beta.ReportRow.productPerformanceView: object expected");
                                     message.productPerformanceView = $root.google.shopping.merchant.reports.v1beta.ProductPerformanceView.fromObject(object.productPerformanceView);
+                                }
+                                if (object.nonProductPerformanceView != null) {
+                                    if (typeof object.nonProductPerformanceView !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1beta.ReportRow.nonProductPerformanceView: object expected");
+                                    message.nonProductPerformanceView = $root.google.shopping.merchant.reports.v1beta.NonProductPerformanceView.fromObject(object.nonProductPerformanceView);
                                 }
                                 if (object.productView != null) {
                                     if (typeof object.productView !== "object")
@@ -1043,6 +1068,7 @@
                                     object.priceInsightsProductView = null;
                                     object.bestSellersProductClusterView = null;
                                     object.bestSellersBrandView = null;
+                                    object.nonProductPerformanceView = null;
                                     object.competitiveVisibilityCompetitorView = null;
                                     object.competitiveVisibilityTopMerchantView = null;
                                     object.competitiveVisibilityBenchmarkView = null;
@@ -1059,6 +1085,8 @@
                                     object.bestSellersProductClusterView = $root.google.shopping.merchant.reports.v1beta.BestSellersProductClusterView.toObject(message.bestSellersProductClusterView, options);
                                 if (message.bestSellersBrandView != null && message.hasOwnProperty("bestSellersBrandView"))
                                     object.bestSellersBrandView = $root.google.shopping.merchant.reports.v1beta.BestSellersBrandView.toObject(message.bestSellersBrandView, options);
+                                if (message.nonProductPerformanceView != null && message.hasOwnProperty("nonProductPerformanceView"))
+                                    object.nonProductPerformanceView = $root.google.shopping.merchant.reports.v1beta.NonProductPerformanceView.toObject(message.nonProductPerformanceView, options);
                                 if (message.competitiveVisibilityCompetitorView != null && message.hasOwnProperty("competitiveVisibilityCompetitorView"))
                                     object.competitiveVisibilityCompetitorView = $root.google.shopping.merchant.reports.v1beta.CompetitiveVisibilityCompetitorView.toObject(message.competitiveVisibilityCompetitorView, options);
                                 if (message.competitiveVisibilityTopMerchantView != null && message.hasOwnProperty("competitiveVisibilityTopMerchantView"))
@@ -8676,6 +8704,381 @@
                             };
     
                             return BestSellersBrandView;
+                        })();
+    
+                        v1beta.NonProductPerformanceView = (function() {
+    
+                            /**
+                             * Properties of a NonProductPerformanceView.
+                             * @memberof google.shopping.merchant.reports.v1beta
+                             * @interface INonProductPerformanceView
+                             * @property {google.type.IDate|null} [date] NonProductPerformanceView date
+                             * @property {google.type.IDate|null} [week] NonProductPerformanceView week
+                             * @property {number|Long|null} [clicks] NonProductPerformanceView clicks
+                             * @property {number|Long|null} [impressions] NonProductPerformanceView impressions
+                             * @property {number|null} [clickThroughRate] NonProductPerformanceView clickThroughRate
+                             */
+    
+                            /**
+                             * Constructs a new NonProductPerformanceView.
+                             * @memberof google.shopping.merchant.reports.v1beta
+                             * @classdesc Represents a NonProductPerformanceView.
+                             * @implements INonProductPerformanceView
+                             * @constructor
+                             * @param {google.shopping.merchant.reports.v1beta.INonProductPerformanceView=} [properties] Properties to set
+                             */
+                            function NonProductPerformanceView(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * NonProductPerformanceView date.
+                             * @member {google.type.IDate|null|undefined} date
+                             * @memberof google.shopping.merchant.reports.v1beta.NonProductPerformanceView
+                             * @instance
+                             */
+                            NonProductPerformanceView.prototype.date = null;
+    
+                            /**
+                             * NonProductPerformanceView week.
+                             * @member {google.type.IDate|null|undefined} week
+                             * @memberof google.shopping.merchant.reports.v1beta.NonProductPerformanceView
+                             * @instance
+                             */
+                            NonProductPerformanceView.prototype.week = null;
+    
+                            /**
+                             * NonProductPerformanceView clicks.
+                             * @member {number|Long|null|undefined} clicks
+                             * @memberof google.shopping.merchant.reports.v1beta.NonProductPerformanceView
+                             * @instance
+                             */
+                            NonProductPerformanceView.prototype.clicks = null;
+    
+                            /**
+                             * NonProductPerformanceView impressions.
+                             * @member {number|Long|null|undefined} impressions
+                             * @memberof google.shopping.merchant.reports.v1beta.NonProductPerformanceView
+                             * @instance
+                             */
+                            NonProductPerformanceView.prototype.impressions = null;
+    
+                            /**
+                             * NonProductPerformanceView clickThroughRate.
+                             * @member {number|null|undefined} clickThroughRate
+                             * @memberof google.shopping.merchant.reports.v1beta.NonProductPerformanceView
+                             * @instance
+                             */
+                            NonProductPerformanceView.prototype.clickThroughRate = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * NonProductPerformanceView _clicks.
+                             * @member {"clicks"|undefined} _clicks
+                             * @memberof google.shopping.merchant.reports.v1beta.NonProductPerformanceView
+                             * @instance
+                             */
+                            Object.defineProperty(NonProductPerformanceView.prototype, "_clicks", {
+                                get: $util.oneOfGetter($oneOfFields = ["clicks"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * NonProductPerformanceView _impressions.
+                             * @member {"impressions"|undefined} _impressions
+                             * @memberof google.shopping.merchant.reports.v1beta.NonProductPerformanceView
+                             * @instance
+                             */
+                            Object.defineProperty(NonProductPerformanceView.prototype, "_impressions", {
+                                get: $util.oneOfGetter($oneOfFields = ["impressions"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * NonProductPerformanceView _clickThroughRate.
+                             * @member {"clickThroughRate"|undefined} _clickThroughRate
+                             * @memberof google.shopping.merchant.reports.v1beta.NonProductPerformanceView
+                             * @instance
+                             */
+                            Object.defineProperty(NonProductPerformanceView.prototype, "_clickThroughRate", {
+                                get: $util.oneOfGetter($oneOfFields = ["clickThroughRate"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new NonProductPerformanceView instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.reports.v1beta.NonProductPerformanceView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1beta.INonProductPerformanceView=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.reports.v1beta.NonProductPerformanceView} NonProductPerformanceView instance
+                             */
+                            NonProductPerformanceView.create = function create(properties) {
+                                return new NonProductPerformanceView(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified NonProductPerformanceView message. Does not implicitly {@link google.shopping.merchant.reports.v1beta.NonProductPerformanceView.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.reports.v1beta.NonProductPerformanceView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1beta.INonProductPerformanceView} message NonProductPerformanceView message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NonProductPerformanceView.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.date != null && Object.hasOwnProperty.call(message, "date"))
+                                    $root.google.type.Date.encode(message.date, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.week != null && Object.hasOwnProperty.call(message, "week"))
+                                    $root.google.type.Date.encode(message.week, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.clicks != null && Object.hasOwnProperty.call(message, "clicks"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int64(message.clicks);
+                                if (message.impressions != null && Object.hasOwnProperty.call(message, "impressions"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int64(message.impressions);
+                                if (message.clickThroughRate != null && Object.hasOwnProperty.call(message, "clickThroughRate"))
+                                    writer.uint32(/* id 5, wireType 1 =*/41).double(message.clickThroughRate);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified NonProductPerformanceView message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1beta.NonProductPerformanceView.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1beta.NonProductPerformanceView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1beta.INonProductPerformanceView} message NonProductPerformanceView message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NonProductPerformanceView.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a NonProductPerformanceView message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.reports.v1beta.NonProductPerformanceView
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.reports.v1beta.NonProductPerformanceView} NonProductPerformanceView
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NonProductPerformanceView.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1beta.NonProductPerformanceView();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.date = $root.google.type.Date.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.week = $root.google.type.Date.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.clicks = reader.int64();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.impressions = reader.int64();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.clickThroughRate = reader.double();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a NonProductPerformanceView message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1beta.NonProductPerformanceView
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.reports.v1beta.NonProductPerformanceView} NonProductPerformanceView
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NonProductPerformanceView.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a NonProductPerformanceView message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.reports.v1beta.NonProductPerformanceView
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            NonProductPerformanceView.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.date != null && message.hasOwnProperty("date")) {
+                                    var error = $root.google.type.Date.verify(message.date);
+                                    if (error)
+                                        return "date." + error;
+                                }
+                                if (message.week != null && message.hasOwnProperty("week")) {
+                                    var error = $root.google.type.Date.verify(message.week);
+                                    if (error)
+                                        return "week." + error;
+                                }
+                                if (message.clicks != null && message.hasOwnProperty("clicks")) {
+                                    properties._clicks = 1;
+                                    if (!$util.isInteger(message.clicks) && !(message.clicks && $util.isInteger(message.clicks.low) && $util.isInteger(message.clicks.high)))
+                                        return "clicks: integer|Long expected";
+                                }
+                                if (message.impressions != null && message.hasOwnProperty("impressions")) {
+                                    properties._impressions = 1;
+                                    if (!$util.isInteger(message.impressions) && !(message.impressions && $util.isInteger(message.impressions.low) && $util.isInteger(message.impressions.high)))
+                                        return "impressions: integer|Long expected";
+                                }
+                                if (message.clickThroughRate != null && message.hasOwnProperty("clickThroughRate")) {
+                                    properties._clickThroughRate = 1;
+                                    if (typeof message.clickThroughRate !== "number")
+                                        return "clickThroughRate: number expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a NonProductPerformanceView message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.reports.v1beta.NonProductPerformanceView
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.reports.v1beta.NonProductPerformanceView} NonProductPerformanceView
+                             */
+                            NonProductPerformanceView.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.reports.v1beta.NonProductPerformanceView)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.reports.v1beta.NonProductPerformanceView();
+                                if (object.date != null) {
+                                    if (typeof object.date !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1beta.NonProductPerformanceView.date: object expected");
+                                    message.date = $root.google.type.Date.fromObject(object.date);
+                                }
+                                if (object.week != null) {
+                                    if (typeof object.week !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1beta.NonProductPerformanceView.week: object expected");
+                                    message.week = $root.google.type.Date.fromObject(object.week);
+                                }
+                                if (object.clicks != null)
+                                    if ($util.Long)
+                                        (message.clicks = $util.Long.fromValue(object.clicks)).unsigned = false;
+                                    else if (typeof object.clicks === "string")
+                                        message.clicks = parseInt(object.clicks, 10);
+                                    else if (typeof object.clicks === "number")
+                                        message.clicks = object.clicks;
+                                    else if (typeof object.clicks === "object")
+                                        message.clicks = new $util.LongBits(object.clicks.low >>> 0, object.clicks.high >>> 0).toNumber();
+                                if (object.impressions != null)
+                                    if ($util.Long)
+                                        (message.impressions = $util.Long.fromValue(object.impressions)).unsigned = false;
+                                    else if (typeof object.impressions === "string")
+                                        message.impressions = parseInt(object.impressions, 10);
+                                    else if (typeof object.impressions === "number")
+                                        message.impressions = object.impressions;
+                                    else if (typeof object.impressions === "object")
+                                        message.impressions = new $util.LongBits(object.impressions.low >>> 0, object.impressions.high >>> 0).toNumber();
+                                if (object.clickThroughRate != null)
+                                    message.clickThroughRate = Number(object.clickThroughRate);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a NonProductPerformanceView message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.reports.v1beta.NonProductPerformanceView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1beta.NonProductPerformanceView} message NonProductPerformanceView
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            NonProductPerformanceView.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.date = null;
+                                    object.week = null;
+                                }
+                                if (message.date != null && message.hasOwnProperty("date"))
+                                    object.date = $root.google.type.Date.toObject(message.date, options);
+                                if (message.week != null && message.hasOwnProperty("week"))
+                                    object.week = $root.google.type.Date.toObject(message.week, options);
+                                if (message.clicks != null && message.hasOwnProperty("clicks")) {
+                                    if (typeof message.clicks === "number")
+                                        object.clicks = options.longs === String ? String(message.clicks) : message.clicks;
+                                    else
+                                        object.clicks = options.longs === String ? $util.Long.prototype.toString.call(message.clicks) : options.longs === Number ? new $util.LongBits(message.clicks.low >>> 0, message.clicks.high >>> 0).toNumber() : message.clicks;
+                                    if (options.oneofs)
+                                        object._clicks = "clicks";
+                                }
+                                if (message.impressions != null && message.hasOwnProperty("impressions")) {
+                                    if (typeof message.impressions === "number")
+                                        object.impressions = options.longs === String ? String(message.impressions) : message.impressions;
+                                    else
+                                        object.impressions = options.longs === String ? $util.Long.prototype.toString.call(message.impressions) : options.longs === Number ? new $util.LongBits(message.impressions.low >>> 0, message.impressions.high >>> 0).toNumber() : message.impressions;
+                                    if (options.oneofs)
+                                        object._impressions = "impressions";
+                                }
+                                if (message.clickThroughRate != null && message.hasOwnProperty("clickThroughRate")) {
+                                    object.clickThroughRate = options.json && !isFinite(message.clickThroughRate) ? String(message.clickThroughRate) : message.clickThroughRate;
+                                    if (options.oneofs)
+                                        object._clickThroughRate = "clickThroughRate";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this NonProductPerformanceView to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.reports.v1beta.NonProductPerformanceView
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            NonProductPerformanceView.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for NonProductPerformanceView
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.reports.v1beta.NonProductPerformanceView
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            NonProductPerformanceView.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.reports.v1beta.NonProductPerformanceView";
+                            };
+    
+                            return NonProductPerformanceView;
                         })();
     
                         v1beta.CompetitiveVisibilityCompetitorView = (function() {
