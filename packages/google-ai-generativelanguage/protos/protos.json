@@ -387,6 +387,13 @@
                         "promptFeedback": {
                           "type": "PromptFeedback",
                           "id": 2
+                        },
+                        "usageMetadata": {
+                          "type": "UsageMetadata",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -412,6 +419,22 @@
                                 "SAFETY": 1,
                                 "OTHER": 2
                               }
+                            }
+                          }
+                        },
+                        "UsageMetadata": {
+                          "fields": {
+                            "promptTokenCount": {
+                              "type": "int32",
+                              "id": 1
+                            },
+                            "candidatesTokenCount": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "totalTokenCount": {
+                              "type": "int32",
+                              "id": 3
                             }
                           }
                         }
@@ -608,7 +631,14 @@
                           "type": "Content",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "generateContentRequest": {
+                          "type": "GenerateContentRequest",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -1627,7 +1657,21 @@
                         "(google.api.resource).plural": "files",
                         "(google.api.resource).singular": "file"
                       },
+                      "oneofs": {
+                        "metadata": {
+                          "oneof": [
+                            "videoMetadata"
+                          ]
+                        }
+                      },
                       "fields": {
+                        "videoMetadata": {
+                          "type": "VideoMetadata",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "name": {
                           "type": "string",
                           "id": 1,
@@ -1697,6 +1741,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -1707,6 +1758,14 @@
                             "ACTIVE": 2,
                             "FAILED": 10
                           }
+                        }
+                      }
+                    },
+                    "VideoMetadata": {
+                      "fields": {
+                        "videoDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 1
                         }
                       }
                     },
@@ -9796,9 +9855,6 @@
                 }
               }
             },
-            "Empty": {
-              "fields": {}
-            },
             "Any": {
               "fields": {
                 "type_url": {
@@ -9811,12 +9867,44 @@
                 }
               }
             },
+            "Empty": {
+              "fields": {}
+            },
             "FieldMask": {
               "fields": {
                 "paths": {
                   "rule": "repeated",
                   "type": "string",
                   "id": 1
+                }
+              }
+            }
+          }
+        },
+        "rpc": {
+          "options": {
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
+            "java_multiple_files": true,
+            "java_outer_classname": "StatusProto",
+            "java_package": "com.google.rpc",
+            "objc_class_prefix": "RPC"
+          },
+          "nested": {
+            "Status": {
+              "fields": {
+                "code": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "message": {
+                  "type": "string",
+                  "id": 2
+                },
+                "details": {
+                  "rule": "repeated",
+                  "type": "google.protobuf.Any",
+                  "id": 3
                 }
               }
             }
@@ -10033,35 +10121,6 @@
                 "metadataType": {
                   "type": "string",
                   "id": 2
-                }
-              }
-            }
-          }
-        },
-        "rpc": {
-          "options": {
-            "cc_enable_arenas": true,
-            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
-            "java_multiple_files": true,
-            "java_outer_classname": "StatusProto",
-            "java_package": "com.google.rpc",
-            "objc_class_prefix": "RPC"
-          },
-          "nested": {
-            "Status": {
-              "fields": {
-                "code": {
-                  "type": "int32",
-                  "id": 1
-                },
-                "message": {
-                  "type": "string",
-                  "id": 2
-                },
-                "details": {
-                  "rule": "repeated",
-                  "type": "google.protobuf.Any",
-                  "id": 3
                 }
               }
             }
