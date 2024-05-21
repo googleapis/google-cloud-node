@@ -89,6 +89,9 @@ message ReportRow {
   // Fields available for query in `product_performance_view` table.
   ProductPerformanceView product_performance_view = 1;
 
+  // Fields available for query in `non_product_performance_view` table.
+  NonProductPerformanceView non_product_performance_view = 7;
+
   // Fields available for query in `product_view` table.
   ProductView product_view = 2;
 
@@ -352,7 +355,7 @@ message ProductView {
   //
   // Here's an example of how the aggregated status is computed:
   //
-  // Free listings | Shopping Ads | Status
+  // Free listings | Shopping ads | Status
   // --------------|--------------|------------------------------
   // Approved      | Approved     | ELIGIBLE
   // Approved      | Pending      | ELIGIBLE
@@ -480,7 +483,7 @@ message ProductView {
 
   // Normalized [shipping
   // label](https://support.google.com/merchants/answer/6324504) specified in
-  // the feed.
+  // the data source.
   optional string shipping_label = 20;
 
   // List of Global Trade Item Numbers (GTINs) of the product.
@@ -607,6 +610,27 @@ message PriceCompetitivenessProductView {
 // Values are only set for fields requested explicitly in the request's search
 // query.
 message PriceInsightsProductView {
+  // Predicted effectiveness bucket.
+  //
+  // Effectiveness indicates which products would benefit most from price
+  // changes. This rating takes into consideration the performance boost
+  // predicted by adjusting the sale price and the difference between your
+  // current price and the suggested price. Price suggestions with `HIGH`
+  // effectiveness are predicted to drive the largest increase in performance.
+  enum Effectiveness {
+    // Effectiveness is unknown.
+    EFFECTIVENESS_UNSPECIFIED = 0;
+
+    // Effectiveness is low.
+    LOW = 1;
+
+    // Effectiveness is medium.
+    MEDIUM = 2;
+
+    // Effectiveness is high.
+    HIGH = 3;
+  }
+
   // REST ID of the product, in the form of
   // `channel~languageCode~feedLabel~offerId`. Can be used to join data with the
   // `product_view` table.
@@ -683,6 +707,9 @@ message PriceInsightsProductView {
   // suggested price compared to current active price. For example, 0.05 is a 5%
   // predicted increase in conversions).
   optional double predicted_conversions_change_fraction = 19;
+
+  // The predicted effectiveness of applying the price suggestion, bucketed.
+  Effectiveness effectiveness = 22;
 }
 
 // Fields available for query in `best_sellers_product_cluster_view` table.
@@ -778,16 +805,16 @@ message BestSellersProductClusterView {
   // GTINs of example variants of the product cluster.
   repeated string variant_gtins = 13;
 
-  // Whether the product cluster is `IN_STOCK` in your product feed in at least
-  // one of the countries, `OUT_OF_STOCK` in your product feed in all countries,
-  // or `NOT_IN_INVENTORY` at all.
+  // Whether the product cluster is `IN_STOCK` in your product data source in at
+  // least one of the countries, `OUT_OF_STOCK` in your product data source in
+  // all countries, or `NOT_IN_INVENTORY` at all.
   //
   // The field doesn't take the Best sellers report country filter into account.
   optional InventoryStatus inventory_status = 14;
 
   // Whether there is at least one product of the brand currently `IN_STOCK` in
-  // your product feed in at least one of the countries, all products are
-  // `OUT_OF_STOCK` in your product feed in all countries, or
+  // your product data source in at least one of the countries, all products are
+  // `OUT_OF_STOCK` in your product data source in all countries, or
   // `NOT_IN_INVENTORY`.
   //
   // The field doesn't take the Best sellers report country filter into account.
@@ -876,6 +903,42 @@ message BestSellersBrandView {
   // Change in the estimated demand. Whether it rose, sank or remained flat.
   optional RelativeDemandChangeType.RelativeDemandChangeTypeEnum
       relative_demand_change = 11;
+}
+
+// Fields available for query in `non_product_performance_view` table.
+//
+// Performance data on images and online store links leading to your non-product
+// pages. This includes performance metrics (for example, `clicks`)
+// and dimensions according to which performance metrics are segmented (for
+// example, `date`).
+//
+// Segment fields cannot be selected in queries without also selecting at least
+// one metric field.
+//
+// Values are only set for fields requested explicitly in the request's search
+// query.
+message NonProductPerformanceView {
+  // Date in the merchant timezone to which metrics apply. Segment.
+  //
+  // Condition on `date` is required in the `WHERE` clause.
+  google.type.Date date = 1;
+
+  // First day of the week (Monday) of the metrics date in the merchant
+  // timezone. Segment.
+  google.type.Date week = 2;
+
+  // Number of clicks on images and online store links leading to your
+  // non-product pages. Metric.
+  optional int64 clicks = 3;
+
+  // Number of times images and online store links leading to your non-product
+  // pages were shown. Metric.
+  optional int64 impressions = 4;
+
+  // Click-through rate - the number of clicks (`clicks`) divided by the number
+  // of impressions (`impressions`) of images and online store links leading to
+  // your non-product pages. Metric.
+  optional double click_through_rate = 5;
 }
 
 // Fields available for query in `competitive_visibility_competitor_view` table.
