@@ -33098,6 +33098,7 @@
                          * @property {boolean|null} [allowMissing] DeleteAzureClusterRequest allowMissing
                          * @property {boolean|null} [validateOnly] DeleteAzureClusterRequest validateOnly
                          * @property {string|null} [etag] DeleteAzureClusterRequest etag
+                         * @property {boolean|null} [ignoreErrors] DeleteAzureClusterRequest ignoreErrors
                          */
     
                         /**
@@ -33148,6 +33149,14 @@
                         DeleteAzureClusterRequest.prototype.etag = "";
     
                         /**
+                         * DeleteAzureClusterRequest ignoreErrors.
+                         * @member {boolean} ignoreErrors
+                         * @memberof google.cloud.gkemulticloud.v1.DeleteAzureClusterRequest
+                         * @instance
+                         */
+                        DeleteAzureClusterRequest.prototype.ignoreErrors = false;
+    
+                        /**
                          * Creates a new DeleteAzureClusterRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gkemulticloud.v1.DeleteAzureClusterRequest
@@ -33179,6 +33188,8 @@
                                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.validateOnly);
                             if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.etag);
+                            if (message.ignoreErrors != null && Object.hasOwnProperty.call(message, "ignoreErrors"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.ignoreErrors);
                             return writer;
                         };
     
@@ -33229,6 +33240,10 @@
                                         message.etag = reader.string();
                                         break;
                                     }
+                                case 5: {
+                                        message.ignoreErrors = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -33276,6 +33291,9 @@
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 if (!$util.isString(message.etag))
                                     return "etag: string expected";
+                            if (message.ignoreErrors != null && message.hasOwnProperty("ignoreErrors"))
+                                if (typeof message.ignoreErrors !== "boolean")
+                                    return "ignoreErrors: boolean expected";
                             return null;
                         };
     
@@ -33299,6 +33317,8 @@
                                 message.validateOnly = Boolean(object.validateOnly);
                             if (object.etag != null)
                                 message.etag = String(object.etag);
+                            if (object.ignoreErrors != null)
+                                message.ignoreErrors = Boolean(object.ignoreErrors);
                             return message;
                         };
     
@@ -33320,6 +33340,7 @@
                                 object.allowMissing = false;
                                 object.validateOnly = false;
                                 object.etag = "";
+                                object.ignoreErrors = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -33329,6 +33350,8 @@
                                 object.validateOnly = message.validateOnly;
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 object.etag = message.etag;
+                            if (message.ignoreErrors != null && message.hasOwnProperty("ignoreErrors"))
+                                object.ignoreErrors = message.ignoreErrors;
                             return object;
                         };
     
@@ -34610,6 +34633,7 @@
                          * @property {boolean|null} [validateOnly] DeleteAzureNodePoolRequest validateOnly
                          * @property {boolean|null} [allowMissing] DeleteAzureNodePoolRequest allowMissing
                          * @property {string|null} [etag] DeleteAzureNodePoolRequest etag
+                         * @property {boolean|null} [ignoreErrors] DeleteAzureNodePoolRequest ignoreErrors
                          */
     
                         /**
@@ -34660,6 +34684,14 @@
                         DeleteAzureNodePoolRequest.prototype.etag = "";
     
                         /**
+                         * DeleteAzureNodePoolRequest ignoreErrors.
+                         * @member {boolean} ignoreErrors
+                         * @memberof google.cloud.gkemulticloud.v1.DeleteAzureNodePoolRequest
+                         * @instance
+                         */
+                        DeleteAzureNodePoolRequest.prototype.ignoreErrors = false;
+    
+                        /**
                          * Creates a new DeleteAzureNodePoolRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gkemulticloud.v1.DeleteAzureNodePoolRequest
@@ -34691,6 +34723,8 @@
                                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.allowMissing);
                             if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.etag);
+                            if (message.ignoreErrors != null && Object.hasOwnProperty.call(message, "ignoreErrors"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.ignoreErrors);
                             return writer;
                         };
     
@@ -34741,6 +34775,10 @@
                                         message.etag = reader.string();
                                         break;
                                     }
+                                case 5: {
+                                        message.ignoreErrors = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -34788,6 +34826,9 @@
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 if (!$util.isString(message.etag))
                                     return "etag: string expected";
+                            if (message.ignoreErrors != null && message.hasOwnProperty("ignoreErrors"))
+                                if (typeof message.ignoreErrors !== "boolean")
+                                    return "ignoreErrors: boolean expected";
                             return null;
                         };
     
@@ -34811,6 +34852,8 @@
                                 message.allowMissing = Boolean(object.allowMissing);
                             if (object.etag != null)
                                 message.etag = String(object.etag);
+                            if (object.ignoreErrors != null)
+                                message.ignoreErrors = Boolean(object.ignoreErrors);
                             return message;
                         };
     
@@ -34832,6 +34875,7 @@
                                 object.validateOnly = false;
                                 object.allowMissing = false;
                                 object.etag = "";
+                                object.ignoreErrors = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -34841,6 +34885,8 @@
                                 object.allowMissing = message.allowMissing;
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 object.etag = message.etag;
+                            if (message.ignoreErrors != null && message.hasOwnProperty("ignoreErrors"))
+                                object.ignoreErrors = message.ignoreErrors;
                             return object;
                         };
     

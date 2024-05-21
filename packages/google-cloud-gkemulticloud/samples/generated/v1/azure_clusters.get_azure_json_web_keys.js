@@ -31,7 +31,7 @@ function main(azureCluster) {
   /**
    *  Required. The AzureCluster, which owns the JsonWebKeys.
    *  Format:
-   *  projects/<project-id>/locations/<region>/azureClusters/<cluster-id>
+   *  `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`
    */
   // const azureCluster = 'abc123'
 
