@@ -1,5 +1,14 @@
 # Changelog
 
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/service-directory-v5.2.0...service-directory-v5.3.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+* [servicedirectory] update Nodejs generator to send API versions in headers for GAPICs ([#5349](https://github.com/googleapis/google-cloud-node/issues/5349)) ([181871c](https://github.com/googleapis/google-cloud-node/commit/181871cf3a4660f6e4039c7ec3e6bc5a0781bdc8))
+
 ## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/service-directory-v5.1.0...service-directory-v5.2.0) (2024-03-29)
 
 

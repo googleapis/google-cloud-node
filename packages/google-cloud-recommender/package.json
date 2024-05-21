@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/recommender",
-  "version": "6.3.0",
+  "version": "6.4.0",
   "description": "Recommender client for Node.js",
   "repository": {
     "type": "git",
