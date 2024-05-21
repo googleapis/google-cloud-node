@@ -20,6 +20,11 @@
                 "getJob"
               ]
             },
+            "UpdateJob": {
+              "methods": [
+                "updateJob"
+              ]
+            },
             "GetTask": {
               "methods": [
                 "getTask"
@@ -84,6 +89,11 @@
             "GetJob": {
               "methods": [
                 "getJob"
+              ]
+            },
+            "UpdateJob": {
+              "methods": [
+                "updateJob"
               ]
             },
             "GetTask": {

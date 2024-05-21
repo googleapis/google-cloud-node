@@ -20,6 +20,11 @@
                 "updateDataset"
               ]
             },
+            "UpdateDatasetVersion": {
+              "methods": [
+                "updateDatasetVersion"
+              ]
+            },
             "GetDatasetVersion": {
               "methods": [
                 "getDatasetVersion"
@@ -125,6 +130,11 @@
             "UpdateDataset": {
               "methods": [
                 "updateDataset"
+              ]
+            },
+            "UpdateDatasetVersion": {
+              "methods": [
+                "updateDatasetVersion"
               ]
             },
             "GetDatasetVersion": {
@@ -1109,6 +1119,64 @@
                 "searchFeatures",
                 "searchFeaturesStream",
                 "searchFeaturesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "GenAiTuningService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "GenAiTuningServiceClient",
+          "rpcs": {
+            "CreateTuningJob": {
+              "methods": [
+                "createTuningJob"
+              ]
+            },
+            "GetTuningJob": {
+              "methods": [
+                "getTuningJob"
+              ]
+            },
+            "CancelTuningJob": {
+              "methods": [
+                "cancelTuningJob"
+              ]
+            },
+            "ListTuningJobs": {
+              "methods": [
+                "listTuningJobs",
+                "listTuningJobsStream",
+                "listTuningJobsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "GenAiTuningServiceClient",
+          "rpcs": {
+            "CreateTuningJob": {
+              "methods": [
+                "createTuningJob"
+              ]
+            },
+            "GetTuningJob": {
+              "methods": [
+                "getTuningJob"
+              ]
+            },
+            "CancelTuningJob": {
+              "methods": [
+                "cancelTuningJob"
+              ]
+            },
+            "ListTuningJobs": {
+              "methods": [
+                "listTuningJobs",
+                "listTuningJobsStream",
+                "listTuningJobsAsync"
               ]
             }
           }
@@ -2185,6 +2253,146 @@
         }
       }
     },
+    "ModelMonitoringService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ModelMonitoringServiceClient",
+          "rpcs": {
+            "GetModelMonitor": {
+              "methods": [
+                "getModelMonitor"
+              ]
+            },
+            "CreateModelMonitoringJob": {
+              "methods": [
+                "createModelMonitoringJob"
+              ]
+            },
+            "GetModelMonitoringJob": {
+              "methods": [
+                "getModelMonitoringJob"
+              ]
+            },
+            "CreateModelMonitor": {
+              "methods": [
+                "createModelMonitor"
+              ]
+            },
+            "UpdateModelMonitor": {
+              "methods": [
+                "updateModelMonitor"
+              ]
+            },
+            "DeleteModelMonitor": {
+              "methods": [
+                "deleteModelMonitor"
+              ]
+            },
+            "DeleteModelMonitoringJob": {
+              "methods": [
+                "deleteModelMonitoringJob"
+              ]
+            },
+            "ListModelMonitors": {
+              "methods": [
+                "listModelMonitors",
+                "listModelMonitorsStream",
+                "listModelMonitorsAsync"
+              ]
+            },
+            "ListModelMonitoringJobs": {
+              "methods": [
+                "listModelMonitoringJobs",
+                "listModelMonitoringJobsStream",
+                "listModelMonitoringJobsAsync"
+              ]
+            },
+            "SearchModelMonitoringStats": {
+              "methods": [
+                "searchModelMonitoringStats",
+                "searchModelMonitoringStatsStream",
+                "searchModelMonitoringStatsAsync"
+              ]
+            },
+            "SearchModelMonitoringAlerts": {
+              "methods": [
+                "searchModelMonitoringAlerts",
+                "searchModelMonitoringAlertsStream",
+                "searchModelMonitoringAlertsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ModelMonitoringServiceClient",
+          "rpcs": {
+            "GetModelMonitor": {
+              "methods": [
+                "getModelMonitor"
+              ]
+            },
+            "CreateModelMonitoringJob": {
+              "methods": [
+                "createModelMonitoringJob"
+              ]
+            },
+            "GetModelMonitoringJob": {
+              "methods": [
+                "getModelMonitoringJob"
+              ]
+            },
+            "CreateModelMonitor": {
+              "methods": [
+                "createModelMonitor"
+              ]
+            },
+            "UpdateModelMonitor": {
+              "methods": [
+                "updateModelMonitor"
+              ]
+            },
+            "DeleteModelMonitor": {
+              "methods": [
+                "deleteModelMonitor"
+              ]
+            },
+            "DeleteModelMonitoringJob": {
+              "methods": [
+                "deleteModelMonitoringJob"
+              ]
+            },
+            "ListModelMonitors": {
+              "methods": [
+                "listModelMonitors",
+                "listModelMonitorsStream",
+                "listModelMonitorsAsync"
+              ]
+            },
+            "ListModelMonitoringJobs": {
+              "methods": [
+                "listModelMonitoringJobs",
+                "listModelMonitoringJobsStream",
+                "listModelMonitoringJobsAsync"
+              ]
+            },
+            "SearchModelMonitoringStats": {
+              "methods": [
+                "searchModelMonitoringStats",
+                "searchModelMonitoringStatsStream",
+                "searchModelMonitoringStatsAsync"
+              ]
+            },
+            "SearchModelMonitoringAlerts": {
+              "methods": [
+                "searchModelMonitoringAlerts",
+                "searchModelMonitoringAlertsStream",
+                "searchModelMonitoringAlertsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ModelService": {
       "clients": {
         "grpc": {
@@ -2410,6 +2618,11 @@
                 "getNotebookRuntime"
               ]
             },
+            "GetNotebookExecutionJob": {
+              "methods": [
+                "getNotebookExecutionJob"
+              ]
+            },
             "CreateNotebookRuntimeTemplate": {
               "methods": [
                 "createNotebookRuntimeTemplate"
@@ -2440,6 +2653,11 @@
                 "startNotebookRuntime"
               ]
             },
+            "DeleteNotebookExecutionJob": {
+              "methods": [
+                "deleteNotebookExecutionJob"
+              ]
+            },
             "ListNotebookRuntimeTemplates": {
               "methods": [
                 "listNotebookRuntimeTemplates",
@@ -2452,6 +2670,13 @@
                 "listNotebookRuntimes",
                 "listNotebookRuntimesStream",
                 "listNotebookRuntimesAsync"
+              ]
+            },
+            "ListNotebookExecutionJobs": {
+              "methods": [
+                "listNotebookExecutionJobs",
+                "listNotebookExecutionJobsStream",
+                "listNotebookExecutionJobsAsync"
               ]
             }
           }
@@ -2469,6 +2694,11 @@
                 "getNotebookRuntime"
               ]
             },
+            "GetNotebookExecutionJob": {
+              "methods": [
+                "getNotebookExecutionJob"
+              ]
+            },
             "CreateNotebookRuntimeTemplate": {
               "methods": [
                 "createNotebookRuntimeTemplate"
@@ -2499,6 +2729,11 @@
                 "startNotebookRuntime"
               ]
             },
+            "DeleteNotebookExecutionJob": {
+              "methods": [
+                "deleteNotebookExecutionJob"
+              ]
+            },
             "ListNotebookRuntimeTemplates": {
               "methods": [
                 "listNotebookRuntimeTemplates",
@@ -2511,6 +2746,13 @@
                 "listNotebookRuntimes",
                 "listNotebookRuntimesStream",
                 "listNotebookRuntimesAsync"
+              ]
+            },
+            "ListNotebookExecutionJobs": {
+              "methods": [
+                "listNotebookExecutionJobs",
+                "listNotebookExecutionJobsStream",
+                "listNotebookExecutionJobsAsync"
               ]
             }
           }
@@ -2805,11 +3047,6 @@
             "StreamGenerateContent": {
               "methods": [
                 "streamGenerateContent"
-              ]
-            },
-            "ChatCompletions": {
-              "methods": [
-                "chatCompletions"
               ]
             }
           }

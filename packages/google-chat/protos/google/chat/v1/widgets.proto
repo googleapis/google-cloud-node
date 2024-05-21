@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ option go_package = "cloud.google.com/go/chat/apiv1/chatpb;chatpb";
 option java_multiple_files = true;
 option java_outer_classname = "WidgetsProto";
 option java_package = "com.google.chat.v1";
+option objc_class_prefix = "DYNAPIProto";
 option php_namespace = "Google\\Apps\\Chat\\V1";
 option ruby_package = "Google::Apps::Chat::V1";
 
@@ -29,7 +30,7 @@ message WidgetMarkup {
   // A paragraph of text. Formatted text supported. For more information
   // about formatting text, see
   // [Formatting text in Google Chat
-  // apps](https://developers.google.com/chat/format-messages#card-formatting)
+  // apps](https://developers.google.com/workspace/chat/format-messages#card-formatting)
   // and
   // [Formatting
   // text in Google Workspace
@@ -139,7 +140,7 @@ message WidgetMarkup {
     // The text of the top label. Formatted text supported. For more information
     // about formatting text, see
     // [Formatting text in Google Chat
-    // apps](https://developers.google.com/chat/format-messages#card-formatting)
+    // apps](https://developers.google.com/workspace/chat/format-messages#card-formatting)
     // and
     // [Formatting
     // text in Google Workspace
@@ -150,7 +151,7 @@ message WidgetMarkup {
     // For more information
     // about formatting text, see
     // [Formatting text in Google Chat
-    // apps](https://developers.google.com/chat/format-messages#card-formatting)
+    // apps](https://developers.google.com/workspace/chat/format-messages#card-formatting)
     // and
     // [Formatting
     // text in Google Workspace
@@ -162,7 +163,7 @@ message WidgetMarkup {
 
     // The text of the bottom label. Formatted text supported. For more
     // information about formatting text, see [Formatting text in Google Chat
-    // apps](https://developers.google.com/chat/format-messages#card-formatting)
+    // apps](https://developers.google.com/workspace/chat/format-messages#card-formatting)
     // and
     // [Formatting
     // text in Google Workspace

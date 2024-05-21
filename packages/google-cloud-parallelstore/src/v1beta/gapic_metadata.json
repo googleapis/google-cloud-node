@@ -30,6 +30,16 @@
                 "deleteInstance"
               ]
             },
+            "ImportData": {
+              "methods": [
+                "importData"
+              ]
+            },
+            "ExportData": {
+              "methods": [
+                "exportData"
+              ]
+            },
             "ListInstances": {
               "methods": [
                 "listInstances",
@@ -60,6 +70,16 @@
             "DeleteInstance": {
               "methods": [
                 "deleteInstance"
+              ]
+            },
+            "ImportData": {
+              "methods": [
+                "importData"
+              ]
+            },
+            "ExportData": {
+              "methods": [
+                "exportData"
               ]
             },
             "ListInstances": {

@@ -2118,6 +2118,140 @@ describe('v1.ChatServiceClient', () => {
     });
   });
 
+  describe('updateMembership', () => {
+    it('invokes updateMembership without error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.UpdateMembershipRequest()
+      );
+      request.membership ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.UpdateMembershipRequest',
+        ['membership', 'name']
+      );
+      request.membership.name = defaultValue1;
+      const expectedHeaderRequestParams = `membership.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.chat.v1.Membership()
+      );
+      client.innerApiCalls.updateMembership = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateMembership(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateMembership as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateMembership as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateMembership without error using callback', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.UpdateMembershipRequest()
+      );
+      request.membership ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.UpdateMembershipRequest',
+        ['membership', 'name']
+      );
+      request.membership.name = defaultValue1;
+      const expectedHeaderRequestParams = `membership.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.chat.v1.Membership()
+      );
+      client.innerApiCalls.updateMembership =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateMembership(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.chat.v1.IMembership | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateMembership as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateMembership as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateMembership with error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.UpdateMembershipRequest()
+      );
+      request.membership ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.UpdateMembershipRequest',
+        ['membership', 'name']
+      );
+      request.membership.name = defaultValue1;
+      const expectedHeaderRequestParams = `membership.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateMembership = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateMembership(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateMembership as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateMembership as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateMembership with closed client', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.UpdateMembershipRequest()
+      );
+      request.membership ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.UpdateMembershipRequest',
+        ['membership', 'name']
+      );
+      request.membership.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateMembership(request), expectedError);
+    });
+  });
+
   describe('deleteMembership', () => {
     it('invokes deleteMembership without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
@@ -2505,6 +2639,402 @@ describe('v1.ChatServiceClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteReaction(request), expectedError);
+    });
+  });
+
+  describe('getSpaceReadState', () => {
+    it('invokes getSpaceReadState without error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.GetSpaceReadStateRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.GetSpaceReadStateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.chat.v1.SpaceReadState()
+      );
+      client.innerApiCalls.getSpaceReadState = stubSimpleCall(expectedResponse);
+      const [response] = await client.getSpaceReadState(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getSpaceReadState as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSpaceReadState as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSpaceReadState without error using callback', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.GetSpaceReadStateRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.GetSpaceReadStateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.chat.v1.SpaceReadState()
+      );
+      client.innerApiCalls.getSpaceReadState =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getSpaceReadState(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.chat.v1.ISpaceReadState | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getSpaceReadState as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSpaceReadState as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSpaceReadState with error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.GetSpaceReadStateRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.GetSpaceReadStateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getSpaceReadState = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getSpaceReadState(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getSpaceReadState as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSpaceReadState as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSpaceReadState with closed client', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.GetSpaceReadStateRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.GetSpaceReadStateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getSpaceReadState(request), expectedError);
+    });
+  });
+
+  describe('updateSpaceReadState', () => {
+    it('invokes updateSpaceReadState without error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.UpdateSpaceReadStateRequest()
+      );
+      request.spaceReadState ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.UpdateSpaceReadStateRequest',
+        ['spaceReadState', 'name']
+      );
+      request.spaceReadState.name = defaultValue1;
+      const expectedHeaderRequestParams = `space_read_state.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.chat.v1.SpaceReadState()
+      );
+      client.innerApiCalls.updateSpaceReadState =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateSpaceReadState(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateSpaceReadState as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSpaceReadState as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSpaceReadState without error using callback', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.UpdateSpaceReadStateRequest()
+      );
+      request.spaceReadState ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.UpdateSpaceReadStateRequest',
+        ['spaceReadState', 'name']
+      );
+      request.spaceReadState.name = defaultValue1;
+      const expectedHeaderRequestParams = `space_read_state.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.chat.v1.SpaceReadState()
+      );
+      client.innerApiCalls.updateSpaceReadState =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateSpaceReadState(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.chat.v1.ISpaceReadState | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateSpaceReadState as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSpaceReadState as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSpaceReadState with error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.UpdateSpaceReadStateRequest()
+      );
+      request.spaceReadState ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.UpdateSpaceReadStateRequest',
+        ['spaceReadState', 'name']
+      );
+      request.spaceReadState.name = defaultValue1;
+      const expectedHeaderRequestParams = `space_read_state.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateSpaceReadState = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateSpaceReadState(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateSpaceReadState as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSpaceReadState as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSpaceReadState with closed client', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.UpdateSpaceReadStateRequest()
+      );
+      request.spaceReadState ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.UpdateSpaceReadStateRequest',
+        ['spaceReadState', 'name']
+      );
+      request.spaceReadState.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateSpaceReadState(request), expectedError);
+    });
+  });
+
+  describe('getThreadReadState', () => {
+    it('invokes getThreadReadState without error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.GetThreadReadStateRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.GetThreadReadStateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.chat.v1.ThreadReadState()
+      );
+      client.innerApiCalls.getThreadReadState =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getThreadReadState(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getThreadReadState as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getThreadReadState as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getThreadReadState without error using callback', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.GetThreadReadStateRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.GetThreadReadStateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.chat.v1.ThreadReadState()
+      );
+      client.innerApiCalls.getThreadReadState =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getThreadReadState(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.chat.v1.IThreadReadState | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getThreadReadState as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getThreadReadState as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getThreadReadState with error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.GetThreadReadStateRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.GetThreadReadStateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getThreadReadState = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getThreadReadState(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getThreadReadState as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getThreadReadState as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getThreadReadState with closed client', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.GetThreadReadStateRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.GetThreadReadStateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getThreadReadState(request), expectedError);
     });
   });
 
@@ -3945,6 +4475,55 @@ describe('v1.ChatServiceClient', () => {
       });
     });
 
+    describe('spaceReadState', () => {
+      const fakePath = '/rendered/path/spaceReadState';
+      const expectedParameters = {
+        user: 'userValue',
+        space: 'spaceValue',
+      };
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.spaceReadStatePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.spaceReadStatePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('spaceReadStatePath', () => {
+        const result = client.spaceReadStatePath('userValue', 'spaceValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.spaceReadStatePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchUserFromSpaceReadStateName', () => {
+        const result = client.matchUserFromSpaceReadStateName(fakePath);
+        assert.strictEqual(result, 'userValue');
+        assert(
+          (client.pathTemplates.spaceReadStatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSpaceFromSpaceReadStateName', () => {
+        const result = client.matchSpaceFromSpaceReadStateName(fakePath);
+        assert.strictEqual(result, 'spaceValue');
+        assert(
+          (client.pathTemplates.spaceReadStatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('thread', () => {
       const fakePath = '/rendered/path/thread';
       const expectedParameters = {
@@ -3988,6 +4567,70 @@ describe('v1.ChatServiceClient', () => {
         assert.strictEqual(result, 'threadValue');
         assert(
           (client.pathTemplates.threadPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('threadReadState', () => {
+      const fakePath = '/rendered/path/threadReadState';
+      const expectedParameters = {
+        user: 'userValue',
+        space: 'spaceValue',
+        thread: 'threadValue',
+      };
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.threadReadStatePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.threadReadStatePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('threadReadStatePath', () => {
+        const result = client.threadReadStatePath(
+          'userValue',
+          'spaceValue',
+          'threadValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.threadReadStatePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchUserFromThreadReadStateName', () => {
+        const result = client.matchUserFromThreadReadStateName(fakePath);
+        assert.strictEqual(result, 'userValue');
+        assert(
+          (client.pathTemplates.threadReadStatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSpaceFromThreadReadStateName', () => {
+        const result = client.matchSpaceFromThreadReadStateName(fakePath);
+        assert.strictEqual(result, 'spaceValue');
+        assert(
+          (client.pathTemplates.threadReadStatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchThreadFromThreadReadStateName', () => {
+        const result = client.matchThreadFromThreadReadStateName(fakePath);
+        assert.strictEqual(result, 'threadValue');
+        assert(
+          (client.pathTemplates.threadReadStatePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

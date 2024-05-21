@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -37,6 +37,11 @@ service GenerativeService {
 
   // Generates a response from the model given an input
   // `GenerateContentRequest`.
+  //
+  // Input capabilities differ between models, including tuned models. See the
+  // [model guide](https://ai.google.dev/models/gemini) and
+  // [tuning guide](https://ai.google.dev/docs/model_tuning_guidance) for
+  // details.
   rpc GenerateContent(GenerateContentRequest)
       returns (GenerateContentResponse) {
     option (google.api.http) = {
@@ -121,6 +126,12 @@ enum TaskType {
 
   // Specifies that the embeddings will be used for clustering.
   CLUSTERING = 5;
+
+  // Specifies that the given text will be used for question answering.
+  QUESTION_ANSWERING = 6;
+
+  // Specifies that the given text will be used for fact verification.
+  FACT_VERIFICATION = 7;
 }
 
 // Request to generate a completion from the model.
@@ -205,7 +216,7 @@ message GenerationConfig {
   // Note: The default value varies by model, see the `Model.temperature`
   // attribute of the `Model` returned from the `getModel` function.
   //
-  // Values can range from [0.0, infinity).
+  // Values can range from [0.0, 2.0].
   optional float temperature = 5 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. The maximum cumulative probability of tokens to consider when
@@ -224,13 +235,31 @@ message GenerationConfig {
 
   // Optional. The maximum number of tokens to consider when sampling.
   //
-  // The model uses combined Top-k and nucleus sampling.
-  //
+  // Models use nucleus sampling or combined Top-k and nucleus sampling.
   // Top-k sampling considers the set of `top_k` most probable tokens.
+  // Models running with nucleus sampling don't allow top_k setting.
   //
   // Note: The default value varies by model, see the `Model.top_k`
-  // attribute of the `Model` returned from the `getModel` function.
+  // attribute of the `Model` returned from the `getModel` function. Empty
+  // `top_k` field in `Model` indicates the model doesn't apply top-k sampling
+  // and doesn't allow setting `top_k` on requests.
   optional int32 top_k = 7 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Output response mimetype of the generated candidate text.
+  // Supported mimetype:
+  // `text/plain`: (default) Text output.
+  // `application/json`: JSON response in the candidates.
+  string response_mime_type = 13 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Output response schema of the generated candidate text when
+  // response mime type can have schema. Schema can be objects, primitives or
+  // arrays and is a subset of [OpenAPI
+  // schema](https://spec.openapis.org/oas/v3.0.3#schema).
+  //
+  // If set, a compatible response_mime_type must also be set.
+  // Compatible mimetypes:
+  // `application/json`: Schema for JSON response.
+  Schema response_schema = 14 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Configuration for retrieving grounding content from a `Corpus` or
@@ -293,11 +322,26 @@ message GenerateContentResponse {
     repeated SafetyRating safety_ratings = 2;
   }
 
+  // Metadata on the generation request's token usage.
+  message UsageMetadata {
+    // Number of tokens in the prompt.
+    int32 prompt_token_count = 1;
+
+    // Total number of tokens across the generated candidates.
+    int32 candidates_token_count = 2;
+
+    // Total token count for the generation request (prompt + candidates).
+    int32 total_token_count = 3;
+  }
+
   // Candidate responses from the model.
   repeated Candidate candidates = 1;
 
   // Returns the prompt's feedback related to the content filters.
   PromptFeedback prompt_feedback = 2;
+
+  // Output only. Metadata on the generation requests' token usage.
+  UsageMetadata usage_metadata = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // A response candidate generated from the model.
@@ -576,6 +620,13 @@ message EmbedContentRequest {
   // Note: Specifying a `title` for `RETRIEVAL_DOCUMENT` provides better quality
   // embeddings for retrieval.
   optional string title = 4 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Optional reduced dimension for the output embedding. If set,
+  // excessive values in the output embedding are truncated from the end.
+  // Supported by newer models since 2024, and the earlier model
+  // (`models/embedding-001`) cannot specify this value.
+  optional int32 output_dimensionality = 5
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // A list of floats representing an embedding.
@@ -637,8 +688,14 @@ message CountTokensRequest {
     }
   ];
 
-  // Required. The input given to the model as a prompt.
-  repeated Content contents = 2 [(google.api.field_behavior) = REQUIRED];
+  // Optional. The input given to the model as a prompt. This field is ignored
+  // when `generate_content_request` is set.
+  repeated Content contents = 2 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The overall input given to the model. CountTokens will count
+  // prompt, function calling, etc.
+  GenerateContentRequest generate_content_request = 3
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // A response from `CountTokens`.

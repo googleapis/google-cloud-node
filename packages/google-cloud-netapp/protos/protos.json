@@ -3318,7 +3318,8 @@
                         "SERVICE_LEVEL_UNSPECIFIED": 0,
                         "PREMIUM": 1,
                         "EXTREME": 2,
-                        "STANDARD": 3
+                        "STANDARD": 3,
+                        "FLEX": 4
                       }
                     },
                     "EncryptionType": {
@@ -3326,6 +3327,18 @@
                         "ENCRYPTION_TYPE_UNSPECIFIED": 0,
                         "SERVICE_MANAGED": 1,
                         "CLOUD_KMS": 2
+                      }
+                    },
+                    "LocationMetadata": {
+                      "fields": {
+                        "supportedServiceLevels": {
+                          "rule": "repeated",
+                          "type": "ServiceLevel",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
                       }
                     },
                     "Protocols": {
@@ -3519,6 +3532,11 @@
                         "_backupConfig": {
                           "oneof": [
                             "backupConfig"
+                          ]
+                        },
+                        "_tieringPolicy": {
+                          "oneof": [
+                            "tieringPolicy"
                           ]
                         }
                       },
@@ -3747,6 +3765,13 @@
                           "id": 31,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "tieringPolicy": {
+                          "type": "TieringPolicy",
+                          "id": 34,
+                          "options": {
+                            "proto3_optional": true
                           }
                         }
                       },
@@ -4207,6 +4232,11 @@
                           "oneof": [
                             "scheduledBackupEnabled"
                           ]
+                        },
+                        "_backupChainBytes": {
+                          "oneof": [
+                            "backupChainBytes"
+                          ]
                         }
                       },
                       "fields": {
@@ -4233,6 +4263,55 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
+                          }
+                        },
+                        "backupChainBytes": {
+                          "type": "int64",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "TieringPolicy": {
+                      "oneofs": {
+                        "_tierAction": {
+                          "oneof": [
+                            "tierAction"
+                          ]
+                        },
+                        "_coolingThresholdDays": {
+                          "oneof": [
+                            "coolingThresholdDays"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "tierAction": {
+                          "type": "TierAction",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "coolingThresholdDays": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "TierAction": {
+                          "values": {
+                            "TIER_ACTION_UNSPECIFIED": 0,
+                            "ENABLED": 1,
+                            "PAUSED": 2
                           }
                         }
                       }

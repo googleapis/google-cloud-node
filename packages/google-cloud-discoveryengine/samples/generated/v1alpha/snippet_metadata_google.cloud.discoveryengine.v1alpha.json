@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-discoveryengine",
-        "version": "1.6.0",
+        "version": "1.7.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -620,6 +620,346 @@
             }
         },
         {
+            "regionTag": "discoveryengine_v1alpha_generated_ConversationalSearchService_AnswerQuery_async",
+            "title": "AclConfigService answerQuery Sample",
+            "origin": "API_DEFINITION",
+            "description": " Answer query method.",
+            "canonical": true,
+            "file": "conversational_search_service.answer_query.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 111,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "AnswerQuery",
+                "fullName": "google.cloud.discoveryengine.v1alpha.ConversationalSearchService.AnswerQuery",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "serving_config",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "query",
+                        "type": ".google.cloud.discoveryengine.v1alpha.Query"
+                    },
+                    {
+                        "name": "session",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "safety_spec",
+                        "type": ".google.cloud.discoveryengine.v1alpha.AnswerQueryRequest.SafetySpec"
+                    },
+                    {
+                        "name": "related_questions_spec",
+                        "type": ".google.cloud.discoveryengine.v1alpha.AnswerQueryRequest.RelatedQuestionsSpec"
+                    },
+                    {
+                        "name": "answer_generation_spec",
+                        "type": ".google.cloud.discoveryengine.v1alpha.AnswerQueryRequest.AnswerGenerationSpec"
+                    },
+                    {
+                        "name": "search_spec",
+                        "type": ".google.cloud.discoveryengine.v1alpha.AnswerQueryRequest.SearchSpec"
+                    },
+                    {
+                        "name": "query_understanding_spec",
+                        "type": ".google.cloud.discoveryengine.v1alpha.AnswerQueryRequest.QueryUnderstandingSpec"
+                    },
+                    {
+                        "name": "asynchronous_mode",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "user_pseudo_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.discoveryengine.v1alpha.AnswerQueryResponse",
+                "client": {
+                    "shortName": "ConversationalSearchServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.ConversationalSearchServiceClient"
+                },
+                "method": {
+                    "shortName": "AnswerQuery",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.ConversationalSearchService.AnswerQuery",
+                    "service": {
+                        "shortName": "ConversationalSearchService",
+                        "fullName": "google.cloud.discoveryengine.v1alpha.ConversationalSearchService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1alpha_generated_ConversationalSearchService_GetAnswer_async",
+            "title": "AclConfigService getAnswer Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a Answer.",
+            "canonical": true,
+            "file": "conversational_search_service.get_answer.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetAnswer",
+                "fullName": "google.cloud.discoveryengine.v1alpha.ConversationalSearchService.GetAnswer",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.discoveryengine.v1alpha.Answer",
+                "client": {
+                    "shortName": "ConversationalSearchServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.ConversationalSearchServiceClient"
+                },
+                "method": {
+                    "shortName": "GetAnswer",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.ConversationalSearchService.GetAnswer",
+                    "service": {
+                        "shortName": "ConversationalSearchService",
+                        "fullName": "google.cloud.discoveryengine.v1alpha.ConversationalSearchService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1alpha_generated_ConversationalSearchService_CreateSession_async",
+            "title": "AclConfigService createSession Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a Session. If the [Session][google.cloud.discoveryengine.v1alpha.Session] to create already exists, an ALREADY_EXISTS error is returned.",
+            "canonical": true,
+            "file": "conversational_search_service.create_session.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateSession",
+                "fullName": "google.cloud.discoveryengine.v1alpha.ConversationalSearchService.CreateSession",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "session",
+                        "type": ".google.cloud.discoveryengine.v1alpha.Session"
+                    }
+                ],
+                "resultType": ".google.cloud.discoveryengine.v1alpha.Session",
+                "client": {
+                    "shortName": "ConversationalSearchServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.ConversationalSearchServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateSession",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.ConversationalSearchService.CreateSession",
+                    "service": {
+                        "shortName": "ConversationalSearchService",
+                        "fullName": "google.cloud.discoveryengine.v1alpha.ConversationalSearchService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1alpha_generated_ConversationalSearchService_DeleteSession_async",
+            "title": "AclConfigService deleteSession Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a Session. If the [Session][google.cloud.discoveryengine.v1alpha.Session] to delete does not exist, a NOT_FOUND error is returned.",
+            "canonical": true,
+            "file": "conversational_search_service.delete_session.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteSession",
+                "fullName": "google.cloud.discoveryengine.v1alpha.ConversationalSearchService.DeleteSession",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "ConversationalSearchServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.ConversationalSearchServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteSession",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.ConversationalSearchService.DeleteSession",
+                    "service": {
+                        "shortName": "ConversationalSearchService",
+                        "fullName": "google.cloud.discoveryengine.v1alpha.ConversationalSearchService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1alpha_generated_ConversationalSearchService_UpdateSession_async",
+            "title": "AclConfigService updateSession Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates a Session. [Session][google.cloud.discoveryengine.v1alpha.Session] action type cannot be changed. If the [Session][google.cloud.discoveryengine.v1alpha.Session] to update does not exist, a NOT_FOUND error is returned.",
+            "canonical": true,
+            "file": "conversational_search_service.update_session.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 61,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateSession",
+                "fullName": "google.cloud.discoveryengine.v1alpha.ConversationalSearchService.UpdateSession",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "session",
+                        "type": ".google.cloud.discoveryengine.v1alpha.Session"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.cloud.discoveryengine.v1alpha.Session",
+                "client": {
+                    "shortName": "ConversationalSearchServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.ConversationalSearchServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateSession",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.ConversationalSearchService.UpdateSession",
+                    "service": {
+                        "shortName": "ConversationalSearchService",
+                        "fullName": "google.cloud.discoveryengine.v1alpha.ConversationalSearchService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1alpha_generated_ConversationalSearchService_GetSession_async",
+            "title": "AclConfigService getSession Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a Session.",
+            "canonical": true,
+            "file": "conversational_search_service.get_session.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetSession",
+                "fullName": "google.cloud.discoveryengine.v1alpha.ConversationalSearchService.GetSession",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.discoveryengine.v1alpha.Session",
+                "client": {
+                    "shortName": "ConversationalSearchServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.ConversationalSearchServiceClient"
+                },
+                "method": {
+                    "shortName": "GetSession",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.ConversationalSearchService.GetSession",
+                    "service": {
+                        "shortName": "ConversationalSearchService",
+                        "fullName": "google.cloud.discoveryengine.v1alpha.ConversationalSearchService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1alpha_generated_ConversationalSearchService_ListSessions_async",
+            "title": "AclConfigService listSessions Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists all Sessions by their parent [DataStore][google.cloud.discoveryengine.v1alpha.DataStore].",
+            "canonical": true,
+            "file": "conversational_search_service.list_sessions.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 85,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListSessions",
+                "fullName": "google.cloud.discoveryengine.v1alpha.ConversationalSearchService.ListSessions",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.discoveryengine.v1alpha.ListSessionsResponse",
+                "client": {
+                    "shortName": "ConversationalSearchServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.ConversationalSearchServiceClient"
+                },
+                "method": {
+                    "shortName": "ListSessions",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.ConversationalSearchService.ListSessions",
+                    "service": {
+                        "shortName": "ConversationalSearchService",
+                        "fullName": "google.cloud.discoveryengine.v1alpha.ConversationalSearchService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "discoveryengine_v1alpha_generated_DataStoreService_CreateDataStore_async",
             "title": "AclConfigService createDataStore Sample",
             "origin": "API_DEFINITION",
@@ -1166,7 +1506,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 128,
+                    "end": 159,
                     "type": "FULL"
                 }
             ],
@@ -1188,6 +1528,26 @@
                         "type": ".google.cloud.discoveryengine.v1alpha.BigQuerySource"
                     },
                     {
+                        "name": "fhir_store_source",
+                        "type": ".google.cloud.discoveryengine.v1alpha.FhirStoreSource"
+                    },
+                    {
+                        "name": "spanner_source",
+                        "type": ".google.cloud.discoveryengine.v1alpha.SpannerSource"
+                    },
+                    {
+                        "name": "cloud_sql_source",
+                        "type": ".google.cloud.discoveryengine.v1alpha.CloudSqlSource"
+                    },
+                    {
+                        "name": "firestore_source",
+                        "type": ".google.cloud.discoveryengine.v1alpha.FirestoreSource"
+                    },
+                    {
+                        "name": "bigtable_source",
+                        "type": ".google.cloud.discoveryengine.v1alpha.BigtableSource"
+                    },
+                    {
                         "name": "parent",
                         "type": "TYPE_STRING"
                     },
@@ -1198,6 +1558,10 @@
                     {
                         "name": "reconciliation_mode",
                         "type": ".google.cloud.discoveryengine.v1alpha.ImportDocumentsRequest.ReconciliationMode"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
                     },
                     {
                         "name": "auto_generate_ids",
@@ -1272,6 +1636,54 @@
                 "method": {
                     "shortName": "PurgeDocuments",
                     "fullName": "google.cloud.discoveryengine.v1alpha.DocumentService.PurgeDocuments",
+                    "service": {
+                        "shortName": "DocumentService",
+                        "fullName": "google.cloud.discoveryengine.v1alpha.DocumentService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1alpha_generated_DocumentService_GetProcessedDocument_async",
+            "title": "AclConfigService getProcessedDocument Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets the parsed layout information for a [Document][google.cloud.discoveryengine.v1alpha.Document].",
+            "canonical": true,
+            "file": "document_service.get_processed_document.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 69,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetProcessedDocument",
+                "fullName": "google.cloud.discoveryengine.v1alpha.DocumentService.GetProcessedDocument",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "processed_document_type",
+                        "type": ".google.cloud.discoveryengine.v1alpha.GetProcessedDocumentRequest.ProcessedDocumentType"
+                    },
+                    {
+                        "name": "processed_document_format",
+                        "type": ".google.cloud.discoveryengine.v1alpha.GetProcessedDocumentRequest.ProcessedDocumentFormat"
+                    }
+                ],
+                "resultType": ".google.cloud.discoveryengine.v1alpha.ProcessedDocument",
+                "client": {
+                    "shortName": "DocumentServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.DocumentServiceClient"
+                },
+                "method": {
+                    "shortName": "GetProcessedDocument",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.DocumentService.GetProcessedDocument",
                     "service": {
                         "shortName": "DocumentService",
                         "fullName": "google.cloud.discoveryengine.v1alpha.DocumentService"
@@ -1672,6 +2084,258 @@
             }
         },
         {
+            "regionTag": "discoveryengine_v1alpha_generated_GroundedGenerationService_CheckGrounding_async",
+            "title": "AclConfigService checkGrounding Sample",
+            "origin": "API_DEFINITION",
+            "description": " Performs a grounding check.",
+            "canonical": true,
+            "file": "grounded_generation_service.check_grounding.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CheckGrounding",
+                "fullName": "google.cloud.discoveryengine.v1alpha.GroundedGenerationService.CheckGrounding",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "grounding_config",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "answer_candidate",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "facts",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "grounding_spec",
+                        "type": ".google.cloud.discoveryengine.v1alpha.CheckGroundingSpec"
+                    }
+                ],
+                "resultType": ".google.cloud.discoveryengine.v1alpha.CheckGroundingResponse",
+                "client": {
+                    "shortName": "GroundedGenerationServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.GroundedGenerationServiceClient"
+                },
+                "method": {
+                    "shortName": "CheckGrounding",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.GroundedGenerationService.CheckGrounding",
+                    "service": {
+                        "shortName": "GroundedGenerationService",
+                        "fullName": "google.cloud.discoveryengine.v1alpha.GroundedGenerationService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1alpha_generated_ProjectService_GetProject_async",
+            "title": "AclConfigService getProject Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a [Project][google.cloud.discoveryengine.v1alpha.Project]. Returns NOT_FOUND when the project is not yet created.",
+            "canonical": true,
+            "file": "project_service.get_project.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetProject",
+                "fullName": "google.cloud.discoveryengine.v1alpha.ProjectService.GetProject",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.discoveryengine.v1alpha.Project",
+                "client": {
+                    "shortName": "ProjectServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.ProjectServiceClient"
+                },
+                "method": {
+                    "shortName": "GetProject",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.ProjectService.GetProject",
+                    "service": {
+                        "shortName": "ProjectService",
+                        "fullName": "google.cloud.discoveryengine.v1alpha.ProjectService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1alpha_generated_ProjectService_ProvisionProject_async",
+            "title": "AclConfigService provisionProject Sample",
+            "origin": "API_DEFINITION",
+            "description": " Provisions the project resource. During the process, related systems will get prepared and initialized. Caller must read the [Terms for data use](https://cloud.google.com/retail/data-use-terms), and optionally specify in request to provide consent to that service terms.",
+            "canonical": true,
+            "file": "project_service.provision_project.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 71,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ProvisionProject",
+                "fullName": "google.cloud.discoveryengine.v1alpha.ProjectService.ProvisionProject",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "accept_data_use_terms",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "data_use_terms_version",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ProjectServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.ProjectServiceClient"
+                },
+                "method": {
+                    "shortName": "ProvisionProject",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.ProjectService.ProvisionProject",
+                    "service": {
+                        "shortName": "ProjectService",
+                        "fullName": "google.cloud.discoveryengine.v1alpha.ProjectService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1alpha_generated_ProjectService_ReportConsentChange_async",
+            "title": "AclConfigService reportConsentChange Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates service terms for this project. This method can be used to retroactively accept the latest terms. Terms available for update: * [Terms for data use](https://cloud.google.com/retail/data-use-terms)",
+            "canonical": true,
+            "file": "project_service.report_consent_change.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 77,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ReportConsentChange",
+                "fullName": "google.cloud.discoveryengine.v1alpha.ProjectService.ReportConsentChange",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "consent_change_action",
+                        "type": ".google.cloud.discoveryengine.v1alpha.ReportConsentChangeRequest.ConsentChangeAction"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "service_term_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "service_term_version",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.discoveryengine.v1alpha.Project",
+                "client": {
+                    "shortName": "ProjectServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.ProjectServiceClient"
+                },
+                "method": {
+                    "shortName": "ReportConsentChange",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.ProjectService.ReportConsentChange",
+                    "service": {
+                        "shortName": "ProjectService",
+                        "fullName": "google.cloud.discoveryengine.v1alpha.ProjectService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1alpha_generated_RankService_Rank_async",
+            "title": "AclConfigService rank Sample",
+            "origin": "API_DEFINITION",
+            "description": " Ranks a list of text records based on the given input query.",
+            "canonical": true,
+            "file": "rank_service.rank.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 80,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Rank",
+                "fullName": "google.cloud.discoveryengine.v1alpha.RankService.Rank",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "ranking_config",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "model",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "top_n",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "query",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "records",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "ignore_record_details_in_response",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.cloud.discoveryengine.v1alpha.RankResponse",
+                "client": {
+                    "shortName": "RankServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.RankServiceClient"
+                },
+                "method": {
+                    "shortName": "Rank",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.RankService.Rank",
+                    "service": {
+                        "shortName": "RankService",
+                        "fullName": "google.cloud.discoveryengine.v1alpha.RankService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "discoveryengine_v1alpha_generated_RecommendationService_Recommend_async",
             "title": "AclConfigService recommend Sample",
             "origin": "API_DEFINITION",
@@ -1966,7 +2630,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 267,
+                    "end": 271,
                     "type": "FULL"
                 }
             ],

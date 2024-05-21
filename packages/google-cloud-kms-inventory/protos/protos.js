@@ -3461,6 +3461,7 @@
                                 case 12:
                                 case 13:
                                 case 31:
+                                case 40:
                                 case 32:
                                 case 33:
                                 case 34:
@@ -3634,6 +3635,10 @@
                             case "EC_SIGN_SECP256K1_SHA256":
                             case 31:
                                 message.algorithm = 31;
+                                break;
+                            case "EC_SIGN_ED25519":
+                            case 40:
+                                message.algorithm = 40;
                                 break;
                             case "HMAC_SHA256":
                             case 32:
@@ -4738,6 +4743,7 @@
                                 case 12:
                                 case 13:
                                 case 31:
+                                case 40:
                                 case 32:
                                 case 33:
                                 case 34:
@@ -5016,6 +5022,10 @@
                             case 31:
                                 message.algorithm = 31;
                                 break;
+                            case "EC_SIGN_ED25519":
+                            case 40:
+                                message.algorithm = 40;
+                                break;
                             case "HMAC_SHA256":
                             case 32:
                                 message.algorithm = 32;
@@ -5214,6 +5224,7 @@
                          * @property {number} EC_SIGN_P256_SHA256=12 EC_SIGN_P256_SHA256 value
                          * @property {number} EC_SIGN_P384_SHA384=13 EC_SIGN_P384_SHA384 value
                          * @property {number} EC_SIGN_SECP256K1_SHA256=31 EC_SIGN_SECP256K1_SHA256 value
+                         * @property {number} EC_SIGN_ED25519=40 EC_SIGN_ED25519 value
                          * @property {number} HMAC_SHA256=32 HMAC_SHA256 value
                          * @property {number} HMAC_SHA1=33 HMAC_SHA1 value
                          * @property {number} HMAC_SHA384=34 HMAC_SHA384 value
@@ -5252,6 +5263,7 @@
                             values[valuesById[12] = "EC_SIGN_P256_SHA256"] = 12;
                             values[valuesById[13] = "EC_SIGN_P384_SHA384"] = 13;
                             values[valuesById[31] = "EC_SIGN_SECP256K1_SHA256"] = 31;
+                            values[valuesById[40] = "EC_SIGN_ED25519"] = 40;
                             values[valuesById[32] = "HMAC_SHA256"] = 32;
                             values[valuesById[33] = "HMAC_SHA1"] = 33;
                             values[valuesById[34] = "HMAC_SHA384"] = 34;
@@ -5537,6 +5549,7 @@
                                 case 12:
                                 case 13:
                                 case 31:
+                                case 40:
                                 case 32:
                                 case 33:
                                 case 34:
@@ -5703,6 +5716,10 @@
                             case "EC_SIGN_SECP256K1_SHA256":
                             case 31:
                                 message.algorithm = 31;
+                                break;
+                            case "EC_SIGN_ED25519":
+                            case 40:
+                                message.algorithm = 40;
                                 break;
                             case "HMAC_SHA256":
                             case 32:

@@ -1490,6 +1490,8 @@ export class DocumentProcessorServiceClient {
    *   The request object that will be sent.
    * @param {google.cloud.documentai.v1.TrainProcessorVersionRequest.CustomDocumentExtractionOptions} request.customDocumentExtractionOptions
    *   Options to control Custom Document Extraction (CDE) Processor.
+   * @param {google.cloud.documentai.v1.TrainProcessorVersionRequest.FoundationModelTuningOptions} request.foundationModelTuningOptions
+   *   Options to control foundation model tuning of a processor.
    * @param {string} request.parent
    *   Required. The parent (project, location and processor) to create the new
    *   version for. Format:

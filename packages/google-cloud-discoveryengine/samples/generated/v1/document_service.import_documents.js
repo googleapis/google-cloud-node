@@ -41,6 +41,26 @@ function main(parent) {
    */
   // const bigquerySource = {}
   /**
+   *  FhirStore input source.
+   */
+  // const fhirStoreSource = {}
+  /**
+   *  Spanner input source.
+   */
+  // const spannerSource = {}
+  /**
+   *  Cloud SQL input source.
+   */
+  // const cloudSqlSource = {}
+  /**
+   *  Firestore input source.
+   */
+  // const firestoreSource = {}
+  /**
+   *  Cloud Bigtable input source.
+   */
+  // const bigtableSource = {}
+  /**
    *  Required. The parent branch resource name, such as
    *  `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`.
    *  Requires create/update permission.
@@ -57,6 +77,11 @@ function main(parent) {
    */
   // const reconciliationMode = {}
   /**
+   *  Indicates which fields in the provided imported documents to update. If
+   *  not set, the default is to update all fields.
+   */
+  // const updateMask = {}
+  /**
    *  Whether to automatically generate IDs for the documents if absent.
    *  If set to `true`,
    *  Document.id google.cloud.discoveryengine.v1.Document.id s are
@@ -68,39 +93,48 @@ function main(parent) {
    *  to be specified using
    *  id_field google.cloud.discoveryengine.v1.ImportDocumentsRequest.id_field,
    *  otherwise, documents without IDs fail to be imported.
-   *  Only set this field when using
-   *  GcsSource google.cloud.discoveryengine.v1.GcsSource  or
-   *  BigQuerySource google.cloud.discoveryengine.v1.BigQuerySource, and when
+   *  Supported data sources:
+   *  * GcsSource google.cloud.discoveryengine.v1.GcsSource.
    *  GcsSource.data_schema google.cloud.discoveryengine.v1.GcsSource.data_schema 
-   *  or
+   *  must be `custom` or `csv`. Otherwise, an INVALID_ARGUMENT error is thrown.
+   *  * BigQuerySource google.cloud.discoveryengine.v1.BigQuerySource.
    *  BigQuerySource.data_schema google.cloud.discoveryengine.v1.BigQuerySource.data_schema 
-   *  is `custom` or `csv`. Otherwise, an INVALID_ARGUMENT error is thrown.
+   *  must be `custom` or `csv`. Otherwise, an INVALID_ARGUMENT error is thrown.
+   *  * SpannerSource google.cloud.discoveryengine.v1.SpannerSource.
+   *  * CloudSqlSource google.cloud.discoveryengine.v1.CloudSqlSource.
+   *  * FirestoreSource google.cloud.discoveryengine.v1.FirestoreSource.
+   *  * BigtableSource google.cloud.discoveryengine.v1.BigtableSource.
    */
   // const autoGenerateIds = true
   /**
-   *  The field in the Cloud Storage and BigQuery sources that indicates the
-   *  unique IDs of the documents.
+   *  The field indicates the ID field or column to be used as unique IDs of
+   *  the documents.
    *  For GcsSource google.cloud.discoveryengine.v1.GcsSource  it is the key of
    *  the JSON field. For instance, `my_id` for JSON `{"my_id": "some_uuid"}`.
-   *  For BigQuerySource google.cloud.discoveryengine.v1.BigQuerySource  it is
-   *  the column name of the BigQuery table where the unique ids are stored.
-   *  The values of the JSON field or the BigQuery column are used as the
+   *  For others, it may be the column name of the table where the unique ids are
+   *  stored.
+   *  The values of the JSON field or the table column are used as the
    *  Document.id google.cloud.discoveryengine.v1.Document.id s. The JSON field
-   *  or the BigQuery column must be of string type, and the values must be set
-   *  as valid strings conform to RFC-1034 (https://tools.ietf.org/html/rfc1034)
+   *  or the table column must be of string type, and the values must be set as
+   *  valid strings conform to RFC-1034 (https://tools.ietf.org/html/rfc1034)
    *  with 1-63 characters. Otherwise, documents without valid IDs fail to be
    *  imported.
-   *  Only set this field when using
-   *  GcsSource google.cloud.discoveryengine.v1.GcsSource  or
-   *  BigQuerySource google.cloud.discoveryengine.v1.BigQuerySource, and when
-   *  GcsSource.data_schema google.cloud.discoveryengine.v1.GcsSource.data_schema 
-   *  or
-   *  BigQuerySource.data_schema google.cloud.discoveryengine.v1.BigQuerySource.data_schema 
-   *  is `custom`. And only set this field when
+   *  Only set this field when
    *  auto_generate_ids google.cloud.discoveryengine.v1.ImportDocumentsRequest.auto_generate_ids 
    *  is unset or set as `false`. Otherwise, an INVALID_ARGUMENT error is thrown.
    *  If it is unset, a default value `_id` is used when importing from the
    *  allowed data sources.
+   *  Supported data sources:
+   *  * GcsSource google.cloud.discoveryengine.v1.GcsSource.
+   *  GcsSource.data_schema google.cloud.discoveryengine.v1.GcsSource.data_schema 
+   *  must be `custom` or `csv`. Otherwise, an INVALID_ARGUMENT error is thrown.
+   *  * BigQuerySource google.cloud.discoveryengine.v1.BigQuerySource.
+   *  BigQuerySource.data_schema google.cloud.discoveryengine.v1.BigQuerySource.data_schema 
+   *  must be `custom` or `csv`. Otherwise, an INVALID_ARGUMENT error is thrown.
+   *  * SpannerSource google.cloud.discoveryengine.v1.SpannerSource.
+   *  * CloudSqlSource google.cloud.discoveryengine.v1.CloudSqlSource.
+   *  * FirestoreSource google.cloud.discoveryengine.v1.FirestoreSource.
+   *  * BigtableSource google.cloud.discoveryengine.v1.BigtableSource.
    */
   // const idField = 'abc123'
 

@@ -29,9 +29,10 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the Secret google.cloud.secretmanager.v1.Secret  associated with the
-   *  SecretVersions google.cloud.secretmanager.v1.SecretVersion  to list, in the format
-   *  `projects/* /secrets/*`.
+   *  Required. The resource name of the
+   *  Secret google.cloud.secretmanager.v1.Secret  associated with the
+   *  SecretVersions google.cloud.secretmanager.v1.SecretVersion  to list, in
+   *  the format `projects/* /secrets/*` or `projects/* /locations/* /secrets/*`.
    */
   // const parent = 'abc123'
   /**

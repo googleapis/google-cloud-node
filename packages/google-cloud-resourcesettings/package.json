@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/resource-settings",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "description": "resourcesettings client for Node.js",
   "repository": {
     "type": "git",

@@ -4,6 +4,21 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [8.8.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v8.7.0...security-center-v8.8.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [8.7.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v8.6.0...security-center-v8.7.0) (2024-04-18)
+
+
+### Features
+
+* [securitycenter] Add cloud_armor field to finding's list of attributes ([#5245](https://github.com/googleapis/google-cloud-node/issues/5245)) ([1ffd246](https://github.com/googleapis/google-cloud-node/commit/1ffd2461e581efe40f9cf950e3c0886e4613380c))
+
 ## [8.6.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v8.5.0...security-center-v8.6.0) (2024-03-29)
 
 

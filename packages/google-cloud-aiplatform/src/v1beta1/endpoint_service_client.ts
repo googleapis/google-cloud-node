@@ -299,11 +299,20 @@ export class EndpointServiceClient {
       modelEvaluationSlicePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}/slices/{slice}'
       ),
+      modelMonitorPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/modelMonitors/{model_monitor}'
+      ),
+      modelMonitoringJobPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/modelMonitors/{model_monitor}/modelMonitoringJobs/{model_monitoring_job}'
+      ),
       nasJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/nasJobs/{nas_job}'
       ),
       nasTrialDetailPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/nasJobs/{nas_job}/nasTrialDetails/{nas_trial_detail}'
+      ),
+      notebookExecutionJobPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/notebookExecutionJobs/{notebook_execution_job}'
       ),
       notebookRuntimePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/notebookRuntimes/{notebook_runtime}'
@@ -373,6 +382,9 @@ export class EndpointServiceClient {
       ),
       trialPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/studies/{study}/trials/{trial}'
+      ),
+      tuningJobPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/tuningJobs/{tuning_job}'
       ),
     };
 
@@ -725,9 +737,6 @@ export class EndpointServiceClient {
               post: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*/operations/*}:cancel',
-            },
-            {
               post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',
             },
             {
@@ -1062,10 +1071,6 @@ export class EndpointServiceClient {
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*/operations/*}',
-            },
-            {
-              delete:
                 '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
             },
             {
@@ -1352,9 +1357,6 @@ export class EndpointServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*/operations/*}',
-            },
-            {
               get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}',
             },
             {
@@ -1613,9 +1615,6 @@ export class EndpointServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/extensions/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/featurestores/*}/operations',
@@ -1894,9 +1893,6 @@ export class EndpointServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}:wait',
-            },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*/operations/*}:wait',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}:wait',
@@ -5694,6 +5690,135 @@ export class EndpointServiceClient {
   }
 
   /**
+   * Return a fully-qualified modelMonitor resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} model_monitor
+   * @returns {string} Resource name string.
+   */
+  modelMonitorPath(project: string, location: string, modelMonitor: string) {
+    return this.pathTemplates.modelMonitorPathTemplate.render({
+      project: project,
+      location: location,
+      model_monitor: modelMonitor,
+    });
+  }
+
+  /**
+   * Parse the project from ModelMonitor resource.
+   *
+   * @param {string} modelMonitorName
+   *   A fully-qualified path representing ModelMonitor resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromModelMonitorName(modelMonitorName: string) {
+    return this.pathTemplates.modelMonitorPathTemplate.match(modelMonitorName)
+      .project;
+  }
+
+  /**
+   * Parse the location from ModelMonitor resource.
+   *
+   * @param {string} modelMonitorName
+   *   A fully-qualified path representing ModelMonitor resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromModelMonitorName(modelMonitorName: string) {
+    return this.pathTemplates.modelMonitorPathTemplate.match(modelMonitorName)
+      .location;
+  }
+
+  /**
+   * Parse the model_monitor from ModelMonitor resource.
+   *
+   * @param {string} modelMonitorName
+   *   A fully-qualified path representing ModelMonitor resource.
+   * @returns {string} A string representing the model_monitor.
+   */
+  matchModelMonitorFromModelMonitorName(modelMonitorName: string) {
+    return this.pathTemplates.modelMonitorPathTemplate.match(modelMonitorName)
+      .model_monitor;
+  }
+
+  /**
+   * Return a fully-qualified modelMonitoringJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} model_monitor
+   * @param {string} model_monitoring_job
+   * @returns {string} Resource name string.
+   */
+  modelMonitoringJobPath(
+    project: string,
+    location: string,
+    modelMonitor: string,
+    modelMonitoringJob: string
+  ) {
+    return this.pathTemplates.modelMonitoringJobPathTemplate.render({
+      project: project,
+      location: location,
+      model_monitor: modelMonitor,
+      model_monitoring_job: modelMonitoringJob,
+    });
+  }
+
+  /**
+   * Parse the project from ModelMonitoringJob resource.
+   *
+   * @param {string} modelMonitoringJobName
+   *   A fully-qualified path representing ModelMonitoringJob resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromModelMonitoringJobName(modelMonitoringJobName: string) {
+    return this.pathTemplates.modelMonitoringJobPathTemplate.match(
+      modelMonitoringJobName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ModelMonitoringJob resource.
+   *
+   * @param {string} modelMonitoringJobName
+   *   A fully-qualified path representing ModelMonitoringJob resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromModelMonitoringJobName(modelMonitoringJobName: string) {
+    return this.pathTemplates.modelMonitoringJobPathTemplate.match(
+      modelMonitoringJobName
+    ).location;
+  }
+
+  /**
+   * Parse the model_monitor from ModelMonitoringJob resource.
+   *
+   * @param {string} modelMonitoringJobName
+   *   A fully-qualified path representing ModelMonitoringJob resource.
+   * @returns {string} A string representing the model_monitor.
+   */
+  matchModelMonitorFromModelMonitoringJobName(modelMonitoringJobName: string) {
+    return this.pathTemplates.modelMonitoringJobPathTemplate.match(
+      modelMonitoringJobName
+    ).model_monitor;
+  }
+
+  /**
+   * Parse the model_monitoring_job from ModelMonitoringJob resource.
+   *
+   * @param {string} modelMonitoringJobName
+   *   A fully-qualified path representing ModelMonitoringJob resource.
+   * @returns {string} A string representing the model_monitoring_job.
+   */
+  matchModelMonitoringJobFromModelMonitoringJobName(
+    modelMonitoringJobName: string
+  ) {
+    return this.pathTemplates.modelMonitoringJobPathTemplate.match(
+      modelMonitoringJobName
+    ).model_monitoring_job;
+  }
+
+  /**
    * Return a fully-qualified nasJob resource name string.
    *
    * @param {string} project
@@ -5815,6 +5940,67 @@ export class EndpointServiceClient {
     return this.pathTemplates.nasTrialDetailPathTemplate.match(
       nasTrialDetailName
     ).nas_trial_detail;
+  }
+
+  /**
+   * Return a fully-qualified notebookExecutionJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} notebook_execution_job
+   * @returns {string} Resource name string.
+   */
+  notebookExecutionJobPath(
+    project: string,
+    location: string,
+    notebookExecutionJob: string
+  ) {
+    return this.pathTemplates.notebookExecutionJobPathTemplate.render({
+      project: project,
+      location: location,
+      notebook_execution_job: notebookExecutionJob,
+    });
+  }
+
+  /**
+   * Parse the project from NotebookExecutionJob resource.
+   *
+   * @param {string} notebookExecutionJobName
+   *   A fully-qualified path representing NotebookExecutionJob resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNotebookExecutionJobName(notebookExecutionJobName: string) {
+    return this.pathTemplates.notebookExecutionJobPathTemplate.match(
+      notebookExecutionJobName
+    ).project;
+  }
+
+  /**
+   * Parse the location from NotebookExecutionJob resource.
+   *
+   * @param {string} notebookExecutionJobName
+   *   A fully-qualified path representing NotebookExecutionJob resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromNotebookExecutionJobName(notebookExecutionJobName: string) {
+    return this.pathTemplates.notebookExecutionJobPathTemplate.match(
+      notebookExecutionJobName
+    ).location;
+  }
+
+  /**
+   * Parse the notebook_execution_job from NotebookExecutionJob resource.
+   *
+   * @param {string} notebookExecutionJobName
+   *   A fully-qualified path representing NotebookExecutionJob resource.
+   * @returns {string} A string representing the notebook_execution_job.
+   */
+  matchNotebookExecutionJobFromNotebookExecutionJobName(
+    notebookExecutionJobName: string
+  ) {
+    return this.pathTemplates.notebookExecutionJobPathTemplate.match(
+      notebookExecutionJobName
+    ).notebook_execution_job;
   }
 
   /**
@@ -7294,6 +7480,58 @@ export class EndpointServiceClient {
    */
   matchTrialFromTrialName(trialName: string) {
     return this.pathTemplates.trialPathTemplate.match(trialName).trial;
+  }
+
+  /**
+   * Return a fully-qualified tuningJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} tuning_job
+   * @returns {string} Resource name string.
+   */
+  tuningJobPath(project: string, location: string, tuningJob: string) {
+    return this.pathTemplates.tuningJobPathTemplate.render({
+      project: project,
+      location: location,
+      tuning_job: tuningJob,
+    });
+  }
+
+  /**
+   * Parse the project from TuningJob resource.
+   *
+   * @param {string} tuningJobName
+   *   A fully-qualified path representing TuningJob resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTuningJobName(tuningJobName: string) {
+    return this.pathTemplates.tuningJobPathTemplate.match(tuningJobName)
+      .project;
+  }
+
+  /**
+   * Parse the location from TuningJob resource.
+   *
+   * @param {string} tuningJobName
+   *   A fully-qualified path representing TuningJob resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTuningJobName(tuningJobName: string) {
+    return this.pathTemplates.tuningJobPathTemplate.match(tuningJobName)
+      .location;
+  }
+
+  /**
+   * Parse the tuning_job from TuningJob resource.
+   *
+   * @param {string} tuningJobName
+   *   A fully-qualified path representing TuningJob resource.
+   * @returns {string} A string representing the tuning_job.
+   */
+  matchTuningJobFromTuningJobName(tuningJobName: string) {
+    return this.pathTemplates.tuningJobPathTemplate.match(tuningJobName)
+      .tuning_job;
   }
 
   /**

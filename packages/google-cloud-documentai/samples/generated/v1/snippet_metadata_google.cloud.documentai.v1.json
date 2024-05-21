@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-documentai",
-        "version": "8.4.0",
+        "version": "8.6.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -366,7 +366,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 80,
+                    "end": 84,
                     "type": "FULL"
                 }
             ],
@@ -378,6 +378,10 @@
                     {
                         "name": "custom_document_extraction_options",
                         "type": ".google.cloud.documentai.v1.TrainProcessorVersionRequest.CustomDocumentExtractionOptions"
+                    },
+                    {
+                        "name": "foundation_model_tuning_options",
+                        "type": ".google.cloud.documentai.v1.TrainProcessorVersionRequest.FoundationModelTuningOptions"
                     },
                     {
                         "name": "parent",

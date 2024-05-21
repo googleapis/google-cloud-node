@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@ syntax = "proto3";
 
 package google.chat.v1;
 
+import "google/api/resource.proto";
 import "google/chat/v1/attachment.proto";
 import "google/chat/v1/user.proto";
 
@@ -24,13 +25,14 @@ option go_package = "cloud.google.com/go/chat/apiv1/chatpb;chatpb";
 option java_multiple_files = true;
 option java_outer_classname = "AnnotationProto";
 option java_package = "com.google.chat.v1";
+option objc_class_prefix = "DYNAPIProto";
 option php_namespace = "Google\\Apps\\Chat\\V1";
 option ruby_package = "Google::Apps::Chat::V1";
 
 // Output only. Annotations associated with the plain-text body of the message.
 // To add basic formatting to a text message, see
 // [Format text
-// messages](https://developers.google.com/chat/format-messages).
+// messages](https://developers.google.com/workspace/chat/format-messages).
 //
 // Example plain-text message body:
 // ```
@@ -155,7 +157,7 @@ message RichLinkMetadata {
 // Data for Google Drive links.
 message DriveLinkData {
   // A
-  // [DriveDataRef](https://developers.google.com/chat/api/reference/rest/v1/spaces.messages.attachments#drivedataref)
+  // [DriveDataRef](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.messages.attachments#drivedataref)
   // which references a Google Drive file.
   DriveDataRef drive_data_ref = 1;
 

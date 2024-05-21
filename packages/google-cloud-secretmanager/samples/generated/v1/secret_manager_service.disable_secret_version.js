@@ -29,14 +29,17 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the SecretVersion google.cloud.secretmanager.v1.SecretVersion  to disable in the format
-   *  `projects/* /secrets/* /versions/*`.
+   *  Required. The resource name of the
+   *  SecretVersion google.cloud.secretmanager.v1.SecretVersion  to disable in
+   *  the format `projects/* /secrets/* /versions/*` or
+   *  `projects/* /locations/* /secrets/* /versions/*`.
    */
   // const name = 'abc123'
   /**
-   *  Optional. Etag of the SecretVersion google.cloud.secretmanager.v1.SecretVersion. The request succeeds if it matches
-   *  the etag of the currently stored secret version object. If the etag is
-   *  omitted, the request succeeds.
+   *  Optional. Etag of the
+   *  SecretVersion google.cloud.secretmanager.v1.SecretVersion. The request
+   *  succeeds if it matches the etag of the currently stored secret version
+   *  object. If the etag is omitted, the request succeeds.
    */
   // const etag = 'abc123'
 

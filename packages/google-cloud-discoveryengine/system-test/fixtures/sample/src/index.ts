@@ -22,6 +22,7 @@ import {
   DataStoreServiceClient,
   DocumentServiceClient,
   EngineServiceClient,
+  RecommendationServiceClient,
   SchemaServiceClient,
   SearchServiceClient,
   SiteSearchEngineServiceClient,
@@ -44,6 +45,11 @@ function doStuffWithDocumentServiceClient(client: DocumentServiceClient) {
   client.close();
 }
 function doStuffWithEngineServiceClient(client: EngineServiceClient) {
+  client.close();
+}
+function doStuffWithRecommendationServiceClient(
+  client: RecommendationServiceClient
+) {
   client.close();
 }
 function doStuffWithSchemaServiceClient(client: SchemaServiceClient) {
@@ -80,6 +86,9 @@ function main() {
   // check that the client instance can be created
   const engineServiceClient = new EngineServiceClient();
   doStuffWithEngineServiceClient(engineServiceClient);
+  // check that the client instance can be created
+  const recommendationServiceClient = new RecommendationServiceClient();
+  doStuffWithRecommendationServiceClient(recommendationServiceClient);
   // check that the client instance can be created
   const schemaServiceClient = new SchemaServiceClient();
   doStuffWithSchemaServiceClient(schemaServiceClient);

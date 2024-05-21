@@ -13580,6 +13580,9 @@ export namespace google {
 
                     /** DeleteAzureClusterRequest etag */
                     etag?: (string|null);
+
+                    /** DeleteAzureClusterRequest ignoreErrors */
+                    ignoreErrors?: (boolean|null);
                 }
 
                 /** Represents a DeleteAzureClusterRequest. */
@@ -13602,6 +13605,9 @@ export namespace google {
 
                     /** DeleteAzureClusterRequest etag. */
                     public etag: string;
+
+                    /** DeleteAzureClusterRequest ignoreErrors. */
+                    public ignoreErrors: boolean;
 
                     /**
                      * Creates a new DeleteAzureClusterRequest instance using the specified properties.
@@ -14228,6 +14234,9 @@ export namespace google {
 
                     /** DeleteAzureNodePoolRequest etag */
                     etag?: (string|null);
+
+                    /** DeleteAzureNodePoolRequest ignoreErrors */
+                    ignoreErrors?: (boolean|null);
                 }
 
                 /** Represents a DeleteAzureNodePoolRequest. */
@@ -14250,6 +14259,9 @@ export namespace google {
 
                     /** DeleteAzureNodePoolRequest etag. */
                     public etag: string;
+
+                    /** DeleteAzureNodePoolRequest ignoreErrors. */
+                    public ignoreErrors: boolean;
 
                     /**
                      * Creates a new DeleteAzureNodePoolRequest instance using the specified properties.

@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ option go_package = "cloud.google.com/go/chat/apiv1/chatpb;chatpb";
 option java_multiple_files = true;
 option java_outer_classname = "ReactionProto";
 option java_package = "com.google.chat.v1";
+option objc_class_prefix = "DYNAPIProto";
 option php_namespace = "Google\\Apps\\Chat\\V1";
 option ruby_package = "Google::Apps::Chat::V1";
 
@@ -49,6 +50,7 @@ message Reaction {
 
 // An emoji that is used as a reaction to a message.
 message Emoji {
+  // The content of the emoji.
   oneof content {
     // A basic emoji represented by a unicode string.
     string unicode = 1;
@@ -60,8 +62,8 @@ message Emoji {
 
 // Represents a custom emoji.
 message CustomEmoji {
-  // Unique key for the custom emoji resource.
-  string uid = 1;
+  // Output only. Unique key for the custom emoji resource.
+  string uid = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // The number of people who reacted to a message with a specific emoji.
@@ -118,9 +120,9 @@ message ListReactionsRequest {
   // Optional. A query filter.
   //
   // You can filter reactions by
-  // [emoji](https://developers.google.com/chat/api/reference/rest/v1/Emoji)
+  // [emoji](https://developers.google.com/workspace/chat/api/reference/rest/v1/Emoji)
   // (either `emoji.unicode` or `emoji.custom_emoji.uid`) and
-  // [user](https://developers.google.com/chat/api/reference/rest/v1/User)
+  // [user](https://developers.google.com/workspace/chat/api/reference/rest/v1/User)
   // (`user.name`).
   //
   // To filter reactions for multiple emojis or users, join similar fields
@@ -162,6 +164,7 @@ message ListReactionsRequest {
   string filter = 4 [(google.api.field_behavior) = OPTIONAL];
 }
 
+// Response to a list reactions request.
 message ListReactionsResponse {
   // List of reactions in the requested (or first) page.
   repeated Reaction reactions = 1;

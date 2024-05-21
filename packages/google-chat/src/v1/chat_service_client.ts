@@ -216,8 +216,14 @@ export class ChatServiceClient {
         'spaces/{space}/messages/{message}/reactions/{reaction}'
       ),
       spacePathTemplate: new this._gaxModule.PathTemplate('spaces/{space}'),
+      spaceReadStatePathTemplate: new this._gaxModule.PathTemplate(
+        'users/{user}/spaces/{space}/spaceReadState'
+      ),
       threadPathTemplate: new this._gaxModule.PathTemplate(
         'spaces/{space}/threads/{thread}'
+      ),
+      threadReadStatePathTemplate: new this._gaxModule.PathTemplate(
+        'users/{user}/spaces/{space}/threads/{thread}/threadReadState'
       ),
     };
 
@@ -315,10 +321,14 @@ export class ChatServiceClient {
       'completeImportSpace',
       'findDirectMessage',
       'createMembership',
+      'updateMembership',
       'deleteMembership',
       'createReaction',
       'listReactions',
       'deleteReaction',
+      'getSpaceReadState',
+      'updateSpaceReadState',
+      'getThreadReadState',
     ];
     for (const methodName of chatServiceStubMethods) {
       const callPromise = this.chatServiceStub.then(
@@ -427,6 +437,8 @@ export class ChatServiceClient {
       'https://www.googleapis.com/auth/chat.spaces',
       'https://www.googleapis.com/auth/chat.spaces.create',
       'https://www.googleapis.com/auth/chat.spaces.readonly',
+      'https://www.googleapis.com/auth/chat.users.readstate',
+      'https://www.googleapis.com/auth/chat.users.readstate.readonly',
     ];
   }
 
@@ -450,12 +462,13 @@ export class ChatServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Creates a message in a Google Chat space. For an example, see [Create a
-   * message](https://developers.google.com/chat/api/guides/v1/messages/create).
+   * Creates a message in a Google Chat space. The maximum message size,
+   * including text and cards, is 32,000 bytes. For an example, see [Send a
+   * message](https://developers.google.com/workspace/chat/create-messages).
    *
    * Calling this method requires
-   * [authentication](https://developers.google.com/chat/api/guides/auth) and
-   * supports the following authentication types:
+   * [authentication](https://developers.google.com/workspace/chat/authenticate-authorize)
+   * and supports the following authentication types:
    *
    * - For text messages, user authentication or app authentication are
    * supported.
@@ -477,7 +490,7 @@ export class ChatServiceClient {
    *   a message and specify a `threadKey` or the
    *   {@link protos.google.chat.v1.Thread.name|thread.name}. For example usage, see [Start or
    *   reply to a message
-   *   thread](https://developers.google.com/chat/api/guides/v1/messages/create#create-message-thread).
+   *   thread](https://developers.google.com/workspace/chat/create-messages#create-message-thread).
    * @param {string} [request.requestId]
    *   Optional. A unique request ID for this message. Specifying an existing
    *   request ID returns the message created with that ID instead of creating a
@@ -500,7 +513,7 @@ export class ChatServiceClient {
    *   different messages.
    *
    *   For details, see [Name a
-   *   message](https://developers.google.com/chat/api/guides/v1/messages/create#name_a_created_message).
+   *   message](https://developers.google.com/workspace/chat/create-messages#name_a_created_message).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -578,30 +591,31 @@ export class ChatServiceClient {
   }
   /**
    * Returns details about a membership. For an example, see
-   * [Get a
-   * membership](https://developers.google.com/chat/api/guides/v1/members/get).
+   * [Get details about a user's or Google Chat app's
+   * membership](https://developers.google.com/workspace/chat/get-members).
    *
    * Requires
-   * [authentication](https://developers.google.com/chat/api/guides/auth).
+   * [authentication](https://developers.google.com/workspace/chat/authenticate-authorize).
    * Supports
    * [app
-   * authentication](https://developers.google.com/chat/api/guides/auth/service-accounts)
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
    * and [user
-   * authentication](https://developers.google.com/chat/api/guides/auth/users).
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Resource name of the membership to retrieve.
    *
-   *   To get the app's own membership, you can optionally use
-   *   `spaces/{space}/members/app`.
+   *   To get the app's own membership [by using user
+   *   authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user),
+   *   you can optionally use `spaces/{space}/members/app`.
    *
    *   Format: `spaces/{space}/members/{member}` or `spaces/{space}/members/app`
    *
    *   When [authenticated as a
-   *   user](https://developers.google.com/chat/api/guides/auth/users), you can
-   *   use the user's email as an alias for `{member}`. For example,
+   *   user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user),
+   *   you can use the user's email as an alias for `{member}`. For example,
    *   `spaces/{space}/members/example@gmail.com` where `example@gmail.com` is the
    *   email of the Google Chat user.
    * @param {object} [options]
@@ -681,16 +695,16 @@ export class ChatServiceClient {
   }
   /**
    * Returns details about a message.
-   * For an example, see [Read a
-   * message](https://developers.google.com/chat/api/guides/v1/messages/get).
+   * For an example, see [Get details about a
+   * message](https://developers.google.com/workspace/chat/get-messages).
    *
    * Requires
-   * [authentication](https://developers.google.com/chat/api/guides/auth).
+   * [authentication](https://developers.google.com/workspace/chat/authenticate-authorize).
    * Supports
    * [app
-   * authentication](https://developers.google.com/chat/api/guides/auth/service-accounts)
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
    * and [user
-   * authentication](https://developers.google.com/chat/api/guides/auth/users).
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
    *
    * Note: Might return a message from a blocked member or space.
    *
@@ -704,7 +718,7 @@ export class ChatServiceClient {
    *   If you've set a custom ID for your message, you can use the value from the
    *   `clientAssignedMessageId` field for `{message}`. For details, see [Name a
    *   message]
-   *   (https://developers.google.com/chat/api/guides/v1/messages/create#name_a_created_message).
+   *   (https://developers.google.com/workspace/chat/create-messages#name_a_created_message).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -786,15 +800,15 @@ export class ChatServiceClient {
    * method uses a `patch` request while the `update` method uses a `put`
    * request. We recommend using the `patch` method. For an example, see
    * [Update a
-   * message](https://developers.google.com/chat/api/guides/v1/messages/update).
+   * message](https://developers.google.com/workspace/chat/update-messages).
    *
    * Requires
-   * [authentication](https://developers.google.com/chat/api/guides/auth).
+   * [authentication](https://developers.google.com/workspace/chat/authenticate-authorize).
    * Supports
    * [app
-   * authentication](https://developers.google.com/chat/api/guides/auth/service-accounts)
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
    * and [user
-   * authentication](https://developers.google.com/chat/api/guides/auth/users).
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
    * When using app authentication, requests can only update messages
    * created by the calling Chat app.
    *
@@ -823,7 +837,7 @@ export class ChatServiceClient {
    * @param {boolean} [request.allowMissing]
    *   Optional. If `true` and the message isn't found, a new message is created
    *   and `updateMask` is ignored. The specified message ID must be
-   *   [client-assigned](https://developers.google.com/chat/api/guides/v1/messages/create#name_a_created_message)
+   *   [client-assigned](https://developers.google.com/workspace/chat/create-messages#name_a_created_message)
    *   or the request fails.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -903,15 +917,15 @@ export class ChatServiceClient {
   /**
    * Deletes a message.
    * For an example, see [Delete a
-   * message](https://developers.google.com/chat/api/guides/v1/messages/delete).
+   * message](https://developers.google.com/workspace/chat/delete-messages).
    *
    * Requires
-   * [authentication](https://developers.google.com/chat/api/guides/auth).
+   * [authentication](https://developers.google.com/workspace/chat/authenticate-authorize).
    * Supports
    * [app
-   * authentication](https://developers.google.com/chat/api/guides/auth/service-accounts)
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
    * and [user
-   * authentication](https://developers.google.com/chat/api/guides/auth/users).
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
    * When using app authentication, requests can only delete messages
    * created by the calling Chat app.
    *
@@ -925,15 +939,15 @@ export class ChatServiceClient {
    *   If you've set a custom ID for your message, you can use the value from the
    *   `clientAssignedMessageId` field for `{message}`. For details, see [Name a
    *   message]
-   *   (https://developers.google.com/chat/api/guides/v1/messages/create#name_a_created_message).
+   *   (https://developers.google.com/workspace/chat/create-messages#name_a_created_message).
    * @param {boolean} request.force
    *   When `true`, deleting a message also deletes its threaded replies. When
    *   `false`, if a message has threaded replies, deletion fails.
    *
    *   Only applies when [authenticating as a
-   *   user](https://developers.google.com/chat/api/guides/auth/users). Has no
-   *   effect when [authenticating as a Chat app]
-   *   (https://developers.google.com/chat/api/guides/auth/service-accounts).
+   *   user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+   *   Has no effect when [authenticating as a Chat app]
+   *   (https://developers.google.com/workspace/chat/authenticate-authorize-chat-app).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1012,12 +1026,12 @@ export class ChatServiceClient {
   /**
    * Gets the metadata of a message attachment. The attachment data is fetched
    * using the [media
-   * API](https://developers.google.com/chat/api/reference/rest/v1/media/download).
+   * API](https://developers.google.com/workspace/chat/api/reference/rest/v1/media/download).
    * For an example, see
-   * [Get a message
-   * attachment](https://developers.google.com/chat/api/guides/v1/media-and-attachments/get).
+   * [Get metadata about a message
+   * attachment](https://developers.google.com/workspace/chat/get-media-attachments).
    * Requires [app
-   * authentication](https://developers.google.com/chat/api/guides/auth/service-accounts).
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1102,9 +1116,9 @@ export class ChatServiceClient {
   /**
    * Uploads an attachment. For an example, see
    * [Upload media as a file
-   * attachment](https://developers.google.com/chat/api/guides/v1/media-and-attachments/upload).
+   * attachment](https://developers.google.com/workspace/chat/upload-media-attachments).
    * Requires user
-   * [authentication](https://developers.google.com/chat/api/guides/auth/users).
+   * [authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
    *
    * You can upload attachments up to 200 MB. Certain file types aren't
    * supported. For details, see [File types blocked by Google
@@ -1194,15 +1208,16 @@ export class ChatServiceClient {
   }
   /**
    * Returns details about a space. For an example, see
-   * [Get a space](https://developers.google.com/chat/api/guides/v1/spaces/get).
+   * [Get details about a
+   * space](https://developers.google.com/workspace/chat/get-spaces).
    *
    * Requires
-   * [authentication](https://developers.google.com/chat/api/guides/auth).
+   * [authentication](https://developers.google.com/workspace/chat/authenticate-authorize).
    * Supports
    * [app
-   * authentication](https://developers.google.com/chat/api/guides/auth/service-accounts)
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
    * and [user
-   * authentication](https://developers.google.com/chat/api/guides/auth/users).
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1288,14 +1303,14 @@ export class ChatServiceClient {
   /**
    * Creates a named space. Spaces grouped by topics aren't supported. For an
    * example, see [Create a
-   * space](https://developers.google.com/chat/api/guides/v1/spaces/create).
+   * space](https://developers.google.com/workspace/chat/create-spaces).
    *
    *  If you receive the error message `ALREADY_EXISTS` when creating
    *  a space, try a different `displayName`. An existing space within
    *  the Google Workspace organization might already use this display name.
    *
    * Requires [user
-   * authentication](https://developers.google.com/chat/api/guides/auth/users).
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1391,21 +1406,21 @@ export class ChatServiceClient {
    * Creates a space and adds specified users to it. The calling user is
    * automatically added to the space, and shouldn't be specified as a
    * membership in the request. For an example, see
-   * [Set up a
-   * space](https://developers.google.com/chat/api/guides/v1/spaces/set-up).
+   * [Set up a space with initial
+   * members](https://developers.google.com/workspace/chat/set-up-spaces).
    *
    * To specify the human members to add, add memberships with the appropriate
-   * `member.name` in the `SetUpSpaceRequest`. To add a human user, use
-   * `users/{user}`, where `{user}` can be the email address for the user. For
-   * users in the same Workspace organization `{user}` can also be the `id` for
-   * the person from the People API, or the `id` for the user in the Directory
-   * API. For example, if the People API Person profile ID for
-   * `user@example.com` is `123456789`, you can add the user to the space by
-   * setting the `membership.member.name` to `users/user@example.com` or
-   * `users/123456789`.
+   * `membership.member.name`. To add a human user, use `users/{user}`, where
+   * `{user}` can be the email address for the user. For users in the same
+   * Workspace organization `{user}` can also be the `id` for the person from
+   * the People API, or the `id` for the user in the Directory API. For example,
+   * if the People API Person profile ID for `user@example.com` is `123456789`,
+   * you can add the user to the space by setting the `membership.member.name`
+   * to `users/user@example.com` or `users/123456789`.
    *
-   * For a space or group chat, if the caller blocks or is blocked by some
-   * members, then those members aren't added to the created space.
+   * For a named space or group chat, if the caller blocks, or is blocked
+   * by some members, or doesn't have permission to add some members, then
+   * those members aren't added to the created space.
    *
    * To create a direct message (DM) between the calling user and another human
    * user, specify exactly one membership to represent the human user. If
@@ -1416,8 +1431,8 @@ export class ChatServiceClient {
    * can only use this method to set up a DM with the calling app. To add the
    * calling app as a member of a space or an existing DM between two human
    * users, see
-   * [create a
-   * membership](https://developers.google.com/chat/api/guides/v1/members/create).
+   * [Invite or add a user or app to a
+   * space](https://developers.google.com/workspace/chat/create-members).
    *
    * If a DM already exists between two users, even when one user blocks the
    * other at the time a request is made, then the existing DM is returned.
@@ -1428,7 +1443,7 @@ export class ChatServiceClient {
    * might already use this display name.
    *
    * Requires [user
-   * authentication](https://developers.google.com/chat/api/guides/auth/users).
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1469,14 +1484,14 @@ export class ChatServiceClient {
    *
    *   The set currently allows up to 20 memberships (in addition to the caller).
    *
-   *   The `Membership.member` field must contain a `user` with `name` populated
-   *   (format: `users/{user}`) and `type` set to `User.Type.HUMAN`. You can only
-   *   add human users when setting up a space (adding Chat apps is only supported
-   *   for direct message setup with the calling app). You can also add members
-   *   using the user's email as an alias for {user}. For example, the `user.name`
-   *   can be `users/example@gmail.com`." To invite Gmail users or users from
-   *   external Google Workspace domains, user's email must be used for
-   *   `{user}`.
+   *   For human membership, the `Membership.member` field must contain a `user`
+   *   with `name` populated (format: `users/{user}`) and `type` set to
+   *   `User.Type.HUMAN`. You can only add human users when setting up a space
+   *   (adding Chat apps is only supported for direct message setup with the
+   *   calling app). You can also add members using the user's email as an alias
+   *   for {user}. For example, the `user.name` can be `users/example@gmail.com`.
+   *   To invite Gmail users or users from external Google Workspace domains,
+   *   user's email must be used for `{user}`.
    *
    *   Optional when setting `Space.spaceType` to `SPACE`.
    *
@@ -1563,14 +1578,14 @@ export class ChatServiceClient {
   /**
    * Updates a space. For an example, see
    * [Update a
-   * space](https://developers.google.com/chat/api/guides/v1/spaces/update).
+   * space](https://developers.google.com/workspace/chat/update-spaces).
    *
    * If you're updating the `displayName` field and receive the error message
    * `ALREADY_EXISTS`, try a different display name.. An existing space within
    * the Google Workspace organization might already use this display name.
    *
    * Requires [user
-   * authentication](https://developers.google.com/chat/api/guides/auth/users).
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1593,12 +1608,13 @@ export class ChatServiceClient {
    *   Google Workspace organization might already use this display name.)
    *
    *   - `space_type` (Only supports changing a `GROUP_CHAT` space type to
-   *   `SPACE`. Include `display_name` together with `space_type` in the update
-   *   mask and ensure that the specified space has a non-empty display name and
-   *   the `SPACE` space type. Including the `space_type` mask and the `SPACE`
-   *   type in the specified space when updating the display name is optional if
-   *   the existing space already has the `SPACE` type. Trying to update the
-   *   space type in other ways results in an invalid argument error).
+   *   `SPACE`. Include `display_name` together
+   *   with `space_type` in the update mask and ensure that the specified space
+   *   has a non-empty display name and the `SPACE` space type. Including the
+   *   `space_type` mask and the `SPACE` type in the specified space when updating
+   *   the display name is optional if the existing space already has the `SPACE`
+   *   type. Trying to update the space type in other ways results in an invalid
+   *   argument error).
    *
    *   - `space_details`
    *
@@ -1607,6 +1623,7 @@ export class ChatServiceClient {
    *   allows users to change their history
    *   setting](https://support.google.com/a/answer/7664184).
    *   Warning: mutually exclusive with all other field paths.)
+   *
    *   - Developer Preview: `access_settings.audience` (Supports changing the
    *   [access setting](https://support.google.com/chat/answer/11971020) of a
    *   space. If no audience is specified in the access setting, the space's
@@ -1692,9 +1709,9 @@ export class ChatServiceClient {
    * that the space's child resources—like messages posted in the space and
    * memberships in the space—are also deleted. For an example, see
    * [Delete a
-   * space](https://developers.google.com/chat/api/guides/v1/spaces/delete).
+   * space](https://developers.google.com/workspace/chat/delete-spaces).
    * Requires [user
-   * authentication](https://developers.google.com/chat/api/guides/auth/users)
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
    * from a user who has permission to delete the space.
    *
    * @param {Object} request
@@ -1780,11 +1797,11 @@ export class ChatServiceClient {
   }
   /**
    * Completes the
-   * [import process](https://developers.google.com/chat/api/guides/import-data)
+   * [import process](https://developers.google.com/workspace/chat/import-data)
    * for the specified space and makes it visible to users.
    * Requires app authentication and domain-wide delegation. For more
    * information, see [Authorize Google Chat apps to import
-   * data](https://developers.google.com/chat/api/guides/authorize-import).
+   * data](https://developers.google.com/workspace/chat/authorize-import).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1874,19 +1891,19 @@ export class ChatServiceClient {
    * [Find a direct message](/chat/api/guides/v1/spaces/find-direct-message).
    *
    * With [user
-   * authentication](https://developers.google.com/chat/api/guides/auth/users),
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user),
    * returns the direct message space between the specified user and the
    * authenticated user.
    *
    * With [app
-   * authentication](https://developers.google.com/chat/api/guides/auth/service-accounts),
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app),
    * returns the direct message space between the specified user and the calling
    * Chat app.
    *
    * Requires [user
-   * authentication](https://developers.google.com/chat/api/guides/auth/users)
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
    * or [app
-   * authentication](https://developers.google.com/chat/api/guides/auth/service-accounts).
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1900,8 +1917,8 @@ export class ChatServiceClient {
    *   in the Directory API. For example, if the People API profile ID is
    *   `123456789`, you can find a direct message with that person by using
    *   `users/123456789` as the `name`. When [authenticated as a
-   *   user](https://developers.google.com/chat/api/guides/auth/users), you can
-   *   use the email as an alias for `{user}`. For example,
+   *   user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user),
+   *   you can use the email as an alias for `{user}`. For example,
    *   `users/example@gmail.com` where `example@gmail.com` is the email of the
    *   Google Chat user.
    * @param {object} [options]
@@ -1978,16 +1995,16 @@ export class ChatServiceClient {
   /**
    * Creates a human membership or app membership for the calling app. Creating
    * memberships for other apps isn't supported. For an example, see
-   * [ Create a
-   * membership](https://developers.google.com/chat/api/guides/v1/members/create).
+   * [Invite or add a user or a Google Chat app to a
+   * space](https://developers.google.com/workspace/chat/create-members).
    * When creating a membership, if the specified member has their auto-accept
    * policy turned off, then they're invited, and must accept the space
    * invitation before joining. Otherwise, creating a membership adds the member
    * directly to the specified space. Requires [user
-   * authentication](https://developers.google.com/chat/api/guides/auth/users).
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
    *
-   * To specify the member to add, set the `membership.member.name` in the
-   * `CreateMembershipRequest`:
+   * To specify the member to add, set the `membership.member.name` for the
+   * human or app member.
    *
    * - To add the calling app to a space or a direct message between two human
    *   users, use `users/app`. Unable to add other
@@ -2101,12 +2118,106 @@ export class ChatServiceClient {
     return this.innerApiCalls.createMembership(request, options, callback);
   }
   /**
-   * Deletes a membership. For an example, see
-   * [Delete a
-   * membership](https://developers.google.com/chat/api/guides/v1/members/delete).
+   * Updates a membership. For an example, see [Update a user's membership in
+   * a space](https://developers.google.com/workspace/chat/update-members).
    *
    * Requires [user
-   * authentication](https://developers.google.com/chat/api/guides/auth/users).
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.chat.v1.Membership} request.membership
+   *   Required. The membership to update. Only fields specified by `update_mask`
+   *   are updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The field paths to update. Separate multiple values with commas
+   *   or use `*` to update all field paths.
+   *
+   *   Currently supported field paths:
+   *
+   *   - `role`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.chat.v1.Membership|Membership}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.update_membership.js</caption>
+   * region_tag:chat_v1_generated_ChatService_UpdateMembership_async
+   */
+  updateMembership(
+    request?: protos.google.chat.v1.IUpdateMembershipRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.chat.v1.IMembership,
+      protos.google.chat.v1.IUpdateMembershipRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateMembership(
+    request: protos.google.chat.v1.IUpdateMembershipRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.chat.v1.IMembership,
+      protos.google.chat.v1.IUpdateMembershipRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateMembership(
+    request: protos.google.chat.v1.IUpdateMembershipRequest,
+    callback: Callback<
+      protos.google.chat.v1.IMembership,
+      protos.google.chat.v1.IUpdateMembershipRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateMembership(
+    request?: protos.google.chat.v1.IUpdateMembershipRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.chat.v1.IMembership,
+          protos.google.chat.v1.IUpdateMembershipRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.chat.v1.IMembership,
+      protos.google.chat.v1.IUpdateMembershipRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.chat.v1.IMembership,
+      protos.google.chat.v1.IUpdateMembershipRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'membership.name': request.membership!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateMembership(request, options, callback);
+  }
+  /**
+   * Deletes a membership. For an example, see
+   * [Remove a user or a Google Chat app from a
+   * space](https://developers.google.com/workspace/chat/delete-members).
+   *
+   * Requires [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2201,12 +2312,12 @@ export class ChatServiceClient {
     return this.innerApiCalls.deleteMembership(request, options, callback);
   }
   /**
-   * Creates a reaction and adds it to a message. For an example, see
-   * [Create a
-   * reaction](https://developers.google.com/chat/api/guides/v1/reactions/create).
+   * Creates a reaction and adds it to a message. Only unicode emojis are
+   * supported. For an example, see
+   * [Add a reaction to a
+   * message](https://developers.google.com/workspace/chat/create-reactions).
    * Requires [user
-   * authentication](https://developers.google.com/chat/api/guides/auth/users).
-   * Only unicode emoji are supported.
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2292,11 +2403,12 @@ export class ChatServiceClient {
     return this.innerApiCalls.createReaction(request, options, callback);
   }
   /**
-   * Deletes a reaction to a message. For an example, see
+   * Deletes a reaction to a message. Only unicode emojis are supported.
+   * For an example, see
    * [Delete a
-   * reaction](https://developers.google.com/chat/api/guides/v1/reactions/delete).
+   * reaction](https://developers.google.com/workspace/chat/delete-reactions).
    * Requires [user
-   * authentication](https://developers.google.com/chat/api/guides/auth/users).
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2379,13 +2491,333 @@ export class ChatServiceClient {
     this.initialize();
     return this.innerApiCalls.deleteReaction(request, options, callback);
   }
+  /**
+   * Returns details about a user's read state within a space, used to identify
+   * read and unread messages. For an example, see [Get details about a user's
+   * space read
+   * state](https://developers.google.com/workspace/chat/get-space-read-state).
+   *
+   * Requires [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the space read state to retrieve.
+   *
+   *   Only supports getting read state for the calling user.
+   *
+   *   To refer to the calling user, set one of the following:
+   *
+   *   - The `me` alias. For example, `users/me/spaces/{space}/spaceReadState`.
+   *
+   *   - Their Workspace email address. For example,
+   *   `users/user@example.com/spaces/{space}/spaceReadState`.
+   *
+   *   - Their user id. For example,
+   *   `users/123456789/spaces/{space}/spaceReadState`.
+   *
+   *   Format: users/{user}/spaces/{space}/spaceReadState
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.chat.v1.SpaceReadState|SpaceReadState}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.get_space_read_state.js</caption>
+   * region_tag:chat_v1_generated_ChatService_GetSpaceReadState_async
+   */
+  getSpaceReadState(
+    request?: protos.google.chat.v1.IGetSpaceReadStateRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.chat.v1.ISpaceReadState,
+      protos.google.chat.v1.IGetSpaceReadStateRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getSpaceReadState(
+    request: protos.google.chat.v1.IGetSpaceReadStateRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.chat.v1.ISpaceReadState,
+      protos.google.chat.v1.IGetSpaceReadStateRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getSpaceReadState(
+    request: protos.google.chat.v1.IGetSpaceReadStateRequest,
+    callback: Callback<
+      protos.google.chat.v1.ISpaceReadState,
+      protos.google.chat.v1.IGetSpaceReadStateRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getSpaceReadState(
+    request?: protos.google.chat.v1.IGetSpaceReadStateRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.chat.v1.ISpaceReadState,
+          protos.google.chat.v1.IGetSpaceReadStateRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.chat.v1.ISpaceReadState,
+      protos.google.chat.v1.IGetSpaceReadStateRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.chat.v1.ISpaceReadState,
+      protos.google.chat.v1.IGetSpaceReadStateRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getSpaceReadState(request, options, callback);
+  }
+  /**
+   * Updates a user's read state within a space, used to identify read and
+   * unread messages. For an example, see [Update a user's space read
+   * state](https://developers.google.com/workspace/chat/update-space-read-state).
+   *
+   * Requires [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.chat.v1.SpaceReadState} request.spaceReadState
+   *   Required. The space read state and fields to update.
+   *
+   *   Only supports updating read state for the calling user.
+   *
+   *   To refer to the calling user, set one of the following:
+   *
+   *   - The `me` alias. For example, `users/me/spaces/{space}/spaceReadState`.
+   *
+   *   - Their Workspace email address. For example,
+   *   `users/user@example.com/spaces/{space}/spaceReadState`.
+   *
+   *   - Their user id. For example,
+   *   `users/123456789/spaces/{space}/spaceReadState`.
+   *
+   *   Format: users/{user}/spaces/{space}/spaceReadState
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The field paths to update. Currently supported field paths:
+   *
+   *   - `last_read_time`
+   *
+   *   When the `last_read_time` is before the latest message create time, the
+   *   space appears as unread in the UI.
+   *
+   *   To mark the space as read, set `last_read_time` to any value later (larger)
+   *   than the latest message create time. The `last_read_time` is coerced to
+   *   match the latest message create time. Note that the space read state only
+   *   affects the read state of messages that are visible in the space's
+   *   top-level conversation. Replies in threads are unaffected by this
+   *   timestamp, and instead rely on the thread read state.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.chat.v1.SpaceReadState|SpaceReadState}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.update_space_read_state.js</caption>
+   * region_tag:chat_v1_generated_ChatService_UpdateSpaceReadState_async
+   */
+  updateSpaceReadState(
+    request?: protos.google.chat.v1.IUpdateSpaceReadStateRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.chat.v1.ISpaceReadState,
+      protos.google.chat.v1.IUpdateSpaceReadStateRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateSpaceReadState(
+    request: protos.google.chat.v1.IUpdateSpaceReadStateRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.chat.v1.ISpaceReadState,
+      protos.google.chat.v1.IUpdateSpaceReadStateRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateSpaceReadState(
+    request: protos.google.chat.v1.IUpdateSpaceReadStateRequest,
+    callback: Callback<
+      protos.google.chat.v1.ISpaceReadState,
+      protos.google.chat.v1.IUpdateSpaceReadStateRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateSpaceReadState(
+    request?: protos.google.chat.v1.IUpdateSpaceReadStateRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.chat.v1.ISpaceReadState,
+          protos.google.chat.v1.IUpdateSpaceReadStateRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.chat.v1.ISpaceReadState,
+      protos.google.chat.v1.IUpdateSpaceReadStateRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.chat.v1.ISpaceReadState,
+      protos.google.chat.v1.IUpdateSpaceReadStateRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'space_read_state.name': request.spaceReadState!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateSpaceReadState(request, options, callback);
+  }
+  /**
+   * Returns details about a user's read state within a thread, used to identify
+   * read and unread messages. For an example, see [Get details about a user's
+   * thread read
+   * state](https://developers.google.com/workspace/chat/get-thread-read-state).
+   *
+   * Requires [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the thread read state to retrieve.
+   *
+   *   Only supports getting read state for the calling user.
+   *
+   *   To refer to the calling user, set one of the following:
+   *
+   *   - The `me` alias. For example,
+   *   `users/me/spaces/{space}/threads/{thread}/threadReadState`.
+   *
+   *   - Their Workspace email address. For example,
+   *   `users/user@example.com/spaces/{space}/threads/{thread}/threadReadState`.
+   *
+   *   - Their user id. For example,
+   *   `users/123456789/spaces/{space}/threads/{thread}/threadReadState`.
+   *
+   *   Format: users/{user}/spaces/{space}/threads/{thread}/threadReadState
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.chat.v1.ThreadReadState|ThreadReadState}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.get_thread_read_state.js</caption>
+   * region_tag:chat_v1_generated_ChatService_GetThreadReadState_async
+   */
+  getThreadReadState(
+    request?: protos.google.chat.v1.IGetThreadReadStateRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.chat.v1.IThreadReadState,
+      protos.google.chat.v1.IGetThreadReadStateRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getThreadReadState(
+    request: protos.google.chat.v1.IGetThreadReadStateRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.chat.v1.IThreadReadState,
+      protos.google.chat.v1.IGetThreadReadStateRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getThreadReadState(
+    request: protos.google.chat.v1.IGetThreadReadStateRequest,
+    callback: Callback<
+      protos.google.chat.v1.IThreadReadState,
+      protos.google.chat.v1.IGetThreadReadStateRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getThreadReadState(
+    request?: protos.google.chat.v1.IGetThreadReadStateRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.chat.v1.IThreadReadState,
+          protos.google.chat.v1.IGetThreadReadStateRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.chat.v1.IThreadReadState,
+      protos.google.chat.v1.IGetThreadReadStateRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.chat.v1.IThreadReadState,
+      protos.google.chat.v1.IGetThreadReadStateRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getThreadReadState(request, options, callback);
+  }
 
   /**
    * Lists messages in a space that the caller is a member of, including
    * messages from blocked members and spaces. For an example, see
    * [List messages](/chat/api/guides/v1/messages/list).
    * Requires [user
-   * authentication](https://developers.google.com/chat/api/guides/auth/users).
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2399,8 +2831,8 @@ export class ChatServiceClient {
    *
    *   If unspecified, at most 25 are returned.
    *
-   *   The maximum value is 1,000. If you use a value more than 1,000, it's
-   *   automatically changed to 1,000.
+   *   The maximum value is 1000. If you use a value more than 1000, it's
+   *   automatically changed to 1000.
    *
    *   Negative values return an `INVALID_ARGUMENT` error.
    * @param {string} request.pageToken
@@ -2557,8 +2989,8 @@ export class ChatServiceClient {
    *
    *   If unspecified, at most 25 are returned.
    *
-   *   The maximum value is 1,000. If you use a value more than 1,000, it's
-   *   automatically changed to 1,000.
+   *   The maximum value is 1000. If you use a value more than 1000, it's
+   *   automatically changed to 1000.
    *
    *   Negative values return an `INVALID_ARGUMENT` error.
    * @param {string} request.pageToken
@@ -2671,8 +3103,8 @@ export class ChatServiceClient {
    *
    *   If unspecified, at most 25 are returned.
    *
-   *   The maximum value is 1,000. If you use a value more than 1,000, it's
-   *   automatically changed to 1,000.
+   *   The maximum value is 1000. If you use a value more than 1000, it's
+   *   automatically changed to 1000.
    *
    *   Negative values return an `INVALID_ARGUMENT` error.
    * @param {string} request.pageToken
@@ -2770,25 +3202,25 @@ export class ChatServiceClient {
     ) as AsyncIterable<protos.google.chat.v1.IMessage>;
   }
   /**
-   * Lists memberships in a space. For an example, see [List
-   * memberships](https://developers.google.com/chat/api/guides/v1/members/list).
-   * Listing memberships with
-   * [app
-   * authentication](https://developers.google.com/chat/api/guides/auth/service-accounts)
+   * Lists memberships in a space. For an example, see [List users and Google
+   * Chat apps in a
+   * space](https://developers.google.com/workspace/chat/list-members). Listing
+   * memberships with [app
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
    * lists memberships in spaces that the Chat app has
    * access to, but excludes Chat app memberships,
    * including its own. Listing memberships with
    * [User
-   * authentication](https://developers.google.com/chat/api/guides/auth/users)
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
    * lists memberships in spaces that the authenticated user has access to.
    *
    * Requires
-   * [authentication](https://developers.google.com/chat/api/guides/auth).
+   * [authentication](https://developers.google.com/workspace/chat/authenticate-authorize).
    * Supports
    * [app
-   * authentication](https://developers.google.com/chat/api/guides/auth/service-accounts)
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
    * and [user
-   * authentication](https://developers.google.com/chat/api/guides/auth/users).
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2803,8 +3235,8 @@ export class ChatServiceClient {
    *
    *   If unspecified, at most 100 memberships are returned.
    *
-   *   The maximum value is 1,000. If you use a value more than 1,000, it's
-   *   automatically changed to 1,000.
+   *   The maximum value is 1000. If you use a value more than 1000, it's
+   *   automatically changed to 1000.
    *
    *   Negative values return an `INVALID_ARGUMENT` error.
    * @param {string} [request.pageToken]
@@ -2818,9 +3250,9 @@ export class ChatServiceClient {
    *   Optional. A query filter.
    *
    *   You can filter memberships by a member's role
-   *   ([`role`](https://developers.google.com/chat/api/reference/rest/v1/spaces.members#membershiprole))
+   *   ([`role`](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.members#membershiprole))
    *   and type
-   *   ([`member.type`](https://developers.google.com/chat/api/reference/rest/v1/User#type)).
+   *   ([`member.type`](https://developers.google.com/workspace/chat/api/reference/rest/v1/User#type)).
    *
    *   To filter by role, set `role` to `ROLE_MEMBER` or `ROLE_MANAGER`.
    *
@@ -2843,6 +3275,7 @@ export class ChatServiceClient {
    *   role = "ROLE_MANAGER" AND role = "ROLE_MEMBER"
    *   ```
    *
+   *
    *   Invalid queries are rejected by the server with an `INVALID_ARGUMENT`
    *   error.
    * @param {boolean} [request.showGroups]
@@ -2861,7 +3294,7 @@ export class ChatServiceClient {
    *   that don't match the filter criteria aren't returned.
    *
    *   Currently requires [user
-   *   authentication](https://developers.google.com/chat/api/guides/auth/users).
+   *   authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2956,8 +3389,8 @@ export class ChatServiceClient {
    *
    *   If unspecified, at most 100 memberships are returned.
    *
-   *   The maximum value is 1,000. If you use a value more than 1,000, it's
-   *   automatically changed to 1,000.
+   *   The maximum value is 1000. If you use a value more than 1000, it's
+   *   automatically changed to 1000.
    *
    *   Negative values return an `INVALID_ARGUMENT` error.
    * @param {string} [request.pageToken]
@@ -2971,9 +3404,9 @@ export class ChatServiceClient {
    *   Optional. A query filter.
    *
    *   You can filter memberships by a member's role
-   *   ([`role`](https://developers.google.com/chat/api/reference/rest/v1/spaces.members#membershiprole))
+   *   ([`role`](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.members#membershiprole))
    *   and type
-   *   ([`member.type`](https://developers.google.com/chat/api/reference/rest/v1/User#type)).
+   *   ([`member.type`](https://developers.google.com/workspace/chat/api/reference/rest/v1/User#type)).
    *
    *   To filter by role, set `role` to `ROLE_MEMBER` or `ROLE_MANAGER`.
    *
@@ -2996,6 +3429,7 @@ export class ChatServiceClient {
    *   role = "ROLE_MANAGER" AND role = "ROLE_MEMBER"
    *   ```
    *
+   *
    *   Invalid queries are rejected by the server with an `INVALID_ARGUMENT`
    *   error.
    * @param {boolean} [request.showGroups]
@@ -3014,7 +3448,7 @@ export class ChatServiceClient {
    *   that don't match the filter criteria aren't returned.
    *
    *   Currently requires [user
-   *   authentication](https://developers.google.com/chat/api/guides/auth/users).
+   *   authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3065,8 +3499,8 @@ export class ChatServiceClient {
    *
    *   If unspecified, at most 100 memberships are returned.
    *
-   *   The maximum value is 1,000. If you use a value more than 1,000, it's
-   *   automatically changed to 1,000.
+   *   The maximum value is 1000. If you use a value more than 1000, it's
+   *   automatically changed to 1000.
    *
    *   Negative values return an `INVALID_ARGUMENT` error.
    * @param {string} [request.pageToken]
@@ -3080,9 +3514,9 @@ export class ChatServiceClient {
    *   Optional. A query filter.
    *
    *   You can filter memberships by a member's role
-   *   ([`role`](https://developers.google.com/chat/api/reference/rest/v1/spaces.members#membershiprole))
+   *   ([`role`](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.members#membershiprole))
    *   and type
-   *   ([`member.type`](https://developers.google.com/chat/api/reference/rest/v1/User#type)).
+   *   ([`member.type`](https://developers.google.com/workspace/chat/api/reference/rest/v1/User#type)).
    *
    *   To filter by role, set `role` to `ROLE_MEMBER` or `ROLE_MANAGER`.
    *
@@ -3105,6 +3539,7 @@ export class ChatServiceClient {
    *   role = "ROLE_MANAGER" AND role = "ROLE_MEMBER"
    *   ```
    *
+   *
    *   Invalid queries are rejected by the server with an `INVALID_ARGUMENT`
    *   error.
    * @param {boolean} [request.showGroups]
@@ -3123,7 +3558,7 @@ export class ChatServiceClient {
    *   that don't match the filter criteria aren't returned.
    *
    *   Currently requires [user
-   *   authentication](https://developers.google.com/chat/api/guides/auth/users).
+   *   authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -3161,18 +3596,19 @@ export class ChatServiceClient {
    * Lists spaces the caller is a member of. Group chats and DMs aren't listed
    * until the first message is sent. For an example, see
    * [List
-   * spaces](https://developers.google.com/chat/api/guides/v1/spaces/list).
+   * spaces](https://developers.google.com/workspace/chat/list-spaces).
    *
    * Requires
-   * [authentication](https://developers.google.com/chat/api/guides/auth).
+   * [authentication](https://developers.google.com/workspace/chat/authenticate-authorize).
    * Supports
    * [app
-   * authentication](https://developers.google.com/chat/api/guides/auth/service-accounts)
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
    * and [user
-   * authentication](https://developers.google.com/chat/api/guides/auth/users).
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
    *
    * Lists spaces visible to the caller or authenticated user. Group chats
    * and DMs aren't listed until the first message is sent.
+   *
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3182,8 +3618,8 @@ export class ChatServiceClient {
    *
    *   If unspecified, at most 100 spaces are returned.
    *
-   *   The maximum value is 1,000. If you use a value more than 1,000, it's
-   *   automatically changed to 1,000.
+   *   The maximum value is 1000. If you use a value more than 1000, it's
+   *   automatically changed to 1000.
    *
    *   Negative values return an `INVALID_ARGUMENT` error.
    * @param {string} [request.pageToken]
@@ -3196,7 +3632,7 @@ export class ChatServiceClient {
    *   Optional. A query filter.
    *
    *   You can filter spaces by the space type
-   *   ([`space_type`](https://developers.google.com/chat/api/reference/rest/v1/spaces#spacetype)).
+   *   ([`space_type`](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces#spacetype)).
    *
    *   To filter by space type, you must specify valid enum value, such as
    *   `SPACE` or `GROUP_CHAT` (the `space_type` can't be
@@ -3297,8 +3733,8 @@ export class ChatServiceClient {
    *
    *   If unspecified, at most 100 spaces are returned.
    *
-   *   The maximum value is 1,000. If you use a value more than 1,000, it's
-   *   automatically changed to 1,000.
+   *   The maximum value is 1000. If you use a value more than 1000, it's
+   *   automatically changed to 1000.
    *
    *   Negative values return an `INVALID_ARGUMENT` error.
    * @param {string} [request.pageToken]
@@ -3311,7 +3747,7 @@ export class ChatServiceClient {
    *   Optional. A query filter.
    *
    *   You can filter spaces by the space type
-   *   ([`space_type`](https://developers.google.com/chat/api/reference/rest/v1/spaces#spacetype)).
+   *   ([`space_type`](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces#spacetype)).
    *
    *   To filter by space type, you must specify valid enum value, such as
    *   `SPACE` or `GROUP_CHAT` (the `space_type` can't be
@@ -3368,8 +3804,8 @@ export class ChatServiceClient {
    *
    *   If unspecified, at most 100 spaces are returned.
    *
-   *   The maximum value is 1,000. If you use a value more than 1,000, it's
-   *   automatically changed to 1,000.
+   *   The maximum value is 1000. If you use a value more than 1000, it's
+   *   automatically changed to 1000.
    *
    *   Negative values return an `INVALID_ARGUMENT` error.
    * @param {string} [request.pageToken]
@@ -3382,7 +3818,7 @@ export class ChatServiceClient {
    *   Optional. A query filter.
    *
    *   You can filter spaces by the space type
-   *   ([`space_type`](https://developers.google.com/chat/api/reference/rest/v1/spaces#spacetype)).
+   *   ([`space_type`](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces#spacetype)).
    *
    *   To filter by space type, you must specify valid enum value, such as
    *   `SPACE` or `GROUP_CHAT` (the `space_type` can't be
@@ -3429,10 +3865,10 @@ export class ChatServiceClient {
   }
   /**
    * Lists reactions to a message. For an example, see
-   * [List
-   * reactions](https://developers.google.com/chat/api/guides/v1/reactions/list).
+   * [List reactions for a
+   * message](https://developers.google.com/workspace/chat/list-reactions).
    * Requires [user
-   * authentication](https://developers.google.com/chat/api/guides/auth/users).
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3456,9 +3892,9 @@ export class ChatServiceClient {
    *   Optional. A query filter.
    *
    *   You can filter reactions by
-   *   [emoji](https://developers.google.com/chat/api/reference/rest/v1/Emoji)
+   *   [emoji](https://developers.google.com/workspace/chat/api/reference/rest/v1/Emoji)
    *   (either `emoji.unicode` or `emoji.custom_emoji.uid`) and
-   *   [user](https://developers.google.com/chat/api/reference/rest/v1/User)
+   *   [user](https://developers.google.com/workspace/chat/api/reference/rest/v1/User)
    *   (`user.name`).
    *
    *   To filter reactions for multiple emojis or users, join similar fields
@@ -3600,9 +4036,9 @@ export class ChatServiceClient {
    *   Optional. A query filter.
    *
    *   You can filter reactions by
-   *   [emoji](https://developers.google.com/chat/api/reference/rest/v1/Emoji)
+   *   [emoji](https://developers.google.com/workspace/chat/api/reference/rest/v1/Emoji)
    *   (either `emoji.unicode` or `emoji.custom_emoji.uid`) and
-   *   [user](https://developers.google.com/chat/api/reference/rest/v1/User)
+   *   [user](https://developers.google.com/workspace/chat/api/reference/rest/v1/User)
    *   (`user.name`).
    *
    *   To filter reactions for multiple emojis or users, join similar fields
@@ -3700,9 +4136,9 @@ export class ChatServiceClient {
    *   Optional. A query filter.
    *
    *   You can filter reactions by
-   *   [emoji](https://developers.google.com/chat/api/reference/rest/v1/Emoji)
+   *   [emoji](https://developers.google.com/workspace/chat/api/reference/rest/v1/Emoji)
    *   (either `emoji.unicode` or `emoji.custom_emoji.uid`) and
-   *   [user](https://developers.google.com/chat/api/reference/rest/v1/User)
+   *   [user](https://developers.google.com/workspace/chat/api/reference/rest/v1/User)
    *   (`user.name`).
    *
    *   To filter reactions for multiple emojis or users, join similar fields
@@ -4038,6 +4474,46 @@ export class ChatServiceClient {
   }
 
   /**
+   * Return a fully-qualified spaceReadState resource name string.
+   *
+   * @param {string} user
+   * @param {string} space
+   * @returns {string} Resource name string.
+   */
+  spaceReadStatePath(user: string, space: string) {
+    return this.pathTemplates.spaceReadStatePathTemplate.render({
+      user: user,
+      space: space,
+    });
+  }
+
+  /**
+   * Parse the user from SpaceReadState resource.
+   *
+   * @param {string} spaceReadStateName
+   *   A fully-qualified path representing SpaceReadState resource.
+   * @returns {string} A string representing the user.
+   */
+  matchUserFromSpaceReadStateName(spaceReadStateName: string) {
+    return this.pathTemplates.spaceReadStatePathTemplate.match(
+      spaceReadStateName
+    ).user;
+  }
+
+  /**
+   * Parse the space from SpaceReadState resource.
+   *
+   * @param {string} spaceReadStateName
+   *   A fully-qualified path representing SpaceReadState resource.
+   * @returns {string} A string representing the space.
+   */
+  matchSpaceFromSpaceReadStateName(spaceReadStateName: string) {
+    return this.pathTemplates.spaceReadStatePathTemplate.match(
+      spaceReadStateName
+    ).space;
+  }
+
+  /**
    * Return a fully-qualified thread resource name string.
    *
    * @param {string} space
@@ -4071,6 +4547,61 @@ export class ChatServiceClient {
    */
   matchThreadFromThreadName(threadName: string) {
     return this.pathTemplates.threadPathTemplate.match(threadName).thread;
+  }
+
+  /**
+   * Return a fully-qualified threadReadState resource name string.
+   *
+   * @param {string} user
+   * @param {string} space
+   * @param {string} thread
+   * @returns {string} Resource name string.
+   */
+  threadReadStatePath(user: string, space: string, thread: string) {
+    return this.pathTemplates.threadReadStatePathTemplate.render({
+      user: user,
+      space: space,
+      thread: thread,
+    });
+  }
+
+  /**
+   * Parse the user from ThreadReadState resource.
+   *
+   * @param {string} threadReadStateName
+   *   A fully-qualified path representing ThreadReadState resource.
+   * @returns {string} A string representing the user.
+   */
+  matchUserFromThreadReadStateName(threadReadStateName: string) {
+    return this.pathTemplates.threadReadStatePathTemplate.match(
+      threadReadStateName
+    ).user;
+  }
+
+  /**
+   * Parse the space from ThreadReadState resource.
+   *
+   * @param {string} threadReadStateName
+   *   A fully-qualified path representing ThreadReadState resource.
+   * @returns {string} A string representing the space.
+   */
+  matchSpaceFromThreadReadStateName(threadReadStateName: string) {
+    return this.pathTemplates.threadReadStatePathTemplate.match(
+      threadReadStateName
+    ).space;
+  }
+
+  /**
+   * Parse the thread from ThreadReadState resource.
+   *
+   * @param {string} threadReadStateName
+   *   A fully-qualified path representing ThreadReadState resource.
+   * @returns {string} A string representing the thread.
+   */
+  matchThreadFromThreadReadStateName(threadReadStateName: string) {
+    return this.pathTemplates.threadReadStatePathTemplate.match(
+      threadReadStateName
+    ).thread;
   }
 
   /**

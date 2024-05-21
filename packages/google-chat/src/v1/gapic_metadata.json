@@ -85,6 +85,11 @@
                 "createMembership"
               ]
             },
+            "UpdateMembership": {
+              "methods": [
+                "updateMembership"
+              ]
+            },
             "DeleteMembership": {
               "methods": [
                 "deleteMembership"
@@ -98,6 +103,21 @@
             "DeleteReaction": {
               "methods": [
                 "deleteReaction"
+              ]
+            },
+            "GetSpaceReadState": {
+              "methods": [
+                "getSpaceReadState"
+              ]
+            },
+            "UpdateSpaceReadState": {
+              "methods": [
+                "updateSpaceReadState"
+              ]
+            },
+            "GetThreadReadState": {
+              "methods": [
+                "getThreadReadState"
               ]
             },
             "ListMessages": {
@@ -208,6 +228,11 @@
                 "createMembership"
               ]
             },
+            "UpdateMembership": {
+              "methods": [
+                "updateMembership"
+              ]
+            },
             "DeleteMembership": {
               "methods": [
                 "deleteMembership"
@@ -221,6 +246,21 @@
             "DeleteReaction": {
               "methods": [
                 "deleteReaction"
+              ]
+            },
+            "GetSpaceReadState": {
+              "methods": [
+                "getSpaceReadState"
+              ]
+            },
+            "UpdateSpaceReadState": {
+              "methods": [
+                "updateSpaceReadState"
+              ]
+            },
+            "GetThreadReadState": {
+              "methods": [
+                "getThreadReadState"
               ]
             },
             "ListMessages": {

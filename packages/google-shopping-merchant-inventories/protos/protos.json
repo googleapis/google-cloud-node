@@ -13,7 +13,9 @@
                         "go_package": "cloud.google.com/go/shopping/merchant/inventories/apiv1beta/inventoriespb;inventoriespb",
                         "java_multiple_files": true,
                         "java_outer_classname": "RegionalInventoryProto",
-                        "java_package": "com.google.shopping.merchant.inventories.v1beta"
+                        "java_package": "com.google.shopping.merchant.inventories.v1beta",
+                        "(google.api.resource_definition).type": "merchantapi.googleapis.com/Product",
+                        "(google.api.resource_definition).pattern": "accounts/{account}/products/{product}"
                       },
                       "nested": {
                         "LocalInventoryService": {
@@ -127,7 +129,7 @@
                               "type": "string",
                               "id": 3,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
+                                "(google.api.field_behavior)": "IMMUTABLE"
                               }
                             },
                             "price": {
@@ -190,7 +192,8 @@
                               "type": "string",
                               "id": 1,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "merchantapi.googleapis.com/LocalInventory"
                               }
                             },
                             "pageSize": {
@@ -222,7 +225,8 @@
                               "type": "string",
                               "id": 1,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "merchantapi.googleapis.com/LocalInventory"
                               }
                             },
                             "localInventory": {
@@ -337,7 +341,7 @@
                               "type": "string",
                               "id": 3,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
+                                "(google.api.field_behavior)": "IMMUTABLE"
                               }
                             },
                             "price": {
@@ -372,7 +376,8 @@
                               "type": "string",
                               "id": 1,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "merchantapi.googleapis.com/RegionalInventory"
                               }
                             },
                             "pageSize": {
@@ -404,7 +409,8 @@
                               "type": "string",
                               "id": 1,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "merchantapi.googleapis.com/RegionalInventory"
                               }
                             },
                             "regionalInventory": {
@@ -443,6 +449,37 @@
                 "java_package": "com.google.shopping.type"
               },
               "nested": {
+                "Weight": {
+                  "oneofs": {
+                    "_amountMicros": {
+                      "oneof": [
+                        "amountMicros"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "amountMicros": {
+                      "type": "int64",
+                      "id": 1,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "unit": {
+                      "type": "WeightUnit",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "WeightUnit": {
+                      "values": {
+                        "WEIGHT_UNIT_UNSPECIFIED": 0,
+                        "POUND": 1,
+                        "KILOGRAM": 2
+                      }
+                    }
+                  }
+                },
                 "Price": {
                   "oneofs": {
                     "_amountMicros": {

@@ -142,7 +142,62 @@
                               }
                             }
                           ]
+                        },
+                        "ImportData": {
+                          "requestType": "ImportDataRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{name=projects/*/locations/*/instances/*}:importData",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "ImportDataResponse",
+                            "(google.longrunning.operation_info).metadata_type": "ImportDataMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{name=projects/*/locations/*/instances/*}:importData",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ImportDataResponse",
+                                "metadata_type": "ImportDataMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ExportData": {
+                          "requestType": "ExportDataRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{name=projects/*/locations/*/instances/*}:exportData",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "ExportDataResponse",
+                            "(google.longrunning.operation_info).metadata_type": "ExportDataMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{name=projects/*/locations/*/instances/*}:exportData",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ExportDataResponse",
+                                "metadata_type": "ExportDataMetadata"
+                              }
+                            }
+                          ]
                         }
+                      }
+                    },
+                    "TransferType": {
+                      "values": {
+                        "TRANSFER_TYPE_UNSPECIFIED": 0,
+                        "IMPORT": 1,
+                        "EXPORT": 2
                       }
                     },
                     "Instance": {
@@ -231,6 +286,14 @@
                           "id": 12,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/Address"
+                          }
+                        },
+                        "effectiveReservedIpRange": {
+                          "type": "string",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "(google.api.resource_reference).type": "compute.googleapis.com/Address"
                           }
                         }
@@ -444,6 +507,338 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        }
+                      }
+                    },
+                    "SourceGcsBucket": {
+                      "fields": {
+                        "uri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DestinationGcsBucket": {
+                      "fields": {
+                        "uri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SourceParallelstore": {
+                      "fields": {
+                        "path": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DestinationParallelstore": {
+                      "fields": {
+                        "path": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ImportDataRequest": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "sourceGcsBucket"
+                          ]
+                        },
+                        "destination": {
+                          "oneof": [
+                            "destinationParallelstore"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "sourceGcsBucket": {
+                          "type": "SourceGcsBucket",
+                          "id": 2
+                        },
+                        "destinationParallelstore": {
+                          "type": "DestinationParallelstore",
+                          "id": 3
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "parallelstore.googleapis.com/Instance"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ExportDataRequest": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "sourceParallelstore"
+                          ]
+                        },
+                        "destination": {
+                          "oneof": [
+                            "destinationGcsBucket"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "sourceParallelstore": {
+                          "type": "SourceParallelstore",
+                          "id": 2
+                        },
+                        "destinationGcsBucket": {
+                          "type": "DestinationGcsBucket",
+                          "id": 3
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "parallelstore.googleapis.com/Instance"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ImportDataResponse": {
+                      "fields": {}
+                    },
+                    "ImportDataMetadata": {
+                      "fields": {
+                        "operationMetadata": {
+                          "type": "TransferOperationMetadata",
+                          "id": 1
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "target": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "verb": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "statusMessage": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "requestedCancellation": {
+                          "type": "bool",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "apiVersion": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "ExportDataResponse": {
+                      "fields": {}
+                    },
+                    "ExportDataMetadata": {
+                      "fields": {
+                        "operationMetadata": {
+                          "type": "TransferOperationMetadata",
+                          "id": 1
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "target": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "verb": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "statusMessage": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "requestedCancellation": {
+                          "type": "bool",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "apiVersion": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "TransferOperationMetadata": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "sourceParallelstore",
+                            "sourceGcsBucket"
+                          ]
+                        },
+                        "destination": {
+                          "oneof": [
+                            "destinationGcsBucket",
+                            "destinationParallelstore"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "sourceParallelstore": {
+                          "type": "SourceParallelstore",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "sourceGcsBucket": {
+                          "type": "SourceGcsBucket",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "destinationGcsBucket": {
+                          "type": "DestinationGcsBucket",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "destinationParallelstore": {
+                          "type": "DestinationParallelstore",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "counters": {
+                          "type": "TransferCounters",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "transferType": {
+                          "type": "TransferType",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "TransferCounters": {
+                      "fields": {
+                        "objectsFound": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "bytesFound": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "objectsSkipped": {
+                          "type": "int64",
+                          "id": 3
+                        },
+                        "bytesSkipped": {
+                          "type": "int64",
+                          "id": 4
+                        },
+                        "objectsCopied": {
+                          "type": "int64",
+                          "id": 5
+                        },
+                        "bytesCopied": {
+                          "type": "int64",
+                          "id": 6
                         }
                       }
                     }

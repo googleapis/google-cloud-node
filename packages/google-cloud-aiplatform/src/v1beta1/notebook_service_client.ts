@@ -299,11 +299,20 @@ export class NotebookServiceClient {
       modelEvaluationSlicePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}/slices/{slice}'
       ),
+      modelMonitorPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/modelMonitors/{model_monitor}'
+      ),
+      modelMonitoringJobPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/modelMonitors/{model_monitor}/modelMonitoringJobs/{model_monitoring_job}'
+      ),
       nasJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/nasJobs/{nas_job}'
       ),
       nasTrialDetailPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/nasJobs/{nas_job}/nasTrialDetails/{nas_trial_detail}'
+      ),
+      notebookExecutionJobPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/notebookExecutionJobs/{notebook_execution_job}'
       ),
       notebookRuntimePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/notebookRuntimes/{notebook_runtime}'
@@ -374,6 +383,9 @@ export class NotebookServiceClient {
       trialPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/studies/{study}/trials/{trial}'
       ),
+      tuningJobPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/tuningJobs/{tuning_job}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -389,6 +401,11 @@ export class NotebookServiceClient {
         'pageToken',
         'nextPageToken',
         'notebookRuntimes'
+      ),
+      listNotebookExecutionJobs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'notebookExecutionJobs'
       ),
     };
 
@@ -730,9 +747,6 @@ export class NotebookServiceClient {
               post: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}:cancel',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*/operations/*}:cancel',
-            },
-            {
               post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',
             },
             {
@@ -1067,10 +1081,6 @@ export class NotebookServiceClient {
             },
             {
               delete:
-                '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*/operations/*}',
-            },
-            {
-              delete:
                 '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
             },
             {
@@ -1357,9 +1367,6 @@ export class NotebookServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}',
             },
             {
-              get: '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*/operations/*}',
-            },
-            {
               get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}',
             },
             {
@@ -1618,9 +1625,6 @@ export class NotebookServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/extensions/*}/operations',
-            },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/featurestores/*}/operations',
@@ -1901,9 +1905,6 @@ export class NotebookServiceClient {
               post: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}:wait',
             },
             {
-              post: '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*/operations/*}:wait',
-            },
-            {
               post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}:wait',
             },
             {
@@ -2051,6 +2052,12 @@ export class NotebookServiceClient {
     const startNotebookRuntimeMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1beta1.StartNotebookRuntimeOperationMetadata'
     ) as gax.protobuf.Type;
+    const deleteNotebookExecutionJobResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteNotebookExecutionJobMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createNotebookRuntimeTemplate: new this._gaxModule.LongrunningDescriptor(
@@ -2098,6 +2105,15 @@ export class NotebookServiceClient {
         this.operationsClient,
         startNotebookRuntimeResponse.decode.bind(startNotebookRuntimeResponse),
         startNotebookRuntimeMetadata.decode.bind(startNotebookRuntimeMetadata)
+      ),
+      deleteNotebookExecutionJob: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteNotebookExecutionJobResponse.decode.bind(
+          deleteNotebookExecutionJobResponse
+        ),
+        deleteNotebookExecutionJobMetadata.decode.bind(
+          deleteNotebookExecutionJobMetadata
+        )
       ),
     };
 
@@ -2161,6 +2177,9 @@ export class NotebookServiceClient {
       'deleteNotebookRuntime',
       'upgradeNotebookRuntime',
       'startNotebookRuntime',
+      'getNotebookExecutionJob',
+      'listNotebookExecutionJobs',
+      'deleteNotebookExecutionJob',
     ];
     for (const methodName of notebookServiceStubMethods) {
       const callPromise = this.notebookServiceStub.then(
@@ -2478,6 +2497,108 @@ export class NotebookServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.getNotebookRuntime(request, options, callback);
+  }
+  /**
+   * Gets a NotebookExecutionJob.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the NotebookExecutionJob resource.
+   * @param {google.cloud.aiplatform.v1beta1.NotebookExecutionJobView} [request.view]
+   *   Optional. The NotebookExecutionJob view. Defaults to BASIC.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.NotebookExecutionJob|NotebookExecutionJob}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/notebook_service.get_notebook_execution_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_NotebookService_GetNotebookExecutionJob_async
+   */
+  getNotebookExecutionJob(
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetNotebookExecutionJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.INotebookExecutionJob,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IGetNotebookExecutionJobRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getNotebookExecutionJob(
+    request: protos.google.cloud.aiplatform.v1beta1.IGetNotebookExecutionJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.INotebookExecutionJob,
+      | protos.google.cloud.aiplatform.v1beta1.IGetNotebookExecutionJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getNotebookExecutionJob(
+    request: protos.google.cloud.aiplatform.v1beta1.IGetNotebookExecutionJobRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.INotebookExecutionJob,
+      | protos.google.cloud.aiplatform.v1beta1.IGetNotebookExecutionJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getNotebookExecutionJob(
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetNotebookExecutionJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1beta1.INotebookExecutionJob,
+          | protos.google.cloud.aiplatform.v1beta1.IGetNotebookExecutionJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1beta1.INotebookExecutionJob,
+      | protos.google.cloud.aiplatform.v1beta1.IGetNotebookExecutionJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.INotebookExecutionJob,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IGetNotebookExecutionJobRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getNotebookExecutionJob(
+      request,
+      options,
+      callback
+    );
   }
 
   /**
@@ -3335,6 +3456,146 @@ export class NotebookServiceClient {
     >;
   }
   /**
+   * Deletes a NotebookExecutionJob.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the NotebookExecutionJob resource to be deleted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/notebook_service.delete_notebook_execution_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_NotebookService_DeleteNotebookExecutionJob_async
+   */
+  deleteNotebookExecutionJob(
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteNotebookExecutionJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteNotebookExecutionJob(
+    request: protos.google.cloud.aiplatform.v1beta1.IDeleteNotebookExecutionJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteNotebookExecutionJob(
+    request: protos.google.cloud.aiplatform.v1beta1.IDeleteNotebookExecutionJobRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteNotebookExecutionJob(
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteNotebookExecutionJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteNotebookExecutionJob(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteNotebookExecutionJob()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/notebook_service.delete_notebook_execution_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_NotebookService_DeleteNotebookExecutionJob_async
+   */
+  async checkDeleteNotebookExecutionJobProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteNotebookExecutionJob,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
+    >;
+  }
+  /**
    * Lists NotebookRuntimeTemplates in a Location.
    *
    * @param {Object} request
@@ -3991,6 +4252,286 @@ export class NotebookServiceClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.INotebookRuntime>;
+  }
+  /**
+   * Lists NotebookExecutionJobs in a Location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location from which to list the
+   *   NotebookExecutionJobs.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request. For field
+   *   names both snake_case and camelCase are supported.
+   *
+   *     * `notebookExecutionJob` supports = and !=. `notebookExecutionJob`
+   *     represents the NotebookExecutionJob ID.
+   *     * `displayName` supports = and != and regex.
+   *     * `schedule` supports = and != and regex.
+   *
+   *   Some examples:
+   *     * `notebookExecutionJob="123"`
+   *     * `notebookExecutionJob="my-execution-job"`
+   *     * `displayName="myDisplayName"` and `displayName=~"myDisplayNameRegex"`
+   * @param {number} [request.pageSize]
+   *   Optional. The standard list page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.|ListNotebookExecutionJobs.next_page_token} of the previous
+   *   {@link protos.google.cloud.aiplatform.v1beta1.NotebookService.ListNotebookExecutionJobs|NotebookService.ListNotebookExecutionJobs}
+   *   call.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields to order by, sorted in ascending
+   *   order. Use "desc" after a field name for descending. Supported fields:
+   *
+   *     * `display_name`
+   *     * `create_time`
+   *     * `update_time`
+   *
+   *   Example: `display_name, create_time desc`.
+   * @param {google.cloud.aiplatform.v1beta1.NotebookExecutionJobView} [request.view]
+   *   Optional. The NotebookExecutionJob view. Defaults to BASIC.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.NotebookExecutionJob|NotebookExecutionJob}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listNotebookExecutionJobsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listNotebookExecutionJobs(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListNotebookExecutionJobsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.INotebookExecutionJob[],
+      protos.google.cloud.aiplatform.v1beta1.IListNotebookExecutionJobsRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.IListNotebookExecutionJobsResponse,
+    ]
+  >;
+  listNotebookExecutionJobs(
+    request: protos.google.cloud.aiplatform.v1beta1.IListNotebookExecutionJobsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListNotebookExecutionJobsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListNotebookExecutionJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.INotebookExecutionJob
+    >
+  ): void;
+  listNotebookExecutionJobs(
+    request: protos.google.cloud.aiplatform.v1beta1.IListNotebookExecutionJobsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListNotebookExecutionJobsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListNotebookExecutionJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.INotebookExecutionJob
+    >
+  ): void;
+  listNotebookExecutionJobs(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListNotebookExecutionJobsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListNotebookExecutionJobsRequest,
+          | protos.google.cloud.aiplatform.v1beta1.IListNotebookExecutionJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1beta1.INotebookExecutionJob
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListNotebookExecutionJobsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListNotebookExecutionJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.INotebookExecutionJob
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.INotebookExecutionJob[],
+      protos.google.cloud.aiplatform.v1beta1.IListNotebookExecutionJobsRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.IListNotebookExecutionJobsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listNotebookExecutionJobs(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location from which to list the
+   *   NotebookExecutionJobs.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request. For field
+   *   names both snake_case and camelCase are supported.
+   *
+   *     * `notebookExecutionJob` supports = and !=. `notebookExecutionJob`
+   *     represents the NotebookExecutionJob ID.
+   *     * `displayName` supports = and != and regex.
+   *     * `schedule` supports = and != and regex.
+   *
+   *   Some examples:
+   *     * `notebookExecutionJob="123"`
+   *     * `notebookExecutionJob="my-execution-job"`
+   *     * `displayName="myDisplayName"` and `displayName=~"myDisplayNameRegex"`
+   * @param {number} [request.pageSize]
+   *   Optional. The standard list page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.|ListNotebookExecutionJobs.next_page_token} of the previous
+   *   {@link protos.google.cloud.aiplatform.v1beta1.NotebookService.ListNotebookExecutionJobs|NotebookService.ListNotebookExecutionJobs}
+   *   call.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields to order by, sorted in ascending
+   *   order. Use "desc" after a field name for descending. Supported fields:
+   *
+   *     * `display_name`
+   *     * `create_time`
+   *     * `update_time`
+   *
+   *   Example: `display_name, create_time desc`.
+   * @param {google.cloud.aiplatform.v1beta1.NotebookExecutionJobView} [request.view]
+   *   Optional. The NotebookExecutionJob view. Defaults to BASIC.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.NotebookExecutionJob|NotebookExecutionJob} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listNotebookExecutionJobsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listNotebookExecutionJobsStream(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListNotebookExecutionJobsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listNotebookExecutionJobs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listNotebookExecutionJobs.createStream(
+      this.innerApiCalls.listNotebookExecutionJobs as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listNotebookExecutionJobs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location from which to list the
+   *   NotebookExecutionJobs.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request. For field
+   *   names both snake_case and camelCase are supported.
+   *
+   *     * `notebookExecutionJob` supports = and !=. `notebookExecutionJob`
+   *     represents the NotebookExecutionJob ID.
+   *     * `displayName` supports = and != and regex.
+   *     * `schedule` supports = and != and regex.
+   *
+   *   Some examples:
+   *     * `notebookExecutionJob="123"`
+   *     * `notebookExecutionJob="my-execution-job"`
+   *     * `displayName="myDisplayName"` and `displayName=~"myDisplayNameRegex"`
+   * @param {number} [request.pageSize]
+   *   Optional. The standard list page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.|ListNotebookExecutionJobs.next_page_token} of the previous
+   *   {@link protos.google.cloud.aiplatform.v1beta1.NotebookService.ListNotebookExecutionJobs|NotebookService.ListNotebookExecutionJobs}
+   *   call.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields to order by, sorted in ascending
+   *   order. Use "desc" after a field name for descending. Supported fields:
+   *
+   *     * `display_name`
+   *     * `create_time`
+   *     * `update_time`
+   *
+   *   Example: `display_name, create_time desc`.
+   * @param {google.cloud.aiplatform.v1beta1.NotebookExecutionJobView} [request.view]
+   *   Optional. The NotebookExecutionJob view. Defaults to BASIC.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.aiplatform.v1beta1.NotebookExecutionJob|NotebookExecutionJob}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/notebook_service.list_notebook_execution_jobs.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_NotebookService_ListNotebookExecutionJobs_async
+   */
+  listNotebookExecutionJobsAsync(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListNotebookExecutionJobsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1beta1.INotebookExecutionJob> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listNotebookExecutionJobs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listNotebookExecutionJobs.asyncIterate(
+      this.innerApiCalls['listNotebookExecutionJobs'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.INotebookExecutionJob>;
   }
   /**
    * Gets the access control policy for a resource. Returns an empty policy
@@ -6230,6 +6771,135 @@ export class NotebookServiceClient {
   }
 
   /**
+   * Return a fully-qualified modelMonitor resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} model_monitor
+   * @returns {string} Resource name string.
+   */
+  modelMonitorPath(project: string, location: string, modelMonitor: string) {
+    return this.pathTemplates.modelMonitorPathTemplate.render({
+      project: project,
+      location: location,
+      model_monitor: modelMonitor,
+    });
+  }
+
+  /**
+   * Parse the project from ModelMonitor resource.
+   *
+   * @param {string} modelMonitorName
+   *   A fully-qualified path representing ModelMonitor resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromModelMonitorName(modelMonitorName: string) {
+    return this.pathTemplates.modelMonitorPathTemplate.match(modelMonitorName)
+      .project;
+  }
+
+  /**
+   * Parse the location from ModelMonitor resource.
+   *
+   * @param {string} modelMonitorName
+   *   A fully-qualified path representing ModelMonitor resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromModelMonitorName(modelMonitorName: string) {
+    return this.pathTemplates.modelMonitorPathTemplate.match(modelMonitorName)
+      .location;
+  }
+
+  /**
+   * Parse the model_monitor from ModelMonitor resource.
+   *
+   * @param {string} modelMonitorName
+   *   A fully-qualified path representing ModelMonitor resource.
+   * @returns {string} A string representing the model_monitor.
+   */
+  matchModelMonitorFromModelMonitorName(modelMonitorName: string) {
+    return this.pathTemplates.modelMonitorPathTemplate.match(modelMonitorName)
+      .model_monitor;
+  }
+
+  /**
+   * Return a fully-qualified modelMonitoringJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} model_monitor
+   * @param {string} model_monitoring_job
+   * @returns {string} Resource name string.
+   */
+  modelMonitoringJobPath(
+    project: string,
+    location: string,
+    modelMonitor: string,
+    modelMonitoringJob: string
+  ) {
+    return this.pathTemplates.modelMonitoringJobPathTemplate.render({
+      project: project,
+      location: location,
+      model_monitor: modelMonitor,
+      model_monitoring_job: modelMonitoringJob,
+    });
+  }
+
+  /**
+   * Parse the project from ModelMonitoringJob resource.
+   *
+   * @param {string} modelMonitoringJobName
+   *   A fully-qualified path representing ModelMonitoringJob resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromModelMonitoringJobName(modelMonitoringJobName: string) {
+    return this.pathTemplates.modelMonitoringJobPathTemplate.match(
+      modelMonitoringJobName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ModelMonitoringJob resource.
+   *
+   * @param {string} modelMonitoringJobName
+   *   A fully-qualified path representing ModelMonitoringJob resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromModelMonitoringJobName(modelMonitoringJobName: string) {
+    return this.pathTemplates.modelMonitoringJobPathTemplate.match(
+      modelMonitoringJobName
+    ).location;
+  }
+
+  /**
+   * Parse the model_monitor from ModelMonitoringJob resource.
+   *
+   * @param {string} modelMonitoringJobName
+   *   A fully-qualified path representing ModelMonitoringJob resource.
+   * @returns {string} A string representing the model_monitor.
+   */
+  matchModelMonitorFromModelMonitoringJobName(modelMonitoringJobName: string) {
+    return this.pathTemplates.modelMonitoringJobPathTemplate.match(
+      modelMonitoringJobName
+    ).model_monitor;
+  }
+
+  /**
+   * Parse the model_monitoring_job from ModelMonitoringJob resource.
+   *
+   * @param {string} modelMonitoringJobName
+   *   A fully-qualified path representing ModelMonitoringJob resource.
+   * @returns {string} A string representing the model_monitoring_job.
+   */
+  matchModelMonitoringJobFromModelMonitoringJobName(
+    modelMonitoringJobName: string
+  ) {
+    return this.pathTemplates.modelMonitoringJobPathTemplate.match(
+      modelMonitoringJobName
+    ).model_monitoring_job;
+  }
+
+  /**
    * Return a fully-qualified nasJob resource name string.
    *
    * @param {string} project
@@ -6351,6 +7021,67 @@ export class NotebookServiceClient {
     return this.pathTemplates.nasTrialDetailPathTemplate.match(
       nasTrialDetailName
     ).nas_trial_detail;
+  }
+
+  /**
+   * Return a fully-qualified notebookExecutionJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} notebook_execution_job
+   * @returns {string} Resource name string.
+   */
+  notebookExecutionJobPath(
+    project: string,
+    location: string,
+    notebookExecutionJob: string
+  ) {
+    return this.pathTemplates.notebookExecutionJobPathTemplate.render({
+      project: project,
+      location: location,
+      notebook_execution_job: notebookExecutionJob,
+    });
+  }
+
+  /**
+   * Parse the project from NotebookExecutionJob resource.
+   *
+   * @param {string} notebookExecutionJobName
+   *   A fully-qualified path representing NotebookExecutionJob resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNotebookExecutionJobName(notebookExecutionJobName: string) {
+    return this.pathTemplates.notebookExecutionJobPathTemplate.match(
+      notebookExecutionJobName
+    ).project;
+  }
+
+  /**
+   * Parse the location from NotebookExecutionJob resource.
+   *
+   * @param {string} notebookExecutionJobName
+   *   A fully-qualified path representing NotebookExecutionJob resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromNotebookExecutionJobName(notebookExecutionJobName: string) {
+    return this.pathTemplates.notebookExecutionJobPathTemplate.match(
+      notebookExecutionJobName
+    ).location;
+  }
+
+  /**
+   * Parse the notebook_execution_job from NotebookExecutionJob resource.
+   *
+   * @param {string} notebookExecutionJobName
+   *   A fully-qualified path representing NotebookExecutionJob resource.
+   * @returns {string} A string representing the notebook_execution_job.
+   */
+  matchNotebookExecutionJobFromNotebookExecutionJobName(
+    notebookExecutionJobName: string
+  ) {
+    return this.pathTemplates.notebookExecutionJobPathTemplate.match(
+      notebookExecutionJobName
+    ).notebook_execution_job;
   }
 
   /**
@@ -7830,6 +8561,58 @@ export class NotebookServiceClient {
    */
   matchTrialFromTrialName(trialName: string) {
     return this.pathTemplates.trialPathTemplate.match(trialName).trial;
+  }
+
+  /**
+   * Return a fully-qualified tuningJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} tuning_job
+   * @returns {string} Resource name string.
+   */
+  tuningJobPath(project: string, location: string, tuningJob: string) {
+    return this.pathTemplates.tuningJobPathTemplate.render({
+      project: project,
+      location: location,
+      tuning_job: tuningJob,
+    });
+  }
+
+  /**
+   * Parse the project from TuningJob resource.
+   *
+   * @param {string} tuningJobName
+   *   A fully-qualified path representing TuningJob resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTuningJobName(tuningJobName: string) {
+    return this.pathTemplates.tuningJobPathTemplate.match(tuningJobName)
+      .project;
+  }
+
+  /**
+   * Parse the location from TuningJob resource.
+   *
+   * @param {string} tuningJobName
+   *   A fully-qualified path representing TuningJob resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTuningJobName(tuningJobName: string) {
+    return this.pathTemplates.tuningJobPathTemplate.match(tuningJobName)
+      .location;
+  }
+
+  /**
+   * Parse the tuning_job from TuningJob resource.
+   *
+   * @param {string} tuningJobName
+   *   A fully-qualified path representing TuningJob resource.
+   * @returns {string} A string representing the tuning_job.
+   */
+  matchTuningJobFromTuningJobName(tuningJobName: string) {
+    return this.pathTemplates.tuningJobPathTemplate.match(tuningJobName)
+      .tuning_job;
   }
 
   /**

@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -976,9 +976,24 @@ message TrainProcessorVersionRequest {
     TrainingMethod training_method = 3;
   }
 
+  // Options to control foundation model tuning of the processor.
+  message FoundationModelTuningOptions {
+    // Optional. The number of steps to run for model tuning. Valid values are
+    // between 1 and 400. If not provided, recommended steps will be used.
+    int32 train_steps = 2 [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. The multiplier to apply to the recommended learning rate. Valid
+    // values are between 0.1 and 10. If not provided, recommended learning rate
+    // will be used.
+    float learning_rate_multiplier = 3 [(google.api.field_behavior) = OPTIONAL];
+  }
+
   oneof processor_flags {
     // Options to control Custom Document Extraction (CDE) Processor.
     CustomDocumentExtractionOptions custom_document_extraction_options = 5;
+
+    // Options to control foundation model tuning of a processor.
+    FoundationModelTuningOptions foundation_model_tuning_options = 12;
   }
 
   // Required. The parent (project, location and processor) to create the new

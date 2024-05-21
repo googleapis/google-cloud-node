@@ -29,7 +29,8 @@ function main(parent, folder, folderId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the bucket in which the folder will reside.
+   *  Required. Name of the bucket in which the folder will reside. The bucket
+   *  must be a hierarchical namespace enabled bucket.
    */
   // const parent = 'abc123'
   /**
@@ -40,7 +41,11 @@ function main(parent, folder, folderId) {
    */
   // const folder = {}
   /**
-   *  Required. The absolute path of the folder, using a single `/` as delimiter.
+   *  Required. The full name of a folder, including all its parent folders.
+   *  Folders use single '/' characters as a delimiter.
+   *  The folder_id must end with a slash.
+   *  For example, the folder_id of "books/biographies/" would create a new
+   *  "biographies/" folder under the "books/" folder.
    */
   // const folderId = 'abc123'
   /**
@@ -50,8 +55,7 @@ function main(parent, folder, folderId) {
   // const recursive = true
   /**
    *  Optional. A unique identifier for this request. UUID is the recommended
-   *  format, but other formats are still accepted. This request is only
-   *  idempotent if a `request_id` is provided.
+   *  format, but other formats are still accepted.
    */
   // const requestId = 'abc123'
 

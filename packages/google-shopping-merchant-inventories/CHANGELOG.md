@@ -1,5 +1,27 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/inventories-v0.5.0...inventories-v0.6.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/inventories-v0.4.0...inventories-v0.5.0) (2024-05-02)
+
+
+### Features
+
+* [shopping] add `Weight` to common types for Shopping APIs to be used for accounts bundle ([#5291](https://github.com/googleapis/google-cloud-node/issues/5291)) ([27a72a6](https://github.com/googleapis/google-cloud-node/commit/27a72a6d16079ff025b4a9ac702c6d1bffd017ce))
+
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/inventories-v0.3.0...inventories-v0.4.0) (2024-04-18)
+
+
+### Features
+
+* [merchantapi] fix inventories sub-API publication by adding correct child_type in the API proto ([#5231](https://github.com/googleapis/google-cloud-node/issues/5231)) ([773b2b6](https://github.com/googleapis/google-cloud-node/commit/773b2b684a2ac5f67b66fd47b55a240873e5f138))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/inventories-v0.2.0...inventories-v0.3.0) (2024-03-29)
 
 

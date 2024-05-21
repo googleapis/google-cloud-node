@@ -172,6 +172,13 @@
     "packages/google-cloud-apphub": {},
     "packages/google-storage-control": {},
     "packages/google-shopping-merchant-quota": {},
+    "packages/google-cloud-backupdr": {},
+    "packages/google-cloud-securesourcemanager": {},
+    "packages/google-shopping-merchant-notifications": {},
+    "packages/google-shopping-merchant-lfp": {},
+    "packages/google-cloud-securitycentermanagement": {},
+    "packages/google-shopping-merchant-conversions": {},
+    "packages/google-maps-solar": {},
     "packages/google-maps-fleetengine": {}
   },
   "plugins": [

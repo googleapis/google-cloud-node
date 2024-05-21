@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -121,6 +121,7 @@ message FunctionResponse {
 
 // Defines a retrieval tool that model can call to access external knowledge.
 message Retrieval {
+  // The source of the retrieval.
   oneof source {
     // Set to use data source powered by Vertex AI Search.
     VertexAISearch vertex_ai_search = 2;

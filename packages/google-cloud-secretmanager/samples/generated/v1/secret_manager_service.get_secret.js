@@ -29,7 +29,9 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the Secret google.cloud.secretmanager.v1.Secret, in the format `projects/* /secrets/*`.
+   *  Required. The resource name of the
+   *  Secret google.cloud.secretmanager.v1.Secret, in the format
+   *  `projects/* /secrets/*` or `projects/* /locations/* /secrets/*`.
    */
   // const name = 'abc123'
 

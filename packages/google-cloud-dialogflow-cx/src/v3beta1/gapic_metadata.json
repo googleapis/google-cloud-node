@@ -171,6 +171,54 @@
         }
       }
     },
+    "ConversationHistory": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ConversationHistoryClient",
+          "rpcs": {
+            "GetConversation": {
+              "methods": [
+                "getConversation"
+              ]
+            },
+            "DeleteConversation": {
+              "methods": [
+                "deleteConversation"
+              ]
+            },
+            "ListConversations": {
+              "methods": [
+                "listConversations",
+                "listConversationsStream",
+                "listConversationsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ConversationHistoryClient",
+          "rpcs": {
+            "GetConversation": {
+              "methods": [
+                "getConversation"
+              ]
+            },
+            "DeleteConversation": {
+              "methods": [
+                "deleteConversation"
+              ]
+            },
+            "ListConversations": {
+              "methods": [
+                "listConversations",
+                "listConversationsStream",
+                "listConversationsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "Deployments": {
       "clients": {
         "grpc": {

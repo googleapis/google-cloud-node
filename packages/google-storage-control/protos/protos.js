@@ -296,6 +296,138 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.storage.control.v2.StorageControl|createManagedFolder}.
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @typedef CreateManagedFolderCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.storage.control.v2.ManagedFolder} [response] ManagedFolder
+                         */
+    
+                        /**
+                         * Calls CreateManagedFolder.
+                         * @function createManagedFolder
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.ICreateManagedFolderRequest} request CreateManagedFolderRequest message or plain object
+                         * @param {google.storage.control.v2.StorageControl.CreateManagedFolderCallback} callback Node-style callback called with the error, if any, and ManagedFolder
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(StorageControl.prototype.createManagedFolder = function createManagedFolder(request, callback) {
+                            return this.rpcCall(createManagedFolder, $root.google.storage.control.v2.CreateManagedFolderRequest, $root.google.storage.control.v2.ManagedFolder, request, callback);
+                        }, "name", { value: "CreateManagedFolder" });
+    
+                        /**
+                         * Calls CreateManagedFolder.
+                         * @function createManagedFolder
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.ICreateManagedFolderRequest} request CreateManagedFolderRequest message or plain object
+                         * @returns {Promise<google.storage.control.v2.ManagedFolder>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.storage.control.v2.StorageControl|deleteManagedFolder}.
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @typedef DeleteManagedFolderCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteManagedFolder.
+                         * @function deleteManagedFolder
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IDeleteManagedFolderRequest} request DeleteManagedFolderRequest message or plain object
+                         * @param {google.storage.control.v2.StorageControl.DeleteManagedFolderCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(StorageControl.prototype.deleteManagedFolder = function deleteManagedFolder(request, callback) {
+                            return this.rpcCall(deleteManagedFolder, $root.google.storage.control.v2.DeleteManagedFolderRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteManagedFolder" });
+    
+                        /**
+                         * Calls DeleteManagedFolder.
+                         * @function deleteManagedFolder
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IDeleteManagedFolderRequest} request DeleteManagedFolderRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.storage.control.v2.StorageControl|getManagedFolder}.
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @typedef GetManagedFolderCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.storage.control.v2.ManagedFolder} [response] ManagedFolder
+                         */
+    
+                        /**
+                         * Calls GetManagedFolder.
+                         * @function getManagedFolder
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IGetManagedFolderRequest} request GetManagedFolderRequest message or plain object
+                         * @param {google.storage.control.v2.StorageControl.GetManagedFolderCallback} callback Node-style callback called with the error, if any, and ManagedFolder
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(StorageControl.prototype.getManagedFolder = function getManagedFolder(request, callback) {
+                            return this.rpcCall(getManagedFolder, $root.google.storage.control.v2.GetManagedFolderRequest, $root.google.storage.control.v2.ManagedFolder, request, callback);
+                        }, "name", { value: "GetManagedFolder" });
+    
+                        /**
+                         * Calls GetManagedFolder.
+                         * @function getManagedFolder
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IGetManagedFolderRequest} request GetManagedFolderRequest message or plain object
+                         * @returns {Promise<google.storage.control.v2.ManagedFolder>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.storage.control.v2.StorageControl|listManagedFolders}.
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @typedef ListManagedFoldersCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.storage.control.v2.ListManagedFoldersResponse} [response] ListManagedFoldersResponse
+                         */
+    
+                        /**
+                         * Calls ListManagedFolders.
+                         * @function listManagedFolders
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IListManagedFoldersRequest} request ListManagedFoldersRequest message or plain object
+                         * @param {google.storage.control.v2.StorageControl.ListManagedFoldersCallback} callback Node-style callback called with the error, if any, and ListManagedFoldersResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(StorageControl.prototype.listManagedFolders = function listManagedFolders(request, callback) {
+                            return this.rpcCall(listManagedFolders, $root.google.storage.control.v2.ListManagedFoldersRequest, $root.google.storage.control.v2.ListManagedFoldersResponse, request, callback);
+                        }, "name", { value: "ListManagedFolders" });
+    
+                        /**
+                         * Calls ListManagedFolders.
+                         * @function listManagedFolders
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IListManagedFoldersRequest} request ListManagedFoldersRequest message or plain object
+                         * @returns {Promise<google.storage.control.v2.ListManagedFoldersResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return StorageControl;
                     })();
     
@@ -4310,6 +4442,1802 @@
                         };
     
                         return GetStorageLayoutRequest;
+                    })();
+    
+                    v2.ManagedFolder = (function() {
+    
+                        /**
+                         * Properties of a ManagedFolder.
+                         * @memberof google.storage.control.v2
+                         * @interface IManagedFolder
+                         * @property {string|null} [name] ManagedFolder name
+                         * @property {number|Long|null} [metageneration] ManagedFolder metageneration
+                         * @property {google.protobuf.ITimestamp|null} [createTime] ManagedFolder createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] ManagedFolder updateTime
+                         */
+    
+                        /**
+                         * Constructs a new ManagedFolder.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a ManagedFolder.
+                         * @implements IManagedFolder
+                         * @constructor
+                         * @param {google.storage.control.v2.IManagedFolder=} [properties] Properties to set
+                         */
+                        function ManagedFolder(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ManagedFolder name.
+                         * @member {string} name
+                         * @memberof google.storage.control.v2.ManagedFolder
+                         * @instance
+                         */
+                        ManagedFolder.prototype.name = "";
+    
+                        /**
+                         * ManagedFolder metageneration.
+                         * @member {number|Long} metageneration
+                         * @memberof google.storage.control.v2.ManagedFolder
+                         * @instance
+                         */
+                        ManagedFolder.prototype.metageneration = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * ManagedFolder createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.storage.control.v2.ManagedFolder
+                         * @instance
+                         */
+                        ManagedFolder.prototype.createTime = null;
+    
+                        /**
+                         * ManagedFolder updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.storage.control.v2.ManagedFolder
+                         * @instance
+                         */
+                        ManagedFolder.prototype.updateTime = null;
+    
+                        /**
+                         * Creates a new ManagedFolder instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.ManagedFolder
+                         * @static
+                         * @param {google.storage.control.v2.IManagedFolder=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.ManagedFolder} ManagedFolder instance
+                         */
+                        ManagedFolder.create = function create(properties) {
+                            return new ManagedFolder(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ManagedFolder message. Does not implicitly {@link google.storage.control.v2.ManagedFolder.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.ManagedFolder
+                         * @static
+                         * @param {google.storage.control.v2.IManagedFolder} message ManagedFolder message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ManagedFolder.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.metageneration != null && Object.hasOwnProperty.call(message, "metageneration"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.metageneration);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ManagedFolder message, length delimited. Does not implicitly {@link google.storage.control.v2.ManagedFolder.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.ManagedFolder
+                         * @static
+                         * @param {google.storage.control.v2.IManagedFolder} message ManagedFolder message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ManagedFolder.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ManagedFolder message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.ManagedFolder
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.ManagedFolder} ManagedFolder
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ManagedFolder.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.ManagedFolder();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.metageneration = reader.int64();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ManagedFolder message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.ManagedFolder
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.ManagedFolder} ManagedFolder
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ManagedFolder.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ManagedFolder message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.ManagedFolder
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ManagedFolder.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.metageneration != null && message.hasOwnProperty("metageneration"))
+                                if (!$util.isInteger(message.metageneration) && !(message.metageneration && $util.isInteger(message.metageneration.low) && $util.isInteger(message.metageneration.high)))
+                                    return "metageneration: integer|Long expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ManagedFolder message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.ManagedFolder
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.ManagedFolder} ManagedFolder
+                         */
+                        ManagedFolder.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.storage.control.v2.ManagedFolder)
+                                return object;
+                            var message = new $root.google.storage.control.v2.ManagedFolder();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.metageneration != null)
+                                if ($util.Long)
+                                    (message.metageneration = $util.Long.fromValue(object.metageneration)).unsigned = false;
+                                else if (typeof object.metageneration === "string")
+                                    message.metageneration = parseInt(object.metageneration, 10);
+                                else if (typeof object.metageneration === "number")
+                                    message.metageneration = object.metageneration;
+                                else if (typeof object.metageneration === "object")
+                                    message.metageneration = new $util.LongBits(object.metageneration.low >>> 0, object.metageneration.high >>> 0).toNumber();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.storage.control.v2.ManagedFolder.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.storage.control.v2.ManagedFolder.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ManagedFolder message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.ManagedFolder
+                         * @static
+                         * @param {google.storage.control.v2.ManagedFolder} message ManagedFolder
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ManagedFolder.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.metageneration = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.metageneration = options.longs === String ? "0" : 0;
+                                object.createTime = null;
+                                object.updateTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.metageneration != null && message.hasOwnProperty("metageneration"))
+                                if (typeof message.metageneration === "number")
+                                    object.metageneration = options.longs === String ? String(message.metageneration) : message.metageneration;
+                                else
+                                    object.metageneration = options.longs === String ? $util.Long.prototype.toString.call(message.metageneration) : options.longs === Number ? new $util.LongBits(message.metageneration.low >>> 0, message.metageneration.high >>> 0).toNumber() : message.metageneration;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ManagedFolder to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.ManagedFolder
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ManagedFolder.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ManagedFolder
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.ManagedFolder
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ManagedFolder.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.ManagedFolder";
+                        };
+    
+                        return ManagedFolder;
+                    })();
+    
+                    v2.GetManagedFolderRequest = (function() {
+    
+                        /**
+                         * Properties of a GetManagedFolderRequest.
+                         * @memberof google.storage.control.v2
+                         * @interface IGetManagedFolderRequest
+                         * @property {string|null} [name] GetManagedFolderRequest name
+                         * @property {number|Long|null} [ifMetagenerationMatch] GetManagedFolderRequest ifMetagenerationMatch
+                         * @property {number|Long|null} [ifMetagenerationNotMatch] GetManagedFolderRequest ifMetagenerationNotMatch
+                         * @property {string|null} [requestId] GetManagedFolderRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new GetManagedFolderRequest.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a GetManagedFolderRequest.
+                         * @implements IGetManagedFolderRequest
+                         * @constructor
+                         * @param {google.storage.control.v2.IGetManagedFolderRequest=} [properties] Properties to set
+                         */
+                        function GetManagedFolderRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetManagedFolderRequest name.
+                         * @member {string} name
+                         * @memberof google.storage.control.v2.GetManagedFolderRequest
+                         * @instance
+                         */
+                        GetManagedFolderRequest.prototype.name = "";
+    
+                        /**
+                         * GetManagedFolderRequest ifMetagenerationMatch.
+                         * @member {number|Long|null|undefined} ifMetagenerationMatch
+                         * @memberof google.storage.control.v2.GetManagedFolderRequest
+                         * @instance
+                         */
+                        GetManagedFolderRequest.prototype.ifMetagenerationMatch = null;
+    
+                        /**
+                         * GetManagedFolderRequest ifMetagenerationNotMatch.
+                         * @member {number|Long|null|undefined} ifMetagenerationNotMatch
+                         * @memberof google.storage.control.v2.GetManagedFolderRequest
+                         * @instance
+                         */
+                        GetManagedFolderRequest.prototype.ifMetagenerationNotMatch = null;
+    
+                        /**
+                         * GetManagedFolderRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.storage.control.v2.GetManagedFolderRequest
+                         * @instance
+                         */
+                        GetManagedFolderRequest.prototype.requestId = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * GetManagedFolderRequest _ifMetagenerationMatch.
+                         * @member {"ifMetagenerationMatch"|undefined} _ifMetagenerationMatch
+                         * @memberof google.storage.control.v2.GetManagedFolderRequest
+                         * @instance
+                         */
+                        Object.defineProperty(GetManagedFolderRequest.prototype, "_ifMetagenerationMatch", {
+                            get: $util.oneOfGetter($oneOfFields = ["ifMetagenerationMatch"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * GetManagedFolderRequest _ifMetagenerationNotMatch.
+                         * @member {"ifMetagenerationNotMatch"|undefined} _ifMetagenerationNotMatch
+                         * @memberof google.storage.control.v2.GetManagedFolderRequest
+                         * @instance
+                         */
+                        Object.defineProperty(GetManagedFolderRequest.prototype, "_ifMetagenerationNotMatch", {
+                            get: $util.oneOfGetter($oneOfFields = ["ifMetagenerationNotMatch"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new GetManagedFolderRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.GetManagedFolderRequest
+                         * @static
+                         * @param {google.storage.control.v2.IGetManagedFolderRequest=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.GetManagedFolderRequest} GetManagedFolderRequest instance
+                         */
+                        GetManagedFolderRequest.create = function create(properties) {
+                            return new GetManagedFolderRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetManagedFolderRequest message. Does not implicitly {@link google.storage.control.v2.GetManagedFolderRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.GetManagedFolderRequest
+                         * @static
+                         * @param {google.storage.control.v2.IGetManagedFolderRequest} message GetManagedFolderRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetManagedFolderRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.ifMetagenerationMatch);
+                            if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.ifMetagenerationNotMatch);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.requestId);
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetManagedFolderRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.GetManagedFolderRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.GetManagedFolderRequest
+                         * @static
+                         * @param {google.storage.control.v2.IGetManagedFolderRequest} message GetManagedFolderRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetManagedFolderRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetManagedFolderRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.GetManagedFolderRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.GetManagedFolderRequest} GetManagedFolderRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetManagedFolderRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.GetManagedFolderRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 6: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.ifMetagenerationMatch = reader.int64();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.ifMetagenerationNotMatch = reader.int64();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetManagedFolderRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.GetManagedFolderRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.GetManagedFolderRequest} GetManagedFolderRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetManagedFolderRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetManagedFolderRequest message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.GetManagedFolderRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetManagedFolderRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                                properties._ifMetagenerationMatch = 1;
+                                if (!$util.isInteger(message.ifMetagenerationMatch) && !(message.ifMetagenerationMatch && $util.isInteger(message.ifMetagenerationMatch.low) && $util.isInteger(message.ifMetagenerationMatch.high)))
+                                    return "ifMetagenerationMatch: integer|Long expected";
+                            }
+                            if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                                properties._ifMetagenerationNotMatch = 1;
+                                if (!$util.isInteger(message.ifMetagenerationNotMatch) && !(message.ifMetagenerationNotMatch && $util.isInteger(message.ifMetagenerationNotMatch.low) && $util.isInteger(message.ifMetagenerationNotMatch.high)))
+                                    return "ifMetagenerationNotMatch: integer|Long expected";
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetManagedFolderRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.GetManagedFolderRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.GetManagedFolderRequest} GetManagedFolderRequest
+                         */
+                        GetManagedFolderRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.storage.control.v2.GetManagedFolderRequest)
+                                return object;
+                            var message = new $root.google.storage.control.v2.GetManagedFolderRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.ifMetagenerationMatch != null)
+                                if ($util.Long)
+                                    (message.ifMetagenerationMatch = $util.Long.fromValue(object.ifMetagenerationMatch)).unsigned = false;
+                                else if (typeof object.ifMetagenerationMatch === "string")
+                                    message.ifMetagenerationMatch = parseInt(object.ifMetagenerationMatch, 10);
+                                else if (typeof object.ifMetagenerationMatch === "number")
+                                    message.ifMetagenerationMatch = object.ifMetagenerationMatch;
+                                else if (typeof object.ifMetagenerationMatch === "object")
+                                    message.ifMetagenerationMatch = new $util.LongBits(object.ifMetagenerationMatch.low >>> 0, object.ifMetagenerationMatch.high >>> 0).toNumber();
+                            if (object.ifMetagenerationNotMatch != null)
+                                if ($util.Long)
+                                    (message.ifMetagenerationNotMatch = $util.Long.fromValue(object.ifMetagenerationNotMatch)).unsigned = false;
+                                else if (typeof object.ifMetagenerationNotMatch === "string")
+                                    message.ifMetagenerationNotMatch = parseInt(object.ifMetagenerationNotMatch, 10);
+                                else if (typeof object.ifMetagenerationNotMatch === "number")
+                                    message.ifMetagenerationNotMatch = object.ifMetagenerationNotMatch;
+                                else if (typeof object.ifMetagenerationNotMatch === "object")
+                                    message.ifMetagenerationNotMatch = new $util.LongBits(object.ifMetagenerationNotMatch.low >>> 0, object.ifMetagenerationNotMatch.high >>> 0).toNumber();
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetManagedFolderRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.GetManagedFolderRequest
+                         * @static
+                         * @param {google.storage.control.v2.GetManagedFolderRequest} message GetManagedFolderRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetManagedFolderRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.requestId = "";
+                                object.name = "";
+                            }
+                            if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                                if (typeof message.ifMetagenerationMatch === "number")
+                                    object.ifMetagenerationMatch = options.longs === String ? String(message.ifMetagenerationMatch) : message.ifMetagenerationMatch;
+                                else
+                                    object.ifMetagenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0).toNumber() : message.ifMetagenerationMatch;
+                                if (options.oneofs)
+                                    object._ifMetagenerationMatch = "ifMetagenerationMatch";
+                            }
+                            if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                                if (typeof message.ifMetagenerationNotMatch === "number")
+                                    object.ifMetagenerationNotMatch = options.longs === String ? String(message.ifMetagenerationNotMatch) : message.ifMetagenerationNotMatch;
+                                else
+                                    object.ifMetagenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0).toNumber() : message.ifMetagenerationNotMatch;
+                                if (options.oneofs)
+                                    object._ifMetagenerationNotMatch = "ifMetagenerationNotMatch";
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetManagedFolderRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.GetManagedFolderRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetManagedFolderRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetManagedFolderRequest
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.GetManagedFolderRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetManagedFolderRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.GetManagedFolderRequest";
+                        };
+    
+                        return GetManagedFolderRequest;
+                    })();
+    
+                    v2.CreateManagedFolderRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateManagedFolderRequest.
+                         * @memberof google.storage.control.v2
+                         * @interface ICreateManagedFolderRequest
+                         * @property {string|null} [parent] CreateManagedFolderRequest parent
+                         * @property {google.storage.control.v2.IManagedFolder|null} [managedFolder] CreateManagedFolderRequest managedFolder
+                         * @property {string|null} [managedFolderId] CreateManagedFolderRequest managedFolderId
+                         * @property {string|null} [requestId] CreateManagedFolderRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new CreateManagedFolderRequest.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a CreateManagedFolderRequest.
+                         * @implements ICreateManagedFolderRequest
+                         * @constructor
+                         * @param {google.storage.control.v2.ICreateManagedFolderRequest=} [properties] Properties to set
+                         */
+                        function CreateManagedFolderRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateManagedFolderRequest parent.
+                         * @member {string} parent
+                         * @memberof google.storage.control.v2.CreateManagedFolderRequest
+                         * @instance
+                         */
+                        CreateManagedFolderRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateManagedFolderRequest managedFolder.
+                         * @member {google.storage.control.v2.IManagedFolder|null|undefined} managedFolder
+                         * @memberof google.storage.control.v2.CreateManagedFolderRequest
+                         * @instance
+                         */
+                        CreateManagedFolderRequest.prototype.managedFolder = null;
+    
+                        /**
+                         * CreateManagedFolderRequest managedFolderId.
+                         * @member {string} managedFolderId
+                         * @memberof google.storage.control.v2.CreateManagedFolderRequest
+                         * @instance
+                         */
+                        CreateManagedFolderRequest.prototype.managedFolderId = "";
+    
+                        /**
+                         * CreateManagedFolderRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.storage.control.v2.CreateManagedFolderRequest
+                         * @instance
+                         */
+                        CreateManagedFolderRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new CreateManagedFolderRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.CreateManagedFolderRequest
+                         * @static
+                         * @param {google.storage.control.v2.ICreateManagedFolderRequest=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.CreateManagedFolderRequest} CreateManagedFolderRequest instance
+                         */
+                        CreateManagedFolderRequest.create = function create(properties) {
+                            return new CreateManagedFolderRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateManagedFolderRequest message. Does not implicitly {@link google.storage.control.v2.CreateManagedFolderRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.CreateManagedFolderRequest
+                         * @static
+                         * @param {google.storage.control.v2.ICreateManagedFolderRequest} message CreateManagedFolderRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateManagedFolderRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.managedFolder != null && Object.hasOwnProperty.call(message, "managedFolder"))
+                                $root.google.storage.control.v2.ManagedFolder.encode(message.managedFolder, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.managedFolderId != null && Object.hasOwnProperty.call(message, "managedFolderId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.managedFolderId);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateManagedFolderRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.CreateManagedFolderRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.CreateManagedFolderRequest
+                         * @static
+                         * @param {google.storage.control.v2.ICreateManagedFolderRequest} message CreateManagedFolderRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateManagedFolderRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateManagedFolderRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.CreateManagedFolderRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.CreateManagedFolderRequest} CreateManagedFolderRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateManagedFolderRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.CreateManagedFolderRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.managedFolder = $root.google.storage.control.v2.ManagedFolder.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.managedFolderId = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateManagedFolderRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.CreateManagedFolderRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.CreateManagedFolderRequest} CreateManagedFolderRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateManagedFolderRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateManagedFolderRequest message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.CreateManagedFolderRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateManagedFolderRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.managedFolder != null && message.hasOwnProperty("managedFolder")) {
+                                var error = $root.google.storage.control.v2.ManagedFolder.verify(message.managedFolder);
+                                if (error)
+                                    return "managedFolder." + error;
+                            }
+                            if (message.managedFolderId != null && message.hasOwnProperty("managedFolderId"))
+                                if (!$util.isString(message.managedFolderId))
+                                    return "managedFolderId: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateManagedFolderRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.CreateManagedFolderRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.CreateManagedFolderRequest} CreateManagedFolderRequest
+                         */
+                        CreateManagedFolderRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.storage.control.v2.CreateManagedFolderRequest)
+                                return object;
+                            var message = new $root.google.storage.control.v2.CreateManagedFolderRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.managedFolder != null) {
+                                if (typeof object.managedFolder !== "object")
+                                    throw TypeError(".google.storage.control.v2.CreateManagedFolderRequest.managedFolder: object expected");
+                                message.managedFolder = $root.google.storage.control.v2.ManagedFolder.fromObject(object.managedFolder);
+                            }
+                            if (object.managedFolderId != null)
+                                message.managedFolderId = String(object.managedFolderId);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateManagedFolderRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.CreateManagedFolderRequest
+                         * @static
+                         * @param {google.storage.control.v2.CreateManagedFolderRequest} message CreateManagedFolderRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateManagedFolderRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.managedFolder = null;
+                                object.managedFolderId = "";
+                                object.requestId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.managedFolder != null && message.hasOwnProperty("managedFolder"))
+                                object.managedFolder = $root.google.storage.control.v2.ManagedFolder.toObject(message.managedFolder, options);
+                            if (message.managedFolderId != null && message.hasOwnProperty("managedFolderId"))
+                                object.managedFolderId = message.managedFolderId;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateManagedFolderRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.CreateManagedFolderRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateManagedFolderRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateManagedFolderRequest
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.CreateManagedFolderRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateManagedFolderRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.CreateManagedFolderRequest";
+                        };
+    
+                        return CreateManagedFolderRequest;
+                    })();
+    
+                    v2.DeleteManagedFolderRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteManagedFolderRequest.
+                         * @memberof google.storage.control.v2
+                         * @interface IDeleteManagedFolderRequest
+                         * @property {string|null} [name] DeleteManagedFolderRequest name
+                         * @property {number|Long|null} [ifMetagenerationMatch] DeleteManagedFolderRequest ifMetagenerationMatch
+                         * @property {number|Long|null} [ifMetagenerationNotMatch] DeleteManagedFolderRequest ifMetagenerationNotMatch
+                         * @property {boolean|null} [allowNonEmpty] DeleteManagedFolderRequest allowNonEmpty
+                         * @property {string|null} [requestId] DeleteManagedFolderRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new DeleteManagedFolderRequest.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a DeleteManagedFolderRequest.
+                         * @implements IDeleteManagedFolderRequest
+                         * @constructor
+                         * @param {google.storage.control.v2.IDeleteManagedFolderRequest=} [properties] Properties to set
+                         */
+                        function DeleteManagedFolderRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteManagedFolderRequest name.
+                         * @member {string} name
+                         * @memberof google.storage.control.v2.DeleteManagedFolderRequest
+                         * @instance
+                         */
+                        DeleteManagedFolderRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteManagedFolderRequest ifMetagenerationMatch.
+                         * @member {number|Long|null|undefined} ifMetagenerationMatch
+                         * @memberof google.storage.control.v2.DeleteManagedFolderRequest
+                         * @instance
+                         */
+                        DeleteManagedFolderRequest.prototype.ifMetagenerationMatch = null;
+    
+                        /**
+                         * DeleteManagedFolderRequest ifMetagenerationNotMatch.
+                         * @member {number|Long|null|undefined} ifMetagenerationNotMatch
+                         * @memberof google.storage.control.v2.DeleteManagedFolderRequest
+                         * @instance
+                         */
+                        DeleteManagedFolderRequest.prototype.ifMetagenerationNotMatch = null;
+    
+                        /**
+                         * DeleteManagedFolderRequest allowNonEmpty.
+                         * @member {boolean} allowNonEmpty
+                         * @memberof google.storage.control.v2.DeleteManagedFolderRequest
+                         * @instance
+                         */
+                        DeleteManagedFolderRequest.prototype.allowNonEmpty = false;
+    
+                        /**
+                         * DeleteManagedFolderRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.storage.control.v2.DeleteManagedFolderRequest
+                         * @instance
+                         */
+                        DeleteManagedFolderRequest.prototype.requestId = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * DeleteManagedFolderRequest _ifMetagenerationMatch.
+                         * @member {"ifMetagenerationMatch"|undefined} _ifMetagenerationMatch
+                         * @memberof google.storage.control.v2.DeleteManagedFolderRequest
+                         * @instance
+                         */
+                        Object.defineProperty(DeleteManagedFolderRequest.prototype, "_ifMetagenerationMatch", {
+                            get: $util.oneOfGetter($oneOfFields = ["ifMetagenerationMatch"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * DeleteManagedFolderRequest _ifMetagenerationNotMatch.
+                         * @member {"ifMetagenerationNotMatch"|undefined} _ifMetagenerationNotMatch
+                         * @memberof google.storage.control.v2.DeleteManagedFolderRequest
+                         * @instance
+                         */
+                        Object.defineProperty(DeleteManagedFolderRequest.prototype, "_ifMetagenerationNotMatch", {
+                            get: $util.oneOfGetter($oneOfFields = ["ifMetagenerationNotMatch"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new DeleteManagedFolderRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.DeleteManagedFolderRequest
+                         * @static
+                         * @param {google.storage.control.v2.IDeleteManagedFolderRequest=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.DeleteManagedFolderRequest} DeleteManagedFolderRequest instance
+                         */
+                        DeleteManagedFolderRequest.create = function create(properties) {
+                            return new DeleteManagedFolderRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteManagedFolderRequest message. Does not implicitly {@link google.storage.control.v2.DeleteManagedFolderRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.DeleteManagedFolderRequest
+                         * @static
+                         * @param {google.storage.control.v2.IDeleteManagedFolderRequest} message DeleteManagedFolderRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteManagedFolderRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.ifMetagenerationMatch);
+                            if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.ifMetagenerationNotMatch);
+                            if (message.allowNonEmpty != null && Object.hasOwnProperty.call(message, "allowNonEmpty"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.allowNonEmpty);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.requestId);
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteManagedFolderRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.DeleteManagedFolderRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.DeleteManagedFolderRequest
+                         * @static
+                         * @param {google.storage.control.v2.IDeleteManagedFolderRequest} message DeleteManagedFolderRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteManagedFolderRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteManagedFolderRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.DeleteManagedFolderRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.DeleteManagedFolderRequest} DeleteManagedFolderRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteManagedFolderRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.DeleteManagedFolderRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 7: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.ifMetagenerationMatch = reader.int64();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.ifMetagenerationNotMatch = reader.int64();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.allowNonEmpty = reader.bool();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteManagedFolderRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.DeleteManagedFolderRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.DeleteManagedFolderRequest} DeleteManagedFolderRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteManagedFolderRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteManagedFolderRequest message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.DeleteManagedFolderRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteManagedFolderRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                                properties._ifMetagenerationMatch = 1;
+                                if (!$util.isInteger(message.ifMetagenerationMatch) && !(message.ifMetagenerationMatch && $util.isInteger(message.ifMetagenerationMatch.low) && $util.isInteger(message.ifMetagenerationMatch.high)))
+                                    return "ifMetagenerationMatch: integer|Long expected";
+                            }
+                            if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                                properties._ifMetagenerationNotMatch = 1;
+                                if (!$util.isInteger(message.ifMetagenerationNotMatch) && !(message.ifMetagenerationNotMatch && $util.isInteger(message.ifMetagenerationNotMatch.low) && $util.isInteger(message.ifMetagenerationNotMatch.high)))
+                                    return "ifMetagenerationNotMatch: integer|Long expected";
+                            }
+                            if (message.allowNonEmpty != null && message.hasOwnProperty("allowNonEmpty"))
+                                if (typeof message.allowNonEmpty !== "boolean")
+                                    return "allowNonEmpty: boolean expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteManagedFolderRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.DeleteManagedFolderRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.DeleteManagedFolderRequest} DeleteManagedFolderRequest
+                         */
+                        DeleteManagedFolderRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.storage.control.v2.DeleteManagedFolderRequest)
+                                return object;
+                            var message = new $root.google.storage.control.v2.DeleteManagedFolderRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.ifMetagenerationMatch != null)
+                                if ($util.Long)
+                                    (message.ifMetagenerationMatch = $util.Long.fromValue(object.ifMetagenerationMatch)).unsigned = false;
+                                else if (typeof object.ifMetagenerationMatch === "string")
+                                    message.ifMetagenerationMatch = parseInt(object.ifMetagenerationMatch, 10);
+                                else if (typeof object.ifMetagenerationMatch === "number")
+                                    message.ifMetagenerationMatch = object.ifMetagenerationMatch;
+                                else if (typeof object.ifMetagenerationMatch === "object")
+                                    message.ifMetagenerationMatch = new $util.LongBits(object.ifMetagenerationMatch.low >>> 0, object.ifMetagenerationMatch.high >>> 0).toNumber();
+                            if (object.ifMetagenerationNotMatch != null)
+                                if ($util.Long)
+                                    (message.ifMetagenerationNotMatch = $util.Long.fromValue(object.ifMetagenerationNotMatch)).unsigned = false;
+                                else if (typeof object.ifMetagenerationNotMatch === "string")
+                                    message.ifMetagenerationNotMatch = parseInt(object.ifMetagenerationNotMatch, 10);
+                                else if (typeof object.ifMetagenerationNotMatch === "number")
+                                    message.ifMetagenerationNotMatch = object.ifMetagenerationNotMatch;
+                                else if (typeof object.ifMetagenerationNotMatch === "object")
+                                    message.ifMetagenerationNotMatch = new $util.LongBits(object.ifMetagenerationNotMatch.low >>> 0, object.ifMetagenerationNotMatch.high >>> 0).toNumber();
+                            if (object.allowNonEmpty != null)
+                                message.allowNonEmpty = Boolean(object.allowNonEmpty);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteManagedFolderRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.DeleteManagedFolderRequest
+                         * @static
+                         * @param {google.storage.control.v2.DeleteManagedFolderRequest} message DeleteManagedFolderRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteManagedFolderRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.allowNonEmpty = false;
+                                object.requestId = "";
+                                object.name = "";
+                            }
+                            if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                                if (typeof message.ifMetagenerationMatch === "number")
+                                    object.ifMetagenerationMatch = options.longs === String ? String(message.ifMetagenerationMatch) : message.ifMetagenerationMatch;
+                                else
+                                    object.ifMetagenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0).toNumber() : message.ifMetagenerationMatch;
+                                if (options.oneofs)
+                                    object._ifMetagenerationMatch = "ifMetagenerationMatch";
+                            }
+                            if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                                if (typeof message.ifMetagenerationNotMatch === "number")
+                                    object.ifMetagenerationNotMatch = options.longs === String ? String(message.ifMetagenerationNotMatch) : message.ifMetagenerationNotMatch;
+                                else
+                                    object.ifMetagenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0).toNumber() : message.ifMetagenerationNotMatch;
+                                if (options.oneofs)
+                                    object._ifMetagenerationNotMatch = "ifMetagenerationNotMatch";
+                            }
+                            if (message.allowNonEmpty != null && message.hasOwnProperty("allowNonEmpty"))
+                                object.allowNonEmpty = message.allowNonEmpty;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteManagedFolderRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.DeleteManagedFolderRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteManagedFolderRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteManagedFolderRequest
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.DeleteManagedFolderRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteManagedFolderRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.DeleteManagedFolderRequest";
+                        };
+    
+                        return DeleteManagedFolderRequest;
+                    })();
+    
+                    v2.ListManagedFoldersRequest = (function() {
+    
+                        /**
+                         * Properties of a ListManagedFoldersRequest.
+                         * @memberof google.storage.control.v2
+                         * @interface IListManagedFoldersRequest
+                         * @property {string|null} [parent] ListManagedFoldersRequest parent
+                         * @property {number|null} [pageSize] ListManagedFoldersRequest pageSize
+                         * @property {string|null} [pageToken] ListManagedFoldersRequest pageToken
+                         * @property {string|null} [prefix] ListManagedFoldersRequest prefix
+                         * @property {string|null} [requestId] ListManagedFoldersRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new ListManagedFoldersRequest.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a ListManagedFoldersRequest.
+                         * @implements IListManagedFoldersRequest
+                         * @constructor
+                         * @param {google.storage.control.v2.IListManagedFoldersRequest=} [properties] Properties to set
+                         */
+                        function ListManagedFoldersRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListManagedFoldersRequest parent.
+                         * @member {string} parent
+                         * @memberof google.storage.control.v2.ListManagedFoldersRequest
+                         * @instance
+                         */
+                        ListManagedFoldersRequest.prototype.parent = "";
+    
+                        /**
+                         * ListManagedFoldersRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.storage.control.v2.ListManagedFoldersRequest
+                         * @instance
+                         */
+                        ListManagedFoldersRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListManagedFoldersRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.storage.control.v2.ListManagedFoldersRequest
+                         * @instance
+                         */
+                        ListManagedFoldersRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListManagedFoldersRequest prefix.
+                         * @member {string} prefix
+                         * @memberof google.storage.control.v2.ListManagedFoldersRequest
+                         * @instance
+                         */
+                        ListManagedFoldersRequest.prototype.prefix = "";
+    
+                        /**
+                         * ListManagedFoldersRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.storage.control.v2.ListManagedFoldersRequest
+                         * @instance
+                         */
+                        ListManagedFoldersRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new ListManagedFoldersRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.ListManagedFoldersRequest
+                         * @static
+                         * @param {google.storage.control.v2.IListManagedFoldersRequest=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.ListManagedFoldersRequest} ListManagedFoldersRequest instance
+                         */
+                        ListManagedFoldersRequest.create = function create(properties) {
+                            return new ListManagedFoldersRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListManagedFoldersRequest message. Does not implicitly {@link google.storage.control.v2.ListManagedFoldersRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.ListManagedFoldersRequest
+                         * @static
+                         * @param {google.storage.control.v2.IListManagedFoldersRequest} message ListManagedFoldersRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListManagedFoldersRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.prefix != null && Object.hasOwnProperty.call(message, "prefix"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.prefix);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListManagedFoldersRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.ListManagedFoldersRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.ListManagedFoldersRequest
+                         * @static
+                         * @param {google.storage.control.v2.IListManagedFoldersRequest} message ListManagedFoldersRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListManagedFoldersRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListManagedFoldersRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.ListManagedFoldersRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.ListManagedFoldersRequest} ListManagedFoldersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListManagedFoldersRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.ListManagedFoldersRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.prefix = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListManagedFoldersRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.ListManagedFoldersRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.ListManagedFoldersRequest} ListManagedFoldersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListManagedFoldersRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListManagedFoldersRequest message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.ListManagedFoldersRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListManagedFoldersRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.prefix != null && message.hasOwnProperty("prefix"))
+                                if (!$util.isString(message.prefix))
+                                    return "prefix: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListManagedFoldersRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.ListManagedFoldersRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.ListManagedFoldersRequest} ListManagedFoldersRequest
+                         */
+                        ListManagedFoldersRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.storage.control.v2.ListManagedFoldersRequest)
+                                return object;
+                            var message = new $root.google.storage.control.v2.ListManagedFoldersRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.prefix != null)
+                                message.prefix = String(object.prefix);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListManagedFoldersRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.ListManagedFoldersRequest
+                         * @static
+                         * @param {google.storage.control.v2.ListManagedFoldersRequest} message ListManagedFoldersRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListManagedFoldersRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.prefix = "";
+                                object.requestId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.prefix != null && message.hasOwnProperty("prefix"))
+                                object.prefix = message.prefix;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListManagedFoldersRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.ListManagedFoldersRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListManagedFoldersRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListManagedFoldersRequest
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.ListManagedFoldersRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListManagedFoldersRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.ListManagedFoldersRequest";
+                        };
+    
+                        return ListManagedFoldersRequest;
+                    })();
+    
+                    v2.ListManagedFoldersResponse = (function() {
+    
+                        /**
+                         * Properties of a ListManagedFoldersResponse.
+                         * @memberof google.storage.control.v2
+                         * @interface IListManagedFoldersResponse
+                         * @property {Array.<google.storage.control.v2.IManagedFolder>|null} [managedFolders] ListManagedFoldersResponse managedFolders
+                         * @property {string|null} [nextPageToken] ListManagedFoldersResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListManagedFoldersResponse.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a ListManagedFoldersResponse.
+                         * @implements IListManagedFoldersResponse
+                         * @constructor
+                         * @param {google.storage.control.v2.IListManagedFoldersResponse=} [properties] Properties to set
+                         */
+                        function ListManagedFoldersResponse(properties) {
+                            this.managedFolders = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListManagedFoldersResponse managedFolders.
+                         * @member {Array.<google.storage.control.v2.IManagedFolder>} managedFolders
+                         * @memberof google.storage.control.v2.ListManagedFoldersResponse
+                         * @instance
+                         */
+                        ListManagedFoldersResponse.prototype.managedFolders = $util.emptyArray;
+    
+                        /**
+                         * ListManagedFoldersResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.storage.control.v2.ListManagedFoldersResponse
+                         * @instance
+                         */
+                        ListManagedFoldersResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListManagedFoldersResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.ListManagedFoldersResponse
+                         * @static
+                         * @param {google.storage.control.v2.IListManagedFoldersResponse=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.ListManagedFoldersResponse} ListManagedFoldersResponse instance
+                         */
+                        ListManagedFoldersResponse.create = function create(properties) {
+                            return new ListManagedFoldersResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListManagedFoldersResponse message. Does not implicitly {@link google.storage.control.v2.ListManagedFoldersResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.ListManagedFoldersResponse
+                         * @static
+                         * @param {google.storage.control.v2.IListManagedFoldersResponse} message ListManagedFoldersResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListManagedFoldersResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.managedFolders != null && message.managedFolders.length)
+                                for (var i = 0; i < message.managedFolders.length; ++i)
+                                    $root.google.storage.control.v2.ManagedFolder.encode(message.managedFolders[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListManagedFoldersResponse message, length delimited. Does not implicitly {@link google.storage.control.v2.ListManagedFoldersResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.ListManagedFoldersResponse
+                         * @static
+                         * @param {google.storage.control.v2.IListManagedFoldersResponse} message ListManagedFoldersResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListManagedFoldersResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListManagedFoldersResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.ListManagedFoldersResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.ListManagedFoldersResponse} ListManagedFoldersResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListManagedFoldersResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.ListManagedFoldersResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.managedFolders && message.managedFolders.length))
+                                            message.managedFolders = [];
+                                        message.managedFolders.push($root.google.storage.control.v2.ManagedFolder.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListManagedFoldersResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.ListManagedFoldersResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.ListManagedFoldersResponse} ListManagedFoldersResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListManagedFoldersResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListManagedFoldersResponse message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.ListManagedFoldersResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListManagedFoldersResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.managedFolders != null && message.hasOwnProperty("managedFolders")) {
+                                if (!Array.isArray(message.managedFolders))
+                                    return "managedFolders: array expected";
+                                for (var i = 0; i < message.managedFolders.length; ++i) {
+                                    var error = $root.google.storage.control.v2.ManagedFolder.verify(message.managedFolders[i]);
+                                    if (error)
+                                        return "managedFolders." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListManagedFoldersResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.ListManagedFoldersResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.ListManagedFoldersResponse} ListManagedFoldersResponse
+                         */
+                        ListManagedFoldersResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.storage.control.v2.ListManagedFoldersResponse)
+                                return object;
+                            var message = new $root.google.storage.control.v2.ListManagedFoldersResponse();
+                            if (object.managedFolders) {
+                                if (!Array.isArray(object.managedFolders))
+                                    throw TypeError(".google.storage.control.v2.ListManagedFoldersResponse.managedFolders: array expected");
+                                message.managedFolders = [];
+                                for (var i = 0; i < object.managedFolders.length; ++i) {
+                                    if (typeof object.managedFolders[i] !== "object")
+                                        throw TypeError(".google.storage.control.v2.ListManagedFoldersResponse.managedFolders: object expected");
+                                    message.managedFolders[i] = $root.google.storage.control.v2.ManagedFolder.fromObject(object.managedFolders[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListManagedFoldersResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.ListManagedFoldersResponse
+                         * @static
+                         * @param {google.storage.control.v2.ListManagedFoldersResponse} message ListManagedFoldersResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListManagedFoldersResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.managedFolders = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.managedFolders && message.managedFolders.length) {
+                                object.managedFolders = [];
+                                for (var j = 0; j < message.managedFolders.length; ++j)
+                                    object.managedFolders[j] = $root.google.storage.control.v2.ManagedFolder.toObject(message.managedFolders[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListManagedFoldersResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.ListManagedFoldersResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListManagedFoldersResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListManagedFoldersResponse
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.ListManagedFoldersResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListManagedFoldersResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.ListManagedFoldersResponse";
+                        };
+    
+                        return ListManagedFoldersResponse;
                     })();
     
                     return v2;

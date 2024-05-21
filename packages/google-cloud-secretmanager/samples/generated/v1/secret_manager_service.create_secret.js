@@ -30,7 +30,8 @@ function main(parent, secretId, secret) {
    */
   /**
    *  Required. The resource name of the project to associate with the
-   *  Secret google.cloud.secretmanager.v1.Secret, in the format `projects/*`.
+   *  Secret google.cloud.secretmanager.v1.Secret, in the format `projects/*`
+   *  or `projects/* /locations/*`.
    */
   // const parent = 'abc123'
   /**
@@ -41,7 +42,8 @@ function main(parent, secretId, secret) {
    */
   // const secretId = 'abc123'
   /**
-   *  Required. A Secret google.cloud.secretmanager.v1.Secret  with initial field values.
+   *  Required. A Secret google.cloud.secretmanager.v1.Secret  with initial
+   *  field values.
    */
   // const secret = {}
 

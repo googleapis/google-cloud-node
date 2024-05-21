@@ -109,6 +109,9 @@ export namespace google {
 
                     /** Backup configBackupSizeBytes */
                     configBackupSizeBytes?: (number|Long|string|null);
+
+                    /** Backup permissiveMode */
+                    permissiveMode?: (boolean|null);
                 }
 
                 /** Represents a Backup. */
@@ -200,6 +203,9 @@ export namespace google {
 
                     /** Backup configBackupSizeBytes. */
                     public configBackupSizeBytes: (number|Long|string);
+
+                    /** Backup permissiveMode. */
+                    public permissiveMode: boolean;
 
                     /** Backup backupScope. */
                     public backupScope?: ("allNamespaces"|"selectedNamespaces"|"selectedApplications");
@@ -813,6 +819,106 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a VolumeTypeEnum. */
+                interface IVolumeTypeEnum {
+                }
+
+                /** Represents a VolumeTypeEnum. */
+                class VolumeTypeEnum implements IVolumeTypeEnum {
+
+                    /**
+                     * Constructs a new VolumeTypeEnum.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkebackup.v1.IVolumeTypeEnum);
+
+                    /**
+                     * Creates a new VolumeTypeEnum instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VolumeTypeEnum instance
+                     */
+                    public static create(properties?: google.cloud.gkebackup.v1.IVolumeTypeEnum): google.cloud.gkebackup.v1.VolumeTypeEnum;
+
+                    /**
+                     * Encodes the specified VolumeTypeEnum message. Does not implicitly {@link google.cloud.gkebackup.v1.VolumeTypeEnum.verify|verify} messages.
+                     * @param message VolumeTypeEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkebackup.v1.IVolumeTypeEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VolumeTypeEnum message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.VolumeTypeEnum.verify|verify} messages.
+                     * @param message VolumeTypeEnum message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkebackup.v1.IVolumeTypeEnum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VolumeTypeEnum message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VolumeTypeEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.VolumeTypeEnum;
+
+                    /**
+                     * Decodes a VolumeTypeEnum message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VolumeTypeEnum
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.VolumeTypeEnum;
+
+                    /**
+                     * Verifies a VolumeTypeEnum message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VolumeTypeEnum message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VolumeTypeEnum
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.VolumeTypeEnum;
+
+                    /**
+                     * Creates a plain object from a VolumeTypeEnum message. Also converts values to other types if specified.
+                     * @param message VolumeTypeEnum
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkebackup.v1.VolumeTypeEnum, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VolumeTypeEnum to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VolumeTypeEnum
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace VolumeTypeEnum {
+
+                    /** VolumeType enum. */
+                    enum VolumeType {
+                        VOLUME_TYPE_UNSPECIFIED = 0,
+                        GCE_PERSISTENT_DISK = 1
+                    }
+                }
+
                 /** Properties of a BackupPlan. */
                 interface IBackupPlan {
 
@@ -1252,6 +1358,9 @@ export namespace google {
 
                         /** BackupConfig encryptionKey */
                         encryptionKey?: (google.cloud.gkebackup.v1.IEncryptionKey|null);
+
+                        /** BackupConfig permissiveMode */
+                        permissiveMode?: (boolean|null);
                     }
 
                     /** Represents a BackupConfig. */
@@ -1280,6 +1389,9 @@ export namespace google {
 
                         /** BackupConfig encryptionKey. */
                         public encryptionKey?: (google.cloud.gkebackup.v1.IEncryptionKey|null);
+
+                        /** BackupConfig permissiveMode. */
+                        public permissiveMode: boolean;
 
                         /** BackupConfig backupScope. */
                         public backupScope?: ("allNamespaces"|"selectedNamespaces"|"selectedApplications");
@@ -5852,6 +5964,12 @@ export namespace google {
 
                     /** Restore etag */
                     etag?: (string|null);
+
+                    /** Restore filter */
+                    filter?: (google.cloud.gkebackup.v1.Restore.IFilter|null);
+
+                    /** Restore volumeDataRestorePolicyOverrides */
+                    volumeDataRestorePolicyOverrides?: (google.cloud.gkebackup.v1.IVolumeDataRestorePolicyOverride[]|null);
                 }
 
                 /** Represents a Restore. */
@@ -5913,6 +6031,12 @@ export namespace google {
 
                     /** Restore etag. */
                     public etag: string;
+
+                    /** Restore filter. */
+                    public filter?: (google.cloud.gkebackup.v1.Restore.IFilter|null);
+
+                    /** Restore volumeDataRestorePolicyOverrides. */
+                    public volumeDataRestorePolicyOverrides: google.cloud.gkebackup.v1.IVolumeDataRestorePolicyOverride[];
 
                     /**
                      * Creates a new Restore instance using the specified properties.
@@ -6003,6 +6127,109 @@ export namespace google {
                         FAILED = 4,
                         DELETING = 5
                     }
+
+                    /** Properties of a Filter. */
+                    interface IFilter {
+
+                        /** Filter inclusionFilters */
+                        inclusionFilters?: (google.cloud.gkebackup.v1.IResourceSelector[]|null);
+
+                        /** Filter exclusionFilters */
+                        exclusionFilters?: (google.cloud.gkebackup.v1.IResourceSelector[]|null);
+                    }
+
+                    /** Represents a Filter. */
+                    class Filter implements IFilter {
+
+                        /**
+                         * Constructs a new Filter.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.gkebackup.v1.Restore.IFilter);
+
+                        /** Filter inclusionFilters. */
+                        public inclusionFilters: google.cloud.gkebackup.v1.IResourceSelector[];
+
+                        /** Filter exclusionFilters. */
+                        public exclusionFilters: google.cloud.gkebackup.v1.IResourceSelector[];
+
+                        /**
+                         * Creates a new Filter instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Filter instance
+                         */
+                        public static create(properties?: google.cloud.gkebackup.v1.Restore.IFilter): google.cloud.gkebackup.v1.Restore.Filter;
+
+                        /**
+                         * Encodes the specified Filter message. Does not implicitly {@link google.cloud.gkebackup.v1.Restore.Filter.verify|verify} messages.
+                         * @param message Filter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.gkebackup.v1.Restore.IFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Filter message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.Restore.Filter.verify|verify} messages.
+                         * @param message Filter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.gkebackup.v1.Restore.IFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Filter message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Filter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.Restore.Filter;
+
+                        /**
+                         * Decodes a Filter message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Filter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.Restore.Filter;
+
+                        /**
+                         * Verifies a Filter message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Filter message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Filter
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.Restore.Filter;
+
+                        /**
+                         * Creates a plain object from a Filter message. Also converts values to other types if specified.
+                         * @param message Filter
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.gkebackup.v1.Restore.Filter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Filter to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Filter
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a RestoreConfig. */
@@ -6040,6 +6267,12 @@ export namespace google {
 
                     /** RestoreConfig transformationRules */
                     transformationRules?: (google.cloud.gkebackup.v1.RestoreConfig.ITransformationRule[]|null);
+
+                    /** RestoreConfig volumeDataRestorePolicyBindings */
+                    volumeDataRestorePolicyBindings?: (google.cloud.gkebackup.v1.RestoreConfig.IVolumeDataRestorePolicyBinding[]|null);
+
+                    /** RestoreConfig restoreOrder */
+                    restoreOrder?: (google.cloud.gkebackup.v1.RestoreConfig.IRestoreOrder|null);
                 }
 
                 /** Represents a RestoreConfig. */
@@ -6083,6 +6316,12 @@ export namespace google {
 
                     /** RestoreConfig transformationRules. */
                     public transformationRules: google.cloud.gkebackup.v1.RestoreConfig.ITransformationRule[];
+
+                    /** RestoreConfig volumeDataRestorePolicyBindings. */
+                    public volumeDataRestorePolicyBindings: google.cloud.gkebackup.v1.RestoreConfig.IVolumeDataRestorePolicyBinding[];
+
+                    /** RestoreConfig restoreOrder. */
+                    public restoreOrder?: (google.cloud.gkebackup.v1.RestoreConfig.IRestoreOrder|null);
 
                     /** RestoreConfig namespacedResourceRestoreScope. */
                     public namespacedResourceRestoreScope?: ("allNamespaces"|"selectedNamespaces"|"selectedApplications"|"noNamespaces"|"excludedNamespaces");
@@ -6186,7 +6425,10 @@ export namespace google {
                     enum NamespacedResourceRestoreMode {
                         NAMESPACED_RESOURCE_RESTORE_MODE_UNSPECIFIED = 0,
                         DELETE_AND_RESTORE = 1,
-                        FAIL_ON_CONFLICT = 2
+                        FAIL_ON_CONFLICT = 2,
+                        MERGE_SKIP_ON_CONFLICT = 3,
+                        MERGE_REPLACE_VOLUME_ON_CONFLICT = 4,
+                        MERGE_REPLACE_ON_CONFLICT = 5
                     }
 
                     /** Properties of a GroupKind. */
@@ -6874,6 +7116,536 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+
+                    /** Properties of a VolumeDataRestorePolicyBinding. */
+                    interface IVolumeDataRestorePolicyBinding {
+
+                        /** VolumeDataRestorePolicyBinding policy */
+                        policy?: (google.cloud.gkebackup.v1.RestoreConfig.VolumeDataRestorePolicy|keyof typeof google.cloud.gkebackup.v1.RestoreConfig.VolumeDataRestorePolicy|null);
+
+                        /** VolumeDataRestorePolicyBinding volumeType */
+                        volumeType?: (google.cloud.gkebackup.v1.VolumeTypeEnum.VolumeType|keyof typeof google.cloud.gkebackup.v1.VolumeTypeEnum.VolumeType|null);
+                    }
+
+                    /** Represents a VolumeDataRestorePolicyBinding. */
+                    class VolumeDataRestorePolicyBinding implements IVolumeDataRestorePolicyBinding {
+
+                        /**
+                         * Constructs a new VolumeDataRestorePolicyBinding.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.gkebackup.v1.RestoreConfig.IVolumeDataRestorePolicyBinding);
+
+                        /** VolumeDataRestorePolicyBinding policy. */
+                        public policy: (google.cloud.gkebackup.v1.RestoreConfig.VolumeDataRestorePolicy|keyof typeof google.cloud.gkebackup.v1.RestoreConfig.VolumeDataRestorePolicy);
+
+                        /** VolumeDataRestorePolicyBinding volumeType. */
+                        public volumeType?: (google.cloud.gkebackup.v1.VolumeTypeEnum.VolumeType|keyof typeof google.cloud.gkebackup.v1.VolumeTypeEnum.VolumeType|null);
+
+                        /** VolumeDataRestorePolicyBinding scope. */
+                        public scope?: "volumeType";
+
+                        /**
+                         * Creates a new VolumeDataRestorePolicyBinding instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns VolumeDataRestorePolicyBinding instance
+                         */
+                        public static create(properties?: google.cloud.gkebackup.v1.RestoreConfig.IVolumeDataRestorePolicyBinding): google.cloud.gkebackup.v1.RestoreConfig.VolumeDataRestorePolicyBinding;
+
+                        /**
+                         * Encodes the specified VolumeDataRestorePolicyBinding message. Does not implicitly {@link google.cloud.gkebackup.v1.RestoreConfig.VolumeDataRestorePolicyBinding.verify|verify} messages.
+                         * @param message VolumeDataRestorePolicyBinding message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.gkebackup.v1.RestoreConfig.IVolumeDataRestorePolicyBinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified VolumeDataRestorePolicyBinding message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.RestoreConfig.VolumeDataRestorePolicyBinding.verify|verify} messages.
+                         * @param message VolumeDataRestorePolicyBinding message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.gkebackup.v1.RestoreConfig.IVolumeDataRestorePolicyBinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a VolumeDataRestorePolicyBinding message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns VolumeDataRestorePolicyBinding
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.RestoreConfig.VolumeDataRestorePolicyBinding;
+
+                        /**
+                         * Decodes a VolumeDataRestorePolicyBinding message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns VolumeDataRestorePolicyBinding
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.RestoreConfig.VolumeDataRestorePolicyBinding;
+
+                        /**
+                         * Verifies a VolumeDataRestorePolicyBinding message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a VolumeDataRestorePolicyBinding message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns VolumeDataRestorePolicyBinding
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.RestoreConfig.VolumeDataRestorePolicyBinding;
+
+                        /**
+                         * Creates a plain object from a VolumeDataRestorePolicyBinding message. Also converts values to other types if specified.
+                         * @param message VolumeDataRestorePolicyBinding
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.gkebackup.v1.RestoreConfig.VolumeDataRestorePolicyBinding, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this VolumeDataRestorePolicyBinding to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for VolumeDataRestorePolicyBinding
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RestoreOrder. */
+                    interface IRestoreOrder {
+
+                        /** RestoreOrder groupKindDependencies */
+                        groupKindDependencies?: (google.cloud.gkebackup.v1.RestoreConfig.RestoreOrder.IGroupKindDependency[]|null);
+                    }
+
+                    /** Represents a RestoreOrder. */
+                    class RestoreOrder implements IRestoreOrder {
+
+                        /**
+                         * Constructs a new RestoreOrder.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.gkebackup.v1.RestoreConfig.IRestoreOrder);
+
+                        /** RestoreOrder groupKindDependencies. */
+                        public groupKindDependencies: google.cloud.gkebackup.v1.RestoreConfig.RestoreOrder.IGroupKindDependency[];
+
+                        /**
+                         * Creates a new RestoreOrder instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RestoreOrder instance
+                         */
+                        public static create(properties?: google.cloud.gkebackup.v1.RestoreConfig.IRestoreOrder): google.cloud.gkebackup.v1.RestoreConfig.RestoreOrder;
+
+                        /**
+                         * Encodes the specified RestoreOrder message. Does not implicitly {@link google.cloud.gkebackup.v1.RestoreConfig.RestoreOrder.verify|verify} messages.
+                         * @param message RestoreOrder message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.gkebackup.v1.RestoreConfig.IRestoreOrder, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RestoreOrder message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.RestoreConfig.RestoreOrder.verify|verify} messages.
+                         * @param message RestoreOrder message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.gkebackup.v1.RestoreConfig.IRestoreOrder, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RestoreOrder message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RestoreOrder
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.RestoreConfig.RestoreOrder;
+
+                        /**
+                         * Decodes a RestoreOrder message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RestoreOrder
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.RestoreConfig.RestoreOrder;
+
+                        /**
+                         * Verifies a RestoreOrder message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RestoreOrder message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RestoreOrder
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.RestoreConfig.RestoreOrder;
+
+                        /**
+                         * Creates a plain object from a RestoreOrder message. Also converts values to other types if specified.
+                         * @param message RestoreOrder
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.gkebackup.v1.RestoreConfig.RestoreOrder, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RestoreOrder to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RestoreOrder
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace RestoreOrder {
+
+                        /** Properties of a GroupKindDependency. */
+                        interface IGroupKindDependency {
+
+                            /** GroupKindDependency satisfying */
+                            satisfying?: (google.cloud.gkebackup.v1.RestoreConfig.IGroupKind|null);
+
+                            /** GroupKindDependency requiring */
+                            requiring?: (google.cloud.gkebackup.v1.RestoreConfig.IGroupKind|null);
+                        }
+
+                        /** Represents a GroupKindDependency. */
+                        class GroupKindDependency implements IGroupKindDependency {
+
+                            /**
+                             * Constructs a new GroupKindDependency.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.gkebackup.v1.RestoreConfig.RestoreOrder.IGroupKindDependency);
+
+                            /** GroupKindDependency satisfying. */
+                            public satisfying?: (google.cloud.gkebackup.v1.RestoreConfig.IGroupKind|null);
+
+                            /** GroupKindDependency requiring. */
+                            public requiring?: (google.cloud.gkebackup.v1.RestoreConfig.IGroupKind|null);
+
+                            /**
+                             * Creates a new GroupKindDependency instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns GroupKindDependency instance
+                             */
+                            public static create(properties?: google.cloud.gkebackup.v1.RestoreConfig.RestoreOrder.IGroupKindDependency): google.cloud.gkebackup.v1.RestoreConfig.RestoreOrder.GroupKindDependency;
+
+                            /**
+                             * Encodes the specified GroupKindDependency message. Does not implicitly {@link google.cloud.gkebackup.v1.RestoreConfig.RestoreOrder.GroupKindDependency.verify|verify} messages.
+                             * @param message GroupKindDependency message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.gkebackup.v1.RestoreConfig.RestoreOrder.IGroupKindDependency, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified GroupKindDependency message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.RestoreConfig.RestoreOrder.GroupKindDependency.verify|verify} messages.
+                             * @param message GroupKindDependency message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.gkebackup.v1.RestoreConfig.RestoreOrder.IGroupKindDependency, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a GroupKindDependency message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns GroupKindDependency
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.RestoreConfig.RestoreOrder.GroupKindDependency;
+
+                            /**
+                             * Decodes a GroupKindDependency message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns GroupKindDependency
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.RestoreConfig.RestoreOrder.GroupKindDependency;
+
+                            /**
+                             * Verifies a GroupKindDependency message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a GroupKindDependency message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns GroupKindDependency
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.RestoreConfig.RestoreOrder.GroupKindDependency;
+
+                            /**
+                             * Creates a plain object from a GroupKindDependency message. Also converts values to other types if specified.
+                             * @param message GroupKindDependency
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.gkebackup.v1.RestoreConfig.RestoreOrder.GroupKindDependency, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this GroupKindDependency to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for GroupKindDependency
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+                }
+
+                /** Properties of a ResourceSelector. */
+                interface IResourceSelector {
+
+                    /** ResourceSelector groupKind */
+                    groupKind?: (google.cloud.gkebackup.v1.RestoreConfig.IGroupKind|null);
+
+                    /** ResourceSelector name */
+                    name?: (string|null);
+
+                    /** ResourceSelector namespace */
+                    namespace?: (string|null);
+
+                    /** ResourceSelector labels */
+                    labels?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents a ResourceSelector. */
+                class ResourceSelector implements IResourceSelector {
+
+                    /**
+                     * Constructs a new ResourceSelector.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkebackup.v1.IResourceSelector);
+
+                    /** ResourceSelector groupKind. */
+                    public groupKind?: (google.cloud.gkebackup.v1.RestoreConfig.IGroupKind|null);
+
+                    /** ResourceSelector name. */
+                    public name: string;
+
+                    /** ResourceSelector namespace. */
+                    public namespace: string;
+
+                    /** ResourceSelector labels. */
+                    public labels: { [k: string]: string };
+
+                    /**
+                     * Creates a new ResourceSelector instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResourceSelector instance
+                     */
+                    public static create(properties?: google.cloud.gkebackup.v1.IResourceSelector): google.cloud.gkebackup.v1.ResourceSelector;
+
+                    /**
+                     * Encodes the specified ResourceSelector message. Does not implicitly {@link google.cloud.gkebackup.v1.ResourceSelector.verify|verify} messages.
+                     * @param message ResourceSelector message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkebackup.v1.IResourceSelector, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResourceSelector message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.ResourceSelector.verify|verify} messages.
+                     * @param message ResourceSelector message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkebackup.v1.IResourceSelector, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResourceSelector message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResourceSelector
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.ResourceSelector;
+
+                    /**
+                     * Decodes a ResourceSelector message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResourceSelector
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.ResourceSelector;
+
+                    /**
+                     * Verifies a ResourceSelector message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResourceSelector message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResourceSelector
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.ResourceSelector;
+
+                    /**
+                     * Creates a plain object from a ResourceSelector message. Also converts values to other types if specified.
+                     * @param message ResourceSelector
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkebackup.v1.ResourceSelector, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResourceSelector to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ResourceSelector
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VolumeDataRestorePolicyOverride. */
+                interface IVolumeDataRestorePolicyOverride {
+
+                    /** VolumeDataRestorePolicyOverride policy */
+                    policy?: (google.cloud.gkebackup.v1.RestoreConfig.VolumeDataRestorePolicy|keyof typeof google.cloud.gkebackup.v1.RestoreConfig.VolumeDataRestorePolicy|null);
+
+                    /** VolumeDataRestorePolicyOverride selectedPvcs */
+                    selectedPvcs?: (google.cloud.gkebackup.v1.INamespacedNames|null);
+                }
+
+                /** Represents a VolumeDataRestorePolicyOverride. */
+                class VolumeDataRestorePolicyOverride implements IVolumeDataRestorePolicyOverride {
+
+                    /**
+                     * Constructs a new VolumeDataRestorePolicyOverride.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkebackup.v1.IVolumeDataRestorePolicyOverride);
+
+                    /** VolumeDataRestorePolicyOverride policy. */
+                    public policy: (google.cloud.gkebackup.v1.RestoreConfig.VolumeDataRestorePolicy|keyof typeof google.cloud.gkebackup.v1.RestoreConfig.VolumeDataRestorePolicy);
+
+                    /** VolumeDataRestorePolicyOverride selectedPvcs. */
+                    public selectedPvcs?: (google.cloud.gkebackup.v1.INamespacedNames|null);
+
+                    /** VolumeDataRestorePolicyOverride scope. */
+                    public scope?: "selectedPvcs";
+
+                    /**
+                     * Creates a new VolumeDataRestorePolicyOverride instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VolumeDataRestorePolicyOverride instance
+                     */
+                    public static create(properties?: google.cloud.gkebackup.v1.IVolumeDataRestorePolicyOverride): google.cloud.gkebackup.v1.VolumeDataRestorePolicyOverride;
+
+                    /**
+                     * Encodes the specified VolumeDataRestorePolicyOverride message. Does not implicitly {@link google.cloud.gkebackup.v1.VolumeDataRestorePolicyOverride.verify|verify} messages.
+                     * @param message VolumeDataRestorePolicyOverride message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkebackup.v1.IVolumeDataRestorePolicyOverride, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VolumeDataRestorePolicyOverride message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.VolumeDataRestorePolicyOverride.verify|verify} messages.
+                     * @param message VolumeDataRestorePolicyOverride message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkebackup.v1.IVolumeDataRestorePolicyOverride, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VolumeDataRestorePolicyOverride message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VolumeDataRestorePolicyOverride
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.VolumeDataRestorePolicyOverride;
+
+                    /**
+                     * Decodes a VolumeDataRestorePolicyOverride message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VolumeDataRestorePolicyOverride
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.VolumeDataRestorePolicyOverride;
+
+                    /**
+                     * Verifies a VolumeDataRestorePolicyOverride message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VolumeDataRestorePolicyOverride message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VolumeDataRestorePolicyOverride
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.VolumeDataRestorePolicyOverride;
+
+                    /**
+                     * Creates a plain object from a VolumeDataRestorePolicyOverride message. Also converts values to other types if specified.
+                     * @param message VolumeDataRestorePolicyOverride
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkebackup.v1.VolumeDataRestorePolicyOverride, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VolumeDataRestorePolicyOverride to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VolumeDataRestorePolicyOverride
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a RestorePlan. */
