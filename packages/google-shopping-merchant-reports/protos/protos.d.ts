@@ -1891,6 +1891,9 @@ export namespace google {
 
                         /** PriceInsightsProductView predictedConversionsChangeFraction */
                         predictedConversionsChangeFraction?: (number|null);
+
+                        /** PriceInsightsProductView effectiveness */
+                        effectiveness?: (google.shopping.merchant.reports.v1beta.PriceInsightsProductView.Effectiveness|keyof typeof google.shopping.merchant.reports.v1beta.PriceInsightsProductView.Effectiveness|null);
                     }
 
                     /** Represents a PriceInsightsProductView. */
@@ -1958,6 +1961,9 @@ export namespace google {
 
                         /** PriceInsightsProductView predictedConversionsChangeFraction. */
                         public predictedConversionsChangeFraction?: (number|null);
+
+                        /** PriceInsightsProductView effectiveness. */
+                        public effectiveness: (google.shopping.merchant.reports.v1beta.PriceInsightsProductView.Effectiveness|keyof typeof google.shopping.merchant.reports.v1beta.PriceInsightsProductView.Effectiveness);
 
                         /** PriceInsightsProductView _id. */
                         public _id?: "id";
@@ -2086,6 +2092,17 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace PriceInsightsProductView {
+
+                        /** Effectiveness enum. */
+                        enum Effectiveness {
+                            EFFECTIVENESS_UNSPECIFIED = 0,
+                            LOW = 1,
+                            MEDIUM = 2,
+                            HIGH = 3
+                        }
                     }
 
                     /** Properties of a BestSellersProductClusterView. */

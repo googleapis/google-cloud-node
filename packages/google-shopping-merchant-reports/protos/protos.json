@@ -1321,6 +1321,20 @@
                               "options": {
                                 "proto3_optional": true
                               }
+                            },
+                            "effectiveness": {
+                              "type": "Effectiveness",
+                              "id": 22
+                            }
+                          },
+                          "nested": {
+                            "Effectiveness": {
+                              "values": {
+                                "EFFECTIVENESS_UNSPECIFIED": 0,
+                                "LOW": 1,
+                                "MEDIUM": 2,
+                                "HIGH": 3
+                              }
                             }
                           }
                         },

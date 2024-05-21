@@ -5896,6 +5896,7 @@
                              * @property {number|null} [predictedImpressionsChangeFraction] PriceInsightsProductView predictedImpressionsChangeFraction
                              * @property {number|null} [predictedClicksChangeFraction] PriceInsightsProductView predictedClicksChangeFraction
                              * @property {number|null} [predictedConversionsChangeFraction] PriceInsightsProductView predictedConversionsChangeFraction
+                             * @property {google.shopping.merchant.reports.v1beta.PriceInsightsProductView.Effectiveness|null} [effectiveness] PriceInsightsProductView effectiveness
                              */
     
                             /**
@@ -6064,6 +6065,14 @@
                              * @instance
                              */
                             PriceInsightsProductView.prototype.predictedConversionsChangeFraction = null;
+    
+                            /**
+                             * PriceInsightsProductView effectiveness.
+                             * @member {google.shopping.merchant.reports.v1beta.PriceInsightsProductView.Effectiveness} effectiveness
+                             * @memberof google.shopping.merchant.reports.v1beta.PriceInsightsProductView
+                             * @instance
+                             */
+                            PriceInsightsProductView.prototype.effectiveness = 0;
     
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
@@ -6317,6 +6326,8 @@
                                     writer.uint32(/* id 18, wireType 1 =*/145).double(message.predictedClicksChangeFraction);
                                 if (message.predictedConversionsChangeFraction != null && Object.hasOwnProperty.call(message, "predictedConversionsChangeFraction"))
                                     writer.uint32(/* id 19, wireType 1 =*/153).double(message.predictedConversionsChangeFraction);
+                                if (message.effectiveness != null && Object.hasOwnProperty.call(message, "effectiveness"))
+                                    writer.uint32(/* id 22, wireType 0 =*/176).int32(message.effectiveness);
                                 return writer;
                             };
     
@@ -6425,6 +6436,10 @@
                                         }
                                     case 19: {
                                             message.predictedConversionsChangeFraction = reader.double();
+                                            break;
+                                        }
+                                    case 22: {
+                                            message.effectiveness = reader.int32();
                                             break;
                                         }
                                     default:
@@ -6558,6 +6573,16 @@
                                     if (typeof message.predictedConversionsChangeFraction !== "number")
                                         return "predictedConversionsChangeFraction: number expected";
                                 }
+                                if (message.effectiveness != null && message.hasOwnProperty("effectiveness"))
+                                    switch (message.effectiveness) {
+                                    default:
+                                        return "effectiveness: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
                                 return null;
                             };
     
@@ -6617,6 +6642,30 @@
                                     message.predictedClicksChangeFraction = Number(object.predictedClicksChangeFraction);
                                 if (object.predictedConversionsChangeFraction != null)
                                     message.predictedConversionsChangeFraction = Number(object.predictedConversionsChangeFraction);
+                                switch (object.effectiveness) {
+                                default:
+                                    if (typeof object.effectiveness === "number") {
+                                        message.effectiveness = object.effectiveness;
+                                        break;
+                                    }
+                                    break;
+                                case "EFFECTIVENESS_UNSPECIFIED":
+                                case 0:
+                                    message.effectiveness = 0;
+                                    break;
+                                case "LOW":
+                                case 1:
+                                    message.effectiveness = 1;
+                                    break;
+                                case "MEDIUM":
+                                case 2:
+                                    message.effectiveness = 2;
+                                    break;
+                                case "HIGH":
+                                case 3:
+                                    message.effectiveness = 3;
+                                    break;
+                                }
                                 return message;
                             };
     
@@ -6636,6 +6685,7 @@
                                 if (options.defaults) {
                                     object.price = null;
                                     object.suggestedPrice = null;
+                                    object.effectiveness = options.enums === String ? "EFFECTIVENESS_UNSPECIFIED" : 0;
                                 }
                                 if (message.id != null && message.hasOwnProperty("id")) {
                                     object.id = message.id;
@@ -6726,6 +6776,8 @@
                                     if (options.oneofs)
                                         object._predictedConversionsChangeFraction = "predictedConversionsChangeFraction";
                                 }
+                                if (message.effectiveness != null && message.hasOwnProperty("effectiveness"))
+                                    object.effectiveness = options.enums === String ? $root.google.shopping.merchant.reports.v1beta.PriceInsightsProductView.Effectiveness[message.effectiveness] === undefined ? message.effectiveness : $root.google.shopping.merchant.reports.v1beta.PriceInsightsProductView.Effectiveness[message.effectiveness] : message.effectiveness;
                                 return object;
                             };
     
@@ -6754,6 +6806,24 @@
                                 }
                                 return typeUrlPrefix + "/google.shopping.merchant.reports.v1beta.PriceInsightsProductView";
                             };
+    
+                            /**
+                             * Effectiveness enum.
+                             * @name google.shopping.merchant.reports.v1beta.PriceInsightsProductView.Effectiveness
+                             * @enum {number}
+                             * @property {number} EFFECTIVENESS_UNSPECIFIED=0 EFFECTIVENESS_UNSPECIFIED value
+                             * @property {number} LOW=1 LOW value
+                             * @property {number} MEDIUM=2 MEDIUM value
+                             * @property {number} HIGH=3 HIGH value
+                             */
+                            PriceInsightsProductView.Effectiveness = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "EFFECTIVENESS_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "LOW"] = 1;
+                                values[valuesById[2] = "MEDIUM"] = 2;
+                                values[valuesById[3] = "HIGH"] = 3;
+                                return values;
+                            })();
     
                             return PriceInsightsProductView;
                         })();
