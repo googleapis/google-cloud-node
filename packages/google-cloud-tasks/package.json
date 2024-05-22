@@ -98,7 +98,7 @@
     "long": "^5.2.3",
     "mocha": "^10.2.0",
     "pack-n-play": "^2.0.0",
-    "sinon": "^17.0.0",
+    "sinon": "^18.0.0",
     "ts-loader": "^9.0.0",
     "typescript": "5.1.6",
     "webpack": "^4.47.0",
