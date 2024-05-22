@@ -271,6 +271,7 @@ async function callOptimizeTours() {
   // Construct request
   const request = {
     parent,
+    model
   };
 
   // Run request

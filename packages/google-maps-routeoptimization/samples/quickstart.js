@@ -18,41 +18,44 @@
 
 'use strict';
 
-function main(parent, model = {
-  "shipments": [
-    {
-      "pickups": [
-        {
-          "arrivalLocation": {
-            "latitude": 37.73881799999999,
-            "longitude": -122.4161
-          }
-        }
-      ],
-      "deliveries": [
-        {
-          "arrivalLocation": {
-            "latitude": 37.79581,
-            "longitude": -122.4218856
-          }
-        }
-      ]
-    }
-  ],
-  "vehicles": [
-    {
-      "startLocation": {
-        "latitude": 37.73881799999999,
-        "longitude": -122.4161
+function main(
+  parent,
+  model = {
+    shipments: [
+      {
+        pickups: [
+          {
+            arrivalLocation: {
+              latitude: 37.73881799999999,
+              longitude: -122.4161,
+            },
+          },
+        ],
+        deliveries: [
+          {
+            arrivalLocation: {
+              latitude: 37.79581,
+              longitude: -122.4218856,
+            },
+          },
+        ],
       },
-      "endLocation": {
-        "latitude": 37.73881799999999,
-        "longitude": -122.4161
+    ],
+    vehicles: [
+      {
+        startLocation: {
+          latitude: 37.73881799999999,
+          longitude: -122.4161,
+        },
+        endLocation: {
+          latitude: 37.73881799999999,
+          longitude: -122.4161,
+        },
+        costPerKilometer: 1.0,
       },
-      "costPerKilometer": 1.0
-    }
-  ]
-}) {
+    ],
+  }
+) {
   // [START routeoptimization_quickstart]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -268,7 +271,7 @@ function main(parent, model = {
     // Construct request
     const request = {
       parent,
-      model
+      model,
     };
 
     // Run request
