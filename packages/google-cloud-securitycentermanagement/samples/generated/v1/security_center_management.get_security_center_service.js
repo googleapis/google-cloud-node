@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START securitycentermanagement_v1_generated_SecurityCenterManagement_DeleteSecurityHealthAnalyticsCustomModule_async]
+  // [START securitycentermanagement_v1_generated_SecurityCenterManagement_GetSecurityCenterService_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,23 +29,19 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the SHA custom module.
-   *  Its format is:
-   *    * `organizations/{organization}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}`.
-   *    * `folders/{folder}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}`.
-   *    * `projects/{project}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}`.
+   *  Required. The Security Command Center service to retrieve.
+   *  Formats:
+   *    * organizations/{organization}/locations/{location}/securityCenterServices/{service}
+   *    * folders/{folder}/locations/{location}/securityCenterServices/{service}
+   *    * projects/{project}/locations/{location}/securityCenterServices/{service}
+   *  The possible values for id {service} are:
+   *    * container-threat-detection
+   *    * event-threat-detection
+   *    * security-health-analytics
+   *    * vm-threat-detection
+   *    * web-security-scanner
    */
   // const name = 'abc123'
-  /**
-   *  Optional. When set to true, only validations (including IAM checks) will
-   *  done for the request (module will not be deleted). An OK response indicates
-   *  the request is valid while an error response indicates the request is
-   *  invalid. Note that a subsequent request to actually delete the module could
-   *  still fail because 1. the state could have changed (e.g. IAM permission
-   *  lost) or
-   *  2. A failure occurred while trying to delete the module.
-   */
-  // const validateOnly = true
 
   // Imports the Securitycentermanagement library
   const {SecurityCenterManagementClient} = require('@google-cloud/securitycentermanagement').v1;
@@ -53,19 +49,19 @@ function main(name) {
   // Instantiates a client
   const securitycentermanagementClient = new SecurityCenterManagementClient();
 
-  async function callDeleteSecurityHealthAnalyticsCustomModule() {
+  async function callGetSecurityCenterService() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const response = await securitycentermanagementClient.deleteSecurityHealthAnalyticsCustomModule(request);
+    const response = await securitycentermanagementClient.getSecurityCenterService(request);
     console.log(response);
   }
 
-  callDeleteSecurityHealthAnalyticsCustomModule();
-  // [END securitycentermanagement_v1_generated_SecurityCenterManagement_DeleteSecurityHealthAnalyticsCustomModule_async]
+  callGetSecurityCenterService();
+  // [END securitycentermanagement_v1_generated_SecurityCenterManagement_GetSecurityCenterService_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -19,15 +19,18 @@
   * [Security_center_management.get_effective_event_threat_detection_custom_module](#security_center_management.get_effective_event_threat_detection_custom_module)
   * [Security_center_management.get_effective_security_health_analytics_custom_module](#security_center_management.get_effective_security_health_analytics_custom_module)
   * [Security_center_management.get_event_threat_detection_custom_module](#security_center_management.get_event_threat_detection_custom_module)
+  * [Security_center_management.get_security_center_service](#security_center_management.get_security_center_service)
   * [Security_center_management.get_security_health_analytics_custom_module](#security_center_management.get_security_health_analytics_custom_module)
   * [Security_center_management.list_descendant_event_threat_detection_custom_modules](#security_center_management.list_descendant_event_threat_detection_custom_modules)
   * [Security_center_management.list_descendant_security_health_analytics_custom_modules](#security_center_management.list_descendant_security_health_analytics_custom_modules)
   * [Security_center_management.list_effective_event_threat_detection_custom_modules](#security_center_management.list_effective_event_threat_detection_custom_modules)
   * [Security_center_management.list_effective_security_health_analytics_custom_modules](#security_center_management.list_effective_security_health_analytics_custom_modules)
   * [Security_center_management.list_event_threat_detection_custom_modules](#security_center_management.list_event_threat_detection_custom_modules)
+  * [Security_center_management.list_security_center_services](#security_center_management.list_security_center_services)
   * [Security_center_management.list_security_health_analytics_custom_modules](#security_center_management.list_security_health_analytics_custom_modules)
   * [Security_center_management.simulate_security_health_analytics_custom_module](#security_center_management.simulate_security_health_analytics_custom_module)
   * [Security_center_management.update_event_threat_detection_custom_module](#security_center_management.update_event_threat_detection_custom_module)
+  * [Security_center_management.update_security_center_service](#security_center_management.update_security_center_service)
   * [Security_center_management.update_security_health_analytics_custom_module](#security_center_management.update_security_health_analytics_custom_module)
   * [Security_center_management.validate_event_threat_detection_custom_module](#security_center_management.validate_event_threat_detection_custom_module)
   * [Quickstart](#quickstart)
@@ -166,6 +169,23 @@ __Usage:__
 
 
 
+### Security_center_management.get_security_center_service
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycentermanagement/samples/generated/v1/security_center_management.get_security_center_service.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycentermanagement/samples/generated/v1/security_center_management.get_security_center_service.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-securitycentermanagement/samples/generated/v1/security_center_management.get_security_center_service.js`
+
+
+-----
+
+
+
+
 ### Security_center_management.get_security_health_analytics_custom_module
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycentermanagement/samples/generated/v1/security_center_management.get_security_health_analytics_custom_module.js).
@@ -268,6 +288,23 @@ __Usage:__
 
 
 
+### Security_center_management.list_security_center_services
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycentermanagement/samples/generated/v1/security_center_management.list_security_center_services.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycentermanagement/samples/generated/v1/security_center_management.list_security_center_services.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-securitycentermanagement/samples/generated/v1/security_center_management.list_security_center_services.js`
+
+
+-----
+
+
+
+
 ### Security_center_management.list_security_health_analytics_custom_modules
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycentermanagement/samples/generated/v1/security_center_management.list_security_health_analytics_custom_modules.js).
@@ -312,6 +349,23 @@ __Usage:__
 
 
 `node packages/google-cloud-securitycentermanagement/samples/generated/v1/security_center_management.update_event_threat_detection_custom_module.js`
+
+
+-----
+
+
+
+
+### Security_center_management.update_security_center_service
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycentermanagement/samples/generated/v1/security_center_management.update_security_center_service.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-securitycentermanagement/samples/generated/v1/security_center_management.update_security_center_service.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-securitycentermanagement/samples/generated/v1/security_center_management.update_security_center_service.js`
 
 
 -----

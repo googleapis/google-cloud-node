@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START securitycentermanagement_v1_generated_SecurityCenterManagement_DeleteSecurityHealthAnalyticsCustomModule_async]
+function main(securityCenterService, updateMask) {
+  // [START securitycentermanagement_v1_generated_SecurityCenterManagement_UpdateSecurityCenterService_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,20 +29,22 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the SHA custom module.
-   *  Its format is:
-   *    * `organizations/{organization}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}`.
-   *    * `folders/{folder}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}`.
-   *    * `projects/{project}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}`.
+   *  Required. The updated service.
    */
-  // const name = 'abc123'
+  // const securityCenterService = {}
+  /**
+   *  Required. The list of fields to be updated. Possible values:
+   *    * "intended_enablement_state"
+   *    * "modules"
+   */
+  // const updateMask = {}
   /**
    *  Optional. When set to true, only validations (including IAM checks) will
-   *  done for the request (module will not be deleted). An OK response indicates
-   *  the request is valid while an error response indicates the request is
-   *  invalid. Note that a subsequent request to actually delete the module could
-   *  still fail because 1. the state could have changed (e.g. IAM permission
-   *  lost) or
+   *  done for the request (service will not be updated). An OK response
+   *  indicates the request is valid while an error response indicates the
+   *  request is invalid. Note that a subsequent request to actually update the
+   *  service could still fail because 1. the state could have changed (e.g. IAM
+   *  permission lost) or
    *  2. A failure occurred while trying to delete the module.
    */
   // const validateOnly = true
@@ -53,19 +55,20 @@ function main(name) {
   // Instantiates a client
   const securitycentermanagementClient = new SecurityCenterManagementClient();
 
-  async function callDeleteSecurityHealthAnalyticsCustomModule() {
+  async function callUpdateSecurityCenterService() {
     // Construct request
     const request = {
-      name,
+      securityCenterService,
+      updateMask,
     };
 
     // Run request
-    const response = await securitycentermanagementClient.deleteSecurityHealthAnalyticsCustomModule(request);
+    const response = await securitycentermanagementClient.updateSecurityCenterService(request);
     console.log(response);
   }
 
-  callDeleteSecurityHealthAnalyticsCustomModule();
-  // [END securitycentermanagement_v1_generated_SecurityCenterManagement_DeleteSecurityHealthAnalyticsCustomModule_async]
+  callUpdateSecurityCenterService();
+  // [END securitycentermanagement_v1_generated_SecurityCenterManagement_UpdateSecurityCenterService_async]
 }
 
 process.on('unhandledRejection', err => {
