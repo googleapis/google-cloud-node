@@ -59,6 +59,13 @@ function main(name) {
    *  the request will fail and an ABORTED error will be returned.
    */
   // const etag = 'abc123'
+  /**
+   *  Optional. If set to true, the deletion of
+   *  AzureNodePool google.cloud.gkemulticloud.v1.AzureNodePool  resource will
+   *  succeed even if errors occur during deleting in node pool resources. Using
+   *  this parameter may result in orphaned resources in the node pool.
+   */
+  // const ignoreErrors = true
 
   // Imports the Gkemulticloud library
   const {AzureClustersClient} = require('@google-cloud/gkemulticloud').v1;

@@ -4164,6 +4164,13 @@
                         "etag": {
                           "type": "string",
                           "id": 4
+                        },
+                        "ignoreErrors": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4285,6 +4292,13 @@
                         "etag": {
                           "type": "string",
                           "id": 4
+                        },
+                        "ignoreErrors": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },

@@ -46,9 +46,10 @@ message ProcessorVersion {
     google.protobuf.Timestamp deprecation_time = 1;
 
     // If set, the processor version that will be used as a replacement.
-    string replacement_processor_version = 2 [(google.api.resource_reference) = {
-                                                type: "documentai.googleapis.com/ProcessorVersion"
-                                              }];
+    string replacement_processor_version = 2
+        [(google.api.resource_reference) = {
+          type: "documentai.googleapis.com/ProcessorVersion"
+        }];
   }
 
   // The possible states of the processor version.
@@ -93,10 +94,10 @@ message ProcessorVersion {
     MODEL_TYPE_CUSTOM = 2;
   }
 
-  // The resource name of the processor version.
+  // Identifier. The resource name of the processor version.
   // Format:
   // `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processor_version}`
-  string name = 1;
+  string name = 1 [(google.api.field_behavior) = IDENTIFIER];
 
   // The display name of the processor version.
   string display_name = 2;
@@ -104,8 +105,8 @@ message ProcessorVersion {
   // The schema of the processor version. Describes the output.
   DocumentSchema document_schema = 12;
 
-  // The state of the processor version.
-  State state = 6;
+  // Output only. The state of the processor version.
+  State state = 6 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // The time the processor version was created.
   google.protobuf.Timestamp create_time = 7;
@@ -136,8 +137,8 @@ message ProcessorVersionAlias {
 
   // The resource name of aliased processor version.
   string processor_version = 2 [(google.api.resource_reference) = {
-                                  type: "documentai.googleapis.com/ProcessorVersion"
-                                }];
+    type: "documentai.googleapis.com/ProcessorVersion"
+  }];
 }
 
 // The first-class citizen for Document AI. Each processor defines how to
@@ -203,13 +204,15 @@ message Processor {
 
   // The default processor version.
   string default_processor_version = 9 [(google.api.resource_reference) = {
-                                          type: "documentai.googleapis.com/ProcessorVersion"
-                                        }];
+    type: "documentai.googleapis.com/ProcessorVersion"
+  }];
 
   // Output only. The processor version aliases.
-  repeated ProcessorVersionAlias processor_version_aliases = 10 [(google.api.field_behavior) = OUTPUT_ONLY];
+  repeated ProcessorVersionAlias processor_version_aliases = 10
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Output only. Immutable. The http endpoint that can be called to invoke processing.
+  // Output only. Immutable. The http endpoint that can be called to invoke
+  // processing.
   string process_endpoint = 6 [
     (google.api.field_behavior) = OUTPUT_ONLY,
     (google.api.field_behavior) = IMMUTABLE

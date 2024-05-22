@@ -207,7 +207,7 @@ export class GenerativeServiceClient {
       streamGenerateContent: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.SERVER_STREAMING,
         !!opts.fallback,
-        /* gaxStreamingRetries: */ false
+        !!opts.gaxServerStreamingRetries
       ),
     };
 
@@ -397,6 +397,11 @@ export class GenerativeServiceClient {
    * Generates a response from the model given an input
    * `GenerateContentRequest`.
    *
+   * Input capabilities differ between models, including tuned models. See the
+   * [model guide](https://ai.google.dev/models/gemini) and
+   * [tuning guide](https://ai.google.dev/docs/model_tuning_guidance) for
+   * details.
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.model
@@ -541,7 +546,8 @@ export class GenerativeServiceClient {
    * @param {number} [request.outputDimensionality]
    *   Optional. Optional reduced dimension for the output embedding. If set,
    *   excessive values in the output embedding are truncated from the end.
-   *   Supported by `models/text-embedding-latest`.
+   *   Supported by newer models since 2024, and the earlier model
+   *   (`models/embedding-001`) cannot specify this value.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -742,8 +748,12 @@ export class GenerativeServiceClient {
    *   This name should match a model name returned by the `ListModels` method.
    *
    *   Format: `models/{model}`
-   * @param {number[]} request.contents
-   *   Required. The input given to the model as a prompt.
+   * @param {number[]} [request.contents]
+   *   Optional. The input given to the model as a prompt. This field is ignored
+   *   when `generate_content_request` is set.
+   * @param {google.ai.generativelanguage.v1.GenerateContentRequest} [request.generateContentRequest]
+   *   Optional. The overall input given to the model. CountTokens will count
+   *   prompt, function calling, etc.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

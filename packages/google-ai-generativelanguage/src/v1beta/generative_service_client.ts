@@ -224,7 +224,7 @@ export class GenerativeServiceClient {
       streamGenerateContent: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.SERVER_STREAMING,
         !!opts.fallback,
-        /* gaxStreamingRetries: */ false
+        !!opts.gaxServerStreamingRetries
       ),
     };
 
@@ -921,7 +921,8 @@ export class GenerativeServiceClient {
    *
    *   Format: `models/{model}`
    * @param {number[]} [request.contents]
-   *   Optional. The input given to the model as a prompt.
+   *   Optional. The input given to the model as a prompt. This field is ignored
+   *   when `generate_content_request` is set.
    * @param {google.ai.generativelanguage.v1beta.GenerateContentRequest} [request.generateContentRequest]
    *   Optional. The overall input given to the model. CountTokens will count
    *   prompt, function calling, etc.

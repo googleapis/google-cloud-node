@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/datalabeling",
   "description": "Data Labeling API client for Node.js",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
@@ -64,7 +64,7 @@
     "long": "^5.2.3",
     "mocha": "^9.2.2",
     "pack-n-play": "^2.0.0",
-    "sinon": "^17.0.0",
+    "sinon": "^18.0.0",
     "typescript": "^5.1.6"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-datalabeling"
