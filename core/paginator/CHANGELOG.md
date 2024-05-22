@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-paginator?activeTab=versions
 
+## [5.0.1](https://github.com/googleapis/nodejs-paginator/compare/v5.0.0...v5.0.1) (2024-05-22)
+
+
+### Bug Fixes
+
+* Should pass extra callback arguments back to consumer ([#361](https://github.com/googleapis/nodejs-paginator/issues/361)) ([cc5c48b](https://github.com/googleapis/nodejs-paginator/commit/cc5c48b95b21e9c6a4e555ff98de267258657b6e))
+
 ## [5.0.0](https://github.com/googleapis/nodejs-paginator/compare/v4.0.1...v5.0.0) (2023-08-09)
 
 
