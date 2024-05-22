@@ -221,18 +221,22 @@ export class Paginator {
       return originalMethod(query, callback);
     }
     const results = new Array<{}>();
+    let otherArgs: unknown[] = [];
     const promise = new Promise((resolve, reject) => {
-      paginator
-        .runAsStream_(parsedArguments, originalMethod)
+      const stream = paginator.runAsStream_(parsedArguments, originalMethod);
+      stream
         .on('error', reject)
         .on('data', (data: {}) => results.push(data))
-        .on('end', () => resolve(results));
+        .on('end', () => {
+          otherArgs = stream._otherArgs || [];
+          resolve(results);
+        });
     });
     if (!callback) {
-      return promise.then(results => [results]);
+      return promise.then(results => [results, ...otherArgs]);
     }
     promise.then(
-      results => callback(null, results),
+      results => callback(null, results, ...otherArgs),
       (err: Error) => callback(err)
     );
   }

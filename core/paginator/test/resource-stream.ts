@@ -150,6 +150,17 @@ describe('ResourceStream', () => {
       assert.strictEqual(stream._nextQuery, fakeQuery);
     });
 
+    it('should cache the rest of the callback arguments', () => {
+      const fakeRes = {status: 'OK'};
+      const anotherArg = 10;
+
+      stream._read();
+      const callback = requestSpy.lastCall.args[1];
+      callback(null, [], {}, fakeRes, anotherArg);
+
+      assert.deepStrictEqual(stream._otherArgs, [fakeRes, anotherArg]);
+    });
+
     it('should adjust the results to send counter', () => {
       const maxResults = 100;
       const results = [{}, {}];

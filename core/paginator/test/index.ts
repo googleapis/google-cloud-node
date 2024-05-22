@@ -382,6 +382,38 @@ describe('paginator', () => {
 
           paginator.run_(parsedArguments, util.noop);
         });
+
+        it('should return all results and extra args', done => {
+          const results = [{a: 1}, {b: 2}, {c: 3}];
+          const args: any[] = [{msg: 'OK'}, 10];
+
+          const parsedArguments = {
+            autoPaginate: true,
+            callback(
+              err: Error,
+              results_: {},
+              fakeRes: {},
+              anotherArg: number
+            ) {
+              assert.deepStrictEqual(results_, results);
+              assert.deepStrictEqual(fakeRes, {msg: 'OK'});
+              assert.deepStrictEqual(anotherArg, 10);
+              done();
+            },
+          };
+
+          sandbox.stub(paginator, 'runAsStream_').callsFake(() => {
+            const stream = createFakeStream();
+            setImmediate(() => {
+              results.forEach(result => stream.push(result));
+              stream.push(null);
+              stream._otherArgs = args;
+            });
+            return stream;
+          });
+
+          paginator.run_(parsedArguments, util.noop);
+        });
       });
 
       describe('original method is promise based', () => {
@@ -433,6 +465,29 @@ describe('paginator', () => {
             .then(([results_]: [1]) =>
               assert.deepStrictEqual(results_, results)
             );
+        });
+
+        it('should resolve with all results and extra args', () => {
+          const results = [{a: 1}, {b: 2}, {c: 3}];
+          const args: any[] = [{msg: 'OK'}, 10];
+
+          sandbox.stub(paginator, 'runAsStream_').callsFake(() => {
+            const stream = createFakeStream();
+            setImmediate(() => {
+              results.forEach(result => stream.push(result));
+              stream.push(null);
+              stream._otherArgs = args;
+            });
+            return stream;
+          });
+
+          paginator
+            .run_(parsedArguments, util.noop)
+            .then(([results_, fakeRes, anotherArg]: unknown[]) => {
+              assert.deepStrictEqual(results_, results);
+              assert.deepEqual(fakeRes, {msg: 'OK'});
+              assert.deepEqual(anotherArg, 10);
+            });
         });
       });
     });

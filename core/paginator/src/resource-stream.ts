@@ -31,6 +31,7 @@ export class ResourceStream<T> extends Transform implements ResourceEvents<T> {
   _ended: boolean;
   _maxApiCalls: number;
   _nextQuery: {} | null;
+  _otherArgs: unknown[];
   _reading: boolean;
   _requestFn: Function;
   _requestsMade: number;
@@ -46,6 +47,7 @@ export class ResourceStream<T> extends Transform implements ResourceEvents<T> {
     this._requestFn = requestFn;
     this._requestsMade = 0;
     this._resultsToSend = args.maxResults === -1 ? Infinity : args.maxResults!;
+    this._otherArgs = [];
   }
   /* eslint-disable  @typescript-eslint/no-explicit-any */
   end(
@@ -67,12 +69,18 @@ export class ResourceStream<T> extends Transform implements ResourceEvents<T> {
     try {
       this._requestFn(
         this._nextQuery,
-        (err: Error | null, results: T[], nextQuery: {} | null) => {
+        (
+          err: Error | null,
+          results: T[],
+          nextQuery: {} | null,
+          ...otherArgs: []
+        ) => {
           if (err) {
             this.destroy(err);
             return;
           }
 
+          this._otherArgs = otherArgs;
           this._nextQuery = nextQuery;
 
           if (this._resultsToSend !== Infinity) {
