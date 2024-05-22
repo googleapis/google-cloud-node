@@ -31,7 +31,7 @@ function main(parent, rawText, type) {
   /**
    *  Required. Resource name of the parent to validate the Custom Module under.
    *  Its format is:
-   *    * "organizations/{organization}/locations/{location}".
+   *    * `organizations/{organization}/locations/{location}`.
    */
   // const parent = 'abc123'
   /**

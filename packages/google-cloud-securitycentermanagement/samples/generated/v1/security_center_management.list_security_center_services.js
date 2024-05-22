@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START securitycentermanagement_v1_generated_SecurityCenterManagement_DeleteSecurityHealthAnalyticsCustomModule_async]
+function main(parent) {
+  // [START securitycentermanagement_v1_generated_SecurityCenterManagement_ListSecurityCenterServices_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,23 +29,22 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the SHA custom module.
-   *  Its format is:
-   *    * `organizations/{organization}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}`.
-   *    * `folders/{folder}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}`.
-   *    * `projects/{project}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}`.
+   *  Required. The name of the parent to list Security Command Center services.
+   *  Formats:
+   *    * organizations/{organization}/locations/{location}
+   *    * folders/{folder}/locations/{location}
+   *    * projects/{project}/locations/{location}
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
   /**
-   *  Optional. When set to true, only validations (including IAM checks) will
-   *  done for the request (module will not be deleted). An OK response indicates
-   *  the request is valid while an error response indicates the request is
-   *  invalid. Note that a subsequent request to actually delete the module could
-   *  still fail because 1. the state could have changed (e.g. IAM permission
-   *  lost) or
-   *  2. A failure occurred while trying to delete the module.
+   *  Optional. The maximum number of results to return in a single response.
+   *  Default is 10, minimum is 1, maximum is 1000.
    */
-  // const validateOnly = true
+  // const pageSize = 1234
+  /**
+   *  Optional. The value returned by the last call indicating a continuation.
+   */
+  // const pageToken = 'abc123'
 
   // Imports the Securitycentermanagement library
   const {SecurityCenterManagementClient} = require('@google-cloud/securitycentermanagement').v1;
@@ -53,19 +52,21 @@ function main(name) {
   // Instantiates a client
   const securitycentermanagementClient = new SecurityCenterManagementClient();
 
-  async function callDeleteSecurityHealthAnalyticsCustomModule() {
+  async function callListSecurityCenterServices() {
     // Construct request
     const request = {
-      name,
+      parent,
     };
 
     // Run request
-    const response = await securitycentermanagementClient.deleteSecurityHealthAnalyticsCustomModule(request);
-    console.log(response);
+    const iterable = securitycentermanagementClient.listSecurityCenterServicesAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callDeleteSecurityHealthAnalyticsCustomModule();
-  // [END securitycentermanagement_v1_generated_SecurityCenterManagement_DeleteSecurityHealthAnalyticsCustomModule_async]
+  callListSecurityCenterServices();
+  // [END securitycentermanagement_v1_generated_SecurityCenterManagement_ListSecurityCenterServices_async]
 }
 
 process.on('unhandledRejection', err => {

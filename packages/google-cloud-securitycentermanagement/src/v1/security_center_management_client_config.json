@@ -109,6 +109,18 @@
           "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
+        },
+        "GetSecurityCenterService": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListSecurityCenterServices": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateSecurityCenterService": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }
