@@ -536,6 +536,173 @@
                               }
                             }
                           ]
+                        },
+                        "GetSecurityCenterService": {
+                          "requestType": "GetSecurityCenterServiceRequest",
+                          "responseType": "SecurityCenterService",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/securityCenterServices/*}",
+                            "(google.api.http).additional_bindings.get": "/v1/{name=organizations/*/locations/*/securityCenterServices/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/securityCenterServices/*}",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{name=folders/*/locations/*/securityCenterServices/*}"
+                                  },
+                                  {
+                                    "get": "/v1/{name=organizations/*/locations/*/securityCenterServices/*}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListSecurityCenterServices": {
+                          "requestType": "ListSecurityCenterServicesRequest",
+                          "responseType": "ListSecurityCenterServicesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/securityCenterServices",
+                            "(google.api.http).additional_bindings.get": "/v1/{parent=organizations/*/locations/*}/securityCenterServices",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/securityCenterServices",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{parent=folders/*/locations/*}/securityCenterServices"
+                                  },
+                                  {
+                                    "get": "/v1/{parent=organizations/*/locations/*}/securityCenterServices"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "UpdateSecurityCenterService": {
+                          "requestType": "UpdateSecurityCenterServiceRequest",
+                          "responseType": "SecurityCenterService",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{security_center_service.name=projects/*/locations/*/securityCenterServices/*}",
+                            "(google.api.http).body": "security_center_service",
+                            "(google.api.http).additional_bindings.patch": "/v1/{security_center_service.name=organizations/*/locations/*/securityCenterServices/*}",
+                            "(google.api.http).additional_bindings.body": "security_center_service",
+                            "(google.api.method_signature)": "security_center_service,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{security_center_service.name=projects/*/locations/*/securityCenterServices/*}",
+                                "body": "security_center_service",
+                                "additional_bindings": [
+                                  {
+                                    "patch": "/v1/{security_center_service.name=folders/*/locations/*/securityCenterServices/*}",
+                                    "body": "security_center_service"
+                                  },
+                                  {
+                                    "patch": "/v1/{security_center_service.name=organizations/*/locations/*/securityCenterServices/*}",
+                                    "body": "security_center_service"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "security_center_service,update_mask"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "SecurityCenterService": {
+                      "options": {
+                        "(google.api.resource).type": "securitycentermanagement.googleapis.com/SecurityCenterService",
+                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/securityCenterServices/{service}",
+                        "(google.api.resource).plural": "securityCenterServices",
+                        "(google.api.resource).singular": "securityCenterService"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "intendedEnablementState": {
+                          "type": "EnablementState",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "effectiveEnablementState": {
+                          "type": "EnablementState",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "modules": {
+                          "keyType": "string",
+                          "type": "ModuleSettings",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "serviceConfig": {
+                          "type": "google.protobuf.Struct",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ModuleSettings": {
+                          "fields": {
+                            "intendedEnablementState": {
+                              "type": "EnablementState",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "effectiveEnablementState": {
+                              "type": "EnablementState",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "EnablementState": {
+                          "values": {
+                            "ENABLEMENT_STATE_UNSPECIFIED": 0,
+                            "INHERITED": 1,
+                            "ENABLED": 2,
+                            "DISABLED": 3
+                          }
                         }
                       }
                     },
@@ -1576,6 +1743,82 @@
                               "type": "int32",
                               "id": 2
                             }
+                          }
+                        }
+                      }
+                    },
+                    "GetSecurityCenterServiceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "securitycentermanagement.googleapis.com/SecurityCenterService"
+                          }
+                        }
+                      }
+                    },
+                    "ListSecurityCenterServicesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "securitycentermanagement.googleapis.com/SecurityCenterService"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListSecurityCenterServicesResponse": {
+                      "fields": {
+                        "securityCenterServices": {
+                          "rule": "repeated",
+                          "type": "SecurityCenterService",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateSecurityCenterServiceRequest": {
+                      "fields": {
+                        "securityCenterService": {
+                          "type": "SecurityCenterService",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }

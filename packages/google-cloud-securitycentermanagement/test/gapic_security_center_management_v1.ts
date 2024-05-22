@@ -2068,6 +2068,292 @@ describe('v1.SecurityCenterManagementClient', () => {
     });
   });
 
+  describe('getSecurityCenterService', () => {
+    it('invokes getSecurityCenterService without error', async () => {
+      const client =
+        new securitycentermanagementModule.v1.SecurityCenterManagementClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.securitycentermanagement.v1.SecurityCenterService()
+      );
+      client.innerApiCalls.getSecurityCenterService =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getSecurityCenterService(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getSecurityCenterService as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSecurityCenterService as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSecurityCenterService without error using callback', async () => {
+      const client =
+        new securitycentermanagementModule.v1.SecurityCenterManagementClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.securitycentermanagement.v1.SecurityCenterService()
+      );
+      client.innerApiCalls.getSecurityCenterService =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getSecurityCenterService(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getSecurityCenterService as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSecurityCenterService as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSecurityCenterService with error', async () => {
+      const client =
+        new securitycentermanagementModule.v1.SecurityCenterManagementClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getSecurityCenterService = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getSecurityCenterService(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.getSecurityCenterService as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSecurityCenterService as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSecurityCenterService with closed client', async () => {
+      const client =
+        new securitycentermanagementModule.v1.SecurityCenterManagementClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getSecurityCenterService(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('updateSecurityCenterService', () => {
+    it('invokes updateSecurityCenterService without error', async () => {
+      const client =
+        new securitycentermanagementModule.v1.SecurityCenterManagementClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest()
+      );
+      request.securityCenterService ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest',
+        ['securityCenterService', 'name']
+      );
+      request.securityCenterService.name = defaultValue1;
+      const expectedHeaderRequestParams = `security_center_service.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.securitycentermanagement.v1.SecurityCenterService()
+      );
+      client.innerApiCalls.updateSecurityCenterService =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateSecurityCenterService(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateSecurityCenterService as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSecurityCenterService as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSecurityCenterService without error using callback', async () => {
+      const client =
+        new securitycentermanagementModule.v1.SecurityCenterManagementClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest()
+      );
+      request.securityCenterService ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest',
+        ['securityCenterService', 'name']
+      );
+      request.securityCenterService.name = defaultValue1;
+      const expectedHeaderRequestParams = `security_center_service.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.securitycentermanagement.v1.SecurityCenterService()
+      );
+      client.innerApiCalls.updateSecurityCenterService =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateSecurityCenterService(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateSecurityCenterService as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSecurityCenterService as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSecurityCenterService with error', async () => {
+      const client =
+        new securitycentermanagementModule.v1.SecurityCenterManagementClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest()
+      );
+      request.securityCenterService ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest',
+        ['securityCenterService', 'name']
+      );
+      request.securityCenterService.name = defaultValue1;
+      const expectedHeaderRequestParams = `security_center_service.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateSecurityCenterService = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateSecurityCenterService(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateSecurityCenterService as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSecurityCenterService as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSecurityCenterService with closed client', async () => {
+      const client =
+        new securitycentermanagementModule.v1.SecurityCenterManagementClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest()
+      );
+      request.securityCenterService ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest',
+        ['securityCenterService', 'name']
+      );
+      request.securityCenterService.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateSecurityCenterService(request),
+        expectedError
+      );
+    });
+  });
+
   describe('listEffectiveSecurityHealthAnalyticsCustomModules', () => {
     it('invokes listEffectiveSecurityHealthAnalyticsCustomModules without error', async () => {
       const client =
@@ -4383,6 +4669,372 @@ describe('v1.SecurityCenterManagementClient', () => {
       );
     });
   });
+
+  describe('listSecurityCenterServices', () => {
+    it('invokes listSecurityCenterServices without error', async () => {
+      const client =
+        new securitycentermanagementModule.v1.SecurityCenterManagementClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.securitycentermanagement.v1.SecurityCenterService()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycentermanagement.v1.SecurityCenterService()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycentermanagement.v1.SecurityCenterService()
+        ),
+      ];
+      client.innerApiCalls.listSecurityCenterServices =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listSecurityCenterServices(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listSecurityCenterServices as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSecurityCenterServices as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSecurityCenterServices without error using callback', async () => {
+      const client =
+        new securitycentermanagementModule.v1.SecurityCenterManagementClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.securitycentermanagement.v1.SecurityCenterService()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycentermanagement.v1.SecurityCenterService()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycentermanagement.v1.SecurityCenterService()
+        ),
+      ];
+      client.innerApiCalls.listSecurityCenterServices =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listSecurityCenterServices(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listSecurityCenterServices as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSecurityCenterServices as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSecurityCenterServices with error', async () => {
+      const client =
+        new securitycentermanagementModule.v1.SecurityCenterManagementClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listSecurityCenterServices = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listSecurityCenterServices(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.listSecurityCenterServices as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSecurityCenterServices as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSecurityCenterServicesStream without error', async () => {
+      const client =
+        new securitycentermanagementModule.v1.SecurityCenterManagementClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.securitycentermanagement.v1.SecurityCenterService()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycentermanagement.v1.SecurityCenterService()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycentermanagement.v1.SecurityCenterService()
+        ),
+      ];
+      client.descriptors.page.listSecurityCenterServices.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listSecurityCenterServicesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.securitycentermanagement.v1.SecurityCenterService[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.securitycentermanagement.v1.SecurityCenterService
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listSecurityCenterServices
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listSecurityCenterServices, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listSecurityCenterServices
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listSecurityCenterServicesStream with error', async () => {
+      const client =
+        new securitycentermanagementModule.v1.SecurityCenterManagementClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listSecurityCenterServices.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listSecurityCenterServicesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.securitycentermanagement.v1.SecurityCenterService[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.securitycentermanagement.v1.SecurityCenterService
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listSecurityCenterServices
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listSecurityCenterServices, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listSecurityCenterServices
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listSecurityCenterServices without error', async () => {
+      const client =
+        new securitycentermanagementModule.v1.SecurityCenterManagementClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.securitycentermanagement.v1.SecurityCenterService()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycentermanagement.v1.SecurityCenterService()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securitycentermanagement.v1.SecurityCenterService()
+        ),
+      ];
+      client.descriptors.page.listSecurityCenterServices.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService[] =
+        [];
+      const iterable = client.listSecurityCenterServicesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listSecurityCenterServices
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listSecurityCenterServices
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listSecurityCenterServices with error', async () => {
+      const client =
+        new securitycentermanagementModule.v1.SecurityCenterManagementClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listSecurityCenterServices.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listSecurityCenterServicesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listSecurityCenterServices
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listSecurityCenterServices
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client =
@@ -4958,6 +5610,86 @@ describe('v1.SecurityCenterManagementClient', () => {
       });
     });
 
+    describe('folderLocationService', () => {
+      const fakePath = '/rendered/path/folderLocationService';
+      const expectedParameters = {
+        folder: 'folderValue',
+        location: 'locationValue',
+        service: 'serviceValue',
+      };
+      const client =
+        new securitycentermanagementModule.v1.SecurityCenterManagementClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.folderLocationServicePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.folderLocationServicePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('folderLocationServicePath', () => {
+        const result = client.folderLocationServicePath(
+          'folderValue',
+          'locationValue',
+          'serviceValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.folderLocationServicePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchFolderFromFolderLocationServiceName', () => {
+        const result =
+          client.matchFolderFromFolderLocationServiceName(fakePath);
+        assert.strictEqual(result, 'folderValue');
+        assert(
+          (
+            client.pathTemplates.folderLocationServicePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromFolderLocationServiceName', () => {
+        const result =
+          client.matchLocationFromFolderLocationServiceName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.folderLocationServicePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchServiceFromFolderLocationServiceName', () => {
+        const result =
+          client.matchServiceFromFolderLocationServiceName(fakePath);
+        assert.strictEqual(result, 'serviceValue');
+        assert(
+          (
+            client.pathTemplates.folderLocationServicePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('folderSourceFinding', () => {
       const fakePath = '/rendered/path/folderSourceFinding';
       const expectedParameters = {
@@ -5029,6 +5761,56 @@ describe('v1.SecurityCenterManagementClient', () => {
             client.pathTemplates.folderSourceFindingPathTemplate
               .match as SinonStub
           )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('location', () => {
+      const fakePath = '/rendered/path/location';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+      };
+      const client =
+        new securitycentermanagementModule.v1.SecurityCenterManagementClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.locationPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.locationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('locationPath', () => {
+        const result = client.locationPath('projectValue', 'locationValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.locationPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromLocationName', () => {
+        const result = client.matchProjectFromLocationName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromLocationName', () => {
+        const result = client.matchLocationFromLocationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -5508,6 +6290,85 @@ describe('v1.SecurityCenterManagementClient', () => {
       });
     });
 
+    describe('organizationLocationService', () => {
+      const fakePath = '/rendered/path/organizationLocationService';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        location: 'locationValue',
+        service: 'serviceValue',
+      };
+      const client =
+        new securitycentermanagementModule.v1.SecurityCenterManagementClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.organizationLocationServicePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationLocationServicePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('organizationLocationServicePath', () => {
+        const result = client.organizationLocationServicePath(
+          'organizationValue',
+          'locationValue',
+          'serviceValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.organizationLocationServicePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationLocationServiceName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationLocationServiceName(fakePath);
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates.organizationLocationServicePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromOrganizationLocationServiceName', () => {
+        const result =
+          client.matchLocationFromOrganizationLocationServiceName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.organizationLocationServicePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchServiceFromOrganizationLocationServiceName', () => {
+        const result =
+          client.matchServiceFromOrganizationLocationServiceName(fakePath);
+        assert.strictEqual(result, 'serviceValue');
+        assert(
+          (
+            client.pathTemplates.organizationLocationServicePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('organizationSourceFinding', () => {
       const fakePath = '/rendered/path/organizationSourceFinding';
       const expectedParameters = {
@@ -5582,6 +6443,45 @@ describe('v1.SecurityCenterManagementClient', () => {
             client.pathTemplates.organizationSourceFindingPathTemplate
               .match as SinonStub
           )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('project', () => {
+      const fakePath = '/rendered/path/project';
+      const expectedParameters = {
+        project: 'projectValue',
+      };
+      const client =
+        new securitycentermanagementModule.v1.SecurityCenterManagementClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.projectPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectPath', () => {
+        const result = client.projectPath('projectValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectName', () => {
+        const result = client.matchProjectFromProjectName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -5950,6 +6850,86 @@ describe('v1.SecurityCenterManagementClient', () => {
           (
             client.pathTemplates
               .projectLocationSecurityHealthAnalyticsCustomModulePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationService', () => {
+      const fakePath = '/rendered/path/projectLocationService';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        service: 'serviceValue',
+      };
+      const client =
+        new securitycentermanagementModule.v1.SecurityCenterManagementClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.projectLocationServicePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectLocationServicePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectLocationServicePath', () => {
+        const result = client.projectLocationServicePath(
+          'projectValue',
+          'locationValue',
+          'serviceValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationServicePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationServiceName', () => {
+        const result =
+          client.matchProjectFromProjectLocationServiceName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationServicePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationServiceName', () => {
+        const result =
+          client.matchLocationFromProjectLocationServiceName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationServicePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchServiceFromProjectLocationServiceName', () => {
+        const result =
+          client.matchServiceFromProjectLocationServiceName(fakePath);
+        assert.strictEqual(result, 'serviceValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationServicePathTemplate
               .match as SinonStub
           )
             .getCall(-1)
