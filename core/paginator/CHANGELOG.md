@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-paginator?activeTab=versions
 
+## [5.0.2](https://github.com/googleapis/nodejs-paginator/compare/v5.0.1...v5.0.2) (2024-05-23)
+
+
+### Bug Fixes
+
+* Query should be on the list of extra args ([#365](https://github.com/googleapis/nodejs-paginator/issues/365)) ([50e40d0](https://github.com/googleapis/nodejs-paginator/commit/50e40d064aed1bd0d5f93a51ad54112343086644))
+
 ## [5.0.1](https://github.com/googleapis/nodejs-paginator/compare/v5.0.0...v5.0.1) (2024-05-22)
 
 
