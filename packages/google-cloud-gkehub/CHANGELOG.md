@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/gke-hub-v4.3.0...gke-hub-v4.4.0) (2024-05-23)
+
+
+### Features
+
+* [gkehub] Add ServiceMesh feature to gkehub v1beta API ([#5368](https://github.com/googleapis/google-cloud-node/issues/5368)) ([0c4c15d](https://github.com/googleapis/google-cloud-node/commit/0c4c15d88fc06402ab665b9b7e29302f3406da45))
+
 ## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/gke-hub-v4.2.0...gke-hub-v4.3.0) (2024-05-21)
 
 
