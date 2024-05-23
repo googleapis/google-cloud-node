@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/googleapis/google-cloud-node/compare/places-v1.5.0...places-v1.6.0) (2024-05-23)
+
+
+### Features
+
+* [places] add `generative_summary` and `area_summary` for place summaries ([#5364](https://github.com/googleapis/google-cloud-node/issues/5364)) ([b0fbf7b](https://github.com/googleapis/google-cloud-node/commit/b0fbf7b73894284dd46aea5faa0a91f97123a194))
+
 ## [1.5.0](https://github.com/googleapis/google-cloud-node/compare/places-v1.4.0...places-v1.5.0) (2024-05-21)
 
 

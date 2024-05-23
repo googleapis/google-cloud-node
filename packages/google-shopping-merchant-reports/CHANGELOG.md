@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/reports-v0.6.0...reports-v0.7.0) (2024-05-23)
+
+
+### Features
+
+* [merchantapi] add `non_product_performance_view` table to Reports sub-API ([#5372](https://github.com/googleapis/google-cloud-node/issues/5372)) ([9e5778c](https://github.com/googleapis/google-cloud-node/commit/9e5778cf6bd2fae5141150ed00bdd1ed44643ca4))
+
 ## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/reports-v0.5.0...reports-v0.6.0) (2024-05-21)
 
 

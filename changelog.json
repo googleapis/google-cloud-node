@@ -5,6 +5,107 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "723d429fc69717376df5ee5fcbb620311080b3fe",
+          "message": "Add initial files for google.maps.routeoptimization.v1",
+          "issues": [
+            "5362"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "a9784ed3db6ee96d171762308bbbcd57390b6866",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5354"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5351"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/routeoptimization",
+      "id": "d3886e3c-3a26-4f0f-a256-5cbd09c08ca5",
+      "createTime": "2024-05-23T18:44:11.657Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "564b48ca4048a96e3f3ca37085e8712fa63aa1c8",
+          "message": "[securitycentermanagement] Adding support for new Security Center Management Apis",
+          "issues": [
+            "5377"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/securitycentermanagement",
+      "id": "80242c02-58fe-406f-9f89-98517e2e5ce2",
+      "createTime": "2024-05-23T18:44:11.643Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9e5778cf6bd2fae5141150ed00bdd1ed44643ca4",
+          "message": "[merchantapi] add `non_product_performance_view` table to Reports sub-API",
+          "issues": [
+            "5372"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reports",
+      "id": "6c23077d-7a91-4856-85be-f98a905ab524",
+      "createTime": "2024-05-23T18:44:11.628Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b0fbf7b73894284dd46aea5faa0a91f97123a194",
+          "message": "[places] add `generative_summary` and `area_summary` for place summaries",
+          "issues": [
+            "5364"
+          ]
+        }
+      ],
+      "version": "1.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/places",
+      "id": "b4f36c9d-2856-4c97-bec1-2ed2f1fd4de4",
+      "createTime": "2024-05-23T18:44:11.612Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0c4c15d88fc06402ab665b9b7e29302f3406da45",
+          "message": "[gkehub] Add ServiceMesh feature to gkehub v1beta API",
+          "issues": [
+            "5368"
+          ]
+        }
+      ],
+      "version": "4.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-hub",
+      "id": "392fb302-b59b-46ab-bd97-7e6c51e414be",
+      "createTime": "2024-05-23T18:44:11.598Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "a9784ed3db6ee96d171762308bbbcd57390b6866",
           "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
           "issues": [
@@ -33996,5 +34097,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-05-21T06:26:21.907Z"
+  "updateTime": "2024-05-23T18:44:11.657Z"
 }
