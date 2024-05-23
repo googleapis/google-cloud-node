@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/securitycentermanagement-v0.2.0...securitycentermanagement-v0.3.0) (2024-05-23)
+
+
+### Features
+
+* [securitycentermanagement] Adding support for new Security Center Management Apis ([#5377](https://github.com/googleapis/google-cloud-node/issues/5377)) ([564b48c](https://github.com/googleapis/google-cloud-node/commit/564b48ca4048a96e3f3ca37085e8712fa63aa1c8))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/securitycentermanagement-v0.1.0...securitycentermanagement-v0.2.0) (2024-05-21)
 
 
