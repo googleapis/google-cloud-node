@@ -2169,6 +2169,7 @@
                              * @interface IMediaCdnKey
                              * @property {Uint8Array|null} [privateKey] MediaCdnKey privateKey
                              * @property {string|null} [keyName] MediaCdnKey keyName
+                             * @property {google.cloud.video.stitcher.v1.MediaCdnKey.ITokenConfig|null} [tokenConfig] MediaCdnKey tokenConfig
                              */
     
                             /**
@@ -2203,6 +2204,14 @@
                             MediaCdnKey.prototype.keyName = "";
     
                             /**
+                             * MediaCdnKey tokenConfig.
+                             * @member {google.cloud.video.stitcher.v1.MediaCdnKey.ITokenConfig|null|undefined} tokenConfig
+                             * @memberof google.cloud.video.stitcher.v1.MediaCdnKey
+                             * @instance
+                             */
+                            MediaCdnKey.prototype.tokenConfig = null;
+    
+                            /**
                              * Creates a new MediaCdnKey instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.video.stitcher.v1.MediaCdnKey
@@ -2230,6 +2239,8 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.privateKey);
                                 if (message.keyName != null && Object.hasOwnProperty.call(message, "keyName"))
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.keyName);
+                                if (message.tokenConfig != null && Object.hasOwnProperty.call(message, "tokenConfig"))
+                                    $root.google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig.encode(message.tokenConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                                 return writer;
                             };
     
@@ -2270,6 +2281,10 @@
                                         }
                                     case 2: {
                                             message.keyName = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.tokenConfig = $root.google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -2313,6 +2328,11 @@
                                 if (message.keyName != null && message.hasOwnProperty("keyName"))
                                     if (!$util.isString(message.keyName))
                                         return "keyName: string expected";
+                                if (message.tokenConfig != null && message.hasOwnProperty("tokenConfig")) {
+                                    var error = $root.google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig.verify(message.tokenConfig);
+                                    if (error)
+                                        return "tokenConfig." + error;
+                                }
                                 return null;
                             };
     
@@ -2335,6 +2355,11 @@
                                         message.privateKey = object.privateKey;
                                 if (object.keyName != null)
                                     message.keyName = String(object.keyName);
+                                if (object.tokenConfig != null) {
+                                    if (typeof object.tokenConfig !== "object")
+                                        throw TypeError(".google.cloud.video.stitcher.v1.MediaCdnKey.tokenConfig: object expected");
+                                    message.tokenConfig = $root.google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig.fromObject(object.tokenConfig);
+                                }
                                 return message;
                             };
     
@@ -2360,11 +2385,14 @@
                                             object.privateKey = $util.newBuffer(object.privateKey);
                                     }
                                     object.keyName = "";
+                                    object.tokenConfig = null;
                                 }
                                 if (message.privateKey != null && message.hasOwnProperty("privateKey"))
                                     object.privateKey = options.bytes === String ? $util.base64.encode(message.privateKey, 0, message.privateKey.length) : options.bytes === Array ? Array.prototype.slice.call(message.privateKey) : message.privateKey;
                                 if (message.keyName != null && message.hasOwnProperty("keyName"))
                                     object.keyName = message.keyName;
+                                if (message.tokenConfig != null && message.hasOwnProperty("tokenConfig"))
+                                    object.tokenConfig = $root.google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig.toObject(message.tokenConfig, options);
                                 return object;
                             };
     
@@ -2393,6 +2421,209 @@
                                 }
                                 return typeUrlPrefix + "/google.cloud.video.stitcher.v1.MediaCdnKey";
                             };
+    
+                            MediaCdnKey.TokenConfig = (function() {
+    
+                                /**
+                                 * Properties of a TokenConfig.
+                                 * @memberof google.cloud.video.stitcher.v1.MediaCdnKey
+                                 * @interface ITokenConfig
+                                 * @property {string|null} [queryParameter] TokenConfig queryParameter
+                                 */
+    
+                                /**
+                                 * Constructs a new TokenConfig.
+                                 * @memberof google.cloud.video.stitcher.v1.MediaCdnKey
+                                 * @classdesc Represents a TokenConfig.
+                                 * @implements ITokenConfig
+                                 * @constructor
+                                 * @param {google.cloud.video.stitcher.v1.MediaCdnKey.ITokenConfig=} [properties] Properties to set
+                                 */
+                                function TokenConfig(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * TokenConfig queryParameter.
+                                 * @member {string} queryParameter
+                                 * @memberof google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig
+                                 * @instance
+                                 */
+                                TokenConfig.prototype.queryParameter = "";
+    
+                                /**
+                                 * Creates a new TokenConfig instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig
+                                 * @static
+                                 * @param {google.cloud.video.stitcher.v1.MediaCdnKey.ITokenConfig=} [properties] Properties to set
+                                 * @returns {google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig} TokenConfig instance
+                                 */
+                                TokenConfig.create = function create(properties) {
+                                    return new TokenConfig(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified TokenConfig message. Does not implicitly {@link google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig
+                                 * @static
+                                 * @param {google.cloud.video.stitcher.v1.MediaCdnKey.ITokenConfig} message TokenConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                TokenConfig.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.queryParameter != null && Object.hasOwnProperty.call(message, "queryParameter"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.queryParameter);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified TokenConfig message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig
+                                 * @static
+                                 * @param {google.cloud.video.stitcher.v1.MediaCdnKey.ITokenConfig} message TokenConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                TokenConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a TokenConfig message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig} TokenConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                TokenConfig.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.queryParameter = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a TokenConfig message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig} TokenConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                TokenConfig.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a TokenConfig message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                TokenConfig.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.queryParameter != null && message.hasOwnProperty("queryParameter"))
+                                        if (!$util.isString(message.queryParameter))
+                                            return "queryParameter: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a TokenConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig} TokenConfig
+                                 */
+                                TokenConfig.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig)
+                                        return object;
+                                    var message = new $root.google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig();
+                                    if (object.queryParameter != null)
+                                        message.queryParameter = String(object.queryParameter);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a TokenConfig message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig
+                                 * @static
+                                 * @param {google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig} message TokenConfig
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                TokenConfig.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.queryParameter = "";
+                                    if (message.queryParameter != null && message.hasOwnProperty("queryParameter"))
+                                        object.queryParameter = message.queryParameter;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this TokenConfig to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                TokenConfig.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for TokenConfig
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                TokenConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig";
+                                };
+    
+                                return TokenConfig;
+                            })();
     
                             return MediaCdnKey;
                         })();
@@ -4578,6 +4809,244 @@
                             return ProgressEvent;
                         })();
     
+                        v1.FetchOptions = (function() {
+    
+                            /**
+                             * Properties of a FetchOptions.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @interface IFetchOptions
+                             * @property {Object.<string,string>|null} [headers] FetchOptions headers
+                             */
+    
+                            /**
+                             * Constructs a new FetchOptions.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @classdesc Represents a FetchOptions.
+                             * @implements IFetchOptions
+                             * @constructor
+                             * @param {google.cloud.video.stitcher.v1.IFetchOptions=} [properties] Properties to set
+                             */
+                            function FetchOptions(properties) {
+                                this.headers = {};
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * FetchOptions headers.
+                             * @member {Object.<string,string>} headers
+                             * @memberof google.cloud.video.stitcher.v1.FetchOptions
+                             * @instance
+                             */
+                            FetchOptions.prototype.headers = $util.emptyObject;
+    
+                            /**
+                             * Creates a new FetchOptions instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.stitcher.v1.FetchOptions
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IFetchOptions=} [properties] Properties to set
+                             * @returns {google.cloud.video.stitcher.v1.FetchOptions} FetchOptions instance
+                             */
+                            FetchOptions.create = function create(properties) {
+                                return new FetchOptions(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified FetchOptions message. Does not implicitly {@link google.cloud.video.stitcher.v1.FetchOptions.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.stitcher.v1.FetchOptions
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IFetchOptions} message FetchOptions message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FetchOptions.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.headers != null && Object.hasOwnProperty.call(message, "headers"))
+                                    for (var keys = Object.keys(message.headers), i = 0; i < keys.length; ++i)
+                                        writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.headers[keys[i]]).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified FetchOptions message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.FetchOptions.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.FetchOptions
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IFetchOptions} message FetchOptions message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FetchOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a FetchOptions message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.stitcher.v1.FetchOptions
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.stitcher.v1.FetchOptions} FetchOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FetchOptions.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.stitcher.v1.FetchOptions(), key, value;
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (message.headers === $util.emptyObject)
+                                                message.headers = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            key = "";
+                                            value = "";
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = reader.string();
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7);
+                                                    break;
+                                                }
+                                            }
+                                            message.headers[key] = value;
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a FetchOptions message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.FetchOptions
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.stitcher.v1.FetchOptions} FetchOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FetchOptions.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a FetchOptions message.
+                             * @function verify
+                             * @memberof google.cloud.video.stitcher.v1.FetchOptions
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            FetchOptions.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.headers != null && message.hasOwnProperty("headers")) {
+                                    if (!$util.isObject(message.headers))
+                                        return "headers: object expected";
+                                    var key = Object.keys(message.headers);
+                                    for (var i = 0; i < key.length; ++i)
+                                        if (!$util.isString(message.headers[key[i]]))
+                                            return "headers: string{k:string} expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a FetchOptions message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.stitcher.v1.FetchOptions
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.stitcher.v1.FetchOptions} FetchOptions
+                             */
+                            FetchOptions.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.stitcher.v1.FetchOptions)
+                                    return object;
+                                var message = new $root.google.cloud.video.stitcher.v1.FetchOptions();
+                                if (object.headers) {
+                                    if (typeof object.headers !== "object")
+                                        throw TypeError(".google.cloud.video.stitcher.v1.FetchOptions.headers: object expected");
+                                    message.headers = {};
+                                    for (var keys = Object.keys(object.headers), i = 0; i < keys.length; ++i)
+                                        message.headers[keys[i]] = String(object.headers[keys[i]]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a FetchOptions message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.stitcher.v1.FetchOptions
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.FetchOptions} message FetchOptions
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            FetchOptions.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.objects || options.defaults)
+                                    object.headers = {};
+                                var keys2;
+                                if (message.headers && (keys2 = Object.keys(message.headers)).length) {
+                                    object.headers = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.headers[keys2[j]] = message.headers[keys2[j]];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this FetchOptions to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.stitcher.v1.FetchOptions
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            FetchOptions.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for FetchOptions
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.stitcher.v1.FetchOptions
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            FetchOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.stitcher.v1.FetchOptions";
+                            };
+    
+                            return FetchOptions;
+                        })();
+    
                         /**
                          * AdTracking enum.
                          * @name google.cloud.video.stitcher.v1.AdTracking
@@ -4609,6 +5078,7 @@
                              * @property {string|null} [defaultSlate] LiveConfig defaultSlate
                              * @property {google.cloud.video.stitcher.v1.LiveConfig.StitchingPolicy|null} [stitchingPolicy] LiveConfig stitchingPolicy
                              * @property {google.cloud.video.stitcher.v1.IPrefetchConfig|null} [prefetchConfig] LiveConfig prefetchConfig
+                             * @property {google.cloud.video.stitcher.v1.IFetchOptions|null} [sourceFetchOptions] LiveConfig sourceFetchOptions
                              */
     
                             /**
@@ -4699,6 +5169,14 @@
                             LiveConfig.prototype.prefetchConfig = null;
     
                             /**
+                             * LiveConfig sourceFetchOptions.
+                             * @member {google.cloud.video.stitcher.v1.IFetchOptions|null|undefined} sourceFetchOptions
+                             * @memberof google.cloud.video.stitcher.v1.LiveConfig
+                             * @instance
+                             */
+                            LiveConfig.prototype.sourceFetchOptions = null;
+    
+                            /**
                              * Creates a new LiveConfig instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.video.stitcher.v1.LiveConfig
@@ -4740,6 +5218,8 @@
                                     writer.uint32(/* id 8, wireType 0 =*/64).int32(message.stitchingPolicy);
                                 if (message.prefetchConfig != null && Object.hasOwnProperty.call(message, "prefetchConfig"))
                                     $root.google.cloud.video.stitcher.v1.PrefetchConfig.encode(message.prefetchConfig, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                                if (message.sourceFetchOptions != null && Object.hasOwnProperty.call(message, "sourceFetchOptions"))
+                                    $root.google.cloud.video.stitcher.v1.FetchOptions.encode(message.sourceFetchOptions, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
                                 return writer;
                             };
     
@@ -4808,6 +5288,10 @@
                                         }
                                     case 10: {
                                             message.prefetchConfig = $root.google.cloud.video.stitcher.v1.PrefetchConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 16: {
+                                            message.sourceFetchOptions = $root.google.cloud.video.stitcher.v1.FetchOptions.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -4894,6 +5378,11 @@
                                     var error = $root.google.cloud.video.stitcher.v1.PrefetchConfig.verify(message.prefetchConfig);
                                     if (error)
                                         return "prefetchConfig." + error;
+                                }
+                                if (message.sourceFetchOptions != null && message.hasOwnProperty("sourceFetchOptions")) {
+                                    var error = $root.google.cloud.video.stitcher.v1.FetchOptions.verify(message.sourceFetchOptions);
+                                    if (error)
+                                        return "sourceFetchOptions." + error;
                                 }
                                 return null;
                             };
@@ -4992,6 +5481,11 @@
                                         throw TypeError(".google.cloud.video.stitcher.v1.LiveConfig.prefetchConfig: object expected");
                                     message.prefetchConfig = $root.google.cloud.video.stitcher.v1.PrefetchConfig.fromObject(object.prefetchConfig);
                                 }
+                                if (object.sourceFetchOptions != null) {
+                                    if (typeof object.sourceFetchOptions !== "object")
+                                        throw TypeError(".google.cloud.video.stitcher.v1.LiveConfig.sourceFetchOptions: object expected");
+                                    message.sourceFetchOptions = $root.google.cloud.video.stitcher.v1.FetchOptions.fromObject(object.sourceFetchOptions);
+                                }
                                 return message;
                             };
     
@@ -5018,6 +5512,7 @@
                                     object.defaultSlate = "";
                                     object.stitchingPolicy = options.enums === String ? "STITCHING_POLICY_UNSPECIFIED" : 0;
                                     object.prefetchConfig = null;
+                                    object.sourceFetchOptions = null;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -5037,6 +5532,8 @@
                                     object.stitchingPolicy = options.enums === String ? $root.google.cloud.video.stitcher.v1.LiveConfig.StitchingPolicy[message.stitchingPolicy] === undefined ? message.stitchingPolicy : $root.google.cloud.video.stitcher.v1.LiveConfig.StitchingPolicy[message.stitchingPolicy] : message.stitchingPolicy;
                                 if (message.prefetchConfig != null && message.hasOwnProperty("prefetchConfig"))
                                     object.prefetchConfig = $root.google.cloud.video.stitcher.v1.PrefetchConfig.toObject(message.prefetchConfig, options);
+                                if (message.sourceFetchOptions != null && message.hasOwnProperty("sourceFetchOptions"))
+                                    object.sourceFetchOptions = $root.google.cloud.video.stitcher.v1.FetchOptions.toObject(message.sourceFetchOptions, options);
                                 return object;
                             };
     
@@ -5601,6 +6098,7 @@
                              * @property {string|null} [assetId] VodSession assetId
                              * @property {google.cloud.video.stitcher.v1.AdTracking|null} [adTracking] VodSession adTracking
                              * @property {google.cloud.video.stitcher.v1.VodSession.IGamSettings|null} [gamSettings] VodSession gamSettings
+                             * @property {string|null} [vodConfig] VodSession vodConfig
                              */
     
                             /**
@@ -5700,6 +6198,14 @@
                             VodSession.prototype.gamSettings = null;
     
                             /**
+                             * VodSession vodConfig.
+                             * @member {string} vodConfig
+                             * @memberof google.cloud.video.stitcher.v1.VodSession
+                             * @instance
+                             */
+                            VodSession.prototype.vodConfig = "";
+    
+                            /**
                              * Creates a new VodSession instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.video.stitcher.v1.VodSession
@@ -5744,6 +6250,8 @@
                                     writer.uint32(/* id 11, wireType 0 =*/88).int32(message.adTracking);
                                 if (message.gamSettings != null && Object.hasOwnProperty.call(message, "gamSettings"))
                                     $root.google.cloud.video.stitcher.v1.VodSession.GamSettings.encode(message.gamSettings, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                                if (message.vodConfig != null && Object.hasOwnProperty.call(message, "vodConfig"))
+                                    writer.uint32(/* id 14, wireType 2 =*/114).string(message.vodConfig);
                                 return writer;
                             };
     
@@ -5837,6 +6345,10 @@
                                             message.gamSettings = $root.google.cloud.video.stitcher.v1.VodSession.GamSettings.decode(reader, reader.uint32());
                                             break;
                                         }
+                                    case 14: {
+                                            message.vodConfig = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -5919,6 +6431,9 @@
                                     if (error)
                                         return "gamSettings." + error;
                                 }
+                                if (message.vodConfig != null && message.hasOwnProperty("vodConfig"))
+                                    if (!$util.isString(message.vodConfig))
+                                        return "vodConfig: string expected";
                                 return null;
                             };
     
@@ -5986,6 +6501,8 @@
                                         throw TypeError(".google.cloud.video.stitcher.v1.VodSession.gamSettings: object expected");
                                     message.gamSettings = $root.google.cloud.video.stitcher.v1.VodSession.GamSettings.fromObject(object.gamSettings);
                                 }
+                                if (object.vodConfig != null)
+                                    message.vodConfig = String(object.vodConfig);
                                 return message;
                             };
     
@@ -6014,6 +6531,7 @@
                                     object.assetId = "";
                                     object.adTracking = options.enums === String ? "AD_TRACKING_UNSPECIFIED" : 0;
                                     object.gamSettings = null;
+                                    object.vodConfig = "";
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -6039,6 +6557,8 @@
                                     object.adTracking = options.enums === String ? $root.google.cloud.video.stitcher.v1.AdTracking[message.adTracking] === undefined ? message.adTracking : $root.google.cloud.video.stitcher.v1.AdTracking[message.adTracking] : message.adTracking;
                                 if (message.gamSettings != null && message.hasOwnProperty("gamSettings"))
                                     object.gamSettings = $root.google.cloud.video.stitcher.v1.VodSession.GamSettings.toObject(message.gamSettings, options);
+                                if (message.vodConfig != null && message.hasOwnProperty("vodConfig"))
+                                    object.vodConfig = message.vodConfig;
                                 return object;
                             };
     
@@ -7380,6 +7900,7 @@
                              * @property {google.cloud.video.stitcher.v1.IManifestOptions|null} [manifestOptions] LiveSession manifestOptions
                              * @property {google.cloud.video.stitcher.v1.LiveSession.IGamSettings|null} [gamSettings] LiveSession gamSettings
                              * @property {string|null} [liveConfig] LiveSession liveConfig
+                             * @property {google.cloud.video.stitcher.v1.AdTracking|null} [adTracking] LiveSession adTracking
                              */
     
                             /**
@@ -7447,6 +7968,14 @@
                             LiveSession.prototype.liveConfig = "";
     
                             /**
+                             * LiveSession adTracking.
+                             * @member {google.cloud.video.stitcher.v1.AdTracking} adTracking
+                             * @memberof google.cloud.video.stitcher.v1.LiveSession
+                             * @instance
+                             */
+                            LiveSession.prototype.adTracking = 0;
+    
+                            /**
                              * Creates a new LiveSession instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.video.stitcher.v1.LiveSession
@@ -7483,6 +8012,8 @@
                                     $root.google.cloud.video.stitcher.v1.LiveSession.GamSettings.encode(message.gamSettings, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                                 if (message.liveConfig != null && Object.hasOwnProperty.call(message, "liveConfig"))
                                     writer.uint32(/* id 16, wireType 2 =*/130).string(message.liveConfig);
+                                if (message.adTracking != null && Object.hasOwnProperty.call(message, "adTracking"))
+                                    writer.uint32(/* id 17, wireType 0 =*/136).int32(message.adTracking);
                                 return writer;
                             };
     
@@ -7560,6 +8091,10 @@
                                             message.liveConfig = reader.string();
                                             break;
                                         }
+                                    case 17: {
+                                            message.adTracking = reader.int32();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -7622,6 +8157,15 @@
                                 if (message.liveConfig != null && message.hasOwnProperty("liveConfig"))
                                     if (!$util.isString(message.liveConfig))
                                         return "liveConfig: string expected";
+                                if (message.adTracking != null && message.hasOwnProperty("adTracking"))
+                                    switch (message.adTracking) {
+                                    default:
+                                        return "adTracking: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
                                 return null;
                             };
     
@@ -7660,6 +8204,26 @@
                                 }
                                 if (object.liveConfig != null)
                                     message.liveConfig = String(object.liveConfig);
+                                switch (object.adTracking) {
+                                default:
+                                    if (typeof object.adTracking === "number") {
+                                        message.adTracking = object.adTracking;
+                                        break;
+                                    }
+                                    break;
+                                case "AD_TRACKING_UNSPECIFIED":
+                                case 0:
+                                    message.adTracking = 0;
+                                    break;
+                                case "CLIENT":
+                                case 1:
+                                    message.adTracking = 1;
+                                    break;
+                                case "SERVER":
+                                case 2:
+                                    message.adTracking = 2;
+                                    break;
+                                }
                                 return message;
                             };
     
@@ -7684,6 +8248,7 @@
                                     object.manifestOptions = null;
                                     object.gamSettings = null;
                                     object.liveConfig = "";
+                                    object.adTracking = options.enums === String ? "AD_TRACKING_UNSPECIFIED" : 0;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -7701,6 +8266,8 @@
                                     object.gamSettings = $root.google.cloud.video.stitcher.v1.LiveSession.GamSettings.toObject(message.gamSettings, options);
                                 if (message.liveConfig != null && message.hasOwnProperty("liveConfig"))
                                     object.liveConfig = message.liveConfig;
+                                if (message.adTracking != null && message.hasOwnProperty("adTracking"))
+                                    object.adTracking = options.enums === String ? $root.google.cloud.video.stitcher.v1.AdTracking[message.adTracking] === undefined ? message.adTracking : $root.google.cloud.video.stitcher.v1.AdTracking[message.adTracking] : message.adTracking;
                                 return object;
                             };
     
@@ -7737,6 +8304,7 @@
                                  * @memberof google.cloud.video.stitcher.v1.LiveSession
                                  * @interface IGamSettings
                                  * @property {string|null} [streamId] GamSettings streamId
+                                 * @property {Object.<string,string>|null} [targetingParameters] GamSettings targetingParameters
                                  */
     
                                 /**
@@ -7748,6 +8316,7 @@
                                  * @param {google.cloud.video.stitcher.v1.LiveSession.IGamSettings=} [properties] Properties to set
                                  */
                                 function GamSettings(properties) {
+                                    this.targetingParameters = {};
                                     if (properties)
                                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                             if (properties[keys[i]] != null)
@@ -7761,6 +8330,14 @@
                                  * @instance
                                  */
                                 GamSettings.prototype.streamId = "";
+    
+                                /**
+                                 * GamSettings targetingParameters.
+                                 * @member {Object.<string,string>} targetingParameters
+                                 * @memberof google.cloud.video.stitcher.v1.LiveSession.GamSettings
+                                 * @instance
+                                 */
+                                GamSettings.prototype.targetingParameters = $util.emptyObject;
     
                                 /**
                                  * Creates a new GamSettings instance using the specified properties.
@@ -7788,6 +8365,9 @@
                                         writer = $Writer.create();
                                     if (message.streamId != null && Object.hasOwnProperty.call(message, "streamId"))
                                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.streamId);
+                                    if (message.targetingParameters != null && Object.hasOwnProperty.call(message, "targetingParameters"))
+                                        for (var keys = Object.keys(message.targetingParameters), i = 0; i < keys.length; ++i)
+                                            writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.targetingParameters[keys[i]]).ldelim();
                                     return writer;
                                 };
     
@@ -7818,12 +8398,35 @@
                                 GamSettings.decode = function decode(reader, length) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
-                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.stitcher.v1.LiveSession.GamSettings();
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.stitcher.v1.LiveSession.GamSettings(), key, value;
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.streamId = reader.string();
+                                                break;
+                                            }
+                                        case 4: {
+                                                if (message.targetingParameters === $util.emptyObject)
+                                                    message.targetingParameters = {};
+                                                var end2 = reader.uint32() + reader.pos;
+                                                key = "";
+                                                value = "";
+                                                while (reader.pos < end2) {
+                                                    var tag2 = reader.uint32();
+                                                    switch (tag2 >>> 3) {
+                                                    case 1:
+                                                        key = reader.string();
+                                                        break;
+                                                    case 2:
+                                                        value = reader.string();
+                                                        break;
+                                                    default:
+                                                        reader.skipType(tag2 & 7);
+                                                        break;
+                                                    }
+                                                }
+                                                message.targetingParameters[key] = value;
                                                 break;
                                             }
                                         default:
@@ -7864,6 +8467,14 @@
                                     if (message.streamId != null && message.hasOwnProperty("streamId"))
                                         if (!$util.isString(message.streamId))
                                             return "streamId: string expected";
+                                    if (message.targetingParameters != null && message.hasOwnProperty("targetingParameters")) {
+                                        if (!$util.isObject(message.targetingParameters))
+                                            return "targetingParameters: object expected";
+                                        var key = Object.keys(message.targetingParameters);
+                                        for (var i = 0; i < key.length; ++i)
+                                            if (!$util.isString(message.targetingParameters[key[i]]))
+                                                return "targetingParameters: string{k:string} expected";
+                                    }
                                     return null;
                                 };
     
@@ -7881,6 +8492,13 @@
                                     var message = new $root.google.cloud.video.stitcher.v1.LiveSession.GamSettings();
                                     if (object.streamId != null)
                                         message.streamId = String(object.streamId);
+                                    if (object.targetingParameters) {
+                                        if (typeof object.targetingParameters !== "object")
+                                            throw TypeError(".google.cloud.video.stitcher.v1.LiveSession.GamSettings.targetingParameters: object expected");
+                                        message.targetingParameters = {};
+                                        for (var keys = Object.keys(object.targetingParameters), i = 0; i < keys.length; ++i)
+                                            message.targetingParameters[keys[i]] = String(object.targetingParameters[keys[i]]);
+                                    }
                                     return message;
                                 };
     
@@ -7897,10 +8515,18 @@
                                     if (!options)
                                         options = {};
                                     var object = {};
+                                    if (options.objects || options.defaults)
+                                        object.targetingParameters = {};
                                     if (options.defaults)
                                         object.streamId = "";
                                     if (message.streamId != null && message.hasOwnProperty("streamId"))
                                         object.streamId = message.streamId;
+                                    var keys2;
+                                    if (message.targetingParameters && (keys2 = Object.keys(message.targetingParameters)).length) {
+                                        object.targetingParameters = {};
+                                        for (var j = 0; j < keys2.length; ++j)
+                                            object.targetingParameters[keys2[j]] = message.targetingParameters[keys2[j]];
+                                    }
                                     return object;
                                 };
     
@@ -10359,6 +10985,204 @@
                              * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
                              * @instance
                              * @param {google.cloud.video.stitcher.v1.IDeleteLiveConfigRequest} request DeleteLiveConfigRequest message or plain object
+                             * @returns {Promise<google.longrunning.Operation>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.video.stitcher.v1.VideoStitcherService|updateLiveConfig}.
+                             * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
+                             * @typedef UpdateLiveConfigCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.longrunning.Operation} [response] Operation
+                             */
+    
+                            /**
+                             * Calls UpdateLiveConfig.
+                             * @function updateLiveConfig
+                             * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
+                             * @instance
+                             * @param {google.cloud.video.stitcher.v1.IUpdateLiveConfigRequest} request UpdateLiveConfigRequest message or plain object
+                             * @param {google.cloud.video.stitcher.v1.VideoStitcherService.UpdateLiveConfigCallback} callback Node-style callback called with the error, if any, and Operation
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(VideoStitcherService.prototype.updateLiveConfig = function updateLiveConfig(request, callback) {
+                                return this.rpcCall(updateLiveConfig, $root.google.cloud.video.stitcher.v1.UpdateLiveConfigRequest, $root.google.longrunning.Operation, request, callback);
+                            }, "name", { value: "UpdateLiveConfig" });
+    
+                            /**
+                             * Calls UpdateLiveConfig.
+                             * @function updateLiveConfig
+                             * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
+                             * @instance
+                             * @param {google.cloud.video.stitcher.v1.IUpdateLiveConfigRequest} request UpdateLiveConfigRequest message or plain object
+                             * @returns {Promise<google.longrunning.Operation>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.video.stitcher.v1.VideoStitcherService|createVodConfig}.
+                             * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
+                             * @typedef CreateVodConfigCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.longrunning.Operation} [response] Operation
+                             */
+    
+                            /**
+                             * Calls CreateVodConfig.
+                             * @function createVodConfig
+                             * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
+                             * @instance
+                             * @param {google.cloud.video.stitcher.v1.ICreateVodConfigRequest} request CreateVodConfigRequest message or plain object
+                             * @param {google.cloud.video.stitcher.v1.VideoStitcherService.CreateVodConfigCallback} callback Node-style callback called with the error, if any, and Operation
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(VideoStitcherService.prototype.createVodConfig = function createVodConfig(request, callback) {
+                                return this.rpcCall(createVodConfig, $root.google.cloud.video.stitcher.v1.CreateVodConfigRequest, $root.google.longrunning.Operation, request, callback);
+                            }, "name", { value: "CreateVodConfig" });
+    
+                            /**
+                             * Calls CreateVodConfig.
+                             * @function createVodConfig
+                             * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
+                             * @instance
+                             * @param {google.cloud.video.stitcher.v1.ICreateVodConfigRequest} request CreateVodConfigRequest message or plain object
+                             * @returns {Promise<google.longrunning.Operation>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.video.stitcher.v1.VideoStitcherService|listVodConfigs}.
+                             * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
+                             * @typedef ListVodConfigsCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.video.stitcher.v1.ListVodConfigsResponse} [response] ListVodConfigsResponse
+                             */
+    
+                            /**
+                             * Calls ListVodConfigs.
+                             * @function listVodConfigs
+                             * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
+                             * @instance
+                             * @param {google.cloud.video.stitcher.v1.IListVodConfigsRequest} request ListVodConfigsRequest message or plain object
+                             * @param {google.cloud.video.stitcher.v1.VideoStitcherService.ListVodConfigsCallback} callback Node-style callback called with the error, if any, and ListVodConfigsResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(VideoStitcherService.prototype.listVodConfigs = function listVodConfigs(request, callback) {
+                                return this.rpcCall(listVodConfigs, $root.google.cloud.video.stitcher.v1.ListVodConfigsRequest, $root.google.cloud.video.stitcher.v1.ListVodConfigsResponse, request, callback);
+                            }, "name", { value: "ListVodConfigs" });
+    
+                            /**
+                             * Calls ListVodConfigs.
+                             * @function listVodConfigs
+                             * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
+                             * @instance
+                             * @param {google.cloud.video.stitcher.v1.IListVodConfigsRequest} request ListVodConfigsRequest message or plain object
+                             * @returns {Promise<google.cloud.video.stitcher.v1.ListVodConfigsResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.video.stitcher.v1.VideoStitcherService|getVodConfig}.
+                             * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
+                             * @typedef GetVodConfigCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.video.stitcher.v1.VodConfig} [response] VodConfig
+                             */
+    
+                            /**
+                             * Calls GetVodConfig.
+                             * @function getVodConfig
+                             * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
+                             * @instance
+                             * @param {google.cloud.video.stitcher.v1.IGetVodConfigRequest} request GetVodConfigRequest message or plain object
+                             * @param {google.cloud.video.stitcher.v1.VideoStitcherService.GetVodConfigCallback} callback Node-style callback called with the error, if any, and VodConfig
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(VideoStitcherService.prototype.getVodConfig = function getVodConfig(request, callback) {
+                                return this.rpcCall(getVodConfig, $root.google.cloud.video.stitcher.v1.GetVodConfigRequest, $root.google.cloud.video.stitcher.v1.VodConfig, request, callback);
+                            }, "name", { value: "GetVodConfig" });
+    
+                            /**
+                             * Calls GetVodConfig.
+                             * @function getVodConfig
+                             * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
+                             * @instance
+                             * @param {google.cloud.video.stitcher.v1.IGetVodConfigRequest} request GetVodConfigRequest message or plain object
+                             * @returns {Promise<google.cloud.video.stitcher.v1.VodConfig>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.video.stitcher.v1.VideoStitcherService|deleteVodConfig}.
+                             * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
+                             * @typedef DeleteVodConfigCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.longrunning.Operation} [response] Operation
+                             */
+    
+                            /**
+                             * Calls DeleteVodConfig.
+                             * @function deleteVodConfig
+                             * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
+                             * @instance
+                             * @param {google.cloud.video.stitcher.v1.IDeleteVodConfigRequest} request DeleteVodConfigRequest message or plain object
+                             * @param {google.cloud.video.stitcher.v1.VideoStitcherService.DeleteVodConfigCallback} callback Node-style callback called with the error, if any, and Operation
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(VideoStitcherService.prototype.deleteVodConfig = function deleteVodConfig(request, callback) {
+                                return this.rpcCall(deleteVodConfig, $root.google.cloud.video.stitcher.v1.DeleteVodConfigRequest, $root.google.longrunning.Operation, request, callback);
+                            }, "name", { value: "DeleteVodConfig" });
+    
+                            /**
+                             * Calls DeleteVodConfig.
+                             * @function deleteVodConfig
+                             * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
+                             * @instance
+                             * @param {google.cloud.video.stitcher.v1.IDeleteVodConfigRequest} request DeleteVodConfigRequest message or plain object
+                             * @returns {Promise<google.longrunning.Operation>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.video.stitcher.v1.VideoStitcherService|updateVodConfig}.
+                             * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
+                             * @typedef UpdateVodConfigCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.longrunning.Operation} [response] Operation
+                             */
+    
+                            /**
+                             * Calls UpdateVodConfig.
+                             * @function updateVodConfig
+                             * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
+                             * @instance
+                             * @param {google.cloud.video.stitcher.v1.IUpdateVodConfigRequest} request UpdateVodConfigRequest message or plain object
+                             * @param {google.cloud.video.stitcher.v1.VideoStitcherService.UpdateVodConfigCallback} callback Node-style callback called with the error, if any, and Operation
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(VideoStitcherService.prototype.updateVodConfig = function updateVodConfig(request, callback) {
+                                return this.rpcCall(updateVodConfig, $root.google.cloud.video.stitcher.v1.UpdateVodConfigRequest, $root.google.longrunning.Operation, request, callback);
+                            }, "name", { value: "UpdateVodConfig" });
+    
+                            /**
+                             * Calls UpdateVodConfig.
+                             * @function updateVodConfig
+                             * @memberof google.cloud.video.stitcher.v1.VideoStitcherService
+                             * @instance
+                             * @param {google.cloud.video.stitcher.v1.IUpdateVodConfigRequest} request UpdateVodConfigRequest message or plain object
                              * @returns {Promise<google.longrunning.Operation>} Promise
                              * @variation 2
                              */
@@ -17594,6 +18418,1748 @@
                             return DeleteLiveConfigRequest;
                         })();
     
+                        v1.UpdateLiveConfigRequest = (function() {
+    
+                            /**
+                             * Properties of an UpdateLiveConfigRequest.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @interface IUpdateLiveConfigRequest
+                             * @property {google.cloud.video.stitcher.v1.ILiveConfig|null} [liveConfig] UpdateLiveConfigRequest liveConfig
+                             * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateLiveConfigRequest updateMask
+                             */
+    
+                            /**
+                             * Constructs a new UpdateLiveConfigRequest.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @classdesc Represents an UpdateLiveConfigRequest.
+                             * @implements IUpdateLiveConfigRequest
+                             * @constructor
+                             * @param {google.cloud.video.stitcher.v1.IUpdateLiveConfigRequest=} [properties] Properties to set
+                             */
+                            function UpdateLiveConfigRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * UpdateLiveConfigRequest liveConfig.
+                             * @member {google.cloud.video.stitcher.v1.ILiveConfig|null|undefined} liveConfig
+                             * @memberof google.cloud.video.stitcher.v1.UpdateLiveConfigRequest
+                             * @instance
+                             */
+                            UpdateLiveConfigRequest.prototype.liveConfig = null;
+    
+                            /**
+                             * UpdateLiveConfigRequest updateMask.
+                             * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                             * @memberof google.cloud.video.stitcher.v1.UpdateLiveConfigRequest
+                             * @instance
+                             */
+                            UpdateLiveConfigRequest.prototype.updateMask = null;
+    
+                            /**
+                             * Creates a new UpdateLiveConfigRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.stitcher.v1.UpdateLiveConfigRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IUpdateLiveConfigRequest=} [properties] Properties to set
+                             * @returns {google.cloud.video.stitcher.v1.UpdateLiveConfigRequest} UpdateLiveConfigRequest instance
+                             */
+                            UpdateLiveConfigRequest.create = function create(properties) {
+                                return new UpdateLiveConfigRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateLiveConfigRequest message. Does not implicitly {@link google.cloud.video.stitcher.v1.UpdateLiveConfigRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.stitcher.v1.UpdateLiveConfigRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IUpdateLiveConfigRequest} message UpdateLiveConfigRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateLiveConfigRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.liveConfig != null && Object.hasOwnProperty.call(message, "liveConfig"))
+                                    $root.google.cloud.video.stitcher.v1.LiveConfig.encode(message.liveConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                    $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateLiveConfigRequest message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.UpdateLiveConfigRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.UpdateLiveConfigRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IUpdateLiveConfigRequest} message UpdateLiveConfigRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateLiveConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an UpdateLiveConfigRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.stitcher.v1.UpdateLiveConfigRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.stitcher.v1.UpdateLiveConfigRequest} UpdateLiveConfigRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateLiveConfigRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.stitcher.v1.UpdateLiveConfigRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.liveConfig = $root.google.cloud.video.stitcher.v1.LiveConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an UpdateLiveConfigRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.UpdateLiveConfigRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.stitcher.v1.UpdateLiveConfigRequest} UpdateLiveConfigRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateLiveConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an UpdateLiveConfigRequest message.
+                             * @function verify
+                             * @memberof google.cloud.video.stitcher.v1.UpdateLiveConfigRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            UpdateLiveConfigRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.liveConfig != null && message.hasOwnProperty("liveConfig")) {
+                                    var error = $root.google.cloud.video.stitcher.v1.LiveConfig.verify(message.liveConfig);
+                                    if (error)
+                                        return "liveConfig." + error;
+                                }
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                    var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                    if (error)
+                                        return "updateMask." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an UpdateLiveConfigRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.stitcher.v1.UpdateLiveConfigRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.stitcher.v1.UpdateLiveConfigRequest} UpdateLiveConfigRequest
+                             */
+                            UpdateLiveConfigRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.stitcher.v1.UpdateLiveConfigRequest)
+                                    return object;
+                                var message = new $root.google.cloud.video.stitcher.v1.UpdateLiveConfigRequest();
+                                if (object.liveConfig != null) {
+                                    if (typeof object.liveConfig !== "object")
+                                        throw TypeError(".google.cloud.video.stitcher.v1.UpdateLiveConfigRequest.liveConfig: object expected");
+                                    message.liveConfig = $root.google.cloud.video.stitcher.v1.LiveConfig.fromObject(object.liveConfig);
+                                }
+                                if (object.updateMask != null) {
+                                    if (typeof object.updateMask !== "object")
+                                        throw TypeError(".google.cloud.video.stitcher.v1.UpdateLiveConfigRequest.updateMask: object expected");
+                                    message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an UpdateLiveConfigRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.stitcher.v1.UpdateLiveConfigRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.UpdateLiveConfigRequest} message UpdateLiveConfigRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            UpdateLiveConfigRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.liveConfig = null;
+                                    object.updateMask = null;
+                                }
+                                if (message.liveConfig != null && message.hasOwnProperty("liveConfig"))
+                                    object.liveConfig = $root.google.cloud.video.stitcher.v1.LiveConfig.toObject(message.liveConfig, options);
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                    object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this UpdateLiveConfigRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.stitcher.v1.UpdateLiveConfigRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            UpdateLiveConfigRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for UpdateLiveConfigRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.stitcher.v1.UpdateLiveConfigRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            UpdateLiveConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.stitcher.v1.UpdateLiveConfigRequest";
+                            };
+    
+                            return UpdateLiveConfigRequest;
+                        })();
+    
+                        v1.CreateVodConfigRequest = (function() {
+    
+                            /**
+                             * Properties of a CreateVodConfigRequest.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @interface ICreateVodConfigRequest
+                             * @property {string|null} [parent] CreateVodConfigRequest parent
+                             * @property {string|null} [vodConfigId] CreateVodConfigRequest vodConfigId
+                             * @property {google.cloud.video.stitcher.v1.IVodConfig|null} [vodConfig] CreateVodConfigRequest vodConfig
+                             * @property {string|null} [requestId] CreateVodConfigRequest requestId
+                             */
+    
+                            /**
+                             * Constructs a new CreateVodConfigRequest.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @classdesc Represents a CreateVodConfigRequest.
+                             * @implements ICreateVodConfigRequest
+                             * @constructor
+                             * @param {google.cloud.video.stitcher.v1.ICreateVodConfigRequest=} [properties] Properties to set
+                             */
+                            function CreateVodConfigRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CreateVodConfigRequest parent.
+                             * @member {string} parent
+                             * @memberof google.cloud.video.stitcher.v1.CreateVodConfigRequest
+                             * @instance
+                             */
+                            CreateVodConfigRequest.prototype.parent = "";
+    
+                            /**
+                             * CreateVodConfigRequest vodConfigId.
+                             * @member {string} vodConfigId
+                             * @memberof google.cloud.video.stitcher.v1.CreateVodConfigRequest
+                             * @instance
+                             */
+                            CreateVodConfigRequest.prototype.vodConfigId = "";
+    
+                            /**
+                             * CreateVodConfigRequest vodConfig.
+                             * @member {google.cloud.video.stitcher.v1.IVodConfig|null|undefined} vodConfig
+                             * @memberof google.cloud.video.stitcher.v1.CreateVodConfigRequest
+                             * @instance
+                             */
+                            CreateVodConfigRequest.prototype.vodConfig = null;
+    
+                            /**
+                             * CreateVodConfigRequest requestId.
+                             * @member {string} requestId
+                             * @memberof google.cloud.video.stitcher.v1.CreateVodConfigRequest
+                             * @instance
+                             */
+                            CreateVodConfigRequest.prototype.requestId = "";
+    
+                            /**
+                             * Creates a new CreateVodConfigRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.stitcher.v1.CreateVodConfigRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.ICreateVodConfigRequest=} [properties] Properties to set
+                             * @returns {google.cloud.video.stitcher.v1.CreateVodConfigRequest} CreateVodConfigRequest instance
+                             */
+                            CreateVodConfigRequest.create = function create(properties) {
+                                return new CreateVodConfigRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CreateVodConfigRequest message. Does not implicitly {@link google.cloud.video.stitcher.v1.CreateVodConfigRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.stitcher.v1.CreateVodConfigRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.ICreateVodConfigRequest} message CreateVodConfigRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateVodConfigRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.vodConfigId != null && Object.hasOwnProperty.call(message, "vodConfigId"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.vodConfigId);
+                                if (message.vodConfig != null && Object.hasOwnProperty.call(message, "vodConfig"))
+                                    $root.google.cloud.video.stitcher.v1.VodConfig.encode(message.vodConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CreateVodConfigRequest message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.CreateVodConfigRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.CreateVodConfigRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.ICreateVodConfigRequest} message CreateVodConfigRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateVodConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CreateVodConfigRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.stitcher.v1.CreateVodConfigRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.stitcher.v1.CreateVodConfigRequest} CreateVodConfigRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateVodConfigRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.stitcher.v1.CreateVodConfigRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.vodConfigId = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.vodConfig = $root.google.cloud.video.stitcher.v1.VodConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.requestId = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CreateVodConfigRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.CreateVodConfigRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.stitcher.v1.CreateVodConfigRequest} CreateVodConfigRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateVodConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CreateVodConfigRequest message.
+                             * @function verify
+                             * @memberof google.cloud.video.stitcher.v1.CreateVodConfigRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CreateVodConfigRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.vodConfigId != null && message.hasOwnProperty("vodConfigId"))
+                                    if (!$util.isString(message.vodConfigId))
+                                        return "vodConfigId: string expected";
+                                if (message.vodConfig != null && message.hasOwnProperty("vodConfig")) {
+                                    var error = $root.google.cloud.video.stitcher.v1.VodConfig.verify(message.vodConfig);
+                                    if (error)
+                                        return "vodConfig." + error;
+                                }
+                                if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                    if (!$util.isString(message.requestId))
+                                        return "requestId: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CreateVodConfigRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.stitcher.v1.CreateVodConfigRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.stitcher.v1.CreateVodConfigRequest} CreateVodConfigRequest
+                             */
+                            CreateVodConfigRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.stitcher.v1.CreateVodConfigRequest)
+                                    return object;
+                                var message = new $root.google.cloud.video.stitcher.v1.CreateVodConfigRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.vodConfigId != null)
+                                    message.vodConfigId = String(object.vodConfigId);
+                                if (object.vodConfig != null) {
+                                    if (typeof object.vodConfig !== "object")
+                                        throw TypeError(".google.cloud.video.stitcher.v1.CreateVodConfigRequest.vodConfig: object expected");
+                                    message.vodConfig = $root.google.cloud.video.stitcher.v1.VodConfig.fromObject(object.vodConfig);
+                                }
+                                if (object.requestId != null)
+                                    message.requestId = String(object.requestId);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CreateVodConfigRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.stitcher.v1.CreateVodConfigRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.CreateVodConfigRequest} message CreateVodConfigRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CreateVodConfigRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.vodConfigId = "";
+                                    object.vodConfig = null;
+                                    object.requestId = "";
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.vodConfigId != null && message.hasOwnProperty("vodConfigId"))
+                                    object.vodConfigId = message.vodConfigId;
+                                if (message.vodConfig != null && message.hasOwnProperty("vodConfig"))
+                                    object.vodConfig = $root.google.cloud.video.stitcher.v1.VodConfig.toObject(message.vodConfig, options);
+                                if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                    object.requestId = message.requestId;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CreateVodConfigRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.stitcher.v1.CreateVodConfigRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CreateVodConfigRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CreateVodConfigRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.stitcher.v1.CreateVodConfigRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CreateVodConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.stitcher.v1.CreateVodConfigRequest";
+                            };
+    
+                            return CreateVodConfigRequest;
+                        })();
+    
+                        v1.ListVodConfigsRequest = (function() {
+    
+                            /**
+                             * Properties of a ListVodConfigsRequest.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @interface IListVodConfigsRequest
+                             * @property {string|null} [parent] ListVodConfigsRequest parent
+                             * @property {number|null} [pageSize] ListVodConfigsRequest pageSize
+                             * @property {string|null} [pageToken] ListVodConfigsRequest pageToken
+                             * @property {string|null} [filter] ListVodConfigsRequest filter
+                             * @property {string|null} [orderBy] ListVodConfigsRequest orderBy
+                             */
+    
+                            /**
+                             * Constructs a new ListVodConfigsRequest.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @classdesc Represents a ListVodConfigsRequest.
+                             * @implements IListVodConfigsRequest
+                             * @constructor
+                             * @param {google.cloud.video.stitcher.v1.IListVodConfigsRequest=} [properties] Properties to set
+                             */
+                            function ListVodConfigsRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListVodConfigsRequest parent.
+                             * @member {string} parent
+                             * @memberof google.cloud.video.stitcher.v1.ListVodConfigsRequest
+                             * @instance
+                             */
+                            ListVodConfigsRequest.prototype.parent = "";
+    
+                            /**
+                             * ListVodConfigsRequest pageSize.
+                             * @member {number} pageSize
+                             * @memberof google.cloud.video.stitcher.v1.ListVodConfigsRequest
+                             * @instance
+                             */
+                            ListVodConfigsRequest.prototype.pageSize = 0;
+    
+                            /**
+                             * ListVodConfigsRequest pageToken.
+                             * @member {string} pageToken
+                             * @memberof google.cloud.video.stitcher.v1.ListVodConfigsRequest
+                             * @instance
+                             */
+                            ListVodConfigsRequest.prototype.pageToken = "";
+    
+                            /**
+                             * ListVodConfigsRequest filter.
+                             * @member {string} filter
+                             * @memberof google.cloud.video.stitcher.v1.ListVodConfigsRequest
+                             * @instance
+                             */
+                            ListVodConfigsRequest.prototype.filter = "";
+    
+                            /**
+                             * ListVodConfigsRequest orderBy.
+                             * @member {string} orderBy
+                             * @memberof google.cloud.video.stitcher.v1.ListVodConfigsRequest
+                             * @instance
+                             */
+                            ListVodConfigsRequest.prototype.orderBy = "";
+    
+                            /**
+                             * Creates a new ListVodConfigsRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.stitcher.v1.ListVodConfigsRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IListVodConfigsRequest=} [properties] Properties to set
+                             * @returns {google.cloud.video.stitcher.v1.ListVodConfigsRequest} ListVodConfigsRequest instance
+                             */
+                            ListVodConfigsRequest.create = function create(properties) {
+                                return new ListVodConfigsRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListVodConfigsRequest message. Does not implicitly {@link google.cloud.video.stitcher.v1.ListVodConfigsRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.stitcher.v1.ListVodConfigsRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IListVodConfigsRequest} message ListVodConfigsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListVodConfigsRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                                if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                                if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListVodConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.ListVodConfigsRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.ListVodConfigsRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IListVodConfigsRequest} message ListVodConfigsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListVodConfigsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListVodConfigsRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.stitcher.v1.ListVodConfigsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.stitcher.v1.ListVodConfigsRequest} ListVodConfigsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListVodConfigsRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.stitcher.v1.ListVodConfigsRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.pageSize = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.pageToken = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.filter = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.orderBy = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListVodConfigsRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.ListVodConfigsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.stitcher.v1.ListVodConfigsRequest} ListVodConfigsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListVodConfigsRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListVodConfigsRequest message.
+                             * @function verify
+                             * @memberof google.cloud.video.stitcher.v1.ListVodConfigsRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListVodConfigsRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    if (!$util.isInteger(message.pageSize))
+                                        return "pageSize: integer expected";
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    if (!$util.isString(message.pageToken))
+                                        return "pageToken: string expected";
+                                if (message.filter != null && message.hasOwnProperty("filter"))
+                                    if (!$util.isString(message.filter))
+                                        return "filter: string expected";
+                                if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                    if (!$util.isString(message.orderBy))
+                                        return "orderBy: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListVodConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.stitcher.v1.ListVodConfigsRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.stitcher.v1.ListVodConfigsRequest} ListVodConfigsRequest
+                             */
+                            ListVodConfigsRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.stitcher.v1.ListVodConfigsRequest)
+                                    return object;
+                                var message = new $root.google.cloud.video.stitcher.v1.ListVodConfigsRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.pageSize != null)
+                                    message.pageSize = object.pageSize | 0;
+                                if (object.pageToken != null)
+                                    message.pageToken = String(object.pageToken);
+                                if (object.filter != null)
+                                    message.filter = String(object.filter);
+                                if (object.orderBy != null)
+                                    message.orderBy = String(object.orderBy);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListVodConfigsRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.stitcher.v1.ListVodConfigsRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.ListVodConfigsRequest} message ListVodConfigsRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListVodConfigsRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.pageSize = 0;
+                                    object.pageToken = "";
+                                    object.filter = "";
+                                    object.orderBy = "";
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    object.pageSize = message.pageSize;
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    object.pageToken = message.pageToken;
+                                if (message.filter != null && message.hasOwnProperty("filter"))
+                                    object.filter = message.filter;
+                                if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                    object.orderBy = message.orderBy;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListVodConfigsRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.stitcher.v1.ListVodConfigsRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListVodConfigsRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListVodConfigsRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.stitcher.v1.ListVodConfigsRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListVodConfigsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.stitcher.v1.ListVodConfigsRequest";
+                            };
+    
+                            return ListVodConfigsRequest;
+                        })();
+    
+                        v1.ListVodConfigsResponse = (function() {
+    
+                            /**
+                             * Properties of a ListVodConfigsResponse.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @interface IListVodConfigsResponse
+                             * @property {Array.<google.cloud.video.stitcher.v1.IVodConfig>|null} [vodConfigs] ListVodConfigsResponse vodConfigs
+                             * @property {string|null} [nextPageToken] ListVodConfigsResponse nextPageToken
+                             * @property {Array.<string>|null} [unreachable] ListVodConfigsResponse unreachable
+                             */
+    
+                            /**
+                             * Constructs a new ListVodConfigsResponse.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @classdesc Represents a ListVodConfigsResponse.
+                             * @implements IListVodConfigsResponse
+                             * @constructor
+                             * @param {google.cloud.video.stitcher.v1.IListVodConfigsResponse=} [properties] Properties to set
+                             */
+                            function ListVodConfigsResponse(properties) {
+                                this.vodConfigs = [];
+                                this.unreachable = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListVodConfigsResponse vodConfigs.
+                             * @member {Array.<google.cloud.video.stitcher.v1.IVodConfig>} vodConfigs
+                             * @memberof google.cloud.video.stitcher.v1.ListVodConfigsResponse
+                             * @instance
+                             */
+                            ListVodConfigsResponse.prototype.vodConfigs = $util.emptyArray;
+    
+                            /**
+                             * ListVodConfigsResponse nextPageToken.
+                             * @member {string} nextPageToken
+                             * @memberof google.cloud.video.stitcher.v1.ListVodConfigsResponse
+                             * @instance
+                             */
+                            ListVodConfigsResponse.prototype.nextPageToken = "";
+    
+                            /**
+                             * ListVodConfigsResponse unreachable.
+                             * @member {Array.<string>} unreachable
+                             * @memberof google.cloud.video.stitcher.v1.ListVodConfigsResponse
+                             * @instance
+                             */
+                            ListVodConfigsResponse.prototype.unreachable = $util.emptyArray;
+    
+                            /**
+                             * Creates a new ListVodConfigsResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.stitcher.v1.ListVodConfigsResponse
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IListVodConfigsResponse=} [properties] Properties to set
+                             * @returns {google.cloud.video.stitcher.v1.ListVodConfigsResponse} ListVodConfigsResponse instance
+                             */
+                            ListVodConfigsResponse.create = function create(properties) {
+                                return new ListVodConfigsResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListVodConfigsResponse message. Does not implicitly {@link google.cloud.video.stitcher.v1.ListVodConfigsResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.stitcher.v1.ListVodConfigsResponse
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IListVodConfigsResponse} message ListVodConfigsResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListVodConfigsResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.vodConfigs != null && message.vodConfigs.length)
+                                    for (var i = 0; i < message.vodConfigs.length; ++i)
+                                        $root.google.cloud.video.stitcher.v1.VodConfig.encode(message.vodConfigs[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                                if (message.unreachable != null && message.unreachable.length)
+                                    for (var i = 0; i < message.unreachable.length; ++i)
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListVodConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.ListVodConfigsResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.ListVodConfigsResponse
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IListVodConfigsResponse} message ListVodConfigsResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListVodConfigsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListVodConfigsResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.stitcher.v1.ListVodConfigsResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.stitcher.v1.ListVodConfigsResponse} ListVodConfigsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListVodConfigsResponse.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.stitcher.v1.ListVodConfigsResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.vodConfigs && message.vodConfigs.length))
+                                                message.vodConfigs = [];
+                                            message.vodConfigs.push($root.google.cloud.video.stitcher.v1.VodConfig.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.nextPageToken = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.unreachable && message.unreachable.length))
+                                                message.unreachable = [];
+                                            message.unreachable.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListVodConfigsResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.ListVodConfigsResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.stitcher.v1.ListVodConfigsResponse} ListVodConfigsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListVodConfigsResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListVodConfigsResponse message.
+                             * @function verify
+                             * @memberof google.cloud.video.stitcher.v1.ListVodConfigsResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListVodConfigsResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.vodConfigs != null && message.hasOwnProperty("vodConfigs")) {
+                                    if (!Array.isArray(message.vodConfigs))
+                                        return "vodConfigs: array expected";
+                                    for (var i = 0; i < message.vodConfigs.length; ++i) {
+                                        var error = $root.google.cloud.video.stitcher.v1.VodConfig.verify(message.vodConfigs[i]);
+                                        if (error)
+                                            return "vodConfigs." + error;
+                                    }
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    if (!$util.isString(message.nextPageToken))
+                                        return "nextPageToken: string expected";
+                                if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                    if (!Array.isArray(message.unreachable))
+                                        return "unreachable: array expected";
+                                    for (var i = 0; i < message.unreachable.length; ++i)
+                                        if (!$util.isString(message.unreachable[i]))
+                                            return "unreachable: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListVodConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.stitcher.v1.ListVodConfigsResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.stitcher.v1.ListVodConfigsResponse} ListVodConfigsResponse
+                             */
+                            ListVodConfigsResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.stitcher.v1.ListVodConfigsResponse)
+                                    return object;
+                                var message = new $root.google.cloud.video.stitcher.v1.ListVodConfigsResponse();
+                                if (object.vodConfigs) {
+                                    if (!Array.isArray(object.vodConfigs))
+                                        throw TypeError(".google.cloud.video.stitcher.v1.ListVodConfigsResponse.vodConfigs: array expected");
+                                    message.vodConfigs = [];
+                                    for (var i = 0; i < object.vodConfigs.length; ++i) {
+                                        if (typeof object.vodConfigs[i] !== "object")
+                                            throw TypeError(".google.cloud.video.stitcher.v1.ListVodConfigsResponse.vodConfigs: object expected");
+                                        message.vodConfigs[i] = $root.google.cloud.video.stitcher.v1.VodConfig.fromObject(object.vodConfigs[i]);
+                                    }
+                                }
+                                if (object.nextPageToken != null)
+                                    message.nextPageToken = String(object.nextPageToken);
+                                if (object.unreachable) {
+                                    if (!Array.isArray(object.unreachable))
+                                        throw TypeError(".google.cloud.video.stitcher.v1.ListVodConfigsResponse.unreachable: array expected");
+                                    message.unreachable = [];
+                                    for (var i = 0; i < object.unreachable.length; ++i)
+                                        message.unreachable[i] = String(object.unreachable[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListVodConfigsResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.stitcher.v1.ListVodConfigsResponse
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.ListVodConfigsResponse} message ListVodConfigsResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListVodConfigsResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.vodConfigs = [];
+                                    object.unreachable = [];
+                                }
+                                if (options.defaults)
+                                    object.nextPageToken = "";
+                                if (message.vodConfigs && message.vodConfigs.length) {
+                                    object.vodConfigs = [];
+                                    for (var j = 0; j < message.vodConfigs.length; ++j)
+                                        object.vodConfigs[j] = $root.google.cloud.video.stitcher.v1.VodConfig.toObject(message.vodConfigs[j], options);
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    object.nextPageToken = message.nextPageToken;
+                                if (message.unreachable && message.unreachable.length) {
+                                    object.unreachable = [];
+                                    for (var j = 0; j < message.unreachable.length; ++j)
+                                        object.unreachable[j] = message.unreachable[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListVodConfigsResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.stitcher.v1.ListVodConfigsResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListVodConfigsResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListVodConfigsResponse
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.stitcher.v1.ListVodConfigsResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListVodConfigsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.stitcher.v1.ListVodConfigsResponse";
+                            };
+    
+                            return ListVodConfigsResponse;
+                        })();
+    
+                        v1.GetVodConfigRequest = (function() {
+    
+                            /**
+                             * Properties of a GetVodConfigRequest.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @interface IGetVodConfigRequest
+                             * @property {string|null} [name] GetVodConfigRequest name
+                             */
+    
+                            /**
+                             * Constructs a new GetVodConfigRequest.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @classdesc Represents a GetVodConfigRequest.
+                             * @implements IGetVodConfigRequest
+                             * @constructor
+                             * @param {google.cloud.video.stitcher.v1.IGetVodConfigRequest=} [properties] Properties to set
+                             */
+                            function GetVodConfigRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GetVodConfigRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.video.stitcher.v1.GetVodConfigRequest
+                             * @instance
+                             */
+                            GetVodConfigRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new GetVodConfigRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.stitcher.v1.GetVodConfigRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IGetVodConfigRequest=} [properties] Properties to set
+                             * @returns {google.cloud.video.stitcher.v1.GetVodConfigRequest} GetVodConfigRequest instance
+                             */
+                            GetVodConfigRequest.create = function create(properties) {
+                                return new GetVodConfigRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GetVodConfigRequest message. Does not implicitly {@link google.cloud.video.stitcher.v1.GetVodConfigRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.stitcher.v1.GetVodConfigRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IGetVodConfigRequest} message GetVodConfigRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetVodConfigRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GetVodConfigRequest message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.GetVodConfigRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.GetVodConfigRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IGetVodConfigRequest} message GetVodConfigRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetVodConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GetVodConfigRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.stitcher.v1.GetVodConfigRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.stitcher.v1.GetVodConfigRequest} GetVodConfigRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetVodConfigRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.stitcher.v1.GetVodConfigRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GetVodConfigRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.GetVodConfigRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.stitcher.v1.GetVodConfigRequest} GetVodConfigRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetVodConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GetVodConfigRequest message.
+                             * @function verify
+                             * @memberof google.cloud.video.stitcher.v1.GetVodConfigRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GetVodConfigRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GetVodConfigRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.stitcher.v1.GetVodConfigRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.stitcher.v1.GetVodConfigRequest} GetVodConfigRequest
+                             */
+                            GetVodConfigRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.stitcher.v1.GetVodConfigRequest)
+                                    return object;
+                                var message = new $root.google.cloud.video.stitcher.v1.GetVodConfigRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GetVodConfigRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.stitcher.v1.GetVodConfigRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.GetVodConfigRequest} message GetVodConfigRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GetVodConfigRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GetVodConfigRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.stitcher.v1.GetVodConfigRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GetVodConfigRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GetVodConfigRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.stitcher.v1.GetVodConfigRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GetVodConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.stitcher.v1.GetVodConfigRequest";
+                            };
+    
+                            return GetVodConfigRequest;
+                        })();
+    
+                        v1.DeleteVodConfigRequest = (function() {
+    
+                            /**
+                             * Properties of a DeleteVodConfigRequest.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @interface IDeleteVodConfigRequest
+                             * @property {string|null} [name] DeleteVodConfigRequest name
+                             */
+    
+                            /**
+                             * Constructs a new DeleteVodConfigRequest.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @classdesc Represents a DeleteVodConfigRequest.
+                             * @implements IDeleteVodConfigRequest
+                             * @constructor
+                             * @param {google.cloud.video.stitcher.v1.IDeleteVodConfigRequest=} [properties] Properties to set
+                             */
+                            function DeleteVodConfigRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DeleteVodConfigRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.video.stitcher.v1.DeleteVodConfigRequest
+                             * @instance
+                             */
+                            DeleteVodConfigRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new DeleteVodConfigRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.stitcher.v1.DeleteVodConfigRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IDeleteVodConfigRequest=} [properties] Properties to set
+                             * @returns {google.cloud.video.stitcher.v1.DeleteVodConfigRequest} DeleteVodConfigRequest instance
+                             */
+                            DeleteVodConfigRequest.create = function create(properties) {
+                                return new DeleteVodConfigRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteVodConfigRequest message. Does not implicitly {@link google.cloud.video.stitcher.v1.DeleteVodConfigRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.stitcher.v1.DeleteVodConfigRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IDeleteVodConfigRequest} message DeleteVodConfigRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteVodConfigRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteVodConfigRequest message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.DeleteVodConfigRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.DeleteVodConfigRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IDeleteVodConfigRequest} message DeleteVodConfigRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteVodConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DeleteVodConfigRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.stitcher.v1.DeleteVodConfigRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.stitcher.v1.DeleteVodConfigRequest} DeleteVodConfigRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteVodConfigRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.stitcher.v1.DeleteVodConfigRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DeleteVodConfigRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.DeleteVodConfigRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.stitcher.v1.DeleteVodConfigRequest} DeleteVodConfigRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteVodConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DeleteVodConfigRequest message.
+                             * @function verify
+                             * @memberof google.cloud.video.stitcher.v1.DeleteVodConfigRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DeleteVodConfigRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DeleteVodConfigRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.stitcher.v1.DeleteVodConfigRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.stitcher.v1.DeleteVodConfigRequest} DeleteVodConfigRequest
+                             */
+                            DeleteVodConfigRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.stitcher.v1.DeleteVodConfigRequest)
+                                    return object;
+                                var message = new $root.google.cloud.video.stitcher.v1.DeleteVodConfigRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DeleteVodConfigRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.stitcher.v1.DeleteVodConfigRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.DeleteVodConfigRequest} message DeleteVodConfigRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DeleteVodConfigRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DeleteVodConfigRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.stitcher.v1.DeleteVodConfigRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DeleteVodConfigRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DeleteVodConfigRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.stitcher.v1.DeleteVodConfigRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DeleteVodConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.stitcher.v1.DeleteVodConfigRequest";
+                            };
+    
+                            return DeleteVodConfigRequest;
+                        })();
+    
+                        v1.UpdateVodConfigRequest = (function() {
+    
+                            /**
+                             * Properties of an UpdateVodConfigRequest.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @interface IUpdateVodConfigRequest
+                             * @property {google.cloud.video.stitcher.v1.IVodConfig|null} [vodConfig] UpdateVodConfigRequest vodConfig
+                             * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateVodConfigRequest updateMask
+                             */
+    
+                            /**
+                             * Constructs a new UpdateVodConfigRequest.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @classdesc Represents an UpdateVodConfigRequest.
+                             * @implements IUpdateVodConfigRequest
+                             * @constructor
+                             * @param {google.cloud.video.stitcher.v1.IUpdateVodConfigRequest=} [properties] Properties to set
+                             */
+                            function UpdateVodConfigRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * UpdateVodConfigRequest vodConfig.
+                             * @member {google.cloud.video.stitcher.v1.IVodConfig|null|undefined} vodConfig
+                             * @memberof google.cloud.video.stitcher.v1.UpdateVodConfigRequest
+                             * @instance
+                             */
+                            UpdateVodConfigRequest.prototype.vodConfig = null;
+    
+                            /**
+                             * UpdateVodConfigRequest updateMask.
+                             * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                             * @memberof google.cloud.video.stitcher.v1.UpdateVodConfigRequest
+                             * @instance
+                             */
+                            UpdateVodConfigRequest.prototype.updateMask = null;
+    
+                            /**
+                             * Creates a new UpdateVodConfigRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.stitcher.v1.UpdateVodConfigRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IUpdateVodConfigRequest=} [properties] Properties to set
+                             * @returns {google.cloud.video.stitcher.v1.UpdateVodConfigRequest} UpdateVodConfigRequest instance
+                             */
+                            UpdateVodConfigRequest.create = function create(properties) {
+                                return new UpdateVodConfigRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateVodConfigRequest message. Does not implicitly {@link google.cloud.video.stitcher.v1.UpdateVodConfigRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.stitcher.v1.UpdateVodConfigRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IUpdateVodConfigRequest} message UpdateVodConfigRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateVodConfigRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.vodConfig != null && Object.hasOwnProperty.call(message, "vodConfig"))
+                                    $root.google.cloud.video.stitcher.v1.VodConfig.encode(message.vodConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                    $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateVodConfigRequest message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.UpdateVodConfigRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.UpdateVodConfigRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IUpdateVodConfigRequest} message UpdateVodConfigRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateVodConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an UpdateVodConfigRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.stitcher.v1.UpdateVodConfigRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.stitcher.v1.UpdateVodConfigRequest} UpdateVodConfigRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateVodConfigRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.stitcher.v1.UpdateVodConfigRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.vodConfig = $root.google.cloud.video.stitcher.v1.VodConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an UpdateVodConfigRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.UpdateVodConfigRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.stitcher.v1.UpdateVodConfigRequest} UpdateVodConfigRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateVodConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an UpdateVodConfigRequest message.
+                             * @function verify
+                             * @memberof google.cloud.video.stitcher.v1.UpdateVodConfigRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            UpdateVodConfigRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.vodConfig != null && message.hasOwnProperty("vodConfig")) {
+                                    var error = $root.google.cloud.video.stitcher.v1.VodConfig.verify(message.vodConfig);
+                                    if (error)
+                                        return "vodConfig." + error;
+                                }
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                    var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                    if (error)
+                                        return "updateMask." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an UpdateVodConfigRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.stitcher.v1.UpdateVodConfigRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.stitcher.v1.UpdateVodConfigRequest} UpdateVodConfigRequest
+                             */
+                            UpdateVodConfigRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.stitcher.v1.UpdateVodConfigRequest)
+                                    return object;
+                                var message = new $root.google.cloud.video.stitcher.v1.UpdateVodConfigRequest();
+                                if (object.vodConfig != null) {
+                                    if (typeof object.vodConfig !== "object")
+                                        throw TypeError(".google.cloud.video.stitcher.v1.UpdateVodConfigRequest.vodConfig: object expected");
+                                    message.vodConfig = $root.google.cloud.video.stitcher.v1.VodConfig.fromObject(object.vodConfig);
+                                }
+                                if (object.updateMask != null) {
+                                    if (typeof object.updateMask !== "object")
+                                        throw TypeError(".google.cloud.video.stitcher.v1.UpdateVodConfigRequest.updateMask: object expected");
+                                    message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an UpdateVodConfigRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.stitcher.v1.UpdateVodConfigRequest
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.UpdateVodConfigRequest} message UpdateVodConfigRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            UpdateVodConfigRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.vodConfig = null;
+                                    object.updateMask = null;
+                                }
+                                if (message.vodConfig != null && message.hasOwnProperty("vodConfig"))
+                                    object.vodConfig = $root.google.cloud.video.stitcher.v1.VodConfig.toObject(message.vodConfig, options);
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                    object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this UpdateVodConfigRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.stitcher.v1.UpdateVodConfigRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            UpdateVodConfigRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for UpdateVodConfigRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.stitcher.v1.UpdateVodConfigRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            UpdateVodConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.stitcher.v1.UpdateVodConfigRequest";
+                            };
+    
+                            return UpdateVodConfigRequest;
+                        })();
+    
                         v1.OperationMetadata = (function() {
     
                             /**
@@ -17875,6 +20441,585 @@
                             };
     
                             return OperationMetadata;
+                        })();
+    
+                        v1.VodConfig = (function() {
+    
+                            /**
+                             * Properties of a VodConfig.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @interface IVodConfig
+                             * @property {string|null} [name] VodConfig name
+                             * @property {string|null} [sourceUri] VodConfig sourceUri
+                             * @property {string|null} [adTagUri] VodConfig adTagUri
+                             * @property {google.cloud.video.stitcher.v1.IGamVodConfig|null} [gamVodConfig] VodConfig gamVodConfig
+                             * @property {google.cloud.video.stitcher.v1.VodConfig.State|null} [state] VodConfig state
+                             * @property {google.cloud.video.stitcher.v1.IFetchOptions|null} [sourceFetchOptions] VodConfig sourceFetchOptions
+                             */
+    
+                            /**
+                             * Constructs a new VodConfig.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @classdesc Represents a VodConfig.
+                             * @implements IVodConfig
+                             * @constructor
+                             * @param {google.cloud.video.stitcher.v1.IVodConfig=} [properties] Properties to set
+                             */
+                            function VodConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * VodConfig name.
+                             * @member {string} name
+                             * @memberof google.cloud.video.stitcher.v1.VodConfig
+                             * @instance
+                             */
+                            VodConfig.prototype.name = "";
+    
+                            /**
+                             * VodConfig sourceUri.
+                             * @member {string} sourceUri
+                             * @memberof google.cloud.video.stitcher.v1.VodConfig
+                             * @instance
+                             */
+                            VodConfig.prototype.sourceUri = "";
+    
+                            /**
+                             * VodConfig adTagUri.
+                             * @member {string} adTagUri
+                             * @memberof google.cloud.video.stitcher.v1.VodConfig
+                             * @instance
+                             */
+                            VodConfig.prototype.adTagUri = "";
+    
+                            /**
+                             * VodConfig gamVodConfig.
+                             * @member {google.cloud.video.stitcher.v1.IGamVodConfig|null|undefined} gamVodConfig
+                             * @memberof google.cloud.video.stitcher.v1.VodConfig
+                             * @instance
+                             */
+                            VodConfig.prototype.gamVodConfig = null;
+    
+                            /**
+                             * VodConfig state.
+                             * @member {google.cloud.video.stitcher.v1.VodConfig.State} state
+                             * @memberof google.cloud.video.stitcher.v1.VodConfig
+                             * @instance
+                             */
+                            VodConfig.prototype.state = 0;
+    
+                            /**
+                             * VodConfig sourceFetchOptions.
+                             * @member {google.cloud.video.stitcher.v1.IFetchOptions|null|undefined} sourceFetchOptions
+                             * @memberof google.cloud.video.stitcher.v1.VodConfig
+                             * @instance
+                             */
+                            VodConfig.prototype.sourceFetchOptions = null;
+    
+                            /**
+                             * Creates a new VodConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.stitcher.v1.VodConfig
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IVodConfig=} [properties] Properties to set
+                             * @returns {google.cloud.video.stitcher.v1.VodConfig} VodConfig instance
+                             */
+                            VodConfig.create = function create(properties) {
+                                return new VodConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified VodConfig message. Does not implicitly {@link google.cloud.video.stitcher.v1.VodConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.stitcher.v1.VodConfig
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IVodConfig} message VodConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            VodConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.sourceUri != null && Object.hasOwnProperty.call(message, "sourceUri"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.sourceUri);
+                                if (message.adTagUri != null && Object.hasOwnProperty.call(message, "adTagUri"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.adTagUri);
+                                if (message.gamVodConfig != null && Object.hasOwnProperty.call(message, "gamVodConfig"))
+                                    $root.google.cloud.video.stitcher.v1.GamVodConfig.encode(message.gamVodConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).int32(message.state);
+                                if (message.sourceFetchOptions != null && Object.hasOwnProperty.call(message, "sourceFetchOptions"))
+                                    $root.google.cloud.video.stitcher.v1.FetchOptions.encode(message.sourceFetchOptions, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified VodConfig message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.VodConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.VodConfig
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IVodConfig} message VodConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            VodConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a VodConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.stitcher.v1.VodConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.stitcher.v1.VodConfig} VodConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            VodConfig.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.stitcher.v1.VodConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.sourceUri = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.adTagUri = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.gamVodConfig = $root.google.cloud.video.stitcher.v1.GamVodConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.state = reader.int32();
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.sourceFetchOptions = $root.google.cloud.video.stitcher.v1.FetchOptions.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a VodConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.VodConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.stitcher.v1.VodConfig} VodConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            VodConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a VodConfig message.
+                             * @function verify
+                             * @memberof google.cloud.video.stitcher.v1.VodConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            VodConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.sourceUri != null && message.hasOwnProperty("sourceUri"))
+                                    if (!$util.isString(message.sourceUri))
+                                        return "sourceUri: string expected";
+                                if (message.adTagUri != null && message.hasOwnProperty("adTagUri"))
+                                    if (!$util.isString(message.adTagUri))
+                                        return "adTagUri: string expected";
+                                if (message.gamVodConfig != null && message.hasOwnProperty("gamVodConfig")) {
+                                    var error = $root.google.cloud.video.stitcher.v1.GamVodConfig.verify(message.gamVodConfig);
+                                    if (error)
+                                        return "gamVodConfig." + error;
+                                }
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    switch (message.state) {
+                                    default:
+                                        return "state: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                if (message.sourceFetchOptions != null && message.hasOwnProperty("sourceFetchOptions")) {
+                                    var error = $root.google.cloud.video.stitcher.v1.FetchOptions.verify(message.sourceFetchOptions);
+                                    if (error)
+                                        return "sourceFetchOptions." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a VodConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.stitcher.v1.VodConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.stitcher.v1.VodConfig} VodConfig
+                             */
+                            VodConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.stitcher.v1.VodConfig)
+                                    return object;
+                                var message = new $root.google.cloud.video.stitcher.v1.VodConfig();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.sourceUri != null)
+                                    message.sourceUri = String(object.sourceUri);
+                                if (object.adTagUri != null)
+                                    message.adTagUri = String(object.adTagUri);
+                                if (object.gamVodConfig != null) {
+                                    if (typeof object.gamVodConfig !== "object")
+                                        throw TypeError(".google.cloud.video.stitcher.v1.VodConfig.gamVodConfig: object expected");
+                                    message.gamVodConfig = $root.google.cloud.video.stitcher.v1.GamVodConfig.fromObject(object.gamVodConfig);
+                                }
+                                switch (object.state) {
+                                default:
+                                    if (typeof object.state === "number") {
+                                        message.state = object.state;
+                                        break;
+                                    }
+                                    break;
+                                case "STATE_UNSPECIFIED":
+                                case 0:
+                                    message.state = 0;
+                                    break;
+                                case "CREATING":
+                                case 1:
+                                    message.state = 1;
+                                    break;
+                                case "READY":
+                                case 2:
+                                    message.state = 2;
+                                    break;
+                                case "DELETING":
+                                case 3:
+                                    message.state = 3;
+                                    break;
+                                }
+                                if (object.sourceFetchOptions != null) {
+                                    if (typeof object.sourceFetchOptions !== "object")
+                                        throw TypeError(".google.cloud.video.stitcher.v1.VodConfig.sourceFetchOptions: object expected");
+                                    message.sourceFetchOptions = $root.google.cloud.video.stitcher.v1.FetchOptions.fromObject(object.sourceFetchOptions);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a VodConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.stitcher.v1.VodConfig
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.VodConfig} message VodConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            VodConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.sourceUri = "";
+                                    object.adTagUri = "";
+                                    object.gamVodConfig = null;
+                                    object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                    object.sourceFetchOptions = null;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.sourceUri != null && message.hasOwnProperty("sourceUri"))
+                                    object.sourceUri = message.sourceUri;
+                                if (message.adTagUri != null && message.hasOwnProperty("adTagUri"))
+                                    object.adTagUri = message.adTagUri;
+                                if (message.gamVodConfig != null && message.hasOwnProperty("gamVodConfig"))
+                                    object.gamVodConfig = $root.google.cloud.video.stitcher.v1.GamVodConfig.toObject(message.gamVodConfig, options);
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    object.state = options.enums === String ? $root.google.cloud.video.stitcher.v1.VodConfig.State[message.state] === undefined ? message.state : $root.google.cloud.video.stitcher.v1.VodConfig.State[message.state] : message.state;
+                                if (message.sourceFetchOptions != null && message.hasOwnProperty("sourceFetchOptions"))
+                                    object.sourceFetchOptions = $root.google.cloud.video.stitcher.v1.FetchOptions.toObject(message.sourceFetchOptions, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this VodConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.stitcher.v1.VodConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            VodConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for VodConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.stitcher.v1.VodConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            VodConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.stitcher.v1.VodConfig";
+                            };
+    
+                            /**
+                             * State enum.
+                             * @name google.cloud.video.stitcher.v1.VodConfig.State
+                             * @enum {number}
+                             * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                             * @property {number} CREATING=1 CREATING value
+                             * @property {number} READY=2 READY value
+                             * @property {number} DELETING=3 DELETING value
+                             */
+                            VodConfig.State = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "CREATING"] = 1;
+                                values[valuesById[2] = "READY"] = 2;
+                                values[valuesById[3] = "DELETING"] = 3;
+                                return values;
+                            })();
+    
+                            return VodConfig;
+                        })();
+    
+                        v1.GamVodConfig = (function() {
+    
+                            /**
+                             * Properties of a GamVodConfig.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @interface IGamVodConfig
+                             * @property {string|null} [networkCode] GamVodConfig networkCode
+                             */
+    
+                            /**
+                             * Constructs a new GamVodConfig.
+                             * @memberof google.cloud.video.stitcher.v1
+                             * @classdesc Represents a GamVodConfig.
+                             * @implements IGamVodConfig
+                             * @constructor
+                             * @param {google.cloud.video.stitcher.v1.IGamVodConfig=} [properties] Properties to set
+                             */
+                            function GamVodConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GamVodConfig networkCode.
+                             * @member {string} networkCode
+                             * @memberof google.cloud.video.stitcher.v1.GamVodConfig
+                             * @instance
+                             */
+                            GamVodConfig.prototype.networkCode = "";
+    
+                            /**
+                             * Creates a new GamVodConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.stitcher.v1.GamVodConfig
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IGamVodConfig=} [properties] Properties to set
+                             * @returns {google.cloud.video.stitcher.v1.GamVodConfig} GamVodConfig instance
+                             */
+                            GamVodConfig.create = function create(properties) {
+                                return new GamVodConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GamVodConfig message. Does not implicitly {@link google.cloud.video.stitcher.v1.GamVodConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.stitcher.v1.GamVodConfig
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IGamVodConfig} message GamVodConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GamVodConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.networkCode != null && Object.hasOwnProperty.call(message, "networkCode"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.networkCode);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GamVodConfig message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.GamVodConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.GamVodConfig
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.IGamVodConfig} message GamVodConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GamVodConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GamVodConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.stitcher.v1.GamVodConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.stitcher.v1.GamVodConfig} GamVodConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GamVodConfig.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.stitcher.v1.GamVodConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.networkCode = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GamVodConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.stitcher.v1.GamVodConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.stitcher.v1.GamVodConfig} GamVodConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GamVodConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GamVodConfig message.
+                             * @function verify
+                             * @memberof google.cloud.video.stitcher.v1.GamVodConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GamVodConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.networkCode != null && message.hasOwnProperty("networkCode"))
+                                    if (!$util.isString(message.networkCode))
+                                        return "networkCode: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GamVodConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.stitcher.v1.GamVodConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.stitcher.v1.GamVodConfig} GamVodConfig
+                             */
+                            GamVodConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.stitcher.v1.GamVodConfig)
+                                    return object;
+                                var message = new $root.google.cloud.video.stitcher.v1.GamVodConfig();
+                                if (object.networkCode != null)
+                                    message.networkCode = String(object.networkCode);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GamVodConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.stitcher.v1.GamVodConfig
+                             * @static
+                             * @param {google.cloud.video.stitcher.v1.GamVodConfig} message GamVodConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GamVodConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.networkCode = "";
+                                if (message.networkCode != null && message.hasOwnProperty("networkCode"))
+                                    object.networkCode = message.networkCode;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GamVodConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.stitcher.v1.GamVodConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GamVodConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GamVodConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.stitcher.v1.GamVodConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GamVodConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.stitcher.v1.GamVodConfig";
+                            };
+    
+                            return GamVodConfig;
                         })();
     
                         return v1;
