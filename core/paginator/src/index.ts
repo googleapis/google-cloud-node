@@ -233,10 +233,10 @@ export class Paginator {
         });
     });
     if (!callback) {
-      return promise.then(results => [results, ...otherArgs]);
+      return promise.then(results => [results, query, ...otherArgs]);
     }
     promise.then(
-      results => callback(null, results, ...otherArgs),
+      results => callback(null, results, query, ...otherArgs),
       (err: Error) => callback(err)
     );
   }
