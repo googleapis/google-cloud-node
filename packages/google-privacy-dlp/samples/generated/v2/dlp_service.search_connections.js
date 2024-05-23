@@ -43,8 +43,7 @@ function main(parent) {
    */
   // const pageToken = 'abc123'
   /**
-   *  Optional. * Supported fields/values
-   *      - `state` - MISSING|AVAILABLE|ERROR
+   *  Optional. Supported field/value: - `state` - MISSING|AVAILABLE|ERROR
    */
   // const filter = 'abc123'
 
