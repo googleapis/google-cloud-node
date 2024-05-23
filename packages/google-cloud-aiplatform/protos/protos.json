@@ -30303,6 +30303,11 @@
                           "oneof": [
                             "frequencyPenalty"
                           ]
+                        },
+                        "_responseSchema": {
+                          "oneof": [
+                            "responseSchema"
+                          ]
                         }
                       },
                       "fields": {
@@ -30375,6 +30380,14 @@
                           "id": 13,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "responseSchema": {
+                          "type": "Schema",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -30793,6 +30806,164 @@
                         }
                       }
                     },
+                    "Type": {
+                      "values": {
+                        "TYPE_UNSPECIFIED": 0,
+                        "STRING": 1,
+                        "NUMBER": 2,
+                        "INTEGER": 3,
+                        "BOOLEAN": 4,
+                        "ARRAY": 5,
+                        "OBJECT": 6
+                      }
+                    },
+                    "Schema": {
+                      "fields": {
+                        "type": {
+                          "type": "Type",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "format": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "title": {
+                          "type": "string",
+                          "id": 24,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "nullable": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "default": {
+                          "type": "google.protobuf.Value",
+                          "id": 23,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "items": {
+                          "type": "Schema",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "minItems": {
+                          "type": "int64",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "maxItems": {
+                          "type": "int64",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "enum": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "properties": {
+                          "keyType": "string",
+                          "type": "Schema",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "required": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "minProperties": {
+                          "type": "int64",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "maxProperties": {
+                          "type": "int64",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "minimum": {
+                          "type": "double",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "maximum": {
+                          "type": "double",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "minLength": {
+                          "type": "int64",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "maxLength": {
+                          "type": "int64",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pattern": {
+                          "type": "string",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "example": {
+                          "type": "google.protobuf.Value",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "Tool": {
                       "fields": {
                         "functionDeclarations": {
@@ -31110,164 +31281,6 @@
                             "AUTO": 1,
                             "ANY": 2,
                             "NONE": 3
-                          }
-                        }
-                      }
-                    },
-                    "Type": {
-                      "values": {
-                        "TYPE_UNSPECIFIED": 0,
-                        "STRING": 1,
-                        "NUMBER": 2,
-                        "INTEGER": 3,
-                        "BOOLEAN": 4,
-                        "ARRAY": 5,
-                        "OBJECT": 6
-                      }
-                    },
-                    "Schema": {
-                      "fields": {
-                        "type": {
-                          "type": "Type",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "format": {
-                          "type": "string",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "title": {
-                          "type": "string",
-                          "id": 24,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 8,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "nullable": {
-                          "type": "bool",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "default": {
-                          "type": "google.protobuf.Value",
-                          "id": 23,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "items": {
-                          "type": "Schema",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "minItems": {
-                          "type": "int64",
-                          "id": 21,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "maxItems": {
-                          "type": "int64",
-                          "id": 22,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "enum": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 9,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "properties": {
-                          "keyType": "string",
-                          "type": "Schema",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "required": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "minProperties": {
-                          "type": "int64",
-                          "id": 14,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "maxProperties": {
-                          "type": "int64",
-                          "id": 15,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "minimum": {
-                          "type": "double",
-                          "id": 16,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "maximum": {
-                          "type": "double",
-                          "id": 17,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "minLength": {
-                          "type": "int64",
-                          "id": 18,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "maxLength": {
-                          "type": "int64",
-                          "id": 19,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "pattern": {
-                          "type": "string",
-                          "id": 20,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "example": {
-                          "type": "google.protobuf.Value",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
