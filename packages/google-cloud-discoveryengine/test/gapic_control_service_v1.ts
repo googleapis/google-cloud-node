@@ -21,16 +21,11 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as documentserviceModule from '../src';
+import * as controlserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {
-  protobuf,
-  LROperation,
-  operationsProtos,
-  LocationProtos,
-} from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -69,38 +64,6 @@ function stubSimpleCallWithCallback<ResponseType>(
   return error
     ? sinon.stub().callsArgWith(2, error)
     : sinon.stub().callsArgWith(2, null, response);
-}
-
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
-}
-
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
 function stubPageStreamingCall<ResponseType>(
@@ -164,16 +127,16 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1.DocumentServiceClient', () => {
+describe('v1.ControlServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient();
+      const client = new controlserviceModule.v1.ControlServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'discoveryengine.googleapis.com');
     });
 
     it('has universeDomain', () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient();
+      const client = new controlserviceModule.v1.ControlServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -185,7 +148,7 @@ describe('v1.DocumentServiceClient', () => {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const servicePath =
-          documentserviceModule.v1.DocumentServiceClient.servicePath;
+          controlserviceModule.v1.ControlServiceClient.servicePath;
         assert.strictEqual(servicePath, 'discoveryengine.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -194,14 +157,14 @@ describe('v1.DocumentServiceClient', () => {
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const apiEndpoint =
-          documentserviceModule.v1.DocumentServiceClient.apiEndpoint;
+          controlserviceModule.v1.ControlServiceClient.apiEndpoint;
         assert.strictEqual(apiEndpoint, 'discoveryengine.googleapis.com');
         assert(stub.called);
         stub.restore();
       });
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         universeDomain: 'example.com',
       });
       const servicePath = client.apiEndpoint;
@@ -209,7 +172,7 @@ describe('v1.DocumentServiceClient', () => {
     });
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         universe_domain: 'example.com',
       });
       const servicePath = client.apiEndpoint;
@@ -221,7 +184,7 @@ describe('v1.DocumentServiceClient', () => {
         it('sets apiEndpoint from environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new documentserviceModule.v1.DocumentServiceClient();
+          const client = new controlserviceModule.v1.ControlServiceClient();
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'discoveryengine.example.com');
           if (saved) {
@@ -234,7 +197,7 @@ describe('v1.DocumentServiceClient', () => {
         it('value configured in code has priority over environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new documentserviceModule.v1.DocumentServiceClient({
+          const client = new controlserviceModule.v1.ControlServiceClient({
             universeDomain: 'configured.example.com',
           });
           const servicePath = client.apiEndpoint;
@@ -252,7 +215,7 @@ describe('v1.DocumentServiceClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new documentserviceModule.v1.DocumentServiceClient({
+        new controlserviceModule.v1.ControlServiceClient({
           universe_domain: 'example.com',
           universeDomain: 'example.net',
         });
@@ -260,51 +223,51 @@ describe('v1.DocumentServiceClient', () => {
     });
 
     it('has port', () => {
-      const port = documentserviceModule.v1.DocumentServiceClient.port;
+      const port = controlserviceModule.v1.ControlServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient();
+      const client = new controlserviceModule.v1.ControlServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         fallback: true,
       });
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      assert.strictEqual(client.documentServiceStub, undefined);
+      assert.strictEqual(client.controlServiceStub, undefined);
       await client.initialize();
-      assert(client.documentServiceStub);
+      assert(client.controlServiceStub);
     });
 
     it('has close method for the initialized client', done => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
-      assert(client.documentServiceStub);
+      assert(client.controlServiceStub);
       client.close().then(() => {
         done();
       });
     });
 
     it('has close method for the non-initialized client', done => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      assert.strictEqual(client.documentServiceStub, undefined);
+      assert.strictEqual(client.controlServiceStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -312,7 +275,7 @@ describe('v1.DocumentServiceClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -324,7 +287,7 @@ describe('v1.DocumentServiceClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -345,64 +308,64 @@ describe('v1.DocumentServiceClient', () => {
     });
   });
 
-  describe('getDocument', () => {
-    it('invokes getDocument without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+  describe('createControl', () => {
+    it('invokes createControl without error', async () => {
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.GetDocumentRequest()
+        new protos.google.cloud.discoveryengine.v1.CreateControlRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.GetDocumentRequest',
-        ['name']
+        '.google.cloud.discoveryengine.v1.CreateControlRequest',
+        ['parent']
       );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.Document()
+        new protos.google.cloud.discoveryengine.v1.Control()
       );
-      client.innerApiCalls.getDocument = stubSimpleCall(expectedResponse);
-      const [response] = await client.getDocument(request);
+      client.innerApiCalls.createControl = stubSimpleCall(expectedResponse);
+      const [response] = await client.createControl(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getDocument as SinonStub
+        client.innerApiCalls.createControl as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getDocument as SinonStub
+        client.innerApiCalls.createControl as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getDocument without error using callback', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+    it('invokes createControl without error using callback', async () => {
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.GetDocumentRequest()
+        new protos.google.cloud.discoveryengine.v1.CreateControlRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.GetDocumentRequest',
-        ['name']
+        '.google.cloud.discoveryengine.v1.CreateControlRequest',
+        ['parent']
       );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.Document()
+        new protos.google.cloud.discoveryengine.v1.Control()
       );
-      client.innerApiCalls.getDocument =
+      client.innerApiCalls.createControl =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.getDocument(
+        client.createControl(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1.IDocument | null
+            result?: protos.google.cloud.discoveryengine.v1.IControl | null
           ) => {
             if (err) {
               reject(err);
@@ -415,342 +378,78 @@ describe('v1.DocumentServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getDocument as SinonStub
+        client.innerApiCalls.createControl as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getDocument as SinonStub
+        client.innerApiCalls.createControl as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getDocument with error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+    it('invokes createControl with error', async () => {
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.GetDocumentRequest()
+        new protos.google.cloud.discoveryengine.v1.CreateControlRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.GetDocumentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getDocument = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getDocument(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getDocument as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getDocument as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getDocument with closed client', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.GetDocumentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.GetDocumentRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getDocument(request), expectedError);
-    });
-  });
-
-  describe('createDocument', () => {
-    it('invokes createDocument without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.CreateDocumentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.CreateDocumentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.Document()
-      );
-      client.innerApiCalls.createDocument = stubSimpleCall(expectedResponse);
-      const [response] = await client.createDocument(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createDocument as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createDocument as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createDocument without error using callback', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.CreateDocumentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.CreateDocumentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.Document()
-      );
-      client.innerApiCalls.createDocument =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createDocument(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1.IDocument | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createDocument as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createDocument as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createDocument with error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.CreateDocumentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.CreateDocumentRequest',
+        '.google.cloud.discoveryengine.v1.CreateControlRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.createDocument = stubSimpleCall(
+      client.innerApiCalls.createControl = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.createDocument(request), expectedError);
+      await assert.rejects(client.createControl(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.createDocument as SinonStub
+        client.innerApiCalls.createControl as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.createDocument as SinonStub
+        client.innerApiCalls.createControl as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes createDocument with closed client', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+    it('invokes createControl with closed client', async () => {
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.CreateDocumentRequest()
+        new protos.google.cloud.discoveryengine.v1.CreateControlRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.CreateDocumentRequest',
+        '.google.cloud.discoveryengine.v1.CreateControlRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.createDocument(request), expectedError);
+      await assert.rejects(client.createControl(request), expectedError);
     });
   });
 
-  describe('updateDocument', () => {
-    it('invokes updateDocument without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+  describe('deleteControl', () => {
+    it('invokes deleteControl without error', async () => {
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.UpdateDocumentRequest()
-      );
-      request.document ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.UpdateDocumentRequest',
-        ['document', 'name']
-      );
-      request.document.name = defaultValue1;
-      const expectedHeaderRequestParams = `document.name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.Document()
-      );
-      client.innerApiCalls.updateDocument = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateDocument(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateDocument as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateDocument as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateDocument without error using callback', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.UpdateDocumentRequest()
-      );
-      request.document ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.UpdateDocumentRequest',
-        ['document', 'name']
-      );
-      request.document.name = defaultValue1;
-      const expectedHeaderRequestParams = `document.name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.Document()
-      );
-      client.innerApiCalls.updateDocument =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateDocument(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1.IDocument | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateDocument as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateDocument as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateDocument with error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.UpdateDocumentRequest()
-      );
-      request.document ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.UpdateDocumentRequest',
-        ['document', 'name']
-      );
-      request.document.name = defaultValue1;
-      const expectedHeaderRequestParams = `document.name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateDocument = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateDocument(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateDocument as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateDocument as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateDocument with closed client', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.UpdateDocumentRequest()
-      );
-      request.document ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.UpdateDocumentRequest',
-        ['document', 'name']
-      );
-      request.document.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.updateDocument(request), expectedError);
-    });
-  });
-
-  describe('deleteDocument', () => {
-    it('invokes deleteDocument without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.DeleteDocumentRequest()
+        new protos.google.cloud.discoveryengine.v1.DeleteControlRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.DeleteDocumentRequest',
+        '.google.cloud.discoveryengine.v1.DeleteControlRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -758,30 +457,30 @@ describe('v1.DocumentServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteDocument = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteDocument(request);
+      client.innerApiCalls.deleteControl = stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteControl(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.deleteDocument as SinonStub
+        client.innerApiCalls.deleteControl as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDocument as SinonStub
+        client.innerApiCalls.deleteControl as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes deleteDocument without error using callback', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+    it('invokes deleteControl without error using callback', async () => {
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.DeleteDocumentRequest()
+        new protos.google.cloud.discoveryengine.v1.DeleteControlRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.DeleteDocumentRequest',
+        '.google.cloud.discoveryengine.v1.DeleteControlRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -789,10 +488,10 @@ describe('v1.DocumentServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteDocument =
+      client.innerApiCalls.deleteControl =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.deleteDocument(
+        client.deleteControl(
           request,
           (
             err?: Error | null,
@@ -809,528 +508,126 @@ describe('v1.DocumentServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.deleteDocument as SinonStub
+        client.innerApiCalls.deleteControl as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDocument as SinonStub
+        client.innerApiCalls.deleteControl as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes deleteDocument with error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+    it('invokes deleteControl with error', async () => {
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.DeleteDocumentRequest()
+        new protos.google.cloud.discoveryengine.v1.DeleteControlRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.DeleteDocumentRequest',
+        '.google.cloud.discoveryengine.v1.DeleteControlRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.deleteDocument = stubSimpleCall(
+      client.innerApiCalls.deleteControl = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.deleteDocument(request), expectedError);
+      await assert.rejects(client.deleteControl(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.deleteDocument as SinonStub
+        client.innerApiCalls.deleteControl as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDocument as SinonStub
+        client.innerApiCalls.deleteControl as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes deleteDocument with closed client', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+    it('invokes deleteControl with closed client', async () => {
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.DeleteDocumentRequest()
+        new protos.google.cloud.discoveryengine.v1.DeleteControlRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.DeleteDocumentRequest',
+        '.google.cloud.discoveryengine.v1.DeleteControlRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.deleteDocument(request), expectedError);
+      await assert.rejects(client.deleteControl(request), expectedError);
     });
   });
 
-  describe('importDocuments', () => {
-    it('invokes importDocuments without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+  describe('updateControl', () => {
+    it('invokes updateControl without error', async () => {
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ImportDocumentsRequest()
+        new protos.google.cloud.discoveryengine.v1.UpdateControlRequest()
       );
+      request.control ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ImportDocumentsRequest',
-        ['parent']
+        '.google.cloud.discoveryengine.v1.UpdateControlRequest',
+        ['control', 'name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      request.control.name = defaultValue1;
+      const expectedHeaderRequestParams = `control.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
+        new protos.google.cloud.discoveryengine.v1.Control()
       );
-      client.innerApiCalls.importDocuments =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.importDocuments(request);
-      const [response] = await operation.promise();
+      client.innerApiCalls.updateControl = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateControl(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.importDocuments as SinonStub
+        client.innerApiCalls.updateControl as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.importDocuments as SinonStub
+        client.innerApiCalls.updateControl as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes importDocuments without error using callback', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+    it('invokes updateControl without error using callback', async () => {
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ImportDocumentsRequest()
+        new protos.google.cloud.discoveryengine.v1.UpdateControlRequest()
       );
+      request.control ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ImportDocumentsRequest',
-        ['parent']
+        '.google.cloud.discoveryengine.v1.UpdateControlRequest',
+        ['control', 'name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      request.control.name = defaultValue1;
+      const expectedHeaderRequestParams = `control.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
+        new protos.google.cloud.discoveryengine.v1.Control()
       );
-      client.innerApiCalls.importDocuments =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.importDocuments(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.discoveryengine.v1.IImportDocumentsResponse,
-              protos.google.cloud.discoveryengine.v1.IImportDocumentsMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.discoveryengine.v1.IImportDocumentsResponse,
-        protos.google.cloud.discoveryengine.v1.IImportDocumentsMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.importDocuments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.importDocuments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes importDocuments with call error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ImportDocumentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ImportDocumentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.importDocuments = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.importDocuments(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.importDocuments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.importDocuments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes importDocuments with LRO error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ImportDocumentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ImportDocumentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.importDocuments = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.importDocuments(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.importDocuments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.importDocuments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkImportDocumentsProgress without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkImportDocumentsProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkImportDocumentsProgress with error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkImportDocumentsProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('purgeDocuments', () => {
-    it('invokes purgeDocuments without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.PurgeDocumentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.PurgeDocumentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.purgeDocuments =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.purgeDocuments(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.purgeDocuments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.purgeDocuments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes purgeDocuments without error using callback', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.PurgeDocumentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.PurgeDocumentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.purgeDocuments =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.purgeDocuments(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.discoveryengine.v1.IPurgeDocumentsResponse,
-              protos.google.cloud.discoveryengine.v1.IPurgeDocumentsMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.discoveryengine.v1.IPurgeDocumentsResponse,
-        protos.google.cloud.discoveryengine.v1.IPurgeDocumentsMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.purgeDocuments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.purgeDocuments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes purgeDocuments with call error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.PurgeDocumentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.PurgeDocumentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.purgeDocuments = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.purgeDocuments(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.purgeDocuments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.purgeDocuments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes purgeDocuments with LRO error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.PurgeDocumentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.PurgeDocumentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.purgeDocuments = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.purgeDocuments(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.purgeDocuments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.purgeDocuments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkPurgeDocumentsProgress without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkPurgeDocumentsProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkPurgeDocumentsProgress with error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkPurgeDocumentsProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listDocuments', () => {
-    it('invokes listDocuments without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ListDocumentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ListDocumentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.Document()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.Document()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.Document()
-        ),
-      ];
-      client.innerApiCalls.listDocuments = stubSimpleCall(expectedResponse);
-      const [response] = await client.listDocuments(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listDocuments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listDocuments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listDocuments without error using callback', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ListDocumentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ListDocumentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.Document()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.Document()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.Document()
-        ),
-      ];
-      client.innerApiCalls.listDocuments =
+      client.innerApiCalls.updateControl =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.listDocuments(
+        client.updateControl(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1.IDocument[] | null
+            result?: protos.google.cloud.discoveryengine.v1.IControl | null
           ) => {
             if (err) {
               reject(err);
@@ -1343,80 +640,358 @@ describe('v1.DocumentServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.listDocuments as SinonStub
+        client.innerApiCalls.updateControl as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listDocuments as SinonStub
+        client.innerApiCalls.updateControl as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listDocuments with error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+    it('invokes updateControl with error', async () => {
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ListDocumentsRequest()
+        new protos.google.cloud.discoveryengine.v1.UpdateControlRequest()
       );
+      request.control ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ListDocumentsRequest',
-        ['parent']
+        '.google.cloud.discoveryengine.v1.UpdateControlRequest',
+        ['control', 'name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      request.control.name = defaultValue1;
+      const expectedHeaderRequestParams = `control.name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.listDocuments = stubSimpleCall(
+      client.innerApiCalls.updateControl = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.listDocuments(request), expectedError);
+      await assert.rejects(client.updateControl(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.listDocuments as SinonStub
+        client.innerApiCalls.updateControl as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listDocuments as SinonStub
+        client.innerApiCalls.updateControl as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listDocumentsStream without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+    it('invokes updateControl with closed client', async () => {
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ListDocumentsRequest()
+        new protos.google.cloud.discoveryengine.v1.UpdateControlRequest()
+      );
+      request.control ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.UpdateControlRequest',
+        ['control', 'name']
+      );
+      request.control.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateControl(request), expectedError);
+    });
+  });
+
+  describe('getControl', () => {
+    it('invokes getControl without error', async () => {
+      const client = new controlserviceModule.v1.ControlServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.GetControlRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ListDocumentsRequest',
+        '.google.cloud.discoveryengine.v1.GetControlRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.Control()
+      );
+      client.innerApiCalls.getControl = stubSimpleCall(expectedResponse);
+      const [response] = await client.getControl(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getControl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getControl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getControl without error using callback', async () => {
+      const client = new controlserviceModule.v1.ControlServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.GetControlRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.GetControlRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.Control()
+      );
+      client.innerApiCalls.getControl =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getControl(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.discoveryengine.v1.IControl | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getControl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getControl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getControl with error', async () => {
+      const client = new controlserviceModule.v1.ControlServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.GetControlRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.GetControlRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getControl = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getControl(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getControl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getControl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getControl with closed client', async () => {
+      const client = new controlserviceModule.v1.ControlServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.GetControlRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.GetControlRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getControl(request), expectedError);
+    });
+  });
+
+  describe('listControls', () => {
+    it('invokes listControls without error', async () => {
+      const client = new controlserviceModule.v1.ControlServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.ListControlsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.ListControlsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.Document()
+          new protos.google.cloud.discoveryengine.v1.Control()
         ),
         generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.Document()
+          new protos.google.cloud.discoveryengine.v1.Control()
         ),
         generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.Document()
+          new protos.google.cloud.discoveryengine.v1.Control()
         ),
       ];
-      client.descriptors.page.listDocuments.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listDocumentsStream(request);
+      client.innerApiCalls.listControls = stubSimpleCall(expectedResponse);
+      const [response] = await client.listControls(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listControls as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listControls as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listControls without error using callback', async () => {
+      const client = new controlserviceModule.v1.ControlServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.ListControlsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.ListControlsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1.Control()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1.Control()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1.Control()
+        ),
+      ];
+      client.innerApiCalls.listControls =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.discoveryengine.v1.Document[] = [];
+        client.listControls(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.discoveryengine.v1.IControl[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listControls as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listControls as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listControls with error', async () => {
+      const client = new controlserviceModule.v1.ControlServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.ListControlsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.ListControlsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listControls = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listControls(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listControls as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listControls as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listControlsStream without error', async () => {
+      const client = new controlserviceModule.v1.ControlServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.ListControlsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.ListControlsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1.Control()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1.Control()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1.Control()
+        ),
+      ];
+      client.descriptors.page.listControls.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listControlsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.discoveryengine.v1.Control[] = [];
         stream.on(
           'data',
-          (response: protos.google.cloud.discoveryengine.v1.Document) => {
+          (response: protos.google.cloud.discoveryengine.v1.Control) => {
             responses.push(response);
           }
         );
@@ -1430,12 +1005,12 @@ describe('v1.DocumentServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listDocuments.createStream as SinonStub)
+        (client.descriptors.page.listControls.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listDocuments, request)
+          .calledWith(client.innerApiCalls.listControls, request)
       );
       assert(
-        (client.descriptors.page.listDocuments.createStream as SinonStub)
+        (client.descriptors.page.listControls.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
@@ -1443,30 +1018,32 @@ describe('v1.DocumentServiceClient', () => {
       );
     });
 
-    it('invokes listDocumentsStream with error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+    it('invokes listControlsStream with error', async () => {
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ListDocumentsRequest()
+        new protos.google.cloud.discoveryengine.v1.ListControlsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ListDocumentsRequest',
+        '.google.cloud.discoveryengine.v1.ListControlsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.descriptors.page.listDocuments.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listDocumentsStream(request);
+      client.descriptors.page.listControls.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.listControlsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.discoveryengine.v1.Document[] = [];
+        const responses: protos.google.cloud.discoveryengine.v1.Control[] = [];
         stream.on(
           'data',
-          (response: protos.google.cloud.discoveryengine.v1.Document) => {
+          (response: protos.google.cloud.discoveryengine.v1.Control) => {
             responses.push(response);
           }
         );
@@ -1479,12 +1056,12 @@ describe('v1.DocumentServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listDocuments.createStream as SinonStub)
+        (client.descriptors.page.listControls.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listDocuments, request)
+          .calledWith(client.innerApiCalls.listControls, request)
       );
       assert(
-        (client.descriptors.page.listDocuments.createStream as SinonStub)
+        (client.descriptors.page.listControls.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
@@ -1492,48 +1069,48 @@ describe('v1.DocumentServiceClient', () => {
       );
     });
 
-    it('uses async iteration with listDocuments without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+    it('uses async iteration with listControls without error', async () => {
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ListDocumentsRequest()
+        new protos.google.cloud.discoveryengine.v1.ListControlsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ListDocumentsRequest',
+        '.google.cloud.discoveryengine.v1.ListControlsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.Document()
+          new protos.google.cloud.discoveryengine.v1.Control()
         ),
         generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.Document()
+          new protos.google.cloud.discoveryengine.v1.Control()
         ),
         generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.Document()
+          new protos.google.cloud.discoveryengine.v1.Control()
         ),
       ];
-      client.descriptors.page.listDocuments.asyncIterate =
+      client.descriptors.page.listControls.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.discoveryengine.v1.IDocument[] = [];
-      const iterable = client.listDocumentsAsync(request);
+      const responses: protos.google.cloud.discoveryengine.v1.IControl[] = [];
+      const iterable = client.listControlsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
         (
-          client.descriptors.page.listDocuments.asyncIterate as SinonStub
+          client.descriptors.page.listControls.asyncIterate as SinonStub
         ).getCall(0).args[1],
         request
       );
       assert(
-        (client.descriptors.page.listDocuments.asyncIterate as SinonStub)
+        (client.descriptors.page.listControls.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
@@ -1541,40 +1118,39 @@ describe('v1.DocumentServiceClient', () => {
       );
     });
 
-    it('uses async iteration with listDocuments with error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+    it('uses async iteration with listControls with error', async () => {
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ListDocumentsRequest()
+        new protos.google.cloud.discoveryengine.v1.ListControlsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ListDocumentsRequest',
+        '.google.cloud.discoveryengine.v1.ListControlsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.descriptors.page.listDocuments.asyncIterate =
+      client.descriptors.page.listControls.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listDocumentsAsync(request);
+      const iterable = client.listControlsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.discoveryengine.v1.IDocument[] =
-          [];
+        const responses: protos.google.cloud.discoveryengine.v1.IControl[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
         (
-          client.descriptors.page.listDocuments.asyncIterate as SinonStub
+          client.descriptors.page.listControls.asyncIterate as SinonStub
         ).getCall(0).args[1],
         request
       );
       assert(
-        (client.descriptors.page.listDocuments.asyncIterate as SinonStub)
+        (client.descriptors.page.listControls.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
@@ -1584,7 +1160,7 @@ describe('v1.DocumentServiceClient', () => {
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1614,7 +1190,7 @@ describe('v1.DocumentServiceClient', () => {
       );
     });
     it('invokes getLocation without error using callback', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1658,7 +1234,7 @@ describe('v1.DocumentServiceClient', () => {
       assert((client.locationsClient.getLocation as SinonStub).getCall(0));
     });
     it('invokes getLocation with error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1693,7 +1269,7 @@ describe('v1.DocumentServiceClient', () => {
   });
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1741,7 +1317,7 @@ describe('v1.DocumentServiceClient', () => {
       );
     });
     it('uses async iteration with listLocations with error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1780,311 +1356,6 @@ describe('v1.DocumentServiceClient', () => {
       );
     });
   });
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const response = await client.getOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes getOperation without error using callback', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.getOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: operationsProtos.google.longrunning.Operation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-    it('invokes getOperation with error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes cancelOperation without error using callback', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.cancelOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
-    });
-    it('invokes cancelOperation with error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('deleteOperation', () => {
-    it('invokes deleteOperation without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.deleteOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes deleteOperation without error using callback', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.deleteOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
-    });
-    it('invokes deleteOperation with error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.deleteOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('listOperationsAsync', () => {
-    it('uses async iteration with listOperations without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-      ];
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-    it('uses async iteration with listOperations with error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
 
   describe('Path templates', () => {
     describe('engine', () => {
@@ -2095,7 +1366,7 @@ describe('v1.DocumentServiceClient', () => {
         collection: 'collectionValue',
         engine: 'engineValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2168,7 +1439,7 @@ describe('v1.DocumentServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2209,7 +1480,7 @@ describe('v1.DocumentServiceClient', () => {
         collection: 'collectionValue',
         data_store: 'dataStoreValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2302,132 +1573,6 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationCollectionDataStoreBranch', () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionDataStoreBranch';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-        data_store: 'dataStoreValue',
-        branch: 'branchValue',
-      };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      client.pathTemplates.projectLocationCollectionDataStoreBranchPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionDataStoreBranchPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationCollectionDataStoreBranchPath', () => {
-        const result = client.projectLocationCollectionDataStoreBranchPath(
-          'projectValue',
-          'locationValue',
-          'collectionValue',
-          'dataStoreValue',
-          'branchValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationCollectionDataStoreBranchName', () => {
-        const result =
-          client.matchProjectFromProjectLocationCollectionDataStoreBranchName(
-            fakePath
-          );
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationCollectionDataStoreBranchName', () => {
-        const result =
-          client.matchLocationFromProjectLocationCollectionDataStoreBranchName(
-            fakePath
-          );
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromProjectLocationCollectionDataStoreBranchName', () => {
-        const result =
-          client.matchCollectionFromProjectLocationCollectionDataStoreBranchName(
-            fakePath
-          );
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationCollectionDataStoreBranchName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationCollectionDataStoreBranchName(
-            fakePath
-          );
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchBranchFromProjectLocationCollectionDataStoreBranchName', () => {
-        const result =
-          client.matchBranchFromProjectLocationCollectionDataStoreBranchName(
-            fakePath
-          );
-        assert.strictEqual(result, 'branchValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
     describe('projectLocationCollectionDataStoreBranchDocument', () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionDataStoreBranchDocument';
@@ -2439,7 +1584,7 @@ describe('v1.DocumentServiceClient', () => {
         branch: 'branchValue',
         document: 'documentValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2584,7 +1729,7 @@ describe('v1.DocumentServiceClient', () => {
         data_store: 'dataStoreValue',
         control: 'controlValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2710,7 +1855,7 @@ describe('v1.DocumentServiceClient', () => {
         data_store: 'dataStoreValue',
         conversation: 'conversationValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2836,7 +1981,7 @@ describe('v1.DocumentServiceClient', () => {
         collection: 'collectionValue',
         data_store: 'dataStoreValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2945,7 +2090,7 @@ describe('v1.DocumentServiceClient', () => {
         data_store: 'dataStoreValue',
         schema: 'schemaValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3071,7 +2216,7 @@ describe('v1.DocumentServiceClient', () => {
         data_store: 'dataStoreValue',
         session: 'sessionValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3198,7 +2343,7 @@ describe('v1.DocumentServiceClient', () => {
         session: 'sessionValue',
         answer: 'answerValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3342,7 +2487,7 @@ describe('v1.DocumentServiceClient', () => {
         collection: 'collectionValue',
         data_store: 'dataStoreValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3451,7 +2596,7 @@ describe('v1.DocumentServiceClient', () => {
         data_store: 'dataStoreValue',
         target_site: 'targetSiteValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3577,7 +2722,7 @@ describe('v1.DocumentServiceClient', () => {
         engine: 'engineValue',
         control: 'controlValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3703,7 +2848,7 @@ describe('v1.DocumentServiceClient', () => {
         engine: 'engineValue',
         conversation: 'conversationValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3828,7 +2973,7 @@ describe('v1.DocumentServiceClient', () => {
         engine: 'engineValue',
         session: 'sessionValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3955,7 +3100,7 @@ describe('v1.DocumentServiceClient', () => {
         session: 'sessionValue',
         answer: 'answerValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4096,7 +3241,7 @@ describe('v1.DocumentServiceClient', () => {
         location: 'locationValue',
         data_store: 'dataStoreValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4168,99 +3313,6 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationDataStoreBranch', () => {
-      const fakePath = '/rendered/path/projectLocationDataStoreBranch';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        data_store: 'dataStoreValue',
-        branch: 'branchValue',
-      };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      client.pathTemplates.projectLocationDataStoreBranchPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationDataStoreBranchPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
-
-      it('projectLocationDataStoreBranchPath', () => {
-        const result = client.projectLocationDataStoreBranchPath(
-          'projectValue',
-          'locationValue',
-          'dataStoreValue',
-          'branchValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreBranchPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectLocationDataStoreBranchName', () => {
-        const result =
-          client.matchProjectFromProjectLocationDataStoreBranchName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreBranchPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProjectLocationDataStoreBranchName', () => {
-        const result =
-          client.matchLocationFromProjectLocationDataStoreBranchName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreBranchPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchDataStoreFromProjectLocationDataStoreBranchName', () => {
-        const result =
-          client.matchDataStoreFromProjectLocationDataStoreBranchName(fakePath);
-        assert.strictEqual(result, 'dataStoreValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreBranchPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchBranchFromProjectLocationDataStoreBranchName', () => {
-        const result =
-          client.matchBranchFromProjectLocationDataStoreBranchName(fakePath);
-        assert.strictEqual(result, 'branchValue');
-        assert(
-          (
-            client.pathTemplates.projectLocationDataStoreBranchPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
     describe('projectLocationDataStoreBranchDocument', () => {
       const fakePath = '/rendered/path/projectLocationDataStoreBranchDocument';
       const expectedParameters = {
@@ -4270,7 +3322,7 @@ describe('v1.DocumentServiceClient', () => {
         branch: 'branchValue',
         document: 'documentValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4394,7 +3446,7 @@ describe('v1.DocumentServiceClient', () => {
         data_store: 'dataStoreValue',
         control: 'controlValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4489,7 +3541,7 @@ describe('v1.DocumentServiceClient', () => {
         data_store: 'dataStoreValue',
         conversation: 'conversationValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4595,7 +3647,7 @@ describe('v1.DocumentServiceClient', () => {
         location: 'locationValue',
         data_store: 'dataStoreValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4684,7 +3736,7 @@ describe('v1.DocumentServiceClient', () => {
         data_store: 'dataStoreValue',
         schema: 'schemaValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4777,7 +3829,7 @@ describe('v1.DocumentServiceClient', () => {
         data_store: 'dataStoreValue',
         session: 'sessionValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4873,7 +3925,7 @@ describe('v1.DocumentServiceClient', () => {
         session: 'sessionValue',
         answer: 'answerValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4997,7 +4049,7 @@ describe('v1.DocumentServiceClient', () => {
         location: 'locationValue',
         data_store: 'dataStoreValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -5086,7 +4138,7 @@ describe('v1.DocumentServiceClient', () => {
         data_store: 'dataStoreValue',
         target_site: 'targetSiteValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
+      const client = new controlserviceModule.v1.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });

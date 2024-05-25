@@ -40,14 +40,14 @@ function main(document) {
    */
   // const document = {}
   /**
-   *  If set to true, and the
+   *  If set to `true` and the
    *  Document google.cloud.discoveryengine.v1.Document  is not found, a new
-   *  Document google.cloud.discoveryengine.v1.Document  will be created.
+   *  Document google.cloud.discoveryengine.v1.Document  is be created.
    */
   // const allowMissing = true
   /**
    *  Indicates which fields in the provided imported 'document' to update. If
-   *  not set, will by default update all fields.
+   *  not set, by default updates all fields.
    */
   // const updateMask = {}
 

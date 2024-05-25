@@ -18,10 +18,14 @@
 
 import {
   CompletionServiceClient,
+  ControlServiceClient,
   ConversationalSearchServiceClient,
   DataStoreServiceClient,
   DocumentServiceClient,
   EngineServiceClient,
+  GroundedGenerationServiceClient,
+  ProjectServiceClient,
+  RankServiceClient,
   RecommendationServiceClient,
   SchemaServiceClient,
   SearchServiceClient,
@@ -31,6 +35,9 @@ import {
 
 // check that the client class type name can be used
 function doStuffWithCompletionServiceClient(client: CompletionServiceClient) {
+  client.close();
+}
+function doStuffWithControlServiceClient(client: ControlServiceClient) {
   client.close();
 }
 function doStuffWithConversationalSearchServiceClient(
@@ -45,6 +52,17 @@ function doStuffWithDocumentServiceClient(client: DocumentServiceClient) {
   client.close();
 }
 function doStuffWithEngineServiceClient(client: EngineServiceClient) {
+  client.close();
+}
+function doStuffWithGroundedGenerationServiceClient(
+  client: GroundedGenerationServiceClient
+) {
+  client.close();
+}
+function doStuffWithProjectServiceClient(client: ProjectServiceClient) {
+  client.close();
+}
+function doStuffWithRankServiceClient(client: RankServiceClient) {
   client.close();
 }
 function doStuffWithRecommendationServiceClient(
@@ -72,6 +90,9 @@ function main() {
   const completionServiceClient = new CompletionServiceClient();
   doStuffWithCompletionServiceClient(completionServiceClient);
   // check that the client instance can be created
+  const controlServiceClient = new ControlServiceClient();
+  doStuffWithControlServiceClient(controlServiceClient);
+  // check that the client instance can be created
   const conversationalSearchServiceClient =
     new ConversationalSearchServiceClient();
   doStuffWithConversationalSearchServiceClient(
@@ -86,6 +107,15 @@ function main() {
   // check that the client instance can be created
   const engineServiceClient = new EngineServiceClient();
   doStuffWithEngineServiceClient(engineServiceClient);
+  // check that the client instance can be created
+  const groundedGenerationServiceClient = new GroundedGenerationServiceClient();
+  doStuffWithGroundedGenerationServiceClient(groundedGenerationServiceClient);
+  // check that the client instance can be created
+  const projectServiceClient = new ProjectServiceClient();
+  doStuffWithProjectServiceClient(projectServiceClient);
+  // check that the client instance can be created
+  const rankServiceClient = new RankServiceClient();
+  doStuffWithRankServiceClient(rankServiceClient);
   // check that the client instance can be created
   const recommendationServiceClient = new RecommendationServiceClient();
   doStuffWithRecommendationServiceClient(recommendationServiceClient);
