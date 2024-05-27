@@ -555,7 +555,7 @@ export class DataTransferServiceClient {
    *   and new credentials are needed, as indicated by `CheckValidCreds`. In order
    *   to obtain authorization_code, make a request to the following URL:
    *   <pre class="prettyprint" suppresswarning="true">
-   *   https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=authorization_code&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
+   *   https://bigquery.cloud.google.com/datatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=authorization_code&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
    *   </pre>
    *   * The <var>client_id</var> is the OAuth client_id of the a data source as
    *   returned by ListDataSources method.
@@ -570,7 +570,7 @@ export class DataTransferServiceClient {
    *   are needed, as indicated by `CheckValidCreds`. In order to obtain version
    *   info, make a request to the following URL:
    *   <pre class="prettyprint" suppresswarning="true">
-   *   https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=version_info&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
+   *   https://bigquery.cloud.google.com/datatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=version_info&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
    *   </pre>
    *   * The <var>client_id</var> is the OAuth client_id of the a data source as
    *   returned by ListDataSources method.
@@ -692,7 +692,7 @@ export class DataTransferServiceClient {
    *   and new credentials are needed, as indicated by `CheckValidCreds`. In order
    *   to obtain authorization_code, make a request to the following URL:
    *   <pre class="prettyprint" suppresswarning="true">
-   *   https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=authorization_code&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
+   *   https://bigquery.cloud.google.com/datatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=authorization_code&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
    *   </pre>
    *   * The <var>client_id</var> is the OAuth client_id of the a data source as
    *   returned by ListDataSources method.
@@ -709,7 +709,7 @@ export class DataTransferServiceClient {
    *   are needed, as indicated by `CheckValidCreds`. In order to obtain version
    *   info, make a request to the following URL:
    *   <pre class="prettyprint" suppresswarning="true">
-   *   https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=version_info&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
+   *   https://bigquery.cloud.google.com/datatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=version_info&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
    *   </pre>
    *   * The <var>client_id</var> is the OAuth client_id of the a data source as
    *   returned by ListDataSources method.
