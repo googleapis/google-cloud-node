@@ -4,6 +4,23 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [9.0.0](https://github.com/googleapis/nodejs-datastore/compare/v8.7.0...v9.0.0) (2024-05-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* An existing method `UpdateVehicleLocation` is removed from service `VehicleService` ([#1248](https://github.com/googleapis/nodejs-datastore/issues/1248))
+
+### Features
+
+* Query profiling feature ([#1221](https://github.com/googleapis/nodejs-datastore/issues/1221)) ([414dec4](https://github.com/googleapis/nodejs-datastore/commit/414dec4e1548f551be06df914d6b56362bdc1790))
+
+
+### Bug Fixes
+
+* An existing method `UpdateVehicleLocation` is removed from service `VehicleService` ([#1248](https://github.com/googleapis/nodejs-datastore/issues/1248)) ([ba79118](https://github.com/googleapis/nodejs-datastore/commit/ba79118ac00ccc3bb0380ee5693c3b687a7ae9c7))
+* Read time should be used for transaction reads ([#1171](https://github.com/googleapis/nodejs-datastore/issues/1171)) ([73a0a39](https://github.com/googleapis/nodejs-datastore/commit/73a0a39b4c0423a5b4802076cdce80fce7c9adda))
+
 ## [8.7.0](https://github.com/googleapis/nodejs-datastore/compare/v8.6.0...v8.7.0) (2024-04-02)
 
 
