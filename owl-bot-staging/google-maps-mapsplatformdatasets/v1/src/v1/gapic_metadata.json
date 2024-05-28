@@ -1,0 +1,77 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.maps.mapsplatformdatasets.v1",
+  "libraryPackage": "@googlemaps/maps-platform-datasets",
+  "services": {
+    "MapsPlatformDatasets": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "MapsPlatformDatasetsClient",
+          "rpcs": {
+            "CreateDataset": {
+              "methods": [
+                "createDataset"
+              ]
+            },
+            "UpdateDatasetMetadata": {
+              "methods": [
+                "updateDatasetMetadata"
+              ]
+            },
+            "GetDataset": {
+              "methods": [
+                "getDataset"
+              ]
+            },
+            "DeleteDataset": {
+              "methods": [
+                "deleteDataset"
+              ]
+            },
+            "ListDatasets": {
+              "methods": [
+                "listDatasets",
+                "listDatasetsStream",
+                "listDatasetsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "MapsPlatformDatasetsClient",
+          "rpcs": {
+            "CreateDataset": {
+              "methods": [
+                "createDataset"
+              ]
+            },
+            "UpdateDatasetMetadata": {
+              "methods": [
+                "updateDatasetMetadata"
+              ]
+            },
+            "GetDataset": {
+              "methods": [
+                "getDataset"
+              ]
+            },
+            "DeleteDataset": {
+              "methods": [
+                "deleteDataset"
+              ]
+            },
+            "ListDatasets": {
+              "methods": [
+                "listDatasets",
+                "listDatasetsStream",
+                "listDatasetsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
