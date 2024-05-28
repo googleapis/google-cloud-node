@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'MapsPlatformDatasetsV1Alpha',
-    filename: './maps-platform-datasets-v1-alpha.js',
+    library: 'MapsPlatformDatasets',
+    filename: './maps-platform-datasets.js',
   },
   node: {
     child_process: 'empty',
