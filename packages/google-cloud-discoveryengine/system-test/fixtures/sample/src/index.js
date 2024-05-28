@@ -21,11 +21,16 @@ const discoveryengine = require('@google-cloud/discoveryengine');
 
 function main() {
   const completionServiceClient = new discoveryengine.CompletionServiceClient();
+  const controlServiceClient = new discoveryengine.ControlServiceClient();
   const conversationalSearchServiceClient =
     new discoveryengine.ConversationalSearchServiceClient();
   const dataStoreServiceClient = new discoveryengine.DataStoreServiceClient();
   const documentServiceClient = new discoveryengine.DocumentServiceClient();
   const engineServiceClient = new discoveryengine.EngineServiceClient();
+  const groundedGenerationServiceClient =
+    new discoveryengine.GroundedGenerationServiceClient();
+  const projectServiceClient = new discoveryengine.ProjectServiceClient();
+  const rankServiceClient = new discoveryengine.RankServiceClient();
   const recommendationServiceClient =
     new discoveryengine.RecommendationServiceClient();
   const schemaServiceClient = new discoveryengine.SchemaServiceClient();
