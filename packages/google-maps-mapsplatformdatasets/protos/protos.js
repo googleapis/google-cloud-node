@@ -2179,6 +2179,7 @@
                          * @property {string|null} [parent] ListDatasetsRequest parent
                          * @property {number|null} [pageSize] ListDatasetsRequest pageSize
                          * @property {string|null} [pageToken] ListDatasetsRequest pageToken
+                         * @property {string|null} [tag] ListDatasetsRequest tag
                          */
     
                         /**
@@ -2221,6 +2222,14 @@
                         ListDatasetsRequest.prototype.pageToken = "";
     
                         /**
+                         * ListDatasetsRequest tag.
+                         * @member {string} tag
+                         * @memberof google.maps.mapsplatformdatasets.v1.ListDatasetsRequest
+                         * @instance
+                         */
+                        ListDatasetsRequest.prototype.tag = "";
+    
+                        /**
                          * Creates a new ListDatasetsRequest instance using the specified properties.
                          * @function create
                          * @memberof google.maps.mapsplatformdatasets.v1.ListDatasetsRequest
@@ -2250,6 +2259,8 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
                             if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.tag != null && Object.hasOwnProperty.call(message, "tag"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.tag);
                             return writer;
                         };
     
@@ -2296,6 +2307,10 @@
                                         message.pageToken = reader.string();
                                         break;
                                     }
+                                case 4: {
+                                        message.tag = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -2340,6 +2355,9 @@
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 if (!$util.isString(message.pageToken))
                                     return "pageToken: string expected";
+                            if (message.tag != null && message.hasOwnProperty("tag"))
+                                if (!$util.isString(message.tag))
+                                    return "tag: string expected";
                             return null;
                         };
     
@@ -2361,6 +2379,8 @@
                                 message.pageSize = object.pageSize | 0;
                             if (object.pageToken != null)
                                 message.pageToken = String(object.pageToken);
+                            if (object.tag != null)
+                                message.tag = String(object.tag);
                             return message;
                         };
     
@@ -2381,6 +2401,7 @@
                                 object.parent = "";
                                 object.pageSize = 0;
                                 object.pageToken = "";
+                                object.tag = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -2388,6 +2409,8 @@
                                 object.pageSize = message.pageSize;
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 object.pageToken = message.pageToken;
+                            if (message.tag != null && message.hasOwnProperty("tag"))
+                                object.tag = message.tag;
                             return object;
                         };
     

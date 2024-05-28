@@ -386,13 +386,13 @@ export class MapsPlatformDatasetsClient {
   // -- Service calls --
   // -------------------
   /**
-   * Create a new dataset for the specified project.
+   * Creates a new dataset for the specified project.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent project that will own the dataset.
-   *   Format: projects/{$project}
+   *   Format: projects/{project}
    * @param {google.maps.mapsplatformdatasets.v1.Dataset} request.dataset
    *   Required. The dataset version to create.
    * @param {object} [options]
@@ -485,17 +485,17 @@ export class MapsPlatformDatasetsClient {
     return this.innerApiCalls.createDataset(request, options, callback);
   }
   /**
-   * Update the metadata for the dataset.
+   * Updates the metadata for the dataset.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.maps.mapsplatformdatasets.v1.Dataset} request.dataset
-   *   Required. The dataset to update. The dataset's name is used to identify the
-   *   dataset to be updated. The name has the format:
-   *   projects/{project}/datasets/{dataset_id}
+   *   Required. Resource name of the dataset to update.
+   *   Format: projects/{project}/datasets/{dataset_id}
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   The list of fields to be updated. Support the value "*" for full
-   *   replacement.
+   *   The list of fields to be updated.
+   *
+   *   The value "*" is used for full replacement (default).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -586,12 +586,20 @@ export class MapsPlatformDatasetsClient {
     return this.innerApiCalls.updateDatasetMetadata(request, options, callback);
   }
   /**
-   * Get the dataset.
+   * Gets the dataset.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name. projects/{project}/datasets/{dataset_id}
+   *   Required. Resource name.
+   *   Format: projects/{project}/datasets/{dataset_id}
+   *
+   *
+   *   Can also fetch some special versions by appending "@" and a tag.
+   *   Format: projects/{project}/datasets/{dataset_id}@{tag}
+   *
+   *   Tag "active": The info of the latest completed version will be included,
+   *   and NOT_FOUND if the dataset does not have one.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -676,12 +684,13 @@ export class MapsPlatformDatasetsClient {
     return this.innerApiCalls.getDataset(request, options, callback);
   }
   /**
-   * Delete the specified dataset .
+   * Deletes the specified dataset.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Format: projects/${project}/datasets/{dataset_id}
+   *   Required. The name of the dataset to delete.
+   *   Format: projects/{project}/datasets/{dataset_id}
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -773,18 +782,30 @@ export class MapsPlatformDatasetsClient {
   }
 
   /**
-   * List all the datasets for the specified project.
+   * Lists all the datasets for the specified project.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the project to list all the datasets for.
+   *   Format: projects/{project}
    * @param {number} request.pageSize
-   *   The maximum number of versions to return per page.
+   *   The maximum number of datasets to return per page.
+   *
    *   If unspecified (or zero), all datasets will be returned.
    * @param {string} request.pageToken
    *   The page token, received from a previous ListDatasets call.
    *   Provide this to retrieve the subsequent page.
+   * @param {string} request.tag
+   *   The tag that specifies the desired version for each dataset.
+   *
+   *   Note that when pagination is also specified, some filtering can happen
+   *   after pagination, which may cause the response to contain fewer datasets
+   *   than the page size, even if it's not the last page.
+   *
+   *   Tag "active": Each dataset in the response will include the info of its
+   *   latest completed version, and the dataset will be skipped if it does not
+   *   have one.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -878,12 +899,24 @@ export class MapsPlatformDatasetsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the project to list all the datasets for.
+   *   Format: projects/{project}
    * @param {number} request.pageSize
-   *   The maximum number of versions to return per page.
+   *   The maximum number of datasets to return per page.
+   *
    *   If unspecified (or zero), all datasets will be returned.
    * @param {string} request.pageToken
    *   The page token, received from a previous ListDatasets call.
    *   Provide this to retrieve the subsequent page.
+   * @param {string} request.tag
+   *   The tag that specifies the desired version for each dataset.
+   *
+   *   Note that when pagination is also specified, some filtering can happen
+   *   after pagination, which may cause the response to contain fewer datasets
+   *   than the page size, even if it's not the last page.
+   *
+   *   Tag "active": Each dataset in the response will include the info of its
+   *   latest completed version, and the dataset will be skipped if it does not
+   *   have one.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -925,12 +958,24 @@ export class MapsPlatformDatasetsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the project to list all the datasets for.
+   *   Format: projects/{project}
    * @param {number} request.pageSize
-   *   The maximum number of versions to return per page.
+   *   The maximum number of datasets to return per page.
+   *
    *   If unspecified (or zero), all datasets will be returned.
    * @param {string} request.pageToken
    *   The page token, received from a previous ListDatasets call.
    *   Provide this to retrieve the subsequent page.
+   * @param {string} request.tag
+   *   The tag that specifies the desired version for each dataset.
+   *
+   *   Note that when pagination is also specified, some filtering can happen
+   *   after pagination, which may cause the response to contain fewer datasets
+   *   than the page size, even if it's not the last page.
+   *
+   *   Tag "active": Each dataset in the response will include the info of its
+   *   latest completed version, and the dataset will be skipped if it does not
+   *   have one.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

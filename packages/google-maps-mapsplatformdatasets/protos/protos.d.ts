@@ -848,6 +848,9 @@ export namespace google {
 
                     /** ListDatasetsRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** ListDatasetsRequest tag */
+                    tag?: (string|null);
                 }
 
                 /** Represents a ListDatasetsRequest. */
@@ -867,6 +870,9 @@ export namespace google {
 
                     /** ListDatasetsRequest pageToken. */
                     public pageToken: string;
+
+                    /** ListDatasetsRequest tag. */
+                    public tag: string;
 
                     /**
                      * Creates a new ListDatasetsRequest instance using the specified properties.
