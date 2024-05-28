@@ -154,6 +154,11 @@
   * [Completion_service.complete_query](#completion_service.complete_query)
   * [Completion_service.import_suggestion_deny_list_entries](#completion_service.import_suggestion_deny_list_entries)
   * [Completion_service.purge_suggestion_deny_list_entries](#completion_service.purge_suggestion_deny_list_entries)
+  * [Control_service.create_control](#control_service.create_control)
+  * [Control_service.delete_control](#control_service.delete_control)
+  * [Control_service.get_control](#control_service.get_control)
+  * [Control_service.list_controls](#control_service.list_controls)
+  * [Control_service.update_control](#control_service.update_control)
   * [Conversational_search_service.answer_query](#conversational_search_service.answer_query)
   * [Conversational_search_service.converse_conversation](#conversational_search_service.converse_conversation)
   * [Conversational_search_service.create_conversation](#conversational_search_service.create_conversation)
@@ -188,6 +193,7 @@
   * [Engine_service.tune_engine](#engine_service.tune_engine)
   * [Engine_service.update_engine](#engine_service.update_engine)
   * [Grounded_generation_service.check_grounding](#grounded_generation_service.check_grounding)
+  * [Project_service.provision_project](#project_service.provision_project)
   * [Rank_service.rank](#rank_service.rank)
   * [Recommendation_service.recommend](#recommendation_service.recommend)
   * [Schema_service.create_schema](#schema_service.create_schema)
@@ -196,6 +202,7 @@
   * [Schema_service.list_schemas](#schema_service.list_schemas)
   * [Schema_service.update_schema](#schema_service.update_schema)
   * [Search_service.search](#search_service.search)
+  * [Search_tuning_service.list_custom_models](#search_tuning_service.list_custom_models)
   * [Search_tuning_service.train_custom_model](#search_tuning_service.train_custom_model)
   * [Serving_config_service.get_serving_config](#serving_config_service.get_serving_config)
   * [Serving_config_service.list_serving_configs](#serving_config_service.list_serving_configs)
@@ -2646,6 +2653,91 @@ __Usage:__
 
 
 
+### Control_service.create_control
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/control_service.create_control.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/control_service.create_control.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/control_service.create_control.js`
+
+
+-----
+
+
+
+
+### Control_service.delete_control
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/control_service.delete_control.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/control_service.delete_control.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/control_service.delete_control.js`
+
+
+-----
+
+
+
+
+### Control_service.get_control
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/control_service.get_control.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/control_service.get_control.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/control_service.get_control.js`
+
+
+-----
+
+
+
+
+### Control_service.list_controls
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/control_service.list_controls.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/control_service.list_controls.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/control_service.list_controls.js`
+
+
+-----
+
+
+
+
+### Control_service.update_control
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/control_service.update_control.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/control_service.update_control.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/control_service.update_control.js`
+
+
+-----
+
+
+
+
 ### Conversational_search_service.answer_query
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.answer_query.js).
@@ -3224,6 +3316,23 @@ __Usage:__
 
 
 
+### Project_service.provision_project
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/project_service.provision_project.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/project_service.provision_project.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/project_service.provision_project.js`
+
+
+-----
+
+
+
+
 ### Rank_service.rank
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/rank_service.rank.js).
@@ -3353,6 +3462,23 @@ __Usage:__
 
 
 `node packages/google-cloud-discoveryengine/samples/generated/v1beta/search_service.search.js`
+
+
+-----
+
+
+
+
+### Search_tuning_service.list_custom_models
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/search_tuning_service.list_custom_models.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/search_tuning_service.list_custom_models.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/search_tuning_service.list_custom_models.js`
 
 
 -----

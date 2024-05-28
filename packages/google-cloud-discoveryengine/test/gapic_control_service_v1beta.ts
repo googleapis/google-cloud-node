@@ -21,7 +21,9 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as rankserviceModule from '../src';
+import * as controlserviceModule from '../src';
+
+import {PassThrough} from 'stream';
 
 import {protobuf, LocationProtos} from 'google-gax';
 
@@ -64,6 +66,44 @@ function stubSimpleCallWithCallback<ResponseType>(
     : sinon.stub().callsArgWith(2, null, response);
 }
 
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+    }
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
+    });
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
+  return sinon.stub().returns(mockStream);
+}
+
 function stubAsyncIterationCall<ResponseType>(
   responses?: ResponseType[],
   error?: Error
@@ -87,16 +127,16 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1beta.RankServiceClient', () => {
+describe('v1beta.ControlServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
-      const client = new rankserviceModule.v1beta.RankServiceClient();
+      const client = new controlserviceModule.v1beta.ControlServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'discoveryengine.googleapis.com');
     });
 
     it('has universeDomain', () => {
-      const client = new rankserviceModule.v1beta.RankServiceClient();
+      const client = new controlserviceModule.v1beta.ControlServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -108,7 +148,7 @@ describe('v1beta.RankServiceClient', () => {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const servicePath =
-          rankserviceModule.v1beta.RankServiceClient.servicePath;
+          controlserviceModule.v1beta.ControlServiceClient.servicePath;
         assert.strictEqual(servicePath, 'discoveryengine.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -117,14 +157,14 @@ describe('v1beta.RankServiceClient', () => {
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const apiEndpoint =
-          rankserviceModule.v1beta.RankServiceClient.apiEndpoint;
+          controlserviceModule.v1beta.ControlServiceClient.apiEndpoint;
         assert.strictEqual(apiEndpoint, 'discoveryengine.googleapis.com');
         assert(stub.called);
         stub.restore();
       });
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         universeDomain: 'example.com',
       });
       const servicePath = client.apiEndpoint;
@@ -132,7 +172,7 @@ describe('v1beta.RankServiceClient', () => {
     });
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         universe_domain: 'example.com',
       });
       const servicePath = client.apiEndpoint;
@@ -144,7 +184,7 @@ describe('v1beta.RankServiceClient', () => {
         it('sets apiEndpoint from environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new rankserviceModule.v1beta.RankServiceClient();
+          const client = new controlserviceModule.v1beta.ControlServiceClient();
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'discoveryengine.example.com');
           if (saved) {
@@ -157,7 +197,7 @@ describe('v1beta.RankServiceClient', () => {
         it('value configured in code has priority over environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new rankserviceModule.v1beta.RankServiceClient({
+          const client = new controlserviceModule.v1beta.ControlServiceClient({
             universeDomain: 'configured.example.com',
           });
           const servicePath = client.apiEndpoint;
@@ -175,7 +215,7 @@ describe('v1beta.RankServiceClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new rankserviceModule.v1beta.RankServiceClient({
+        new controlserviceModule.v1beta.ControlServiceClient({
           universe_domain: 'example.com',
           universeDomain: 'example.net',
         });
@@ -183,51 +223,51 @@ describe('v1beta.RankServiceClient', () => {
     });
 
     it('has port', () => {
-      const port = rankserviceModule.v1beta.RankServiceClient.port;
+      const port = controlserviceModule.v1beta.ControlServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client = new rankserviceModule.v1beta.RankServiceClient();
+      const client = new controlserviceModule.v1beta.ControlServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         fallback: true,
       });
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      assert.strictEqual(client.rankServiceStub, undefined);
+      assert.strictEqual(client.controlServiceStub, undefined);
       await client.initialize();
-      assert(client.rankServiceStub);
+      assert(client.controlServiceStub);
     });
 
     it('has close method for the initialized client', done => {
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
-      assert(client.rankServiceStub);
+      assert(client.controlServiceStub);
       client.close().then(() => {
         done();
       });
     });
 
     it('has close method for the non-initialized client', done => {
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      assert.strictEqual(client.rankServiceStub, undefined);
+      assert.strictEqual(client.controlServiceStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -235,7 +275,7 @@ describe('v1beta.RankServiceClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -247,7 +287,7 @@ describe('v1beta.RankServiceClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -268,62 +308,64 @@ describe('v1beta.RankServiceClient', () => {
     });
   });
 
-  describe('rank', () => {
-    it('invokes rank without error', async () => {
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+  describe('createControl', () => {
+    it('invokes createControl without error', async () => {
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.RankRequest()
+        new protos.google.cloud.discoveryengine.v1beta.CreateControlRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.RankRequest',
-        ['rankingConfig']
+        '.google.cloud.discoveryengine.v1beta.CreateControlRequest',
+        ['parent']
       );
-      request.rankingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `ranking_config=${defaultValue1}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.RankResponse()
+        new protos.google.cloud.discoveryengine.v1beta.Control()
       );
-      client.innerApiCalls.rank = stubSimpleCall(expectedResponse);
-      const [response] = await client.rank(request);
+      client.innerApiCalls.createControl = stubSimpleCall(expectedResponse);
+      const [response] = await client.createControl(request);
       assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.rank as SinonStub).getCall(0)
-        .args[0];
+      const actualRequest = (
+        client.innerApiCalls.createControl as SinonStub
+      ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.rank as SinonStub
+        client.innerApiCalls.createControl as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes rank without error using callback', async () => {
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+    it('invokes createControl without error using callback', async () => {
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.RankRequest()
+        new protos.google.cloud.discoveryengine.v1beta.CreateControlRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.RankRequest',
-        ['rankingConfig']
+        '.google.cloud.discoveryengine.v1beta.CreateControlRequest',
+        ['parent']
       );
-      request.rankingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `ranking_config=${defaultValue1}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.RankResponse()
+        new protos.google.cloud.discoveryengine.v1beta.Control()
       );
-      client.innerApiCalls.rank = stubSimpleCallWithCallback(expectedResponse);
+      client.innerApiCalls.createControl =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.rank(
+        client.createControl(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1beta.IRankResponse | null
+            result?: protos.google.cloud.discoveryengine.v1beta.IControl | null
           ) => {
             if (err) {
               reject(err);
@@ -335,64 +377,796 @@ describe('v1beta.RankServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.rank as SinonStub).getCall(0)
-        .args[0];
+      const actualRequest = (
+        client.innerApiCalls.createControl as SinonStub
+      ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.rank as SinonStub
+        client.innerApiCalls.createControl as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes rank with error', async () => {
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+    it('invokes createControl with error', async () => {
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.RankRequest()
+        new protos.google.cloud.discoveryengine.v1beta.CreateControlRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.RankRequest',
-        ['rankingConfig']
+        '.google.cloud.discoveryengine.v1beta.CreateControlRequest',
+        ['parent']
       );
-      request.rankingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `ranking_config=${defaultValue1}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.rank = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.rank(request), expectedError);
-      const actualRequest = (client.innerApiCalls.rank as SinonStub).getCall(0)
-        .args[0];
+      client.innerApiCalls.createControl = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createControl(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createControl as SinonStub
+      ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.rank as SinonStub
+        client.innerApiCalls.createControl as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes rank with closed client', async () => {
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+    it('invokes createControl with closed client', async () => {
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.RankRequest()
+        new protos.google.cloud.discoveryengine.v1beta.CreateControlRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.RankRequest',
-        ['rankingConfig']
+        '.google.cloud.discoveryengine.v1beta.CreateControlRequest',
+        ['parent']
       );
-      request.rankingConfig = defaultValue1;
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.rank(request), expectedError);
+      await assert.rejects(client.createControl(request), expectedError);
+    });
+  });
+
+  describe('deleteControl', () => {
+    it('invokes deleteControl without error', async () => {
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.DeleteControlRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.DeleteControlRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteControl = stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteControl(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteControl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteControl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteControl without error using callback', async () => {
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.DeleteControlRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.DeleteControlRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteControl =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteControl(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteControl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteControl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteControl with error', async () => {
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.DeleteControlRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.DeleteControlRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteControl = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteControl(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteControl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteControl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteControl with closed client', async () => {
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.DeleteControlRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.DeleteControlRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteControl(request), expectedError);
+    });
+  });
+
+  describe('updateControl', () => {
+    it('invokes updateControl without error', async () => {
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.UpdateControlRequest()
+      );
+      request.control ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.UpdateControlRequest',
+        ['control', 'name']
+      );
+      request.control.name = defaultValue1;
+      const expectedHeaderRequestParams = `control.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.Control()
+      );
+      client.innerApiCalls.updateControl = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateControl(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateControl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateControl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateControl without error using callback', async () => {
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.UpdateControlRequest()
+      );
+      request.control ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.UpdateControlRequest',
+        ['control', 'name']
+      );
+      request.control.name = defaultValue1;
+      const expectedHeaderRequestParams = `control.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.Control()
+      );
+      client.innerApiCalls.updateControl =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateControl(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.discoveryengine.v1beta.IControl | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateControl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateControl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateControl with error', async () => {
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.UpdateControlRequest()
+      );
+      request.control ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.UpdateControlRequest',
+        ['control', 'name']
+      );
+      request.control.name = defaultValue1;
+      const expectedHeaderRequestParams = `control.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateControl = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateControl(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateControl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateControl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateControl with closed client', async () => {
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.UpdateControlRequest()
+      );
+      request.control ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.UpdateControlRequest',
+        ['control', 'name']
+      );
+      request.control.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateControl(request), expectedError);
+    });
+  });
+
+  describe('getControl', () => {
+    it('invokes getControl without error', async () => {
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.GetControlRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.GetControlRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.Control()
+      );
+      client.innerApiCalls.getControl = stubSimpleCall(expectedResponse);
+      const [response] = await client.getControl(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getControl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getControl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getControl without error using callback', async () => {
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.GetControlRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.GetControlRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.Control()
+      );
+      client.innerApiCalls.getControl =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getControl(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.discoveryengine.v1beta.IControl | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getControl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getControl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getControl with error', async () => {
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.GetControlRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.GetControlRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getControl = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getControl(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getControl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getControl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getControl with closed client', async () => {
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.GetControlRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.GetControlRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getControl(request), expectedError);
+    });
+  });
+
+  describe('listControls', () => {
+    it('invokes listControls without error', async () => {
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ListControlsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.ListControlsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.Control()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.Control()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.Control()
+        ),
+      ];
+      client.innerApiCalls.listControls = stubSimpleCall(expectedResponse);
+      const [response] = await client.listControls(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listControls as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listControls as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listControls without error using callback', async () => {
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ListControlsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.ListControlsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.Control()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.Control()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.Control()
+        ),
+      ];
+      client.innerApiCalls.listControls =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listControls(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.discoveryengine.v1beta.IControl[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listControls as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listControls as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listControls with error', async () => {
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ListControlsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.ListControlsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listControls = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listControls(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listControls as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listControls as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listControlsStream without error', async () => {
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ListControlsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.ListControlsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.Control()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.Control()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.Control()
+        ),
+      ];
+      client.descriptors.page.listControls.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listControlsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.discoveryengine.v1beta.Control[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.discoveryengine.v1beta.Control) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listControls.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listControls, request)
+      );
+      assert(
+        (client.descriptors.page.listControls.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes listControlsStream with error', async () => {
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ListControlsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.ListControlsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listControls.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.listControlsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.discoveryengine.v1beta.Control[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.discoveryengine.v1beta.Control) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listControls.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listControls, request)
+      );
+      assert(
+        (client.descriptors.page.listControls.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listControls without error', async () => {
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ListControlsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.ListControlsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.Control()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.Control()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.Control()
+        ),
+      ];
+      client.descriptors.page.listControls.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.discoveryengine.v1beta.IControl[] =
+        [];
+      const iterable = client.listControlsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listControls.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listControls.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listControls with error', async () => {
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ListControlsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.ListControlsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listControls.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listControlsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.discoveryengine.v1beta.IControl[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listControls.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listControls.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -422,7 +1196,7 @@ describe('v1beta.RankServiceClient', () => {
       );
     });
     it('invokes getLocation without error using callback', async () => {
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -466,7 +1240,7 @@ describe('v1beta.RankServiceClient', () => {
       assert((client.locationsClient.getLocation as SinonStub).getCall(0));
     });
     it('invokes getLocation with error', async () => {
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -501,7 +1275,7 @@ describe('v1beta.RankServiceClient', () => {
   });
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -549,7 +1323,7 @@ describe('v1beta.RankServiceClient', () => {
       );
     });
     it('uses async iteration with listLocations with error', async () => {
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -598,7 +1372,7 @@ describe('v1beta.RankServiceClient', () => {
         collection: 'collectionValue',
         engine: 'engineValue',
       };
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -666,12 +1440,61 @@ describe('v1beta.RankServiceClient', () => {
       });
     });
 
+    describe('location', () => {
+      const fakePath = '/rendered/path/location';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+      };
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.locationPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.locationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('locationPath', () => {
+        const result = client.locationPath('projectValue', 'locationValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.locationPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromLocationName', () => {
+        const result = client.matchProjectFromLocationName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromLocationName', () => {
+        const result = client.matchLocationFromLocationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('project', () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
       };
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -712,7 +1535,7 @@ describe('v1beta.RankServiceClient', () => {
         collection: 'collectionValue',
         data_store: 'dataStoreValue',
       };
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -816,7 +1639,7 @@ describe('v1beta.RankServiceClient', () => {
         branch: 'branchValue',
         document: 'documentValue',
       };
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -961,7 +1784,7 @@ describe('v1beta.RankServiceClient', () => {
         data_store: 'dataStoreValue',
         control: 'controlValue',
       };
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1087,7 +1910,7 @@ describe('v1beta.RankServiceClient', () => {
         data_store: 'dataStoreValue',
         conversation: 'conversationValue',
       };
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1214,7 +2037,7 @@ describe('v1beta.RankServiceClient', () => {
         data_store: 'dataStoreValue',
         custom_tuning_model: 'customTuningModelValue',
       };
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1340,7 +2163,7 @@ describe('v1beta.RankServiceClient', () => {
         collection: 'collectionValue',
         data_store: 'dataStoreValue',
       };
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1449,7 +2272,7 @@ describe('v1beta.RankServiceClient', () => {
         data_store: 'dataStoreValue',
         schema: 'schemaValue',
       };
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1575,7 +2398,7 @@ describe('v1beta.RankServiceClient', () => {
         data_store: 'dataStoreValue',
         serving_config: 'servingConfigValue',
       };
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1702,7 +2525,7 @@ describe('v1beta.RankServiceClient', () => {
         data_store: 'dataStoreValue',
         session: 'sessionValue',
       };
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1829,7 +2652,7 @@ describe('v1beta.RankServiceClient', () => {
         session: 'sessionValue',
         answer: 'answerValue',
       };
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1973,7 +2796,7 @@ describe('v1beta.RankServiceClient', () => {
         collection: 'collectionValue',
         data_store: 'dataStoreValue',
       };
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2082,7 +2905,7 @@ describe('v1beta.RankServiceClient', () => {
         data_store: 'dataStoreValue',
         target_site: 'targetSiteValue',
       };
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2208,7 +3031,7 @@ describe('v1beta.RankServiceClient', () => {
         engine: 'engineValue',
         control: 'controlValue',
       };
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2334,7 +3157,7 @@ describe('v1beta.RankServiceClient', () => {
         engine: 'engineValue',
         conversation: 'conversationValue',
       };
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2460,7 +3283,7 @@ describe('v1beta.RankServiceClient', () => {
         engine: 'engineValue',
         serving_config: 'servingConfigValue',
       };
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2585,7 +3408,7 @@ describe('v1beta.RankServiceClient', () => {
         engine: 'engineValue',
         session: 'sessionValue',
       };
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2712,7 +3535,7 @@ describe('v1beta.RankServiceClient', () => {
         session: 'sessionValue',
         answer: 'answerValue',
       };
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2853,7 +3676,7 @@ describe('v1beta.RankServiceClient', () => {
         location: 'locationValue',
         data_store: 'dataStoreValue',
       };
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2934,7 +3757,7 @@ describe('v1beta.RankServiceClient', () => {
         branch: 'branchValue',
         document: 'documentValue',
       };
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3058,7 +3881,7 @@ describe('v1beta.RankServiceClient', () => {
         data_store: 'dataStoreValue',
         control: 'controlValue',
       };
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3153,7 +3976,7 @@ describe('v1beta.RankServiceClient', () => {
         data_store: 'dataStoreValue',
         conversation: 'conversationValue',
       };
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3260,7 +4083,7 @@ describe('v1beta.RankServiceClient', () => {
         data_store: 'dataStoreValue',
         custom_tuning_model: 'customTuningModelValue',
       };
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3366,7 +4189,7 @@ describe('v1beta.RankServiceClient', () => {
         location: 'locationValue',
         data_store: 'dataStoreValue',
       };
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3455,7 +4278,7 @@ describe('v1beta.RankServiceClient', () => {
         data_store: 'dataStoreValue',
         schema: 'schemaValue',
       };
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3548,7 +4371,7 @@ describe('v1beta.RankServiceClient', () => {
         data_store: 'dataStoreValue',
         serving_config: 'servingConfigValue',
       };
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3654,7 +4477,7 @@ describe('v1beta.RankServiceClient', () => {
         data_store: 'dataStoreValue',
         session: 'sessionValue',
       };
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3750,7 +4573,7 @@ describe('v1beta.RankServiceClient', () => {
         session: 'sessionValue',
         answer: 'answerValue',
       };
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3874,7 +4697,7 @@ describe('v1beta.RankServiceClient', () => {
         location: 'locationValue',
         data_store: 'dataStoreValue',
       };
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3963,7 +4786,7 @@ describe('v1beta.RankServiceClient', () => {
         data_store: 'dataStoreValue',
         target_site: 'targetSiteValue',
       };
-      const client = new rankserviceModule.v1beta.RankServiceClient({
+      const client = new controlserviceModule.v1beta.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4056,70 +4879,6 @@ describe('v1beta.RankServiceClient', () => {
               .projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate
               .match as SinonStub
           )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('rankingConfig', () => {
-      const fakePath = '/rendered/path/rankingConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        ranking_config: 'rankingConfigValue',
-      };
-      const client = new rankserviceModule.v1beta.RankServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      client.pathTemplates.rankingConfigPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.rankingConfigPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('rankingConfigPath', () => {
-        const result = client.rankingConfigPath(
-          'projectValue',
-          'locationValue',
-          'rankingConfigValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.rankingConfigPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromRankingConfigName', () => {
-        const result = client.matchProjectFromRankingConfigName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.rankingConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromRankingConfigName', () => {
-        const result = client.matchLocationFromRankingConfigName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.rankingConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchRankingConfigFromRankingConfigName', () => {
-        const result = client.matchRankingConfigFromRankingConfigName(fakePath);
-        assert.strictEqual(result, 'rankingConfigValue');
-        assert(
-          (client.pathTemplates.rankingConfigPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
