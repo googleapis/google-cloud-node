@@ -70,9 +70,9 @@ npm install @google-cloud/publish
 // const pageSize = 1234
 /**
  *  Optional. The
- *  nextPageToken google.streetview.publish.v1.ListPhotosResponse.next_page_token 
+ *  nextPageToken google.streetview.publish.v1.ListPhotosResponse.next_page_token
  *  value returned from a previous
- *  ListPhotos google.streetview.publish.v1.StreetViewPublishService.ListPhotos 
+ *  ListPhotos google.streetview.publish.v1.StreetViewPublishService.ListPhotos
  *  request, if any.
  */
 // const pageToken = 'abc123'
@@ -108,7 +108,7 @@ async function callListPhotos() {
   // Run request
   const iterable = publishClient.listPhotosAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
