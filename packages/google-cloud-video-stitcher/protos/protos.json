@@ -12,7 +12,7 @@
                       "options": {
                         "go_package": "cloud.google.com/go/video/stitcher/apiv1/stitcherpb;stitcherpb",
                         "java_multiple_files": true,
-                        "java_outer_classname": "VideoStitcherServiceProto",
+                        "java_outer_classname": "VodConfigsProto",
                         "java_package": "com.google.cloud.video.stitcher.v1"
                       },
                       "nested": {
@@ -177,6 +177,26 @@
                             "keyName": {
                               "type": "string",
                               "id": 2
+                            },
+                            "tokenConfig": {
+                              "type": "TokenConfig",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "TokenConfig": {
+                              "fields": {
+                                "queryParameter": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
                             }
                           }
                         },
@@ -357,6 +377,15 @@
                             }
                           }
                         },
+                        "FetchOptions": {
+                          "fields": {
+                            "headers": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
                         "AdTracking": {
                           "values": {
                             "AD_TRACKING_UNSPECIFIED": 0,
@@ -420,6 +449,10 @@
                             "prefetchConfig": {
                               "type": "PrefetchConfig",
                               "id": 10
+                            },
+                            "sourceFetchOptions": {
+                              "type": "FetchOptions",
+                              "id": 16
                             }
                           },
                           "nested": {
@@ -509,17 +542,11 @@
                             },
                             "sourceUri": {
                               "type": "string",
-                              "id": 5,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
+                              "id": 5
                             },
                             "adTagUri": {
                               "type": "string",
-                              "id": 6,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
+                              "id": 6
                             },
                             "adTagMacroMap": {
                               "keyType": "string",
@@ -547,6 +574,13 @@
                             "gamSettings": {
                               "type": "GamSettings",
                               "id": 13
+                            },
+                            "vodConfig": {
+                              "type": "string",
+                              "id": 14,
+                              "options": {
+                                "(google.api.resource_reference).type": "videostitcher.googleapis.com/VodConfig"
+                              }
                             }
                           },
                           "nested": {
@@ -670,6 +704,10 @@
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "videostitcher.googleapis.com/LiveConfig"
                               }
+                            },
+                            "adTracking": {
+                              "type": "AdTracking",
+                              "id": 17
                             }
                           },
                           "nested": {
@@ -681,6 +719,11 @@
                                   "options": {
                                     "(google.api.field_behavior)": "REQUIRED"
                                   }
+                                },
+                                "targetingParameters": {
+                                  "keyType": "string",
+                                  "type": "string",
+                                  "id": 4
                                 }
                               }
                             }
@@ -1335,6 +1378,152 @@
                                   }
                                 }
                               ]
+                            },
+                            "UpdateLiveConfig": {
+                              "requestType": "UpdateLiveConfigRequest",
+                              "responseType": "google.longrunning.Operation",
+                              "options": {
+                                "(google.api.http).patch": "/v1/{live_config.name=projects/*/locations/*/liveConfigs/*}",
+                                "(google.api.http).body": "live_config",
+                                "(google.api.method_signature)": "live_config,update_mask",
+                                "(google.longrunning.operation_info).response_type": "google.cloud.video.stitcher.v1.LiveConfig",
+                                "(google.longrunning.operation_info).metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/v1/{live_config.name=projects/*/locations/*/liveConfigs/*}",
+                                    "body": "live_config"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "live_config,update_mask"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "google.cloud.video.stitcher.v1.LiveConfig",
+                                    "metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
+                                  }
+                                }
+                              ]
+                            },
+                            "CreateVodConfig": {
+                              "requestType": "CreateVodConfigRequest",
+                              "responseType": "google.longrunning.Operation",
+                              "options": {
+                                "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/vodConfigs",
+                                "(google.api.http).body": "vod_config",
+                                "(google.api.method_signature)": "parent,vod_config,vod_config_id",
+                                "(google.longrunning.operation_info).response_type": "google.cloud.video.stitcher.v1.VodConfig",
+                                "(google.longrunning.operation_info).metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{parent=projects/*/locations/*}/vodConfigs",
+                                    "body": "vod_config"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,vod_config,vod_config_id"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "google.cloud.video.stitcher.v1.VodConfig",
+                                    "metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
+                                  }
+                                }
+                              ]
+                            },
+                            "ListVodConfigs": {
+                              "requestType": "ListVodConfigsRequest",
+                              "responseType": "ListVodConfigsResponse",
+                              "options": {
+                                "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/vodConfigs",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{parent=projects/*/locations/*}/vodConfigs"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            },
+                            "GetVodConfig": {
+                              "requestType": "GetVodConfigRequest",
+                              "responseType": "VodConfig",
+                              "options": {
+                                "(google.api.http).get": "/v1/{name=projects/*/locations/*/vodConfigs/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{name=projects/*/locations/*/vodConfigs/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "DeleteVodConfig": {
+                              "requestType": "DeleteVodConfigRequest",
+                              "responseType": "google.longrunning.Operation",
+                              "options": {
+                                "(google.api.http).delete": "/v1/{name=projects/*/locations/*/vodConfigs/*}",
+                                "(google.api.method_signature)": "name",
+                                "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                                "(google.longrunning.operation_info).metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v1/{name=projects/*/locations/*/vodConfigs/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "google.protobuf.Empty",
+                                    "metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
+                                  }
+                                }
+                              ]
+                            },
+                            "UpdateVodConfig": {
+                              "requestType": "UpdateVodConfigRequest",
+                              "responseType": "google.longrunning.Operation",
+                              "options": {
+                                "(google.api.http).patch": "/v1/{vod_config.name=projects/*/locations/*/vodConfigs/*}",
+                                "(google.api.http).body": "vod_config",
+                                "(google.api.method_signature)": "vod_config,update_mask",
+                                "(google.longrunning.operation_info).response_type": "google.cloud.video.stitcher.v1.VodConfig",
+                                "(google.longrunning.operation_info).metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/v1/{vod_config.name=projects/*/locations/*/vodConfigs/*}",
+                                    "body": "vod_config"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "vod_config,update_mask"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "google.cloud.video.stitcher.v1.VodConfig",
+                                    "metadata_type": "google.cloud.video.stitcher.v1.OperationMetadata"
+                                  }
+                                }
+                              ]
                             }
                           }
                         },
@@ -1873,6 +2062,157 @@
                             }
                           }
                         },
+                        "UpdateLiveConfigRequest": {
+                          "fields": {
+                            "liveConfig": {
+                              "type": "LiveConfig",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "updateMask": {
+                              "type": "google.protobuf.FieldMask",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "CreateVodConfigRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "videostitcher.googleapis.com/VodConfig"
+                              }
+                            },
+                            "vodConfigId": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "vodConfig": {
+                              "type": "VodConfig",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "ListVodConfigsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "videostitcher.googleapis.com/VodConfig"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "filter": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "orderBy": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "ListVodConfigsResponse": {
+                          "fields": {
+                            "vodConfigs": {
+                              "rule": "repeated",
+                              "type": "VodConfig",
+                              "id": 1
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "unreachable": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "GetVodConfigRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "videostitcher.googleapis.com/VodConfig"
+                              }
+                            }
+                          }
+                        },
+                        "DeleteVodConfigRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "videostitcher.googleapis.com/VodConfig"
+                              }
+                            }
+                          }
+                        },
+                        "UpdateVodConfigRequest": {
+                          "fields": {
+                            "vodConfig": {
+                              "type": "VodConfig",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "updateMask": {
+                              "type": "google.protobuf.FieldMask",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
                         "OperationMetadata": {
                           "fields": {
                             "createTime": {
@@ -1890,6 +2230,74 @@
                             "verb": {
                               "type": "string",
                               "id": 4
+                            }
+                          }
+                        },
+                        "VodConfig": {
+                          "options": {
+                            "(google.api.resource).type": "videostitcher.googleapis.com/VodConfig",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/vodConfigs/{vod_config}"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "sourceUri": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "adTagUri": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "gamVodConfig": {
+                              "type": "GamVodConfig",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "state": {
+                              "type": "State",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "sourceFetchOptions": {
+                              "type": "FetchOptions",
+                              "id": 8
+                            }
+                          },
+                          "nested": {
+                            "State": {
+                              "values": {
+                                "STATE_UNSPECIFIED": 0,
+                                "CREATING": 1,
+                                "READY": 2,
+                                "DELETING": 3
+                              }
+                            }
+                          }
+                        },
+                        "GamVodConfig": {
+                          "fields": {
+                            "networkCode": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             }
                           }
                         }

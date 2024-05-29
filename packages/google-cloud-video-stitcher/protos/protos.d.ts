@@ -900,6 +900,9 @@ export namespace google {
 
                         /** MediaCdnKey keyName */
                         keyName?: (string|null);
+
+                        /** MediaCdnKey tokenConfig */
+                        tokenConfig?: (google.cloud.video.stitcher.v1.MediaCdnKey.ITokenConfig|null);
                     }
 
                     /** Represents a MediaCdnKey. */
@@ -916,6 +919,9 @@ export namespace google {
 
                         /** MediaCdnKey keyName. */
                         public keyName: string;
+
+                        /** MediaCdnKey tokenConfig. */
+                        public tokenConfig?: (google.cloud.video.stitcher.v1.MediaCdnKey.ITokenConfig|null);
 
                         /**
                          * Creates a new MediaCdnKey instance using the specified properties.
@@ -993,6 +999,106 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace MediaCdnKey {
+
+                        /** Properties of a TokenConfig. */
+                        interface ITokenConfig {
+
+                            /** TokenConfig queryParameter */
+                            queryParameter?: (string|null);
+                        }
+
+                        /** Represents a TokenConfig. */
+                        class TokenConfig implements ITokenConfig {
+
+                            /**
+                             * Constructs a new TokenConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.video.stitcher.v1.MediaCdnKey.ITokenConfig);
+
+                            /** TokenConfig queryParameter. */
+                            public queryParameter: string;
+
+                            /**
+                             * Creates a new TokenConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns TokenConfig instance
+                             */
+                            public static create(properties?: google.cloud.video.stitcher.v1.MediaCdnKey.ITokenConfig): google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig;
+
+                            /**
+                             * Encodes the specified TokenConfig message. Does not implicitly {@link google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig.verify|verify} messages.
+                             * @param message TokenConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.video.stitcher.v1.MediaCdnKey.ITokenConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified TokenConfig message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig.verify|verify} messages.
+                             * @param message TokenConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.video.stitcher.v1.MediaCdnKey.ITokenConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a TokenConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns TokenConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig;
+
+                            /**
+                             * Decodes a TokenConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns TokenConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig;
+
+                            /**
+                             * Verifies a TokenConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a TokenConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns TokenConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig;
+
+                            /**
+                             * Creates a plain object from a TokenConfig message. Also converts values to other types if specified.
+                             * @param message TokenConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this TokenConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for TokenConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
 
                     /** Properties of a CompanionAds. */
@@ -1822,6 +1928,103 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a FetchOptions. */
+                    interface IFetchOptions {
+
+                        /** FetchOptions headers */
+                        headers?: ({ [k: string]: string }|null);
+                    }
+
+                    /** Represents a FetchOptions. */
+                    class FetchOptions implements IFetchOptions {
+
+                        /**
+                         * Constructs a new FetchOptions.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.stitcher.v1.IFetchOptions);
+
+                        /** FetchOptions headers. */
+                        public headers: { [k: string]: string };
+
+                        /**
+                         * Creates a new FetchOptions instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FetchOptions instance
+                         */
+                        public static create(properties?: google.cloud.video.stitcher.v1.IFetchOptions): google.cloud.video.stitcher.v1.FetchOptions;
+
+                        /**
+                         * Encodes the specified FetchOptions message. Does not implicitly {@link google.cloud.video.stitcher.v1.FetchOptions.verify|verify} messages.
+                         * @param message FetchOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.stitcher.v1.IFetchOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FetchOptions message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.FetchOptions.verify|verify} messages.
+                         * @param message FetchOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.stitcher.v1.IFetchOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FetchOptions message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FetchOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.stitcher.v1.FetchOptions;
+
+                        /**
+                         * Decodes a FetchOptions message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FetchOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.stitcher.v1.FetchOptions;
+
+                        /**
+                         * Verifies a FetchOptions message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FetchOptions message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FetchOptions
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.stitcher.v1.FetchOptions;
+
+                        /**
+                         * Creates a plain object from a FetchOptions message. Also converts values to other types if specified.
+                         * @param message FetchOptions
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.stitcher.v1.FetchOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FetchOptions to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FetchOptions
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** AdTracking enum. */
                     enum AdTracking {
                         AD_TRACKING_UNSPECIFIED = 0,
@@ -1858,6 +2061,9 @@ export namespace google {
 
                         /** LiveConfig prefetchConfig */
                         prefetchConfig?: (google.cloud.video.stitcher.v1.IPrefetchConfig|null);
+
+                        /** LiveConfig sourceFetchOptions */
+                        sourceFetchOptions?: (google.cloud.video.stitcher.v1.IFetchOptions|null);
                     }
 
                     /** Represents a LiveConfig. */
@@ -1895,6 +2101,9 @@ export namespace google {
 
                         /** LiveConfig prefetchConfig. */
                         public prefetchConfig?: (google.cloud.video.stitcher.v1.IPrefetchConfig|null);
+
+                        /** LiveConfig sourceFetchOptions. */
+                        public sourceFetchOptions?: (google.cloud.video.stitcher.v1.IFetchOptions|null);
 
                         /**
                          * Creates a new LiveConfig instance using the specified properties.
@@ -2236,6 +2445,9 @@ export namespace google {
 
                         /** VodSession gamSettings */
                         gamSettings?: (google.cloud.video.stitcher.v1.VodSession.IGamSettings|null);
+
+                        /** VodSession vodConfig */
+                        vodConfig?: (string|null);
                     }
 
                     /** Represents a VodSession. */
@@ -2276,6 +2488,9 @@ export namespace google {
 
                         /** VodSession gamSettings. */
                         public gamSettings?: (google.cloud.video.stitcher.v1.VodSession.IGamSettings|null);
+
+                        /** VodSession vodConfig. */
+                        public vodConfig: string;
 
                         /**
                          * Creates a new VodSession instance using the specified properties.
@@ -2905,6 +3120,9 @@ export namespace google {
 
                         /** LiveSession liveConfig */
                         liveConfig?: (string|null);
+
+                        /** LiveSession adTracking */
+                        adTracking?: (google.cloud.video.stitcher.v1.AdTracking|keyof typeof google.cloud.video.stitcher.v1.AdTracking|null);
                     }
 
                     /** Represents a LiveSession. */
@@ -2933,6 +3151,9 @@ export namespace google {
 
                         /** LiveSession liveConfig. */
                         public liveConfig: string;
+
+                        /** LiveSession adTracking. */
+                        public adTracking: (google.cloud.video.stitcher.v1.AdTracking|keyof typeof google.cloud.video.stitcher.v1.AdTracking);
 
                         /**
                          * Creates a new LiveSession instance using the specified properties.
@@ -3019,6 +3240,9 @@ export namespace google {
 
                             /** GamSettings streamId */
                             streamId?: (string|null);
+
+                            /** GamSettings targetingParameters */
+                            targetingParameters?: ({ [k: string]: string }|null);
                         }
 
                         /** Represents a GamSettings. */
@@ -3032,6 +3256,9 @@ export namespace google {
 
                             /** GamSettings streamId. */
                             public streamId: string;
+
+                            /** GamSettings targetingParameters. */
+                            public targetingParameters: { [k: string]: string };
 
                             /**
                              * Creates a new GamSettings instance using the specified properties.
@@ -4122,6 +4349,90 @@ export namespace google {
                          * @returns Promise
                          */
                         public deleteLiveConfig(request: google.cloud.video.stitcher.v1.IDeleteLiveConfigRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls UpdateLiveConfig.
+                         * @param request UpdateLiveConfigRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public updateLiveConfig(request: google.cloud.video.stitcher.v1.IUpdateLiveConfigRequest, callback: google.cloud.video.stitcher.v1.VideoStitcherService.UpdateLiveConfigCallback): void;
+
+                        /**
+                         * Calls UpdateLiveConfig.
+                         * @param request UpdateLiveConfigRequest message or plain object
+                         * @returns Promise
+                         */
+                        public updateLiveConfig(request: google.cloud.video.stitcher.v1.IUpdateLiveConfigRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls CreateVodConfig.
+                         * @param request CreateVodConfigRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public createVodConfig(request: google.cloud.video.stitcher.v1.ICreateVodConfigRequest, callback: google.cloud.video.stitcher.v1.VideoStitcherService.CreateVodConfigCallback): void;
+
+                        /**
+                         * Calls CreateVodConfig.
+                         * @param request CreateVodConfigRequest message or plain object
+                         * @returns Promise
+                         */
+                        public createVodConfig(request: google.cloud.video.stitcher.v1.ICreateVodConfigRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls ListVodConfigs.
+                         * @param request ListVodConfigsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListVodConfigsResponse
+                         */
+                        public listVodConfigs(request: google.cloud.video.stitcher.v1.IListVodConfigsRequest, callback: google.cloud.video.stitcher.v1.VideoStitcherService.ListVodConfigsCallback): void;
+
+                        /**
+                         * Calls ListVodConfigs.
+                         * @param request ListVodConfigsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listVodConfigs(request: google.cloud.video.stitcher.v1.IListVodConfigsRequest): Promise<google.cloud.video.stitcher.v1.ListVodConfigsResponse>;
+
+                        /**
+                         * Calls GetVodConfig.
+                         * @param request GetVodConfigRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and VodConfig
+                         */
+                        public getVodConfig(request: google.cloud.video.stitcher.v1.IGetVodConfigRequest, callback: google.cloud.video.stitcher.v1.VideoStitcherService.GetVodConfigCallback): void;
+
+                        /**
+                         * Calls GetVodConfig.
+                         * @param request GetVodConfigRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getVodConfig(request: google.cloud.video.stitcher.v1.IGetVodConfigRequest): Promise<google.cloud.video.stitcher.v1.VodConfig>;
+
+                        /**
+                         * Calls DeleteVodConfig.
+                         * @param request DeleteVodConfigRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public deleteVodConfig(request: google.cloud.video.stitcher.v1.IDeleteVodConfigRequest, callback: google.cloud.video.stitcher.v1.VideoStitcherService.DeleteVodConfigCallback): void;
+
+                        /**
+                         * Calls DeleteVodConfig.
+                         * @param request DeleteVodConfigRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteVodConfig(request: google.cloud.video.stitcher.v1.IDeleteVodConfigRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls UpdateVodConfig.
+                         * @param request UpdateVodConfigRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public updateVodConfig(request: google.cloud.video.stitcher.v1.IUpdateVodConfigRequest, callback: google.cloud.video.stitcher.v1.VideoStitcherService.UpdateVodConfigCallback): void;
+
+                        /**
+                         * Calls UpdateVodConfig.
+                         * @param request UpdateVodConfigRequest message or plain object
+                         * @returns Promise
+                         */
+                        public updateVodConfig(request: google.cloud.video.stitcher.v1.IUpdateVodConfigRequest): Promise<google.longrunning.Operation>;
                     }
 
                     namespace VideoStitcherService {
@@ -4293,6 +4604,48 @@ export namespace google {
                          * @param [response] Operation
                          */
                         type DeleteLiveConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.video.stitcher.v1.VideoStitcherService|updateLiveConfig}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type UpdateLiveConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.video.stitcher.v1.VideoStitcherService|createVodConfig}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type CreateVodConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.video.stitcher.v1.VideoStitcherService|listVodConfigs}.
+                         * @param error Error, if any
+                         * @param [response] ListVodConfigsResponse
+                         */
+                        type ListVodConfigsCallback = (error: (Error|null), response?: google.cloud.video.stitcher.v1.ListVodConfigsResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.video.stitcher.v1.VideoStitcherService|getVodConfig}.
+                         * @param error Error, if any
+                         * @param [response] VodConfig
+                         */
+                        type GetVodConfigCallback = (error: (Error|null), response?: google.cloud.video.stitcher.v1.VodConfig) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.video.stitcher.v1.VideoStitcherService|deleteVodConfig}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type DeleteVodConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.video.stitcher.v1.VideoStitcherService|updateVodConfig}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type UpdateVodConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                     }
 
                     /** Properties of a CreateCdnKeyRequest. */
@@ -7439,6 +7792,751 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of an UpdateLiveConfigRequest. */
+                    interface IUpdateLiveConfigRequest {
+
+                        /** UpdateLiveConfigRequest liveConfig */
+                        liveConfig?: (google.cloud.video.stitcher.v1.ILiveConfig|null);
+
+                        /** UpdateLiveConfigRequest updateMask */
+                        updateMask?: (google.protobuf.IFieldMask|null);
+                    }
+
+                    /** Represents an UpdateLiveConfigRequest. */
+                    class UpdateLiveConfigRequest implements IUpdateLiveConfigRequest {
+
+                        /**
+                         * Constructs a new UpdateLiveConfigRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.stitcher.v1.IUpdateLiveConfigRequest);
+
+                        /** UpdateLiveConfigRequest liveConfig. */
+                        public liveConfig?: (google.cloud.video.stitcher.v1.ILiveConfig|null);
+
+                        /** UpdateLiveConfigRequest updateMask. */
+                        public updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /**
+                         * Creates a new UpdateLiveConfigRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UpdateLiveConfigRequest instance
+                         */
+                        public static create(properties?: google.cloud.video.stitcher.v1.IUpdateLiveConfigRequest): google.cloud.video.stitcher.v1.UpdateLiveConfigRequest;
+
+                        /**
+                         * Encodes the specified UpdateLiveConfigRequest message. Does not implicitly {@link google.cloud.video.stitcher.v1.UpdateLiveConfigRequest.verify|verify} messages.
+                         * @param message UpdateLiveConfigRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.stitcher.v1.IUpdateLiveConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UpdateLiveConfigRequest message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.UpdateLiveConfigRequest.verify|verify} messages.
+                         * @param message UpdateLiveConfigRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.stitcher.v1.IUpdateLiveConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UpdateLiveConfigRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UpdateLiveConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.stitcher.v1.UpdateLiveConfigRequest;
+
+                        /**
+                         * Decodes an UpdateLiveConfigRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UpdateLiveConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.stitcher.v1.UpdateLiveConfigRequest;
+
+                        /**
+                         * Verifies an UpdateLiveConfigRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UpdateLiveConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UpdateLiveConfigRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.stitcher.v1.UpdateLiveConfigRequest;
+
+                        /**
+                         * Creates a plain object from an UpdateLiveConfigRequest message. Also converts values to other types if specified.
+                         * @param message UpdateLiveConfigRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.stitcher.v1.UpdateLiveConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UpdateLiveConfigRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UpdateLiveConfigRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CreateVodConfigRequest. */
+                    interface ICreateVodConfigRequest {
+
+                        /** CreateVodConfigRequest parent */
+                        parent?: (string|null);
+
+                        /** CreateVodConfigRequest vodConfigId */
+                        vodConfigId?: (string|null);
+
+                        /** CreateVodConfigRequest vodConfig */
+                        vodConfig?: (google.cloud.video.stitcher.v1.IVodConfig|null);
+
+                        /** CreateVodConfigRequest requestId */
+                        requestId?: (string|null);
+                    }
+
+                    /** Represents a CreateVodConfigRequest. */
+                    class CreateVodConfigRequest implements ICreateVodConfigRequest {
+
+                        /**
+                         * Constructs a new CreateVodConfigRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.stitcher.v1.ICreateVodConfigRequest);
+
+                        /** CreateVodConfigRequest parent. */
+                        public parent: string;
+
+                        /** CreateVodConfigRequest vodConfigId. */
+                        public vodConfigId: string;
+
+                        /** CreateVodConfigRequest vodConfig. */
+                        public vodConfig?: (google.cloud.video.stitcher.v1.IVodConfig|null);
+
+                        /** CreateVodConfigRequest requestId. */
+                        public requestId: string;
+
+                        /**
+                         * Creates a new CreateVodConfigRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CreateVodConfigRequest instance
+                         */
+                        public static create(properties?: google.cloud.video.stitcher.v1.ICreateVodConfigRequest): google.cloud.video.stitcher.v1.CreateVodConfigRequest;
+
+                        /**
+                         * Encodes the specified CreateVodConfigRequest message. Does not implicitly {@link google.cloud.video.stitcher.v1.CreateVodConfigRequest.verify|verify} messages.
+                         * @param message CreateVodConfigRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.stitcher.v1.ICreateVodConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CreateVodConfigRequest message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.CreateVodConfigRequest.verify|verify} messages.
+                         * @param message CreateVodConfigRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.stitcher.v1.ICreateVodConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CreateVodConfigRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CreateVodConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.stitcher.v1.CreateVodConfigRequest;
+
+                        /**
+                         * Decodes a CreateVodConfigRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CreateVodConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.stitcher.v1.CreateVodConfigRequest;
+
+                        /**
+                         * Verifies a CreateVodConfigRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CreateVodConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CreateVodConfigRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.stitcher.v1.CreateVodConfigRequest;
+
+                        /**
+                         * Creates a plain object from a CreateVodConfigRequest message. Also converts values to other types if specified.
+                         * @param message CreateVodConfigRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.stitcher.v1.CreateVodConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CreateVodConfigRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CreateVodConfigRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListVodConfigsRequest. */
+                    interface IListVodConfigsRequest {
+
+                        /** ListVodConfigsRequest parent */
+                        parent?: (string|null);
+
+                        /** ListVodConfigsRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListVodConfigsRequest pageToken */
+                        pageToken?: (string|null);
+
+                        /** ListVodConfigsRequest filter */
+                        filter?: (string|null);
+
+                        /** ListVodConfigsRequest orderBy */
+                        orderBy?: (string|null);
+                    }
+
+                    /** Represents a ListVodConfigsRequest. */
+                    class ListVodConfigsRequest implements IListVodConfigsRequest {
+
+                        /**
+                         * Constructs a new ListVodConfigsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.stitcher.v1.IListVodConfigsRequest);
+
+                        /** ListVodConfigsRequest parent. */
+                        public parent: string;
+
+                        /** ListVodConfigsRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListVodConfigsRequest pageToken. */
+                        public pageToken: string;
+
+                        /** ListVodConfigsRequest filter. */
+                        public filter: string;
+
+                        /** ListVodConfigsRequest orderBy. */
+                        public orderBy: string;
+
+                        /**
+                         * Creates a new ListVodConfigsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListVodConfigsRequest instance
+                         */
+                        public static create(properties?: google.cloud.video.stitcher.v1.IListVodConfigsRequest): google.cloud.video.stitcher.v1.ListVodConfigsRequest;
+
+                        /**
+                         * Encodes the specified ListVodConfigsRequest message. Does not implicitly {@link google.cloud.video.stitcher.v1.ListVodConfigsRequest.verify|verify} messages.
+                         * @param message ListVodConfigsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.stitcher.v1.IListVodConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListVodConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.ListVodConfigsRequest.verify|verify} messages.
+                         * @param message ListVodConfigsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.stitcher.v1.IListVodConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListVodConfigsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListVodConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.stitcher.v1.ListVodConfigsRequest;
+
+                        /**
+                         * Decodes a ListVodConfigsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListVodConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.stitcher.v1.ListVodConfigsRequest;
+
+                        /**
+                         * Verifies a ListVodConfigsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListVodConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListVodConfigsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.stitcher.v1.ListVodConfigsRequest;
+
+                        /**
+                         * Creates a plain object from a ListVodConfigsRequest message. Also converts values to other types if specified.
+                         * @param message ListVodConfigsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.stitcher.v1.ListVodConfigsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListVodConfigsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListVodConfigsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListVodConfigsResponse. */
+                    interface IListVodConfigsResponse {
+
+                        /** ListVodConfigsResponse vodConfigs */
+                        vodConfigs?: (google.cloud.video.stitcher.v1.IVodConfig[]|null);
+
+                        /** ListVodConfigsResponse nextPageToken */
+                        nextPageToken?: (string|null);
+
+                        /** ListVodConfigsResponse unreachable */
+                        unreachable?: (string[]|null);
+                    }
+
+                    /** Represents a ListVodConfigsResponse. */
+                    class ListVodConfigsResponse implements IListVodConfigsResponse {
+
+                        /**
+                         * Constructs a new ListVodConfigsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.stitcher.v1.IListVodConfigsResponse);
+
+                        /** ListVodConfigsResponse vodConfigs. */
+                        public vodConfigs: google.cloud.video.stitcher.v1.IVodConfig[];
+
+                        /** ListVodConfigsResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /** ListVodConfigsResponse unreachable. */
+                        public unreachable: string[];
+
+                        /**
+                         * Creates a new ListVodConfigsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListVodConfigsResponse instance
+                         */
+                        public static create(properties?: google.cloud.video.stitcher.v1.IListVodConfigsResponse): google.cloud.video.stitcher.v1.ListVodConfigsResponse;
+
+                        /**
+                         * Encodes the specified ListVodConfigsResponse message. Does not implicitly {@link google.cloud.video.stitcher.v1.ListVodConfigsResponse.verify|verify} messages.
+                         * @param message ListVodConfigsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.stitcher.v1.IListVodConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListVodConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.ListVodConfigsResponse.verify|verify} messages.
+                         * @param message ListVodConfigsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.stitcher.v1.IListVodConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListVodConfigsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListVodConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.stitcher.v1.ListVodConfigsResponse;
+
+                        /**
+                         * Decodes a ListVodConfigsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListVodConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.stitcher.v1.ListVodConfigsResponse;
+
+                        /**
+                         * Verifies a ListVodConfigsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListVodConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListVodConfigsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.stitcher.v1.ListVodConfigsResponse;
+
+                        /**
+                         * Creates a plain object from a ListVodConfigsResponse message. Also converts values to other types if specified.
+                         * @param message ListVodConfigsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.stitcher.v1.ListVodConfigsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListVodConfigsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListVodConfigsResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GetVodConfigRequest. */
+                    interface IGetVodConfigRequest {
+
+                        /** GetVodConfigRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetVodConfigRequest. */
+                    class GetVodConfigRequest implements IGetVodConfigRequest {
+
+                        /**
+                         * Constructs a new GetVodConfigRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.stitcher.v1.IGetVodConfigRequest);
+
+                        /** GetVodConfigRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetVodConfigRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetVodConfigRequest instance
+                         */
+                        public static create(properties?: google.cloud.video.stitcher.v1.IGetVodConfigRequest): google.cloud.video.stitcher.v1.GetVodConfigRequest;
+
+                        /**
+                         * Encodes the specified GetVodConfigRequest message. Does not implicitly {@link google.cloud.video.stitcher.v1.GetVodConfigRequest.verify|verify} messages.
+                         * @param message GetVodConfigRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.stitcher.v1.IGetVodConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetVodConfigRequest message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.GetVodConfigRequest.verify|verify} messages.
+                         * @param message GetVodConfigRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.stitcher.v1.IGetVodConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetVodConfigRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetVodConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.stitcher.v1.GetVodConfigRequest;
+
+                        /**
+                         * Decodes a GetVodConfigRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetVodConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.stitcher.v1.GetVodConfigRequest;
+
+                        /**
+                         * Verifies a GetVodConfigRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetVodConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetVodConfigRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.stitcher.v1.GetVodConfigRequest;
+
+                        /**
+                         * Creates a plain object from a GetVodConfigRequest message. Also converts values to other types if specified.
+                         * @param message GetVodConfigRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.stitcher.v1.GetVodConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetVodConfigRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetVodConfigRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeleteVodConfigRequest. */
+                    interface IDeleteVodConfigRequest {
+
+                        /** DeleteVodConfigRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a DeleteVodConfigRequest. */
+                    class DeleteVodConfigRequest implements IDeleteVodConfigRequest {
+
+                        /**
+                         * Constructs a new DeleteVodConfigRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.stitcher.v1.IDeleteVodConfigRequest);
+
+                        /** DeleteVodConfigRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new DeleteVodConfigRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteVodConfigRequest instance
+                         */
+                        public static create(properties?: google.cloud.video.stitcher.v1.IDeleteVodConfigRequest): google.cloud.video.stitcher.v1.DeleteVodConfigRequest;
+
+                        /**
+                         * Encodes the specified DeleteVodConfigRequest message. Does not implicitly {@link google.cloud.video.stitcher.v1.DeleteVodConfigRequest.verify|verify} messages.
+                         * @param message DeleteVodConfigRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.stitcher.v1.IDeleteVodConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteVodConfigRequest message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.DeleteVodConfigRequest.verify|verify} messages.
+                         * @param message DeleteVodConfigRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.stitcher.v1.IDeleteVodConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteVodConfigRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteVodConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.stitcher.v1.DeleteVodConfigRequest;
+
+                        /**
+                         * Decodes a DeleteVodConfigRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteVodConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.stitcher.v1.DeleteVodConfigRequest;
+
+                        /**
+                         * Verifies a DeleteVodConfigRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteVodConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteVodConfigRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.stitcher.v1.DeleteVodConfigRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteVodConfigRequest message. Also converts values to other types if specified.
+                         * @param message DeleteVodConfigRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.stitcher.v1.DeleteVodConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteVodConfigRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteVodConfigRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an UpdateVodConfigRequest. */
+                    interface IUpdateVodConfigRequest {
+
+                        /** UpdateVodConfigRequest vodConfig */
+                        vodConfig?: (google.cloud.video.stitcher.v1.IVodConfig|null);
+
+                        /** UpdateVodConfigRequest updateMask */
+                        updateMask?: (google.protobuf.IFieldMask|null);
+                    }
+
+                    /** Represents an UpdateVodConfigRequest. */
+                    class UpdateVodConfigRequest implements IUpdateVodConfigRequest {
+
+                        /**
+                         * Constructs a new UpdateVodConfigRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.stitcher.v1.IUpdateVodConfigRequest);
+
+                        /** UpdateVodConfigRequest vodConfig. */
+                        public vodConfig?: (google.cloud.video.stitcher.v1.IVodConfig|null);
+
+                        /** UpdateVodConfigRequest updateMask. */
+                        public updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /**
+                         * Creates a new UpdateVodConfigRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UpdateVodConfigRequest instance
+                         */
+                        public static create(properties?: google.cloud.video.stitcher.v1.IUpdateVodConfigRequest): google.cloud.video.stitcher.v1.UpdateVodConfigRequest;
+
+                        /**
+                         * Encodes the specified UpdateVodConfigRequest message. Does not implicitly {@link google.cloud.video.stitcher.v1.UpdateVodConfigRequest.verify|verify} messages.
+                         * @param message UpdateVodConfigRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.stitcher.v1.IUpdateVodConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UpdateVodConfigRequest message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.UpdateVodConfigRequest.verify|verify} messages.
+                         * @param message UpdateVodConfigRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.stitcher.v1.IUpdateVodConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UpdateVodConfigRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UpdateVodConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.stitcher.v1.UpdateVodConfigRequest;
+
+                        /**
+                         * Decodes an UpdateVodConfigRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UpdateVodConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.stitcher.v1.UpdateVodConfigRequest;
+
+                        /**
+                         * Verifies an UpdateVodConfigRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UpdateVodConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UpdateVodConfigRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.stitcher.v1.UpdateVodConfigRequest;
+
+                        /**
+                         * Creates a plain object from an UpdateVodConfigRequest message. Also converts values to other types if specified.
+                         * @param message UpdateVodConfigRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.stitcher.v1.UpdateVodConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UpdateVodConfigRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UpdateVodConfigRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of an OperationMetadata. */
                     interface IOperationMetadata {
 
@@ -7548,6 +8646,241 @@ export namespace google {
 
                         /**
                          * Gets the default type url for OperationMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a VodConfig. */
+                    interface IVodConfig {
+
+                        /** VodConfig name */
+                        name?: (string|null);
+
+                        /** VodConfig sourceUri */
+                        sourceUri?: (string|null);
+
+                        /** VodConfig adTagUri */
+                        adTagUri?: (string|null);
+
+                        /** VodConfig gamVodConfig */
+                        gamVodConfig?: (google.cloud.video.stitcher.v1.IGamVodConfig|null);
+
+                        /** VodConfig state */
+                        state?: (google.cloud.video.stitcher.v1.VodConfig.State|keyof typeof google.cloud.video.stitcher.v1.VodConfig.State|null);
+
+                        /** VodConfig sourceFetchOptions */
+                        sourceFetchOptions?: (google.cloud.video.stitcher.v1.IFetchOptions|null);
+                    }
+
+                    /** Represents a VodConfig. */
+                    class VodConfig implements IVodConfig {
+
+                        /**
+                         * Constructs a new VodConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.stitcher.v1.IVodConfig);
+
+                        /** VodConfig name. */
+                        public name: string;
+
+                        /** VodConfig sourceUri. */
+                        public sourceUri: string;
+
+                        /** VodConfig adTagUri. */
+                        public adTagUri: string;
+
+                        /** VodConfig gamVodConfig. */
+                        public gamVodConfig?: (google.cloud.video.stitcher.v1.IGamVodConfig|null);
+
+                        /** VodConfig state. */
+                        public state: (google.cloud.video.stitcher.v1.VodConfig.State|keyof typeof google.cloud.video.stitcher.v1.VodConfig.State);
+
+                        /** VodConfig sourceFetchOptions. */
+                        public sourceFetchOptions?: (google.cloud.video.stitcher.v1.IFetchOptions|null);
+
+                        /**
+                         * Creates a new VodConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns VodConfig instance
+                         */
+                        public static create(properties?: google.cloud.video.stitcher.v1.IVodConfig): google.cloud.video.stitcher.v1.VodConfig;
+
+                        /**
+                         * Encodes the specified VodConfig message. Does not implicitly {@link google.cloud.video.stitcher.v1.VodConfig.verify|verify} messages.
+                         * @param message VodConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.stitcher.v1.IVodConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified VodConfig message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.VodConfig.verify|verify} messages.
+                         * @param message VodConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.stitcher.v1.IVodConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a VodConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns VodConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.stitcher.v1.VodConfig;
+
+                        /**
+                         * Decodes a VodConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns VodConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.stitcher.v1.VodConfig;
+
+                        /**
+                         * Verifies a VodConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a VodConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns VodConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.stitcher.v1.VodConfig;
+
+                        /**
+                         * Creates a plain object from a VodConfig message. Also converts values to other types if specified.
+                         * @param message VodConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.stitcher.v1.VodConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this VodConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for VodConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace VodConfig {
+
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            CREATING = 1,
+                            READY = 2,
+                            DELETING = 3
+                        }
+                    }
+
+                    /** Properties of a GamVodConfig. */
+                    interface IGamVodConfig {
+
+                        /** GamVodConfig networkCode */
+                        networkCode?: (string|null);
+                    }
+
+                    /** Represents a GamVodConfig. */
+                    class GamVodConfig implements IGamVodConfig {
+
+                        /**
+                         * Constructs a new GamVodConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.stitcher.v1.IGamVodConfig);
+
+                        /** GamVodConfig networkCode. */
+                        public networkCode: string;
+
+                        /**
+                         * Creates a new GamVodConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GamVodConfig instance
+                         */
+                        public static create(properties?: google.cloud.video.stitcher.v1.IGamVodConfig): google.cloud.video.stitcher.v1.GamVodConfig;
+
+                        /**
+                         * Encodes the specified GamVodConfig message. Does not implicitly {@link google.cloud.video.stitcher.v1.GamVodConfig.verify|verify} messages.
+                         * @param message GamVodConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.stitcher.v1.IGamVodConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GamVodConfig message, length delimited. Does not implicitly {@link google.cloud.video.stitcher.v1.GamVodConfig.verify|verify} messages.
+                         * @param message GamVodConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.stitcher.v1.IGamVodConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GamVodConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GamVodConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.stitcher.v1.GamVodConfig;
+
+                        /**
+                         * Decodes a GamVodConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GamVodConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.stitcher.v1.GamVodConfig;
+
+                        /**
+                         * Verifies a GamVodConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GamVodConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GamVodConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.stitcher.v1.GamVodConfig;
+
+                        /**
+                         * Creates a plain object from a GamVodConfig message. Also converts values to other types if specified.
+                         * @param message GamVodConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.stitcher.v1.GamVodConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GamVodConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GamVodConfig
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
