@@ -18,8 +18,8 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const {Client} = require('@google-cloud/publish').v1;
-const publishClient = new Client();
+const {StreetViewPublishServiceClient} = require('@google-cloud/publish').v1;
+const publishClient = new StreetViewPublishServiceClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
