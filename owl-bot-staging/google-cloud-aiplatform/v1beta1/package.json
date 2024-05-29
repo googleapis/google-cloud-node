@@ -32,6 +32,7 @@
     "feature registry service",
     "featurestore online serving service",
     "featurestore service",
+    "gen ai cache service",
     "gen ai tuning service",
     "index endpoint service",
     "index service",

@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {DatasetServiceClient, DeploymentResourcePoolServiceClient, EndpointServiceClient, EvaluationServiceClient, ExtensionExecutionServiceClient, ExtensionRegistryServiceClient, FeatureOnlineStoreAdminServiceClient, FeatureOnlineStoreServiceClient, FeatureRegistryServiceClient, FeaturestoreOnlineServingServiceClient, FeaturestoreServiceClient, GenAiTuningServiceClient, IndexEndpointServiceClient, IndexServiceClient, JobServiceClient, LlmUtilityServiceClient, MatchServiceClient, MetadataServiceClient, MigrationServiceClient, ModelGardenServiceClient, ModelMonitoringServiceClient, ModelServiceClient, NotebookServiceClient, PersistentResourceServiceClient, PipelineServiceClient, PredictionServiceClient, ReasoningEngineExecutionServiceClient, ReasoningEngineServiceClient, ScheduleServiceClient, SpecialistPoolServiceClient, TensorboardServiceClient, VertexRagDataServiceClient, VertexRagServiceClient, VizierServiceClient} from '@google-cloud/aiplatform';
+import {DatasetServiceClient, DeploymentResourcePoolServiceClient, EndpointServiceClient, EvaluationServiceClient, ExtensionExecutionServiceClient, ExtensionRegistryServiceClient, FeatureOnlineStoreAdminServiceClient, FeatureOnlineStoreServiceClient, FeatureRegistryServiceClient, FeaturestoreOnlineServingServiceClient, FeaturestoreServiceClient, GenAiCacheServiceClient, GenAiTuningServiceClient, IndexEndpointServiceClient, IndexServiceClient, JobServiceClient, LlmUtilityServiceClient, MatchServiceClient, MetadataServiceClient, MigrationServiceClient, ModelGardenServiceClient, ModelMonitoringServiceClient, ModelServiceClient, NotebookServiceClient, PersistentResourceServiceClient, PipelineServiceClient, PredictionServiceClient, ReasoningEngineExecutionServiceClient, ReasoningEngineServiceClient, ScheduleServiceClient, SpecialistPoolServiceClient, TensorboardServiceClient, VertexRagDataServiceClient, VertexRagServiceClient, VizierServiceClient} from '@google-cloud/aiplatform';
 
 // check that the client class type name can be used
 function doStuffWithDatasetServiceClient(client: DatasetServiceClient) {
@@ -50,6 +50,9 @@ function doStuffWithFeaturestoreOnlineServingServiceClient(client: FeaturestoreO
   client.close();
 }
 function doStuffWithFeaturestoreServiceClient(client: FeaturestoreServiceClient) {
+  client.close();
+}
+function doStuffWithGenAiCacheServiceClient(client: GenAiCacheServiceClient) {
   client.close();
 }
 function doStuffWithGenAiTuningServiceClient(client: GenAiTuningServiceClient) {
@@ -156,6 +159,9 @@ function main() {
   // check that the client instance can be created
   const featurestoreServiceClient = new FeaturestoreServiceClient();
   doStuffWithFeaturestoreServiceClient(featurestoreServiceClient);
+  // check that the client instance can be created
+  const genAiCacheServiceClient = new GenAiCacheServiceClient();
+  doStuffWithGenAiCacheServiceClient(genAiCacheServiceClient);
   // check that the client instance can be created
   const genAiTuningServiceClient = new GenAiTuningServiceClient();
   doStuffWithGenAiTuningServiceClient(genAiTuningServiceClient);

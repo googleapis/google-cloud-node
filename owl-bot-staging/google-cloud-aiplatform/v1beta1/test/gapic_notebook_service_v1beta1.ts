@@ -383,6 +383,118 @@ describe('v1beta1.NotebookServiceClient', () => {
         });
     });
 
+    describe('updateNotebookRuntimeTemplate', () => {
+        it('invokes updateNotebookRuntimeTemplate without error', async () => {
+            const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.UpdateNotebookRuntimeTemplateRequest()
+            );
+            request.notebookRuntimeTemplate ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateNotebookRuntimeTemplateRequest', ['notebookRuntimeTemplate', 'name']);
+            request.notebookRuntimeTemplate.name = defaultValue1;
+            const expectedHeaderRequestParams = `notebook_runtime_template.name=${defaultValue1}`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.NotebookRuntimeTemplate()
+            );
+            client.innerApiCalls.updateNotebookRuntimeTemplate = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateNotebookRuntimeTemplate(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateNotebookRuntimeTemplate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateNotebookRuntimeTemplate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateNotebookRuntimeTemplate without error using callback', async () => {
+            const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.UpdateNotebookRuntimeTemplateRequest()
+            );
+            request.notebookRuntimeTemplate ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateNotebookRuntimeTemplateRequest', ['notebookRuntimeTemplate', 'name']);
+            request.notebookRuntimeTemplate.name = defaultValue1;
+            const expectedHeaderRequestParams = `notebook_runtime_template.name=${defaultValue1}`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.NotebookRuntimeTemplate()
+            );
+            client.innerApiCalls.updateNotebookRuntimeTemplate = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateNotebookRuntimeTemplate(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.aiplatform.v1beta1.INotebookRuntimeTemplate|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateNotebookRuntimeTemplate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateNotebookRuntimeTemplate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateNotebookRuntimeTemplate with error', async () => {
+            const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.UpdateNotebookRuntimeTemplateRequest()
+            );
+            request.notebookRuntimeTemplate ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateNotebookRuntimeTemplateRequest', ['notebookRuntimeTemplate', 'name']);
+            request.notebookRuntimeTemplate.name = defaultValue1;
+            const expectedHeaderRequestParams = `notebook_runtime_template.name=${defaultValue1}`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateNotebookRuntimeTemplate = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateNotebookRuntimeTemplate(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateNotebookRuntimeTemplate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateNotebookRuntimeTemplate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateNotebookRuntimeTemplate with closed client', async () => {
+            const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.UpdateNotebookRuntimeTemplateRequest()
+            );
+            request.notebookRuntimeTemplate ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateNotebookRuntimeTemplateRequest', ['notebookRuntimeTemplate', 'name']);
+            request.notebookRuntimeTemplate.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close();
+            await assert.rejects(client.updateNotebookRuntimeTemplate(request), expectedError);
+        });
+    });
+
     describe('getNotebookRuntime', () => {
         it('invokes getNotebookRuntime without error', async () => {
             const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
@@ -1518,6 +1630,160 @@ describe('v1beta1.NotebookServiceClient', () => {
 
             client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.checkStartNotebookRuntimeProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createNotebookExecutionJob', () => {
+        it('invokes createNotebookExecutionJob without error', async () => {
+            const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.CreateNotebookExecutionJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateNotebookExecutionJobRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createNotebookExecutionJob = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createNotebookExecutionJob(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createNotebookExecutionJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createNotebookExecutionJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createNotebookExecutionJob without error using callback', async () => {
+            const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.CreateNotebookExecutionJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateNotebookExecutionJobRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createNotebookExecutionJob = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createNotebookExecutionJob(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.aiplatform.v1beta1.INotebookExecutionJob, protos.google.cloud.aiplatform.v1beta1.ICreateNotebookExecutionJobOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.aiplatform.v1beta1.INotebookExecutionJob, protos.google.cloud.aiplatform.v1beta1.ICreateNotebookExecutionJobOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createNotebookExecutionJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createNotebookExecutionJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createNotebookExecutionJob with call error', async () => {
+            const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.CreateNotebookExecutionJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateNotebookExecutionJobRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createNotebookExecutionJob = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createNotebookExecutionJob(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createNotebookExecutionJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createNotebookExecutionJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createNotebookExecutionJob with LRO error', async () => {
+            const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.CreateNotebookExecutionJobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateNotebookExecutionJobRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createNotebookExecutionJob = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createNotebookExecutionJob(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createNotebookExecutionJob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createNotebookExecutionJob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateNotebookExecutionJobProgress without error', async () => {
+            const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateNotebookExecutionJobProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateNotebookExecutionJobProgress with error', async () => {
+            const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateNotebookExecutionJobProgress(''), expectedError);
             assert((client.operationsClient.getOperation as SinonStub)
                 .getCall(0));
         });
@@ -3323,6 +3589,52 @@ describe('v1beta1.NotebookServiceClient', () => {
                 const result = client.matchBatchPredictionJobFromBatchPredictionJobName(fakePath);
                 assert.strictEqual(result, "batchPredictionJobValue");
                 assert((client.pathTemplates.batchPredictionJobPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('cachedContent', () => {
+            const fakePath = "/rendered/path/cachedContent";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                cached_content: "cachedContentValue",
+            };
+            const client = new notebookserviceModule.v1beta1.NotebookServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            client.pathTemplates.cachedContentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.cachedContentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('cachedContentPath', () => {
+                const result = client.cachedContentPath("projectValue", "locationValue", "cachedContentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.cachedContentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromCachedContentName', () => {
+                const result = client.matchProjectFromCachedContentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.cachedContentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromCachedContentName', () => {
+                const result = client.matchLocationFromCachedContentName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.cachedContentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCachedContentFromCachedContentName', () => {
+                const result = client.matchCachedContentFromCachedContentName(fakePath);
+                assert.strictEqual(result, "cachedContentValue");
+                assert((client.pathTemplates.cachedContentPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
