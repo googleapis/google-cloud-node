@@ -98,9 +98,10 @@ async function callListGitRepositoryLinks() {
   };
 
   // Run request
-  const iterable = developerconnectClient.listGitRepositoryLinksAsync(request);
+  const iterable =
+    developerconnectClient.listGitRepositoryLinksAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
