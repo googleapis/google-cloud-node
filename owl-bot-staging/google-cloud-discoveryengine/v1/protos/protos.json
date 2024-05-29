@@ -2146,7 +2146,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "discoveryengine.googleapis.com/DataStore"
+                            "(google.api.resource_reference).child_type": "discoveryengine.googleapis.com/Control"
                           }
                         },
                         "control": {
@@ -2214,7 +2214,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "discoveryengine.googleapis.com/DataStore"
+                            "(google.api.resource_reference).child_type": "discoveryengine.googleapis.com/Control"
                           }
                         },
                         "pageSize": {
