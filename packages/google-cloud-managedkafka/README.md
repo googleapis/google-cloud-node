@@ -98,7 +98,7 @@ async function callListConsumerGroups() {
   // Run request
   const iterable = managedkafkaClient.listConsumerGroupsAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
