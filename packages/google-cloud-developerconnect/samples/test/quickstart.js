@@ -18,8 +18,8 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const {Client} = require('@google-cloud/developerconnect').v1;
-const developerconnectClient = new Client();
+const {DeveloperConnectClient} = require('@google-cloud/developerconnect').v1;
+const developerconnectClient = new DeveloperConnectClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
