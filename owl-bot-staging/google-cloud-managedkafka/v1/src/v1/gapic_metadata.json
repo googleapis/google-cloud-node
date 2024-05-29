@@ -1,0 +1,175 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.managedkafka.v1",
+  "libraryPackage": "@google-cloud/managedkafka",
+  "services": {
+    "ManagedKafka": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ManagedKafkaClient",
+          "rpcs": {
+            "GetCluster": {
+              "methods": [
+                "getCluster"
+              ]
+            },
+            "GetTopic": {
+              "methods": [
+                "getTopic"
+              ]
+            },
+            "CreateTopic": {
+              "methods": [
+                "createTopic"
+              ]
+            },
+            "UpdateTopic": {
+              "methods": [
+                "updateTopic"
+              ]
+            },
+            "DeleteTopic": {
+              "methods": [
+                "deleteTopic"
+              ]
+            },
+            "GetConsumerGroup": {
+              "methods": [
+                "getConsumerGroup"
+              ]
+            },
+            "UpdateConsumerGroup": {
+              "methods": [
+                "updateConsumerGroup"
+              ]
+            },
+            "DeleteConsumerGroup": {
+              "methods": [
+                "deleteConsumerGroup"
+              ]
+            },
+            "CreateCluster": {
+              "methods": [
+                "createCluster"
+              ]
+            },
+            "UpdateCluster": {
+              "methods": [
+                "updateCluster"
+              ]
+            },
+            "DeleteCluster": {
+              "methods": [
+                "deleteCluster"
+              ]
+            },
+            "ListClusters": {
+              "methods": [
+                "listClusters",
+                "listClustersStream",
+                "listClustersAsync"
+              ]
+            },
+            "ListTopics": {
+              "methods": [
+                "listTopics",
+                "listTopicsStream",
+                "listTopicsAsync"
+              ]
+            },
+            "ListConsumerGroups": {
+              "methods": [
+                "listConsumerGroups",
+                "listConsumerGroupsStream",
+                "listConsumerGroupsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ManagedKafkaClient",
+          "rpcs": {
+            "GetCluster": {
+              "methods": [
+                "getCluster"
+              ]
+            },
+            "GetTopic": {
+              "methods": [
+                "getTopic"
+              ]
+            },
+            "CreateTopic": {
+              "methods": [
+                "createTopic"
+              ]
+            },
+            "UpdateTopic": {
+              "methods": [
+                "updateTopic"
+              ]
+            },
+            "DeleteTopic": {
+              "methods": [
+                "deleteTopic"
+              ]
+            },
+            "GetConsumerGroup": {
+              "methods": [
+                "getConsumerGroup"
+              ]
+            },
+            "UpdateConsumerGroup": {
+              "methods": [
+                "updateConsumerGroup"
+              ]
+            },
+            "DeleteConsumerGroup": {
+              "methods": [
+                "deleteConsumerGroup"
+              ]
+            },
+            "CreateCluster": {
+              "methods": [
+                "createCluster"
+              ]
+            },
+            "UpdateCluster": {
+              "methods": [
+                "updateCluster"
+              ]
+            },
+            "DeleteCluster": {
+              "methods": [
+                "deleteCluster"
+              ]
+            },
+            "ListClusters": {
+              "methods": [
+                "listClusters",
+                "listClustersStream",
+                "listClustersAsync"
+              ]
+            },
+            "ListTopics": {
+              "methods": [
+                "listTopics",
+                "listTopicsStream",
+                "listTopicsAsync"
+              ]
+            },
+            "ListConsumerGroups": {
+              "methods": [
+                "listConsumerGroups",
+                "listConsumerGroupsStream",
+                "listConsumerGroupsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
