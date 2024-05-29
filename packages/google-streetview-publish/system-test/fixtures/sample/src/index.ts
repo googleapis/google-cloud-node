@@ -16,10 +16,19 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import * as v1 from './v1';
-const StreetViewPublishServiceClient = v1.StreetViewPublishServiceClient;
-type StreetViewPublishServiceClient = v1.StreetViewPublishServiceClient;
-export {v1, StreetViewPublishServiceClient};
-export default {v1, StreetViewPublishServiceClient};
-import * as protos from '../protos/protos';
-export {protos}
+import {StreetViewPublishServiceClient} from '@google-cloud/publish';
+
+// check that the client class type name can be used
+function doStuffWithStreetViewPublishServiceClient(
+  client: StreetViewPublishServiceClient
+) {
+  client.close();
+}
+
+function main() {
+  // check that the client instance can be created
+  const streetViewPublishServiceClient = new StreetViewPublishServiceClient();
+  doStuffWithStreetViewPublishServiceClient(streetViewPublishServiceClient);
+}
+
+main();
