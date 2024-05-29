@@ -19,6 +19,7 @@
 export {AclConfigServiceClient} from './acl_config_service_client';
 export {ChunkServiceClient} from './chunk_service_client';
 export {CompletionServiceClient} from './completion_service_client';
+export {ControlServiceClient} from './control_service_client';
 export {ConversationalSearchServiceClient} from './conversational_search_service_client';
 export {DataStoreServiceClient} from './data_store_service_client';
 export {DocumentServiceClient} from './document_service_client';
