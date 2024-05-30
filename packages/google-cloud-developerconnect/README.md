@@ -64,7 +64,7 @@ npm install @google-cloud/developerconnect
  * TODO(developer): Uncomment these variables before running the sample.
  */
 /**
- *  Required. Parent value for ListGitRepositoryLinksRequest
+ *  Required. Parent value for ListConnectionsRequest
  */
 // const parent = 'abc123'
 /**
@@ -91,21 +91,20 @@ const {DeveloperConnectClient} = require('@google-cloud/developerconnect').v1;
 // Instantiates a client
 const developerconnectClient = new DeveloperConnectClient();
 
-async function callListGitRepositoryLinks() {
+async function callListConnections() {
   // Construct request
   const request = {
     parent,
   };
 
   // Run request
-  const iterable =
-    developerconnectClient.listGitRepositoryLinksAsync(request);
+  const iterable = developerconnectClient.listConnectionsAsync(request);
   for await (const response of iterable) {
     console.log(response);
   }
 }
 
-callListGitRepositoryLinks();
+callListConnections();
 
 ```
 
