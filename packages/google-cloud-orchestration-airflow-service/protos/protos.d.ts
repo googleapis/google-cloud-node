@@ -165,6 +165,160 @@ export namespace google {
                             public pollAirflowCommand(request: google.cloud.orchestration.airflow.service.v1.IPollAirflowCommandRequest): Promise<google.cloud.orchestration.airflow.service.v1.PollAirflowCommandResponse>;
 
                             /**
+                             * Calls ListWorkloads.
+                             * @param request ListWorkloadsRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and ListWorkloadsResponse
+                             */
+                            public listWorkloads(request: google.cloud.orchestration.airflow.service.v1.IListWorkloadsRequest, callback: google.cloud.orchestration.airflow.service.v1.Environments.ListWorkloadsCallback): void;
+
+                            /**
+                             * Calls ListWorkloads.
+                             * @param request ListWorkloadsRequest message or plain object
+                             * @returns Promise
+                             */
+                            public listWorkloads(request: google.cloud.orchestration.airflow.service.v1.IListWorkloadsRequest): Promise<google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse>;
+
+                            /**
+                             * Calls CreateUserWorkloadsSecret.
+                             * @param request CreateUserWorkloadsSecretRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and UserWorkloadsSecret
+                             */
+                            public createUserWorkloadsSecret(request: google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsSecretRequest, callback: google.cloud.orchestration.airflow.service.v1.Environments.CreateUserWorkloadsSecretCallback): void;
+
+                            /**
+                             * Calls CreateUserWorkloadsSecret.
+                             * @param request CreateUserWorkloadsSecretRequest message or plain object
+                             * @returns Promise
+                             */
+                            public createUserWorkloadsSecret(request: google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsSecretRequest): Promise<google.cloud.orchestration.airflow.service.v1.UserWorkloadsSecret>;
+
+                            /**
+                             * Calls GetUserWorkloadsSecret.
+                             * @param request GetUserWorkloadsSecretRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and UserWorkloadsSecret
+                             */
+                            public getUserWorkloadsSecret(request: google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsSecretRequest, callback: google.cloud.orchestration.airflow.service.v1.Environments.GetUserWorkloadsSecretCallback): void;
+
+                            /**
+                             * Calls GetUserWorkloadsSecret.
+                             * @param request GetUserWorkloadsSecretRequest message or plain object
+                             * @returns Promise
+                             */
+                            public getUserWorkloadsSecret(request: google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsSecretRequest): Promise<google.cloud.orchestration.airflow.service.v1.UserWorkloadsSecret>;
+
+                            /**
+                             * Calls ListUserWorkloadsSecrets.
+                             * @param request ListUserWorkloadsSecretsRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and ListUserWorkloadsSecretsResponse
+                             */
+                            public listUserWorkloadsSecrets(request: google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsSecretsRequest, callback: google.cloud.orchestration.airflow.service.v1.Environments.ListUserWorkloadsSecretsCallback): void;
+
+                            /**
+                             * Calls ListUserWorkloadsSecrets.
+                             * @param request ListUserWorkloadsSecretsRequest message or plain object
+                             * @returns Promise
+                             */
+                            public listUserWorkloadsSecrets(request: google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsSecretsRequest): Promise<google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsSecretsResponse>;
+
+                            /**
+                             * Calls UpdateUserWorkloadsSecret.
+                             * @param request UpdateUserWorkloadsSecretRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and UserWorkloadsSecret
+                             */
+                            public updateUserWorkloadsSecret(request: google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsSecretRequest, callback: google.cloud.orchestration.airflow.service.v1.Environments.UpdateUserWorkloadsSecretCallback): void;
+
+                            /**
+                             * Calls UpdateUserWorkloadsSecret.
+                             * @param request UpdateUserWorkloadsSecretRequest message or plain object
+                             * @returns Promise
+                             */
+                            public updateUserWorkloadsSecret(request: google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsSecretRequest): Promise<google.cloud.orchestration.airflow.service.v1.UserWorkloadsSecret>;
+
+                            /**
+                             * Calls DeleteUserWorkloadsSecret.
+                             * @param request DeleteUserWorkloadsSecretRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and Empty
+                             */
+                            public deleteUserWorkloadsSecret(request: google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsSecretRequest, callback: google.cloud.orchestration.airflow.service.v1.Environments.DeleteUserWorkloadsSecretCallback): void;
+
+                            /**
+                             * Calls DeleteUserWorkloadsSecret.
+                             * @param request DeleteUserWorkloadsSecretRequest message or plain object
+                             * @returns Promise
+                             */
+                            public deleteUserWorkloadsSecret(request: google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsSecretRequest): Promise<google.protobuf.Empty>;
+
+                            /**
+                             * Calls CreateUserWorkloadsConfigMap.
+                             * @param request CreateUserWorkloadsConfigMapRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and UserWorkloadsConfigMap
+                             */
+                            public createUserWorkloadsConfigMap(request: google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsConfigMapRequest, callback: google.cloud.orchestration.airflow.service.v1.Environments.CreateUserWorkloadsConfigMapCallback): void;
+
+                            /**
+                             * Calls CreateUserWorkloadsConfigMap.
+                             * @param request CreateUserWorkloadsConfigMapRequest message or plain object
+                             * @returns Promise
+                             */
+                            public createUserWorkloadsConfigMap(request: google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsConfigMapRequest): Promise<google.cloud.orchestration.airflow.service.v1.UserWorkloadsConfigMap>;
+
+                            /**
+                             * Calls GetUserWorkloadsConfigMap.
+                             * @param request GetUserWorkloadsConfigMapRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and UserWorkloadsConfigMap
+                             */
+                            public getUserWorkloadsConfigMap(request: google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsConfigMapRequest, callback: google.cloud.orchestration.airflow.service.v1.Environments.GetUserWorkloadsConfigMapCallback): void;
+
+                            /**
+                             * Calls GetUserWorkloadsConfigMap.
+                             * @param request GetUserWorkloadsConfigMapRequest message or plain object
+                             * @returns Promise
+                             */
+                            public getUserWorkloadsConfigMap(request: google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsConfigMapRequest): Promise<google.cloud.orchestration.airflow.service.v1.UserWorkloadsConfigMap>;
+
+                            /**
+                             * Calls ListUserWorkloadsConfigMaps.
+                             * @param request ListUserWorkloadsConfigMapsRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and ListUserWorkloadsConfigMapsResponse
+                             */
+                            public listUserWorkloadsConfigMaps(request: google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsConfigMapsRequest, callback: google.cloud.orchestration.airflow.service.v1.Environments.ListUserWorkloadsConfigMapsCallback): void;
+
+                            /**
+                             * Calls ListUserWorkloadsConfigMaps.
+                             * @param request ListUserWorkloadsConfigMapsRequest message or plain object
+                             * @returns Promise
+                             */
+                            public listUserWorkloadsConfigMaps(request: google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsConfigMapsRequest): Promise<google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsConfigMapsResponse>;
+
+                            /**
+                             * Calls UpdateUserWorkloadsConfigMap.
+                             * @param request UpdateUserWorkloadsConfigMapRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and UserWorkloadsConfigMap
+                             */
+                            public updateUserWorkloadsConfigMap(request: google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsConfigMapRequest, callback: google.cloud.orchestration.airflow.service.v1.Environments.UpdateUserWorkloadsConfigMapCallback): void;
+
+                            /**
+                             * Calls UpdateUserWorkloadsConfigMap.
+                             * @param request UpdateUserWorkloadsConfigMapRequest message or plain object
+                             * @returns Promise
+                             */
+                            public updateUserWorkloadsConfigMap(request: google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsConfigMapRequest): Promise<google.cloud.orchestration.airflow.service.v1.UserWorkloadsConfigMap>;
+
+                            /**
+                             * Calls DeleteUserWorkloadsConfigMap.
+                             * @param request DeleteUserWorkloadsConfigMapRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and Empty
+                             */
+                            public deleteUserWorkloadsConfigMap(request: google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsConfigMapRequest, callback: google.cloud.orchestration.airflow.service.v1.Environments.DeleteUserWorkloadsConfigMapCallback): void;
+
+                            /**
+                             * Calls DeleteUserWorkloadsConfigMap.
+                             * @param request DeleteUserWorkloadsConfigMapRequest message or plain object
+                             * @returns Promise
+                             */
+                            public deleteUserWorkloadsConfigMap(request: google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsConfigMapRequest): Promise<google.protobuf.Empty>;
+
+                            /**
                              * Calls SaveSnapshot.
                              * @param request SaveSnapshotRequest message or plain object
                              * @param callback Node-style callback called with the error, if any, and Operation
@@ -278,6 +432,83 @@ export namespace google {
                              * @param [response] PollAirflowCommandResponse
                              */
                             type PollAirflowCommandCallback = (error: (Error|null), response?: google.cloud.orchestration.airflow.service.v1.PollAirflowCommandResponse) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.orchestration.airflow.service.v1.Environments|listWorkloads}.
+                             * @param error Error, if any
+                             * @param [response] ListWorkloadsResponse
+                             */
+                            type ListWorkloadsCallback = (error: (Error|null), response?: google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.orchestration.airflow.service.v1.Environments|createUserWorkloadsSecret}.
+                             * @param error Error, if any
+                             * @param [response] UserWorkloadsSecret
+                             */
+                            type CreateUserWorkloadsSecretCallback = (error: (Error|null), response?: google.cloud.orchestration.airflow.service.v1.UserWorkloadsSecret) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.orchestration.airflow.service.v1.Environments|getUserWorkloadsSecret}.
+                             * @param error Error, if any
+                             * @param [response] UserWorkloadsSecret
+                             */
+                            type GetUserWorkloadsSecretCallback = (error: (Error|null), response?: google.cloud.orchestration.airflow.service.v1.UserWorkloadsSecret) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.orchestration.airflow.service.v1.Environments|listUserWorkloadsSecrets}.
+                             * @param error Error, if any
+                             * @param [response] ListUserWorkloadsSecretsResponse
+                             */
+                            type ListUserWorkloadsSecretsCallback = (error: (Error|null), response?: google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsSecretsResponse) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.orchestration.airflow.service.v1.Environments|updateUserWorkloadsSecret}.
+                             * @param error Error, if any
+                             * @param [response] UserWorkloadsSecret
+                             */
+                            type UpdateUserWorkloadsSecretCallback = (error: (Error|null), response?: google.cloud.orchestration.airflow.service.v1.UserWorkloadsSecret) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.orchestration.airflow.service.v1.Environments|deleteUserWorkloadsSecret}.
+                             * @param error Error, if any
+                             * @param [response] Empty
+                             */
+                            type DeleteUserWorkloadsSecretCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.orchestration.airflow.service.v1.Environments|createUserWorkloadsConfigMap}.
+                             * @param error Error, if any
+                             * @param [response] UserWorkloadsConfigMap
+                             */
+                            type CreateUserWorkloadsConfigMapCallback = (error: (Error|null), response?: google.cloud.orchestration.airflow.service.v1.UserWorkloadsConfigMap) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.orchestration.airflow.service.v1.Environments|getUserWorkloadsConfigMap}.
+                             * @param error Error, if any
+                             * @param [response] UserWorkloadsConfigMap
+                             */
+                            type GetUserWorkloadsConfigMapCallback = (error: (Error|null), response?: google.cloud.orchestration.airflow.service.v1.UserWorkloadsConfigMap) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.orchestration.airflow.service.v1.Environments|listUserWorkloadsConfigMaps}.
+                             * @param error Error, if any
+                             * @param [response] ListUserWorkloadsConfigMapsResponse
+                             */
+                            type ListUserWorkloadsConfigMapsCallback = (error: (Error|null), response?: google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsConfigMapsResponse) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.orchestration.airflow.service.v1.Environments|updateUserWorkloadsConfigMap}.
+                             * @param error Error, if any
+                             * @param [response] UserWorkloadsConfigMap
+                             */
+                            type UpdateUserWorkloadsConfigMapCallback = (error: (Error|null), response?: google.cloud.orchestration.airflow.service.v1.UserWorkloadsConfigMap) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.orchestration.airflow.service.v1.Environments|deleteUserWorkloadsConfigMap}.
+                             * @param error Error, if any
+                             * @param [response] Empty
+                             */
+                            type DeleteUserWorkloadsConfigMapCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
                             /**
                              * Callback as used by {@link google.cloud.orchestration.airflow.service.v1.Environments|saveSnapshot}.
@@ -1819,6 +2050,1887 @@ export namespace google {
                             }
                         }
 
+                        /** Properties of a CreateUserWorkloadsSecretRequest. */
+                        interface ICreateUserWorkloadsSecretRequest {
+
+                            /** CreateUserWorkloadsSecretRequest parent */
+                            parent?: (string|null);
+
+                            /** CreateUserWorkloadsSecretRequest userWorkloadsSecret */
+                            userWorkloadsSecret?: (google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret|null);
+                        }
+
+                        /** Represents a CreateUserWorkloadsSecretRequest. */
+                        class CreateUserWorkloadsSecretRequest implements ICreateUserWorkloadsSecretRequest {
+
+                            /**
+                             * Constructs a new CreateUserWorkloadsSecretRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsSecretRequest);
+
+                            /** CreateUserWorkloadsSecretRequest parent. */
+                            public parent: string;
+
+                            /** CreateUserWorkloadsSecretRequest userWorkloadsSecret. */
+                            public userWorkloadsSecret?: (google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret|null);
+
+                            /**
+                             * Creates a new CreateUserWorkloadsSecretRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns CreateUserWorkloadsSecretRequest instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsSecretRequest): google.cloud.orchestration.airflow.service.v1.CreateUserWorkloadsSecretRequest;
+
+                            /**
+                             * Encodes the specified CreateUserWorkloadsSecretRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.CreateUserWorkloadsSecretRequest.verify|verify} messages.
+                             * @param message CreateUserWorkloadsSecretRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsSecretRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified CreateUserWorkloadsSecretRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.CreateUserWorkloadsSecretRequest.verify|verify} messages.
+                             * @param message CreateUserWorkloadsSecretRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsSecretRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a CreateUserWorkloadsSecretRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns CreateUserWorkloadsSecretRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.CreateUserWorkloadsSecretRequest;
+
+                            /**
+                             * Decodes a CreateUserWorkloadsSecretRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns CreateUserWorkloadsSecretRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.CreateUserWorkloadsSecretRequest;
+
+                            /**
+                             * Verifies a CreateUserWorkloadsSecretRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a CreateUserWorkloadsSecretRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns CreateUserWorkloadsSecretRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.CreateUserWorkloadsSecretRequest;
+
+                            /**
+                             * Creates a plain object from a CreateUserWorkloadsSecretRequest message. Also converts values to other types if specified.
+                             * @param message CreateUserWorkloadsSecretRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.CreateUserWorkloadsSecretRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this CreateUserWorkloadsSecretRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CreateUserWorkloadsSecretRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a GetUserWorkloadsSecretRequest. */
+                        interface IGetUserWorkloadsSecretRequest {
+
+                            /** GetUserWorkloadsSecretRequest name */
+                            name?: (string|null);
+                        }
+
+                        /** Represents a GetUserWorkloadsSecretRequest. */
+                        class GetUserWorkloadsSecretRequest implements IGetUserWorkloadsSecretRequest {
+
+                            /**
+                             * Constructs a new GetUserWorkloadsSecretRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsSecretRequest);
+
+                            /** GetUserWorkloadsSecretRequest name. */
+                            public name: string;
+
+                            /**
+                             * Creates a new GetUserWorkloadsSecretRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns GetUserWorkloadsSecretRequest instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsSecretRequest): google.cloud.orchestration.airflow.service.v1.GetUserWorkloadsSecretRequest;
+
+                            /**
+                             * Encodes the specified GetUserWorkloadsSecretRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.GetUserWorkloadsSecretRequest.verify|verify} messages.
+                             * @param message GetUserWorkloadsSecretRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsSecretRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified GetUserWorkloadsSecretRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.GetUserWorkloadsSecretRequest.verify|verify} messages.
+                             * @param message GetUserWorkloadsSecretRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsSecretRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a GetUserWorkloadsSecretRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns GetUserWorkloadsSecretRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.GetUserWorkloadsSecretRequest;
+
+                            /**
+                             * Decodes a GetUserWorkloadsSecretRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns GetUserWorkloadsSecretRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.GetUserWorkloadsSecretRequest;
+
+                            /**
+                             * Verifies a GetUserWorkloadsSecretRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a GetUserWorkloadsSecretRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns GetUserWorkloadsSecretRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.GetUserWorkloadsSecretRequest;
+
+                            /**
+                             * Creates a plain object from a GetUserWorkloadsSecretRequest message. Also converts values to other types if specified.
+                             * @param message GetUserWorkloadsSecretRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.GetUserWorkloadsSecretRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this GetUserWorkloadsSecretRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for GetUserWorkloadsSecretRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a ListUserWorkloadsSecretsRequest. */
+                        interface IListUserWorkloadsSecretsRequest {
+
+                            /** ListUserWorkloadsSecretsRequest parent */
+                            parent?: (string|null);
+
+                            /** ListUserWorkloadsSecretsRequest pageSize */
+                            pageSize?: (number|null);
+
+                            /** ListUserWorkloadsSecretsRequest pageToken */
+                            pageToken?: (string|null);
+                        }
+
+                        /** Represents a ListUserWorkloadsSecretsRequest. */
+                        class ListUserWorkloadsSecretsRequest implements IListUserWorkloadsSecretsRequest {
+
+                            /**
+                             * Constructs a new ListUserWorkloadsSecretsRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsSecretsRequest);
+
+                            /** ListUserWorkloadsSecretsRequest parent. */
+                            public parent: string;
+
+                            /** ListUserWorkloadsSecretsRequest pageSize. */
+                            public pageSize: number;
+
+                            /** ListUserWorkloadsSecretsRequest pageToken. */
+                            public pageToken: string;
+
+                            /**
+                             * Creates a new ListUserWorkloadsSecretsRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ListUserWorkloadsSecretsRequest instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsSecretsRequest): google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsSecretsRequest;
+
+                            /**
+                             * Encodes the specified ListUserWorkloadsSecretsRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsSecretsRequest.verify|verify} messages.
+                             * @param message ListUserWorkloadsSecretsRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsSecretsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ListUserWorkloadsSecretsRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsSecretsRequest.verify|verify} messages.
+                             * @param message ListUserWorkloadsSecretsRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsSecretsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ListUserWorkloadsSecretsRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ListUserWorkloadsSecretsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsSecretsRequest;
+
+                            /**
+                             * Decodes a ListUserWorkloadsSecretsRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ListUserWorkloadsSecretsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsSecretsRequest;
+
+                            /**
+                             * Verifies a ListUserWorkloadsSecretsRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ListUserWorkloadsSecretsRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ListUserWorkloadsSecretsRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsSecretsRequest;
+
+                            /**
+                             * Creates a plain object from a ListUserWorkloadsSecretsRequest message. Also converts values to other types if specified.
+                             * @param message ListUserWorkloadsSecretsRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsSecretsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ListUserWorkloadsSecretsRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ListUserWorkloadsSecretsRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of an UpdateUserWorkloadsSecretRequest. */
+                        interface IUpdateUserWorkloadsSecretRequest {
+
+                            /** UpdateUserWorkloadsSecretRequest userWorkloadsSecret */
+                            userWorkloadsSecret?: (google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret|null);
+                        }
+
+                        /** Represents an UpdateUserWorkloadsSecretRequest. */
+                        class UpdateUserWorkloadsSecretRequest implements IUpdateUserWorkloadsSecretRequest {
+
+                            /**
+                             * Constructs a new UpdateUserWorkloadsSecretRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsSecretRequest);
+
+                            /** UpdateUserWorkloadsSecretRequest userWorkloadsSecret. */
+                            public userWorkloadsSecret?: (google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret|null);
+
+                            /**
+                             * Creates a new UpdateUserWorkloadsSecretRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns UpdateUserWorkloadsSecretRequest instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsSecretRequest): google.cloud.orchestration.airflow.service.v1.UpdateUserWorkloadsSecretRequest;
+
+                            /**
+                             * Encodes the specified UpdateUserWorkloadsSecretRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.UpdateUserWorkloadsSecretRequest.verify|verify} messages.
+                             * @param message UpdateUserWorkloadsSecretRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsSecretRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified UpdateUserWorkloadsSecretRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.UpdateUserWorkloadsSecretRequest.verify|verify} messages.
+                             * @param message UpdateUserWorkloadsSecretRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsSecretRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an UpdateUserWorkloadsSecretRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns UpdateUserWorkloadsSecretRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.UpdateUserWorkloadsSecretRequest;
+
+                            /**
+                             * Decodes an UpdateUserWorkloadsSecretRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns UpdateUserWorkloadsSecretRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.UpdateUserWorkloadsSecretRequest;
+
+                            /**
+                             * Verifies an UpdateUserWorkloadsSecretRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an UpdateUserWorkloadsSecretRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns UpdateUserWorkloadsSecretRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.UpdateUserWorkloadsSecretRequest;
+
+                            /**
+                             * Creates a plain object from an UpdateUserWorkloadsSecretRequest message. Also converts values to other types if specified.
+                             * @param message UpdateUserWorkloadsSecretRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.UpdateUserWorkloadsSecretRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this UpdateUserWorkloadsSecretRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for UpdateUserWorkloadsSecretRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a DeleteUserWorkloadsSecretRequest. */
+                        interface IDeleteUserWorkloadsSecretRequest {
+
+                            /** DeleteUserWorkloadsSecretRequest name */
+                            name?: (string|null);
+                        }
+
+                        /** Represents a DeleteUserWorkloadsSecretRequest. */
+                        class DeleteUserWorkloadsSecretRequest implements IDeleteUserWorkloadsSecretRequest {
+
+                            /**
+                             * Constructs a new DeleteUserWorkloadsSecretRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsSecretRequest);
+
+                            /** DeleteUserWorkloadsSecretRequest name. */
+                            public name: string;
+
+                            /**
+                             * Creates a new DeleteUserWorkloadsSecretRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DeleteUserWorkloadsSecretRequest instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsSecretRequest): google.cloud.orchestration.airflow.service.v1.DeleteUserWorkloadsSecretRequest;
+
+                            /**
+                             * Encodes the specified DeleteUserWorkloadsSecretRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.DeleteUserWorkloadsSecretRequest.verify|verify} messages.
+                             * @param message DeleteUserWorkloadsSecretRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsSecretRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DeleteUserWorkloadsSecretRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.DeleteUserWorkloadsSecretRequest.verify|verify} messages.
+                             * @param message DeleteUserWorkloadsSecretRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsSecretRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DeleteUserWorkloadsSecretRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DeleteUserWorkloadsSecretRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.DeleteUserWorkloadsSecretRequest;
+
+                            /**
+                             * Decodes a DeleteUserWorkloadsSecretRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DeleteUserWorkloadsSecretRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.DeleteUserWorkloadsSecretRequest;
+
+                            /**
+                             * Verifies a DeleteUserWorkloadsSecretRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DeleteUserWorkloadsSecretRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DeleteUserWorkloadsSecretRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.DeleteUserWorkloadsSecretRequest;
+
+                            /**
+                             * Creates a plain object from a DeleteUserWorkloadsSecretRequest message. Also converts values to other types if specified.
+                             * @param message DeleteUserWorkloadsSecretRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.DeleteUserWorkloadsSecretRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DeleteUserWorkloadsSecretRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DeleteUserWorkloadsSecretRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a CreateUserWorkloadsConfigMapRequest. */
+                        interface ICreateUserWorkloadsConfigMapRequest {
+
+                            /** CreateUserWorkloadsConfigMapRequest parent */
+                            parent?: (string|null);
+
+                            /** CreateUserWorkloadsConfigMapRequest userWorkloadsConfigMap */
+                            userWorkloadsConfigMap?: (google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap|null);
+                        }
+
+                        /** Represents a CreateUserWorkloadsConfigMapRequest. */
+                        class CreateUserWorkloadsConfigMapRequest implements ICreateUserWorkloadsConfigMapRequest {
+
+                            /**
+                             * Constructs a new CreateUserWorkloadsConfigMapRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsConfigMapRequest);
+
+                            /** CreateUserWorkloadsConfigMapRequest parent. */
+                            public parent: string;
+
+                            /** CreateUserWorkloadsConfigMapRequest userWorkloadsConfigMap. */
+                            public userWorkloadsConfigMap?: (google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap|null);
+
+                            /**
+                             * Creates a new CreateUserWorkloadsConfigMapRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns CreateUserWorkloadsConfigMapRequest instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsConfigMapRequest): google.cloud.orchestration.airflow.service.v1.CreateUserWorkloadsConfigMapRequest;
+
+                            /**
+                             * Encodes the specified CreateUserWorkloadsConfigMapRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.CreateUserWorkloadsConfigMapRequest.verify|verify} messages.
+                             * @param message CreateUserWorkloadsConfigMapRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsConfigMapRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified CreateUserWorkloadsConfigMapRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.CreateUserWorkloadsConfigMapRequest.verify|verify} messages.
+                             * @param message CreateUserWorkloadsConfigMapRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsConfigMapRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a CreateUserWorkloadsConfigMapRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns CreateUserWorkloadsConfigMapRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.CreateUserWorkloadsConfigMapRequest;
+
+                            /**
+                             * Decodes a CreateUserWorkloadsConfigMapRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns CreateUserWorkloadsConfigMapRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.CreateUserWorkloadsConfigMapRequest;
+
+                            /**
+                             * Verifies a CreateUserWorkloadsConfigMapRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a CreateUserWorkloadsConfigMapRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns CreateUserWorkloadsConfigMapRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.CreateUserWorkloadsConfigMapRequest;
+
+                            /**
+                             * Creates a plain object from a CreateUserWorkloadsConfigMapRequest message. Also converts values to other types if specified.
+                             * @param message CreateUserWorkloadsConfigMapRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.CreateUserWorkloadsConfigMapRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this CreateUserWorkloadsConfigMapRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CreateUserWorkloadsConfigMapRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a GetUserWorkloadsConfigMapRequest. */
+                        interface IGetUserWorkloadsConfigMapRequest {
+
+                            /** GetUserWorkloadsConfigMapRequest name */
+                            name?: (string|null);
+                        }
+
+                        /** Represents a GetUserWorkloadsConfigMapRequest. */
+                        class GetUserWorkloadsConfigMapRequest implements IGetUserWorkloadsConfigMapRequest {
+
+                            /**
+                             * Constructs a new GetUserWorkloadsConfigMapRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsConfigMapRequest);
+
+                            /** GetUserWorkloadsConfigMapRequest name. */
+                            public name: string;
+
+                            /**
+                             * Creates a new GetUserWorkloadsConfigMapRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns GetUserWorkloadsConfigMapRequest instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsConfigMapRequest): google.cloud.orchestration.airflow.service.v1.GetUserWorkloadsConfigMapRequest;
+
+                            /**
+                             * Encodes the specified GetUserWorkloadsConfigMapRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.GetUserWorkloadsConfigMapRequest.verify|verify} messages.
+                             * @param message GetUserWorkloadsConfigMapRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsConfigMapRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified GetUserWorkloadsConfigMapRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.GetUserWorkloadsConfigMapRequest.verify|verify} messages.
+                             * @param message GetUserWorkloadsConfigMapRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsConfigMapRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a GetUserWorkloadsConfigMapRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns GetUserWorkloadsConfigMapRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.GetUserWorkloadsConfigMapRequest;
+
+                            /**
+                             * Decodes a GetUserWorkloadsConfigMapRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns GetUserWorkloadsConfigMapRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.GetUserWorkloadsConfigMapRequest;
+
+                            /**
+                             * Verifies a GetUserWorkloadsConfigMapRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a GetUserWorkloadsConfigMapRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns GetUserWorkloadsConfigMapRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.GetUserWorkloadsConfigMapRequest;
+
+                            /**
+                             * Creates a plain object from a GetUserWorkloadsConfigMapRequest message. Also converts values to other types if specified.
+                             * @param message GetUserWorkloadsConfigMapRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.GetUserWorkloadsConfigMapRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this GetUserWorkloadsConfigMapRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for GetUserWorkloadsConfigMapRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a ListUserWorkloadsConfigMapsRequest. */
+                        interface IListUserWorkloadsConfigMapsRequest {
+
+                            /** ListUserWorkloadsConfigMapsRequest parent */
+                            parent?: (string|null);
+
+                            /** ListUserWorkloadsConfigMapsRequest pageSize */
+                            pageSize?: (number|null);
+
+                            /** ListUserWorkloadsConfigMapsRequest pageToken */
+                            pageToken?: (string|null);
+                        }
+
+                        /** Represents a ListUserWorkloadsConfigMapsRequest. */
+                        class ListUserWorkloadsConfigMapsRequest implements IListUserWorkloadsConfigMapsRequest {
+
+                            /**
+                             * Constructs a new ListUserWorkloadsConfigMapsRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsConfigMapsRequest);
+
+                            /** ListUserWorkloadsConfigMapsRequest parent. */
+                            public parent: string;
+
+                            /** ListUserWorkloadsConfigMapsRequest pageSize. */
+                            public pageSize: number;
+
+                            /** ListUserWorkloadsConfigMapsRequest pageToken. */
+                            public pageToken: string;
+
+                            /**
+                             * Creates a new ListUserWorkloadsConfigMapsRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ListUserWorkloadsConfigMapsRequest instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsConfigMapsRequest): google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsConfigMapsRequest;
+
+                            /**
+                             * Encodes the specified ListUserWorkloadsConfigMapsRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsConfigMapsRequest.verify|verify} messages.
+                             * @param message ListUserWorkloadsConfigMapsRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsConfigMapsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ListUserWorkloadsConfigMapsRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsConfigMapsRequest.verify|verify} messages.
+                             * @param message ListUserWorkloadsConfigMapsRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsConfigMapsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ListUserWorkloadsConfigMapsRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ListUserWorkloadsConfigMapsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsConfigMapsRequest;
+
+                            /**
+                             * Decodes a ListUserWorkloadsConfigMapsRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ListUserWorkloadsConfigMapsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsConfigMapsRequest;
+
+                            /**
+                             * Verifies a ListUserWorkloadsConfigMapsRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ListUserWorkloadsConfigMapsRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ListUserWorkloadsConfigMapsRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsConfigMapsRequest;
+
+                            /**
+                             * Creates a plain object from a ListUserWorkloadsConfigMapsRequest message. Also converts values to other types if specified.
+                             * @param message ListUserWorkloadsConfigMapsRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsConfigMapsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ListUserWorkloadsConfigMapsRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ListUserWorkloadsConfigMapsRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of an UpdateUserWorkloadsConfigMapRequest. */
+                        interface IUpdateUserWorkloadsConfigMapRequest {
+
+                            /** UpdateUserWorkloadsConfigMapRequest userWorkloadsConfigMap */
+                            userWorkloadsConfigMap?: (google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap|null);
+                        }
+
+                        /** Represents an UpdateUserWorkloadsConfigMapRequest. */
+                        class UpdateUserWorkloadsConfigMapRequest implements IUpdateUserWorkloadsConfigMapRequest {
+
+                            /**
+                             * Constructs a new UpdateUserWorkloadsConfigMapRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsConfigMapRequest);
+
+                            /** UpdateUserWorkloadsConfigMapRequest userWorkloadsConfigMap. */
+                            public userWorkloadsConfigMap?: (google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap|null);
+
+                            /**
+                             * Creates a new UpdateUserWorkloadsConfigMapRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns UpdateUserWorkloadsConfigMapRequest instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsConfigMapRequest): google.cloud.orchestration.airflow.service.v1.UpdateUserWorkloadsConfigMapRequest;
+
+                            /**
+                             * Encodes the specified UpdateUserWorkloadsConfigMapRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.UpdateUserWorkloadsConfigMapRequest.verify|verify} messages.
+                             * @param message UpdateUserWorkloadsConfigMapRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsConfigMapRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified UpdateUserWorkloadsConfigMapRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.UpdateUserWorkloadsConfigMapRequest.verify|verify} messages.
+                             * @param message UpdateUserWorkloadsConfigMapRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsConfigMapRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an UpdateUserWorkloadsConfigMapRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns UpdateUserWorkloadsConfigMapRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.UpdateUserWorkloadsConfigMapRequest;
+
+                            /**
+                             * Decodes an UpdateUserWorkloadsConfigMapRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns UpdateUserWorkloadsConfigMapRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.UpdateUserWorkloadsConfigMapRequest;
+
+                            /**
+                             * Verifies an UpdateUserWorkloadsConfigMapRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an UpdateUserWorkloadsConfigMapRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns UpdateUserWorkloadsConfigMapRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.UpdateUserWorkloadsConfigMapRequest;
+
+                            /**
+                             * Creates a plain object from an UpdateUserWorkloadsConfigMapRequest message. Also converts values to other types if specified.
+                             * @param message UpdateUserWorkloadsConfigMapRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.UpdateUserWorkloadsConfigMapRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this UpdateUserWorkloadsConfigMapRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for UpdateUserWorkloadsConfigMapRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a DeleteUserWorkloadsConfigMapRequest. */
+                        interface IDeleteUserWorkloadsConfigMapRequest {
+
+                            /** DeleteUserWorkloadsConfigMapRequest name */
+                            name?: (string|null);
+                        }
+
+                        /** Represents a DeleteUserWorkloadsConfigMapRequest. */
+                        class DeleteUserWorkloadsConfigMapRequest implements IDeleteUserWorkloadsConfigMapRequest {
+
+                            /**
+                             * Constructs a new DeleteUserWorkloadsConfigMapRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsConfigMapRequest);
+
+                            /** DeleteUserWorkloadsConfigMapRequest name. */
+                            public name: string;
+
+                            /**
+                             * Creates a new DeleteUserWorkloadsConfigMapRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DeleteUserWorkloadsConfigMapRequest instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsConfigMapRequest): google.cloud.orchestration.airflow.service.v1.DeleteUserWorkloadsConfigMapRequest;
+
+                            /**
+                             * Encodes the specified DeleteUserWorkloadsConfigMapRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.DeleteUserWorkloadsConfigMapRequest.verify|verify} messages.
+                             * @param message DeleteUserWorkloadsConfigMapRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsConfigMapRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DeleteUserWorkloadsConfigMapRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.DeleteUserWorkloadsConfigMapRequest.verify|verify} messages.
+                             * @param message DeleteUserWorkloadsConfigMapRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsConfigMapRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DeleteUserWorkloadsConfigMapRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DeleteUserWorkloadsConfigMapRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.DeleteUserWorkloadsConfigMapRequest;
+
+                            /**
+                             * Decodes a DeleteUserWorkloadsConfigMapRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DeleteUserWorkloadsConfigMapRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.DeleteUserWorkloadsConfigMapRequest;
+
+                            /**
+                             * Verifies a DeleteUserWorkloadsConfigMapRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DeleteUserWorkloadsConfigMapRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DeleteUserWorkloadsConfigMapRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.DeleteUserWorkloadsConfigMapRequest;
+
+                            /**
+                             * Creates a plain object from a DeleteUserWorkloadsConfigMapRequest message. Also converts values to other types if specified.
+                             * @param message DeleteUserWorkloadsConfigMapRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.DeleteUserWorkloadsConfigMapRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DeleteUserWorkloadsConfigMapRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DeleteUserWorkloadsConfigMapRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a UserWorkloadsSecret. */
+                        interface IUserWorkloadsSecret {
+
+                            /** UserWorkloadsSecret name */
+                            name?: (string|null);
+
+                            /** UserWorkloadsSecret data */
+                            data?: ({ [k: string]: string }|null);
+                        }
+
+                        /** Represents a UserWorkloadsSecret. */
+                        class UserWorkloadsSecret implements IUserWorkloadsSecret {
+
+                            /**
+                             * Constructs a new UserWorkloadsSecret.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret);
+
+                            /** UserWorkloadsSecret name. */
+                            public name: string;
+
+                            /** UserWorkloadsSecret data. */
+                            public data: { [k: string]: string };
+
+                            /**
+                             * Creates a new UserWorkloadsSecret instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns UserWorkloadsSecret instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret): google.cloud.orchestration.airflow.service.v1.UserWorkloadsSecret;
+
+                            /**
+                             * Encodes the specified UserWorkloadsSecret message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.UserWorkloadsSecret.verify|verify} messages.
+                             * @param message UserWorkloadsSecret message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified UserWorkloadsSecret message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.UserWorkloadsSecret.verify|verify} messages.
+                             * @param message UserWorkloadsSecret message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a UserWorkloadsSecret message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns UserWorkloadsSecret
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.UserWorkloadsSecret;
+
+                            /**
+                             * Decodes a UserWorkloadsSecret message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns UserWorkloadsSecret
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.UserWorkloadsSecret;
+
+                            /**
+                             * Verifies a UserWorkloadsSecret message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a UserWorkloadsSecret message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns UserWorkloadsSecret
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.UserWorkloadsSecret;
+
+                            /**
+                             * Creates a plain object from a UserWorkloadsSecret message. Also converts values to other types if specified.
+                             * @param message UserWorkloadsSecret
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.UserWorkloadsSecret, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this UserWorkloadsSecret to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for UserWorkloadsSecret
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a ListUserWorkloadsSecretsResponse. */
+                        interface IListUserWorkloadsSecretsResponse {
+
+                            /** ListUserWorkloadsSecretsResponse userWorkloadsSecrets */
+                            userWorkloadsSecrets?: (google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret[]|null);
+
+                            /** ListUserWorkloadsSecretsResponse nextPageToken */
+                            nextPageToken?: (string|null);
+                        }
+
+                        /** Represents a ListUserWorkloadsSecretsResponse. */
+                        class ListUserWorkloadsSecretsResponse implements IListUserWorkloadsSecretsResponse {
+
+                            /**
+                             * Constructs a new ListUserWorkloadsSecretsResponse.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsSecretsResponse);
+
+                            /** ListUserWorkloadsSecretsResponse userWorkloadsSecrets. */
+                            public userWorkloadsSecrets: google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret[];
+
+                            /** ListUserWorkloadsSecretsResponse nextPageToken. */
+                            public nextPageToken: string;
+
+                            /**
+                             * Creates a new ListUserWorkloadsSecretsResponse instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ListUserWorkloadsSecretsResponse instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsSecretsResponse): google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsSecretsResponse;
+
+                            /**
+                             * Encodes the specified ListUserWorkloadsSecretsResponse message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsSecretsResponse.verify|verify} messages.
+                             * @param message ListUserWorkloadsSecretsResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsSecretsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ListUserWorkloadsSecretsResponse message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsSecretsResponse.verify|verify} messages.
+                             * @param message ListUserWorkloadsSecretsResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsSecretsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ListUserWorkloadsSecretsResponse message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ListUserWorkloadsSecretsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsSecretsResponse;
+
+                            /**
+                             * Decodes a ListUserWorkloadsSecretsResponse message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ListUserWorkloadsSecretsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsSecretsResponse;
+
+                            /**
+                             * Verifies a ListUserWorkloadsSecretsResponse message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ListUserWorkloadsSecretsResponse message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ListUserWorkloadsSecretsResponse
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsSecretsResponse;
+
+                            /**
+                             * Creates a plain object from a ListUserWorkloadsSecretsResponse message. Also converts values to other types if specified.
+                             * @param message ListUserWorkloadsSecretsResponse
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsSecretsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ListUserWorkloadsSecretsResponse to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ListUserWorkloadsSecretsResponse
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a UserWorkloadsConfigMap. */
+                        interface IUserWorkloadsConfigMap {
+
+                            /** UserWorkloadsConfigMap name */
+                            name?: (string|null);
+
+                            /** UserWorkloadsConfigMap data */
+                            data?: ({ [k: string]: string }|null);
+                        }
+
+                        /** Represents a UserWorkloadsConfigMap. */
+                        class UserWorkloadsConfigMap implements IUserWorkloadsConfigMap {
+
+                            /**
+                             * Constructs a new UserWorkloadsConfigMap.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap);
+
+                            /** UserWorkloadsConfigMap name. */
+                            public name: string;
+
+                            /** UserWorkloadsConfigMap data. */
+                            public data: { [k: string]: string };
+
+                            /**
+                             * Creates a new UserWorkloadsConfigMap instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns UserWorkloadsConfigMap instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap): google.cloud.orchestration.airflow.service.v1.UserWorkloadsConfigMap;
+
+                            /**
+                             * Encodes the specified UserWorkloadsConfigMap message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.UserWorkloadsConfigMap.verify|verify} messages.
+                             * @param message UserWorkloadsConfigMap message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified UserWorkloadsConfigMap message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.UserWorkloadsConfigMap.verify|verify} messages.
+                             * @param message UserWorkloadsConfigMap message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a UserWorkloadsConfigMap message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns UserWorkloadsConfigMap
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.UserWorkloadsConfigMap;
+
+                            /**
+                             * Decodes a UserWorkloadsConfigMap message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns UserWorkloadsConfigMap
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.UserWorkloadsConfigMap;
+
+                            /**
+                             * Verifies a UserWorkloadsConfigMap message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a UserWorkloadsConfigMap message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns UserWorkloadsConfigMap
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.UserWorkloadsConfigMap;
+
+                            /**
+                             * Creates a plain object from a UserWorkloadsConfigMap message. Also converts values to other types if specified.
+                             * @param message UserWorkloadsConfigMap
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.UserWorkloadsConfigMap, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this UserWorkloadsConfigMap to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for UserWorkloadsConfigMap
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a ListUserWorkloadsConfigMapsResponse. */
+                        interface IListUserWorkloadsConfigMapsResponse {
+
+                            /** ListUserWorkloadsConfigMapsResponse userWorkloadsConfigMaps */
+                            userWorkloadsConfigMaps?: (google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap[]|null);
+
+                            /** ListUserWorkloadsConfigMapsResponse nextPageToken */
+                            nextPageToken?: (string|null);
+                        }
+
+                        /** Represents a ListUserWorkloadsConfigMapsResponse. */
+                        class ListUserWorkloadsConfigMapsResponse implements IListUserWorkloadsConfigMapsResponse {
+
+                            /**
+                             * Constructs a new ListUserWorkloadsConfigMapsResponse.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsConfigMapsResponse);
+
+                            /** ListUserWorkloadsConfigMapsResponse userWorkloadsConfigMaps. */
+                            public userWorkloadsConfigMaps: google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap[];
+
+                            /** ListUserWorkloadsConfigMapsResponse nextPageToken. */
+                            public nextPageToken: string;
+
+                            /**
+                             * Creates a new ListUserWorkloadsConfigMapsResponse instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ListUserWorkloadsConfigMapsResponse instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsConfigMapsResponse): google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsConfigMapsResponse;
+
+                            /**
+                             * Encodes the specified ListUserWorkloadsConfigMapsResponse message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsConfigMapsResponse.verify|verify} messages.
+                             * @param message ListUserWorkloadsConfigMapsResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsConfigMapsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ListUserWorkloadsConfigMapsResponse message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsConfigMapsResponse.verify|verify} messages.
+                             * @param message ListUserWorkloadsConfigMapsResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsConfigMapsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ListUserWorkloadsConfigMapsResponse message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ListUserWorkloadsConfigMapsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsConfigMapsResponse;
+
+                            /**
+                             * Decodes a ListUserWorkloadsConfigMapsResponse message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ListUserWorkloadsConfigMapsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsConfigMapsResponse;
+
+                            /**
+                             * Verifies a ListUserWorkloadsConfigMapsResponse message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ListUserWorkloadsConfigMapsResponse message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ListUserWorkloadsConfigMapsResponse
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsConfigMapsResponse;
+
+                            /**
+                             * Creates a plain object from a ListUserWorkloadsConfigMapsResponse message. Also converts values to other types if specified.
+                             * @param message ListUserWorkloadsConfigMapsResponse
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.ListUserWorkloadsConfigMapsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ListUserWorkloadsConfigMapsResponse to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ListUserWorkloadsConfigMapsResponse
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a ListWorkloadsRequest. */
+                        interface IListWorkloadsRequest {
+
+                            /** ListWorkloadsRequest parent */
+                            parent?: (string|null);
+
+                            /** ListWorkloadsRequest pageSize */
+                            pageSize?: (number|null);
+
+                            /** ListWorkloadsRequest pageToken */
+                            pageToken?: (string|null);
+
+                            /** ListWorkloadsRequest filter */
+                            filter?: (string|null);
+                        }
+
+                        /** Represents a ListWorkloadsRequest. */
+                        class ListWorkloadsRequest implements IListWorkloadsRequest {
+
+                            /**
+                             * Constructs a new ListWorkloadsRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.IListWorkloadsRequest);
+
+                            /** ListWorkloadsRequest parent. */
+                            public parent: string;
+
+                            /** ListWorkloadsRequest pageSize. */
+                            public pageSize: number;
+
+                            /** ListWorkloadsRequest pageToken. */
+                            public pageToken: string;
+
+                            /** ListWorkloadsRequest filter. */
+                            public filter: string;
+
+                            /**
+                             * Creates a new ListWorkloadsRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ListWorkloadsRequest instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.IListWorkloadsRequest): google.cloud.orchestration.airflow.service.v1.ListWorkloadsRequest;
+
+                            /**
+                             * Encodes the specified ListWorkloadsRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.ListWorkloadsRequest.verify|verify} messages.
+                             * @param message ListWorkloadsRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1.IListWorkloadsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ListWorkloadsRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.ListWorkloadsRequest.verify|verify} messages.
+                             * @param message ListWorkloadsRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.IListWorkloadsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ListWorkloadsRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ListWorkloadsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.ListWorkloadsRequest;
+
+                            /**
+                             * Decodes a ListWorkloadsRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ListWorkloadsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.ListWorkloadsRequest;
+
+                            /**
+                             * Verifies a ListWorkloadsRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ListWorkloadsRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ListWorkloadsRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.ListWorkloadsRequest;
+
+                            /**
+                             * Creates a plain object from a ListWorkloadsRequest message. Also converts values to other types if specified.
+                             * @param message ListWorkloadsRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.ListWorkloadsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ListWorkloadsRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ListWorkloadsRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a ListWorkloadsResponse. */
+                        interface IListWorkloadsResponse {
+
+                            /** ListWorkloadsResponse workloads */
+                            workloads?: (google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.IComposerWorkload[]|null);
+
+                            /** ListWorkloadsResponse nextPageToken */
+                            nextPageToken?: (string|null);
+                        }
+
+                        /** Represents a ListWorkloadsResponse. */
+                        class ListWorkloadsResponse implements IListWorkloadsResponse {
+
+                            /**
+                             * Constructs a new ListWorkloadsResponse.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.IListWorkloadsResponse);
+
+                            /** ListWorkloadsResponse workloads. */
+                            public workloads: google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.IComposerWorkload[];
+
+                            /** ListWorkloadsResponse nextPageToken. */
+                            public nextPageToken: string;
+
+                            /**
+                             * Creates a new ListWorkloadsResponse instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ListWorkloadsResponse instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.IListWorkloadsResponse): google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse;
+
+                            /**
+                             * Encodes the specified ListWorkloadsResponse message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.verify|verify} messages.
+                             * @param message ListWorkloadsResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1.IListWorkloadsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ListWorkloadsResponse message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.verify|verify} messages.
+                             * @param message ListWorkloadsResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.IListWorkloadsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ListWorkloadsResponse message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ListWorkloadsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse;
+
+                            /**
+                             * Decodes a ListWorkloadsResponse message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ListWorkloadsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse;
+
+                            /**
+                             * Verifies a ListWorkloadsResponse message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ListWorkloadsResponse message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ListWorkloadsResponse
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse;
+
+                            /**
+                             * Creates a plain object from a ListWorkloadsResponse message. Also converts values to other types if specified.
+                             * @param message ListWorkloadsResponse
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ListWorkloadsResponse to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ListWorkloadsResponse
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace ListWorkloadsResponse {
+
+                            /** Properties of a ComposerWorkload. */
+                            interface IComposerWorkload {
+
+                                /** ComposerWorkload name */
+                                name?: (string|null);
+
+                                /** ComposerWorkload type */
+                                type?: (google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.ComposerWorkloadType|keyof typeof google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.ComposerWorkloadType|null);
+
+                                /** ComposerWorkload status */
+                                status?: (google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.IComposerWorkloadStatus|null);
+                            }
+
+                            /** Represents a ComposerWorkload. */
+                            class ComposerWorkload implements IComposerWorkload {
+
+                                /**
+                                 * Constructs a new ComposerWorkload.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.IComposerWorkload);
+
+                                /** ComposerWorkload name. */
+                                public name: string;
+
+                                /** ComposerWorkload type. */
+                                public type: (google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.ComposerWorkloadType|keyof typeof google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.ComposerWorkloadType);
+
+                                /** ComposerWorkload status. */
+                                public status?: (google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.IComposerWorkloadStatus|null);
+
+                                /**
+                                 * Creates a new ComposerWorkload instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns ComposerWorkload instance
+                                 */
+                                public static create(properties?: google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.IComposerWorkload): google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.ComposerWorkload;
+
+                                /**
+                                 * Encodes the specified ComposerWorkload message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.ComposerWorkload.verify|verify} messages.
+                                 * @param message ComposerWorkload message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.IComposerWorkload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified ComposerWorkload message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.ComposerWorkload.verify|verify} messages.
+                                 * @param message ComposerWorkload message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.IComposerWorkload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a ComposerWorkload message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns ComposerWorkload
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.ComposerWorkload;
+
+                                /**
+                                 * Decodes a ComposerWorkload message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns ComposerWorkload
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.ComposerWorkload;
+
+                                /**
+                                 * Verifies a ComposerWorkload message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a ComposerWorkload message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns ComposerWorkload
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.ComposerWorkload;
+
+                                /**
+                                 * Creates a plain object from a ComposerWorkload message. Also converts values to other types if specified.
+                                 * @param message ComposerWorkload
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.ComposerWorkload, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this ComposerWorkload to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for ComposerWorkload
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** ComposerWorkloadType enum. */
+                            enum ComposerWorkloadType {
+                                COMPOSER_WORKLOAD_TYPE_UNSPECIFIED = 0,
+                                CELERY_WORKER = 1,
+                                KUBERNETES_WORKER = 2,
+                                KUBERNETES_OPERATOR_POD = 3,
+                                SCHEDULER = 4,
+                                DAG_PROCESSOR = 5,
+                                TRIGGERER = 6,
+                                WEB_SERVER = 7,
+                                REDIS = 8
+                            }
+
+                            /** Properties of a ComposerWorkloadStatus. */
+                            interface IComposerWorkloadStatus {
+
+                                /** ComposerWorkloadStatus state */
+                                state?: (google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.ComposerWorkloadState|keyof typeof google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.ComposerWorkloadState|null);
+
+                                /** ComposerWorkloadStatus statusMessage */
+                                statusMessage?: (string|null);
+
+                                /** ComposerWorkloadStatus detailedStatusMessage */
+                                detailedStatusMessage?: (string|null);
+                            }
+
+                            /** Represents a ComposerWorkloadStatus. */
+                            class ComposerWorkloadStatus implements IComposerWorkloadStatus {
+
+                                /**
+                                 * Constructs a new ComposerWorkloadStatus.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.IComposerWorkloadStatus);
+
+                                /** ComposerWorkloadStatus state. */
+                                public state: (google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.ComposerWorkloadState|keyof typeof google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.ComposerWorkloadState);
+
+                                /** ComposerWorkloadStatus statusMessage. */
+                                public statusMessage: string;
+
+                                /** ComposerWorkloadStatus detailedStatusMessage. */
+                                public detailedStatusMessage: string;
+
+                                /**
+                                 * Creates a new ComposerWorkloadStatus instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns ComposerWorkloadStatus instance
+                                 */
+                                public static create(properties?: google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.IComposerWorkloadStatus): google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.ComposerWorkloadStatus;
+
+                                /**
+                                 * Encodes the specified ComposerWorkloadStatus message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.ComposerWorkloadStatus.verify|verify} messages.
+                                 * @param message ComposerWorkloadStatus message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.IComposerWorkloadStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified ComposerWorkloadStatus message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.ComposerWorkloadStatus.verify|verify} messages.
+                                 * @param message ComposerWorkloadStatus message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.IComposerWorkloadStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a ComposerWorkloadStatus message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns ComposerWorkloadStatus
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.ComposerWorkloadStatus;
+
+                                /**
+                                 * Decodes a ComposerWorkloadStatus message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns ComposerWorkloadStatus
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.ComposerWorkloadStatus;
+
+                                /**
+                                 * Verifies a ComposerWorkloadStatus message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a ComposerWorkloadStatus message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns ComposerWorkloadStatus
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.ComposerWorkloadStatus;
+
+                                /**
+                                 * Creates a plain object from a ComposerWorkloadStatus message. Also converts values to other types if specified.
+                                 * @param message ComposerWorkloadStatus
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.ComposerWorkloadStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this ComposerWorkloadStatus to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for ComposerWorkloadStatus
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** ComposerWorkloadState enum. */
+                            enum ComposerWorkloadState {
+                                COMPOSER_WORKLOAD_STATE_UNSPECIFIED = 0,
+                                PENDING = 1,
+                                OK = 2,
+                                WARNING = 3,
+                                ERROR = 4,
+                                SUCCEEDED = 5,
+                                FAILED = 6
+                            }
+                        }
+
                         /** Properties of a SaveSnapshotRequest. */
                         interface ISaveSnapshotRequest {
 
@@ -2631,6 +4743,103 @@ export namespace google {
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
+                        /** Properties of a StorageConfig. */
+                        interface IStorageConfig {
+
+                            /** StorageConfig bucket */
+                            bucket?: (string|null);
+                        }
+
+                        /** Represents a StorageConfig. */
+                        class StorageConfig implements IStorageConfig {
+
+                            /**
+                             * Constructs a new StorageConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.IStorageConfig);
+
+                            /** StorageConfig bucket. */
+                            public bucket: string;
+
+                            /**
+                             * Creates a new StorageConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns StorageConfig instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.IStorageConfig): google.cloud.orchestration.airflow.service.v1.StorageConfig;
+
+                            /**
+                             * Encodes the specified StorageConfig message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.StorageConfig.verify|verify} messages.
+                             * @param message StorageConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1.IStorageConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified StorageConfig message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.StorageConfig.verify|verify} messages.
+                             * @param message StorageConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.IStorageConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a StorageConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns StorageConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.StorageConfig;
+
+                            /**
+                             * Decodes a StorageConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns StorageConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.StorageConfig;
+
+                            /**
+                             * Verifies a StorageConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a StorageConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns StorageConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.StorageConfig;
+
+                            /**
+                             * Creates a plain object from a StorageConfig message. Also converts values to other types if specified.
+                             * @param message StorageConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.StorageConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this StorageConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for StorageConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
                         /** Properties of an EnvironmentConfig. */
                         interface IEnvironmentConfig {
 
@@ -2687,6 +4896,9 @@ export namespace google {
 
                             /** EnvironmentConfig resilienceMode */
                             resilienceMode?: (google.cloud.orchestration.airflow.service.v1.EnvironmentConfig.ResilienceMode|keyof typeof google.cloud.orchestration.airflow.service.v1.EnvironmentConfig.ResilienceMode|null);
+
+                            /** EnvironmentConfig dataRetentionConfig */
+                            dataRetentionConfig?: (google.cloud.orchestration.airflow.service.v1.IDataRetentionConfig|null);
                         }
 
                         /** Represents an EnvironmentConfig. */
@@ -2751,6 +4963,9 @@ export namespace google {
 
                             /** EnvironmentConfig resilienceMode. */
                             public resilienceMode: (google.cloud.orchestration.airflow.service.v1.EnvironmentConfig.ResilienceMode|keyof typeof google.cloud.orchestration.airflow.service.v1.EnvironmentConfig.ResilienceMode);
+
+                            /** EnvironmentConfig dataRetentionConfig. */
+                            public dataRetentionConfig?: (google.cloud.orchestration.airflow.service.v1.IDataRetentionConfig|null);
 
                             /**
                              * Creates a new EnvironmentConfig instance using the specified properties.
@@ -3055,6 +5270,9 @@ export namespace google {
 
                             /** DatabaseConfig machineType */
                             machineType?: (string|null);
+
+                            /** DatabaseConfig zone */
+                            zone?: (string|null);
                         }
 
                         /** Represents a DatabaseConfig. */
@@ -3068,6 +5286,9 @@ export namespace google {
 
                             /** DatabaseConfig machineType. */
                             public machineType: string;
+
+                            /** DatabaseConfig zone. */
+                            public zone: string;
 
                             /**
                              * Creates a new DatabaseConfig instance using the specified properties.
@@ -3470,6 +5691,12 @@ export namespace google {
 
                             /** SoftwareConfig schedulerCount */
                             schedulerCount?: (number|null);
+
+                            /** SoftwareConfig cloudDataLineageIntegration */
+                            cloudDataLineageIntegration?: (google.cloud.orchestration.airflow.service.v1.ICloudDataLineageIntegration|null);
+
+                            /** SoftwareConfig webServerPluginsMode */
+                            webServerPluginsMode?: (google.cloud.orchestration.airflow.service.v1.SoftwareConfig.WebServerPluginsMode|keyof typeof google.cloud.orchestration.airflow.service.v1.SoftwareConfig.WebServerPluginsMode|null);
                         }
 
                         /** Represents a SoftwareConfig. */
@@ -3498,6 +5725,12 @@ export namespace google {
 
                             /** SoftwareConfig schedulerCount. */
                             public schedulerCount: number;
+
+                            /** SoftwareConfig cloudDataLineageIntegration. */
+                            public cloudDataLineageIntegration?: (google.cloud.orchestration.airflow.service.v1.ICloudDataLineageIntegration|null);
+
+                            /** SoftwareConfig webServerPluginsMode. */
+                            public webServerPluginsMode: (google.cloud.orchestration.airflow.service.v1.SoftwareConfig.WebServerPluginsMode|keyof typeof google.cloud.orchestration.airflow.service.v1.SoftwareConfig.WebServerPluginsMode);
 
                             /**
                              * Creates a new SoftwareConfig instance using the specified properties.
@@ -3575,6 +5808,16 @@ export namespace google {
                              * @returns The default type url
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace SoftwareConfig {
+
+                            /** WebServerPluginsMode enum. */
+                            enum WebServerPluginsMode {
+                                WEB_SERVER_PLUGINS_MODE_UNSPECIFIED = 0,
+                                PLUGINS_DISABLED = 1,
+                                PLUGINS_ENABLED = 2
+                            }
                         }
 
                         /** Properties of a IPAllocationPolicy. */
@@ -3736,6 +5979,12 @@ export namespace google {
 
                             /** NodeConfig enableIpMasqAgent */
                             enableIpMasqAgent?: (boolean|null);
+
+                            /** NodeConfig composerNetworkAttachment */
+                            composerNetworkAttachment?: (string|null);
+
+                            /** NodeConfig composerInternalIpv4CidrBlock */
+                            composerInternalIpv4CidrBlock?: (string|null);
                         }
 
                         /** Represents a NodeConfig. */
@@ -3776,6 +6025,12 @@ export namespace google {
 
                             /** NodeConfig enableIpMasqAgent. */
                             public enableIpMasqAgent: boolean;
+
+                            /** NodeConfig composerNetworkAttachment. */
+                            public composerNetworkAttachment: string;
+
+                            /** NodeConfig composerInternalIpv4CidrBlock. */
+                            public composerInternalIpv4CidrBlock: string;
 
                             /**
                              * Creates a new NodeConfig instance using the specified properties.
@@ -4077,6 +6332,9 @@ export namespace google {
                             /** PrivateEnvironmentConfig enablePrivateEnvironment */
                             enablePrivateEnvironment?: (boolean|null);
 
+                            /** PrivateEnvironmentConfig enablePrivateBuildsOnly */
+                            enablePrivateBuildsOnly?: (boolean|null);
+
                             /** PrivateEnvironmentConfig privateClusterConfig */
                             privateClusterConfig?: (google.cloud.orchestration.airflow.service.v1.IPrivateClusterConfig|null);
 
@@ -4116,6 +6374,9 @@ export namespace google {
 
                             /** PrivateEnvironmentConfig enablePrivateEnvironment. */
                             public enablePrivateEnvironment: boolean;
+
+                            /** PrivateEnvironmentConfig enablePrivateBuildsOnly. */
+                            public enablePrivateBuildsOnly: boolean;
 
                             /** PrivateEnvironmentConfig privateClusterConfig. */
                             public privateClusterConfig?: (google.cloud.orchestration.airflow.service.v1.IPrivateClusterConfig|null);
@@ -4233,6 +6494,12 @@ export namespace google {
 
                             /** WorkloadsConfig worker */
                             worker?: (google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.IWorkerResource|null);
+
+                            /** WorkloadsConfig triggerer */
+                            triggerer?: (google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.ITriggererResource|null);
+
+                            /** WorkloadsConfig dagProcessor */
+                            dagProcessor?: (google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.IDagProcessorResource|null);
                         }
 
                         /** Represents a WorkloadsConfig. */
@@ -4252,6 +6519,12 @@ export namespace google {
 
                             /** WorkloadsConfig worker. */
                             public worker?: (google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.IWorkerResource|null);
+
+                            /** WorkloadsConfig triggerer. */
+                            public triggerer?: (google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.ITriggererResource|null);
+
+                            /** WorkloadsConfig dagProcessor. */
+                            public dagProcessor?: (google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.IDagProcessorResource|null);
 
                             /**
                              * Creates a new WorkloadsConfig instance using the specified properties.
@@ -4672,6 +6945,230 @@ export namespace google {
 
                                 /**
                                  * Gets the default type url for WorkerResource
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of a TriggererResource. */
+                            interface ITriggererResource {
+
+                                /** TriggererResource count */
+                                count?: (number|null);
+
+                                /** TriggererResource cpu */
+                                cpu?: (number|null);
+
+                                /** TriggererResource memoryGb */
+                                memoryGb?: (number|null);
+                            }
+
+                            /** Represents a TriggererResource. */
+                            class TriggererResource implements ITriggererResource {
+
+                                /**
+                                 * Constructs a new TriggererResource.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.ITriggererResource);
+
+                                /** TriggererResource count. */
+                                public count: number;
+
+                                /** TriggererResource cpu. */
+                                public cpu: number;
+
+                                /** TriggererResource memoryGb. */
+                                public memoryGb: number;
+
+                                /**
+                                 * Creates a new TriggererResource instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns TriggererResource instance
+                                 */
+                                public static create(properties?: google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.ITriggererResource): google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.TriggererResource;
+
+                                /**
+                                 * Encodes the specified TriggererResource message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.TriggererResource.verify|verify} messages.
+                                 * @param message TriggererResource message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.ITriggererResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified TriggererResource message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.TriggererResource.verify|verify} messages.
+                                 * @param message TriggererResource message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.ITriggererResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a TriggererResource message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns TriggererResource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.TriggererResource;
+
+                                /**
+                                 * Decodes a TriggererResource message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns TriggererResource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.TriggererResource;
+
+                                /**
+                                 * Verifies a TriggererResource message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a TriggererResource message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns TriggererResource
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.TriggererResource;
+
+                                /**
+                                 * Creates a plain object from a TriggererResource message. Also converts values to other types if specified.
+                                 * @param message TriggererResource
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.TriggererResource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this TriggererResource to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for TriggererResource
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of a DagProcessorResource. */
+                            interface IDagProcessorResource {
+
+                                /** DagProcessorResource cpu */
+                                cpu?: (number|null);
+
+                                /** DagProcessorResource memoryGb */
+                                memoryGb?: (number|null);
+
+                                /** DagProcessorResource storageGb */
+                                storageGb?: (number|null);
+
+                                /** DagProcessorResource count */
+                                count?: (number|null);
+                            }
+
+                            /** Represents a DagProcessorResource. */
+                            class DagProcessorResource implements IDagProcessorResource {
+
+                                /**
+                                 * Constructs a new DagProcessorResource.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.IDagProcessorResource);
+
+                                /** DagProcessorResource cpu. */
+                                public cpu: number;
+
+                                /** DagProcessorResource memoryGb. */
+                                public memoryGb: number;
+
+                                /** DagProcessorResource storageGb. */
+                                public storageGb: number;
+
+                                /** DagProcessorResource count. */
+                                public count: number;
+
+                                /**
+                                 * Creates a new DagProcessorResource instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns DagProcessorResource instance
+                                 */
+                                public static create(properties?: google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.IDagProcessorResource): google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.DagProcessorResource;
+
+                                /**
+                                 * Encodes the specified DagProcessorResource message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.DagProcessorResource.verify|verify} messages.
+                                 * @param message DagProcessorResource message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.IDagProcessorResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified DagProcessorResource message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.DagProcessorResource.verify|verify} messages.
+                                 * @param message DagProcessorResource message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.IDagProcessorResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a DagProcessorResource message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns DagProcessorResource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.DagProcessorResource;
+
+                                /**
+                                 * Decodes a DagProcessorResource message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns DagProcessorResource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.DagProcessorResource;
+
+                                /**
+                                 * Verifies a DagProcessorResource message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a DagProcessorResource message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns DagProcessorResource
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.DagProcessorResource;
+
+                                /**
+                                 * Creates a plain object from a DagProcessorResource message. Also converts values to other types if specified.
+                                 * @param message DagProcessorResource
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.orchestration.airflow.service.v1.WorkloadsConfig.DagProcessorResource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this DagProcessorResource to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for DagProcessorResource
                                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                                  * @returns The default type url
                                  */
@@ -5100,6 +7597,103 @@ export namespace google {
                             }
                         }
 
+                        /** Properties of a CloudDataLineageIntegration. */
+                        interface ICloudDataLineageIntegration {
+
+                            /** CloudDataLineageIntegration enabled */
+                            enabled?: (boolean|null);
+                        }
+
+                        /** Represents a CloudDataLineageIntegration. */
+                        class CloudDataLineageIntegration implements ICloudDataLineageIntegration {
+
+                            /**
+                             * Constructs a new CloudDataLineageIntegration.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.ICloudDataLineageIntegration);
+
+                            /** CloudDataLineageIntegration enabled. */
+                            public enabled: boolean;
+
+                            /**
+                             * Creates a new CloudDataLineageIntegration instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns CloudDataLineageIntegration instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.ICloudDataLineageIntegration): google.cloud.orchestration.airflow.service.v1.CloudDataLineageIntegration;
+
+                            /**
+                             * Encodes the specified CloudDataLineageIntegration message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.CloudDataLineageIntegration.verify|verify} messages.
+                             * @param message CloudDataLineageIntegration message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1.ICloudDataLineageIntegration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified CloudDataLineageIntegration message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.CloudDataLineageIntegration.verify|verify} messages.
+                             * @param message CloudDataLineageIntegration message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.ICloudDataLineageIntegration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a CloudDataLineageIntegration message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns CloudDataLineageIntegration
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.CloudDataLineageIntegration;
+
+                            /**
+                             * Decodes a CloudDataLineageIntegration message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns CloudDataLineageIntegration
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.CloudDataLineageIntegration;
+
+                            /**
+                             * Verifies a CloudDataLineageIntegration message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a CloudDataLineageIntegration message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns CloudDataLineageIntegration
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.CloudDataLineageIntegration;
+
+                            /**
+                             * Creates a plain object from a CloudDataLineageIntegration message. Also converts values to other types if specified.
+                             * @param message CloudDataLineageIntegration
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.CloudDataLineageIntegration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this CloudDataLineageIntegration to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CloudDataLineageIntegration
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
                         /** Properties of an Environment. */
                         interface IEnvironment {
 
@@ -5123,6 +7717,12 @@ export namespace google {
 
                             /** Environment labels */
                             labels?: ({ [k: string]: string }|null);
+
+                            /** Environment satisfiesPzs */
+                            satisfiesPzs?: (boolean|null);
+
+                            /** Environment storageConfig */
+                            storageConfig?: (google.cloud.orchestration.airflow.service.v1.IStorageConfig|null);
                         }
 
                         /** Represents an Environment. */
@@ -5154,6 +7754,12 @@ export namespace google {
 
                             /** Environment labels. */
                             public labels: { [k: string]: string };
+
+                            /** Environment satisfiesPzs. */
+                            public satisfiesPzs: boolean;
+
+                            /** Environment storageConfig. */
+                            public storageConfig?: (google.cloud.orchestration.airflow.service.v1.IStorageConfig|null);
 
                             /**
                              * Creates a new Environment instance using the specified properties.
@@ -5374,6 +7980,210 @@ export namespace google {
                                 CONFLICT_RESULT_UNSPECIFIED = 0,
                                 CONFLICT = 1,
                                 NO_CONFLICT = 2
+                            }
+                        }
+
+                        /** Properties of a DataRetentionConfig. */
+                        interface IDataRetentionConfig {
+
+                            /** DataRetentionConfig taskLogsRetentionConfig */
+                            taskLogsRetentionConfig?: (google.cloud.orchestration.airflow.service.v1.ITaskLogsRetentionConfig|null);
+                        }
+
+                        /** Represents a DataRetentionConfig. */
+                        class DataRetentionConfig implements IDataRetentionConfig {
+
+                            /**
+                             * Constructs a new DataRetentionConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.IDataRetentionConfig);
+
+                            /** DataRetentionConfig taskLogsRetentionConfig. */
+                            public taskLogsRetentionConfig?: (google.cloud.orchestration.airflow.service.v1.ITaskLogsRetentionConfig|null);
+
+                            /**
+                             * Creates a new DataRetentionConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DataRetentionConfig instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.IDataRetentionConfig): google.cloud.orchestration.airflow.service.v1.DataRetentionConfig;
+
+                            /**
+                             * Encodes the specified DataRetentionConfig message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.DataRetentionConfig.verify|verify} messages.
+                             * @param message DataRetentionConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1.IDataRetentionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DataRetentionConfig message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.DataRetentionConfig.verify|verify} messages.
+                             * @param message DataRetentionConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.IDataRetentionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DataRetentionConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DataRetentionConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.DataRetentionConfig;
+
+                            /**
+                             * Decodes a DataRetentionConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DataRetentionConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.DataRetentionConfig;
+
+                            /**
+                             * Verifies a DataRetentionConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DataRetentionConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DataRetentionConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.DataRetentionConfig;
+
+                            /**
+                             * Creates a plain object from a DataRetentionConfig message. Also converts values to other types if specified.
+                             * @param message DataRetentionConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.DataRetentionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DataRetentionConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DataRetentionConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a TaskLogsRetentionConfig. */
+                        interface ITaskLogsRetentionConfig {
+
+                            /** TaskLogsRetentionConfig storageMode */
+                            storageMode?: (google.cloud.orchestration.airflow.service.v1.TaskLogsRetentionConfig.TaskLogsStorageMode|keyof typeof google.cloud.orchestration.airflow.service.v1.TaskLogsRetentionConfig.TaskLogsStorageMode|null);
+                        }
+
+                        /** Represents a TaskLogsRetentionConfig. */
+                        class TaskLogsRetentionConfig implements ITaskLogsRetentionConfig {
+
+                            /**
+                             * Constructs a new TaskLogsRetentionConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.ITaskLogsRetentionConfig);
+
+                            /** TaskLogsRetentionConfig storageMode. */
+                            public storageMode: (google.cloud.orchestration.airflow.service.v1.TaskLogsRetentionConfig.TaskLogsStorageMode|keyof typeof google.cloud.orchestration.airflow.service.v1.TaskLogsRetentionConfig.TaskLogsStorageMode);
+
+                            /**
+                             * Creates a new TaskLogsRetentionConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns TaskLogsRetentionConfig instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.ITaskLogsRetentionConfig): google.cloud.orchestration.airflow.service.v1.TaskLogsRetentionConfig;
+
+                            /**
+                             * Encodes the specified TaskLogsRetentionConfig message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.TaskLogsRetentionConfig.verify|verify} messages.
+                             * @param message TaskLogsRetentionConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1.ITaskLogsRetentionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified TaskLogsRetentionConfig message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.TaskLogsRetentionConfig.verify|verify} messages.
+                             * @param message TaskLogsRetentionConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.ITaskLogsRetentionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a TaskLogsRetentionConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns TaskLogsRetentionConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.TaskLogsRetentionConfig;
+
+                            /**
+                             * Decodes a TaskLogsRetentionConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns TaskLogsRetentionConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.TaskLogsRetentionConfig;
+
+                            /**
+                             * Verifies a TaskLogsRetentionConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a TaskLogsRetentionConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns TaskLogsRetentionConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.TaskLogsRetentionConfig;
+
+                            /**
+                             * Creates a plain object from a TaskLogsRetentionConfig message. Also converts values to other types if specified.
+                             * @param message TaskLogsRetentionConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.TaskLogsRetentionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this TaskLogsRetentionConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for TaskLogsRetentionConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace TaskLogsRetentionConfig {
+
+                            /** TaskLogsStorageMode enum. */
+                            enum TaskLogsStorageMode {
+                                TASK_LOGS_STORAGE_MODE_UNSPECIFIED = 0,
+                                CLOUD_LOGGING_AND_CLOUD_STORAGE = 1,
+                                CLOUD_LOGGING_ONLY = 2
                             }
                         }
 
@@ -6084,6 +8894,160 @@ export namespace google {
                             public pollAirflowCommand(request: google.cloud.orchestration.airflow.service.v1beta1.IPollAirflowCommandRequest): Promise<google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse>;
 
                             /**
+                             * Calls ListWorkloads.
+                             * @param request ListWorkloadsRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and ListWorkloadsResponse
+                             */
+                            public listWorkloads(request: google.cloud.orchestration.airflow.service.v1beta1.IListWorkloadsRequest, callback: google.cloud.orchestration.airflow.service.v1beta1.Environments.ListWorkloadsCallback): void;
+
+                            /**
+                             * Calls ListWorkloads.
+                             * @param request ListWorkloadsRequest message or plain object
+                             * @returns Promise
+                             */
+                            public listWorkloads(request: google.cloud.orchestration.airflow.service.v1beta1.IListWorkloadsRequest): Promise<google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse>;
+
+                            /**
+                             * Calls CreateUserWorkloadsSecret.
+                             * @param request CreateUserWorkloadsSecretRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and UserWorkloadsSecret
+                             */
+                            public createUserWorkloadsSecret(request: google.cloud.orchestration.airflow.service.v1beta1.ICreateUserWorkloadsSecretRequest, callback: google.cloud.orchestration.airflow.service.v1beta1.Environments.CreateUserWorkloadsSecretCallback): void;
+
+                            /**
+                             * Calls CreateUserWorkloadsSecret.
+                             * @param request CreateUserWorkloadsSecretRequest message or plain object
+                             * @returns Promise
+                             */
+                            public createUserWorkloadsSecret(request: google.cloud.orchestration.airflow.service.v1beta1.ICreateUserWorkloadsSecretRequest): Promise<google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret>;
+
+                            /**
+                             * Calls GetUserWorkloadsSecret.
+                             * @param request GetUserWorkloadsSecretRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and UserWorkloadsSecret
+                             */
+                            public getUserWorkloadsSecret(request: google.cloud.orchestration.airflow.service.v1beta1.IGetUserWorkloadsSecretRequest, callback: google.cloud.orchestration.airflow.service.v1beta1.Environments.GetUserWorkloadsSecretCallback): void;
+
+                            /**
+                             * Calls GetUserWorkloadsSecret.
+                             * @param request GetUserWorkloadsSecretRequest message or plain object
+                             * @returns Promise
+                             */
+                            public getUserWorkloadsSecret(request: google.cloud.orchestration.airflow.service.v1beta1.IGetUserWorkloadsSecretRequest): Promise<google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret>;
+
+                            /**
+                             * Calls ListUserWorkloadsSecrets.
+                             * @param request ListUserWorkloadsSecretsRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and ListUserWorkloadsSecretsResponse
+                             */
+                            public listUserWorkloadsSecrets(request: google.cloud.orchestration.airflow.service.v1beta1.IListUserWorkloadsSecretsRequest, callback: google.cloud.orchestration.airflow.service.v1beta1.Environments.ListUserWorkloadsSecretsCallback): void;
+
+                            /**
+                             * Calls ListUserWorkloadsSecrets.
+                             * @param request ListUserWorkloadsSecretsRequest message or plain object
+                             * @returns Promise
+                             */
+                            public listUserWorkloadsSecrets(request: google.cloud.orchestration.airflow.service.v1beta1.IListUserWorkloadsSecretsRequest): Promise<google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsResponse>;
+
+                            /**
+                             * Calls UpdateUserWorkloadsSecret.
+                             * @param request UpdateUserWorkloadsSecretRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and UserWorkloadsSecret
+                             */
+                            public updateUserWorkloadsSecret(request: google.cloud.orchestration.airflow.service.v1beta1.IUpdateUserWorkloadsSecretRequest, callback: google.cloud.orchestration.airflow.service.v1beta1.Environments.UpdateUserWorkloadsSecretCallback): void;
+
+                            /**
+                             * Calls UpdateUserWorkloadsSecret.
+                             * @param request UpdateUserWorkloadsSecretRequest message or plain object
+                             * @returns Promise
+                             */
+                            public updateUserWorkloadsSecret(request: google.cloud.orchestration.airflow.service.v1beta1.IUpdateUserWorkloadsSecretRequest): Promise<google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret>;
+
+                            /**
+                             * Calls DeleteUserWorkloadsSecret.
+                             * @param request DeleteUserWorkloadsSecretRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and Empty
+                             */
+                            public deleteUserWorkloadsSecret(request: google.cloud.orchestration.airflow.service.v1beta1.IDeleteUserWorkloadsSecretRequest, callback: google.cloud.orchestration.airflow.service.v1beta1.Environments.DeleteUserWorkloadsSecretCallback): void;
+
+                            /**
+                             * Calls DeleteUserWorkloadsSecret.
+                             * @param request DeleteUserWorkloadsSecretRequest message or plain object
+                             * @returns Promise
+                             */
+                            public deleteUserWorkloadsSecret(request: google.cloud.orchestration.airflow.service.v1beta1.IDeleteUserWorkloadsSecretRequest): Promise<google.protobuf.Empty>;
+
+                            /**
+                             * Calls CreateUserWorkloadsConfigMap.
+                             * @param request CreateUserWorkloadsConfigMapRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and UserWorkloadsConfigMap
+                             */
+                            public createUserWorkloadsConfigMap(request: google.cloud.orchestration.airflow.service.v1beta1.ICreateUserWorkloadsConfigMapRequest, callback: google.cloud.orchestration.airflow.service.v1beta1.Environments.CreateUserWorkloadsConfigMapCallback): void;
+
+                            /**
+                             * Calls CreateUserWorkloadsConfigMap.
+                             * @param request CreateUserWorkloadsConfigMapRequest message or plain object
+                             * @returns Promise
+                             */
+                            public createUserWorkloadsConfigMap(request: google.cloud.orchestration.airflow.service.v1beta1.ICreateUserWorkloadsConfigMapRequest): Promise<google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap>;
+
+                            /**
+                             * Calls GetUserWorkloadsConfigMap.
+                             * @param request GetUserWorkloadsConfigMapRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and UserWorkloadsConfigMap
+                             */
+                            public getUserWorkloadsConfigMap(request: google.cloud.orchestration.airflow.service.v1beta1.IGetUserWorkloadsConfigMapRequest, callback: google.cloud.orchestration.airflow.service.v1beta1.Environments.GetUserWorkloadsConfigMapCallback): void;
+
+                            /**
+                             * Calls GetUserWorkloadsConfigMap.
+                             * @param request GetUserWorkloadsConfigMapRequest message or plain object
+                             * @returns Promise
+                             */
+                            public getUserWorkloadsConfigMap(request: google.cloud.orchestration.airflow.service.v1beta1.IGetUserWorkloadsConfigMapRequest): Promise<google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap>;
+
+                            /**
+                             * Calls ListUserWorkloadsConfigMaps.
+                             * @param request ListUserWorkloadsConfigMapsRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and ListUserWorkloadsConfigMapsResponse
+                             */
+                            public listUserWorkloadsConfigMaps(request: google.cloud.orchestration.airflow.service.v1beta1.IListUserWorkloadsConfigMapsRequest, callback: google.cloud.orchestration.airflow.service.v1beta1.Environments.ListUserWorkloadsConfigMapsCallback): void;
+
+                            /**
+                             * Calls ListUserWorkloadsConfigMaps.
+                             * @param request ListUserWorkloadsConfigMapsRequest message or plain object
+                             * @returns Promise
+                             */
+                            public listUserWorkloadsConfigMaps(request: google.cloud.orchestration.airflow.service.v1beta1.IListUserWorkloadsConfigMapsRequest): Promise<google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsResponse>;
+
+                            /**
+                             * Calls UpdateUserWorkloadsConfigMap.
+                             * @param request UpdateUserWorkloadsConfigMapRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and UserWorkloadsConfigMap
+                             */
+                            public updateUserWorkloadsConfigMap(request: google.cloud.orchestration.airflow.service.v1beta1.IUpdateUserWorkloadsConfigMapRequest, callback: google.cloud.orchestration.airflow.service.v1beta1.Environments.UpdateUserWorkloadsConfigMapCallback): void;
+
+                            /**
+                             * Calls UpdateUserWorkloadsConfigMap.
+                             * @param request UpdateUserWorkloadsConfigMapRequest message or plain object
+                             * @returns Promise
+                             */
+                            public updateUserWorkloadsConfigMap(request: google.cloud.orchestration.airflow.service.v1beta1.IUpdateUserWorkloadsConfigMapRequest): Promise<google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap>;
+
+                            /**
+                             * Calls DeleteUserWorkloadsConfigMap.
+                             * @param request DeleteUserWorkloadsConfigMapRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and Empty
+                             */
+                            public deleteUserWorkloadsConfigMap(request: google.cloud.orchestration.airflow.service.v1beta1.IDeleteUserWorkloadsConfigMapRequest, callback: google.cloud.orchestration.airflow.service.v1beta1.Environments.DeleteUserWorkloadsConfigMapCallback): void;
+
+                            /**
+                             * Calls DeleteUserWorkloadsConfigMap.
+                             * @param request DeleteUserWorkloadsConfigMapRequest message or plain object
+                             * @returns Promise
+                             */
+                            public deleteUserWorkloadsConfigMap(request: google.cloud.orchestration.airflow.service.v1beta1.IDeleteUserWorkloadsConfigMapRequest): Promise<google.protobuf.Empty>;
+
+                            /**
                              * Calls SaveSnapshot.
                              * @param request SaveSnapshotRequest message or plain object
                              * @param callback Node-style callback called with the error, if any, and Operation
@@ -6211,6 +9175,83 @@ export namespace google {
                              * @param [response] PollAirflowCommandResponse
                              */
                             type PollAirflowCommandCallback = (error: (Error|null), response?: google.cloud.orchestration.airflow.service.v1beta1.PollAirflowCommandResponse) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.orchestration.airflow.service.v1beta1.Environments|listWorkloads}.
+                             * @param error Error, if any
+                             * @param [response] ListWorkloadsResponse
+                             */
+                            type ListWorkloadsCallback = (error: (Error|null), response?: google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.orchestration.airflow.service.v1beta1.Environments|createUserWorkloadsSecret}.
+                             * @param error Error, if any
+                             * @param [response] UserWorkloadsSecret
+                             */
+                            type CreateUserWorkloadsSecretCallback = (error: (Error|null), response?: google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.orchestration.airflow.service.v1beta1.Environments|getUserWorkloadsSecret}.
+                             * @param error Error, if any
+                             * @param [response] UserWorkloadsSecret
+                             */
+                            type GetUserWorkloadsSecretCallback = (error: (Error|null), response?: google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.orchestration.airflow.service.v1beta1.Environments|listUserWorkloadsSecrets}.
+                             * @param error Error, if any
+                             * @param [response] ListUserWorkloadsSecretsResponse
+                             */
+                            type ListUserWorkloadsSecretsCallback = (error: (Error|null), response?: google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsResponse) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.orchestration.airflow.service.v1beta1.Environments|updateUserWorkloadsSecret}.
+                             * @param error Error, if any
+                             * @param [response] UserWorkloadsSecret
+                             */
+                            type UpdateUserWorkloadsSecretCallback = (error: (Error|null), response?: google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.orchestration.airflow.service.v1beta1.Environments|deleteUserWorkloadsSecret}.
+                             * @param error Error, if any
+                             * @param [response] Empty
+                             */
+                            type DeleteUserWorkloadsSecretCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.orchestration.airflow.service.v1beta1.Environments|createUserWorkloadsConfigMap}.
+                             * @param error Error, if any
+                             * @param [response] UserWorkloadsConfigMap
+                             */
+                            type CreateUserWorkloadsConfigMapCallback = (error: (Error|null), response?: google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.orchestration.airflow.service.v1beta1.Environments|getUserWorkloadsConfigMap}.
+                             * @param error Error, if any
+                             * @param [response] UserWorkloadsConfigMap
+                             */
+                            type GetUserWorkloadsConfigMapCallback = (error: (Error|null), response?: google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.orchestration.airflow.service.v1beta1.Environments|listUserWorkloadsConfigMaps}.
+                             * @param error Error, if any
+                             * @param [response] ListUserWorkloadsConfigMapsResponse
+                             */
+                            type ListUserWorkloadsConfigMapsCallback = (error: (Error|null), response?: google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsResponse) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.orchestration.airflow.service.v1beta1.Environments|updateUserWorkloadsConfigMap}.
+                             * @param error Error, if any
+                             * @param [response] UserWorkloadsConfigMap
+                             */
+                            type UpdateUserWorkloadsConfigMapCallback = (error: (Error|null), response?: google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.orchestration.airflow.service.v1beta1.Environments|deleteUserWorkloadsConfigMap}.
+                             * @param error Error, if any
+                             * @param [response] Empty
+                             */
+                            type DeleteUserWorkloadsConfigMapCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
                             /**
                              * Callback as used by {@link google.cloud.orchestration.airflow.service.v1beta1.Environments|saveSnapshot}.
@@ -7849,6 +10890,1887 @@ export namespace google {
                             }
                         }
 
+                        /** Properties of a CreateUserWorkloadsSecretRequest. */
+                        interface ICreateUserWorkloadsSecretRequest {
+
+                            /** CreateUserWorkloadsSecretRequest parent */
+                            parent?: (string|null);
+
+                            /** CreateUserWorkloadsSecretRequest userWorkloadsSecret */
+                            userWorkloadsSecret?: (google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsSecret|null);
+                        }
+
+                        /** Represents a CreateUserWorkloadsSecretRequest. */
+                        class CreateUserWorkloadsSecretRequest implements ICreateUserWorkloadsSecretRequest {
+
+                            /**
+                             * Constructs a new CreateUserWorkloadsSecretRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.ICreateUserWorkloadsSecretRequest);
+
+                            /** CreateUserWorkloadsSecretRequest parent. */
+                            public parent: string;
+
+                            /** CreateUserWorkloadsSecretRequest userWorkloadsSecret. */
+                            public userWorkloadsSecret?: (google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsSecret|null);
+
+                            /**
+                             * Creates a new CreateUserWorkloadsSecretRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns CreateUserWorkloadsSecretRequest instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.ICreateUserWorkloadsSecretRequest): google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsSecretRequest;
+
+                            /**
+                             * Encodes the specified CreateUserWorkloadsSecretRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsSecretRequest.verify|verify} messages.
+                             * @param message CreateUserWorkloadsSecretRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.ICreateUserWorkloadsSecretRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified CreateUserWorkloadsSecretRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsSecretRequest.verify|verify} messages.
+                             * @param message CreateUserWorkloadsSecretRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.ICreateUserWorkloadsSecretRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a CreateUserWorkloadsSecretRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns CreateUserWorkloadsSecretRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsSecretRequest;
+
+                            /**
+                             * Decodes a CreateUserWorkloadsSecretRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns CreateUserWorkloadsSecretRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsSecretRequest;
+
+                            /**
+                             * Verifies a CreateUserWorkloadsSecretRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a CreateUserWorkloadsSecretRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns CreateUserWorkloadsSecretRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsSecretRequest;
+
+                            /**
+                             * Creates a plain object from a CreateUserWorkloadsSecretRequest message. Also converts values to other types if specified.
+                             * @param message CreateUserWorkloadsSecretRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsSecretRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this CreateUserWorkloadsSecretRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CreateUserWorkloadsSecretRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a GetUserWorkloadsSecretRequest. */
+                        interface IGetUserWorkloadsSecretRequest {
+
+                            /** GetUserWorkloadsSecretRequest name */
+                            name?: (string|null);
+                        }
+
+                        /** Represents a GetUserWorkloadsSecretRequest. */
+                        class GetUserWorkloadsSecretRequest implements IGetUserWorkloadsSecretRequest {
+
+                            /**
+                             * Constructs a new GetUserWorkloadsSecretRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.IGetUserWorkloadsSecretRequest);
+
+                            /** GetUserWorkloadsSecretRequest name. */
+                            public name: string;
+
+                            /**
+                             * Creates a new GetUserWorkloadsSecretRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns GetUserWorkloadsSecretRequest instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.IGetUserWorkloadsSecretRequest): google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsSecretRequest;
+
+                            /**
+                             * Encodes the specified GetUserWorkloadsSecretRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsSecretRequest.verify|verify} messages.
+                             * @param message GetUserWorkloadsSecretRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.IGetUserWorkloadsSecretRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified GetUserWorkloadsSecretRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsSecretRequest.verify|verify} messages.
+                             * @param message GetUserWorkloadsSecretRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.IGetUserWorkloadsSecretRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a GetUserWorkloadsSecretRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns GetUserWorkloadsSecretRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsSecretRequest;
+
+                            /**
+                             * Decodes a GetUserWorkloadsSecretRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns GetUserWorkloadsSecretRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsSecretRequest;
+
+                            /**
+                             * Verifies a GetUserWorkloadsSecretRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a GetUserWorkloadsSecretRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns GetUserWorkloadsSecretRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsSecretRequest;
+
+                            /**
+                             * Creates a plain object from a GetUserWorkloadsSecretRequest message. Also converts values to other types if specified.
+                             * @param message GetUserWorkloadsSecretRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsSecretRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this GetUserWorkloadsSecretRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for GetUserWorkloadsSecretRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a ListUserWorkloadsSecretsRequest. */
+                        interface IListUserWorkloadsSecretsRequest {
+
+                            /** ListUserWorkloadsSecretsRequest parent */
+                            parent?: (string|null);
+
+                            /** ListUserWorkloadsSecretsRequest pageSize */
+                            pageSize?: (number|null);
+
+                            /** ListUserWorkloadsSecretsRequest pageToken */
+                            pageToken?: (string|null);
+                        }
+
+                        /** Represents a ListUserWorkloadsSecretsRequest. */
+                        class ListUserWorkloadsSecretsRequest implements IListUserWorkloadsSecretsRequest {
+
+                            /**
+                             * Constructs a new ListUserWorkloadsSecretsRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.IListUserWorkloadsSecretsRequest);
+
+                            /** ListUserWorkloadsSecretsRequest parent. */
+                            public parent: string;
+
+                            /** ListUserWorkloadsSecretsRequest pageSize. */
+                            public pageSize: number;
+
+                            /** ListUserWorkloadsSecretsRequest pageToken. */
+                            public pageToken: string;
+
+                            /**
+                             * Creates a new ListUserWorkloadsSecretsRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ListUserWorkloadsSecretsRequest instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.IListUserWorkloadsSecretsRequest): google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest;
+
+                            /**
+                             * Encodes the specified ListUserWorkloadsSecretsRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest.verify|verify} messages.
+                             * @param message ListUserWorkloadsSecretsRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.IListUserWorkloadsSecretsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ListUserWorkloadsSecretsRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest.verify|verify} messages.
+                             * @param message ListUserWorkloadsSecretsRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.IListUserWorkloadsSecretsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ListUserWorkloadsSecretsRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ListUserWorkloadsSecretsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest;
+
+                            /**
+                             * Decodes a ListUserWorkloadsSecretsRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ListUserWorkloadsSecretsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest;
+
+                            /**
+                             * Verifies a ListUserWorkloadsSecretsRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ListUserWorkloadsSecretsRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ListUserWorkloadsSecretsRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest;
+
+                            /**
+                             * Creates a plain object from a ListUserWorkloadsSecretsRequest message. Also converts values to other types if specified.
+                             * @param message ListUserWorkloadsSecretsRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ListUserWorkloadsSecretsRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ListUserWorkloadsSecretsRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of an UpdateUserWorkloadsSecretRequest. */
+                        interface IUpdateUserWorkloadsSecretRequest {
+
+                            /** UpdateUserWorkloadsSecretRequest userWorkloadsSecret */
+                            userWorkloadsSecret?: (google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsSecret|null);
+                        }
+
+                        /** Represents an UpdateUserWorkloadsSecretRequest. */
+                        class UpdateUserWorkloadsSecretRequest implements IUpdateUserWorkloadsSecretRequest {
+
+                            /**
+                             * Constructs a new UpdateUserWorkloadsSecretRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.IUpdateUserWorkloadsSecretRequest);
+
+                            /** UpdateUserWorkloadsSecretRequest userWorkloadsSecret. */
+                            public userWorkloadsSecret?: (google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsSecret|null);
+
+                            /**
+                             * Creates a new UpdateUserWorkloadsSecretRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns UpdateUserWorkloadsSecretRequest instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.IUpdateUserWorkloadsSecretRequest): google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsSecretRequest;
+
+                            /**
+                             * Encodes the specified UpdateUserWorkloadsSecretRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsSecretRequest.verify|verify} messages.
+                             * @param message UpdateUserWorkloadsSecretRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.IUpdateUserWorkloadsSecretRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified UpdateUserWorkloadsSecretRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsSecretRequest.verify|verify} messages.
+                             * @param message UpdateUserWorkloadsSecretRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.IUpdateUserWorkloadsSecretRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an UpdateUserWorkloadsSecretRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns UpdateUserWorkloadsSecretRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsSecretRequest;
+
+                            /**
+                             * Decodes an UpdateUserWorkloadsSecretRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns UpdateUserWorkloadsSecretRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsSecretRequest;
+
+                            /**
+                             * Verifies an UpdateUserWorkloadsSecretRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an UpdateUserWorkloadsSecretRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns UpdateUserWorkloadsSecretRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsSecretRequest;
+
+                            /**
+                             * Creates a plain object from an UpdateUserWorkloadsSecretRequest message. Also converts values to other types if specified.
+                             * @param message UpdateUserWorkloadsSecretRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsSecretRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this UpdateUserWorkloadsSecretRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for UpdateUserWorkloadsSecretRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a DeleteUserWorkloadsSecretRequest. */
+                        interface IDeleteUserWorkloadsSecretRequest {
+
+                            /** DeleteUserWorkloadsSecretRequest name */
+                            name?: (string|null);
+                        }
+
+                        /** Represents a DeleteUserWorkloadsSecretRequest. */
+                        class DeleteUserWorkloadsSecretRequest implements IDeleteUserWorkloadsSecretRequest {
+
+                            /**
+                             * Constructs a new DeleteUserWorkloadsSecretRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.IDeleteUserWorkloadsSecretRequest);
+
+                            /** DeleteUserWorkloadsSecretRequest name. */
+                            public name: string;
+
+                            /**
+                             * Creates a new DeleteUserWorkloadsSecretRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DeleteUserWorkloadsSecretRequest instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.IDeleteUserWorkloadsSecretRequest): google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsSecretRequest;
+
+                            /**
+                             * Encodes the specified DeleteUserWorkloadsSecretRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsSecretRequest.verify|verify} messages.
+                             * @param message DeleteUserWorkloadsSecretRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.IDeleteUserWorkloadsSecretRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DeleteUserWorkloadsSecretRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsSecretRequest.verify|verify} messages.
+                             * @param message DeleteUserWorkloadsSecretRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.IDeleteUserWorkloadsSecretRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DeleteUserWorkloadsSecretRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DeleteUserWorkloadsSecretRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsSecretRequest;
+
+                            /**
+                             * Decodes a DeleteUserWorkloadsSecretRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DeleteUserWorkloadsSecretRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsSecretRequest;
+
+                            /**
+                             * Verifies a DeleteUserWorkloadsSecretRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DeleteUserWorkloadsSecretRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DeleteUserWorkloadsSecretRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsSecretRequest;
+
+                            /**
+                             * Creates a plain object from a DeleteUserWorkloadsSecretRequest message. Also converts values to other types if specified.
+                             * @param message DeleteUserWorkloadsSecretRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsSecretRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DeleteUserWorkloadsSecretRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DeleteUserWorkloadsSecretRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a CreateUserWorkloadsConfigMapRequest. */
+                        interface ICreateUserWorkloadsConfigMapRequest {
+
+                            /** CreateUserWorkloadsConfigMapRequest parent */
+                            parent?: (string|null);
+
+                            /** CreateUserWorkloadsConfigMapRequest userWorkloadsConfigMap */
+                            userWorkloadsConfigMap?: (google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsConfigMap|null);
+                        }
+
+                        /** Represents a CreateUserWorkloadsConfigMapRequest. */
+                        class CreateUserWorkloadsConfigMapRequest implements ICreateUserWorkloadsConfigMapRequest {
+
+                            /**
+                             * Constructs a new CreateUserWorkloadsConfigMapRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.ICreateUserWorkloadsConfigMapRequest);
+
+                            /** CreateUserWorkloadsConfigMapRequest parent. */
+                            public parent: string;
+
+                            /** CreateUserWorkloadsConfigMapRequest userWorkloadsConfigMap. */
+                            public userWorkloadsConfigMap?: (google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsConfigMap|null);
+
+                            /**
+                             * Creates a new CreateUserWorkloadsConfigMapRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns CreateUserWorkloadsConfigMapRequest instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.ICreateUserWorkloadsConfigMapRequest): google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsConfigMapRequest;
+
+                            /**
+                             * Encodes the specified CreateUserWorkloadsConfigMapRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsConfigMapRequest.verify|verify} messages.
+                             * @param message CreateUserWorkloadsConfigMapRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.ICreateUserWorkloadsConfigMapRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified CreateUserWorkloadsConfigMapRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsConfigMapRequest.verify|verify} messages.
+                             * @param message CreateUserWorkloadsConfigMapRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.ICreateUserWorkloadsConfigMapRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a CreateUserWorkloadsConfigMapRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns CreateUserWorkloadsConfigMapRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsConfigMapRequest;
+
+                            /**
+                             * Decodes a CreateUserWorkloadsConfigMapRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns CreateUserWorkloadsConfigMapRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsConfigMapRequest;
+
+                            /**
+                             * Verifies a CreateUserWorkloadsConfigMapRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a CreateUserWorkloadsConfigMapRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns CreateUserWorkloadsConfigMapRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsConfigMapRequest;
+
+                            /**
+                             * Creates a plain object from a CreateUserWorkloadsConfigMapRequest message. Also converts values to other types if specified.
+                             * @param message CreateUserWorkloadsConfigMapRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.CreateUserWorkloadsConfigMapRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this CreateUserWorkloadsConfigMapRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CreateUserWorkloadsConfigMapRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a GetUserWorkloadsConfigMapRequest. */
+                        interface IGetUserWorkloadsConfigMapRequest {
+
+                            /** GetUserWorkloadsConfigMapRequest name */
+                            name?: (string|null);
+                        }
+
+                        /** Represents a GetUserWorkloadsConfigMapRequest. */
+                        class GetUserWorkloadsConfigMapRequest implements IGetUserWorkloadsConfigMapRequest {
+
+                            /**
+                             * Constructs a new GetUserWorkloadsConfigMapRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.IGetUserWorkloadsConfigMapRequest);
+
+                            /** GetUserWorkloadsConfigMapRequest name. */
+                            public name: string;
+
+                            /**
+                             * Creates a new GetUserWorkloadsConfigMapRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns GetUserWorkloadsConfigMapRequest instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.IGetUserWorkloadsConfigMapRequest): google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsConfigMapRequest;
+
+                            /**
+                             * Encodes the specified GetUserWorkloadsConfigMapRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsConfigMapRequest.verify|verify} messages.
+                             * @param message GetUserWorkloadsConfigMapRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.IGetUserWorkloadsConfigMapRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified GetUserWorkloadsConfigMapRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsConfigMapRequest.verify|verify} messages.
+                             * @param message GetUserWorkloadsConfigMapRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.IGetUserWorkloadsConfigMapRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a GetUserWorkloadsConfigMapRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns GetUserWorkloadsConfigMapRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsConfigMapRequest;
+
+                            /**
+                             * Decodes a GetUserWorkloadsConfigMapRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns GetUserWorkloadsConfigMapRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsConfigMapRequest;
+
+                            /**
+                             * Verifies a GetUserWorkloadsConfigMapRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a GetUserWorkloadsConfigMapRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns GetUserWorkloadsConfigMapRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsConfigMapRequest;
+
+                            /**
+                             * Creates a plain object from a GetUserWorkloadsConfigMapRequest message. Also converts values to other types if specified.
+                             * @param message GetUserWorkloadsConfigMapRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.GetUserWorkloadsConfigMapRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this GetUserWorkloadsConfigMapRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for GetUserWorkloadsConfigMapRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a ListUserWorkloadsConfigMapsRequest. */
+                        interface IListUserWorkloadsConfigMapsRequest {
+
+                            /** ListUserWorkloadsConfigMapsRequest parent */
+                            parent?: (string|null);
+
+                            /** ListUserWorkloadsConfigMapsRequest pageSize */
+                            pageSize?: (number|null);
+
+                            /** ListUserWorkloadsConfigMapsRequest pageToken */
+                            pageToken?: (string|null);
+                        }
+
+                        /** Represents a ListUserWorkloadsConfigMapsRequest. */
+                        class ListUserWorkloadsConfigMapsRequest implements IListUserWorkloadsConfigMapsRequest {
+
+                            /**
+                             * Constructs a new ListUserWorkloadsConfigMapsRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.IListUserWorkloadsConfigMapsRequest);
+
+                            /** ListUserWorkloadsConfigMapsRequest parent. */
+                            public parent: string;
+
+                            /** ListUserWorkloadsConfigMapsRequest pageSize. */
+                            public pageSize: number;
+
+                            /** ListUserWorkloadsConfigMapsRequest pageToken. */
+                            public pageToken: string;
+
+                            /**
+                             * Creates a new ListUserWorkloadsConfigMapsRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ListUserWorkloadsConfigMapsRequest instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.IListUserWorkloadsConfigMapsRequest): google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest;
+
+                            /**
+                             * Encodes the specified ListUserWorkloadsConfigMapsRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest.verify|verify} messages.
+                             * @param message ListUserWorkloadsConfigMapsRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.IListUserWorkloadsConfigMapsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ListUserWorkloadsConfigMapsRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest.verify|verify} messages.
+                             * @param message ListUserWorkloadsConfigMapsRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.IListUserWorkloadsConfigMapsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ListUserWorkloadsConfigMapsRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ListUserWorkloadsConfigMapsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest;
+
+                            /**
+                             * Decodes a ListUserWorkloadsConfigMapsRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ListUserWorkloadsConfigMapsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest;
+
+                            /**
+                             * Verifies a ListUserWorkloadsConfigMapsRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ListUserWorkloadsConfigMapsRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ListUserWorkloadsConfigMapsRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest;
+
+                            /**
+                             * Creates a plain object from a ListUserWorkloadsConfigMapsRequest message. Also converts values to other types if specified.
+                             * @param message ListUserWorkloadsConfigMapsRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ListUserWorkloadsConfigMapsRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ListUserWorkloadsConfigMapsRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of an UpdateUserWorkloadsConfigMapRequest. */
+                        interface IUpdateUserWorkloadsConfigMapRequest {
+
+                            /** UpdateUserWorkloadsConfigMapRequest userWorkloadsConfigMap */
+                            userWorkloadsConfigMap?: (google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsConfigMap|null);
+                        }
+
+                        /** Represents an UpdateUserWorkloadsConfigMapRequest. */
+                        class UpdateUserWorkloadsConfigMapRequest implements IUpdateUserWorkloadsConfigMapRequest {
+
+                            /**
+                             * Constructs a new UpdateUserWorkloadsConfigMapRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.IUpdateUserWorkloadsConfigMapRequest);
+
+                            /** UpdateUserWorkloadsConfigMapRequest userWorkloadsConfigMap. */
+                            public userWorkloadsConfigMap?: (google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsConfigMap|null);
+
+                            /**
+                             * Creates a new UpdateUserWorkloadsConfigMapRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns UpdateUserWorkloadsConfigMapRequest instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.IUpdateUserWorkloadsConfigMapRequest): google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsConfigMapRequest;
+
+                            /**
+                             * Encodes the specified UpdateUserWorkloadsConfigMapRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsConfigMapRequest.verify|verify} messages.
+                             * @param message UpdateUserWorkloadsConfigMapRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.IUpdateUserWorkloadsConfigMapRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified UpdateUserWorkloadsConfigMapRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsConfigMapRequest.verify|verify} messages.
+                             * @param message UpdateUserWorkloadsConfigMapRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.IUpdateUserWorkloadsConfigMapRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an UpdateUserWorkloadsConfigMapRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns UpdateUserWorkloadsConfigMapRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsConfigMapRequest;
+
+                            /**
+                             * Decodes an UpdateUserWorkloadsConfigMapRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns UpdateUserWorkloadsConfigMapRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsConfigMapRequest;
+
+                            /**
+                             * Verifies an UpdateUserWorkloadsConfigMapRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an UpdateUserWorkloadsConfigMapRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns UpdateUserWorkloadsConfigMapRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsConfigMapRequest;
+
+                            /**
+                             * Creates a plain object from an UpdateUserWorkloadsConfigMapRequest message. Also converts values to other types if specified.
+                             * @param message UpdateUserWorkloadsConfigMapRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.UpdateUserWorkloadsConfigMapRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this UpdateUserWorkloadsConfigMapRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for UpdateUserWorkloadsConfigMapRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a DeleteUserWorkloadsConfigMapRequest. */
+                        interface IDeleteUserWorkloadsConfigMapRequest {
+
+                            /** DeleteUserWorkloadsConfigMapRequest name */
+                            name?: (string|null);
+                        }
+
+                        /** Represents a DeleteUserWorkloadsConfigMapRequest. */
+                        class DeleteUserWorkloadsConfigMapRequest implements IDeleteUserWorkloadsConfigMapRequest {
+
+                            /**
+                             * Constructs a new DeleteUserWorkloadsConfigMapRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.IDeleteUserWorkloadsConfigMapRequest);
+
+                            /** DeleteUserWorkloadsConfigMapRequest name. */
+                            public name: string;
+
+                            /**
+                             * Creates a new DeleteUserWorkloadsConfigMapRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DeleteUserWorkloadsConfigMapRequest instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.IDeleteUserWorkloadsConfigMapRequest): google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsConfigMapRequest;
+
+                            /**
+                             * Encodes the specified DeleteUserWorkloadsConfigMapRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsConfigMapRequest.verify|verify} messages.
+                             * @param message DeleteUserWorkloadsConfigMapRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.IDeleteUserWorkloadsConfigMapRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DeleteUserWorkloadsConfigMapRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsConfigMapRequest.verify|verify} messages.
+                             * @param message DeleteUserWorkloadsConfigMapRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.IDeleteUserWorkloadsConfigMapRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DeleteUserWorkloadsConfigMapRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DeleteUserWorkloadsConfigMapRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsConfigMapRequest;
+
+                            /**
+                             * Decodes a DeleteUserWorkloadsConfigMapRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DeleteUserWorkloadsConfigMapRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsConfigMapRequest;
+
+                            /**
+                             * Verifies a DeleteUserWorkloadsConfigMapRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DeleteUserWorkloadsConfigMapRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DeleteUserWorkloadsConfigMapRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsConfigMapRequest;
+
+                            /**
+                             * Creates a plain object from a DeleteUserWorkloadsConfigMapRequest message. Also converts values to other types if specified.
+                             * @param message DeleteUserWorkloadsConfigMapRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.DeleteUserWorkloadsConfigMapRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DeleteUserWorkloadsConfigMapRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DeleteUserWorkloadsConfigMapRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a UserWorkloadsSecret. */
+                        interface IUserWorkloadsSecret {
+
+                            /** UserWorkloadsSecret name */
+                            name?: (string|null);
+
+                            /** UserWorkloadsSecret data */
+                            data?: ({ [k: string]: string }|null);
+                        }
+
+                        /** Represents a UserWorkloadsSecret. */
+                        class UserWorkloadsSecret implements IUserWorkloadsSecret {
+
+                            /**
+                             * Constructs a new UserWorkloadsSecret.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsSecret);
+
+                            /** UserWorkloadsSecret name. */
+                            public name: string;
+
+                            /** UserWorkloadsSecret data. */
+                            public data: { [k: string]: string };
+
+                            /**
+                             * Creates a new UserWorkloadsSecret instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns UserWorkloadsSecret instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsSecret): google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret;
+
+                            /**
+                             * Encodes the specified UserWorkloadsSecret message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret.verify|verify} messages.
+                             * @param message UserWorkloadsSecret message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsSecret, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified UserWorkloadsSecret message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret.verify|verify} messages.
+                             * @param message UserWorkloadsSecret message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsSecret, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a UserWorkloadsSecret message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns UserWorkloadsSecret
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret;
+
+                            /**
+                             * Decodes a UserWorkloadsSecret message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns UserWorkloadsSecret
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret;
+
+                            /**
+                             * Verifies a UserWorkloadsSecret message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a UserWorkloadsSecret message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns UserWorkloadsSecret
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret;
+
+                            /**
+                             * Creates a plain object from a UserWorkloadsSecret message. Also converts values to other types if specified.
+                             * @param message UserWorkloadsSecret
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsSecret, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this UserWorkloadsSecret to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for UserWorkloadsSecret
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a ListUserWorkloadsSecretsResponse. */
+                        interface IListUserWorkloadsSecretsResponse {
+
+                            /** ListUserWorkloadsSecretsResponse userWorkloadsSecrets */
+                            userWorkloadsSecrets?: (google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsSecret[]|null);
+
+                            /** ListUserWorkloadsSecretsResponse nextPageToken */
+                            nextPageToken?: (string|null);
+                        }
+
+                        /** Represents a ListUserWorkloadsSecretsResponse. */
+                        class ListUserWorkloadsSecretsResponse implements IListUserWorkloadsSecretsResponse {
+
+                            /**
+                             * Constructs a new ListUserWorkloadsSecretsResponse.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.IListUserWorkloadsSecretsResponse);
+
+                            /** ListUserWorkloadsSecretsResponse userWorkloadsSecrets. */
+                            public userWorkloadsSecrets: google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsSecret[];
+
+                            /** ListUserWorkloadsSecretsResponse nextPageToken. */
+                            public nextPageToken: string;
+
+                            /**
+                             * Creates a new ListUserWorkloadsSecretsResponse instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ListUserWorkloadsSecretsResponse instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.IListUserWorkloadsSecretsResponse): google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsResponse;
+
+                            /**
+                             * Encodes the specified ListUserWorkloadsSecretsResponse message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsResponse.verify|verify} messages.
+                             * @param message ListUserWorkloadsSecretsResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.IListUserWorkloadsSecretsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ListUserWorkloadsSecretsResponse message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsResponse.verify|verify} messages.
+                             * @param message ListUserWorkloadsSecretsResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.IListUserWorkloadsSecretsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ListUserWorkloadsSecretsResponse message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ListUserWorkloadsSecretsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsResponse;
+
+                            /**
+                             * Decodes a ListUserWorkloadsSecretsResponse message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ListUserWorkloadsSecretsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsResponse;
+
+                            /**
+                             * Verifies a ListUserWorkloadsSecretsResponse message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ListUserWorkloadsSecretsResponse message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ListUserWorkloadsSecretsResponse
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsResponse;
+
+                            /**
+                             * Creates a plain object from a ListUserWorkloadsSecretsResponse message. Also converts values to other types if specified.
+                             * @param message ListUserWorkloadsSecretsResponse
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsSecretsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ListUserWorkloadsSecretsResponse to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ListUserWorkloadsSecretsResponse
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a UserWorkloadsConfigMap. */
+                        interface IUserWorkloadsConfigMap {
+
+                            /** UserWorkloadsConfigMap name */
+                            name?: (string|null);
+
+                            /** UserWorkloadsConfigMap data */
+                            data?: ({ [k: string]: string }|null);
+                        }
+
+                        /** Represents a UserWorkloadsConfigMap. */
+                        class UserWorkloadsConfigMap implements IUserWorkloadsConfigMap {
+
+                            /**
+                             * Constructs a new UserWorkloadsConfigMap.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsConfigMap);
+
+                            /** UserWorkloadsConfigMap name. */
+                            public name: string;
+
+                            /** UserWorkloadsConfigMap data. */
+                            public data: { [k: string]: string };
+
+                            /**
+                             * Creates a new UserWorkloadsConfigMap instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns UserWorkloadsConfigMap instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsConfigMap): google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap;
+
+                            /**
+                             * Encodes the specified UserWorkloadsConfigMap message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap.verify|verify} messages.
+                             * @param message UserWorkloadsConfigMap message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsConfigMap, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified UserWorkloadsConfigMap message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap.verify|verify} messages.
+                             * @param message UserWorkloadsConfigMap message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsConfigMap, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a UserWorkloadsConfigMap message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns UserWorkloadsConfigMap
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap;
+
+                            /**
+                             * Decodes a UserWorkloadsConfigMap message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns UserWorkloadsConfigMap
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap;
+
+                            /**
+                             * Verifies a UserWorkloadsConfigMap message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a UserWorkloadsConfigMap message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns UserWorkloadsConfigMap
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap;
+
+                            /**
+                             * Creates a plain object from a UserWorkloadsConfigMap message. Also converts values to other types if specified.
+                             * @param message UserWorkloadsConfigMap
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.UserWorkloadsConfigMap, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this UserWorkloadsConfigMap to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for UserWorkloadsConfigMap
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a ListUserWorkloadsConfigMapsResponse. */
+                        interface IListUserWorkloadsConfigMapsResponse {
+
+                            /** ListUserWorkloadsConfigMapsResponse userWorkloadsConfigMaps */
+                            userWorkloadsConfigMaps?: (google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsConfigMap[]|null);
+
+                            /** ListUserWorkloadsConfigMapsResponse nextPageToken */
+                            nextPageToken?: (string|null);
+                        }
+
+                        /** Represents a ListUserWorkloadsConfigMapsResponse. */
+                        class ListUserWorkloadsConfigMapsResponse implements IListUserWorkloadsConfigMapsResponse {
+
+                            /**
+                             * Constructs a new ListUserWorkloadsConfigMapsResponse.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.IListUserWorkloadsConfigMapsResponse);
+
+                            /** ListUserWorkloadsConfigMapsResponse userWorkloadsConfigMaps. */
+                            public userWorkloadsConfigMaps: google.cloud.orchestration.airflow.service.v1beta1.IUserWorkloadsConfigMap[];
+
+                            /** ListUserWorkloadsConfigMapsResponse nextPageToken. */
+                            public nextPageToken: string;
+
+                            /**
+                             * Creates a new ListUserWorkloadsConfigMapsResponse instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ListUserWorkloadsConfigMapsResponse instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.IListUserWorkloadsConfigMapsResponse): google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsResponse;
+
+                            /**
+                             * Encodes the specified ListUserWorkloadsConfigMapsResponse message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsResponse.verify|verify} messages.
+                             * @param message ListUserWorkloadsConfigMapsResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.IListUserWorkloadsConfigMapsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ListUserWorkloadsConfigMapsResponse message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsResponse.verify|verify} messages.
+                             * @param message ListUserWorkloadsConfigMapsResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.IListUserWorkloadsConfigMapsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ListUserWorkloadsConfigMapsResponse message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ListUserWorkloadsConfigMapsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsResponse;
+
+                            /**
+                             * Decodes a ListUserWorkloadsConfigMapsResponse message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ListUserWorkloadsConfigMapsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsResponse;
+
+                            /**
+                             * Verifies a ListUserWorkloadsConfigMapsResponse message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ListUserWorkloadsConfigMapsResponse message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ListUserWorkloadsConfigMapsResponse
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsResponse;
+
+                            /**
+                             * Creates a plain object from a ListUserWorkloadsConfigMapsResponse message. Also converts values to other types if specified.
+                             * @param message ListUserWorkloadsConfigMapsResponse
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.ListUserWorkloadsConfigMapsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ListUserWorkloadsConfigMapsResponse to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ListUserWorkloadsConfigMapsResponse
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a ListWorkloadsRequest. */
+                        interface IListWorkloadsRequest {
+
+                            /** ListWorkloadsRequest parent */
+                            parent?: (string|null);
+
+                            /** ListWorkloadsRequest pageSize */
+                            pageSize?: (number|null);
+
+                            /** ListWorkloadsRequest pageToken */
+                            pageToken?: (string|null);
+
+                            /** ListWorkloadsRequest filter */
+                            filter?: (string|null);
+                        }
+
+                        /** Represents a ListWorkloadsRequest. */
+                        class ListWorkloadsRequest implements IListWorkloadsRequest {
+
+                            /**
+                             * Constructs a new ListWorkloadsRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.IListWorkloadsRequest);
+
+                            /** ListWorkloadsRequest parent. */
+                            public parent: string;
+
+                            /** ListWorkloadsRequest pageSize. */
+                            public pageSize: number;
+
+                            /** ListWorkloadsRequest pageToken. */
+                            public pageToken: string;
+
+                            /** ListWorkloadsRequest filter. */
+                            public filter: string;
+
+                            /**
+                             * Creates a new ListWorkloadsRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ListWorkloadsRequest instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.IListWorkloadsRequest): google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest;
+
+                            /**
+                             * Encodes the specified ListWorkloadsRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest.verify|verify} messages.
+                             * @param message ListWorkloadsRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.IListWorkloadsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ListWorkloadsRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest.verify|verify} messages.
+                             * @param message ListWorkloadsRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.IListWorkloadsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ListWorkloadsRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ListWorkloadsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest;
+
+                            /**
+                             * Decodes a ListWorkloadsRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ListWorkloadsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest;
+
+                            /**
+                             * Verifies a ListWorkloadsRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ListWorkloadsRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ListWorkloadsRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest;
+
+                            /**
+                             * Creates a plain object from a ListWorkloadsRequest message. Also converts values to other types if specified.
+                             * @param message ListWorkloadsRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ListWorkloadsRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ListWorkloadsRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a ListWorkloadsResponse. */
+                        interface IListWorkloadsResponse {
+
+                            /** ListWorkloadsResponse workloads */
+                            workloads?: (google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.IComposerWorkload[]|null);
+
+                            /** ListWorkloadsResponse nextPageToken */
+                            nextPageToken?: (string|null);
+                        }
+
+                        /** Represents a ListWorkloadsResponse. */
+                        class ListWorkloadsResponse implements IListWorkloadsResponse {
+
+                            /**
+                             * Constructs a new ListWorkloadsResponse.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.IListWorkloadsResponse);
+
+                            /** ListWorkloadsResponse workloads. */
+                            public workloads: google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.IComposerWorkload[];
+
+                            /** ListWorkloadsResponse nextPageToken. */
+                            public nextPageToken: string;
+
+                            /**
+                             * Creates a new ListWorkloadsResponse instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ListWorkloadsResponse instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.IListWorkloadsResponse): google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse;
+
+                            /**
+                             * Encodes the specified ListWorkloadsResponse message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.verify|verify} messages.
+                             * @param message ListWorkloadsResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.IListWorkloadsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ListWorkloadsResponse message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.verify|verify} messages.
+                             * @param message ListWorkloadsResponse message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.IListWorkloadsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ListWorkloadsResponse message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ListWorkloadsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse;
+
+                            /**
+                             * Decodes a ListWorkloadsResponse message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ListWorkloadsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse;
+
+                            /**
+                             * Verifies a ListWorkloadsResponse message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ListWorkloadsResponse message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ListWorkloadsResponse
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse;
+
+                            /**
+                             * Creates a plain object from a ListWorkloadsResponse message. Also converts values to other types if specified.
+                             * @param message ListWorkloadsResponse
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ListWorkloadsResponse to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ListWorkloadsResponse
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace ListWorkloadsResponse {
+
+                            /** Properties of a ComposerWorkload. */
+                            interface IComposerWorkload {
+
+                                /** ComposerWorkload name */
+                                name?: (string|null);
+
+                                /** ComposerWorkload type */
+                                type?: (google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkloadType|keyof typeof google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkloadType|null);
+
+                                /** ComposerWorkload status */
+                                status?: (google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.IComposerWorkloadStatus|null);
+                            }
+
+                            /** Represents a ComposerWorkload. */
+                            class ComposerWorkload implements IComposerWorkload {
+
+                                /**
+                                 * Constructs a new ComposerWorkload.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.IComposerWorkload);
+
+                                /** ComposerWorkload name. */
+                                public name: string;
+
+                                /** ComposerWorkload type. */
+                                public type: (google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkloadType|keyof typeof google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkloadType);
+
+                                /** ComposerWorkload status. */
+                                public status?: (google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.IComposerWorkloadStatus|null);
+
+                                /**
+                                 * Creates a new ComposerWorkload instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns ComposerWorkload instance
+                                 */
+                                public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.IComposerWorkload): google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload;
+
+                                /**
+                                 * Encodes the specified ComposerWorkload message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload.verify|verify} messages.
+                                 * @param message ComposerWorkload message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.IComposerWorkload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified ComposerWorkload message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload.verify|verify} messages.
+                                 * @param message ComposerWorkload message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.IComposerWorkload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a ComposerWorkload message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns ComposerWorkload
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload;
+
+                                /**
+                                 * Decodes a ComposerWorkload message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns ComposerWorkload
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload;
+
+                                /**
+                                 * Verifies a ComposerWorkload message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a ComposerWorkload message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns ComposerWorkload
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload;
+
+                                /**
+                                 * Creates a plain object from a ComposerWorkload message. Also converts values to other types if specified.
+                                 * @param message ComposerWorkload
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkload, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this ComposerWorkload to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for ComposerWorkload
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** ComposerWorkloadType enum. */
+                            enum ComposerWorkloadType {
+                                COMPOSER_WORKLOAD_TYPE_UNSPECIFIED = 0,
+                                CELERY_WORKER = 1,
+                                KUBERNETES_WORKER = 2,
+                                KUBERNETES_OPERATOR_POD = 3,
+                                SCHEDULER = 4,
+                                DAG_PROCESSOR = 5,
+                                TRIGGERER = 6,
+                                WEB_SERVER = 7,
+                                REDIS = 8
+                            }
+
+                            /** Properties of a ComposerWorkloadStatus. */
+                            interface IComposerWorkloadStatus {
+
+                                /** ComposerWorkloadStatus state */
+                                state?: (google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkloadState|keyof typeof google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkloadState|null);
+
+                                /** ComposerWorkloadStatus statusMessage */
+                                statusMessage?: (string|null);
+
+                                /** ComposerWorkloadStatus detailedStatusMessage */
+                                detailedStatusMessage?: (string|null);
+                            }
+
+                            /** Represents a ComposerWorkloadStatus. */
+                            class ComposerWorkloadStatus implements IComposerWorkloadStatus {
+
+                                /**
+                                 * Constructs a new ComposerWorkloadStatus.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.IComposerWorkloadStatus);
+
+                                /** ComposerWorkloadStatus state. */
+                                public state: (google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkloadState|keyof typeof google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkloadState);
+
+                                /** ComposerWorkloadStatus statusMessage. */
+                                public statusMessage: string;
+
+                                /** ComposerWorkloadStatus detailedStatusMessage. */
+                                public detailedStatusMessage: string;
+
+                                /**
+                                 * Creates a new ComposerWorkloadStatus instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns ComposerWorkloadStatus instance
+                                 */
+                                public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.IComposerWorkloadStatus): google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkloadStatus;
+
+                                /**
+                                 * Encodes the specified ComposerWorkloadStatus message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkloadStatus.verify|verify} messages.
+                                 * @param message ComposerWorkloadStatus message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.IComposerWorkloadStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified ComposerWorkloadStatus message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkloadStatus.verify|verify} messages.
+                                 * @param message ComposerWorkloadStatus message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.IComposerWorkloadStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a ComposerWorkloadStatus message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns ComposerWorkloadStatus
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkloadStatus;
+
+                                /**
+                                 * Decodes a ComposerWorkloadStatus message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns ComposerWorkloadStatus
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkloadStatus;
+
+                                /**
+                                 * Verifies a ComposerWorkloadStatus message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a ComposerWorkloadStatus message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns ComposerWorkloadStatus
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkloadStatus;
+
+                                /**
+                                 * Creates a plain object from a ComposerWorkloadStatus message. Also converts values to other types if specified.
+                                 * @param message ComposerWorkloadStatus
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.ListWorkloadsResponse.ComposerWorkloadStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this ComposerWorkloadStatus to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for ComposerWorkloadStatus
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** ComposerWorkloadState enum. */
+                            enum ComposerWorkloadState {
+                                COMPOSER_WORKLOAD_STATE_UNSPECIFIED = 0,
+                                PENDING = 1,
+                                OK = 2,
+                                WARNING = 3,
+                                ERROR = 4,
+                                SUCCEEDED = 5,
+                                FAILED = 6
+                            }
+                        }
+
                         /** Properties of a SaveSnapshotRequest. */
                         interface ISaveSnapshotRequest {
 
@@ -8715,6 +13637,9 @@ export namespace google {
                             /** EnvironmentConfig recoveryConfig */
                             recoveryConfig?: (google.cloud.orchestration.airflow.service.v1beta1.IRecoveryConfig|null);
 
+                            /** EnvironmentConfig dataRetentionConfig */
+                            dataRetentionConfig?: (google.cloud.orchestration.airflow.service.v1beta1.IDataRetentionConfig|null);
+
                             /** EnvironmentConfig resilienceMode */
                             resilienceMode?: (google.cloud.orchestration.airflow.service.v1beta1.EnvironmentConfig.ResilienceMode|keyof typeof google.cloud.orchestration.airflow.service.v1beta1.EnvironmentConfig.ResilienceMode|null);
                         }
@@ -8778,6 +13703,9 @@ export namespace google {
 
                             /** EnvironmentConfig recoveryConfig. */
                             public recoveryConfig?: (google.cloud.orchestration.airflow.service.v1beta1.IRecoveryConfig|null);
+
+                            /** EnvironmentConfig dataRetentionConfig. */
+                            public dataRetentionConfig?: (google.cloud.orchestration.airflow.service.v1beta1.IDataRetentionConfig|null);
 
                             /** EnvironmentConfig resilienceMode. */
                             public resilienceMode: (google.cloud.orchestration.airflow.service.v1beta1.EnvironmentConfig.ResilienceMode|keyof typeof google.cloud.orchestration.airflow.service.v1beta1.EnvironmentConfig.ResilienceMode);
@@ -9103,6 +14031,9 @@ export namespace google {
 
                             /** SoftwareConfig cloudDataLineageIntegration */
                             cloudDataLineageIntegration?: (google.cloud.orchestration.airflow.service.v1beta1.ICloudDataLineageIntegration|null);
+
+                            /** SoftwareConfig webServerPluginsMode */
+                            webServerPluginsMode?: (google.cloud.orchestration.airflow.service.v1beta1.SoftwareConfig.WebServerPluginsMode|keyof typeof google.cloud.orchestration.airflow.service.v1beta1.SoftwareConfig.WebServerPluginsMode|null);
                         }
 
                         /** Represents a SoftwareConfig. */
@@ -9134,6 +14065,9 @@ export namespace google {
 
                             /** SoftwareConfig cloudDataLineageIntegration. */
                             public cloudDataLineageIntegration?: (google.cloud.orchestration.airflow.service.v1beta1.ICloudDataLineageIntegration|null);
+
+                            /** SoftwareConfig webServerPluginsMode. */
+                            public webServerPluginsMode: (google.cloud.orchestration.airflow.service.v1beta1.SoftwareConfig.WebServerPluginsMode|keyof typeof google.cloud.orchestration.airflow.service.v1beta1.SoftwareConfig.WebServerPluginsMode);
 
                             /**
                              * Creates a new SoftwareConfig instance using the specified properties.
@@ -9211,6 +14145,16 @@ export namespace google {
                              * @returns The default type url
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace SoftwareConfig {
+
+                            /** WebServerPluginsMode enum. */
+                            enum WebServerPluginsMode {
+                                WEB_SERVER_PLUGINS_MODE_UNSPECIFIED = 0,
+                                PLUGINS_DISABLED = 1,
+                                PLUGINS_ENABLED = 2
+                            }
                         }
 
                         /** Properties of a IPAllocationPolicy. */
@@ -9369,6 +14313,12 @@ export namespace google {
 
                             /** NodeConfig enableIpMasqAgent */
                             enableIpMasqAgent?: (boolean|null);
+
+                            /** NodeConfig composerNetworkAttachment */
+                            composerNetworkAttachment?: (string|null);
+
+                            /** NodeConfig composerInternalIpv4CidrBlock */
+                            composerInternalIpv4CidrBlock?: (string|null);
                         }
 
                         /** Represents a NodeConfig. */
@@ -9412,6 +14362,12 @@ export namespace google {
 
                             /** NodeConfig enableIpMasqAgent. */
                             public enableIpMasqAgent: boolean;
+
+                            /** NodeConfig composerNetworkAttachment. */
+                            public composerNetworkAttachment: string;
+
+                            /** NodeConfig composerInternalIpv4CidrBlock. */
+                            public composerInternalIpv4CidrBlock: string;
 
                             /**
                              * Creates a new NodeConfig instance using the specified properties.
@@ -9713,6 +14669,9 @@ export namespace google {
                             /** PrivateEnvironmentConfig enablePrivateEnvironment */
                             enablePrivateEnvironment?: (boolean|null);
 
+                            /** PrivateEnvironmentConfig enablePrivateBuildsOnly */
+                            enablePrivateBuildsOnly?: (boolean|null);
+
                             /** PrivateEnvironmentConfig privateClusterConfig */
                             privateClusterConfig?: (google.cloud.orchestration.airflow.service.v1beta1.IPrivateClusterConfig|null);
 
@@ -9752,6 +14711,9 @@ export namespace google {
 
                             /** PrivateEnvironmentConfig enablePrivateEnvironment. */
                             public enablePrivateEnvironment: boolean;
+
+                            /** PrivateEnvironmentConfig enablePrivateBuildsOnly. */
+                            public enablePrivateBuildsOnly: boolean;
 
                             /** PrivateEnvironmentConfig privateClusterConfig. */
                             public privateClusterConfig?: (google.cloud.orchestration.airflow.service.v1beta1.IPrivateClusterConfig|null);
@@ -9863,6 +14825,9 @@ export namespace google {
 
                             /** DatabaseConfig machineType */
                             machineType?: (string|null);
+
+                            /** DatabaseConfig zone */
+                            zone?: (string|null);
                         }
 
                         /** Represents a DatabaseConfig. */
@@ -9876,6 +14841,9 @@ export namespace google {
 
                             /** DatabaseConfig machineType. */
                             public machineType: string;
+
+                            /** DatabaseConfig zone. */
+                            public zone: string;
 
                             /**
                              * Creates a new DatabaseConfig instance using the specified properties.
@@ -10272,6 +15240,9 @@ export namespace google {
 
                             /** WorkloadsConfig triggerer */
                             triggerer?: (google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.ITriggererResource|null);
+
+                            /** WorkloadsConfig dagProcessor */
+                            dagProcessor?: (google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.IDagProcessorResource|null);
                         }
 
                         /** Represents a WorkloadsConfig. */
@@ -10294,6 +15265,9 @@ export namespace google {
 
                             /** WorkloadsConfig triggerer. */
                             public triggerer?: (google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.ITriggererResource|null);
+
+                            /** WorkloadsConfig dagProcessor. */
+                            public dagProcessor?: (google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.IDagProcessorResource|null);
 
                             /**
                              * Creates a new WorkloadsConfig instance using the specified properties.
@@ -10828,6 +15802,422 @@ export namespace google {
                                  */
                                 public static getTypeUrl(typeUrlPrefix?: string): string;
                             }
+
+                            /** Properties of a DagProcessorResource. */
+                            interface IDagProcessorResource {
+
+                                /** DagProcessorResource cpu */
+                                cpu?: (number|null);
+
+                                /** DagProcessorResource memoryGb */
+                                memoryGb?: (number|null);
+
+                                /** DagProcessorResource storageGb */
+                                storageGb?: (number|null);
+
+                                /** DagProcessorResource count */
+                                count?: (number|null);
+                            }
+
+                            /** Represents a DagProcessorResource. */
+                            class DagProcessorResource implements IDagProcessorResource {
+
+                                /**
+                                 * Constructs a new DagProcessorResource.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.IDagProcessorResource);
+
+                                /** DagProcessorResource cpu. */
+                                public cpu: number;
+
+                                /** DagProcessorResource memoryGb. */
+                                public memoryGb: number;
+
+                                /** DagProcessorResource storageGb. */
+                                public storageGb: number;
+
+                                /** DagProcessorResource count. */
+                                public count: number;
+
+                                /**
+                                 * Creates a new DagProcessorResource instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns DagProcessorResource instance
+                                 */
+                                public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.IDagProcessorResource): google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.DagProcessorResource;
+
+                                /**
+                                 * Encodes the specified DagProcessorResource message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.DagProcessorResource.verify|verify} messages.
+                                 * @param message DagProcessorResource message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.IDagProcessorResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified DagProcessorResource message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.DagProcessorResource.verify|verify} messages.
+                                 * @param message DagProcessorResource message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.IDagProcessorResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a DagProcessorResource message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns DagProcessorResource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.DagProcessorResource;
+
+                                /**
+                                 * Decodes a DagProcessorResource message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns DagProcessorResource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.DagProcessorResource;
+
+                                /**
+                                 * Verifies a DagProcessorResource message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a DagProcessorResource message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns DagProcessorResource
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.DagProcessorResource;
+
+                                /**
+                                 * Creates a plain object from a DagProcessorResource message. Also converts values to other types if specified.
+                                 * @param message DagProcessorResource
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.WorkloadsConfig.DagProcessorResource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this DagProcessorResource to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for DagProcessorResource
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+
+                        /** Properties of a DataRetentionConfig. */
+                        interface IDataRetentionConfig {
+
+                            /** DataRetentionConfig taskLogsRetentionConfig */
+                            taskLogsRetentionConfig?: (google.cloud.orchestration.airflow.service.v1beta1.ITaskLogsRetentionConfig|null);
+                        }
+
+                        /** Represents a DataRetentionConfig. */
+                        class DataRetentionConfig implements IDataRetentionConfig {
+
+                            /**
+                             * Constructs a new DataRetentionConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.IDataRetentionConfig);
+
+                            /** DataRetentionConfig taskLogsRetentionConfig. */
+                            public taskLogsRetentionConfig?: (google.cloud.orchestration.airflow.service.v1beta1.ITaskLogsRetentionConfig|null);
+
+                            /**
+                             * Creates a new DataRetentionConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DataRetentionConfig instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.IDataRetentionConfig): google.cloud.orchestration.airflow.service.v1beta1.DataRetentionConfig;
+
+                            /**
+                             * Encodes the specified DataRetentionConfig message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.DataRetentionConfig.verify|verify} messages.
+                             * @param message DataRetentionConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.IDataRetentionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DataRetentionConfig message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.DataRetentionConfig.verify|verify} messages.
+                             * @param message DataRetentionConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.IDataRetentionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DataRetentionConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DataRetentionConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.DataRetentionConfig;
+
+                            /**
+                             * Decodes a DataRetentionConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DataRetentionConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.DataRetentionConfig;
+
+                            /**
+                             * Verifies a DataRetentionConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DataRetentionConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DataRetentionConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.DataRetentionConfig;
+
+                            /**
+                             * Creates a plain object from a DataRetentionConfig message. Also converts values to other types if specified.
+                             * @param message DataRetentionConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.DataRetentionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DataRetentionConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DataRetentionConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a TaskLogsRetentionConfig. */
+                        interface ITaskLogsRetentionConfig {
+
+                            /** TaskLogsRetentionConfig storageMode */
+                            storageMode?: (google.cloud.orchestration.airflow.service.v1beta1.TaskLogsRetentionConfig.TaskLogsStorageMode|keyof typeof google.cloud.orchestration.airflow.service.v1beta1.TaskLogsRetentionConfig.TaskLogsStorageMode|null);
+                        }
+
+                        /** Represents a TaskLogsRetentionConfig. */
+                        class TaskLogsRetentionConfig implements ITaskLogsRetentionConfig {
+
+                            /**
+                             * Constructs a new TaskLogsRetentionConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.ITaskLogsRetentionConfig);
+
+                            /** TaskLogsRetentionConfig storageMode. */
+                            public storageMode: (google.cloud.orchestration.airflow.service.v1beta1.TaskLogsRetentionConfig.TaskLogsStorageMode|keyof typeof google.cloud.orchestration.airflow.service.v1beta1.TaskLogsRetentionConfig.TaskLogsStorageMode);
+
+                            /**
+                             * Creates a new TaskLogsRetentionConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns TaskLogsRetentionConfig instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.ITaskLogsRetentionConfig): google.cloud.orchestration.airflow.service.v1beta1.TaskLogsRetentionConfig;
+
+                            /**
+                             * Encodes the specified TaskLogsRetentionConfig message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.TaskLogsRetentionConfig.verify|verify} messages.
+                             * @param message TaskLogsRetentionConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.ITaskLogsRetentionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified TaskLogsRetentionConfig message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.TaskLogsRetentionConfig.verify|verify} messages.
+                             * @param message TaskLogsRetentionConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.ITaskLogsRetentionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a TaskLogsRetentionConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns TaskLogsRetentionConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.TaskLogsRetentionConfig;
+
+                            /**
+                             * Decodes a TaskLogsRetentionConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns TaskLogsRetentionConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.TaskLogsRetentionConfig;
+
+                            /**
+                             * Verifies a TaskLogsRetentionConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a TaskLogsRetentionConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns TaskLogsRetentionConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.TaskLogsRetentionConfig;
+
+                            /**
+                             * Creates a plain object from a TaskLogsRetentionConfig message. Also converts values to other types if specified.
+                             * @param message TaskLogsRetentionConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.TaskLogsRetentionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this TaskLogsRetentionConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for TaskLogsRetentionConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace TaskLogsRetentionConfig {
+
+                            /** TaskLogsStorageMode enum. */
+                            enum TaskLogsStorageMode {
+                                TASK_LOGS_STORAGE_MODE_UNSPECIFIED = 0,
+                                CLOUD_LOGGING_AND_CLOUD_STORAGE = 1,
+                                CLOUD_LOGGING_ONLY = 2
+                            }
+                        }
+
+                        /** Properties of a StorageConfig. */
+                        interface IStorageConfig {
+
+                            /** StorageConfig bucket */
+                            bucket?: (string|null);
+                        }
+
+                        /** Represents a StorageConfig. */
+                        class StorageConfig implements IStorageConfig {
+
+                            /**
+                             * Constructs a new StorageConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.IStorageConfig);
+
+                            /** StorageConfig bucket. */
+                            public bucket: string;
+
+                            /**
+                             * Creates a new StorageConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns StorageConfig instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.IStorageConfig): google.cloud.orchestration.airflow.service.v1beta1.StorageConfig;
+
+                            /**
+                             * Encodes the specified StorageConfig message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.StorageConfig.verify|verify} messages.
+                             * @param message StorageConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.IStorageConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified StorageConfig message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.StorageConfig.verify|verify} messages.
+                             * @param message StorageConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.IStorageConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a StorageConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns StorageConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.StorageConfig;
+
+                            /**
+                             * Decodes a StorageConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns StorageConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.StorageConfig;
+
+                            /**
+                             * Verifies a StorageConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a StorageConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns StorageConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.StorageConfig;
+
+                            /**
+                             * Creates a plain object from a StorageConfig message. Also converts values to other types if specified.
+                             * @param message StorageConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.StorageConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this StorageConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for StorageConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
                         /** Properties of a RecoveryConfig. */
@@ -11371,6 +16761,12 @@ export namespace google {
 
                             /** Environment labels */
                             labels?: ({ [k: string]: string }|null);
+
+                            /** Environment satisfiesPzs */
+                            satisfiesPzs?: (boolean|null);
+
+                            /** Environment storageConfig */
+                            storageConfig?: (google.cloud.orchestration.airflow.service.v1beta1.IStorageConfig|null);
                         }
 
                         /** Represents an Environment. */
@@ -11402,6 +16798,12 @@ export namespace google {
 
                             /** Environment labels. */
                             public labels: { [k: string]: string };
+
+                            /** Environment satisfiesPzs. */
+                            public satisfiesPzs: boolean;
+
+                            /** Environment storageConfig. */
+                            public storageConfig?: (google.cloud.orchestration.airflow.service.v1beta1.IStorageConfig|null);
 
                             /**
                              * Creates a new Environment instance using the specified properties.
@@ -12926,6 +18328,9 @@ export namespace google {
 
             /** Publishing librarySettings */
             librarySettings?: (google.api.IClientLibrarySettings[]|null);
+
+            /** Publishing protoReferenceDocumentationUri */
+            protoReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -12963,6 +18368,9 @@ export namespace google {
 
             /** Publishing librarySettings. */
             public librarySettings: google.api.IClientLibrarySettings[];
+
+            /** Publishing protoReferenceDocumentationUri. */
+            public protoReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -13544,6 +18952,21 @@ export namespace google {
 
             /** DotnetSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** DotnetSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
+
+            /** DotnetSettings renamedResources */
+            renamedResources?: ({ [k: string]: string }|null);
+
+            /** DotnetSettings ignoredResources */
+            ignoredResources?: (string[]|null);
+
+            /** DotnetSettings forcedNamespaceAliases */
+            forcedNamespaceAliases?: (string[]|null);
+
+            /** DotnetSettings handwrittenSignatures */
+            handwrittenSignatures?: (string[]|null);
         }
 
         /** Represents a DotnetSettings. */
@@ -13557,6 +18980,21 @@ export namespace google {
 
             /** DotnetSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** DotnetSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
+
+            /** DotnetSettings renamedResources. */
+            public renamedResources: { [k: string]: string };
+
+            /** DotnetSettings ignoredResources. */
+            public ignoredResources: string[];
+
+            /** DotnetSettings forcedNamespaceAliases. */
+            public forcedNamespaceAliases: string[];
+
+            /** DotnetSettings handwrittenSignatures. */
+            public handwrittenSignatures: string[];
 
             /**
              * Creates a new DotnetSettings instance using the specified properties.
@@ -13838,6 +19276,9 @@ export namespace google {
 
             /** MethodSettings longRunning */
             longRunning?: (google.api.MethodSettings.ILongRunning|null);
+
+            /** MethodSettings autoPopulatedFields */
+            autoPopulatedFields?: (string[]|null);
         }
 
         /** Represents a MethodSettings. */
@@ -13854,6 +19295,9 @@ export namespace google {
 
             /** MethodSettings longRunning. */
             public longRunning?: (google.api.MethodSettings.ILongRunning|null);
+
+            /** MethodSettings autoPopulatedFields. */
+            public autoPopulatedFields: string[];
 
             /**
              * Creates a new MethodSettings instance using the specified properties.
@@ -14057,7 +19501,10 @@ export namespace google {
             CLOUD = 1,
             ADS = 2,
             PHOTOS = 3,
-            STREET_VIEW = 4
+            STREET_VIEW = 4,
+            SHOPPING = 5,
+            GEO = 6,
+            GENERATIVE_AI = 7
         }
 
         /** ClientLibraryDestination enum. */
@@ -14088,7 +19535,8 @@ export namespace google {
             INPUT_ONLY = 4,
             IMMUTABLE = 5,
             UNORDERED_LIST = 6,
-            NON_EMPTY_DEFAULT = 7
+            NON_EMPTY_DEFAULT = 7,
+            IDENTIFIER = 8
         }
 
         /** Properties of a ResourceDescriptor. */
@@ -14444,6 +19892,21 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
+        /** Edition enum. */
+        enum Edition {
+            EDITION_UNKNOWN = 0,
+            EDITION_PROTO2 = 998,
+            EDITION_PROTO3 = 999,
+            EDITION_2023 = 1000,
+            EDITION_2024 = 1001,
+            EDITION_1_TEST_ONLY = 1,
+            EDITION_2_TEST_ONLY = 2,
+            EDITION_99997_TEST_ONLY = 99997,
+            EDITION_99998_TEST_ONLY = 99998,
+            EDITION_99999_TEST_ONLY = 99999,
+            EDITION_MAX = 2147483647
+        }
+
         /** Properties of a FileDescriptorProto. */
         interface IFileDescriptorProto {
 
@@ -14484,7 +19947,7 @@ export namespace google {
             syntax?: (string|null);
 
             /** FileDescriptorProto edition */
-            edition?: (string|null);
+            edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
         }
 
         /** Represents a FileDescriptorProto. */
@@ -14533,7 +19996,7 @@ export namespace google {
             public syntax: string;
 
             /** FileDescriptorProto edition. */
-            public edition: string;
+            public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
             /**
              * Creates a new FileDescriptorProto instance using the specified properties.
@@ -14984,6 +20447,15 @@ export namespace google {
 
             /** ExtensionRangeOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** ExtensionRangeOptions declaration */
+            declaration?: (google.protobuf.ExtensionRangeOptions.IDeclaration[]|null);
+
+            /** ExtensionRangeOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
+            /** ExtensionRangeOptions verification */
+            verification?: (google.protobuf.ExtensionRangeOptions.VerificationState|keyof typeof google.protobuf.ExtensionRangeOptions.VerificationState|null);
         }
 
         /** Represents an ExtensionRangeOptions. */
@@ -14997,6 +20469,15 @@ export namespace google {
 
             /** ExtensionRangeOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
+
+            /** ExtensionRangeOptions declaration. */
+            public declaration: google.protobuf.ExtensionRangeOptions.IDeclaration[];
+
+            /** ExtensionRangeOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
+
+            /** ExtensionRangeOptions verification. */
+            public verification: (google.protobuf.ExtensionRangeOptions.VerificationState|keyof typeof google.protobuf.ExtensionRangeOptions.VerificationState);
 
             /**
              * Creates a new ExtensionRangeOptions instance using the specified properties.
@@ -15074,6 +20555,136 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace ExtensionRangeOptions {
+
+            /** Properties of a Declaration. */
+            interface IDeclaration {
+
+                /** Declaration number */
+                number?: (number|null);
+
+                /** Declaration fullName */
+                fullName?: (string|null);
+
+                /** Declaration type */
+                type?: (string|null);
+
+                /** Declaration reserved */
+                reserved?: (boolean|null);
+
+                /** Declaration repeated */
+                repeated?: (boolean|null);
+            }
+
+            /** Represents a Declaration. */
+            class Declaration implements IDeclaration {
+
+                /**
+                 * Constructs a new Declaration.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.ExtensionRangeOptions.IDeclaration);
+
+                /** Declaration number. */
+                public number: number;
+
+                /** Declaration fullName. */
+                public fullName: string;
+
+                /** Declaration type. */
+                public type: string;
+
+                /** Declaration reserved. */
+                public reserved: boolean;
+
+                /** Declaration repeated. */
+                public repeated: boolean;
+
+                /**
+                 * Creates a new Declaration instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Declaration instance
+                 */
+                public static create(properties?: google.protobuf.ExtensionRangeOptions.IDeclaration): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Encodes the specified Declaration message. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
+                 * @param message Declaration message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.ExtensionRangeOptions.IDeclaration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Declaration message, length delimited. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
+                 * @param message Declaration message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.ExtensionRangeOptions.IDeclaration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Declaration message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Declaration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Decodes a Declaration message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Declaration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Verifies a Declaration message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Declaration message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Declaration
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Creates a plain object from a Declaration message. Also converts values to other types if specified.
+                 * @param message Declaration
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.ExtensionRangeOptions.Declaration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Declaration to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Declaration
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** VerificationState enum. */
+            enum VerificationState {
+                DECLARATION = 0,
+                UNVERIFIED = 1
+            }
         }
 
         /** Properties of a FieldDescriptorProto. */
@@ -15260,8 +20871,8 @@ export namespace google {
             /** Label enum. */
             enum Label {
                 LABEL_OPTIONAL = 1,
-                LABEL_REQUIRED = 2,
-                LABEL_REPEATED = 3
+                LABEL_REPEATED = 3,
+                LABEL_REQUIRED = 2
             }
         }
 
@@ -15973,9 +21584,6 @@ export namespace google {
             /** FileOptions pyGenericServices */
             pyGenericServices?: (boolean|null);
 
-            /** FileOptions phpGenericServices */
-            phpGenericServices?: (boolean|null);
-
             /** FileOptions deprecated */
             deprecated?: (boolean|null);
 
@@ -16002,6 +21610,9 @@ export namespace google {
 
             /** FileOptions rubyPackage */
             rubyPackage?: (string|null);
+
+            /** FileOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
 
             /** FileOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -16049,9 +21660,6 @@ export namespace google {
             /** FileOptions pyGenericServices. */
             public pyGenericServices: boolean;
 
-            /** FileOptions phpGenericServices. */
-            public phpGenericServices: boolean;
-
             /** FileOptions deprecated. */
             public deprecated: boolean;
 
@@ -16078,6 +21686,9 @@ export namespace google {
 
             /** FileOptions rubyPackage. */
             public rubyPackage: string;
+
+            /** FileOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** FileOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -16188,6 +21799,9 @@ export namespace google {
             /** MessageOptions deprecatedLegacyJsonFieldConflicts */
             deprecatedLegacyJsonFieldConflicts?: (boolean|null);
 
+            /** MessageOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** MessageOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -16218,6 +21832,9 @@ export namespace google {
 
             /** MessageOptions deprecatedLegacyJsonFieldConflicts. */
             public deprecatedLegacyJsonFieldConflicts: boolean;
+
+            /** MessageOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** MessageOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -16330,8 +21947,14 @@ export namespace google {
             /** FieldOptions retention */
             retention?: (google.protobuf.FieldOptions.OptionRetention|keyof typeof google.protobuf.FieldOptions.OptionRetention|null);
 
-            /** FieldOptions target */
-            target?: (google.protobuf.FieldOptions.OptionTargetType|keyof typeof google.protobuf.FieldOptions.OptionTargetType|null);
+            /** FieldOptions targets */
+            targets?: (google.protobuf.FieldOptions.OptionTargetType[]|null);
+
+            /** FieldOptions editionDefaults */
+            editionDefaults?: (google.protobuf.FieldOptions.IEditionDefault[]|null);
+
+            /** FieldOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
 
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -16379,8 +22002,14 @@ export namespace google {
             /** FieldOptions retention. */
             public retention: (google.protobuf.FieldOptions.OptionRetention|keyof typeof google.protobuf.FieldOptions.OptionRetention);
 
-            /** FieldOptions target. */
-            public target: (google.protobuf.FieldOptions.OptionTargetType|keyof typeof google.protobuf.FieldOptions.OptionTargetType);
+            /** FieldOptions targets. */
+            public targets: google.protobuf.FieldOptions.OptionTargetType[];
+
+            /** FieldOptions editionDefaults. */
+            public editionDefaults: google.protobuf.FieldOptions.IEditionDefault[];
+
+            /** FieldOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -16499,10 +22128,116 @@ export namespace google {
                 TARGET_TYPE_SERVICE = 8,
                 TARGET_TYPE_METHOD = 9
             }
+
+            /** Properties of an EditionDefault. */
+            interface IEditionDefault {
+
+                /** EditionDefault edition */
+                edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** EditionDefault value */
+                value?: (string|null);
+            }
+
+            /** Represents an EditionDefault. */
+            class EditionDefault implements IEditionDefault {
+
+                /**
+                 * Constructs a new EditionDefault.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IEditionDefault);
+
+                /** EditionDefault edition. */
+                public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** EditionDefault value. */
+                public value: string;
+
+                /**
+                 * Creates a new EditionDefault instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns EditionDefault instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IEditionDefault): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Encodes the specified EditionDefault message. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
+                 * @param message EditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified EditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
+                 * @param message EditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an EditionDefault message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns EditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Decodes an EditionDefault message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns EditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Verifies an EditionDefault message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an EditionDefault message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns EditionDefault
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Creates a plain object from an EditionDefault message. Also converts values to other types if specified.
+                 * @param message EditionDefault
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.EditionDefault, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this EditionDefault to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of an OneofOptions. */
         interface IOneofOptions {
+
+            /** OneofOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
 
             /** OneofOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -16516,6 +22251,9 @@ export namespace google {
              * @param [properties] Properties to set
              */
             constructor(properties?: google.protobuf.IOneofOptions);
+
+            /** OneofOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** OneofOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -16610,6 +22348,9 @@ export namespace google {
             /** EnumOptions deprecatedLegacyJsonFieldConflicts */
             deprecatedLegacyJsonFieldConflicts?: (boolean|null);
 
+            /** EnumOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** EnumOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -16631,6 +22372,9 @@ export namespace google {
 
             /** EnumOptions deprecatedLegacyJsonFieldConflicts. */
             public deprecatedLegacyJsonFieldConflicts: boolean;
+
+            /** EnumOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** EnumOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -16719,6 +22463,12 @@ export namespace google {
             /** EnumValueOptions deprecated */
             deprecated?: (boolean|null);
 
+            /** EnumValueOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
+            /** EnumValueOptions debugRedact */
+            debugRedact?: (boolean|null);
+
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -16734,6 +22484,12 @@ export namespace google {
 
             /** EnumValueOptions deprecated. */
             public deprecated: boolean;
+
+            /** EnumValueOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
+
+            /** EnumValueOptions debugRedact. */
+            public debugRedact: boolean;
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -16819,6 +22575,9 @@ export namespace google {
         /** Properties of a ServiceOptions. */
         interface IServiceOptions {
 
+            /** ServiceOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** ServiceOptions deprecated */
             deprecated?: (boolean|null);
 
@@ -16840,6 +22599,9 @@ export namespace google {
              * @param [properties] Properties to set
              */
             constructor(properties?: google.protobuf.IServiceOptions);
+
+            /** ServiceOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** ServiceOptions deprecated. */
             public deprecated: boolean;
@@ -16934,6 +22696,9 @@ export namespace google {
             /** MethodOptions idempotencyLevel */
             idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel|null);
 
+            /** MethodOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** MethodOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -16961,6 +22726,9 @@ export namespace google {
 
             /** MethodOptions idempotencyLevel. */
             public idempotencyLevel: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel);
+
+            /** MethodOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** MethodOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -17285,6 +23053,394 @@ export namespace google {
 
                 /**
                  * Gets the default type url for NamePart
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+        }
+
+        /** Properties of a FeatureSet. */
+        interface IFeatureSet {
+
+            /** FeatureSet fieldPresence */
+            fieldPresence?: (google.protobuf.FeatureSet.FieldPresence|keyof typeof google.protobuf.FeatureSet.FieldPresence|null);
+
+            /** FeatureSet enumType */
+            enumType?: (google.protobuf.FeatureSet.EnumType|keyof typeof google.protobuf.FeatureSet.EnumType|null);
+
+            /** FeatureSet repeatedFieldEncoding */
+            repeatedFieldEncoding?: (google.protobuf.FeatureSet.RepeatedFieldEncoding|keyof typeof google.protobuf.FeatureSet.RepeatedFieldEncoding|null);
+
+            /** FeatureSet utf8Validation */
+            utf8Validation?: (google.protobuf.FeatureSet.Utf8Validation|keyof typeof google.protobuf.FeatureSet.Utf8Validation|null);
+
+            /** FeatureSet messageEncoding */
+            messageEncoding?: (google.protobuf.FeatureSet.MessageEncoding|keyof typeof google.protobuf.FeatureSet.MessageEncoding|null);
+
+            /** FeatureSet jsonFormat */
+            jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+        }
+
+        /** Represents a FeatureSet. */
+        class FeatureSet implements IFeatureSet {
+
+            /**
+             * Constructs a new FeatureSet.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFeatureSet);
+
+            /** FeatureSet fieldPresence. */
+            public fieldPresence: (google.protobuf.FeatureSet.FieldPresence|keyof typeof google.protobuf.FeatureSet.FieldPresence);
+
+            /** FeatureSet enumType. */
+            public enumType: (google.protobuf.FeatureSet.EnumType|keyof typeof google.protobuf.FeatureSet.EnumType);
+
+            /** FeatureSet repeatedFieldEncoding. */
+            public repeatedFieldEncoding: (google.protobuf.FeatureSet.RepeatedFieldEncoding|keyof typeof google.protobuf.FeatureSet.RepeatedFieldEncoding);
+
+            /** FeatureSet utf8Validation. */
+            public utf8Validation: (google.protobuf.FeatureSet.Utf8Validation|keyof typeof google.protobuf.FeatureSet.Utf8Validation);
+
+            /** FeatureSet messageEncoding. */
+            public messageEncoding: (google.protobuf.FeatureSet.MessageEncoding|keyof typeof google.protobuf.FeatureSet.MessageEncoding);
+
+            /** FeatureSet jsonFormat. */
+            public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /**
+             * Creates a new FeatureSet instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FeatureSet instance
+             */
+            public static create(properties?: google.protobuf.IFeatureSet): google.protobuf.FeatureSet;
+
+            /**
+             * Encodes the specified FeatureSet message. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
+             * @param message FeatureSet message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFeatureSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FeatureSet message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
+             * @param message FeatureSet message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFeatureSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FeatureSet message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FeatureSet
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet;
+
+            /**
+             * Decodes a FeatureSet message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FeatureSet
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet;
+
+            /**
+             * Verifies a FeatureSet message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FeatureSet message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FeatureSet
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet;
+
+            /**
+             * Creates a plain object from a FeatureSet message. Also converts values to other types if specified.
+             * @param message FeatureSet
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FeatureSet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FeatureSet to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FeatureSet
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FeatureSet {
+
+            /** FieldPresence enum. */
+            enum FieldPresence {
+                FIELD_PRESENCE_UNKNOWN = 0,
+                EXPLICIT = 1,
+                IMPLICIT = 2,
+                LEGACY_REQUIRED = 3
+            }
+
+            /** EnumType enum. */
+            enum EnumType {
+                ENUM_TYPE_UNKNOWN = 0,
+                OPEN = 1,
+                CLOSED = 2
+            }
+
+            /** RepeatedFieldEncoding enum. */
+            enum RepeatedFieldEncoding {
+                REPEATED_FIELD_ENCODING_UNKNOWN = 0,
+                PACKED = 1,
+                EXPANDED = 2
+            }
+
+            /** Utf8Validation enum. */
+            enum Utf8Validation {
+                UTF8_VALIDATION_UNKNOWN = 0,
+                VERIFY = 2,
+                NONE = 3
+            }
+
+            /** MessageEncoding enum. */
+            enum MessageEncoding {
+                MESSAGE_ENCODING_UNKNOWN = 0,
+                LENGTH_PREFIXED = 1,
+                DELIMITED = 2
+            }
+
+            /** JsonFormat enum. */
+            enum JsonFormat {
+                JSON_FORMAT_UNKNOWN = 0,
+                ALLOW = 1,
+                LEGACY_BEST_EFFORT = 2
+            }
+        }
+
+        /** Properties of a FeatureSetDefaults. */
+        interface IFeatureSetDefaults {
+
+            /** FeatureSetDefaults defaults */
+            defaults?: (google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault[]|null);
+
+            /** FeatureSetDefaults minimumEdition */
+            minimumEdition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+            /** FeatureSetDefaults maximumEdition */
+            maximumEdition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+        }
+
+        /** Represents a FeatureSetDefaults. */
+        class FeatureSetDefaults implements IFeatureSetDefaults {
+
+            /**
+             * Constructs a new FeatureSetDefaults.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFeatureSetDefaults);
+
+            /** FeatureSetDefaults defaults. */
+            public defaults: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault[];
+
+            /** FeatureSetDefaults minimumEdition. */
+            public minimumEdition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+            /** FeatureSetDefaults maximumEdition. */
+            public maximumEdition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+            /**
+             * Creates a new FeatureSetDefaults instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FeatureSetDefaults instance
+             */
+            public static create(properties?: google.protobuf.IFeatureSetDefaults): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Encodes the specified FeatureSetDefaults message. Does not implicitly {@link google.protobuf.FeatureSetDefaults.verify|verify} messages.
+             * @param message FeatureSetDefaults message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFeatureSetDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FeatureSetDefaults message, length delimited. Does not implicitly {@link google.protobuf.FeatureSetDefaults.verify|verify} messages.
+             * @param message FeatureSetDefaults message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFeatureSetDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FeatureSetDefaults message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FeatureSetDefaults
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Decodes a FeatureSetDefaults message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FeatureSetDefaults
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Verifies a FeatureSetDefaults message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FeatureSetDefaults message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FeatureSetDefaults
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Creates a plain object from a FeatureSetDefaults message. Also converts values to other types if specified.
+             * @param message FeatureSetDefaults
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FeatureSetDefaults, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FeatureSetDefaults to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FeatureSetDefaults
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FeatureSetDefaults {
+
+            /** Properties of a FeatureSetEditionDefault. */
+            interface IFeatureSetEditionDefault {
+
+                /** FeatureSetEditionDefault edition */
+                edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSetEditionDefault features */
+                features?: (google.protobuf.IFeatureSet|null);
+            }
+
+            /** Represents a FeatureSetEditionDefault. */
+            class FeatureSetEditionDefault implements IFeatureSetEditionDefault {
+
+                /**
+                 * Constructs a new FeatureSetEditionDefault.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault);
+
+                /** FeatureSetEditionDefault edition. */
+                public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSetEditionDefault features. */
+                public features?: (google.protobuf.IFeatureSet|null);
+
+                /**
+                 * Creates a new FeatureSetEditionDefault instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSetEditionDefault instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Encodes the specified FeatureSetEditionDefault message. Does not implicitly {@link google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify|verify} messages.
+                 * @param message FeatureSetEditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSetEditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify|verify} messages.
+                 * @param message FeatureSetEditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSetEditionDefault message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSetEditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Decodes a FeatureSetEditionDefault message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSetEditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Verifies a FeatureSetEditionDefault message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSetEditionDefault message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSetEditionDefault
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Creates a plain object from a FeatureSetEditionDefault message. Also converts values to other types if specified.
+                 * @param message FeatureSetEditionDefault
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSetEditionDefault to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSetEditionDefault
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */

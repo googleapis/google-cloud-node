@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -784,7 +784,8 @@ message Document {
           [deprecated = true, (google.api.field_behavior) = OPTIONAL];
 
       // Optional. Identifies the bounding polygon of a layout element on the
-      // page.
+      // page. If `layout_type` is set, the bounding polygon must be exactly the
+      // same to the layout element it's referring to.
       BoundingPoly bounding_poly = 4 [(google.api.field_behavior) = OPTIONAL];
 
       // Optional. Confidence of detected page element, if applicable. Range

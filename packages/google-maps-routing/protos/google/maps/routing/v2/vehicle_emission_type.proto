@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ option ruby_package = "Google::Maps::Routing::V2";
 
 // A set of values describing the vehicle's emission type.
 // Applies only to the `DRIVE`
-// [RouteTravelMode][google.maps.routing.v2.RouteTravelMode].
+// [`RouteTravelMode`][google.maps.routing.v2.RouteTravelMode].
 enum VehicleEmissionType {
   // No emission type specified. Default to `GASOLINE`.
   VEHICLE_EMISSION_TYPE_UNSPECIFIED = 0;

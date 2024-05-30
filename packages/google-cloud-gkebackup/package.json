@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/gke-backup",
-  "version": "1.1.0",
+  "version": "1.4.0",
   "description": "gkebackup client for Node.js",
   "repository": {
     "type": "git",
@@ -51,8 +51,8 @@
     "@types/mocha": "^10.0.0",
     "@types/node": "^20.4.5",
     "@types/sinon": "^17.0.0",
-    "c8": "^8.0.1",
-    "gapic-tools": "^0.3.0",
+    "c8": "^9.0.0",
+    "gapic-tools": "^0.4.0",
     "gts": "^5.0.0",
     "jsdoc": "^4.0.0",
     "jsdoc-fresh": "^3.0.0",
@@ -61,7 +61,7 @@
     "long": "^5.2.3",
     "mocha": "^10.0.0",
     "pack-n-play": "^2.0.0",
-    "sinon": "^17.0.0",
+    "sinon": "^18.0.0",
     "typescript": "^5.1.6"
   },
   "engines": {

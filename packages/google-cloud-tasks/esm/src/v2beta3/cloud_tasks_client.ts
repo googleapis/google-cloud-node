@@ -35,6 +35,7 @@ import * as cloud_tasks_client_config from './cloud_tasks_client_config.json';
 import fs from 'fs';
 import path from 'path';
 import {fileURLToPath} from 'url';
+import {getJSON} from '../json-helper.cjs';
 // @ts-ignore
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -43,20 +44,16 @@ const dirname = path.dirname(fileURLToPath(import.meta.url));
  * `src/v2beta3/cloud_tasks_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-const gapicConfig = JSON.parse(
-  fs.readFileSync(path.join(dirname, 'cloud_tasks_client_config.json'), 'utf8')
+const gapicConfig = getJSON(
+  path.join(dirname, 'cloud_tasks_client_config.json')
 );
-const jsonProtos = JSON.parse(
-  fs.readFileSync(
-    path.join(dirname, '..', '..', '..', 'protos/protos.json'),
-    'utf8'
-  )
+
+const jsonProtos = getJSON(
+  path.join(dirname, '..', '..', '..', 'protos/protos.json')
 );
-const version = JSON.parse(
-  fs.readFileSync(
-    path.join(dirname, '..', '..', '..', '..', 'package.json'),
-    'utf8'
-  )
+
+const version = getJSON(
+  path.join(dirname, '..', '..', '..', '..', 'package.json')
 ).version;
 
 /**
@@ -143,8 +140,15 @@ export class CloudTasksClient {
         'Please set either universe_domain or universeDomain, but not both.'
       );
     }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
     this._universeDomain =
-      opts?.universeDomain ?? opts?.universe_domain ?? 'googleapis.com';
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'cloudtasks.' + this._universeDomain;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || this._servicePath;
@@ -200,7 +204,7 @@ export class CloudTasksClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -215,10 +219,8 @@ export class CloudTasksClient {
     }
     // Add ESM headers
     const isEsm = true;
-    if (opts.libVersion && isEsm) {
-      clientHeader.push(`${opts.libVersion}-esm`);
-    } else if (opts.libVersion && !isEsm) {
-      clientHeader.push(`${opts.libVersion}-cjs`);
+    if ((opts.libVersion || version) && isEsm) {
+      clientHeader.push(`${opts.libVersion ?? version}-esm`);
     }
 
     // Load the applicable protos.
@@ -363,7 +365,7 @@ export class CloudTasksClient {
    */
   static get servicePath() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -382,7 +384,7 @@ export class CloudTasksClient {
    */
   static get apiEndpoint() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(

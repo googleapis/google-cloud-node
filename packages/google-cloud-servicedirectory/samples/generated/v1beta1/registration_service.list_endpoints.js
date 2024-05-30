@@ -34,7 +34,7 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The maximum number of items to return.
+   *  Optional. The maximum number of items to return. The default value is 100.
    */
   // const pageSize = 1234
   /**

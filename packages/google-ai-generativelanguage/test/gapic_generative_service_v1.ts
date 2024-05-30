@@ -102,7 +102,7 @@ describe('v1.GenerativeServiceClient', () => {
     });
 
     if (
-      typeof process !== 'undefined' &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       it('throws DeprecationWarning if static servicePath is used', () => {
@@ -138,6 +138,42 @@ describe('v1.GenerativeServiceClient', () => {
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'generativelanguage.example.com');
     });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new generativeserviceModule.v1.GenerativeServiceClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'generativelanguage.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new generativeserviceModule.v1.GenerativeServiceClient(
+            {universeDomain: 'configured.example.com'}
+          );
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(
+            servicePath,
+            'generativelanguage.configured.example.com'
+          );
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new generativeserviceModule.v1.GenerativeServiceClient({
@@ -801,6 +837,51 @@ describe('v1.GenerativeServiceClient', () => {
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
+    it('invokes streamGenerateContent without error and gaxServerStreamingRetries enabled', async () => {
+      const client = new generativeserviceModule.v1.GenerativeServiceClient({
+        gaxServerStreamingRetries: true,
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ai.generativelanguage.v1.GenerateContentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ai.generativelanguage.v1.GenerateContentRequest',
+        ['model']
+      );
+      request.model = defaultValue1;
+      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ai.generativelanguage.v1.GenerateContentResponse()
+      );
+      client.innerApiCalls.streamGenerateContent =
+        stubServerStreamingCall(expectedResponse);
+      const stream = client.streamGenerateContent(request);
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.ai.generativelanguage.v1.GenerateContentResponse
+          ) => {
+            resolve(response);
+          }
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.streamGenerateContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.streamGenerateContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
     it('invokes streamGenerateContent with error', async () => {
       const client = new generativeserviceModule.v1.GenerativeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
@@ -879,6 +960,12 @@ describe('v1.GenerativeServiceClient', () => {
         });
       });
       await assert.rejects(promise, expectedError);
+    });
+    it('should create a client with gaxServerStreamingRetries enabled', () => {
+      const client = new generativeserviceModule.v1.GenerativeServiceClient({
+        gaxServerStreamingRetries: true,
+      });
+      assert(client);
     });
   });
 

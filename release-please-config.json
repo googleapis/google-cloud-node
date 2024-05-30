@@ -163,7 +163,23 @@
     "packages/google-shopping-css": {},
     "packages/google-api-cloudquotas": {},
     "packages/google-cloud-redis-cluster": {},
-    "packages/google-cloud-servicehealth": {}
+    "packages/google-cloud-servicehealth": {},
+    "packages/google-cloud-telcoautomation": {},
+    "packages/google-cloud-cloudcontrolspartner": {},
+    "packages/google-apps-meet": {},
+    "packages/google-cloud-parallelstore": {},
+    "packages/google-chat": {},
+    "packages/google-cloud-apphub": {},
+    "packages/google-storage-control": {},
+    "packages/google-shopping-merchant-quota": {},
+    "packages/google-cloud-backupdr": {},
+    "packages/google-cloud-securesourcemanager": {},
+    "packages/google-shopping-merchant-notifications": {},
+    "packages/google-shopping-merchant-lfp": {},
+    "packages/google-cloud-securitycentermanagement": {},
+    "packages/google-shopping-merchant-conversions": {},
+    "packages/google-maps-solar": {},
+    "packages/google-maps-routeoptimization": {}
   },
   "plugins": [
     {

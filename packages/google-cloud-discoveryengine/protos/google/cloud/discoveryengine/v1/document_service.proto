@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ import "google/cloud/discoveryengine/v1/import_config.proto";
 import "google/cloud/discoveryengine/v1/purge_config.proto";
 import "google/longrunning/operations.proto";
 import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
 
 option csharp_namespace = "Google.Cloud.DiscoveryEngine.V1";
 option go_package = "cloud.google.com/go/discoveryengine/apiv1/discoveryenginepb;discoveryenginepb";
@@ -87,6 +88,7 @@ service DocumentService {
         body: "document"
       }
     };
+    option (google.api.method_signature) = "document,update_mask";
   }
 
   // Deletes a [Document][google.cloud.discoveryengine.v1.Document].
@@ -102,7 +104,7 @@ service DocumentService {
 
   // Bulk import of multiple
   // [Document][google.cloud.discoveryengine.v1.Document]s. Request processing
-  // may be synchronous. Non-existing items will be created.
+  // may be synchronous. Non-existing items are created.
   //
   // Note: It is possible for a subset of the
   // [Document][google.cloud.discoveryengine.v1.Document]s to be successfully
@@ -200,7 +202,7 @@ message ListDocumentsRequest {
 
   // Maximum number of [Document][google.cloud.discoveryengine.v1.Document]s to
   // return. If unspecified, defaults to 100. The maximum allowed value is 1000.
-  // Values above 1000 will be coerced to 1000.
+  // Values above 1000 are set to 1000.
   //
   // If this field is negative, an `INVALID_ARGUMENT` error is returned.
   int32 page_size = 2;
@@ -250,7 +252,7 @@ message CreateDocumentRequest {
   Document document = 2 [(google.api.field_behavior) = REQUIRED];
 
   // Required. The ID to use for the
-  // [Document][google.cloud.discoveryengine.v1.Document], which will become the
+  // [Document][google.cloud.discoveryengine.v1.Document], which becomes the
   // final component of the
   // [Document.name][google.cloud.discoveryengine.v1.Document.name].
   //
@@ -285,10 +287,14 @@ message UpdateDocumentRequest {
   // is not set, a `NOT_FOUND` error is returned.
   Document document = 1 [(google.api.field_behavior) = REQUIRED];
 
-  // If set to true, and the
+  // If set to `true` and the
   // [Document][google.cloud.discoveryengine.v1.Document] is not found, a new
-  // [Document][google.cloud.discoveryengine.v1.Document] will be created.
+  // [Document][google.cloud.discoveryengine.v1.Document] is be created.
   bool allow_missing = 2;
+
+  // Indicates which fields in the provided imported 'document' to update. If
+  // not set, by default updates all fields.
+  google.protobuf.FieldMask update_mask = 3;
 }
 
 // Request message for

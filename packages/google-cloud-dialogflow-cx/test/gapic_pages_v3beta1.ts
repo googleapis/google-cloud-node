@@ -142,7 +142,7 @@ describe('v3beta1.PagesClient', () => {
     });
 
     if (
-      typeof process !== 'undefined' &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       it('throws DeprecationWarning if static servicePath is used', () => {
@@ -176,6 +176,38 @@ describe('v3beta1.PagesClient', () => {
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'dialogflow.example.com');
     });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new pagesModule.v3beta1.PagesClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'dialogflow.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new pagesModule.v3beta1.PagesClient({
+            universeDomain: 'configured.example.com',
+          });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'dialogflow.configured.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new pagesModule.v3beta1.PagesClient({
@@ -969,9 +1001,9 @@ describe('v3beta1.PagesClient', () => {
       assert(
         (client.descriptors.page.listPages.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1020,9 +1052,9 @@ describe('v3beta1.PagesClient', () => {
       assert(
         (client.descriptors.page.listPages.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1068,9 +1100,9 @@ describe('v3beta1.PagesClient', () => {
       assert(
         (client.descriptors.page.listPages.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1109,9 +1141,9 @@ describe('v3beta1.PagesClient', () => {
       assert(
         (client.descriptors.page.listPages.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -1718,6 +1750,82 @@ describe('v3beta1.PagesClient', () => {
             client.pathTemplates.continuousTestResultPathTemplate
               .match as SinonStub
           )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('conversation', () => {
+      const fakePath = '/rendered/path/conversation';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        agent: 'agentValue',
+        conversation: 'conversationValue',
+      };
+      const client = new pagesModule.v3beta1.PagesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.conversationPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.conversationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('conversationPath', () => {
+        const result = client.conversationPath(
+          'projectValue',
+          'locationValue',
+          'agentValue',
+          'conversationValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.conversationPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromConversationName', () => {
+        const result = client.matchProjectFromConversationName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.conversationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromConversationName', () => {
+        const result = client.matchLocationFromConversationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.conversationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAgentFromConversationName', () => {
+        const result = client.matchAgentFromConversationName(fakePath);
+        assert.strictEqual(result, 'agentValue');
+        assert(
+          (client.pathTemplates.conversationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConversationFromConversationName', () => {
+        const result = client.matchConversationFromConversationName(fakePath);
+        assert.strictEqual(result, 'conversationValue');
+        assert(
+          (client.pathTemplates.conversationPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/routing-v1.2.0...routing-v1.3.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5357](https://github.com/googleapis/google-cloud-node/issues/5357)) ([66111e8](https://github.com/googleapis/google-cloud-node/commit/66111e8d285a2357bc477004d1880b70934a60d2))
+
+## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/routing-v1.1.0...routing-v1.2.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5193](https://github.com/googleapis/google-cloud-node/issues/5193)) ([333b409](https://github.com/googleapis/google-cloud-node/commit/333b40951a255ecfab249bd6e7ace5877270ec85))
+
 ## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/routing-v1.0.2...routing-v1.1.0) (2024-02-09)
 
 

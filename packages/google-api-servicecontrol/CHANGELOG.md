@@ -1,5 +1,28 @@
 # Changelog
 
+## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/service-control-v3.3.0...service-control-v3.4.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5350](https://github.com/googleapis/google-cloud-node/issues/5350)) ([6c03873](https://github.com/googleapis/google-cloud-node/commit/6c038731de1f36456042e6b4ecf2a9686be662c7))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/service-control-v3.2.0...service-control-v3.3.0) (2024-04-16)
+
+
+### Features
+
+* [Many APIs] support GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable ([#5185](https://github.com/googleapis/google-cloud-node/issues/5185)) ([cc54e98](https://github.com/googleapis/google-cloud-node/commit/cc54e98f7f51598e88277ac50310b07b778acbc7))
+
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/service-control-v3.1.0...service-control-v3.2.0) (2024-02-22)
+
+
+### Features
+
+* [servicecontrol] include api_key_uid in service control check response ([#5061](https://github.com/googleapis/google-cloud-node/issues/5061)) ([f442912](https://github.com/googleapis/google-cloud-node/commit/f44291270aba5581520205feeed2dfe169eca790))
+
 ## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/service-control-v3.0.1...service-control-v3.1.0) (2024-02-09)
 
 

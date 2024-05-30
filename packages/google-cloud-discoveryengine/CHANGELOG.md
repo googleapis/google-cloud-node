@@ -1,5 +1,41 @@
 # Changelog
 
+## [1.8.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.7.0...discoveryengine-v1.8.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [1.7.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.6.0...discoveryengine-v1.7.0) (2024-04-18)
+
+
+### Features
+
+* [discoveryengine] add answer generation APIs ([7d36b46](https://github.com/googleapis/google-cloud-node/commit/7d36b464c362985b7e8ffdf2bad1689da7a8661c))
+
+## [1.6.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.5.0...discoveryengine-v1.6.0) (2024-04-16)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5188](https://github.com/googleapis/google-cloud-node/issues/5188)) ([c5ccdf9](https://github.com/googleapis/google-cloud-node/commit/c5ccdf93641e7bb6d0e5c636168fad0feafab6e3))
+
+## [1.5.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.4.1...discoveryengine-v1.5.0) (2024-04-05)
+
+
+### Features
+
+* [discoveryengine] support import data from Cloud Spanner, BigTable, SQL and Firestore ([#5218](https://github.com/googleapis/google-cloud-node/issues/5218)) ([cc25e93](https://github.com/googleapis/google-cloud-node/commit/cc25e935f087526738303cd94c406bd352a7b595))
+
+## [1.4.1](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.4.0...discoveryengine-v1.4.1) (2024-03-12)
+
+
+### Bug Fixes
+
+* [discoveryengine] `http_uri` fix for method `ListChunks` in service `ChunkService` ([#5120](https://github.com/googleapis/google-cloud-node/issues/5120)) ([494a98f](https://github.com/googleapis/google-cloud-node/commit/494a98f6b4908f89eedcc05db68bb6af99dc02cb))
+
 ## [1.4.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.3.1...discoveryengine-v1.4.0) (2024-02-09)
 
 

@@ -135,6 +135,9 @@
   * [Agents.validate_agent](#agents.validate_agent)
   * [Changelogs.get_changelog](#changelogs.get_changelog)
   * [Changelogs.list_changelogs](#changelogs.list_changelogs)
+  * [Conversation_history.delete_conversation](#conversation_history.delete_conversation)
+  * [Conversation_history.get_conversation](#conversation_history.get_conversation)
+  * [Conversation_history.list_conversations](#conversation_history.list_conversations)
   * [Deployments.get_deployment](#deployments.get_deployment)
   * [Deployments.list_deployments](#deployments.list_deployments)
   * [Entity_types.create_entity_type](#entity_types.create_entity_type)
@@ -2353,6 +2356,57 @@ __Usage:__
 
 
 `node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/changelogs.list_changelogs.js`
+
+
+-----
+
+
+
+
+### Conversation_history.delete_conversation
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/conversation_history.delete_conversation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/conversation_history.delete_conversation.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/conversation_history.delete_conversation.js`
+
+
+-----
+
+
+
+
+### Conversation_history.get_conversation
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/conversation_history.get_conversation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/conversation_history.get_conversation.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/conversation_history.get_conversation.js`
+
+
+-----
+
+
+
+
+### Conversation_history.list_conversations
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/conversation_history.list_conversations.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/conversation_history.list_conversations.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/conversation_history.list_conversations.js`
 
 
 -----

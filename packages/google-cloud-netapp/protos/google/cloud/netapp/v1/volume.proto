@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -102,7 +102,7 @@ enum SecurityStyle {
   // SecurityStyle uses NTFS
   NTFS = 1;
 
-  // SecurityStyle uses NTFS
+  // SecurityStyle uses UNIX
   UNIX = 2;
 }
 
@@ -274,8 +274,8 @@ message Volume {
   // Required. Share name of the volume
   string share_name = 5 [(google.api.field_behavior) = REQUIRED];
 
-  // Output only. Name of the Private Service Access allocated range. This is
-  // optional. If not provided, any available range will be chosen.
+  // Output only. This field is not implemented. The values provided in this
+  // field are ignored.
   string psa_range = 6 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Required. StoragePool name of the volume
@@ -383,6 +383,9 @@ message Volume {
   // Optional. List of actions that are restricted on this volume.
   repeated RestrictedAction restricted_actions = 31
       [(google.api.field_behavior) = OPTIONAL];
+
+  // Tiering policy for the volume.
+  optional TieringPolicy tiering_policy = 34;
 }
 
 // Defines the export policy for the volume.
@@ -575,5 +578,35 @@ message BackupConfig {
   // Optional. When set to true, scheduled backup is enabled on the volume.
   // This field should be nil when there's no backup policy attached.
   optional bool scheduled_backup_enabled = 3
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Output only. Total size of all backups in a chain in bytes = baseline
+  // backup size + sum(incremental backup size).
+  optional int64 backup_chain_bytes = 4
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// Defines tiering policy for the volume.
+message TieringPolicy {
+  // Tier action for the volume.
+  enum TierAction {
+    // Unspecified.
+    TIER_ACTION_UNSPECIFIED = 0;
+
+    // When tiering is enabled, new cold data will be tiered.
+    ENABLED = 1;
+
+    // When paused, tiering won't be performed on new data. Existing data stays
+    // tiered until accessed.
+    PAUSED = 2;
+  }
+
+  // Optional. Flag indicating if the volume has tiering policy enable/pause.
+  // Default is PAUSED.
+  optional TierAction tier_action = 1 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Time in days to mark the volume's data block as cold and make it
+  // eligible for tiering, can be range from 7-183. Default is 31.
+  optional int32 cooling_threshold_days = 2
       [(google.api.field_behavior) = OPTIONAL];
 }

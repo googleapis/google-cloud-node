@@ -39,6 +39,64 @@
         }
       }
     },
+    "FileService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "FileServiceClient",
+          "rpcs": {
+            "CreateFile": {
+              "methods": [
+                "createFile"
+              ]
+            },
+            "GetFile": {
+              "methods": [
+                "getFile"
+              ]
+            },
+            "DeleteFile": {
+              "methods": [
+                "deleteFile"
+              ]
+            },
+            "ListFiles": {
+              "methods": [
+                "listFiles",
+                "listFilesStream",
+                "listFilesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "FileServiceClient",
+          "rpcs": {
+            "CreateFile": {
+              "methods": [
+                "createFile"
+              ]
+            },
+            "GetFile": {
+              "methods": [
+                "getFile"
+              ]
+            },
+            "DeleteFile": {
+              "methods": [
+                "deleteFile"
+              ]
+            },
+            "ListFiles": {
+              "methods": [
+                "listFiles",
+                "listFilesStream",
+                "listFilesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "GenerativeService": {
       "clients": {
         "grpc": {

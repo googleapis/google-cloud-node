@@ -120,8 +120,15 @@ export class ExportServiceClient {
         'Please set either universe_domain or universeDomain, but not both.'
       );
     }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
     this._universeDomain =
-      opts?.universeDomain ?? opts?.universe_domain ?? 'googleapis.com';
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'cloudprofiler.' + this._universeDomain;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || this._servicePath;
@@ -173,7 +180,7 @@ export class ExportServiceClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -298,7 +305,7 @@ export class ExportServiceClient {
    */
   static get servicePath() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -316,7 +323,7 @@ export class ExportServiceClient {
    */
   static get apiEndpoint() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -392,7 +399,7 @@ export class ExportServiceClient {
    * @param {number} request.pageSize
    *   The maximum number of items to return.
    *   Default page_size is 1000.
-   *   Max limit is 10000.
+   *   Max limit is 1000.
    * @param {string} request.pageToken
    *   The token to continue pagination and get profiles from a particular page.
    *   When paginating, all other parameters provided to `ListProfiles` must match
@@ -494,7 +501,7 @@ export class ExportServiceClient {
    * @param {number} request.pageSize
    *   The maximum number of items to return.
    *   Default page_size is 1000.
-   *   Max limit is 10000.
+   *   Max limit is 1000.
    * @param {string} request.pageToken
    *   The token to continue pagination and get profiles from a particular page.
    *   When paginating, all other parameters provided to `ListProfiles` must match
@@ -544,7 +551,7 @@ export class ExportServiceClient {
    * @param {number} request.pageSize
    *   The maximum number of items to return.
    *   Default page_size is 1000.
-   *   Max limit is 10000.
+   *   Max limit is 1000.
    * @param {string} request.pageToken
    *   The token to continue pagination and get profiles from a particular page.
    *   When paginating, all other parameters provided to `ListProfiles` must match

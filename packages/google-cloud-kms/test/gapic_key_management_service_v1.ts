@@ -144,7 +144,7 @@ describe('v1.KeyManagementServiceClient', () => {
     });
 
     if (
-      typeof process !== 'undefined' &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       it('throws DeprecationWarning if static servicePath is used', () => {
@@ -182,6 +182,40 @@ describe('v1.KeyManagementServiceClient', () => {
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'cloudkms.example.com');
     });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new keymanagementserviceModule.v1.KeyManagementServiceClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'cloudkms.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              universeDomain: 'configured.example.com',
+            });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'cloudkms.configured.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
@@ -3704,9 +3738,9 @@ describe('v1.KeyManagementServiceClient', () => {
       assert(
         (client.descriptors.page.listKeyRings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3753,9 +3787,9 @@ describe('v1.KeyManagementServiceClient', () => {
       assert(
         (client.descriptors.page.listKeyRings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3797,9 +3831,9 @@ describe('v1.KeyManagementServiceClient', () => {
       assert(
         (client.descriptors.page.listKeyRings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3838,9 +3872,9 @@ describe('v1.KeyManagementServiceClient', () => {
       assert(
         (client.descriptors.page.listKeyRings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -4008,9 +4042,9 @@ describe('v1.KeyManagementServiceClient', () => {
       assert(
         (client.descriptors.page.listCryptoKeys.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4055,9 +4089,9 @@ describe('v1.KeyManagementServiceClient', () => {
       assert(
         (client.descriptors.page.listCryptoKeys.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4099,9 +4133,9 @@ describe('v1.KeyManagementServiceClient', () => {
       assert(
         (client.descriptors.page.listCryptoKeys.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4140,9 +4174,9 @@ describe('v1.KeyManagementServiceClient', () => {
       assert(
         (client.descriptors.page.listCryptoKeys.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -4666,9 +4700,9 @@ describe('v1.KeyManagementServiceClient', () => {
       assert(
         (client.descriptors.page.listImportJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4713,9 +4747,9 @@ describe('v1.KeyManagementServiceClient', () => {
       assert(
         (client.descriptors.page.listImportJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4757,9 +4791,9 @@ describe('v1.KeyManagementServiceClient', () => {
       assert(
         (client.descriptors.page.listImportJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4798,9 +4832,9 @@ describe('v1.KeyManagementServiceClient', () => {
       assert(
         (client.descriptors.page.listImportJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -5342,6 +5376,45 @@ describe('v1.KeyManagementServiceClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('autokeyConfig', () => {
+      const fakePath = '/rendered/path/autokeyConfig';
+      const expectedParameters = {
+        folder: 'folderValue',
+      };
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.autokeyConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.autokeyConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('autokeyConfigPath', () => {
+        const result = client.autokeyConfigPath('folderValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.autokeyConfigPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchFolderFromAutokeyConfigName', () => {
+        const result = client.matchFolderFromAutokeyConfigName(fakePath);
+        assert.strictEqual(result, 'folderValue');
+        assert(
+          (client.pathTemplates.autokeyConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('cryptoKey', () => {
       const fakePath = '/rendered/path/cryptoKey';
       const expectedParameters = {
@@ -5698,6 +5771,71 @@ describe('v1.KeyManagementServiceClient', () => {
         assert.strictEqual(result, 'importJobValue');
         assert(
           (client.pathTemplates.importJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('keyHandle', () => {
+      const fakePath = '/rendered/path/keyHandle';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        key_handle: 'keyHandleValue',
+      };
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.keyHandlePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.keyHandlePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('keyHandlePath', () => {
+        const result = client.keyHandlePath(
+          'projectValue',
+          'locationValue',
+          'keyHandleValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.keyHandlePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromKeyHandleName', () => {
+        const result = client.matchProjectFromKeyHandleName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.keyHandlePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromKeyHandleName', () => {
+        const result = client.matchLocationFromKeyHandleName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.keyHandlePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchKeyHandleFromKeyHandleName', () => {
+        const result = client.matchKeyHandleFromKeyHandleName(fakePath);
+        assert.strictEqual(result, 'keyHandleValue');
+        assert(
+          (client.pathTemplates.keyHandlePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

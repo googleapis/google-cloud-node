@@ -79,7 +79,7 @@ describe('v1.PlacesClient', () => {
     });
 
     if (
-      typeof process !== 'undefined' &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       it('throws DeprecationWarning if static servicePath is used', () => {
@@ -113,6 +113,38 @@ describe('v1.PlacesClient', () => {
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'places.example.com');
     });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new placesModule.v1.PlacesClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'places.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new placesModule.v1.PlacesClient({
+            universeDomain: 'configured.example.com',
+          });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'places.configured.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new placesModule.v1.PlacesClient({
@@ -628,6 +660,90 @@ describe('v1.PlacesClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getPlace(request), expectedError);
+    });
+  });
+
+  describe('autocompletePlaces', () => {
+    it('invokes autocompletePlaces without error', async () => {
+      const client = new placesModule.v1.PlacesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.maps.places.v1.AutocompletePlacesRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.maps.places.v1.AutocompletePlacesResponse()
+      );
+      client.innerApiCalls.autocompletePlaces =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.autocompletePlaces(request);
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes autocompletePlaces without error using callback', async () => {
+      const client = new placesModule.v1.PlacesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.maps.places.v1.AutocompletePlacesRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.maps.places.v1.AutocompletePlacesResponse()
+      );
+      client.innerApiCalls.autocompletePlaces =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.autocompletePlaces(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.maps.places.v1.IAutocompletePlacesResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes autocompletePlaces with error', async () => {
+      const client = new placesModule.v1.PlacesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.maps.places.v1.AutocompletePlacesRequest()
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.autocompletePlaces = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.autocompletePlaces(request), expectedError);
+    });
+
+    it('invokes autocompletePlaces with closed client', async () => {
+      const client = new placesModule.v1.PlacesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.maps.places.v1.AutocompletePlacesRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.autocompletePlaces(request), expectedError);
     });
   });
 

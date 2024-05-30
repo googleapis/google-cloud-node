@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -292,4 +292,9 @@ message IndexPrivateEndpoints {
   // Output only. The name of the service attachment resource. Populated if
   // private service connect is enabled.
   string service_attachment = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. PscAutomatedEndpoints is populated if private service connect
+  // is enabled if PscAutomatedConfig is set.
+  repeated PscAutomatedEndpoints psc_automated_endpoints = 3
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 }

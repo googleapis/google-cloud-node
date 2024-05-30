@@ -1,5 +1,79 @@
 # Changelog
 
+## [3.21.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.20.0...aiplatform-v3.21.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+* Update Nodejs generator to send API versions in headers for GAPICs ([#5343](https://github.com/googleapis/google-cloud-node/issues/5343)) ([d129760](https://github.com/googleapis/google-cloud-node/commit/d129760b6ce09bf5d7037aa04df60f0d2e064bea))
+
+## [3.20.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.19.1...aiplatform-v3.20.0) (2024-05-02)
+
+
+### Features
+
+* A new field `search_entry_point` is added to message `.google.cloud.aiplatform.v1beta1.GroundingMetadata` ([#5285](https://github.com/googleapis/google-cloud-node/issues/5285)) ([fe2a4e3](https://github.com/googleapis/google-cloud-node/commit/fe2a4e3cb6f8714048b1e0c97e07c7afbfb25602))
+
+## [3.19.1](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.19.0...aiplatform-v3.19.1) (2024-04-23)
+
+
+### Bug Fixes
+
+* Delete the deprecated field for model monitor ([#5274](https://github.com/googleapis/google-cloud-node/issues/5274)) ([ae521e6](https://github.com/googleapis/google-cloud-node/commit/ae521e642cf612621edabaeacc81abbd66aec5d2))
+
+## [3.19.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.18.0...aiplatform-v3.19.0) (2024-04-18)
+
+
+### Features
+
+* Add model_monitor resource and APIs to public v1beta1 client library ([#5234](https://github.com/googleapis/google-cloud-node/issues/5234)) ([cecd67c](https://github.com/googleapis/google-cloud-node/commit/cecd67c9f25e687c0a0081e4f424b70525604d72))
+
+## [3.18.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.17.0...aiplatform-v3.18.0) (2024-04-10)
+
+
+### Features
+
+* Add Persistent Resource reboot api call to v1beta1 ([#5182](https://github.com/googleapis/google-cloud-node/issues/5182)) ([c271d54](https://github.com/googleapis/google-cloud-node/commit/c271d54547cf657eabd674ace50842d22005fb67))
+
+## [3.17.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.16.0...aiplatform-v3.17.0) (2024-03-26)
+
+
+### Features
+
+* Add Optimized feature store proto ([#5153](https://github.com/googleapis/google-cloud-node/issues/5153)) ([1f5d99c](https://github.com/googleapis/google-cloud-node/commit/1f5d99c3fec4d7c0c84da22fc780e4e76af57548))
+* Evaluation Service aiplatform v1beta1 initial release ([#5172](https://github.com/googleapis/google-cloud-node/issues/5172)) ([6827acc](https://github.com/googleapis/google-cloud-node/commit/6827accaabc06bffa6a154189c18cd8e3bc7ed82))
+
+## [3.16.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.15.0...aiplatform-v3.16.0) (2024-03-23)
+
+
+### Features
+
+* Add v1beta1 StreamingFetchFeatureValues API ([#5128](https://github.com/googleapis/google-cloud-node/issues/5128)) ([4849a58](https://github.com/googleapis/google-cloud-node/commit/4849a58a9761a0123f3232f33651bd6972e6fd3a))
+
+## [3.15.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.14.0...aiplatform-v3.15.0) (2024-03-12)
+
+
+### Features
+
+* A new value `NVIDIA_H100_80GB` is added to enum `AcceleratorType` ([#5114](https://github.com/googleapis/google-cloud-node/issues/5114)) ([729d778](https://github.com/googleapis/google-cloud-node/commit/729d778f67e4e0869379b32d2b2b19c758ebc955))
+
+## [3.14.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.13.0...aiplatform-v3.14.0) (2024-02-27)
+
+
+### Features
+
+* Add CompositeKey message and composite_key field to FeatureViewDataKey ([#5072](https://github.com/googleapis/google-cloud-node/issues/5072)) ([b643f04](https://github.com/googleapis/google-cloud-node/commit/b643f040b35dd180ad0264935373e44056283249))
+
+## [3.13.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.12.0...aiplatform-v3.13.0) (2024-02-22)
+
+
+### Features
+
+* Add `point_of_contact` to `Feature` message ([#5064](https://github.com/googleapis/google-cloud-node/issues/5064)) ([d158bfb](https://github.com/googleapis/google-cloud-node/commit/d158bfb432f1c54ae9cb121607c33508e79accf0))
+* Add Grounding feature to PredictionService.GenerateContent ([#5036](https://github.com/googleapis/google-cloud-node/issues/5036)) ([6b73cce](https://github.com/googleapis/google-cloud-node/commit/6b73cce2fc4b29290b51878ba07aa4b9bca4e573))
+
 ## [3.12.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.11.0...aiplatform-v3.12.0) (2024-02-09)
 
 

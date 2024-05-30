@@ -1,5 +1,28 @@
 # Changelog
 
+## [4.7.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v4.6.0...dialogflow-cx-v4.7.0) (2024-05-21)
+
+
+### Features
+
+* [dialogflow-cx] update Nodejs generator to send API versions in headers for GAPICs ([#5331](https://github.com/googleapis/google-cloud-node/issues/5331)) ([74a4454](https://github.com/googleapis/google-cloud-node/commit/74a44549caaf9f29be6c6ada78a3550dac8d4b55))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [4.6.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v4.5.0...dialogflow-cx-v4.6.0) (2024-04-16)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5188](https://github.com/googleapis/google-cloud-node/issues/5188)) ([c5ccdf9](https://github.com/googleapis/google-cloud-node/commit/c5ccdf93641e7bb6d0e5c636168fad0feafab6e3))
+
+## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v4.4.0...dialogflow-cx-v4.5.0) (2024-04-05)
+
+
+### Features
+
+* [dialogflow-cx] added support for DataStoreConnection, DataStoreConnectionSettings ([#5196](https://github.com/googleapis/google-cloud-node/issues/5196)) ([e81cd49](https://github.com/googleapis/google-cloud-node/commit/e81cd492d2c3cef915d89b095852aa9a7ae64160))
+
 ## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v4.3.1...dialogflow-cx-v4.4.0) (2024-02-09)
 
 

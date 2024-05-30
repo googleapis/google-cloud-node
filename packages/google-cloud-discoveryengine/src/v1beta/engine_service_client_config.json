@@ -39,6 +39,18 @@
         "ListEngines": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "PauseEngine": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ResumeEngine": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "TuneEngine": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }

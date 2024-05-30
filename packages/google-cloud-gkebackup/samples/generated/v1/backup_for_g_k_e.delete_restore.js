@@ -34,14 +34,14 @@ function main(name) {
    */
   // const name = 'abc123'
   /**
-   *  If provided, this value must match the current value of the
+   *  Optional. If provided, this value must match the current value of the
    *  target Restore's etag google.cloud.gkebackup.v1.Restore.etag  field or
    *  the request is rejected.
    */
   // const etag = 'abc123'
   /**
-   *  If set to true, any VolumeRestores below this restore will also be deleted.
-   *  Otherwise, the request will only succeed if the restore has no
+   *  Optional. If set to true, any VolumeRestores below this restore will also
+   *  be deleted. Otherwise, the request will only succeed if the restore has no
    *  VolumeRestores.
    */
   // const force = true

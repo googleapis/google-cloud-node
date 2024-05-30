@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ option php_namespace = "Google\\Maps\\Routing\\V2";
 option ruby_package = "Google::Maps::Routing::V2";
 
 // A set of values that specify the navigation action to take for the current
-// step (e.g., turn left, merge, straight, etc.).
+// step (for example, turn left, merge, or straight).
 enum Maneuver {
   // Not used.
   MANEUVER_UNSPECIFIED = 0;

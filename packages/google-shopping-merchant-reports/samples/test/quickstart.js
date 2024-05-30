@@ -18,7 +18,7 @@
 // const path = require('path');
 // const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-// const {ReportServiceClient} = require('@google-cloud/reports').v1beta;
+// const {ReportServiceClient} = require('@google-shopping/reports').v1beta;
 // const merchantapiClient = new ReportServiceClient();
 
 // const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});

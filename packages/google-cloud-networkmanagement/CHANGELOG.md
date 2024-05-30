@@ -1,5 +1,34 @@
 # Changelog
 
+## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.5.0...network-management-v3.6.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.4.0...network-management-v3.5.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5189](https://github.com/googleapis/google-cloud-node/issues/5189)) ([64b5a75](https://github.com/googleapis/google-cloud-node/commit/64b5a759caa979837199086c2d546a565ad2b3b1))
+
+## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.3.0...network-management-v3.4.0) (2024-03-26)
+
+
+### Features
+
+* [networkmanagement] add new fields and enum values related to round-trip ([#5171](https://github.com/googleapis/google-cloud-node/issues/5171)) ([009e21a](https://github.com/googleapis/google-cloud-node/commit/009e21ab1ca8cddc53dc68a197c0b23989ec55c0))
+
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.2.0...network-management-v3.3.0) (2024-03-12)
+
+
+### Features
+
+* [networkmanagement] add new NAT fields to Network Management API definition ([#5118](https://github.com/googleapis/google-cloud-node/issues/5118)) ([8488d9a](https://github.com/googleapis/google-cloud-node/commit/8488d9a2de0950e50e5eab05cc286511d03de5e7))
+
 ## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.1.0...network-management-v3.2.0) (2024-02-09)
 
 

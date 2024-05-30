@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/cloudquotas-v0.3.0...cloudquotas-v0.4.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5350](https://github.com/googleapis/google-cloud-node/issues/5350)) ([6c03873](https://github.com/googleapis/google-cloud-node/commit/6c038731de1f36456042e6b4ecf2a9686be662c7))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/cloudquotas-v0.2.0...cloudquotas-v0.3.0) (2024-04-05)
+
+
+### Features
+
+* [cloudquotas] Add `rollout_info` field to `QuotaDetails` message ([#5194](https://github.com/googleapis/google-cloud-node/issues/5194)) ([39da4b1](https://github.com/googleapis/google-cloud-node/commit/39da4b1b5e02da47dd449420bfd215461bec4801))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/cloudquotas-v0.1.0...cloudquotas-v0.2.0) (2024-02-09)
 
 

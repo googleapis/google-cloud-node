@@ -83,6 +83,8 @@
                          * @property {google.cloud.secretmanager.v1.IRotation|null} [rotation] Secret rotation
                          * @property {Object.<string,number|Long>|null} [versionAliases] Secret versionAliases
                          * @property {Object.<string,string>|null} [annotations] Secret annotations
+                         * @property {google.protobuf.IDuration|null} [versionDestroyTtl] Secret versionDestroyTtl
+                         * @property {google.cloud.secretmanager.v1.ICustomerManagedEncryption|null} [customerManagedEncryption] Secret customerManagedEncryption
                          */
     
                         /**
@@ -192,6 +194,22 @@
                          */
                         Secret.prototype.annotations = $util.emptyObject;
     
+                        /**
+                         * Secret versionDestroyTtl.
+                         * @member {google.protobuf.IDuration|null|undefined} versionDestroyTtl
+                         * @memberof google.cloud.secretmanager.v1.Secret
+                         * @instance
+                         */
+                        Secret.prototype.versionDestroyTtl = null;
+    
+                        /**
+                         * Secret customerManagedEncryption.
+                         * @member {google.cloud.secretmanager.v1.ICustomerManagedEncryption|null|undefined} customerManagedEncryption
+                         * @memberof google.cloud.secretmanager.v1.Secret
+                         * @instance
+                         */
+                        Secret.prototype.customerManagedEncryption = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -256,6 +274,10 @@
                             if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
                                 for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 13, wireType 2 =*/106).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
+                            if (message.versionDestroyTtl != null && Object.hasOwnProperty.call(message, "versionDestroyTtl"))
+                                $root.google.protobuf.Duration.encode(message.versionDestroyTtl, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.customerManagedEncryption != null && Object.hasOwnProperty.call(message, "customerManagedEncryption"))
+                                $root.google.cloud.secretmanager.v1.CustomerManagedEncryption.encode(message.customerManagedEncryption, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                             return writer;
                         };
     
@@ -393,6 +415,14 @@
                                         message.annotations[key] = value;
                                         break;
                                     }
+                                case 14: {
+                                        message.versionDestroyTtl = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 15: {
+                                        message.customerManagedEncryption = $root.google.cloud.secretmanager.v1.CustomerManagedEncryption.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -501,6 +531,16 @@
                                     if (!$util.isString(message.annotations[key[i]]))
                                         return "annotations: string{k:string} expected";
                             }
+                            if (message.versionDestroyTtl != null && message.hasOwnProperty("versionDestroyTtl")) {
+                                var error = $root.google.protobuf.Duration.verify(message.versionDestroyTtl);
+                                if (error)
+                                    return "versionDestroyTtl." + error;
+                            }
+                            if (message.customerManagedEncryption != null && message.hasOwnProperty("customerManagedEncryption")) {
+                                var error = $root.google.cloud.secretmanager.v1.CustomerManagedEncryption.verify(message.customerManagedEncryption);
+                                if (error)
+                                    return "customerManagedEncryption." + error;
+                            }
                             return null;
                         };
     
@@ -583,6 +623,16 @@
                                 for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i)
                                     message.annotations[keys[i]] = String(object.annotations[keys[i]]);
                             }
+                            if (object.versionDestroyTtl != null) {
+                                if (typeof object.versionDestroyTtl !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1.Secret.versionDestroyTtl: object expected");
+                                message.versionDestroyTtl = $root.google.protobuf.Duration.fromObject(object.versionDestroyTtl);
+                            }
+                            if (object.customerManagedEncryption != null) {
+                                if (typeof object.customerManagedEncryption !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1.Secret.customerManagedEncryption: object expected");
+                                message.customerManagedEncryption = $root.google.cloud.secretmanager.v1.CustomerManagedEncryption.fromObject(object.customerManagedEncryption);
+                            }
                             return message;
                         };
     
@@ -612,6 +662,8 @@
                                 object.createTime = null;
                                 object.etag = "";
                                 object.rotation = null;
+                                object.versionDestroyTtl = null;
+                                object.customerManagedEncryption = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -657,6 +709,10 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.annotations[keys2[j]] = message.annotations[keys2[j]];
                             }
+                            if (message.versionDestroyTtl != null && message.hasOwnProperty("versionDestroyTtl"))
+                                object.versionDestroyTtl = $root.google.protobuf.Duration.toObject(message.versionDestroyTtl, options);
+                            if (message.customerManagedEncryption != null && message.hasOwnProperty("customerManagedEncryption"))
+                                object.customerManagedEncryption = $root.google.cloud.secretmanager.v1.CustomerManagedEncryption.toObject(message.customerManagedEncryption, options);
                             return object;
                         };
     
@@ -702,6 +758,8 @@
                          * @property {google.cloud.secretmanager.v1.IReplicationStatus|null} [replicationStatus] SecretVersion replicationStatus
                          * @property {string|null} [etag] SecretVersion etag
                          * @property {boolean|null} [clientSpecifiedPayloadChecksum] SecretVersion clientSpecifiedPayloadChecksum
+                         * @property {google.protobuf.ITimestamp|null} [scheduledDestroyTime] SecretVersion scheduledDestroyTime
+                         * @property {google.cloud.secretmanager.v1.ICustomerManagedEncryptionStatus|null} [customerManagedEncryption] SecretVersion customerManagedEncryption
                          */
     
                         /**
@@ -776,6 +834,22 @@
                         SecretVersion.prototype.clientSpecifiedPayloadChecksum = false;
     
                         /**
+                         * SecretVersion scheduledDestroyTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} scheduledDestroyTime
+                         * @memberof google.cloud.secretmanager.v1.SecretVersion
+                         * @instance
+                         */
+                        SecretVersion.prototype.scheduledDestroyTime = null;
+    
+                        /**
+                         * SecretVersion customerManagedEncryption.
+                         * @member {google.cloud.secretmanager.v1.ICustomerManagedEncryptionStatus|null|undefined} customerManagedEncryption
+                         * @memberof google.cloud.secretmanager.v1.SecretVersion
+                         * @instance
+                         */
+                        SecretVersion.prototype.customerManagedEncryption = null;
+    
+                        /**
                          * Creates a new SecretVersion instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.secretmanager.v1.SecretVersion
@@ -813,6 +887,10 @@
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.etag);
                             if (message.clientSpecifiedPayloadChecksum != null && Object.hasOwnProperty.call(message, "clientSpecifiedPayloadChecksum"))
                                 writer.uint32(/* id 7, wireType 0 =*/56).bool(message.clientSpecifiedPayloadChecksum);
+                            if (message.scheduledDestroyTime != null && Object.hasOwnProperty.call(message, "scheduledDestroyTime"))
+                                $root.google.protobuf.Timestamp.encode(message.scheduledDestroyTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.customerManagedEncryption != null && Object.hasOwnProperty.call(message, "customerManagedEncryption"))
+                                $root.google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus.encode(message.customerManagedEncryption, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             return writer;
                         };
     
@@ -873,6 +951,14 @@
                                     }
                                 case 7: {
                                         message.clientSpecifiedPayloadChecksum = reader.bool();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.scheduledDestroyTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.customerManagedEncryption = $root.google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -944,6 +1030,16 @@
                             if (message.clientSpecifiedPayloadChecksum != null && message.hasOwnProperty("clientSpecifiedPayloadChecksum"))
                                 if (typeof message.clientSpecifiedPayloadChecksum !== "boolean")
                                     return "clientSpecifiedPayloadChecksum: boolean expected";
+                            if (message.scheduledDestroyTime != null && message.hasOwnProperty("scheduledDestroyTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.scheduledDestroyTime);
+                                if (error)
+                                    return "scheduledDestroyTime." + error;
+                            }
+                            if (message.customerManagedEncryption != null && message.hasOwnProperty("customerManagedEncryption")) {
+                                var error = $root.google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus.verify(message.customerManagedEncryption);
+                                if (error)
+                                    return "customerManagedEncryption." + error;
+                            }
                             return null;
                         };
     
@@ -1004,6 +1100,16 @@
                                 message.etag = String(object.etag);
                             if (object.clientSpecifiedPayloadChecksum != null)
                                 message.clientSpecifiedPayloadChecksum = Boolean(object.clientSpecifiedPayloadChecksum);
+                            if (object.scheduledDestroyTime != null) {
+                                if (typeof object.scheduledDestroyTime !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1.SecretVersion.scheduledDestroyTime: object expected");
+                                message.scheduledDestroyTime = $root.google.protobuf.Timestamp.fromObject(object.scheduledDestroyTime);
+                            }
+                            if (object.customerManagedEncryption != null) {
+                                if (typeof object.customerManagedEncryption !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1.SecretVersion.customerManagedEncryption: object expected");
+                                message.customerManagedEncryption = $root.google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus.fromObject(object.customerManagedEncryption);
+                            }
                             return message;
                         };
     
@@ -1028,6 +1134,8 @@
                                 object.replicationStatus = null;
                                 object.etag = "";
                                 object.clientSpecifiedPayloadChecksum = false;
+                                object.scheduledDestroyTime = null;
+                                object.customerManagedEncryption = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -1043,6 +1151,10 @@
                                 object.etag = message.etag;
                             if (message.clientSpecifiedPayloadChecksum != null && message.hasOwnProperty("clientSpecifiedPayloadChecksum"))
                                 object.clientSpecifiedPayloadChecksum = message.clientSpecifiedPayloadChecksum;
+                            if (message.scheduledDestroyTime != null && message.hasOwnProperty("scheduledDestroyTime"))
+                                object.scheduledDestroyTime = $root.google.protobuf.Timestamp.toObject(message.scheduledDestroyTime, options);
+                            if (message.customerManagedEncryption != null && message.hasOwnProperty("customerManagedEncryption"))
+                                object.customerManagedEncryption = $root.google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus.toObject(message.customerManagedEncryption, options);
                             return object;
                         };
     
@@ -8151,6 +8263,8212 @@
                     return v1;
                 })();
     
+                secretmanager.v1beta2 = (function() {
+    
+                    /**
+                     * Namespace v1beta2.
+                     * @memberof google.cloud.secretmanager
+                     * @namespace
+                     */
+                    var v1beta2 = {};
+    
+                    v1beta2.Secret = (function() {
+    
+                        /**
+                         * Properties of a Secret.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @interface ISecret
+                         * @property {string|null} [name] Secret name
+                         * @property {google.cloud.secretmanager.v1beta2.IReplication|null} [replication] Secret replication
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Secret createTime
+                         * @property {Object.<string,string>|null} [labels] Secret labels
+                         * @property {Array.<google.cloud.secretmanager.v1beta2.ITopic>|null} [topics] Secret topics
+                         * @property {google.protobuf.ITimestamp|null} [expireTime] Secret expireTime
+                         * @property {google.protobuf.IDuration|null} [ttl] Secret ttl
+                         * @property {string|null} [etag] Secret etag
+                         * @property {google.cloud.secretmanager.v1beta2.IRotation|null} [rotation] Secret rotation
+                         * @property {Object.<string,number|Long>|null} [versionAliases] Secret versionAliases
+                         * @property {Object.<string,string>|null} [annotations] Secret annotations
+                         * @property {google.protobuf.IDuration|null} [versionDestroyTtl] Secret versionDestroyTtl
+                         * @property {google.cloud.secretmanager.v1beta2.ICustomerManagedEncryption|null} [customerManagedEncryption] Secret customerManagedEncryption
+                         */
+    
+                        /**
+                         * Constructs a new Secret.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @classdesc Represents a Secret.
+                         * @implements ISecret
+                         * @constructor
+                         * @param {google.cloud.secretmanager.v1beta2.ISecret=} [properties] Properties to set
+                         */
+                        function Secret(properties) {
+                            this.labels = {};
+                            this.topics = [];
+                            this.versionAliases = {};
+                            this.annotations = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Secret name.
+                         * @member {string} name
+                         * @memberof google.cloud.secretmanager.v1beta2.Secret
+                         * @instance
+                         */
+                        Secret.prototype.name = "";
+    
+                        /**
+                         * Secret replication.
+                         * @member {google.cloud.secretmanager.v1beta2.IReplication|null|undefined} replication
+                         * @memberof google.cloud.secretmanager.v1beta2.Secret
+                         * @instance
+                         */
+                        Secret.prototype.replication = null;
+    
+                        /**
+                         * Secret createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.secretmanager.v1beta2.Secret
+                         * @instance
+                         */
+                        Secret.prototype.createTime = null;
+    
+                        /**
+                         * Secret labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.secretmanager.v1beta2.Secret
+                         * @instance
+                         */
+                        Secret.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * Secret topics.
+                         * @member {Array.<google.cloud.secretmanager.v1beta2.ITopic>} topics
+                         * @memberof google.cloud.secretmanager.v1beta2.Secret
+                         * @instance
+                         */
+                        Secret.prototype.topics = $util.emptyArray;
+    
+                        /**
+                         * Secret expireTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} expireTime
+                         * @memberof google.cloud.secretmanager.v1beta2.Secret
+                         * @instance
+                         */
+                        Secret.prototype.expireTime = null;
+    
+                        /**
+                         * Secret ttl.
+                         * @member {google.protobuf.IDuration|null|undefined} ttl
+                         * @memberof google.cloud.secretmanager.v1beta2.Secret
+                         * @instance
+                         */
+                        Secret.prototype.ttl = null;
+    
+                        /**
+                         * Secret etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.secretmanager.v1beta2.Secret
+                         * @instance
+                         */
+                        Secret.prototype.etag = "";
+    
+                        /**
+                         * Secret rotation.
+                         * @member {google.cloud.secretmanager.v1beta2.IRotation|null|undefined} rotation
+                         * @memberof google.cloud.secretmanager.v1beta2.Secret
+                         * @instance
+                         */
+                        Secret.prototype.rotation = null;
+    
+                        /**
+                         * Secret versionAliases.
+                         * @member {Object.<string,number|Long>} versionAliases
+                         * @memberof google.cloud.secretmanager.v1beta2.Secret
+                         * @instance
+                         */
+                        Secret.prototype.versionAliases = $util.emptyObject;
+    
+                        /**
+                         * Secret annotations.
+                         * @member {Object.<string,string>} annotations
+                         * @memberof google.cloud.secretmanager.v1beta2.Secret
+                         * @instance
+                         */
+                        Secret.prototype.annotations = $util.emptyObject;
+    
+                        /**
+                         * Secret versionDestroyTtl.
+                         * @member {google.protobuf.IDuration|null|undefined} versionDestroyTtl
+                         * @memberof google.cloud.secretmanager.v1beta2.Secret
+                         * @instance
+                         */
+                        Secret.prototype.versionDestroyTtl = null;
+    
+                        /**
+                         * Secret customerManagedEncryption.
+                         * @member {google.cloud.secretmanager.v1beta2.ICustomerManagedEncryption|null|undefined} customerManagedEncryption
+                         * @memberof google.cloud.secretmanager.v1beta2.Secret
+                         * @instance
+                         */
+                        Secret.prototype.customerManagedEncryption = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Secret expiration.
+                         * @member {"expireTime"|"ttl"|undefined} expiration
+                         * @memberof google.cloud.secretmanager.v1beta2.Secret
+                         * @instance
+                         */
+                        Object.defineProperty(Secret.prototype, "expiration", {
+                            get: $util.oneOfGetter($oneOfFields = ["expireTime", "ttl"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new Secret instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.secretmanager.v1beta2.Secret
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.ISecret=} [properties] Properties to set
+                         * @returns {google.cloud.secretmanager.v1beta2.Secret} Secret instance
+                         */
+                        Secret.create = function create(properties) {
+                            return new Secret(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Secret message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.Secret.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.secretmanager.v1beta2.Secret
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.ISecret} message Secret message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Secret.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.replication != null && Object.hasOwnProperty.call(message, "replication"))
+                                $root.google.cloud.secretmanager.v1beta2.Replication.encode(message.replication, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.topics != null && message.topics.length)
+                                for (var i = 0; i < message.topics.length; ++i)
+                                    $root.google.cloud.secretmanager.v1beta2.Topic.encode(message.topics[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.expireTime != null && Object.hasOwnProperty.call(message, "expireTime"))
+                                $root.google.protobuf.Timestamp.encode(message.expireTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.ttl != null && Object.hasOwnProperty.call(message, "ttl"))
+                                $root.google.protobuf.Duration.encode(message.ttl, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.etag);
+                            if (message.rotation != null && Object.hasOwnProperty.call(message, "rotation"))
+                                $root.google.cloud.secretmanager.v1beta2.Rotation.encode(message.rotation, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.versionAliases != null && Object.hasOwnProperty.call(message, "versionAliases"))
+                                for (var keys = Object.keys(message.versionAliases), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 11, wireType 2 =*/90).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 0 =*/16).int64(message.versionAliases[keys[i]]).ldelim();
+                            if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
+                                for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 13, wireType 2 =*/106).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
+                            if (message.versionDestroyTtl != null && Object.hasOwnProperty.call(message, "versionDestroyTtl"))
+                                $root.google.protobuf.Duration.encode(message.versionDestroyTtl, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.customerManagedEncryption != null && Object.hasOwnProperty.call(message, "customerManagedEncryption"))
+                                $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryption.encode(message.customerManagedEncryption, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Secret message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.Secret.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.Secret
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.ISecret} message Secret message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Secret.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Secret message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.secretmanager.v1beta2.Secret
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.secretmanager.v1beta2.Secret} Secret
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Secret.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1beta2.Secret(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.replication = $root.google.cloud.secretmanager.v1beta2.Replication.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.topics && message.topics.length))
+                                            message.topics = [];
+                                        message.topics.push($root.google.cloud.secretmanager.v1beta2.Topic.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 6: {
+                                        message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.ttl = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.rotation = $root.google.cloud.secretmanager.v1beta2.Rotation.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 11: {
+                                        if (message.versionAliases === $util.emptyObject)
+                                            message.versionAliases = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = 0;
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.int64();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.versionAliases[key] = value;
+                                        break;
+                                    }
+                                case 13: {
+                                        if (message.annotations === $util.emptyObject)
+                                            message.annotations = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.annotations[key] = value;
+                                        break;
+                                    }
+                                case 14: {
+                                        message.versionDestroyTtl = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 15: {
+                                        message.customerManagedEncryption = $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryption.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Secret message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.Secret
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.secretmanager.v1beta2.Secret} Secret
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Secret.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Secret message.
+                         * @function verify
+                         * @memberof google.cloud.secretmanager.v1beta2.Secret
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Secret.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.replication != null && message.hasOwnProperty("replication")) {
+                                var error = $root.google.cloud.secretmanager.v1beta2.Replication.verify(message.replication);
+                                if (error)
+                                    return "replication." + error;
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.topics != null && message.hasOwnProperty("topics")) {
+                                if (!Array.isArray(message.topics))
+                                    return "topics: array expected";
+                                for (var i = 0; i < message.topics.length; ++i) {
+                                    var error = $root.google.cloud.secretmanager.v1beta2.Topic.verify(message.topics[i]);
+                                    if (error)
+                                        return "topics." + error;
+                                }
+                            }
+                            if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
+                                properties.expiration = 1;
+                                {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.expireTime);
+                                    if (error)
+                                        return "expireTime." + error;
+                                }
+                            }
+                            if (message.ttl != null && message.hasOwnProperty("ttl")) {
+                                if (properties.expiration === 1)
+                                    return "expiration: multiple values";
+                                properties.expiration = 1;
+                                {
+                                    var error = $root.google.protobuf.Duration.verify(message.ttl);
+                                    if (error)
+                                        return "ttl." + error;
+                                }
+                            }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            if (message.rotation != null && message.hasOwnProperty("rotation")) {
+                                var error = $root.google.cloud.secretmanager.v1beta2.Rotation.verify(message.rotation);
+                                if (error)
+                                    return "rotation." + error;
+                            }
+                            if (message.versionAliases != null && message.hasOwnProperty("versionAliases")) {
+                                if (!$util.isObject(message.versionAliases))
+                                    return "versionAliases: object expected";
+                                var key = Object.keys(message.versionAliases);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isInteger(message.versionAliases[key[i]]) && !(message.versionAliases[key[i]] && $util.isInteger(message.versionAliases[key[i]].low) && $util.isInteger(message.versionAliases[key[i]].high)))
+                                        return "versionAliases: integer|Long{k:string} expected";
+                            }
+                            if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                                if (!$util.isObject(message.annotations))
+                                    return "annotations: object expected";
+                                var key = Object.keys(message.annotations);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.annotations[key[i]]))
+                                        return "annotations: string{k:string} expected";
+                            }
+                            if (message.versionDestroyTtl != null && message.hasOwnProperty("versionDestroyTtl")) {
+                                var error = $root.google.protobuf.Duration.verify(message.versionDestroyTtl);
+                                if (error)
+                                    return "versionDestroyTtl." + error;
+                            }
+                            if (message.customerManagedEncryption != null && message.hasOwnProperty("customerManagedEncryption")) {
+                                var error = $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryption.verify(message.customerManagedEncryption);
+                                if (error)
+                                    return "customerManagedEncryption." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Secret message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.secretmanager.v1beta2.Secret
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.secretmanager.v1beta2.Secret} Secret
+                         */
+                        Secret.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.secretmanager.v1beta2.Secret)
+                                return object;
+                            var message = new $root.google.cloud.secretmanager.v1beta2.Secret();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.replication != null) {
+                                if (typeof object.replication !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1beta2.Secret.replication: object expected");
+                                message.replication = $root.google.cloud.secretmanager.v1beta2.Replication.fromObject(object.replication);
+                            }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1beta2.Secret.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1beta2.Secret.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.topics) {
+                                if (!Array.isArray(object.topics))
+                                    throw TypeError(".google.cloud.secretmanager.v1beta2.Secret.topics: array expected");
+                                message.topics = [];
+                                for (var i = 0; i < object.topics.length; ++i) {
+                                    if (typeof object.topics[i] !== "object")
+                                        throw TypeError(".google.cloud.secretmanager.v1beta2.Secret.topics: object expected");
+                                    message.topics[i] = $root.google.cloud.secretmanager.v1beta2.Topic.fromObject(object.topics[i]);
+                                }
+                            }
+                            if (object.expireTime != null) {
+                                if (typeof object.expireTime !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1beta2.Secret.expireTime: object expected");
+                                message.expireTime = $root.google.protobuf.Timestamp.fromObject(object.expireTime);
+                            }
+                            if (object.ttl != null) {
+                                if (typeof object.ttl !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1beta2.Secret.ttl: object expected");
+                                message.ttl = $root.google.protobuf.Duration.fromObject(object.ttl);
+                            }
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            if (object.rotation != null) {
+                                if (typeof object.rotation !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1beta2.Secret.rotation: object expected");
+                                message.rotation = $root.google.cloud.secretmanager.v1beta2.Rotation.fromObject(object.rotation);
+                            }
+                            if (object.versionAliases) {
+                                if (typeof object.versionAliases !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1beta2.Secret.versionAliases: object expected");
+                                message.versionAliases = {};
+                                for (var keys = Object.keys(object.versionAliases), i = 0; i < keys.length; ++i)
+                                    if ($util.Long)
+                                        (message.versionAliases[keys[i]] = $util.Long.fromValue(object.versionAliases[keys[i]])).unsigned = false;
+                                    else if (typeof object.versionAliases[keys[i]] === "string")
+                                        message.versionAliases[keys[i]] = parseInt(object.versionAliases[keys[i]], 10);
+                                    else if (typeof object.versionAliases[keys[i]] === "number")
+                                        message.versionAliases[keys[i]] = object.versionAliases[keys[i]];
+                                    else if (typeof object.versionAliases[keys[i]] === "object")
+                                        message.versionAliases[keys[i]] = new $util.LongBits(object.versionAliases[keys[i]].low >>> 0, object.versionAliases[keys[i]].high >>> 0).toNumber();
+                            }
+                            if (object.annotations) {
+                                if (typeof object.annotations !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1beta2.Secret.annotations: object expected");
+                                message.annotations = {};
+                                for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i)
+                                    message.annotations[keys[i]] = String(object.annotations[keys[i]]);
+                            }
+                            if (object.versionDestroyTtl != null) {
+                                if (typeof object.versionDestroyTtl !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1beta2.Secret.versionDestroyTtl: object expected");
+                                message.versionDestroyTtl = $root.google.protobuf.Duration.fromObject(object.versionDestroyTtl);
+                            }
+                            if (object.customerManagedEncryption != null) {
+                                if (typeof object.customerManagedEncryption !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1beta2.Secret.customerManagedEncryption: object expected");
+                                message.customerManagedEncryption = $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryption.fromObject(object.customerManagedEncryption);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Secret message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.secretmanager.v1beta2.Secret
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.Secret} message Secret
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Secret.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.topics = [];
+                            if (options.objects || options.defaults) {
+                                object.labels = {};
+                                object.versionAliases = {};
+                                object.annotations = {};
+                            }
+                            if (options.defaults) {
+                                object.name = "";
+                                object.replication = null;
+                                object.createTime = null;
+                                object.etag = "";
+                                object.rotation = null;
+                                object.versionDestroyTtl = null;
+                                object.customerManagedEncryption = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.replication != null && message.hasOwnProperty("replication"))
+                                object.replication = $root.google.cloud.secretmanager.v1beta2.Replication.toObject(message.replication, options);
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.topics && message.topics.length) {
+                                object.topics = [];
+                                for (var j = 0; j < message.topics.length; ++j)
+                                    object.topics[j] = $root.google.cloud.secretmanager.v1beta2.Topic.toObject(message.topics[j], options);
+                            }
+                            if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
+                                object.expireTime = $root.google.protobuf.Timestamp.toObject(message.expireTime, options);
+                                if (options.oneofs)
+                                    object.expiration = "expireTime";
+                            }
+                            if (message.ttl != null && message.hasOwnProperty("ttl")) {
+                                object.ttl = $root.google.protobuf.Duration.toObject(message.ttl, options);
+                                if (options.oneofs)
+                                    object.expiration = "ttl";
+                            }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            if (message.rotation != null && message.hasOwnProperty("rotation"))
+                                object.rotation = $root.google.cloud.secretmanager.v1beta2.Rotation.toObject(message.rotation, options);
+                            if (message.versionAliases && (keys2 = Object.keys(message.versionAliases)).length) {
+                                object.versionAliases = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    if (typeof message.versionAliases[keys2[j]] === "number")
+                                        object.versionAliases[keys2[j]] = options.longs === String ? String(message.versionAliases[keys2[j]]) : message.versionAliases[keys2[j]];
+                                    else
+                                        object.versionAliases[keys2[j]] = options.longs === String ? $util.Long.prototype.toString.call(message.versionAliases[keys2[j]]) : options.longs === Number ? new $util.LongBits(message.versionAliases[keys2[j]].low >>> 0, message.versionAliases[keys2[j]].high >>> 0).toNumber() : message.versionAliases[keys2[j]];
+                            }
+                            if (message.annotations && (keys2 = Object.keys(message.annotations)).length) {
+                                object.annotations = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.annotations[keys2[j]] = message.annotations[keys2[j]];
+                            }
+                            if (message.versionDestroyTtl != null && message.hasOwnProperty("versionDestroyTtl"))
+                                object.versionDestroyTtl = $root.google.protobuf.Duration.toObject(message.versionDestroyTtl, options);
+                            if (message.customerManagedEncryption != null && message.hasOwnProperty("customerManagedEncryption"))
+                                object.customerManagedEncryption = $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryption.toObject(message.customerManagedEncryption, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Secret to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.secretmanager.v1beta2.Secret
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Secret.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Secret
+                         * @function getTypeUrl
+                         * @memberof google.cloud.secretmanager.v1beta2.Secret
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Secret.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.secretmanager.v1beta2.Secret";
+                        };
+    
+                        return Secret;
+                    })();
+    
+                    v1beta2.SecretVersion = (function() {
+    
+                        /**
+                         * Properties of a SecretVersion.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @interface ISecretVersion
+                         * @property {string|null} [name] SecretVersion name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] SecretVersion createTime
+                         * @property {google.protobuf.ITimestamp|null} [destroyTime] SecretVersion destroyTime
+                         * @property {google.cloud.secretmanager.v1beta2.SecretVersion.State|null} [state] SecretVersion state
+                         * @property {google.cloud.secretmanager.v1beta2.IReplicationStatus|null} [replicationStatus] SecretVersion replicationStatus
+                         * @property {string|null} [etag] SecretVersion etag
+                         * @property {boolean|null} [clientSpecifiedPayloadChecksum] SecretVersion clientSpecifiedPayloadChecksum
+                         * @property {google.protobuf.ITimestamp|null} [scheduledDestroyTime] SecretVersion scheduledDestroyTime
+                         * @property {google.cloud.secretmanager.v1beta2.ICustomerManagedEncryptionStatus|null} [customerManagedEncryption] SecretVersion customerManagedEncryption
+                         */
+    
+                        /**
+                         * Constructs a new SecretVersion.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @classdesc Represents a SecretVersion.
+                         * @implements ISecretVersion
+                         * @constructor
+                         * @param {google.cloud.secretmanager.v1beta2.ISecretVersion=} [properties] Properties to set
+                         */
+                        function SecretVersion(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SecretVersion name.
+                         * @member {string} name
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretVersion
+                         * @instance
+                         */
+                        SecretVersion.prototype.name = "";
+    
+                        /**
+                         * SecretVersion createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretVersion
+                         * @instance
+                         */
+                        SecretVersion.prototype.createTime = null;
+    
+                        /**
+                         * SecretVersion destroyTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} destroyTime
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretVersion
+                         * @instance
+                         */
+                        SecretVersion.prototype.destroyTime = null;
+    
+                        /**
+                         * SecretVersion state.
+                         * @member {google.cloud.secretmanager.v1beta2.SecretVersion.State} state
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretVersion
+                         * @instance
+                         */
+                        SecretVersion.prototype.state = 0;
+    
+                        /**
+                         * SecretVersion replicationStatus.
+                         * @member {google.cloud.secretmanager.v1beta2.IReplicationStatus|null|undefined} replicationStatus
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretVersion
+                         * @instance
+                         */
+                        SecretVersion.prototype.replicationStatus = null;
+    
+                        /**
+                         * SecretVersion etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretVersion
+                         * @instance
+                         */
+                        SecretVersion.prototype.etag = "";
+    
+                        /**
+                         * SecretVersion clientSpecifiedPayloadChecksum.
+                         * @member {boolean} clientSpecifiedPayloadChecksum
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretVersion
+                         * @instance
+                         */
+                        SecretVersion.prototype.clientSpecifiedPayloadChecksum = false;
+    
+                        /**
+                         * SecretVersion scheduledDestroyTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} scheduledDestroyTime
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretVersion
+                         * @instance
+                         */
+                        SecretVersion.prototype.scheduledDestroyTime = null;
+    
+                        /**
+                         * SecretVersion customerManagedEncryption.
+                         * @member {google.cloud.secretmanager.v1beta2.ICustomerManagedEncryptionStatus|null|undefined} customerManagedEncryption
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretVersion
+                         * @instance
+                         */
+                        SecretVersion.prototype.customerManagedEncryption = null;
+    
+                        /**
+                         * Creates a new SecretVersion instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretVersion
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.ISecretVersion=} [properties] Properties to set
+                         * @returns {google.cloud.secretmanager.v1beta2.SecretVersion} SecretVersion instance
+                         */
+                        SecretVersion.create = function create(properties) {
+                            return new SecretVersion(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SecretVersion message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.SecretVersion.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretVersion
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.ISecretVersion} message SecretVersion message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SecretVersion.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.destroyTime != null && Object.hasOwnProperty.call(message, "destroyTime"))
+                                $root.google.protobuf.Timestamp.encode(message.destroyTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.state);
+                            if (message.replicationStatus != null && Object.hasOwnProperty.call(message, "replicationStatus"))
+                                $root.google.cloud.secretmanager.v1beta2.ReplicationStatus.encode(message.replicationStatus, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.etag);
+                            if (message.clientSpecifiedPayloadChecksum != null && Object.hasOwnProperty.call(message, "clientSpecifiedPayloadChecksum"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.clientSpecifiedPayloadChecksum);
+                            if (message.scheduledDestroyTime != null && Object.hasOwnProperty.call(message, "scheduledDestroyTime"))
+                                $root.google.protobuf.Timestamp.encode(message.scheduledDestroyTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.customerManagedEncryption != null && Object.hasOwnProperty.call(message, "customerManagedEncryption"))
+                                $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus.encode(message.customerManagedEncryption, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SecretVersion message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.SecretVersion.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretVersion
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.ISecretVersion} message SecretVersion message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SecretVersion.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SecretVersion message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretVersion
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.secretmanager.v1beta2.SecretVersion} SecretVersion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SecretVersion.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1beta2.SecretVersion();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.destroyTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.replicationStatus = $root.google.cloud.secretmanager.v1beta2.ReplicationStatus.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.clientSpecifiedPayloadChecksum = reader.bool();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.scheduledDestroyTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.customerManagedEncryption = $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SecretVersion message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretVersion
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.secretmanager.v1beta2.SecretVersion} SecretVersion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SecretVersion.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SecretVersion message.
+                         * @function verify
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretVersion
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SecretVersion.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.destroyTime != null && message.hasOwnProperty("destroyTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.destroyTime);
+                                if (error)
+                                    return "destroyTime." + error;
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.replicationStatus != null && message.hasOwnProperty("replicationStatus")) {
+                                var error = $root.google.cloud.secretmanager.v1beta2.ReplicationStatus.verify(message.replicationStatus);
+                                if (error)
+                                    return "replicationStatus." + error;
+                            }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            if (message.clientSpecifiedPayloadChecksum != null && message.hasOwnProperty("clientSpecifiedPayloadChecksum"))
+                                if (typeof message.clientSpecifiedPayloadChecksum !== "boolean")
+                                    return "clientSpecifiedPayloadChecksum: boolean expected";
+                            if (message.scheduledDestroyTime != null && message.hasOwnProperty("scheduledDestroyTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.scheduledDestroyTime);
+                                if (error)
+                                    return "scheduledDestroyTime." + error;
+                            }
+                            if (message.customerManagedEncryption != null && message.hasOwnProperty("customerManagedEncryption")) {
+                                var error = $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus.verify(message.customerManagedEncryption);
+                                if (error)
+                                    return "customerManagedEncryption." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SecretVersion message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretVersion
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.secretmanager.v1beta2.SecretVersion} SecretVersion
+                         */
+                        SecretVersion.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.secretmanager.v1beta2.SecretVersion)
+                                return object;
+                            var message = new $root.google.cloud.secretmanager.v1beta2.SecretVersion();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1beta2.SecretVersion.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.destroyTime != null) {
+                                if (typeof object.destroyTime !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1beta2.SecretVersion.destroyTime: object expected");
+                                message.destroyTime = $root.google.protobuf.Timestamp.fromObject(object.destroyTime);
+                            }
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "ENABLED":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "DISABLED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "DESTROYED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            }
+                            if (object.replicationStatus != null) {
+                                if (typeof object.replicationStatus !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1beta2.SecretVersion.replicationStatus: object expected");
+                                message.replicationStatus = $root.google.cloud.secretmanager.v1beta2.ReplicationStatus.fromObject(object.replicationStatus);
+                            }
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            if (object.clientSpecifiedPayloadChecksum != null)
+                                message.clientSpecifiedPayloadChecksum = Boolean(object.clientSpecifiedPayloadChecksum);
+                            if (object.scheduledDestroyTime != null) {
+                                if (typeof object.scheduledDestroyTime !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1beta2.SecretVersion.scheduledDestroyTime: object expected");
+                                message.scheduledDestroyTime = $root.google.protobuf.Timestamp.fromObject(object.scheduledDestroyTime);
+                            }
+                            if (object.customerManagedEncryption != null) {
+                                if (typeof object.customerManagedEncryption !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1beta2.SecretVersion.customerManagedEncryption: object expected");
+                                message.customerManagedEncryption = $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus.fromObject(object.customerManagedEncryption);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SecretVersion message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretVersion
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.SecretVersion} message SecretVersion
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SecretVersion.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.destroyTime = null;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.replicationStatus = null;
+                                object.etag = "";
+                                object.clientSpecifiedPayloadChecksum = false;
+                                object.scheduledDestroyTime = null;
+                                object.customerManagedEncryption = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.destroyTime != null && message.hasOwnProperty("destroyTime"))
+                                object.destroyTime = $root.google.protobuf.Timestamp.toObject(message.destroyTime, options);
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.secretmanager.v1beta2.SecretVersion.State[message.state] === undefined ? message.state : $root.google.cloud.secretmanager.v1beta2.SecretVersion.State[message.state] : message.state;
+                            if (message.replicationStatus != null && message.hasOwnProperty("replicationStatus"))
+                                object.replicationStatus = $root.google.cloud.secretmanager.v1beta2.ReplicationStatus.toObject(message.replicationStatus, options);
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            if (message.clientSpecifiedPayloadChecksum != null && message.hasOwnProperty("clientSpecifiedPayloadChecksum"))
+                                object.clientSpecifiedPayloadChecksum = message.clientSpecifiedPayloadChecksum;
+                            if (message.scheduledDestroyTime != null && message.hasOwnProperty("scheduledDestroyTime"))
+                                object.scheduledDestroyTime = $root.google.protobuf.Timestamp.toObject(message.scheduledDestroyTime, options);
+                            if (message.customerManagedEncryption != null && message.hasOwnProperty("customerManagedEncryption"))
+                                object.customerManagedEncryption = $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus.toObject(message.customerManagedEncryption, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SecretVersion to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretVersion
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SecretVersion.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SecretVersion
+                         * @function getTypeUrl
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretVersion
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SecretVersion.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.secretmanager.v1beta2.SecretVersion";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.secretmanager.v1beta2.SecretVersion.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} ENABLED=1 ENABLED value
+                         * @property {number} DISABLED=2 DISABLED value
+                         * @property {number} DESTROYED=3 DESTROYED value
+                         */
+                        SecretVersion.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ENABLED"] = 1;
+                            values[valuesById[2] = "DISABLED"] = 2;
+                            values[valuesById[3] = "DESTROYED"] = 3;
+                            return values;
+                        })();
+    
+                        return SecretVersion;
+                    })();
+    
+                    v1beta2.Replication = (function() {
+    
+                        /**
+                         * Properties of a Replication.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @interface IReplication
+                         * @property {google.cloud.secretmanager.v1beta2.Replication.IAutomatic|null} [automatic] Replication automatic
+                         * @property {google.cloud.secretmanager.v1beta2.Replication.IUserManaged|null} [userManaged] Replication userManaged
+                         */
+    
+                        /**
+                         * Constructs a new Replication.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @classdesc Represents a Replication.
+                         * @implements IReplication
+                         * @constructor
+                         * @param {google.cloud.secretmanager.v1beta2.IReplication=} [properties] Properties to set
+                         */
+                        function Replication(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Replication automatic.
+                         * @member {google.cloud.secretmanager.v1beta2.Replication.IAutomatic|null|undefined} automatic
+                         * @memberof google.cloud.secretmanager.v1beta2.Replication
+                         * @instance
+                         */
+                        Replication.prototype.automatic = null;
+    
+                        /**
+                         * Replication userManaged.
+                         * @member {google.cloud.secretmanager.v1beta2.Replication.IUserManaged|null|undefined} userManaged
+                         * @memberof google.cloud.secretmanager.v1beta2.Replication
+                         * @instance
+                         */
+                        Replication.prototype.userManaged = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Replication replication.
+                         * @member {"automatic"|"userManaged"|undefined} replication
+                         * @memberof google.cloud.secretmanager.v1beta2.Replication
+                         * @instance
+                         */
+                        Object.defineProperty(Replication.prototype, "replication", {
+                            get: $util.oneOfGetter($oneOfFields = ["automatic", "userManaged"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new Replication instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.secretmanager.v1beta2.Replication
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IReplication=} [properties] Properties to set
+                         * @returns {google.cloud.secretmanager.v1beta2.Replication} Replication instance
+                         */
+                        Replication.create = function create(properties) {
+                            return new Replication(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Replication message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.Replication.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.secretmanager.v1beta2.Replication
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IReplication} message Replication message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Replication.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.automatic != null && Object.hasOwnProperty.call(message, "automatic"))
+                                $root.google.cloud.secretmanager.v1beta2.Replication.Automatic.encode(message.automatic, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.userManaged != null && Object.hasOwnProperty.call(message, "userManaged"))
+                                $root.google.cloud.secretmanager.v1beta2.Replication.UserManaged.encode(message.userManaged, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Replication message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.Replication.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.Replication
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IReplication} message Replication message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Replication.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Replication message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.secretmanager.v1beta2.Replication
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.secretmanager.v1beta2.Replication} Replication
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Replication.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1beta2.Replication();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.automatic = $root.google.cloud.secretmanager.v1beta2.Replication.Automatic.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.userManaged = $root.google.cloud.secretmanager.v1beta2.Replication.UserManaged.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Replication message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.Replication
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.secretmanager.v1beta2.Replication} Replication
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Replication.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Replication message.
+                         * @function verify
+                         * @memberof google.cloud.secretmanager.v1beta2.Replication
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Replication.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.automatic != null && message.hasOwnProperty("automatic")) {
+                                properties.replication = 1;
+                                {
+                                    var error = $root.google.cloud.secretmanager.v1beta2.Replication.Automatic.verify(message.automatic);
+                                    if (error)
+                                        return "automatic." + error;
+                                }
+                            }
+                            if (message.userManaged != null && message.hasOwnProperty("userManaged")) {
+                                if (properties.replication === 1)
+                                    return "replication: multiple values";
+                                properties.replication = 1;
+                                {
+                                    var error = $root.google.cloud.secretmanager.v1beta2.Replication.UserManaged.verify(message.userManaged);
+                                    if (error)
+                                        return "userManaged." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Replication message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.secretmanager.v1beta2.Replication
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.secretmanager.v1beta2.Replication} Replication
+                         */
+                        Replication.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.secretmanager.v1beta2.Replication)
+                                return object;
+                            var message = new $root.google.cloud.secretmanager.v1beta2.Replication();
+                            if (object.automatic != null) {
+                                if (typeof object.automatic !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1beta2.Replication.automatic: object expected");
+                                message.automatic = $root.google.cloud.secretmanager.v1beta2.Replication.Automatic.fromObject(object.automatic);
+                            }
+                            if (object.userManaged != null) {
+                                if (typeof object.userManaged !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1beta2.Replication.userManaged: object expected");
+                                message.userManaged = $root.google.cloud.secretmanager.v1beta2.Replication.UserManaged.fromObject(object.userManaged);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Replication message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.secretmanager.v1beta2.Replication
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.Replication} message Replication
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Replication.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.automatic != null && message.hasOwnProperty("automatic")) {
+                                object.automatic = $root.google.cloud.secretmanager.v1beta2.Replication.Automatic.toObject(message.automatic, options);
+                                if (options.oneofs)
+                                    object.replication = "automatic";
+                            }
+                            if (message.userManaged != null && message.hasOwnProperty("userManaged")) {
+                                object.userManaged = $root.google.cloud.secretmanager.v1beta2.Replication.UserManaged.toObject(message.userManaged, options);
+                                if (options.oneofs)
+                                    object.replication = "userManaged";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Replication to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.secretmanager.v1beta2.Replication
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Replication.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Replication
+                         * @function getTypeUrl
+                         * @memberof google.cloud.secretmanager.v1beta2.Replication
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Replication.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.secretmanager.v1beta2.Replication";
+                        };
+    
+                        Replication.Automatic = (function() {
+    
+                            /**
+                             * Properties of an Automatic.
+                             * @memberof google.cloud.secretmanager.v1beta2.Replication
+                             * @interface IAutomatic
+                             * @property {google.cloud.secretmanager.v1beta2.ICustomerManagedEncryption|null} [customerManagedEncryption] Automatic customerManagedEncryption
+                             */
+    
+                            /**
+                             * Constructs a new Automatic.
+                             * @memberof google.cloud.secretmanager.v1beta2.Replication
+                             * @classdesc Represents an Automatic.
+                             * @implements IAutomatic
+                             * @constructor
+                             * @param {google.cloud.secretmanager.v1beta2.Replication.IAutomatic=} [properties] Properties to set
+                             */
+                            function Automatic(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Automatic customerManagedEncryption.
+                             * @member {google.cloud.secretmanager.v1beta2.ICustomerManagedEncryption|null|undefined} customerManagedEncryption
+                             * @memberof google.cloud.secretmanager.v1beta2.Replication.Automatic
+                             * @instance
+                             */
+                            Automatic.prototype.customerManagedEncryption = null;
+    
+                            /**
+                             * Creates a new Automatic instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.secretmanager.v1beta2.Replication.Automatic
+                             * @static
+                             * @param {google.cloud.secretmanager.v1beta2.Replication.IAutomatic=} [properties] Properties to set
+                             * @returns {google.cloud.secretmanager.v1beta2.Replication.Automatic} Automatic instance
+                             */
+                            Automatic.create = function create(properties) {
+                                return new Automatic(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Automatic message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.Replication.Automatic.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.secretmanager.v1beta2.Replication.Automatic
+                             * @static
+                             * @param {google.cloud.secretmanager.v1beta2.Replication.IAutomatic} message Automatic message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Automatic.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.customerManagedEncryption != null && Object.hasOwnProperty.call(message, "customerManagedEncryption"))
+                                    $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryption.encode(message.customerManagedEncryption, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Automatic message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.Replication.Automatic.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.secretmanager.v1beta2.Replication.Automatic
+                             * @static
+                             * @param {google.cloud.secretmanager.v1beta2.Replication.IAutomatic} message Automatic message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Automatic.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an Automatic message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.secretmanager.v1beta2.Replication.Automatic
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.secretmanager.v1beta2.Replication.Automatic} Automatic
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Automatic.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1beta2.Replication.Automatic();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.customerManagedEncryption = $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryption.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an Automatic message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.secretmanager.v1beta2.Replication.Automatic
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.secretmanager.v1beta2.Replication.Automatic} Automatic
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Automatic.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an Automatic message.
+                             * @function verify
+                             * @memberof google.cloud.secretmanager.v1beta2.Replication.Automatic
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Automatic.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.customerManagedEncryption != null && message.hasOwnProperty("customerManagedEncryption")) {
+                                    var error = $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryption.verify(message.customerManagedEncryption);
+                                    if (error)
+                                        return "customerManagedEncryption." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an Automatic message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.secretmanager.v1beta2.Replication.Automatic
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.secretmanager.v1beta2.Replication.Automatic} Automatic
+                             */
+                            Automatic.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.secretmanager.v1beta2.Replication.Automatic)
+                                    return object;
+                                var message = new $root.google.cloud.secretmanager.v1beta2.Replication.Automatic();
+                                if (object.customerManagedEncryption != null) {
+                                    if (typeof object.customerManagedEncryption !== "object")
+                                        throw TypeError(".google.cloud.secretmanager.v1beta2.Replication.Automatic.customerManagedEncryption: object expected");
+                                    message.customerManagedEncryption = $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryption.fromObject(object.customerManagedEncryption);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an Automatic message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.secretmanager.v1beta2.Replication.Automatic
+                             * @static
+                             * @param {google.cloud.secretmanager.v1beta2.Replication.Automatic} message Automatic
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Automatic.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.customerManagedEncryption = null;
+                                if (message.customerManagedEncryption != null && message.hasOwnProperty("customerManagedEncryption"))
+                                    object.customerManagedEncryption = $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryption.toObject(message.customerManagedEncryption, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Automatic to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.secretmanager.v1beta2.Replication.Automatic
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Automatic.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Automatic
+                             * @function getTypeUrl
+                             * @memberof google.cloud.secretmanager.v1beta2.Replication.Automatic
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Automatic.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.secretmanager.v1beta2.Replication.Automatic";
+                            };
+    
+                            return Automatic;
+                        })();
+    
+                        Replication.UserManaged = (function() {
+    
+                            /**
+                             * Properties of a UserManaged.
+                             * @memberof google.cloud.secretmanager.v1beta2.Replication
+                             * @interface IUserManaged
+                             * @property {Array.<google.cloud.secretmanager.v1beta2.Replication.UserManaged.IReplica>|null} [replicas] UserManaged replicas
+                             */
+    
+                            /**
+                             * Constructs a new UserManaged.
+                             * @memberof google.cloud.secretmanager.v1beta2.Replication
+                             * @classdesc Represents a UserManaged.
+                             * @implements IUserManaged
+                             * @constructor
+                             * @param {google.cloud.secretmanager.v1beta2.Replication.IUserManaged=} [properties] Properties to set
+                             */
+                            function UserManaged(properties) {
+                                this.replicas = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * UserManaged replicas.
+                             * @member {Array.<google.cloud.secretmanager.v1beta2.Replication.UserManaged.IReplica>} replicas
+                             * @memberof google.cloud.secretmanager.v1beta2.Replication.UserManaged
+                             * @instance
+                             */
+                            UserManaged.prototype.replicas = $util.emptyArray;
+    
+                            /**
+                             * Creates a new UserManaged instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.secretmanager.v1beta2.Replication.UserManaged
+                             * @static
+                             * @param {google.cloud.secretmanager.v1beta2.Replication.IUserManaged=} [properties] Properties to set
+                             * @returns {google.cloud.secretmanager.v1beta2.Replication.UserManaged} UserManaged instance
+                             */
+                            UserManaged.create = function create(properties) {
+                                return new UserManaged(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified UserManaged message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.Replication.UserManaged.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.secretmanager.v1beta2.Replication.UserManaged
+                             * @static
+                             * @param {google.cloud.secretmanager.v1beta2.Replication.IUserManaged} message UserManaged message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UserManaged.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.replicas != null && message.replicas.length)
+                                    for (var i = 0; i < message.replicas.length; ++i)
+                                        $root.google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica.encode(message.replicas[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified UserManaged message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.Replication.UserManaged.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.secretmanager.v1beta2.Replication.UserManaged
+                             * @static
+                             * @param {google.cloud.secretmanager.v1beta2.Replication.IUserManaged} message UserManaged message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UserManaged.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a UserManaged message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.secretmanager.v1beta2.Replication.UserManaged
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.secretmanager.v1beta2.Replication.UserManaged} UserManaged
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UserManaged.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1beta2.Replication.UserManaged();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.replicas && message.replicas.length))
+                                                message.replicas = [];
+                                            message.replicas.push($root.google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a UserManaged message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.secretmanager.v1beta2.Replication.UserManaged
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.secretmanager.v1beta2.Replication.UserManaged} UserManaged
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UserManaged.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a UserManaged message.
+                             * @function verify
+                             * @memberof google.cloud.secretmanager.v1beta2.Replication.UserManaged
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            UserManaged.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.replicas != null && message.hasOwnProperty("replicas")) {
+                                    if (!Array.isArray(message.replicas))
+                                        return "replicas: array expected";
+                                    for (var i = 0; i < message.replicas.length; ++i) {
+                                        var error = $root.google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica.verify(message.replicas[i]);
+                                        if (error)
+                                            return "replicas." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a UserManaged message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.secretmanager.v1beta2.Replication.UserManaged
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.secretmanager.v1beta2.Replication.UserManaged} UserManaged
+                             */
+                            UserManaged.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.secretmanager.v1beta2.Replication.UserManaged)
+                                    return object;
+                                var message = new $root.google.cloud.secretmanager.v1beta2.Replication.UserManaged();
+                                if (object.replicas) {
+                                    if (!Array.isArray(object.replicas))
+                                        throw TypeError(".google.cloud.secretmanager.v1beta2.Replication.UserManaged.replicas: array expected");
+                                    message.replicas = [];
+                                    for (var i = 0; i < object.replicas.length; ++i) {
+                                        if (typeof object.replicas[i] !== "object")
+                                            throw TypeError(".google.cloud.secretmanager.v1beta2.Replication.UserManaged.replicas: object expected");
+                                        message.replicas[i] = $root.google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica.fromObject(object.replicas[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a UserManaged message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.secretmanager.v1beta2.Replication.UserManaged
+                             * @static
+                             * @param {google.cloud.secretmanager.v1beta2.Replication.UserManaged} message UserManaged
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            UserManaged.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.replicas = [];
+                                if (message.replicas && message.replicas.length) {
+                                    object.replicas = [];
+                                    for (var j = 0; j < message.replicas.length; ++j)
+                                        object.replicas[j] = $root.google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica.toObject(message.replicas[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this UserManaged to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.secretmanager.v1beta2.Replication.UserManaged
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            UserManaged.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for UserManaged
+                             * @function getTypeUrl
+                             * @memberof google.cloud.secretmanager.v1beta2.Replication.UserManaged
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            UserManaged.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.secretmanager.v1beta2.Replication.UserManaged";
+                            };
+    
+                            UserManaged.Replica = (function() {
+    
+                                /**
+                                 * Properties of a Replica.
+                                 * @memberof google.cloud.secretmanager.v1beta2.Replication.UserManaged
+                                 * @interface IReplica
+                                 * @property {string|null} [location] Replica location
+                                 * @property {google.cloud.secretmanager.v1beta2.ICustomerManagedEncryption|null} [customerManagedEncryption] Replica customerManagedEncryption
+                                 */
+    
+                                /**
+                                 * Constructs a new Replica.
+                                 * @memberof google.cloud.secretmanager.v1beta2.Replication.UserManaged
+                                 * @classdesc Represents a Replica.
+                                 * @implements IReplica
+                                 * @constructor
+                                 * @param {google.cloud.secretmanager.v1beta2.Replication.UserManaged.IReplica=} [properties] Properties to set
+                                 */
+                                function Replica(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Replica location.
+                                 * @member {string} location
+                                 * @memberof google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica
+                                 * @instance
+                                 */
+                                Replica.prototype.location = "";
+    
+                                /**
+                                 * Replica customerManagedEncryption.
+                                 * @member {google.cloud.secretmanager.v1beta2.ICustomerManagedEncryption|null|undefined} customerManagedEncryption
+                                 * @memberof google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica
+                                 * @instance
+                                 */
+                                Replica.prototype.customerManagedEncryption = null;
+    
+                                /**
+                                 * Creates a new Replica instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica
+                                 * @static
+                                 * @param {google.cloud.secretmanager.v1beta2.Replication.UserManaged.IReplica=} [properties] Properties to set
+                                 * @returns {google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica} Replica instance
+                                 */
+                                Replica.create = function create(properties) {
+                                    return new Replica(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Replica message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica
+                                 * @static
+                                 * @param {google.cloud.secretmanager.v1beta2.Replication.UserManaged.IReplica} message Replica message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Replica.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.location);
+                                    if (message.customerManagedEncryption != null && Object.hasOwnProperty.call(message, "customerManagedEncryption"))
+                                        $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryption.encode(message.customerManagedEncryption, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Replica message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica
+                                 * @static
+                                 * @param {google.cloud.secretmanager.v1beta2.Replication.UserManaged.IReplica} message Replica message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Replica.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Replica message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica} Replica
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Replica.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.location = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.customerManagedEncryption = $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryption.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Replica message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica} Replica
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Replica.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Replica message.
+                                 * @function verify
+                                 * @memberof google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Replica.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.location != null && message.hasOwnProperty("location"))
+                                        if (!$util.isString(message.location))
+                                            return "location: string expected";
+                                    if (message.customerManagedEncryption != null && message.hasOwnProperty("customerManagedEncryption")) {
+                                        var error = $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryption.verify(message.customerManagedEncryption);
+                                        if (error)
+                                            return "customerManagedEncryption." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Replica message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica} Replica
+                                 */
+                                Replica.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica)
+                                        return object;
+                                    var message = new $root.google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica();
+                                    if (object.location != null)
+                                        message.location = String(object.location);
+                                    if (object.customerManagedEncryption != null) {
+                                        if (typeof object.customerManagedEncryption !== "object")
+                                            throw TypeError(".google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica.customerManagedEncryption: object expected");
+                                        message.customerManagedEncryption = $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryption.fromObject(object.customerManagedEncryption);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Replica message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica
+                                 * @static
+                                 * @param {google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica} message Replica
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Replica.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.location = "";
+                                        object.customerManagedEncryption = null;
+                                    }
+                                    if (message.location != null && message.hasOwnProperty("location"))
+                                        object.location = message.location;
+                                    if (message.customerManagedEncryption != null && message.hasOwnProperty("customerManagedEncryption"))
+                                        object.customerManagedEncryption = $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryption.toObject(message.customerManagedEncryption, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Replica to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Replica.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Replica
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Replica.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica";
+                                };
+    
+                                return Replica;
+                            })();
+    
+                            return UserManaged;
+                        })();
+    
+                        return Replication;
+                    })();
+    
+                    v1beta2.CustomerManagedEncryption = (function() {
+    
+                        /**
+                         * Properties of a CustomerManagedEncryption.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @interface ICustomerManagedEncryption
+                         * @property {string|null} [kmsKeyName] CustomerManagedEncryption kmsKeyName
+                         */
+    
+                        /**
+                         * Constructs a new CustomerManagedEncryption.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @classdesc Represents a CustomerManagedEncryption.
+                         * @implements ICustomerManagedEncryption
+                         * @constructor
+                         * @param {google.cloud.secretmanager.v1beta2.ICustomerManagedEncryption=} [properties] Properties to set
+                         */
+                        function CustomerManagedEncryption(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CustomerManagedEncryption kmsKeyName.
+                         * @member {string} kmsKeyName
+                         * @memberof google.cloud.secretmanager.v1beta2.CustomerManagedEncryption
+                         * @instance
+                         */
+                        CustomerManagedEncryption.prototype.kmsKeyName = "";
+    
+                        /**
+                         * Creates a new CustomerManagedEncryption instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.secretmanager.v1beta2.CustomerManagedEncryption
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.ICustomerManagedEncryption=} [properties] Properties to set
+                         * @returns {google.cloud.secretmanager.v1beta2.CustomerManagedEncryption} CustomerManagedEncryption instance
+                         */
+                        CustomerManagedEncryption.create = function create(properties) {
+                            return new CustomerManagedEncryption(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CustomerManagedEncryption message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.CustomerManagedEncryption.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.secretmanager.v1beta2.CustomerManagedEncryption
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.ICustomerManagedEncryption} message CustomerManagedEncryption message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomerManagedEncryption.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.kmsKeyName != null && Object.hasOwnProperty.call(message, "kmsKeyName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.kmsKeyName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CustomerManagedEncryption message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.CustomerManagedEncryption.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.CustomerManagedEncryption
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.ICustomerManagedEncryption} message CustomerManagedEncryption message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomerManagedEncryption.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CustomerManagedEncryption message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.secretmanager.v1beta2.CustomerManagedEncryption
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.secretmanager.v1beta2.CustomerManagedEncryption} CustomerManagedEncryption
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomerManagedEncryption.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryption();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.kmsKeyName = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CustomerManagedEncryption message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.CustomerManagedEncryption
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.secretmanager.v1beta2.CustomerManagedEncryption} CustomerManagedEncryption
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomerManagedEncryption.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CustomerManagedEncryption message.
+                         * @function verify
+                         * @memberof google.cloud.secretmanager.v1beta2.CustomerManagedEncryption
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CustomerManagedEncryption.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
+                                if (!$util.isString(message.kmsKeyName))
+                                    return "kmsKeyName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CustomerManagedEncryption message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.secretmanager.v1beta2.CustomerManagedEncryption
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.secretmanager.v1beta2.CustomerManagedEncryption} CustomerManagedEncryption
+                         */
+                        CustomerManagedEncryption.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryption)
+                                return object;
+                            var message = new $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryption();
+                            if (object.kmsKeyName != null)
+                                message.kmsKeyName = String(object.kmsKeyName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CustomerManagedEncryption message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.secretmanager.v1beta2.CustomerManagedEncryption
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.CustomerManagedEncryption} message CustomerManagedEncryption
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CustomerManagedEncryption.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.kmsKeyName = "";
+                            if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
+                                object.kmsKeyName = message.kmsKeyName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CustomerManagedEncryption to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.secretmanager.v1beta2.CustomerManagedEncryption
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CustomerManagedEncryption.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CustomerManagedEncryption
+                         * @function getTypeUrl
+                         * @memberof google.cloud.secretmanager.v1beta2.CustomerManagedEncryption
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CustomerManagedEncryption.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.secretmanager.v1beta2.CustomerManagedEncryption";
+                        };
+    
+                        return CustomerManagedEncryption;
+                    })();
+    
+                    v1beta2.ReplicationStatus = (function() {
+    
+                        /**
+                         * Properties of a ReplicationStatus.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @interface IReplicationStatus
+                         * @property {google.cloud.secretmanager.v1beta2.ReplicationStatus.IAutomaticStatus|null} [automatic] ReplicationStatus automatic
+                         * @property {google.cloud.secretmanager.v1beta2.ReplicationStatus.IUserManagedStatus|null} [userManaged] ReplicationStatus userManaged
+                         */
+    
+                        /**
+                         * Constructs a new ReplicationStatus.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @classdesc Represents a ReplicationStatus.
+                         * @implements IReplicationStatus
+                         * @constructor
+                         * @param {google.cloud.secretmanager.v1beta2.IReplicationStatus=} [properties] Properties to set
+                         */
+                        function ReplicationStatus(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ReplicationStatus automatic.
+                         * @member {google.cloud.secretmanager.v1beta2.ReplicationStatus.IAutomaticStatus|null|undefined} automatic
+                         * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus
+                         * @instance
+                         */
+                        ReplicationStatus.prototype.automatic = null;
+    
+                        /**
+                         * ReplicationStatus userManaged.
+                         * @member {google.cloud.secretmanager.v1beta2.ReplicationStatus.IUserManagedStatus|null|undefined} userManaged
+                         * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus
+                         * @instance
+                         */
+                        ReplicationStatus.prototype.userManaged = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ReplicationStatus replicationStatus.
+                         * @member {"automatic"|"userManaged"|undefined} replicationStatus
+                         * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus
+                         * @instance
+                         */
+                        Object.defineProperty(ReplicationStatus.prototype, "replicationStatus", {
+                            get: $util.oneOfGetter($oneOfFields = ["automatic", "userManaged"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ReplicationStatus instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IReplicationStatus=} [properties] Properties to set
+                         * @returns {google.cloud.secretmanager.v1beta2.ReplicationStatus} ReplicationStatus instance
+                         */
+                        ReplicationStatus.create = function create(properties) {
+                            return new ReplicationStatus(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ReplicationStatus message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.ReplicationStatus.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IReplicationStatus} message ReplicationStatus message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReplicationStatus.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.automatic != null && Object.hasOwnProperty.call(message, "automatic"))
+                                $root.google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus.encode(message.automatic, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.userManaged != null && Object.hasOwnProperty.call(message, "userManaged"))
+                                $root.google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.encode(message.userManaged, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ReplicationStatus message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.ReplicationStatus.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IReplicationStatus} message ReplicationStatus message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReplicationStatus.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ReplicationStatus message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.secretmanager.v1beta2.ReplicationStatus} ReplicationStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReplicationStatus.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1beta2.ReplicationStatus();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.automatic = $root.google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.userManaged = $root.google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ReplicationStatus message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.secretmanager.v1beta2.ReplicationStatus} ReplicationStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReplicationStatus.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ReplicationStatus message.
+                         * @function verify
+                         * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ReplicationStatus.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.automatic != null && message.hasOwnProperty("automatic")) {
+                                properties.replicationStatus = 1;
+                                {
+                                    var error = $root.google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus.verify(message.automatic);
+                                    if (error)
+                                        return "automatic." + error;
+                                }
+                            }
+                            if (message.userManaged != null && message.hasOwnProperty("userManaged")) {
+                                if (properties.replicationStatus === 1)
+                                    return "replicationStatus: multiple values";
+                                properties.replicationStatus = 1;
+                                {
+                                    var error = $root.google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.verify(message.userManaged);
+                                    if (error)
+                                        return "userManaged." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ReplicationStatus message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.secretmanager.v1beta2.ReplicationStatus} ReplicationStatus
+                         */
+                        ReplicationStatus.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.secretmanager.v1beta2.ReplicationStatus)
+                                return object;
+                            var message = new $root.google.cloud.secretmanager.v1beta2.ReplicationStatus();
+                            if (object.automatic != null) {
+                                if (typeof object.automatic !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1beta2.ReplicationStatus.automatic: object expected");
+                                message.automatic = $root.google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus.fromObject(object.automatic);
+                            }
+                            if (object.userManaged != null) {
+                                if (typeof object.userManaged !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1beta2.ReplicationStatus.userManaged: object expected");
+                                message.userManaged = $root.google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.fromObject(object.userManaged);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ReplicationStatus message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.ReplicationStatus} message ReplicationStatus
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ReplicationStatus.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.automatic != null && message.hasOwnProperty("automatic")) {
+                                object.automatic = $root.google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus.toObject(message.automatic, options);
+                                if (options.oneofs)
+                                    object.replicationStatus = "automatic";
+                            }
+                            if (message.userManaged != null && message.hasOwnProperty("userManaged")) {
+                                object.userManaged = $root.google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.toObject(message.userManaged, options);
+                                if (options.oneofs)
+                                    object.replicationStatus = "userManaged";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ReplicationStatus to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ReplicationStatus.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ReplicationStatus
+                         * @function getTypeUrl
+                         * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ReplicationStatus.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.secretmanager.v1beta2.ReplicationStatus";
+                        };
+    
+                        ReplicationStatus.AutomaticStatus = (function() {
+    
+                            /**
+                             * Properties of an AutomaticStatus.
+                             * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus
+                             * @interface IAutomaticStatus
+                             * @property {google.cloud.secretmanager.v1beta2.ICustomerManagedEncryptionStatus|null} [customerManagedEncryption] AutomaticStatus customerManagedEncryption
+                             */
+    
+                            /**
+                             * Constructs a new AutomaticStatus.
+                             * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus
+                             * @classdesc Represents an AutomaticStatus.
+                             * @implements IAutomaticStatus
+                             * @constructor
+                             * @param {google.cloud.secretmanager.v1beta2.ReplicationStatus.IAutomaticStatus=} [properties] Properties to set
+                             */
+                            function AutomaticStatus(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AutomaticStatus customerManagedEncryption.
+                             * @member {google.cloud.secretmanager.v1beta2.ICustomerManagedEncryptionStatus|null|undefined} customerManagedEncryption
+                             * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus
+                             * @instance
+                             */
+                            AutomaticStatus.prototype.customerManagedEncryption = null;
+    
+                            /**
+                             * Creates a new AutomaticStatus instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus
+                             * @static
+                             * @param {google.cloud.secretmanager.v1beta2.ReplicationStatus.IAutomaticStatus=} [properties] Properties to set
+                             * @returns {google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus} AutomaticStatus instance
+                             */
+                            AutomaticStatus.create = function create(properties) {
+                                return new AutomaticStatus(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AutomaticStatus message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus
+                             * @static
+                             * @param {google.cloud.secretmanager.v1beta2.ReplicationStatus.IAutomaticStatus} message AutomaticStatus message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AutomaticStatus.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.customerManagedEncryption != null && Object.hasOwnProperty.call(message, "customerManagedEncryption"))
+                                    $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus.encode(message.customerManagedEncryption, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AutomaticStatus message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus
+                             * @static
+                             * @param {google.cloud.secretmanager.v1beta2.ReplicationStatus.IAutomaticStatus} message AutomaticStatus message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AutomaticStatus.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AutomaticStatus message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus} AutomaticStatus
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AutomaticStatus.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.customerManagedEncryption = $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AutomaticStatus message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus} AutomaticStatus
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AutomaticStatus.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AutomaticStatus message.
+                             * @function verify
+                             * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AutomaticStatus.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.customerManagedEncryption != null && message.hasOwnProperty("customerManagedEncryption")) {
+                                    var error = $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus.verify(message.customerManagedEncryption);
+                                    if (error)
+                                        return "customerManagedEncryption." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AutomaticStatus message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus} AutomaticStatus
+                             */
+                            AutomaticStatus.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus)
+                                    return object;
+                                var message = new $root.google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus();
+                                if (object.customerManagedEncryption != null) {
+                                    if (typeof object.customerManagedEncryption !== "object")
+                                        throw TypeError(".google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus.customerManagedEncryption: object expected");
+                                    message.customerManagedEncryption = $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus.fromObject(object.customerManagedEncryption);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AutomaticStatus message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus
+                             * @static
+                             * @param {google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus} message AutomaticStatus
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AutomaticStatus.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.customerManagedEncryption = null;
+                                if (message.customerManagedEncryption != null && message.hasOwnProperty("customerManagedEncryption"))
+                                    object.customerManagedEncryption = $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus.toObject(message.customerManagedEncryption, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AutomaticStatus to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AutomaticStatus.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AutomaticStatus
+                             * @function getTypeUrl
+                             * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AutomaticStatus.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus";
+                            };
+    
+                            return AutomaticStatus;
+                        })();
+    
+                        ReplicationStatus.UserManagedStatus = (function() {
+    
+                            /**
+                             * Properties of a UserManagedStatus.
+                             * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus
+                             * @interface IUserManagedStatus
+                             * @property {Array.<google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.IReplicaStatus>|null} [replicas] UserManagedStatus replicas
+                             */
+    
+                            /**
+                             * Constructs a new UserManagedStatus.
+                             * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus
+                             * @classdesc Represents a UserManagedStatus.
+                             * @implements IUserManagedStatus
+                             * @constructor
+                             * @param {google.cloud.secretmanager.v1beta2.ReplicationStatus.IUserManagedStatus=} [properties] Properties to set
+                             */
+                            function UserManagedStatus(properties) {
+                                this.replicas = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * UserManagedStatus replicas.
+                             * @member {Array.<google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.IReplicaStatus>} replicas
+                             * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus
+                             * @instance
+                             */
+                            UserManagedStatus.prototype.replicas = $util.emptyArray;
+    
+                            /**
+                             * Creates a new UserManagedStatus instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus
+                             * @static
+                             * @param {google.cloud.secretmanager.v1beta2.ReplicationStatus.IUserManagedStatus=} [properties] Properties to set
+                             * @returns {google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus} UserManagedStatus instance
+                             */
+                            UserManagedStatus.create = function create(properties) {
+                                return new UserManagedStatus(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified UserManagedStatus message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus
+                             * @static
+                             * @param {google.cloud.secretmanager.v1beta2.ReplicationStatus.IUserManagedStatus} message UserManagedStatus message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UserManagedStatus.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.replicas != null && message.replicas.length)
+                                    for (var i = 0; i < message.replicas.length; ++i)
+                                        $root.google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus.encode(message.replicas[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified UserManagedStatus message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus
+                             * @static
+                             * @param {google.cloud.secretmanager.v1beta2.ReplicationStatus.IUserManagedStatus} message UserManagedStatus message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UserManagedStatus.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a UserManagedStatus message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus} UserManagedStatus
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UserManagedStatus.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.replicas && message.replicas.length))
+                                                message.replicas = [];
+                                            message.replicas.push($root.google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a UserManagedStatus message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus} UserManagedStatus
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UserManagedStatus.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a UserManagedStatus message.
+                             * @function verify
+                             * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            UserManagedStatus.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.replicas != null && message.hasOwnProperty("replicas")) {
+                                    if (!Array.isArray(message.replicas))
+                                        return "replicas: array expected";
+                                    for (var i = 0; i < message.replicas.length; ++i) {
+                                        var error = $root.google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus.verify(message.replicas[i]);
+                                        if (error)
+                                            return "replicas." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a UserManagedStatus message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus} UserManagedStatus
+                             */
+                            UserManagedStatus.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus)
+                                    return object;
+                                var message = new $root.google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus();
+                                if (object.replicas) {
+                                    if (!Array.isArray(object.replicas))
+                                        throw TypeError(".google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.replicas: array expected");
+                                    message.replicas = [];
+                                    for (var i = 0; i < object.replicas.length; ++i) {
+                                        if (typeof object.replicas[i] !== "object")
+                                            throw TypeError(".google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.replicas: object expected");
+                                        message.replicas[i] = $root.google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus.fromObject(object.replicas[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a UserManagedStatus message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus
+                             * @static
+                             * @param {google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus} message UserManagedStatus
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            UserManagedStatus.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.replicas = [];
+                                if (message.replicas && message.replicas.length) {
+                                    object.replicas = [];
+                                    for (var j = 0; j < message.replicas.length; ++j)
+                                        object.replicas[j] = $root.google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus.toObject(message.replicas[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this UserManagedStatus to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            UserManagedStatus.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for UserManagedStatus
+                             * @function getTypeUrl
+                             * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            UserManagedStatus.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus";
+                            };
+    
+                            UserManagedStatus.ReplicaStatus = (function() {
+    
+                                /**
+                                 * Properties of a ReplicaStatus.
+                                 * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus
+                                 * @interface IReplicaStatus
+                                 * @property {string|null} [location] ReplicaStatus location
+                                 * @property {google.cloud.secretmanager.v1beta2.ICustomerManagedEncryptionStatus|null} [customerManagedEncryption] ReplicaStatus customerManagedEncryption
+                                 */
+    
+                                /**
+                                 * Constructs a new ReplicaStatus.
+                                 * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus
+                                 * @classdesc Represents a ReplicaStatus.
+                                 * @implements IReplicaStatus
+                                 * @constructor
+                                 * @param {google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.IReplicaStatus=} [properties] Properties to set
+                                 */
+                                function ReplicaStatus(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ReplicaStatus location.
+                                 * @member {string} location
+                                 * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus
+                                 * @instance
+                                 */
+                                ReplicaStatus.prototype.location = "";
+    
+                                /**
+                                 * ReplicaStatus customerManagedEncryption.
+                                 * @member {google.cloud.secretmanager.v1beta2.ICustomerManagedEncryptionStatus|null|undefined} customerManagedEncryption
+                                 * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus
+                                 * @instance
+                                 */
+                                ReplicaStatus.prototype.customerManagedEncryption = null;
+    
+                                /**
+                                 * Creates a new ReplicaStatus instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus
+                                 * @static
+                                 * @param {google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.IReplicaStatus=} [properties] Properties to set
+                                 * @returns {google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus} ReplicaStatus instance
+                                 */
+                                ReplicaStatus.create = function create(properties) {
+                                    return new ReplicaStatus(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ReplicaStatus message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus
+                                 * @static
+                                 * @param {google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.IReplicaStatus} message ReplicaStatus message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ReplicaStatus.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.location);
+                                    if (message.customerManagedEncryption != null && Object.hasOwnProperty.call(message, "customerManagedEncryption"))
+                                        $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus.encode(message.customerManagedEncryption, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ReplicaStatus message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus
+                                 * @static
+                                 * @param {google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.IReplicaStatus} message ReplicaStatus message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ReplicaStatus.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a ReplicaStatus message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus} ReplicaStatus
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ReplicaStatus.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.location = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.customerManagedEncryption = $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a ReplicaStatus message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus} ReplicaStatus
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ReplicaStatus.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a ReplicaStatus message.
+                                 * @function verify
+                                 * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ReplicaStatus.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.location != null && message.hasOwnProperty("location"))
+                                        if (!$util.isString(message.location))
+                                            return "location: string expected";
+                                    if (message.customerManagedEncryption != null && message.hasOwnProperty("customerManagedEncryption")) {
+                                        var error = $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus.verify(message.customerManagedEncryption);
+                                        if (error)
+                                            return "customerManagedEncryption." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a ReplicaStatus message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus} ReplicaStatus
+                                 */
+                                ReplicaStatus.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus)
+                                        return object;
+                                    var message = new $root.google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus();
+                                    if (object.location != null)
+                                        message.location = String(object.location);
+                                    if (object.customerManagedEncryption != null) {
+                                        if (typeof object.customerManagedEncryption !== "object")
+                                            throw TypeError(".google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus.customerManagedEncryption: object expected");
+                                        message.customerManagedEncryption = $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus.fromObject(object.customerManagedEncryption);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a ReplicaStatus message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus
+                                 * @static
+                                 * @param {google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus} message ReplicaStatus
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ReplicaStatus.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.location = "";
+                                        object.customerManagedEncryption = null;
+                                    }
+                                    if (message.location != null && message.hasOwnProperty("location"))
+                                        object.location = message.location;
+                                    if (message.customerManagedEncryption != null && message.hasOwnProperty("customerManagedEncryption"))
+                                        object.customerManagedEncryption = $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus.toObject(message.customerManagedEncryption, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ReplicaStatus to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ReplicaStatus.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ReplicaStatus
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ReplicaStatus.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus";
+                                };
+    
+                                return ReplicaStatus;
+                            })();
+    
+                            return UserManagedStatus;
+                        })();
+    
+                        return ReplicationStatus;
+                    })();
+    
+                    v1beta2.CustomerManagedEncryptionStatus = (function() {
+    
+                        /**
+                         * Properties of a CustomerManagedEncryptionStatus.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @interface ICustomerManagedEncryptionStatus
+                         * @property {string|null} [kmsKeyVersionName] CustomerManagedEncryptionStatus kmsKeyVersionName
+                         */
+    
+                        /**
+                         * Constructs a new CustomerManagedEncryptionStatus.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @classdesc Represents a CustomerManagedEncryptionStatus.
+                         * @implements ICustomerManagedEncryptionStatus
+                         * @constructor
+                         * @param {google.cloud.secretmanager.v1beta2.ICustomerManagedEncryptionStatus=} [properties] Properties to set
+                         */
+                        function CustomerManagedEncryptionStatus(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CustomerManagedEncryptionStatus kmsKeyVersionName.
+                         * @member {string} kmsKeyVersionName
+                         * @memberof google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus
+                         * @instance
+                         */
+                        CustomerManagedEncryptionStatus.prototype.kmsKeyVersionName = "";
+    
+                        /**
+                         * Creates a new CustomerManagedEncryptionStatus instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.ICustomerManagedEncryptionStatus=} [properties] Properties to set
+                         * @returns {google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus} CustomerManagedEncryptionStatus instance
+                         */
+                        CustomerManagedEncryptionStatus.create = function create(properties) {
+                            return new CustomerManagedEncryptionStatus(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CustomerManagedEncryptionStatus message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.ICustomerManagedEncryptionStatus} message CustomerManagedEncryptionStatus message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomerManagedEncryptionStatus.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.kmsKeyVersionName != null && Object.hasOwnProperty.call(message, "kmsKeyVersionName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.kmsKeyVersionName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CustomerManagedEncryptionStatus message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.ICustomerManagedEncryptionStatus} message CustomerManagedEncryptionStatus message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomerManagedEncryptionStatus.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CustomerManagedEncryptionStatus message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus} CustomerManagedEncryptionStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomerManagedEncryptionStatus.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.kmsKeyVersionName = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CustomerManagedEncryptionStatus message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus} CustomerManagedEncryptionStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomerManagedEncryptionStatus.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CustomerManagedEncryptionStatus message.
+                         * @function verify
+                         * @memberof google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CustomerManagedEncryptionStatus.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.kmsKeyVersionName != null && message.hasOwnProperty("kmsKeyVersionName"))
+                                if (!$util.isString(message.kmsKeyVersionName))
+                                    return "kmsKeyVersionName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CustomerManagedEncryptionStatus message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus} CustomerManagedEncryptionStatus
+                         */
+                        CustomerManagedEncryptionStatus.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus)
+                                return object;
+                            var message = new $root.google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus();
+                            if (object.kmsKeyVersionName != null)
+                                message.kmsKeyVersionName = String(object.kmsKeyVersionName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CustomerManagedEncryptionStatus message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus} message CustomerManagedEncryptionStatus
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CustomerManagedEncryptionStatus.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.kmsKeyVersionName = "";
+                            if (message.kmsKeyVersionName != null && message.hasOwnProperty("kmsKeyVersionName"))
+                                object.kmsKeyVersionName = message.kmsKeyVersionName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CustomerManagedEncryptionStatus to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CustomerManagedEncryptionStatus.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CustomerManagedEncryptionStatus
+                         * @function getTypeUrl
+                         * @memberof google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CustomerManagedEncryptionStatus.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus";
+                        };
+    
+                        return CustomerManagedEncryptionStatus;
+                    })();
+    
+                    v1beta2.Topic = (function() {
+    
+                        /**
+                         * Properties of a Topic.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @interface ITopic
+                         * @property {string|null} [name] Topic name
+                         */
+    
+                        /**
+                         * Constructs a new Topic.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @classdesc Represents a Topic.
+                         * @implements ITopic
+                         * @constructor
+                         * @param {google.cloud.secretmanager.v1beta2.ITopic=} [properties] Properties to set
+                         */
+                        function Topic(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Topic name.
+                         * @member {string} name
+                         * @memberof google.cloud.secretmanager.v1beta2.Topic
+                         * @instance
+                         */
+                        Topic.prototype.name = "";
+    
+                        /**
+                         * Creates a new Topic instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.secretmanager.v1beta2.Topic
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.ITopic=} [properties] Properties to set
+                         * @returns {google.cloud.secretmanager.v1beta2.Topic} Topic instance
+                         */
+                        Topic.create = function create(properties) {
+                            return new Topic(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Topic message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.Topic.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.secretmanager.v1beta2.Topic
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.ITopic} message Topic message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Topic.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Topic message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.Topic.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.Topic
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.ITopic} message Topic message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Topic.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Topic message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.secretmanager.v1beta2.Topic
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.secretmanager.v1beta2.Topic} Topic
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Topic.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1beta2.Topic();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Topic message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.Topic
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.secretmanager.v1beta2.Topic} Topic
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Topic.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Topic message.
+                         * @function verify
+                         * @memberof google.cloud.secretmanager.v1beta2.Topic
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Topic.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Topic message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.secretmanager.v1beta2.Topic
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.secretmanager.v1beta2.Topic} Topic
+                         */
+                        Topic.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.secretmanager.v1beta2.Topic)
+                                return object;
+                            var message = new $root.google.cloud.secretmanager.v1beta2.Topic();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Topic message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.secretmanager.v1beta2.Topic
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.Topic} message Topic
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Topic.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Topic to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.secretmanager.v1beta2.Topic
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Topic.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Topic
+                         * @function getTypeUrl
+                         * @memberof google.cloud.secretmanager.v1beta2.Topic
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Topic.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.secretmanager.v1beta2.Topic";
+                        };
+    
+                        return Topic;
+                    })();
+    
+                    v1beta2.Rotation = (function() {
+    
+                        /**
+                         * Properties of a Rotation.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @interface IRotation
+                         * @property {google.protobuf.ITimestamp|null} [nextRotationTime] Rotation nextRotationTime
+                         * @property {google.protobuf.IDuration|null} [rotationPeriod] Rotation rotationPeriod
+                         */
+    
+                        /**
+                         * Constructs a new Rotation.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @classdesc Represents a Rotation.
+                         * @implements IRotation
+                         * @constructor
+                         * @param {google.cloud.secretmanager.v1beta2.IRotation=} [properties] Properties to set
+                         */
+                        function Rotation(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Rotation nextRotationTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} nextRotationTime
+                         * @memberof google.cloud.secretmanager.v1beta2.Rotation
+                         * @instance
+                         */
+                        Rotation.prototype.nextRotationTime = null;
+    
+                        /**
+                         * Rotation rotationPeriod.
+                         * @member {google.protobuf.IDuration|null|undefined} rotationPeriod
+                         * @memberof google.cloud.secretmanager.v1beta2.Rotation
+                         * @instance
+                         */
+                        Rotation.prototype.rotationPeriod = null;
+    
+                        /**
+                         * Creates a new Rotation instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.secretmanager.v1beta2.Rotation
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IRotation=} [properties] Properties to set
+                         * @returns {google.cloud.secretmanager.v1beta2.Rotation} Rotation instance
+                         */
+                        Rotation.create = function create(properties) {
+                            return new Rotation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Rotation message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.Rotation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.secretmanager.v1beta2.Rotation
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IRotation} message Rotation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Rotation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.nextRotationTime != null && Object.hasOwnProperty.call(message, "nextRotationTime"))
+                                $root.google.protobuf.Timestamp.encode(message.nextRotationTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.rotationPeriod != null && Object.hasOwnProperty.call(message, "rotationPeriod"))
+                                $root.google.protobuf.Duration.encode(message.rotationPeriod, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Rotation message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.Rotation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.Rotation
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IRotation} message Rotation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Rotation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Rotation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.secretmanager.v1beta2.Rotation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.secretmanager.v1beta2.Rotation} Rotation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Rotation.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1beta2.Rotation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.nextRotationTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.rotationPeriod = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Rotation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.Rotation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.secretmanager.v1beta2.Rotation} Rotation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Rotation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Rotation message.
+                         * @function verify
+                         * @memberof google.cloud.secretmanager.v1beta2.Rotation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Rotation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.nextRotationTime != null && message.hasOwnProperty("nextRotationTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.nextRotationTime);
+                                if (error)
+                                    return "nextRotationTime." + error;
+                            }
+                            if (message.rotationPeriod != null && message.hasOwnProperty("rotationPeriod")) {
+                                var error = $root.google.protobuf.Duration.verify(message.rotationPeriod);
+                                if (error)
+                                    return "rotationPeriod." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Rotation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.secretmanager.v1beta2.Rotation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.secretmanager.v1beta2.Rotation} Rotation
+                         */
+                        Rotation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.secretmanager.v1beta2.Rotation)
+                                return object;
+                            var message = new $root.google.cloud.secretmanager.v1beta2.Rotation();
+                            if (object.nextRotationTime != null) {
+                                if (typeof object.nextRotationTime !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1beta2.Rotation.nextRotationTime: object expected");
+                                message.nextRotationTime = $root.google.protobuf.Timestamp.fromObject(object.nextRotationTime);
+                            }
+                            if (object.rotationPeriod != null) {
+                                if (typeof object.rotationPeriod !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1beta2.Rotation.rotationPeriod: object expected");
+                                message.rotationPeriod = $root.google.protobuf.Duration.fromObject(object.rotationPeriod);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Rotation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.secretmanager.v1beta2.Rotation
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.Rotation} message Rotation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Rotation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.nextRotationTime = null;
+                                object.rotationPeriod = null;
+                            }
+                            if (message.nextRotationTime != null && message.hasOwnProperty("nextRotationTime"))
+                                object.nextRotationTime = $root.google.protobuf.Timestamp.toObject(message.nextRotationTime, options);
+                            if (message.rotationPeriod != null && message.hasOwnProperty("rotationPeriod"))
+                                object.rotationPeriod = $root.google.protobuf.Duration.toObject(message.rotationPeriod, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Rotation to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.secretmanager.v1beta2.Rotation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Rotation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Rotation
+                         * @function getTypeUrl
+                         * @memberof google.cloud.secretmanager.v1beta2.Rotation
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Rotation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.secretmanager.v1beta2.Rotation";
+                        };
+    
+                        return Rotation;
+                    })();
+    
+                    v1beta2.SecretPayload = (function() {
+    
+                        /**
+                         * Properties of a SecretPayload.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @interface ISecretPayload
+                         * @property {Uint8Array|null} [data] SecretPayload data
+                         * @property {number|Long|null} [dataCrc32c] SecretPayload dataCrc32c
+                         */
+    
+                        /**
+                         * Constructs a new SecretPayload.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @classdesc Represents a SecretPayload.
+                         * @implements ISecretPayload
+                         * @constructor
+                         * @param {google.cloud.secretmanager.v1beta2.ISecretPayload=} [properties] Properties to set
+                         */
+                        function SecretPayload(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SecretPayload data.
+                         * @member {Uint8Array} data
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretPayload
+                         * @instance
+                         */
+                        SecretPayload.prototype.data = $util.newBuffer([]);
+    
+                        /**
+                         * SecretPayload dataCrc32c.
+                         * @member {number|Long|null|undefined} dataCrc32c
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretPayload
+                         * @instance
+                         */
+                        SecretPayload.prototype.dataCrc32c = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * SecretPayload _dataCrc32c.
+                         * @member {"dataCrc32c"|undefined} _dataCrc32c
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretPayload
+                         * @instance
+                         */
+                        Object.defineProperty(SecretPayload.prototype, "_dataCrc32c", {
+                            get: $util.oneOfGetter($oneOfFields = ["dataCrc32c"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new SecretPayload instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretPayload
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.ISecretPayload=} [properties] Properties to set
+                         * @returns {google.cloud.secretmanager.v1beta2.SecretPayload} SecretPayload instance
+                         */
+                        SecretPayload.create = function create(properties) {
+                            return new SecretPayload(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SecretPayload message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.SecretPayload.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretPayload
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.ISecretPayload} message SecretPayload message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SecretPayload.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.data != null && Object.hasOwnProperty.call(message, "data"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.data);
+                            if (message.dataCrc32c != null && Object.hasOwnProperty.call(message, "dataCrc32c"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.dataCrc32c);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SecretPayload message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.SecretPayload.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretPayload
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.ISecretPayload} message SecretPayload message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SecretPayload.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SecretPayload message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretPayload
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.secretmanager.v1beta2.SecretPayload} SecretPayload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SecretPayload.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1beta2.SecretPayload();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.data = reader.bytes();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.dataCrc32c = reader.int64();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SecretPayload message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretPayload
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.secretmanager.v1beta2.SecretPayload} SecretPayload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SecretPayload.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SecretPayload message.
+                         * @function verify
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretPayload
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SecretPayload.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.data != null && message.hasOwnProperty("data"))
+                                if (!(message.data && typeof message.data.length === "number" || $util.isString(message.data)))
+                                    return "data: buffer expected";
+                            if (message.dataCrc32c != null && message.hasOwnProperty("dataCrc32c")) {
+                                properties._dataCrc32c = 1;
+                                if (!$util.isInteger(message.dataCrc32c) && !(message.dataCrc32c && $util.isInteger(message.dataCrc32c.low) && $util.isInteger(message.dataCrc32c.high)))
+                                    return "dataCrc32c: integer|Long expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SecretPayload message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretPayload
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.secretmanager.v1beta2.SecretPayload} SecretPayload
+                         */
+                        SecretPayload.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.secretmanager.v1beta2.SecretPayload)
+                                return object;
+                            var message = new $root.google.cloud.secretmanager.v1beta2.SecretPayload();
+                            if (object.data != null)
+                                if (typeof object.data === "string")
+                                    $util.base64.decode(object.data, message.data = $util.newBuffer($util.base64.length(object.data)), 0);
+                                else if (object.data.length >= 0)
+                                    message.data = object.data;
+                            if (object.dataCrc32c != null)
+                                if ($util.Long)
+                                    (message.dataCrc32c = $util.Long.fromValue(object.dataCrc32c)).unsigned = false;
+                                else if (typeof object.dataCrc32c === "string")
+                                    message.dataCrc32c = parseInt(object.dataCrc32c, 10);
+                                else if (typeof object.dataCrc32c === "number")
+                                    message.dataCrc32c = object.dataCrc32c;
+                                else if (typeof object.dataCrc32c === "object")
+                                    message.dataCrc32c = new $util.LongBits(object.dataCrc32c.low >>> 0, object.dataCrc32c.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SecretPayload message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretPayload
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.SecretPayload} message SecretPayload
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SecretPayload.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                if (options.bytes === String)
+                                    object.data = "";
+                                else {
+                                    object.data = [];
+                                    if (options.bytes !== Array)
+                                        object.data = $util.newBuffer(object.data);
+                                }
+                            if (message.data != null && message.hasOwnProperty("data"))
+                                object.data = options.bytes === String ? $util.base64.encode(message.data, 0, message.data.length) : options.bytes === Array ? Array.prototype.slice.call(message.data) : message.data;
+                            if (message.dataCrc32c != null && message.hasOwnProperty("dataCrc32c")) {
+                                if (typeof message.dataCrc32c === "number")
+                                    object.dataCrc32c = options.longs === String ? String(message.dataCrc32c) : message.dataCrc32c;
+                                else
+                                    object.dataCrc32c = options.longs === String ? $util.Long.prototype.toString.call(message.dataCrc32c) : options.longs === Number ? new $util.LongBits(message.dataCrc32c.low >>> 0, message.dataCrc32c.high >>> 0).toNumber() : message.dataCrc32c;
+                                if (options.oneofs)
+                                    object._dataCrc32c = "dataCrc32c";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SecretPayload to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretPayload
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SecretPayload.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SecretPayload
+                         * @function getTypeUrl
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretPayload
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SecretPayload.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.secretmanager.v1beta2.SecretPayload";
+                        };
+    
+                        return SecretPayload;
+                    })();
+    
+                    v1beta2.SecretManagerService = (function() {
+    
+                        /**
+                         * Constructs a new SecretManagerService service.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @classdesc Represents a SecretManagerService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function SecretManagerService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (SecretManagerService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = SecretManagerService;
+    
+                        /**
+                         * Creates new SecretManagerService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {SecretManagerService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        SecretManagerService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.secretmanager.v1beta2.SecretManagerService|listSecrets}.
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @typedef ListSecretsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.secretmanager.v1beta2.ListSecretsResponse} [response] ListSecretsResponse
+                         */
+    
+                        /**
+                         * Calls ListSecrets.
+                         * @function listSecrets
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @instance
+                         * @param {google.cloud.secretmanager.v1beta2.IListSecretsRequest} request ListSecretsRequest message or plain object
+                         * @param {google.cloud.secretmanager.v1beta2.SecretManagerService.ListSecretsCallback} callback Node-style callback called with the error, if any, and ListSecretsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecretManagerService.prototype.listSecrets = function listSecrets(request, callback) {
+                            return this.rpcCall(listSecrets, $root.google.cloud.secretmanager.v1beta2.ListSecretsRequest, $root.google.cloud.secretmanager.v1beta2.ListSecretsResponse, request, callback);
+                        }, "name", { value: "ListSecrets" });
+    
+                        /**
+                         * Calls ListSecrets.
+                         * @function listSecrets
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @instance
+                         * @param {google.cloud.secretmanager.v1beta2.IListSecretsRequest} request ListSecretsRequest message or plain object
+                         * @returns {Promise<google.cloud.secretmanager.v1beta2.ListSecretsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.secretmanager.v1beta2.SecretManagerService|createSecret}.
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @typedef CreateSecretCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.secretmanager.v1beta2.Secret} [response] Secret
+                         */
+    
+                        /**
+                         * Calls CreateSecret.
+                         * @function createSecret
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @instance
+                         * @param {google.cloud.secretmanager.v1beta2.ICreateSecretRequest} request CreateSecretRequest message or plain object
+                         * @param {google.cloud.secretmanager.v1beta2.SecretManagerService.CreateSecretCallback} callback Node-style callback called with the error, if any, and Secret
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecretManagerService.prototype.createSecret = function createSecret(request, callback) {
+                            return this.rpcCall(createSecret, $root.google.cloud.secretmanager.v1beta2.CreateSecretRequest, $root.google.cloud.secretmanager.v1beta2.Secret, request, callback);
+                        }, "name", { value: "CreateSecret" });
+    
+                        /**
+                         * Calls CreateSecret.
+                         * @function createSecret
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @instance
+                         * @param {google.cloud.secretmanager.v1beta2.ICreateSecretRequest} request CreateSecretRequest message or plain object
+                         * @returns {Promise<google.cloud.secretmanager.v1beta2.Secret>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.secretmanager.v1beta2.SecretManagerService|addSecretVersion}.
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @typedef AddSecretVersionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.secretmanager.v1beta2.SecretVersion} [response] SecretVersion
+                         */
+    
+                        /**
+                         * Calls AddSecretVersion.
+                         * @function addSecretVersion
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @instance
+                         * @param {google.cloud.secretmanager.v1beta2.IAddSecretVersionRequest} request AddSecretVersionRequest message or plain object
+                         * @param {google.cloud.secretmanager.v1beta2.SecretManagerService.AddSecretVersionCallback} callback Node-style callback called with the error, if any, and SecretVersion
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecretManagerService.prototype.addSecretVersion = function addSecretVersion(request, callback) {
+                            return this.rpcCall(addSecretVersion, $root.google.cloud.secretmanager.v1beta2.AddSecretVersionRequest, $root.google.cloud.secretmanager.v1beta2.SecretVersion, request, callback);
+                        }, "name", { value: "AddSecretVersion" });
+    
+                        /**
+                         * Calls AddSecretVersion.
+                         * @function addSecretVersion
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @instance
+                         * @param {google.cloud.secretmanager.v1beta2.IAddSecretVersionRequest} request AddSecretVersionRequest message or plain object
+                         * @returns {Promise<google.cloud.secretmanager.v1beta2.SecretVersion>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.secretmanager.v1beta2.SecretManagerService|getSecret}.
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @typedef GetSecretCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.secretmanager.v1beta2.Secret} [response] Secret
+                         */
+    
+                        /**
+                         * Calls GetSecret.
+                         * @function getSecret
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @instance
+                         * @param {google.cloud.secretmanager.v1beta2.IGetSecretRequest} request GetSecretRequest message or plain object
+                         * @param {google.cloud.secretmanager.v1beta2.SecretManagerService.GetSecretCallback} callback Node-style callback called with the error, if any, and Secret
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecretManagerService.prototype.getSecret = function getSecret(request, callback) {
+                            return this.rpcCall(getSecret, $root.google.cloud.secretmanager.v1beta2.GetSecretRequest, $root.google.cloud.secretmanager.v1beta2.Secret, request, callback);
+                        }, "name", { value: "GetSecret" });
+    
+                        /**
+                         * Calls GetSecret.
+                         * @function getSecret
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @instance
+                         * @param {google.cloud.secretmanager.v1beta2.IGetSecretRequest} request GetSecretRequest message or plain object
+                         * @returns {Promise<google.cloud.secretmanager.v1beta2.Secret>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.secretmanager.v1beta2.SecretManagerService|updateSecret}.
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @typedef UpdateSecretCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.secretmanager.v1beta2.Secret} [response] Secret
+                         */
+    
+                        /**
+                         * Calls UpdateSecret.
+                         * @function updateSecret
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @instance
+                         * @param {google.cloud.secretmanager.v1beta2.IUpdateSecretRequest} request UpdateSecretRequest message or plain object
+                         * @param {google.cloud.secretmanager.v1beta2.SecretManagerService.UpdateSecretCallback} callback Node-style callback called with the error, if any, and Secret
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecretManagerService.prototype.updateSecret = function updateSecret(request, callback) {
+                            return this.rpcCall(updateSecret, $root.google.cloud.secretmanager.v1beta2.UpdateSecretRequest, $root.google.cloud.secretmanager.v1beta2.Secret, request, callback);
+                        }, "name", { value: "UpdateSecret" });
+    
+                        /**
+                         * Calls UpdateSecret.
+                         * @function updateSecret
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @instance
+                         * @param {google.cloud.secretmanager.v1beta2.IUpdateSecretRequest} request UpdateSecretRequest message or plain object
+                         * @returns {Promise<google.cloud.secretmanager.v1beta2.Secret>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.secretmanager.v1beta2.SecretManagerService|deleteSecret}.
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @typedef DeleteSecretCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteSecret.
+                         * @function deleteSecret
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @instance
+                         * @param {google.cloud.secretmanager.v1beta2.IDeleteSecretRequest} request DeleteSecretRequest message or plain object
+                         * @param {google.cloud.secretmanager.v1beta2.SecretManagerService.DeleteSecretCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecretManagerService.prototype.deleteSecret = function deleteSecret(request, callback) {
+                            return this.rpcCall(deleteSecret, $root.google.cloud.secretmanager.v1beta2.DeleteSecretRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteSecret" });
+    
+                        /**
+                         * Calls DeleteSecret.
+                         * @function deleteSecret
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @instance
+                         * @param {google.cloud.secretmanager.v1beta2.IDeleteSecretRequest} request DeleteSecretRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.secretmanager.v1beta2.SecretManagerService|listSecretVersions}.
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @typedef ListSecretVersionsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse} [response] ListSecretVersionsResponse
+                         */
+    
+                        /**
+                         * Calls ListSecretVersions.
+                         * @function listSecretVersions
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @instance
+                         * @param {google.cloud.secretmanager.v1beta2.IListSecretVersionsRequest} request ListSecretVersionsRequest message or plain object
+                         * @param {google.cloud.secretmanager.v1beta2.SecretManagerService.ListSecretVersionsCallback} callback Node-style callback called with the error, if any, and ListSecretVersionsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecretManagerService.prototype.listSecretVersions = function listSecretVersions(request, callback) {
+                            return this.rpcCall(listSecretVersions, $root.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest, $root.google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse, request, callback);
+                        }, "name", { value: "ListSecretVersions" });
+    
+                        /**
+                         * Calls ListSecretVersions.
+                         * @function listSecretVersions
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @instance
+                         * @param {google.cloud.secretmanager.v1beta2.IListSecretVersionsRequest} request ListSecretVersionsRequest message or plain object
+                         * @returns {Promise<google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.secretmanager.v1beta2.SecretManagerService|getSecretVersion}.
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @typedef GetSecretVersionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.secretmanager.v1beta2.SecretVersion} [response] SecretVersion
+                         */
+    
+                        /**
+                         * Calls GetSecretVersion.
+                         * @function getSecretVersion
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @instance
+                         * @param {google.cloud.secretmanager.v1beta2.IGetSecretVersionRequest} request GetSecretVersionRequest message or plain object
+                         * @param {google.cloud.secretmanager.v1beta2.SecretManagerService.GetSecretVersionCallback} callback Node-style callback called with the error, if any, and SecretVersion
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecretManagerService.prototype.getSecretVersion = function getSecretVersion(request, callback) {
+                            return this.rpcCall(getSecretVersion, $root.google.cloud.secretmanager.v1beta2.GetSecretVersionRequest, $root.google.cloud.secretmanager.v1beta2.SecretVersion, request, callback);
+                        }, "name", { value: "GetSecretVersion" });
+    
+                        /**
+                         * Calls GetSecretVersion.
+                         * @function getSecretVersion
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @instance
+                         * @param {google.cloud.secretmanager.v1beta2.IGetSecretVersionRequest} request GetSecretVersionRequest message or plain object
+                         * @returns {Promise<google.cloud.secretmanager.v1beta2.SecretVersion>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.secretmanager.v1beta2.SecretManagerService|accessSecretVersion}.
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @typedef AccessSecretVersionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse} [response] AccessSecretVersionResponse
+                         */
+    
+                        /**
+                         * Calls AccessSecretVersion.
+                         * @function accessSecretVersion
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @instance
+                         * @param {google.cloud.secretmanager.v1beta2.IAccessSecretVersionRequest} request AccessSecretVersionRequest message or plain object
+                         * @param {google.cloud.secretmanager.v1beta2.SecretManagerService.AccessSecretVersionCallback} callback Node-style callback called with the error, if any, and AccessSecretVersionResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecretManagerService.prototype.accessSecretVersion = function accessSecretVersion(request, callback) {
+                            return this.rpcCall(accessSecretVersion, $root.google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest, $root.google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse, request, callback);
+                        }, "name", { value: "AccessSecretVersion" });
+    
+                        /**
+                         * Calls AccessSecretVersion.
+                         * @function accessSecretVersion
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @instance
+                         * @param {google.cloud.secretmanager.v1beta2.IAccessSecretVersionRequest} request AccessSecretVersionRequest message or plain object
+                         * @returns {Promise<google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.secretmanager.v1beta2.SecretManagerService|disableSecretVersion}.
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @typedef DisableSecretVersionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.secretmanager.v1beta2.SecretVersion} [response] SecretVersion
+                         */
+    
+                        /**
+                         * Calls DisableSecretVersion.
+                         * @function disableSecretVersion
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @instance
+                         * @param {google.cloud.secretmanager.v1beta2.IDisableSecretVersionRequest} request DisableSecretVersionRequest message or plain object
+                         * @param {google.cloud.secretmanager.v1beta2.SecretManagerService.DisableSecretVersionCallback} callback Node-style callback called with the error, if any, and SecretVersion
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecretManagerService.prototype.disableSecretVersion = function disableSecretVersion(request, callback) {
+                            return this.rpcCall(disableSecretVersion, $root.google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest, $root.google.cloud.secretmanager.v1beta2.SecretVersion, request, callback);
+                        }, "name", { value: "DisableSecretVersion" });
+    
+                        /**
+                         * Calls DisableSecretVersion.
+                         * @function disableSecretVersion
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @instance
+                         * @param {google.cloud.secretmanager.v1beta2.IDisableSecretVersionRequest} request DisableSecretVersionRequest message or plain object
+                         * @returns {Promise<google.cloud.secretmanager.v1beta2.SecretVersion>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.secretmanager.v1beta2.SecretManagerService|enableSecretVersion}.
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @typedef EnableSecretVersionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.secretmanager.v1beta2.SecretVersion} [response] SecretVersion
+                         */
+    
+                        /**
+                         * Calls EnableSecretVersion.
+                         * @function enableSecretVersion
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @instance
+                         * @param {google.cloud.secretmanager.v1beta2.IEnableSecretVersionRequest} request EnableSecretVersionRequest message or plain object
+                         * @param {google.cloud.secretmanager.v1beta2.SecretManagerService.EnableSecretVersionCallback} callback Node-style callback called with the error, if any, and SecretVersion
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecretManagerService.prototype.enableSecretVersion = function enableSecretVersion(request, callback) {
+                            return this.rpcCall(enableSecretVersion, $root.google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest, $root.google.cloud.secretmanager.v1beta2.SecretVersion, request, callback);
+                        }, "name", { value: "EnableSecretVersion" });
+    
+                        /**
+                         * Calls EnableSecretVersion.
+                         * @function enableSecretVersion
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @instance
+                         * @param {google.cloud.secretmanager.v1beta2.IEnableSecretVersionRequest} request EnableSecretVersionRequest message or plain object
+                         * @returns {Promise<google.cloud.secretmanager.v1beta2.SecretVersion>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.secretmanager.v1beta2.SecretManagerService|destroySecretVersion}.
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @typedef DestroySecretVersionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.secretmanager.v1beta2.SecretVersion} [response] SecretVersion
+                         */
+    
+                        /**
+                         * Calls DestroySecretVersion.
+                         * @function destroySecretVersion
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @instance
+                         * @param {google.cloud.secretmanager.v1beta2.IDestroySecretVersionRequest} request DestroySecretVersionRequest message or plain object
+                         * @param {google.cloud.secretmanager.v1beta2.SecretManagerService.DestroySecretVersionCallback} callback Node-style callback called with the error, if any, and SecretVersion
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecretManagerService.prototype.destroySecretVersion = function destroySecretVersion(request, callback) {
+                            return this.rpcCall(destroySecretVersion, $root.google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest, $root.google.cloud.secretmanager.v1beta2.SecretVersion, request, callback);
+                        }, "name", { value: "DestroySecretVersion" });
+    
+                        /**
+                         * Calls DestroySecretVersion.
+                         * @function destroySecretVersion
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @instance
+                         * @param {google.cloud.secretmanager.v1beta2.IDestroySecretVersionRequest} request DestroySecretVersionRequest message or plain object
+                         * @returns {Promise<google.cloud.secretmanager.v1beta2.SecretVersion>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.secretmanager.v1beta2.SecretManagerService|setIamPolicy}.
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @typedef SetIamPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.iam.v1.Policy} [response] Policy
+                         */
+    
+                        /**
+                         * Calls SetIamPolicy.
+                         * @function setIamPolicy
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @instance
+                         * @param {google.iam.v1.ISetIamPolicyRequest} request SetIamPolicyRequest message or plain object
+                         * @param {google.cloud.secretmanager.v1beta2.SecretManagerService.SetIamPolicyCallback} callback Node-style callback called with the error, if any, and Policy
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecretManagerService.prototype.setIamPolicy = function setIamPolicy(request, callback) {
+                            return this.rpcCall(setIamPolicy, $root.google.iam.v1.SetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                        }, "name", { value: "SetIamPolicy" });
+    
+                        /**
+                         * Calls SetIamPolicy.
+                         * @function setIamPolicy
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @instance
+                         * @param {google.iam.v1.ISetIamPolicyRequest} request SetIamPolicyRequest message or plain object
+                         * @returns {Promise<google.iam.v1.Policy>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.secretmanager.v1beta2.SecretManagerService|getIamPolicy}.
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @typedef GetIamPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.iam.v1.Policy} [response] Policy
+                         */
+    
+                        /**
+                         * Calls GetIamPolicy.
+                         * @function getIamPolicy
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @instance
+                         * @param {google.iam.v1.IGetIamPolicyRequest} request GetIamPolicyRequest message or plain object
+                         * @param {google.cloud.secretmanager.v1beta2.SecretManagerService.GetIamPolicyCallback} callback Node-style callback called with the error, if any, and Policy
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecretManagerService.prototype.getIamPolicy = function getIamPolicy(request, callback) {
+                            return this.rpcCall(getIamPolicy, $root.google.iam.v1.GetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                        }, "name", { value: "GetIamPolicy" });
+    
+                        /**
+                         * Calls GetIamPolicy.
+                         * @function getIamPolicy
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @instance
+                         * @param {google.iam.v1.IGetIamPolicyRequest} request GetIamPolicyRequest message or plain object
+                         * @returns {Promise<google.iam.v1.Policy>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.secretmanager.v1beta2.SecretManagerService|testIamPermissions}.
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @typedef TestIamPermissionsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.iam.v1.TestIamPermissionsResponse} [response] TestIamPermissionsResponse
+                         */
+    
+                        /**
+                         * Calls TestIamPermissions.
+                         * @function testIamPermissions
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @instance
+                         * @param {google.iam.v1.ITestIamPermissionsRequest} request TestIamPermissionsRequest message or plain object
+                         * @param {google.cloud.secretmanager.v1beta2.SecretManagerService.TestIamPermissionsCallback} callback Node-style callback called with the error, if any, and TestIamPermissionsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecretManagerService.prototype.testIamPermissions = function testIamPermissions(request, callback) {
+                            return this.rpcCall(testIamPermissions, $root.google.iam.v1.TestIamPermissionsRequest, $root.google.iam.v1.TestIamPermissionsResponse, request, callback);
+                        }, "name", { value: "TestIamPermissions" });
+    
+                        /**
+                         * Calls TestIamPermissions.
+                         * @function testIamPermissions
+                         * @memberof google.cloud.secretmanager.v1beta2.SecretManagerService
+                         * @instance
+                         * @param {google.iam.v1.ITestIamPermissionsRequest} request TestIamPermissionsRequest message or plain object
+                         * @returns {Promise<google.iam.v1.TestIamPermissionsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        return SecretManagerService;
+                    })();
+    
+                    v1beta2.ListSecretsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListSecretsRequest.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @interface IListSecretsRequest
+                         * @property {string|null} [parent] ListSecretsRequest parent
+                         * @property {number|null} [pageSize] ListSecretsRequest pageSize
+                         * @property {string|null} [pageToken] ListSecretsRequest pageToken
+                         * @property {string|null} [filter] ListSecretsRequest filter
+                         */
+    
+                        /**
+                         * Constructs a new ListSecretsRequest.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @classdesc Represents a ListSecretsRequest.
+                         * @implements IListSecretsRequest
+                         * @constructor
+                         * @param {google.cloud.secretmanager.v1beta2.IListSecretsRequest=} [properties] Properties to set
+                         */
+                        function ListSecretsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSecretsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretsRequest
+                         * @instance
+                         */
+                        ListSecretsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListSecretsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretsRequest
+                         * @instance
+                         */
+                        ListSecretsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListSecretsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretsRequest
+                         * @instance
+                         */
+                        ListSecretsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListSecretsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretsRequest
+                         * @instance
+                         */
+                        ListSecretsRequest.prototype.filter = "";
+    
+                        /**
+                         * Creates a new ListSecretsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretsRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IListSecretsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.secretmanager.v1beta2.ListSecretsRequest} ListSecretsRequest instance
+                         */
+                        ListSecretsRequest.create = function create(properties) {
+                            return new ListSecretsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSecretsRequest message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.ListSecretsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretsRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IListSecretsRequest} message ListSecretsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSecretsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSecretsRequest message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.ListSecretsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretsRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IListSecretsRequest} message ListSecretsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSecretsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSecretsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.secretmanager.v1beta2.ListSecretsRequest} ListSecretsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSecretsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1beta2.ListSecretsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSecretsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.secretmanager.v1beta2.ListSecretsRequest} ListSecretsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSecretsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSecretsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSecretsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSecretsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.secretmanager.v1beta2.ListSecretsRequest} ListSecretsRequest
+                         */
+                        ListSecretsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.secretmanager.v1beta2.ListSecretsRequest)
+                                return object;
+                            var message = new $root.google.cloud.secretmanager.v1beta2.ListSecretsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSecretsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretsRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.ListSecretsRequest} message ListSecretsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSecretsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSecretsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSecretsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListSecretsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSecretsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.secretmanager.v1beta2.ListSecretsRequest";
+                        };
+    
+                        return ListSecretsRequest;
+                    })();
+    
+                    v1beta2.ListSecretsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListSecretsResponse.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @interface IListSecretsResponse
+                         * @property {Array.<google.cloud.secretmanager.v1beta2.ISecret>|null} [secrets] ListSecretsResponse secrets
+                         * @property {string|null} [nextPageToken] ListSecretsResponse nextPageToken
+                         * @property {number|null} [totalSize] ListSecretsResponse totalSize
+                         */
+    
+                        /**
+                         * Constructs a new ListSecretsResponse.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @classdesc Represents a ListSecretsResponse.
+                         * @implements IListSecretsResponse
+                         * @constructor
+                         * @param {google.cloud.secretmanager.v1beta2.IListSecretsResponse=} [properties] Properties to set
+                         */
+                        function ListSecretsResponse(properties) {
+                            this.secrets = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSecretsResponse secrets.
+                         * @member {Array.<google.cloud.secretmanager.v1beta2.ISecret>} secrets
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretsResponse
+                         * @instance
+                         */
+                        ListSecretsResponse.prototype.secrets = $util.emptyArray;
+    
+                        /**
+                         * ListSecretsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretsResponse
+                         * @instance
+                         */
+                        ListSecretsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListSecretsResponse totalSize.
+                         * @member {number} totalSize
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretsResponse
+                         * @instance
+                         */
+                        ListSecretsResponse.prototype.totalSize = 0;
+    
+                        /**
+                         * Creates a new ListSecretsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretsResponse
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IListSecretsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.secretmanager.v1beta2.ListSecretsResponse} ListSecretsResponse instance
+                         */
+                        ListSecretsResponse.create = function create(properties) {
+                            return new ListSecretsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSecretsResponse message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.ListSecretsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretsResponse
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IListSecretsResponse} message ListSecretsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSecretsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.secrets != null && message.secrets.length)
+                                for (var i = 0; i < message.secrets.length; ++i)
+                                    $root.google.cloud.secretmanager.v1beta2.Secret.encode(message.secrets[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.totalSize != null && Object.hasOwnProperty.call(message, "totalSize"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.totalSize);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSecretsResponse message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.ListSecretsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretsResponse
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IListSecretsResponse} message ListSecretsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSecretsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSecretsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.secretmanager.v1beta2.ListSecretsResponse} ListSecretsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSecretsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1beta2.ListSecretsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.secrets && message.secrets.length))
+                                            message.secrets = [];
+                                        message.secrets.push($root.google.cloud.secretmanager.v1beta2.Secret.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.totalSize = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSecretsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.secretmanager.v1beta2.ListSecretsResponse} ListSecretsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSecretsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSecretsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSecretsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.secrets != null && message.hasOwnProperty("secrets")) {
+                                if (!Array.isArray(message.secrets))
+                                    return "secrets: array expected";
+                                for (var i = 0; i < message.secrets.length; ++i) {
+                                    var error = $root.google.cloud.secretmanager.v1beta2.Secret.verify(message.secrets[i]);
+                                    if (error)
+                                        return "secrets." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.totalSize != null && message.hasOwnProperty("totalSize"))
+                                if (!$util.isInteger(message.totalSize))
+                                    return "totalSize: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSecretsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.secretmanager.v1beta2.ListSecretsResponse} ListSecretsResponse
+                         */
+                        ListSecretsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.secretmanager.v1beta2.ListSecretsResponse)
+                                return object;
+                            var message = new $root.google.cloud.secretmanager.v1beta2.ListSecretsResponse();
+                            if (object.secrets) {
+                                if (!Array.isArray(object.secrets))
+                                    throw TypeError(".google.cloud.secretmanager.v1beta2.ListSecretsResponse.secrets: array expected");
+                                message.secrets = [];
+                                for (var i = 0; i < object.secrets.length; ++i) {
+                                    if (typeof object.secrets[i] !== "object")
+                                        throw TypeError(".google.cloud.secretmanager.v1beta2.ListSecretsResponse.secrets: object expected");
+                                    message.secrets[i] = $root.google.cloud.secretmanager.v1beta2.Secret.fromObject(object.secrets[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.totalSize != null)
+                                message.totalSize = object.totalSize | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSecretsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretsResponse
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.ListSecretsResponse} message ListSecretsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSecretsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.secrets = [];
+                            if (options.defaults) {
+                                object.nextPageToken = "";
+                                object.totalSize = 0;
+                            }
+                            if (message.secrets && message.secrets.length) {
+                                object.secrets = [];
+                                for (var j = 0; j < message.secrets.length; ++j)
+                                    object.secrets[j] = $root.google.cloud.secretmanager.v1beta2.Secret.toObject(message.secrets[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.totalSize != null && message.hasOwnProperty("totalSize"))
+                                object.totalSize = message.totalSize;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSecretsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSecretsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListSecretsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSecretsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.secretmanager.v1beta2.ListSecretsResponse";
+                        };
+    
+                        return ListSecretsResponse;
+                    })();
+    
+                    v1beta2.CreateSecretRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateSecretRequest.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @interface ICreateSecretRequest
+                         * @property {string|null} [parent] CreateSecretRequest parent
+                         * @property {string|null} [secretId] CreateSecretRequest secretId
+                         * @property {google.cloud.secretmanager.v1beta2.ISecret|null} [secret] CreateSecretRequest secret
+                         */
+    
+                        /**
+                         * Constructs a new CreateSecretRequest.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @classdesc Represents a CreateSecretRequest.
+                         * @implements ICreateSecretRequest
+                         * @constructor
+                         * @param {google.cloud.secretmanager.v1beta2.ICreateSecretRequest=} [properties] Properties to set
+                         */
+                        function CreateSecretRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateSecretRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.secretmanager.v1beta2.CreateSecretRequest
+                         * @instance
+                         */
+                        CreateSecretRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateSecretRequest secretId.
+                         * @member {string} secretId
+                         * @memberof google.cloud.secretmanager.v1beta2.CreateSecretRequest
+                         * @instance
+                         */
+                        CreateSecretRequest.prototype.secretId = "";
+    
+                        /**
+                         * CreateSecretRequest secret.
+                         * @member {google.cloud.secretmanager.v1beta2.ISecret|null|undefined} secret
+                         * @memberof google.cloud.secretmanager.v1beta2.CreateSecretRequest
+                         * @instance
+                         */
+                        CreateSecretRequest.prototype.secret = null;
+    
+                        /**
+                         * Creates a new CreateSecretRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.secretmanager.v1beta2.CreateSecretRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.ICreateSecretRequest=} [properties] Properties to set
+                         * @returns {google.cloud.secretmanager.v1beta2.CreateSecretRequest} CreateSecretRequest instance
+                         */
+                        CreateSecretRequest.create = function create(properties) {
+                            return new CreateSecretRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSecretRequest message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.CreateSecretRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.secretmanager.v1beta2.CreateSecretRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.ICreateSecretRequest} message CreateSecretRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSecretRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.secretId != null && Object.hasOwnProperty.call(message, "secretId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.secretId);
+                            if (message.secret != null && Object.hasOwnProperty.call(message, "secret"))
+                                $root.google.cloud.secretmanager.v1beta2.Secret.encode(message.secret, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSecretRequest message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.CreateSecretRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.CreateSecretRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.ICreateSecretRequest} message CreateSecretRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSecretRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateSecretRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.secretmanager.v1beta2.CreateSecretRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.secretmanager.v1beta2.CreateSecretRequest} CreateSecretRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSecretRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1beta2.CreateSecretRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.secretId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.secret = $root.google.cloud.secretmanager.v1beta2.Secret.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateSecretRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.CreateSecretRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.secretmanager.v1beta2.CreateSecretRequest} CreateSecretRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSecretRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateSecretRequest message.
+                         * @function verify
+                         * @memberof google.cloud.secretmanager.v1beta2.CreateSecretRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateSecretRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.secretId != null && message.hasOwnProperty("secretId"))
+                                if (!$util.isString(message.secretId))
+                                    return "secretId: string expected";
+                            if (message.secret != null && message.hasOwnProperty("secret")) {
+                                var error = $root.google.cloud.secretmanager.v1beta2.Secret.verify(message.secret);
+                                if (error)
+                                    return "secret." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateSecretRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.secretmanager.v1beta2.CreateSecretRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.secretmanager.v1beta2.CreateSecretRequest} CreateSecretRequest
+                         */
+                        CreateSecretRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.secretmanager.v1beta2.CreateSecretRequest)
+                                return object;
+                            var message = new $root.google.cloud.secretmanager.v1beta2.CreateSecretRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.secretId != null)
+                                message.secretId = String(object.secretId);
+                            if (object.secret != null) {
+                                if (typeof object.secret !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1beta2.CreateSecretRequest.secret: object expected");
+                                message.secret = $root.google.cloud.secretmanager.v1beta2.Secret.fromObject(object.secret);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateSecretRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.secretmanager.v1beta2.CreateSecretRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.CreateSecretRequest} message CreateSecretRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateSecretRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.secretId = "";
+                                object.secret = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.secretId != null && message.hasOwnProperty("secretId"))
+                                object.secretId = message.secretId;
+                            if (message.secret != null && message.hasOwnProperty("secret"))
+                                object.secret = $root.google.cloud.secretmanager.v1beta2.Secret.toObject(message.secret, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateSecretRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.secretmanager.v1beta2.CreateSecretRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateSecretRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateSecretRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.secretmanager.v1beta2.CreateSecretRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateSecretRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.secretmanager.v1beta2.CreateSecretRequest";
+                        };
+    
+                        return CreateSecretRequest;
+                    })();
+    
+                    v1beta2.AddSecretVersionRequest = (function() {
+    
+                        /**
+                         * Properties of an AddSecretVersionRequest.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @interface IAddSecretVersionRequest
+                         * @property {string|null} [parent] AddSecretVersionRequest parent
+                         * @property {google.cloud.secretmanager.v1beta2.ISecretPayload|null} [payload] AddSecretVersionRequest payload
+                         */
+    
+                        /**
+                         * Constructs a new AddSecretVersionRequest.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @classdesc Represents an AddSecretVersionRequest.
+                         * @implements IAddSecretVersionRequest
+                         * @constructor
+                         * @param {google.cloud.secretmanager.v1beta2.IAddSecretVersionRequest=} [properties] Properties to set
+                         */
+                        function AddSecretVersionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AddSecretVersionRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.secretmanager.v1beta2.AddSecretVersionRequest
+                         * @instance
+                         */
+                        AddSecretVersionRequest.prototype.parent = "";
+    
+                        /**
+                         * AddSecretVersionRequest payload.
+                         * @member {google.cloud.secretmanager.v1beta2.ISecretPayload|null|undefined} payload
+                         * @memberof google.cloud.secretmanager.v1beta2.AddSecretVersionRequest
+                         * @instance
+                         */
+                        AddSecretVersionRequest.prototype.payload = null;
+    
+                        /**
+                         * Creates a new AddSecretVersionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.secretmanager.v1beta2.AddSecretVersionRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IAddSecretVersionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.secretmanager.v1beta2.AddSecretVersionRequest} AddSecretVersionRequest instance
+                         */
+                        AddSecretVersionRequest.create = function create(properties) {
+                            return new AddSecretVersionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AddSecretVersionRequest message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.AddSecretVersionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.secretmanager.v1beta2.AddSecretVersionRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IAddSecretVersionRequest} message AddSecretVersionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AddSecretVersionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.payload != null && Object.hasOwnProperty.call(message, "payload"))
+                                $root.google.cloud.secretmanager.v1beta2.SecretPayload.encode(message.payload, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AddSecretVersionRequest message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.AddSecretVersionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.AddSecretVersionRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IAddSecretVersionRequest} message AddSecretVersionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AddSecretVersionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AddSecretVersionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.secretmanager.v1beta2.AddSecretVersionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.secretmanager.v1beta2.AddSecretVersionRequest} AddSecretVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AddSecretVersionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1beta2.AddSecretVersionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.payload = $root.google.cloud.secretmanager.v1beta2.SecretPayload.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AddSecretVersionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.AddSecretVersionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.secretmanager.v1beta2.AddSecretVersionRequest} AddSecretVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AddSecretVersionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AddSecretVersionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.secretmanager.v1beta2.AddSecretVersionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AddSecretVersionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.payload != null && message.hasOwnProperty("payload")) {
+                                var error = $root.google.cloud.secretmanager.v1beta2.SecretPayload.verify(message.payload);
+                                if (error)
+                                    return "payload." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AddSecretVersionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.secretmanager.v1beta2.AddSecretVersionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.secretmanager.v1beta2.AddSecretVersionRequest} AddSecretVersionRequest
+                         */
+                        AddSecretVersionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.secretmanager.v1beta2.AddSecretVersionRequest)
+                                return object;
+                            var message = new $root.google.cloud.secretmanager.v1beta2.AddSecretVersionRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.payload != null) {
+                                if (typeof object.payload !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1beta2.AddSecretVersionRequest.payload: object expected");
+                                message.payload = $root.google.cloud.secretmanager.v1beta2.SecretPayload.fromObject(object.payload);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AddSecretVersionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.secretmanager.v1beta2.AddSecretVersionRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.AddSecretVersionRequest} message AddSecretVersionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AddSecretVersionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.payload = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.payload != null && message.hasOwnProperty("payload"))
+                                object.payload = $root.google.cloud.secretmanager.v1beta2.SecretPayload.toObject(message.payload, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AddSecretVersionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.secretmanager.v1beta2.AddSecretVersionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AddSecretVersionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AddSecretVersionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.secretmanager.v1beta2.AddSecretVersionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AddSecretVersionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.secretmanager.v1beta2.AddSecretVersionRequest";
+                        };
+    
+                        return AddSecretVersionRequest;
+                    })();
+    
+                    v1beta2.GetSecretRequest = (function() {
+    
+                        /**
+                         * Properties of a GetSecretRequest.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @interface IGetSecretRequest
+                         * @property {string|null} [name] GetSecretRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetSecretRequest.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @classdesc Represents a GetSecretRequest.
+                         * @implements IGetSecretRequest
+                         * @constructor
+                         * @param {google.cloud.secretmanager.v1beta2.IGetSecretRequest=} [properties] Properties to set
+                         */
+                        function GetSecretRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetSecretRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.secretmanager.v1beta2.GetSecretRequest
+                         * @instance
+                         */
+                        GetSecretRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetSecretRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.secretmanager.v1beta2.GetSecretRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IGetSecretRequest=} [properties] Properties to set
+                         * @returns {google.cloud.secretmanager.v1beta2.GetSecretRequest} GetSecretRequest instance
+                         */
+                        GetSecretRequest.create = function create(properties) {
+                            return new GetSecretRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetSecretRequest message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.GetSecretRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.secretmanager.v1beta2.GetSecretRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IGetSecretRequest} message GetSecretRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSecretRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetSecretRequest message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.GetSecretRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.GetSecretRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IGetSecretRequest} message GetSecretRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSecretRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetSecretRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.secretmanager.v1beta2.GetSecretRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.secretmanager.v1beta2.GetSecretRequest} GetSecretRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSecretRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1beta2.GetSecretRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetSecretRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.GetSecretRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.secretmanager.v1beta2.GetSecretRequest} GetSecretRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSecretRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetSecretRequest message.
+                         * @function verify
+                         * @memberof google.cloud.secretmanager.v1beta2.GetSecretRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetSecretRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetSecretRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.secretmanager.v1beta2.GetSecretRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.secretmanager.v1beta2.GetSecretRequest} GetSecretRequest
+                         */
+                        GetSecretRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.secretmanager.v1beta2.GetSecretRequest)
+                                return object;
+                            var message = new $root.google.cloud.secretmanager.v1beta2.GetSecretRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetSecretRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.secretmanager.v1beta2.GetSecretRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.GetSecretRequest} message GetSecretRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetSecretRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetSecretRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.secretmanager.v1beta2.GetSecretRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetSecretRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetSecretRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.secretmanager.v1beta2.GetSecretRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetSecretRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.secretmanager.v1beta2.GetSecretRequest";
+                        };
+    
+                        return GetSecretRequest;
+                    })();
+    
+                    v1beta2.ListSecretVersionsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListSecretVersionsRequest.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @interface IListSecretVersionsRequest
+                         * @property {string|null} [parent] ListSecretVersionsRequest parent
+                         * @property {number|null} [pageSize] ListSecretVersionsRequest pageSize
+                         * @property {string|null} [pageToken] ListSecretVersionsRequest pageToken
+                         * @property {string|null} [filter] ListSecretVersionsRequest filter
+                         */
+    
+                        /**
+                         * Constructs a new ListSecretVersionsRequest.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @classdesc Represents a ListSecretVersionsRequest.
+                         * @implements IListSecretVersionsRequest
+                         * @constructor
+                         * @param {google.cloud.secretmanager.v1beta2.IListSecretVersionsRequest=} [properties] Properties to set
+                         */
+                        function ListSecretVersionsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSecretVersionsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest
+                         * @instance
+                         */
+                        ListSecretVersionsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListSecretVersionsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest
+                         * @instance
+                         */
+                        ListSecretVersionsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListSecretVersionsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest
+                         * @instance
+                         */
+                        ListSecretVersionsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListSecretVersionsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest
+                         * @instance
+                         */
+                        ListSecretVersionsRequest.prototype.filter = "";
+    
+                        /**
+                         * Creates a new ListSecretVersionsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IListSecretVersionsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest} ListSecretVersionsRequest instance
+                         */
+                        ListSecretVersionsRequest.create = function create(properties) {
+                            return new ListSecretVersionsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSecretVersionsRequest message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IListSecretVersionsRequest} message ListSecretVersionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSecretVersionsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSecretVersionsRequest message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IListSecretVersionsRequest} message ListSecretVersionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSecretVersionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSecretVersionsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest} ListSecretVersionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSecretVersionsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSecretVersionsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest} ListSecretVersionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSecretVersionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSecretVersionsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSecretVersionsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSecretVersionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest} ListSecretVersionsRequest
+                         */
+                        ListSecretVersionsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest)
+                                return object;
+                            var message = new $root.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSecretVersionsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest} message ListSecretVersionsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSecretVersionsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSecretVersionsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSecretVersionsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListSecretVersionsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSecretVersionsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest";
+                        };
+    
+                        return ListSecretVersionsRequest;
+                    })();
+    
+                    v1beta2.ListSecretVersionsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListSecretVersionsResponse.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @interface IListSecretVersionsResponse
+                         * @property {Array.<google.cloud.secretmanager.v1beta2.ISecretVersion>|null} [versions] ListSecretVersionsResponse versions
+                         * @property {string|null} [nextPageToken] ListSecretVersionsResponse nextPageToken
+                         * @property {number|null} [totalSize] ListSecretVersionsResponse totalSize
+                         */
+    
+                        /**
+                         * Constructs a new ListSecretVersionsResponse.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @classdesc Represents a ListSecretVersionsResponse.
+                         * @implements IListSecretVersionsResponse
+                         * @constructor
+                         * @param {google.cloud.secretmanager.v1beta2.IListSecretVersionsResponse=} [properties] Properties to set
+                         */
+                        function ListSecretVersionsResponse(properties) {
+                            this.versions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSecretVersionsResponse versions.
+                         * @member {Array.<google.cloud.secretmanager.v1beta2.ISecretVersion>} versions
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse
+                         * @instance
+                         */
+                        ListSecretVersionsResponse.prototype.versions = $util.emptyArray;
+    
+                        /**
+                         * ListSecretVersionsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse
+                         * @instance
+                         */
+                        ListSecretVersionsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListSecretVersionsResponse totalSize.
+                         * @member {number} totalSize
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse
+                         * @instance
+                         */
+                        ListSecretVersionsResponse.prototype.totalSize = 0;
+    
+                        /**
+                         * Creates a new ListSecretVersionsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IListSecretVersionsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse} ListSecretVersionsResponse instance
+                         */
+                        ListSecretVersionsResponse.create = function create(properties) {
+                            return new ListSecretVersionsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSecretVersionsResponse message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IListSecretVersionsResponse} message ListSecretVersionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSecretVersionsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.versions != null && message.versions.length)
+                                for (var i = 0; i < message.versions.length; ++i)
+                                    $root.google.cloud.secretmanager.v1beta2.SecretVersion.encode(message.versions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.totalSize != null && Object.hasOwnProperty.call(message, "totalSize"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.totalSize);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSecretVersionsResponse message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IListSecretVersionsResponse} message ListSecretVersionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSecretVersionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSecretVersionsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse} ListSecretVersionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSecretVersionsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.versions && message.versions.length))
+                                            message.versions = [];
+                                        message.versions.push($root.google.cloud.secretmanager.v1beta2.SecretVersion.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.totalSize = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSecretVersionsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse} ListSecretVersionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSecretVersionsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSecretVersionsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSecretVersionsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.versions != null && message.hasOwnProperty("versions")) {
+                                if (!Array.isArray(message.versions))
+                                    return "versions: array expected";
+                                for (var i = 0; i < message.versions.length; ++i) {
+                                    var error = $root.google.cloud.secretmanager.v1beta2.SecretVersion.verify(message.versions[i]);
+                                    if (error)
+                                        return "versions." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.totalSize != null && message.hasOwnProperty("totalSize"))
+                                if (!$util.isInteger(message.totalSize))
+                                    return "totalSize: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSecretVersionsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse} ListSecretVersionsResponse
+                         */
+                        ListSecretVersionsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse)
+                                return object;
+                            var message = new $root.google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse();
+                            if (object.versions) {
+                                if (!Array.isArray(object.versions))
+                                    throw TypeError(".google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse.versions: array expected");
+                                message.versions = [];
+                                for (var i = 0; i < object.versions.length; ++i) {
+                                    if (typeof object.versions[i] !== "object")
+                                        throw TypeError(".google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse.versions: object expected");
+                                    message.versions[i] = $root.google.cloud.secretmanager.v1beta2.SecretVersion.fromObject(object.versions[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.totalSize != null)
+                                message.totalSize = object.totalSize | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSecretVersionsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse} message ListSecretVersionsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSecretVersionsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.versions = [];
+                            if (options.defaults) {
+                                object.nextPageToken = "";
+                                object.totalSize = 0;
+                            }
+                            if (message.versions && message.versions.length) {
+                                object.versions = [];
+                                for (var j = 0; j < message.versions.length; ++j)
+                                    object.versions[j] = $root.google.cloud.secretmanager.v1beta2.SecretVersion.toObject(message.versions[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.totalSize != null && message.hasOwnProperty("totalSize"))
+                                object.totalSize = message.totalSize;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSecretVersionsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSecretVersionsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListSecretVersionsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSecretVersionsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse";
+                        };
+    
+                        return ListSecretVersionsResponse;
+                    })();
+    
+                    v1beta2.GetSecretVersionRequest = (function() {
+    
+                        /**
+                         * Properties of a GetSecretVersionRequest.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @interface IGetSecretVersionRequest
+                         * @property {string|null} [name] GetSecretVersionRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetSecretVersionRequest.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @classdesc Represents a GetSecretVersionRequest.
+                         * @implements IGetSecretVersionRequest
+                         * @constructor
+                         * @param {google.cloud.secretmanager.v1beta2.IGetSecretVersionRequest=} [properties] Properties to set
+                         */
+                        function GetSecretVersionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetSecretVersionRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.secretmanager.v1beta2.GetSecretVersionRequest
+                         * @instance
+                         */
+                        GetSecretVersionRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetSecretVersionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.secretmanager.v1beta2.GetSecretVersionRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IGetSecretVersionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.secretmanager.v1beta2.GetSecretVersionRequest} GetSecretVersionRequest instance
+                         */
+                        GetSecretVersionRequest.create = function create(properties) {
+                            return new GetSecretVersionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetSecretVersionRequest message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.GetSecretVersionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.secretmanager.v1beta2.GetSecretVersionRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IGetSecretVersionRequest} message GetSecretVersionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSecretVersionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetSecretVersionRequest message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.GetSecretVersionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.GetSecretVersionRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IGetSecretVersionRequest} message GetSecretVersionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSecretVersionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetSecretVersionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.secretmanager.v1beta2.GetSecretVersionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.secretmanager.v1beta2.GetSecretVersionRequest} GetSecretVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSecretVersionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1beta2.GetSecretVersionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetSecretVersionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.GetSecretVersionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.secretmanager.v1beta2.GetSecretVersionRequest} GetSecretVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSecretVersionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetSecretVersionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.secretmanager.v1beta2.GetSecretVersionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetSecretVersionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetSecretVersionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.secretmanager.v1beta2.GetSecretVersionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.secretmanager.v1beta2.GetSecretVersionRequest} GetSecretVersionRequest
+                         */
+                        GetSecretVersionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.secretmanager.v1beta2.GetSecretVersionRequest)
+                                return object;
+                            var message = new $root.google.cloud.secretmanager.v1beta2.GetSecretVersionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetSecretVersionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.secretmanager.v1beta2.GetSecretVersionRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.GetSecretVersionRequest} message GetSecretVersionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetSecretVersionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetSecretVersionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.secretmanager.v1beta2.GetSecretVersionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetSecretVersionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetSecretVersionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.secretmanager.v1beta2.GetSecretVersionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetSecretVersionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.secretmanager.v1beta2.GetSecretVersionRequest";
+                        };
+    
+                        return GetSecretVersionRequest;
+                    })();
+    
+                    v1beta2.UpdateSecretRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateSecretRequest.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @interface IUpdateSecretRequest
+                         * @property {google.cloud.secretmanager.v1beta2.ISecret|null} [secret] UpdateSecretRequest secret
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateSecretRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateSecretRequest.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @classdesc Represents an UpdateSecretRequest.
+                         * @implements IUpdateSecretRequest
+                         * @constructor
+                         * @param {google.cloud.secretmanager.v1beta2.IUpdateSecretRequest=} [properties] Properties to set
+                         */
+                        function UpdateSecretRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateSecretRequest secret.
+                         * @member {google.cloud.secretmanager.v1beta2.ISecret|null|undefined} secret
+                         * @memberof google.cloud.secretmanager.v1beta2.UpdateSecretRequest
+                         * @instance
+                         */
+                        UpdateSecretRequest.prototype.secret = null;
+    
+                        /**
+                         * UpdateSecretRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.secretmanager.v1beta2.UpdateSecretRequest
+                         * @instance
+                         */
+                        UpdateSecretRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateSecretRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.secretmanager.v1beta2.UpdateSecretRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IUpdateSecretRequest=} [properties] Properties to set
+                         * @returns {google.cloud.secretmanager.v1beta2.UpdateSecretRequest} UpdateSecretRequest instance
+                         */
+                        UpdateSecretRequest.create = function create(properties) {
+                            return new UpdateSecretRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateSecretRequest message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.UpdateSecretRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.secretmanager.v1beta2.UpdateSecretRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IUpdateSecretRequest} message UpdateSecretRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateSecretRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.secret != null && Object.hasOwnProperty.call(message, "secret"))
+                                $root.google.cloud.secretmanager.v1beta2.Secret.encode(message.secret, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateSecretRequest message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.UpdateSecretRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.UpdateSecretRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IUpdateSecretRequest} message UpdateSecretRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateSecretRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateSecretRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.secretmanager.v1beta2.UpdateSecretRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.secretmanager.v1beta2.UpdateSecretRequest} UpdateSecretRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateSecretRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1beta2.UpdateSecretRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.secret = $root.google.cloud.secretmanager.v1beta2.Secret.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateSecretRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.UpdateSecretRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.secretmanager.v1beta2.UpdateSecretRequest} UpdateSecretRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateSecretRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateSecretRequest message.
+                         * @function verify
+                         * @memberof google.cloud.secretmanager.v1beta2.UpdateSecretRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateSecretRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.secret != null && message.hasOwnProperty("secret")) {
+                                var error = $root.google.cloud.secretmanager.v1beta2.Secret.verify(message.secret);
+                                if (error)
+                                    return "secret." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateSecretRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.secretmanager.v1beta2.UpdateSecretRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.secretmanager.v1beta2.UpdateSecretRequest} UpdateSecretRequest
+                         */
+                        UpdateSecretRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.secretmanager.v1beta2.UpdateSecretRequest)
+                                return object;
+                            var message = new $root.google.cloud.secretmanager.v1beta2.UpdateSecretRequest();
+                            if (object.secret != null) {
+                                if (typeof object.secret !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1beta2.UpdateSecretRequest.secret: object expected");
+                                message.secret = $root.google.cloud.secretmanager.v1beta2.Secret.fromObject(object.secret);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1beta2.UpdateSecretRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateSecretRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.secretmanager.v1beta2.UpdateSecretRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.UpdateSecretRequest} message UpdateSecretRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateSecretRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.secret = null;
+                                object.updateMask = null;
+                            }
+                            if (message.secret != null && message.hasOwnProperty("secret"))
+                                object.secret = $root.google.cloud.secretmanager.v1beta2.Secret.toObject(message.secret, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateSecretRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.secretmanager.v1beta2.UpdateSecretRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateSecretRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateSecretRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.secretmanager.v1beta2.UpdateSecretRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateSecretRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.secretmanager.v1beta2.UpdateSecretRequest";
+                        };
+    
+                        return UpdateSecretRequest;
+                    })();
+    
+                    v1beta2.AccessSecretVersionRequest = (function() {
+    
+                        /**
+                         * Properties of an AccessSecretVersionRequest.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @interface IAccessSecretVersionRequest
+                         * @property {string|null} [name] AccessSecretVersionRequest name
+                         */
+    
+                        /**
+                         * Constructs a new AccessSecretVersionRequest.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @classdesc Represents an AccessSecretVersionRequest.
+                         * @implements IAccessSecretVersionRequest
+                         * @constructor
+                         * @param {google.cloud.secretmanager.v1beta2.IAccessSecretVersionRequest=} [properties] Properties to set
+                         */
+                        function AccessSecretVersionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AccessSecretVersionRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest
+                         * @instance
+                         */
+                        AccessSecretVersionRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new AccessSecretVersionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IAccessSecretVersionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest} AccessSecretVersionRequest instance
+                         */
+                        AccessSecretVersionRequest.create = function create(properties) {
+                            return new AccessSecretVersionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AccessSecretVersionRequest message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IAccessSecretVersionRequest} message AccessSecretVersionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AccessSecretVersionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AccessSecretVersionRequest message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IAccessSecretVersionRequest} message AccessSecretVersionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AccessSecretVersionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AccessSecretVersionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest} AccessSecretVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AccessSecretVersionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AccessSecretVersionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest} AccessSecretVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AccessSecretVersionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AccessSecretVersionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AccessSecretVersionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AccessSecretVersionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest} AccessSecretVersionRequest
+                         */
+                        AccessSecretVersionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest)
+                                return object;
+                            var message = new $root.google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AccessSecretVersionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest} message AccessSecretVersionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AccessSecretVersionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AccessSecretVersionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AccessSecretVersionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AccessSecretVersionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AccessSecretVersionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest";
+                        };
+    
+                        return AccessSecretVersionRequest;
+                    })();
+    
+                    v1beta2.AccessSecretVersionResponse = (function() {
+    
+                        /**
+                         * Properties of an AccessSecretVersionResponse.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @interface IAccessSecretVersionResponse
+                         * @property {string|null} [name] AccessSecretVersionResponse name
+                         * @property {google.cloud.secretmanager.v1beta2.ISecretPayload|null} [payload] AccessSecretVersionResponse payload
+                         */
+    
+                        /**
+                         * Constructs a new AccessSecretVersionResponse.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @classdesc Represents an AccessSecretVersionResponse.
+                         * @implements IAccessSecretVersionResponse
+                         * @constructor
+                         * @param {google.cloud.secretmanager.v1beta2.IAccessSecretVersionResponse=} [properties] Properties to set
+                         */
+                        function AccessSecretVersionResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AccessSecretVersionResponse name.
+                         * @member {string} name
+                         * @memberof google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse
+                         * @instance
+                         */
+                        AccessSecretVersionResponse.prototype.name = "";
+    
+                        /**
+                         * AccessSecretVersionResponse payload.
+                         * @member {google.cloud.secretmanager.v1beta2.ISecretPayload|null|undefined} payload
+                         * @memberof google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse
+                         * @instance
+                         */
+                        AccessSecretVersionResponse.prototype.payload = null;
+    
+                        /**
+                         * Creates a new AccessSecretVersionResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IAccessSecretVersionResponse=} [properties] Properties to set
+                         * @returns {google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse} AccessSecretVersionResponse instance
+                         */
+                        AccessSecretVersionResponse.create = function create(properties) {
+                            return new AccessSecretVersionResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AccessSecretVersionResponse message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IAccessSecretVersionResponse} message AccessSecretVersionResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AccessSecretVersionResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.payload != null && Object.hasOwnProperty.call(message, "payload"))
+                                $root.google.cloud.secretmanager.v1beta2.SecretPayload.encode(message.payload, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AccessSecretVersionResponse message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IAccessSecretVersionResponse} message AccessSecretVersionResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AccessSecretVersionResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AccessSecretVersionResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse} AccessSecretVersionResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AccessSecretVersionResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.payload = $root.google.cloud.secretmanager.v1beta2.SecretPayload.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AccessSecretVersionResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse} AccessSecretVersionResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AccessSecretVersionResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AccessSecretVersionResponse message.
+                         * @function verify
+                         * @memberof google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AccessSecretVersionResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.payload != null && message.hasOwnProperty("payload")) {
+                                var error = $root.google.cloud.secretmanager.v1beta2.SecretPayload.verify(message.payload);
+                                if (error)
+                                    return "payload." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AccessSecretVersionResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse} AccessSecretVersionResponse
+                         */
+                        AccessSecretVersionResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse)
+                                return object;
+                            var message = new $root.google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.payload != null) {
+                                if (typeof object.payload !== "object")
+                                    throw TypeError(".google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse.payload: object expected");
+                                message.payload = $root.google.cloud.secretmanager.v1beta2.SecretPayload.fromObject(object.payload);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AccessSecretVersionResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse} message AccessSecretVersionResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AccessSecretVersionResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.payload = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.payload != null && message.hasOwnProperty("payload"))
+                                object.payload = $root.google.cloud.secretmanager.v1beta2.SecretPayload.toObject(message.payload, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AccessSecretVersionResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AccessSecretVersionResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AccessSecretVersionResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AccessSecretVersionResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse";
+                        };
+    
+                        return AccessSecretVersionResponse;
+                    })();
+    
+                    v1beta2.DeleteSecretRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteSecretRequest.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @interface IDeleteSecretRequest
+                         * @property {string|null} [name] DeleteSecretRequest name
+                         * @property {string|null} [etag] DeleteSecretRequest etag
+                         */
+    
+                        /**
+                         * Constructs a new DeleteSecretRequest.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @classdesc Represents a DeleteSecretRequest.
+                         * @implements IDeleteSecretRequest
+                         * @constructor
+                         * @param {google.cloud.secretmanager.v1beta2.IDeleteSecretRequest=} [properties] Properties to set
+                         */
+                        function DeleteSecretRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteSecretRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.secretmanager.v1beta2.DeleteSecretRequest
+                         * @instance
+                         */
+                        DeleteSecretRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteSecretRequest etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.secretmanager.v1beta2.DeleteSecretRequest
+                         * @instance
+                         */
+                        DeleteSecretRequest.prototype.etag = "";
+    
+                        /**
+                         * Creates a new DeleteSecretRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.secretmanager.v1beta2.DeleteSecretRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IDeleteSecretRequest=} [properties] Properties to set
+                         * @returns {google.cloud.secretmanager.v1beta2.DeleteSecretRequest} DeleteSecretRequest instance
+                         */
+                        DeleteSecretRequest.create = function create(properties) {
+                            return new DeleteSecretRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteSecretRequest message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.DeleteSecretRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.secretmanager.v1beta2.DeleteSecretRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IDeleteSecretRequest} message DeleteSecretRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteSecretRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.etag);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteSecretRequest message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.DeleteSecretRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.DeleteSecretRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IDeleteSecretRequest} message DeleteSecretRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteSecretRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteSecretRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.secretmanager.v1beta2.DeleteSecretRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.secretmanager.v1beta2.DeleteSecretRequest} DeleteSecretRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteSecretRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1beta2.DeleteSecretRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteSecretRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.DeleteSecretRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.secretmanager.v1beta2.DeleteSecretRequest} DeleteSecretRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteSecretRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteSecretRequest message.
+                         * @function verify
+                         * @memberof google.cloud.secretmanager.v1beta2.DeleteSecretRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteSecretRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteSecretRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.secretmanager.v1beta2.DeleteSecretRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.secretmanager.v1beta2.DeleteSecretRequest} DeleteSecretRequest
+                         */
+                        DeleteSecretRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.secretmanager.v1beta2.DeleteSecretRequest)
+                                return object;
+                            var message = new $root.google.cloud.secretmanager.v1beta2.DeleteSecretRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteSecretRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.secretmanager.v1beta2.DeleteSecretRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.DeleteSecretRequest} message DeleteSecretRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteSecretRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.etag = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteSecretRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.secretmanager.v1beta2.DeleteSecretRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteSecretRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteSecretRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.secretmanager.v1beta2.DeleteSecretRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteSecretRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.secretmanager.v1beta2.DeleteSecretRequest";
+                        };
+    
+                        return DeleteSecretRequest;
+                    })();
+    
+                    v1beta2.DisableSecretVersionRequest = (function() {
+    
+                        /**
+                         * Properties of a DisableSecretVersionRequest.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @interface IDisableSecretVersionRequest
+                         * @property {string|null} [name] DisableSecretVersionRequest name
+                         * @property {string|null} [etag] DisableSecretVersionRequest etag
+                         */
+    
+                        /**
+                         * Constructs a new DisableSecretVersionRequest.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @classdesc Represents a DisableSecretVersionRequest.
+                         * @implements IDisableSecretVersionRequest
+                         * @constructor
+                         * @param {google.cloud.secretmanager.v1beta2.IDisableSecretVersionRequest=} [properties] Properties to set
+                         */
+                        function DisableSecretVersionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DisableSecretVersionRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest
+                         * @instance
+                         */
+                        DisableSecretVersionRequest.prototype.name = "";
+    
+                        /**
+                         * DisableSecretVersionRequest etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest
+                         * @instance
+                         */
+                        DisableSecretVersionRequest.prototype.etag = "";
+    
+                        /**
+                         * Creates a new DisableSecretVersionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IDisableSecretVersionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest} DisableSecretVersionRequest instance
+                         */
+                        DisableSecretVersionRequest.create = function create(properties) {
+                            return new DisableSecretVersionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DisableSecretVersionRequest message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IDisableSecretVersionRequest} message DisableSecretVersionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DisableSecretVersionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.etag);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DisableSecretVersionRequest message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IDisableSecretVersionRequest} message DisableSecretVersionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DisableSecretVersionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DisableSecretVersionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest} DisableSecretVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DisableSecretVersionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DisableSecretVersionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest} DisableSecretVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DisableSecretVersionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DisableSecretVersionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DisableSecretVersionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DisableSecretVersionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest} DisableSecretVersionRequest
+                         */
+                        DisableSecretVersionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest)
+                                return object;
+                            var message = new $root.google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DisableSecretVersionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest} message DisableSecretVersionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DisableSecretVersionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.etag = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DisableSecretVersionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DisableSecretVersionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DisableSecretVersionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DisableSecretVersionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest";
+                        };
+    
+                        return DisableSecretVersionRequest;
+                    })();
+    
+                    v1beta2.EnableSecretVersionRequest = (function() {
+    
+                        /**
+                         * Properties of an EnableSecretVersionRequest.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @interface IEnableSecretVersionRequest
+                         * @property {string|null} [name] EnableSecretVersionRequest name
+                         * @property {string|null} [etag] EnableSecretVersionRequest etag
+                         */
+    
+                        /**
+                         * Constructs a new EnableSecretVersionRequest.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @classdesc Represents an EnableSecretVersionRequest.
+                         * @implements IEnableSecretVersionRequest
+                         * @constructor
+                         * @param {google.cloud.secretmanager.v1beta2.IEnableSecretVersionRequest=} [properties] Properties to set
+                         */
+                        function EnableSecretVersionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * EnableSecretVersionRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest
+                         * @instance
+                         */
+                        EnableSecretVersionRequest.prototype.name = "";
+    
+                        /**
+                         * EnableSecretVersionRequest etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest
+                         * @instance
+                         */
+                        EnableSecretVersionRequest.prototype.etag = "";
+    
+                        /**
+                         * Creates a new EnableSecretVersionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IEnableSecretVersionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest} EnableSecretVersionRequest instance
+                         */
+                        EnableSecretVersionRequest.create = function create(properties) {
+                            return new EnableSecretVersionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified EnableSecretVersionRequest message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IEnableSecretVersionRequest} message EnableSecretVersionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EnableSecretVersionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.etag);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified EnableSecretVersionRequest message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IEnableSecretVersionRequest} message EnableSecretVersionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EnableSecretVersionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an EnableSecretVersionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest} EnableSecretVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EnableSecretVersionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an EnableSecretVersionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest} EnableSecretVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EnableSecretVersionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an EnableSecretVersionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        EnableSecretVersionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an EnableSecretVersionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest} EnableSecretVersionRequest
+                         */
+                        EnableSecretVersionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest)
+                                return object;
+                            var message = new $root.google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an EnableSecretVersionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest} message EnableSecretVersionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        EnableSecretVersionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.etag = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this EnableSecretVersionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        EnableSecretVersionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for EnableSecretVersionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        EnableSecretVersionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest";
+                        };
+    
+                        return EnableSecretVersionRequest;
+                    })();
+    
+                    v1beta2.DestroySecretVersionRequest = (function() {
+    
+                        /**
+                         * Properties of a DestroySecretVersionRequest.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @interface IDestroySecretVersionRequest
+                         * @property {string|null} [name] DestroySecretVersionRequest name
+                         * @property {string|null} [etag] DestroySecretVersionRequest etag
+                         */
+    
+                        /**
+                         * Constructs a new DestroySecretVersionRequest.
+                         * @memberof google.cloud.secretmanager.v1beta2
+                         * @classdesc Represents a DestroySecretVersionRequest.
+                         * @implements IDestroySecretVersionRequest
+                         * @constructor
+                         * @param {google.cloud.secretmanager.v1beta2.IDestroySecretVersionRequest=} [properties] Properties to set
+                         */
+                        function DestroySecretVersionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DestroySecretVersionRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest
+                         * @instance
+                         */
+                        DestroySecretVersionRequest.prototype.name = "";
+    
+                        /**
+                         * DestroySecretVersionRequest etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest
+                         * @instance
+                         */
+                        DestroySecretVersionRequest.prototype.etag = "";
+    
+                        /**
+                         * Creates a new DestroySecretVersionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IDestroySecretVersionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest} DestroySecretVersionRequest instance
+                         */
+                        DestroySecretVersionRequest.create = function create(properties) {
+                            return new DestroySecretVersionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DestroySecretVersionRequest message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IDestroySecretVersionRequest} message DestroySecretVersionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DestroySecretVersionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.etag);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DestroySecretVersionRequest message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.IDestroySecretVersionRequest} message DestroySecretVersionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DestroySecretVersionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DestroySecretVersionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest} DestroySecretVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DestroySecretVersionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DestroySecretVersionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest} DestroySecretVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DestroySecretVersionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DestroySecretVersionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DestroySecretVersionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DestroySecretVersionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest} DestroySecretVersionRequest
+                         */
+                        DestroySecretVersionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest)
+                                return object;
+                            var message = new $root.google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DestroySecretVersionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest
+                         * @static
+                         * @param {google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest} message DestroySecretVersionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DestroySecretVersionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.etag = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DestroySecretVersionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DestroySecretVersionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DestroySecretVersionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DestroySecretVersionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest";
+                        };
+    
+                        return DestroySecretVersionRequest;
+                    })();
+    
+                    return v1beta2;
+                })();
+    
                 return secretmanager;
             })();
     
@@ -13878,6 +22196,7 @@
              * @property {number} IMMUTABLE=5 IMMUTABLE value
              * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
              * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
+             * @property {number} IDENTIFIER=8 IDENTIFIER value
              */
             api.FieldBehavior = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
@@ -13889,6 +22208,7 @@
                 values[valuesById[5] = "IMMUTABLE"] = 5;
                 values[valuesById[6] = "UNORDERED_LIST"] = 6;
                 values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
+                values[valuesById[8] = "IDENTIFIER"] = 8;
                 return values;
             })();
     
@@ -16352,6 +24672,7 @@
                  * @property {string|null} [docTagPrefix] Publishing docTagPrefix
                  * @property {google.api.ClientLibraryOrganization|null} [organization] Publishing organization
                  * @property {Array.<google.api.IClientLibrarySettings>|null} [librarySettings] Publishing librarySettings
+                 * @property {string|null} [protoReferenceDocumentationUri] Publishing protoReferenceDocumentationUri
                  */
     
                 /**
@@ -16445,6 +24766,14 @@
                 Publishing.prototype.librarySettings = $util.emptyArray;
     
                 /**
+                 * Publishing protoReferenceDocumentationUri.
+                 * @member {string} protoReferenceDocumentationUri
+                 * @memberof google.api.Publishing
+                 * @instance
+                 */
+                Publishing.prototype.protoReferenceDocumentationUri = "";
+    
+                /**
                  * Creates a new Publishing instance using the specified properties.
                  * @function create
                  * @memberof google.api.Publishing
@@ -16489,6 +24818,8 @@
                     if (message.librarySettings != null && message.librarySettings.length)
                         for (var i = 0; i < message.librarySettings.length; ++i)
                             $root.google.api.ClientLibrarySettings.encode(message.librarySettings[i], writer.uint32(/* id 109, wireType 2 =*/874).fork()).ldelim();
+                    if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
+                        writer.uint32(/* id 110, wireType 2 =*/882).string(message.protoReferenceDocumentationUri);
                     return writer;
                 };
     
@@ -16563,6 +24894,10 @@
                                 if (!(message.librarySettings && message.librarySettings.length))
                                     message.librarySettings = [];
                                 message.librarySettings.push($root.google.api.ClientLibrarySettings.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 110: {
+                                message.protoReferenceDocumentationUri = reader.string();
                                 break;
                             }
                         default:
@@ -16640,6 +24975,9 @@
                         case 2:
                         case 3:
                         case 4:
+                        case 5:
+                        case 6:
+                        case 7:
                             break;
                         }
                     if (message.librarySettings != null && message.hasOwnProperty("librarySettings")) {
@@ -16651,6 +24989,9 @@
                                 return "librarySettings." + error;
                         }
                     }
+                    if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
+                        if (!$util.isString(message.protoReferenceDocumentationUri))
+                            return "protoReferenceDocumentationUri: string expected";
                     return null;
                 };
     
@@ -16720,6 +25061,18 @@
                     case 4:
                         message.organization = 4;
                         break;
+                    case "SHOPPING":
+                    case 5:
+                        message.organization = 5;
+                        break;
+                    case "GEO":
+                    case 6:
+                        message.organization = 6;
+                        break;
+                    case "GENERATIVE_AI":
+                    case 7:
+                        message.organization = 7;
+                        break;
                     }
                     if (object.librarySettings) {
                         if (!Array.isArray(object.librarySettings))
@@ -16731,6 +25084,8 @@
                             message.librarySettings[i] = $root.google.api.ClientLibrarySettings.fromObject(object.librarySettings[i]);
                         }
                     }
+                    if (object.protoReferenceDocumentationUri != null)
+                        message.protoReferenceDocumentationUri = String(object.protoReferenceDocumentationUri);
                     return message;
                 };
     
@@ -16759,6 +25114,7 @@
                         object.githubLabel = "";
                         object.docTagPrefix = "";
                         object.organization = options.enums === String ? "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED" : 0;
+                        object.protoReferenceDocumentationUri = "";
                     }
                     if (message.methodSettings && message.methodSettings.length) {
                         object.methodSettings = [];
@@ -16787,6 +25143,8 @@
                         for (var j = 0; j < message.librarySettings.length; ++j)
                             object.librarySettings[j] = $root.google.api.ClientLibrarySettings.toObject(message.librarySettings[j], options);
                     }
+                    if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
+                        object.protoReferenceDocumentationUri = message.protoReferenceDocumentationUri;
                     return object;
                 };
     
@@ -17949,6 +26307,11 @@
                  * @memberof google.api
                  * @interface IDotnetSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] DotnetSettings common
+                 * @property {Object.<string,string>|null} [renamedServices] DotnetSettings renamedServices
+                 * @property {Object.<string,string>|null} [renamedResources] DotnetSettings renamedResources
+                 * @property {Array.<string>|null} [ignoredResources] DotnetSettings ignoredResources
+                 * @property {Array.<string>|null} [forcedNamespaceAliases] DotnetSettings forcedNamespaceAliases
+                 * @property {Array.<string>|null} [handwrittenSignatures] DotnetSettings handwrittenSignatures
                  */
     
                 /**
@@ -17960,6 +26323,11 @@
                  * @param {google.api.IDotnetSettings=} [properties] Properties to set
                  */
                 function DotnetSettings(properties) {
+                    this.renamedServices = {};
+                    this.renamedResources = {};
+                    this.ignoredResources = [];
+                    this.forcedNamespaceAliases = [];
+                    this.handwrittenSignatures = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -17973,6 +26341,46 @@
                  * @instance
                  */
                 DotnetSettings.prototype.common = null;
+    
+                /**
+                 * DotnetSettings renamedServices.
+                 * @member {Object.<string,string>} renamedServices
+                 * @memberof google.api.DotnetSettings
+                 * @instance
+                 */
+                DotnetSettings.prototype.renamedServices = $util.emptyObject;
+    
+                /**
+                 * DotnetSettings renamedResources.
+                 * @member {Object.<string,string>} renamedResources
+                 * @memberof google.api.DotnetSettings
+                 * @instance
+                 */
+                DotnetSettings.prototype.renamedResources = $util.emptyObject;
+    
+                /**
+                 * DotnetSettings ignoredResources.
+                 * @member {Array.<string>} ignoredResources
+                 * @memberof google.api.DotnetSettings
+                 * @instance
+                 */
+                DotnetSettings.prototype.ignoredResources = $util.emptyArray;
+    
+                /**
+                 * DotnetSettings forcedNamespaceAliases.
+                 * @member {Array.<string>} forcedNamespaceAliases
+                 * @memberof google.api.DotnetSettings
+                 * @instance
+                 */
+                DotnetSettings.prototype.forcedNamespaceAliases = $util.emptyArray;
+    
+                /**
+                 * DotnetSettings handwrittenSignatures.
+                 * @member {Array.<string>} handwrittenSignatures
+                 * @memberof google.api.DotnetSettings
+                 * @instance
+                 */
+                DotnetSettings.prototype.handwrittenSignatures = $util.emptyArray;
     
                 /**
                  * Creates a new DotnetSettings instance using the specified properties.
@@ -18000,6 +26408,21 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices"))
+                        for (var keys = Object.keys(message.renamedServices), i = 0; i < keys.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedServices[keys[i]]).ldelim();
+                    if (message.renamedResources != null && Object.hasOwnProperty.call(message, "renamedResources"))
+                        for (var keys = Object.keys(message.renamedResources), i = 0; i < keys.length; ++i)
+                            writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedResources[keys[i]]).ldelim();
+                    if (message.ignoredResources != null && message.ignoredResources.length)
+                        for (var i = 0; i < message.ignoredResources.length; ++i)
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.ignoredResources[i]);
+                    if (message.forcedNamespaceAliases != null && message.forcedNamespaceAliases.length)
+                        for (var i = 0; i < message.forcedNamespaceAliases.length; ++i)
+                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.forcedNamespaceAliases[i]);
+                    if (message.handwrittenSignatures != null && message.handwrittenSignatures.length)
+                        for (var i = 0; i < message.handwrittenSignatures.length; ++i)
+                            writer.uint32(/* id 6, wireType 2 =*/50).string(message.handwrittenSignatures[i]);
                     return writer;
                 };
     
@@ -18030,12 +26453,76 @@
                 DotnetSettings.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings();
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                if (message.renamedServices === $util.emptyObject)
+                                    message.renamedServices = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.renamedServices[key] = value;
+                                break;
+                            }
+                        case 3: {
+                                if (message.renamedResources === $util.emptyObject)
+                                    message.renamedResources = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.renamedResources[key] = value;
+                                break;
+                            }
+                        case 4: {
+                                if (!(message.ignoredResources && message.ignoredResources.length))
+                                    message.ignoredResources = [];
+                                message.ignoredResources.push(reader.string());
+                                break;
+                            }
+                        case 5: {
+                                if (!(message.forcedNamespaceAliases && message.forcedNamespaceAliases.length))
+                                    message.forcedNamespaceAliases = [];
+                                message.forcedNamespaceAliases.push(reader.string());
+                                break;
+                            }
+                        case 6: {
+                                if (!(message.handwrittenSignatures && message.handwrittenSignatures.length))
+                                    message.handwrittenSignatures = [];
+                                message.handwrittenSignatures.push(reader.string());
                                 break;
                             }
                         default:
@@ -18078,6 +26565,43 @@
                         if (error)
                             return "common." + error;
                     }
+                    if (message.renamedServices != null && message.hasOwnProperty("renamedServices")) {
+                        if (!$util.isObject(message.renamedServices))
+                            return "renamedServices: object expected";
+                        var key = Object.keys(message.renamedServices);
+                        for (var i = 0; i < key.length; ++i)
+                            if (!$util.isString(message.renamedServices[key[i]]))
+                                return "renamedServices: string{k:string} expected";
+                    }
+                    if (message.renamedResources != null && message.hasOwnProperty("renamedResources")) {
+                        if (!$util.isObject(message.renamedResources))
+                            return "renamedResources: object expected";
+                        var key = Object.keys(message.renamedResources);
+                        for (var i = 0; i < key.length; ++i)
+                            if (!$util.isString(message.renamedResources[key[i]]))
+                                return "renamedResources: string{k:string} expected";
+                    }
+                    if (message.ignoredResources != null && message.hasOwnProperty("ignoredResources")) {
+                        if (!Array.isArray(message.ignoredResources))
+                            return "ignoredResources: array expected";
+                        for (var i = 0; i < message.ignoredResources.length; ++i)
+                            if (!$util.isString(message.ignoredResources[i]))
+                                return "ignoredResources: string[] expected";
+                    }
+                    if (message.forcedNamespaceAliases != null && message.hasOwnProperty("forcedNamespaceAliases")) {
+                        if (!Array.isArray(message.forcedNamespaceAliases))
+                            return "forcedNamespaceAliases: array expected";
+                        for (var i = 0; i < message.forcedNamespaceAliases.length; ++i)
+                            if (!$util.isString(message.forcedNamespaceAliases[i]))
+                                return "forcedNamespaceAliases: string[] expected";
+                    }
+                    if (message.handwrittenSignatures != null && message.hasOwnProperty("handwrittenSignatures")) {
+                        if (!Array.isArray(message.handwrittenSignatures))
+                            return "handwrittenSignatures: array expected";
+                        for (var i = 0; i < message.handwrittenSignatures.length; ++i)
+                            if (!$util.isString(message.handwrittenSignatures[i]))
+                                return "handwrittenSignatures: string[] expected";
+                    }
                     return null;
                 };
     
@@ -18098,6 +26622,41 @@
                             throw TypeError(".google.api.DotnetSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
+                    if (object.renamedServices) {
+                        if (typeof object.renamedServices !== "object")
+                            throw TypeError(".google.api.DotnetSettings.renamedServices: object expected");
+                        message.renamedServices = {};
+                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i)
+                            message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
+                    }
+                    if (object.renamedResources) {
+                        if (typeof object.renamedResources !== "object")
+                            throw TypeError(".google.api.DotnetSettings.renamedResources: object expected");
+                        message.renamedResources = {};
+                        for (var keys = Object.keys(object.renamedResources), i = 0; i < keys.length; ++i)
+                            message.renamedResources[keys[i]] = String(object.renamedResources[keys[i]]);
+                    }
+                    if (object.ignoredResources) {
+                        if (!Array.isArray(object.ignoredResources))
+                            throw TypeError(".google.api.DotnetSettings.ignoredResources: array expected");
+                        message.ignoredResources = [];
+                        for (var i = 0; i < object.ignoredResources.length; ++i)
+                            message.ignoredResources[i] = String(object.ignoredResources[i]);
+                    }
+                    if (object.forcedNamespaceAliases) {
+                        if (!Array.isArray(object.forcedNamespaceAliases))
+                            throw TypeError(".google.api.DotnetSettings.forcedNamespaceAliases: array expected");
+                        message.forcedNamespaceAliases = [];
+                        for (var i = 0; i < object.forcedNamespaceAliases.length; ++i)
+                            message.forcedNamespaceAliases[i] = String(object.forcedNamespaceAliases[i]);
+                    }
+                    if (object.handwrittenSignatures) {
+                        if (!Array.isArray(object.handwrittenSignatures))
+                            throw TypeError(".google.api.DotnetSettings.handwrittenSignatures: array expected");
+                        message.handwrittenSignatures = [];
+                        for (var i = 0; i < object.handwrittenSignatures.length; ++i)
+                            message.handwrittenSignatures[i] = String(object.handwrittenSignatures[i]);
+                    }
                     return message;
                 };
     
@@ -18114,10 +26673,45 @@
                     if (!options)
                         options = {};
                     var object = {};
+                    if (options.arrays || options.defaults) {
+                        object.ignoredResources = [];
+                        object.forcedNamespaceAliases = [];
+                        object.handwrittenSignatures = [];
+                    }
+                    if (options.objects || options.defaults) {
+                        object.renamedServices = {};
+                        object.renamedResources = {};
+                    }
                     if (options.defaults)
                         object.common = null;
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    var keys2;
+                    if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
+                        object.renamedServices = {};
+                        for (var j = 0; j < keys2.length; ++j)
+                            object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
+                    }
+                    if (message.renamedResources && (keys2 = Object.keys(message.renamedResources)).length) {
+                        object.renamedResources = {};
+                        for (var j = 0; j < keys2.length; ++j)
+                            object.renamedResources[keys2[j]] = message.renamedResources[keys2[j]];
+                    }
+                    if (message.ignoredResources && message.ignoredResources.length) {
+                        object.ignoredResources = [];
+                        for (var j = 0; j < message.ignoredResources.length; ++j)
+                            object.ignoredResources[j] = message.ignoredResources[j];
+                    }
+                    if (message.forcedNamespaceAliases && message.forcedNamespaceAliases.length) {
+                        object.forcedNamespaceAliases = [];
+                        for (var j = 0; j < message.forcedNamespaceAliases.length; ++j)
+                            object.forcedNamespaceAliases[j] = message.forcedNamespaceAliases[j];
+                    }
+                    if (message.handwrittenSignatures && message.handwrittenSignatures.length) {
+                        object.handwrittenSignatures = [];
+                        for (var j = 0; j < message.handwrittenSignatures.length; ++j)
+                            object.handwrittenSignatures[j] = message.handwrittenSignatures[j];
+                    }
                     return object;
                 };
     
@@ -18574,6 +27168,7 @@
                  * @interface IMethodSettings
                  * @property {string|null} [selector] MethodSettings selector
                  * @property {google.api.MethodSettings.ILongRunning|null} [longRunning] MethodSettings longRunning
+                 * @property {Array.<string>|null} [autoPopulatedFields] MethodSettings autoPopulatedFields
                  */
     
                 /**
@@ -18585,6 +27180,7 @@
                  * @param {google.api.IMethodSettings=} [properties] Properties to set
                  */
                 function MethodSettings(properties) {
+                    this.autoPopulatedFields = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -18606,6 +27202,14 @@
                  * @instance
                  */
                 MethodSettings.prototype.longRunning = null;
+    
+                /**
+                 * MethodSettings autoPopulatedFields.
+                 * @member {Array.<string>} autoPopulatedFields
+                 * @memberof google.api.MethodSettings
+                 * @instance
+                 */
+                MethodSettings.prototype.autoPopulatedFields = $util.emptyArray;
     
                 /**
                  * Creates a new MethodSettings instance using the specified properties.
@@ -18635,6 +27239,9 @@
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.selector);
                     if (message.longRunning != null && Object.hasOwnProperty.call(message, "longRunning"))
                         $root.google.api.MethodSettings.LongRunning.encode(message.longRunning, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.autoPopulatedFields != null && message.autoPopulatedFields.length)
+                        for (var i = 0; i < message.autoPopulatedFields.length; ++i)
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.autoPopulatedFields[i]);
                     return writer;
                 };
     
@@ -18675,6 +27282,12 @@
                             }
                         case 2: {
                                 message.longRunning = $root.google.api.MethodSettings.LongRunning.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.autoPopulatedFields && message.autoPopulatedFields.length))
+                                    message.autoPopulatedFields = [];
+                                message.autoPopulatedFields.push(reader.string());
                                 break;
                             }
                         default:
@@ -18720,6 +27333,13 @@
                         if (error)
                             return "longRunning." + error;
                     }
+                    if (message.autoPopulatedFields != null && message.hasOwnProperty("autoPopulatedFields")) {
+                        if (!Array.isArray(message.autoPopulatedFields))
+                            return "autoPopulatedFields: array expected";
+                        for (var i = 0; i < message.autoPopulatedFields.length; ++i)
+                            if (!$util.isString(message.autoPopulatedFields[i]))
+                                return "autoPopulatedFields: string[] expected";
+                    }
                     return null;
                 };
     
@@ -18742,6 +27362,13 @@
                             throw TypeError(".google.api.MethodSettings.longRunning: object expected");
                         message.longRunning = $root.google.api.MethodSettings.LongRunning.fromObject(object.longRunning);
                     }
+                    if (object.autoPopulatedFields) {
+                        if (!Array.isArray(object.autoPopulatedFields))
+                            throw TypeError(".google.api.MethodSettings.autoPopulatedFields: array expected");
+                        message.autoPopulatedFields = [];
+                        for (var i = 0; i < object.autoPopulatedFields.length; ++i)
+                            message.autoPopulatedFields[i] = String(object.autoPopulatedFields[i]);
+                    }
                     return message;
                 };
     
@@ -18758,6 +27385,8 @@
                     if (!options)
                         options = {};
                     var object = {};
+                    if (options.arrays || options.defaults)
+                        object.autoPopulatedFields = [];
                     if (options.defaults) {
                         object.selector = "";
                         object.longRunning = null;
@@ -18766,6 +27395,11 @@
                         object.selector = message.selector;
                     if (message.longRunning != null && message.hasOwnProperty("longRunning"))
                         object.longRunning = $root.google.api.MethodSettings.LongRunning.toObject(message.longRunning, options);
+                    if (message.autoPopulatedFields && message.autoPopulatedFields.length) {
+                        object.autoPopulatedFields = [];
+                        for (var j = 0; j < message.autoPopulatedFields.length; ++j)
+                            object.autoPopulatedFields[j] = message.autoPopulatedFields[j];
+                    }
                     return object;
                 };
     
@@ -19095,6 +27729,9 @@
              * @property {number} ADS=2 ADS value
              * @property {number} PHOTOS=3 PHOTOS value
              * @property {number} STREET_VIEW=4 STREET_VIEW value
+             * @property {number} SHOPPING=5 SHOPPING value
+             * @property {number} GEO=6 GEO value
+             * @property {number} GENERATIVE_AI=7 GENERATIVE_AI value
              */
             api.ClientLibraryOrganization = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
@@ -19103,6 +27740,9 @@
                 values[valuesById[2] = "ADS"] = 2;
                 values[valuesById[3] = "PHOTOS"] = 3;
                 values[valuesById[4] = "STREET_VIEW"] = 4;
+                values[valuesById[5] = "SHOPPING"] = 5;
+                values[valuesById[6] = "GEO"] = 6;
+                values[valuesById[7] = "GENERATIVE_AI"] = 7;
                 return values;
             })();
     
@@ -19384,6 +28024,38 @@
                 return FileDescriptorSet;
             })();
     
+            /**
+             * Edition enum.
+             * @name google.protobuf.Edition
+             * @enum {number}
+             * @property {number} EDITION_UNKNOWN=0 EDITION_UNKNOWN value
+             * @property {number} EDITION_PROTO2=998 EDITION_PROTO2 value
+             * @property {number} EDITION_PROTO3=999 EDITION_PROTO3 value
+             * @property {number} EDITION_2023=1000 EDITION_2023 value
+             * @property {number} EDITION_2024=1001 EDITION_2024 value
+             * @property {number} EDITION_1_TEST_ONLY=1 EDITION_1_TEST_ONLY value
+             * @property {number} EDITION_2_TEST_ONLY=2 EDITION_2_TEST_ONLY value
+             * @property {number} EDITION_99997_TEST_ONLY=99997 EDITION_99997_TEST_ONLY value
+             * @property {number} EDITION_99998_TEST_ONLY=99998 EDITION_99998_TEST_ONLY value
+             * @property {number} EDITION_99999_TEST_ONLY=99999 EDITION_99999_TEST_ONLY value
+             * @property {number} EDITION_MAX=2147483647 EDITION_MAX value
+             */
+            protobuf.Edition = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "EDITION_UNKNOWN"] = 0;
+                values[valuesById[998] = "EDITION_PROTO2"] = 998;
+                values[valuesById[999] = "EDITION_PROTO3"] = 999;
+                values[valuesById[1000] = "EDITION_2023"] = 1000;
+                values[valuesById[1001] = "EDITION_2024"] = 1001;
+                values[valuesById[1] = "EDITION_1_TEST_ONLY"] = 1;
+                values[valuesById[2] = "EDITION_2_TEST_ONLY"] = 2;
+                values[valuesById[99997] = "EDITION_99997_TEST_ONLY"] = 99997;
+                values[valuesById[99998] = "EDITION_99998_TEST_ONLY"] = 99998;
+                values[valuesById[99999] = "EDITION_99999_TEST_ONLY"] = 99999;
+                values[valuesById[2147483647] = "EDITION_MAX"] = 2147483647;
+                return values;
+            })();
+    
             protobuf.FileDescriptorProto = (function() {
     
                 /**
@@ -19402,7 +28074,7 @@
                  * @property {google.protobuf.IFileOptions|null} [options] FileDescriptorProto options
                  * @property {google.protobuf.ISourceCodeInfo|null} [sourceCodeInfo] FileDescriptorProto sourceCodeInfo
                  * @property {string|null} [syntax] FileDescriptorProto syntax
-                 * @property {string|null} [edition] FileDescriptorProto edition
+                 * @property {google.protobuf.Edition|null} [edition] FileDescriptorProto edition
                  */
     
                 /**
@@ -19525,11 +28197,11 @@
     
                 /**
                  * FileDescriptorProto edition.
-                 * @member {string} edition
+                 * @member {google.protobuf.Edition} edition
                  * @memberof google.protobuf.FileDescriptorProto
                  * @instance
                  */
-                FileDescriptorProto.prototype.edition = "";
+                FileDescriptorProto.prototype.edition = 0;
     
                 /**
                  * Creates a new FileDescriptorProto instance using the specified properties.
@@ -19587,7 +28259,7 @@
                     if (message.syntax != null && Object.hasOwnProperty.call(message, "syntax"))
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
                     if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
-                        writer.uint32(/* id 13, wireType 2 =*/106).string(message.edition);
+                        writer.uint32(/* id 14, wireType 0 =*/112).int32(message.edition);
                     return writer;
                 };
     
@@ -19694,8 +28366,8 @@
                                 message.syntax = reader.string();
                                 break;
                             }
-                        case 13: {
-                                message.edition = reader.string();
+                        case 14: {
+                                message.edition = reader.int32();
                                 break;
                             }
                         default:
@@ -19810,8 +28482,22 @@
                         if (!$util.isString(message.syntax))
                             return "syntax: string expected";
                     if (message.edition != null && message.hasOwnProperty("edition"))
-                        if (!$util.isString(message.edition))
-                            return "edition: string expected";
+                        switch (message.edition) {
+                        default:
+                            return "edition: enum value expected";
+                        case 0:
+                        case 998:
+                        case 999:
+                        case 1000:
+                        case 1001:
+                        case 1:
+                        case 2:
+                        case 99997:
+                        case 99998:
+                        case 99999:
+                        case 2147483647:
+                            break;
+                        }
                     return null;
                 };
     
@@ -19904,8 +28590,58 @@
                     }
                     if (object.syntax != null)
                         message.syntax = String(object.syntax);
-                    if (object.edition != null)
-                        message.edition = String(object.edition);
+                    switch (object.edition) {
+                    default:
+                        if (typeof object.edition === "number") {
+                            message.edition = object.edition;
+                            break;
+                        }
+                        break;
+                    case "EDITION_UNKNOWN":
+                    case 0:
+                        message.edition = 0;
+                        break;
+                    case "EDITION_PROTO2":
+                    case 998:
+                        message.edition = 998;
+                        break;
+                    case "EDITION_PROTO3":
+                    case 999:
+                        message.edition = 999;
+                        break;
+                    case "EDITION_2023":
+                    case 1000:
+                        message.edition = 1000;
+                        break;
+                    case "EDITION_2024":
+                    case 1001:
+                        message.edition = 1001;
+                        break;
+                    case "EDITION_1_TEST_ONLY":
+                    case 1:
+                        message.edition = 1;
+                        break;
+                    case "EDITION_2_TEST_ONLY":
+                    case 2:
+                        message.edition = 2;
+                        break;
+                    case "EDITION_99997_TEST_ONLY":
+                    case 99997:
+                        message.edition = 99997;
+                        break;
+                    case "EDITION_99998_TEST_ONLY":
+                    case 99998:
+                        message.edition = 99998;
+                        break;
+                    case "EDITION_99999_TEST_ONLY":
+                    case 99999:
+                        message.edition = 99999;
+                        break;
+                    case "EDITION_MAX":
+                    case 2147483647:
+                        message.edition = 2147483647;
+                        break;
+                    }
                     return message;
                 };
     
@@ -19937,7 +28673,7 @@
                         object.options = null;
                         object.sourceCodeInfo = null;
                         object.syntax = "";
-                        object.edition = "";
+                        object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -19985,7 +28721,7 @@
                     if (message.syntax != null && message.hasOwnProperty("syntax"))
                         object.syntax = message.syntax;
                     if (message.edition != null && message.hasOwnProperty("edition"))
-                        object.edition = message.edition;
+                        object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
                     return object;
                 };
     
@@ -21088,6 +29824,9 @@
                  * @memberof google.protobuf
                  * @interface IExtensionRangeOptions
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ExtensionRangeOptions uninterpretedOption
+                 * @property {Array.<google.protobuf.ExtensionRangeOptions.IDeclaration>|null} [declaration] ExtensionRangeOptions declaration
+                 * @property {google.protobuf.IFeatureSet|null} [features] ExtensionRangeOptions features
+                 * @property {google.protobuf.ExtensionRangeOptions.VerificationState|null} [verification] ExtensionRangeOptions verification
                  */
     
                 /**
@@ -21100,6 +29839,7 @@
                  */
                 function ExtensionRangeOptions(properties) {
                     this.uninterpretedOption = [];
+                    this.declaration = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -21113,6 +29853,30 @@
                  * @instance
                  */
                 ExtensionRangeOptions.prototype.uninterpretedOption = $util.emptyArray;
+    
+                /**
+                 * ExtensionRangeOptions declaration.
+                 * @member {Array.<google.protobuf.ExtensionRangeOptions.IDeclaration>} declaration
+                 * @memberof google.protobuf.ExtensionRangeOptions
+                 * @instance
+                 */
+                ExtensionRangeOptions.prototype.declaration = $util.emptyArray;
+    
+                /**
+                 * ExtensionRangeOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.ExtensionRangeOptions
+                 * @instance
+                 */
+                ExtensionRangeOptions.prototype.features = null;
+    
+                /**
+                 * ExtensionRangeOptions verification.
+                 * @member {google.protobuf.ExtensionRangeOptions.VerificationState} verification
+                 * @memberof google.protobuf.ExtensionRangeOptions
+                 * @instance
+                 */
+                ExtensionRangeOptions.prototype.verification = 1;
     
                 /**
                  * Creates a new ExtensionRangeOptions instance using the specified properties.
@@ -21138,6 +29902,13 @@
                 ExtensionRangeOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (message.declaration != null && message.declaration.length)
+                        for (var i = 0; i < message.declaration.length; ++i)
+                            $root.google.protobuf.ExtensionRangeOptions.Declaration.encode(message.declaration[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.verification != null && Object.hasOwnProperty.call(message, "verification"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.verification);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 50, wireType 2 =*/402).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -21179,6 +29950,20 @@
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
                                 message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.declaration && message.declaration.length))
+                                    message.declaration = [];
+                                message.declaration.push($root.google.protobuf.ExtensionRangeOptions.Declaration.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 50: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 3: {
+                                message.verification = reader.int32();
                                 break;
                             }
                         default:
@@ -21225,6 +30010,28 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message.declaration != null && message.hasOwnProperty("declaration")) {
+                        if (!Array.isArray(message.declaration))
+                            return "declaration: array expected";
+                        for (var i = 0; i < message.declaration.length; ++i) {
+                            var error = $root.google.protobuf.ExtensionRangeOptions.Declaration.verify(message.declaration[i]);
+                            if (error)
+                                return "declaration." + error;
+                        }
+                    }
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
+                    if (message.verification != null && message.hasOwnProperty("verification"))
+                        switch (message.verification) {
+                        default:
+                            return "verification: enum value expected";
+                        case 0:
+                        case 1:
+                            break;
+                        }
                     return null;
                 };
     
@@ -21250,6 +30057,37 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object.declaration) {
+                        if (!Array.isArray(object.declaration))
+                            throw TypeError(".google.protobuf.ExtensionRangeOptions.declaration: array expected");
+                        message.declaration = [];
+                        for (var i = 0; i < object.declaration.length; ++i) {
+                            if (typeof object.declaration[i] !== "object")
+                                throw TypeError(".google.protobuf.ExtensionRangeOptions.declaration: object expected");
+                            message.declaration[i] = $root.google.protobuf.ExtensionRangeOptions.Declaration.fromObject(object.declaration[i]);
+                        }
+                    }
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.ExtensionRangeOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                    }
+                    switch (object.verification) {
+                    case "DECLARATION":
+                    case 0:
+                        message.verification = 0;
+                        break;
+                    default:
+                        if (typeof object.verification === "number") {
+                            message.verification = object.verification;
+                            break;
+                        }
+                        break;
+                    case "UNVERIFIED":
+                    case 1:
+                        message.verification = 1;
+                        break;
+                    }
                     return message;
                 };
     
@@ -21266,8 +30104,23 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.arrays || options.defaults)
+                    if (options.arrays || options.defaults) {
+                        object.declaration = [];
                         object.uninterpretedOption = [];
+                    }
+                    if (options.defaults) {
+                        object.verification = options.enums === String ? "UNVERIFIED" : 1;
+                        object.features = null;
+                    }
+                    if (message.declaration && message.declaration.length) {
+                        object.declaration = [];
+                        for (var j = 0; j < message.declaration.length; ++j)
+                            object.declaration[j] = $root.google.protobuf.ExtensionRangeOptions.Declaration.toObject(message.declaration[j], options);
+                    }
+                    if (message.verification != null && message.hasOwnProperty("verification"))
+                        object.verification = options.enums === String ? $root.google.protobuf.ExtensionRangeOptions.VerificationState[message.verification] === undefined ? message.verification : $root.google.protobuf.ExtensionRangeOptions.VerificationState[message.verification] : message.verification;
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -21301,6 +30154,316 @@
                     }
                     return typeUrlPrefix + "/google.protobuf.ExtensionRangeOptions";
                 };
+    
+                ExtensionRangeOptions.Declaration = (function() {
+    
+                    /**
+                     * Properties of a Declaration.
+                     * @memberof google.protobuf.ExtensionRangeOptions
+                     * @interface IDeclaration
+                     * @property {number|null} [number] Declaration number
+                     * @property {string|null} [fullName] Declaration fullName
+                     * @property {string|null} [type] Declaration type
+                     * @property {boolean|null} [reserved] Declaration reserved
+                     * @property {boolean|null} [repeated] Declaration repeated
+                     */
+    
+                    /**
+                     * Constructs a new Declaration.
+                     * @memberof google.protobuf.ExtensionRangeOptions
+                     * @classdesc Represents a Declaration.
+                     * @implements IDeclaration
+                     * @constructor
+                     * @param {google.protobuf.ExtensionRangeOptions.IDeclaration=} [properties] Properties to set
+                     */
+                    function Declaration(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Declaration number.
+                     * @member {number} number
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @instance
+                     */
+                    Declaration.prototype.number = 0;
+    
+                    /**
+                     * Declaration fullName.
+                     * @member {string} fullName
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @instance
+                     */
+                    Declaration.prototype.fullName = "";
+    
+                    /**
+                     * Declaration type.
+                     * @member {string} type
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @instance
+                     */
+                    Declaration.prototype.type = "";
+    
+                    /**
+                     * Declaration reserved.
+                     * @member {boolean} reserved
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @instance
+                     */
+                    Declaration.prototype.reserved = false;
+    
+                    /**
+                     * Declaration repeated.
+                     * @member {boolean} repeated
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @instance
+                     */
+                    Declaration.prototype.repeated = false;
+    
+                    /**
+                     * Creates a new Declaration instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {google.protobuf.ExtensionRangeOptions.IDeclaration=} [properties] Properties to set
+                     * @returns {google.protobuf.ExtensionRangeOptions.Declaration} Declaration instance
+                     */
+                    Declaration.create = function create(properties) {
+                        return new Declaration(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Declaration message. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {google.protobuf.ExtensionRangeOptions.IDeclaration} message Declaration message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Declaration.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.number != null && Object.hasOwnProperty.call(message, "number"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.number);
+                        if (message.fullName != null && Object.hasOwnProperty.call(message, "fullName"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.fullName);
+                        if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.type);
+                        if (message.reserved != null && Object.hasOwnProperty.call(message, "reserved"))
+                            writer.uint32(/* id 5, wireType 0 =*/40).bool(message.reserved);
+                        if (message.repeated != null && Object.hasOwnProperty.call(message, "repeated"))
+                            writer.uint32(/* id 6, wireType 0 =*/48).bool(message.repeated);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Declaration message, length delimited. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {google.protobuf.ExtensionRangeOptions.IDeclaration} message Declaration message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Declaration.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Declaration message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.ExtensionRangeOptions.Declaration} Declaration
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Declaration.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.number = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.fullName = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.type = reader.string();
+                                    break;
+                                }
+                            case 5: {
+                                    message.reserved = reader.bool();
+                                    break;
+                                }
+                            case 6: {
+                                    message.repeated = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Declaration message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.ExtensionRangeOptions.Declaration} Declaration
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Declaration.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Declaration message.
+                     * @function verify
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Declaration.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.number != null && message.hasOwnProperty("number"))
+                            if (!$util.isInteger(message.number))
+                                return "number: integer expected";
+                        if (message.fullName != null && message.hasOwnProperty("fullName"))
+                            if (!$util.isString(message.fullName))
+                                return "fullName: string expected";
+                        if (message.type != null && message.hasOwnProperty("type"))
+                            if (!$util.isString(message.type))
+                                return "type: string expected";
+                        if (message.reserved != null && message.hasOwnProperty("reserved"))
+                            if (typeof message.reserved !== "boolean")
+                                return "reserved: boolean expected";
+                        if (message.repeated != null && message.hasOwnProperty("repeated"))
+                            if (typeof message.repeated !== "boolean")
+                                return "repeated: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Declaration message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.ExtensionRangeOptions.Declaration} Declaration
+                     */
+                    Declaration.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.ExtensionRangeOptions.Declaration)
+                            return object;
+                        var message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
+                        if (object.number != null)
+                            message.number = object.number | 0;
+                        if (object.fullName != null)
+                            message.fullName = String(object.fullName);
+                        if (object.type != null)
+                            message.type = String(object.type);
+                        if (object.reserved != null)
+                            message.reserved = Boolean(object.reserved);
+                        if (object.repeated != null)
+                            message.repeated = Boolean(object.repeated);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Declaration message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {google.protobuf.ExtensionRangeOptions.Declaration} message Declaration
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Declaration.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.number = 0;
+                            object.fullName = "";
+                            object.type = "";
+                            object.reserved = false;
+                            object.repeated = false;
+                        }
+                        if (message.number != null && message.hasOwnProperty("number"))
+                            object.number = message.number;
+                        if (message.fullName != null && message.hasOwnProperty("fullName"))
+                            object.fullName = message.fullName;
+                        if (message.type != null && message.hasOwnProperty("type"))
+                            object.type = message.type;
+                        if (message.reserved != null && message.hasOwnProperty("reserved"))
+                            object.reserved = message.reserved;
+                        if (message.repeated != null && message.hasOwnProperty("repeated"))
+                            object.repeated = message.repeated;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Declaration to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Declaration.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for Declaration
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Declaration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.ExtensionRangeOptions.Declaration";
+                    };
+    
+                    return Declaration;
+                })();
+    
+                /**
+                 * VerificationState enum.
+                 * @name google.protobuf.ExtensionRangeOptions.VerificationState
+                 * @enum {number}
+                 * @property {number} DECLARATION=0 DECLARATION value
+                 * @property {number} UNVERIFIED=1 UNVERIFIED value
+                 */
+                ExtensionRangeOptions.VerificationState = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "DECLARATION"] = 0;
+                    values[valuesById[1] = "UNVERIFIED"] = 1;
+                    return values;
+                })();
     
                 return ExtensionRangeOptions;
             })();
@@ -21597,8 +30760,8 @@
                         default:
                             return "label: enum value expected";
                         case 1:
-                        case 2:
                         case 3:
+                        case 2:
                             break;
                         }
                     if (message.type != null && message.hasOwnProperty("type"))
@@ -21678,13 +30841,13 @@
                     case 1:
                         message.label = 1;
                         break;
-                    case "LABEL_REQUIRED":
-                    case 2:
-                        message.label = 2;
-                        break;
                     case "LABEL_REPEATED":
                     case 3:
                         message.label = 3;
+                        break;
+                    case "LABEL_REQUIRED":
+                    case 2:
+                        message.label = 2;
                         break;
                     }
                     switch (object.type) {
@@ -21915,14 +31078,14 @@
                  * @name google.protobuf.FieldDescriptorProto.Label
                  * @enum {number}
                  * @property {number} LABEL_OPTIONAL=1 LABEL_OPTIONAL value
-                 * @property {number} LABEL_REQUIRED=2 LABEL_REQUIRED value
                  * @property {number} LABEL_REPEATED=3 LABEL_REPEATED value
+                 * @property {number} LABEL_REQUIRED=2 LABEL_REQUIRED value
                  */
                 FieldDescriptorProto.Label = (function() {
                     var valuesById = {}, values = Object.create(valuesById);
                     values[valuesById[1] = "LABEL_OPTIONAL"] = 1;
-                    values[valuesById[2] = "LABEL_REQUIRED"] = 2;
                     values[valuesById[3] = "LABEL_REPEATED"] = 3;
+                    values[valuesById[2] = "LABEL_REQUIRED"] = 2;
                     return values;
                 })();
     
@@ -23621,7 +32784,6 @@
                  * @property {boolean|null} [ccGenericServices] FileOptions ccGenericServices
                  * @property {boolean|null} [javaGenericServices] FileOptions javaGenericServices
                  * @property {boolean|null} [pyGenericServices] FileOptions pyGenericServices
-                 * @property {boolean|null} [phpGenericServices] FileOptions phpGenericServices
                  * @property {boolean|null} [deprecated] FileOptions deprecated
                  * @property {boolean|null} [ccEnableArenas] FileOptions ccEnableArenas
                  * @property {string|null} [objcClassPrefix] FileOptions objcClassPrefix
@@ -23631,6 +32793,7 @@
                  * @property {string|null} [phpNamespace] FileOptions phpNamespace
                  * @property {string|null} [phpMetadataNamespace] FileOptions phpMetadataNamespace
                  * @property {string|null} [rubyPackage] FileOptions rubyPackage
+                 * @property {google.protobuf.IFeatureSet|null} [features] FileOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FileOptions uninterpretedOption
                  * @property {Array.<google.api.IResourceDescriptor>|null} [".google.api.resourceDefinition"] FileOptions .google.api.resourceDefinition
                  */
@@ -23733,14 +32896,6 @@
                 FileOptions.prototype.pyGenericServices = false;
     
                 /**
-                 * FileOptions phpGenericServices.
-                 * @member {boolean} phpGenericServices
-                 * @memberof google.protobuf.FileOptions
-                 * @instance
-                 */
-                FileOptions.prototype.phpGenericServices = false;
-    
-                /**
                  * FileOptions deprecated.
                  * @member {boolean} deprecated
                  * @memberof google.protobuf.FileOptions
@@ -23811,6 +32966,14 @@
                  * @instance
                  */
                 FileOptions.prototype.rubyPackage = "";
+    
+                /**
+                 * FileOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype.features = null;
     
                 /**
                  * FileOptions uninterpretedOption.
@@ -23886,12 +33049,12 @@
                         writer.uint32(/* id 40, wireType 2 =*/322).string(message.phpClassPrefix);
                     if (message.phpNamespace != null && Object.hasOwnProperty.call(message, "phpNamespace"))
                         writer.uint32(/* id 41, wireType 2 =*/330).string(message.phpNamespace);
-                    if (message.phpGenericServices != null && Object.hasOwnProperty.call(message, "phpGenericServices"))
-                        writer.uint32(/* id 42, wireType 0 =*/336).bool(message.phpGenericServices);
                     if (message.phpMetadataNamespace != null && Object.hasOwnProperty.call(message, "phpMetadataNamespace"))
                         writer.uint32(/* id 44, wireType 2 =*/354).string(message.phpMetadataNamespace);
                     if (message.rubyPackage != null && Object.hasOwnProperty.call(message, "rubyPackage"))
                         writer.uint32(/* id 45, wireType 2 =*/362).string(message.rubyPackage);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 50, wireType 2 =*/402).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -23972,10 +33135,6 @@
                                 message.pyGenericServices = reader.bool();
                                 break;
                             }
-                        case 42: {
-                                message.phpGenericServices = reader.bool();
-                                break;
-                            }
                         case 23: {
                                 message.deprecated = reader.bool();
                                 break;
@@ -24010,6 +33169,10 @@
                             }
                         case 45: {
                                 message.rubyPackage = reader.string();
+                                break;
+                            }
+                        case 50: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -24095,9 +33258,6 @@
                     if (message.pyGenericServices != null && message.hasOwnProperty("pyGenericServices"))
                         if (typeof message.pyGenericServices !== "boolean")
                             return "pyGenericServices: boolean expected";
-                    if (message.phpGenericServices != null && message.hasOwnProperty("phpGenericServices"))
-                        if (typeof message.phpGenericServices !== "boolean")
-                            return "phpGenericServices: boolean expected";
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
@@ -24125,6 +33285,11 @@
                     if (message.rubyPackage != null && message.hasOwnProperty("rubyPackage"))
                         if (!$util.isString(message.rubyPackage))
                             return "rubyPackage: string expected";
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -24196,8 +33361,6 @@
                         message.javaGenericServices = Boolean(object.javaGenericServices);
                     if (object.pyGenericServices != null)
                         message.pyGenericServices = Boolean(object.pyGenericServices);
-                    if (object.phpGenericServices != null)
-                        message.phpGenericServices = Boolean(object.phpGenericServices);
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     if (object.ccEnableArenas != null)
@@ -24216,6 +33379,11 @@
                         message.phpMetadataNamespace = String(object.phpMetadataNamespace);
                     if (object.rubyPackage != null)
                         message.rubyPackage = String(object.rubyPackage);
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.FileOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.FileOptions.uninterpretedOption: array expected");
@@ -24274,9 +33442,9 @@
                         object.swiftPrefix = "";
                         object.phpClassPrefix = "";
                         object.phpNamespace = "";
-                        object.phpGenericServices = false;
                         object.phpMetadataNamespace = "";
                         object.rubyPackage = "";
+                        object.features = null;
                     }
                     if (message.javaPackage != null && message.hasOwnProperty("javaPackage"))
                         object.javaPackage = message.javaPackage;
@@ -24312,12 +33480,12 @@
                         object.phpClassPrefix = message.phpClassPrefix;
                     if (message.phpNamespace != null && message.hasOwnProperty("phpNamespace"))
                         object.phpNamespace = message.phpNamespace;
-                    if (message.phpGenericServices != null && message.hasOwnProperty("phpGenericServices"))
-                        object.phpGenericServices = message.phpGenericServices;
                     if (message.phpMetadataNamespace != null && message.hasOwnProperty("phpMetadataNamespace"))
                         object.phpMetadataNamespace = message.phpMetadataNamespace;
                     if (message.rubyPackage != null && message.hasOwnProperty("rubyPackage"))
                         object.rubyPackage = message.rubyPackage;
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -24387,6 +33555,7 @@
                  * @property {boolean|null} [deprecated] MessageOptions deprecated
                  * @property {boolean|null} [mapEntry] MessageOptions mapEntry
                  * @property {boolean|null} [deprecatedLegacyJsonFieldConflicts] MessageOptions deprecatedLegacyJsonFieldConflicts
+                 * @property {google.protobuf.IFeatureSet|null} [features] MessageOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MessageOptions uninterpretedOption
                  * @property {google.api.IResourceDescriptor|null} [".google.api.resource"] MessageOptions .google.api.resource
                  */
@@ -24448,6 +33617,14 @@
                 MessageOptions.prototype.deprecatedLegacyJsonFieldConflicts = false;
     
                 /**
+                 * MessageOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.MessageOptions
+                 * @instance
+                 */
+                MessageOptions.prototype.features = null;
+    
+                /**
                  * MessageOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.MessageOptions
@@ -24497,6 +33674,8 @@
                         writer.uint32(/* id 7, wireType 0 =*/56).bool(message.mapEntry);
                     if (message.deprecatedLegacyJsonFieldConflicts != null && Object.hasOwnProperty.call(message, "deprecatedLegacyJsonFieldConflicts"))
                         writer.uint32(/* id 11, wireType 0 =*/88).bool(message.deprecatedLegacyJsonFieldConflicts);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -24554,6 +33733,10 @@
                             }
                         case 11: {
                                 message.deprecatedLegacyJsonFieldConflicts = reader.bool();
+                                break;
+                            }
+                        case 12: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -24616,6 +33799,11 @@
                     if (message.deprecatedLegacyJsonFieldConflicts != null && message.hasOwnProperty("deprecatedLegacyJsonFieldConflicts"))
                         if (typeof message.deprecatedLegacyJsonFieldConflicts !== "boolean")
                             return "deprecatedLegacyJsonFieldConflicts: boolean expected";
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -24655,6 +33843,11 @@
                         message.mapEntry = Boolean(object.mapEntry);
                     if (object.deprecatedLegacyJsonFieldConflicts != null)
                         message.deprecatedLegacyJsonFieldConflicts = Boolean(object.deprecatedLegacyJsonFieldConflicts);
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.MessageOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.MessageOptions.uninterpretedOption: array expected");
@@ -24694,6 +33887,7 @@
                         object.deprecated = false;
                         object.mapEntry = false;
                         object.deprecatedLegacyJsonFieldConflicts = false;
+                        object.features = null;
                         object[".google.api.resource"] = null;
                     }
                     if (message.messageSetWireFormat != null && message.hasOwnProperty("messageSetWireFormat"))
@@ -24706,6 +33900,8 @@
                         object.mapEntry = message.mapEntry;
                     if (message.deprecatedLegacyJsonFieldConflicts != null && message.hasOwnProperty("deprecatedLegacyJsonFieldConflicts"))
                         object.deprecatedLegacyJsonFieldConflicts = message.deprecatedLegacyJsonFieldConflicts;
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -24760,7 +33956,9 @@
                  * @property {boolean|null} [weak] FieldOptions weak
                  * @property {boolean|null} [debugRedact] FieldOptions debugRedact
                  * @property {google.protobuf.FieldOptions.OptionRetention|null} [retention] FieldOptions retention
-                 * @property {google.protobuf.FieldOptions.OptionTargetType|null} [target] FieldOptions target
+                 * @property {Array.<google.protobuf.FieldOptions.OptionTargetType>|null} [targets] FieldOptions targets
+                 * @property {Array.<google.protobuf.FieldOptions.IEditionDefault>|null} [editionDefaults] FieldOptions editionDefaults
+                 * @property {google.protobuf.IFeatureSet|null} [features] FieldOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
@@ -24775,6 +33973,8 @@
                  * @param {google.protobuf.IFieldOptions=} [properties] Properties to set
                  */
                 function FieldOptions(properties) {
+                    this.targets = [];
+                    this.editionDefaults = [];
                     this.uninterpretedOption = [];
                     this[".google.api.fieldBehavior"] = [];
                     if (properties)
@@ -24856,12 +34056,28 @@
                 FieldOptions.prototype.retention = 0;
     
                 /**
-                 * FieldOptions target.
-                 * @member {google.protobuf.FieldOptions.OptionTargetType} target
+                 * FieldOptions targets.
+                 * @member {Array.<google.protobuf.FieldOptions.OptionTargetType>} targets
                  * @memberof google.protobuf.FieldOptions
                  * @instance
                  */
-                FieldOptions.prototype.target = 0;
+                FieldOptions.prototype.targets = $util.emptyArray;
+    
+                /**
+                 * FieldOptions editionDefaults.
+                 * @member {Array.<google.protobuf.FieldOptions.IEditionDefault>} editionDefaults
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.editionDefaults = $util.emptyArray;
+    
+                /**
+                 * FieldOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.features = null;
     
                 /**
                  * FieldOptions uninterpretedOption.
@@ -24929,8 +34145,14 @@
                         writer.uint32(/* id 16, wireType 0 =*/128).bool(message.debugRedact);
                     if (message.retention != null && Object.hasOwnProperty.call(message, "retention"))
                         writer.uint32(/* id 17, wireType 0 =*/136).int32(message.retention);
-                    if (message.target != null && Object.hasOwnProperty.call(message, "target"))
-                        writer.uint32(/* id 18, wireType 0 =*/144).int32(message.target);
+                    if (message.targets != null && message.targets.length)
+                        for (var i = 0; i < message.targets.length; ++i)
+                            writer.uint32(/* id 19, wireType 0 =*/152).int32(message.targets[i]);
+                    if (message.editionDefaults != null && message.editionDefaults.length)
+                        for (var i = 0; i < message.editionDefaults.length; ++i)
+                            $root.google.protobuf.FieldOptions.EditionDefault.encode(message.editionDefaults[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -25012,8 +34234,25 @@
                                 message.retention = reader.int32();
                                 break;
                             }
-                        case 18: {
-                                message.target = reader.int32();
+                        case 19: {
+                                if (!(message.targets && message.targets.length))
+                                    message.targets = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.targets.push(reader.int32());
+                                } else
+                                    message.targets.push(reader.int32());
+                                break;
+                            }
+                        case 20: {
+                                if (!(message.editionDefaults && message.editionDefaults.length))
+                                    message.editionDefaults = [];
+                                message.editionDefaults.push($root.google.protobuf.FieldOptions.EditionDefault.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 21: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -25117,22 +34356,40 @@
                         case 2:
                             break;
                         }
-                    if (message.target != null && message.hasOwnProperty("target"))
-                        switch (message.target) {
-                        default:
-                            return "target: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
-                        case 5:
-                        case 6:
-                        case 7:
-                        case 8:
-                        case 9:
-                            break;
+                    if (message.targets != null && message.hasOwnProperty("targets")) {
+                        if (!Array.isArray(message.targets))
+                            return "targets: array expected";
+                        for (var i = 0; i < message.targets.length; ++i)
+                            switch (message.targets[i]) {
+                            default:
+                                return "targets: enum value[] expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                            case 4:
+                            case 5:
+                            case 6:
+                            case 7:
+                            case 8:
+                            case 9:
+                                break;
+                            }
+                    }
+                    if (message.editionDefaults != null && message.hasOwnProperty("editionDefaults")) {
+                        if (!Array.isArray(message.editionDefaults))
+                            return "editionDefaults: array expected";
+                        for (var i = 0; i < message.editionDefaults.length; ++i) {
+                            var error = $root.google.protobuf.FieldOptions.EditionDefault.verify(message.editionDefaults[i]);
+                            if (error)
+                                return "editionDefaults." + error;
                         }
+                    }
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -25157,6 +34414,7 @@
                             case 5:
                             case 6:
                             case 7:
+                            case 8:
                                 break;
                             }
                     }
@@ -25252,53 +34510,73 @@
                         message.retention = 2;
                         break;
                     }
-                    switch (object.target) {
-                    default:
-                        if (typeof object.target === "number") {
-                            message.target = object.target;
-                            break;
+                    if (object.targets) {
+                        if (!Array.isArray(object.targets))
+                            throw TypeError(".google.protobuf.FieldOptions.targets: array expected");
+                        message.targets = [];
+                        for (var i = 0; i < object.targets.length; ++i)
+                            switch (object.targets[i]) {
+                            default:
+                                if (typeof object.targets[i] === "number") {
+                                    message.targets[i] = object.targets[i];
+                                    break;
+                                }
+                            case "TARGET_TYPE_UNKNOWN":
+                            case 0:
+                                message.targets[i] = 0;
+                                break;
+                            case "TARGET_TYPE_FILE":
+                            case 1:
+                                message.targets[i] = 1;
+                                break;
+                            case "TARGET_TYPE_EXTENSION_RANGE":
+                            case 2:
+                                message.targets[i] = 2;
+                                break;
+                            case "TARGET_TYPE_MESSAGE":
+                            case 3:
+                                message.targets[i] = 3;
+                                break;
+                            case "TARGET_TYPE_FIELD":
+                            case 4:
+                                message.targets[i] = 4;
+                                break;
+                            case "TARGET_TYPE_ONEOF":
+                            case 5:
+                                message.targets[i] = 5;
+                                break;
+                            case "TARGET_TYPE_ENUM":
+                            case 6:
+                                message.targets[i] = 6;
+                                break;
+                            case "TARGET_TYPE_ENUM_ENTRY":
+                            case 7:
+                                message.targets[i] = 7;
+                                break;
+                            case "TARGET_TYPE_SERVICE":
+                            case 8:
+                                message.targets[i] = 8;
+                                break;
+                            case "TARGET_TYPE_METHOD":
+                            case 9:
+                                message.targets[i] = 9;
+                                break;
+                            }
+                    }
+                    if (object.editionDefaults) {
+                        if (!Array.isArray(object.editionDefaults))
+                            throw TypeError(".google.protobuf.FieldOptions.editionDefaults: array expected");
+                        message.editionDefaults = [];
+                        for (var i = 0; i < object.editionDefaults.length; ++i) {
+                            if (typeof object.editionDefaults[i] !== "object")
+                                throw TypeError(".google.protobuf.FieldOptions.editionDefaults: object expected");
+                            message.editionDefaults[i] = $root.google.protobuf.FieldOptions.EditionDefault.fromObject(object.editionDefaults[i]);
                         }
-                        break;
-                    case "TARGET_TYPE_UNKNOWN":
-                    case 0:
-                        message.target = 0;
-                        break;
-                    case "TARGET_TYPE_FILE":
-                    case 1:
-                        message.target = 1;
-                        break;
-                    case "TARGET_TYPE_EXTENSION_RANGE":
-                    case 2:
-                        message.target = 2;
-                        break;
-                    case "TARGET_TYPE_MESSAGE":
-                    case 3:
-                        message.target = 3;
-                        break;
-                    case "TARGET_TYPE_FIELD":
-                    case 4:
-                        message.target = 4;
-                        break;
-                    case "TARGET_TYPE_ONEOF":
-                    case 5:
-                        message.target = 5;
-                        break;
-                    case "TARGET_TYPE_ENUM":
-                    case 6:
-                        message.target = 6;
-                        break;
-                    case "TARGET_TYPE_ENUM_ENTRY":
-                    case 7:
-                        message.target = 7;
-                        break;
-                    case "TARGET_TYPE_SERVICE":
-                    case 8:
-                        message.target = 8;
-                        break;
-                    case "TARGET_TYPE_METHOD":
-                    case 9:
-                        message.target = 9;
-                        break;
+                    }
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
                     }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -25353,6 +34631,10 @@
                             case 7:
                                 message[".google.api.fieldBehavior"][i] = 7;
                                 break;
+                            case "IDENTIFIER":
+                            case 8:
+                                message[".google.api.fieldBehavior"][i] = 8;
+                                break;
                             }
                     }
                     if (object[".google.api.resourceReference"] != null) {
@@ -25377,6 +34659,8 @@
                         options = {};
                     var object = {};
                     if (options.arrays || options.defaults) {
+                        object.targets = [];
+                        object.editionDefaults = [];
                         object.uninterpretedOption = [];
                         object[".google.api.fieldBehavior"] = [];
                     }
@@ -25390,7 +34674,7 @@
                         object.unverifiedLazy = false;
                         object.debugRedact = false;
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
-                        object.target = options.enums === String ? "TARGET_TYPE_UNKNOWN" : 0;
+                        object.features = null;
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
@@ -25411,8 +34695,18 @@
                         object.debugRedact = message.debugRedact;
                     if (message.retention != null && message.hasOwnProperty("retention"))
                         object.retention = options.enums === String ? $root.google.protobuf.FieldOptions.OptionRetention[message.retention] === undefined ? message.retention : $root.google.protobuf.FieldOptions.OptionRetention[message.retention] : message.retention;
-                    if (message.target != null && message.hasOwnProperty("target"))
-                        object.target = options.enums === String ? $root.google.protobuf.FieldOptions.OptionTargetType[message.target] === undefined ? message.target : $root.google.protobuf.FieldOptions.OptionTargetType[message.target] : message.target;
+                    if (message.targets && message.targets.length) {
+                        object.targets = [];
+                        for (var j = 0; j < message.targets.length; ++j)
+                            object.targets[j] = options.enums === String ? $root.google.protobuf.FieldOptions.OptionTargetType[message.targets[j]] === undefined ? message.targets[j] : $root.google.protobuf.FieldOptions.OptionTargetType[message.targets[j]] : message.targets[j];
+                    }
+                    if (message.editionDefaults && message.editionDefaults.length) {
+                        object.editionDefaults = [];
+                        for (var j = 0; j < message.editionDefaults.length; ++j)
+                            object.editionDefaults[j] = $root.google.protobuf.FieldOptions.EditionDefault.toObject(message.editionDefaults[j], options);
+                    }
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -25532,6 +34826,297 @@
                     return values;
                 })();
     
+                FieldOptions.EditionDefault = (function() {
+    
+                    /**
+                     * Properties of an EditionDefault.
+                     * @memberof google.protobuf.FieldOptions
+                     * @interface IEditionDefault
+                     * @property {google.protobuf.Edition|null} [edition] EditionDefault edition
+                     * @property {string|null} [value] EditionDefault value
+                     */
+    
+                    /**
+                     * Constructs a new EditionDefault.
+                     * @memberof google.protobuf.FieldOptions
+                     * @classdesc Represents an EditionDefault.
+                     * @implements IEditionDefault
+                     * @constructor
+                     * @param {google.protobuf.FieldOptions.IEditionDefault=} [properties] Properties to set
+                     */
+                    function EditionDefault(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * EditionDefault edition.
+                     * @member {google.protobuf.Edition} edition
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @instance
+                     */
+                    EditionDefault.prototype.edition = 0;
+    
+                    /**
+                     * EditionDefault value.
+                     * @member {string} value
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @instance
+                     */
+                    EditionDefault.prototype.value = "";
+    
+                    /**
+                     * Creates a new EditionDefault instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IEditionDefault=} [properties] Properties to set
+                     * @returns {google.protobuf.FieldOptions.EditionDefault} EditionDefault instance
+                     */
+                    EditionDefault.create = function create(properties) {
+                        return new EditionDefault(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified EditionDefault message. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IEditionDefault} message EditionDefault message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    EditionDefault.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
+                        if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.edition);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified EditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IEditionDefault} message EditionDefault message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    EditionDefault.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an EditionDefault message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FieldOptions.EditionDefault} EditionDefault
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    EditionDefault.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.EditionDefault();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 3: {
+                                    message.edition = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.value = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an EditionDefault message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FieldOptions.EditionDefault} EditionDefault
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    EditionDefault.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an EditionDefault message.
+                     * @function verify
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    EditionDefault.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.edition != null && message.hasOwnProperty("edition"))
+                            switch (message.edition) {
+                            default:
+                                return "edition: enum value expected";
+                            case 0:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.value != null && message.hasOwnProperty("value"))
+                            if (!$util.isString(message.value))
+                                return "value: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an EditionDefault message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FieldOptions.EditionDefault} EditionDefault
+                     */
+                    EditionDefault.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FieldOptions.EditionDefault)
+                            return object;
+                        var message = new $root.google.protobuf.FieldOptions.EditionDefault();
+                        switch (object.edition) {
+                        default:
+                            if (typeof object.edition === "number") {
+                                message.edition = object.edition;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.edition = 0;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.edition = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.edition = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.edition = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.edition = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.edition = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.edition = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.edition = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.edition = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.edition = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.edition = 2147483647;
+                            break;
+                        }
+                        if (object.value != null)
+                            message.value = String(object.value);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an EditionDefault message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {google.protobuf.FieldOptions.EditionDefault} message EditionDefault
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    EditionDefault.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.value = "";
+                            object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                        }
+                        if (message.value != null && message.hasOwnProperty("value"))
+                            object.value = message.value;
+                        if (message.edition != null && message.hasOwnProperty("edition"))
+                            object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this EditionDefault to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    EditionDefault.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for EditionDefault
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    EditionDefault.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FieldOptions.EditionDefault";
+                    };
+    
+                    return EditionDefault;
+                })();
+    
                 return FieldOptions;
             })();
     
@@ -25541,6 +35126,7 @@
                  * Properties of an OneofOptions.
                  * @memberof google.protobuf
                  * @interface IOneofOptions
+                 * @property {google.protobuf.IFeatureSet|null} [features] OneofOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] OneofOptions uninterpretedOption
                  */
     
@@ -25559,6 +35145,14 @@
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
+    
+                /**
+                 * OneofOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.OneofOptions
+                 * @instance
+                 */
+                OneofOptions.prototype.features = null;
     
                 /**
                  * OneofOptions uninterpretedOption.
@@ -25592,6 +35186,8 @@
                 OneofOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -25629,6 +35225,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
+                        case 1: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                break;
+                            }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
@@ -25670,6 +35270,11 @@
                 OneofOptions.verify = function verify(message) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -25694,6 +35299,11 @@
                     if (object instanceof $root.google.protobuf.OneofOptions)
                         return object;
                     var message = new $root.google.protobuf.OneofOptions();
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.OneofOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.OneofOptions.uninterpretedOption: array expected");
@@ -25722,6 +35332,10 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.uninterpretedOption = [];
+                    if (options.defaults)
+                        object.features = null;
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -25768,6 +35382,7 @@
                  * @property {boolean|null} [allowAlias] EnumOptions allowAlias
                  * @property {boolean|null} [deprecated] EnumOptions deprecated
                  * @property {boolean|null} [deprecatedLegacyJsonFieldConflicts] EnumOptions deprecatedLegacyJsonFieldConflicts
+                 * @property {google.protobuf.IFeatureSet|null} [features] EnumOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] EnumOptions uninterpretedOption
                  */
     
@@ -25812,6 +35427,14 @@
                 EnumOptions.prototype.deprecatedLegacyJsonFieldConflicts = false;
     
                 /**
+                 * EnumOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.EnumOptions
+                 * @instance
+                 */
+                EnumOptions.prototype.features = null;
+    
+                /**
                  * EnumOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.EnumOptions
@@ -25849,6 +35472,8 @@
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.deprecated);
                     if (message.deprecatedLegacyJsonFieldConflicts != null && Object.hasOwnProperty.call(message, "deprecatedLegacyJsonFieldConflicts"))
                         writer.uint32(/* id 6, wireType 0 =*/48).bool(message.deprecatedLegacyJsonFieldConflicts);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -25896,6 +35521,10 @@
                             }
                         case 6: {
                                 message.deprecatedLegacyJsonFieldConflicts = reader.bool();
+                                break;
+                            }
+                        case 7: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -25948,6 +35577,11 @@
                     if (message.deprecatedLegacyJsonFieldConflicts != null && message.hasOwnProperty("deprecatedLegacyJsonFieldConflicts"))
                         if (typeof message.deprecatedLegacyJsonFieldConflicts !== "boolean")
                             return "deprecatedLegacyJsonFieldConflicts: boolean expected";
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -25978,6 +35612,11 @@
                         message.deprecated = Boolean(object.deprecated);
                     if (object.deprecatedLegacyJsonFieldConflicts != null)
                         message.deprecatedLegacyJsonFieldConflicts = Boolean(object.deprecatedLegacyJsonFieldConflicts);
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.EnumOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.EnumOptions.uninterpretedOption: array expected");
@@ -26010,6 +35649,7 @@
                         object.allowAlias = false;
                         object.deprecated = false;
                         object.deprecatedLegacyJsonFieldConflicts = false;
+                        object.features = null;
                     }
                     if (message.allowAlias != null && message.hasOwnProperty("allowAlias"))
                         object.allowAlias = message.allowAlias;
@@ -26017,6 +35657,8 @@
                         object.deprecated = message.deprecated;
                     if (message.deprecatedLegacyJsonFieldConflicts != null && message.hasOwnProperty("deprecatedLegacyJsonFieldConflicts"))
                         object.deprecatedLegacyJsonFieldConflicts = message.deprecatedLegacyJsonFieldConflicts;
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -26061,6 +35703,8 @@
                  * @memberof google.protobuf
                  * @interface IEnumValueOptions
                  * @property {boolean|null} [deprecated] EnumValueOptions deprecated
+                 * @property {google.protobuf.IFeatureSet|null} [features] EnumValueOptions features
+                 * @property {boolean|null} [debugRedact] EnumValueOptions debugRedact
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] EnumValueOptions uninterpretedOption
                  */
     
@@ -26087,6 +35731,22 @@
                  * @instance
                  */
                 EnumValueOptions.prototype.deprecated = false;
+    
+                /**
+                 * EnumValueOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @instance
+                 */
+                EnumValueOptions.prototype.features = null;
+    
+                /**
+                 * EnumValueOptions debugRedact.
+                 * @member {boolean} debugRedact
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @instance
+                 */
+                EnumValueOptions.prototype.debugRedact = false;
     
                 /**
                  * EnumValueOptions uninterpretedOption.
@@ -26122,6 +35782,10 @@
                         writer = $Writer.create();
                     if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         writer.uint32(/* id 1, wireType 0 =*/8).bool(message.deprecated);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).bool(message.debugRedact);
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -26161,6 +35825,14 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 2: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 3: {
+                                message.debugRedact = reader.bool();
                                 break;
                             }
                         case 999: {
@@ -26207,6 +35879,14 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
+                    if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
+                        if (typeof message.debugRedact !== "boolean")
+                            return "debugRedact: boolean expected";
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -26233,6 +35913,13 @@
                     var message = new $root.google.protobuf.EnumValueOptions();
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.EnumValueOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                    }
+                    if (object.debugRedact != null)
+                        message.debugRedact = Boolean(object.debugRedact);
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: array expected");
@@ -26261,10 +35948,17 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.uninterpretedOption = [];
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.deprecated = false;
+                        object.features = null;
+                        object.debugRedact = false;
+                    }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                    if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
+                        object.debugRedact = message.debugRedact;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -26308,6 +36002,7 @@
                  * Properties of a ServiceOptions.
                  * @memberof google.protobuf
                  * @interface IServiceOptions
+                 * @property {google.protobuf.IFeatureSet|null} [features] ServiceOptions features
                  * @property {boolean|null} [deprecated] ServiceOptions deprecated
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ServiceOptions uninterpretedOption
                  * @property {string|null} [".google.api.defaultHost"] ServiceOptions .google.api.defaultHost
@@ -26329,6 +36024,14 @@
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
+    
+                /**
+                 * ServiceOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 */
+                ServiceOptions.prototype.features = null;
     
                 /**
                  * ServiceOptions deprecated.
@@ -26388,6 +36091,8 @@
                         writer = $Writer.create();
                     if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         writer.uint32(/* id 33, wireType 0 =*/264).bool(message.deprecated);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 34, wireType 2 =*/274).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -26429,6 +36134,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
+                        case 34: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                break;
+                            }
                         case 33: {
                                 message.deprecated = reader.bool();
                                 break;
@@ -26482,6 +36191,11 @@
                 ServiceOptions.verify = function verify(message) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
@@ -26515,6 +36229,11 @@
                     if (object instanceof $root.google.protobuf.ServiceOptions)
                         return object;
                     var message = new $root.google.protobuf.ServiceOptions();
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.ServiceOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                    }
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     if (object.uninterpretedOption) {
@@ -26551,11 +36270,14 @@
                         object.uninterpretedOption = [];
                     if (options.defaults) {
                         object.deprecated = false;
+                        object.features = null;
                         object[".google.api.defaultHost"] = "";
                         object[".google.api.oauthScopes"] = "";
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -26605,6 +36327,7 @@
                  * @interface IMethodOptions
                  * @property {boolean|null} [deprecated] MethodOptions deprecated
                  * @property {google.protobuf.MethodOptions.IdempotencyLevel|null} [idempotencyLevel] MethodOptions idempotencyLevel
+                 * @property {google.protobuf.IFeatureSet|null} [features] MethodOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MethodOptions uninterpretedOption
                  * @property {google.api.IHttpRule|null} [".google.api.http"] MethodOptions .google.api.http
                  * @property {Array.<string>|null} [".google.api.methodSignature"] MethodOptions .google.api.methodSignature
@@ -26642,6 +36365,14 @@
                  * @instance
                  */
                 MethodOptions.prototype.idempotencyLevel = 0;
+    
+                /**
+                 * MethodOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.MethodOptions
+                 * @instance
+                 */
+                MethodOptions.prototype.features = null;
     
                 /**
                  * MethodOptions uninterpretedOption.
@@ -26695,6 +36426,8 @@
                         writer.uint32(/* id 33, wireType 0 =*/264).bool(message.deprecated);
                     if (message.idempotencyLevel != null && Object.hasOwnProperty.call(message, "idempotencyLevel"))
                         writer.uint32(/* id 34, wireType 0 =*/272).int32(message.idempotencyLevel);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 35, wireType 2 =*/282).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -26743,6 +36476,10 @@
                             }
                         case 34: {
                                 message.idempotencyLevel = reader.int32();
+                                break;
+                            }
+                        case 35: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -26808,6 +36545,11 @@
                         case 2:
                             break;
                         }
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -26866,6 +36608,11 @@
                         message.idempotencyLevel = 2;
                         break;
                     }
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.MethodOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.MethodOptions.uninterpretedOption: array expected");
@@ -26911,12 +36658,15 @@
                     if (options.defaults) {
                         object.deprecated = false;
                         object.idempotencyLevel = options.enums === String ? "IDEMPOTENCY_UNKNOWN" : 0;
+                        object.features = null;
                         object[".google.api.http"] = null;
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
                         object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -27603,6 +37353,1268 @@
                 })();
     
                 return UninterpretedOption;
+            })();
+    
+            protobuf.FeatureSet = (function() {
+    
+                /**
+                 * Properties of a FeatureSet.
+                 * @memberof google.protobuf
+                 * @interface IFeatureSet
+                 * @property {google.protobuf.FeatureSet.FieldPresence|null} [fieldPresence] FeatureSet fieldPresence
+                 * @property {google.protobuf.FeatureSet.EnumType|null} [enumType] FeatureSet enumType
+                 * @property {google.protobuf.FeatureSet.RepeatedFieldEncoding|null} [repeatedFieldEncoding] FeatureSet repeatedFieldEncoding
+                 * @property {google.protobuf.FeatureSet.Utf8Validation|null} [utf8Validation] FeatureSet utf8Validation
+                 * @property {google.protobuf.FeatureSet.MessageEncoding|null} [messageEncoding] FeatureSet messageEncoding
+                 * @property {google.protobuf.FeatureSet.JsonFormat|null} [jsonFormat] FeatureSet jsonFormat
+                 */
+    
+                /**
+                 * Constructs a new FeatureSet.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a FeatureSet.
+                 * @implements IFeatureSet
+                 * @constructor
+                 * @param {google.protobuf.IFeatureSet=} [properties] Properties to set
+                 */
+                function FeatureSet(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FeatureSet fieldPresence.
+                 * @member {google.protobuf.FeatureSet.FieldPresence} fieldPresence
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.fieldPresence = 0;
+    
+                /**
+                 * FeatureSet enumType.
+                 * @member {google.protobuf.FeatureSet.EnumType} enumType
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.enumType = 0;
+    
+                /**
+                 * FeatureSet repeatedFieldEncoding.
+                 * @member {google.protobuf.FeatureSet.RepeatedFieldEncoding} repeatedFieldEncoding
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.repeatedFieldEncoding = 0;
+    
+                /**
+                 * FeatureSet utf8Validation.
+                 * @member {google.protobuf.FeatureSet.Utf8Validation} utf8Validation
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.utf8Validation = 0;
+    
+                /**
+                 * FeatureSet messageEncoding.
+                 * @member {google.protobuf.FeatureSet.MessageEncoding} messageEncoding
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.messageEncoding = 0;
+    
+                /**
+                 * FeatureSet jsonFormat.
+                 * @member {google.protobuf.FeatureSet.JsonFormat} jsonFormat
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.jsonFormat = 0;
+    
+                /**
+                 * Creates a new FeatureSet instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {google.protobuf.IFeatureSet=} [properties] Properties to set
+                 * @returns {google.protobuf.FeatureSet} FeatureSet instance
+                 */
+                FeatureSet.create = function create(properties) {
+                    return new FeatureSet(properties);
+                };
+    
+                /**
+                 * Encodes the specified FeatureSet message. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {google.protobuf.IFeatureSet} message FeatureSet message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FeatureSet.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.fieldPresence != null && Object.hasOwnProperty.call(message, "fieldPresence"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.fieldPresence);
+                    if (message.enumType != null && Object.hasOwnProperty.call(message, "enumType"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.enumType);
+                    if (message.repeatedFieldEncoding != null && Object.hasOwnProperty.call(message, "repeatedFieldEncoding"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.repeatedFieldEncoding);
+                    if (message.utf8Validation != null && Object.hasOwnProperty.call(message, "utf8Validation"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.utf8Validation);
+                    if (message.messageEncoding != null && Object.hasOwnProperty.call(message, "messageEncoding"))
+                        writer.uint32(/* id 5, wireType 0 =*/40).int32(message.messageEncoding);
+                    if (message.jsonFormat != null && Object.hasOwnProperty.call(message, "jsonFormat"))
+                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jsonFormat);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FeatureSet message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {google.protobuf.IFeatureSet} message FeatureSet message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FeatureSet.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FeatureSet message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.FeatureSet} FeatureSet
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FeatureSet.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.fieldPresence = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.enumType = reader.int32();
+                                break;
+                            }
+                        case 3: {
+                                message.repeatedFieldEncoding = reader.int32();
+                                break;
+                            }
+                        case 4: {
+                                message.utf8Validation = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.messageEncoding = reader.int32();
+                                break;
+                            }
+                        case 6: {
+                                message.jsonFormat = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FeatureSet message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.FeatureSet} FeatureSet
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FeatureSet.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FeatureSet message.
+                 * @function verify
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FeatureSet.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
+                        switch (message.fieldPresence) {
+                        default:
+                            return "fieldPresence: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                            break;
+                        }
+                    if (message.enumType != null && message.hasOwnProperty("enumType"))
+                        switch (message.enumType) {
+                        default:
+                            return "enumType: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.repeatedFieldEncoding != null && message.hasOwnProperty("repeatedFieldEncoding"))
+                        switch (message.repeatedFieldEncoding) {
+                        default:
+                            return "repeatedFieldEncoding: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.utf8Validation != null && message.hasOwnProperty("utf8Validation"))
+                        switch (message.utf8Validation) {
+                        default:
+                            return "utf8Validation: enum value expected";
+                        case 0:
+                        case 2:
+                        case 3:
+                            break;
+                        }
+                    if (message.messageEncoding != null && message.hasOwnProperty("messageEncoding"))
+                        switch (message.messageEncoding) {
+                        default:
+                            return "messageEncoding: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
+                        switch (message.jsonFormat) {
+                        default:
+                            return "jsonFormat: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FeatureSet message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.FeatureSet} FeatureSet
+                 */
+                FeatureSet.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.FeatureSet)
+                        return object;
+                    var message = new $root.google.protobuf.FeatureSet();
+                    switch (object.fieldPresence) {
+                    default:
+                        if (typeof object.fieldPresence === "number") {
+                            message.fieldPresence = object.fieldPresence;
+                            break;
+                        }
+                        break;
+                    case "FIELD_PRESENCE_UNKNOWN":
+                    case 0:
+                        message.fieldPresence = 0;
+                        break;
+                    case "EXPLICIT":
+                    case 1:
+                        message.fieldPresence = 1;
+                        break;
+                    case "IMPLICIT":
+                    case 2:
+                        message.fieldPresence = 2;
+                        break;
+                    case "LEGACY_REQUIRED":
+                    case 3:
+                        message.fieldPresence = 3;
+                        break;
+                    }
+                    switch (object.enumType) {
+                    default:
+                        if (typeof object.enumType === "number") {
+                            message.enumType = object.enumType;
+                            break;
+                        }
+                        break;
+                    case "ENUM_TYPE_UNKNOWN":
+                    case 0:
+                        message.enumType = 0;
+                        break;
+                    case "OPEN":
+                    case 1:
+                        message.enumType = 1;
+                        break;
+                    case "CLOSED":
+                    case 2:
+                        message.enumType = 2;
+                        break;
+                    }
+                    switch (object.repeatedFieldEncoding) {
+                    default:
+                        if (typeof object.repeatedFieldEncoding === "number") {
+                            message.repeatedFieldEncoding = object.repeatedFieldEncoding;
+                            break;
+                        }
+                        break;
+                    case "REPEATED_FIELD_ENCODING_UNKNOWN":
+                    case 0:
+                        message.repeatedFieldEncoding = 0;
+                        break;
+                    case "PACKED":
+                    case 1:
+                        message.repeatedFieldEncoding = 1;
+                        break;
+                    case "EXPANDED":
+                    case 2:
+                        message.repeatedFieldEncoding = 2;
+                        break;
+                    }
+                    switch (object.utf8Validation) {
+                    default:
+                        if (typeof object.utf8Validation === "number") {
+                            message.utf8Validation = object.utf8Validation;
+                            break;
+                        }
+                        break;
+                    case "UTF8_VALIDATION_UNKNOWN":
+                    case 0:
+                        message.utf8Validation = 0;
+                        break;
+                    case "VERIFY":
+                    case 2:
+                        message.utf8Validation = 2;
+                        break;
+                    case "NONE":
+                    case 3:
+                        message.utf8Validation = 3;
+                        break;
+                    }
+                    switch (object.messageEncoding) {
+                    default:
+                        if (typeof object.messageEncoding === "number") {
+                            message.messageEncoding = object.messageEncoding;
+                            break;
+                        }
+                        break;
+                    case "MESSAGE_ENCODING_UNKNOWN":
+                    case 0:
+                        message.messageEncoding = 0;
+                        break;
+                    case "LENGTH_PREFIXED":
+                    case 1:
+                        message.messageEncoding = 1;
+                        break;
+                    case "DELIMITED":
+                    case 2:
+                        message.messageEncoding = 2;
+                        break;
+                    }
+                    switch (object.jsonFormat) {
+                    default:
+                        if (typeof object.jsonFormat === "number") {
+                            message.jsonFormat = object.jsonFormat;
+                            break;
+                        }
+                        break;
+                    case "JSON_FORMAT_UNKNOWN":
+                    case 0:
+                        message.jsonFormat = 0;
+                        break;
+                    case "ALLOW":
+                    case 1:
+                        message.jsonFormat = 1;
+                        break;
+                    case "LEGACY_BEST_EFFORT":
+                    case 2:
+                        message.jsonFormat = 2;
+                        break;
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FeatureSet message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {google.protobuf.FeatureSet} message FeatureSet
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FeatureSet.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.fieldPresence = options.enums === String ? "FIELD_PRESENCE_UNKNOWN" : 0;
+                        object.enumType = options.enums === String ? "ENUM_TYPE_UNKNOWN" : 0;
+                        object.repeatedFieldEncoding = options.enums === String ? "REPEATED_FIELD_ENCODING_UNKNOWN" : 0;
+                        object.utf8Validation = options.enums === String ? "UTF8_VALIDATION_UNKNOWN" : 0;
+                        object.messageEncoding = options.enums === String ? "MESSAGE_ENCODING_UNKNOWN" : 0;
+                        object.jsonFormat = options.enums === String ? "JSON_FORMAT_UNKNOWN" : 0;
+                    }
+                    if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
+                        object.fieldPresence = options.enums === String ? $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] === undefined ? message.fieldPresence : $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] : message.fieldPresence;
+                    if (message.enumType != null && message.hasOwnProperty("enumType"))
+                        object.enumType = options.enums === String ? $root.google.protobuf.FeatureSet.EnumType[message.enumType] === undefined ? message.enumType : $root.google.protobuf.FeatureSet.EnumType[message.enumType] : message.enumType;
+                    if (message.repeatedFieldEncoding != null && message.hasOwnProperty("repeatedFieldEncoding"))
+                        object.repeatedFieldEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.RepeatedFieldEncoding[message.repeatedFieldEncoding] === undefined ? message.repeatedFieldEncoding : $root.google.protobuf.FeatureSet.RepeatedFieldEncoding[message.repeatedFieldEncoding] : message.repeatedFieldEncoding;
+                    if (message.utf8Validation != null && message.hasOwnProperty("utf8Validation"))
+                        object.utf8Validation = options.enums === String ? $root.google.protobuf.FeatureSet.Utf8Validation[message.utf8Validation] === undefined ? message.utf8Validation : $root.google.protobuf.FeatureSet.Utf8Validation[message.utf8Validation] : message.utf8Validation;
+                    if (message.messageEncoding != null && message.hasOwnProperty("messageEncoding"))
+                        object.messageEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] === undefined ? message.messageEncoding : $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] : message.messageEncoding;
+                    if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
+                        object.jsonFormat = options.enums === String ? $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] === undefined ? message.jsonFormat : $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] : message.jsonFormat;
+                    return object;
+                };
+    
+                /**
+                 * Converts this FeatureSet to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FeatureSet.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FeatureSet
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FeatureSet.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FeatureSet";
+                };
+    
+                /**
+                 * FieldPresence enum.
+                 * @name google.protobuf.FeatureSet.FieldPresence
+                 * @enum {number}
+                 * @property {number} FIELD_PRESENCE_UNKNOWN=0 FIELD_PRESENCE_UNKNOWN value
+                 * @property {number} EXPLICIT=1 EXPLICIT value
+                 * @property {number} IMPLICIT=2 IMPLICIT value
+                 * @property {number} LEGACY_REQUIRED=3 LEGACY_REQUIRED value
+                 */
+                FeatureSet.FieldPresence = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "FIELD_PRESENCE_UNKNOWN"] = 0;
+                    values[valuesById[1] = "EXPLICIT"] = 1;
+                    values[valuesById[2] = "IMPLICIT"] = 2;
+                    values[valuesById[3] = "LEGACY_REQUIRED"] = 3;
+                    return values;
+                })();
+    
+                /**
+                 * EnumType enum.
+                 * @name google.protobuf.FeatureSet.EnumType
+                 * @enum {number}
+                 * @property {number} ENUM_TYPE_UNKNOWN=0 ENUM_TYPE_UNKNOWN value
+                 * @property {number} OPEN=1 OPEN value
+                 * @property {number} CLOSED=2 CLOSED value
+                 */
+                FeatureSet.EnumType = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "ENUM_TYPE_UNKNOWN"] = 0;
+                    values[valuesById[1] = "OPEN"] = 1;
+                    values[valuesById[2] = "CLOSED"] = 2;
+                    return values;
+                })();
+    
+                /**
+                 * RepeatedFieldEncoding enum.
+                 * @name google.protobuf.FeatureSet.RepeatedFieldEncoding
+                 * @enum {number}
+                 * @property {number} REPEATED_FIELD_ENCODING_UNKNOWN=0 REPEATED_FIELD_ENCODING_UNKNOWN value
+                 * @property {number} PACKED=1 PACKED value
+                 * @property {number} EXPANDED=2 EXPANDED value
+                 */
+                FeatureSet.RepeatedFieldEncoding = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "REPEATED_FIELD_ENCODING_UNKNOWN"] = 0;
+                    values[valuesById[1] = "PACKED"] = 1;
+                    values[valuesById[2] = "EXPANDED"] = 2;
+                    return values;
+                })();
+    
+                /**
+                 * Utf8Validation enum.
+                 * @name google.protobuf.FeatureSet.Utf8Validation
+                 * @enum {number}
+                 * @property {number} UTF8_VALIDATION_UNKNOWN=0 UTF8_VALIDATION_UNKNOWN value
+                 * @property {number} VERIFY=2 VERIFY value
+                 * @property {number} NONE=3 NONE value
+                 */
+                FeatureSet.Utf8Validation = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "UTF8_VALIDATION_UNKNOWN"] = 0;
+                    values[valuesById[2] = "VERIFY"] = 2;
+                    values[valuesById[3] = "NONE"] = 3;
+                    return values;
+                })();
+    
+                /**
+                 * MessageEncoding enum.
+                 * @name google.protobuf.FeatureSet.MessageEncoding
+                 * @enum {number}
+                 * @property {number} MESSAGE_ENCODING_UNKNOWN=0 MESSAGE_ENCODING_UNKNOWN value
+                 * @property {number} LENGTH_PREFIXED=1 LENGTH_PREFIXED value
+                 * @property {number} DELIMITED=2 DELIMITED value
+                 */
+                FeatureSet.MessageEncoding = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "MESSAGE_ENCODING_UNKNOWN"] = 0;
+                    values[valuesById[1] = "LENGTH_PREFIXED"] = 1;
+                    values[valuesById[2] = "DELIMITED"] = 2;
+                    return values;
+                })();
+    
+                /**
+                 * JsonFormat enum.
+                 * @name google.protobuf.FeatureSet.JsonFormat
+                 * @enum {number}
+                 * @property {number} JSON_FORMAT_UNKNOWN=0 JSON_FORMAT_UNKNOWN value
+                 * @property {number} ALLOW=1 ALLOW value
+                 * @property {number} LEGACY_BEST_EFFORT=2 LEGACY_BEST_EFFORT value
+                 */
+                FeatureSet.JsonFormat = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "JSON_FORMAT_UNKNOWN"] = 0;
+                    values[valuesById[1] = "ALLOW"] = 1;
+                    values[valuesById[2] = "LEGACY_BEST_EFFORT"] = 2;
+                    return values;
+                })();
+    
+                return FeatureSet;
+            })();
+    
+            protobuf.FeatureSetDefaults = (function() {
+    
+                /**
+                 * Properties of a FeatureSetDefaults.
+                 * @memberof google.protobuf
+                 * @interface IFeatureSetDefaults
+                 * @property {Array.<google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault>|null} [defaults] FeatureSetDefaults defaults
+                 * @property {google.protobuf.Edition|null} [minimumEdition] FeatureSetDefaults minimumEdition
+                 * @property {google.protobuf.Edition|null} [maximumEdition] FeatureSetDefaults maximumEdition
+                 */
+    
+                /**
+                 * Constructs a new FeatureSetDefaults.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a FeatureSetDefaults.
+                 * @implements IFeatureSetDefaults
+                 * @constructor
+                 * @param {google.protobuf.IFeatureSetDefaults=} [properties] Properties to set
+                 */
+                function FeatureSetDefaults(properties) {
+                    this.defaults = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FeatureSetDefaults defaults.
+                 * @member {Array.<google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault>} defaults
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @instance
+                 */
+                FeatureSetDefaults.prototype.defaults = $util.emptyArray;
+    
+                /**
+                 * FeatureSetDefaults minimumEdition.
+                 * @member {google.protobuf.Edition} minimumEdition
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @instance
+                 */
+                FeatureSetDefaults.prototype.minimumEdition = 0;
+    
+                /**
+                 * FeatureSetDefaults maximumEdition.
+                 * @member {google.protobuf.Edition} maximumEdition
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @instance
+                 */
+                FeatureSetDefaults.prototype.maximumEdition = 0;
+    
+                /**
+                 * Creates a new FeatureSetDefaults instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {google.protobuf.IFeatureSetDefaults=} [properties] Properties to set
+                 * @returns {google.protobuf.FeatureSetDefaults} FeatureSetDefaults instance
+                 */
+                FeatureSetDefaults.create = function create(properties) {
+                    return new FeatureSetDefaults(properties);
+                };
+    
+                /**
+                 * Encodes the specified FeatureSetDefaults message. Does not implicitly {@link google.protobuf.FeatureSetDefaults.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {google.protobuf.IFeatureSetDefaults} message FeatureSetDefaults message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FeatureSetDefaults.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.defaults != null && message.defaults.length)
+                        for (var i = 0; i < message.defaults.length; ++i)
+                            $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.encode(message.defaults[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.minimumEdition != null && Object.hasOwnProperty.call(message, "minimumEdition"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.minimumEdition);
+                    if (message.maximumEdition != null && Object.hasOwnProperty.call(message, "maximumEdition"))
+                        writer.uint32(/* id 5, wireType 0 =*/40).int32(message.maximumEdition);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FeatureSetDefaults message, length delimited. Does not implicitly {@link google.protobuf.FeatureSetDefaults.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {google.protobuf.IFeatureSetDefaults} message FeatureSetDefaults message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FeatureSetDefaults.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FeatureSetDefaults message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.FeatureSetDefaults} FeatureSetDefaults
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FeatureSetDefaults.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.defaults && message.defaults.length))
+                                    message.defaults = [];
+                                message.defaults.push($root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 4: {
+                                message.minimumEdition = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.maximumEdition = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FeatureSetDefaults message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.FeatureSetDefaults} FeatureSetDefaults
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FeatureSetDefaults.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FeatureSetDefaults message.
+                 * @function verify
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FeatureSetDefaults.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.defaults != null && message.hasOwnProperty("defaults")) {
+                        if (!Array.isArray(message.defaults))
+                            return "defaults: array expected";
+                        for (var i = 0; i < message.defaults.length; ++i) {
+                            var error = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify(message.defaults[i]);
+                            if (error)
+                                return "defaults." + error;
+                        }
+                    }
+                    if (message.minimumEdition != null && message.hasOwnProperty("minimumEdition"))
+                        switch (message.minimumEdition) {
+                        default:
+                            return "minimumEdition: enum value expected";
+                        case 0:
+                        case 998:
+                        case 999:
+                        case 1000:
+                        case 1001:
+                        case 1:
+                        case 2:
+                        case 99997:
+                        case 99998:
+                        case 99999:
+                        case 2147483647:
+                            break;
+                        }
+                    if (message.maximumEdition != null && message.hasOwnProperty("maximumEdition"))
+                        switch (message.maximumEdition) {
+                        default:
+                            return "maximumEdition: enum value expected";
+                        case 0:
+                        case 998:
+                        case 999:
+                        case 1000:
+                        case 1001:
+                        case 1:
+                        case 2:
+                        case 99997:
+                        case 99998:
+                        case 99999:
+                        case 2147483647:
+                            break;
+                        }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FeatureSetDefaults message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.FeatureSetDefaults} FeatureSetDefaults
+                 */
+                FeatureSetDefaults.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.FeatureSetDefaults)
+                        return object;
+                    var message = new $root.google.protobuf.FeatureSetDefaults();
+                    if (object.defaults) {
+                        if (!Array.isArray(object.defaults))
+                            throw TypeError(".google.protobuf.FeatureSetDefaults.defaults: array expected");
+                        message.defaults = [];
+                        for (var i = 0; i < object.defaults.length; ++i) {
+                            if (typeof object.defaults[i] !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.defaults: object expected");
+                            message.defaults[i] = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fromObject(object.defaults[i]);
+                        }
+                    }
+                    switch (object.minimumEdition) {
+                    default:
+                        if (typeof object.minimumEdition === "number") {
+                            message.minimumEdition = object.minimumEdition;
+                            break;
+                        }
+                        break;
+                    case "EDITION_UNKNOWN":
+                    case 0:
+                        message.minimumEdition = 0;
+                        break;
+                    case "EDITION_PROTO2":
+                    case 998:
+                        message.minimumEdition = 998;
+                        break;
+                    case "EDITION_PROTO3":
+                    case 999:
+                        message.minimumEdition = 999;
+                        break;
+                    case "EDITION_2023":
+                    case 1000:
+                        message.minimumEdition = 1000;
+                        break;
+                    case "EDITION_2024":
+                    case 1001:
+                        message.minimumEdition = 1001;
+                        break;
+                    case "EDITION_1_TEST_ONLY":
+                    case 1:
+                        message.minimumEdition = 1;
+                        break;
+                    case "EDITION_2_TEST_ONLY":
+                    case 2:
+                        message.minimumEdition = 2;
+                        break;
+                    case "EDITION_99997_TEST_ONLY":
+                    case 99997:
+                        message.minimumEdition = 99997;
+                        break;
+                    case "EDITION_99998_TEST_ONLY":
+                    case 99998:
+                        message.minimumEdition = 99998;
+                        break;
+                    case "EDITION_99999_TEST_ONLY":
+                    case 99999:
+                        message.minimumEdition = 99999;
+                        break;
+                    case "EDITION_MAX":
+                    case 2147483647:
+                        message.minimumEdition = 2147483647;
+                        break;
+                    }
+                    switch (object.maximumEdition) {
+                    default:
+                        if (typeof object.maximumEdition === "number") {
+                            message.maximumEdition = object.maximumEdition;
+                            break;
+                        }
+                        break;
+                    case "EDITION_UNKNOWN":
+                    case 0:
+                        message.maximumEdition = 0;
+                        break;
+                    case "EDITION_PROTO2":
+                    case 998:
+                        message.maximumEdition = 998;
+                        break;
+                    case "EDITION_PROTO3":
+                    case 999:
+                        message.maximumEdition = 999;
+                        break;
+                    case "EDITION_2023":
+                    case 1000:
+                        message.maximumEdition = 1000;
+                        break;
+                    case "EDITION_2024":
+                    case 1001:
+                        message.maximumEdition = 1001;
+                        break;
+                    case "EDITION_1_TEST_ONLY":
+                    case 1:
+                        message.maximumEdition = 1;
+                        break;
+                    case "EDITION_2_TEST_ONLY":
+                    case 2:
+                        message.maximumEdition = 2;
+                        break;
+                    case "EDITION_99997_TEST_ONLY":
+                    case 99997:
+                        message.maximumEdition = 99997;
+                        break;
+                    case "EDITION_99998_TEST_ONLY":
+                    case 99998:
+                        message.maximumEdition = 99998;
+                        break;
+                    case "EDITION_99999_TEST_ONLY":
+                    case 99999:
+                        message.maximumEdition = 99999;
+                        break;
+                    case "EDITION_MAX":
+                    case 2147483647:
+                        message.maximumEdition = 2147483647;
+                        break;
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FeatureSetDefaults message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {google.protobuf.FeatureSetDefaults} message FeatureSetDefaults
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FeatureSetDefaults.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.defaults = [];
+                    if (options.defaults) {
+                        object.minimumEdition = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                        object.maximumEdition = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                    }
+                    if (message.defaults && message.defaults.length) {
+                        object.defaults = [];
+                        for (var j = 0; j < message.defaults.length; ++j)
+                            object.defaults[j] = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.toObject(message.defaults[j], options);
+                    }
+                    if (message.minimumEdition != null && message.hasOwnProperty("minimumEdition"))
+                        object.minimumEdition = options.enums === String ? $root.google.protobuf.Edition[message.minimumEdition] === undefined ? message.minimumEdition : $root.google.protobuf.Edition[message.minimumEdition] : message.minimumEdition;
+                    if (message.maximumEdition != null && message.hasOwnProperty("maximumEdition"))
+                        object.maximumEdition = options.enums === String ? $root.google.protobuf.Edition[message.maximumEdition] === undefined ? message.maximumEdition : $root.google.protobuf.Edition[message.maximumEdition] : message.maximumEdition;
+                    return object;
+                };
+    
+                /**
+                 * Converts this FeatureSetDefaults to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FeatureSetDefaults.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FeatureSetDefaults
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FeatureSetDefaults.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FeatureSetDefaults";
+                };
+    
+                FeatureSetDefaults.FeatureSetEditionDefault = (function() {
+    
+                    /**
+                     * Properties of a FeatureSetEditionDefault.
+                     * @memberof google.protobuf.FeatureSetDefaults
+                     * @interface IFeatureSetEditionDefault
+                     * @property {google.protobuf.Edition|null} [edition] FeatureSetEditionDefault edition
+                     * @property {google.protobuf.IFeatureSet|null} [features] FeatureSetEditionDefault features
+                     */
+    
+                    /**
+                     * Constructs a new FeatureSetEditionDefault.
+                     * @memberof google.protobuf.FeatureSetDefaults
+                     * @classdesc Represents a FeatureSetEditionDefault.
+                     * @implements IFeatureSetEditionDefault
+                     * @constructor
+                     * @param {google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault=} [properties] Properties to set
+                     */
+                    function FeatureSetEditionDefault(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * FeatureSetEditionDefault edition.
+                     * @member {google.protobuf.Edition} edition
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @instance
+                     */
+                    FeatureSetEditionDefault.prototype.edition = 0;
+    
+                    /**
+                     * FeatureSetEditionDefault features.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} features
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @instance
+                     */
+                    FeatureSetEditionDefault.prototype.features = null;
+    
+                    /**
+                     * Creates a new FeatureSetEditionDefault instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault=} [properties] Properties to set
+                     * @returns {google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault} FeatureSetEditionDefault instance
+                     */
+                    FeatureSetEditionDefault.create = function create(properties) {
+                        return new FeatureSetEditionDefault(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSetEditionDefault message. Does not implicitly {@link google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault} message FeatureSetEditionDefault message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSetEditionDefault.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                            $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.edition);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSetEditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault} message FeatureSetEditionDefault message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSetEditionDefault.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a FeatureSetEditionDefault message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault} FeatureSetEditionDefault
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSetEditionDefault.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 3: {
+                                    message.edition = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a FeatureSetEditionDefault message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault} FeatureSetEditionDefault
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSetEditionDefault.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a FeatureSetEditionDefault message.
+                     * @function verify
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    FeatureSetEditionDefault.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.edition != null && message.hasOwnProperty("edition"))
+                            switch (message.edition) {
+                            default:
+                                return "edition: enum value expected";
+                            case 0:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.features != null && message.hasOwnProperty("features")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                            if (error)
+                                return "features." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a FeatureSetEditionDefault message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault} FeatureSetEditionDefault
+                     */
+                    FeatureSetEditionDefault.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault)
+                            return object;
+                        var message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
+                        switch (object.edition) {
+                        default:
+                            if (typeof object.edition === "number") {
+                                message.edition = object.edition;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.edition = 0;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.edition = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.edition = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.edition = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.edition = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.edition = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.edition = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.edition = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.edition = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.edition = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.edition = 2147483647;
+                            break;
+                        }
+                        if (object.features != null) {
+                            if (typeof object.features !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.features: object expected");
+                            message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a FeatureSetEditionDefault message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault} message FeatureSetEditionDefault
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    FeatureSetEditionDefault.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.features = null;
+                            object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                        }
+                        if (message.features != null && message.hasOwnProperty("features"))
+                            object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                        if (message.edition != null && message.hasOwnProperty("edition"))
+                            object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this FeatureSetEditionDefault to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    FeatureSetEditionDefault.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for FeatureSetEditionDefault
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    FeatureSetEditionDefault.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault";
+                    };
+    
+                    return FeatureSetEditionDefault;
+                })();
+    
+                return FeatureSetDefaults;
             })();
     
             protobuf.SourceCodeInfo = (function() {

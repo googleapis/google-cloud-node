@@ -43,10 +43,15 @@ function main() {
   const healthChecksClient = new compute.HealthChecksClient();
   const imageFamilyViewsClient = new compute.ImageFamilyViewsClient();
   const imagesClient = new compute.ImagesClient();
+  const instanceGroupManagerResizeRequestsClient =
+    new compute.InstanceGroupManagerResizeRequestsClient();
   const instanceGroupManagersClient = new compute.InstanceGroupManagersClient();
   const instanceGroupsClient = new compute.InstanceGroupsClient();
   const instancesClient = new compute.InstancesClient();
+  const instanceSettingsServiceClient =
+    new compute.InstanceSettingsServiceClient();
   const instanceTemplatesClient = new compute.InstanceTemplatesClient();
+  const instantSnapshotsClient = new compute.InstantSnapshotsClient();
   const interconnectAttachmentsClient =
     new compute.InterconnectAttachmentsClient();
   const interconnectLocationsClient = new compute.InterconnectLocationsClient();
@@ -87,6 +92,8 @@ function main() {
   const regionInstancesClient = new compute.RegionInstancesClient();
   const regionInstanceTemplatesClient =
     new compute.RegionInstanceTemplatesClient();
+  const regionInstantSnapshotsClient =
+    new compute.RegionInstantSnapshotsClient();
   const regionNetworkEndpointGroupsClient =
     new compute.RegionNetworkEndpointGroupsClient();
   const regionNetworkFirewallPoliciesClient =
@@ -118,6 +125,8 @@ function main() {
     new compute.SnapshotSettingsServiceClient();
   const sslCertificatesClient = new compute.SslCertificatesClient();
   const sslPoliciesClient = new compute.SslPoliciesClient();
+  const storagePoolsClient = new compute.StoragePoolsClient();
+  const storagePoolTypesClient = new compute.StoragePoolTypesClient();
   const subnetworksClient = new compute.SubnetworksClient();
   const targetGrpcProxiesClient = new compute.TargetGrpcProxiesClient();
   const targetHttpProxiesClient = new compute.TargetHttpProxiesClient();

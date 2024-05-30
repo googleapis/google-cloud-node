@@ -1,5 +1,27 @@
 # Changelog
 
+## [1.4.0](https://github.com/googleapis/google-cloud-node/compare/certificate-manager-v1.3.0...certificate-manager-v1.4.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/certificate-manager-v1.2.0...certificate-manager-v1.3.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5187](https://github.com/googleapis/google-cloud-node/issues/5187)) ([1952fbe](https://github.com/googleapis/google-cloud-node/commit/1952fbe432b96115278d42e5c1dbdbc7de39036b))
+
+## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/certificate-manager-v1.1.0...certificate-manager-v1.2.0) (2024-03-26)
+
+
+### Features
+
+* [certificatemanager] Added Trust Configs and DnsAuthorization.Type to Certificate Manager ([#5145](https://github.com/googleapis/google-cloud-node/issues/5145)) ([cd79bb0](https://github.com/googleapis/google-cloud-node/commit/cd79bb04fba6e8eafac28c8a360bc077151cbf10))
+
 ## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/certificate-manager-v1.0.1...certificate-manager-v1.1.0) (2024-02-09)
 
 

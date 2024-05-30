@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -121,6 +121,11 @@ message CheckResponse {
 
     // Consumer info of this check.
     ConsumerInfo consumer_info = 2;
+
+    // The unique id of the api key in the format of "apikey:<UID>".
+    // This field will be populated when the consumer passed to Service Control
+    // is an API key and all the API key related validations are successful.
+    string api_key_uid = 5;
   }
 
   // `ConsumerInfo` provides information about the consumer.

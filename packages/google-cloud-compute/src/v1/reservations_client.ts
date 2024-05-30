@@ -119,8 +119,15 @@ export class ReservationsClient {
         'Please set either universe_domain or universeDomain, but not both.'
       );
     }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
     this._universeDomain =
-      opts?.universeDomain ?? opts?.universe_domain ?? 'googleapis.com';
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'compute.' + this._universeDomain;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || this._servicePath;
@@ -172,7 +179,7 @@ export class ReservationsClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -301,7 +308,7 @@ export class ReservationsClient {
    */
   static get servicePath() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -319,7 +326,7 @@ export class ReservationsClient {
    */
   static get apiEndpoint() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -1283,7 +1290,7 @@ export class ReservationsClient {
   }
 
   /**
-   * Retrieves an aggregated list of reservations.
+   * Retrieves an aggregated list of reservations. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
@@ -1301,7 +1308,7 @@ export class ReservationsClient {
    * @param {string} request.project
    *   Project ID for this request.
    * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
    * @param {number} request.serviceProjectNumber
    *   The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
    * @param {object} [options]
@@ -1357,7 +1364,7 @@ export class ReservationsClient {
    * @param {string} request.project
    *   Project ID for this request.
    * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
    * @param {string} request.zone
    *   Name of the zone for this request.
    * @param {object} [options]
@@ -1455,7 +1462,7 @@ export class ReservationsClient {
    * @param {string} request.project
    *   Project ID for this request.
    * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
    * @param {string} request.zone
    *   Name of the zone for this request.
    * @param {object} [options]
@@ -1509,7 +1516,7 @@ export class ReservationsClient {
    * @param {string} request.project
    *   Project ID for this request.
    * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
    * @param {string} request.zone
    *   Name of the zone for this request.
    * @param {object} [options]

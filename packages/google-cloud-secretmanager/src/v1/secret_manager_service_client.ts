@@ -25,6 +25,8 @@ import type {
   ClientOptions,
   PaginationCallback,
   GaxCall,
+  LocationsClient,
+  LocationProtos,
 } from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
@@ -68,6 +70,7 @@ export class SecretManagerServiceClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
+  locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   secretManagerServiceStub?: Promise<{[name: string]: Function}>;
 
@@ -125,8 +128,15 @@ export class SecretManagerServiceClient {
         'Please set either universe_domain or universeDomain, but not both.'
       );
     }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
     this._universeDomain =
-      opts?.universeDomain ?? opts?.universe_domain ?? 'googleapis.com';
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'secretmanager.' + this._universeDomain;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || this._servicePath;
@@ -175,10 +185,14 @@ export class SecretManagerServiceClient {
     if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
+    this.locationsClient = new this._gaxModule.LocationsClient(
+      this._gaxGrpc,
+      opts
+    );
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -201,14 +215,27 @@ export class SecretManagerServiceClient {
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
+      projectLocationSecretPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/secrets/{secret}'
+      ),
+      projectLocationSecretSecretVersionPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/secrets/{secret}/versions/{secret_version}'
+        ),
+      projectSecretPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/secrets/{secret}'
+      ),
+      projectSecretSecretVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/secrets/{secret}/versions/{secret_version}'
+      ),
+      topicPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/topics/{topic}'
+      ),
       secretPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/secrets/{secret}'
       ),
       secretVersionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/secrets/{secret}/versions/{secret_version}'
-      ),
-      topicPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/topics/{topic}'
       ),
     };
 
@@ -331,7 +358,7 @@ export class SecretManagerServiceClient {
    */
   static get servicePath() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -349,7 +376,7 @@ export class SecretManagerServiceClient {
    */
   static get apiEndpoint() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -409,13 +436,15 @@ export class SecretManagerServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Creates a new {@link protos.google.cloud.secretmanager.v1.Secret|Secret} containing no {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersions}.
+   * Creates a new {@link protos.google.cloud.secretmanager.v1.Secret|Secret} containing no
+   * {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersions}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the project to associate with the
-   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secret}, in the format `projects/*`.
+   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secret}, in the format `projects/*`
+   *   or `projects/* /locations/*`.
    * @param {string} request.secretId
    *   Required. This must be unique within the project.
    *
@@ -423,7 +452,8 @@ export class SecretManagerServiceClient {
    *   contain uppercase and lowercase letters, numerals, and the hyphen (`-`) and
    *   underscore (`_`) characters.
    * @param {google.cloud.secretmanager.v1.Secret} request.secret
-   *   Required. A {@link protos.google.cloud.secretmanager.v1.Secret|Secret} with initial field values.
+   *   Required. A {@link protos.google.cloud.secretmanager.v1.Secret|Secret} with initial
+   *   field values.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -508,16 +538,20 @@ export class SecretManagerServiceClient {
     return this.innerApiCalls.createSecret(request, options, callback);
   }
   /**
-   * Creates a new {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} containing secret data and attaches
-   * it to an existing {@link protos.google.cloud.secretmanager.v1.Secret|Secret}.
+   * Creates a new {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}
+   * containing secret data and attaches it to an existing
+   * {@link protos.google.cloud.secretmanager.v1.Secret|Secret}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the {@link protos.google.cloud.secretmanager.v1.Secret|Secret} to associate with the
-   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} in the format `projects/* /secrets/*`.
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secret} to associate with the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} in the format
+   *   `projects/* /secrets/*` or `projects/* /locations/* /secrets/*`.
    * @param {google.cloud.secretmanager.v1.SecretPayload} request.payload
-   *   Required. The secret payload of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
+   *   Required. The secret payload of the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -607,7 +641,9 @@ export class SecretManagerServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the {@link protos.google.cloud.secretmanager.v1.Secret|Secret}, in the format `projects/* /secrets/*`.
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secret}, in the format
+   *   `projects/* /secrets/*` or `projects/* /locations/* /secrets/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -686,12 +722,14 @@ export class SecretManagerServiceClient {
     return this.innerApiCalls.getSecret(request, options, callback);
   }
   /**
-   * Updates metadata of an existing {@link protos.google.cloud.secretmanager.v1.Secret|Secret}.
+   * Updates metadata of an existing
+   * {@link protos.google.cloud.secretmanager.v1.Secret|Secret}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.secretmanager.v1.Secret} request.secret
-   *   Required. {@link protos.google.cloud.secretmanager.v1.Secret|Secret} with updated field values.
+   *   Required. {@link protos.google.cloud.secretmanager.v1.Secret|Secret} with updated field
+   *   values.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. Specifies the fields to be updated.
    * @param {object} [options]
@@ -783,12 +821,13 @@ export class SecretManagerServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the {@link protos.google.cloud.secretmanager.v1.Secret|Secret} to delete in the format
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secret} to delete in the format
    *   `projects/* /secrets/*`.
    * @param {string} [request.etag]
-   *   Optional. Etag of the {@link protos.google.cloud.secretmanager.v1.Secret|Secret}. The request succeeds if it matches
-   *   the etag of the currently stored secret object. If the etag is omitted,
-   *   the request succeeds.
+   *   Optional. Etag of the {@link protos.google.cloud.secretmanager.v1.Secret|Secret}. The
+   *   request succeeds if it matches the etag of the currently stored secret
+   *   object. If the etag is omitted, the request succeeds.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -873,7 +912,8 @@ export class SecretManagerServiceClient {
     return this.innerApiCalls.deleteSecret(request, options, callback);
   }
   /**
-   * Gets metadata for a {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
+   * Gets metadata for a
+   * {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
    *
    * `projects/* /secrets/* /versions/latest` is an alias to the most recently
    * created {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
@@ -881,11 +921,15 @@ export class SecretManagerServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} in the format
-   *   `projects/* /secrets/* /versions/*`.
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} in the format
+   *   `projects/* /secrets/* /versions/*` or
+   *   `projects/* /locations/* /secrets/* /versions/*`.
    *
-   *   `projects/* /secrets/* /versions/latest` is an alias to the most recently
-   *   created {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
+   *   `projects/* /secrets/* /versions/latest` or
+   *   `projects/* /locations/* /secrets/* /versions/latest` is an alias to the most
+   *   recently created
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -970,7 +1014,8 @@ export class SecretManagerServiceClient {
     return this.innerApiCalls.getSecretVersion(request, options, callback);
   }
   /**
-   * Accesses a {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}. This call returns the secret data.
+   * Accesses a {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
+   * This call returns the secret data.
    *
    * `projects/* /secrets/* /versions/latest` is an alias to the most recently
    * created {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
@@ -978,11 +1023,15 @@ export class SecretManagerServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} in the format
-   *   `projects/* /secrets/* /versions/*`.
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} in the format
+   *   `projects/* /secrets/* /versions/*` or
+   *   `projects/* /locations/* /secrets/* /versions/*`.
    *
-   *   `projects/* /secrets/* /versions/latest` is an alias to the most recently
-   *   created {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
+   *   `projects/* /secrets/* /versions/latest` or
+   *   `projects/* /locations/* /secrets/* /versions/latest` is an alias to the most
+   *   recently created
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1075,18 +1124,22 @@ export class SecretManagerServiceClient {
   /**
    * Disables a {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
    *
-   * Sets the {@link protos.google.cloud.secretmanager.v1.SecretVersion.state|state} of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to
+   * Sets the {@link protos.google.cloud.secretmanager.v1.SecretVersion.state|state} of the
+   * {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to
    * {@link protos.google.cloud.secretmanager.v1.SecretVersion.State.DISABLED|DISABLED}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to disable in the format
-   *   `projects/* /secrets/* /versions/*`.
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to disable in
+   *   the format `projects/* /secrets/* /versions/*` or
+   *   `projects/* /locations/* /secrets/* /versions/*`.
    * @param {string} [request.etag]
-   *   Optional. Etag of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}. The request succeeds if it matches
-   *   the etag of the currently stored secret version object. If the etag is
-   *   omitted, the request succeeds.
+   *   Optional. Etag of the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}. The request
+   *   succeeds if it matches the etag of the currently stored secret version
+   *   object. If the etag is omitted, the request succeeds.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1179,18 +1232,22 @@ export class SecretManagerServiceClient {
   /**
    * Enables a {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
    *
-   * Sets the {@link protos.google.cloud.secretmanager.v1.SecretVersion.state|state} of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to
+   * Sets the {@link protos.google.cloud.secretmanager.v1.SecretVersion.state|state} of the
+   * {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to
    * {@link protos.google.cloud.secretmanager.v1.SecretVersion.State.ENABLED|ENABLED}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to enable in the format
-   *   `projects/* /secrets/* /versions/*`.
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to enable in
+   *   the format `projects/* /secrets/* /versions/*` or
+   *   `projects/* /locations/* /secrets/* /versions/*`.
    * @param {string} [request.etag]
-   *   Optional. Etag of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}. The request succeeds if it matches
-   *   the etag of the currently stored secret version object. If the etag is
-   *   omitted, the request succeeds.
+   *   Optional. Etag of the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}. The request
+   *   succeeds if it matches the etag of the currently stored secret version
+   *   object. If the etag is omitted, the request succeeds.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1283,19 +1340,23 @@ export class SecretManagerServiceClient {
   /**
    * Destroys a {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
    *
-   * Sets the {@link protos.google.cloud.secretmanager.v1.SecretVersion.state|state} of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to
-   * {@link protos.google.cloud.secretmanager.v1.SecretVersion.State.DESTROYED|DESTROYED} and irrevocably destroys the
-   * secret data.
+   * Sets the {@link protos.google.cloud.secretmanager.v1.SecretVersion.state|state} of the
+   * {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to
+   * {@link protos.google.cloud.secretmanager.v1.SecretVersion.State.DESTROYED|DESTROYED}
+   * and irrevocably destroys the secret data.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to destroy in the format
-   *   `projects/* /secrets/* /versions/*`.
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to destroy in
+   *   the format `projects/* /secrets/* /versions/*` or
+   *   `projects/* /locations/* /secrets/* /versions/*`.
    * @param {string} [request.etag]
-   *   Optional. Etag of the {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}. The request succeeds if it matches
-   *   the etag of the currently stored secret version object. If the etag is
-   *   omitted, the request succeeds.
+   *   Optional. Etag of the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}. The request
+   *   succeeds if it matches the etag of the currently stored secret version
+   *   object. If the etag is omitted, the request succeeds.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1389,8 +1450,10 @@ export class SecretManagerServiceClient {
    * Sets the access control policy on the specified secret. Replaces any
    * existing policy.
    *
-   * Permissions on {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersions} are enforced according
-   * to the policy set on the associated {@link protos.google.cloud.secretmanager.v1.Secret|Secret}.
+   * Permissions on
+   * {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersions} are enforced
+   * according to the policy set on the associated
+   * {@link protos.google.cloud.secretmanager.v1.Secret|Secret}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1672,7 +1735,8 @@ export class SecretManagerServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the project associated with the
-   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secrets}, in the format `projects/*`.
+   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secrets}, in the format `projects/*`
+   *   or `projects/* /locations/*`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to be returned in a single page. If
    *   set to 0, the server decides the number of results to return. If the
@@ -1779,7 +1843,8 @@ export class SecretManagerServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the project associated with the
-   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secrets}, in the format `projects/*`.
+   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secrets}, in the format `projects/*`
+   *   or `projects/* /locations/*`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to be returned in a single page. If
    *   set to 0, the server decides the number of results to return. If the
@@ -1834,7 +1899,8 @@ export class SecretManagerServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the project associated with the
-   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secrets}, in the format `projects/*`.
+   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secrets}, in the format `projects/*`
+   *   or `projects/* /locations/*`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to be returned in a single page. If
    *   set to 0, the server decides the number of results to return. If the
@@ -1882,15 +1948,16 @@ export class SecretManagerServiceClient {
     ) as AsyncIterable<protos.google.cloud.secretmanager.v1.ISecret>;
   }
   /**
-   * Lists {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersions}. This call does not return secret
-   * data.
+   * Lists {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersions}. This
+   * call does not return secret data.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the {@link protos.google.cloud.secretmanager.v1.Secret|Secret} associated with the
-   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersions} to list, in the format
-   *   `projects/* /secrets/*`.
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secret} associated with the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersions} to list, in
+   *   the format `projects/* /secrets/*` or `projects/* /locations/* /secrets/*`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to be returned in a single page. If
    *   set to 0, the server decides the number of results to return. If the
@@ -1996,9 +2063,10 @@ export class SecretManagerServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the {@link protos.google.cloud.secretmanager.v1.Secret|Secret} associated with the
-   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersions} to list, in the format
-   *   `projects/* /secrets/*`.
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secret} associated with the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersions} to list, in
+   *   the format `projects/* /secrets/*` or `projects/* /locations/* /secrets/*`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to be returned in a single page. If
    *   set to 0, the server decides the number of results to return. If the
@@ -2052,9 +2120,10 @@ export class SecretManagerServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the {@link protos.google.cloud.secretmanager.v1.Secret|Secret} associated with the
-   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersions} to list, in the format
-   *   `projects/* /secrets/*`.
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secret} associated with the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersions} to list, in
+   *   the format `projects/* /secrets/*` or `projects/* /locations/* /secrets/*`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to be returned in a single page. If
    *   set to 0, the server decides the number of results to return. If the
@@ -2101,6 +2170,84 @@ export class SecretManagerServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.secretmanager.v1.ISecretVersion>;
   }
+  /**
+   * Gets information about a location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Resource name for the location.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example
+   * ```
+   * const [response] = await client.getLocation(request);
+   * ```
+   */
+  getLocation(
+    request: LocationProtos.google.cloud.location.IGetLocationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          LocationProtos.google.cloud.location.ILocation,
+          | LocationProtos.google.cloud.location.IGetLocationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LocationProtos.google.cloud.location.ILocation,
+      | LocationProtos.google.cloud.location.IGetLocationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.getLocation(request, options, callback);
+  }
+
+  /**
+   * Lists information about the supported locations for this service. Returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The resource that owns the locations collection, if applicable.
+   * @param {string} request.filter
+   *   The standard list filter.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example
+   * ```
+   * const iterable = client.listLocationsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   * ```
+   */
+  listLocationsAsync(
+    request: LocationProtos.google.cloud.location.IListLocationsRequest,
+    options?: CallOptions
+  ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.listLocationsAsync(request, options);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
@@ -2129,10 +2276,307 @@ export class SecretManagerServiceClient {
   }
 
   /**
-   * Return a fully-qualified secret resource name string.
+   * Return a fully-qualified projectLocationSecret resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} secret
+   * @returns {string} Resource name string.
+   */
+  projectLocationSecretPath(project: string, location: string, secret: string) {
+    return this.pathTemplates.projectLocationSecretPathTemplate.render({
+      project: project,
+      location: location,
+      secret: secret,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationSecret resource.
+   *
+   * @param {string} projectLocationSecretName
+   *   A fully-qualified path representing project_location_secret resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationSecretName(projectLocationSecretName: string) {
+    return this.pathTemplates.projectLocationSecretPathTemplate.match(
+      projectLocationSecretName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationSecret resource.
+   *
+   * @param {string} projectLocationSecretName
+   *   A fully-qualified path representing project_location_secret resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationSecretName(
+    projectLocationSecretName: string
+  ) {
+    return this.pathTemplates.projectLocationSecretPathTemplate.match(
+      projectLocationSecretName
+    ).location;
+  }
+
+  /**
+   * Parse the secret from ProjectLocationSecret resource.
+   *
+   * @param {string} projectLocationSecretName
+   *   A fully-qualified path representing project_location_secret resource.
+   * @returns {string} A string representing the secret.
+   */
+  matchSecretFromProjectLocationSecretName(projectLocationSecretName: string) {
+    return this.pathTemplates.projectLocationSecretPathTemplate.match(
+      projectLocationSecretName
+    ).secret;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationSecretSecretVersion resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} secret
+   * @param {string} secret_version
+   * @returns {string} Resource name string.
+   */
+  projectLocationSecretSecretVersionPath(
+    project: string,
+    location: string,
+    secret: string,
+    secretVersion: string
+  ) {
+    return this.pathTemplates.projectLocationSecretSecretVersionPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        secret: secret,
+        secret_version: secretVersion,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationSecretSecretVersion resource.
+   *
+   * @param {string} projectLocationSecretSecretVersionName
+   *   A fully-qualified path representing project_location_secret_secret_version resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationSecretSecretVersionName(
+    projectLocationSecretSecretVersionName: string
+  ) {
+    return this.pathTemplates.projectLocationSecretSecretVersionPathTemplate.match(
+      projectLocationSecretSecretVersionName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationSecretSecretVersion resource.
+   *
+   * @param {string} projectLocationSecretSecretVersionName
+   *   A fully-qualified path representing project_location_secret_secret_version resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationSecretSecretVersionName(
+    projectLocationSecretSecretVersionName: string
+  ) {
+    return this.pathTemplates.projectLocationSecretSecretVersionPathTemplate.match(
+      projectLocationSecretSecretVersionName
+    ).location;
+  }
+
+  /**
+   * Parse the secret from ProjectLocationSecretSecretVersion resource.
+   *
+   * @param {string} projectLocationSecretSecretVersionName
+   *   A fully-qualified path representing project_location_secret_secret_version resource.
+   * @returns {string} A string representing the secret.
+   */
+  matchSecretFromProjectLocationSecretSecretVersionName(
+    projectLocationSecretSecretVersionName: string
+  ) {
+    return this.pathTemplates.projectLocationSecretSecretVersionPathTemplate.match(
+      projectLocationSecretSecretVersionName
+    ).secret;
+  }
+
+  /**
+   * Parse the secret_version from ProjectLocationSecretSecretVersion resource.
+   *
+   * @param {string} projectLocationSecretSecretVersionName
+   *   A fully-qualified path representing project_location_secret_secret_version resource.
+   * @returns {string} A string representing the secret_version.
+   */
+  matchSecretVersionFromProjectLocationSecretSecretVersionName(
+    projectLocationSecretSecretVersionName: string
+  ) {
+    return this.pathTemplates.projectLocationSecretSecretVersionPathTemplate.match(
+      projectLocationSecretSecretVersionName
+    ).secret_version;
+  }
+
+  /**
+   * Return a fully-qualified projectSecret resource name string.
    *
    * @param {string} project
    * @param {string} secret
+   * @returns {string} Resource name string.
+   */
+  projectSecretPath(project: string, secret: string) {
+    return this.pathTemplates.projectSecretPathTemplate.render({
+      project: project,
+      secret: secret,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectSecret resource.
+   *
+   * @param {string} projectSecretName
+   *   A fully-qualified path representing project_secret resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectSecretName(projectSecretName: string) {
+    return this.pathTemplates.projectSecretPathTemplate.match(projectSecretName)
+      .project;
+  }
+
+  /**
+   * Parse the secret from ProjectSecret resource.
+   *
+   * @param {string} projectSecretName
+   *   A fully-qualified path representing project_secret resource.
+   * @returns {string} A string representing the secret.
+   */
+  matchSecretFromProjectSecretName(projectSecretName: string) {
+    return this.pathTemplates.projectSecretPathTemplate.match(projectSecretName)
+      .secret;
+  }
+
+  /**
+   * Return a fully-qualified projectSecretSecretVersion resource name string.
+   *
+   * @param {string} project
+   * @param {string} secret
+   * @param {string} secret_version
+   * @returns {string} Resource name string.
+   */
+  projectSecretSecretVersionPath(
+    project: string,
+    secret: string,
+    secretVersion: string
+  ) {
+    return this.pathTemplates.projectSecretSecretVersionPathTemplate.render({
+      project: project,
+      secret: secret,
+      secret_version: secretVersion,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectSecretSecretVersion resource.
+   *
+   * @param {string} projectSecretSecretVersionName
+   *   A fully-qualified path representing project_secret_secret_version resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectSecretSecretVersionName(
+    projectSecretSecretVersionName: string
+  ) {
+    return this.pathTemplates.projectSecretSecretVersionPathTemplate.match(
+      projectSecretSecretVersionName
+    ).project;
+  }
+
+  /**
+   * Parse the secret from ProjectSecretSecretVersion resource.
+   *
+   * @param {string} projectSecretSecretVersionName
+   *   A fully-qualified path representing project_secret_secret_version resource.
+   * @returns {string} A string representing the secret.
+   */
+  matchSecretFromProjectSecretSecretVersionName(
+    projectSecretSecretVersionName: string
+  ) {
+    return this.pathTemplates.projectSecretSecretVersionPathTemplate.match(
+      projectSecretSecretVersionName
+    ).secret;
+  }
+
+  /**
+   * Parse the secret_version from ProjectSecretSecretVersion resource.
+   *
+   * @param {string} projectSecretSecretVersionName
+   *   A fully-qualified path representing project_secret_secret_version resource.
+   * @returns {string} A string representing the secret_version.
+   */
+  matchSecretVersionFromProjectSecretSecretVersionName(
+    projectSecretSecretVersionName: string
+  ) {
+    return this.pathTemplates.projectSecretSecretVersionPathTemplate.match(
+      projectSecretSecretVersionName
+    ).secret_version;
+  }
+
+  /**
+   * Return a fully-qualified topic resource name string.
+   *
+   * @param {string} project
+   * @param {string} topic
+   * @returns {string} Resource name string.
+   */
+  topicPath(project: string, topic: string) {
+    return this.pathTemplates.topicPathTemplate.render({
+      project: project,
+      topic: topic,
+    });
+  }
+
+  /**
+   * Parse the project from Topic resource.
+   *
+   * @param {string} topicName
+   *   A fully-qualified path representing Topic resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTopicName(topicName: string) {
+    return this.pathTemplates.topicPathTemplate.match(topicName).project;
+  }
+
+  /**
+   * Parse the topic from Topic resource.
+   *
+   * @param {string} topicName
+   *   A fully-qualified path representing Topic resource.
+   * @returns {string} A string representing the topic.
+   */
+  matchTopicFromTopicName(topicName: string) {
+    return this.pathTemplates.topicPathTemplate.match(topicName).topic;
+  }
+
+  /**
+   * Terminate the gRPC channel and close the client.
+   *
+   * The client will no longer be usable and all future behavior is undefined.
+   * @returns {Promise} A promise that resolves when the client is closed.
+   */
+  close(): Promise<void> {
+    if (this.secretManagerServiceStub && !this._terminated) {
+      return this.secretManagerServiceStub.then(stub => {
+        this._terminated = true;
+        stub.close();
+        this.locationsClient.close();
+      });
+    }
+    return Promise.resolve();
+  }
+
+  /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {string} project
    * @returns {string} Resource name string.
    */
   secretPath(project: string, secret: string) {
@@ -2191,7 +2635,6 @@ export class SecretManagerServiceClient {
     return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
       .project;
   }
-
   /**
    * Parse the secret from SecretVersion resource.
    *
@@ -2214,57 +2657,5 @@ export class SecretManagerServiceClient {
   matchSecretVersionFromSecretVersionName(secretVersionName: string) {
     return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
       .secret_version;
-  }
-
-  /**
-   * Return a fully-qualified topic resource name string.
-   *
-   * @param {string} project
-   * @param {string} topic
-   * @returns {string} Resource name string.
-   */
-  topicPath(project: string, topic: string) {
-    return this.pathTemplates.topicPathTemplate.render({
-      project: project,
-      topic: topic,
-    });
-  }
-
-  /**
-   * Parse the project from Topic resource.
-   *
-   * @param {string} topicName
-   *   A fully-qualified path representing Topic resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromTopicName(topicName: string) {
-    return this.pathTemplates.topicPathTemplate.match(topicName).project;
-  }
-
-  /**
-   * Parse the topic from Topic resource.
-   *
-   * @param {string} topicName
-   *   A fully-qualified path representing Topic resource.
-   * @returns {string} A string representing the topic.
-   */
-  matchTopicFromTopicName(topicName: string) {
-    return this.pathTemplates.topicPathTemplate.match(topicName).topic;
-  }
-
-  /**
-   * Terminate the gRPC channel and close the client.
-   *
-   * The client will no longer be usable and all future behavior is undefined.
-   * @returns {Promise} A promise that resolves when the client is closed.
-   */
-  close(): Promise<void> {
-    if (this.secretManagerServiceStub && !this._terminated) {
-      return this.secretManagerServiceStub.then(stub => {
-        this._terminated = true;
-        stub.close();
-      });
-    }
-    return Promise.resolve();
   }
 }

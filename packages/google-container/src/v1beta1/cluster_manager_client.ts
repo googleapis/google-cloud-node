@@ -118,8 +118,15 @@ export class ClusterManagerClient {
         'Please set either universe_domain or universeDomain, but not both.'
       );
     }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
     this._universeDomain =
-      opts?.universeDomain ?? opts?.universe_domain ?? 'googleapis.com';
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'container.' + this._universeDomain;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || this._servicePath;
@@ -171,7 +178,7 @@ export class ClusterManagerClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -320,7 +327,7 @@ export class ClusterManagerClient {
    */
   static get servicePath() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -338,7 +345,7 @@ export class ClusterManagerClient {
    */
   static get apiEndpoint() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -895,6 +902,10 @@ export class ClusterManagerClient {
    *   Google Compute Engine resources.
    * @param {google.container.v1beta1.WindowsNodeConfig} request.windowsNodeConfig
    *   Parameters that can be configured on Windows nodes.
+   * @param {number[]} request.accelerators
+   *   A list of hardware accelerators to be attached to each node.
+   *   See https://cloud.google.com/compute/docs/gpus for more information about
+   *   support for GPUs.
    * @param {string} [request.machineType]
    *   Optional. The desired machine type for nodes in the node pool.
    *   Initiates an upgrade operation that migrates the nodes in the
@@ -911,6 +922,12 @@ export class ClusterManagerClient {
    *   Desired resource manager tag keys and values to be attached to the nodes
    *   for managing Compute Engine firewalls using Network Firewall Policies.
    *   Existing tags will be replaced with new values.
+   * @param {google.container.v1beta1.ContainerdConfig} request.containerdConfig
+   *   The desired containerd config for nodes in the node pool.
+   *   Initiates an upgrade operation that recreates the nodes with the new
+   *   config.
+   * @param {google.container.v1beta1.NodePool.QueuedProvisioning} request.queuedProvisioning
+   *   Specifies the configuration of queued provisioning.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

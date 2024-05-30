@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -234,6 +234,19 @@ service DataTransferService {
         post: "/v1/{name=projects/*}:enrollDataSources"
         body: "*"
       }
+    };
+  }
+
+  // Unenroll data sources in a user project. This allows users to remove
+  // transfer configurations for these data sources. They will no longer appear
+  // in the ListDataSources RPC and will also no longer appear in the [BigQuery
+  // UI](https://console.cloud.google.com/bigquery). Data transfers
+  // configurations of unenrolled data sources will not be scheduled.
+  rpc UnenrollDataSources(UnenrollDataSourcesRequest)
+      returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/v1/{name=projects/*/locations/*}:unenrollDataSources"
+      body: "*"
     };
   }
 }
@@ -504,7 +517,7 @@ message CreateTransferConfigRequest {
   // and new credentials are needed, as indicated by `CheckValidCreds`. In order
   // to obtain authorization_code, make a request to the following URL:
   // <pre class="prettyprint" suppresswarning="true">
-  // https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=authorization_code&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
+  // https://bigquery.cloud.google.com/datatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=authorization_code&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
   // </pre>
   // * The <var>client_id</var> is the OAuth client_id of the a data source as
   // returned by ListDataSources method.
@@ -520,7 +533,7 @@ message CreateTransferConfigRequest {
   // are needed, as indicated by `CheckValidCreds`. In order to obtain version
   // info, make a request to the following URL:
   // <pre class="prettyprint" suppresswarning="true">
-  // https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=version_info&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
+  // https://bigquery.cloud.google.com/datatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=version_info&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
   // </pre>
   // * The <var>client_id</var> is the OAuth client_id of the a data source as
   // returned by ListDataSources method.
@@ -554,7 +567,7 @@ message UpdateTransferConfigRequest {
   // and new credentials are needed, as indicated by `CheckValidCreds`. In order
   // to obtain authorization_code, make a request to the following URL:
   // <pre class="prettyprint" suppresswarning="true">
-  // https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=authorization_code&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
+  // https://bigquery.cloud.google.com/datatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=authorization_code&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
   // </pre>
   // * The <var>client_id</var> is the OAuth client_id of the a data source as
   // returned by ListDataSources method.
@@ -574,7 +587,7 @@ message UpdateTransferConfigRequest {
   // are needed, as indicated by `CheckValidCreds`. In order to obtain version
   // info, make a request to the following URL:
   // <pre class="prettyprint" suppresswarning="true">
-  // https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=version_info&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
+  // https://bigquery.cloud.google.com/datatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=version_info&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
   // </pre>
   // * The <var>client_id</var> is the OAuth client_id of the a data source as
   // returned by ListDataSources method.
@@ -854,12 +867,15 @@ message StartManualTransferRunsRequest {
     google.protobuf.Timestamp end_time = 2;
   }
 
-  // Transfer configuration name in the form:
+  // Required. Transfer configuration name in the form:
   // `projects/{project_id}/transferConfigs/{config_id}` or
   // `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`.
-  string parent = 1 [(google.api.resource_reference) = {
-    type: "bigquerydatatransfer.googleapis.com/TransferConfig"
-  }];
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "bigquerydatatransfer.googleapis.com/TransferConfig"
+    }
+  ];
 
   // The requested time specification - this can be a time range or a specific
   // run_time.
@@ -887,10 +903,23 @@ message StartManualTransferRunsResponse {
 // A request to enroll a set of data sources so they are visible in the
 // BigQuery UI's `Transfer` tab.
 message EnrollDataSourcesRequest {
-  // The name of the project resource in the form: `projects/{project_id}`
-  string name = 1;
+  // Required. The name of the project resource in the form:
+  // `projects/{project_id}`
+  string name = 1 [(google.api.field_behavior) = REQUIRED];
 
   // Data sources that are enrolled. It is required to provide at least one
+  // data source id.
+  repeated string data_source_ids = 2;
+}
+
+// A request to unenroll a set of data sources so they are no longer visible in
+// the BigQuery UI's `Transfer` tab.
+message UnenrollDataSourcesRequest {
+  // Required. The name of the project resource in the form:
+  // `projects/{project_id}`
+  string name = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Data sources that are unenrolled. It is required to provide at least one
   // data source id.
   repeated string data_source_ids = 2;
 }

@@ -33,20 +33,21 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  The maximum number of items to return.
+   *  Optional. The maximum number of items to return.
    */
   // const pageSize = 1234
   /**
-   *  The next_page_token value to use if there are additional
+   *  Optional. The next_page_token value to use if there are additional
    *  results to retrieve for this list request.
    */
   // const pageToken = 'abc123'
   /**
-   *  Sort results. Supported values are "name", "name desc" or "" (unsorted).
+   *  Optional. Sort results. Supported values are "name", "name desc" or ""
+   *  (unsorted).
    */
   // const orderBy = 'abc123'
   /**
-   *  List filter.
+   *  Optional. List filter.
    */
   // const filter = 'abc123'
 

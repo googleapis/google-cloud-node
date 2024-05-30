@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import "google/cloud/aiplatform/v1/encryption_spec.proto";
 import "google/cloud/aiplatform/v1/explanation.proto";
 import "google/cloud/aiplatform/v1/io.proto";
 import "google/cloud/aiplatform/v1/machine_resources.proto";
+import "google/cloud/aiplatform/v1/service_networking.proto";
 import "google/protobuf/timestamp.proto";
 
 option csharp_namespace = "Google.Cloud.AIPlatform.V1";
@@ -126,6 +127,14 @@ message Endpoint {
   // can be set.
   bool enable_private_service_connect = 17 [deprecated = true];
 
+  // Optional. Configuration for private service connect.
+  //
+  // [network][google.cloud.aiplatform.v1.Endpoint.network] and
+  // [private_service_connect_config][google.cloud.aiplatform.v1.Endpoint.private_service_connect_config]
+  // are mutually exclusive.
+  PrivateServiceConnectConfig private_service_connect_config = 21
+      [(google.api.field_behavior) = OPTIONAL];
+
   // Output only. Resource name of the Model Monitoring job associated with this
   // Endpoint if monitoring is enabled by
   // [JobService.CreateModelDeploymentMonitoringJob][google.cloud.aiplatform.v1.JobService.CreateModelDeploymentMonitoringJob].
@@ -220,6 +229,13 @@ message DeployedModel {
   // [explanation_spec][google.cloud.aiplatform.v1.DeployedModel.explanation_spec]
   // will be used for the explanation configuration.
   ExplanationSpec explanation_spec = 9;
+
+  // If true, deploy the model without explainable feature, regardless the
+  // existence of
+  // [Model.explanation_spec][google.cloud.aiplatform.v1.Model.explanation_spec]
+  // or
+  // [explanation_spec][google.cloud.aiplatform.v1.DeployedModel.explanation_spec].
+  bool disable_explanations = 19;
 
   // The service account that the DeployedModel's container runs as. Specify the
   // email address of the service account. If this service account is not

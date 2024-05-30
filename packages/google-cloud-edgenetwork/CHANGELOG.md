@@ -1,5 +1,27 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/edgenetwork-v0.4.0...edgenetwork-v0.5.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/edgenetwork-v0.3.1...edgenetwork-v0.4.0) (2024-04-16)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5188](https://github.com/googleapis/google-cloud-node/issues/5188)) ([c5ccdf9](https://github.com/googleapis/google-cloud-node/commit/c5ccdf93641e7bb6d0e5c636168fad0feafab6e3))
+
+## [0.3.1](https://github.com/googleapis/google-cloud-node/compare/edgenetwork-v0.3.0...edgenetwork-v0.3.1) (2024-03-26)
+
+
+### Bug Fixes
+
+* [edgenetwork] deprecate unimplemented Zone fields and methods ([#5148](https://github.com/googleapis/google-cloud-node/issues/5148)) ([115b695](https://github.com/googleapis/google-cloud-node/commit/115b6952af6016b1c88f1d706056b92cd8f41979))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/edgenetwork-v0.2.0...edgenetwork-v0.3.0) (2024-02-09)
 
 

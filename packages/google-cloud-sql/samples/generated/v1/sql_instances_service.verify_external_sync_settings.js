@@ -52,6 +52,16 @@ function main() {
    *  Optional. MySQL-specific settings for start external sync.
    */
   // const mysqlSyncConfig = {}
+  /**
+   *  Optional. MigrationType decides if the migration is a physical file based
+   *  migration or logical migration
+   */
+  // const migrationType = {}
+  /**
+   *  Optional. Parallel level for initial data sync. Currently only applicable
+   *  for PostgreSQL.
+   */
+  // const syncParallelLevel = {}
 
   // Imports the Sql library
   const {SqlInstancesServiceClient} = require('@google-cloud/sql').v1;

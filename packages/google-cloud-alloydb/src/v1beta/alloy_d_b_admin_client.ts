@@ -128,8 +128,15 @@ export class AlloyDBAdminClient {
         'Please set either universe_domain or universeDomain, but not both.'
       );
     }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
     this._universeDomain =
-      opts?.universeDomain ?? opts?.universe_domain ?? 'googleapis.com';
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'alloydb.' + this._universeDomain;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || this._servicePath;
@@ -187,7 +194,7 @@ export class AlloyDBAdminClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -215,6 +222,9 @@ export class AlloyDBAdminClient {
       ),
       connectionInfoPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/clusters/{cluster}/instances/{instance}/connectionInfo'
+      ),
+      databasePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/clusters/{cluster}/databases/{database}'
       ),
       instancePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/clusters/{cluster}/instances/{instance}'
@@ -261,6 +271,11 @@ export class AlloyDBAdminClient {
         'pageToken',
         'nextPageToken',
         'users'
+      ),
+      listDatabases: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'databases'
       ),
     };
 
@@ -584,6 +599,7 @@ export class AlloyDBAdminClient {
       'createUser',
       'updateUser',
       'deleteUser',
+      'listDatabases',
     ];
     for (const methodName of alloyDBAdminStubMethods) {
       const callPromise = this.alloyDBAdminStub.then(
@@ -624,7 +640,7 @@ export class AlloyDBAdminClient {
    */
   static get servicePath() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -642,7 +658,7 @@ export class AlloyDBAdminClient {
    */
   static get apiEndpoint() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -987,7 +1003,8 @@ export class AlloyDBAdminClient {
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
    * @param {string} [request.pemCsr]
-   *   Optional. A pem-encoded X.509 certificate signing request (CSR).
+   *   Optional. A pem-encoded X.509 certificate signing request (CSR). It is
+   *   recommended to use public_key instead.
    * @param {google.protobuf.Duration} [request.certDuration]
    *   Optional. An optional hint to the endpoint to generate the client
    *   certificate with the requested duration. The duration can be from 1 hour to
@@ -5355,6 +5372,216 @@ export class AlloyDBAdminClient {
     ) as AsyncIterable<protos.google.cloud.alloydb.v1beta.IUser>;
   }
   /**
+   * Lists Databases in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListDatabasesRequest.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of databases to return. The service may return
+   *   fewer than this value. If unspecified, an appropriate number of databases
+   *   will be returned. The max value will be 2000, values above max will be
+   *   coerced to max.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListDatabases` call.
+   *   This should be provided to retrieve the subsequent page.
+   *   This field is currently not supported, its value will be ignored if passed.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results.
+   *   This field is currently not supported, its value will be ignored if passed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.alloydb.v1beta.Database|Database}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listDatabasesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listDatabases(
+    request?: protos.google.cloud.alloydb.v1beta.IListDatabasesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.alloydb.v1beta.IDatabase[],
+      protos.google.cloud.alloydb.v1beta.IListDatabasesRequest | null,
+      protos.google.cloud.alloydb.v1beta.IListDatabasesResponse,
+    ]
+  >;
+  listDatabases(
+    request: protos.google.cloud.alloydb.v1beta.IListDatabasesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.alloydb.v1beta.IListDatabasesRequest,
+      | protos.google.cloud.alloydb.v1beta.IListDatabasesResponse
+      | null
+      | undefined,
+      protos.google.cloud.alloydb.v1beta.IDatabase
+    >
+  ): void;
+  listDatabases(
+    request: protos.google.cloud.alloydb.v1beta.IListDatabasesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.alloydb.v1beta.IListDatabasesRequest,
+      | protos.google.cloud.alloydb.v1beta.IListDatabasesResponse
+      | null
+      | undefined,
+      protos.google.cloud.alloydb.v1beta.IDatabase
+    >
+  ): void;
+  listDatabases(
+    request?: protos.google.cloud.alloydb.v1beta.IListDatabasesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.alloydb.v1beta.IListDatabasesRequest,
+          | protos.google.cloud.alloydb.v1beta.IListDatabasesResponse
+          | null
+          | undefined,
+          protos.google.cloud.alloydb.v1beta.IDatabase
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.alloydb.v1beta.IListDatabasesRequest,
+      | protos.google.cloud.alloydb.v1beta.IListDatabasesResponse
+      | null
+      | undefined,
+      protos.google.cloud.alloydb.v1beta.IDatabase
+    >
+  ): Promise<
+    [
+      protos.google.cloud.alloydb.v1beta.IDatabase[],
+      protos.google.cloud.alloydb.v1beta.IListDatabasesRequest | null,
+      protos.google.cloud.alloydb.v1beta.IListDatabasesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listDatabases(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListDatabasesRequest.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of databases to return. The service may return
+   *   fewer than this value. If unspecified, an appropriate number of databases
+   *   will be returned. The max value will be 2000, values above max will be
+   *   coerced to max.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListDatabases` call.
+   *   This should be provided to retrieve the subsequent page.
+   *   This field is currently not supported, its value will be ignored if passed.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results.
+   *   This field is currently not supported, its value will be ignored if passed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.alloydb.v1beta.Database|Database} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listDatabasesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listDatabasesStream(
+    request?: protos.google.cloud.alloydb.v1beta.IListDatabasesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listDatabases'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listDatabases.createStream(
+      this.innerApiCalls.listDatabases as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listDatabases`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListDatabasesRequest.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of databases to return. The service may return
+   *   fewer than this value. If unspecified, an appropriate number of databases
+   *   will be returned. The max value will be 2000, values above max will be
+   *   coerced to max.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListDatabases` call.
+   *   This should be provided to retrieve the subsequent page.
+   *   This field is currently not supported, its value will be ignored if passed.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results.
+   *   This field is currently not supported, its value will be ignored if passed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.alloydb.v1beta.Database|Database}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/alloy_d_b_admin.list_databases.js</caption>
+   * region_tag:alloydb_v1beta_generated_AlloyDBAdmin_ListDatabases_async
+   */
+  listDatabasesAsync(
+    request?: protos.google.cloud.alloydb.v1beta.IListDatabasesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.alloydb.v1beta.IDatabase> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listDatabases'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listDatabases.asyncIterate(
+      this.innerApiCalls['listDatabases'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.alloydb.v1beta.IDatabase>;
+  }
+  /**
    * Gets the access control policy for a resource. Returns an empty policy
    * if the resource exists and does not have a policy set.
    *
@@ -5920,6 +6147,73 @@ export class AlloyDBAdminClient {
     return this.pathTemplates.connectionInfoPathTemplate.match(
       connectionInfoName
     ).instance;
+  }
+
+  /**
+   * Return a fully-qualified database resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} cluster
+   * @param {string} database
+   * @returns {string} Resource name string.
+   */
+  databasePath(
+    project: string,
+    location: string,
+    cluster: string,
+    database: string
+  ) {
+    return this.pathTemplates.databasePathTemplate.render({
+      project: project,
+      location: location,
+      cluster: cluster,
+      database: database,
+    });
+  }
+
+  /**
+   * Parse the project from Database resource.
+   *
+   * @param {string} databaseName
+   *   A fully-qualified path representing Database resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDatabaseName(databaseName: string) {
+    return this.pathTemplates.databasePathTemplate.match(databaseName).project;
+  }
+
+  /**
+   * Parse the location from Database resource.
+   *
+   * @param {string} databaseName
+   *   A fully-qualified path representing Database resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDatabaseName(databaseName: string) {
+    return this.pathTemplates.databasePathTemplate.match(databaseName).location;
+  }
+
+  /**
+   * Parse the cluster from Database resource.
+   *
+   * @param {string} databaseName
+   *   A fully-qualified path representing Database resource.
+   * @returns {string} A string representing the cluster.
+   */
+  matchClusterFromDatabaseName(databaseName: string) {
+    return this.pathTemplates.databasePathTemplate.match(databaseName).cluster;
+  }
+
+  /**
+   * Parse the database from Database resource.
+   *
+   * @param {string} databaseName
+   *   A fully-qualified path representing Database resource.
+   * @returns {string} A string representing the database.
+   */
+  matchDatabaseFromDatabaseName(databaseName: string) {
+    return this.pathTemplates.databasePathTemplate.match(databaseName).database;
   }
 
   /**

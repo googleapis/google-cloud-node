@@ -4,6 +4,28 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery-data-transfer?activeTab=versions
 
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-data-transfer-v4.2.1...bigquery-data-transfer-v4.3.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [4.2.1](https://github.com/googleapis/google-cloud-node/compare/bigquery-data-transfer-v4.2.0...bigquery-data-transfer-v4.2.1) (2024-04-18)
+
+
+### Bug Fixes
+
+* [bigquery-datatransfer] mark parent/name fields with the REQUIRED field_behavior annotation ([#5233](https://github.com/googleapis/google-cloud-node/issues/5233)) ([29c939f](https://github.com/googleapis/google-cloud-node/commit/29c939f4bc270aa6063af26f79c55b4a7ae9b557))
+
+## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-data-transfer-v4.1.0...bigquery-data-transfer-v4.2.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5186](https://github.com/googleapis/google-cloud-node/issues/5186)) ([97c7951](https://github.com/googleapis/google-cloud-node/commit/97c7951481ef70d8f49c3d218f7c22ce00df9174))
+
 ## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-data-transfer-v4.0.1...bigquery-data-transfer-v4.1.0) (2024-02-09)
 
 

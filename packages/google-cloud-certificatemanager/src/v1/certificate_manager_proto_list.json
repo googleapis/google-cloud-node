@@ -1,4 +1,5 @@
 [
   "../../protos/google/cloud/certificatemanager/v1/certificate_issuance_config.proto",
-  "../../protos/google/cloud/certificatemanager/v1/certificate_manager.proto"
+  "../../protos/google/cloud/certificatemanager/v1/certificate_manager.proto",
+  "../../protos/google/cloud/certificatemanager/v1/trust_config.proto"
 ]

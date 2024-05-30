@@ -1,5 +1,28 @@
 # Changelog
 
+## [1.8.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v1.7.0...alloydb-v1.8.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5350](https://github.com/googleapis/google-cloud-node/issues/5350)) ([6c03873](https://github.com/googleapis/google-cloud-node/commit/6c038731de1f36456042e6b4ecf2a9686be662c7))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [1.7.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v1.6.0...alloydb-v1.7.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5186](https://github.com/googleapis/google-cloud-node/issues/5186)) ([97c7951](https://github.com/googleapis/google-cloud-node/commit/97c7951481ef70d8f49c3d218f7c22ce00df9174))
+
+## [1.6.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v1.5.0...alloydb-v1.6.0) (2024-02-28)
+
+
+### Features
+
+* [alloydb] support for obtaining the public IP address of an Instance ([#5088](https://github.com/googleapis/google-cloud-node/issues/5088)) ([639c707](https://github.com/googleapis/google-cloud-node/commit/639c7076472d2e77845e2e5fdda954608566f852))
+
 ## [1.5.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v1.4.1...alloydb-v1.5.0) (2024-02-09)
 
 

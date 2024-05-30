@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package google.cloud.recaptchaenterprise.v1;
 import "google/api/annotations.proto";
 import "google/api/client.proto";
 import "google/api/field_behavior.proto";
+import "google/api/field_info.proto";
 import "google/api/resource.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/field_mask.proto";
@@ -181,6 +182,16 @@ service RecaptchaEnterpriseService {
       delete: "/v1/{name=projects/*/firewallpolicies/*}"
     };
     option (google.api.method_signature) = "name";
+  }
+
+  // Reorders all firewall policies.
+  rpc ReorderFirewallPolicies(ReorderFirewallPoliciesRequest)
+      returns (ReorderFirewallPoliciesResponse) {
+    option (google.api.http) = {
+      post: "/v1/{parent=projects/*}/firewallpolicies:reorder"
+      body: "*"
+    };
+    option (google.api.method_signature) = "parent,names";
   }
 
   // List groups of related accounts.
@@ -588,6 +599,8 @@ message Assessment {
   option (google.api.resource) = {
     type: "recaptchaenterprise.googleapis.com/Assessment"
     pattern: "projects/{project}/assessments/{assessment}"
+    plural: "assessments"
+    singular: "assessment"
   };
 
   // Output only. Identifier. The resource name for the Assessment in the format
@@ -640,6 +653,24 @@ message Assessment {
 
 // The event being assessed.
 message Event {
+  // Setting that controls Fraud Prevention assessments.
+  enum FraudPrevention {
+    // Default, unspecified setting. If opted in for automatic detection,
+    // `fraud_prevention_assessment` is returned based on the request.
+    // Otherwise, `fraud_prevention_assessment` is returned if
+    // `transaction_data` is present in the `Event` and Fraud Prevention is
+    // enabled in the Google Cloud console.
+    FRAUD_PREVENTION_UNSPECIFIED = 0;
+
+    // Enable Fraud Prevention for this assessment, if Fraud Prevention is
+    // enabled in the Google Cloud console.
+    ENABLED = 1;
+
+    // Disable Fraud Prevention for this assessment, regardless of opt-in
+    // status or Google Cloud console settings.
+    DISABLED = 2;
+  }
+
   // Optional. The user response token provided by the reCAPTCHA Enterprise
   // client-side integration on your site.
   string token = 1 [(google.api.field_behavior) = OPTIONAL];
@@ -654,7 +685,10 @@ message Event {
 
   // Optional. The IP address in the request from the user's device related to
   // this event.
-  string user_ip_address = 4 [(google.api.field_behavior) = OPTIONAL];
+  string user_ip_address = 4 [
+    (google.api.field_info).format = IPV4_OR_IPV6,
+    (google.api.field_behavior) = OPTIONAL
+  ];
 
   // Optional. The expected action for this type of event. This should be the
   // same action provided at token generation time on client-side platforms
@@ -702,6 +736,10 @@ message Event {
   // for logged-in requests or login/registration requests, or by providing user
   // identifiers for guest actions like checkout.
   UserInfo user_info = 15 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The Fraud Prevention setting for this assessment.
+  FraudPrevention fraud_prevention = 17
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Transaction data associated with a payment protected by reCAPTCHA Enterprise.
@@ -1234,7 +1272,7 @@ message ListFirewallPoliciesRequest {
   string page_token = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
-// Response to request to list firewall policies belonging to a key.
+// Response to request to list firewall policies belonging to a project.
 message ListFirewallPoliciesResponse {
   // Policy details.
   repeated FirewallPolicy firewall_policies = 1;
@@ -1279,6 +1317,30 @@ message DeleteFirewallPolicyRequest {
   ];
 }
 
+// The reorder firewall policies request message.
+message ReorderFirewallPoliciesRequest {
+  // Required. The name of the project to list the policies for, in the format
+  // `projects/{project}`.
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "cloudresourcemanager.googleapis.com/Project"
+    }
+  ];
+
+  // Required. A list containing all policy names, in the new order. Each name
+  // is in the format `projects/{project}/firewallpolicies/{firewallpolicy}`.
+  repeated string names = 2 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "recaptchaenterprise.googleapis.com/FirewallPolicy"
+    }
+  ];
+}
+
+// The reorder firewall policies response message.
+message ReorderFirewallPoliciesResponse {}
+
 // The migrate key request message.
 message MigrateKeyRequest {
   // Required. The name of the key to be migrated, in the format
@@ -1318,6 +1380,8 @@ message Metrics {
   option (google.api.resource) = {
     type: "recaptchaenterprise.googleapis.com/Metrics"
     pattern: "projects/{project}/keys/{key}/metrics"
+    plural: "metrics"
+    singular: "metrics"
   };
 
   // Output only. Identifier. The name of the metrics, in the format
@@ -1356,6 +1420,8 @@ message Key {
   option (google.api.resource) = {
     type: "recaptchaenterprise.googleapis.com/Key"
     pattern: "projects/{project}/keys/{key}"
+    plural: "keys"
+    singular: "key"
   };
 
   // Identifier. The resource name for the Key in the format
@@ -1597,6 +1663,13 @@ message FirewallAction {
   // hitting the backend.
   message BlockAction {}
 
+  // An include reCAPTCHA script action involves injecting reCAPTCHA JavaScript
+  // code into the HTML returned by the site backend. This reCAPTCHA
+  // script is tasked with collecting user signals on the requested web page,
+  // issuing tokens as a cookie within the site domain, and enabling their
+  // utilization in subsequent page requests.
+  message IncludeRecaptchaScriptAction {}
+
   // A redirect action returns a 307 (temporary redirect) response, pointing
   // the user to a ReCaptcha interstitial page to attach a token.
   message RedirectAction {}
@@ -1629,6 +1702,10 @@ message FirewallAction {
     // error code.
     BlockAction block = 2;
 
+    // This action will inject reCAPTCHA JavaScript code into the HTML page
+    // returned by the site backend.
+    IncludeRecaptchaScriptAction include_recaptcha_script = 6;
+
     // This action will redirect the request to a ReCaptcha interstitial to
     // attach a token.
     RedirectAction redirect = 5;
@@ -1649,6 +1726,8 @@ message FirewallPolicy {
   option (google.api.resource) = {
     type: "recaptchaenterprise.googleapis.com/FirewallPolicy"
     pattern: "projects/{project}/firewallpolicies/{firewallpolicy}"
+    plural: "firewallPolicies"
+    singular: "firewallPolicy"
   };
 
   // Identifier. The resource name for the FirewallPolicy in the format
@@ -1764,7 +1843,7 @@ message SearchRelatedAccountGroupMembershipsRequest {
   string project = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
-      child_type: "recaptchaenterprise.googleapis.com/RelatedAccountGroupMembership"
+      type: "cloudresourcemanager.googleapis.com/Project"
     }
   ];
 
@@ -1812,16 +1891,15 @@ message RelatedAccountGroupMembership {
   option (google.api.resource) = {
     type: "recaptchaenterprise.googleapis.com/RelatedAccountGroupMembership"
     pattern: "projects/{project}/relatedaccountgroups/{relatedaccountgroup}/memberships/{membership}"
+    plural: "relatedAccountGroupMemberships"
+    singular: "relatedAccountGroupMembership"
   };
 
   // Required. Identifier. The resource name for this membership in the format
   // `projects/{project}/relatedaccountgroups/{relatedaccountgroup}/memberships/{membership}`.
   string name = 1 [
     (google.api.field_behavior) = IDENTIFIER,
-    (google.api.field_behavior) = REQUIRED,
-    (google.api.resource_reference) = {
-      type: "recaptchaenterprise.googleapis.com/RelatedAccountGroupMembership"
-    }
+    (google.api.field_behavior) = REQUIRED
   ];
 
   // The unique stable account identifier of the member. The identifier
@@ -1841,6 +1919,8 @@ message RelatedAccountGroup {
   option (google.api.resource) = {
     type: "recaptchaenterprise.googleapis.com/RelatedAccountGroup"
     pattern: "projects/{project}/relatedaccountgroups/{relatedaccountgroup}"
+    plural: "relatedAccountGroups"
+    singular: "relatedAccountGroup"
   };
 
   // Required. Identifier. The resource name for the related account group in
@@ -1848,10 +1928,7 @@ message RelatedAccountGroup {
   // `projects/{project}/relatedaccountgroups/{related_account_group}`.
   string name = 1 [
     (google.api.field_behavior) = IDENTIFIER,
-    (google.api.field_behavior) = REQUIRED,
-    (google.api.resource_reference) = {
-      type: "recaptchaenterprise.googleapis.com/RelatedAccountGroup"
-    }
+    (google.api.field_behavior) = REQUIRED
   ];
 }
 
@@ -1889,6 +1966,9 @@ message WafSettings {
 
     // Fastly
     FASTLY = 3;
+
+    // Cloudflare
+    CLOUDFLARE = 4;
   }
 
   // Required. The WAF service that uses this key.

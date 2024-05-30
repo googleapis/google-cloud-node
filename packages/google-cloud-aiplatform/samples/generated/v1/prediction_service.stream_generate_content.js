@@ -42,12 +42,17 @@ function main(model, contents) {
    */
   // const contents = [1,2,3,4]
   /**
+   *  Optional. The user provided system instructions for the model.
+   *  Note: only text should be used in parts and content in each part will be in
+   *  a separate paragraph.
+   */
+  // const systemInstruction = {}
+  /**
    *  Optional. A list of `Tools` the model may use to generate the next
    *  response.
    *  A `Tool` is a piece of code that enables the system to interact with
    *  external systems to perform an action, or set of actions, outside of
-   *  knowledge and scope of the model. The only supported tool is currently
-   *  `Function`
+   *  knowledge and scope of the model.
    */
   // const tools = [1,2,3,4]
   /**

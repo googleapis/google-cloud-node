@@ -4,6 +4,36 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [6.6.0](https://github.com/googleapis/google-cloud-node/compare/speech-v6.5.0...speech-v6.6.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5355](https://github.com/googleapis/google-cloud-node/issues/5355)) ([19f9d6d](https://github.com/googleapis/google-cloud-node/commit/19f9d6df9ea88283d3a3a476c58cca6521a3354d))
+
+## [6.5.0](https://github.com/googleapis/google-cloud-node/compare/speech-v6.4.0...speech-v6.5.0) (2024-04-05)
+
+
+### Features
+
+* Add `translation_config` in `RecognitionConfig` message ([#5216](https://github.com/googleapis/google-cloud-node/issues/5216)) ([c86ddd0](https://github.com/googleapis/google-cloud-node/commit/c86ddd006109322a7ba7ae9d28c49bea3993cb1f))
+
+## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/speech-v6.3.0...speech-v6.4.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5191](https://github.com/googleapis/google-cloud-node/issues/5191)) ([57567db](https://github.com/googleapis/google-cloud-node/commit/57567db36033ca53ae2f54e6517b8cd12145bb82))
+
+## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/speech-v6.2.0...speech-v6.3.0) (2024-02-22)
+
+
+### Features
+
+* Add API for writing BatchRecognize transcripts in SRT and VTT formats ([#5062](https://github.com/googleapis/google-cloud-node/issues/5062)) ([6f3ab04](https://github.com/googleapis/google-cloud-node/commit/6f3ab0415304dd270cca99ce18949a2a1fc0e1a9))
+
 ## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/speech-v6.1.1...speech-v6.2.0) (2024-02-09)
 
 

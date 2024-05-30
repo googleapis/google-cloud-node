@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -94,9 +94,10 @@ message Dataset {
     GCSManagedConfig gcs_managed_config = 3
         [(google.api.field_behavior) = OPTIONAL];
 
-    // Optional. Document AI Warehouse-based dataset configuration.
+    // Optional. Deprecated. Warehouse-based dataset configuration is not
+    // supported.
     DocumentWarehouseConfig document_warehouse_config = 5
-        [(google.api.field_behavior) = OPTIONAL];
+        [deprecated = true, (google.api.field_behavior) = OPTIONAL];
 
     // Optional. Unmanaged dataset configuration. Use this configuration if the
     // dataset documents are managed by the document service internally (not

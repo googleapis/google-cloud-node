@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,6 +19,9 @@ package google.cloud.securitycenter.v1;
 import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 import "google/cloud/securitycenter/v1/access.proto";
+import "google/cloud/securitycenter/v1/application.proto";
+import "google/cloud/securitycenter/v1/backup_disaster_recovery.proto";
+import "google/cloud/securitycenter/v1/cloud_armor.proto";
 import "google/cloud/securitycenter/v1/cloud_dlp_data_profile.proto";
 import "google/cloud/securitycenter/v1/cloud_dlp_inspection.proto";
 import "google/cloud/securitycenter/v1/compliance.proto";
@@ -33,9 +36,14 @@ import "google/cloud/securitycenter/v1/iam_binding.proto";
 import "google/cloud/securitycenter/v1/indicator.proto";
 import "google/cloud/securitycenter/v1/kernel_rootkit.proto";
 import "google/cloud/securitycenter/v1/kubernetes.proto";
+import "google/cloud/securitycenter/v1/load_balancer.proto";
+import "google/cloud/securitycenter/v1/log_entry.proto";
 import "google/cloud/securitycenter/v1/mitre_attack.proto";
+import "google/cloud/securitycenter/v1/notebook.proto";
+import "google/cloud/securitycenter/v1/org_policy.proto";
 import "google/cloud/securitycenter/v1/process.proto";
 import "google/cloud/securitycenter/v1/security_marks.proto";
+import "google/cloud/securitycenter/v1/security_posture.proto";
 import "google/cloud/securitycenter/v1/vulnerability.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
@@ -171,6 +179,10 @@ message Finding {
 
     // Describes an error that prevents some SCC functionality.
     SCC_ERROR = 5;
+
+    // Describes a potential security risk due to a change in the security
+    // posture.
+    POSTURE_VIOLATION = 6;
   }
 
   // The [relative resource
@@ -359,4 +371,28 @@ message Finding {
 
   // Signature of the kernel rootkit.
   KernelRootkit kernel_rootkit = 50;
+
+  // Contains information about the org policies associated with the finding.
+  repeated OrgPolicy org_policies = 51;
+
+  // Represents an application associated with the finding.
+  Application application = 53;
+
+  // Fields related to Backup and DR findings.
+  BackupDisasterRecovery backup_disaster_recovery = 55;
+
+  // The security posture associated with the finding.
+  SecurityPosture security_posture = 56;
+
+  // Log entries that are relevant to the finding.
+  repeated LogEntry log_entries = 57;
+
+  // The load balancers associated with the finding.
+  repeated LoadBalancer load_balancers = 58;
+
+  // Fields related to Cloud Armor findings.
+  CloudArmor cloud_armor = 59;
+
+  // Notebook associated with the finding.
+  Notebook notebook = 63;
 }

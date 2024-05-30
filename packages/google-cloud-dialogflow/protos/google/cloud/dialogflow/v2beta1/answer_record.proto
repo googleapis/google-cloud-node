@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -243,6 +243,10 @@ message AgentAssistantFeedback {
 
     // Text of actual submitted summary.
     string summary_text = 3;
+
+    // Optional. Actual text sections of submitted summary.
+    map<string, string> text_sections = 4
+        [(google.api.field_behavior) = OPTIONAL];
   }
 
   // Feedback for knowledge search.

@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -291,18 +291,49 @@ service AssetService {
 
   // Analyzes organization policies governed assets (Google Cloud resources or
   // policies) under a scope. This RPC supports custom constraints and the
-  // following 10 canned constraints:
+  // following canned constraints:
   //
-  // * storage.uniformBucketLevelAccess
-  // * iam.disableServiceAccountKeyCreation
-  // * iam.allowedPolicyMemberDomains
-  // * compute.vmExternalIpAccess
-  // * appengine.enforceServiceAccountActAsCheck
-  // * gcp.resourceLocations
-  // * compute.trustedImageProjects
-  // * compute.skipDefaultNetworkCreation
-  // * compute.requireOsLogin
-  // * compute.disableNestedVirtualization
+  // * constraints/ainotebooks.accessMode
+  // * constraints/ainotebooks.disableFileDownloads
+  // * constraints/ainotebooks.disableRootAccess
+  // * constraints/ainotebooks.disableTerminal
+  // * constraints/ainotebooks.environmentOptions
+  // * constraints/ainotebooks.requireAutoUpgradeSchedule
+  // * constraints/ainotebooks.restrictVpcNetworks
+  // * constraints/compute.disableGuestAttributesAccess
+  // * constraints/compute.disableInstanceDataAccessApis
+  // * constraints/compute.disableNestedVirtualization
+  // * constraints/compute.disableSerialPortAccess
+  // * constraints/compute.disableSerialPortLogging
+  // * constraints/compute.disableVpcExternalIpv6
+  // * constraints/compute.requireOsLogin
+  // * constraints/compute.requireShieldedVm
+  // * constraints/compute.restrictLoadBalancerCreationForTypes
+  // * constraints/compute.restrictProtocolForwardingCreationForTypes
+  // * constraints/compute.restrictXpnProjectLienRemoval
+  // * constraints/compute.setNewProjectDefaultToZonalDNSOnly
+  // * constraints/compute.skipDefaultNetworkCreation
+  // * constraints/compute.trustedImageProjects
+  // * constraints/compute.vmCanIpForward
+  // * constraints/compute.vmExternalIpAccess
+  // * constraints/gcp.detailedAuditLoggingMode
+  // * constraints/gcp.resourceLocations
+  // * constraints/iam.allowedPolicyMemberDomains
+  // * constraints/iam.automaticIamGrantsForDefaultServiceAccounts
+  // * constraints/iam.disableServiceAccountCreation
+  // * constraints/iam.disableServiceAccountKeyCreation
+  // * constraints/iam.disableServiceAccountKeyUpload
+  // * constraints/iam.restrictCrossProjectServiceAccountLienRemoval
+  // * constraints/iam.serviceAccountKeyExpiryHours
+  // * constraints/resourcemanager.accessBoundaries
+  // * constraints/resourcemanager.allowedExportDestinations
+  // * constraints/sql.restrictAuthorizedNetworks
+  // * constraints/sql.restrictNoncompliantDiagnosticDataAccess
+  // * constraints/sql.restrictNoncompliantResourceCreation
+  // * constraints/sql.restrictPublicIp
+  // * constraints/storage.publicAccessPrevention
+  // * constraints/storage.restrictAuthTypes
+  // * constraints/storage.uniformBucketLevelAccess
   //
   // This RPC only returns either resources of types [supported by search
   // APIs](https://cloud.google.com/asset-inventory/docs/supported-asset-types)
@@ -1361,10 +1392,10 @@ message IamPolicyAnalysisQuery {
   // folder number (such as "folders/123"), a project ID (such as
   // "projects/my-project-id"), or a project number (such as "projects/12345").
   //
-  // To know how to get organization id, visit [here
+  // To know how to get organization ID, visit [here
   // ](https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id).
   //
-  // To know how to get folder or project id, visit [here
+  // To know how to get folder or project ID, visit [here
   // ](https://cloud.google.com/resource-manager/docs/creating-managing-folders#viewing_or_listing_folders_and_projects).
   string scope = 1 [(google.api.field_behavior) = REQUIRED];
 
@@ -2051,10 +2082,10 @@ message BatchGetEffectiveIamPoliciesRequest {
   // folder number (such as "folders/123"), a project ID (such as
   // "projects/my-project-id"), or a project number (such as "projects/12345").
   //
-  // To know how to get organization id, visit [here
+  // To know how to get organization ID, visit [here
   // ](https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id).
   //
-  // To know how to get folder or project id, visit [here
+  // To know how to get folder or project ID, visit [here
   // ](https://cloud.google.com/resource-manager/docs/creating-managing-folders#viewing_or_listing_folders_and_projects).
   string scope = 1 [
     (google.api.field_behavior) = REQUIRED,
@@ -2150,8 +2181,8 @@ message AnalyzerOrgPolicy {
     }
 
     oneof kind {
-      // List of values to be used for this PolicyRule. This field can be set
-      // only in Policies for list constraints.
+      // List of values to be used for this policy rule. This field can be set
+      // only in policies for list constraints.
       StringValues values = 3;
 
       // Setting this to true means that all values are allowed. This field can
@@ -2170,6 +2201,22 @@ message AnalyzerOrgPolicy {
 
     // The evaluating condition for this rule.
     google.type.Expr condition = 7;
+
+    // The condition evaluation result for this rule.
+    // Only populated if it meets all the following criteria:
+    //
+    // * There is a
+    // [condition][google.cloud.asset.v1.AnalyzerOrgPolicy.Rule.condition]
+    // defined for this rule.
+    // * This rule is within
+    //   [AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer.consolidated_policy][google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer.consolidated_policy],
+    //   or
+    //   [AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset.consolidated_policy][google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset.consolidated_policy]
+    //   when the
+    //   [AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset][google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset]
+    //   has
+    //   [AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset.governed_resource][google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset.governed_resource].
+    ConditionEvaluation condition_evaluation = 8;
   }
 
   // The [full resource name]
@@ -2405,6 +2452,21 @@ message AnalyzeOrgPoliciesResponse {
     // If the constraint is defined with default policy, it will also appear in
     // the list.
     repeated AnalyzerOrgPolicy policy_bundle = 2;
+
+    // The project that this consolidated policy belongs to, in the format of
+    // projects/{PROJECT_NUMBER}. This field is available when the consolidated
+    // policy belongs to a project.
+    string project = 3;
+
+    // The folder(s) that this consolidated policy belongs to, in the format of
+    // folders/{FOLDER_NUMBER}. This field is available when the consolidated
+    // policy belongs (directly or cascadingly) to one or more folders.
+    repeated string folders = 4;
+
+    // The organization that this consolidated policy belongs to, in the format
+    // of organizations/{ORGANIZATION_NUMBER}. This field is available when the
+    // consolidated policy belongs (directly or cascadingly) to an organization.
+    string organization = 5;
   }
 
   // The organization policies under the
@@ -2491,6 +2553,24 @@ message AnalyzeOrgPolicyGovernedContainersResponse {
     // If the constraint is defined with default policy, it will also appear in
     // the list.
     repeated AnalyzerOrgPolicy policy_bundle = 4;
+
+    // The project that this resource belongs to, in the format of
+    // projects/{PROJECT_NUMBER}. This field is available when the resource
+    // belongs to a project.
+    string project = 5;
+
+    // The folder(s) that this resource belongs to, in the format of
+    // folders/{FOLDER_NUMBER}. This field is available when the resource
+    // belongs (directly or cascadingly) to one or more folders.
+    repeated string folders = 6;
+
+    // The organization that this resource belongs to, in the format of
+    // organizations/{ORGANIZATION_NUMBER}. This field is available when the
+    // resource belongs (directly or cascadingly) to an organization.
+    string organization = 7;
+
+    // The effective tags on this resource.
+    repeated EffectiveTagDetails effective_tags = 8;
   }
 
   // The list of the analyzed governed containers.
@@ -2589,6 +2669,18 @@ message AnalyzeOrgPolicyGovernedAssetsResponse {
     // organizations/{ORGANIZATION_NUMBER}. This field is available when the
     // resource belongs (directly or cascadingly) to an organization.
     string organization = 7;
+
+    // The asset type of the
+    // [AnalyzeOrgPolicyGovernedAssetsResponse.GovernedResource.full_resource_name][google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedResource.full_resource_name]
+    // Example:
+    // `cloudresourcemanager.googleapis.com/Project`
+    // See [Cloud Asset Inventory Supported Asset
+    // Types](https://cloud.google.com/asset-inventory/docs/supported-asset-types)
+    // for all supported asset types.
+    string asset_type = 8;
+
+    // The effective tags on this resource.
+    repeated EffectiveTagDetails effective_tags = 9;
   }
 
   // The IAM policies governed by the organization policies of the
@@ -2619,6 +2711,15 @@ message AnalyzeOrgPolicyGovernedAssetsResponse {
     // organizations/{ORGANIZATION_NUMBER}. This field is available when the
     // IAM policy belongs (directly or cascadingly) to an organization.
     string organization = 7;
+
+    // The asset type of the
+    // [AnalyzeOrgPolicyGovernedAssetsResponse.GovernedIamPolicy.attached_resource][google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedIamPolicy.attached_resource].
+    // Example:
+    // `cloudresourcemanager.googleapis.com/Project`
+    // See [Cloud Asset Inventory Supported Asset
+    // Types](https://cloud.google.com/asset-inventory/docs/supported-asset-types)
+    // for all supported asset types.
+    string asset_type = 8;
   }
 
   // Represents a Google Cloud asset(resource or IAM policy) governed by the

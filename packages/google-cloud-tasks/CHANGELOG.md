@@ -4,6 +4,42 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/tasks-v5.3.0...tasks-v5.4.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/tasks-v5.2.1...tasks-v5.3.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5191](https://github.com/googleapis/google-cloud-node/issues/5191)) ([57567db](https://github.com/googleapis/google-cloud-node/commit/57567db36033ca53ae2f54e6517b8cd12145bb82))
+
+## [5.2.1](https://github.com/googleapis/google-cloud-node/compare/tasks-v5.2.0...tasks-v5.2.1) (2024-03-26)
+
+
+### Bug Fixes
+
+* [tasks] issue with ambiguous naming in protos ([#5173](https://github.com/googleapis/google-cloud-node/issues/5173)) ([28e1ffd](https://github.com/googleapis/google-cloud-node/commit/28e1ffd2cf64aafe72d4f993fa0b313722682c04))
+
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/tasks-v5.1.1...tasks-v5.2.0) (2024-03-23)
+
+
+### Features
+
+* Add initial files for google.chat.v1 ([#5091](https://github.com/googleapis/google-cloud-node/issues/5091)) ([0aab044](https://github.com/googleapis/google-cloud-node/commit/0aab0441677cb4cc037c2adc08b10f3556e9f459))
+
+## [5.1.1](https://github.com/googleapis/google-cloud-node/compare/tasks-v5.1.0...tasks-v5.1.1) (2024-02-27)
+
+
+### Bug Fixes
+
+* [tasks] Add client library version to headers ([#5083](https://github.com/googleapis/google-cloud-node/issues/5083)) ([411e8eb](https://github.com/googleapis/google-cloud-node/commit/411e8eb9d577c92505a1b0e6845b9ece277280e7))
+
 ## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/tasks-v5.0.0...tasks-v5.1.0) (2024-02-09)
 
 

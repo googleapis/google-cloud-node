@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-aiplatform",
-        "version": "3.12.0",
+        "version": "3.20.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -368,6 +368,50 @@
                 "method": {
                     "shortName": "CreateDatasetVersion",
                     "fullName": "google.cloud.aiplatform.v1beta1.DatasetService.CreateDatasetVersion",
+                    "service": {
+                        "shortName": "DatasetService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.DatasetService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_DatasetService_UpdateDatasetVersion_async",
+            "title": "DatasetService updateDatasetVersion Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates a DatasetVersion.",
+            "canonical": true,
+            "file": "dataset_service.update_dataset_version.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 61,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateDatasetVersion",
+                "fullName": "google.cloud.aiplatform.v1beta1.DatasetService.UpdateDatasetVersion",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "dataset_version",
+                        "type": ".google.cloud.aiplatform.v1beta1.DatasetVersion"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.DatasetVersion",
+                "client": {
+                    "shortName": "DatasetServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.DatasetServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateDatasetVersion",
+                    "fullName": "google.cloud.aiplatform.v1beta1.DatasetService.UpdateDatasetVersion",
                     "service": {
                         "shortName": "DatasetService",
                         "fullName": "google.cloud.aiplatform.v1beta1.DatasetService"
@@ -1234,7 +1278,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 90,
+                    "end": 92,
                     "type": "FULL"
                 }
             ],
@@ -1508,6 +1552,450 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1beta1_generated_EvaluationService_EvaluateInstances_async",
+            "title": "DatasetService evaluateInstances Sample",
+            "origin": "API_DEFINITION",
+            "description": " Evaluates instances based on a given metric.",
+            "canonical": true,
+            "file": "evaluation_service.evaluate_instances.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 144,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "EvaluateInstances",
+                "fullName": "google.cloud.aiplatform.v1beta1.EvaluationService.EvaluateInstances",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "exact_match_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.ExactMatchInput"
+                    },
+                    {
+                        "name": "bleu_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.BleuInput"
+                    },
+                    {
+                        "name": "rouge_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.RougeInput"
+                    },
+                    {
+                        "name": "fluency_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.FluencyInput"
+                    },
+                    {
+                        "name": "coherence_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.CoherenceInput"
+                    },
+                    {
+                        "name": "safety_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.SafetyInput"
+                    },
+                    {
+                        "name": "groundedness_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.GroundednessInput"
+                    },
+                    {
+                        "name": "fulfillment_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.FulfillmentInput"
+                    },
+                    {
+                        "name": "summarization_quality_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.SummarizationQualityInput"
+                    },
+                    {
+                        "name": "pairwise_summarization_quality_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.PairwiseSummarizationQualityInput"
+                    },
+                    {
+                        "name": "summarization_helpfulness_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.SummarizationHelpfulnessInput"
+                    },
+                    {
+                        "name": "summarization_verbosity_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.SummarizationVerbosityInput"
+                    },
+                    {
+                        "name": "question_answering_quality_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.QuestionAnsweringQualityInput"
+                    },
+                    {
+                        "name": "pairwise_question_answering_quality_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.PairwiseQuestionAnsweringQualityInput"
+                    },
+                    {
+                        "name": "question_answering_relevance_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.QuestionAnsweringRelevanceInput"
+                    },
+                    {
+                        "name": "question_answering_helpfulness_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.QuestionAnsweringHelpfulnessInput"
+                    },
+                    {
+                        "name": "question_answering_correctness_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.QuestionAnsweringCorrectnessInput"
+                    },
+                    {
+                        "name": "tool_call_valid_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.ToolCallValidInput"
+                    },
+                    {
+                        "name": "tool_name_match_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.ToolNameMatchInput"
+                    },
+                    {
+                        "name": "tool_parameter_key_match_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.ToolParameterKeyMatchInput"
+                    },
+                    {
+                        "name": "tool_parameter_kv_match_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.ToolParameterKVMatchInput"
+                    },
+                    {
+                        "name": "location",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.EvaluateInstancesResponse",
+                "client": {
+                    "shortName": "EvaluationServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.EvaluationServiceClient"
+                },
+                "method": {
+                    "shortName": "EvaluateInstances",
+                    "fullName": "google.cloud.aiplatform.v1beta1.EvaluationService.EvaluateInstances",
+                    "service": {
+                        "shortName": "EvaluationService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.EvaluationService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_ExtensionExecutionService_ExecuteExtension_async",
+            "title": "DatasetService executeExtension Sample",
+            "origin": "API_DEFINITION",
+            "description": " Executes the request against a given extension.",
+            "canonical": true,
+            "file": "extension_execution_service.execute_extension.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 78,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ExecuteExtension",
+                "fullName": "google.cloud.aiplatform.v1beta1.ExtensionExecutionService.ExecuteExtension",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "operation_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "operation_params",
+                        "type": ".google.protobuf.Struct"
+                    },
+                    {
+                        "name": "runtime_auth_config",
+                        "type": ".google.cloud.aiplatform.v1beta1.AuthConfig"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.ExecuteExtensionResponse",
+                "client": {
+                    "shortName": "ExtensionExecutionServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ExtensionExecutionServiceClient"
+                },
+                "method": {
+                    "shortName": "ExecuteExtension",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ExtensionExecutionService.ExecuteExtension",
+                    "service": {
+                        "shortName": "ExtensionExecutionService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ExtensionExecutionService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_ExtensionExecutionService_QueryExtension_async",
+            "title": "DatasetService queryExtension Sample",
+            "origin": "API_DEFINITION",
+            "description": " Queries an extension with a default controller.",
+            "canonical": true,
+            "file": "extension_execution_service.query_extension.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "QueryExtension",
+                "fullName": "google.cloud.aiplatform.v1beta1.ExtensionExecutionService.QueryExtension",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "contents",
+                        "type": "TYPE_MESSAGE[]"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.QueryExtensionResponse",
+                "client": {
+                    "shortName": "ExtensionExecutionServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ExtensionExecutionServiceClient"
+                },
+                "method": {
+                    "shortName": "QueryExtension",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ExtensionExecutionService.QueryExtension",
+                    "service": {
+                        "shortName": "ExtensionExecutionService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ExtensionExecutionService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_ExtensionRegistryService_ImportExtension_async",
+            "title": "DatasetService importExtension Sample",
+            "origin": "API_DEFINITION",
+            "description": " Imports an Extension.",
+            "canonical": true,
+            "file": "extension_registry_service.import_extension.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ImportExtension",
+                "fullName": "google.cloud.aiplatform.v1beta1.ExtensionRegistryService.ImportExtension",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "extension",
+                        "type": ".google.cloud.aiplatform.v1beta1.Extension"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ExtensionRegistryServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ExtensionRegistryServiceClient"
+                },
+                "method": {
+                    "shortName": "ImportExtension",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ExtensionRegistryService.ImportExtension",
+                    "service": {
+                        "shortName": "ExtensionRegistryService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ExtensionRegistryService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_ExtensionRegistryService_GetExtension_async",
+            "title": "DatasetService getExtension Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets an Extension.",
+            "canonical": true,
+            "file": "extension_registry_service.get_extension.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetExtension",
+                "fullName": "google.cloud.aiplatform.v1beta1.ExtensionRegistryService.GetExtension",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.Extension",
+                "client": {
+                    "shortName": "ExtensionRegistryServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ExtensionRegistryServiceClient"
+                },
+                "method": {
+                    "shortName": "GetExtension",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ExtensionRegistryService.GetExtension",
+                    "service": {
+                        "shortName": "ExtensionRegistryService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ExtensionRegistryService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_ExtensionRegistryService_ListExtensions_async",
+            "title": "DatasetService listExtensions Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists Extensions in a location.",
+            "canonical": true,
+            "file": "extension_registry_service.list_extensions.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 82,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListExtensions",
+                "fullName": "google.cloud.aiplatform.v1beta1.ExtensionRegistryService.ListExtensions",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.ListExtensionsResponse",
+                "client": {
+                    "shortName": "ExtensionRegistryServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ExtensionRegistryServiceClient"
+                },
+                "method": {
+                    "shortName": "ListExtensions",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ExtensionRegistryService.ListExtensions",
+                    "service": {
+                        "shortName": "ExtensionRegistryService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ExtensionRegistryService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_ExtensionRegistryService_UpdateExtension_async",
+            "title": "DatasetService updateExtension Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates an Extension.",
+            "canonical": true,
+            "file": "extension_registry_service.update_extension.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateExtension",
+                "fullName": "google.cloud.aiplatform.v1beta1.ExtensionRegistryService.UpdateExtension",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "extension",
+                        "type": ".google.cloud.aiplatform.v1beta1.Extension"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.Extension",
+                "client": {
+                    "shortName": "ExtensionRegistryServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ExtensionRegistryServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateExtension",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ExtensionRegistryService.UpdateExtension",
+                    "service": {
+                        "shortName": "ExtensionRegistryService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ExtensionRegistryService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_ExtensionRegistryService_DeleteExtension_async",
+            "title": "DatasetService deleteExtension Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes an Extension.",
+            "canonical": true,
+            "file": "extension_registry_service.delete_extension.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteExtension",
+                "fullName": "google.cloud.aiplatform.v1beta1.ExtensionRegistryService.DeleteExtension",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ExtensionRegistryServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ExtensionRegistryServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteExtension",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ExtensionRegistryService.DeleteExtension",
+                    "service": {
+                        "shortName": "ExtensionRegistryService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ExtensionRegistryService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1beta1_generated_FeatureOnlineStoreAdminService_CreateFeatureOnlineStore_async",
             "title": "DatasetService createFeatureOnlineStore Sample",
             "origin": "API_DEFINITION",
@@ -1662,7 +2150,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 70,
+                    "end": 71,
                     "type": "FULL"
                 }
             ],
@@ -1898,7 +2386,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 68,
+                    "end": 69,
                     "type": "FULL"
                 }
             ],
@@ -2156,6 +2644,54 @@
                 "method": {
                     "shortName": "FetchFeatureValues",
                     "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreService.FetchFeatureValues",
+                    "service": {
+                        "shortName": "FeatureOnlineStoreService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_FeatureOnlineStoreService_StreamingFetchFeatureValues_async",
+            "title": "DatasetService streamingFetchFeatureValues Sample",
+            "origin": "API_DEFINITION",
+            "description": " Bidirectional streaming RPC to fetch feature values under a FeatureView. Requests may not have a one-to-one mapping to responses and responses may be returned out-of-order to reduce latency.",
+            "canonical": true,
+            "file": "feature_online_store_service.streaming_fetch_feature_values.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 65,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "StreamingFetchFeatureValues",
+                "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreService.StreamingFetchFeatureValues",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "feature_view",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "data_keys",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "data_format",
+                        "type": ".google.cloud.aiplatform.v1beta1.FeatureViewDataFormat"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.StreamingFetchFeatureValuesResponse",
+                "client": {
+                    "shortName": "FeatureOnlineStoreServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreServiceClient"
+                },
+                "method": {
+                    "shortName": "StreamingFetchFeatureValues",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreService.StreamingFetchFeatureValues",
                     "service": {
                         "shortName": "FeatureOnlineStoreService",
                         "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreService"
@@ -3876,6 +4412,182 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1beta1_generated_GenAiTuningService_CreateTuningJob_async",
+            "title": "DatasetService createTuningJob Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a TuningJob. A created TuningJob right away will be attempted to be run.",
+            "canonical": true,
+            "file": "gen_ai_tuning_service.create_tuning_job.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateTuningJob",
+                "fullName": "google.cloud.aiplatform.v1beta1.GenAiTuningService.CreateTuningJob",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "tuning_job",
+                        "type": ".google.cloud.aiplatform.v1beta1.TuningJob"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.TuningJob",
+                "client": {
+                    "shortName": "GenAiTuningServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.GenAiTuningServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateTuningJob",
+                    "fullName": "google.cloud.aiplatform.v1beta1.GenAiTuningService.CreateTuningJob",
+                    "service": {
+                        "shortName": "GenAiTuningService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.GenAiTuningService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_GenAiTuningService_GetTuningJob_async",
+            "title": "DatasetService getTuningJob Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a TuningJob.",
+            "canonical": true,
+            "file": "gen_ai_tuning_service.get_tuning_job.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetTuningJob",
+                "fullName": "google.cloud.aiplatform.v1beta1.GenAiTuningService.GetTuningJob",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.TuningJob",
+                "client": {
+                    "shortName": "GenAiTuningServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.GenAiTuningServiceClient"
+                },
+                "method": {
+                    "shortName": "GetTuningJob",
+                    "fullName": "google.cloud.aiplatform.v1beta1.GenAiTuningService.GetTuningJob",
+                    "service": {
+                        "shortName": "GenAiTuningService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.GenAiTuningService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_GenAiTuningService_ListTuningJobs_async",
+            "title": "DatasetService listTuningJobs Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists TuningJobs in a Location.",
+            "canonical": true,
+            "file": "gen_ai_tuning_service.list_tuning_jobs.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 70,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListTuningJobs",
+                "fullName": "google.cloud.aiplatform.v1beta1.GenAiTuningService.ListTuningJobs",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.ListTuningJobsResponse",
+                "client": {
+                    "shortName": "GenAiTuningServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.GenAiTuningServiceClient"
+                },
+                "method": {
+                    "shortName": "ListTuningJobs",
+                    "fullName": "google.cloud.aiplatform.v1beta1.GenAiTuningService.ListTuningJobs",
+                    "service": {
+                        "shortName": "GenAiTuningService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.GenAiTuningService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_GenAiTuningService_CancelTuningJob_async",
+            "title": "DatasetService cancelTuningJob Sample",
+            "origin": "API_DEFINITION",
+            "description": " Cancels a TuningJob. Starts asynchronous cancellation on the TuningJob. The server makes a best effort to cancel the job, but success is not guaranteed. Clients can use [GenAiTuningService.GetTuningJob][google.cloud.aiplatform.v1beta1.GenAiTuningService.GetTuningJob] or other methods to check whether the cancellation succeeded or whether the job completed despite cancellation. On successful cancellation, the TuningJob is not deleted; instead it becomes a job with a [TuningJob.error][google.cloud.aiplatform.v1beta1.TuningJob.error] value with a [google.rpc.Status.code][google.rpc.Status.code] of 1, corresponding to `Code.CANCELLED`, and [TuningJob.state][google.cloud.aiplatform.v1beta1.TuningJob.state] is set to `CANCELLED`.",
+            "canonical": true,
+            "file": "gen_ai_tuning_service.cancel_tuning_job.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CancelTuningJob",
+                "fullName": "google.cloud.aiplatform.v1beta1.GenAiTuningService.CancelTuningJob",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "GenAiTuningServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.GenAiTuningServiceClient"
+                },
+                "method": {
+                    "shortName": "CancelTuningJob",
+                    "fullName": "google.cloud.aiplatform.v1beta1.GenAiTuningService.CancelTuningJob",
+                    "service": {
+                        "shortName": "GenAiTuningService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.GenAiTuningService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1beta1_generated_IndexEndpointService_CreateIndexEndpoint_async",
             "title": "DatasetService createIndexEndpoint Sample",
             "origin": "API_DEFINITION",
@@ -4466,7 +5178,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 59,
+                    "end": 67,
                     "type": "FULL"
                 }
             ],
@@ -4482,6 +5194,10 @@
                     {
                         "name": "datapoints",
                         "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
                     }
                 ],
                 "resultType": ".google.cloud.aiplatform.v1beta1.UpsertDatapointsResponse",
@@ -6103,58 +6819,6 @@
                     "service": {
                         "shortName": "JobService",
                         "fullName": "google.cloud.aiplatform.v1beta1.JobService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "aiplatform_v1beta1_generated_LlmUtilityService_CountTokens_async",
-            "title": "DatasetService countTokens Sample",
-            "origin": "API_DEFINITION",
-            "description": " Perform a token counting.",
-            "canonical": true,
-            "file": "llm_utility_service.count_tokens.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 73,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CountTokens",
-                "fullName": "google.cloud.aiplatform.v1beta1.LlmUtilityService.CountTokens",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "endpoint",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "model",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "instances",
-                        "type": "TYPE_MESSAGE[]"
-                    },
-                    {
-                        "name": "contents",
-                        "type": "TYPE_MESSAGE[]"
-                    }
-                ],
-                "resultType": ".google.cloud.aiplatform.v1beta1.CountTokensResponse",
-                "client": {
-                    "shortName": "LlmUtilityServiceClient",
-                    "fullName": "google.cloud.aiplatform.v1beta1.LlmUtilityServiceClient"
-                },
-                "method": {
-                    "shortName": "CountTokens",
-                    "fullName": "google.cloud.aiplatform.v1beta1.LlmUtilityService.CountTokens",
-                    "service": {
-                        "shortName": "LlmUtilityService",
-                        "fullName": "google.cloud.aiplatform.v1beta1.LlmUtilityService"
                     }
                 }
             }
@@ -7996,6 +8660,542 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1beta1_generated_ModelMonitoringService_CreateModelMonitor_async",
+            "title": "DatasetService createModelMonitor Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a ModelMonitor.",
+            "canonical": true,
+            "file": "model_monitoring_service.create_model_monitor.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateModelMonitor",
+                "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringService.CreateModelMonitor",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "model_monitor",
+                        "type": ".google.cloud.aiplatform.v1beta1.ModelMonitor"
+                    },
+                    {
+                        "name": "model_monitor_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ModelMonitoringServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateModelMonitor",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringService.CreateModelMonitor",
+                    "service": {
+                        "shortName": "ModelMonitoringService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_ModelMonitoringService_UpdateModelMonitor_async",
+            "title": "DatasetService updateModelMonitor Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates a ModelMonitor.",
+            "canonical": true,
+            "file": "model_monitoring_service.update_model_monitor.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateModelMonitor",
+                "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringService.UpdateModelMonitor",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "model_monitor",
+                        "type": ".google.cloud.aiplatform.v1beta1.ModelMonitor"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ModelMonitoringServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateModelMonitor",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringService.UpdateModelMonitor",
+                    "service": {
+                        "shortName": "ModelMonitoringService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_ModelMonitoringService_GetModelMonitor_async",
+            "title": "DatasetService getModelMonitor Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a ModelMonitor.",
+            "canonical": true,
+            "file": "model_monitoring_service.get_model_monitor.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetModelMonitor",
+                "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringService.GetModelMonitor",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.ModelMonitor",
+                "client": {
+                    "shortName": "ModelMonitoringServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringServiceClient"
+                },
+                "method": {
+                    "shortName": "GetModelMonitor",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringService.GetModelMonitor",
+                    "service": {
+                        "shortName": "ModelMonitoringService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_ModelMonitoringService_ListModelMonitors_async",
+            "title": "DatasetService listModelMonitors Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists ModelMonitors in a Location.",
+            "canonical": true,
+            "file": "model_monitoring_service.list_model_monitors.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 73,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListModelMonitors",
+                "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringService.ListModelMonitors",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "read_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.ListModelMonitorsResponse",
+                "client": {
+                    "shortName": "ModelMonitoringServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringServiceClient"
+                },
+                "method": {
+                    "shortName": "ListModelMonitors",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringService.ListModelMonitors",
+                    "service": {
+                        "shortName": "ModelMonitoringService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_ModelMonitoringService_DeleteModelMonitor_async",
+            "title": "DatasetService deleteModelMonitor Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a ModelMonitor.",
+            "canonical": true,
+            "file": "model_monitoring_service.delete_model_monitor.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteModelMonitor",
+                "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringService.DeleteModelMonitor",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "force",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ModelMonitoringServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteModelMonitor",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringService.DeleteModelMonitor",
+                    "service": {
+                        "shortName": "ModelMonitoringService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_ModelMonitoringService_CreateModelMonitoringJob_async",
+            "title": "DatasetService createModelMonitoringJob Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a ModelMonitoringJob.",
+            "canonical": true,
+            "file": "model_monitoring_service.create_model_monitoring_job.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateModelMonitoringJob",
+                "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringService.CreateModelMonitoringJob",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "model_monitoring_job",
+                        "type": ".google.cloud.aiplatform.v1beta1.ModelMonitoringJob"
+                    },
+                    {
+                        "name": "model_monitoring_job_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.ModelMonitoringJob",
+                "client": {
+                    "shortName": "ModelMonitoringServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateModelMonitoringJob",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringService.CreateModelMonitoringJob",
+                    "service": {
+                        "shortName": "ModelMonitoringService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_ModelMonitoringService_GetModelMonitoringJob_async",
+            "title": "DatasetService getModelMonitoringJob Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a ModelMonitoringJob.",
+            "canonical": true,
+            "file": "model_monitoring_service.get_model_monitoring_job.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetModelMonitoringJob",
+                "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringService.GetModelMonitoringJob",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.ModelMonitoringJob",
+                "client": {
+                    "shortName": "ModelMonitoringServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringServiceClient"
+                },
+                "method": {
+                    "shortName": "GetModelMonitoringJob",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringService.GetModelMonitoringJob",
+                    "service": {
+                        "shortName": "ModelMonitoringService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_ModelMonitoringService_ListModelMonitoringJobs_async",
+            "title": "DatasetService listModelMonitoringJobs Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists ModelMonitoringJobs. Callers may choose to read across multiple Monitors as per [AIP-159](https://google.aip.dev/159) by using '-' (the hyphen or dash character) as a wildcard character instead of modelMonitor id in the parent. Format `projects/{project_id}/locations/{location}/moodelMonitors/-/modelMonitoringJobs`",
+            "canonical": true,
+            "file": "model_monitoring_service.list_model_monitoring_jobs.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 74,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListModelMonitoringJobs",
+                "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringService.ListModelMonitoringJobs",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "read_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.ListModelMonitoringJobsResponse",
+                "client": {
+                    "shortName": "ModelMonitoringServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringServiceClient"
+                },
+                "method": {
+                    "shortName": "ListModelMonitoringJobs",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringService.ListModelMonitoringJobs",
+                    "service": {
+                        "shortName": "ModelMonitoringService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_ModelMonitoringService_DeleteModelMonitoringJob_async",
+            "title": "DatasetService deleteModelMonitoringJob Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a ModelMonitoringJob.",
+            "canonical": true,
+            "file": "model_monitoring_service.delete_model_monitoring_job.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteModelMonitoringJob",
+                "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringService.DeleteModelMonitoringJob",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ModelMonitoringServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteModelMonitoringJob",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringService.DeleteModelMonitoringJob",
+                    "service": {
+                        "shortName": "ModelMonitoringService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_ModelMonitoringService_SearchModelMonitoringStats_async",
+            "title": "DatasetService searchModelMonitoringStats Sample",
+            "origin": "API_DEFINITION",
+            "description": " Searches Model Monitoring Stats generated within a given time window.",
+            "canonical": true,
+            "file": "model_monitoring_service.search_model_monitoring_stats.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 75,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SearchModelMonitoringStats",
+                "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringService.SearchModelMonitoringStats",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "model_monitor",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "stats_filter",
+                        "type": ".google.cloud.aiplatform.v1beta1.SearchModelMonitoringStatsFilter"
+                    },
+                    {
+                        "name": "time_interval",
+                        "type": ".google.type.Interval"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.SearchModelMonitoringStatsResponse",
+                "client": {
+                    "shortName": "ModelMonitoringServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringServiceClient"
+                },
+                "method": {
+                    "shortName": "SearchModelMonitoringStats",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringService.SearchModelMonitoringStats",
+                    "service": {
+                        "shortName": "ModelMonitoringService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_ModelMonitoringService_SearchModelMonitoringAlerts_async",
+            "title": "DatasetService searchModelMonitoringAlerts Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns the Model Monitoring alerts.",
+            "canonical": true,
+            "file": "model_monitoring_service.search_model_monitoring_alerts.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 87,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SearchModelMonitoringAlerts",
+                "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringService.SearchModelMonitoringAlerts",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "model_monitor",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "model_monitoring_job",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "alert_time_interval",
+                        "type": ".google.type.Interval"
+                    },
+                    {
+                        "name": "stats_name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "objective_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.SearchModelMonitoringAlertsResponse",
+                "client": {
+                    "shortName": "ModelMonitoringServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringServiceClient"
+                },
+                "method": {
+                    "shortName": "SearchModelMonitoringAlerts",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringService.SearchModelMonitoringAlerts",
+                    "service": {
+                        "shortName": "ModelMonitoringService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ModelMonitoringService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1beta1_generated_ModelService_UploadModel_async",
             "title": "DatasetService uploadModel Sample",
             "origin": "API_DEFINITION",
@@ -8102,7 +9302,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 90,
+                    "end": 92,
                     "type": "FULL"
                 }
             ],
@@ -8844,6 +10044,610 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1beta1_generated_NotebookService_CreateNotebookRuntimeTemplate_async",
+            "title": "DatasetService createNotebookRuntimeTemplate Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a NotebookRuntimeTemplate.",
+            "canonical": true,
+            "file": "notebook_service.create_notebook_runtime_template.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 64,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateNotebookRuntimeTemplate",
+                "fullName": "google.cloud.aiplatform.v1beta1.NotebookService.CreateNotebookRuntimeTemplate",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "notebook_runtime_template",
+                        "type": ".google.cloud.aiplatform.v1beta1.NotebookRuntimeTemplate"
+                    },
+                    {
+                        "name": "notebook_runtime_template_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "NotebookServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.NotebookServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateNotebookRuntimeTemplate",
+                    "fullName": "google.cloud.aiplatform.v1beta1.NotebookService.CreateNotebookRuntimeTemplate",
+                    "service": {
+                        "shortName": "NotebookService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.NotebookService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_NotebookService_GetNotebookRuntimeTemplate_async",
+            "title": "DatasetService getNotebookRuntimeTemplate Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a NotebookRuntimeTemplate.",
+            "canonical": true,
+            "file": "notebook_service.get_notebook_runtime_template.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetNotebookRuntimeTemplate",
+                "fullName": "google.cloud.aiplatform.v1beta1.NotebookService.GetNotebookRuntimeTemplate",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.NotebookRuntimeTemplate",
+                "client": {
+                    "shortName": "NotebookServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.NotebookServiceClient"
+                },
+                "method": {
+                    "shortName": "GetNotebookRuntimeTemplate",
+                    "fullName": "google.cloud.aiplatform.v1beta1.NotebookService.GetNotebookRuntimeTemplate",
+                    "service": {
+                        "shortName": "NotebookService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.NotebookService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_NotebookService_ListNotebookRuntimeTemplates_async",
+            "title": "DatasetService listNotebookRuntimeTemplates Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists NotebookRuntimeTemplates in a Location.",
+            "canonical": true,
+            "file": "notebook_service.list_notebook_runtime_templates.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 104,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListNotebookRuntimeTemplates",
+                "fullName": "google.cloud.aiplatform.v1beta1.NotebookService.ListNotebookRuntimeTemplates",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "read_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.ListNotebookRuntimeTemplatesResponse",
+                "client": {
+                    "shortName": "NotebookServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.NotebookServiceClient"
+                },
+                "method": {
+                    "shortName": "ListNotebookRuntimeTemplates",
+                    "fullName": "google.cloud.aiplatform.v1beta1.NotebookService.ListNotebookRuntimeTemplates",
+                    "service": {
+                        "shortName": "NotebookService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.NotebookService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_NotebookService_DeleteNotebookRuntimeTemplate_async",
+            "title": "DatasetService deleteNotebookRuntimeTemplate Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a NotebookRuntimeTemplate.",
+            "canonical": true,
+            "file": "notebook_service.delete_notebook_runtime_template.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteNotebookRuntimeTemplate",
+                "fullName": "google.cloud.aiplatform.v1beta1.NotebookService.DeleteNotebookRuntimeTemplate",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "NotebookServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.NotebookServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteNotebookRuntimeTemplate",
+                    "fullName": "google.cloud.aiplatform.v1beta1.NotebookService.DeleteNotebookRuntimeTemplate",
+                    "service": {
+                        "shortName": "NotebookService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.NotebookService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_NotebookService_AssignNotebookRuntime_async",
+            "title": "DatasetService assignNotebookRuntime Sample",
+            "origin": "API_DEFINITION",
+            "description": " Assigns a NotebookRuntime to a user for a particular Notebook file. This method will either returns an existing assignment or generates a new one.",
+            "canonical": true,
+            "file": "notebook_service.assign_notebook_runtime.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 71,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "AssignNotebookRuntime",
+                "fullName": "google.cloud.aiplatform.v1beta1.NotebookService.AssignNotebookRuntime",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "notebook_runtime_template",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "notebook_runtime",
+                        "type": ".google.cloud.aiplatform.v1beta1.NotebookRuntime"
+                    },
+                    {
+                        "name": "notebook_runtime_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "NotebookServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.NotebookServiceClient"
+                },
+                "method": {
+                    "shortName": "AssignNotebookRuntime",
+                    "fullName": "google.cloud.aiplatform.v1beta1.NotebookService.AssignNotebookRuntime",
+                    "service": {
+                        "shortName": "NotebookService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.NotebookService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_NotebookService_GetNotebookRuntime_async",
+            "title": "DatasetService getNotebookRuntime Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a NotebookRuntime.",
+            "canonical": true,
+            "file": "notebook_service.get_notebook_runtime.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetNotebookRuntime",
+                "fullName": "google.cloud.aiplatform.v1beta1.NotebookService.GetNotebookRuntime",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.NotebookRuntime",
+                "client": {
+                    "shortName": "NotebookServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.NotebookServiceClient"
+                },
+                "method": {
+                    "shortName": "GetNotebookRuntime",
+                    "fullName": "google.cloud.aiplatform.v1beta1.NotebookService.GetNotebookRuntime",
+                    "service": {
+                        "shortName": "NotebookService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.NotebookService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_NotebookService_ListNotebookRuntimes_async",
+            "title": "DatasetService listNotebookRuntimes Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists NotebookRuntimes in a Location.",
+            "canonical": true,
+            "file": "notebook_service.list_notebook_runtimes.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 53,
+                    "end": 118,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListNotebookRuntimes",
+                "fullName": "google.cloud.aiplatform.v1beta1.NotebookService.ListNotebookRuntimes",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "read_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.ListNotebookRuntimesResponse",
+                "client": {
+                    "shortName": "NotebookServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.NotebookServiceClient"
+                },
+                "method": {
+                    "shortName": "ListNotebookRuntimes",
+                    "fullName": "google.cloud.aiplatform.v1beta1.NotebookService.ListNotebookRuntimes",
+                    "service": {
+                        "shortName": "NotebookService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.NotebookService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_NotebookService_DeleteNotebookRuntime_async",
+            "title": "DatasetService deleteNotebookRuntime Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a NotebookRuntime.",
+            "canonical": true,
+            "file": "notebook_service.delete_notebook_runtime.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 57,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteNotebookRuntime",
+                "fullName": "google.cloud.aiplatform.v1beta1.NotebookService.DeleteNotebookRuntime",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "NotebookServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.NotebookServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteNotebookRuntime",
+                    "fullName": "google.cloud.aiplatform.v1beta1.NotebookService.DeleteNotebookRuntime",
+                    "service": {
+                        "shortName": "NotebookService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.NotebookService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_NotebookService_UpgradeNotebookRuntime_async",
+            "title": "DatasetService upgradeNotebookRuntime Sample",
+            "origin": "API_DEFINITION",
+            "description": " Upgrades a NotebookRuntime.",
+            "canonical": true,
+            "file": "notebook_service.upgrade_notebook_runtime.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 57,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpgradeNotebookRuntime",
+                "fullName": "google.cloud.aiplatform.v1beta1.NotebookService.UpgradeNotebookRuntime",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "NotebookServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.NotebookServiceClient"
+                },
+                "method": {
+                    "shortName": "UpgradeNotebookRuntime",
+                    "fullName": "google.cloud.aiplatform.v1beta1.NotebookService.UpgradeNotebookRuntime",
+                    "service": {
+                        "shortName": "NotebookService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.NotebookService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_NotebookService_StartNotebookRuntime_async",
+            "title": "DatasetService startNotebookRuntime Sample",
+            "origin": "API_DEFINITION",
+            "description": " Starts a NotebookRuntime.",
+            "canonical": true,
+            "file": "notebook_service.start_notebook_runtime.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 57,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "StartNotebookRuntime",
+                "fullName": "google.cloud.aiplatform.v1beta1.NotebookService.StartNotebookRuntime",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "NotebookServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.NotebookServiceClient"
+                },
+                "method": {
+                    "shortName": "StartNotebookRuntime",
+                    "fullName": "google.cloud.aiplatform.v1beta1.NotebookService.StartNotebookRuntime",
+                    "service": {
+                        "shortName": "NotebookService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.NotebookService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_NotebookService_GetNotebookExecutionJob_async",
+            "title": "DatasetService getNotebookExecutionJob Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a NotebookExecutionJob.",
+            "canonical": true,
+            "file": "notebook_service.get_notebook_execution_job.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 57,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetNotebookExecutionJob",
+                "fullName": "google.cloud.aiplatform.v1beta1.NotebookService.GetNotebookExecutionJob",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "view",
+                        "type": ".google.cloud.aiplatform.v1beta1.NotebookExecutionJobView"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.NotebookExecutionJob",
+                "client": {
+                    "shortName": "NotebookServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.NotebookServiceClient"
+                },
+                "method": {
+                    "shortName": "GetNotebookExecutionJob",
+                    "fullName": "google.cloud.aiplatform.v1beta1.NotebookService.GetNotebookExecutionJob",
+                    "service": {
+                        "shortName": "NotebookService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.NotebookService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_NotebookService_ListNotebookExecutionJobs_async",
+            "title": "DatasetService listNotebookExecutionJobs Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists NotebookExecutionJobs in a Location.",
+            "canonical": true,
+            "file": "notebook_service.list_notebook_execution_jobs.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 95,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListNotebookExecutionJobs",
+                "fullName": "google.cloud.aiplatform.v1beta1.NotebookService.ListNotebookExecutionJobs",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "view",
+                        "type": ".google.cloud.aiplatform.v1beta1.NotebookExecutionJobView"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.ListNotebookExecutionJobsResponse",
+                "client": {
+                    "shortName": "NotebookServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.NotebookServiceClient"
+                },
+                "method": {
+                    "shortName": "ListNotebookExecutionJobs",
+                    "fullName": "google.cloud.aiplatform.v1beta1.NotebookService.ListNotebookExecutionJobs",
+                    "service": {
+                        "shortName": "NotebookService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.NotebookService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_NotebookService_DeleteNotebookExecutionJob_async",
+            "title": "DatasetService deleteNotebookExecutionJob Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a NotebookExecutionJob.",
+            "canonical": true,
+            "file": "notebook_service.delete_notebook_execution_job.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteNotebookExecutionJob",
+                "fullName": "google.cloud.aiplatform.v1beta1.NotebookService.DeleteNotebookExecutionJob",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "NotebookServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.NotebookServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteNotebookExecutionJob",
+                    "fullName": "google.cloud.aiplatform.v1beta1.NotebookService.DeleteNotebookExecutionJob",
+                    "service": {
+                        "shortName": "NotebookService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.NotebookService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1beta1_generated_PersistentResourceService_CreatePersistentResource_async",
             "title": "DatasetService createPersistentResource Sample",
             "origin": "API_DEFINITION",
@@ -9056,6 +10860,46 @@
                 "method": {
                     "shortName": "UpdatePersistentResource",
                     "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceService.UpdatePersistentResource",
+                    "service": {
+                        "shortName": "PersistentResourceService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_PersistentResourceService_RebootPersistentResource_async",
+            "title": "DatasetService rebootPersistentResource Sample",
+            "origin": "API_DEFINITION",
+            "description": " Reboots a PersistentResource.",
+            "canonical": true,
+            "file": "persistent_resource_service.reboot_persistent_resource.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RebootPersistentResource",
+                "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceService.RebootPersistentResource",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "PersistentResourceServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceServiceClient"
+                },
+                "method": {
+                    "shortName": "RebootPersistentResource",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceService.RebootPersistentResource",
                     "service": {
                         "shortName": "PersistentResourceService",
                         "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceService"
@@ -9548,6 +11392,50 @@
                 "method": {
                     "shortName": "CancelPipelineJob",
                     "fullName": "google.cloud.aiplatform.v1beta1.PipelineService.CancelPipelineJob",
+                    "service": {
+                        "shortName": "PipelineService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.PipelineService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_PipelineService_BatchCancelPipelineJobs_async",
+            "title": "DatasetService batchCancelPipelineJobs Sample",
+            "origin": "API_DEFINITION",
+            "description": " Batch cancel PipelineJobs. Firstly the server will check if all the jobs are in non-terminal states, and skip the jobs that are already terminated. If the operation failed, none of the pipeline jobs are cancelled. The server will poll the states of all the pipeline jobs periodically to check the cancellation status. This operation will return an LRO.",
+            "canonical": true,
+            "file": "pipeline_service.batch_cancel_pipeline_jobs.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "BatchCancelPipelineJobs",
+                "fullName": "google.cloud.aiplatform.v1beta1.PipelineService.BatchCancelPipelineJobs",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "names",
+                        "type": "TYPE_STRING[]"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "PipelineServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PipelineServiceClient"
+                },
+                "method": {
+                    "shortName": "BatchCancelPipelineJobs",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PipelineService.BatchCancelPipelineJobs",
                     "service": {
                         "shortName": "PipelineService",
                         "fullName": "google.cloud.aiplatform.v1beta1.PipelineService"
@@ -10106,7 +11994,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 81,
+                    "end": 91,
                     "type": "FULL"
                 }
             ],
@@ -10124,8 +12012,16 @@
                         "type": "TYPE_MESSAGE[]"
                     },
                     {
+                        "name": "system_instruction",
+                        "type": ".google.cloud.aiplatform.v1beta1.Content"
+                    },
+                    {
                         "name": "tools",
                         "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "tool_config",
+                        "type": ".google.cloud.aiplatform.v1beta1.ToolConfig"
                     },
                     {
                         "name": "safety_settings",
@@ -10162,7 +12058,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 83,
+                    "end": 93,
                     "type": "FULL"
                 }
             ],
@@ -10180,8 +12076,16 @@
                         "type": "TYPE_MESSAGE[]"
                     },
                     {
+                        "name": "system_instruction",
+                        "type": ".google.cloud.aiplatform.v1beta1.Content"
+                    },
+                    {
                         "name": "tools",
                         "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "tool_config",
+                        "type": ".google.cloud.aiplatform.v1beta1.ToolConfig"
                     },
                     {
                         "name": "safety_settings",
@@ -10203,6 +12107,226 @@
                     "service": {
                         "shortName": "PredictionService",
                         "fullName": "google.cloud.aiplatform.v1beta1.PredictionService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_ReasoningEngineExecutionService_QueryReasoningEngine_async",
+            "title": "DatasetService queryReasoningEngine Sample",
+            "origin": "API_DEFINITION",
+            "description": " Queries using a reasoning engine.",
+            "canonical": true,
+            "file": "reasoning_engine_execution_service.query_reasoning_engine.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "QueryReasoningEngine",
+                "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineExecutionService.QueryReasoningEngine",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "input",
+                        "type": ".google.protobuf.Struct"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.QueryReasoningEngineResponse",
+                "client": {
+                    "shortName": "ReasoningEngineExecutionServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineExecutionServiceClient"
+                },
+                "method": {
+                    "shortName": "QueryReasoningEngine",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineExecutionService.QueryReasoningEngine",
+                    "service": {
+                        "shortName": "ReasoningEngineExecutionService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineExecutionService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_ReasoningEngineService_CreateReasoningEngine_async",
+            "title": "DatasetService createReasoningEngine Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a reasoning engine.",
+            "canonical": true,
+            "file": "reasoning_engine_service.create_reasoning_engine.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateReasoningEngine",
+                "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineService.CreateReasoningEngine",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "reasoning_engine",
+                        "type": ".google.cloud.aiplatform.v1beta1.ReasoningEngine"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ReasoningEngineServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateReasoningEngine",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineService.CreateReasoningEngine",
+                    "service": {
+                        "shortName": "ReasoningEngineService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_ReasoningEngineService_GetReasoningEngine_async",
+            "title": "DatasetService getReasoningEngine Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a reasoning engine.",
+            "canonical": true,
+            "file": "reasoning_engine_service.get_reasoning_engine.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetReasoningEngine",
+                "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineService.GetReasoningEngine",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.ReasoningEngine",
+                "client": {
+                    "shortName": "ReasoningEngineServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineServiceClient"
+                },
+                "method": {
+                    "shortName": "GetReasoningEngine",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineService.GetReasoningEngine",
+                    "service": {
+                        "shortName": "ReasoningEngineService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_ReasoningEngineService_ListReasoningEngines_async",
+            "title": "DatasetService listReasoningEngines Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists reasoning engines in a location.",
+            "canonical": true,
+            "file": "reasoning_engine_service.list_reasoning_engines.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 69,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListReasoningEngines",
+                "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineService.ListReasoningEngines",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.ListReasoningEnginesResponse",
+                "client": {
+                    "shortName": "ReasoningEngineServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineServiceClient"
+                },
+                "method": {
+                    "shortName": "ListReasoningEngines",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineService.ListReasoningEngines",
+                    "service": {
+                        "shortName": "ReasoningEngineService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_ReasoningEngineService_DeleteReasoningEngine_async",
+            "title": "DatasetService deleteReasoningEngine Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a reasoning engine.",
+            "canonical": true,
+            "file": "reasoning_engine_service.delete_reasoning_engine.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteReasoningEngine",
+                "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineService.DeleteReasoningEngine",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ReasoningEngineServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteReasoningEngine",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineService.DeleteReasoningEngine",
+                    "service": {
+                        "shortName": "ReasoningEngineService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineService"
                     }
                 }
             }
@@ -12107,6 +14231,450 @@
                     "service": {
                         "shortName": "TensorboardService",
                         "fullName": "google.cloud.aiplatform.v1beta1.TensorboardService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_VertexRagDataService_CreateRagCorpus_async",
+            "title": "DatasetService createRagCorpus Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a RagCorpus.",
+            "canonical": true,
+            "file": "vertex_rag_data_service.create_rag_corpus.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateRagCorpus",
+                "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.CreateRagCorpus",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "rag_corpus",
+                        "type": ".google.cloud.aiplatform.v1beta1.RagCorpus"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "VertexRagDataServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateRagCorpus",
+                    "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.CreateRagCorpus",
+                    "service": {
+                        "shortName": "VertexRagDataService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_VertexRagDataService_GetRagCorpus_async",
+            "title": "DatasetService getRagCorpus Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a RagCorpus.",
+            "canonical": true,
+            "file": "vertex_rag_data_service.get_rag_corpus.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetRagCorpus",
+                "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.GetRagCorpus",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.RagCorpus",
+                "client": {
+                    "shortName": "VertexRagDataServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataServiceClient"
+                },
+                "method": {
+                    "shortName": "GetRagCorpus",
+                    "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.GetRagCorpus",
+                    "service": {
+                        "shortName": "VertexRagDataService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_VertexRagDataService_ListRagCorpora_async",
+            "title": "DatasetService listRagCorpora Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists RagCorpora in a Location.",
+            "canonical": true,
+            "file": "vertex_rag_data_service.list_rag_corpora.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 69,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListRagCorpora",
+                "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.ListRagCorpora",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.ListRagCorporaResponse",
+                "client": {
+                    "shortName": "VertexRagDataServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataServiceClient"
+                },
+                "method": {
+                    "shortName": "ListRagCorpora",
+                    "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.ListRagCorpora",
+                    "service": {
+                        "shortName": "VertexRagDataService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_VertexRagDataService_DeleteRagCorpus_async",
+            "title": "DatasetService deleteRagCorpus Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a RagCorpus.",
+            "canonical": true,
+            "file": "vertex_rag_data_service.delete_rag_corpus.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteRagCorpus",
+                "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.DeleteRagCorpus",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "force",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "VertexRagDataServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteRagCorpus",
+                    "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.DeleteRagCorpus",
+                    "service": {
+                        "shortName": "VertexRagDataService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_VertexRagDataService_UploadRagFile_async",
+            "title": "DatasetService uploadRagFile Sample",
+            "origin": "API_DEFINITION",
+            "description": " Upload a file into a RagCorpus.",
+            "canonical": true,
+            "file": "vertex_rag_data_service.upload_rag_file.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 66,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UploadRagFile",
+                "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.UploadRagFile",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "rag_file",
+                        "type": ".google.cloud.aiplatform.v1beta1.RagFile"
+                    },
+                    {
+                        "name": "upload_rag_file_config",
+                        "type": ".google.cloud.aiplatform.v1beta1.UploadRagFileConfig"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.UploadRagFileResponse",
+                "client": {
+                    "shortName": "VertexRagDataServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataServiceClient"
+                },
+                "method": {
+                    "shortName": "UploadRagFile",
+                    "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.UploadRagFile",
+                    "service": {
+                        "shortName": "VertexRagDataService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_VertexRagDataService_ImportRagFiles_async",
+            "title": "DatasetService importRagFiles Sample",
+            "origin": "API_DEFINITION",
+            "description": " Import files from Google Cloud Storage or Google Drive into a RagCorpus.",
+            "canonical": true,
+            "file": "vertex_rag_data_service.import_rag_files.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ImportRagFiles",
+                "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.ImportRagFiles",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "import_rag_files_config",
+                        "type": ".google.cloud.aiplatform.v1beta1.ImportRagFilesConfig"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "VertexRagDataServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataServiceClient"
+                },
+                "method": {
+                    "shortName": "ImportRagFiles",
+                    "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.ImportRagFiles",
+                    "service": {
+                        "shortName": "VertexRagDataService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_VertexRagDataService_GetRagFile_async",
+            "title": "DatasetService getRagFile Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a RagFile.",
+            "canonical": true,
+            "file": "vertex_rag_data_service.get_rag_file.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetRagFile",
+                "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.GetRagFile",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.RagFile",
+                "client": {
+                    "shortName": "VertexRagDataServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataServiceClient"
+                },
+                "method": {
+                    "shortName": "GetRagFile",
+                    "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.GetRagFile",
+                    "service": {
+                        "shortName": "VertexRagDataService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_VertexRagDataService_ListRagFiles_async",
+            "title": "DatasetService listRagFiles Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists RagFiles in a RagCorpus.",
+            "canonical": true,
+            "file": "vertex_rag_data_service.list_rag_files.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 70,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListRagFiles",
+                "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.ListRagFiles",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.ListRagFilesResponse",
+                "client": {
+                    "shortName": "VertexRagDataServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataServiceClient"
+                },
+                "method": {
+                    "shortName": "ListRagFiles",
+                    "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.ListRagFiles",
+                    "service": {
+                        "shortName": "VertexRagDataService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_VertexRagDataService_DeleteRagFile_async",
+            "title": "DatasetService deleteRagFile Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a RagFile.",
+            "canonical": true,
+            "file": "vertex_rag_data_service.delete_rag_file.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteRagFile",
+                "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.DeleteRagFile",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "VertexRagDataServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteRagFile",
+                    "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.DeleteRagFile",
+                    "service": {
+                        "shortName": "VertexRagDataService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_VertexRagService_RetrieveContexts_async",
+            "title": "DatasetService retrieveContexts Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves relevant contexts for a query.",
+            "canonical": true,
+            "file": "vertex_rag_service.retrieve_contexts.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 65,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RetrieveContexts",
+                "fullName": "google.cloud.aiplatform.v1beta1.VertexRagService.RetrieveContexts",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "vertex_rag_store",
+                        "type": ".google.cloud.aiplatform.v1beta1.RetrieveContextsRequest.VertexRagStore"
+                    },
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "query",
+                        "type": ".google.cloud.aiplatform.v1beta1.RagQuery"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.RetrieveContextsResponse",
+                "client": {
+                    "shortName": "VertexRagServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.VertexRagServiceClient"
+                },
+                "method": {
+                    "shortName": "RetrieveContexts",
+                    "fullName": "google.cloud.aiplatform.v1beta1.VertexRagService.RetrieveContexts",
+                    "service": {
+                        "shortName": "VertexRagService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagService"
                     }
                 }
             }

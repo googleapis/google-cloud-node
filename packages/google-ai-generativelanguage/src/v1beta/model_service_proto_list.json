@@ -2,6 +2,8 @@
   "../../protos/google/ai/generativelanguage/v1beta/citation.proto",
   "../../protos/google/ai/generativelanguage/v1beta/content.proto",
   "../../protos/google/ai/generativelanguage/v1beta/discuss_service.proto",
+  "../../protos/google/ai/generativelanguage/v1beta/file.proto",
+  "../../protos/google/ai/generativelanguage/v1beta/file_service.proto",
   "../../protos/google/ai/generativelanguage/v1beta/generative_service.proto",
   "../../protos/google/ai/generativelanguage/v1beta/model.proto",
   "../../protos/google/ai/generativelanguage/v1beta/model_service.proto",

@@ -102,7 +102,7 @@ describe('v2.RoutesClient', () => {
     });
 
     if (
-      typeof process !== 'undefined' &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       it('throws DeprecationWarning if static servicePath is used', () => {
@@ -136,6 +136,38 @@ describe('v2.RoutesClient', () => {
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'routes.example.com');
     });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new routesModule.v2.RoutesClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'routes.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new routesModule.v2.RoutesClient({
+            universeDomain: 'configured.example.com',
+          });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'routes.configured.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new routesModule.v2.RoutesClient({
@@ -345,6 +377,35 @@ describe('v2.RoutesClient', () => {
       assert.deepStrictEqual(response, expectedResponse);
     });
 
+    it('invokes computeRouteMatrix without error and gaxServerStreamingRetries enabled', async () => {
+      const client = new routesModule.v2.RoutesClient({
+        gaxServerStreamingRetries: true,
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.maps.routing.v2.ComputeRouteMatrixRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.maps.routing.v2.RouteMatrixElement()
+      );
+      client.innerApiCalls.computeRouteMatrix =
+        stubServerStreamingCall(expectedResponse);
+      const stream = client.computeRouteMatrix(request);
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (response: protos.google.maps.routing.v2.RouteMatrixElement) => {
+            resolve(response);
+          }
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
     it('invokes computeRouteMatrix with error', async () => {
       const client = new routesModule.v2.RoutesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
@@ -400,6 +461,12 @@ describe('v2.RoutesClient', () => {
         });
       });
       await assert.rejects(promise, expectedError);
+    });
+    it('should create a client with gaxServerStreamingRetries enabled', () => {
+      const client = new routesModule.v2.RoutesClient({
+        gaxServerStreamingRetries: true,
+      });
+      assert(client);
     });
   });
 });

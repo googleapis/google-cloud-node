@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. The resource name of the ServingConfig to get. Format:
-   *  `projects/{project_number}/locations/{location}/collections/{collection}/dataStores/{data_store}/servingConfigs/{serving_config_id}`
+   *  `projects/{project_number}/locations/{location}/collections/{collection}/engines/{engine}/servingConfigs/{serving_config_id}`
    */
   // const name = 'abc123'
 

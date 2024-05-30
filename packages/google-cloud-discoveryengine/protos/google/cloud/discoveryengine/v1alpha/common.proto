@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -36,10 +36,20 @@ option (google.api.resource_definition) = {
   pattern: "projects/{project}/locations/{location}/collections/{collection}"
 };
 option (google.api.resource_definition) = {
-  type: "discoveryengine.googleapis.com/ServingConfig"
-  pattern: "projects/{project}/locations/{location}/dataStores/{data_store}/servingConfigs/{serving_config}"
-  pattern: "projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/servingConfigs/{serving_config}"
-  pattern: "projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/servingConfigs/{serving_config}"
+  type: "discoveryengine.googleapis.com/Location"
+  pattern: "projects/{project}/locations/{location}"
+};
+option (google.api.resource_definition) = {
+  type: "discoveryengine.googleapis.com/GroundingConfig"
+  pattern: "projects/{project}/locations/{location}/groundingConfigs/{grounding_config}"
+};
+option (google.api.resource_definition) = {
+  type: "discoveryengine.googleapis.com/RankingConfig"
+  pattern: "projects/{project}/locations/{location}/rankingConfigs/{ranking_config}"
+};
+option (google.api.resource_definition) = {
+  type: "healthcare.googleapis.com/FhirStore"
+  pattern: "projects/{project}/locations/{location}/datasets/{dataset}/fhirStores/{fhir_store}"
 };
 
 // The industry vertical associated with the
@@ -54,6 +64,9 @@ enum IndustryVertical {
 
   // The media industry vertical.
   MEDIA = 2;
+
+  // The healthcare FHIR vertical.
+  HEALTHCARE_FHIR = 7;
 }
 
 // The type of solution.
@@ -69,10 +82,31 @@ enum SolutionType {
 
   // Used for use cases related to the Generative AI agent.
   SOLUTION_TYPE_CHAT = 3;
+
+  // Used for use cases related to the Generative Chat agent.
+  // It's used for Generative chat engine only, the associated data stores
+  // must enrolled with `SOLUTION_TYPE_CHAT` solution.
+  SOLUTION_TYPE_GENERATIVE_CHAT = 4;
+}
+
+// Defines a further subdivision of `SolutionType`.
+// Specifically applies to
+// [SOLUTION_TYPE_SEARCH][google.cloud.discoveryengine.v1alpha.SolutionType.SOLUTION_TYPE_SEARCH].
+enum SearchUseCase {
+  // Value used when unset. Will not occur in CSS.
+  SEARCH_USE_CASE_UNSPECIFIED = 0;
+
+  // Search use case. Expects the traffic has a non-empty
+  // [query][google.cloud.discoveryengine.v1alpha.SearchRequest.query].
+  SEARCH_USE_CASE_SEARCH = 1;
+
+  // Browse use case. Expects the traffic has an empty
+  // [query][google.cloud.discoveryengine.v1alpha.SearchRequest.query].
+  SEARCH_USE_CASE_BROWSE = 2;
 }
 
 // Tiers of search features. Different tiers might have different
-// pricing. To learn more, please check the pricing documentation.
+// pricing. To learn more, check the pricing documentation.
 enum SearchTier {
   // Default value when the enum is unspecified. This is invalid to use.
   SEARCH_TIER_UNSPECIFIED = 0;
@@ -178,8 +212,83 @@ message UserInfo {
   string user_agent = 2;
 }
 
+// Defines embedding config, used for bring your own embeddings feature.
+message EmbeddingConfig {
+  // Full field path in the schema mapped as embedding field.
+  string field_path = 1;
+}
+
 // Double list.
 message DoubleList {
   // Double values.
   repeated double values = 1;
+}
+
+// Defines guided search spec.
+message GuidedSearchSpec {
+  // Whether or not to enable and include refinement attributes in gudied search
+  // result.
+  bool enable_refinement_attributes = 1;
+
+  // Whether or not to enable and include related questions in search response.
+  bool enable_related_questions = 2;
+
+  // Max number of related questions to be returned. The valid range is [1, 5].
+  // If enable_related_questions is true, the default value is 3.
+  int32 max_related_questions = 3;
+}
+
+// Defines custom fine tuning spec.
+message CustomFineTuningSpec {
+  // Whether or not to enable and include custom fine tuned search adaptor
+  // model.
+  bool enable_search_adaptor = 1;
+}
+
+// Identity Provider Config.
+message IdpConfig {
+  // Third party IDP Config.
+  message ExternalIdpConfig {
+    // Workforce pool name.
+    // Example: "locations/global/workforcePools/pool_id"
+    string workforce_pool_name = 1;
+  }
+
+  // Identity Provider Type.
+  enum IdpType {
+    // Default value. ACL search not enabled.
+    IDP_TYPE_UNSPECIFIED = 0;
+
+    // Google 1P provider.
+    GSUITE = 1;
+
+    // Third party provider.
+    THIRD_PARTY = 2;
+  }
+
+  // Identity provider type configured.
+  IdpType idp_type = 1;
+
+  // External Identity provider config.
+  ExternalIdpConfig external_idp_config = 2;
+}
+
+// Principal identifier of a user or a group.
+message Principal {
+  // Union field principal. Principal can be a user or a group.
+  oneof principal {
+    // User identifier.
+    // For Google Workspace user account, user_id should be the google workspace
+    // user email.
+    // For non-google identity provider user account, user_id is the mapped user
+    // identifier configured during the workforcepool config.
+    string user_id = 1;
+
+    // Group identifier.
+    // For Google Workspace user account, group_id should be the google
+    // workspace group email.
+    // For non-google identity provider user account, group_id is the mapped
+    // group identifier configured during the workforcepool config.
+    string group_id = 2;
+  }
 }

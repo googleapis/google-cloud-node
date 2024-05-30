@@ -54,9 +54,12 @@ function main(servingConfig) {
   // const imageQuery = {}
   /**
    *  Maximum number of Document google.cloud.discoveryengine.v1beta.Document s
-   *  to return. If unspecified, defaults to a reasonable value. The maximum
-   *  allowed value is 100. Values above 100 are coerced to 100.
-   *  If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   *  to return. The maximum allowed value depends on the data type. Values above
+   *  the maximum value are coerced to the maximum value.
+   *  * Websites with basic indexing: Default `10`, Maximum `25`.
+   *  * Websites with advanced indexing: Default `25`, Maximum `50`.
+   *  * Other: Default `50`, Maximum `100`.
+   *  If this field is negative, an  `INVALID_ARGUMENT` is returned.
    */
   // const pageSize = 1234
   /**
@@ -79,6 +82,13 @@ function main(servingConfig) {
    *  If this field is negative, an  `INVALID_ARGUMENT`  is returned.
    */
   // const offset = 1234
+  /**
+   *  Specs defining dataStores to filter on in a search call and configurations
+   *  for those dataStores. This is only considered for engines with multiple
+   *  dataStores use case. For single dataStore within an engine, they should
+   *  use the specs at the top level.
+   */
+  // const dataStoreSpecs = [1,2,3,4]
   /**
    *  The filter syntax consists of an expression language for constructing a
    *  predicate from one or more fields of the documents being filtered. Filter
@@ -111,7 +121,8 @@ function main(servingConfig) {
    *  The order in which documents are returned. Documents can be ordered by
    *  a field in an Document google.cloud.discoveryengine.v1beta.Document 
    *  object. Leave it unset if ordered by relevance. `order_by` expression is
-   *  case-sensitive. For more information on ordering, see
+   *  case-sensitive.
+   *  For more information on ordering for retail search, see
    *  Ordering (https://cloud.google.com/retail/docs/filter-and-order#order)
    *  If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
    */
@@ -132,7 +143,7 @@ function main(servingConfig) {
   /**
    *  Boost specification to boost certain documents.
    *  For more information on boosting, see
-   *  Boosting (https://cloud.google.com/retail/docs/boosting#boost)
+   *  Boosting (https://cloud.google.com/generative-ai-app-builder/docs/boost-search-results)
    */
   // const boostSpec = {}
   /**
@@ -140,15 +151,13 @@ function main(servingConfig) {
    *  For public website search only, supported values are:
    *  * `user_country_code`: string. Default empty. If set to non-empty, results
    *     are restricted or boosted based on the location provided.
-   *     Example:
-   *     user_country_code: "au"
+   *     For example, `user_country_code: "au"`
    *     For available codes see Country
    *     Codes (https://developers.google.com/custom-search/docs/json_api_reference#countryCodes)
    *  * `search_type`: double. Default empty. Enables non-webpage searching
    *     depending on the value. The only valid non-default value is 1,
    *     which enables image searching.
-   *     Example:
-   *     search_type: 1
+   *     For example, `search_type: 1`
    */
   // const params = [1,2,3,4]
   /**
@@ -187,7 +196,8 @@ function main(servingConfig) {
    *  SearchRequest.EmbeddingSpec.EmbeddingVector.field_path google.cloud.discoveryengine.v1beta.SearchRequest.EmbeddingSpec.EmbeddingVector.field_path.
    *  If
    *  SearchRequest.EmbeddingSpec.EmbeddingVector.field_path google.cloud.discoveryengine.v1beta.SearchRequest.EmbeddingSpec.EmbeddingVector.field_path 
-   *  is not provided, it will use ServingConfig.EmbeddingConfig.field_path .
+   *  is not provided, it will use
+   *  ServingConfig.EmbeddingConfig.field_path google.cloud.discoveryengine.v1beta.ServingConfig.embedding_config.
    */
   // const embeddingSpec = {}
   /**

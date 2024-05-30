@@ -1,5 +1,27 @@
 # Changelog
 
+## [4.7.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.6.0...data-v4.7.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [4.6.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.5.0...data-v4.6.0) (2024-05-08)
+
+
+### Features
+
+* Add `ReportTask`, `Metric`, `OrderBy`, `Cohort`, `CohortsRange`, `CohortReportSettings`, `ResponseMetaData`, `MetricAggregation`, `RestrictedMetricType` types to the Data API v1alpha ([#5318](https://github.com/googleapis/google-cloud-node/issues/5318)) ([76ae561](https://github.com/googleapis/google-cloud-node/commit/76ae561ee40d66cbba815cd7c9c964a6b92cc00c))
+
+## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.4.0...data-v4.5.0) (2024-04-16)
+
+
+### Features
+
+* [Many APIs] support GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable ([#5185](https://github.com/googleapis/google-cloud-node/issues/5185)) ([cc54e98](https://github.com/googleapis/google-cloud-node/commit/cc54e98f7f51598e88277ac50310b07b778acbc7))
+
 ## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.3.0...data-v4.4.0) (2024-02-09)
 
 

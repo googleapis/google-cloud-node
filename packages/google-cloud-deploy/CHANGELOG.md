@@ -1,5 +1,28 @@
 # Changelog
 
+## [3.7.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v3.6.0...deploy-v3.7.0) (2024-05-21)
+
+
+### Features
+
+* [deploy] update Nodejs generator to send API versions in headers for GAPICs ([#5347](https://github.com/googleapis/google-cloud-node/issues/5347)) ([0f99f52](https://github.com/googleapis/google-cloud-node/commit/0f99f52c7e7d5694ddcb609665ae82ac4ffed67c))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v3.5.0...deploy-v3.6.0) (2024-04-23)
+
+
+### Features
+
+* [deploy] add Skaffold remote config support for GCB repos ([#5267](https://github.com/googleapis/google-cloud-node/issues/5267)) ([02c6ae6](https://github.com/googleapis/google-cloud-node/commit/02c6ae60a3dbf8fa08d08abc1944afe48f2c4461))
+
+## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v3.4.0...deploy-v3.5.0) (2024-04-16)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5188](https://github.com/googleapis/google-cloud-node/issues/5188)) ([c5ccdf9](https://github.com/googleapis/google-cloud-node/commit/c5ccdf93641e7bb6d0e5c636168fad0feafab6e3))
+
 ## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v3.3.0...deploy-v3.4.0) (2024-01-15)
 
 

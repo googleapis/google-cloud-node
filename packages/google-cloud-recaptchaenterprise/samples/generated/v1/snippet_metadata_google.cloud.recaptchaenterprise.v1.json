@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-recaptchaenterprise",
-        "version": "5.3.0",
+        "version": "5.8.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -664,6 +664,50 @@
                 "method": {
                     "shortName": "DeleteFirewallPolicy",
                     "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.DeleteFirewallPolicy",
+                    "service": {
+                        "shortName": "RecaptchaEnterpriseService",
+                        "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ReorderFirewallPolicies_async",
+            "title": "RecaptchaEnterpriseService reorderFirewallPolicies Sample",
+            "origin": "API_DEFINITION",
+            "description": " Reorders all firewall policies.",
+            "canonical": true,
+            "file": "recaptcha_enterprise_service.reorder_firewall_policies.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ReorderFirewallPolicies",
+                "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.ReorderFirewallPolicies",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "names",
+                        "type": "TYPE_STRING[]"
+                    }
+                ],
+                "resultType": ".google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesResponse",
+                "client": {
+                    "shortName": "RecaptchaEnterpriseServiceClient",
+                    "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseServiceClient"
+                },
+                "method": {
+                    "shortName": "ReorderFirewallPolicies",
+                    "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.ReorderFirewallPolicies",
                     "service": {
                         "shortName": "RecaptchaEnterpriseService",
                         "fullName": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService"

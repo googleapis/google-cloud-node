@@ -25,7 +25,7 @@ import * as secretmanagerserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf} from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -144,7 +144,7 @@ describe('v1.SecretManagerServiceClient', () => {
     });
 
     if (
-      typeof process !== 'undefined' &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       it('throws DeprecationWarning if static servicePath is used', () => {
@@ -182,6 +182,43 @@ describe('v1.SecretManagerServiceClient', () => {
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'secretmanager.example.com');
     });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new secretmanagerserviceModule.v1.SecretManagerServiceClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'secretmanager.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+              universeDomain: 'configured.example.com',
+            });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(
+            servicePath,
+            'secretmanager.configured.example.com'
+          );
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new secretmanagerserviceModule.v1.SecretManagerServiceClient({
@@ -2217,9 +2254,9 @@ describe('v1.SecretManagerServiceClient', () => {
       assert(
         (client.descriptors.page.listSecrets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2269,9 +2306,9 @@ describe('v1.SecretManagerServiceClient', () => {
       assert(
         (client.descriptors.page.listSecrets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2319,9 +2356,9 @@ describe('v1.SecretManagerServiceClient', () => {
       assert(
         (client.descriptors.page.listSecrets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2362,9 +2399,9 @@ describe('v1.SecretManagerServiceClient', () => {
       assert(
         (client.descriptors.page.listSecrets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -2557,9 +2594,9 @@ describe('v1.SecretManagerServiceClient', () => {
       assert(
         (client.descriptors.page.listSecretVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2608,9 +2645,9 @@ describe('v1.SecretManagerServiceClient', () => {
       assert(
         (client.descriptors.page.listSecretVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2659,9 +2696,9 @@ describe('v1.SecretManagerServiceClient', () => {
       assert(
         (client.descriptors.page.listSecretVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2700,6 +2737,209 @@ describe('v1.SecretManagerServiceClient', () => {
       );
       assert(
         (client.descriptors.page.listSecretVersions.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+  });
+  describe('getLocation', () => {
+    it('invokes getLocation without error', async () => {
+      const client =
+        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.GetLocationRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new LocationProtos.google.cloud.location.Location()
+      );
+      client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
+      const response = await client.getLocation(request, expectedOptions);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.locationsClient.getLocation as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+    it('invokes getLocation without error using callback', async () => {
+      const client =
+        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.GetLocationRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new LocationProtos.google.cloud.location.Location()
+      );
+      client.locationsClient.getLocation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getLocation(
+          request,
+          expectedOptions,
+          (
+            err?: Error | null,
+            result?: LocationProtos.google.cloud.location.ILocation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.locationsClient.getLocation as SinonStub).getCall(0));
+    });
+    it('invokes getLocation with error', async () => {
+      const client =
+        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.GetLocationRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.locationsClient.getLocation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getLocation(request, expectedOptions),
+        expectedError
+      );
+      assert(
+        (client.locationsClient.getLocation as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+  describe('listLocationsAsync', () => {
+    it('uses async iteration with listLocations without error', async () => {
+      const client =
+        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.ListLocationsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new LocationProtos.google.cloud.location.Location()
+        ),
+        generateSampleMessage(
+          new LocationProtos.google.cloud.location.Location()
+        ),
+        generateSampleMessage(
+          new LocationProtos.google.cloud.location.Location()
+        ),
+      ];
+      client.locationsClient.descriptors.page.listLocations.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+      const iterable = client.listLocationsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+    it('uses async iteration with listLocations with error', async () => {
+      const client =
+        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.ListLocationsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('expected');
+      client.locationsClient.descriptors.page.listLocations.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listLocationsAsync(request);
+      await assert.rejects(async () => {
+        const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        )
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
@@ -2748,8 +2988,190 @@ describe('v1.SecretManagerServiceClient', () => {
       });
     });
 
-    describe('secret', () => {
-      const fakePath = '/rendered/path/secret';
+    describe('projectLocationSecret', () => {
+      const fakePath = '/rendered/path/projectLocationSecret';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        secret: 'secretValue',
+      };
+      const client =
+        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.projectLocationSecretPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectLocationSecretPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectLocationSecretPath', () => {
+        const result = client.projectLocationSecretPath(
+          'projectValue',
+          'locationValue',
+          'secretValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationSecretPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationSecretName', () => {
+        const result =
+          client.matchProjectFromProjectLocationSecretName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationSecretPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationSecretName', () => {
+        const result =
+          client.matchLocationFromProjectLocationSecretName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationSecretPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSecretFromProjectLocationSecretName', () => {
+        const result =
+          client.matchSecretFromProjectLocationSecretName(fakePath);
+        assert.strictEqual(result, 'secretValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationSecretPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationSecretSecretVersion', () => {
+      const fakePath = '/rendered/path/projectLocationSecretSecretVersion';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        secret: 'secretValue',
+        secret_version: 'secretVersionValue',
+      };
+      const client =
+        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.projectLocationSecretSecretVersionPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationSecretSecretVersionPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationSecretSecretVersionPath', () => {
+        const result = client.projectLocationSecretSecretVersionPath(
+          'projectValue',
+          'locationValue',
+          'secretValue',
+          'secretVersionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationSecretSecretVersionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationSecretSecretVersionName', () => {
+        const result =
+          client.matchProjectFromProjectLocationSecretSecretVersionName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationSecretSecretVersionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationSecretSecretVersionName', () => {
+        const result =
+          client.matchLocationFromProjectLocationSecretSecretVersionName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationSecretSecretVersionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSecretFromProjectLocationSecretSecretVersionName', () => {
+        const result =
+          client.matchSecretFromProjectLocationSecretSecretVersionName(
+            fakePath
+          );
+        assert.strictEqual(result, 'secretValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationSecretSecretVersionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSecretVersionFromProjectLocationSecretSecretVersionName', () => {
+        const result =
+          client.matchSecretVersionFromProjectLocationSecretSecretVersionName(
+            fakePath
+          );
+        assert.strictEqual(result, 'secretVersionValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationSecretSecretVersionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectSecret', () => {
+      const fakePath = '/rendered/path/projectSecret';
       const expectedParameters = {
         project: 'projectValue',
         secret: 'secretValue',
@@ -2760,46 +3182,46 @@ describe('v1.SecretManagerServiceClient', () => {
           projectId: 'bogus',
         });
       client.initialize();
-      client.pathTemplates.secretPathTemplate.render = sinon
+      client.pathTemplates.projectSecretPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
-      client.pathTemplates.secretPathTemplate.match = sinon
+      client.pathTemplates.projectSecretPathTemplate.match = sinon
         .stub()
         .returns(expectedParameters);
 
-      it('secretPath', () => {
-        const result = client.secretPath('projectValue', 'secretValue');
+      it('projectSecretPath', () => {
+        const result = client.projectSecretPath('projectValue', 'secretValue');
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.secretPathTemplate.render as SinonStub)
+          (client.pathTemplates.projectSecretPathTemplate.render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
-      it('matchProjectFromSecretName', () => {
-        const result = client.matchProjectFromSecretName(fakePath);
+      it('matchProjectFromProjectSecretName', () => {
+        const result = client.matchProjectFromProjectSecretName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.secretPathTemplate.match as SinonStub)
+          (client.pathTemplates.projectSecretPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
-      it('matchSecretFromSecretName', () => {
-        const result = client.matchSecretFromSecretName(fakePath);
+      it('matchSecretFromProjectSecretName', () => {
+        const result = client.matchSecretFromProjectSecretName(fakePath);
         assert.strictEqual(result, 'secretValue');
         assert(
-          (client.pathTemplates.secretPathTemplate.match as SinonStub)
+          (client.pathTemplates.projectSecretPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
     });
 
-    describe('secretVersion', () => {
-      const fakePath = '/rendered/path/secretVersion';
+    describe('projectSecretSecretVersion', () => {
+      const fakePath = '/rendered/path/projectSecretSecretVersion';
       const expectedParameters = {
         project: 'projectValue',
         secret: 'secretValue',
@@ -2811,52 +3233,67 @@ describe('v1.SecretManagerServiceClient', () => {
           projectId: 'bogus',
         });
       client.initialize();
-      client.pathTemplates.secretVersionPathTemplate.render = sinon
+      client.pathTemplates.projectSecretSecretVersionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
-      client.pathTemplates.secretVersionPathTemplate.match = sinon
+      client.pathTemplates.projectSecretSecretVersionPathTemplate.match = sinon
         .stub()
         .returns(expectedParameters);
 
-      it('secretVersionPath', () => {
-        const result = client.secretVersionPath(
+      it('projectSecretSecretVersionPath', () => {
+        const result = client.projectSecretSecretVersionPath(
           'projectValue',
           'secretValue',
           'secretVersionValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.secretVersionPathTemplate.render as SinonStub)
+          (
+            client.pathTemplates.projectSecretSecretVersionPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
-      it('matchProjectFromSecretVersionName', () => {
-        const result = client.matchProjectFromSecretVersionName(fakePath);
+      it('matchProjectFromProjectSecretSecretVersionName', () => {
+        const result =
+          client.matchProjectFromProjectSecretSecretVersionName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.secretVersionPathTemplate.match as SinonStub)
+          (
+            client.pathTemplates.projectSecretSecretVersionPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
-      it('matchSecretFromSecretVersionName', () => {
-        const result = client.matchSecretFromSecretVersionName(fakePath);
+      it('matchSecretFromProjectSecretSecretVersionName', () => {
+        const result =
+          client.matchSecretFromProjectSecretSecretVersionName(fakePath);
         assert.strictEqual(result, 'secretValue');
         assert(
-          (client.pathTemplates.secretVersionPathTemplate.match as SinonStub)
+          (
+            client.pathTemplates.projectSecretSecretVersionPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
-      it('matchSecretVersionFromSecretVersionName', () => {
-        const result = client.matchSecretVersionFromSecretVersionName(fakePath);
+      it('matchSecretVersionFromProjectSecretSecretVersionName', () => {
+        const result =
+          client.matchSecretVersionFromProjectSecretSecretVersionName(fakePath);
         assert.strictEqual(result, 'secretVersionValue');
         assert(
-          (client.pathTemplates.secretVersionPathTemplate.match as SinonStub)
+          (
+            client.pathTemplates.projectSecretSecretVersionPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -773,9 +773,9 @@ message StreamingRecognitionResult {
     // Message contains DTMF digits.
     DTMF_DIGITS = 3;
 
-    // Event indicates that the server has detected the end of the user's speech
-    // utterance and expects no additional speech. Therefore, the server will
-    // not process additional audio (although it may subsequently return
+    // This event indicates that the server has detected the end of the user's
+    // speech utterance and expects no additional speech. Therefore, the server
+    // will not process additional audio (although it may subsequently return
     // additional results). The client should stop sending additional audio
     // data, half-close the gRPC connection, and wait for any additional results
     // until the server closes the gRPC connection. This message is only sent if

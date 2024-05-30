@@ -4,6 +4,28 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/grafeas-v5.3.0...grafeas-v5.4.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/grafeas-v5.2.0...grafeas-v5.3.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5193](https://github.com/googleapis/google-cloud-node/issues/5193)) ([333b409](https://github.com/googleapis/google-cloud-node/commit/333b40951a255ecfab249bd6e7ace5877270ec85))
+
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/grafeas-v5.1.0...grafeas-v5.2.0) (2024-03-23)
+
+
+### Features
+
+* [grafeas] A new field `in_toto_slsa_provenance_v1` is added to message `BuildOccurrence` ([#5133](https://github.com/googleapis/google-cloud-node/issues/5133)) ([31c36a8](https://github.com/googleapis/google-cloud-node/commit/31c36a88987e2dd68c70fb6220b5bf1311239d2d))
+
 ## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/grafeas-v5.0.1...grafeas-v5.1.0) (2024-02-09)
 
 

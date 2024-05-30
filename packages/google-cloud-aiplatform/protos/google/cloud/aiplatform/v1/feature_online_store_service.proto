@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -73,9 +73,20 @@ enum FeatureViewDataFormat {
 
 // Lookup key for a feature view.
 message FeatureViewDataKey {
+  // ID that is comprised from several parts (columns).
+  message CompositeKey {
+    // Parts to construct Entity ID. Should match with the same ID columns as
+    // defined in FeatureView in the same order.
+    repeated string parts = 1;
+  }
+
   oneof key_oneof {
     // String key to use for lookup.
     string key = 1;
+
+    // The actual Entity ID will be composed from this struct. This should match
+    // with the way ID is defined in the FeatureView spec.
+    CompositeKey composite_key = 2;
   }
 }
 
@@ -130,6 +141,11 @@ message FetchFeatureValuesResponse {
     // Feature values in proto Struct format.
     google.protobuf.Struct proto_struct = 2;
   }
+
+  // The data key associated with this response.
+  // Will only be populated for
+  // [FeatureOnlineStoreService.StreamingFetchFeatureValues][] RPCs.
+  FeatureViewDataKey data_key = 4;
 }
 
 // A query to find a number of similar entities.

@@ -180,7 +180,7 @@ describe('v1.NetworkServicesClient', () => {
     });
 
     if (
-      typeof process !== 'undefined' &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       it('throws DeprecationWarning if static servicePath is used', () => {
@@ -216,6 +216,41 @@ describe('v1.NetworkServicesClient', () => {
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'networkservices.example.com');
     });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new networkservicesModule.v1.NetworkServicesClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'networkservices.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new networkservicesModule.v1.NetworkServicesClient({
+            universeDomain: 'configured.example.com',
+          });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(
+            servicePath,
+            'networkservices.configured.example.com'
+          );
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new networkservicesModule.v1.NetworkServicesClient({
@@ -6010,9 +6045,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listEndpointPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6060,9 +6095,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listEndpointPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6110,9 +6145,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listEndpointPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6151,9 +6186,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listEndpointPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -6338,9 +6373,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listGateways.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6389,9 +6424,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listGateways.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6438,9 +6473,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listGateways.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6478,9 +6513,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listGateways.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -6666,9 +6701,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listGrpcRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6716,9 +6751,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listGrpcRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6765,9 +6800,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listGrpcRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6806,9 +6841,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listGrpcRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -6994,9 +7029,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listHttpRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7044,9 +7079,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listHttpRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7093,9 +7128,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listHttpRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7134,9 +7169,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listHttpRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -7321,9 +7356,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listTcpRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7370,9 +7405,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listTcpRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7419,9 +7454,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listTcpRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7460,9 +7495,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listTcpRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -7647,9 +7682,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listTlsRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7696,9 +7731,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listTlsRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7745,9 +7780,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listTlsRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7786,9 +7821,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listTlsRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -7977,9 +8012,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listServiceBindings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -8027,9 +8062,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listServiceBindings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -8077,9 +8112,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listServiceBindings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -8118,9 +8153,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listServiceBindings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -8305,9 +8340,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listMeshes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -8356,9 +8391,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listMeshes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -8405,9 +8440,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listMeshes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -8447,9 +8482,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listMeshes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -9533,6 +9568,151 @@ describe('v1.NetworkServicesClient', () => {
         assert.strictEqual(result, 'httpRouteValue');
         assert(
           (client.pathTemplates.httpRoutePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('lbRouteExtension', () => {
+      const fakePath = '/rendered/path/lbRouteExtension';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        lb_route_extension: 'lbRouteExtensionValue',
+      };
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.lbRouteExtensionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.lbRouteExtensionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('lbRouteExtensionPath', () => {
+        const result = client.lbRouteExtensionPath(
+          'projectValue',
+          'locationValue',
+          'lbRouteExtensionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.lbRouteExtensionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromLbRouteExtensionName', () => {
+        const result = client.matchProjectFromLbRouteExtensionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.lbRouteExtensionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromLbRouteExtensionName', () => {
+        const result = client.matchLocationFromLbRouteExtensionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.lbRouteExtensionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLbRouteExtensionFromLbRouteExtensionName', () => {
+        const result =
+          client.matchLbRouteExtensionFromLbRouteExtensionName(fakePath);
+        assert.strictEqual(result, 'lbRouteExtensionValue');
+        assert(
+          (client.pathTemplates.lbRouteExtensionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('lbTrafficExtension', () => {
+      const fakePath = '/rendered/path/lbTrafficExtension';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        lb_traffic_extension: 'lbTrafficExtensionValue',
+      };
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.lbTrafficExtensionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.lbTrafficExtensionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('lbTrafficExtensionPath', () => {
+        const result = client.lbTrafficExtensionPath(
+          'projectValue',
+          'locationValue',
+          'lbTrafficExtensionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.lbTrafficExtensionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromLbTrafficExtensionName', () => {
+        const result = client.matchProjectFromLbTrafficExtensionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.lbTrafficExtensionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromLbTrafficExtensionName', () => {
+        const result = client.matchLocationFromLbTrafficExtensionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.lbTrafficExtensionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLbTrafficExtensionFromLbTrafficExtensionName', () => {
+        const result =
+          client.matchLbTrafficExtensionFromLbTrafficExtensionName(fakePath);
+        assert.strictEqual(result, 'lbTrafficExtensionValue');
+        assert(
+          (
+            client.pathTemplates.lbTrafficExtensionPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

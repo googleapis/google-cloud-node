@@ -18,6 +18,7 @@
 
 export {AgentsClient} from './agents_client';
 export {ChangelogsClient} from './changelogs_client';
+export {ConversationHistoryClient} from './conversation_history_client';
 export {DeploymentsClient} from './deployments_client';
 export {EntityTypesClient} from './entity_types_client';
 export {EnvironmentsClient} from './environments_client';

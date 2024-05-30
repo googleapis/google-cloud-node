@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-sql",
-        "version": "0.6.0",
+        "version": "0.11.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -1874,7 +1874,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 72,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -1906,6 +1906,14 @@
                     {
                         "name": "mysql_sync_config",
                         "type": ".google.cloud.sql.v1beta4.MySqlSyncConfig"
+                    },
+                    {
+                        "name": "migration_type",
+                        "type": ".google.cloud.sql.v1beta4.SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType"
+                    },
+                    {
+                        "name": "sync_parallel_level",
+                        "type": ".google.cloud.sql.v1beta4.ExternalSyncParallelLevel"
                     }
                 ],
                 "resultType": ".google.cloud.sql.v1beta4.SqlInstancesVerifyExternalSyncSettingsResponse",
@@ -1934,7 +1942,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 73,
+                    "end": 78,
                     "type": "FULL"
                 }
             ],
@@ -1966,6 +1974,10 @@
                     {
                         "name": "sync_parallel_level",
                         "type": ".google.cloud.sql.v1beta4.ExternalSyncParallelLevel"
+                    },
+                    {
+                        "name": "migration_type",
+                        "type": ".google.cloud.sql.v1beta4.SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType"
                     }
                 ],
                 "resultType": ".google.cloud.sql.v1beta4.Operation",
@@ -2156,6 +2168,98 @@
                 "method": {
                     "shortName": "GetLatestRecoveryTime",
                     "fullName": "google.cloud.sql.v1beta4.SqlInstancesService.GetLatestRecoveryTime",
+                    "service": {
+                        "shortName": "SqlInstancesService",
+                        "fullName": "google.cloud.sql.v1beta4.SqlInstancesService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "sqladmin_v1beta4_generated_SqlInstancesService_AcquireSsrsLease_async",
+            "title": "SqlBackupRunsService acquireSsrsLease Sample",
+            "origin": "API_DEFINITION",
+            "description": " Acquire a lease for the setup of SQL Server Reporting Services (SSRS).",
+            "canonical": true,
+            "file": "sql_instances_service.acquire_ssrs_lease.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 66,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "AcquireSsrsLease",
+                "fullName": "google.cloud.sql.v1beta4.SqlInstancesService.AcquireSsrsLease",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "instance",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "body",
+                        "type": ".google.cloud.sql.v1beta4.InstancesAcquireSsrsLeaseRequest"
+                    }
+                ],
+                "resultType": ".google.cloud.sql.v1beta4.SqlInstancesAcquireSsrsLeaseResponse",
+                "client": {
+                    "shortName": "SqlInstancesServiceClient",
+                    "fullName": "google.cloud.sql.v1beta4.SqlInstancesServiceClient"
+                },
+                "method": {
+                    "shortName": "AcquireSsrsLease",
+                    "fullName": "google.cloud.sql.v1beta4.SqlInstancesService.AcquireSsrsLease",
+                    "service": {
+                        "shortName": "SqlInstancesService",
+                        "fullName": "google.cloud.sql.v1beta4.SqlInstancesService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "sqladmin_v1beta4_generated_SqlInstancesService_ReleaseSsrsLease_async",
+            "title": "SqlBackupRunsService releaseSsrsLease Sample",
+            "origin": "API_DEFINITION",
+            "description": " Release a lease for the setup of SQL Server Reporting Services (SSRS).",
+            "canonical": true,
+            "file": "sql_instances_service.release_ssrs_lease.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ReleaseSsrsLease",
+                "fullName": "google.cloud.sql.v1beta4.SqlInstancesService.ReleaseSsrsLease",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "instance",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.sql.v1beta4.SqlInstancesReleaseSsrsLeaseResponse",
+                "client": {
+                    "shortName": "SqlInstancesServiceClient",
+                    "fullName": "google.cloud.sql.v1beta4.SqlInstancesServiceClient"
+                },
+                "method": {
+                    "shortName": "ReleaseSsrsLease",
+                    "fullName": "google.cloud.sql.v1beta4.SqlInstancesService.ReleaseSsrsLease",
                     "service": {
                         "shortName": "SqlInstancesService",
                         "fullName": "google.cloud.sql.v1beta4.SqlInstancesService"

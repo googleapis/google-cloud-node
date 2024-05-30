@@ -120,8 +120,15 @@ export class LocalInventoryServiceClient {
         'Please set either universe_domain or universeDomain, but not both.'
       );
     }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
     this._universeDomain =
-      opts?.universeDomain ?? opts?.universe_domain ?? 'googleapis.com';
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'merchantapi.' + this._universeDomain;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || this._servicePath;
@@ -173,7 +180,7 @@ export class LocalInventoryServiceClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -195,6 +202,9 @@ export class LocalInventoryServiceClient {
     this.pathTemplates = {
       localInventoryPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/products/{product}/localInventories/{store_code}'
+      ),
+      productPathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}/products/{product}'
       ),
       regionalInventoryPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/products/{product}/regionalInventories/{region}'
@@ -303,7 +313,7 @@ export class LocalInventoryServiceClient {
    */
   static get servicePath() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -321,7 +331,7 @@ export class LocalInventoryServiceClient {
    */
   static get apiEndpoint() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -876,6 +886,42 @@ export class LocalInventoryServiceClient {
     return this.pathTemplates.localInventoryPathTemplate.match(
       localInventoryName
     ).store_code;
+  }
+
+  /**
+   * Return a fully-qualified product resource name string.
+   *
+   * @param {string} account
+   * @param {string} product
+   * @returns {string} Resource name string.
+   */
+  productPath(account: string, product: string) {
+    return this.pathTemplates.productPathTemplate.render({
+      account: account,
+      product: product,
+    });
+  }
+
+  /**
+   * Parse the account from Product resource.
+   *
+   * @param {string} productName
+   *   A fully-qualified path representing Product resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromProductName(productName: string) {
+    return this.pathTemplates.productPathTemplate.match(productName).account;
+  }
+
+  /**
+   * Parse the product from Product resource.
+   *
+   * @param {string} productName
+   *   A fully-qualified path representing Product resource.
+   * @returns {string} A string representing the product.
+   */
+  matchProductFromProductName(productName: string) {
+    return this.pathTemplates.productPathTemplate.match(productName).product;
   }
 
   /**

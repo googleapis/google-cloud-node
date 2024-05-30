@@ -142,7 +142,7 @@ describe('v1.ImageVersionsClient', () => {
     });
 
     if (
-      typeof process !== 'undefined' &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       it('throws DeprecationWarning if static servicePath is used', () => {
@@ -178,6 +178,38 @@ describe('v1.ImageVersionsClient', () => {
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'composer.example.com');
     });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new imageversionsModule.v1.ImageVersionsClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'composer.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new imageversionsModule.v1.ImageVersionsClient({
+            universeDomain: 'configured.example.com',
+          });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'composer.configured.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new imageversionsModule.v1.ImageVersionsClient({
@@ -458,9 +490,9 @@ describe('v1.ImageVersionsClient', () => {
       assert(
         (client.descriptors.page.listImageVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -510,9 +542,9 @@ describe('v1.ImageVersionsClient', () => {
       assert(
         (client.descriptors.page.listImageVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -560,9 +592,9 @@ describe('v1.ImageVersionsClient', () => {
       assert(
         (client.descriptors.page.listImageVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -601,9 +633,9 @@ describe('v1.ImageVersionsClient', () => {
       assert(
         (client.descriptors.page.listImageVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -667,6 +699,197 @@ describe('v1.ImageVersionsClient', () => {
         assert.strictEqual(result, 'environmentValue');
         assert(
           (client.pathTemplates.environmentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('userWorkloadsConfigMap', () => {
+      const fakePath = '/rendered/path/userWorkloadsConfigMap';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        environment: 'environmentValue',
+        user_workloads_config_map: 'userWorkloadsConfigMapValue',
+      };
+      const client = new imageversionsModule.v1.ImageVersionsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.userWorkloadsConfigMapPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.userWorkloadsConfigMapPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('userWorkloadsConfigMapPath', () => {
+        const result = client.userWorkloadsConfigMapPath(
+          'projectValue',
+          'locationValue',
+          'environmentValue',
+          'userWorkloadsConfigMapValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.userWorkloadsConfigMapPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromUserWorkloadsConfigMapName', () => {
+        const result =
+          client.matchProjectFromUserWorkloadsConfigMapName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.userWorkloadsConfigMapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromUserWorkloadsConfigMapName', () => {
+        const result =
+          client.matchLocationFromUserWorkloadsConfigMapName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.userWorkloadsConfigMapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEnvironmentFromUserWorkloadsConfigMapName', () => {
+        const result =
+          client.matchEnvironmentFromUserWorkloadsConfigMapName(fakePath);
+        assert.strictEqual(result, 'environmentValue');
+        assert(
+          (
+            client.pathTemplates.userWorkloadsConfigMapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchUserWorkloadsConfigMapFromUserWorkloadsConfigMapName', () => {
+        const result =
+          client.matchUserWorkloadsConfigMapFromUserWorkloadsConfigMapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'userWorkloadsConfigMapValue');
+        assert(
+          (
+            client.pathTemplates.userWorkloadsConfigMapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('userWorkloadsSecret', () => {
+      const fakePath = '/rendered/path/userWorkloadsSecret';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        environment: 'environmentValue',
+        user_workloads_secret: 'userWorkloadsSecretValue',
+      };
+      const client = new imageversionsModule.v1.ImageVersionsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.userWorkloadsSecretPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.userWorkloadsSecretPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('userWorkloadsSecretPath', () => {
+        const result = client.userWorkloadsSecretPath(
+          'projectValue',
+          'locationValue',
+          'environmentValue',
+          'userWorkloadsSecretValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.userWorkloadsSecretPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromUserWorkloadsSecretName', () => {
+        const result = client.matchProjectFromUserWorkloadsSecretName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.userWorkloadsSecretPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromUserWorkloadsSecretName', () => {
+        const result =
+          client.matchLocationFromUserWorkloadsSecretName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.userWorkloadsSecretPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEnvironmentFromUserWorkloadsSecretName', () => {
+        const result =
+          client.matchEnvironmentFromUserWorkloadsSecretName(fakePath);
+        assert.strictEqual(result, 'environmentValue');
+        assert(
+          (
+            client.pathTemplates.userWorkloadsSecretPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchUserWorkloadsSecretFromUserWorkloadsSecretName', () => {
+        const result =
+          client.matchUserWorkloadsSecretFromUserWorkloadsSecretName(fakePath);
+        assert.strictEqual(result, 'userWorkloadsSecretValue');
+        assert(
+          (
+            client.pathTemplates.userWorkloadsSecretPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

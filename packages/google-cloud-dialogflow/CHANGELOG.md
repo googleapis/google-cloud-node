@@ -4,6 +4,36 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [6.7.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.6.0...dialogflow-v6.7.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5352](https://github.com/googleapis/google-cloud-node/issues/5352)) ([8c165ca](https://github.com/googleapis/google-cloud-node/commit/8c165ca4ae387bb13610e93b1ef4db6017033a7a))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [6.6.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.5.0...dialogflow-v6.6.0) (2024-04-16)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5188](https://github.com/googleapis/google-cloud-node/issues/5188)) ([c5ccdf9](https://github.com/googleapis/google-cloud-node/commit/c5ccdf93641e7bb6d0e5c636168fad0feafab6e3))
+
+## [6.5.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.4.0...dialogflow-v6.5.0) (2024-03-23)
+
+
+### Features
+
+* [dialogflow] added text sections to the submitted summary ([#5130](https://github.com/googleapis/google-cloud-node/issues/5130)) ([f930cd2](https://github.com/googleapis/google-cloud-node/commit/f930cd21e4f3dba436281a1db4f65714d795fb6c))
+
+## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.3.1...dialogflow-v6.4.0) (2024-03-12)
+
+
+### Features
+
+* [dialogflow] added text sections to the submitted summary ([#5121](https://github.com/googleapis/google-cloud-node/issues/5121)) ([2eb27fb](https://github.com/googleapis/google-cloud-node/commit/2eb27fb603d97e43eca3968eeaab13d6280dec97))
+
 ## [6.3.1](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.3.0...dialogflow-v6.3.1) (2024-01-23)
 
 

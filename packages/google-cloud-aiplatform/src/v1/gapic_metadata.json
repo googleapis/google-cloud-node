@@ -984,6 +984,64 @@
         }
       }
     },
+    "GenAiTuningService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "GenAiTuningServiceClient",
+          "rpcs": {
+            "CreateTuningJob": {
+              "methods": [
+                "createTuningJob"
+              ]
+            },
+            "GetTuningJob": {
+              "methods": [
+                "getTuningJob"
+              ]
+            },
+            "CancelTuningJob": {
+              "methods": [
+                "cancelTuningJob"
+              ]
+            },
+            "ListTuningJobs": {
+              "methods": [
+                "listTuningJobs",
+                "listTuningJobsStream",
+                "listTuningJobsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "GenAiTuningServiceClient",
+          "rpcs": {
+            "CreateTuningJob": {
+              "methods": [
+                "createTuningJob"
+              ]
+            },
+            "GetTuningJob": {
+              "methods": [
+                "getTuningJob"
+              ]
+            },
+            "CancelTuningJob": {
+              "methods": [
+                "cancelTuningJob"
+              ]
+            },
+            "ListTuningJobs": {
+              "methods": [
+                "listTuningJobs",
+                "listTuningJobsStream",
+                "listTuningJobsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "IndexEndpointService": {
       "clients": {
         "grpc": {
@@ -2260,6 +2318,206 @@
         }
       }
     },
+    "NotebookService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "NotebookServiceClient",
+          "rpcs": {
+            "GetNotebookRuntimeTemplate": {
+              "methods": [
+                "getNotebookRuntimeTemplate"
+              ]
+            },
+            "GetNotebookRuntime": {
+              "methods": [
+                "getNotebookRuntime"
+              ]
+            },
+            "CreateNotebookRuntimeTemplate": {
+              "methods": [
+                "createNotebookRuntimeTemplate"
+              ]
+            },
+            "DeleteNotebookRuntimeTemplate": {
+              "methods": [
+                "deleteNotebookRuntimeTemplate"
+              ]
+            },
+            "AssignNotebookRuntime": {
+              "methods": [
+                "assignNotebookRuntime"
+              ]
+            },
+            "DeleteNotebookRuntime": {
+              "methods": [
+                "deleteNotebookRuntime"
+              ]
+            },
+            "UpgradeNotebookRuntime": {
+              "methods": [
+                "upgradeNotebookRuntime"
+              ]
+            },
+            "StartNotebookRuntime": {
+              "methods": [
+                "startNotebookRuntime"
+              ]
+            },
+            "ListNotebookRuntimeTemplates": {
+              "methods": [
+                "listNotebookRuntimeTemplates",
+                "listNotebookRuntimeTemplatesStream",
+                "listNotebookRuntimeTemplatesAsync"
+              ]
+            },
+            "ListNotebookRuntimes": {
+              "methods": [
+                "listNotebookRuntimes",
+                "listNotebookRuntimesStream",
+                "listNotebookRuntimesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "NotebookServiceClient",
+          "rpcs": {
+            "GetNotebookRuntimeTemplate": {
+              "methods": [
+                "getNotebookRuntimeTemplate"
+              ]
+            },
+            "GetNotebookRuntime": {
+              "methods": [
+                "getNotebookRuntime"
+              ]
+            },
+            "CreateNotebookRuntimeTemplate": {
+              "methods": [
+                "createNotebookRuntimeTemplate"
+              ]
+            },
+            "DeleteNotebookRuntimeTemplate": {
+              "methods": [
+                "deleteNotebookRuntimeTemplate"
+              ]
+            },
+            "AssignNotebookRuntime": {
+              "methods": [
+                "assignNotebookRuntime"
+              ]
+            },
+            "DeleteNotebookRuntime": {
+              "methods": [
+                "deleteNotebookRuntime"
+              ]
+            },
+            "UpgradeNotebookRuntime": {
+              "methods": [
+                "upgradeNotebookRuntime"
+              ]
+            },
+            "StartNotebookRuntime": {
+              "methods": [
+                "startNotebookRuntime"
+              ]
+            },
+            "ListNotebookRuntimeTemplates": {
+              "methods": [
+                "listNotebookRuntimeTemplates",
+                "listNotebookRuntimeTemplatesStream",
+                "listNotebookRuntimeTemplatesAsync"
+              ]
+            },
+            "ListNotebookRuntimes": {
+              "methods": [
+                "listNotebookRuntimes",
+                "listNotebookRuntimesStream",
+                "listNotebookRuntimesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "PersistentResourceService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "PersistentResourceServiceClient",
+          "rpcs": {
+            "GetPersistentResource": {
+              "methods": [
+                "getPersistentResource"
+              ]
+            },
+            "CreatePersistentResource": {
+              "methods": [
+                "createPersistentResource"
+              ]
+            },
+            "DeletePersistentResource": {
+              "methods": [
+                "deletePersistentResource"
+              ]
+            },
+            "UpdatePersistentResource": {
+              "methods": [
+                "updatePersistentResource"
+              ]
+            },
+            "RebootPersistentResource": {
+              "methods": [
+                "rebootPersistentResource"
+              ]
+            },
+            "ListPersistentResources": {
+              "methods": [
+                "listPersistentResources",
+                "listPersistentResourcesStream",
+                "listPersistentResourcesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "PersistentResourceServiceClient",
+          "rpcs": {
+            "GetPersistentResource": {
+              "methods": [
+                "getPersistentResource"
+              ]
+            },
+            "CreatePersistentResource": {
+              "methods": [
+                "createPersistentResource"
+              ]
+            },
+            "DeletePersistentResource": {
+              "methods": [
+                "deletePersistentResource"
+              ]
+            },
+            "UpdatePersistentResource": {
+              "methods": [
+                "updatePersistentResource"
+              ]
+            },
+            "RebootPersistentResource": {
+              "methods": [
+                "rebootPersistentResource"
+              ]
+            },
+            "ListPersistentResources": {
+              "methods": [
+                "listPersistentResources",
+                "listPersistentResourcesStream",
+                "listPersistentResourcesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "PipelineService": {
       "clients": {
         "grpc": {
@@ -2303,6 +2561,16 @@
             "DeletePipelineJob": {
               "methods": [
                 "deletePipelineJob"
+              ]
+            },
+            "BatchDeletePipelineJobs": {
+              "methods": [
+                "batchDeletePipelineJobs"
+              ]
+            },
+            "BatchCancelPipelineJobs": {
+              "methods": [
+                "batchCancelPipelineJobs"
               ]
             },
             "ListTrainingPipelines": {
@@ -2362,6 +2630,16 @@
             "DeletePipelineJob": {
               "methods": [
                 "deletePipelineJob"
+              ]
+            },
+            "BatchDeletePipelineJobs": {
+              "methods": [
+                "batchDeletePipelineJobs"
+              ]
+            },
+            "BatchCancelPipelineJobs": {
+              "methods": [
+                "batchCancelPipelineJobs"
               ]
             },
             "ListTrainingPipelines": {

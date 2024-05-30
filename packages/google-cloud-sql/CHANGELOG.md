@@ -1,5 +1,48 @@
 # Changelog
 
+## [0.12.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.11.0...sql-v0.12.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [0.11.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.10.0...sql-v0.11.0) (2024-05-02)
+
+
+### Features
+
+* [sql] Support for the AcquireSsrsLease and ReleaseSsrsLease RPCs ([#5299](https://github.com/googleapis/google-cloud-node/issues/5299)) ([485ff29](https://github.com/googleapis/google-cloud-node/commit/485ff29f98a3b7d6b5c40f2bd3f4696c1a82115e))
+
+## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.9.0...sql-v0.10.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5191](https://github.com/googleapis/google-cloud-node/issues/5191)) ([57567db](https://github.com/googleapis/google-cloud-node/commit/57567db36033ca53ae2f54e6517b8cd12145bb82))
+
+## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.8.0...sql-v0.9.0) (2024-03-26)
+
+
+### Features
+
+* [sql] support INSUFFICIENT_DISK_SIZE and INSUFFICIENT_MACHINE_TIER error types for external primary instance migration settings ([#5161](https://github.com/googleapis/google-cloud-node/issues/5161)) ([73bed7b](https://github.com/googleapis/google-cloud-node/commit/73bed7b530eadf710153938cdb76af007cb4fcbf))
+
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.7.0...sql-v0.8.0) (2024-03-07)
+
+
+### Features
+
+* [sql] A new value `PG_SUBSCRIPTION_COUNT` is added to enum `SqlExternalSyncSettingErrorType` ([#5115](https://github.com/googleapis/google-cloud-node/issues/5115)) ([33edf62](https://github.com/googleapis/google-cloud-node/commit/33edf6239bdcf34b28ed328ae12f3ba261301de6))
+
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.6.0...sql-v0.7.0) (2024-02-22)
+
+
+### Features
+
+* [sql] A new field `threads` is added to message `.google.cloud.sql.v1beta4.ExportContext` ([#5048](https://github.com/googleapis/google-cloud-node/issues/5048)) ([ff8ef66](https://github.com/googleapis/google-cloud-node/commit/ff8ef66a10c3c78c941299eddb3ce79b09b91d14))
+
 ## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.5.0...sql-v0.6.0) (2024-02-09)
 
 

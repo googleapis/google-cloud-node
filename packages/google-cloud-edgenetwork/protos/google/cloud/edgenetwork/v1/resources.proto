@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -71,11 +71,13 @@ message Zone {
   google.protobuf.Timestamp update_time = 3
       [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Labels as key value pairs
-  map<string, string> labels = 4;
+  // Deprecated: not implemented.
+  // Labels as key value pairs.
+  map<string, string> labels = 4 [deprecated = true];
 
+  // Deprecated: not implemented.
   // The deployment layout type.
-  string layout_name = 5;
+  string layout_name = 5 [deprecated = true];
 }
 
 // Message describing Network object

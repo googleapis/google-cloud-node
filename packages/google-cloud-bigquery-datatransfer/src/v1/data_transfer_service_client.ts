@@ -122,8 +122,15 @@ export class DataTransferServiceClient {
         'Please set either universe_domain or universeDomain, but not both.'
       );
     }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
     this._universeDomain =
-      opts?.universeDomain ?? opts?.universe_domain ?? 'googleapis.com';
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'bigquerydatatransfer.' + this._universeDomain;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || this._servicePath;
@@ -179,7 +186,7 @@ export class DataTransferServiceClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -316,6 +323,7 @@ export class DataTransferServiceClient {
       'listTransferLogs',
       'checkValidCreds',
       'enrollDataSources',
+      'unenrollDataSources',
     ];
     for (const methodName of dataTransferServiceStubMethods) {
       const callPromise = this.dataTransferServiceStub.then(
@@ -353,7 +361,7 @@ export class DataTransferServiceClient {
    */
   static get servicePath() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -371,7 +379,7 @@ export class DataTransferServiceClient {
    */
   static get apiEndpoint() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -547,7 +555,7 @@ export class DataTransferServiceClient {
    *   and new credentials are needed, as indicated by `CheckValidCreds`. In order
    *   to obtain authorization_code, make a request to the following URL:
    *   <pre class="prettyprint" suppresswarning="true">
-   *   https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=authorization_code&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
+   *   https://bigquery.cloud.google.com/datatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=authorization_code&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
    *   </pre>
    *   * The <var>client_id</var> is the OAuth client_id of the a data source as
    *   returned by ListDataSources method.
@@ -562,7 +570,7 @@ export class DataTransferServiceClient {
    *   are needed, as indicated by `CheckValidCreds`. In order to obtain version
    *   info, make a request to the following URL:
    *   <pre class="prettyprint" suppresswarning="true">
-   *   https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=version_info&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
+   *   https://bigquery.cloud.google.com/datatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=version_info&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
    *   </pre>
    *   * The <var>client_id</var> is the OAuth client_id of the a data source as
    *   returned by ListDataSources method.
@@ -684,7 +692,7 @@ export class DataTransferServiceClient {
    *   and new credentials are needed, as indicated by `CheckValidCreds`. In order
    *   to obtain authorization_code, make a request to the following URL:
    *   <pre class="prettyprint" suppresswarning="true">
-   *   https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=authorization_code&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
+   *   https://bigquery.cloud.google.com/datatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=authorization_code&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
    *   </pre>
    *   * The <var>client_id</var> is the OAuth client_id of the a data source as
    *   returned by ListDataSources method.
@@ -701,7 +709,7 @@ export class DataTransferServiceClient {
    *   are needed, as indicated by `CheckValidCreds`. In order to obtain version
    *   info, make a request to the following URL:
    *   <pre class="prettyprint" suppresswarning="true">
-   *   https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=version_info&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
+   *   https://bigquery.cloud.google.com/datatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=version_info&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
    *   </pre>
    *   * The <var>client_id</var> is the OAuth client_id of the a data source as
    *   returned by ListDataSources method.
@@ -1129,7 +1137,7 @@ export class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Transfer configuration name in the form:
+   *   Required. Transfer configuration name in the form:
    *   `projects/{project_id}/transferConfigs/{config_id}` or
    *   `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`.
    * @param {google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest.TimeRange} request.requestedTimeRange
@@ -1545,7 +1553,8 @@ export class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The name of the project resource in the form: `projects/{project_id}`
+   *   Required. The name of the project resource in the form:
+   *   `projects/{project_id}`
    * @param {string[]} request.dataSourceIds
    *   Data sources that are enrolled. It is required to provide at least one
    *   data source id.
@@ -1637,6 +1646,110 @@ export class DataTransferServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.enrollDataSources(request, options, callback);
+  }
+  /**
+   * Unenroll data sources in a user project. This allows users to remove
+   * transfer configurations for these data sources. They will no longer appear
+   * in the ListDataSources RPC and will also no longer appear in the [BigQuery
+   * UI](https://console.cloud.google.com/bigquery). Data transfers
+   * configurations of unenrolled data sources will not be scheduled.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the project resource in the form:
+   *   `projects/{project_id}`
+   * @param {string[]} request.dataSourceIds
+   *   Data sources that are unenrolled. It is required to provide at least one
+   *   data source id.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_transfer_service.unenroll_data_sources.js</caption>
+   * region_tag:bigquerydatatransfer_v1_generated_DataTransferService_UnenrollDataSources_async
+   */
+  unenrollDataSources(
+    request?: protos.google.cloud.bigquery.datatransfer.v1.IUnenrollDataSourcesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.bigquery.datatransfer.v1.IUnenrollDataSourcesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  unenrollDataSources(
+    request: protos.google.cloud.bigquery.datatransfer.v1.IUnenrollDataSourcesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.bigquery.datatransfer.v1.IUnenrollDataSourcesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  unenrollDataSources(
+    request: protos.google.cloud.bigquery.datatransfer.v1.IUnenrollDataSourcesRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.bigquery.datatransfer.v1.IUnenrollDataSourcesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  unenrollDataSources(
+    request?: protos.google.cloud.bigquery.datatransfer.v1.IUnenrollDataSourcesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.bigquery.datatransfer.v1.IUnenrollDataSourcesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.bigquery.datatransfer.v1.IUnenrollDataSourcesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.bigquery.datatransfer.v1.IUnenrollDataSourcesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.unenrollDataSources(request, options, callback);
   }
 
   /**

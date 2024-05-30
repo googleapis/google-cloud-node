@@ -104,7 +104,7 @@ describe('v1.SqlInstancesServiceClient', () => {
     });
 
     if (
-      typeof process !== 'undefined' &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       it('throws DeprecationWarning if static servicePath is used', () => {
@@ -140,6 +140,40 @@ describe('v1.SqlInstancesServiceClient', () => {
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'sqladmin.example.com');
     });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new sqlinstancesserviceModule.v1.SqlInstancesServiceClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'sqladmin.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new sqlinstancesserviceModule.v1.SqlInstancesServiceClient({
+              universeDomain: 'configured.example.com',
+            });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'sqladmin.configured.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new sqlinstancesserviceModule.v1.SqlInstancesServiceClient({
@@ -5228,6 +5262,322 @@ describe('v1.SqlInstancesServiceClient', () => {
         client.getLatestRecoveryTime(request),
         expectedError
       );
+    });
+  });
+
+  describe('acquireSsrsLease', () => {
+    it('invokes acquireSsrsLease without error', async () => {
+      const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseRequest',
+        ['instance']
+      );
+      request.instance = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseResponse()
+      );
+      client.innerApiCalls.acquireSsrsLease = stubSimpleCall(expectedResponse);
+      const [response] = await client.acquireSsrsLease(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.acquireSsrsLease as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.acquireSsrsLease as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes acquireSsrsLease without error using callback', async () => {
+      const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseRequest',
+        ['instance']
+      );
+      request.instance = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseResponse()
+      );
+      client.innerApiCalls.acquireSsrsLease =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.acquireSsrsLease(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.sql.v1.ISqlInstancesAcquireSsrsLeaseResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.acquireSsrsLease as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.acquireSsrsLease as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes acquireSsrsLease with error', async () => {
+      const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseRequest',
+        ['instance']
+      );
+      request.instance = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.acquireSsrsLease = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.acquireSsrsLease(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.acquireSsrsLease as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.acquireSsrsLease as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes acquireSsrsLease with closed client', async () => {
+      const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseRequest',
+        ['instance']
+      );
+      request.instance = defaultValue2;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.acquireSsrsLease(request), expectedError);
+    });
+  });
+
+  describe('releaseSsrsLease', () => {
+    it('invokes releaseSsrsLease without error', async () => {
+      const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseRequest',
+        ['instance']
+      );
+      request.instance = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseResponse()
+      );
+      client.innerApiCalls.releaseSsrsLease = stubSimpleCall(expectedResponse);
+      const [response] = await client.releaseSsrsLease(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.releaseSsrsLease as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.releaseSsrsLease as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes releaseSsrsLease without error using callback', async () => {
+      const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseRequest',
+        ['instance']
+      );
+      request.instance = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseResponse()
+      );
+      client.innerApiCalls.releaseSsrsLease =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.releaseSsrsLease(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.sql.v1.ISqlInstancesReleaseSsrsLeaseResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.releaseSsrsLease as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.releaseSsrsLease as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes releaseSsrsLease with error', async () => {
+      const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseRequest',
+        ['instance']
+      );
+      request.instance = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.releaseSsrsLease = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.releaseSsrsLease(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.releaseSsrsLease as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.releaseSsrsLease as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes releaseSsrsLease with closed client', async () => {
+      const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseRequest',
+        ['instance']
+      );
+      request.instance = defaultValue2;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.releaseSsrsLease(request), expectedError);
     });
   });
   describe('getLocation', () => {

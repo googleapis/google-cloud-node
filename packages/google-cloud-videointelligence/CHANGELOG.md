@@ -4,6 +4,22 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/video-intelligence-v5.2.0...video-intelligence-v5.3.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5356](https://github.com/googleapis/google-cloud-node/issues/5356)) ([819988f](https://github.com/googleapis/google-cloud-node/commit/819988f97a7c2f9a64bf1ef0385feb1bcd107ae7))
+
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/video-intelligence-v5.1.0...video-intelligence-v5.2.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5192](https://github.com/googleapis/google-cloud-node/issues/5192)) ([b926f13](https://github.com/googleapis/google-cloud-node/commit/b926f1326ea4df73c411dbeb7e529f8d9ccc3642))
+
 ## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/video-intelligence-v5.0.2...video-intelligence-v5.1.0) (2024-02-09)
 
 

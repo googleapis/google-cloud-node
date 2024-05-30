@@ -129,8 +129,15 @@ export class ConfigClient {
         'Please set either universe_domain or universeDomain, but not both.'
       );
     }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
     this._universeDomain =
-      opts?.universeDomain ?? opts?.universe_domain ?? 'googleapis.com';
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'config.' + this._universeDomain;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || this._servicePath;
@@ -188,7 +195,7 @@ export class ConfigClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -226,6 +233,9 @@ export class ConfigClient {
       serviceAccountPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/serviceAccounts/{service_account}'
       ),
+      terraformVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/terraformVersions/{terraform_version}'
+      ),
       workerPoolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/workerPools/{worker_pool}'
       ),
@@ -254,6 +264,11 @@ export class ConfigClient {
         'pageToken',
         'nextPageToken',
         'previews'
+      ),
+      listTerraformVersions: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'terraformVersions'
       ),
     };
 
@@ -464,6 +479,8 @@ export class ConfigClient {
       'listPreviews',
       'deletePreview',
       'exportPreviewResult',
+      'listTerraformVersions',
+      'getTerraformVersion',
     ];
     for (const methodName of configStubMethods) {
       const callPromise = this.configStub.then(
@@ -504,7 +521,7 @@ export class ConfigClient {
    */
   static get servicePath() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -522,7 +539,7 @@ export class ConfigClient {
    */
   static get apiEndpoint() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -1474,6 +1491,98 @@ export class ConfigClient {
       });
     this.initialize();
     return this.innerApiCalls.exportPreviewResult(request, options, callback);
+  }
+  /**
+   * Gets details about a
+   * {@link protos.google.cloud.config.v1.TerraformVersion|TerraformVersion}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the TerraformVersion. Format:
+   *   'projects/{project_id}/locations/{location}/terraformVersions/{terraform_version}'
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.config.v1.TerraformVersion|TerraformVersion}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/config.get_terraform_version.js</caption>
+   * region_tag:config_v1_generated_Config_GetTerraformVersion_async
+   */
+  getTerraformVersion(
+    request?: protos.google.cloud.config.v1.IGetTerraformVersionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.config.v1.ITerraformVersion,
+      protos.google.cloud.config.v1.IGetTerraformVersionRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getTerraformVersion(
+    request: protos.google.cloud.config.v1.IGetTerraformVersionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.config.v1.ITerraformVersion,
+      | protos.google.cloud.config.v1.IGetTerraformVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getTerraformVersion(
+    request: protos.google.cloud.config.v1.IGetTerraformVersionRequest,
+    callback: Callback<
+      protos.google.cloud.config.v1.ITerraformVersion,
+      | protos.google.cloud.config.v1.IGetTerraformVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getTerraformVersion(
+    request?: protos.google.cloud.config.v1.IGetTerraformVersionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.config.v1.ITerraformVersion,
+          | protos.google.cloud.config.v1.IGetTerraformVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.config.v1.ITerraformVersion,
+      | protos.google.cloud.config.v1.IGetTerraformVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.config.v1.ITerraformVersion,
+      protos.google.cloud.config.v1.IGetTerraformVersionRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getTerraformVersion(request, options, callback);
   }
 
   /**
@@ -2546,8 +2655,8 @@ export class ConfigClient {
    *   'projects/{project_id}/locations/{location}'.
    * @param {number} request.pageSize
    *   When requesting a page of resources, 'page_size' specifies number of
-   *   resources to return. If unspecified or set to 0, all resources will be
-   *   returned.
+   *   resources to return. If unspecified, at most 500 will be returned. The
+   *   maximum value is 1000.
    * @param {string} request.pageToken
    *   Token returned by previous call to 'ListDeployments' which specifies the
    *   position in the list from where to continue listing the resources.
@@ -2666,8 +2775,8 @@ export class ConfigClient {
    *   'projects/{project_id}/locations/{location}'.
    * @param {number} request.pageSize
    *   When requesting a page of resources, 'page_size' specifies number of
-   *   resources to return. If unspecified or set to 0, all resources will be
-   *   returned.
+   *   resources to return. If unspecified, at most 500 will be returned. The
+   *   maximum value is 1000.
    * @param {string} request.pageToken
    *   Token returned by previous call to 'ListDeployments' which specifies the
    *   position in the list from where to continue listing the resources.
@@ -2740,8 +2849,8 @@ export class ConfigClient {
    *   'projects/{project_id}/locations/{location}'.
    * @param {number} request.pageSize
    *   When requesting a page of resources, 'page_size' specifies number of
-   *   resources to return. If unspecified or set to 0, all resources will be
-   *   returned.
+   *   resources to return. If unspecified, at most 500 will be returned. The
+   *   maximum value is 1000.
    * @param {string} request.pageToken
    *   Token returned by previous call to 'ListDeployments' which specifies the
    *   position in the list from where to continue listing the resources.
@@ -2813,8 +2922,8 @@ export class ConfigClient {
    *   'projects/{project_id}/locations/{location}/deployments/{deployment}'.
    * @param {number} request.pageSize
    *   When requesting a page of resources, `page_size` specifies number of
-   *   resources to return. If unspecified or set to 0, all resources will be
-   *   returned.
+   *   resources to return. If unspecified, at most 500 will be returned. The
+   *   maximum value is 1000.
    * @param {string} request.pageToken
    *   Token returned by previous call to 'ListRevisions' which specifies the
    *   position in the list from where to continue listing the resources.
@@ -2933,8 +3042,8 @@ export class ConfigClient {
    *   'projects/{project_id}/locations/{location}/deployments/{deployment}'.
    * @param {number} request.pageSize
    *   When requesting a page of resources, `page_size` specifies number of
-   *   resources to return. If unspecified or set to 0, all resources will be
-   *   returned.
+   *   resources to return. If unspecified, at most 500 will be returned. The
+   *   maximum value is 1000.
    * @param {string} request.pageToken
    *   Token returned by previous call to 'ListRevisions' which specifies the
    *   position in the list from where to continue listing the resources.
@@ -3007,8 +3116,8 @@ export class ConfigClient {
    *   'projects/{project_id}/locations/{location}/deployments/{deployment}'.
    * @param {number} request.pageSize
    *   When requesting a page of resources, `page_size` specifies number of
-   *   resources to return. If unspecified or set to 0, all resources will be
-   *   returned.
+   *   resources to return. If unspecified, at most 500 will be returned. The
+   *   maximum value is 1000.
    * @param {string} request.pageToken
    *   Token returned by previous call to 'ListRevisions' which specifies the
    *   position in the list from where to continue listing the resources.
@@ -3080,8 +3189,8 @@ export class ConfigClient {
    *   'projects/{project_id}/locations/{location}/deployments/{deployment}/revisions/{revision}'.
    * @param {number} request.pageSize
    *   When requesting a page of resources, 'page_size' specifies number of
-   *   resources to return. If unspecified or set to 0, all resources will be
-   *   returned.
+   *   resources to return. If unspecified, at most 500 will be returned. The
+   *   maximum value is 1000.
    * @param {string} request.pageToken
    *   Token returned by previous call to 'ListResources' which specifies the
    *   position in the list from where to continue listing the resources.
@@ -3192,8 +3301,8 @@ export class ConfigClient {
    *   'projects/{project_id}/locations/{location}/deployments/{deployment}/revisions/{revision}'.
    * @param {number} request.pageSize
    *   When requesting a page of resources, 'page_size' specifies number of
-   *   resources to return. If unspecified or set to 0, all resources will be
-   *   returned.
+   *   resources to return. If unspecified, at most 500 will be returned. The
+   *   maximum value is 1000.
    * @param {string} request.pageToken
    *   Token returned by previous call to 'ListResources' which specifies the
    *   position in the list from where to continue listing the resources.
@@ -3258,8 +3367,8 @@ export class ConfigClient {
    *   'projects/{project_id}/locations/{location}/deployments/{deployment}/revisions/{revision}'.
    * @param {number} request.pageSize
    *   When requesting a page of resources, 'page_size' specifies number of
-   *   resources to return. If unspecified or set to 0, all resources will be
-   *   returned.
+   *   resources to return. If unspecified, at most 500 will be returned. The
+   *   maximum value is 1000.
    * @param {string} request.pageToken
    *   Token returned by previous call to 'ListResources' which specifies the
    *   position in the list from where to continue listing the resources.
@@ -3323,8 +3432,8 @@ export class ConfigClient {
    *   value is in the format: 'projects/{project_id}/locations/{location}'.
    * @param {number} [request.pageSize]
    *   Optional. When requesting a page of resources, 'page_size' specifies number
-   *   of resources to return. If unspecified or set to 0, all resources will be
-   *   returned.
+   *   of resources to return. If unspecified, at most 500 will be returned. The
+   *   maximum value is 1000.
    * @param {string} [request.pageToken]
    *   Optional. Token returned by previous call to 'ListDeployments' which
    *   specifies the position in the list from where to continue listing the
@@ -3443,8 +3552,8 @@ export class ConfigClient {
    *   value is in the format: 'projects/{project_id}/locations/{location}'.
    * @param {number} [request.pageSize]
    *   Optional. When requesting a page of resources, 'page_size' specifies number
-   *   of resources to return. If unspecified or set to 0, all resources will be
-   *   returned.
+   *   of resources to return. If unspecified, at most 500 will be returned. The
+   *   maximum value is 1000.
    * @param {string} [request.pageToken]
    *   Optional. Token returned by previous call to 'ListDeployments' which
    *   specifies the position in the list from where to continue listing the
@@ -3517,8 +3626,8 @@ export class ConfigClient {
    *   value is in the format: 'projects/{project_id}/locations/{location}'.
    * @param {number} [request.pageSize]
    *   Optional. When requesting a page of resources, 'page_size' specifies number
-   *   of resources to return. If unspecified or set to 0, all resources will be
-   *   returned.
+   *   of resources to return. If unspecified, at most 500 will be returned. The
+   *   maximum value is 1000.
    * @param {string} [request.pageToken]
    *   Optional. Token returned by previous call to 'ListDeployments' which
    *   specifies the position in the list from where to continue listing the
@@ -3579,6 +3688,244 @@ export class ConfigClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.config.v1.IPreview>;
+  }
+  /**
+   * Lists {@link protos.google.cloud.config.v1.TerraformVersion|TerraformVersion}s in a
+   * given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent in whose context the TerraformVersions are listed. The
+   *   parent value is in the format:
+   *   'projects/{project_id}/locations/{location}'.
+   * @param {number} [request.pageSize]
+   *   Optional. When requesting a page of resources, 'page_size' specifies number
+   *   of resources to return. If unspecified, at most 500 will be returned. The
+   *   maximum value is 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Token returned by previous call to 'ListTerraformVersions' which
+   *   specifies the position in the list from where to continue listing the
+   *   resources.
+   * @param {string} [request.filter]
+   *   Optional. Lists the TerraformVersions that match the filter expression. A
+   *   filter expression filters the resources listed in the response. The
+   *   expression must be of the form '{field} {operator} {value}' where
+   *   operators: '<', '>',
+   *   '<=', '>=', '!=', '=', ':' are supported (colon ':' represents a HAS
+   *   operator which is roughly synonymous with equality). {field} can refer to a
+   *   proto or JSON field, or a synthetic field. Field names can be camelCase or
+   *   snake_case.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to use to sort the list.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.config.v1.TerraformVersion|TerraformVersion}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listTerraformVersionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listTerraformVersions(
+    request?: protos.google.cloud.config.v1.IListTerraformVersionsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.config.v1.ITerraformVersion[],
+      protos.google.cloud.config.v1.IListTerraformVersionsRequest | null,
+      protos.google.cloud.config.v1.IListTerraformVersionsResponse,
+    ]
+  >;
+  listTerraformVersions(
+    request: protos.google.cloud.config.v1.IListTerraformVersionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.config.v1.IListTerraformVersionsRequest,
+      | protos.google.cloud.config.v1.IListTerraformVersionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.config.v1.ITerraformVersion
+    >
+  ): void;
+  listTerraformVersions(
+    request: protos.google.cloud.config.v1.IListTerraformVersionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.config.v1.IListTerraformVersionsRequest,
+      | protos.google.cloud.config.v1.IListTerraformVersionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.config.v1.ITerraformVersion
+    >
+  ): void;
+  listTerraformVersions(
+    request?: protos.google.cloud.config.v1.IListTerraformVersionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.config.v1.IListTerraformVersionsRequest,
+          | protos.google.cloud.config.v1.IListTerraformVersionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.config.v1.ITerraformVersion
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.config.v1.IListTerraformVersionsRequest,
+      | protos.google.cloud.config.v1.IListTerraformVersionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.config.v1.ITerraformVersion
+    >
+  ): Promise<
+    [
+      protos.google.cloud.config.v1.ITerraformVersion[],
+      protos.google.cloud.config.v1.IListTerraformVersionsRequest | null,
+      protos.google.cloud.config.v1.IListTerraformVersionsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listTerraformVersions(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent in whose context the TerraformVersions are listed. The
+   *   parent value is in the format:
+   *   'projects/{project_id}/locations/{location}'.
+   * @param {number} [request.pageSize]
+   *   Optional. When requesting a page of resources, 'page_size' specifies number
+   *   of resources to return. If unspecified, at most 500 will be returned. The
+   *   maximum value is 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Token returned by previous call to 'ListTerraformVersions' which
+   *   specifies the position in the list from where to continue listing the
+   *   resources.
+   * @param {string} [request.filter]
+   *   Optional. Lists the TerraformVersions that match the filter expression. A
+   *   filter expression filters the resources listed in the response. The
+   *   expression must be of the form '{field} {operator} {value}' where
+   *   operators: '<', '>',
+   *   '<=', '>=', '!=', '=', ':' are supported (colon ':' represents a HAS
+   *   operator which is roughly synonymous with equality). {field} can refer to a
+   *   proto or JSON field, or a synthetic field. Field names can be camelCase or
+   *   snake_case.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to use to sort the list.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.config.v1.TerraformVersion|TerraformVersion} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listTerraformVersionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listTerraformVersionsStream(
+    request?: protos.google.cloud.config.v1.IListTerraformVersionsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listTerraformVersions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listTerraformVersions.createStream(
+      this.innerApiCalls.listTerraformVersions as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listTerraformVersions`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent in whose context the TerraformVersions are listed. The
+   *   parent value is in the format:
+   *   'projects/{project_id}/locations/{location}'.
+   * @param {number} [request.pageSize]
+   *   Optional. When requesting a page of resources, 'page_size' specifies number
+   *   of resources to return. If unspecified, at most 500 will be returned. The
+   *   maximum value is 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Token returned by previous call to 'ListTerraformVersions' which
+   *   specifies the position in the list from where to continue listing the
+   *   resources.
+   * @param {string} [request.filter]
+   *   Optional. Lists the TerraformVersions that match the filter expression. A
+   *   filter expression filters the resources listed in the response. The
+   *   expression must be of the form '{field} {operator} {value}' where
+   *   operators: '<', '>',
+   *   '<=', '>=', '!=', '=', ':' are supported (colon ':' represents a HAS
+   *   operator which is roughly synonymous with equality). {field} can refer to a
+   *   proto or JSON field, or a synthetic field. Field names can be camelCase or
+   *   snake_case.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to use to sort the list.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.config.v1.TerraformVersion|TerraformVersion}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/config.list_terraform_versions.js</caption>
+   * region_tag:config_v1_generated_Config_ListTerraformVersions_async
+   */
+  listTerraformVersionsAsync(
+    request?: protos.google.cloud.config.v1.IListTerraformVersionsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.config.v1.ITerraformVersion> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listTerraformVersions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listTerraformVersions.asyncIterate(
+      this.innerApiCalls['listTerraformVersions'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.config.v1.ITerraformVersion>;
   }
   /**
    * Gets the access control policy for a resource. Returns an empty policy
@@ -4300,6 +4647,65 @@ export class ConfigClient {
     return this.pathTemplates.serviceAccountPathTemplate.match(
       serviceAccountName
     ).service_account;
+  }
+
+  /**
+   * Return a fully-qualified terraformVersion resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} terraform_version
+   * @returns {string} Resource name string.
+   */
+  terraformVersionPath(
+    project: string,
+    location: string,
+    terraformVersion: string
+  ) {
+    return this.pathTemplates.terraformVersionPathTemplate.render({
+      project: project,
+      location: location,
+      terraform_version: terraformVersion,
+    });
+  }
+
+  /**
+   * Parse the project from TerraformVersion resource.
+   *
+   * @param {string} terraformVersionName
+   *   A fully-qualified path representing TerraformVersion resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromTerraformVersionName(terraformVersionName: string) {
+    return this.pathTemplates.terraformVersionPathTemplate.match(
+      terraformVersionName
+    ).project;
+  }
+
+  /**
+   * Parse the location from TerraformVersion resource.
+   *
+   * @param {string} terraformVersionName
+   *   A fully-qualified path representing TerraformVersion resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromTerraformVersionName(terraformVersionName: string) {
+    return this.pathTemplates.terraformVersionPathTemplate.match(
+      terraformVersionName
+    ).location;
+  }
+
+  /**
+   * Parse the terraform_version from TerraformVersion resource.
+   *
+   * @param {string} terraformVersionName
+   *   A fully-qualified path representing TerraformVersion resource.
+   * @returns {string} A string representing the terraform_version.
+   */
+  matchTerraformVersionFromTerraformVersionName(terraformVersionName: string) {
+    return this.pathTemplates.terraformVersionPathTemplate.match(
+      terraformVersionName
+    ).terraform_version;
   }
 
   /**

@@ -119,8 +119,15 @@ export class ImageVersionsClient {
         'Please set either universe_domain or universeDomain, but not both.'
       );
     }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
     this._universeDomain =
-      opts?.universeDomain ?? opts?.universe_domain ?? 'googleapis.com';
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'composer.' + this._universeDomain;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || this._servicePath;
@@ -172,7 +179,7 @@ export class ImageVersionsClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -194,6 +201,12 @@ export class ImageVersionsClient {
     this.pathTemplates = {
       environmentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/environments/{environment}'
+      ),
+      userWorkloadsConfigMapPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/environments/{environment}/userWorkloadsConfigMaps/{user_workloads_config_map}'
+      ),
+      userWorkloadsSecretPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/environments/{environment}/userWorkloadsSecrets/{user_workloads_secret}'
       ),
     };
 
@@ -295,7 +308,7 @@ export class ImageVersionsClient {
    */
   static get servicePath() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -313,7 +326,7 @@ export class ImageVersionsClient {
    */
   static get apiEndpoint() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -622,6 +635,166 @@ export class ImageVersionsClient {
   matchEnvironmentFromEnvironmentName(environmentName: string) {
     return this.pathTemplates.environmentPathTemplate.match(environmentName)
       .environment;
+  }
+
+  /**
+   * Return a fully-qualified userWorkloadsConfigMap resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} environment
+   * @param {string} user_workloads_config_map
+   * @returns {string} Resource name string.
+   */
+  userWorkloadsConfigMapPath(
+    project: string,
+    location: string,
+    environment: string,
+    userWorkloadsConfigMap: string
+  ) {
+    return this.pathTemplates.userWorkloadsConfigMapPathTemplate.render({
+      project: project,
+      location: location,
+      environment: environment,
+      user_workloads_config_map: userWorkloadsConfigMap,
+    });
+  }
+
+  /**
+   * Parse the project from UserWorkloadsConfigMap resource.
+   *
+   * @param {string} userWorkloadsConfigMapName
+   *   A fully-qualified path representing UserWorkloadsConfigMap resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromUserWorkloadsConfigMapName(
+    userWorkloadsConfigMapName: string
+  ) {
+    return this.pathTemplates.userWorkloadsConfigMapPathTemplate.match(
+      userWorkloadsConfigMapName
+    ).project;
+  }
+
+  /**
+   * Parse the location from UserWorkloadsConfigMap resource.
+   *
+   * @param {string} userWorkloadsConfigMapName
+   *   A fully-qualified path representing UserWorkloadsConfigMap resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromUserWorkloadsConfigMapName(
+    userWorkloadsConfigMapName: string
+  ) {
+    return this.pathTemplates.userWorkloadsConfigMapPathTemplate.match(
+      userWorkloadsConfigMapName
+    ).location;
+  }
+
+  /**
+   * Parse the environment from UserWorkloadsConfigMap resource.
+   *
+   * @param {string} userWorkloadsConfigMapName
+   *   A fully-qualified path representing UserWorkloadsConfigMap resource.
+   * @returns {string} A string representing the environment.
+   */
+  matchEnvironmentFromUserWorkloadsConfigMapName(
+    userWorkloadsConfigMapName: string
+  ) {
+    return this.pathTemplates.userWorkloadsConfigMapPathTemplate.match(
+      userWorkloadsConfigMapName
+    ).environment;
+  }
+
+  /**
+   * Parse the user_workloads_config_map from UserWorkloadsConfigMap resource.
+   *
+   * @param {string} userWorkloadsConfigMapName
+   *   A fully-qualified path representing UserWorkloadsConfigMap resource.
+   * @returns {string} A string representing the user_workloads_config_map.
+   */
+  matchUserWorkloadsConfigMapFromUserWorkloadsConfigMapName(
+    userWorkloadsConfigMapName: string
+  ) {
+    return this.pathTemplates.userWorkloadsConfigMapPathTemplate.match(
+      userWorkloadsConfigMapName
+    ).user_workloads_config_map;
+  }
+
+  /**
+   * Return a fully-qualified userWorkloadsSecret resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} environment
+   * @param {string} user_workloads_secret
+   * @returns {string} Resource name string.
+   */
+  userWorkloadsSecretPath(
+    project: string,
+    location: string,
+    environment: string,
+    userWorkloadsSecret: string
+  ) {
+    return this.pathTemplates.userWorkloadsSecretPathTemplate.render({
+      project: project,
+      location: location,
+      environment: environment,
+      user_workloads_secret: userWorkloadsSecret,
+    });
+  }
+
+  /**
+   * Parse the project from UserWorkloadsSecret resource.
+   *
+   * @param {string} userWorkloadsSecretName
+   *   A fully-qualified path representing UserWorkloadsSecret resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromUserWorkloadsSecretName(userWorkloadsSecretName: string) {
+    return this.pathTemplates.userWorkloadsSecretPathTemplate.match(
+      userWorkloadsSecretName
+    ).project;
+  }
+
+  /**
+   * Parse the location from UserWorkloadsSecret resource.
+   *
+   * @param {string} userWorkloadsSecretName
+   *   A fully-qualified path representing UserWorkloadsSecret resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromUserWorkloadsSecretName(userWorkloadsSecretName: string) {
+    return this.pathTemplates.userWorkloadsSecretPathTemplate.match(
+      userWorkloadsSecretName
+    ).location;
+  }
+
+  /**
+   * Parse the environment from UserWorkloadsSecret resource.
+   *
+   * @param {string} userWorkloadsSecretName
+   *   A fully-qualified path representing UserWorkloadsSecret resource.
+   * @returns {string} A string representing the environment.
+   */
+  matchEnvironmentFromUserWorkloadsSecretName(userWorkloadsSecretName: string) {
+    return this.pathTemplates.userWorkloadsSecretPathTemplate.match(
+      userWorkloadsSecretName
+    ).environment;
+  }
+
+  /**
+   * Parse the user_workloads_secret from UserWorkloadsSecret resource.
+   *
+   * @param {string} userWorkloadsSecretName
+   *   A fully-qualified path representing UserWorkloadsSecret resource.
+   * @returns {string} A string representing the user_workloads_secret.
+   */
+  matchUserWorkloadsSecretFromUserWorkloadsSecretName(
+    userWorkloadsSecretName: string
+  ) {
+    return this.pathTemplates.userWorkloadsSecretPathTemplate.match(
+      userWorkloadsSecretName
+    ).user_workloads_secret;
   }
 
   /**

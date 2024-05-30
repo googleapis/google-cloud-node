@@ -1,5 +1,27 @@
 # Changelog
 
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/addressvalidation-v2.3.0...addressvalidation-v2.4.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/addressvalidation-v2.2.0...addressvalidation-v2.3.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5192](https://github.com/googleapis/google-cloud-node/issues/5192)) ([b926f13](https://github.com/googleapis/google-cloud-node/commit/b926f1326ea4df73c411dbeb7e529f8d9ccc3642))
+
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/addressvalidation-v2.1.0...addressvalidation-v2.2.0) (2024-02-22)
+
+
+### Features
+
+* [addressvalidation] add session token support for Autocomplete (New) sessions that end with a call to Address Validation ([#5059](https://github.com/googleapis/google-cloud-node/issues/5059)) ([da1c96f](https://github.com/googleapis/google-cloud-node/commit/da1c96fcf441e412b3657b6b433c4a07c5afca1d))
+
 ## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/addressvalidation-v2.0.1...addressvalidation-v2.1.0) (2024-02-09)
 
 

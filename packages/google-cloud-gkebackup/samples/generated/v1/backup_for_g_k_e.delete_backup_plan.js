@@ -34,7 +34,7 @@ function main(name) {
    */
   // const name = 'abc123'
   /**
-   *  If provided, this value must match the current value of the
+   *  Optional. If provided, this value must match the current value of the
    *  target BackupPlan's etag google.cloud.gkebackup.v1.BackupPlan.etag  field
    *  or the request is rejected.
    */

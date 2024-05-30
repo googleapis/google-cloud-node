@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -164,9 +164,38 @@ service DepService {
   }
 }
 
+// The part of the request or response for which the extension is called.
+enum EventType {
+  // Unspecified value. Do not use.
+  EVENT_TYPE_UNSPECIFIED = 0;
+
+  // If included in `supported_events`,
+  // the extension is called when the HTTP request headers arrive.
+  REQUEST_HEADERS = 1;
+
+  // If included in `supported_events`,
+  // the extension is called when the HTTP request body arrives.
+  REQUEST_BODY = 2;
+
+  // If included in `supported_events`,
+  // the extension is called when the HTTP response headers arrive.
+  RESPONSE_HEADERS = 3;
+
+  // If included in `supported_events`,
+  // the extension is called when the HTTP response body arrives.
+  RESPONSE_BODY = 4;
+
+  // If included in `supported_events`,
+  // the extension is called when the HTTP request trailers arrives.
+  REQUEST_TRAILERS = 5;
+
+  // If included in `supported_events`,
+  // the extension is called when the HTTP response trailers arrives.
+  RESPONSE_TRAILERS = 6;
+}
+
 // Load balancing schemes supported by the `LbTrafficExtension` resource and
-// `LbRouteExtension` resource. The valid values are: `INTERNAL_MANAGED`,
-// `EXTERNAL_MANAGED`.
+// `LbRouteExtension` resource.
 // For more information, refer to [Choosing a load
 // balancer](https://cloud.google.com/load-balancing/docs/backend-service).
 enum LoadBalancingScheme {
@@ -189,39 +218,13 @@ message ExtensionChain {
     // Required. A Common Expression Language (CEL) expression that is used to
     // match requests for which the extension chain is executed.
     //
-    // For more information, see
-    // [CEL matcher language
+    // For more information, see [CEL matcher language
     // reference](https://cloud.google.com/service-extensions/docs/cel-matcher-language-reference).
     string cel_expression = 1 [(google.api.field_behavior) = REQUIRED];
   }
 
   // A single extension in the chain to execute for the matching request.
   message Extension {
-    // Defines the part of the request or response for which this extension
-    // is called.
-    // The valid values are:
-    // `REQUEST_HEADERS`, `REQUEST_BODY`, `RESPONSE_HEADERS`, `RESPONSE_BODY`.
-    enum EventType {
-      // Unspecified value. Do not use.
-      EVENT_TYPE_UNSPECIFIED = 0;
-
-      // If included in `supported_events`,
-      // the extension is called when the HTTP request headers arrive.
-      REQUEST_HEADERS = 1;
-
-      // If included in `supported_events`,
-      // the extension is called when the HTTP request body arrives.
-      REQUEST_BODY = 2;
-
-      // If included in `supported_events`,
-      // the extension is called when the HTTP response headers arrive.
-      RESPONSE_HEADERS = 3;
-
-      // If included in `supported_events`,
-      // the extension is called when the HTTP response body arrives.
-      RESPONSE_BODY = 4;
-    }
-
     // Required. The name for this extension.
     // The name is logged as part of the HTTP request logs.
     // The name must conform with RFC-1034, is restricted to lower-cased
@@ -230,15 +233,16 @@ message ExtensionChain {
     // last a letter or a number.
     string name = 1 [(google.api.field_behavior) = REQUIRED];
 
-    // Required. The `:authority` header in the gRPC request sent from Envoy
+    // Optional. The `:authority` header in the gRPC request sent from Envoy
     // to the extension service.
-    string authority = 2 [(google.api.field_behavior) = REQUIRED];
+    // Required for Callout extensions.
+    string authority = 2 [(google.api.field_behavior) = OPTIONAL];
 
     // Required. The reference to the service that runs the extension.
     //
-    // Currently only Callout extensions are supported here.
+    // Currently only callout extensions are supported here.
     //
-    // To configure a Callout extension, `service` must be a fully-qualified
+    // To configure a callout extension, `service` must be a fully-qualified
     // reference
     // to a [backend
     // service](https://cloud.google.com/compute/docs/reference/rest/v1/backendServices)
@@ -255,24 +259,25 @@ message ExtensionChain {
     repeated EventType supported_events = 4
         [(google.api.field_behavior) = OPTIONAL];
 
-    // Required. Specifies the timeout for each individual message on the
-    // stream. The timeout must be between 10-1000 milliseconds.
+    // Optional. Specifies the timeout for each individual message on the
+    // stream. The timeout must be between 10-1000 milliseconds. Required for
+    // Callout extensions.
     google.protobuf.Duration timeout = 5
-        [(google.api.field_behavior) = REQUIRED];
+        [(google.api.field_behavior) = OPTIONAL];
 
     // Optional. Determines how the proxy behaves if the call to the extension
     // fails or times out.
+    //
     // When set to `TRUE`, request or response processing continues without
     // error. Any subsequent extensions in the extension chain are also
-    // executed. When set to `FALSE`:
-    // * If response headers have not been delivered to the downstream
-    //  client, a generic 500 error is returned to the client. The error
-    //  response can be tailored by configuring a custom error response
-    //  in the load balancer.
+    // executed. When set to `FALSE` or the default setting of `FALSE` is used,
+    // one of the following happens:
+    // * If response headers have not been delivered to the downstream client,
+    // a generic 500 error is returned to the client. The error response can be
+    // tailored by configuring a custom error response in the load balancer.
     //
-    // * If response headers have been delivered, then the HTTP stream to
-    //  the downstream client is reset.
-    // Default is `FALSE`.
+    // * If response headers have been delivered, then the HTTP stream to the
+    // downstream client is reset.
     bool fail_open = 6 [(google.api.field_behavior) = OPTIONAL];
 
     // Optional. List of the HTTP headers to forward to the extension
@@ -334,8 +339,9 @@ message LbTrafficExtension {
 
   // Optional. Set of labels associated with the `LbTrafficExtension` resource.
   //
-  // The format must comply with [the following
-  // requirements](/compute/docs/labeling-resources#requirements).
+  // The format must comply with [the requirements for
+  // labels](https://cloud.google.com/compute/docs/labeling-resources#requirements)
+  // for Google Cloud resources.
   map<string, string> labels = 4 [(google.api.field_behavior) = OPTIONAL];
 
   // Required. A list of references to the forwarding rules to which this
@@ -545,8 +551,9 @@ message LbRouteExtension {
 
   // Optional. Set of labels associated with the `LbRouteExtension` resource.
   //
-  // The format must comply with [the following
-  // requirements](/compute/docs/labeling-resources#requirements).
+  // The format must comply with [the requirements for
+  // labels](https://cloud.google.com/compute/docs/labeling-resources#requirements)
+  // for Google Cloud resources.
   map<string, string> labels = 4 [(google.api.field_behavior) = OPTIONAL];
 
   // Required. A list of references to the forwarding rules to which this

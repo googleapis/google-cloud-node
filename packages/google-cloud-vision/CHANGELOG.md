@@ -4,6 +4,28 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/vision-v4.2.1...vision-v4.3.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [4.2.1](https://github.com/googleapis/google-cloud-node/compare/vision-v4.2.0...vision-v4.2.1) (2024-04-16)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency natural to v7 ([#5221](https://github.com/googleapis/google-cloud-node/issues/5221)) ([dbc5e67](https://github.com/googleapis/google-cloud-node/commit/dbc5e6713c9e733a10acd551a34494ae21a17110))
+
+## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/vision-v4.1.0...vision-v4.2.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5192](https://github.com/googleapis/google-cloud-node/issues/5192)) ([b926f13](https://github.com/googleapis/google-cloud-node/commit/b926f1326ea4df73c411dbeb7e529f8d9ccc3642))
+
 ## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/vision-v4.0.3...vision-v4.1.0) (2024-02-09)
 
 

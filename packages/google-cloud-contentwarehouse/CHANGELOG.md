@@ -1,5 +1,35 @@
 # Changelog
 
+## [1.8.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v1.7.0...contentwarehouse-v1.8.0) (2024-05-21)
+
+
+### Features
+
+* [contentwarehouse] update Nodejs generator to send API versions in headers for GAPICs ([#5335](https://github.com/googleapis/google-cloud-node/issues/5335)) ([093bfb2](https://github.com/googleapis/google-cloud-node/commit/093bfb29464688846c513e2b3293c18ccd4507a6))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [1.7.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v1.6.0...contentwarehouse-v1.7.0) (2024-04-18)
+
+
+### Features
+
+* [contentwarehouse] A new message `FoundationModelTuningOptions` is added ([#5243](https://github.com/googleapis/google-cloud-node/issues/5243)) ([280a42e](https://github.com/googleapis/google-cloud-node/commit/280a42e0b9e8559ca895f8545ed4f261c41dfaa3))
+
+## [1.6.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v1.5.0...contentwarehouse-v1.6.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5187](https://github.com/googleapis/google-cloud-node/issues/5187)) ([1952fbe](https://github.com/googleapis/google-cloud-node/commit/1952fbe432b96115278d42e5c1dbdbc7de39036b))
+
+## [1.5.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v1.4.0...contentwarehouse-v1.5.0) (2024-02-22)
+
+
+### Features
+
+* [contentwarehouse] A new field `schema_override` is added to message `ProcessOptions` ([#5052](https://github.com/googleapis/google-cloud-node/issues/5052)) ([e1afd1f](https://github.com/googleapis/google-cloud-node/commit/e1afd1fc6779e73022f996ffa44378d0096f6269))
+
 ## [1.4.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v1.3.0...contentwarehouse-v1.4.0) (2024-02-07)
 
 

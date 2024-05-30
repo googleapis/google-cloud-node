@@ -1,5 +1,51 @@
 # Changelog
 
+## [5.6.0](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v5.5.0...secret-manager-v5.6.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+
+### Bug Fixes
+
+* Readd path templates for secret manager ([#5333](https://github.com/googleapis/google-cloud-node/issues/5333)) ([2e5fe96](https://github.com/googleapis/google-cloud-node/commit/2e5fe96e98bea8b50910901d13176dc4e95340fc))
+
+## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v5.4.0...secret-manager-v5.5.0) (2024-05-02)
+
+
+### Features
+
+* [shopping] add `Weight` to common types for Shopping APIs to be used for accounts bundle ([#5291](https://github.com/googleapis/google-cloud-node/issues/5291)) ([27a72a6](https://github.com/googleapis/google-cloud-node/commit/27a72a6d16079ff025b4a9ac702c6d1bffd017ce))
+
+
+### Bug Fixes
+
+* (secretmanaer) readd legacy path templates ([#5290](https://github.com/googleapis/google-cloud-node/issues/5290)) ([5e14553](https://github.com/googleapis/google-cloud-node/commit/5e145530c217cc87ee2d2e9f6124c5091534fc5e))
+
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v5.3.0...secret-manager-v5.4.0) (2024-04-23)
+
+
+### Features
+
+* [secretmanager] Add Secret Version Delayed Destroy changes for client libraries ([#5273](https://github.com/googleapis/google-cloud-node/issues/5273)) ([fcce43c](https://github.com/googleapis/google-cloud-node/commit/fcce43c5914b7ae7df6b7bb21196b64ccf7361c9))
+
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v5.2.0...secret-manager-v5.3.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5191](https://github.com/googleapis/google-cloud-node/issues/5191)) ([57567db](https://github.com/googleapis/google-cloud-node/commit/57567db36033ca53ae2f54e6517b8cd12145bb82))
+
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v5.1.0...secret-manager-v5.2.0) (2024-03-07)
+
+
+### Features
+
+* [secretmanager] clients for SecretManager API v1beta2 ([#5117](https://github.com/googleapis/google-cloud-node/issues/5117)) ([2c2c42b](https://github.com/googleapis/google-cloud-node/commit/2c2c42b725f4504651a372b513258fac88c5b5f6))
+
 ## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v5.0.1...secret-manager-v5.1.0) (2024-02-09)
 
 

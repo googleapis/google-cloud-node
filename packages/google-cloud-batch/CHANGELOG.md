@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.10.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.9.0...batch-v1.10.0) (2024-05-21)
+
+
+### Features
+
+* [batch] update Nodejs generator to send API versions in headers for GAPICs ([#5336](https://github.com/googleapis/google-cloud-node/issues/5336)) ([d89a145](https://github.com/googleapis/google-cloud-node/commit/d89a1456582c1123dc788d064487802917be2564))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
 ## [1.9.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.8.0...batch-v1.9.0) (2024-02-09)
 
 

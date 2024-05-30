@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/publicca-v1.2.0...publicca-v1.3.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+* [security] update Nodejs generator to send API versions in headers for GAPICs ([#5341](https://github.com/googleapis/google-cloud-node/issues/5341)) ([8eb07ac](https://github.com/googleapis/google-cloud-node/commit/8eb07ac8084a06ff6c917eefba46a764a27dfcac))
+
+## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/publicca-v1.1.0...publicca-v1.2.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5191](https://github.com/googleapis/google-cloud-node/issues/5191)) ([57567db](https://github.com/googleapis/google-cloud-node/commit/57567db36033ca53ae2f54e6517b8cd12145bb82))
+
 ## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/publicca-v1.0.1...publicca-v1.1.0) (2024-02-09)
 
 

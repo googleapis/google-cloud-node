@@ -182,7 +182,7 @@ describe('v1.IndexEndpointServiceClient', () => {
     });
 
     if (
-      typeof process !== 'undefined' &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       it('throws DeprecationWarning if static servicePath is used', () => {
@@ -220,6 +220,40 @@ describe('v1.IndexEndpointServiceClient', () => {
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'aiplatform.example.com');
     });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new indexendpointserviceModule.v1.IndexEndpointServiceClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'aiplatform.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new indexendpointserviceModule.v1.IndexEndpointServiceClient({
+              universeDomain: 'configured.example.com',
+            });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'aiplatform.configured.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new indexendpointserviceModule.v1.IndexEndpointServiceClient({
@@ -1777,9 +1811,9 @@ describe('v1.IndexEndpointServiceClient', () => {
       assert(
         (client.descriptors.page.listIndexEndpoints.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1827,9 +1861,9 @@ describe('v1.IndexEndpointServiceClient', () => {
       assert(
         (client.descriptors.page.listIndexEndpoints.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1877,9 +1911,9 @@ describe('v1.IndexEndpointServiceClient', () => {
       assert(
         (client.descriptors.page.listIndexEndpoints.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1919,9 +1953,9 @@ describe('v1.IndexEndpointServiceClient', () => {
       assert(
         (client.descriptors.page.listIndexEndpoints.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -5010,6 +5044,232 @@ describe('v1.IndexEndpointServiceClient', () => {
       });
     });
 
+    describe('notebookRuntime', () => {
+      const fakePath = '/rendered/path/notebookRuntime';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        notebook_runtime: 'notebookRuntimeValue',
+      };
+      const client =
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.notebookRuntimePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.notebookRuntimePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('notebookRuntimePath', () => {
+        const result = client.notebookRuntimePath(
+          'projectValue',
+          'locationValue',
+          'notebookRuntimeValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.notebookRuntimePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromNotebookRuntimeName', () => {
+        const result = client.matchProjectFromNotebookRuntimeName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.notebookRuntimePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromNotebookRuntimeName', () => {
+        const result = client.matchLocationFromNotebookRuntimeName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.notebookRuntimePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNotebookRuntimeFromNotebookRuntimeName', () => {
+        const result =
+          client.matchNotebookRuntimeFromNotebookRuntimeName(fakePath);
+        assert.strictEqual(result, 'notebookRuntimeValue');
+        assert(
+          (client.pathTemplates.notebookRuntimePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('notebookRuntimeTemplate', () => {
+      const fakePath = '/rendered/path/notebookRuntimeTemplate';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        notebook_runtime_template: 'notebookRuntimeTemplateValue',
+      };
+      const client =
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.notebookRuntimeTemplatePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.notebookRuntimeTemplatePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('notebookRuntimeTemplatePath', () => {
+        const result = client.notebookRuntimeTemplatePath(
+          'projectValue',
+          'locationValue',
+          'notebookRuntimeTemplateValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.notebookRuntimeTemplatePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromNotebookRuntimeTemplateName', () => {
+        const result =
+          client.matchProjectFromNotebookRuntimeTemplateName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.notebookRuntimeTemplatePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromNotebookRuntimeTemplateName', () => {
+        const result =
+          client.matchLocationFromNotebookRuntimeTemplateName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.notebookRuntimeTemplatePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNotebookRuntimeTemplateFromNotebookRuntimeTemplateName', () => {
+        const result =
+          client.matchNotebookRuntimeTemplateFromNotebookRuntimeTemplateName(
+            fakePath
+          );
+        assert.strictEqual(result, 'notebookRuntimeTemplateValue');
+        assert(
+          (
+            client.pathTemplates.notebookRuntimeTemplatePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('persistentResource', () => {
+      const fakePath = '/rendered/path/persistentResource';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        persistent_resource: 'persistentResourceValue',
+      };
+      const client =
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.persistentResourcePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.persistentResourcePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('persistentResourcePath', () => {
+        const result = client.persistentResourcePath(
+          'projectValue',
+          'locationValue',
+          'persistentResourceValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.persistentResourcePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromPersistentResourceName', () => {
+        const result = client.matchProjectFromPersistentResourceName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.persistentResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromPersistentResourceName', () => {
+        const result = client.matchLocationFromPersistentResourceName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.persistentResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPersistentResourceFromPersistentResourceName', () => {
+        const result =
+          client.matchPersistentResourceFromPersistentResourceName(fakePath);
+        assert.strictEqual(result, 'persistentResourceValue');
+        assert(
+          (
+            client.pathTemplates.persistentResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('pipelineJob', () => {
       const fakePath = '/rendered/path/pipelineJob';
       const expectedParameters = {
@@ -6321,6 +6581,71 @@ describe('v1.IndexEndpointServiceClient', () => {
         assert.strictEqual(result, 'trialValue');
         assert(
           (client.pathTemplates.trialPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('tuningJob', () => {
+      const fakePath = '/rendered/path/tuningJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        tuning_job: 'tuningJobValue',
+      };
+      const client =
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.tuningJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.tuningJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('tuningJobPath', () => {
+        const result = client.tuningJobPath(
+          'projectValue',
+          'locationValue',
+          'tuningJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.tuningJobPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTuningJobName', () => {
+        const result = client.matchProjectFromTuningJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.tuningJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTuningJobName', () => {
+        const result = client.matchLocationFromTuningJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.tuningJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTuningJobFromTuningJobName', () => {
+        const result = client.matchTuningJobFromTuningJobName(fakePath);
+        assert.strictEqual(result, 'tuningJobValue');
+        assert(
+          (client.pathTemplates.tuningJobPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

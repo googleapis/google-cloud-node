@@ -144,7 +144,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
     });
 
     if (
-      typeof process !== 'undefined' &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       it('throws DeprecationWarning if static servicePath is used', () => {
@@ -184,6 +184,43 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'recaptchaenterprise.example.com');
     });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'recaptchaenterprise.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+              {universeDomain: 'configured.example.com'}
+            );
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(
+            servicePath,
+            'recaptchaenterprise.configured.example.com'
+          );
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
@@ -2152,6 +2189,155 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
     });
   });
 
+  describe('reorderFirewallPolicies', () => {
+    it('invokes reorderFirewallPolicies without error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesResponse()
+      );
+      client.innerApiCalls.reorderFirewallPolicies =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.reorderFirewallPolicies(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.reorderFirewallPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.reorderFirewallPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes reorderFirewallPolicies without error using callback', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesResponse()
+      );
+      client.innerApiCalls.reorderFirewallPolicies =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.reorderFirewallPolicies(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.reorderFirewallPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.reorderFirewallPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes reorderFirewallPolicies with error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.reorderFirewallPolicies = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.reorderFirewallPolicies(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.reorderFirewallPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.reorderFirewallPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes reorderFirewallPolicies with closed client', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.reorderFirewallPolicies(request),
+        expectedError
+      );
+    });
+  });
+
   describe('listKeys', () => {
     it('invokes listKeys without error', async () => {
       const client =
@@ -2341,9 +2527,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       assert(
         (client.descriptors.page.listKeys.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2395,9 +2581,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       assert(
         (client.descriptors.page.listKeys.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2446,9 +2632,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       assert(
         (client.descriptors.page.listKeys.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2490,9 +2676,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       assert(
         (client.descriptors.page.listKeys.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -2695,9 +2881,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       assert(
         (client.descriptors.page.listFirewallPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2750,9 +2936,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       assert(
         (client.descriptors.page.listFirewallPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2803,9 +2989,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       assert(
         (client.descriptors.page.listFirewallPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2847,9 +3033,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       assert(
         (client.descriptors.page.listFirewallPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });

@@ -165,6 +165,26 @@
                 "deleteStoredInfoType"
               ]
             },
+            "GetProjectDataProfile": {
+              "methods": [
+                "getProjectDataProfile"
+              ]
+            },
+            "GetTableDataProfile": {
+              "methods": [
+                "getTableDataProfile"
+              ]
+            },
+            "GetColumnDataProfile": {
+              "methods": [
+                "getColumnDataProfile"
+              ]
+            },
+            "DeleteTableDataProfile": {
+              "methods": [
+                "deleteTableDataProfile"
+              ]
+            },
             "HybridInspectDlpJob": {
               "methods": [
                 "hybridInspectDlpJob"
@@ -173,6 +193,26 @@
             "FinishDlpJob": {
               "methods": [
                 "finishDlpJob"
+              ]
+            },
+            "CreateConnection": {
+              "methods": [
+                "createConnection"
+              ]
+            },
+            "GetConnection": {
+              "methods": [
+                "getConnection"
+              ]
+            },
+            "DeleteConnection": {
+              "methods": [
+                "deleteConnection"
+              ]
+            },
+            "UpdateConnection": {
+              "methods": [
+                "updateConnection"
               ]
             },
             "ListInspectTemplates": {
@@ -215,6 +255,41 @@
                 "listStoredInfoTypes",
                 "listStoredInfoTypesStream",
                 "listStoredInfoTypesAsync"
+              ]
+            },
+            "ListProjectDataProfiles": {
+              "methods": [
+                "listProjectDataProfiles",
+                "listProjectDataProfilesStream",
+                "listProjectDataProfilesAsync"
+              ]
+            },
+            "ListTableDataProfiles": {
+              "methods": [
+                "listTableDataProfiles",
+                "listTableDataProfilesStream",
+                "listTableDataProfilesAsync"
+              ]
+            },
+            "ListColumnDataProfiles": {
+              "methods": [
+                "listColumnDataProfiles",
+                "listColumnDataProfilesStream",
+                "listColumnDataProfilesAsync"
+              ]
+            },
+            "ListConnections": {
+              "methods": [
+                "listConnections",
+                "listConnectionsStream",
+                "listConnectionsAsync"
+              ]
+            },
+            "SearchConnections": {
+              "methods": [
+                "searchConnections",
+                "searchConnectionsStream",
+                "searchConnectionsAsync"
               ]
             }
           }
@@ -377,6 +452,26 @@
                 "deleteStoredInfoType"
               ]
             },
+            "GetProjectDataProfile": {
+              "methods": [
+                "getProjectDataProfile"
+              ]
+            },
+            "GetTableDataProfile": {
+              "methods": [
+                "getTableDataProfile"
+              ]
+            },
+            "GetColumnDataProfile": {
+              "methods": [
+                "getColumnDataProfile"
+              ]
+            },
+            "DeleteTableDataProfile": {
+              "methods": [
+                "deleteTableDataProfile"
+              ]
+            },
             "HybridInspectDlpJob": {
               "methods": [
                 "hybridInspectDlpJob"
@@ -385,6 +480,26 @@
             "FinishDlpJob": {
               "methods": [
                 "finishDlpJob"
+              ]
+            },
+            "CreateConnection": {
+              "methods": [
+                "createConnection"
+              ]
+            },
+            "GetConnection": {
+              "methods": [
+                "getConnection"
+              ]
+            },
+            "DeleteConnection": {
+              "methods": [
+                "deleteConnection"
+              ]
+            },
+            "UpdateConnection": {
+              "methods": [
+                "updateConnection"
               ]
             },
             "ListInspectTemplates": {
@@ -427,6 +542,41 @@
                 "listStoredInfoTypes",
                 "listStoredInfoTypesStream",
                 "listStoredInfoTypesAsync"
+              ]
+            },
+            "ListProjectDataProfiles": {
+              "methods": [
+                "listProjectDataProfiles",
+                "listProjectDataProfilesStream",
+                "listProjectDataProfilesAsync"
+              ]
+            },
+            "ListTableDataProfiles": {
+              "methods": [
+                "listTableDataProfiles",
+                "listTableDataProfilesStream",
+                "listTableDataProfilesAsync"
+              ]
+            },
+            "ListColumnDataProfiles": {
+              "methods": [
+                "listColumnDataProfiles",
+                "listColumnDataProfilesStream",
+                "listColumnDataProfilesAsync"
+              ]
+            },
+            "ListConnections": {
+              "methods": [
+                "listConnections",
+                "listConnectionsStream",
+                "listConnectionsAsync"
+              ]
+            },
+            "SearchConnections": {
+              "methods": [
+                "searchConnections",
+                "searchConnectionsStream",
+                "searchConnectionsAsync"
               ]
             }
           }

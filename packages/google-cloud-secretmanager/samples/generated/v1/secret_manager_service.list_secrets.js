@@ -30,7 +30,8 @@ function main(parent) {
    */
   /**
    *  Required. The resource name of the project associated with the
-   *  Secrets google.cloud.secretmanager.v1.Secret, in the format `projects/*`.
+   *  Secrets google.cloud.secretmanager.v1.Secret, in the format `projects/*`
+   *  or `projects/* /locations/*`
    */
   // const parent = 'abc123'
   /**

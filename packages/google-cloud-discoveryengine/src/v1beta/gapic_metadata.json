@@ -49,6 +49,74 @@
         }
       }
     },
+    "ControlService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ControlServiceClient",
+          "rpcs": {
+            "CreateControl": {
+              "methods": [
+                "createControl"
+              ]
+            },
+            "DeleteControl": {
+              "methods": [
+                "deleteControl"
+              ]
+            },
+            "UpdateControl": {
+              "methods": [
+                "updateControl"
+              ]
+            },
+            "GetControl": {
+              "methods": [
+                "getControl"
+              ]
+            },
+            "ListControls": {
+              "methods": [
+                "listControls",
+                "listControlsStream",
+                "listControlsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ControlServiceClient",
+          "rpcs": {
+            "CreateControl": {
+              "methods": [
+                "createControl"
+              ]
+            },
+            "DeleteControl": {
+              "methods": [
+                "deleteControl"
+              ]
+            },
+            "UpdateControl": {
+              "methods": [
+                "updateControl"
+              ]
+            },
+            "GetControl": {
+              "methods": [
+                "getControl"
+              ]
+            },
+            "ListControls": {
+              "methods": [
+                "listControls",
+                "listControlsStream",
+                "listControlsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ConversationalSearchService": {
       "clients": {
         "grpc": {
@@ -79,11 +147,48 @@
                 "getConversation"
               ]
             },
+            "AnswerQuery": {
+              "methods": [
+                "answerQuery"
+              ]
+            },
+            "GetAnswer": {
+              "methods": [
+                "getAnswer"
+              ]
+            },
+            "CreateSession": {
+              "methods": [
+                "createSession"
+              ]
+            },
+            "DeleteSession": {
+              "methods": [
+                "deleteSession"
+              ]
+            },
+            "UpdateSession": {
+              "methods": [
+                "updateSession"
+              ]
+            },
+            "GetSession": {
+              "methods": [
+                "getSession"
+              ]
+            },
             "ListConversations": {
               "methods": [
                 "listConversations",
                 "listConversationsStream",
                 "listConversationsAsync"
+              ]
+            },
+            "ListSessions": {
+              "methods": [
+                "listSessions",
+                "listSessionsStream",
+                "listSessionsAsync"
               ]
             }
           }
@@ -116,11 +221,48 @@
                 "getConversation"
               ]
             },
+            "AnswerQuery": {
+              "methods": [
+                "answerQuery"
+              ]
+            },
+            "GetAnswer": {
+              "methods": [
+                "getAnswer"
+              ]
+            },
+            "CreateSession": {
+              "methods": [
+                "createSession"
+              ]
+            },
+            "DeleteSession": {
+              "methods": [
+                "deleteSession"
+              ]
+            },
+            "UpdateSession": {
+              "methods": [
+                "updateSession"
+              ]
+            },
+            "GetSession": {
+              "methods": [
+                "getSession"
+              ]
+            },
             "ListConversations": {
               "methods": [
                 "listConversations",
                 "listConversationsStream",
                 "listConversationsAsync"
+              ]
+            },
+            "ListSessions": {
+              "methods": [
+                "listSessions",
+                "listSessionsStream",
+                "listSessionsAsync"
               ]
             }
           }
@@ -298,6 +440,16 @@
                 "getEngine"
               ]
             },
+            "PauseEngine": {
+              "methods": [
+                "pauseEngine"
+              ]
+            },
+            "ResumeEngine": {
+              "methods": [
+                "resumeEngine"
+              ]
+            },
             "CreateEngine": {
               "methods": [
                 "createEngine"
@@ -306,6 +458,11 @@
             "DeleteEngine": {
               "methods": [
                 "deleteEngine"
+              ]
+            },
+            "TuneEngine": {
+              "methods": [
+                "tuneEngine"
               ]
             },
             "ListEngines": {
@@ -330,6 +487,16 @@
                 "getEngine"
               ]
             },
+            "PauseEngine": {
+              "methods": [
+                "pauseEngine"
+              ]
+            },
+            "ResumeEngine": {
+              "methods": [
+                "resumeEngine"
+              ]
+            },
             "CreateEngine": {
               "methods": [
                 "createEngine"
@@ -340,11 +507,88 @@
                 "deleteEngine"
               ]
             },
+            "TuneEngine": {
+              "methods": [
+                "tuneEngine"
+              ]
+            },
             "ListEngines": {
               "methods": [
                 "listEngines",
                 "listEnginesStream",
                 "listEnginesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "GroundedGenerationService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "GroundedGenerationServiceClient",
+          "rpcs": {
+            "CheckGrounding": {
+              "methods": [
+                "checkGrounding"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "GroundedGenerationServiceClient",
+          "rpcs": {
+            "CheckGrounding": {
+              "methods": [
+                "checkGrounding"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ProjectService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ProjectServiceClient",
+          "rpcs": {
+            "ProvisionProject": {
+              "methods": [
+                "provisionProject"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ProjectServiceClient",
+          "rpcs": {
+            "ProvisionProject": {
+              "methods": [
+                "provisionProject"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RankService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RankServiceClient",
+          "rpcs": {
+            "Rank": {
+              "methods": [
+                "rank"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RankServiceClient",
+          "rpcs": {
+            "Rank": {
+              "methods": [
+                "rank"
               ]
             }
           }
@@ -465,6 +709,40 @@
                 "search",
                 "searchStream",
                 "searchAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SearchTuningService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SearchTuningServiceClient",
+          "rpcs": {
+            "ListCustomModels": {
+              "methods": [
+                "listCustomModels"
+              ]
+            },
+            "TrainCustomModel": {
+              "methods": [
+                "trainCustomModel"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SearchTuningServiceClient",
+          "rpcs": {
+            "ListCustomModels": {
+              "methods": [
+                "listCustomModels"
+              ]
+            },
+            "TrainCustomModel": {
+              "methods": [
+                "trainCustomModel"
               ]
             }
           }

@@ -31,7 +31,8 @@ function main(parent) {
   /**
    *  Required. The parent branch resource name, such as
    *  `projects/{project}/locations/{location}/collections/{collection_id}`.
-   *  If the caller does not have permission to list DataStores  s under this
+   *  If the caller does not have permission to list
+   *  DataStore google.cloud.discoveryengine.v1alpha.DataStore s under this
    *  location, regardless of whether or not this data store exists, a
    *  PERMISSION_DENIED error is returned.
    */
@@ -57,8 +58,8 @@ function main(parent) {
    */
   // const pageToken = 'abc123'
   /**
-   *  Filter by solution type. For example: filter =
-   *  'solution_type:SOLUTION_TYPE_SEARCH'
+   *  Filter by solution type.
+   *  For example: `filter = 'solution_type:SOLUTION_TYPE_SEARCH'`
    */
   // const filter = 'abc123'
 

@@ -118,8 +118,15 @@ export class SqlInstancesServiceClient {
         'Please set either universe_domain or universeDomain, but not both.'
       );
     }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
     this._universeDomain =
-      opts?.universeDomain ?? opts?.universe_domain ?? 'googleapis.com';
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'sqladmin.' + this._universeDomain;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || this._servicePath;
@@ -175,7 +182,7 @@ export class SqlInstancesServiceClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -273,6 +280,8 @@ export class SqlInstancesServiceClient {
       'getDiskShrinkConfig',
       'resetReplicaSize',
       'getLatestRecoveryTime',
+      'acquireSsrsLease',
+      'releaseSsrsLease',
     ];
     for (const methodName of sqlInstancesServiceStubMethods) {
       const callPromise = this.sqlInstancesServiceStub.then(
@@ -310,7 +319,7 @@ export class SqlInstancesServiceClient {
    */
   static get servicePath() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -328,7 +337,7 @@ export class SqlInstancesServiceClient {
    */
   static get apiEndpoint() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -2972,6 +2981,12 @@ export class SqlInstancesServiceClient {
    *   Optional. Flag to verify settings required by replication setup only
    * @param {google.cloud.sql.v1beta4.MySqlSyncConfig} [request.mysqlSyncConfig]
    *   Optional. MySQL-specific settings for start external sync.
+   * @param {google.cloud.sql.v1beta4.SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType} [request.migrationType]
+   *   Optional. MigrationType field decides if the migration is a physical file
+   *   based migration or logical migration
+   * @param {google.cloud.sql.v1beta4.ExternalSyncParallelLevel} [request.syncParallelLevel]
+   *   Optional. Parallel level for initial data sync. Currently only applicable
+   *   for PostgreSQL.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3084,6 +3099,9 @@ export class SqlInstancesServiceClient {
    * @param {google.cloud.sql.v1beta4.ExternalSyncParallelLevel} [request.syncParallelLevel]
    *   Optional. Parallel level for initial data sync. Currently only applicable
    *   for MySQL.
+   * @param {google.cloud.sql.v1beta4.SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType} [request.migrationType]
+   *   Optional. MigrationType decides if the migration is a physical file based
+   *   migration or logical migration.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3571,6 +3589,214 @@ export class SqlInstancesServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.getLatestRecoveryTime(request, options, callback);
+  }
+  /**
+   * Acquire a lease for the setup of SQL Server Reporting Services (SSRS).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.instance
+   *   Required. Cloud SQL instance ID. This doesn't include the project ID. It's
+   *   composed of lowercase letters, numbers, and hyphens, and it must start with
+   *   a letter. The total length must be 98 characters or less (Example:
+   *   instance-id).
+   * @param {string} request.project
+   *   Required. ID of the project that contains the instance (Example:
+   *   project-id).
+   * @param {google.cloud.sql.v1beta4.InstancesAcquireSsrsLeaseRequest} request.body
+   *   The body for request to acquire an SSRS lease.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.SqlInstancesAcquireSsrsLeaseResponse|SqlInstancesAcquireSsrsLeaseResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.acquire_ssrs_lease.js</caption>
+   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_AcquireSsrsLease_async
+   */
+  acquireSsrsLease(
+    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseResponse,
+      (
+        | protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  acquireSsrsLease(
+    request: protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseResponse,
+      | protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  acquireSsrsLease(
+    request: protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest,
+    callback: Callback<
+      protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseResponse,
+      | protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  acquireSsrsLease(
+    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseResponse,
+          | protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseResponse,
+      | protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseResponse,
+      (
+        | protos.google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        instance: request.instance ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.acquireSsrsLease(request, options, callback);
+  }
+  /**
+   * Release a lease for the setup of SQL Server Reporting Services (SSRS).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.instance
+   *   Required. The Cloud SQL instance ID. This doesn't include the project ID.
+   *   It's composed of lowercase letters, numbers, and hyphens, and it must start
+   *   with a letter. The total length must be 98 characters or less (Example:
+   *   instance-id).
+   * @param {string} request.project
+   *   Required. The ID of the project that contains the instance (Example:
+   *   project-id).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.SqlInstancesReleaseSsrsLeaseResponse|SqlInstancesReleaseSsrsLeaseResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.release_ssrs_lease.js</caption>
+   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_ReleaseSsrsLease_async
+   */
+  releaseSsrsLease(
+    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseResponse,
+      (
+        | protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  releaseSsrsLease(
+    request: protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseResponse,
+      | protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  releaseSsrsLease(
+    request: protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest,
+    callback: Callback<
+      protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseResponse,
+      | protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  releaseSsrsLease(
+    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseResponse,
+          | protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseResponse,
+      | protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseResponse,
+      (
+        | protos.google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        instance: request.instance ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.releaseSsrsLease(request, options, callback);
   }
 
   /**

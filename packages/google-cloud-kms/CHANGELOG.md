@@ -4,6 +4,28 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/kms-v4.3.0...kms-v4.4.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/kms-v4.2.0...kms-v4.3.0) (2024-05-08)
+
+
+### Features
+
+* [kms] add client library for KMS Autokey service, which enables automated KMS key provision and management ([#5313](https://github.com/googleapis/google-cloud-node/issues/5313)) ([0f199db](https://github.com/googleapis/google-cloud-node/commit/0f199db38fdfecf139a0f08a7cd629711dc392e3))
+
+## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/kms-v4.1.0...kms-v4.2.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5189](https://github.com/googleapis/google-cloud-node/issues/5189)) ([64b5a75](https://github.com/googleapis/google-cloud-node/commit/64b5a759caa979837199086c2d546a565ad2b3b1))
+
 ## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/kms-v4.0.1...kms-v4.1.0) (2024-02-09)
 
 

@@ -144,7 +144,7 @@ describe('v1.DataTransferServiceClient', () => {
     });
 
     if (
-      typeof process !== 'undefined' &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       it('throws DeprecationWarning if static servicePath is used', () => {
@@ -180,6 +180,43 @@ describe('v1.DataTransferServiceClient', () => {
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'bigquerydatatransfer.example.com');
     });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new datatransferserviceModule.v1.DataTransferServiceClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'bigquerydatatransfer.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new datatransferserviceModule.v1.DataTransferServiceClient({
+              universeDomain: 'configured.example.com',
+            });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(
+            servicePath,
+            'bigquerydatatransfer.configured.example.com'
+          );
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new datatransferserviceModule.v1.DataTransferServiceClient({
@@ -1829,6 +1866,145 @@ describe('v1.DataTransferServiceClient', () => {
     });
   });
 
+  describe('unenrollDataSources', () => {
+    it('invokes unenrollDataSources without error', async () => {
+      const client = new datatransferserviceModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.unenrollDataSources =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.unenrollDataSources(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.unenrollDataSources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.unenrollDataSources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes unenrollDataSources without error using callback', async () => {
+      const client = new datatransferserviceModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.unenrollDataSources =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.unenrollDataSources(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.unenrollDataSources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.unenrollDataSources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes unenrollDataSources with error', async () => {
+      const client = new datatransferserviceModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.unenrollDataSources = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.unenrollDataSources(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.unenrollDataSources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.unenrollDataSources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes unenrollDataSources with closed client', async () => {
+      const client = new datatransferserviceModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.unenrollDataSources(request), expectedError);
+    });
+  });
+
   describe('listDataSources', () => {
     it('invokes listDataSources without error', async () => {
       const client = new datatransferserviceModule.v1.DataTransferServiceClient(
@@ -2022,9 +2198,9 @@ describe('v1.DataTransferServiceClient', () => {
       assert(
         (client.descriptors.page.listDataSources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2076,9 +2252,9 @@ describe('v1.DataTransferServiceClient', () => {
       assert(
         (client.descriptors.page.listDataSources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2128,9 +2304,9 @@ describe('v1.DataTransferServiceClient', () => {
       assert(
         (client.descriptors.page.listDataSources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2171,9 +2347,9 @@ describe('v1.DataTransferServiceClient', () => {
       assert(
         (client.descriptors.page.listDataSources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -2372,9 +2548,9 @@ describe('v1.DataTransferServiceClient', () => {
       assert(
         (client.descriptors.page.listTransferConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2426,9 +2602,9 @@ describe('v1.DataTransferServiceClient', () => {
       assert(
         (client.descriptors.page.listTransferConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2478,9 +2654,9 @@ describe('v1.DataTransferServiceClient', () => {
       assert(
         (client.descriptors.page.listTransferConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2521,9 +2697,9 @@ describe('v1.DataTransferServiceClient', () => {
       assert(
         (client.descriptors.page.listTransferConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -2721,9 +2897,9 @@ describe('v1.DataTransferServiceClient', () => {
       assert(
         (client.descriptors.page.listTransferRuns.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2775,9 +2951,9 @@ describe('v1.DataTransferServiceClient', () => {
       assert(
         (client.descriptors.page.listTransferRuns.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2827,9 +3003,9 @@ describe('v1.DataTransferServiceClient', () => {
       assert(
         (client.descriptors.page.listTransferRuns.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2870,9 +3046,9 @@ describe('v1.DataTransferServiceClient', () => {
       assert(
         (client.descriptors.page.listTransferRuns.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -3070,9 +3246,9 @@ describe('v1.DataTransferServiceClient', () => {
       assert(
         (client.descriptors.page.listTransferLogs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3124,9 +3300,9 @@ describe('v1.DataTransferServiceClient', () => {
       assert(
         (client.descriptors.page.listTransferLogs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3176,9 +3352,9 @@ describe('v1.DataTransferServiceClient', () => {
       assert(
         (client.descriptors.page.listTransferLogs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3219,9 +3395,9 @@ describe('v1.DataTransferServiceClient', () => {
       assert(
         (client.descriptors.page.listTransferLogs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });

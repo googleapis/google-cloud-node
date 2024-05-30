@@ -119,8 +119,15 @@ export class ReportServiceClient {
         'Please set either universe_domain or universeDomain, but not both.'
       );
     }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
     this._universeDomain =
-      opts?.universeDomain ?? opts?.universe_domain ?? 'googleapis.com';
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'merchantapi.' + this._universeDomain;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || this._servicePath;
@@ -172,7 +179,7 @@ export class ReportServiceClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -286,7 +293,7 @@ export class ReportServiceClient {
    */
   static get servicePath() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -304,7 +311,7 @@ export class ReportServiceClient {
    */
   static get apiEndpoint() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -382,7 +389,7 @@ export class ReportServiceClient {
    *   fields.
    * @param {number} [request.pageSize]
    *   Optional. Number of `ReportRows` to retrieve in a single page. Defaults to
-   *   the maximum of 1000. Values above 1000 are coerced to 1000.
+   *   1000. Values above 5000 are coerced to 5000.
    * @param {string} [request.pageToken]
    *   Optional. Token of the page to retrieve. If not specified, the first page
    *   of results is returned. In order to request the next page of results, the
@@ -490,7 +497,7 @@ export class ReportServiceClient {
    *   fields.
    * @param {number} [request.pageSize]
    *   Optional. Number of `ReportRows` to retrieve in a single page. Defaults to
-   *   the maximum of 1000. Values above 1000 are coerced to 1000.
+   *   1000. Values above 5000 are coerced to 5000.
    * @param {string} [request.pageToken]
    *   Optional. Token of the page to retrieve. If not specified, the first page
    *   of results is returned. In order to request the next page of results, the
@@ -546,7 +553,7 @@ export class ReportServiceClient {
    *   fields.
    * @param {number} [request.pageSize]
    *   Optional. Number of `ReportRows` to retrieve in a single page. Defaults to
-   *   the maximum of 1000. Values above 1000 are coerced to 1000.
+   *   1000. Values above 5000 are coerced to 5000.
    * @param {string} [request.pageToken]
    *   Optional. Token of the page to retrieve. If not specified, the first page
    *   of results is returned. In order to request the next page of results, the

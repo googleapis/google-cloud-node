@@ -129,8 +129,15 @@ export class DocumentProcessorServiceClient {
         'Please set either universe_domain or universeDomain, but not both.'
       );
     }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
     this._universeDomain =
-      opts?.universeDomain ?? opts?.universe_domain ?? 'googleapis.com';
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'documentai.' + this._universeDomain;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || this._servicePath;
@@ -186,7 +193,7 @@ export class DocumentProcessorServiceClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -592,7 +599,7 @@ export class DocumentProcessorServiceClient {
    */
   static get servicePath() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -610,7 +617,7 @@ export class DocumentProcessorServiceClient {
    */
   static get apiEndpoint() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -706,6 +713,13 @@ export class DocumentProcessorServiceClient {
    *   the form of `{document_field_name}` or `pages.{page_field_name}`.
    * @param {google.cloud.documentai.v1beta3.ProcessOptions} request.processOptions
    *   Inference-time options for the process API
+   * @param {number[]} [request.labels]
+   *   Optional. The labels with user-defined metadata for the request.
+   *
+   *   Label keys and values can be no longer than 63 characters
+   *   (Unicode codepoints) and can only contain lowercase letters, numeric
+   *   characters, underscores, and dashes. International characters are allowed.
+   *   Label values are optional. Label keys must start with a letter.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1177,7 +1191,8 @@ export class DocumentProcessorServiceClient {
    * @param {google.cloud.documentai.v1beta3.Processor} request.processor
    *   Required. The processor to be created, requires
    *   {@link protos.google.cloud.documentai.v1beta3.Processor.type|Processor.type} and
-   *   {@link protos.|Processor.display_name]} to be set. Also, the
+   *   {@link protos.google.cloud.documentai.v1beta3.Processor.display_name|Processor.display_name}
+   *   to be set. Also, the
    *   {@link protos.google.cloud.documentai.v1beta3.Processor.kms_key_name|Processor.kms_key_name}
    *   field must be set if the processor is under CMEK.
    * @param {object} [options]
@@ -1392,6 +1407,13 @@ export class DocumentProcessorServiceClient {
    *   `false`.
    * @param {google.cloud.documentai.v1beta3.ProcessOptions} request.processOptions
    *   Inference-time options for the process API
+   * @param {number[]} [request.labels]
+   *   Optional. The labels with user-defined metadata for the request.
+   *
+   *   Label keys and values can be no longer than 63 characters
+   *   (Unicode codepoints) and can only contain lowercase letters, numeric
+   *   characters, underscores, and dashes. International characters are allowed.
+   *   Label values are optional. Label keys must start with a letter.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1530,6 +1552,8 @@ export class DocumentProcessorServiceClient {
    *   The request object that will be sent.
    * @param {google.cloud.documentai.v1beta3.TrainProcessorVersionRequest.CustomDocumentExtractionOptions} request.customDocumentExtractionOptions
    *   Options to control Custom Document Extraction (CDE) Processor.
+   * @param {google.cloud.documentai.v1beta3.TrainProcessorVersionRequest.FoundationModelTuningOptions} request.foundationModelTuningOptions
+   *   Options to control foundation model tuning of a processor.
    * @param {string} request.parent
    *   Required. The parent (project, location and processor) to create the new
    *   version for. Format:
@@ -2959,6 +2983,8 @@ export class DocumentProcessorServiceClient {
    * @param {string} request.processorVersionSource
    *   The source processor version to import from. The source processor version
    *   and destination processor need to be in the same environment and region.
+   *   Note that ProcessorVersions with `model_type` `MODEL_TYPE_LLM` are not
+   *   supported.
    * @param {google.cloud.documentai.v1beta3.ImportProcessorVersionRequest.ExternalProcessorVersionSource} request.externalProcessorVersionSource
    *   The source processor version to import from. It can be from a different
    *   environment and region than the destination processor.

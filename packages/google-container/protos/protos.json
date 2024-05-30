@@ -955,6 +955,11 @@
                       "oneof": [
                         "fastSocket"
                       ]
+                    },
+                    "_secondaryBootDiskUpdateStrategy": {
+                      "oneof": [
+                        "secondaryBootDiskUpdateStrategy"
+                      ]
                     }
                   },
                   "fields": {
@@ -1107,6 +1112,25 @@
                     "resourceManagerTags": {
                       "type": "ResourceManagerTags",
                       "id": 45
+                    },
+                    "enableConfidentialStorage": {
+                      "type": "bool",
+                      "id": 46,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "secondaryBootDisks": {
+                      "rule": "repeated",
+                      "type": "SecondaryBootDisk",
+                      "id": 48
+                    },
+                    "secondaryBootDiskUpdateStrategy": {
+                      "type": "SecondaryBootDiskUpdateStrategy",
+                      "id": 50,
+                      "options": {
+                        "proto3_optional": true
+                      }
                     }
                   }
                 },
@@ -2317,9 +2341,19 @@
                         "desiredEnableFqdnNetworkPolicy"
                       ]
                     },
+                    "_desiredEnableMultiNetworking": {
+                      "oneof": [
+                        "desiredEnableMultiNetworking"
+                      ]
+                    },
                     "_desiredInTransitEncryptionConfig": {
                       "oneof": [
                         "desiredInTransitEncryptionConfig"
+                      ]
+                    },
+                    "_desiredEnableCiliumClusterwideNetworkPolicy": {
+                      "oneof": [
+                        "desiredEnableCiliumClusterwideNetworkPolicy"
                       ]
                     }
                   },
@@ -2527,6 +2561,13 @@
                       "type": "K8sBetaAPIConfig",
                       "id": 131
                     },
+                    "desiredEnableMultiNetworking": {
+                      "type": "bool",
+                      "id": 135,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
                     "desiredNodePoolAutoConfigResourceManagerTags": {
                       "type": "ResourceManagerTags",
                       "id": 136
@@ -2534,6 +2575,13 @@
                     "desiredInTransitEncryptionConfig": {
                       "type": "InTransitEncryptionConfig",
                       "id": 137,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "desiredEnableCiliumClusterwideNetworkPolicy": {
+                      "type": "bool",
+                      "id": 138,
                       "options": {
                         "proto3_optional": true
                       }
@@ -2999,6 +3047,10 @@
                     "resourceManagerTags": {
                       "type": "ResourceManagerTags",
                       "id": 39
+                    },
+                    "queuedProvisioning": {
+                      "type": "NodePool.QueuedProvisioning",
+                      "id": 42
                     }
                   }
                 },
@@ -4754,6 +4806,11 @@
                       "oneof": [
                         "inTransitEncryptionConfig"
                       ]
+                    },
+                    "_enableCiliumClusterwideNetworkPolicy": {
+                      "oneof": [
+                        "enableCiliumClusterwideNetworkPolicy"
+                      ]
                     }
                   },
                   "fields": {
@@ -4815,6 +4872,13 @@
                     "inTransitEncryptionConfig": {
                       "type": "InTransitEncryptionConfig",
                       "id": 20,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "enableCiliumClusterwideNetworkPolicy": {
+                      "type": "bool",
+                      "id": 21,
                       "options": {
                         "proto3_optional": true
                       }
@@ -5145,6 +5209,13 @@
                   }
                 },
                 "DatabaseEncryption": {
+                  "oneofs": {
+                    "_currentState": {
+                      "oneof": [
+                        "currentState"
+                      ]
+                    }
+                  },
                   "fields": {
                     "keyName": {
                       "type": "string",
@@ -5153,6 +5224,30 @@
                     "state": {
                       "type": "State",
                       "id": 2
+                    },
+                    "currentState": {
+                      "type": "CurrentState",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY",
+                        "proto3_optional": true
+                      }
+                    },
+                    "decryptionKeys": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "lastOperationErrors": {
+                      "rule": "repeated",
+                      "type": "OperationError",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   },
                   "nested": {
@@ -5161,6 +5256,33 @@
                         "UNKNOWN": 0,
                         "ENCRYPTED": 1,
                         "DECRYPTED": 2
+                      }
+                    },
+                    "CurrentState": {
+                      "values": {
+                        "CURRENT_STATE_UNSPECIFIED": 0,
+                        "CURRENT_STATE_ENCRYPTED": 7,
+                        "CURRENT_STATE_DECRYPTED": 2,
+                        "CURRENT_STATE_ENCRYPTION_PENDING": 3,
+                        "CURRENT_STATE_ENCRYPTION_ERROR": 4,
+                        "CURRENT_STATE_DECRYPTION_PENDING": 5,
+                        "CURRENT_STATE_DECRYPTION_ERROR": 6
+                      }
+                    },
+                    "OperationError": {
+                      "fields": {
+                        "keyName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "errorMessage": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "timestamp": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        }
                       }
                     }
                   }
@@ -5747,12 +5869,35 @@
                     }
                   }
                 },
+                "SecondaryBootDisk": {
+                  "fields": {
+                    "mode": {
+                      "type": "Mode",
+                      "id": 1
+                    },
+                    "diskImage": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "Mode": {
+                      "values": {
+                        "MODE_UNSPECIFIED": 0,
+                        "CONTAINER_IMAGE_CACHE": 1
+                      }
+                    }
+                  }
+                },
                 "InTransitEncryptionConfig": {
                   "values": {
                     "IN_TRANSIT_ENCRYPTION_CONFIG_UNSPECIFIED": 0,
                     "IN_TRANSIT_ENCRYPTION_DISABLED": 1,
                     "IN_TRANSIT_ENCRYPTION_INTER_NODE_TRANSPARENT": 2
                   }
+                },
+                "SecondaryBootDiskUpdateStrategy": {
+                  "fields": {}
                 }
               }
             },
@@ -6590,6 +6735,13 @@
                   }
                 },
                 "LinuxNodeConfig": {
+                  "oneofs": {
+                    "_hugepages": {
+                      "oneof": [
+                        "hugepages"
+                      ]
+                    }
+                  },
                   "fields": {
                     "sysctls": {
                       "keyType": "string",
@@ -6599,6 +6751,14 @@
                     "cgroupMode": {
                       "type": "CgroupMode",
                       "id": 2
+                    },
+                    "hugepages": {
+                      "type": "HugepagesConfig",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL",
+                        "proto3_optional": true
+                      }
                     }
                   },
                   "nested": {
@@ -6607,6 +6767,38 @@
                         "CGROUP_MODE_UNSPECIFIED": 0,
                         "CGROUP_MODE_V1": 1,
                         "CGROUP_MODE_V2": 2
+                      }
+                    },
+                    "HugepagesConfig": {
+                      "oneofs": {
+                        "_hugepageSize2m": {
+                          "oneof": [
+                            "hugepageSize2m"
+                          ]
+                        },
+                        "_hugepageSize1g": {
+                          "oneof": [
+                            "hugepageSize1g"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "hugepageSize2m": {
+                          "type": "int32",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "hugepageSize1g": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
                       }
                     }
                   }
@@ -6667,6 +6859,11 @@
                     "_fastSocket": {
                       "oneof": [
                         "fastSocket"
+                      ]
+                    },
+                    "_secondaryBootDiskUpdateStrategy": {
+                      "oneof": [
+                        "secondaryBootDiskUpdateStrategy"
                       ]
                     }
                   },
@@ -6821,6 +7018,10 @@
                       "type": "SoleTenantConfig",
                       "id": 42
                     },
+                    "containerdConfig": {
+                      "type": "ContainerdConfig",
+                      "id": 43
+                    },
                     "hostMaintenancePolicy": {
                       "type": "HostMaintenancePolicy",
                       "id": 44
@@ -6835,6 +7036,18 @@
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
                       }
+                    },
+                    "secondaryBootDisks": {
+                      "rule": "repeated",
+                      "type": "SecondaryBootDisk",
+                      "id": 48
+                    },
+                    "secondaryBootDiskUpdateStrategy": {
+                      "type": "SecondaryBootDiskUpdateStrategy",
+                      "id": 50,
+                      "options": {
+                        "proto3_optional": true
+                      }
                     }
                   }
                 },
@@ -6844,12 +7057,24 @@
                       "oneof": [
                         "threadsPerCore"
                       ]
+                    },
+                    "_enableNestedVirtualization": {
+                      "oneof": [
+                        "enableNestedVirtualization"
+                      ]
                     }
                   },
                   "fields": {
                     "threadsPerCore": {
                       "type": "int64",
                       "id": 1,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "enableNestedVirtualization": {
+                      "type": "bool",
+                      "id": 2,
                       "options": {
                         "proto3_optional": true
                       }
@@ -7125,6 +7350,61 @@
                             "OPERATOR_UNSPECIFIED": 0,
                             "IN": 1,
                             "NOT_IN": 2
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "ContainerdConfig": {
+                  "fields": {
+                    "privateRegistryAccessConfig": {
+                      "type": "PrivateRegistryAccessConfig",
+                      "id": 1
+                    }
+                  },
+                  "nested": {
+                    "PrivateRegistryAccessConfig": {
+                      "fields": {
+                        "enabled": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "certificateAuthorityDomainConfig": {
+                          "rule": "repeated",
+                          "type": "CertificateAuthorityDomainConfig",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "CertificateAuthorityDomainConfig": {
+                          "oneofs": {
+                            "certificateConfig": {
+                              "oneof": [
+                                "gcpSecretManagerCertificateConfig"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "fqdns": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            },
+                            "gcpSecretManagerCertificateConfig": {
+                              "type": "GCPSecretManagerCertificateConfig",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "GCPSecretManagerCertificateConfig": {
+                              "fields": {
+                                "secretUri": {
+                                  "type": "string",
+                                  "id": 1
+                                }
+                              }
+                            }
                           }
                         }
                       }
@@ -7878,6 +8158,16 @@
                       "oneof": [
                         "protectConfig"
                       ]
+                    },
+                    "_satisfiesPzs": {
+                      "oneof": [
+                        "satisfiesPzs"
+                      ]
+                    },
+                    "_satisfiesPzi": {
+                      "oneof": [
+                        "satisfiesPzi"
+                      ]
                     }
                   },
                   "fields": {
@@ -8226,6 +8516,30 @@
                     "enterpriseConfig": {
                       "type": "EnterpriseConfig",
                       "id": 149
+                    },
+                    "secretManagerConfig": {
+                      "type": "SecretManagerConfig",
+                      "id": 150
+                    },
+                    "compliancePostureConfig": {
+                      "type": "CompliancePostureConfig",
+                      "id": 151
+                    },
+                    "satisfiesPzs": {
+                      "type": "bool",
+                      "id": 152,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY",
+                        "proto3_optional": true
+                      }
+                    },
+                    "satisfiesPzi": {
+                      "type": "bool",
+                      "id": 153,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY",
+                        "proto3_optional": true
+                      }
                     }
                   },
                   "nested": {
@@ -8238,6 +8552,56 @@
                         "STOPPING": 4,
                         "ERROR": 5,
                         "DEGRADED": 6
+                      }
+                    }
+                  }
+                },
+                "CompliancePostureConfig": {
+                  "oneofs": {
+                    "_mode": {
+                      "oneof": [
+                        "mode"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "mode": {
+                      "type": "Mode",
+                      "id": 1,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "complianceStandards": {
+                      "rule": "repeated",
+                      "type": "ComplianceStandard",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "Mode": {
+                      "values": {
+                        "MODE_UNSPECIFIED": 0,
+                        "DISABLED": 1,
+                        "ENABLED": 2
+                      }
+                    },
+                    "ComplianceStandard": {
+                      "oneofs": {
+                        "_standard": {
+                          "oneof": [
+                            "standard"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "standard": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
                       }
                     }
                   }
@@ -8361,7 +8725,8 @@
                       "values": {
                         "MODE_UNSPECIFIED": 0,
                         "DISABLED": 1,
-                        "BASIC": 2
+                        "BASIC": 2,
+                        "ENTERPRISE": 3
                       }
                     },
                     "VulnerabilityMode": {
@@ -8392,9 +8757,17 @@
                       "type": "NodePoolLoggingConfig",
                       "id": 3
                     },
+                    "containerdConfig": {
+                      "type": "ContainerdConfig",
+                      "id": 4
+                    },
                     "hostMaintenancePolicy": {
                       "type": "HostMaintenancePolicy",
                       "id": 5
+                    },
+                    "nodeKubeletConfig": {
+                      "type": "NodeKubeletConfig",
+                      "id": 6
                     }
                   }
                 },
@@ -8407,6 +8780,10 @@
                     "resourceManagerTags": {
                       "type": "ResourceManagerTags",
                       "id": 2
+                    },
+                    "nodeKubeletConfig": {
+                      "type": "NodeKubeletConfig",
+                      "id": 3
                     }
                   }
                 },
@@ -8427,9 +8804,24 @@
                         "desiredEnableFqdnNetworkPolicy"
                       ]
                     },
+                    "_desiredEnableMultiNetworking": {
+                      "oneof": [
+                        "desiredEnableMultiNetworking"
+                      ]
+                    },
                     "_desiredInTransitEncryptionConfig": {
                       "oneof": [
                         "desiredInTransitEncryptionConfig"
+                      ]
+                    },
+                    "_desiredEnableCiliumClusterwideNetworkPolicy": {
+                      "oneof": [
+                        "desiredEnableCiliumClusterwideNetworkPolicy"
+                      ]
+                    },
+                    "_desiredSecretManagerConfig": {
+                      "oneof": [
+                        "desiredSecretManagerConfig"
                       ]
                     }
                   },
@@ -8510,6 +8902,13 @@
                     "desiredReleaseChannel": {
                       "type": "ReleaseChannel",
                       "id": 31
+                    },
+                    "privateClusterConfig": {
+                      "type": "PrivateClusterConfig",
+                      "id": 37,
+                      "options": {
+                        "deprecated": true
+                      }
                     },
                     "desiredTpuConfig": {
                       "type": "TpuConfig",
@@ -8673,6 +9072,17 @@
                       "type": "HostMaintenancePolicy",
                       "id": 132
                     },
+                    "desiredContainerdConfig": {
+                      "type": "ContainerdConfig",
+                      "id": 134
+                    },
+                    "desiredEnableMultiNetworking": {
+                      "type": "bool",
+                      "id": 135,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
                     "desiredNodePoolAutoConfigResourceManagerTags": {
                       "type": "ResourceManagerTags",
                       "id": 136
@@ -8683,6 +9093,28 @@
                       "options": {
                         "proto3_optional": true
                       }
+                    },
+                    "desiredEnableCiliumClusterwideNetworkPolicy": {
+                      "type": "bool",
+                      "id": 138,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "desiredSecretManagerConfig": {
+                      "type": "SecretManagerConfig",
+                      "id": 139,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "desiredNodeKubeletConfig": {
+                      "type": "NodeKubeletConfig",
+                      "id": 141
+                    },
+                    "desiredNodePoolAutoConfigKubeletConfig": {
+                      "type": "NodeKubeletConfig",
+                      "id": 142
                     }
                   }
                 },
@@ -9133,6 +9565,11 @@
                       "type": "WindowsNodeConfig",
                       "id": 34
                     },
+                    "accelerators": {
+                      "rule": "repeated",
+                      "type": "AcceleratorConfig",
+                      "id": 35
+                    },
                     "machineType": {
                       "type": "string",
                       "id": 36,
@@ -9157,6 +9594,14 @@
                     "resourceManagerTags": {
                       "type": "ResourceManagerTags",
                       "id": 39
+                    },
+                    "containerdConfig": {
+                      "type": "ContainerdConfig",
+                      "id": 40
+                    },
+                    "queuedProvisioning": {
+                      "type": "NodePool.QueuedProvisioning",
+                      "id": 42
                     }
                   }
                 },
@@ -10892,7 +11337,8 @@
                     "GPUSharingStrategy": {
                       "values": {
                         "GPU_SHARING_STRATEGY_UNSPECIFIED": 0,
-                        "TIME_SHARING": 1
+                        "TIME_SHARING": 1,
+                        "MPS": 2
                       }
                     }
                   }
@@ -11135,6 +11581,11 @@
                       "oneof": [
                         "inTransitEncryptionConfig"
                       ]
+                    },
+                    "_enableCiliumClusterwideNetworkPolicy": {
+                      "oneof": [
+                        "enableCiliumClusterwideNetworkPolicy"
+                      ]
                     }
                   },
                   "fields": {
@@ -11196,6 +11647,13 @@
                     "inTransitEncryptionConfig": {
                       "type": "InTransitEncryptionConfig",
                       "id": 20,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "enableCiliumClusterwideNetworkPolicy": {
+                      "type": "bool",
+                      "id": 21,
                       "options": {
                         "proto3_optional": true
                       }
@@ -11389,6 +11847,13 @@
                     "clusterDnsDomain": {
                       "type": "string",
                       "id": 3
+                    },
+                    "additiveVpcScopeDnsDomain": {
+                      "type": "string",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   },
                   "nested": {
@@ -11461,6 +11926,13 @@
                   }
                 },
                 "DatabaseEncryption": {
+                  "oneofs": {
+                    "_currentState": {
+                      "oneof": [
+                        "currentState"
+                      ]
+                    }
+                  },
                   "fields": {
                     "keyName": {
                       "type": "string",
@@ -11469,6 +11941,30 @@
                     "state": {
                       "type": "State",
                       "id": 2
+                    },
+                    "currentState": {
+                      "type": "CurrentState",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY",
+                        "proto3_optional": true
+                      }
+                    },
+                    "decryptionKeys": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "lastOperationErrors": {
+                      "rule": "repeated",
+                      "type": "OperationError",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   },
                   "nested": {
@@ -11477,6 +11973,33 @@
                         "UNKNOWN": 0,
                         "ENCRYPTED": 1,
                         "DECRYPTED": 2
+                      }
+                    },
+                    "CurrentState": {
+                      "values": {
+                        "CURRENT_STATE_UNSPECIFIED": 0,
+                        "CURRENT_STATE_ENCRYPTED": 7,
+                        "CURRENT_STATE_DECRYPTED": 2,
+                        "CURRENT_STATE_ENCRYPTION_PENDING": 3,
+                        "CURRENT_STATE_ENCRYPTION_ERROR": 4,
+                        "CURRENT_STATE_DECRYPTION_PENDING": 5,
+                        "CURRENT_STATE_DECRYPTION_ERROR": 6
+                      }
+                    },
+                    "OperationError": {
+                      "fields": {
+                        "keyName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "errorMessage": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "timestamp": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        }
                       }
                     }
                   }
@@ -12118,7 +12641,9 @@
                         "POD": 9,
                         "DAEMONSET": 10,
                         "DEPLOYMENT": 11,
-                        "STATEFULSET": 12
+                        "STATEFULSET": 12,
+                        "CADVISOR": 13,
+                        "KUBELET": 14
                       }
                     }
                   }
@@ -12182,12 +12707,53 @@
                     }
                   }
                 },
+                "SecretManagerConfig": {
+                  "oneofs": {
+                    "_enabled": {
+                      "oneof": [
+                        "enabled"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    }
+                  }
+                },
+                "SecondaryBootDisk": {
+                  "fields": {
+                    "mode": {
+                      "type": "Mode",
+                      "id": 1
+                    },
+                    "diskImage": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "Mode": {
+                      "values": {
+                        "MODE_UNSPECIFIED": 0,
+                        "CONTAINER_IMAGE_CACHE": 1
+                      }
+                    }
+                  }
+                },
                 "InTransitEncryptionConfig": {
                   "values": {
                     "IN_TRANSIT_ENCRYPTION_CONFIG_UNSPECIFIED": 0,
                     "IN_TRANSIT_ENCRYPTION_DISABLED": 1,
                     "IN_TRANSIT_ENCRYPTION_INTER_NODE_TRANSPARENT": 2
                   }
+                },
+                "SecondaryBootDiskUpdateStrategy": {
+                  "fields": {}
                 }
               }
             }
@@ -12410,6 +12976,10 @@
                   "rule": "repeated",
                   "type": "ClientLibrarySettings",
                   "id": 109
+                },
+                "protoReferenceDocumentationUri": {
+                  "type": "string",
+                  "id": 110
                 }
               }
             },
@@ -12467,6 +13037,31 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "renamedServices": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
+                },
+                "renamedResources": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 3
+                },
+                "ignoredResources": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 4
+                },
+                "forcedNamespaceAliases": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 5
+                },
+                "handwrittenSignatures": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 6
                 }
               }
             },
@@ -12495,6 +13090,11 @@
                 "longRunning": {
                   "type": "LongRunning",
                   "id": 2
+                },
+                "autoPopulatedFields": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3
                 }
               },
               "nested": {
@@ -12526,7 +13126,10 @@
                 "CLOUD": 1,
                 "ADS": 2,
                 "PHOTOS": 3,
-                "STREET_VIEW": 4
+                "STREET_VIEW": 4,
+                "SHOPPING": 5,
+                "GEO": 6,
+                "GENERATIVE_AI": 7
               }
             },
             "ClientLibraryDestination": {
@@ -12563,7 +13166,8 @@
                 "INPUT_ONLY": 4,
                 "IMMUTABLE": 5,
                 "UNORDERED_LIST": 6,
-                "NON_EMPTY_DEFAULT": 7
+                "NON_EMPTY_DEFAULT": 7,
+                "IDENTIFIER": 8
               }
             },
             "resourceReference": {
@@ -12665,6 +13269,21 @@
                 }
               }
             },
+            "Edition": {
+              "values": {
+                "EDITION_UNKNOWN": 0,
+                "EDITION_PROTO2": 998,
+                "EDITION_PROTO3": 999,
+                "EDITION_2023": 1000,
+                "EDITION_2024": 1001,
+                "EDITION_1_TEST_ONLY": 1,
+                "EDITION_2_TEST_ONLY": 2,
+                "EDITION_99997_TEST_ONLY": 99997,
+                "EDITION_99998_TEST_ONLY": 99998,
+                "EDITION_99999_TEST_ONLY": 99999,
+                "EDITION_MAX": 2147483647
+              }
+            },
             "FileDescriptorProto": {
               "fields": {
                 "name": {
@@ -12729,8 +13348,8 @@
                   "id": 12
                 },
                 "edition": {
-                  "type": "string",
-                  "id": 13
+                  "type": "Edition",
+                  "id": 14
                 }
               }
             },
@@ -12822,6 +13441,26 @@
                   "rule": "repeated",
                   "type": "UninterpretedOption",
                   "id": 999
+                },
+                "declaration": {
+                  "rule": "repeated",
+                  "type": "Declaration",
+                  "id": 2,
+                  "options": {
+                    "retention": "RETENTION_SOURCE"
+                  }
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 50
+                },
+                "verification": {
+                  "type": "VerificationState",
+                  "id": 3,
+                  "options": {
+                    "default": "UNVERIFIED",
+                    "retention": "RETENTION_SOURCE"
+                  }
                 }
               },
               "extensions": [
@@ -12829,7 +13468,45 @@
                   1000,
                   536870911
                 ]
-              ]
+              ],
+              "nested": {
+                "Declaration": {
+                  "fields": {
+                    "number": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "fullName": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "type": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "reserved": {
+                      "type": "bool",
+                      "id": 5
+                    },
+                    "repeated": {
+                      "type": "bool",
+                      "id": 6
+                    }
+                  },
+                  "reserved": [
+                    [
+                      4,
+                      4
+                    ]
+                  ]
+                },
+                "VerificationState": {
+                  "values": {
+                    "DECLARATION": 0,
+                    "UNVERIFIED": 1
+                  }
+                }
+              }
             },
             "FieldDescriptorProto": {
               "fields": {
@@ -12904,8 +13581,8 @@
                 "Label": {
                   "values": {
                     "LABEL_OPTIONAL": 1,
-                    "LABEL_REQUIRED": 2,
-                    "LABEL_REPEATED": 3
+                    "LABEL_REPEATED": 3,
+                    "LABEL_REQUIRED": 2
                   }
                 }
               }
@@ -13093,13 +13770,6 @@
                     "default": false
                   }
                 },
-                "phpGenericServices": {
-                  "type": "bool",
-                  "id": 42,
-                  "options": {
-                    "default": false
-                  }
-                },
                 "deprecated": {
                   "type": "bool",
                   "id": 23,
@@ -13142,6 +13812,10 @@
                   "type": "string",
                   "id": 45
                 },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 50
+                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -13155,6 +13829,10 @@
                 ]
               ],
               "reserved": [
+                [
+                  42,
+                  42
+                ],
                 [
                   38,
                   38
@@ -13203,6 +13881,10 @@
                   "options": {
                     "deprecated": true
                   }
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 12
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -13298,9 +13980,22 @@
                   "type": "OptionRetention",
                   "id": 17
                 },
-                "target": {
+                "targets": {
+                  "rule": "repeated",
                   "type": "OptionTargetType",
-                  "id": 18
+                  "id": 19,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "editionDefaults": {
+                  "rule": "repeated",
+                  "type": "EditionDefault",
+                  "id": 20
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 21
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -13318,6 +14013,10 @@
                 [
                   4,
                   4
+                ],
+                [
+                  18,
+                  18
                 ]
               ],
               "nested": {
@@ -13355,11 +14054,27 @@
                     "TARGET_TYPE_SERVICE": 8,
                     "TARGET_TYPE_METHOD": 9
                   }
+                },
+                "EditionDefault": {
+                  "fields": {
+                    "edition": {
+                      "type": "Edition",
+                      "id": 3
+                    },
+                    "value": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
                 }
               }
             },
             "OneofOptions": {
               "fields": {
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 1
+                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -13393,6 +14108,10 @@
                     "deprecated": true
                   }
                 },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 7
+                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -13421,6 +14140,17 @@
                     "default": false
                   }
                 },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 2
+                },
+                "debugRedact": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -13436,6 +14166,10 @@
             },
             "ServiceOptions": {
               "fields": {
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 34
+                },
                 "deprecated": {
                   "type": "bool",
                   "id": 33,
@@ -13471,6 +14205,10 @@
                   "options": {
                     "default": "IDEMPOTENCY_UNKNOWN"
                   }
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 35
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -13537,6 +14275,166 @@
                     "isExtension": {
                       "rule": "required",
                       "type": "bool",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "FeatureSet": {
+              "fields": {
+                "fieldPresence": {
+                  "type": "FieldPresence",
+                  "id": 1,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_2023",
+                    "edition_defaults.value": "EXPLICIT"
+                  }
+                },
+                "enumType": {
+                  "type": "EnumType",
+                  "id": 2,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_PROTO3",
+                    "edition_defaults.value": "OPEN"
+                  }
+                },
+                "repeatedFieldEncoding": {
+                  "type": "RepeatedFieldEncoding",
+                  "id": 3,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_PROTO3",
+                    "edition_defaults.value": "PACKED"
+                  }
+                },
+                "utf8Validation": {
+                  "type": "Utf8Validation",
+                  "id": 4,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_PROTO3",
+                    "edition_defaults.value": "VERIFY"
+                  }
+                },
+                "messageEncoding": {
+                  "type": "MessageEncoding",
+                  "id": 5,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_PROTO2",
+                    "edition_defaults.value": "LENGTH_PREFIXED"
+                  }
+                },
+                "jsonFormat": {
+                  "type": "JsonFormat",
+                  "id": 6,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_PROTO3",
+                    "edition_defaults.value": "ALLOW"
+                  }
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  1000
+                ],
+                [
+                  1001,
+                  1001
+                ],
+                [
+                  9995,
+                  9999
+                ]
+              ],
+              "reserved": [
+                [
+                  999,
+                  999
+                ]
+              ],
+              "nested": {
+                "FieldPresence": {
+                  "values": {
+                    "FIELD_PRESENCE_UNKNOWN": 0,
+                    "EXPLICIT": 1,
+                    "IMPLICIT": 2,
+                    "LEGACY_REQUIRED": 3
+                  }
+                },
+                "EnumType": {
+                  "values": {
+                    "ENUM_TYPE_UNKNOWN": 0,
+                    "OPEN": 1,
+                    "CLOSED": 2
+                  }
+                },
+                "RepeatedFieldEncoding": {
+                  "values": {
+                    "REPEATED_FIELD_ENCODING_UNKNOWN": 0,
+                    "PACKED": 1,
+                    "EXPANDED": 2
+                  }
+                },
+                "Utf8Validation": {
+                  "values": {
+                    "UTF8_VALIDATION_UNKNOWN": 0,
+                    "VERIFY": 2,
+                    "NONE": 3
+                  }
+                },
+                "MessageEncoding": {
+                  "values": {
+                    "MESSAGE_ENCODING_UNKNOWN": 0,
+                    "LENGTH_PREFIXED": 1,
+                    "DELIMITED": 2
+                  }
+                },
+                "JsonFormat": {
+                  "values": {
+                    "JSON_FORMAT_UNKNOWN": 0,
+                    "ALLOW": 1,
+                    "LEGACY_BEST_EFFORT": 2
+                  }
+                }
+              }
+            },
+            "FeatureSetDefaults": {
+              "fields": {
+                "defaults": {
+                  "rule": "repeated",
+                  "type": "FeatureSetEditionDefault",
+                  "id": 1
+                },
+                "minimumEdition": {
+                  "type": "Edition",
+                  "id": 4
+                },
+                "maximumEdition": {
+                  "type": "Edition",
+                  "id": 5
+                }
+              },
+              "nested": {
+                "FeatureSetEditionDefault": {
+                  "fields": {
+                    "edition": {
+                      "type": "Edition",
+                      "id": 3
+                    },
+                    "features": {
+                      "type": "FeatureSet",
                       "id": 2
                     }
                   }

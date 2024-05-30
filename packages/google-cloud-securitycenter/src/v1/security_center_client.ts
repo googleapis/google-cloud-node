@@ -122,8 +122,15 @@ export class SecurityCenterClient {
         'Please set either universe_domain or universeDomain, but not both.'
       );
     }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
     this._universeDomain =
-      opts?.universeDomain ?? opts?.universe_domain ?? 'googleapis.com';
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'securitycenter.' + this._universeDomain;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || this._servicePath;
@@ -175,7 +182,7 @@ export class SecurityCenterClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -200,6 +207,9 @@ export class SecurityCenterClient {
       ),
       folderAssetSecurityMarksPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/assets/{asset}/securityMarks'
+      ),
+      folderConstraintNamePathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/policies/{constraint_name}'
       ),
       folderExportPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/bigQueryExports/{export}'
@@ -242,6 +252,9 @@ export class SecurityCenterClient {
         new this._gaxModule.PathTemplate(
           'organizations/{organization}/assets/{asset}/securityMarks'
         ),
+      organizationConstraintNamePathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/policies/{constraint_name}'
+      ),
       organizationExportPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/bigQueryExports/{export}'
       ),
@@ -286,6 +299,9 @@ export class SecurityCenterClient {
       ),
       projectAssetSecurityMarksPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/assets/{asset}/securityMarks'
+      ),
+      projectConstraintNamePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/policies/{constraint_name}'
       ),
       projectExportPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/bigQueryExports/{export}'
@@ -577,7 +593,7 @@ export class SecurityCenterClient {
    */
   static get servicePath() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -595,7 +611,7 @@ export class SecurityCenterClient {
    */
   static get apiEndpoint() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -8183,6 +8199,48 @@ export class SecurityCenterClient {
   }
 
   /**
+   * Return a fully-qualified folderConstraintName resource name string.
+   *
+   * @param {string} folder
+   * @param {string} constraint_name
+   * @returns {string} Resource name string.
+   */
+  folderConstraintNamePath(folder: string, constraintName: string) {
+    return this.pathTemplates.folderConstraintNamePathTemplate.render({
+      folder: folder,
+      constraint_name: constraintName,
+    });
+  }
+
+  /**
+   * Parse the folder from FolderConstraintName resource.
+   *
+   * @param {string} folderConstraintNameName
+   *   A fully-qualified path representing folder_constraint_name resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderConstraintNameName(folderConstraintNameName: string) {
+    return this.pathTemplates.folderConstraintNamePathTemplate.match(
+      folderConstraintNameName
+    ).folder;
+  }
+
+  /**
+   * Parse the constraint_name from FolderConstraintName resource.
+   *
+   * @param {string} folderConstraintNameName
+   *   A fully-qualified path representing folder_constraint_name resource.
+   * @returns {string} A string representing the constraint_name.
+   */
+  matchConstraintNameFromFolderConstraintNameName(
+    folderConstraintNameName: string
+  ) {
+    return this.pathTemplates.folderConstraintNamePathTemplate.match(
+      folderConstraintNameName
+    ).constraint_name;
+  }
+
+  /**
    * Return a fully-qualified folderExport resource name string.
    *
    * @param {string} folder
@@ -8755,6 +8813,50 @@ export class SecurityCenterClient {
     return this.pathTemplates.organizationAssetSecurityMarksPathTemplate.match(
       organizationAssetSecurityMarksName
     ).asset;
+  }
+
+  /**
+   * Return a fully-qualified organizationConstraintName resource name string.
+   *
+   * @param {string} organization
+   * @param {string} constraint_name
+   * @returns {string} Resource name string.
+   */
+  organizationConstraintNamePath(organization: string, constraintName: string) {
+    return this.pathTemplates.organizationConstraintNamePathTemplate.render({
+      organization: organization,
+      constraint_name: constraintName,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationConstraintName resource.
+   *
+   * @param {string} organizationConstraintNameName
+   *   A fully-qualified path representing organization_constraint_name resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationConstraintNameName(
+    organizationConstraintNameName: string
+  ) {
+    return this.pathTemplates.organizationConstraintNamePathTemplate.match(
+      organizationConstraintNameName
+    ).organization;
+  }
+
+  /**
+   * Parse the constraint_name from OrganizationConstraintName resource.
+   *
+   * @param {string} organizationConstraintNameName
+   *   A fully-qualified path representing organization_constraint_name resource.
+   * @returns {string} A string representing the constraint_name.
+   */
+  matchConstraintNameFromOrganizationConstraintNameName(
+    organizationConstraintNameName: string
+  ) {
+    return this.pathTemplates.organizationConstraintNamePathTemplate.match(
+      organizationConstraintNameName
+    ).constraint_name;
   }
 
   /**
@@ -9381,6 +9483,48 @@ export class SecurityCenterClient {
     return this.pathTemplates.projectAssetSecurityMarksPathTemplate.match(
       projectAssetSecurityMarksName
     ).asset;
+  }
+
+  /**
+   * Return a fully-qualified projectConstraintName resource name string.
+   *
+   * @param {string} project
+   * @param {string} constraint_name
+   * @returns {string} Resource name string.
+   */
+  projectConstraintNamePath(project: string, constraintName: string) {
+    return this.pathTemplates.projectConstraintNamePathTemplate.render({
+      project: project,
+      constraint_name: constraintName,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectConstraintName resource.
+   *
+   * @param {string} projectConstraintNameName
+   *   A fully-qualified path representing project_constraint_name resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectConstraintNameName(projectConstraintNameName: string) {
+    return this.pathTemplates.projectConstraintNamePathTemplate.match(
+      projectConstraintNameName
+    ).project;
+  }
+
+  /**
+   * Parse the constraint_name from ProjectConstraintName resource.
+   *
+   * @param {string} projectConstraintNameName
+   *   A fully-qualified path representing project_constraint_name resource.
+   * @returns {string} A string representing the constraint_name.
+   */
+  matchConstraintNameFromProjectConstraintNameName(
+    projectConstraintNameName: string
+  ) {
+    return this.pathTemplates.projectConstraintNamePathTemplate.match(
+      projectConstraintNameName
+    ).constraint_name;
   }
 
   /**

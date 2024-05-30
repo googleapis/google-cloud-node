@@ -122,8 +122,15 @@ export class EnvironmentsClient {
         'Please set either universe_domain or universeDomain, but not both.'
       );
     }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
     this._universeDomain =
-      opts?.universeDomain ?? opts?.universe_domain ?? 'googleapis.com';
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'composer.' + this._universeDomain;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || this._servicePath;
@@ -175,7 +182,7 @@ export class EnvironmentsClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -198,6 +205,12 @@ export class EnvironmentsClient {
       environmentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/environments/{environment}'
       ),
+      userWorkloadsConfigMapPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/environments/{environment}/userWorkloadsConfigMaps/{user_workloads_config_map}'
+      ),
+      userWorkloadsSecretPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/environments/{environment}/userWorkloadsSecrets/{user_workloads_secret}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -208,6 +221,21 @@ export class EnvironmentsClient {
         'pageToken',
         'nextPageToken',
         'environments'
+      ),
+      listWorkloads: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'workloads'
+      ),
+      listUserWorkloadsSecrets: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'userWorkloadsSecrets'
+      ),
+      listUserWorkloadsConfigMaps: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'userWorkloadsConfigMaps'
       ),
     };
 
@@ -368,6 +396,17 @@ export class EnvironmentsClient {
       'executeAirflowCommand',
       'stopAirflowCommand',
       'pollAirflowCommand',
+      'listWorkloads',
+      'createUserWorkloadsSecret',
+      'getUserWorkloadsSecret',
+      'listUserWorkloadsSecrets',
+      'updateUserWorkloadsSecret',
+      'deleteUserWorkloadsSecret',
+      'createUserWorkloadsConfigMap',
+      'getUserWorkloadsConfigMap',
+      'listUserWorkloadsConfigMaps',
+      'updateUserWorkloadsConfigMap',
+      'deleteUserWorkloadsConfigMap',
       'saveSnapshot',
       'loadSnapshot',
       'databaseFailover',
@@ -412,7 +451,7 @@ export class EnvironmentsClient {
    */
   static get servicePath() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -430,7 +469,7 @@ export class EnvironmentsClient {
    */
   static get apiEndpoint() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -902,6 +941,842 @@ export class EnvironmentsClient {
       });
     this.initialize();
     return this.innerApiCalls.pollAirflowCommand(request, options, callback);
+  }
+  /**
+   * Creates a user workloads Secret.
+   *
+   * This method is supported for Cloud Composer environments in versions
+   * composer-3.*.*-airflow-*.*.* and newer.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The environment name to create a Secret for, in the form:
+   *   "projects/{projectId}/locations/{locationId}/environments/{environmentId}"
+   * @param {google.cloud.orchestration.airflow.service.v1.UserWorkloadsSecret} request.userWorkloadsSecret
+   *   Required. User workloads Secret to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.orchestration.airflow.service.v1.UserWorkloadsSecret|UserWorkloadsSecret}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/environments.create_user_workloads_secret.js</caption>
+   * region_tag:composer_v1_generated_Environments_CreateUserWorkloadsSecret_async
+   */
+  createUserWorkloadsSecret(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsSecretRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret,
+      (
+        | protos.google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsSecretRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  createUserWorkloadsSecret(
+    request: protos.google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsSecretRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret,
+      | protos.google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsSecretRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createUserWorkloadsSecret(
+    request: protos.google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsSecretRequest,
+    callback: Callback<
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret,
+      | protos.google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsSecretRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createUserWorkloadsSecret(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsSecretRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret,
+          | protos.google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsSecretRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret,
+      | protos.google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsSecretRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret,
+      (
+        | protos.google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsSecretRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createUserWorkloadsSecret(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Gets an existing user workloads Secret.
+   * Values of the "data" field in the response are cleared.
+   *
+   * This method is supported for Cloud Composer environments in versions
+   * composer-3.*.*-airflow-*.*.* and newer.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the Secret to get, in the form:
+   *   "projects/{projectId}/locations/{locationId}/environments/{environmentId}/userWorkloadsSecrets/{userWorkloadsSecretId}"
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.orchestration.airflow.service.v1.UserWorkloadsSecret|UserWorkloadsSecret}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/environments.get_user_workloads_secret.js</caption>
+   * region_tag:composer_v1_generated_Environments_GetUserWorkloadsSecret_async
+   */
+  getUserWorkloadsSecret(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsSecretRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret,
+      (
+        | protos.google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsSecretRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getUserWorkloadsSecret(
+    request: protos.google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsSecretRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret,
+      | protos.google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsSecretRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getUserWorkloadsSecret(
+    request: protos.google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsSecretRequest,
+    callback: Callback<
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret,
+      | protos.google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsSecretRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getUserWorkloadsSecret(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsSecretRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret,
+          | protos.google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsSecretRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret,
+      | protos.google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsSecretRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret,
+      (
+        | protos.google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsSecretRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getUserWorkloadsSecret(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Updates a user workloads Secret.
+   *
+   * This method is supported for Cloud Composer environments in versions
+   * composer-3.*.*-airflow-*.*.* and newer.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.orchestration.airflow.service.v1.UserWorkloadsSecret} [request.userWorkloadsSecret]
+   *   Optional. User workloads Secret to override.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.orchestration.airflow.service.v1.UserWorkloadsSecret|UserWorkloadsSecret}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/environments.update_user_workloads_secret.js</caption>
+   * region_tag:composer_v1_generated_Environments_UpdateUserWorkloadsSecret_async
+   */
+  updateUserWorkloadsSecret(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsSecretRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret,
+      (
+        | protos.google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsSecretRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateUserWorkloadsSecret(
+    request: protos.google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsSecretRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret,
+      | protos.google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsSecretRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateUserWorkloadsSecret(
+    request: protos.google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsSecretRequest,
+    callback: Callback<
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret,
+      | protos.google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsSecretRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateUserWorkloadsSecret(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsSecretRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret,
+          | protos.google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsSecretRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret,
+      | protos.google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsSecretRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret,
+      (
+        | protos.google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsSecretRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'user_workloads_secret.name': request.userWorkloadsSecret!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateUserWorkloadsSecret(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Deletes a user workloads Secret.
+   *
+   * This method is supported for Cloud Composer environments in versions
+   * composer-3.*.*-airflow-*.*.* and newer.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The Secret to delete, in the form:
+   *   "projects/{projectId}/locations/{locationId}/environments/{environmentId}/userWorkloadsSecrets/{userWorkloadsSecretId}"
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/environments.delete_user_workloads_secret.js</caption>
+   * region_tag:composer_v1_generated_Environments_DeleteUserWorkloadsSecret_async
+   */
+  deleteUserWorkloadsSecret(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsSecretRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsSecretRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  deleteUserWorkloadsSecret(
+    request: protos.google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsSecretRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsSecretRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteUserWorkloadsSecret(
+    request: protos.google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsSecretRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsSecretRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteUserWorkloadsSecret(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsSecretRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsSecretRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsSecretRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsSecretRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteUserWorkloadsSecret(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Creates a user workloads ConfigMap.
+   *
+   * This method is supported for Cloud Composer environments in versions
+   * composer-3.*.*-airflow-*.*.* and newer.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The environment name to create a ConfigMap for, in the form:
+   *   "projects/{projectId}/locations/{locationId}/environments/{environmentId}"
+   * @param {google.cloud.orchestration.airflow.service.v1.UserWorkloadsConfigMap} request.userWorkloadsConfigMap
+   *   Required. User workloads ConfigMap to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.orchestration.airflow.service.v1.UserWorkloadsConfigMap|UserWorkloadsConfigMap}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/environments.create_user_workloads_config_map.js</caption>
+   * region_tag:composer_v1_generated_Environments_CreateUserWorkloadsConfigMap_async
+   */
+  createUserWorkloadsConfigMap(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsConfigMapRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap,
+      (
+        | protos.google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsConfigMapRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  createUserWorkloadsConfigMap(
+    request: protos.google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsConfigMapRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap,
+      | protos.google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsConfigMapRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createUserWorkloadsConfigMap(
+    request: protos.google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsConfigMapRequest,
+    callback: Callback<
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap,
+      | protos.google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsConfigMapRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createUserWorkloadsConfigMap(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsConfigMapRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap,
+          | protos.google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsConfigMapRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap,
+      | protos.google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsConfigMapRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap,
+      (
+        | protos.google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsConfigMapRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createUserWorkloadsConfigMap(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Gets an existing user workloads ConfigMap.
+   *
+   * This method is supported for Cloud Composer environments in versions
+   * composer-3.*.*-airflow-*.*.* and newer.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the ConfigMap to get, in the form:
+   *   "projects/{projectId}/locations/{locationId}/environments/{environmentId}/userWorkloadsConfigMaps/{userWorkloadsConfigMapId}"
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.orchestration.airflow.service.v1.UserWorkloadsConfigMap|UserWorkloadsConfigMap}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/environments.get_user_workloads_config_map.js</caption>
+   * region_tag:composer_v1_generated_Environments_GetUserWorkloadsConfigMap_async
+   */
+  getUserWorkloadsConfigMap(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsConfigMapRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap,
+      (
+        | protos.google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsConfigMapRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getUserWorkloadsConfigMap(
+    request: protos.google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsConfigMapRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap,
+      | protos.google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsConfigMapRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getUserWorkloadsConfigMap(
+    request: protos.google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsConfigMapRequest,
+    callback: Callback<
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap,
+      | protos.google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsConfigMapRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getUserWorkloadsConfigMap(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsConfigMapRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap,
+          | protos.google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsConfigMapRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap,
+      | protos.google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsConfigMapRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap,
+      (
+        | protos.google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsConfigMapRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getUserWorkloadsConfigMap(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Updates a user workloads ConfigMap.
+   *
+   * This method is supported for Cloud Composer environments in versions
+   * composer-3.*.*-airflow-*.*.* and newer.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.orchestration.airflow.service.v1.UserWorkloadsConfigMap} [request.userWorkloadsConfigMap]
+   *   Optional. User workloads ConfigMap to override.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.orchestration.airflow.service.v1.UserWorkloadsConfigMap|UserWorkloadsConfigMap}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/environments.update_user_workloads_config_map.js</caption>
+   * region_tag:composer_v1_generated_Environments_UpdateUserWorkloadsConfigMap_async
+   */
+  updateUserWorkloadsConfigMap(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsConfigMapRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap,
+      (
+        | protos.google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsConfigMapRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateUserWorkloadsConfigMap(
+    request: protos.google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsConfigMapRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap,
+      | protos.google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsConfigMapRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateUserWorkloadsConfigMap(
+    request: protos.google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsConfigMapRequest,
+    callback: Callback<
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap,
+      | protos.google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsConfigMapRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateUserWorkloadsConfigMap(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsConfigMapRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap,
+          | protos.google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsConfigMapRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap,
+      | protos.google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsConfigMapRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap,
+      (
+        | protos.google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsConfigMapRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'user_workloads_config_map.name':
+          request.userWorkloadsConfigMap!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateUserWorkloadsConfigMap(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Deletes a user workloads ConfigMap.
+   *
+   * This method is supported for Cloud Composer environments in versions
+   * composer-3.*.*-airflow-*.*.* and newer.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The ConfigMap to delete, in the form:
+   *   "projects/{projectId}/locations/{locationId}/environments/{environmentId}/userWorkloadsConfigMaps/{userWorkloadsConfigMapId}"
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/environments.delete_user_workloads_config_map.js</caption>
+   * region_tag:composer_v1_generated_Environments_DeleteUserWorkloadsConfigMap_async
+   */
+  deleteUserWorkloadsConfigMap(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsConfigMapRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsConfigMapRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  deleteUserWorkloadsConfigMap(
+    request: protos.google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsConfigMapRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsConfigMapRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteUserWorkloadsConfigMap(
+    request: protos.google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsConfigMapRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsConfigMapRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteUserWorkloadsConfigMap(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsConfigMapRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsConfigMapRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsConfigMapRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsConfigMapRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteUserWorkloadsConfigMap(
+      request,
+      options,
+      callback
+    );
   }
   /**
    * Fetches database properties.
@@ -2170,6 +3045,621 @@ export class EnvironmentsClient {
     ) as AsyncIterable<protos.google.cloud.orchestration.airflow.service.v1.IEnvironment>;
   }
   /**
+   * Lists workloads in a Cloud Composer environment. Workload is a unit that
+   * runs a single Composer component.
+   *
+   * This method is supported for Cloud Composer environments in versions
+   * composer-3.*.*-airflow-*.*.* and newer.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The environment name to get workloads for, in the form:
+   *   "projects/{projectId}/locations/{locationId}/environments/{environmentId}"
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of environments to return.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value returned from a previous List request,
+   *   if any.
+   * @param {string} [request.filter]
+   *   Optional. The list filter.
+   *   Currently only supports equality on the type field. The value of a field
+   *   specified in the filter expression must be one ComposerWorkloadType enum
+   *   option. It's possible to get multiple types using "OR" operator, e.g.:
+   *   "type=SCHEDULER OR type=CELERY_WORKER". If not specified, all items are
+   *   returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.ComposerWorkload|ComposerWorkload}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listWorkloadsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listWorkloads(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IListWorkloadsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.IComposerWorkload[],
+      protos.google.cloud.orchestration.airflow.service.v1.IListWorkloadsRequest | null,
+      protos.google.cloud.orchestration.airflow.service.v1.IListWorkloadsResponse,
+    ]
+  >;
+  listWorkloads(
+    request: protos.google.cloud.orchestration.airflow.service.v1.IListWorkloadsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.orchestration.airflow.service.v1.IListWorkloadsRequest,
+      | protos.google.cloud.orchestration.airflow.service.v1.IListWorkloadsResponse
+      | null
+      | undefined,
+      protos.google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.IComposerWorkload
+    >
+  ): void;
+  listWorkloads(
+    request: protos.google.cloud.orchestration.airflow.service.v1.IListWorkloadsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.orchestration.airflow.service.v1.IListWorkloadsRequest,
+      | protos.google.cloud.orchestration.airflow.service.v1.IListWorkloadsResponse
+      | null
+      | undefined,
+      protos.google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.IComposerWorkload
+    >
+  ): void;
+  listWorkloads(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IListWorkloadsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.orchestration.airflow.service.v1.IListWorkloadsRequest,
+          | protos.google.cloud.orchestration.airflow.service.v1.IListWorkloadsResponse
+          | null
+          | undefined,
+          protos.google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.IComposerWorkload
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.orchestration.airflow.service.v1.IListWorkloadsRequest,
+      | protos.google.cloud.orchestration.airflow.service.v1.IListWorkloadsResponse
+      | null
+      | undefined,
+      protos.google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.IComposerWorkload
+    >
+  ): Promise<
+    [
+      protos.google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.IComposerWorkload[],
+      protos.google.cloud.orchestration.airflow.service.v1.IListWorkloadsRequest | null,
+      protos.google.cloud.orchestration.airflow.service.v1.IListWorkloadsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listWorkloads(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The environment name to get workloads for, in the form:
+   *   "projects/{projectId}/locations/{locationId}/environments/{environmentId}"
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of environments to return.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value returned from a previous List request,
+   *   if any.
+   * @param {string} [request.filter]
+   *   Optional. The list filter.
+   *   Currently only supports equality on the type field. The value of a field
+   *   specified in the filter expression must be one ComposerWorkloadType enum
+   *   option. It's possible to get multiple types using "OR" operator, e.g.:
+   *   "type=SCHEDULER OR type=CELERY_WORKER". If not specified, all items are
+   *   returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.ComposerWorkload|ComposerWorkload} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listWorkloadsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listWorkloadsStream(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IListWorkloadsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listWorkloads'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listWorkloads.createStream(
+      this.innerApiCalls.listWorkloads as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listWorkloads`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The environment name to get workloads for, in the form:
+   *   "projects/{projectId}/locations/{locationId}/environments/{environmentId}"
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of environments to return.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value returned from a previous List request,
+   *   if any.
+   * @param {string} [request.filter]
+   *   Optional. The list filter.
+   *   Currently only supports equality on the type field. The value of a field
+   *   specified in the filter expression must be one ComposerWorkloadType enum
+   *   option. It's possible to get multiple types using "OR" operator, e.g.:
+   *   "type=SCHEDULER OR type=CELERY_WORKER". If not specified, all items are
+   *   returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.ComposerWorkload|ComposerWorkload}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/environments.list_workloads.js</caption>
+   * region_tag:composer_v1_generated_Environments_ListWorkloads_async
+   */
+  listWorkloadsAsync(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IListWorkloadsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.IComposerWorkload> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listWorkloads'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listWorkloads.asyncIterate(
+      this.innerApiCalls['listWorkloads'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.IComposerWorkload>;
+  }
+  /**
+   * Lists user workloads Secrets.
+   *
+   * This method is supported for Cloud Composer environments in versions
+   * composer-3.*.*-airflow-*.*.* and newer.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. List Secrets in the given environment, in the form:
+   *   "projects/{projectId}/locations/{locationId}/environments/{environmentId}"
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of Secrets to return.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value returned from a previous List request,
+   *   if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.orchestration.airflow.service.v1.UserWorkloadsSecret|UserWorkloadsSecret}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listUserWorkloadsSecretsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listUserWorkloadsSecrets(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsSecretsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret[],
+      protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsSecretsRequest | null,
+      protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsSecretsResponse,
+    ]
+  >;
+  listUserWorkloadsSecrets(
+    request: protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsSecretsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsSecretsRequest,
+      | protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsSecretsResponse
+      | null
+      | undefined,
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret
+    >
+  ): void;
+  listUserWorkloadsSecrets(
+    request: protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsSecretsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsSecretsRequest,
+      | protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsSecretsResponse
+      | null
+      | undefined,
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret
+    >
+  ): void;
+  listUserWorkloadsSecrets(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsSecretsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsSecretsRequest,
+          | protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsSecretsResponse
+          | null
+          | undefined,
+          protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsSecretsRequest,
+      | protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsSecretsResponse
+      | null
+      | undefined,
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret
+    >
+  ): Promise<
+    [
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret[],
+      protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsSecretsRequest | null,
+      protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsSecretsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listUserWorkloadsSecrets(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. List Secrets in the given environment, in the form:
+   *   "projects/{projectId}/locations/{locationId}/environments/{environmentId}"
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of Secrets to return.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value returned from a previous List request,
+   *   if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.orchestration.airflow.service.v1.UserWorkloadsSecret|UserWorkloadsSecret} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listUserWorkloadsSecretsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listUserWorkloadsSecretsStream(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsSecretsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listUserWorkloadsSecrets'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listUserWorkloadsSecrets.createStream(
+      this.innerApiCalls.listUserWorkloadsSecrets as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listUserWorkloadsSecrets`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. List Secrets in the given environment, in the form:
+   *   "projects/{projectId}/locations/{locationId}/environments/{environmentId}"
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of Secrets to return.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value returned from a previous List request,
+   *   if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.orchestration.airflow.service.v1.UserWorkloadsSecret|UserWorkloadsSecret}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/environments.list_user_workloads_secrets.js</caption>
+   * region_tag:composer_v1_generated_Environments_ListUserWorkloadsSecrets_async
+   */
+  listUserWorkloadsSecretsAsync(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsSecretsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listUserWorkloadsSecrets'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listUserWorkloadsSecrets.asyncIterate(
+      this.innerApiCalls['listUserWorkloadsSecrets'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret>;
+  }
+  /**
+   * Lists user workloads ConfigMaps.
+   *
+   * This method is supported for Cloud Composer environments in versions
+   * composer-3.*.*-airflow-*.*.* and newer.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. List ConfigMaps in the given environment, in the form:
+   *   "projects/{projectId}/locations/{locationId}/environments/{environmentId}"
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of ConfigMaps to return.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value returned from a previous List request,
+   *   if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.orchestration.airflow.service.v1.UserWorkloadsConfigMap|UserWorkloadsConfigMap}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listUserWorkloadsConfigMapsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listUserWorkloadsConfigMaps(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsConfigMapsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap[],
+      protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsConfigMapsRequest | null,
+      protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsConfigMapsResponse,
+    ]
+  >;
+  listUserWorkloadsConfigMaps(
+    request: protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsConfigMapsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsConfigMapsRequest,
+      | protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsConfigMapsResponse
+      | null
+      | undefined,
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap
+    >
+  ): void;
+  listUserWorkloadsConfigMaps(
+    request: protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsConfigMapsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsConfigMapsRequest,
+      | protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsConfigMapsResponse
+      | null
+      | undefined,
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap
+    >
+  ): void;
+  listUserWorkloadsConfigMaps(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsConfigMapsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsConfigMapsRequest,
+          | protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsConfigMapsResponse
+          | null
+          | undefined,
+          protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsConfigMapsRequest,
+      | protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsConfigMapsResponse
+      | null
+      | undefined,
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap
+    >
+  ): Promise<
+    [
+      protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap[],
+      protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsConfigMapsRequest | null,
+      protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsConfigMapsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listUserWorkloadsConfigMaps(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. List ConfigMaps in the given environment, in the form:
+   *   "projects/{projectId}/locations/{locationId}/environments/{environmentId}"
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of ConfigMaps to return.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value returned from a previous List request,
+   *   if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.orchestration.airflow.service.v1.UserWorkloadsConfigMap|UserWorkloadsConfigMap} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listUserWorkloadsConfigMapsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listUserWorkloadsConfigMapsStream(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsConfigMapsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listUserWorkloadsConfigMaps'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listUserWorkloadsConfigMaps.createStream(
+      this.innerApiCalls.listUserWorkloadsConfigMaps as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listUserWorkloadsConfigMaps`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. List ConfigMaps in the given environment, in the form:
+   *   "projects/{projectId}/locations/{locationId}/environments/{environmentId}"
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of ConfigMaps to return.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value returned from a previous List request,
+   *   if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.orchestration.airflow.service.v1.UserWorkloadsConfigMap|UserWorkloadsConfigMap}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/environments.list_user_workloads_config_maps.js</caption>
+   * region_tag:composer_v1_generated_Environments_ListUserWorkloadsConfigMaps_async
+   */
+  listUserWorkloadsConfigMapsAsync(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsConfigMapsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listUserWorkloadsConfigMaps'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listUserWorkloadsConfigMaps.asyncIterate(
+      this.innerApiCalls['listUserWorkloadsConfigMaps'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap>;
+  }
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -2398,6 +3888,166 @@ export class EnvironmentsClient {
   matchEnvironmentFromEnvironmentName(environmentName: string) {
     return this.pathTemplates.environmentPathTemplate.match(environmentName)
       .environment;
+  }
+
+  /**
+   * Return a fully-qualified userWorkloadsConfigMap resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} environment
+   * @param {string} user_workloads_config_map
+   * @returns {string} Resource name string.
+   */
+  userWorkloadsConfigMapPath(
+    project: string,
+    location: string,
+    environment: string,
+    userWorkloadsConfigMap: string
+  ) {
+    return this.pathTemplates.userWorkloadsConfigMapPathTemplate.render({
+      project: project,
+      location: location,
+      environment: environment,
+      user_workloads_config_map: userWorkloadsConfigMap,
+    });
+  }
+
+  /**
+   * Parse the project from UserWorkloadsConfigMap resource.
+   *
+   * @param {string} userWorkloadsConfigMapName
+   *   A fully-qualified path representing UserWorkloadsConfigMap resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromUserWorkloadsConfigMapName(
+    userWorkloadsConfigMapName: string
+  ) {
+    return this.pathTemplates.userWorkloadsConfigMapPathTemplate.match(
+      userWorkloadsConfigMapName
+    ).project;
+  }
+
+  /**
+   * Parse the location from UserWorkloadsConfigMap resource.
+   *
+   * @param {string} userWorkloadsConfigMapName
+   *   A fully-qualified path representing UserWorkloadsConfigMap resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromUserWorkloadsConfigMapName(
+    userWorkloadsConfigMapName: string
+  ) {
+    return this.pathTemplates.userWorkloadsConfigMapPathTemplate.match(
+      userWorkloadsConfigMapName
+    ).location;
+  }
+
+  /**
+   * Parse the environment from UserWorkloadsConfigMap resource.
+   *
+   * @param {string} userWorkloadsConfigMapName
+   *   A fully-qualified path representing UserWorkloadsConfigMap resource.
+   * @returns {string} A string representing the environment.
+   */
+  matchEnvironmentFromUserWorkloadsConfigMapName(
+    userWorkloadsConfigMapName: string
+  ) {
+    return this.pathTemplates.userWorkloadsConfigMapPathTemplate.match(
+      userWorkloadsConfigMapName
+    ).environment;
+  }
+
+  /**
+   * Parse the user_workloads_config_map from UserWorkloadsConfigMap resource.
+   *
+   * @param {string} userWorkloadsConfigMapName
+   *   A fully-qualified path representing UserWorkloadsConfigMap resource.
+   * @returns {string} A string representing the user_workloads_config_map.
+   */
+  matchUserWorkloadsConfigMapFromUserWorkloadsConfigMapName(
+    userWorkloadsConfigMapName: string
+  ) {
+    return this.pathTemplates.userWorkloadsConfigMapPathTemplate.match(
+      userWorkloadsConfigMapName
+    ).user_workloads_config_map;
+  }
+
+  /**
+   * Return a fully-qualified userWorkloadsSecret resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} environment
+   * @param {string} user_workloads_secret
+   * @returns {string} Resource name string.
+   */
+  userWorkloadsSecretPath(
+    project: string,
+    location: string,
+    environment: string,
+    userWorkloadsSecret: string
+  ) {
+    return this.pathTemplates.userWorkloadsSecretPathTemplate.render({
+      project: project,
+      location: location,
+      environment: environment,
+      user_workloads_secret: userWorkloadsSecret,
+    });
+  }
+
+  /**
+   * Parse the project from UserWorkloadsSecret resource.
+   *
+   * @param {string} userWorkloadsSecretName
+   *   A fully-qualified path representing UserWorkloadsSecret resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromUserWorkloadsSecretName(userWorkloadsSecretName: string) {
+    return this.pathTemplates.userWorkloadsSecretPathTemplate.match(
+      userWorkloadsSecretName
+    ).project;
+  }
+
+  /**
+   * Parse the location from UserWorkloadsSecret resource.
+   *
+   * @param {string} userWorkloadsSecretName
+   *   A fully-qualified path representing UserWorkloadsSecret resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromUserWorkloadsSecretName(userWorkloadsSecretName: string) {
+    return this.pathTemplates.userWorkloadsSecretPathTemplate.match(
+      userWorkloadsSecretName
+    ).location;
+  }
+
+  /**
+   * Parse the environment from UserWorkloadsSecret resource.
+   *
+   * @param {string} userWorkloadsSecretName
+   *   A fully-qualified path representing UserWorkloadsSecret resource.
+   * @returns {string} A string representing the environment.
+   */
+  matchEnvironmentFromUserWorkloadsSecretName(userWorkloadsSecretName: string) {
+    return this.pathTemplates.userWorkloadsSecretPathTemplate.match(
+      userWorkloadsSecretName
+    ).environment;
+  }
+
+  /**
+   * Parse the user_workloads_secret from UserWorkloadsSecret resource.
+   *
+   * @param {string} userWorkloadsSecretName
+   *   A fully-qualified path representing UserWorkloadsSecret resource.
+   * @returns {string} A string representing the user_workloads_secret.
+   */
+  matchUserWorkloadsSecretFromUserWorkloadsSecretName(
+    userWorkloadsSecretName: string
+  ) {
+    return this.pathTemplates.userWorkloadsSecretPathTemplate.match(
+      userWorkloadsSecretName
+    ).user_workloads_secret;
   }
 
   /**

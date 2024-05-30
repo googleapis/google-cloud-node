@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.4.0](https://github.com/googleapis/google-cloud-node/compare/gkemulticloud-v1.3.0...gkemulticloud-v1.4.0) (2024-05-21)
+
+
+### Features
+
+* [gkemulticloud] update Nodejs generator to send API versions in headers for GAPICs ([#5344](https://github.com/googleapis/google-cloud-node/issues/5344)) ([4413295](https://github.com/googleapis/google-cloud-node/commit/441329542af223dcf62dca04f2bf05cd393bac31))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/gkemulticloud-v1.2.0...gkemulticloud-v1.3.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5189](https://github.com/googleapis/google-cloud-node/issues/5189)) ([64b5a75](https://github.com/googleapis/google-cloud-node/commit/64b5a759caa979837199086c2d546a565ad2b3b1))
+
 ## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/gkemulticloud-v1.1.0...gkemulticloud-v1.2.0) (2024-02-09)
 
 

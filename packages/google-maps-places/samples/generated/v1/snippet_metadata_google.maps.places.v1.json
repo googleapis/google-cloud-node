@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-places",
-        "version": "1.2.0",
+        "version": "1.6.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -94,7 +94,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 125,
+                    "end": 129,
                     "type": "FULL"
                 }
             ],
@@ -150,6 +150,10 @@
                     {
                         "name": "location_restriction",
                         "type": ".google.maps.places.v1.SearchTextRequest.LocationRestriction"
+                    },
+                    {
+                        "name": "ev_options",
+                        "type": ".google.maps.places.v1.SearchTextRequest.EVOptions"
                     }
                 ],
                 "resultType": ".google.maps.places.v1.SearchTextResponse",
@@ -223,14 +227,14 @@
             "regionTag": "places_v1_generated_Places_GetPlace_async",
             "title": "Places getPlace Sample",
             "origin": "API_DEFINITION",
-            "description": " Get place details with a place id (in a name) string.",
+            "description": " Get the details of a place based on its resource name, which is a string in the `places/{place_id}` format.",
             "canonical": true,
             "file": "places.get_place.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 72,
+                    "end": 96,
                     "type": "FULL"
                 }
             ],
@@ -250,6 +254,10 @@
                     {
                         "name": "region_code",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "session_token",
+                        "type": "TYPE_STRING"
                     }
                 ],
                 "resultType": ".google.maps.places.v1.Place",
@@ -260,6 +268,86 @@
                 "method": {
                     "shortName": "GetPlace",
                     "fullName": "google.maps.places.v1.Places.GetPlace",
+                    "service": {
+                        "shortName": "Places",
+                        "fullName": "google.maps.places.v1.Places"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "places_v1_generated_Places_AutocompletePlaces_async",
+            "title": "Places autocompletePlaces Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns predictions for the given input.",
+            "canonical": true,
+            "file": "places.autocomplete_places.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 143,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "AutocompletePlaces",
+                "fullName": "google.maps.places.v1.Places.AutocompletePlaces",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "input",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "location_bias",
+                        "type": ".google.maps.places.v1.AutocompletePlacesRequest.LocationBias"
+                    },
+                    {
+                        "name": "location_restriction",
+                        "type": ".google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction"
+                    },
+                    {
+                        "name": "included_primary_types",
+                        "type": "TYPE_STRING[]"
+                    },
+                    {
+                        "name": "included_region_codes",
+                        "type": "TYPE_STRING[]"
+                    },
+                    {
+                        "name": "language_code",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region_code",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "origin",
+                        "type": ".google.type.LatLng"
+                    },
+                    {
+                        "name": "input_offset",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "include_query_predictions",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "session_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.maps.places.v1.AutocompletePlacesResponse",
+                "client": {
+                    "shortName": "PlacesClient",
+                    "fullName": "google.maps.places.v1.PlacesClient"
+                },
+                "method": {
+                    "shortName": "AutocompletePlaces",
+                    "fullName": "google.maps.places.v1.Places.AutocompletePlaces",
                     "service": {
                         "shortName": "Places",
                         "fullName": "google.maps.places.v1.Places"

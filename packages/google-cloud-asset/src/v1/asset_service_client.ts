@@ -122,8 +122,15 @@ export class AssetServiceClient {
         'Please set either universe_domain or universeDomain, but not both.'
       );
     }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
     this._universeDomain =
-      opts?.universeDomain ?? opts?.universe_domain ?? 'googleapis.com';
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'cloudasset.' + this._universeDomain;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || this._servicePath;
@@ -175,7 +182,7 @@ export class AssetServiceClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -434,7 +441,7 @@ export class AssetServiceClient {
    */
   static get servicePath() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -452,7 +459,7 @@ export class AssetServiceClient {
    */
   static get apiEndpoint() {
     if (
-      typeof process !== undefined &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       process.emitWarning(
@@ -1823,10 +1830,10 @@ export class AssetServiceClient {
    *   folder number (such as "folders/123"), a project ID (such as
    *   "projects/my-project-id"), or a project number (such as "projects/12345").
    *
-   *   To know how to get organization id, visit [here
+   *   To know how to get organization ID, visit [here
    *   ](https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id).
    *
-   *   To know how to get folder or project id, visit [here
+   *   To know how to get folder or project ID, visit [here
    *   ](https://cloud.google.com/resource-manager/docs/creating-managing-folders#viewing_or_listing_folders_and_projects).
    * @param {string[]} request.names
    *   Required. The names refer to the [full_resource_names]
@@ -4510,18 +4517,49 @@ export class AssetServiceClient {
   /**
    * Analyzes organization policies governed assets (Google Cloud resources or
    * policies) under a scope. This RPC supports custom constraints and the
-   * following 10 canned constraints:
+   * following canned constraints:
    *
-   * * storage.uniformBucketLevelAccess
-   * * iam.disableServiceAccountKeyCreation
-   * * iam.allowedPolicyMemberDomains
-   * * compute.vmExternalIpAccess
-   * * appengine.enforceServiceAccountActAsCheck
-   * * gcp.resourceLocations
-   * * compute.trustedImageProjects
-   * * compute.skipDefaultNetworkCreation
-   * * compute.requireOsLogin
-   * * compute.disableNestedVirtualization
+   * * constraints/ainotebooks.accessMode
+   * * constraints/ainotebooks.disableFileDownloads
+   * * constraints/ainotebooks.disableRootAccess
+   * * constraints/ainotebooks.disableTerminal
+   * * constraints/ainotebooks.environmentOptions
+   * * constraints/ainotebooks.requireAutoUpgradeSchedule
+   * * constraints/ainotebooks.restrictVpcNetworks
+   * * constraints/compute.disableGuestAttributesAccess
+   * * constraints/compute.disableInstanceDataAccessApis
+   * * constraints/compute.disableNestedVirtualization
+   * * constraints/compute.disableSerialPortAccess
+   * * constraints/compute.disableSerialPortLogging
+   * * constraints/compute.disableVpcExternalIpv6
+   * * constraints/compute.requireOsLogin
+   * * constraints/compute.requireShieldedVm
+   * * constraints/compute.restrictLoadBalancerCreationForTypes
+   * * constraints/compute.restrictProtocolForwardingCreationForTypes
+   * * constraints/compute.restrictXpnProjectLienRemoval
+   * * constraints/compute.setNewProjectDefaultToZonalDNSOnly
+   * * constraints/compute.skipDefaultNetworkCreation
+   * * constraints/compute.trustedImageProjects
+   * * constraints/compute.vmCanIpForward
+   * * constraints/compute.vmExternalIpAccess
+   * * constraints/gcp.detailedAuditLoggingMode
+   * * constraints/gcp.resourceLocations
+   * * constraints/iam.allowedPolicyMemberDomains
+   * * constraints/iam.automaticIamGrantsForDefaultServiceAccounts
+   * * constraints/iam.disableServiceAccountCreation
+   * * constraints/iam.disableServiceAccountKeyCreation
+   * * constraints/iam.disableServiceAccountKeyUpload
+   * * constraints/iam.restrictCrossProjectServiceAccountLienRemoval
+   * * constraints/iam.serviceAccountKeyExpiryHours
+   * * constraints/resourcemanager.accessBoundaries
+   * * constraints/resourcemanager.allowedExportDestinations
+   * * constraints/sql.restrictAuthorizedNetworks
+   * * constraints/sql.restrictNoncompliantDiagnosticDataAccess
+   * * constraints/sql.restrictNoncompliantResourceCreation
+   * * constraints/sql.restrictPublicIp
+   * * constraints/storage.publicAccessPrevention
+   * * constraints/storage.restrictAuthTypes
+   * * constraints/storage.uniformBucketLevelAccess
    *
    * This RPC only returns either resources of types [supported by search
    * APIs](https://cloud.google.com/asset-inventory/docs/supported-asset-types)

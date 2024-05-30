@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-migration-v1.2.0...bigquery-migration-v1.3.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-migration-v1.1.0...bigquery-migration-v1.2.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5186](https://github.com/googleapis/google-cloud-node/issues/5186)) ([97c7951](https://github.com/googleapis/google-cloud-node/commit/97c7951481ef70d8f49c3d218f7c22ce00df9174))
+
 ## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-migration-v1.0.1...bigquery-migration-v1.1.0) (2024-02-09)
 
 

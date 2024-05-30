@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -60,7 +60,7 @@ message SearchRequest {
   string query = 2 [(google.api.field_behavior) = REQUIRED];
 
   // Optional. Number of `ReportRows` to retrieve in a single page. Defaults to
-  // the maximum of 1000. Values above 1000 are coerced to 1000.
+  // 1000. Values above 5000 are coerced to 5000.
   int32 page_size = 3 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Token of the page to retrieve. If not specified, the first page
@@ -88,6 +88,9 @@ message SearchResponse {
 message ReportRow {
   // Fields available for query in `product_performance_view` table.
   ProductPerformanceView product_performance_view = 1;
+
+  // Fields available for query in `non_product_performance_view` table.
+  NonProductPerformanceView non_product_performance_view = 7;
 
   // Fields available for query in `product_view` table.
   ProductView product_view = 2;
@@ -352,7 +355,7 @@ message ProductView {
   //
   // Here's an example of how the aggregated status is computed:
   //
-  // Free listings | Shopping Ads | Status
+  // Free listings | Shopping ads | Status
   // --------------|--------------|------------------------------
   // Approved      | Approved     | ELIGIBLE
   // Approved      | Pending      | ELIGIBLE
@@ -376,6 +379,29 @@ message ProductView {
 
     // Product is eligible for all reporting contexts.
     ELIGIBLE = 4;
+  }
+
+  // A product's [click
+  // potential](https://support.google.com/merchants/answer/188488) estimates
+  // its performance potential compared to highest performing products of the
+  // merchant. Click potential of a product helps merchants to prioritize which
+  // products to fix and helps them understand how products are performing
+  // against their potential.
+  enum ClickPotential {
+    // Unknown predicted clicks impact.
+    CLICK_POTENTIAL_UNSPECIFIED = 0;
+
+    // Potential to receive a low number of clicks compared to the highest
+    // performing products of the merchant.
+    LOW = 1;
+
+    // Potential to receive a moderate number of clicks compared to the highest
+    // performing products of the merchant.
+    MEDIUM = 2;
+
+    // Potential to receive a similar number of clicks as the highest performing
+    // products of the merchant.
+    HIGH = 3;
   }
 
   // REST ID of the product, in the form of
@@ -457,7 +483,7 @@ message ProductView {
 
   // Normalized [shipping
   // label](https://support.google.com/merchants/answer/6324504) specified in
-  // the feed.
+  // the data source.
   optional string shipping_label = 20;
 
   // List of Global Trade Item Numbers (GTINs) of the product.
@@ -488,6 +514,15 @@ message ProductView {
   // `item_issues.severity.aggregated_severity`) can be used for filtering the
   // results.**
   repeated ItemIssue item_issues = 27;
+
+  // Estimated performance potential compared to highest performing products of
+  // the merchant.
+  ClickPotential click_potential = 29;
+
+  // Rank of the product based on its click potential. A product with
+  // `click_potential_rank` 1 has the highest click potential among the
+  // merchant's products that fulfill the search query conditions.
+  optional int64 click_potential_rank = 30;
 }
 
 // Fields available for query in `price_competitiveness_product_view` table.
@@ -575,6 +610,27 @@ message PriceCompetitivenessProductView {
 // Values are only set for fields requested explicitly in the request's search
 // query.
 message PriceInsightsProductView {
+  // Predicted effectiveness bucket.
+  //
+  // Effectiveness indicates which products would benefit most from price
+  // changes. This rating takes into consideration the performance boost
+  // predicted by adjusting the sale price and the difference between your
+  // current price and the suggested price. Price suggestions with `HIGH`
+  // effectiveness are predicted to drive the largest increase in performance.
+  enum Effectiveness {
+    // Effectiveness is unknown.
+    EFFECTIVENESS_UNSPECIFIED = 0;
+
+    // Effectiveness is low.
+    LOW = 1;
+
+    // Effectiveness is medium.
+    MEDIUM = 2;
+
+    // Effectiveness is high.
+    HIGH = 3;
+  }
+
   // REST ID of the product, in the form of
   // `channel~languageCode~feedLabel~offerId`. Can be used to join data with the
   // `product_view` table.
@@ -651,6 +707,9 @@ message PriceInsightsProductView {
   // suggested price compared to current active price. For example, 0.05 is a 5%
   // predicted increase in conversions).
   optional double predicted_conversions_change_fraction = 19;
+
+  // The predicted effectiveness of applying the price suggestion, bucketed.
+  Effectiveness effectiveness = 22;
 }
 
 // Fields available for query in `best_sellers_product_cluster_view` table.
@@ -746,16 +805,16 @@ message BestSellersProductClusterView {
   // GTINs of example variants of the product cluster.
   repeated string variant_gtins = 13;
 
-  // Whether the product cluster is `IN_STOCK` in your product feed in at least
-  // one of the countries, `OUT_OF_STOCK` in your product feed in all countries,
-  // or `NOT_IN_INVENTORY` at all.
+  // Whether the product cluster is `IN_STOCK` in your product data source in at
+  // least one of the countries, `OUT_OF_STOCK` in your product data source in
+  // all countries, or `NOT_IN_INVENTORY` at all.
   //
   // The field doesn't take the Best sellers report country filter into account.
   optional InventoryStatus inventory_status = 14;
 
   // Whether there is at least one product of the brand currently `IN_STOCK` in
-  // your product feed in at least one of the countries, all products are
-  // `OUT_OF_STOCK` in your product feed in all countries, or
+  // your product data source in at least one of the countries, all products are
+  // `OUT_OF_STOCK` in your product data source in all countries, or
   // `NOT_IN_INVENTORY`.
   //
   // The field doesn't take the Best sellers report country filter into account.
@@ -844,6 +903,42 @@ message BestSellersBrandView {
   // Change in the estimated demand. Whether it rose, sank or remained flat.
   optional RelativeDemandChangeType.RelativeDemandChangeTypeEnum
       relative_demand_change = 11;
+}
+
+// Fields available for query in `non_product_performance_view` table.
+//
+// Performance data on images and online store links leading to your non-product
+// pages. This includes performance metrics (for example, `clicks`)
+// and dimensions according to which performance metrics are segmented (for
+// example, `date`).
+//
+// Segment fields cannot be selected in queries without also selecting at least
+// one metric field.
+//
+// Values are only set for fields requested explicitly in the request's search
+// query.
+message NonProductPerformanceView {
+  // Date in the merchant timezone to which metrics apply. Segment.
+  //
+  // Condition on `date` is required in the `WHERE` clause.
+  google.type.Date date = 1;
+
+  // First day of the week (Monday) of the metrics date in the merchant
+  // timezone. Segment.
+  google.type.Date week = 2;
+
+  // Number of clicks on images and online store links leading to your
+  // non-product pages. Metric.
+  optional int64 clicks = 3;
+
+  // Number of times images and online store links leading to your non-product
+  // pages were shown. Metric.
+  optional int64 impressions = 4;
+
+  // Click-through rate - the number of clicks (`clicks`) divided by the number
+  // of impressions (`impressions`) of images and online store links leading to
+  // your non-product pages. Metric.
+  optional double click_through_rate = 5;
 }
 
 // Fields available for query in `competitive_visibility_competitor_view` table.

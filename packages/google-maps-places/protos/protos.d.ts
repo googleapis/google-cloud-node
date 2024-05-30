@@ -17,3610 +17,6 @@ import Long = require("long");
 /** Namespace google. */
 export namespace google {
 
-    /** Namespace protobuf. */
-    namespace protobuf {
-
-        /** Properties of a Timestamp. */
-        interface ITimestamp {
-
-            /** Timestamp seconds */
-            seconds?: (number|Long|string|null);
-
-            /** Timestamp nanos */
-            nanos?: (number|null);
-        }
-
-        /** Represents a Timestamp. */
-        class Timestamp implements ITimestamp {
-
-            /**
-             * Constructs a new Timestamp.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.ITimestamp);
-
-            /** Timestamp seconds. */
-            public seconds: (number|Long|string);
-
-            /** Timestamp nanos. */
-            public nanos: number;
-
-            /**
-             * Creates a new Timestamp instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Timestamp instance
-             */
-            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
-
-            /**
-             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
-
-            /**
-             * Verifies a Timestamp message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Timestamp
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
-
-            /**
-             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
-             * @param message Timestamp
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Timestamp to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Timestamp
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a FileDescriptorSet. */
-        interface IFileDescriptorSet {
-
-            /** FileDescriptorSet file */
-            file?: (google.protobuf.IFileDescriptorProto[]|null);
-        }
-
-        /** Represents a FileDescriptorSet. */
-        class FileDescriptorSet implements IFileDescriptorSet {
-
-            /**
-             * Constructs a new FileDescriptorSet.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IFileDescriptorSet);
-
-            /** FileDescriptorSet file. */
-            public file: google.protobuf.IFileDescriptorProto[];
-
-            /**
-             * Creates a new FileDescriptorSet instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns FileDescriptorSet instance
-             */
-            public static create(properties?: google.protobuf.IFileDescriptorSet): google.protobuf.FileDescriptorSet;
-
-            /**
-             * Encodes the specified FileDescriptorSet message. Does not implicitly {@link google.protobuf.FileDescriptorSet.verify|verify} messages.
-             * @param message FileDescriptorSet message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IFileDescriptorSet, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified FileDescriptorSet message, length delimited. Does not implicitly {@link google.protobuf.FileDescriptorSet.verify|verify} messages.
-             * @param message FileDescriptorSet message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IFileDescriptorSet, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a FileDescriptorSet message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns FileDescriptorSet
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FileDescriptorSet;
-
-            /**
-             * Decodes a FileDescriptorSet message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns FileDescriptorSet
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FileDescriptorSet;
-
-            /**
-             * Verifies a FileDescriptorSet message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a FileDescriptorSet message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns FileDescriptorSet
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.FileDescriptorSet;
-
-            /**
-             * Creates a plain object from a FileDescriptorSet message. Also converts values to other types if specified.
-             * @param message FileDescriptorSet
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.FileDescriptorSet, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this FileDescriptorSet to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for FileDescriptorSet
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a FileDescriptorProto. */
-        interface IFileDescriptorProto {
-
-            /** FileDescriptorProto name */
-            name?: (string|null);
-
-            /** FileDescriptorProto package */
-            "package"?: (string|null);
-
-            /** FileDescriptorProto dependency */
-            dependency?: (string[]|null);
-
-            /** FileDescriptorProto publicDependency */
-            publicDependency?: (number[]|null);
-
-            /** FileDescriptorProto weakDependency */
-            weakDependency?: (number[]|null);
-
-            /** FileDescriptorProto messageType */
-            messageType?: (google.protobuf.IDescriptorProto[]|null);
-
-            /** FileDescriptorProto enumType */
-            enumType?: (google.protobuf.IEnumDescriptorProto[]|null);
-
-            /** FileDescriptorProto service */
-            service?: (google.protobuf.IServiceDescriptorProto[]|null);
-
-            /** FileDescriptorProto extension */
-            extension?: (google.protobuf.IFieldDescriptorProto[]|null);
-
-            /** FileDescriptorProto options */
-            options?: (google.protobuf.IFileOptions|null);
-
-            /** FileDescriptorProto sourceCodeInfo */
-            sourceCodeInfo?: (google.protobuf.ISourceCodeInfo|null);
-
-            /** FileDescriptorProto syntax */
-            syntax?: (string|null);
-
-            /** FileDescriptorProto edition */
-            edition?: (string|null);
-        }
-
-        /** Represents a FileDescriptorProto. */
-        class FileDescriptorProto implements IFileDescriptorProto {
-
-            /**
-             * Constructs a new FileDescriptorProto.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IFileDescriptorProto);
-
-            /** FileDescriptorProto name. */
-            public name: string;
-
-            /** FileDescriptorProto package. */
-            public package: string;
-
-            /** FileDescriptorProto dependency. */
-            public dependency: string[];
-
-            /** FileDescriptorProto publicDependency. */
-            public publicDependency: number[];
-
-            /** FileDescriptorProto weakDependency. */
-            public weakDependency: number[];
-
-            /** FileDescriptorProto messageType. */
-            public messageType: google.protobuf.IDescriptorProto[];
-
-            /** FileDescriptorProto enumType. */
-            public enumType: google.protobuf.IEnumDescriptorProto[];
-
-            /** FileDescriptorProto service. */
-            public service: google.protobuf.IServiceDescriptorProto[];
-
-            /** FileDescriptorProto extension. */
-            public extension: google.protobuf.IFieldDescriptorProto[];
-
-            /** FileDescriptorProto options. */
-            public options?: (google.protobuf.IFileOptions|null);
-
-            /** FileDescriptorProto sourceCodeInfo. */
-            public sourceCodeInfo?: (google.protobuf.ISourceCodeInfo|null);
-
-            /** FileDescriptorProto syntax. */
-            public syntax: string;
-
-            /** FileDescriptorProto edition. */
-            public edition: string;
-
-            /**
-             * Creates a new FileDescriptorProto instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns FileDescriptorProto instance
-             */
-            public static create(properties?: google.protobuf.IFileDescriptorProto): google.protobuf.FileDescriptorProto;
-
-            /**
-             * Encodes the specified FileDescriptorProto message. Does not implicitly {@link google.protobuf.FileDescriptorProto.verify|verify} messages.
-             * @param message FileDescriptorProto message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IFileDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified FileDescriptorProto message, length delimited. Does not implicitly {@link google.protobuf.FileDescriptorProto.verify|verify} messages.
-             * @param message FileDescriptorProto message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IFileDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a FileDescriptorProto message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns FileDescriptorProto
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FileDescriptorProto;
-
-            /**
-             * Decodes a FileDescriptorProto message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns FileDescriptorProto
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FileDescriptorProto;
-
-            /**
-             * Verifies a FileDescriptorProto message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a FileDescriptorProto message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns FileDescriptorProto
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.FileDescriptorProto;
-
-            /**
-             * Creates a plain object from a FileDescriptorProto message. Also converts values to other types if specified.
-             * @param message FileDescriptorProto
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.FileDescriptorProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this FileDescriptorProto to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for FileDescriptorProto
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a DescriptorProto. */
-        interface IDescriptorProto {
-
-            /** DescriptorProto name */
-            name?: (string|null);
-
-            /** DescriptorProto field */
-            field?: (google.protobuf.IFieldDescriptorProto[]|null);
-
-            /** DescriptorProto extension */
-            extension?: (google.protobuf.IFieldDescriptorProto[]|null);
-
-            /** DescriptorProto nestedType */
-            nestedType?: (google.protobuf.IDescriptorProto[]|null);
-
-            /** DescriptorProto enumType */
-            enumType?: (google.protobuf.IEnumDescriptorProto[]|null);
-
-            /** DescriptorProto extensionRange */
-            extensionRange?: (google.protobuf.DescriptorProto.IExtensionRange[]|null);
-
-            /** DescriptorProto oneofDecl */
-            oneofDecl?: (google.protobuf.IOneofDescriptorProto[]|null);
-
-            /** DescriptorProto options */
-            options?: (google.protobuf.IMessageOptions|null);
-
-            /** DescriptorProto reservedRange */
-            reservedRange?: (google.protobuf.DescriptorProto.IReservedRange[]|null);
-
-            /** DescriptorProto reservedName */
-            reservedName?: (string[]|null);
-        }
-
-        /** Represents a DescriptorProto. */
-        class DescriptorProto implements IDescriptorProto {
-
-            /**
-             * Constructs a new DescriptorProto.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IDescriptorProto);
-
-            /** DescriptorProto name. */
-            public name: string;
-
-            /** DescriptorProto field. */
-            public field: google.protobuf.IFieldDescriptorProto[];
-
-            /** DescriptorProto extension. */
-            public extension: google.protobuf.IFieldDescriptorProto[];
-
-            /** DescriptorProto nestedType. */
-            public nestedType: google.protobuf.IDescriptorProto[];
-
-            /** DescriptorProto enumType. */
-            public enumType: google.protobuf.IEnumDescriptorProto[];
-
-            /** DescriptorProto extensionRange. */
-            public extensionRange: google.protobuf.DescriptorProto.IExtensionRange[];
-
-            /** DescriptorProto oneofDecl. */
-            public oneofDecl: google.protobuf.IOneofDescriptorProto[];
-
-            /** DescriptorProto options. */
-            public options?: (google.protobuf.IMessageOptions|null);
-
-            /** DescriptorProto reservedRange. */
-            public reservedRange: google.protobuf.DescriptorProto.IReservedRange[];
-
-            /** DescriptorProto reservedName. */
-            public reservedName: string[];
-
-            /**
-             * Creates a new DescriptorProto instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns DescriptorProto instance
-             */
-            public static create(properties?: google.protobuf.IDescriptorProto): google.protobuf.DescriptorProto;
-
-            /**
-             * Encodes the specified DescriptorProto message. Does not implicitly {@link google.protobuf.DescriptorProto.verify|verify} messages.
-             * @param message DescriptorProto message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified DescriptorProto message, length delimited. Does not implicitly {@link google.protobuf.DescriptorProto.verify|verify} messages.
-             * @param message DescriptorProto message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a DescriptorProto message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns DescriptorProto
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.DescriptorProto;
-
-            /**
-             * Decodes a DescriptorProto message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns DescriptorProto
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.DescriptorProto;
-
-            /**
-             * Verifies a DescriptorProto message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a DescriptorProto message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns DescriptorProto
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.DescriptorProto;
-
-            /**
-             * Creates a plain object from a DescriptorProto message. Also converts values to other types if specified.
-             * @param message DescriptorProto
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.DescriptorProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this DescriptorProto to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for DescriptorProto
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        namespace DescriptorProto {
-
-            /** Properties of an ExtensionRange. */
-            interface IExtensionRange {
-
-                /** ExtensionRange start */
-                start?: (number|null);
-
-                /** ExtensionRange end */
-                end?: (number|null);
-
-                /** ExtensionRange options */
-                options?: (google.protobuf.IExtensionRangeOptions|null);
-            }
-
-            /** Represents an ExtensionRange. */
-            class ExtensionRange implements IExtensionRange {
-
-                /**
-                 * Constructs a new ExtensionRange.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.protobuf.DescriptorProto.IExtensionRange);
-
-                /** ExtensionRange start. */
-                public start: number;
-
-                /** ExtensionRange end. */
-                public end: number;
-
-                /** ExtensionRange options. */
-                public options?: (google.protobuf.IExtensionRangeOptions|null);
-
-                /**
-                 * Creates a new ExtensionRange instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns ExtensionRange instance
-                 */
-                public static create(properties?: google.protobuf.DescriptorProto.IExtensionRange): google.protobuf.DescriptorProto.ExtensionRange;
-
-                /**
-                 * Encodes the specified ExtensionRange message. Does not implicitly {@link google.protobuf.DescriptorProto.ExtensionRange.verify|verify} messages.
-                 * @param message ExtensionRange message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.protobuf.DescriptorProto.IExtensionRange, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified ExtensionRange message, length delimited. Does not implicitly {@link google.protobuf.DescriptorProto.ExtensionRange.verify|verify} messages.
-                 * @param message ExtensionRange message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.protobuf.DescriptorProto.IExtensionRange, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes an ExtensionRange message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns ExtensionRange
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.DescriptorProto.ExtensionRange;
-
-                /**
-                 * Decodes an ExtensionRange message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns ExtensionRange
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.DescriptorProto.ExtensionRange;
-
-                /**
-                 * Verifies an ExtensionRange message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates an ExtensionRange message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns ExtensionRange
-                 */
-                public static fromObject(object: { [k: string]: any }): google.protobuf.DescriptorProto.ExtensionRange;
-
-                /**
-                 * Creates a plain object from an ExtensionRange message. Also converts values to other types if specified.
-                 * @param message ExtensionRange
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.protobuf.DescriptorProto.ExtensionRange, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this ExtensionRange to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for ExtensionRange
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a ReservedRange. */
-            interface IReservedRange {
-
-                /** ReservedRange start */
-                start?: (number|null);
-
-                /** ReservedRange end */
-                end?: (number|null);
-            }
-
-            /** Represents a ReservedRange. */
-            class ReservedRange implements IReservedRange {
-
-                /**
-                 * Constructs a new ReservedRange.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.protobuf.DescriptorProto.IReservedRange);
-
-                /** ReservedRange start. */
-                public start: number;
-
-                /** ReservedRange end. */
-                public end: number;
-
-                /**
-                 * Creates a new ReservedRange instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns ReservedRange instance
-                 */
-                public static create(properties?: google.protobuf.DescriptorProto.IReservedRange): google.protobuf.DescriptorProto.ReservedRange;
-
-                /**
-                 * Encodes the specified ReservedRange message. Does not implicitly {@link google.protobuf.DescriptorProto.ReservedRange.verify|verify} messages.
-                 * @param message ReservedRange message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.protobuf.DescriptorProto.IReservedRange, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified ReservedRange message, length delimited. Does not implicitly {@link google.protobuf.DescriptorProto.ReservedRange.verify|verify} messages.
-                 * @param message ReservedRange message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.protobuf.DescriptorProto.IReservedRange, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a ReservedRange message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns ReservedRange
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.DescriptorProto.ReservedRange;
-
-                /**
-                 * Decodes a ReservedRange message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns ReservedRange
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.DescriptorProto.ReservedRange;
-
-                /**
-                 * Verifies a ReservedRange message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a ReservedRange message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns ReservedRange
-                 */
-                public static fromObject(object: { [k: string]: any }): google.protobuf.DescriptorProto.ReservedRange;
-
-                /**
-                 * Creates a plain object from a ReservedRange message. Also converts values to other types if specified.
-                 * @param message ReservedRange
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.protobuf.DescriptorProto.ReservedRange, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this ReservedRange to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for ReservedRange
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-        }
-
-        /** Properties of an ExtensionRangeOptions. */
-        interface IExtensionRangeOptions {
-
-            /** ExtensionRangeOptions uninterpretedOption */
-            uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
-        }
-
-        /** Represents an ExtensionRangeOptions. */
-        class ExtensionRangeOptions implements IExtensionRangeOptions {
-
-            /**
-             * Constructs a new ExtensionRangeOptions.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IExtensionRangeOptions);
-
-            /** ExtensionRangeOptions uninterpretedOption. */
-            public uninterpretedOption: google.protobuf.IUninterpretedOption[];
-
-            /**
-             * Creates a new ExtensionRangeOptions instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ExtensionRangeOptions instance
-             */
-            public static create(properties?: google.protobuf.IExtensionRangeOptions): google.protobuf.ExtensionRangeOptions;
-
-            /**
-             * Encodes the specified ExtensionRangeOptions message. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.verify|verify} messages.
-             * @param message ExtensionRangeOptions message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IExtensionRangeOptions, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ExtensionRangeOptions message, length delimited. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.verify|verify} messages.
-             * @param message ExtensionRangeOptions message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IExtensionRangeOptions, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an ExtensionRangeOptions message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ExtensionRangeOptions
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.ExtensionRangeOptions;
-
-            /**
-             * Decodes an ExtensionRangeOptions message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ExtensionRangeOptions
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.ExtensionRangeOptions;
-
-            /**
-             * Verifies an ExtensionRangeOptions message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an ExtensionRangeOptions message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ExtensionRangeOptions
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.ExtensionRangeOptions;
-
-            /**
-             * Creates a plain object from an ExtensionRangeOptions message. Also converts values to other types if specified.
-             * @param message ExtensionRangeOptions
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.ExtensionRangeOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ExtensionRangeOptions to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for ExtensionRangeOptions
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a FieldDescriptorProto. */
-        interface IFieldDescriptorProto {
-
-            /** FieldDescriptorProto name */
-            name?: (string|null);
-
-            /** FieldDescriptorProto number */
-            number?: (number|null);
-
-            /** FieldDescriptorProto label */
-            label?: (google.protobuf.FieldDescriptorProto.Label|keyof typeof google.protobuf.FieldDescriptorProto.Label|null);
-
-            /** FieldDescriptorProto type */
-            type?: (google.protobuf.FieldDescriptorProto.Type|keyof typeof google.protobuf.FieldDescriptorProto.Type|null);
-
-            /** FieldDescriptorProto typeName */
-            typeName?: (string|null);
-
-            /** FieldDescriptorProto extendee */
-            extendee?: (string|null);
-
-            /** FieldDescriptorProto defaultValue */
-            defaultValue?: (string|null);
-
-            /** FieldDescriptorProto oneofIndex */
-            oneofIndex?: (number|null);
-
-            /** FieldDescriptorProto jsonName */
-            jsonName?: (string|null);
-
-            /** FieldDescriptorProto options */
-            options?: (google.protobuf.IFieldOptions|null);
-
-            /** FieldDescriptorProto proto3Optional */
-            proto3Optional?: (boolean|null);
-        }
-
-        /** Represents a FieldDescriptorProto. */
-        class FieldDescriptorProto implements IFieldDescriptorProto {
-
-            /**
-             * Constructs a new FieldDescriptorProto.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IFieldDescriptorProto);
-
-            /** FieldDescriptorProto name. */
-            public name: string;
-
-            /** FieldDescriptorProto number. */
-            public number: number;
-
-            /** FieldDescriptorProto label. */
-            public label: (google.protobuf.FieldDescriptorProto.Label|keyof typeof google.protobuf.FieldDescriptorProto.Label);
-
-            /** FieldDescriptorProto type. */
-            public type: (google.protobuf.FieldDescriptorProto.Type|keyof typeof google.protobuf.FieldDescriptorProto.Type);
-
-            /** FieldDescriptorProto typeName. */
-            public typeName: string;
-
-            /** FieldDescriptorProto extendee. */
-            public extendee: string;
-
-            /** FieldDescriptorProto defaultValue. */
-            public defaultValue: string;
-
-            /** FieldDescriptorProto oneofIndex. */
-            public oneofIndex: number;
-
-            /** FieldDescriptorProto jsonName. */
-            public jsonName: string;
-
-            /** FieldDescriptorProto options. */
-            public options?: (google.protobuf.IFieldOptions|null);
-
-            /** FieldDescriptorProto proto3Optional. */
-            public proto3Optional: boolean;
-
-            /**
-             * Creates a new FieldDescriptorProto instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns FieldDescriptorProto instance
-             */
-            public static create(properties?: google.protobuf.IFieldDescriptorProto): google.protobuf.FieldDescriptorProto;
-
-            /**
-             * Encodes the specified FieldDescriptorProto message. Does not implicitly {@link google.protobuf.FieldDescriptorProto.verify|verify} messages.
-             * @param message FieldDescriptorProto message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IFieldDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified FieldDescriptorProto message, length delimited. Does not implicitly {@link google.protobuf.FieldDescriptorProto.verify|verify} messages.
-             * @param message FieldDescriptorProto message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IFieldDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a FieldDescriptorProto message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns FieldDescriptorProto
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldDescriptorProto;
-
-            /**
-             * Decodes a FieldDescriptorProto message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns FieldDescriptorProto
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldDescriptorProto;
-
-            /**
-             * Verifies a FieldDescriptorProto message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a FieldDescriptorProto message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns FieldDescriptorProto
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldDescriptorProto;
-
-            /**
-             * Creates a plain object from a FieldDescriptorProto message. Also converts values to other types if specified.
-             * @param message FieldDescriptorProto
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.FieldDescriptorProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this FieldDescriptorProto to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for FieldDescriptorProto
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        namespace FieldDescriptorProto {
-
-            /** Type enum. */
-            enum Type {
-                TYPE_DOUBLE = 1,
-                TYPE_FLOAT = 2,
-                TYPE_INT64 = 3,
-                TYPE_UINT64 = 4,
-                TYPE_INT32 = 5,
-                TYPE_FIXED64 = 6,
-                TYPE_FIXED32 = 7,
-                TYPE_BOOL = 8,
-                TYPE_STRING = 9,
-                TYPE_GROUP = 10,
-                TYPE_MESSAGE = 11,
-                TYPE_BYTES = 12,
-                TYPE_UINT32 = 13,
-                TYPE_ENUM = 14,
-                TYPE_SFIXED32 = 15,
-                TYPE_SFIXED64 = 16,
-                TYPE_SINT32 = 17,
-                TYPE_SINT64 = 18
-            }
-
-            /** Label enum. */
-            enum Label {
-                LABEL_OPTIONAL = 1,
-                LABEL_REQUIRED = 2,
-                LABEL_REPEATED = 3
-            }
-        }
-
-        /** Properties of an OneofDescriptorProto. */
-        interface IOneofDescriptorProto {
-
-            /** OneofDescriptorProto name */
-            name?: (string|null);
-
-            /** OneofDescriptorProto options */
-            options?: (google.protobuf.IOneofOptions|null);
-        }
-
-        /** Represents an OneofDescriptorProto. */
-        class OneofDescriptorProto implements IOneofDescriptorProto {
-
-            /**
-             * Constructs a new OneofDescriptorProto.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IOneofDescriptorProto);
-
-            /** OneofDescriptorProto name. */
-            public name: string;
-
-            /** OneofDescriptorProto options. */
-            public options?: (google.protobuf.IOneofOptions|null);
-
-            /**
-             * Creates a new OneofDescriptorProto instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns OneofDescriptorProto instance
-             */
-            public static create(properties?: google.protobuf.IOneofDescriptorProto): google.protobuf.OneofDescriptorProto;
-
-            /**
-             * Encodes the specified OneofDescriptorProto message. Does not implicitly {@link google.protobuf.OneofDescriptorProto.verify|verify} messages.
-             * @param message OneofDescriptorProto message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IOneofDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified OneofDescriptorProto message, length delimited. Does not implicitly {@link google.protobuf.OneofDescriptorProto.verify|verify} messages.
-             * @param message OneofDescriptorProto message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IOneofDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an OneofDescriptorProto message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns OneofDescriptorProto
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.OneofDescriptorProto;
-
-            /**
-             * Decodes an OneofDescriptorProto message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns OneofDescriptorProto
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.OneofDescriptorProto;
-
-            /**
-             * Verifies an OneofDescriptorProto message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an OneofDescriptorProto message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns OneofDescriptorProto
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.OneofDescriptorProto;
-
-            /**
-             * Creates a plain object from an OneofDescriptorProto message. Also converts values to other types if specified.
-             * @param message OneofDescriptorProto
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.OneofDescriptorProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this OneofDescriptorProto to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for OneofDescriptorProto
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of an EnumDescriptorProto. */
-        interface IEnumDescriptorProto {
-
-            /** EnumDescriptorProto name */
-            name?: (string|null);
-
-            /** EnumDescriptorProto value */
-            value?: (google.protobuf.IEnumValueDescriptorProto[]|null);
-
-            /** EnumDescriptorProto options */
-            options?: (google.protobuf.IEnumOptions|null);
-
-            /** EnumDescriptorProto reservedRange */
-            reservedRange?: (google.protobuf.EnumDescriptorProto.IEnumReservedRange[]|null);
-
-            /** EnumDescriptorProto reservedName */
-            reservedName?: (string[]|null);
-        }
-
-        /** Represents an EnumDescriptorProto. */
-        class EnumDescriptorProto implements IEnumDescriptorProto {
-
-            /**
-             * Constructs a new EnumDescriptorProto.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IEnumDescriptorProto);
-
-            /** EnumDescriptorProto name. */
-            public name: string;
-
-            /** EnumDescriptorProto value. */
-            public value: google.protobuf.IEnumValueDescriptorProto[];
-
-            /** EnumDescriptorProto options. */
-            public options?: (google.protobuf.IEnumOptions|null);
-
-            /** EnumDescriptorProto reservedRange. */
-            public reservedRange: google.protobuf.EnumDescriptorProto.IEnumReservedRange[];
-
-            /** EnumDescriptorProto reservedName. */
-            public reservedName: string[];
-
-            /**
-             * Creates a new EnumDescriptorProto instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns EnumDescriptorProto instance
-             */
-            public static create(properties?: google.protobuf.IEnumDescriptorProto): google.protobuf.EnumDescriptorProto;
-
-            /**
-             * Encodes the specified EnumDescriptorProto message. Does not implicitly {@link google.protobuf.EnumDescriptorProto.verify|verify} messages.
-             * @param message EnumDescriptorProto message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IEnumDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified EnumDescriptorProto message, length delimited. Does not implicitly {@link google.protobuf.EnumDescriptorProto.verify|verify} messages.
-             * @param message EnumDescriptorProto message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IEnumDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an EnumDescriptorProto message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns EnumDescriptorProto
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.EnumDescriptorProto;
-
-            /**
-             * Decodes an EnumDescriptorProto message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns EnumDescriptorProto
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.EnumDescriptorProto;
-
-            /**
-             * Verifies an EnumDescriptorProto message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an EnumDescriptorProto message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns EnumDescriptorProto
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.EnumDescriptorProto;
-
-            /**
-             * Creates a plain object from an EnumDescriptorProto message. Also converts values to other types if specified.
-             * @param message EnumDescriptorProto
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.EnumDescriptorProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this EnumDescriptorProto to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for EnumDescriptorProto
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        namespace EnumDescriptorProto {
-
-            /** Properties of an EnumReservedRange. */
-            interface IEnumReservedRange {
-
-                /** EnumReservedRange start */
-                start?: (number|null);
-
-                /** EnumReservedRange end */
-                end?: (number|null);
-            }
-
-            /** Represents an EnumReservedRange. */
-            class EnumReservedRange implements IEnumReservedRange {
-
-                /**
-                 * Constructs a new EnumReservedRange.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.protobuf.EnumDescriptorProto.IEnumReservedRange);
-
-                /** EnumReservedRange start. */
-                public start: number;
-
-                /** EnumReservedRange end. */
-                public end: number;
-
-                /**
-                 * Creates a new EnumReservedRange instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns EnumReservedRange instance
-                 */
-                public static create(properties?: google.protobuf.EnumDescriptorProto.IEnumReservedRange): google.protobuf.EnumDescriptorProto.EnumReservedRange;
-
-                /**
-                 * Encodes the specified EnumReservedRange message. Does not implicitly {@link google.protobuf.EnumDescriptorProto.EnumReservedRange.verify|verify} messages.
-                 * @param message EnumReservedRange message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.protobuf.EnumDescriptorProto.IEnumReservedRange, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified EnumReservedRange message, length delimited. Does not implicitly {@link google.protobuf.EnumDescriptorProto.EnumReservedRange.verify|verify} messages.
-                 * @param message EnumReservedRange message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.protobuf.EnumDescriptorProto.IEnumReservedRange, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes an EnumReservedRange message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns EnumReservedRange
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.EnumDescriptorProto.EnumReservedRange;
-
-                /**
-                 * Decodes an EnumReservedRange message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns EnumReservedRange
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.EnumDescriptorProto.EnumReservedRange;
-
-                /**
-                 * Verifies an EnumReservedRange message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates an EnumReservedRange message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns EnumReservedRange
-                 */
-                public static fromObject(object: { [k: string]: any }): google.protobuf.EnumDescriptorProto.EnumReservedRange;
-
-                /**
-                 * Creates a plain object from an EnumReservedRange message. Also converts values to other types if specified.
-                 * @param message EnumReservedRange
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.protobuf.EnumDescriptorProto.EnumReservedRange, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this EnumReservedRange to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for EnumReservedRange
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-        }
-
-        /** Properties of an EnumValueDescriptorProto. */
-        interface IEnumValueDescriptorProto {
-
-            /** EnumValueDescriptorProto name */
-            name?: (string|null);
-
-            /** EnumValueDescriptorProto number */
-            number?: (number|null);
-
-            /** EnumValueDescriptorProto options */
-            options?: (google.protobuf.IEnumValueOptions|null);
-        }
-
-        /** Represents an EnumValueDescriptorProto. */
-        class EnumValueDescriptorProto implements IEnumValueDescriptorProto {
-
-            /**
-             * Constructs a new EnumValueDescriptorProto.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IEnumValueDescriptorProto);
-
-            /** EnumValueDescriptorProto name. */
-            public name: string;
-
-            /** EnumValueDescriptorProto number. */
-            public number: number;
-
-            /** EnumValueDescriptorProto options. */
-            public options?: (google.protobuf.IEnumValueOptions|null);
-
-            /**
-             * Creates a new EnumValueDescriptorProto instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns EnumValueDescriptorProto instance
-             */
-            public static create(properties?: google.protobuf.IEnumValueDescriptorProto): google.protobuf.EnumValueDescriptorProto;
-
-            /**
-             * Encodes the specified EnumValueDescriptorProto message. Does not implicitly {@link google.protobuf.EnumValueDescriptorProto.verify|verify} messages.
-             * @param message EnumValueDescriptorProto message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IEnumValueDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified EnumValueDescriptorProto message, length delimited. Does not implicitly {@link google.protobuf.EnumValueDescriptorProto.verify|verify} messages.
-             * @param message EnumValueDescriptorProto message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IEnumValueDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an EnumValueDescriptorProto message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns EnumValueDescriptorProto
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.EnumValueDescriptorProto;
-
-            /**
-             * Decodes an EnumValueDescriptorProto message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns EnumValueDescriptorProto
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.EnumValueDescriptorProto;
-
-            /**
-             * Verifies an EnumValueDescriptorProto message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an EnumValueDescriptorProto message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns EnumValueDescriptorProto
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.EnumValueDescriptorProto;
-
-            /**
-             * Creates a plain object from an EnumValueDescriptorProto message. Also converts values to other types if specified.
-             * @param message EnumValueDescriptorProto
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.EnumValueDescriptorProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this EnumValueDescriptorProto to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for EnumValueDescriptorProto
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a ServiceDescriptorProto. */
-        interface IServiceDescriptorProto {
-
-            /** ServiceDescriptorProto name */
-            name?: (string|null);
-
-            /** ServiceDescriptorProto method */
-            method?: (google.protobuf.IMethodDescriptorProto[]|null);
-
-            /** ServiceDescriptorProto options */
-            options?: (google.protobuf.IServiceOptions|null);
-        }
-
-        /** Represents a ServiceDescriptorProto. */
-        class ServiceDescriptorProto implements IServiceDescriptorProto {
-
-            /**
-             * Constructs a new ServiceDescriptorProto.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IServiceDescriptorProto);
-
-            /** ServiceDescriptorProto name. */
-            public name: string;
-
-            /** ServiceDescriptorProto method. */
-            public method: google.protobuf.IMethodDescriptorProto[];
-
-            /** ServiceDescriptorProto options. */
-            public options?: (google.protobuf.IServiceOptions|null);
-
-            /**
-             * Creates a new ServiceDescriptorProto instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ServiceDescriptorProto instance
-             */
-            public static create(properties?: google.protobuf.IServiceDescriptorProto): google.protobuf.ServiceDescriptorProto;
-
-            /**
-             * Encodes the specified ServiceDescriptorProto message. Does not implicitly {@link google.protobuf.ServiceDescriptorProto.verify|verify} messages.
-             * @param message ServiceDescriptorProto message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IServiceDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ServiceDescriptorProto message, length delimited. Does not implicitly {@link google.protobuf.ServiceDescriptorProto.verify|verify} messages.
-             * @param message ServiceDescriptorProto message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IServiceDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ServiceDescriptorProto message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ServiceDescriptorProto
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.ServiceDescriptorProto;
-
-            /**
-             * Decodes a ServiceDescriptorProto message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ServiceDescriptorProto
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.ServiceDescriptorProto;
-
-            /**
-             * Verifies a ServiceDescriptorProto message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ServiceDescriptorProto message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ServiceDescriptorProto
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.ServiceDescriptorProto;
-
-            /**
-             * Creates a plain object from a ServiceDescriptorProto message. Also converts values to other types if specified.
-             * @param message ServiceDescriptorProto
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.ServiceDescriptorProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ServiceDescriptorProto to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for ServiceDescriptorProto
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a MethodDescriptorProto. */
-        interface IMethodDescriptorProto {
-
-            /** MethodDescriptorProto name */
-            name?: (string|null);
-
-            /** MethodDescriptorProto inputType */
-            inputType?: (string|null);
-
-            /** MethodDescriptorProto outputType */
-            outputType?: (string|null);
-
-            /** MethodDescriptorProto options */
-            options?: (google.protobuf.IMethodOptions|null);
-
-            /** MethodDescriptorProto clientStreaming */
-            clientStreaming?: (boolean|null);
-
-            /** MethodDescriptorProto serverStreaming */
-            serverStreaming?: (boolean|null);
-        }
-
-        /** Represents a MethodDescriptorProto. */
-        class MethodDescriptorProto implements IMethodDescriptorProto {
-
-            /**
-             * Constructs a new MethodDescriptorProto.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IMethodDescriptorProto);
-
-            /** MethodDescriptorProto name. */
-            public name: string;
-
-            /** MethodDescriptorProto inputType. */
-            public inputType: string;
-
-            /** MethodDescriptorProto outputType. */
-            public outputType: string;
-
-            /** MethodDescriptorProto options. */
-            public options?: (google.protobuf.IMethodOptions|null);
-
-            /** MethodDescriptorProto clientStreaming. */
-            public clientStreaming: boolean;
-
-            /** MethodDescriptorProto serverStreaming. */
-            public serverStreaming: boolean;
-
-            /**
-             * Creates a new MethodDescriptorProto instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns MethodDescriptorProto instance
-             */
-            public static create(properties?: google.protobuf.IMethodDescriptorProto): google.protobuf.MethodDescriptorProto;
-
-            /**
-             * Encodes the specified MethodDescriptorProto message. Does not implicitly {@link google.protobuf.MethodDescriptorProto.verify|verify} messages.
-             * @param message MethodDescriptorProto message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IMethodDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified MethodDescriptorProto message, length delimited. Does not implicitly {@link google.protobuf.MethodDescriptorProto.verify|verify} messages.
-             * @param message MethodDescriptorProto message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IMethodDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a MethodDescriptorProto message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns MethodDescriptorProto
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.MethodDescriptorProto;
-
-            /**
-             * Decodes a MethodDescriptorProto message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns MethodDescriptorProto
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.MethodDescriptorProto;
-
-            /**
-             * Verifies a MethodDescriptorProto message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a MethodDescriptorProto message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns MethodDescriptorProto
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.MethodDescriptorProto;
-
-            /**
-             * Creates a plain object from a MethodDescriptorProto message. Also converts values to other types if specified.
-             * @param message MethodDescriptorProto
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.MethodDescriptorProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this MethodDescriptorProto to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for MethodDescriptorProto
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a FileOptions. */
-        interface IFileOptions {
-
-            /** FileOptions javaPackage */
-            javaPackage?: (string|null);
-
-            /** FileOptions javaOuterClassname */
-            javaOuterClassname?: (string|null);
-
-            /** FileOptions javaMultipleFiles */
-            javaMultipleFiles?: (boolean|null);
-
-            /** FileOptions javaGenerateEqualsAndHash */
-            javaGenerateEqualsAndHash?: (boolean|null);
-
-            /** FileOptions javaStringCheckUtf8 */
-            javaStringCheckUtf8?: (boolean|null);
-
-            /** FileOptions optimizeFor */
-            optimizeFor?: (google.protobuf.FileOptions.OptimizeMode|keyof typeof google.protobuf.FileOptions.OptimizeMode|null);
-
-            /** FileOptions goPackage */
-            goPackage?: (string|null);
-
-            /** FileOptions ccGenericServices */
-            ccGenericServices?: (boolean|null);
-
-            /** FileOptions javaGenericServices */
-            javaGenericServices?: (boolean|null);
-
-            /** FileOptions pyGenericServices */
-            pyGenericServices?: (boolean|null);
-
-            /** FileOptions phpGenericServices */
-            phpGenericServices?: (boolean|null);
-
-            /** FileOptions deprecated */
-            deprecated?: (boolean|null);
-
-            /** FileOptions ccEnableArenas */
-            ccEnableArenas?: (boolean|null);
-
-            /** FileOptions objcClassPrefix */
-            objcClassPrefix?: (string|null);
-
-            /** FileOptions csharpNamespace */
-            csharpNamespace?: (string|null);
-
-            /** FileOptions swiftPrefix */
-            swiftPrefix?: (string|null);
-
-            /** FileOptions phpClassPrefix */
-            phpClassPrefix?: (string|null);
-
-            /** FileOptions phpNamespace */
-            phpNamespace?: (string|null);
-
-            /** FileOptions phpMetadataNamespace */
-            phpMetadataNamespace?: (string|null);
-
-            /** FileOptions rubyPackage */
-            rubyPackage?: (string|null);
-
-            /** FileOptions uninterpretedOption */
-            uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
-
-            /** FileOptions .google.api.resourceDefinition */
-            ".google.api.resourceDefinition"?: (google.api.IResourceDescriptor[]|null);
-        }
-
-        /** Represents a FileOptions. */
-        class FileOptions implements IFileOptions {
-
-            /**
-             * Constructs a new FileOptions.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IFileOptions);
-
-            /** FileOptions javaPackage. */
-            public javaPackage: string;
-
-            /** FileOptions javaOuterClassname. */
-            public javaOuterClassname: string;
-
-            /** FileOptions javaMultipleFiles. */
-            public javaMultipleFiles: boolean;
-
-            /** FileOptions javaGenerateEqualsAndHash. */
-            public javaGenerateEqualsAndHash: boolean;
-
-            /** FileOptions javaStringCheckUtf8. */
-            public javaStringCheckUtf8: boolean;
-
-            /** FileOptions optimizeFor. */
-            public optimizeFor: (google.protobuf.FileOptions.OptimizeMode|keyof typeof google.protobuf.FileOptions.OptimizeMode);
-
-            /** FileOptions goPackage. */
-            public goPackage: string;
-
-            /** FileOptions ccGenericServices. */
-            public ccGenericServices: boolean;
-
-            /** FileOptions javaGenericServices. */
-            public javaGenericServices: boolean;
-
-            /** FileOptions pyGenericServices. */
-            public pyGenericServices: boolean;
-
-            /** FileOptions phpGenericServices. */
-            public phpGenericServices: boolean;
-
-            /** FileOptions deprecated. */
-            public deprecated: boolean;
-
-            /** FileOptions ccEnableArenas. */
-            public ccEnableArenas: boolean;
-
-            /** FileOptions objcClassPrefix. */
-            public objcClassPrefix: string;
-
-            /** FileOptions csharpNamespace. */
-            public csharpNamespace: string;
-
-            /** FileOptions swiftPrefix. */
-            public swiftPrefix: string;
-
-            /** FileOptions phpClassPrefix. */
-            public phpClassPrefix: string;
-
-            /** FileOptions phpNamespace. */
-            public phpNamespace: string;
-
-            /** FileOptions phpMetadataNamespace. */
-            public phpMetadataNamespace: string;
-
-            /** FileOptions rubyPackage. */
-            public rubyPackage: string;
-
-            /** FileOptions uninterpretedOption. */
-            public uninterpretedOption: google.protobuf.IUninterpretedOption[];
-
-            /**
-             * Creates a new FileOptions instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns FileOptions instance
-             */
-            public static create(properties?: google.protobuf.IFileOptions): google.protobuf.FileOptions;
-
-            /**
-             * Encodes the specified FileOptions message. Does not implicitly {@link google.protobuf.FileOptions.verify|verify} messages.
-             * @param message FileOptions message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IFileOptions, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified FileOptions message, length delimited. Does not implicitly {@link google.protobuf.FileOptions.verify|verify} messages.
-             * @param message FileOptions message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IFileOptions, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a FileOptions message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns FileOptions
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FileOptions;
-
-            /**
-             * Decodes a FileOptions message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns FileOptions
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FileOptions;
-
-            /**
-             * Verifies a FileOptions message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a FileOptions message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns FileOptions
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.FileOptions;
-
-            /**
-             * Creates a plain object from a FileOptions message. Also converts values to other types if specified.
-             * @param message FileOptions
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.FileOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this FileOptions to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for FileOptions
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        namespace FileOptions {
-
-            /** OptimizeMode enum. */
-            enum OptimizeMode {
-                SPEED = 1,
-                CODE_SIZE = 2,
-                LITE_RUNTIME = 3
-            }
-        }
-
-        /** Properties of a MessageOptions. */
-        interface IMessageOptions {
-
-            /** MessageOptions messageSetWireFormat */
-            messageSetWireFormat?: (boolean|null);
-
-            /** MessageOptions noStandardDescriptorAccessor */
-            noStandardDescriptorAccessor?: (boolean|null);
-
-            /** MessageOptions deprecated */
-            deprecated?: (boolean|null);
-
-            /** MessageOptions mapEntry */
-            mapEntry?: (boolean|null);
-
-            /** MessageOptions deprecatedLegacyJsonFieldConflicts */
-            deprecatedLegacyJsonFieldConflicts?: (boolean|null);
-
-            /** MessageOptions uninterpretedOption */
-            uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
-
-            /** MessageOptions .google.api.resource */
-            ".google.api.resource"?: (google.api.IResourceDescriptor|null);
-        }
-
-        /** Represents a MessageOptions. */
-        class MessageOptions implements IMessageOptions {
-
-            /**
-             * Constructs a new MessageOptions.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IMessageOptions);
-
-            /** MessageOptions messageSetWireFormat. */
-            public messageSetWireFormat: boolean;
-
-            /** MessageOptions noStandardDescriptorAccessor. */
-            public noStandardDescriptorAccessor: boolean;
-
-            /** MessageOptions deprecated. */
-            public deprecated: boolean;
-
-            /** MessageOptions mapEntry. */
-            public mapEntry: boolean;
-
-            /** MessageOptions deprecatedLegacyJsonFieldConflicts. */
-            public deprecatedLegacyJsonFieldConflicts: boolean;
-
-            /** MessageOptions uninterpretedOption. */
-            public uninterpretedOption: google.protobuf.IUninterpretedOption[];
-
-            /**
-             * Creates a new MessageOptions instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns MessageOptions instance
-             */
-            public static create(properties?: google.protobuf.IMessageOptions): google.protobuf.MessageOptions;
-
-            /**
-             * Encodes the specified MessageOptions message. Does not implicitly {@link google.protobuf.MessageOptions.verify|verify} messages.
-             * @param message MessageOptions message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IMessageOptions, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified MessageOptions message, length delimited. Does not implicitly {@link google.protobuf.MessageOptions.verify|verify} messages.
-             * @param message MessageOptions message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IMessageOptions, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a MessageOptions message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns MessageOptions
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.MessageOptions;
-
-            /**
-             * Decodes a MessageOptions message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns MessageOptions
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.MessageOptions;
-
-            /**
-             * Verifies a MessageOptions message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a MessageOptions message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns MessageOptions
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.MessageOptions;
-
-            /**
-             * Creates a plain object from a MessageOptions message. Also converts values to other types if specified.
-             * @param message MessageOptions
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.MessageOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this MessageOptions to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for MessageOptions
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a FieldOptions. */
-        interface IFieldOptions {
-
-            /** FieldOptions ctype */
-            ctype?: (google.protobuf.FieldOptions.CType|keyof typeof google.protobuf.FieldOptions.CType|null);
-
-            /** FieldOptions packed */
-            packed?: (boolean|null);
-
-            /** FieldOptions jstype */
-            jstype?: (google.protobuf.FieldOptions.JSType|keyof typeof google.protobuf.FieldOptions.JSType|null);
-
-            /** FieldOptions lazy */
-            lazy?: (boolean|null);
-
-            /** FieldOptions unverifiedLazy */
-            unverifiedLazy?: (boolean|null);
-
-            /** FieldOptions deprecated */
-            deprecated?: (boolean|null);
-
-            /** FieldOptions weak */
-            weak?: (boolean|null);
-
-            /** FieldOptions debugRedact */
-            debugRedact?: (boolean|null);
-
-            /** FieldOptions retention */
-            retention?: (google.protobuf.FieldOptions.OptionRetention|keyof typeof google.protobuf.FieldOptions.OptionRetention|null);
-
-            /** FieldOptions target */
-            target?: (google.protobuf.FieldOptions.OptionTargetType|keyof typeof google.protobuf.FieldOptions.OptionTargetType|null);
-
-            /** FieldOptions uninterpretedOption */
-            uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
-
-            /** FieldOptions .google.api.fieldBehavior */
-            ".google.api.fieldBehavior"?: (google.api.FieldBehavior[]|null);
-
-            /** FieldOptions .google.api.resourceReference */
-            ".google.api.resourceReference"?: (google.api.IResourceReference|null);
-        }
-
-        /** Represents a FieldOptions. */
-        class FieldOptions implements IFieldOptions {
-
-            /**
-             * Constructs a new FieldOptions.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IFieldOptions);
-
-            /** FieldOptions ctype. */
-            public ctype: (google.protobuf.FieldOptions.CType|keyof typeof google.protobuf.FieldOptions.CType);
-
-            /** FieldOptions packed. */
-            public packed: boolean;
-
-            /** FieldOptions jstype. */
-            public jstype: (google.protobuf.FieldOptions.JSType|keyof typeof google.protobuf.FieldOptions.JSType);
-
-            /** FieldOptions lazy. */
-            public lazy: boolean;
-
-            /** FieldOptions unverifiedLazy. */
-            public unverifiedLazy: boolean;
-
-            /** FieldOptions deprecated. */
-            public deprecated: boolean;
-
-            /** FieldOptions weak. */
-            public weak: boolean;
-
-            /** FieldOptions debugRedact. */
-            public debugRedact: boolean;
-
-            /** FieldOptions retention. */
-            public retention: (google.protobuf.FieldOptions.OptionRetention|keyof typeof google.protobuf.FieldOptions.OptionRetention);
-
-            /** FieldOptions target. */
-            public target: (google.protobuf.FieldOptions.OptionTargetType|keyof typeof google.protobuf.FieldOptions.OptionTargetType);
-
-            /** FieldOptions uninterpretedOption. */
-            public uninterpretedOption: google.protobuf.IUninterpretedOption[];
-
-            /**
-             * Creates a new FieldOptions instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns FieldOptions instance
-             */
-            public static create(properties?: google.protobuf.IFieldOptions): google.protobuf.FieldOptions;
-
-            /**
-             * Encodes the specified FieldOptions message. Does not implicitly {@link google.protobuf.FieldOptions.verify|verify} messages.
-             * @param message FieldOptions message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IFieldOptions, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified FieldOptions message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.verify|verify} messages.
-             * @param message FieldOptions message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IFieldOptions, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a FieldOptions message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns FieldOptions
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions;
-
-            /**
-             * Decodes a FieldOptions message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns FieldOptions
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions;
-
-            /**
-             * Verifies a FieldOptions message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a FieldOptions message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns FieldOptions
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions;
-
-            /**
-             * Creates a plain object from a FieldOptions message. Also converts values to other types if specified.
-             * @param message FieldOptions
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.FieldOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this FieldOptions to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for FieldOptions
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        namespace FieldOptions {
-
-            /** CType enum. */
-            enum CType {
-                STRING = 0,
-                CORD = 1,
-                STRING_PIECE = 2
-            }
-
-            /** JSType enum. */
-            enum JSType {
-                JS_NORMAL = 0,
-                JS_STRING = 1,
-                JS_NUMBER = 2
-            }
-
-            /** OptionRetention enum. */
-            enum OptionRetention {
-                RETENTION_UNKNOWN = 0,
-                RETENTION_RUNTIME = 1,
-                RETENTION_SOURCE = 2
-            }
-
-            /** OptionTargetType enum. */
-            enum OptionTargetType {
-                TARGET_TYPE_UNKNOWN = 0,
-                TARGET_TYPE_FILE = 1,
-                TARGET_TYPE_EXTENSION_RANGE = 2,
-                TARGET_TYPE_MESSAGE = 3,
-                TARGET_TYPE_FIELD = 4,
-                TARGET_TYPE_ONEOF = 5,
-                TARGET_TYPE_ENUM = 6,
-                TARGET_TYPE_ENUM_ENTRY = 7,
-                TARGET_TYPE_SERVICE = 8,
-                TARGET_TYPE_METHOD = 9
-            }
-        }
-
-        /** Properties of an OneofOptions. */
-        interface IOneofOptions {
-
-            /** OneofOptions uninterpretedOption */
-            uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
-        }
-
-        /** Represents an OneofOptions. */
-        class OneofOptions implements IOneofOptions {
-
-            /**
-             * Constructs a new OneofOptions.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IOneofOptions);
-
-            /** OneofOptions uninterpretedOption. */
-            public uninterpretedOption: google.protobuf.IUninterpretedOption[];
-
-            /**
-             * Creates a new OneofOptions instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns OneofOptions instance
-             */
-            public static create(properties?: google.protobuf.IOneofOptions): google.protobuf.OneofOptions;
-
-            /**
-             * Encodes the specified OneofOptions message. Does not implicitly {@link google.protobuf.OneofOptions.verify|verify} messages.
-             * @param message OneofOptions message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IOneofOptions, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified OneofOptions message, length delimited. Does not implicitly {@link google.protobuf.OneofOptions.verify|verify} messages.
-             * @param message OneofOptions message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IOneofOptions, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an OneofOptions message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns OneofOptions
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.OneofOptions;
-
-            /**
-             * Decodes an OneofOptions message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns OneofOptions
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.OneofOptions;
-
-            /**
-             * Verifies an OneofOptions message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an OneofOptions message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns OneofOptions
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.OneofOptions;
-
-            /**
-             * Creates a plain object from an OneofOptions message. Also converts values to other types if specified.
-             * @param message OneofOptions
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.OneofOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this OneofOptions to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for OneofOptions
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of an EnumOptions. */
-        interface IEnumOptions {
-
-            /** EnumOptions allowAlias */
-            allowAlias?: (boolean|null);
-
-            /** EnumOptions deprecated */
-            deprecated?: (boolean|null);
-
-            /** EnumOptions deprecatedLegacyJsonFieldConflicts */
-            deprecatedLegacyJsonFieldConflicts?: (boolean|null);
-
-            /** EnumOptions uninterpretedOption */
-            uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
-        }
-
-        /** Represents an EnumOptions. */
-        class EnumOptions implements IEnumOptions {
-
-            /**
-             * Constructs a new EnumOptions.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IEnumOptions);
-
-            /** EnumOptions allowAlias. */
-            public allowAlias: boolean;
-
-            /** EnumOptions deprecated. */
-            public deprecated: boolean;
-
-            /** EnumOptions deprecatedLegacyJsonFieldConflicts. */
-            public deprecatedLegacyJsonFieldConflicts: boolean;
-
-            /** EnumOptions uninterpretedOption. */
-            public uninterpretedOption: google.protobuf.IUninterpretedOption[];
-
-            /**
-             * Creates a new EnumOptions instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns EnumOptions instance
-             */
-            public static create(properties?: google.protobuf.IEnumOptions): google.protobuf.EnumOptions;
-
-            /**
-             * Encodes the specified EnumOptions message. Does not implicitly {@link google.protobuf.EnumOptions.verify|verify} messages.
-             * @param message EnumOptions message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IEnumOptions, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified EnumOptions message, length delimited. Does not implicitly {@link google.protobuf.EnumOptions.verify|verify} messages.
-             * @param message EnumOptions message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IEnumOptions, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an EnumOptions message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns EnumOptions
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.EnumOptions;
-
-            /**
-             * Decodes an EnumOptions message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns EnumOptions
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.EnumOptions;
-
-            /**
-             * Verifies an EnumOptions message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an EnumOptions message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns EnumOptions
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.EnumOptions;
-
-            /**
-             * Creates a plain object from an EnumOptions message. Also converts values to other types if specified.
-             * @param message EnumOptions
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.EnumOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this EnumOptions to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for EnumOptions
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of an EnumValueOptions. */
-        interface IEnumValueOptions {
-
-            /** EnumValueOptions deprecated */
-            deprecated?: (boolean|null);
-
-            /** EnumValueOptions uninterpretedOption */
-            uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
-        }
-
-        /** Represents an EnumValueOptions. */
-        class EnumValueOptions implements IEnumValueOptions {
-
-            /**
-             * Constructs a new EnumValueOptions.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IEnumValueOptions);
-
-            /** EnumValueOptions deprecated. */
-            public deprecated: boolean;
-
-            /** EnumValueOptions uninterpretedOption. */
-            public uninterpretedOption: google.protobuf.IUninterpretedOption[];
-
-            /**
-             * Creates a new EnumValueOptions instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns EnumValueOptions instance
-             */
-            public static create(properties?: google.protobuf.IEnumValueOptions): google.protobuf.EnumValueOptions;
-
-            /**
-             * Encodes the specified EnumValueOptions message. Does not implicitly {@link google.protobuf.EnumValueOptions.verify|verify} messages.
-             * @param message EnumValueOptions message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IEnumValueOptions, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified EnumValueOptions message, length delimited. Does not implicitly {@link google.protobuf.EnumValueOptions.verify|verify} messages.
-             * @param message EnumValueOptions message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IEnumValueOptions, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an EnumValueOptions message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns EnumValueOptions
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.EnumValueOptions;
-
-            /**
-             * Decodes an EnumValueOptions message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns EnumValueOptions
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.EnumValueOptions;
-
-            /**
-             * Verifies an EnumValueOptions message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an EnumValueOptions message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns EnumValueOptions
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.EnumValueOptions;
-
-            /**
-             * Creates a plain object from an EnumValueOptions message. Also converts values to other types if specified.
-             * @param message EnumValueOptions
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.EnumValueOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this EnumValueOptions to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for EnumValueOptions
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a ServiceOptions. */
-        interface IServiceOptions {
-
-            /** ServiceOptions deprecated */
-            deprecated?: (boolean|null);
-
-            /** ServiceOptions uninterpretedOption */
-            uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
-
-            /** ServiceOptions .google.api.defaultHost */
-            ".google.api.defaultHost"?: (string|null);
-
-            /** ServiceOptions .google.api.oauthScopes */
-            ".google.api.oauthScopes"?: (string|null);
-        }
-
-        /** Represents a ServiceOptions. */
-        class ServiceOptions implements IServiceOptions {
-
-            /**
-             * Constructs a new ServiceOptions.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IServiceOptions);
-
-            /** ServiceOptions deprecated. */
-            public deprecated: boolean;
-
-            /** ServiceOptions uninterpretedOption. */
-            public uninterpretedOption: google.protobuf.IUninterpretedOption[];
-
-            /**
-             * Creates a new ServiceOptions instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ServiceOptions instance
-             */
-            public static create(properties?: google.protobuf.IServiceOptions): google.protobuf.ServiceOptions;
-
-            /**
-             * Encodes the specified ServiceOptions message. Does not implicitly {@link google.protobuf.ServiceOptions.verify|verify} messages.
-             * @param message ServiceOptions message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IServiceOptions, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ServiceOptions message, length delimited. Does not implicitly {@link google.protobuf.ServiceOptions.verify|verify} messages.
-             * @param message ServiceOptions message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IServiceOptions, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ServiceOptions message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ServiceOptions
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.ServiceOptions;
-
-            /**
-             * Decodes a ServiceOptions message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ServiceOptions
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.ServiceOptions;
-
-            /**
-             * Verifies a ServiceOptions message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ServiceOptions message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ServiceOptions
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.ServiceOptions;
-
-            /**
-             * Creates a plain object from a ServiceOptions message. Also converts values to other types if specified.
-             * @param message ServiceOptions
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.ServiceOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ServiceOptions to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for ServiceOptions
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a MethodOptions. */
-        interface IMethodOptions {
-
-            /** MethodOptions deprecated */
-            deprecated?: (boolean|null);
-
-            /** MethodOptions idempotencyLevel */
-            idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel|null);
-
-            /** MethodOptions uninterpretedOption */
-            uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
-
-            /** MethodOptions .google.api.http */
-            ".google.api.http"?: (google.api.IHttpRule|null);
-
-            /** MethodOptions .google.api.methodSignature */
-            ".google.api.methodSignature"?: (string[]|null);
-        }
-
-        /** Represents a MethodOptions. */
-        class MethodOptions implements IMethodOptions {
-
-            /**
-             * Constructs a new MethodOptions.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IMethodOptions);
-
-            /** MethodOptions deprecated. */
-            public deprecated: boolean;
-
-            /** MethodOptions idempotencyLevel. */
-            public idempotencyLevel: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel);
-
-            /** MethodOptions uninterpretedOption. */
-            public uninterpretedOption: google.protobuf.IUninterpretedOption[];
-
-            /**
-             * Creates a new MethodOptions instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns MethodOptions instance
-             */
-            public static create(properties?: google.protobuf.IMethodOptions): google.protobuf.MethodOptions;
-
-            /**
-             * Encodes the specified MethodOptions message. Does not implicitly {@link google.protobuf.MethodOptions.verify|verify} messages.
-             * @param message MethodOptions message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IMethodOptions, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified MethodOptions message, length delimited. Does not implicitly {@link google.protobuf.MethodOptions.verify|verify} messages.
-             * @param message MethodOptions message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IMethodOptions, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a MethodOptions message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns MethodOptions
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.MethodOptions;
-
-            /**
-             * Decodes a MethodOptions message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns MethodOptions
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.MethodOptions;
-
-            /**
-             * Verifies a MethodOptions message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a MethodOptions message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns MethodOptions
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.MethodOptions;
-
-            /**
-             * Creates a plain object from a MethodOptions message. Also converts values to other types if specified.
-             * @param message MethodOptions
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.MethodOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this MethodOptions to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for MethodOptions
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        namespace MethodOptions {
-
-            /** IdempotencyLevel enum. */
-            enum IdempotencyLevel {
-                IDEMPOTENCY_UNKNOWN = 0,
-                NO_SIDE_EFFECTS = 1,
-                IDEMPOTENT = 2
-            }
-        }
-
-        /** Properties of an UninterpretedOption. */
-        interface IUninterpretedOption {
-
-            /** UninterpretedOption name */
-            name?: (google.protobuf.UninterpretedOption.INamePart[]|null);
-
-            /** UninterpretedOption identifierValue */
-            identifierValue?: (string|null);
-
-            /** UninterpretedOption positiveIntValue */
-            positiveIntValue?: (number|Long|string|null);
-
-            /** UninterpretedOption negativeIntValue */
-            negativeIntValue?: (number|Long|string|null);
-
-            /** UninterpretedOption doubleValue */
-            doubleValue?: (number|null);
-
-            /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
-
-            /** UninterpretedOption aggregateValue */
-            aggregateValue?: (string|null);
-        }
-
-        /** Represents an UninterpretedOption. */
-        class UninterpretedOption implements IUninterpretedOption {
-
-            /**
-             * Constructs a new UninterpretedOption.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IUninterpretedOption);
-
-            /** UninterpretedOption name. */
-            public name: google.protobuf.UninterpretedOption.INamePart[];
-
-            /** UninterpretedOption identifierValue. */
-            public identifierValue: string;
-
-            /** UninterpretedOption positiveIntValue. */
-            public positiveIntValue: (number|Long|string);
-
-            /** UninterpretedOption negativeIntValue. */
-            public negativeIntValue: (number|Long|string);
-
-            /** UninterpretedOption doubleValue. */
-            public doubleValue: number;
-
-            /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
-
-            /** UninterpretedOption aggregateValue. */
-            public aggregateValue: string;
-
-            /**
-             * Creates a new UninterpretedOption instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns UninterpretedOption instance
-             */
-            public static create(properties?: google.protobuf.IUninterpretedOption): google.protobuf.UninterpretedOption;
-
-            /**
-             * Encodes the specified UninterpretedOption message. Does not implicitly {@link google.protobuf.UninterpretedOption.verify|verify} messages.
-             * @param message UninterpretedOption message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IUninterpretedOption, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified UninterpretedOption message, length delimited. Does not implicitly {@link google.protobuf.UninterpretedOption.verify|verify} messages.
-             * @param message UninterpretedOption message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IUninterpretedOption, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an UninterpretedOption message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns UninterpretedOption
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.UninterpretedOption;
-
-            /**
-             * Decodes an UninterpretedOption message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns UninterpretedOption
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.UninterpretedOption;
-
-            /**
-             * Verifies an UninterpretedOption message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an UninterpretedOption message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns UninterpretedOption
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.UninterpretedOption;
-
-            /**
-             * Creates a plain object from an UninterpretedOption message. Also converts values to other types if specified.
-             * @param message UninterpretedOption
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.UninterpretedOption, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this UninterpretedOption to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for UninterpretedOption
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        namespace UninterpretedOption {
-
-            /** Properties of a NamePart. */
-            interface INamePart {
-
-                /** NamePart namePart */
-                namePart: string;
-
-                /** NamePart isExtension */
-                isExtension: boolean;
-            }
-
-            /** Represents a NamePart. */
-            class NamePart implements INamePart {
-
-                /**
-                 * Constructs a new NamePart.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.protobuf.UninterpretedOption.INamePart);
-
-                /** NamePart namePart. */
-                public namePart: string;
-
-                /** NamePart isExtension. */
-                public isExtension: boolean;
-
-                /**
-                 * Creates a new NamePart instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns NamePart instance
-                 */
-                public static create(properties?: google.protobuf.UninterpretedOption.INamePart): google.protobuf.UninterpretedOption.NamePart;
-
-                /**
-                 * Encodes the specified NamePart message. Does not implicitly {@link google.protobuf.UninterpretedOption.NamePart.verify|verify} messages.
-                 * @param message NamePart message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.protobuf.UninterpretedOption.INamePart, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified NamePart message, length delimited. Does not implicitly {@link google.protobuf.UninterpretedOption.NamePart.verify|verify} messages.
-                 * @param message NamePart message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.protobuf.UninterpretedOption.INamePart, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a NamePart message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns NamePart
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.UninterpretedOption.NamePart;
-
-                /**
-                 * Decodes a NamePart message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns NamePart
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.UninterpretedOption.NamePart;
-
-                /**
-                 * Verifies a NamePart message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a NamePart message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns NamePart
-                 */
-                public static fromObject(object: { [k: string]: any }): google.protobuf.UninterpretedOption.NamePart;
-
-                /**
-                 * Creates a plain object from a NamePart message. Also converts values to other types if specified.
-                 * @param message NamePart
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.protobuf.UninterpretedOption.NamePart, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this NamePart to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for NamePart
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-        }
-
-        /** Properties of a SourceCodeInfo. */
-        interface ISourceCodeInfo {
-
-            /** SourceCodeInfo location */
-            location?: (google.protobuf.SourceCodeInfo.ILocation[]|null);
-        }
-
-        /** Represents a SourceCodeInfo. */
-        class SourceCodeInfo implements ISourceCodeInfo {
-
-            /**
-             * Constructs a new SourceCodeInfo.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.ISourceCodeInfo);
-
-            /** SourceCodeInfo location. */
-            public location: google.protobuf.SourceCodeInfo.ILocation[];
-
-            /**
-             * Creates a new SourceCodeInfo instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns SourceCodeInfo instance
-             */
-            public static create(properties?: google.protobuf.ISourceCodeInfo): google.protobuf.SourceCodeInfo;
-
-            /**
-             * Encodes the specified SourceCodeInfo message. Does not implicitly {@link google.protobuf.SourceCodeInfo.verify|verify} messages.
-             * @param message SourceCodeInfo message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.ISourceCodeInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified SourceCodeInfo message, length delimited. Does not implicitly {@link google.protobuf.SourceCodeInfo.verify|verify} messages.
-             * @param message SourceCodeInfo message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.ISourceCodeInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a SourceCodeInfo message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns SourceCodeInfo
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.SourceCodeInfo;
-
-            /**
-             * Decodes a SourceCodeInfo message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns SourceCodeInfo
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.SourceCodeInfo;
-
-            /**
-             * Verifies a SourceCodeInfo message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a SourceCodeInfo message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns SourceCodeInfo
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.SourceCodeInfo;
-
-            /**
-             * Creates a plain object from a SourceCodeInfo message. Also converts values to other types if specified.
-             * @param message SourceCodeInfo
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.SourceCodeInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this SourceCodeInfo to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for SourceCodeInfo
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        namespace SourceCodeInfo {
-
-            /** Properties of a Location. */
-            interface ILocation {
-
-                /** Location path */
-                path?: (number[]|null);
-
-                /** Location span */
-                span?: (number[]|null);
-
-                /** Location leadingComments */
-                leadingComments?: (string|null);
-
-                /** Location trailingComments */
-                trailingComments?: (string|null);
-
-                /** Location leadingDetachedComments */
-                leadingDetachedComments?: (string[]|null);
-            }
-
-            /** Represents a Location. */
-            class Location implements ILocation {
-
-                /**
-                 * Constructs a new Location.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.protobuf.SourceCodeInfo.ILocation);
-
-                /** Location path. */
-                public path: number[];
-
-                /** Location span. */
-                public span: number[];
-
-                /** Location leadingComments. */
-                public leadingComments: string;
-
-                /** Location trailingComments. */
-                public trailingComments: string;
-
-                /** Location leadingDetachedComments. */
-                public leadingDetachedComments: string[];
-
-                /**
-                 * Creates a new Location instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns Location instance
-                 */
-                public static create(properties?: google.protobuf.SourceCodeInfo.ILocation): google.protobuf.SourceCodeInfo.Location;
-
-                /**
-                 * Encodes the specified Location message. Does not implicitly {@link google.protobuf.SourceCodeInfo.Location.verify|verify} messages.
-                 * @param message Location message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.protobuf.SourceCodeInfo.ILocation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified Location message, length delimited. Does not implicitly {@link google.protobuf.SourceCodeInfo.Location.verify|verify} messages.
-                 * @param message Location message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.protobuf.SourceCodeInfo.ILocation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a Location message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns Location
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.SourceCodeInfo.Location;
-
-                /**
-                 * Decodes a Location message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns Location
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.SourceCodeInfo.Location;
-
-                /**
-                 * Verifies a Location message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a Location message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns Location
-                 */
-                public static fromObject(object: { [k: string]: any }): google.protobuf.SourceCodeInfo.Location;
-
-                /**
-                 * Creates a plain object from a Location message. Also converts values to other types if specified.
-                 * @param message Location
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.protobuf.SourceCodeInfo.Location, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this Location to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for Location
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-        }
-
-        /** Properties of a GeneratedCodeInfo. */
-        interface IGeneratedCodeInfo {
-
-            /** GeneratedCodeInfo annotation */
-            annotation?: (google.protobuf.GeneratedCodeInfo.IAnnotation[]|null);
-        }
-
-        /** Represents a GeneratedCodeInfo. */
-        class GeneratedCodeInfo implements IGeneratedCodeInfo {
-
-            /**
-             * Constructs a new GeneratedCodeInfo.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IGeneratedCodeInfo);
-
-            /** GeneratedCodeInfo annotation. */
-            public annotation: google.protobuf.GeneratedCodeInfo.IAnnotation[];
-
-            /**
-             * Creates a new GeneratedCodeInfo instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns GeneratedCodeInfo instance
-             */
-            public static create(properties?: google.protobuf.IGeneratedCodeInfo): google.protobuf.GeneratedCodeInfo;
-
-            /**
-             * Encodes the specified GeneratedCodeInfo message. Does not implicitly {@link google.protobuf.GeneratedCodeInfo.verify|verify} messages.
-             * @param message GeneratedCodeInfo message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IGeneratedCodeInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified GeneratedCodeInfo message, length delimited. Does not implicitly {@link google.protobuf.GeneratedCodeInfo.verify|verify} messages.
-             * @param message GeneratedCodeInfo message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IGeneratedCodeInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a GeneratedCodeInfo message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns GeneratedCodeInfo
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.GeneratedCodeInfo;
-
-            /**
-             * Decodes a GeneratedCodeInfo message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns GeneratedCodeInfo
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.GeneratedCodeInfo;
-
-            /**
-             * Verifies a GeneratedCodeInfo message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a GeneratedCodeInfo message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns GeneratedCodeInfo
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.GeneratedCodeInfo;
-
-            /**
-             * Creates a plain object from a GeneratedCodeInfo message. Also converts values to other types if specified.
-             * @param message GeneratedCodeInfo
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.GeneratedCodeInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this GeneratedCodeInfo to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for GeneratedCodeInfo
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        namespace GeneratedCodeInfo {
-
-            /** Properties of an Annotation. */
-            interface IAnnotation {
-
-                /** Annotation path */
-                path?: (number[]|null);
-
-                /** Annotation sourceFile */
-                sourceFile?: (string|null);
-
-                /** Annotation begin */
-                begin?: (number|null);
-
-                /** Annotation end */
-                end?: (number|null);
-
-                /** Annotation semantic */
-                semantic?: (google.protobuf.GeneratedCodeInfo.Annotation.Semantic|keyof typeof google.protobuf.GeneratedCodeInfo.Annotation.Semantic|null);
-            }
-
-            /** Represents an Annotation. */
-            class Annotation implements IAnnotation {
-
-                /**
-                 * Constructs a new Annotation.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.protobuf.GeneratedCodeInfo.IAnnotation);
-
-                /** Annotation path. */
-                public path: number[];
-
-                /** Annotation sourceFile. */
-                public sourceFile: string;
-
-                /** Annotation begin. */
-                public begin: number;
-
-                /** Annotation end. */
-                public end: number;
-
-                /** Annotation semantic. */
-                public semantic: (google.protobuf.GeneratedCodeInfo.Annotation.Semantic|keyof typeof google.protobuf.GeneratedCodeInfo.Annotation.Semantic);
-
-                /**
-                 * Creates a new Annotation instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns Annotation instance
-                 */
-                public static create(properties?: google.protobuf.GeneratedCodeInfo.IAnnotation): google.protobuf.GeneratedCodeInfo.Annotation;
-
-                /**
-                 * Encodes the specified Annotation message. Does not implicitly {@link google.protobuf.GeneratedCodeInfo.Annotation.verify|verify} messages.
-                 * @param message Annotation message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.protobuf.GeneratedCodeInfo.IAnnotation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified Annotation message, length delimited. Does not implicitly {@link google.protobuf.GeneratedCodeInfo.Annotation.verify|verify} messages.
-                 * @param message Annotation message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.protobuf.GeneratedCodeInfo.IAnnotation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes an Annotation message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns Annotation
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.GeneratedCodeInfo.Annotation;
-
-                /**
-                 * Decodes an Annotation message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns Annotation
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.GeneratedCodeInfo.Annotation;
-
-                /**
-                 * Verifies an Annotation message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates an Annotation message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns Annotation
-                 */
-                public static fromObject(object: { [k: string]: any }): google.protobuf.GeneratedCodeInfo.Annotation;
-
-                /**
-                 * Creates a plain object from an Annotation message. Also converts values to other types if specified.
-                 * @param message Annotation
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.protobuf.GeneratedCodeInfo.Annotation, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this Annotation to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for Annotation
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            namespace Annotation {
-
-                /** Semantic enum. */
-                enum Semantic {
-                    NONE = 0,
-                    SET = 1,
-                    ALIAS = 2
-                }
-            }
-        }
-
-        /** Properties of a Duration. */
-        interface IDuration {
-
-            /** Duration seconds */
-            seconds?: (number|Long|string|null);
-
-            /** Duration nanos */
-            nanos?: (number|null);
-        }
-
-        /** Represents a Duration. */
-        class Duration implements IDuration {
-
-            /**
-             * Constructs a new Duration.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IDuration);
-
-            /** Duration seconds. */
-            public seconds: (number|Long|string);
-
-            /** Duration nanos. */
-            public nanos: number;
-
-            /**
-             * Creates a new Duration instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Duration instance
-             */
-            public static create(properties?: google.protobuf.IDuration): google.protobuf.Duration;
-
-            /**
-             * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
-             * @param message Duration message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
-             * @param message Duration message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Duration message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Duration
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Duration;
-
-            /**
-             * Decodes a Duration message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Duration
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Duration;
-
-            /**
-             * Verifies a Duration message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Duration message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Duration
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Duration;
-
-            /**
-             * Creates a plain object from a Duration message. Also converts values to other types if specified.
-             * @param message Duration
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Duration, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Duration to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Duration
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-    }
-
     /** Namespace geo. */
     namespace geo {
 
@@ -3838,6 +234,109 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
+        /** Properties of a LocalizedText. */
+        interface ILocalizedText {
+
+            /** LocalizedText text */
+            text?: (string|null);
+
+            /** LocalizedText languageCode */
+            languageCode?: (string|null);
+        }
+
+        /** Represents a LocalizedText. */
+        class LocalizedText implements ILocalizedText {
+
+            /**
+             * Constructs a new LocalizedText.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.ILocalizedText);
+
+            /** LocalizedText text. */
+            public text: string;
+
+            /** LocalizedText languageCode. */
+            public languageCode: string;
+
+            /**
+             * Creates a new LocalizedText instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns LocalizedText instance
+             */
+            public static create(properties?: google.type.ILocalizedText): google.type.LocalizedText;
+
+            /**
+             * Encodes the specified LocalizedText message. Does not implicitly {@link google.type.LocalizedText.verify|verify} messages.
+             * @param message LocalizedText message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.ILocalizedText, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified LocalizedText message, length delimited. Does not implicitly {@link google.type.LocalizedText.verify|verify} messages.
+             * @param message LocalizedText message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.ILocalizedText, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a LocalizedText message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns LocalizedText
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.LocalizedText;
+
+            /**
+             * Decodes a LocalizedText message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns LocalizedText
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.LocalizedText;
+
+            /**
+             * Verifies a LocalizedText message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a LocalizedText message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns LocalizedText
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.LocalizedText;
+
+            /**
+             * Creates a plain object from a LocalizedText message. Also converts values to other types if specified.
+             * @param message LocalizedText
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.LocalizedText, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this LocalizedText to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for LocalizedText
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of a Money. */
         interface IMoney {
 
@@ -3941,109 +440,6 @@ export namespace google {
 
             /**
              * Gets the default type url for Money
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a LocalizedText. */
-        interface ILocalizedText {
-
-            /** LocalizedText text */
-            text?: (string|null);
-
-            /** LocalizedText languageCode */
-            languageCode?: (string|null);
-        }
-
-        /** Represents a LocalizedText. */
-        class LocalizedText implements ILocalizedText {
-
-            /**
-             * Constructs a new LocalizedText.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.type.ILocalizedText);
-
-            /** LocalizedText text. */
-            public text: string;
-
-            /** LocalizedText languageCode. */
-            public languageCode: string;
-
-            /**
-             * Creates a new LocalizedText instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns LocalizedText instance
-             */
-            public static create(properties?: google.type.ILocalizedText): google.type.LocalizedText;
-
-            /**
-             * Encodes the specified LocalizedText message. Does not implicitly {@link google.type.LocalizedText.verify|verify} messages.
-             * @param message LocalizedText message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.type.ILocalizedText, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified LocalizedText message, length delimited. Does not implicitly {@link google.type.LocalizedText.verify|verify} messages.
-             * @param message LocalizedText message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.type.ILocalizedText, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a LocalizedText message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns LocalizedText
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.LocalizedText;
-
-            /**
-             * Decodes a LocalizedText message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns LocalizedText
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.LocalizedText;
-
-            /**
-             * Verifies a LocalizedText message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a LocalizedText message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns LocalizedText
-             */
-            public static fromObject(object: { [k: string]: any }): google.type.LocalizedText;
-
-            /**
-             * Creates a plain object from a LocalizedText message. Also converts values to other types if specified.
-             * @param message LocalizedText
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.type.LocalizedText, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this LocalizedText to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for LocalizedText
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
@@ -4272,6 +668,1111 @@ export namespace google {
 
                     /**
                      * Gets the default type url for AuthorAttribution
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ContentBlock. */
+                interface IContentBlock {
+
+                    /** ContentBlock topic */
+                    topic?: (string|null);
+
+                    /** ContentBlock content */
+                    content?: (google.type.ILocalizedText|null);
+
+                    /** ContentBlock references */
+                    references?: (google.maps.places.v1.IReferences|null);
+                }
+
+                /** Represents a ContentBlock. */
+                class ContentBlock implements IContentBlock {
+
+                    /**
+                     * Constructs a new ContentBlock.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.places.v1.IContentBlock);
+
+                    /** ContentBlock topic. */
+                    public topic: string;
+
+                    /** ContentBlock content. */
+                    public content?: (google.type.ILocalizedText|null);
+
+                    /** ContentBlock references. */
+                    public references?: (google.maps.places.v1.IReferences|null);
+
+                    /**
+                     * Creates a new ContentBlock instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ContentBlock instance
+                     */
+                    public static create(properties?: google.maps.places.v1.IContentBlock): google.maps.places.v1.ContentBlock;
+
+                    /**
+                     * Encodes the specified ContentBlock message. Does not implicitly {@link google.maps.places.v1.ContentBlock.verify|verify} messages.
+                     * @param message ContentBlock message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.places.v1.IContentBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ContentBlock message, length delimited. Does not implicitly {@link google.maps.places.v1.ContentBlock.verify|verify} messages.
+                     * @param message ContentBlock message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.places.v1.IContentBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ContentBlock message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ContentBlock
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.ContentBlock;
+
+                    /**
+                     * Decodes a ContentBlock message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ContentBlock
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.ContentBlock;
+
+                    /**
+                     * Verifies a ContentBlock message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ContentBlock message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ContentBlock
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.places.v1.ContentBlock;
+
+                    /**
+                     * Creates a plain object from a ContentBlock message. Also converts values to other types if specified.
+                     * @param message ContentBlock
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.places.v1.ContentBlock, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ContentBlock to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ContentBlock
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a References. */
+                interface IReferences {
+
+                    /** References reviews */
+                    reviews?: (google.maps.places.v1.IReview[]|null);
+
+                    /** References places */
+                    places?: (string[]|null);
+                }
+
+                /** Represents a References. */
+                class References implements IReferences {
+
+                    /**
+                     * Constructs a new References.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.places.v1.IReferences);
+
+                    /** References reviews. */
+                    public reviews: google.maps.places.v1.IReview[];
+
+                    /** References places. */
+                    public places: string[];
+
+                    /**
+                     * Creates a new References instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns References instance
+                     */
+                    public static create(properties?: google.maps.places.v1.IReferences): google.maps.places.v1.References;
+
+                    /**
+                     * Encodes the specified References message. Does not implicitly {@link google.maps.places.v1.References.verify|verify} messages.
+                     * @param message References message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.places.v1.IReferences, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified References message, length delimited. Does not implicitly {@link google.maps.places.v1.References.verify|verify} messages.
+                     * @param message References message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.places.v1.IReferences, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a References message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns References
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.References;
+
+                    /**
+                     * Decodes a References message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns References
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.References;
+
+                    /**
+                     * Verifies a References message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a References message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns References
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.places.v1.References;
+
+                    /**
+                     * Creates a plain object from a References message. Also converts values to other types if specified.
+                     * @param message References
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.places.v1.References, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this References to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for References
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Review. */
+                interface IReview {
+
+                    /** Review name */
+                    name?: (string|null);
+
+                    /** Review relativePublishTimeDescription */
+                    relativePublishTimeDescription?: (string|null);
+
+                    /** Review text */
+                    text?: (google.type.ILocalizedText|null);
+
+                    /** Review originalText */
+                    originalText?: (google.type.ILocalizedText|null);
+
+                    /** Review rating */
+                    rating?: (number|null);
+
+                    /** Review authorAttribution */
+                    authorAttribution?: (google.maps.places.v1.IAuthorAttribution|null);
+
+                    /** Review publishTime */
+                    publishTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a Review. */
+                class Review implements IReview {
+
+                    /**
+                     * Constructs a new Review.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.places.v1.IReview);
+
+                    /** Review name. */
+                    public name: string;
+
+                    /** Review relativePublishTimeDescription. */
+                    public relativePublishTimeDescription: string;
+
+                    /** Review text. */
+                    public text?: (google.type.ILocalizedText|null);
+
+                    /** Review originalText. */
+                    public originalText?: (google.type.ILocalizedText|null);
+
+                    /** Review rating. */
+                    public rating: number;
+
+                    /** Review authorAttribution. */
+                    public authorAttribution?: (google.maps.places.v1.IAuthorAttribution|null);
+
+                    /** Review publishTime. */
+                    public publishTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new Review instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Review instance
+                     */
+                    public static create(properties?: google.maps.places.v1.IReview): google.maps.places.v1.Review;
+
+                    /**
+                     * Encodes the specified Review message. Does not implicitly {@link google.maps.places.v1.Review.verify|verify} messages.
+                     * @param message Review message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.places.v1.IReview, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Review message, length delimited. Does not implicitly {@link google.maps.places.v1.Review.verify|verify} messages.
+                     * @param message Review message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.places.v1.IReview, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Review message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Review
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.Review;
+
+                    /**
+                     * Decodes a Review message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Review
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.Review;
+
+                    /**
+                     * Verifies a Review message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Review message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Review
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.places.v1.Review;
+
+                    /**
+                     * Creates a plain object from a Review message. Also converts values to other types if specified.
+                     * @param message Review
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.places.v1.Review, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Review to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Review
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ContextualContent. */
+                interface IContextualContent {
+
+                    /** ContextualContent reviews */
+                    reviews?: (google.maps.places.v1.IReview[]|null);
+
+                    /** ContextualContent photos */
+                    photos?: (google.maps.places.v1.IPhoto[]|null);
+
+                    /** ContextualContent justifications */
+                    justifications?: (google.maps.places.v1.ContextualContent.IJustification[]|null);
+                }
+
+                /** Represents a ContextualContent. */
+                class ContextualContent implements IContextualContent {
+
+                    /**
+                     * Constructs a new ContextualContent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.places.v1.IContextualContent);
+
+                    /** ContextualContent reviews. */
+                    public reviews: google.maps.places.v1.IReview[];
+
+                    /** ContextualContent photos. */
+                    public photos: google.maps.places.v1.IPhoto[];
+
+                    /** ContextualContent justifications. */
+                    public justifications: google.maps.places.v1.ContextualContent.IJustification[];
+
+                    /**
+                     * Creates a new ContextualContent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ContextualContent instance
+                     */
+                    public static create(properties?: google.maps.places.v1.IContextualContent): google.maps.places.v1.ContextualContent;
+
+                    /**
+                     * Encodes the specified ContextualContent message. Does not implicitly {@link google.maps.places.v1.ContextualContent.verify|verify} messages.
+                     * @param message ContextualContent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.places.v1.IContextualContent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ContextualContent message, length delimited. Does not implicitly {@link google.maps.places.v1.ContextualContent.verify|verify} messages.
+                     * @param message ContextualContent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.places.v1.IContextualContent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ContextualContent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ContextualContent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.ContextualContent;
+
+                    /**
+                     * Decodes a ContextualContent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ContextualContent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.ContextualContent;
+
+                    /**
+                     * Verifies a ContextualContent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ContextualContent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ContextualContent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.places.v1.ContextualContent;
+
+                    /**
+                     * Creates a plain object from a ContextualContent message. Also converts values to other types if specified.
+                     * @param message ContextualContent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.places.v1.ContextualContent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ContextualContent to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ContextualContent
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ContextualContent {
+
+                    /** Properties of a Justification. */
+                    interface IJustification {
+
+                        /** Justification reviewJustification */
+                        reviewJustification?: (google.maps.places.v1.ContextualContent.Justification.IReviewJustification|null);
+
+                        /** Justification businessAvailabilityAttributesJustification */
+                        businessAvailabilityAttributesJustification?: (google.maps.places.v1.ContextualContent.Justification.IBusinessAvailabilityAttributesJustification|null);
+                    }
+
+                    /** Represents a Justification. */
+                    class Justification implements IJustification {
+
+                        /**
+                         * Constructs a new Justification.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.maps.places.v1.ContextualContent.IJustification);
+
+                        /** Justification reviewJustification. */
+                        public reviewJustification?: (google.maps.places.v1.ContextualContent.Justification.IReviewJustification|null);
+
+                        /** Justification businessAvailabilityAttributesJustification. */
+                        public businessAvailabilityAttributesJustification?: (google.maps.places.v1.ContextualContent.Justification.IBusinessAvailabilityAttributesJustification|null);
+
+                        /** Justification justification. */
+                        public justification?: ("reviewJustification"|"businessAvailabilityAttributesJustification");
+
+                        /**
+                         * Creates a new Justification instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Justification instance
+                         */
+                        public static create(properties?: google.maps.places.v1.ContextualContent.IJustification): google.maps.places.v1.ContextualContent.Justification;
+
+                        /**
+                         * Encodes the specified Justification message. Does not implicitly {@link google.maps.places.v1.ContextualContent.Justification.verify|verify} messages.
+                         * @param message Justification message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.maps.places.v1.ContextualContent.IJustification, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Justification message, length delimited. Does not implicitly {@link google.maps.places.v1.ContextualContent.Justification.verify|verify} messages.
+                         * @param message Justification message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.maps.places.v1.ContextualContent.IJustification, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Justification message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Justification
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.ContextualContent.Justification;
+
+                        /**
+                         * Decodes a Justification message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Justification
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.ContextualContent.Justification;
+
+                        /**
+                         * Verifies a Justification message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Justification message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Justification
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.maps.places.v1.ContextualContent.Justification;
+
+                        /**
+                         * Creates a plain object from a Justification message. Also converts values to other types if specified.
+                         * @param message Justification
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.maps.places.v1.ContextualContent.Justification, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Justification to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Justification
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Justification {
+
+                        /** Properties of a ReviewJustification. */
+                        interface IReviewJustification {
+
+                            /** ReviewJustification highlightedText */
+                            highlightedText?: (google.maps.places.v1.ContextualContent.Justification.ReviewJustification.IHighlightedText|null);
+
+                            /** ReviewJustification review */
+                            review?: (google.maps.places.v1.IReview|null);
+                        }
+
+                        /** Represents a ReviewJustification. */
+                        class ReviewJustification implements IReviewJustification {
+
+                            /**
+                             * Constructs a new ReviewJustification.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.maps.places.v1.ContextualContent.Justification.IReviewJustification);
+
+                            /** ReviewJustification highlightedText. */
+                            public highlightedText?: (google.maps.places.v1.ContextualContent.Justification.ReviewJustification.IHighlightedText|null);
+
+                            /** ReviewJustification review. */
+                            public review?: (google.maps.places.v1.IReview|null);
+
+                            /**
+                             * Creates a new ReviewJustification instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ReviewJustification instance
+                             */
+                            public static create(properties?: google.maps.places.v1.ContextualContent.Justification.IReviewJustification): google.maps.places.v1.ContextualContent.Justification.ReviewJustification;
+
+                            /**
+                             * Encodes the specified ReviewJustification message. Does not implicitly {@link google.maps.places.v1.ContextualContent.Justification.ReviewJustification.verify|verify} messages.
+                             * @param message ReviewJustification message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.maps.places.v1.ContextualContent.Justification.IReviewJustification, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ReviewJustification message, length delimited. Does not implicitly {@link google.maps.places.v1.ContextualContent.Justification.ReviewJustification.verify|verify} messages.
+                             * @param message ReviewJustification message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.maps.places.v1.ContextualContent.Justification.IReviewJustification, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ReviewJustification message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ReviewJustification
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.ContextualContent.Justification.ReviewJustification;
+
+                            /**
+                             * Decodes a ReviewJustification message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ReviewJustification
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.ContextualContent.Justification.ReviewJustification;
+
+                            /**
+                             * Verifies a ReviewJustification message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ReviewJustification message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ReviewJustification
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.maps.places.v1.ContextualContent.Justification.ReviewJustification;
+
+                            /**
+                             * Creates a plain object from a ReviewJustification message. Also converts values to other types if specified.
+                             * @param message ReviewJustification
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.maps.places.v1.ContextualContent.Justification.ReviewJustification, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ReviewJustification to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ReviewJustification
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace ReviewJustification {
+
+                            /** Properties of a HighlightedText. */
+                            interface IHighlightedText {
+
+                                /** HighlightedText text */
+                                text?: (string|null);
+
+                                /** HighlightedText highlightedTextRanges */
+                                highlightedTextRanges?: (google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText.IHighlightedTextRange[]|null);
+                            }
+
+                            /** Represents a HighlightedText. */
+                            class HighlightedText implements IHighlightedText {
+
+                                /**
+                                 * Constructs a new HighlightedText.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.maps.places.v1.ContextualContent.Justification.ReviewJustification.IHighlightedText);
+
+                                /** HighlightedText text. */
+                                public text: string;
+
+                                /** HighlightedText highlightedTextRanges. */
+                                public highlightedTextRanges: google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText.IHighlightedTextRange[];
+
+                                /**
+                                 * Creates a new HighlightedText instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns HighlightedText instance
+                                 */
+                                public static create(properties?: google.maps.places.v1.ContextualContent.Justification.ReviewJustification.IHighlightedText): google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText;
+
+                                /**
+                                 * Encodes the specified HighlightedText message. Does not implicitly {@link google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText.verify|verify} messages.
+                                 * @param message HighlightedText message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.maps.places.v1.ContextualContent.Justification.ReviewJustification.IHighlightedText, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified HighlightedText message, length delimited. Does not implicitly {@link google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText.verify|verify} messages.
+                                 * @param message HighlightedText message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.maps.places.v1.ContextualContent.Justification.ReviewJustification.IHighlightedText, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a HighlightedText message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns HighlightedText
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText;
+
+                                /**
+                                 * Decodes a HighlightedText message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns HighlightedText
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText;
+
+                                /**
+                                 * Verifies a HighlightedText message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a HighlightedText message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns HighlightedText
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText;
+
+                                /**
+                                 * Creates a plain object from a HighlightedText message. Also converts values to other types if specified.
+                                 * @param message HighlightedText
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this HighlightedText to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for HighlightedText
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            namespace HighlightedText {
+
+                                /** Properties of a HighlightedTextRange. */
+                                interface IHighlightedTextRange {
+
+                                    /** HighlightedTextRange startIndex */
+                                    startIndex?: (number|null);
+
+                                    /** HighlightedTextRange endIndex */
+                                    endIndex?: (number|null);
+                                }
+
+                                /** Represents a HighlightedTextRange. */
+                                class HighlightedTextRange implements IHighlightedTextRange {
+
+                                    /**
+                                     * Constructs a new HighlightedTextRange.
+                                     * @param [properties] Properties to set
+                                     */
+                                    constructor(properties?: google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText.IHighlightedTextRange);
+
+                                    /** HighlightedTextRange startIndex. */
+                                    public startIndex: number;
+
+                                    /** HighlightedTextRange endIndex. */
+                                    public endIndex: number;
+
+                                    /**
+                                     * Creates a new HighlightedTextRange instance using the specified properties.
+                                     * @param [properties] Properties to set
+                                     * @returns HighlightedTextRange instance
+                                     */
+                                    public static create(properties?: google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText.IHighlightedTextRange): google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText.HighlightedTextRange;
+
+                                    /**
+                                     * Encodes the specified HighlightedTextRange message. Does not implicitly {@link google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText.HighlightedTextRange.verify|verify} messages.
+                                     * @param message HighlightedTextRange message or plain object to encode
+                                     * @param [writer] Writer to encode to
+                                     * @returns Writer
+                                     */
+                                    public static encode(message: google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText.IHighlightedTextRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                    /**
+                                     * Encodes the specified HighlightedTextRange message, length delimited. Does not implicitly {@link google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText.HighlightedTextRange.verify|verify} messages.
+                                     * @param message HighlightedTextRange message or plain object to encode
+                                     * @param [writer] Writer to encode to
+                                     * @returns Writer
+                                     */
+                                    public static encodeDelimited(message: google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText.IHighlightedTextRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                    /**
+                                     * Decodes a HighlightedTextRange message from the specified reader or buffer.
+                                     * @param reader Reader or buffer to decode from
+                                     * @param [length] Message length if known beforehand
+                                     * @returns HighlightedTextRange
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText.HighlightedTextRange;
+
+                                    /**
+                                     * Decodes a HighlightedTextRange message from the specified reader or buffer, length delimited.
+                                     * @param reader Reader or buffer to decode from
+                                     * @returns HighlightedTextRange
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText.HighlightedTextRange;
+
+                                    /**
+                                     * Verifies a HighlightedTextRange message.
+                                     * @param message Plain object to verify
+                                     * @returns `null` if valid, otherwise the reason why it is not
+                                     */
+                                    public static verify(message: { [k: string]: any }): (string|null);
+
+                                    /**
+                                     * Creates a HighlightedTextRange message from a plain object. Also converts values to their respective internal types.
+                                     * @param object Plain object
+                                     * @returns HighlightedTextRange
+                                     */
+                                    public static fromObject(object: { [k: string]: any }): google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText.HighlightedTextRange;
+
+                                    /**
+                                     * Creates a plain object from a HighlightedTextRange message. Also converts values to other types if specified.
+                                     * @param message HighlightedTextRange
+                                     * @param [options] Conversion options
+                                     * @returns Plain object
+                                     */
+                                    public static toObject(message: google.maps.places.v1.ContextualContent.Justification.ReviewJustification.HighlightedText.HighlightedTextRange, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                    /**
+                                     * Converts this HighlightedTextRange to JSON.
+                                     * @returns JSON object
+                                     */
+                                    public toJSON(): { [k: string]: any };
+
+                                    /**
+                                     * Gets the default type url for HighlightedTextRange
+                                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns The default type url
+                                     */
+                                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                                }
+                            }
+                        }
+
+                        /** Properties of a BusinessAvailabilityAttributesJustification. */
+                        interface IBusinessAvailabilityAttributesJustification {
+
+                            /** BusinessAvailabilityAttributesJustification takeout */
+                            takeout?: (boolean|null);
+
+                            /** BusinessAvailabilityAttributesJustification delivery */
+                            delivery?: (boolean|null);
+
+                            /** BusinessAvailabilityAttributesJustification dineIn */
+                            dineIn?: (boolean|null);
+                        }
+
+                        /** Represents a BusinessAvailabilityAttributesJustification. */
+                        class BusinessAvailabilityAttributesJustification implements IBusinessAvailabilityAttributesJustification {
+
+                            /**
+                             * Constructs a new BusinessAvailabilityAttributesJustification.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.maps.places.v1.ContextualContent.Justification.IBusinessAvailabilityAttributesJustification);
+
+                            /** BusinessAvailabilityAttributesJustification takeout. */
+                            public takeout: boolean;
+
+                            /** BusinessAvailabilityAttributesJustification delivery. */
+                            public delivery: boolean;
+
+                            /** BusinessAvailabilityAttributesJustification dineIn. */
+                            public dineIn: boolean;
+
+                            /**
+                             * Creates a new BusinessAvailabilityAttributesJustification instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns BusinessAvailabilityAttributesJustification instance
+                             */
+                            public static create(properties?: google.maps.places.v1.ContextualContent.Justification.IBusinessAvailabilityAttributesJustification): google.maps.places.v1.ContextualContent.Justification.BusinessAvailabilityAttributesJustification;
+
+                            /**
+                             * Encodes the specified BusinessAvailabilityAttributesJustification message. Does not implicitly {@link google.maps.places.v1.ContextualContent.Justification.BusinessAvailabilityAttributesJustification.verify|verify} messages.
+                             * @param message BusinessAvailabilityAttributesJustification message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.maps.places.v1.ContextualContent.Justification.IBusinessAvailabilityAttributesJustification, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified BusinessAvailabilityAttributesJustification message, length delimited. Does not implicitly {@link google.maps.places.v1.ContextualContent.Justification.BusinessAvailabilityAttributesJustification.verify|verify} messages.
+                             * @param message BusinessAvailabilityAttributesJustification message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.maps.places.v1.ContextualContent.Justification.IBusinessAvailabilityAttributesJustification, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a BusinessAvailabilityAttributesJustification message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns BusinessAvailabilityAttributesJustification
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.ContextualContent.Justification.BusinessAvailabilityAttributesJustification;
+
+                            /**
+                             * Decodes a BusinessAvailabilityAttributesJustification message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns BusinessAvailabilityAttributesJustification
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.ContextualContent.Justification.BusinessAvailabilityAttributesJustification;
+
+                            /**
+                             * Verifies a BusinessAvailabilityAttributesJustification message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a BusinessAvailabilityAttributesJustification message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns BusinessAvailabilityAttributesJustification
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.maps.places.v1.ContextualContent.Justification.BusinessAvailabilityAttributesJustification;
+
+                            /**
+                             * Creates a plain object from a BusinessAvailabilityAttributesJustification message. Also converts values to other types if specified.
+                             * @param message BusinessAvailabilityAttributesJustification
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.maps.places.v1.ContextualContent.Justification.BusinessAvailabilityAttributesJustification, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this BusinessAvailabilityAttributesJustification to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for BusinessAvailabilityAttributesJustification
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+                }
+
+                /** Properties of a Photo. */
+                interface IPhoto {
+
+                    /** Photo name */
+                    name?: (string|null);
+
+                    /** Photo widthPx */
+                    widthPx?: (number|null);
+
+                    /** Photo heightPx */
+                    heightPx?: (number|null);
+
+                    /** Photo authorAttributions */
+                    authorAttributions?: (google.maps.places.v1.IAuthorAttribution[]|null);
+                }
+
+                /** Represents a Photo. */
+                class Photo implements IPhoto {
+
+                    /**
+                     * Constructs a new Photo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.places.v1.IPhoto);
+
+                    /** Photo name. */
+                    public name: string;
+
+                    /** Photo widthPx. */
+                    public widthPx: number;
+
+                    /** Photo heightPx. */
+                    public heightPx: number;
+
+                    /** Photo authorAttributions. */
+                    public authorAttributions: google.maps.places.v1.IAuthorAttribution[];
+
+                    /**
+                     * Creates a new Photo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Photo instance
+                     */
+                    public static create(properties?: google.maps.places.v1.IPhoto): google.maps.places.v1.Photo;
+
+                    /**
+                     * Encodes the specified Photo message. Does not implicitly {@link google.maps.places.v1.Photo.verify|verify} messages.
+                     * @param message Photo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.places.v1.IPhoto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Photo message, length delimited. Does not implicitly {@link google.maps.places.v1.Photo.verify|verify} messages.
+                     * @param message Photo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.places.v1.IPhoto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Photo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Photo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.Photo;
+
+                    /**
+                     * Decodes a Photo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Photo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.Photo;
+
+                    /**
+                     * Verifies a Photo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Photo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Photo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.places.v1.Photo;
+
+                    /**
+                     * Creates a plain object from a Photo message. Also converts values to other types if specified.
+                     * @param message Photo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.places.v1.Photo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Photo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Photo
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -4869,121 +2370,6 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** Properties of a Photo. */
-                interface IPhoto {
-
-                    /** Photo name */
-                    name?: (string|null);
-
-                    /** Photo widthPx */
-                    widthPx?: (number|null);
-
-                    /** Photo heightPx */
-                    heightPx?: (number|null);
-
-                    /** Photo authorAttributions */
-                    authorAttributions?: (google.maps.places.v1.IAuthorAttribution[]|null);
-                }
-
-                /** Represents a Photo. */
-                class Photo implements IPhoto {
-
-                    /**
-                     * Constructs a new Photo.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.maps.places.v1.IPhoto);
-
-                    /** Photo name. */
-                    public name: string;
-
-                    /** Photo widthPx. */
-                    public widthPx: number;
-
-                    /** Photo heightPx. */
-                    public heightPx: number;
-
-                    /** Photo authorAttributions. */
-                    public authorAttributions: google.maps.places.v1.IAuthorAttribution[];
-
-                    /**
-                     * Creates a new Photo instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Photo instance
-                     */
-                    public static create(properties?: google.maps.places.v1.IPhoto): google.maps.places.v1.Photo;
-
-                    /**
-                     * Encodes the specified Photo message. Does not implicitly {@link google.maps.places.v1.Photo.verify|verify} messages.
-                     * @param message Photo message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.maps.places.v1.IPhoto, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Photo message, length delimited. Does not implicitly {@link google.maps.places.v1.Photo.verify|verify} messages.
-                     * @param message Photo message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.maps.places.v1.IPhoto, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Photo message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Photo
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.Photo;
-
-                    /**
-                     * Decodes a Photo message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Photo
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.Photo;
-
-                    /**
-                     * Verifies a Photo message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Photo message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Photo
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.maps.places.v1.Photo;
-
-                    /**
-                     * Creates a plain object from a Photo message. Also converts values to other types if specified.
-                     * @param message Photo
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.maps.places.v1.Photo, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Photo to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for Photo
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
                 /** Properties of a Place. */
                 interface IPlace {
 
@@ -5169,6 +2555,12 @@ export namespace google {
 
                     /** Place evChargeOptions */
                     evChargeOptions?: (google.maps.places.v1.IEVChargeOptions|null);
+
+                    /** Place generativeSummary */
+                    generativeSummary?: (google.maps.places.v1.Place.IGenerativeSummary|null);
+
+                    /** Place areaSummary */
+                    areaSummary?: (google.maps.places.v1.Place.IAreaSummary|null);
                 }
 
                 /** Represents a Place. */
@@ -5362,6 +2754,12 @@ export namespace google {
 
                     /** Place evChargeOptions. */
                     public evChargeOptions?: (google.maps.places.v1.IEVChargeOptions|null);
+
+                    /** Place generativeSummary. */
+                    public generativeSummary?: (google.maps.places.v1.Place.IGenerativeSummary|null);
+
+                    /** Place areaSummary. */
+                    public areaSummary?: (google.maps.places.v1.Place.IAreaSummary|null);
 
                     /** Place _utcOffsetMinutes. */
                     public _utcOffsetMinutes?: "utcOffsetMinutes";
@@ -6838,6 +4236,212 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+
+                    /** Properties of a GenerativeSummary. */
+                    interface IGenerativeSummary {
+
+                        /** GenerativeSummary overview */
+                        overview?: (google.type.ILocalizedText|null);
+
+                        /** GenerativeSummary description */
+                        description?: (google.type.ILocalizedText|null);
+
+                        /** GenerativeSummary references */
+                        references?: (google.maps.places.v1.IReferences|null);
+                    }
+
+                    /** Represents a GenerativeSummary. */
+                    class GenerativeSummary implements IGenerativeSummary {
+
+                        /**
+                         * Constructs a new GenerativeSummary.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.maps.places.v1.Place.IGenerativeSummary);
+
+                        /** GenerativeSummary overview. */
+                        public overview?: (google.type.ILocalizedText|null);
+
+                        /** GenerativeSummary description. */
+                        public description?: (google.type.ILocalizedText|null);
+
+                        /** GenerativeSummary references. */
+                        public references?: (google.maps.places.v1.IReferences|null);
+
+                        /**
+                         * Creates a new GenerativeSummary instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GenerativeSummary instance
+                         */
+                        public static create(properties?: google.maps.places.v1.Place.IGenerativeSummary): google.maps.places.v1.Place.GenerativeSummary;
+
+                        /**
+                         * Encodes the specified GenerativeSummary message. Does not implicitly {@link google.maps.places.v1.Place.GenerativeSummary.verify|verify} messages.
+                         * @param message GenerativeSummary message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.maps.places.v1.Place.IGenerativeSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GenerativeSummary message, length delimited. Does not implicitly {@link google.maps.places.v1.Place.GenerativeSummary.verify|verify} messages.
+                         * @param message GenerativeSummary message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.maps.places.v1.Place.IGenerativeSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GenerativeSummary message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GenerativeSummary
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.Place.GenerativeSummary;
+
+                        /**
+                         * Decodes a GenerativeSummary message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GenerativeSummary
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.Place.GenerativeSummary;
+
+                        /**
+                         * Verifies a GenerativeSummary message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GenerativeSummary message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GenerativeSummary
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.maps.places.v1.Place.GenerativeSummary;
+
+                        /**
+                         * Creates a plain object from a GenerativeSummary message. Also converts values to other types if specified.
+                         * @param message GenerativeSummary
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.maps.places.v1.Place.GenerativeSummary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GenerativeSummary to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GenerativeSummary
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an AreaSummary. */
+                    interface IAreaSummary {
+
+                        /** AreaSummary contentBlocks */
+                        contentBlocks?: (google.maps.places.v1.IContentBlock[]|null);
+                    }
+
+                    /** Represents an AreaSummary. */
+                    class AreaSummary implements IAreaSummary {
+
+                        /**
+                         * Constructs a new AreaSummary.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.maps.places.v1.Place.IAreaSummary);
+
+                        /** AreaSummary contentBlocks. */
+                        public contentBlocks: google.maps.places.v1.IContentBlock[];
+
+                        /**
+                         * Creates a new AreaSummary instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AreaSummary instance
+                         */
+                        public static create(properties?: google.maps.places.v1.Place.IAreaSummary): google.maps.places.v1.Place.AreaSummary;
+
+                        /**
+                         * Encodes the specified AreaSummary message. Does not implicitly {@link google.maps.places.v1.Place.AreaSummary.verify|verify} messages.
+                         * @param message AreaSummary message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.maps.places.v1.Place.IAreaSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AreaSummary message, length delimited. Does not implicitly {@link google.maps.places.v1.Place.AreaSummary.verify|verify} messages.
+                         * @param message AreaSummary message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.maps.places.v1.Place.IAreaSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AreaSummary message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AreaSummary
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.Place.AreaSummary;
+
+                        /**
+                         * Decodes an AreaSummary message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AreaSummary
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.Place.AreaSummary;
+
+                        /**
+                         * Verifies an AreaSummary message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AreaSummary message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AreaSummary
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.maps.places.v1.Place.AreaSummary;
+
+                        /**
+                         * Creates a plain object from an AreaSummary message. Also converts values to other types if specified.
+                         * @param message AreaSummary
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.maps.places.v1.Place.AreaSummary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AreaSummary to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AreaSummary
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** PriceLevel enum. */
@@ -6848,139 +4452,6 @@ export namespace google {
                     PRICE_LEVEL_MODERATE = 3,
                     PRICE_LEVEL_EXPENSIVE = 4,
                     PRICE_LEVEL_VERY_EXPENSIVE = 5
-                }
-
-                /** Properties of a Review. */
-                interface IReview {
-
-                    /** Review name */
-                    name?: (string|null);
-
-                    /** Review relativePublishTimeDescription */
-                    relativePublishTimeDescription?: (string|null);
-
-                    /** Review text */
-                    text?: (google.type.ILocalizedText|null);
-
-                    /** Review originalText */
-                    originalText?: (google.type.ILocalizedText|null);
-
-                    /** Review rating */
-                    rating?: (number|null);
-
-                    /** Review authorAttribution */
-                    authorAttribution?: (google.maps.places.v1.IAuthorAttribution|null);
-
-                    /** Review publishTime */
-                    publishTime?: (google.protobuf.ITimestamp|null);
-                }
-
-                /** Represents a Review. */
-                class Review implements IReview {
-
-                    /**
-                     * Constructs a new Review.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.maps.places.v1.IReview);
-
-                    /** Review name. */
-                    public name: string;
-
-                    /** Review relativePublishTimeDescription. */
-                    public relativePublishTimeDescription: string;
-
-                    /** Review text. */
-                    public text?: (google.type.ILocalizedText|null);
-
-                    /** Review originalText. */
-                    public originalText?: (google.type.ILocalizedText|null);
-
-                    /** Review rating. */
-                    public rating: number;
-
-                    /** Review authorAttribution. */
-                    public authorAttribution?: (google.maps.places.v1.IAuthorAttribution|null);
-
-                    /** Review publishTime. */
-                    public publishTime?: (google.protobuf.ITimestamp|null);
-
-                    /**
-                     * Creates a new Review instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Review instance
-                     */
-                    public static create(properties?: google.maps.places.v1.IReview): google.maps.places.v1.Review;
-
-                    /**
-                     * Encodes the specified Review message. Does not implicitly {@link google.maps.places.v1.Review.verify|verify} messages.
-                     * @param message Review message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.maps.places.v1.IReview, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Review message, length delimited. Does not implicitly {@link google.maps.places.v1.Review.verify|verify} messages.
-                     * @param message Review message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.maps.places.v1.IReview, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Review message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Review
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.Review;
-
-                    /**
-                     * Decodes a Review message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Review
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.Review;
-
-                    /**
-                     * Verifies a Review message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Review message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Review
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.maps.places.v1.Review;
-
-                    /**
-                     * Creates a plain object from a Review message. Also converts values to other types if specified.
-                     * @param message Review
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.maps.places.v1.Review, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Review to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for Review
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Represents a Places */
@@ -7058,6 +4529,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public getPlace(request: google.maps.places.v1.IGetPlaceRequest): Promise<google.maps.places.v1.Place>;
+
+                    /**
+                     * Calls AutocompletePlaces.
+                     * @param request AutocompletePlacesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AutocompletePlacesResponse
+                     */
+                    public autocompletePlaces(request: google.maps.places.v1.IAutocompletePlacesRequest, callback: google.maps.places.v1.Places.AutocompletePlacesCallback): void;
+
+                    /**
+                     * Calls AutocompletePlaces.
+                     * @param request AutocompletePlacesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public autocompletePlaces(request: google.maps.places.v1.IAutocompletePlacesRequest): Promise<google.maps.places.v1.AutocompletePlacesResponse>;
                 }
 
                 namespace Places {
@@ -7089,6 +4574,13 @@ export namespace google {
                      * @param [response] Place
                      */
                     type GetPlaceCallback = (error: (Error|null), response?: google.maps.places.v1.Place) => void;
+
+                    /**
+                     * Callback as used by {@link google.maps.places.v1.Places|autocompletePlaces}.
+                     * @param error Error, if any
+                     * @param [response] AutocompletePlacesResponse
+                     */
+                    type AutocompletePlacesCallback = (error: (Error|null), response?: google.maps.places.v1.AutocompletePlacesResponse) => void;
                 }
 
                 /** Properties of a SearchNearbyRequest. */
@@ -7481,6 +4973,9 @@ export namespace google {
 
                     /** SearchTextRequest locationRestriction */
                     locationRestriction?: (google.maps.places.v1.SearchTextRequest.ILocationRestriction|null);
+
+                    /** SearchTextRequest evOptions */
+                    evOptions?: (google.maps.places.v1.SearchTextRequest.IEVOptions|null);
                 }
 
                 /** Represents a SearchTextRequest. */
@@ -7527,6 +5022,9 @@ export namespace google {
 
                     /** SearchTextRequest locationRestriction. */
                     public locationRestriction?: (google.maps.places.v1.SearchTextRequest.ILocationRestriction|null);
+
+                    /** SearchTextRequest evOptions. */
+                    public evOptions?: (google.maps.places.v1.SearchTextRequest.IEVOptions|null);
 
                     /**
                      * Creates a new SearchTextRequest instance using the specified properties.
@@ -7820,6 +5318,109 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+
+                    /** Properties of a EVOptions. */
+                    interface IEVOptions {
+
+                        /** EVOptions minimumChargingRateKw */
+                        minimumChargingRateKw?: (number|null);
+
+                        /** EVOptions connectorTypes */
+                        connectorTypes?: (google.maps.places.v1.EVConnectorType[]|null);
+                    }
+
+                    /** Represents a EVOptions. */
+                    class EVOptions implements IEVOptions {
+
+                        /**
+                         * Constructs a new EVOptions.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.maps.places.v1.SearchTextRequest.IEVOptions);
+
+                        /** EVOptions minimumChargingRateKw. */
+                        public minimumChargingRateKw: number;
+
+                        /** EVOptions connectorTypes. */
+                        public connectorTypes: google.maps.places.v1.EVConnectorType[];
+
+                        /**
+                         * Creates a new EVOptions instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns EVOptions instance
+                         */
+                        public static create(properties?: google.maps.places.v1.SearchTextRequest.IEVOptions): google.maps.places.v1.SearchTextRequest.EVOptions;
+
+                        /**
+                         * Encodes the specified EVOptions message. Does not implicitly {@link google.maps.places.v1.SearchTextRequest.EVOptions.verify|verify} messages.
+                         * @param message EVOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.maps.places.v1.SearchTextRequest.IEVOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified EVOptions message, length delimited. Does not implicitly {@link google.maps.places.v1.SearchTextRequest.EVOptions.verify|verify} messages.
+                         * @param message EVOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.maps.places.v1.SearchTextRequest.IEVOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a EVOptions message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns EVOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.SearchTextRequest.EVOptions;
+
+                        /**
+                         * Decodes a EVOptions message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns EVOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.SearchTextRequest.EVOptions;
+
+                        /**
+                         * Verifies a EVOptions message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a EVOptions message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns EVOptions
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.maps.places.v1.SearchTextRequest.EVOptions;
+
+                        /**
+                         * Creates a plain object from a EVOptions message. Also converts values to other types if specified.
+                         * @param message EVOptions
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.maps.places.v1.SearchTextRequest.EVOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this EVOptions to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for EVOptions
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a SearchTextResponse. */
@@ -7827,6 +5428,9 @@ export namespace google {
 
                     /** SearchTextResponse places */
                     places?: (google.maps.places.v1.IPlace[]|null);
+
+                    /** SearchTextResponse contextualContents */
+                    contextualContents?: (google.maps.places.v1.IContextualContent[]|null);
                 }
 
                 /** Represents a SearchTextResponse. */
@@ -7840,6 +5444,9 @@ export namespace google {
 
                     /** SearchTextResponse places. */
                     public places: google.maps.places.v1.IPlace[];
+
+                    /** SearchTextResponse contextualContents. */
+                    public contextualContents: google.maps.places.v1.IContextualContent[];
 
                     /**
                      * Creates a new SearchTextResponse instance using the specified properties.
@@ -8148,6 +5755,9 @@ export namespace google {
 
                     /** GetPlaceRequest regionCode */
                     regionCode?: (string|null);
+
+                    /** GetPlaceRequest sessionToken */
+                    sessionToken?: (string|null);
                 }
 
                 /** Represents a GetPlaceRequest. */
@@ -8167,6 +5777,9 @@ export namespace google {
 
                     /** GetPlaceRequest regionCode. */
                     public regionCode: string;
+
+                    /** GetPlaceRequest sessionToken. */
+                    public sessionToken: string;
 
                     /**
                      * Creates a new GetPlaceRequest instance using the specified properties.
@@ -8245,24 +5858,1132 @@ export namespace google {
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
+
+                /** Properties of an AutocompletePlacesRequest. */
+                interface IAutocompletePlacesRequest {
+
+                    /** AutocompletePlacesRequest input */
+                    input?: (string|null);
+
+                    /** AutocompletePlacesRequest locationBias */
+                    locationBias?: (google.maps.places.v1.AutocompletePlacesRequest.ILocationBias|null);
+
+                    /** AutocompletePlacesRequest locationRestriction */
+                    locationRestriction?: (google.maps.places.v1.AutocompletePlacesRequest.ILocationRestriction|null);
+
+                    /** AutocompletePlacesRequest includedPrimaryTypes */
+                    includedPrimaryTypes?: (string[]|null);
+
+                    /** AutocompletePlacesRequest includedRegionCodes */
+                    includedRegionCodes?: (string[]|null);
+
+                    /** AutocompletePlacesRequest languageCode */
+                    languageCode?: (string|null);
+
+                    /** AutocompletePlacesRequest regionCode */
+                    regionCode?: (string|null);
+
+                    /** AutocompletePlacesRequest origin */
+                    origin?: (google.type.ILatLng|null);
+
+                    /** AutocompletePlacesRequest inputOffset */
+                    inputOffset?: (number|null);
+
+                    /** AutocompletePlacesRequest includeQueryPredictions */
+                    includeQueryPredictions?: (boolean|null);
+
+                    /** AutocompletePlacesRequest sessionToken */
+                    sessionToken?: (string|null);
+                }
+
+                /** Represents an AutocompletePlacesRequest. */
+                class AutocompletePlacesRequest implements IAutocompletePlacesRequest {
+
+                    /**
+                     * Constructs a new AutocompletePlacesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.places.v1.IAutocompletePlacesRequest);
+
+                    /** AutocompletePlacesRequest input. */
+                    public input: string;
+
+                    /** AutocompletePlacesRequest locationBias. */
+                    public locationBias?: (google.maps.places.v1.AutocompletePlacesRequest.ILocationBias|null);
+
+                    /** AutocompletePlacesRequest locationRestriction. */
+                    public locationRestriction?: (google.maps.places.v1.AutocompletePlacesRequest.ILocationRestriction|null);
+
+                    /** AutocompletePlacesRequest includedPrimaryTypes. */
+                    public includedPrimaryTypes: string[];
+
+                    /** AutocompletePlacesRequest includedRegionCodes. */
+                    public includedRegionCodes: string[];
+
+                    /** AutocompletePlacesRequest languageCode. */
+                    public languageCode: string;
+
+                    /** AutocompletePlacesRequest regionCode. */
+                    public regionCode: string;
+
+                    /** AutocompletePlacesRequest origin. */
+                    public origin?: (google.type.ILatLng|null);
+
+                    /** AutocompletePlacesRequest inputOffset. */
+                    public inputOffset: number;
+
+                    /** AutocompletePlacesRequest includeQueryPredictions. */
+                    public includeQueryPredictions: boolean;
+
+                    /** AutocompletePlacesRequest sessionToken. */
+                    public sessionToken: string;
+
+                    /**
+                     * Creates a new AutocompletePlacesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AutocompletePlacesRequest instance
+                     */
+                    public static create(properties?: google.maps.places.v1.IAutocompletePlacesRequest): google.maps.places.v1.AutocompletePlacesRequest;
+
+                    /**
+                     * Encodes the specified AutocompletePlacesRequest message. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesRequest.verify|verify} messages.
+                     * @param message AutocompletePlacesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.places.v1.IAutocompletePlacesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AutocompletePlacesRequest message, length delimited. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesRequest.verify|verify} messages.
+                     * @param message AutocompletePlacesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.places.v1.IAutocompletePlacesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AutocompletePlacesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AutocompletePlacesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.AutocompletePlacesRequest;
+
+                    /**
+                     * Decodes an AutocompletePlacesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AutocompletePlacesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.AutocompletePlacesRequest;
+
+                    /**
+                     * Verifies an AutocompletePlacesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AutocompletePlacesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AutocompletePlacesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.places.v1.AutocompletePlacesRequest;
+
+                    /**
+                     * Creates a plain object from an AutocompletePlacesRequest message. Also converts values to other types if specified.
+                     * @param message AutocompletePlacesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.places.v1.AutocompletePlacesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AutocompletePlacesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AutocompletePlacesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AutocompletePlacesRequest {
+
+                    /** Properties of a LocationBias. */
+                    interface ILocationBias {
+
+                        /** LocationBias rectangle */
+                        rectangle?: (google.geo.type.IViewport|null);
+
+                        /** LocationBias circle */
+                        circle?: (google.maps.places.v1.ICircle|null);
+                    }
+
+                    /** Represents a LocationBias. */
+                    class LocationBias implements ILocationBias {
+
+                        /**
+                         * Constructs a new LocationBias.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.maps.places.v1.AutocompletePlacesRequest.ILocationBias);
+
+                        /** LocationBias rectangle. */
+                        public rectangle?: (google.geo.type.IViewport|null);
+
+                        /** LocationBias circle. */
+                        public circle?: (google.maps.places.v1.ICircle|null);
+
+                        /** LocationBias type. */
+                        public type?: ("rectangle"|"circle");
+
+                        /**
+                         * Creates a new LocationBias instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LocationBias instance
+                         */
+                        public static create(properties?: google.maps.places.v1.AutocompletePlacesRequest.ILocationBias): google.maps.places.v1.AutocompletePlacesRequest.LocationBias;
+
+                        /**
+                         * Encodes the specified LocationBias message. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesRequest.LocationBias.verify|verify} messages.
+                         * @param message LocationBias message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.maps.places.v1.AutocompletePlacesRequest.ILocationBias, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LocationBias message, length delimited. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesRequest.LocationBias.verify|verify} messages.
+                         * @param message LocationBias message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.maps.places.v1.AutocompletePlacesRequest.ILocationBias, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LocationBias message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LocationBias
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.AutocompletePlacesRequest.LocationBias;
+
+                        /**
+                         * Decodes a LocationBias message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LocationBias
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.AutocompletePlacesRequest.LocationBias;
+
+                        /**
+                         * Verifies a LocationBias message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LocationBias message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LocationBias
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.maps.places.v1.AutocompletePlacesRequest.LocationBias;
+
+                        /**
+                         * Creates a plain object from a LocationBias message. Also converts values to other types if specified.
+                         * @param message LocationBias
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.maps.places.v1.AutocompletePlacesRequest.LocationBias, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LocationBias to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for LocationBias
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a LocationRestriction. */
+                    interface ILocationRestriction {
+
+                        /** LocationRestriction rectangle */
+                        rectangle?: (google.geo.type.IViewport|null);
+
+                        /** LocationRestriction circle */
+                        circle?: (google.maps.places.v1.ICircle|null);
+                    }
+
+                    /** Represents a LocationRestriction. */
+                    class LocationRestriction implements ILocationRestriction {
+
+                        /**
+                         * Constructs a new LocationRestriction.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.maps.places.v1.AutocompletePlacesRequest.ILocationRestriction);
+
+                        /** LocationRestriction rectangle. */
+                        public rectangle?: (google.geo.type.IViewport|null);
+
+                        /** LocationRestriction circle. */
+                        public circle?: (google.maps.places.v1.ICircle|null);
+
+                        /** LocationRestriction type. */
+                        public type?: ("rectangle"|"circle");
+
+                        /**
+                         * Creates a new LocationRestriction instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LocationRestriction instance
+                         */
+                        public static create(properties?: google.maps.places.v1.AutocompletePlacesRequest.ILocationRestriction): google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction;
+
+                        /**
+                         * Encodes the specified LocationRestriction message. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction.verify|verify} messages.
+                         * @param message LocationRestriction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.maps.places.v1.AutocompletePlacesRequest.ILocationRestriction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LocationRestriction message, length delimited. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction.verify|verify} messages.
+                         * @param message LocationRestriction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.maps.places.v1.AutocompletePlacesRequest.ILocationRestriction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LocationRestriction message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LocationRestriction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction;
+
+                        /**
+                         * Decodes a LocationRestriction message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LocationRestriction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction;
+
+                        /**
+                         * Verifies a LocationRestriction message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LocationRestriction message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LocationRestriction
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction;
+
+                        /**
+                         * Creates a plain object from a LocationRestriction message. Also converts values to other types if specified.
+                         * @param message LocationRestriction
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LocationRestriction to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for LocationRestriction
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of an AutocompletePlacesResponse. */
+                interface IAutocompletePlacesResponse {
+
+                    /** AutocompletePlacesResponse suggestions */
+                    suggestions?: (google.maps.places.v1.AutocompletePlacesResponse.ISuggestion[]|null);
+                }
+
+                /** Represents an AutocompletePlacesResponse. */
+                class AutocompletePlacesResponse implements IAutocompletePlacesResponse {
+
+                    /**
+                     * Constructs a new AutocompletePlacesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.places.v1.IAutocompletePlacesResponse);
+
+                    /** AutocompletePlacesResponse suggestions. */
+                    public suggestions: google.maps.places.v1.AutocompletePlacesResponse.ISuggestion[];
+
+                    /**
+                     * Creates a new AutocompletePlacesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AutocompletePlacesResponse instance
+                     */
+                    public static create(properties?: google.maps.places.v1.IAutocompletePlacesResponse): google.maps.places.v1.AutocompletePlacesResponse;
+
+                    /**
+                     * Encodes the specified AutocompletePlacesResponse message. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.verify|verify} messages.
+                     * @param message AutocompletePlacesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.places.v1.IAutocompletePlacesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AutocompletePlacesResponse message, length delimited. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.verify|verify} messages.
+                     * @param message AutocompletePlacesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.places.v1.IAutocompletePlacesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AutocompletePlacesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AutocompletePlacesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.AutocompletePlacesResponse;
+
+                    /**
+                     * Decodes an AutocompletePlacesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AutocompletePlacesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.AutocompletePlacesResponse;
+
+                    /**
+                     * Verifies an AutocompletePlacesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AutocompletePlacesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AutocompletePlacesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.places.v1.AutocompletePlacesResponse;
+
+                    /**
+                     * Creates a plain object from an AutocompletePlacesResponse message. Also converts values to other types if specified.
+                     * @param message AutocompletePlacesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.places.v1.AutocompletePlacesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AutocompletePlacesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AutocompletePlacesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AutocompletePlacesResponse {
+
+                    /** Properties of a Suggestion. */
+                    interface ISuggestion {
+
+                        /** Suggestion placePrediction */
+                        placePrediction?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IPlacePrediction|null);
+
+                        /** Suggestion queryPrediction */
+                        queryPrediction?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IQueryPrediction|null);
+                    }
+
+                    /** Represents a Suggestion. */
+                    class Suggestion implements ISuggestion {
+
+                        /**
+                         * Constructs a new Suggestion.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.maps.places.v1.AutocompletePlacesResponse.ISuggestion);
+
+                        /** Suggestion placePrediction. */
+                        public placePrediction?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IPlacePrediction|null);
+
+                        /** Suggestion queryPrediction. */
+                        public queryPrediction?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IQueryPrediction|null);
+
+                        /** Suggestion kind. */
+                        public kind?: ("placePrediction"|"queryPrediction");
+
+                        /**
+                         * Creates a new Suggestion instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Suggestion instance
+                         */
+                        public static create(properties?: google.maps.places.v1.AutocompletePlacesResponse.ISuggestion): google.maps.places.v1.AutocompletePlacesResponse.Suggestion;
+
+                        /**
+                         * Encodes the specified Suggestion message. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.verify|verify} messages.
+                         * @param message Suggestion message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.maps.places.v1.AutocompletePlacesResponse.ISuggestion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Suggestion message, length delimited. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.verify|verify} messages.
+                         * @param message Suggestion message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.maps.places.v1.AutocompletePlacesResponse.ISuggestion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Suggestion message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Suggestion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.AutocompletePlacesResponse.Suggestion;
+
+                        /**
+                         * Decodes a Suggestion message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Suggestion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.AutocompletePlacesResponse.Suggestion;
+
+                        /**
+                         * Verifies a Suggestion message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Suggestion message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Suggestion
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.maps.places.v1.AutocompletePlacesResponse.Suggestion;
+
+                        /**
+                         * Creates a plain object from a Suggestion message. Also converts values to other types if specified.
+                         * @param message Suggestion
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.maps.places.v1.AutocompletePlacesResponse.Suggestion, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Suggestion to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Suggestion
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Suggestion {
+
+                        /** Properties of a StringRange. */
+                        interface IStringRange {
+
+                            /** StringRange startOffset */
+                            startOffset?: (number|null);
+
+                            /** StringRange endOffset */
+                            endOffset?: (number|null);
+                        }
+
+                        /** Represents a StringRange. */
+                        class StringRange implements IStringRange {
+
+                            /**
+                             * Constructs a new StringRange.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStringRange);
+
+                            /** StringRange startOffset. */
+                            public startOffset: number;
+
+                            /** StringRange endOffset. */
+                            public endOffset: number;
+
+                            /**
+                             * Creates a new StringRange instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns StringRange instance
+                             */
+                            public static create(properties?: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStringRange): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange;
+
+                            /**
+                             * Encodes the specified StringRange message. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange.verify|verify} messages.
+                             * @param message StringRange message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStringRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified StringRange message, length delimited. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange.verify|verify} messages.
+                             * @param message StringRange message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStringRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a StringRange message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns StringRange
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange;
+
+                            /**
+                             * Decodes a StringRange message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns StringRange
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange;
+
+                            /**
+                             * Verifies a StringRange message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a StringRange message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns StringRange
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange;
+
+                            /**
+                             * Creates a plain object from a StringRange message. Also converts values to other types if specified.
+                             * @param message StringRange
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this StringRange to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for StringRange
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a FormattableText. */
+                        interface IFormattableText {
+
+                            /** FormattableText text */
+                            text?: (string|null);
+
+                            /** FormattableText matches */
+                            matches?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStringRange[]|null);
+                        }
+
+                        /** Represents a FormattableText. */
+                        class FormattableText implements IFormattableText {
+
+                            /**
+                             * Constructs a new FormattableText.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText);
+
+                            /** FormattableText text. */
+                            public text: string;
+
+                            /** FormattableText matches. */
+                            public matches: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStringRange[];
+
+                            /**
+                             * Creates a new FormattableText instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns FormattableText instance
+                             */
+                            public static create(properties?: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText;
+
+                            /**
+                             * Encodes the specified FormattableText message. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.verify|verify} messages.
+                             * @param message FormattableText message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified FormattableText message, length delimited. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.verify|verify} messages.
+                             * @param message FormattableText message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a FormattableText message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns FormattableText
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText;
+
+                            /**
+                             * Decodes a FormattableText message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns FormattableText
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText;
+
+                            /**
+                             * Verifies a FormattableText message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a FormattableText message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns FormattableText
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText;
+
+                            /**
+                             * Creates a plain object from a FormattableText message. Also converts values to other types if specified.
+                             * @param message FormattableText
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this FormattableText to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for FormattableText
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a StructuredFormat. */
+                        interface IStructuredFormat {
+
+                            /** StructuredFormat mainText */
+                            mainText?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText|null);
+
+                            /** StructuredFormat secondaryText */
+                            secondaryText?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText|null);
+                        }
+
+                        /** Represents a StructuredFormat. */
+                        class StructuredFormat implements IStructuredFormat {
+
+                            /**
+                             * Constructs a new StructuredFormat.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStructuredFormat);
+
+                            /** StructuredFormat mainText. */
+                            public mainText?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText|null);
+
+                            /** StructuredFormat secondaryText. */
+                            public secondaryText?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText|null);
+
+                            /**
+                             * Creates a new StructuredFormat instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns StructuredFormat instance
+                             */
+                            public static create(properties?: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStructuredFormat): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat;
+
+                            /**
+                             * Encodes the specified StructuredFormat message. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat.verify|verify} messages.
+                             * @param message StructuredFormat message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStructuredFormat, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified StructuredFormat message, length delimited. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat.verify|verify} messages.
+                             * @param message StructuredFormat message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStructuredFormat, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a StructuredFormat message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns StructuredFormat
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat;
+
+                            /**
+                             * Decodes a StructuredFormat message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns StructuredFormat
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat;
+
+                            /**
+                             * Verifies a StructuredFormat message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a StructuredFormat message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns StructuredFormat
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat;
+
+                            /**
+                             * Creates a plain object from a StructuredFormat message. Also converts values to other types if specified.
+                             * @param message StructuredFormat
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this StructuredFormat to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for StructuredFormat
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a PlacePrediction. */
+                        interface IPlacePrediction {
+
+                            /** PlacePrediction place */
+                            place?: (string|null);
+
+                            /** PlacePrediction placeId */
+                            placeId?: (string|null);
+
+                            /** PlacePrediction text */
+                            text?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText|null);
+
+                            /** PlacePrediction structuredFormat */
+                            structuredFormat?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStructuredFormat|null);
+
+                            /** PlacePrediction types */
+                            types?: (string[]|null);
+
+                            /** PlacePrediction distanceMeters */
+                            distanceMeters?: (number|null);
+                        }
+
+                        /** Represents a PlacePrediction. */
+                        class PlacePrediction implements IPlacePrediction {
+
+                            /**
+                             * Constructs a new PlacePrediction.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IPlacePrediction);
+
+                            /** PlacePrediction place. */
+                            public place: string;
+
+                            /** PlacePrediction placeId. */
+                            public placeId: string;
+
+                            /** PlacePrediction text. */
+                            public text?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText|null);
+
+                            /** PlacePrediction structuredFormat. */
+                            public structuredFormat?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStructuredFormat|null);
+
+                            /** PlacePrediction types. */
+                            public types: string[];
+
+                            /** PlacePrediction distanceMeters. */
+                            public distanceMeters: number;
+
+                            /**
+                             * Creates a new PlacePrediction instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns PlacePrediction instance
+                             */
+                            public static create(properties?: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IPlacePrediction): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction;
+
+                            /**
+                             * Encodes the specified PlacePrediction message. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction.verify|verify} messages.
+                             * @param message PlacePrediction message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IPlacePrediction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified PlacePrediction message, length delimited. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction.verify|verify} messages.
+                             * @param message PlacePrediction message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IPlacePrediction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a PlacePrediction message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns PlacePrediction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction;
+
+                            /**
+                             * Decodes a PlacePrediction message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns PlacePrediction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction;
+
+                            /**
+                             * Verifies a PlacePrediction message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a PlacePrediction message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns PlacePrediction
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction;
+
+                            /**
+                             * Creates a plain object from a PlacePrediction message. Also converts values to other types if specified.
+                             * @param message PlacePrediction
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this PlacePrediction to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for PlacePrediction
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a QueryPrediction. */
+                        interface IQueryPrediction {
+
+                            /** QueryPrediction text */
+                            text?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText|null);
+
+                            /** QueryPrediction structuredFormat */
+                            structuredFormat?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStructuredFormat|null);
+                        }
+
+                        /** Represents a QueryPrediction. */
+                        class QueryPrediction implements IQueryPrediction {
+
+                            /**
+                             * Constructs a new QueryPrediction.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IQueryPrediction);
+
+                            /** QueryPrediction text. */
+                            public text?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText|null);
+
+                            /** QueryPrediction structuredFormat. */
+                            public structuredFormat?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStructuredFormat|null);
+
+                            /**
+                             * Creates a new QueryPrediction instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns QueryPrediction instance
+                             */
+                            public static create(properties?: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IQueryPrediction): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction;
+
+                            /**
+                             * Encodes the specified QueryPrediction message. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction.verify|verify} messages.
+                             * @param message QueryPrediction message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IQueryPrediction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified QueryPrediction message, length delimited. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction.verify|verify} messages.
+                             * @param message QueryPrediction message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IQueryPrediction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a QueryPrediction message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns QueryPrediction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction;
+
+                            /**
+                             * Decodes a QueryPrediction message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns QueryPrediction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction;
+
+                            /**
+                             * Verifies a QueryPrediction message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a QueryPrediction message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns QueryPrediction
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction;
+
+                            /**
+                             * Creates a plain object from a QueryPrediction message. Also converts values to other types if specified.
+                             * @param message QueryPrediction
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this QueryPrediction to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for QueryPrediction
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+                }
             }
         }
     }
 
     /** Namespace api. */
     namespace api {
-
-        /** FieldBehavior enum. */
-        enum FieldBehavior {
-            FIELD_BEHAVIOR_UNSPECIFIED = 0,
-            OPTIONAL = 1,
-            REQUIRED = 2,
-            OUTPUT_ONLY = 3,
-            INPUT_ONLY = 4,
-            IMMUTABLE = 5,
-            UNORDERED_LIST = 6,
-            NON_EMPTY_DEFAULT = 7
-        }
 
         /** Properties of a ResourceDescriptor. */
         interface IResourceDescriptor {
@@ -8514,6 +7235,19 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** FieldBehavior enum. */
+        enum FieldBehavior {
+            FIELD_BEHAVIOR_UNSPECIFIED = 0,
+            OPTIONAL = 1,
+            REQUIRED = 2,
+            OUTPUT_ONLY = 3,
+            INPUT_ONLY = 4,
+            IMMUTABLE = 5,
+            UNORDERED_LIST = 6,
+            NON_EMPTY_DEFAULT = 7,
+            IDENTIFIER = 8
         }
 
         /** Properties of a Http. */
@@ -9165,6 +7899,9 @@ export namespace google {
 
             /** Publishing librarySettings */
             librarySettings?: (google.api.IClientLibrarySettings[]|null);
+
+            /** Publishing protoReferenceDocumentationUri */
+            protoReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -9202,6 +7939,9 @@ export namespace google {
 
             /** Publishing librarySettings. */
             public librarySettings: google.api.IClientLibrarySettings[];
+
+            /** Publishing protoReferenceDocumentationUri. */
+            public protoReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -9783,6 +8523,21 @@ export namespace google {
 
             /** DotnetSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** DotnetSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
+
+            /** DotnetSettings renamedResources */
+            renamedResources?: ({ [k: string]: string }|null);
+
+            /** DotnetSettings ignoredResources */
+            ignoredResources?: (string[]|null);
+
+            /** DotnetSettings forcedNamespaceAliases */
+            forcedNamespaceAliases?: (string[]|null);
+
+            /** DotnetSettings handwrittenSignatures */
+            handwrittenSignatures?: (string[]|null);
         }
 
         /** Represents a DotnetSettings. */
@@ -9796,6 +8551,21 @@ export namespace google {
 
             /** DotnetSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** DotnetSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
+
+            /** DotnetSettings renamedResources. */
+            public renamedResources: { [k: string]: string };
+
+            /** DotnetSettings ignoredResources. */
+            public ignoredResources: string[];
+
+            /** DotnetSettings forcedNamespaceAliases. */
+            public forcedNamespaceAliases: string[];
+
+            /** DotnetSettings handwrittenSignatures. */
+            public handwrittenSignatures: string[];
 
             /**
              * Creates a new DotnetSettings instance using the specified properties.
@@ -10077,6 +8847,9 @@ export namespace google {
 
             /** MethodSettings longRunning */
             longRunning?: (google.api.MethodSettings.ILongRunning|null);
+
+            /** MethodSettings autoPopulatedFields */
+            autoPopulatedFields?: (string[]|null);
         }
 
         /** Represents a MethodSettings. */
@@ -10093,6 +8866,9 @@ export namespace google {
 
             /** MethodSettings longRunning. */
             public longRunning?: (google.api.MethodSettings.ILongRunning|null);
+
+            /** MethodSettings autoPopulatedFields. */
+            public autoPopulatedFields: string[];
 
             /**
              * Creates a new MethodSettings instance using the specified properties.
@@ -10296,7 +9072,10 @@ export namespace google {
             CLOUD = 1,
             ADS = 2,
             PHOTOS = 3,
-            STREET_VIEW = 4
+            STREET_VIEW = 4,
+            SHOPPING = 5,
+            GEO = 6,
+            GENERATIVE_AI = 7
         }
 
         /** ClientLibraryDestination enum. */
@@ -10316,6 +9095,4318 @@ export namespace google {
             BETA = 3,
             GA = 4,
             DEPRECATED = 5
+        }
+    }
+
+    /** Namespace protobuf. */
+    namespace protobuf {
+
+        /** Properties of a FileDescriptorSet. */
+        interface IFileDescriptorSet {
+
+            /** FileDescriptorSet file */
+            file?: (google.protobuf.IFileDescriptorProto[]|null);
+        }
+
+        /** Represents a FileDescriptorSet. */
+        class FileDescriptorSet implements IFileDescriptorSet {
+
+            /**
+             * Constructs a new FileDescriptorSet.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFileDescriptorSet);
+
+            /** FileDescriptorSet file. */
+            public file: google.protobuf.IFileDescriptorProto[];
+
+            /**
+             * Creates a new FileDescriptorSet instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FileDescriptorSet instance
+             */
+            public static create(properties?: google.protobuf.IFileDescriptorSet): google.protobuf.FileDescriptorSet;
+
+            /**
+             * Encodes the specified FileDescriptorSet message. Does not implicitly {@link google.protobuf.FileDescriptorSet.verify|verify} messages.
+             * @param message FileDescriptorSet message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFileDescriptorSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FileDescriptorSet message, length delimited. Does not implicitly {@link google.protobuf.FileDescriptorSet.verify|verify} messages.
+             * @param message FileDescriptorSet message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFileDescriptorSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FileDescriptorSet message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FileDescriptorSet
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FileDescriptorSet;
+
+            /**
+             * Decodes a FileDescriptorSet message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FileDescriptorSet
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FileDescriptorSet;
+
+            /**
+             * Verifies a FileDescriptorSet message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FileDescriptorSet message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FileDescriptorSet
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FileDescriptorSet;
+
+            /**
+             * Creates a plain object from a FileDescriptorSet message. Also converts values to other types if specified.
+             * @param message FileDescriptorSet
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FileDescriptorSet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FileDescriptorSet to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FileDescriptorSet
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Edition enum. */
+        enum Edition {
+            EDITION_UNKNOWN = 0,
+            EDITION_PROTO2 = 998,
+            EDITION_PROTO3 = 999,
+            EDITION_2023 = 1000,
+            EDITION_2024 = 1001,
+            EDITION_1_TEST_ONLY = 1,
+            EDITION_2_TEST_ONLY = 2,
+            EDITION_99997_TEST_ONLY = 99997,
+            EDITION_99998_TEST_ONLY = 99998,
+            EDITION_99999_TEST_ONLY = 99999,
+            EDITION_MAX = 2147483647
+        }
+
+        /** Properties of a FileDescriptorProto. */
+        interface IFileDescriptorProto {
+
+            /** FileDescriptorProto name */
+            name?: (string|null);
+
+            /** FileDescriptorProto package */
+            "package"?: (string|null);
+
+            /** FileDescriptorProto dependency */
+            dependency?: (string[]|null);
+
+            /** FileDescriptorProto publicDependency */
+            publicDependency?: (number[]|null);
+
+            /** FileDescriptorProto weakDependency */
+            weakDependency?: (number[]|null);
+
+            /** FileDescriptorProto messageType */
+            messageType?: (google.protobuf.IDescriptorProto[]|null);
+
+            /** FileDescriptorProto enumType */
+            enumType?: (google.protobuf.IEnumDescriptorProto[]|null);
+
+            /** FileDescriptorProto service */
+            service?: (google.protobuf.IServiceDescriptorProto[]|null);
+
+            /** FileDescriptorProto extension */
+            extension?: (google.protobuf.IFieldDescriptorProto[]|null);
+
+            /** FileDescriptorProto options */
+            options?: (google.protobuf.IFileOptions|null);
+
+            /** FileDescriptorProto sourceCodeInfo */
+            sourceCodeInfo?: (google.protobuf.ISourceCodeInfo|null);
+
+            /** FileDescriptorProto syntax */
+            syntax?: (string|null);
+
+            /** FileDescriptorProto edition */
+            edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+        }
+
+        /** Represents a FileDescriptorProto. */
+        class FileDescriptorProto implements IFileDescriptorProto {
+
+            /**
+             * Constructs a new FileDescriptorProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFileDescriptorProto);
+
+            /** FileDescriptorProto name. */
+            public name: string;
+
+            /** FileDescriptorProto package. */
+            public package: string;
+
+            /** FileDescriptorProto dependency. */
+            public dependency: string[];
+
+            /** FileDescriptorProto publicDependency. */
+            public publicDependency: number[];
+
+            /** FileDescriptorProto weakDependency. */
+            public weakDependency: number[];
+
+            /** FileDescriptorProto messageType. */
+            public messageType: google.protobuf.IDescriptorProto[];
+
+            /** FileDescriptorProto enumType. */
+            public enumType: google.protobuf.IEnumDescriptorProto[];
+
+            /** FileDescriptorProto service. */
+            public service: google.protobuf.IServiceDescriptorProto[];
+
+            /** FileDescriptorProto extension. */
+            public extension: google.protobuf.IFieldDescriptorProto[];
+
+            /** FileDescriptorProto options. */
+            public options?: (google.protobuf.IFileOptions|null);
+
+            /** FileDescriptorProto sourceCodeInfo. */
+            public sourceCodeInfo?: (google.protobuf.ISourceCodeInfo|null);
+
+            /** FileDescriptorProto syntax. */
+            public syntax: string;
+
+            /** FileDescriptorProto edition. */
+            public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+            /**
+             * Creates a new FileDescriptorProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FileDescriptorProto instance
+             */
+            public static create(properties?: google.protobuf.IFileDescriptorProto): google.protobuf.FileDescriptorProto;
+
+            /**
+             * Encodes the specified FileDescriptorProto message. Does not implicitly {@link google.protobuf.FileDescriptorProto.verify|verify} messages.
+             * @param message FileDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFileDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FileDescriptorProto message, length delimited. Does not implicitly {@link google.protobuf.FileDescriptorProto.verify|verify} messages.
+             * @param message FileDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFileDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FileDescriptorProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FileDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FileDescriptorProto;
+
+            /**
+             * Decodes a FileDescriptorProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FileDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FileDescriptorProto;
+
+            /**
+             * Verifies a FileDescriptorProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FileDescriptorProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FileDescriptorProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FileDescriptorProto;
+
+            /**
+             * Creates a plain object from a FileDescriptorProto message. Also converts values to other types if specified.
+             * @param message FileDescriptorProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FileDescriptorProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FileDescriptorProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FileDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a DescriptorProto. */
+        interface IDescriptorProto {
+
+            /** DescriptorProto name */
+            name?: (string|null);
+
+            /** DescriptorProto field */
+            field?: (google.protobuf.IFieldDescriptorProto[]|null);
+
+            /** DescriptorProto extension */
+            extension?: (google.protobuf.IFieldDescriptorProto[]|null);
+
+            /** DescriptorProto nestedType */
+            nestedType?: (google.protobuf.IDescriptorProto[]|null);
+
+            /** DescriptorProto enumType */
+            enumType?: (google.protobuf.IEnumDescriptorProto[]|null);
+
+            /** DescriptorProto extensionRange */
+            extensionRange?: (google.protobuf.DescriptorProto.IExtensionRange[]|null);
+
+            /** DescriptorProto oneofDecl */
+            oneofDecl?: (google.protobuf.IOneofDescriptorProto[]|null);
+
+            /** DescriptorProto options */
+            options?: (google.protobuf.IMessageOptions|null);
+
+            /** DescriptorProto reservedRange */
+            reservedRange?: (google.protobuf.DescriptorProto.IReservedRange[]|null);
+
+            /** DescriptorProto reservedName */
+            reservedName?: (string[]|null);
+        }
+
+        /** Represents a DescriptorProto. */
+        class DescriptorProto implements IDescriptorProto {
+
+            /**
+             * Constructs a new DescriptorProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IDescriptorProto);
+
+            /** DescriptorProto name. */
+            public name: string;
+
+            /** DescriptorProto field. */
+            public field: google.protobuf.IFieldDescriptorProto[];
+
+            /** DescriptorProto extension. */
+            public extension: google.protobuf.IFieldDescriptorProto[];
+
+            /** DescriptorProto nestedType. */
+            public nestedType: google.protobuf.IDescriptorProto[];
+
+            /** DescriptorProto enumType. */
+            public enumType: google.protobuf.IEnumDescriptorProto[];
+
+            /** DescriptorProto extensionRange. */
+            public extensionRange: google.protobuf.DescriptorProto.IExtensionRange[];
+
+            /** DescriptorProto oneofDecl. */
+            public oneofDecl: google.protobuf.IOneofDescriptorProto[];
+
+            /** DescriptorProto options. */
+            public options?: (google.protobuf.IMessageOptions|null);
+
+            /** DescriptorProto reservedRange. */
+            public reservedRange: google.protobuf.DescriptorProto.IReservedRange[];
+
+            /** DescriptorProto reservedName. */
+            public reservedName: string[];
+
+            /**
+             * Creates a new DescriptorProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns DescriptorProto instance
+             */
+            public static create(properties?: google.protobuf.IDescriptorProto): google.protobuf.DescriptorProto;
+
+            /**
+             * Encodes the specified DescriptorProto message. Does not implicitly {@link google.protobuf.DescriptorProto.verify|verify} messages.
+             * @param message DescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified DescriptorProto message, length delimited. Does not implicitly {@link google.protobuf.DescriptorProto.verify|verify} messages.
+             * @param message DescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a DescriptorProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns DescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.DescriptorProto;
+
+            /**
+             * Decodes a DescriptorProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns DescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.DescriptorProto;
+
+            /**
+             * Verifies a DescriptorProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a DescriptorProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns DescriptorProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.DescriptorProto;
+
+            /**
+             * Creates a plain object from a DescriptorProto message. Also converts values to other types if specified.
+             * @param message DescriptorProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.DescriptorProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this DescriptorProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for DescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace DescriptorProto {
+
+            /** Properties of an ExtensionRange. */
+            interface IExtensionRange {
+
+                /** ExtensionRange start */
+                start?: (number|null);
+
+                /** ExtensionRange end */
+                end?: (number|null);
+
+                /** ExtensionRange options */
+                options?: (google.protobuf.IExtensionRangeOptions|null);
+            }
+
+            /** Represents an ExtensionRange. */
+            class ExtensionRange implements IExtensionRange {
+
+                /**
+                 * Constructs a new ExtensionRange.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.DescriptorProto.IExtensionRange);
+
+                /** ExtensionRange start. */
+                public start: number;
+
+                /** ExtensionRange end. */
+                public end: number;
+
+                /** ExtensionRange options. */
+                public options?: (google.protobuf.IExtensionRangeOptions|null);
+
+                /**
+                 * Creates a new ExtensionRange instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ExtensionRange instance
+                 */
+                public static create(properties?: google.protobuf.DescriptorProto.IExtensionRange): google.protobuf.DescriptorProto.ExtensionRange;
+
+                /**
+                 * Encodes the specified ExtensionRange message. Does not implicitly {@link google.protobuf.DescriptorProto.ExtensionRange.verify|verify} messages.
+                 * @param message ExtensionRange message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.DescriptorProto.IExtensionRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ExtensionRange message, length delimited. Does not implicitly {@link google.protobuf.DescriptorProto.ExtensionRange.verify|verify} messages.
+                 * @param message ExtensionRange message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.DescriptorProto.IExtensionRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ExtensionRange message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ExtensionRange
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.DescriptorProto.ExtensionRange;
+
+                /**
+                 * Decodes an ExtensionRange message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ExtensionRange
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.DescriptorProto.ExtensionRange;
+
+                /**
+                 * Verifies an ExtensionRange message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ExtensionRange message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ExtensionRange
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.DescriptorProto.ExtensionRange;
+
+                /**
+                 * Creates a plain object from an ExtensionRange message. Also converts values to other types if specified.
+                 * @param message ExtensionRange
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.DescriptorProto.ExtensionRange, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ExtensionRange to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ExtensionRange
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ReservedRange. */
+            interface IReservedRange {
+
+                /** ReservedRange start */
+                start?: (number|null);
+
+                /** ReservedRange end */
+                end?: (number|null);
+            }
+
+            /** Represents a ReservedRange. */
+            class ReservedRange implements IReservedRange {
+
+                /**
+                 * Constructs a new ReservedRange.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.DescriptorProto.IReservedRange);
+
+                /** ReservedRange start. */
+                public start: number;
+
+                /** ReservedRange end. */
+                public end: number;
+
+                /**
+                 * Creates a new ReservedRange instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ReservedRange instance
+                 */
+                public static create(properties?: google.protobuf.DescriptorProto.IReservedRange): google.protobuf.DescriptorProto.ReservedRange;
+
+                /**
+                 * Encodes the specified ReservedRange message. Does not implicitly {@link google.protobuf.DescriptorProto.ReservedRange.verify|verify} messages.
+                 * @param message ReservedRange message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.DescriptorProto.IReservedRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ReservedRange message, length delimited. Does not implicitly {@link google.protobuf.DescriptorProto.ReservedRange.verify|verify} messages.
+                 * @param message ReservedRange message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.DescriptorProto.IReservedRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ReservedRange message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ReservedRange
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.DescriptorProto.ReservedRange;
+
+                /**
+                 * Decodes a ReservedRange message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ReservedRange
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.DescriptorProto.ReservedRange;
+
+                /**
+                 * Verifies a ReservedRange message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ReservedRange message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ReservedRange
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.DescriptorProto.ReservedRange;
+
+                /**
+                 * Creates a plain object from a ReservedRange message. Also converts values to other types if specified.
+                 * @param message ReservedRange
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.DescriptorProto.ReservedRange, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ReservedRange to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ReservedRange
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+        }
+
+        /** Properties of an ExtensionRangeOptions. */
+        interface IExtensionRangeOptions {
+
+            /** ExtensionRangeOptions uninterpretedOption */
+            uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** ExtensionRangeOptions declaration */
+            declaration?: (google.protobuf.ExtensionRangeOptions.IDeclaration[]|null);
+
+            /** ExtensionRangeOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
+            /** ExtensionRangeOptions verification */
+            verification?: (google.protobuf.ExtensionRangeOptions.VerificationState|keyof typeof google.protobuf.ExtensionRangeOptions.VerificationState|null);
+        }
+
+        /** Represents an ExtensionRangeOptions. */
+        class ExtensionRangeOptions implements IExtensionRangeOptions {
+
+            /**
+             * Constructs a new ExtensionRangeOptions.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IExtensionRangeOptions);
+
+            /** ExtensionRangeOptions uninterpretedOption. */
+            public uninterpretedOption: google.protobuf.IUninterpretedOption[];
+
+            /** ExtensionRangeOptions declaration. */
+            public declaration: google.protobuf.ExtensionRangeOptions.IDeclaration[];
+
+            /** ExtensionRangeOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
+
+            /** ExtensionRangeOptions verification. */
+            public verification: (google.protobuf.ExtensionRangeOptions.VerificationState|keyof typeof google.protobuf.ExtensionRangeOptions.VerificationState);
+
+            /**
+             * Creates a new ExtensionRangeOptions instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ExtensionRangeOptions instance
+             */
+            public static create(properties?: google.protobuf.IExtensionRangeOptions): google.protobuf.ExtensionRangeOptions;
+
+            /**
+             * Encodes the specified ExtensionRangeOptions message. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.verify|verify} messages.
+             * @param message ExtensionRangeOptions message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IExtensionRangeOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ExtensionRangeOptions message, length delimited. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.verify|verify} messages.
+             * @param message ExtensionRangeOptions message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IExtensionRangeOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an ExtensionRangeOptions message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ExtensionRangeOptions
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.ExtensionRangeOptions;
+
+            /**
+             * Decodes an ExtensionRangeOptions message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ExtensionRangeOptions
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.ExtensionRangeOptions;
+
+            /**
+             * Verifies an ExtensionRangeOptions message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an ExtensionRangeOptions message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ExtensionRangeOptions
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.ExtensionRangeOptions;
+
+            /**
+             * Creates a plain object from an ExtensionRangeOptions message. Also converts values to other types if specified.
+             * @param message ExtensionRangeOptions
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.ExtensionRangeOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ExtensionRangeOptions to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ExtensionRangeOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace ExtensionRangeOptions {
+
+            /** Properties of a Declaration. */
+            interface IDeclaration {
+
+                /** Declaration number */
+                number?: (number|null);
+
+                /** Declaration fullName */
+                fullName?: (string|null);
+
+                /** Declaration type */
+                type?: (string|null);
+
+                /** Declaration reserved */
+                reserved?: (boolean|null);
+
+                /** Declaration repeated */
+                repeated?: (boolean|null);
+            }
+
+            /** Represents a Declaration. */
+            class Declaration implements IDeclaration {
+
+                /**
+                 * Constructs a new Declaration.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.ExtensionRangeOptions.IDeclaration);
+
+                /** Declaration number. */
+                public number: number;
+
+                /** Declaration fullName. */
+                public fullName: string;
+
+                /** Declaration type. */
+                public type: string;
+
+                /** Declaration reserved. */
+                public reserved: boolean;
+
+                /** Declaration repeated. */
+                public repeated: boolean;
+
+                /**
+                 * Creates a new Declaration instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Declaration instance
+                 */
+                public static create(properties?: google.protobuf.ExtensionRangeOptions.IDeclaration): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Encodes the specified Declaration message. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
+                 * @param message Declaration message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.ExtensionRangeOptions.IDeclaration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Declaration message, length delimited. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
+                 * @param message Declaration message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.ExtensionRangeOptions.IDeclaration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Declaration message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Declaration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Decodes a Declaration message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Declaration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Verifies a Declaration message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Declaration message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Declaration
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Creates a plain object from a Declaration message. Also converts values to other types if specified.
+                 * @param message Declaration
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.ExtensionRangeOptions.Declaration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Declaration to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Declaration
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** VerificationState enum. */
+            enum VerificationState {
+                DECLARATION = 0,
+                UNVERIFIED = 1
+            }
+        }
+
+        /** Properties of a FieldDescriptorProto. */
+        interface IFieldDescriptorProto {
+
+            /** FieldDescriptorProto name */
+            name?: (string|null);
+
+            /** FieldDescriptorProto number */
+            number?: (number|null);
+
+            /** FieldDescriptorProto label */
+            label?: (google.protobuf.FieldDescriptorProto.Label|keyof typeof google.protobuf.FieldDescriptorProto.Label|null);
+
+            /** FieldDescriptorProto type */
+            type?: (google.protobuf.FieldDescriptorProto.Type|keyof typeof google.protobuf.FieldDescriptorProto.Type|null);
+
+            /** FieldDescriptorProto typeName */
+            typeName?: (string|null);
+
+            /** FieldDescriptorProto extendee */
+            extendee?: (string|null);
+
+            /** FieldDescriptorProto defaultValue */
+            defaultValue?: (string|null);
+
+            /** FieldDescriptorProto oneofIndex */
+            oneofIndex?: (number|null);
+
+            /** FieldDescriptorProto jsonName */
+            jsonName?: (string|null);
+
+            /** FieldDescriptorProto options */
+            options?: (google.protobuf.IFieldOptions|null);
+
+            /** FieldDescriptorProto proto3Optional */
+            proto3Optional?: (boolean|null);
+        }
+
+        /** Represents a FieldDescriptorProto. */
+        class FieldDescriptorProto implements IFieldDescriptorProto {
+
+            /**
+             * Constructs a new FieldDescriptorProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFieldDescriptorProto);
+
+            /** FieldDescriptorProto name. */
+            public name: string;
+
+            /** FieldDescriptorProto number. */
+            public number: number;
+
+            /** FieldDescriptorProto label. */
+            public label: (google.protobuf.FieldDescriptorProto.Label|keyof typeof google.protobuf.FieldDescriptorProto.Label);
+
+            /** FieldDescriptorProto type. */
+            public type: (google.protobuf.FieldDescriptorProto.Type|keyof typeof google.protobuf.FieldDescriptorProto.Type);
+
+            /** FieldDescriptorProto typeName. */
+            public typeName: string;
+
+            /** FieldDescriptorProto extendee. */
+            public extendee: string;
+
+            /** FieldDescriptorProto defaultValue. */
+            public defaultValue: string;
+
+            /** FieldDescriptorProto oneofIndex. */
+            public oneofIndex: number;
+
+            /** FieldDescriptorProto jsonName. */
+            public jsonName: string;
+
+            /** FieldDescriptorProto options. */
+            public options?: (google.protobuf.IFieldOptions|null);
+
+            /** FieldDescriptorProto proto3Optional. */
+            public proto3Optional: boolean;
+
+            /**
+             * Creates a new FieldDescriptorProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldDescriptorProto instance
+             */
+            public static create(properties?: google.protobuf.IFieldDescriptorProto): google.protobuf.FieldDescriptorProto;
+
+            /**
+             * Encodes the specified FieldDescriptorProto message. Does not implicitly {@link google.protobuf.FieldDescriptorProto.verify|verify} messages.
+             * @param message FieldDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFieldDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldDescriptorProto message, length delimited. Does not implicitly {@link google.protobuf.FieldDescriptorProto.verify|verify} messages.
+             * @param message FieldDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFieldDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldDescriptorProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldDescriptorProto;
+
+            /**
+             * Decodes a FieldDescriptorProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldDescriptorProto;
+
+            /**
+             * Verifies a FieldDescriptorProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldDescriptorProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldDescriptorProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldDescriptorProto;
+
+            /**
+             * Creates a plain object from a FieldDescriptorProto message. Also converts values to other types if specified.
+             * @param message FieldDescriptorProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FieldDescriptorProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldDescriptorProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FieldDescriptorProto {
+
+            /** Type enum. */
+            enum Type {
+                TYPE_DOUBLE = 1,
+                TYPE_FLOAT = 2,
+                TYPE_INT64 = 3,
+                TYPE_UINT64 = 4,
+                TYPE_INT32 = 5,
+                TYPE_FIXED64 = 6,
+                TYPE_FIXED32 = 7,
+                TYPE_BOOL = 8,
+                TYPE_STRING = 9,
+                TYPE_GROUP = 10,
+                TYPE_MESSAGE = 11,
+                TYPE_BYTES = 12,
+                TYPE_UINT32 = 13,
+                TYPE_ENUM = 14,
+                TYPE_SFIXED32 = 15,
+                TYPE_SFIXED64 = 16,
+                TYPE_SINT32 = 17,
+                TYPE_SINT64 = 18
+            }
+
+            /** Label enum. */
+            enum Label {
+                LABEL_OPTIONAL = 1,
+                LABEL_REPEATED = 3,
+                LABEL_REQUIRED = 2
+            }
+        }
+
+        /** Properties of an OneofDescriptorProto. */
+        interface IOneofDescriptorProto {
+
+            /** OneofDescriptorProto name */
+            name?: (string|null);
+
+            /** OneofDescriptorProto options */
+            options?: (google.protobuf.IOneofOptions|null);
+        }
+
+        /** Represents an OneofDescriptorProto. */
+        class OneofDescriptorProto implements IOneofDescriptorProto {
+
+            /**
+             * Constructs a new OneofDescriptorProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IOneofDescriptorProto);
+
+            /** OneofDescriptorProto name. */
+            public name: string;
+
+            /** OneofDescriptorProto options. */
+            public options?: (google.protobuf.IOneofOptions|null);
+
+            /**
+             * Creates a new OneofDescriptorProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns OneofDescriptorProto instance
+             */
+            public static create(properties?: google.protobuf.IOneofDescriptorProto): google.protobuf.OneofDescriptorProto;
+
+            /**
+             * Encodes the specified OneofDescriptorProto message. Does not implicitly {@link google.protobuf.OneofDescriptorProto.verify|verify} messages.
+             * @param message OneofDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IOneofDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified OneofDescriptorProto message, length delimited. Does not implicitly {@link google.protobuf.OneofDescriptorProto.verify|verify} messages.
+             * @param message OneofDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IOneofDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an OneofDescriptorProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns OneofDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.OneofDescriptorProto;
+
+            /**
+             * Decodes an OneofDescriptorProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns OneofDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.OneofDescriptorProto;
+
+            /**
+             * Verifies an OneofDescriptorProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an OneofDescriptorProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns OneofDescriptorProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.OneofDescriptorProto;
+
+            /**
+             * Creates a plain object from an OneofDescriptorProto message. Also converts values to other types if specified.
+             * @param message OneofDescriptorProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.OneofDescriptorProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this OneofDescriptorProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for OneofDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an EnumDescriptorProto. */
+        interface IEnumDescriptorProto {
+
+            /** EnumDescriptorProto name */
+            name?: (string|null);
+
+            /** EnumDescriptorProto value */
+            value?: (google.protobuf.IEnumValueDescriptorProto[]|null);
+
+            /** EnumDescriptorProto options */
+            options?: (google.protobuf.IEnumOptions|null);
+
+            /** EnumDescriptorProto reservedRange */
+            reservedRange?: (google.protobuf.EnumDescriptorProto.IEnumReservedRange[]|null);
+
+            /** EnumDescriptorProto reservedName */
+            reservedName?: (string[]|null);
+        }
+
+        /** Represents an EnumDescriptorProto. */
+        class EnumDescriptorProto implements IEnumDescriptorProto {
+
+            /**
+             * Constructs a new EnumDescriptorProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IEnumDescriptorProto);
+
+            /** EnumDescriptorProto name. */
+            public name: string;
+
+            /** EnumDescriptorProto value. */
+            public value: google.protobuf.IEnumValueDescriptorProto[];
+
+            /** EnumDescriptorProto options. */
+            public options?: (google.protobuf.IEnumOptions|null);
+
+            /** EnumDescriptorProto reservedRange. */
+            public reservedRange: google.protobuf.EnumDescriptorProto.IEnumReservedRange[];
+
+            /** EnumDescriptorProto reservedName. */
+            public reservedName: string[];
+
+            /**
+             * Creates a new EnumDescriptorProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns EnumDescriptorProto instance
+             */
+            public static create(properties?: google.protobuf.IEnumDescriptorProto): google.protobuf.EnumDescriptorProto;
+
+            /**
+             * Encodes the specified EnumDescriptorProto message. Does not implicitly {@link google.protobuf.EnumDescriptorProto.verify|verify} messages.
+             * @param message EnumDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IEnumDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified EnumDescriptorProto message, length delimited. Does not implicitly {@link google.protobuf.EnumDescriptorProto.verify|verify} messages.
+             * @param message EnumDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IEnumDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an EnumDescriptorProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns EnumDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.EnumDescriptorProto;
+
+            /**
+             * Decodes an EnumDescriptorProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns EnumDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.EnumDescriptorProto;
+
+            /**
+             * Verifies an EnumDescriptorProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an EnumDescriptorProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns EnumDescriptorProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.EnumDescriptorProto;
+
+            /**
+             * Creates a plain object from an EnumDescriptorProto message. Also converts values to other types if specified.
+             * @param message EnumDescriptorProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.EnumDescriptorProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this EnumDescriptorProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for EnumDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace EnumDescriptorProto {
+
+            /** Properties of an EnumReservedRange. */
+            interface IEnumReservedRange {
+
+                /** EnumReservedRange start */
+                start?: (number|null);
+
+                /** EnumReservedRange end */
+                end?: (number|null);
+            }
+
+            /** Represents an EnumReservedRange. */
+            class EnumReservedRange implements IEnumReservedRange {
+
+                /**
+                 * Constructs a new EnumReservedRange.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.EnumDescriptorProto.IEnumReservedRange);
+
+                /** EnumReservedRange start. */
+                public start: number;
+
+                /** EnumReservedRange end. */
+                public end: number;
+
+                /**
+                 * Creates a new EnumReservedRange instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns EnumReservedRange instance
+                 */
+                public static create(properties?: google.protobuf.EnumDescriptorProto.IEnumReservedRange): google.protobuf.EnumDescriptorProto.EnumReservedRange;
+
+                /**
+                 * Encodes the specified EnumReservedRange message. Does not implicitly {@link google.protobuf.EnumDescriptorProto.EnumReservedRange.verify|verify} messages.
+                 * @param message EnumReservedRange message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.EnumDescriptorProto.IEnumReservedRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified EnumReservedRange message, length delimited. Does not implicitly {@link google.protobuf.EnumDescriptorProto.EnumReservedRange.verify|verify} messages.
+                 * @param message EnumReservedRange message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.EnumDescriptorProto.IEnumReservedRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an EnumReservedRange message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns EnumReservedRange
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.EnumDescriptorProto.EnumReservedRange;
+
+                /**
+                 * Decodes an EnumReservedRange message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns EnumReservedRange
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.EnumDescriptorProto.EnumReservedRange;
+
+                /**
+                 * Verifies an EnumReservedRange message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an EnumReservedRange message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns EnumReservedRange
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.EnumDescriptorProto.EnumReservedRange;
+
+                /**
+                 * Creates a plain object from an EnumReservedRange message. Also converts values to other types if specified.
+                 * @param message EnumReservedRange
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.EnumDescriptorProto.EnumReservedRange, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this EnumReservedRange to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for EnumReservedRange
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+        }
+
+        /** Properties of an EnumValueDescriptorProto. */
+        interface IEnumValueDescriptorProto {
+
+            /** EnumValueDescriptorProto name */
+            name?: (string|null);
+
+            /** EnumValueDescriptorProto number */
+            number?: (number|null);
+
+            /** EnumValueDescriptorProto options */
+            options?: (google.protobuf.IEnumValueOptions|null);
+        }
+
+        /** Represents an EnumValueDescriptorProto. */
+        class EnumValueDescriptorProto implements IEnumValueDescriptorProto {
+
+            /**
+             * Constructs a new EnumValueDescriptorProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IEnumValueDescriptorProto);
+
+            /** EnumValueDescriptorProto name. */
+            public name: string;
+
+            /** EnumValueDescriptorProto number. */
+            public number: number;
+
+            /** EnumValueDescriptorProto options. */
+            public options?: (google.protobuf.IEnumValueOptions|null);
+
+            /**
+             * Creates a new EnumValueDescriptorProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns EnumValueDescriptorProto instance
+             */
+            public static create(properties?: google.protobuf.IEnumValueDescriptorProto): google.protobuf.EnumValueDescriptorProto;
+
+            /**
+             * Encodes the specified EnumValueDescriptorProto message. Does not implicitly {@link google.protobuf.EnumValueDescriptorProto.verify|verify} messages.
+             * @param message EnumValueDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IEnumValueDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified EnumValueDescriptorProto message, length delimited. Does not implicitly {@link google.protobuf.EnumValueDescriptorProto.verify|verify} messages.
+             * @param message EnumValueDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IEnumValueDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an EnumValueDescriptorProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns EnumValueDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.EnumValueDescriptorProto;
+
+            /**
+             * Decodes an EnumValueDescriptorProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns EnumValueDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.EnumValueDescriptorProto;
+
+            /**
+             * Verifies an EnumValueDescriptorProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an EnumValueDescriptorProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns EnumValueDescriptorProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.EnumValueDescriptorProto;
+
+            /**
+             * Creates a plain object from an EnumValueDescriptorProto message. Also converts values to other types if specified.
+             * @param message EnumValueDescriptorProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.EnumValueDescriptorProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this EnumValueDescriptorProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for EnumValueDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a ServiceDescriptorProto. */
+        interface IServiceDescriptorProto {
+
+            /** ServiceDescriptorProto name */
+            name?: (string|null);
+
+            /** ServiceDescriptorProto method */
+            method?: (google.protobuf.IMethodDescriptorProto[]|null);
+
+            /** ServiceDescriptorProto options */
+            options?: (google.protobuf.IServiceOptions|null);
+        }
+
+        /** Represents a ServiceDescriptorProto. */
+        class ServiceDescriptorProto implements IServiceDescriptorProto {
+
+            /**
+             * Constructs a new ServiceDescriptorProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IServiceDescriptorProto);
+
+            /** ServiceDescriptorProto name. */
+            public name: string;
+
+            /** ServiceDescriptorProto method. */
+            public method: google.protobuf.IMethodDescriptorProto[];
+
+            /** ServiceDescriptorProto options. */
+            public options?: (google.protobuf.IServiceOptions|null);
+
+            /**
+             * Creates a new ServiceDescriptorProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ServiceDescriptorProto instance
+             */
+            public static create(properties?: google.protobuf.IServiceDescriptorProto): google.protobuf.ServiceDescriptorProto;
+
+            /**
+             * Encodes the specified ServiceDescriptorProto message. Does not implicitly {@link google.protobuf.ServiceDescriptorProto.verify|verify} messages.
+             * @param message ServiceDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IServiceDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ServiceDescriptorProto message, length delimited. Does not implicitly {@link google.protobuf.ServiceDescriptorProto.verify|verify} messages.
+             * @param message ServiceDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IServiceDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ServiceDescriptorProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ServiceDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.ServiceDescriptorProto;
+
+            /**
+             * Decodes a ServiceDescriptorProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ServiceDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.ServiceDescriptorProto;
+
+            /**
+             * Verifies a ServiceDescriptorProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ServiceDescriptorProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ServiceDescriptorProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.ServiceDescriptorProto;
+
+            /**
+             * Creates a plain object from a ServiceDescriptorProto message. Also converts values to other types if specified.
+             * @param message ServiceDescriptorProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.ServiceDescriptorProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ServiceDescriptorProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ServiceDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a MethodDescriptorProto. */
+        interface IMethodDescriptorProto {
+
+            /** MethodDescriptorProto name */
+            name?: (string|null);
+
+            /** MethodDescriptorProto inputType */
+            inputType?: (string|null);
+
+            /** MethodDescriptorProto outputType */
+            outputType?: (string|null);
+
+            /** MethodDescriptorProto options */
+            options?: (google.protobuf.IMethodOptions|null);
+
+            /** MethodDescriptorProto clientStreaming */
+            clientStreaming?: (boolean|null);
+
+            /** MethodDescriptorProto serverStreaming */
+            serverStreaming?: (boolean|null);
+        }
+
+        /** Represents a MethodDescriptorProto. */
+        class MethodDescriptorProto implements IMethodDescriptorProto {
+
+            /**
+             * Constructs a new MethodDescriptorProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IMethodDescriptorProto);
+
+            /** MethodDescriptorProto name. */
+            public name: string;
+
+            /** MethodDescriptorProto inputType. */
+            public inputType: string;
+
+            /** MethodDescriptorProto outputType. */
+            public outputType: string;
+
+            /** MethodDescriptorProto options. */
+            public options?: (google.protobuf.IMethodOptions|null);
+
+            /** MethodDescriptorProto clientStreaming. */
+            public clientStreaming: boolean;
+
+            /** MethodDescriptorProto serverStreaming. */
+            public serverStreaming: boolean;
+
+            /**
+             * Creates a new MethodDescriptorProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns MethodDescriptorProto instance
+             */
+            public static create(properties?: google.protobuf.IMethodDescriptorProto): google.protobuf.MethodDescriptorProto;
+
+            /**
+             * Encodes the specified MethodDescriptorProto message. Does not implicitly {@link google.protobuf.MethodDescriptorProto.verify|verify} messages.
+             * @param message MethodDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IMethodDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified MethodDescriptorProto message, length delimited. Does not implicitly {@link google.protobuf.MethodDescriptorProto.verify|verify} messages.
+             * @param message MethodDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IMethodDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a MethodDescriptorProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns MethodDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.MethodDescriptorProto;
+
+            /**
+             * Decodes a MethodDescriptorProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns MethodDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.MethodDescriptorProto;
+
+            /**
+             * Verifies a MethodDescriptorProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a MethodDescriptorProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns MethodDescriptorProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.MethodDescriptorProto;
+
+            /**
+             * Creates a plain object from a MethodDescriptorProto message. Also converts values to other types if specified.
+             * @param message MethodDescriptorProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.MethodDescriptorProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this MethodDescriptorProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for MethodDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a FileOptions. */
+        interface IFileOptions {
+
+            /** FileOptions javaPackage */
+            javaPackage?: (string|null);
+
+            /** FileOptions javaOuterClassname */
+            javaOuterClassname?: (string|null);
+
+            /** FileOptions javaMultipleFiles */
+            javaMultipleFiles?: (boolean|null);
+
+            /** FileOptions javaGenerateEqualsAndHash */
+            javaGenerateEqualsAndHash?: (boolean|null);
+
+            /** FileOptions javaStringCheckUtf8 */
+            javaStringCheckUtf8?: (boolean|null);
+
+            /** FileOptions optimizeFor */
+            optimizeFor?: (google.protobuf.FileOptions.OptimizeMode|keyof typeof google.protobuf.FileOptions.OptimizeMode|null);
+
+            /** FileOptions goPackage */
+            goPackage?: (string|null);
+
+            /** FileOptions ccGenericServices */
+            ccGenericServices?: (boolean|null);
+
+            /** FileOptions javaGenericServices */
+            javaGenericServices?: (boolean|null);
+
+            /** FileOptions pyGenericServices */
+            pyGenericServices?: (boolean|null);
+
+            /** FileOptions deprecated */
+            deprecated?: (boolean|null);
+
+            /** FileOptions ccEnableArenas */
+            ccEnableArenas?: (boolean|null);
+
+            /** FileOptions objcClassPrefix */
+            objcClassPrefix?: (string|null);
+
+            /** FileOptions csharpNamespace */
+            csharpNamespace?: (string|null);
+
+            /** FileOptions swiftPrefix */
+            swiftPrefix?: (string|null);
+
+            /** FileOptions phpClassPrefix */
+            phpClassPrefix?: (string|null);
+
+            /** FileOptions phpNamespace */
+            phpNamespace?: (string|null);
+
+            /** FileOptions phpMetadataNamespace */
+            phpMetadataNamespace?: (string|null);
+
+            /** FileOptions rubyPackage */
+            rubyPackage?: (string|null);
+
+            /** FileOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
+            /** FileOptions uninterpretedOption */
+            uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** FileOptions .google.api.resourceDefinition */
+            ".google.api.resourceDefinition"?: (google.api.IResourceDescriptor[]|null);
+        }
+
+        /** Represents a FileOptions. */
+        class FileOptions implements IFileOptions {
+
+            /**
+             * Constructs a new FileOptions.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFileOptions);
+
+            /** FileOptions javaPackage. */
+            public javaPackage: string;
+
+            /** FileOptions javaOuterClassname. */
+            public javaOuterClassname: string;
+
+            /** FileOptions javaMultipleFiles. */
+            public javaMultipleFiles: boolean;
+
+            /** FileOptions javaGenerateEqualsAndHash. */
+            public javaGenerateEqualsAndHash: boolean;
+
+            /** FileOptions javaStringCheckUtf8. */
+            public javaStringCheckUtf8: boolean;
+
+            /** FileOptions optimizeFor. */
+            public optimizeFor: (google.protobuf.FileOptions.OptimizeMode|keyof typeof google.protobuf.FileOptions.OptimizeMode);
+
+            /** FileOptions goPackage. */
+            public goPackage: string;
+
+            /** FileOptions ccGenericServices. */
+            public ccGenericServices: boolean;
+
+            /** FileOptions javaGenericServices. */
+            public javaGenericServices: boolean;
+
+            /** FileOptions pyGenericServices. */
+            public pyGenericServices: boolean;
+
+            /** FileOptions deprecated. */
+            public deprecated: boolean;
+
+            /** FileOptions ccEnableArenas. */
+            public ccEnableArenas: boolean;
+
+            /** FileOptions objcClassPrefix. */
+            public objcClassPrefix: string;
+
+            /** FileOptions csharpNamespace. */
+            public csharpNamespace: string;
+
+            /** FileOptions swiftPrefix. */
+            public swiftPrefix: string;
+
+            /** FileOptions phpClassPrefix. */
+            public phpClassPrefix: string;
+
+            /** FileOptions phpNamespace. */
+            public phpNamespace: string;
+
+            /** FileOptions phpMetadataNamespace. */
+            public phpMetadataNamespace: string;
+
+            /** FileOptions rubyPackage. */
+            public rubyPackage: string;
+
+            /** FileOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
+
+            /** FileOptions uninterpretedOption. */
+            public uninterpretedOption: google.protobuf.IUninterpretedOption[];
+
+            /**
+             * Creates a new FileOptions instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FileOptions instance
+             */
+            public static create(properties?: google.protobuf.IFileOptions): google.protobuf.FileOptions;
+
+            /**
+             * Encodes the specified FileOptions message. Does not implicitly {@link google.protobuf.FileOptions.verify|verify} messages.
+             * @param message FileOptions message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFileOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FileOptions message, length delimited. Does not implicitly {@link google.protobuf.FileOptions.verify|verify} messages.
+             * @param message FileOptions message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFileOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FileOptions message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FileOptions
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FileOptions;
+
+            /**
+             * Decodes a FileOptions message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FileOptions
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FileOptions;
+
+            /**
+             * Verifies a FileOptions message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FileOptions message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FileOptions
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FileOptions;
+
+            /**
+             * Creates a plain object from a FileOptions message. Also converts values to other types if specified.
+             * @param message FileOptions
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FileOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FileOptions to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FileOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FileOptions {
+
+            /** OptimizeMode enum. */
+            enum OptimizeMode {
+                SPEED = 1,
+                CODE_SIZE = 2,
+                LITE_RUNTIME = 3
+            }
+        }
+
+        /** Properties of a MessageOptions. */
+        interface IMessageOptions {
+
+            /** MessageOptions messageSetWireFormat */
+            messageSetWireFormat?: (boolean|null);
+
+            /** MessageOptions noStandardDescriptorAccessor */
+            noStandardDescriptorAccessor?: (boolean|null);
+
+            /** MessageOptions deprecated */
+            deprecated?: (boolean|null);
+
+            /** MessageOptions mapEntry */
+            mapEntry?: (boolean|null);
+
+            /** MessageOptions deprecatedLegacyJsonFieldConflicts */
+            deprecatedLegacyJsonFieldConflicts?: (boolean|null);
+
+            /** MessageOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
+            /** MessageOptions uninterpretedOption */
+            uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** MessageOptions .google.api.resource */
+            ".google.api.resource"?: (google.api.IResourceDescriptor|null);
+        }
+
+        /** Represents a MessageOptions. */
+        class MessageOptions implements IMessageOptions {
+
+            /**
+             * Constructs a new MessageOptions.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IMessageOptions);
+
+            /** MessageOptions messageSetWireFormat. */
+            public messageSetWireFormat: boolean;
+
+            /** MessageOptions noStandardDescriptorAccessor. */
+            public noStandardDescriptorAccessor: boolean;
+
+            /** MessageOptions deprecated. */
+            public deprecated: boolean;
+
+            /** MessageOptions mapEntry. */
+            public mapEntry: boolean;
+
+            /** MessageOptions deprecatedLegacyJsonFieldConflicts. */
+            public deprecatedLegacyJsonFieldConflicts: boolean;
+
+            /** MessageOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
+
+            /** MessageOptions uninterpretedOption. */
+            public uninterpretedOption: google.protobuf.IUninterpretedOption[];
+
+            /**
+             * Creates a new MessageOptions instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns MessageOptions instance
+             */
+            public static create(properties?: google.protobuf.IMessageOptions): google.protobuf.MessageOptions;
+
+            /**
+             * Encodes the specified MessageOptions message. Does not implicitly {@link google.protobuf.MessageOptions.verify|verify} messages.
+             * @param message MessageOptions message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IMessageOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified MessageOptions message, length delimited. Does not implicitly {@link google.protobuf.MessageOptions.verify|verify} messages.
+             * @param message MessageOptions message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IMessageOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a MessageOptions message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns MessageOptions
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.MessageOptions;
+
+            /**
+             * Decodes a MessageOptions message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns MessageOptions
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.MessageOptions;
+
+            /**
+             * Verifies a MessageOptions message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a MessageOptions message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns MessageOptions
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.MessageOptions;
+
+            /**
+             * Creates a plain object from a MessageOptions message. Also converts values to other types if specified.
+             * @param message MessageOptions
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.MessageOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this MessageOptions to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for MessageOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a FieldOptions. */
+        interface IFieldOptions {
+
+            /** FieldOptions ctype */
+            ctype?: (google.protobuf.FieldOptions.CType|keyof typeof google.protobuf.FieldOptions.CType|null);
+
+            /** FieldOptions packed */
+            packed?: (boolean|null);
+
+            /** FieldOptions jstype */
+            jstype?: (google.protobuf.FieldOptions.JSType|keyof typeof google.protobuf.FieldOptions.JSType|null);
+
+            /** FieldOptions lazy */
+            lazy?: (boolean|null);
+
+            /** FieldOptions unverifiedLazy */
+            unverifiedLazy?: (boolean|null);
+
+            /** FieldOptions deprecated */
+            deprecated?: (boolean|null);
+
+            /** FieldOptions weak */
+            weak?: (boolean|null);
+
+            /** FieldOptions debugRedact */
+            debugRedact?: (boolean|null);
+
+            /** FieldOptions retention */
+            retention?: (google.protobuf.FieldOptions.OptionRetention|keyof typeof google.protobuf.FieldOptions.OptionRetention|null);
+
+            /** FieldOptions targets */
+            targets?: (google.protobuf.FieldOptions.OptionTargetType[]|null);
+
+            /** FieldOptions editionDefaults */
+            editionDefaults?: (google.protobuf.FieldOptions.IEditionDefault[]|null);
+
+            /** FieldOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
+            /** FieldOptions uninterpretedOption */
+            uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** FieldOptions .google.api.resourceReference */
+            ".google.api.resourceReference"?: (google.api.IResourceReference|null);
+
+            /** FieldOptions .google.api.fieldBehavior */
+            ".google.api.fieldBehavior"?: (google.api.FieldBehavior[]|null);
+        }
+
+        /** Represents a FieldOptions. */
+        class FieldOptions implements IFieldOptions {
+
+            /**
+             * Constructs a new FieldOptions.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFieldOptions);
+
+            /** FieldOptions ctype. */
+            public ctype: (google.protobuf.FieldOptions.CType|keyof typeof google.protobuf.FieldOptions.CType);
+
+            /** FieldOptions packed. */
+            public packed: boolean;
+
+            /** FieldOptions jstype. */
+            public jstype: (google.protobuf.FieldOptions.JSType|keyof typeof google.protobuf.FieldOptions.JSType);
+
+            /** FieldOptions lazy. */
+            public lazy: boolean;
+
+            /** FieldOptions unverifiedLazy. */
+            public unverifiedLazy: boolean;
+
+            /** FieldOptions deprecated. */
+            public deprecated: boolean;
+
+            /** FieldOptions weak. */
+            public weak: boolean;
+
+            /** FieldOptions debugRedact. */
+            public debugRedact: boolean;
+
+            /** FieldOptions retention. */
+            public retention: (google.protobuf.FieldOptions.OptionRetention|keyof typeof google.protobuf.FieldOptions.OptionRetention);
+
+            /** FieldOptions targets. */
+            public targets: google.protobuf.FieldOptions.OptionTargetType[];
+
+            /** FieldOptions editionDefaults. */
+            public editionDefaults: google.protobuf.FieldOptions.IEditionDefault[];
+
+            /** FieldOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
+
+            /** FieldOptions uninterpretedOption. */
+            public uninterpretedOption: google.protobuf.IUninterpretedOption[];
+
+            /**
+             * Creates a new FieldOptions instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldOptions instance
+             */
+            public static create(properties?: google.protobuf.IFieldOptions): google.protobuf.FieldOptions;
+
+            /**
+             * Encodes the specified FieldOptions message. Does not implicitly {@link google.protobuf.FieldOptions.verify|verify} messages.
+             * @param message FieldOptions message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFieldOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldOptions message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.verify|verify} messages.
+             * @param message FieldOptions message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFieldOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldOptions message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldOptions
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions;
+
+            /**
+             * Decodes a FieldOptions message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldOptions
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions;
+
+            /**
+             * Verifies a FieldOptions message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldOptions message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldOptions
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions;
+
+            /**
+             * Creates a plain object from a FieldOptions message. Also converts values to other types if specified.
+             * @param message FieldOptions
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FieldOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldOptions to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FieldOptions {
+
+            /** CType enum. */
+            enum CType {
+                STRING = 0,
+                CORD = 1,
+                STRING_PIECE = 2
+            }
+
+            /** JSType enum. */
+            enum JSType {
+                JS_NORMAL = 0,
+                JS_STRING = 1,
+                JS_NUMBER = 2
+            }
+
+            /** OptionRetention enum. */
+            enum OptionRetention {
+                RETENTION_UNKNOWN = 0,
+                RETENTION_RUNTIME = 1,
+                RETENTION_SOURCE = 2
+            }
+
+            /** OptionTargetType enum. */
+            enum OptionTargetType {
+                TARGET_TYPE_UNKNOWN = 0,
+                TARGET_TYPE_FILE = 1,
+                TARGET_TYPE_EXTENSION_RANGE = 2,
+                TARGET_TYPE_MESSAGE = 3,
+                TARGET_TYPE_FIELD = 4,
+                TARGET_TYPE_ONEOF = 5,
+                TARGET_TYPE_ENUM = 6,
+                TARGET_TYPE_ENUM_ENTRY = 7,
+                TARGET_TYPE_SERVICE = 8,
+                TARGET_TYPE_METHOD = 9
+            }
+
+            /** Properties of an EditionDefault. */
+            interface IEditionDefault {
+
+                /** EditionDefault edition */
+                edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** EditionDefault value */
+                value?: (string|null);
+            }
+
+            /** Represents an EditionDefault. */
+            class EditionDefault implements IEditionDefault {
+
+                /**
+                 * Constructs a new EditionDefault.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IEditionDefault);
+
+                /** EditionDefault edition. */
+                public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** EditionDefault value. */
+                public value: string;
+
+                /**
+                 * Creates a new EditionDefault instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns EditionDefault instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IEditionDefault): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Encodes the specified EditionDefault message. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
+                 * @param message EditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified EditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
+                 * @param message EditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an EditionDefault message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns EditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Decodes an EditionDefault message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns EditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Verifies an EditionDefault message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an EditionDefault message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns EditionDefault
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Creates a plain object from an EditionDefault message. Also converts values to other types if specified.
+                 * @param message EditionDefault
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.EditionDefault, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this EditionDefault to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+        }
+
+        /** Properties of an OneofOptions. */
+        interface IOneofOptions {
+
+            /** OneofOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
+            /** OneofOptions uninterpretedOption */
+            uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+        }
+
+        /** Represents an OneofOptions. */
+        class OneofOptions implements IOneofOptions {
+
+            /**
+             * Constructs a new OneofOptions.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IOneofOptions);
+
+            /** OneofOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
+
+            /** OneofOptions uninterpretedOption. */
+            public uninterpretedOption: google.protobuf.IUninterpretedOption[];
+
+            /**
+             * Creates a new OneofOptions instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns OneofOptions instance
+             */
+            public static create(properties?: google.protobuf.IOneofOptions): google.protobuf.OneofOptions;
+
+            /**
+             * Encodes the specified OneofOptions message. Does not implicitly {@link google.protobuf.OneofOptions.verify|verify} messages.
+             * @param message OneofOptions message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IOneofOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified OneofOptions message, length delimited. Does not implicitly {@link google.protobuf.OneofOptions.verify|verify} messages.
+             * @param message OneofOptions message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IOneofOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an OneofOptions message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns OneofOptions
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.OneofOptions;
+
+            /**
+             * Decodes an OneofOptions message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns OneofOptions
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.OneofOptions;
+
+            /**
+             * Verifies an OneofOptions message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an OneofOptions message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns OneofOptions
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.OneofOptions;
+
+            /**
+             * Creates a plain object from an OneofOptions message. Also converts values to other types if specified.
+             * @param message OneofOptions
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.OneofOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this OneofOptions to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for OneofOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an EnumOptions. */
+        interface IEnumOptions {
+
+            /** EnumOptions allowAlias */
+            allowAlias?: (boolean|null);
+
+            /** EnumOptions deprecated */
+            deprecated?: (boolean|null);
+
+            /** EnumOptions deprecatedLegacyJsonFieldConflicts */
+            deprecatedLegacyJsonFieldConflicts?: (boolean|null);
+
+            /** EnumOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
+            /** EnumOptions uninterpretedOption */
+            uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+        }
+
+        /** Represents an EnumOptions. */
+        class EnumOptions implements IEnumOptions {
+
+            /**
+             * Constructs a new EnumOptions.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IEnumOptions);
+
+            /** EnumOptions allowAlias. */
+            public allowAlias: boolean;
+
+            /** EnumOptions deprecated. */
+            public deprecated: boolean;
+
+            /** EnumOptions deprecatedLegacyJsonFieldConflicts. */
+            public deprecatedLegacyJsonFieldConflicts: boolean;
+
+            /** EnumOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
+
+            /** EnumOptions uninterpretedOption. */
+            public uninterpretedOption: google.protobuf.IUninterpretedOption[];
+
+            /**
+             * Creates a new EnumOptions instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns EnumOptions instance
+             */
+            public static create(properties?: google.protobuf.IEnumOptions): google.protobuf.EnumOptions;
+
+            /**
+             * Encodes the specified EnumOptions message. Does not implicitly {@link google.protobuf.EnumOptions.verify|verify} messages.
+             * @param message EnumOptions message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IEnumOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified EnumOptions message, length delimited. Does not implicitly {@link google.protobuf.EnumOptions.verify|verify} messages.
+             * @param message EnumOptions message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IEnumOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an EnumOptions message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns EnumOptions
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.EnumOptions;
+
+            /**
+             * Decodes an EnumOptions message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns EnumOptions
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.EnumOptions;
+
+            /**
+             * Verifies an EnumOptions message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an EnumOptions message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns EnumOptions
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.EnumOptions;
+
+            /**
+             * Creates a plain object from an EnumOptions message. Also converts values to other types if specified.
+             * @param message EnumOptions
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.EnumOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this EnumOptions to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for EnumOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an EnumValueOptions. */
+        interface IEnumValueOptions {
+
+            /** EnumValueOptions deprecated */
+            deprecated?: (boolean|null);
+
+            /** EnumValueOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
+            /** EnumValueOptions debugRedact */
+            debugRedact?: (boolean|null);
+
+            /** EnumValueOptions uninterpretedOption */
+            uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+        }
+
+        /** Represents an EnumValueOptions. */
+        class EnumValueOptions implements IEnumValueOptions {
+
+            /**
+             * Constructs a new EnumValueOptions.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IEnumValueOptions);
+
+            /** EnumValueOptions deprecated. */
+            public deprecated: boolean;
+
+            /** EnumValueOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
+
+            /** EnumValueOptions debugRedact. */
+            public debugRedact: boolean;
+
+            /** EnumValueOptions uninterpretedOption. */
+            public uninterpretedOption: google.protobuf.IUninterpretedOption[];
+
+            /**
+             * Creates a new EnumValueOptions instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns EnumValueOptions instance
+             */
+            public static create(properties?: google.protobuf.IEnumValueOptions): google.protobuf.EnumValueOptions;
+
+            /**
+             * Encodes the specified EnumValueOptions message. Does not implicitly {@link google.protobuf.EnumValueOptions.verify|verify} messages.
+             * @param message EnumValueOptions message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IEnumValueOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified EnumValueOptions message, length delimited. Does not implicitly {@link google.protobuf.EnumValueOptions.verify|verify} messages.
+             * @param message EnumValueOptions message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IEnumValueOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an EnumValueOptions message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns EnumValueOptions
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.EnumValueOptions;
+
+            /**
+             * Decodes an EnumValueOptions message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns EnumValueOptions
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.EnumValueOptions;
+
+            /**
+             * Verifies an EnumValueOptions message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an EnumValueOptions message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns EnumValueOptions
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.EnumValueOptions;
+
+            /**
+             * Creates a plain object from an EnumValueOptions message. Also converts values to other types if specified.
+             * @param message EnumValueOptions
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.EnumValueOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this EnumValueOptions to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for EnumValueOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a ServiceOptions. */
+        interface IServiceOptions {
+
+            /** ServiceOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
+            /** ServiceOptions deprecated */
+            deprecated?: (boolean|null);
+
+            /** ServiceOptions uninterpretedOption */
+            uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** ServiceOptions .google.api.defaultHost */
+            ".google.api.defaultHost"?: (string|null);
+
+            /** ServiceOptions .google.api.oauthScopes */
+            ".google.api.oauthScopes"?: (string|null);
+        }
+
+        /** Represents a ServiceOptions. */
+        class ServiceOptions implements IServiceOptions {
+
+            /**
+             * Constructs a new ServiceOptions.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IServiceOptions);
+
+            /** ServiceOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
+
+            /** ServiceOptions deprecated. */
+            public deprecated: boolean;
+
+            /** ServiceOptions uninterpretedOption. */
+            public uninterpretedOption: google.protobuf.IUninterpretedOption[];
+
+            /**
+             * Creates a new ServiceOptions instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ServiceOptions instance
+             */
+            public static create(properties?: google.protobuf.IServiceOptions): google.protobuf.ServiceOptions;
+
+            /**
+             * Encodes the specified ServiceOptions message. Does not implicitly {@link google.protobuf.ServiceOptions.verify|verify} messages.
+             * @param message ServiceOptions message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IServiceOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ServiceOptions message, length delimited. Does not implicitly {@link google.protobuf.ServiceOptions.verify|verify} messages.
+             * @param message ServiceOptions message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IServiceOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ServiceOptions message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ServiceOptions
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.ServiceOptions;
+
+            /**
+             * Decodes a ServiceOptions message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ServiceOptions
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.ServiceOptions;
+
+            /**
+             * Verifies a ServiceOptions message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ServiceOptions message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ServiceOptions
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.ServiceOptions;
+
+            /**
+             * Creates a plain object from a ServiceOptions message. Also converts values to other types if specified.
+             * @param message ServiceOptions
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.ServiceOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ServiceOptions to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ServiceOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a MethodOptions. */
+        interface IMethodOptions {
+
+            /** MethodOptions deprecated */
+            deprecated?: (boolean|null);
+
+            /** MethodOptions idempotencyLevel */
+            idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel|null);
+
+            /** MethodOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
+            /** MethodOptions uninterpretedOption */
+            uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** MethodOptions .google.api.http */
+            ".google.api.http"?: (google.api.IHttpRule|null);
+
+            /** MethodOptions .google.api.methodSignature */
+            ".google.api.methodSignature"?: (string[]|null);
+        }
+
+        /** Represents a MethodOptions. */
+        class MethodOptions implements IMethodOptions {
+
+            /**
+             * Constructs a new MethodOptions.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IMethodOptions);
+
+            /** MethodOptions deprecated. */
+            public deprecated: boolean;
+
+            /** MethodOptions idempotencyLevel. */
+            public idempotencyLevel: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel);
+
+            /** MethodOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
+
+            /** MethodOptions uninterpretedOption. */
+            public uninterpretedOption: google.protobuf.IUninterpretedOption[];
+
+            /**
+             * Creates a new MethodOptions instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns MethodOptions instance
+             */
+            public static create(properties?: google.protobuf.IMethodOptions): google.protobuf.MethodOptions;
+
+            /**
+             * Encodes the specified MethodOptions message. Does not implicitly {@link google.protobuf.MethodOptions.verify|verify} messages.
+             * @param message MethodOptions message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IMethodOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified MethodOptions message, length delimited. Does not implicitly {@link google.protobuf.MethodOptions.verify|verify} messages.
+             * @param message MethodOptions message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IMethodOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a MethodOptions message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns MethodOptions
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.MethodOptions;
+
+            /**
+             * Decodes a MethodOptions message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns MethodOptions
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.MethodOptions;
+
+            /**
+             * Verifies a MethodOptions message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a MethodOptions message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns MethodOptions
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.MethodOptions;
+
+            /**
+             * Creates a plain object from a MethodOptions message. Also converts values to other types if specified.
+             * @param message MethodOptions
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.MethodOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this MethodOptions to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for MethodOptions
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace MethodOptions {
+
+            /** IdempotencyLevel enum. */
+            enum IdempotencyLevel {
+                IDEMPOTENCY_UNKNOWN = 0,
+                NO_SIDE_EFFECTS = 1,
+                IDEMPOTENT = 2
+            }
+        }
+
+        /** Properties of an UninterpretedOption. */
+        interface IUninterpretedOption {
+
+            /** UninterpretedOption name */
+            name?: (google.protobuf.UninterpretedOption.INamePart[]|null);
+
+            /** UninterpretedOption identifierValue */
+            identifierValue?: (string|null);
+
+            /** UninterpretedOption positiveIntValue */
+            positiveIntValue?: (number|Long|string|null);
+
+            /** UninterpretedOption negativeIntValue */
+            negativeIntValue?: (number|Long|string|null);
+
+            /** UninterpretedOption doubleValue */
+            doubleValue?: (number|null);
+
+            /** UninterpretedOption stringValue */
+            stringValue?: (Uint8Array|string|null);
+
+            /** UninterpretedOption aggregateValue */
+            aggregateValue?: (string|null);
+        }
+
+        /** Represents an UninterpretedOption. */
+        class UninterpretedOption implements IUninterpretedOption {
+
+            /**
+             * Constructs a new UninterpretedOption.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IUninterpretedOption);
+
+            /** UninterpretedOption name. */
+            public name: google.protobuf.UninterpretedOption.INamePart[];
+
+            /** UninterpretedOption identifierValue. */
+            public identifierValue: string;
+
+            /** UninterpretedOption positiveIntValue. */
+            public positiveIntValue: (number|Long|string);
+
+            /** UninterpretedOption negativeIntValue. */
+            public negativeIntValue: (number|Long|string);
+
+            /** UninterpretedOption doubleValue. */
+            public doubleValue: number;
+
+            /** UninterpretedOption stringValue. */
+            public stringValue: (Uint8Array|string);
+
+            /** UninterpretedOption aggregateValue. */
+            public aggregateValue: string;
+
+            /**
+             * Creates a new UninterpretedOption instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns UninterpretedOption instance
+             */
+            public static create(properties?: google.protobuf.IUninterpretedOption): google.protobuf.UninterpretedOption;
+
+            /**
+             * Encodes the specified UninterpretedOption message. Does not implicitly {@link google.protobuf.UninterpretedOption.verify|verify} messages.
+             * @param message UninterpretedOption message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IUninterpretedOption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified UninterpretedOption message, length delimited. Does not implicitly {@link google.protobuf.UninterpretedOption.verify|verify} messages.
+             * @param message UninterpretedOption message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IUninterpretedOption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an UninterpretedOption message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns UninterpretedOption
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.UninterpretedOption;
+
+            /**
+             * Decodes an UninterpretedOption message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns UninterpretedOption
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.UninterpretedOption;
+
+            /**
+             * Verifies an UninterpretedOption message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an UninterpretedOption message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns UninterpretedOption
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.UninterpretedOption;
+
+            /**
+             * Creates a plain object from an UninterpretedOption message. Also converts values to other types if specified.
+             * @param message UninterpretedOption
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.UninterpretedOption, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this UninterpretedOption to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for UninterpretedOption
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace UninterpretedOption {
+
+            /** Properties of a NamePart. */
+            interface INamePart {
+
+                /** NamePart namePart */
+                namePart: string;
+
+                /** NamePart isExtension */
+                isExtension: boolean;
+            }
+
+            /** Represents a NamePart. */
+            class NamePart implements INamePart {
+
+                /**
+                 * Constructs a new NamePart.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.UninterpretedOption.INamePart);
+
+                /** NamePart namePart. */
+                public namePart: string;
+
+                /** NamePart isExtension. */
+                public isExtension: boolean;
+
+                /**
+                 * Creates a new NamePart instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns NamePart instance
+                 */
+                public static create(properties?: google.protobuf.UninterpretedOption.INamePart): google.protobuf.UninterpretedOption.NamePart;
+
+                /**
+                 * Encodes the specified NamePart message. Does not implicitly {@link google.protobuf.UninterpretedOption.NamePart.verify|verify} messages.
+                 * @param message NamePart message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.UninterpretedOption.INamePart, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified NamePart message, length delimited. Does not implicitly {@link google.protobuf.UninterpretedOption.NamePart.verify|verify} messages.
+                 * @param message NamePart message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.UninterpretedOption.INamePart, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a NamePart message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns NamePart
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.UninterpretedOption.NamePart;
+
+                /**
+                 * Decodes a NamePart message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns NamePart
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.UninterpretedOption.NamePart;
+
+                /**
+                 * Verifies a NamePart message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a NamePart message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns NamePart
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.UninterpretedOption.NamePart;
+
+                /**
+                 * Creates a plain object from a NamePart message. Also converts values to other types if specified.
+                 * @param message NamePart
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.UninterpretedOption.NamePart, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this NamePart to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for NamePart
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+        }
+
+        /** Properties of a FeatureSet. */
+        interface IFeatureSet {
+
+            /** FeatureSet fieldPresence */
+            fieldPresence?: (google.protobuf.FeatureSet.FieldPresence|keyof typeof google.protobuf.FeatureSet.FieldPresence|null);
+
+            /** FeatureSet enumType */
+            enumType?: (google.protobuf.FeatureSet.EnumType|keyof typeof google.protobuf.FeatureSet.EnumType|null);
+
+            /** FeatureSet repeatedFieldEncoding */
+            repeatedFieldEncoding?: (google.protobuf.FeatureSet.RepeatedFieldEncoding|keyof typeof google.protobuf.FeatureSet.RepeatedFieldEncoding|null);
+
+            /** FeatureSet utf8Validation */
+            utf8Validation?: (google.protobuf.FeatureSet.Utf8Validation|keyof typeof google.protobuf.FeatureSet.Utf8Validation|null);
+
+            /** FeatureSet messageEncoding */
+            messageEncoding?: (google.protobuf.FeatureSet.MessageEncoding|keyof typeof google.protobuf.FeatureSet.MessageEncoding|null);
+
+            /** FeatureSet jsonFormat */
+            jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+        }
+
+        /** Represents a FeatureSet. */
+        class FeatureSet implements IFeatureSet {
+
+            /**
+             * Constructs a new FeatureSet.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFeatureSet);
+
+            /** FeatureSet fieldPresence. */
+            public fieldPresence: (google.protobuf.FeatureSet.FieldPresence|keyof typeof google.protobuf.FeatureSet.FieldPresence);
+
+            /** FeatureSet enumType. */
+            public enumType: (google.protobuf.FeatureSet.EnumType|keyof typeof google.protobuf.FeatureSet.EnumType);
+
+            /** FeatureSet repeatedFieldEncoding. */
+            public repeatedFieldEncoding: (google.protobuf.FeatureSet.RepeatedFieldEncoding|keyof typeof google.protobuf.FeatureSet.RepeatedFieldEncoding);
+
+            /** FeatureSet utf8Validation. */
+            public utf8Validation: (google.protobuf.FeatureSet.Utf8Validation|keyof typeof google.protobuf.FeatureSet.Utf8Validation);
+
+            /** FeatureSet messageEncoding. */
+            public messageEncoding: (google.protobuf.FeatureSet.MessageEncoding|keyof typeof google.protobuf.FeatureSet.MessageEncoding);
+
+            /** FeatureSet jsonFormat. */
+            public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /**
+             * Creates a new FeatureSet instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FeatureSet instance
+             */
+            public static create(properties?: google.protobuf.IFeatureSet): google.protobuf.FeatureSet;
+
+            /**
+             * Encodes the specified FeatureSet message. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
+             * @param message FeatureSet message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFeatureSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FeatureSet message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
+             * @param message FeatureSet message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFeatureSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FeatureSet message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FeatureSet
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet;
+
+            /**
+             * Decodes a FeatureSet message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FeatureSet
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet;
+
+            /**
+             * Verifies a FeatureSet message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FeatureSet message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FeatureSet
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet;
+
+            /**
+             * Creates a plain object from a FeatureSet message. Also converts values to other types if specified.
+             * @param message FeatureSet
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FeatureSet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FeatureSet to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FeatureSet
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FeatureSet {
+
+            /** FieldPresence enum. */
+            enum FieldPresence {
+                FIELD_PRESENCE_UNKNOWN = 0,
+                EXPLICIT = 1,
+                IMPLICIT = 2,
+                LEGACY_REQUIRED = 3
+            }
+
+            /** EnumType enum. */
+            enum EnumType {
+                ENUM_TYPE_UNKNOWN = 0,
+                OPEN = 1,
+                CLOSED = 2
+            }
+
+            /** RepeatedFieldEncoding enum. */
+            enum RepeatedFieldEncoding {
+                REPEATED_FIELD_ENCODING_UNKNOWN = 0,
+                PACKED = 1,
+                EXPANDED = 2
+            }
+
+            /** Utf8Validation enum. */
+            enum Utf8Validation {
+                UTF8_VALIDATION_UNKNOWN = 0,
+                VERIFY = 2,
+                NONE = 3
+            }
+
+            /** MessageEncoding enum. */
+            enum MessageEncoding {
+                MESSAGE_ENCODING_UNKNOWN = 0,
+                LENGTH_PREFIXED = 1,
+                DELIMITED = 2
+            }
+
+            /** JsonFormat enum. */
+            enum JsonFormat {
+                JSON_FORMAT_UNKNOWN = 0,
+                ALLOW = 1,
+                LEGACY_BEST_EFFORT = 2
+            }
+        }
+
+        /** Properties of a FeatureSetDefaults. */
+        interface IFeatureSetDefaults {
+
+            /** FeatureSetDefaults defaults */
+            defaults?: (google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault[]|null);
+
+            /** FeatureSetDefaults minimumEdition */
+            minimumEdition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+            /** FeatureSetDefaults maximumEdition */
+            maximumEdition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+        }
+
+        /** Represents a FeatureSetDefaults. */
+        class FeatureSetDefaults implements IFeatureSetDefaults {
+
+            /**
+             * Constructs a new FeatureSetDefaults.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFeatureSetDefaults);
+
+            /** FeatureSetDefaults defaults. */
+            public defaults: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault[];
+
+            /** FeatureSetDefaults minimumEdition. */
+            public minimumEdition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+            /** FeatureSetDefaults maximumEdition. */
+            public maximumEdition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+            /**
+             * Creates a new FeatureSetDefaults instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FeatureSetDefaults instance
+             */
+            public static create(properties?: google.protobuf.IFeatureSetDefaults): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Encodes the specified FeatureSetDefaults message. Does not implicitly {@link google.protobuf.FeatureSetDefaults.verify|verify} messages.
+             * @param message FeatureSetDefaults message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFeatureSetDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FeatureSetDefaults message, length delimited. Does not implicitly {@link google.protobuf.FeatureSetDefaults.verify|verify} messages.
+             * @param message FeatureSetDefaults message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFeatureSetDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FeatureSetDefaults message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FeatureSetDefaults
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Decodes a FeatureSetDefaults message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FeatureSetDefaults
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Verifies a FeatureSetDefaults message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FeatureSetDefaults message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FeatureSetDefaults
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Creates a plain object from a FeatureSetDefaults message. Also converts values to other types if specified.
+             * @param message FeatureSetDefaults
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FeatureSetDefaults, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FeatureSetDefaults to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FeatureSetDefaults
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FeatureSetDefaults {
+
+            /** Properties of a FeatureSetEditionDefault. */
+            interface IFeatureSetEditionDefault {
+
+                /** FeatureSetEditionDefault edition */
+                edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSetEditionDefault features */
+                features?: (google.protobuf.IFeatureSet|null);
+            }
+
+            /** Represents a FeatureSetEditionDefault. */
+            class FeatureSetEditionDefault implements IFeatureSetEditionDefault {
+
+                /**
+                 * Constructs a new FeatureSetEditionDefault.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault);
+
+                /** FeatureSetEditionDefault edition. */
+                public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSetEditionDefault features. */
+                public features?: (google.protobuf.IFeatureSet|null);
+
+                /**
+                 * Creates a new FeatureSetEditionDefault instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSetEditionDefault instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Encodes the specified FeatureSetEditionDefault message. Does not implicitly {@link google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify|verify} messages.
+                 * @param message FeatureSetEditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSetEditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify|verify} messages.
+                 * @param message FeatureSetEditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSetEditionDefault message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSetEditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Decodes a FeatureSetEditionDefault message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSetEditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Verifies a FeatureSetEditionDefault message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSetEditionDefault message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSetEditionDefault
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Creates a plain object from a FeatureSetEditionDefault message. Also converts values to other types if specified.
+                 * @param message FeatureSetEditionDefault
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSetEditionDefault to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSetEditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+        }
+
+        /** Properties of a SourceCodeInfo. */
+        interface ISourceCodeInfo {
+
+            /** SourceCodeInfo location */
+            location?: (google.protobuf.SourceCodeInfo.ILocation[]|null);
+        }
+
+        /** Represents a SourceCodeInfo. */
+        class SourceCodeInfo implements ISourceCodeInfo {
+
+            /**
+             * Constructs a new SourceCodeInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.ISourceCodeInfo);
+
+            /** SourceCodeInfo location. */
+            public location: google.protobuf.SourceCodeInfo.ILocation[];
+
+            /**
+             * Creates a new SourceCodeInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SourceCodeInfo instance
+             */
+            public static create(properties?: google.protobuf.ISourceCodeInfo): google.protobuf.SourceCodeInfo;
+
+            /**
+             * Encodes the specified SourceCodeInfo message. Does not implicitly {@link google.protobuf.SourceCodeInfo.verify|verify} messages.
+             * @param message SourceCodeInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.ISourceCodeInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SourceCodeInfo message, length delimited. Does not implicitly {@link google.protobuf.SourceCodeInfo.verify|verify} messages.
+             * @param message SourceCodeInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.ISourceCodeInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a SourceCodeInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns SourceCodeInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.SourceCodeInfo;
+
+            /**
+             * Decodes a SourceCodeInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SourceCodeInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.SourceCodeInfo;
+
+            /**
+             * Verifies a SourceCodeInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SourceCodeInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SourceCodeInfo
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.SourceCodeInfo;
+
+            /**
+             * Creates a plain object from a SourceCodeInfo message. Also converts values to other types if specified.
+             * @param message SourceCodeInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.SourceCodeInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SourceCodeInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SourceCodeInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace SourceCodeInfo {
+
+            /** Properties of a Location. */
+            interface ILocation {
+
+                /** Location path */
+                path?: (number[]|null);
+
+                /** Location span */
+                span?: (number[]|null);
+
+                /** Location leadingComments */
+                leadingComments?: (string|null);
+
+                /** Location trailingComments */
+                trailingComments?: (string|null);
+
+                /** Location leadingDetachedComments */
+                leadingDetachedComments?: (string[]|null);
+            }
+
+            /** Represents a Location. */
+            class Location implements ILocation {
+
+                /**
+                 * Constructs a new Location.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.SourceCodeInfo.ILocation);
+
+                /** Location path. */
+                public path: number[];
+
+                /** Location span. */
+                public span: number[];
+
+                /** Location leadingComments. */
+                public leadingComments: string;
+
+                /** Location trailingComments. */
+                public trailingComments: string;
+
+                /** Location leadingDetachedComments. */
+                public leadingDetachedComments: string[];
+
+                /**
+                 * Creates a new Location instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Location instance
+                 */
+                public static create(properties?: google.protobuf.SourceCodeInfo.ILocation): google.protobuf.SourceCodeInfo.Location;
+
+                /**
+                 * Encodes the specified Location message. Does not implicitly {@link google.protobuf.SourceCodeInfo.Location.verify|verify} messages.
+                 * @param message Location message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.SourceCodeInfo.ILocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Location message, length delimited. Does not implicitly {@link google.protobuf.SourceCodeInfo.Location.verify|verify} messages.
+                 * @param message Location message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.SourceCodeInfo.ILocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Location message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Location
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.SourceCodeInfo.Location;
+
+                /**
+                 * Decodes a Location message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Location
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.SourceCodeInfo.Location;
+
+                /**
+                 * Verifies a Location message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Location message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Location
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.SourceCodeInfo.Location;
+
+                /**
+                 * Creates a plain object from a Location message. Also converts values to other types if specified.
+                 * @param message Location
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.SourceCodeInfo.Location, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Location to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Location
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+        }
+
+        /** Properties of a GeneratedCodeInfo. */
+        interface IGeneratedCodeInfo {
+
+            /** GeneratedCodeInfo annotation */
+            annotation?: (google.protobuf.GeneratedCodeInfo.IAnnotation[]|null);
+        }
+
+        /** Represents a GeneratedCodeInfo. */
+        class GeneratedCodeInfo implements IGeneratedCodeInfo {
+
+            /**
+             * Constructs a new GeneratedCodeInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IGeneratedCodeInfo);
+
+            /** GeneratedCodeInfo annotation. */
+            public annotation: google.protobuf.GeneratedCodeInfo.IAnnotation[];
+
+            /**
+             * Creates a new GeneratedCodeInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns GeneratedCodeInfo instance
+             */
+            public static create(properties?: google.protobuf.IGeneratedCodeInfo): google.protobuf.GeneratedCodeInfo;
+
+            /**
+             * Encodes the specified GeneratedCodeInfo message. Does not implicitly {@link google.protobuf.GeneratedCodeInfo.verify|verify} messages.
+             * @param message GeneratedCodeInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IGeneratedCodeInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified GeneratedCodeInfo message, length delimited. Does not implicitly {@link google.protobuf.GeneratedCodeInfo.verify|verify} messages.
+             * @param message GeneratedCodeInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IGeneratedCodeInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a GeneratedCodeInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns GeneratedCodeInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.GeneratedCodeInfo;
+
+            /**
+             * Decodes a GeneratedCodeInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns GeneratedCodeInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.GeneratedCodeInfo;
+
+            /**
+             * Verifies a GeneratedCodeInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a GeneratedCodeInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns GeneratedCodeInfo
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.GeneratedCodeInfo;
+
+            /**
+             * Creates a plain object from a GeneratedCodeInfo message. Also converts values to other types if specified.
+             * @param message GeneratedCodeInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.GeneratedCodeInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this GeneratedCodeInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for GeneratedCodeInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace GeneratedCodeInfo {
+
+            /** Properties of an Annotation. */
+            interface IAnnotation {
+
+                /** Annotation path */
+                path?: (number[]|null);
+
+                /** Annotation sourceFile */
+                sourceFile?: (string|null);
+
+                /** Annotation begin */
+                begin?: (number|null);
+
+                /** Annotation end */
+                end?: (number|null);
+
+                /** Annotation semantic */
+                semantic?: (google.protobuf.GeneratedCodeInfo.Annotation.Semantic|keyof typeof google.protobuf.GeneratedCodeInfo.Annotation.Semantic|null);
+            }
+
+            /** Represents an Annotation. */
+            class Annotation implements IAnnotation {
+
+                /**
+                 * Constructs a new Annotation.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.GeneratedCodeInfo.IAnnotation);
+
+                /** Annotation path. */
+                public path: number[];
+
+                /** Annotation sourceFile. */
+                public sourceFile: string;
+
+                /** Annotation begin. */
+                public begin: number;
+
+                /** Annotation end. */
+                public end: number;
+
+                /** Annotation semantic. */
+                public semantic: (google.protobuf.GeneratedCodeInfo.Annotation.Semantic|keyof typeof google.protobuf.GeneratedCodeInfo.Annotation.Semantic);
+
+                /**
+                 * Creates a new Annotation instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Annotation instance
+                 */
+                public static create(properties?: google.protobuf.GeneratedCodeInfo.IAnnotation): google.protobuf.GeneratedCodeInfo.Annotation;
+
+                /**
+                 * Encodes the specified Annotation message. Does not implicitly {@link google.protobuf.GeneratedCodeInfo.Annotation.verify|verify} messages.
+                 * @param message Annotation message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.GeneratedCodeInfo.IAnnotation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Annotation message, length delimited. Does not implicitly {@link google.protobuf.GeneratedCodeInfo.Annotation.verify|verify} messages.
+                 * @param message Annotation message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.GeneratedCodeInfo.IAnnotation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an Annotation message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Annotation
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.GeneratedCodeInfo.Annotation;
+
+                /**
+                 * Decodes an Annotation message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Annotation
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.GeneratedCodeInfo.Annotation;
+
+                /**
+                 * Verifies an Annotation message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an Annotation message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Annotation
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.GeneratedCodeInfo.Annotation;
+
+                /**
+                 * Creates a plain object from an Annotation message. Also converts values to other types if specified.
+                 * @param message Annotation
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.GeneratedCodeInfo.Annotation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Annotation to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Annotation
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace Annotation {
+
+                /** Semantic enum. */
+                enum Semantic {
+                    NONE = 0,
+                    SET = 1,
+                    ALIAS = 2
+                }
+            }
+        }
+
+        /** Properties of a Timestamp. */
+        interface ITimestamp {
+
+            /** Timestamp seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Timestamp nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Timestamp. */
+        class Timestamp implements ITimestamp {
+
+            /**
+             * Constructs a new Timestamp.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.ITimestamp);
+
+            /** Timestamp seconds. */
+            public seconds: (number|Long|string);
+
+            /** Timestamp nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Timestamp instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Timestamp instance
+             */
+            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
+
+            /**
+             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
+
+            /**
+             * Verifies a Timestamp message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Timestamp
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
+
+            /**
+             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+             * @param message Timestamp
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Timestamp to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Timestamp
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Duration. */
+        interface IDuration {
+
+            /** Duration seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Duration nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Duration. */
+        class Duration implements IDuration {
+
+            /**
+             * Constructs a new Duration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IDuration);
+
+            /** Duration seconds. */
+            public seconds: (number|Long|string);
+
+            /** Duration nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Duration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Duration instance
+             */
+            public static create(properties?: google.protobuf.IDuration): google.protobuf.Duration;
+
+            /**
+             * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Duration;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Duration;
+
+            /**
+             * Verifies a Duration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Duration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Duration
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Duration;
+
+            /**
+             * Creates a plain object from a Duration message. Also converts values to other types if specified.
+             * @param message Duration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Duration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Duration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Duration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 }

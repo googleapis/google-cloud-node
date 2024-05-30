@@ -33,6 +33,10 @@ function main(parent, processorVersion) {
    */
   // const customDocumentExtractionOptions = {}
   /**
+   *  Options to control foundation model tuning of a processor.
+   */
+  // const foundationModelTuningOptions = {}
+  /**
    *  Required. The parent (project, location and processor) to create the new
    *  version for. Format:
    *  `projects/{project}/locations/{location}/processors/{processor}`.

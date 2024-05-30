@@ -4,6 +4,57 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [5.13.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.12.0...container-v5.13.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [5.12.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.11.0...container-v5.12.0) (2024-04-05)
+
+
+### Features
+
+* [container] add several fields to manage state of database encryption update ([#5184](https://github.com/googleapis/google-cloud-node/issues/5184)) ([632f7f4](https://github.com/googleapis/google-cloud-node/commit/632f7f4789bc8b05587b42ee986f5101ef003614))
+
+## [5.11.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.10.0...container-v5.11.0) (2024-03-26)
+
+
+### Features
+
+* [container] add optional secondary_boot_disk_update_strategy field to NodePool API ([#5162](https://github.com/googleapis/google-cloud-node/issues/5162)) ([5e76444](https://github.com/googleapis/google-cloud-node/commit/5e7644431ce558ea6ce3be42a4038bd25cd224c3))
+
+## [5.10.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.9.0...container-v5.10.0) (2024-03-07)
+
+
+### Features
+
+* [container] add API to enable/disable secret manager csi component on GKE clusters ([#5111](https://github.com/googleapis/google-cloud-node/issues/5111)) ([d7a3bb1](https://github.com/googleapis/google-cloud-node/commit/d7a3bb1217b5c22651c6f3af4e990a8c0cbca6e9))
+* [container] add API to enable/disable secret manager csi component on GKE clusters ([#5113](https://github.com/googleapis/google-cloud-node/issues/5113)) ([f52aa85](https://github.com/googleapis/google-cloud-node/commit/f52aa85e5aaf2303e7fda468eeb280fd441884a7))
+
+## [5.9.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.8.1...container-v5.9.0) (2024-02-28)
+
+
+### Features
+
+* [container] add secondary boot disks field to NodePool API ([#5094](https://github.com/googleapis/google-cloud-node/issues/5094)) ([208250e](https://github.com/googleapis/google-cloud-node/commit/208250ebe1508e4f2190e7233d8fb5ea5bfc7911))
+
+## [5.8.1](https://github.com/googleapis/google-cloud-node/compare/container-v5.8.0...container-v5.8.1) (2024-02-27)
+
+
+### Bug Fixes
+
+* [container] Add client library version to headers ([#5076](https://github.com/googleapis/google-cloud-node/issues/5076)) ([a1b39d3](https://github.com/googleapis/google-cloud-node/commit/a1b39d399119d815282239638cde4903de4b2a76))
+
+## [5.8.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.7.0...container-v5.8.0) (2024-02-22)
+
+
+### Features
+
+* [container] add API to enable Provisioning Request API on existing nodepools ([#5065](https://github.com/googleapis/google-cloud-node/issues/5065)) ([af0e580](https://github.com/googleapis/google-cloud-node/commit/af0e580dbdca83f5e9cebe0df1d9e752c88f4357))
+
 ## [5.7.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.6.0...container-v5.7.0) (2024-02-09)
 
 

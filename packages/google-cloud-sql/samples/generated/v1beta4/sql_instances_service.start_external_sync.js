@@ -53,6 +53,11 @@ function main() {
    *  for MySQL.
    */
   // const syncParallelLevel = {}
+  /**
+   *  Optional. MigrationType decides if the migration is a physical file based
+   *  migration or logical migration.
+   */
+  // const migrationType = {}
 
   // Imports the Sql library
   const {SqlInstancesServiceClient} = require('@google-cloud/sql').v1beta4;

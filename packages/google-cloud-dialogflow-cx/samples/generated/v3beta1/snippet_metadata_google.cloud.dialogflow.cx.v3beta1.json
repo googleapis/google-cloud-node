@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-cx",
-        "version": "4.4.0",
+        "version": "4.6.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -607,6 +607,138 @@
                     "service": {
                         "shortName": "Changelogs",
                         "fullName": "google.cloud.dialogflow.cx.v3beta1.Changelogs"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dialogflow_v3beta1_generated_ConversationHistory_ListConversations_async",
+            "title": "Agents listConversations Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns the list of all conversations.",
+            "canonical": true,
+            "file": "conversation_history.list_conversations.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 80,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListConversations",
+                "fullName": "google.cloud.dialogflow.cx.v3beta1.ConversationHistory.ListConversations",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.dialogflow.cx.v3beta1.ListConversationsResponse",
+                "client": {
+                    "shortName": "ConversationHistoryClient",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.ConversationHistoryClient"
+                },
+                "method": {
+                    "shortName": "ListConversations",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.ConversationHistory.ListConversations",
+                    "service": {
+                        "shortName": "ConversationHistory",
+                        "fullName": "google.cloud.dialogflow.cx.v3beta1.ConversationHistory"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dialogflow_v3beta1_generated_ConversationHistory_GetConversation_async",
+            "title": "Agents getConversation Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves the specified conversation.",
+            "canonical": true,
+            "file": "conversation_history.get_conversation.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetConversation",
+                "fullName": "google.cloud.dialogflow.cx.v3beta1.ConversationHistory.GetConversation",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.dialogflow.cx.v3beta1.Conversation",
+                "client": {
+                    "shortName": "ConversationHistoryClient",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.ConversationHistoryClient"
+                },
+                "method": {
+                    "shortName": "GetConversation",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.ConversationHistory.GetConversation",
+                    "service": {
+                        "shortName": "ConversationHistory",
+                        "fullName": "google.cloud.dialogflow.cx.v3beta1.ConversationHistory"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dialogflow_v3beta1_generated_ConversationHistory_DeleteConversation_async",
+            "title": "Agents deleteConversation Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes the specified conversation.",
+            "canonical": true,
+            "file": "conversation_history.delete_conversation.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteConversation",
+                "fullName": "google.cloud.dialogflow.cx.v3beta1.ConversationHistory.DeleteConversation",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "ConversationHistoryClient",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.ConversationHistoryClient"
+                },
+                "method": {
+                    "shortName": "DeleteConversation",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.ConversationHistory.DeleteConversation",
+                    "service": {
+                        "shortName": "ConversationHistory",
+                        "fullName": "google.cloud.dialogflow.cx.v3beta1.ConversationHistory"
                     }
                 }
             }

@@ -37,10 +37,13 @@ import {
   HealthChecksClient,
   ImageFamilyViewsClient,
   ImagesClient,
+  InstanceGroupManagerResizeRequestsClient,
   InstanceGroupManagersClient,
   InstanceGroupsClient,
   InstancesClient,
+  InstanceSettingsServiceClient,
   InstanceTemplatesClient,
+  InstantSnapshotsClient,
   InterconnectAttachmentsClient,
   InterconnectLocationsClient,
   InterconnectRemoteLocationsClient,
@@ -72,6 +75,7 @@ import {
   RegionInstanceGroupsClient,
   RegionInstancesClient,
   RegionInstanceTemplatesClient,
+  RegionInstantSnapshotsClient,
   RegionNetworkEndpointGroupsClient,
   RegionNetworkFirewallPoliciesClient,
   RegionNotificationEndpointsClient,
@@ -95,6 +99,8 @@ import {
   SnapshotSettingsServiceClient,
   SslCertificatesClient,
   SslPoliciesClient,
+  StoragePoolsClient,
+  StoragePoolTypesClient,
   SubnetworksClient,
   TargetGrpcProxiesClient,
   TargetHttpProxiesClient,
@@ -182,6 +188,11 @@ function doStuffWithImageFamilyViewsClient(client: ImageFamilyViewsClient) {
 function doStuffWithImagesClient(client: ImagesClient) {
   client.close();
 }
+function doStuffWithInstanceGroupManagerResizeRequestsClient(
+  client: InstanceGroupManagerResizeRequestsClient
+) {
+  client.close();
+}
 function doStuffWithInstanceGroupManagersClient(
   client: InstanceGroupManagersClient
 ) {
@@ -193,7 +204,15 @@ function doStuffWithInstanceGroupsClient(client: InstanceGroupsClient) {
 function doStuffWithInstancesClient(client: InstancesClient) {
   client.close();
 }
+function doStuffWithInstanceSettingsServiceClient(
+  client: InstanceSettingsServiceClient
+) {
+  client.close();
+}
 function doStuffWithInstanceTemplatesClient(client: InstanceTemplatesClient) {
+  client.close();
+}
+function doStuffWithInstantSnapshotsClient(client: InstantSnapshotsClient) {
   client.close();
 }
 function doStuffWithInterconnectAttachmentsClient(
@@ -315,6 +334,11 @@ function doStuffWithRegionInstanceTemplatesClient(
 ) {
   client.close();
 }
+function doStuffWithRegionInstantSnapshotsClient(
+  client: RegionInstantSnapshotsClient
+) {
+  client.close();
+}
 function doStuffWithRegionNetworkEndpointGroupsClient(
   client: RegionNetworkEndpointGroupsClient
 ) {
@@ -400,6 +424,12 @@ function doStuffWithSslCertificatesClient(client: SslCertificatesClient) {
   client.close();
 }
 function doStuffWithSslPoliciesClient(client: SslPoliciesClient) {
+  client.close();
+}
+function doStuffWithStoragePoolsClient(client: StoragePoolsClient) {
+  client.close();
+}
+function doStuffWithStoragePoolTypesClient(client: StoragePoolTypesClient) {
   client.close();
 }
 function doStuffWithSubnetworksClient(client: SubnetworksClient) {
@@ -516,6 +546,12 @@ function main() {
   const imagesClient = new ImagesClient();
   doStuffWithImagesClient(imagesClient);
   // check that the client instance can be created
+  const instanceGroupManagerResizeRequestsClient =
+    new InstanceGroupManagerResizeRequestsClient();
+  doStuffWithInstanceGroupManagerResizeRequestsClient(
+    instanceGroupManagerResizeRequestsClient
+  );
+  // check that the client instance can be created
   const instanceGroupManagersClient = new InstanceGroupManagersClient();
   doStuffWithInstanceGroupManagersClient(instanceGroupManagersClient);
   // check that the client instance can be created
@@ -525,8 +561,14 @@ function main() {
   const instancesClient = new InstancesClient();
   doStuffWithInstancesClient(instancesClient);
   // check that the client instance can be created
+  const instanceSettingsServiceClient = new InstanceSettingsServiceClient();
+  doStuffWithInstanceSettingsServiceClient(instanceSettingsServiceClient);
+  // check that the client instance can be created
   const instanceTemplatesClient = new InstanceTemplatesClient();
   doStuffWithInstanceTemplatesClient(instanceTemplatesClient);
+  // check that the client instance can be created
+  const instantSnapshotsClient = new InstantSnapshotsClient();
+  doStuffWithInstantSnapshotsClient(instantSnapshotsClient);
   // check that the client instance can be created
   const interconnectAttachmentsClient = new InterconnectAttachmentsClient();
   doStuffWithInterconnectAttachmentsClient(interconnectAttachmentsClient);
@@ -630,6 +672,9 @@ function main() {
   const regionInstanceTemplatesClient = new RegionInstanceTemplatesClient();
   doStuffWithRegionInstanceTemplatesClient(regionInstanceTemplatesClient);
   // check that the client instance can be created
+  const regionInstantSnapshotsClient = new RegionInstantSnapshotsClient();
+  doStuffWithRegionInstantSnapshotsClient(regionInstantSnapshotsClient);
+  // check that the client instance can be created
   const regionNetworkEndpointGroupsClient =
     new RegionNetworkEndpointGroupsClient();
   doStuffWithRegionNetworkEndpointGroupsClient(
@@ -707,6 +752,12 @@ function main() {
   // check that the client instance can be created
   const sslPoliciesClient = new SslPoliciesClient();
   doStuffWithSslPoliciesClient(sslPoliciesClient);
+  // check that the client instance can be created
+  const storagePoolsClient = new StoragePoolsClient();
+  doStuffWithStoragePoolsClient(storagePoolsClient);
+  // check that the client instance can be created
+  const storagePoolTypesClient = new StoragePoolTypesClient();
+  doStuffWithStoragePoolTypesClient(storagePoolTypesClient);
   // check that the client instance can be created
   const subnetworksClient = new SubnetworksClient();
   doStuffWithSubnetworksClient(subnetworksClient);

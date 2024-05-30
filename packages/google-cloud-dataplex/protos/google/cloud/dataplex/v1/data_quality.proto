@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -41,9 +41,55 @@ message DataQualitySpec {
       string results_table = 1 [(google.api.field_behavior) = OPTIONAL];
     }
 
+    // The individuals or groups who are designated to receive notifications
+    // upon triggers.
+    message Recipients {
+      // Optional. The email recipients who will receive the DataQualityScan
+      // results report.
+      repeated string emails = 1 [(google.api.field_behavior) = OPTIONAL];
+    }
+
+    // This trigger is triggered when the DQ score in the job result is less
+    // than a specified input score.
+    message ScoreThresholdTrigger {
+      // Optional. The score range is in [0,100].
+      float score_threshold = 2 [(google.api.field_behavior) = OPTIONAL];
+    }
+
+    // This trigger is triggered when the scan job itself fails, regardless of
+    // the result.
+    message JobFailureTrigger {}
+
+    // This trigger is triggered whenever a scan job run ends, regardless
+    // of the result.
+    message JobEndTrigger {}
+
+    // The configuration of notification report post scan action.
+    message NotificationReport {
+      // Required. The recipients who will receive the notification report.
+      Recipients recipients = 1 [(google.api.field_behavior) = REQUIRED];
+
+      // Optional. If set, report will be sent when score threshold is met.
+      ScoreThresholdTrigger score_threshold_trigger = 2
+          [(google.api.field_behavior) = OPTIONAL];
+
+      // Optional. If set, report will be sent when a scan job fails.
+      JobFailureTrigger job_failure_trigger = 4
+          [(google.api.field_behavior) = OPTIONAL];
+
+      // Optional. If set, report will be sent when a scan job ends.
+      JobEndTrigger job_end_trigger = 5
+          [(google.api.field_behavior) = OPTIONAL];
+    }
+
     // Optional. If set, results will be exported to the provided BigQuery
     // table.
     BigQueryExport bigquery_export = 1 [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. If set, results will be sent to the provided notification
+    // receipts upon triggers.
+    NotificationReport notification_report = 2
+        [(google.api.field_behavior) = OPTIONAL];
   }
 
   // Required. The list of rules to evaluate against a data source. At least one
@@ -176,6 +222,12 @@ message DataQualityRuleResult {
   //
   // This field is only valid for row-level type rules.
   string failing_rows_query = 10;
+
+  // Output only. The number of rows returned by the sql statement in the
+  // SqlAssertion rule.
+  //
+  // This field is only valid for SqlAssertion rules.
+  int64 assertion_row_count = 11 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // DataQualityDimensionResult provides a more detailed, per-dimension view of
@@ -318,6 +370,22 @@ message DataQualityRule {
     string sql_expression = 1 [(google.api.field_behavior) = OPTIONAL];
   }
 
+  // Queries for rows returned by the provided SQL statement. If any rows are
+  // are returned, this rule fails.
+  //
+  // The SQL statement needs to use BigQuery standard SQL syntax, and must not
+  // contain any semicolons.
+  //
+  // ${data()} can be used to reference the rows being evaluated, i.e. the table
+  // after all additional filters (row filters, incremental data filters,
+  // sampling) are applied.
+  //
+  // Example: SELECT * FROM ${data()} WHERE price < 0
+  message SqlAssertion {
+    // Optional. The SQL statement.
+    string sql_statement = 1 [(google.api.field_behavior) = OPTIONAL];
+  }
+
   // The rule-specific configuration.
   oneof rule_type {
     // Row-level rule which evaluates whether each column value lies between a
@@ -349,6 +417,10 @@ message DataQualityRule {
     // Aggregate rule which evaluates whether the provided expression is true
     // for a table.
     TableConditionExpectation table_condition_expectation = 201;
+
+    // Aggregate rule which evaluates the number of rows returned for the
+    // provided statement.
+    SqlAssertion sql_assertion = 202;
   }
 
   // Optional. The unnested column which this rule is evaluated against.

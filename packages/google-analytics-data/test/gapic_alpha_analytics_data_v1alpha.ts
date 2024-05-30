@@ -176,7 +176,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     });
 
     if (
-      typeof process !== 'undefined' &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       it('throws DeprecationWarning if static servicePath is used', () => {
@@ -214,6 +214,43 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'analyticsdata.example.com');
     });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'analyticsdata.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+              universeDomain: 'configured.example.com',
+            });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(
+            servicePath,
+            'analyticsdata.configured.example.com'
+          );
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
@@ -1142,6 +1179,274 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     });
   });
 
+  describe('queryReportTask', () => {
+    it('invokes queryReportTask without error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.QueryReportTaskRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.QueryReportTaskRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.QueryReportTaskResponse()
+      );
+      client.innerApiCalls.queryReportTask = stubSimpleCall(expectedResponse);
+      const [response] = await client.queryReportTask(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.queryReportTask as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.queryReportTask as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes queryReportTask without error using callback', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.QueryReportTaskRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.QueryReportTaskRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.QueryReportTaskResponse()
+      );
+      client.innerApiCalls.queryReportTask =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.queryReportTask(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.data.v1alpha.IQueryReportTaskResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.queryReportTask as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.queryReportTask as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes queryReportTask with error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.QueryReportTaskRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.QueryReportTaskRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.queryReportTask = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.queryReportTask(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.queryReportTask as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.queryReportTask as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes queryReportTask with closed client', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.QueryReportTaskRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.QueryReportTaskRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.queryReportTask(request), expectedError);
+    });
+  });
+
+  describe('getReportTask', () => {
+    it('invokes getReportTask without error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.GetReportTaskRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.GetReportTaskRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ReportTask()
+      );
+      client.innerApiCalls.getReportTask = stubSimpleCall(expectedResponse);
+      const [response] = await client.getReportTask(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getReportTask as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getReportTask as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getReportTask without error using callback', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.GetReportTaskRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.GetReportTaskRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ReportTask()
+      );
+      client.innerApiCalls.getReportTask =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getReportTask(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.data.v1alpha.IReportTask | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getReportTask as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getReportTask as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getReportTask with error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.GetReportTaskRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.GetReportTaskRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getReportTask = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getReportTask(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getReportTask as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getReportTask as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getReportTask with closed client', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.GetReportTaskRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.GetReportTaskRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getReportTask(request), expectedError);
+    });
+  });
+
   describe('createAudienceList', () => {
     it('invokes createAudienceList without error', async () => {
       const client =
@@ -1342,6 +1647,206 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     });
   });
 
+  describe('createReportTask', () => {
+    it('invokes createReportTask without error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.CreateReportTaskRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.CreateReportTaskRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createReportTask =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createReportTask(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createReportTask as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createReportTask as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createReportTask without error using callback', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.CreateReportTaskRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.CreateReportTaskRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createReportTask =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createReportTask(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.analytics.data.v1alpha.IReportTask,
+              protos.google.analytics.data.v1alpha.IReportTaskMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.analytics.data.v1alpha.IReportTask,
+        protos.google.analytics.data.v1alpha.IReportTaskMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createReportTask as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createReportTask as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createReportTask with call error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.CreateReportTaskRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.CreateReportTaskRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createReportTask = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createReportTask(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createReportTask as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createReportTask as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createReportTask with LRO error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.CreateReportTaskRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.CreateReportTaskRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createReportTask = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.createReportTask(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createReportTask as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createReportTask as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateReportTaskProgress without error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateReportTaskProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateReportTaskProgress with error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreateReportTaskProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('listAudienceLists', () => {
     it('invokes listAudienceLists without error', async () => {
       const client =
@@ -1527,9 +2032,9 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       assert(
         (client.descriptors.page.listAudienceLists.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1578,9 +2083,9 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       assert(
         (client.descriptors.page.listAudienceLists.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1629,9 +2134,9 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       assert(
         (client.descriptors.page.listAudienceLists.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1671,9 +2176,9 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       assert(
         (client.descriptors.page.listAudienceLists.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -2040,6 +2545,339 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
           )
+      );
+    });
+  });
+
+  describe('listReportTasks', () => {
+    it('invokes listReportTasks without error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ListReportTasksRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.ListReportTasksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.ReportTask()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.ReportTask()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.ReportTask()
+        ),
+      ];
+      client.innerApiCalls.listReportTasks = stubSimpleCall(expectedResponse);
+      const [response] = await client.listReportTasks(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listReportTasks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listReportTasks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listReportTasks without error using callback', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ListReportTasksRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.ListReportTasksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.ReportTask()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.ReportTask()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.ReportTask()
+        ),
+      ];
+      client.innerApiCalls.listReportTasks =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listReportTasks(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.data.v1alpha.IReportTask[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listReportTasks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listReportTasks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listReportTasks with error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ListReportTasksRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.ListReportTasksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listReportTasks = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listReportTasks(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listReportTasks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listReportTasks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listReportTasksStream without error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ListReportTasksRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.ListReportTasksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.ReportTask()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.ReportTask()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.ReportTask()
+        ),
+      ];
+      client.descriptors.page.listReportTasks.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listReportTasksStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.data.v1alpha.ReportTask[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.analytics.data.v1alpha.ReportTask) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listReportTasks.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listReportTasks, request)
+      );
+      assert(
+        (client.descriptors.page.listReportTasks.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes listReportTasksStream with error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ListReportTasksRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.ListReportTasksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listReportTasks.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listReportTasksStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.data.v1alpha.ReportTask[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.analytics.data.v1alpha.ReportTask) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listReportTasks.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listReportTasks, request)
+      );
+      assert(
+        (client.descriptors.page.listReportTasks.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listReportTasks without error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ListReportTasksRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.ListReportTasksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.ReportTask()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.ReportTask()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.ReportTask()
+        ),
+      ];
+      client.descriptors.page.listReportTasks.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.analytics.data.v1alpha.IReportTask[] = [];
+      const iterable = client.listReportTasksAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listReportTasks.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listReportTasks.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listReportTasks with error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ListReportTasksRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.ListReportTasksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listReportTasks.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listReportTasksAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.analytics.data.v1alpha.IReportTask[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listReportTasks.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listReportTasks.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -2513,6 +3351,59 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
             client.pathTemplates.recurringAudienceListPathTemplate
               .match as SinonStub
           )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('reportTask', () => {
+      const fakePath = '/rendered/path/reportTask';
+      const expectedParameters = {
+        property: 'propertyValue',
+        report_task: 'reportTaskValue',
+      };
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.reportTaskPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.reportTaskPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('reportTaskPath', () => {
+        const result = client.reportTaskPath(
+          'propertyValue',
+          'reportTaskValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.reportTaskPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchPropertyFromReportTaskName', () => {
+        const result = client.matchPropertyFromReportTaskName(fakePath);
+        assert.strictEqual(result, 'propertyValue');
+        assert(
+          (client.pathTemplates.reportTaskPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchReportTaskFromReportTaskName', () => {
+        const result = client.matchReportTaskFromReportTaskName(fakePath);
+        assert.strictEqual(result, 'reportTaskValue');
+        assert(
+          (client.pathTemplates.reportTaskPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

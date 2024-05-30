@@ -1,5 +1,34 @@
 # Changelog
 
+## [3.9.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.8.0...dataplex-v3.9.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [3.8.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.7.0...dataplex-v3.8.0) (2024-05-08)
+
+
+### Features
+
+* [dataplex] updated client libraries for Dataplex Catalog: removed deprecated fields, updated comments ([#5306](https://github.com/googleapis/google-cloud-node/issues/5306)) ([3db1ac8](https://github.com/googleapis/google-cloud-node/commit/3db1ac8ff587a919b35bd1131c495ce50f315d85))
+
+## [3.7.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.6.0...dataplex-v3.7.0) (2024-04-16)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5188](https://github.com/googleapis/google-cloud-node/issues/5188)) ([c5ccdf9](https://github.com/googleapis/google-cloud-node/commit/c5ccdf93641e7bb6d0e5c636168fad0feafab6e3))
+
+## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.5.1...dataplex-v3.6.0) (2024-03-26)
+
+
+### Features
+
+* [dataplex] added client side library for the followings: ([#5149](https://github.com/googleapis/google-cloud-node/issues/5149)) ([8c2c43c](https://github.com/googleapis/google-cloud-node/commit/8c2c43c19b148b0e95874a1d24261c9b962020f0))
+
 ## [3.5.1](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.5.0...dataplex-v3.5.1) (2024-01-23)
 
 

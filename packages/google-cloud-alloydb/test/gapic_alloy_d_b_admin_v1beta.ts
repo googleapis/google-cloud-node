@@ -180,7 +180,7 @@ describe('v1beta.AlloyDBAdminClient', () => {
     });
 
     if (
-      typeof process !== 'undefined' &&
+      typeof process === 'object' &&
       typeof process.emitWarning === 'function'
     ) {
       it('throws DeprecationWarning if static servicePath is used', () => {
@@ -216,6 +216,38 @@ describe('v1beta.AlloyDBAdminClient', () => {
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'alloydb.example.com');
     });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new alloydbadminModule.v1beta.AlloyDBAdminClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'alloydb.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
+            universeDomain: 'configured.example.com',
+          });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'alloydb.configured.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new alloydbadminModule.v1beta.AlloyDBAdminClient({
@@ -4949,9 +4981,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listClusters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5000,9 +5032,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listClusters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5043,9 +5075,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listClusters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5083,9 +5115,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listClusters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -5270,9 +5302,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5319,9 +5351,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5368,9 +5400,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5408,9 +5440,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -5577,9 +5609,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listBackups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5628,9 +5660,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listBackups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5671,9 +5703,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listBackups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5713,9 +5745,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listBackups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -6238,9 +6270,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listUsers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6289,9 +6321,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listUsers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6331,9 +6363,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listUsers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6372,9 +6404,334 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listUsers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+  });
+
+  describe('listDatabases', () => {
+    it('invokes listDatabases without error', async () => {
+      const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.alloydb.v1beta.ListDatabasesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.alloydb.v1beta.ListDatabasesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.alloydb.v1beta.Database()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.alloydb.v1beta.Database()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.alloydb.v1beta.Database()
+        ),
+      ];
+      client.innerApiCalls.listDatabases = stubSimpleCall(expectedResponse);
+      const [response] = await client.listDatabases(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listDatabases as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDatabases as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listDatabases without error using callback', async () => {
+      const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.alloydb.v1beta.ListDatabasesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.alloydb.v1beta.ListDatabasesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.alloydb.v1beta.Database()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.alloydb.v1beta.Database()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.alloydb.v1beta.Database()
+        ),
+      ];
+      client.innerApiCalls.listDatabases =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listDatabases(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.alloydb.v1beta.IDatabase[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listDatabases as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDatabases as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listDatabases with error', async () => {
+      const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.alloydb.v1beta.ListDatabasesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.alloydb.v1beta.ListDatabasesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listDatabases = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listDatabases(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listDatabases as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDatabases as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listDatabasesStream without error', async () => {
+      const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.alloydb.v1beta.ListDatabasesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.alloydb.v1beta.ListDatabasesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.alloydb.v1beta.Database()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.alloydb.v1beta.Database()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.alloydb.v1beta.Database()
+        ),
+      ];
+      client.descriptors.page.listDatabases.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listDatabasesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.alloydb.v1beta.Database[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.alloydb.v1beta.Database) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listDatabases.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listDatabases, request)
+      );
+      assert(
+        (client.descriptors.page.listDatabases.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes listDatabasesStream with error', async () => {
+      const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.alloydb.v1beta.ListDatabasesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.alloydb.v1beta.ListDatabasesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listDatabases.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listDatabasesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.alloydb.v1beta.Database[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.alloydb.v1beta.Database) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listDatabases.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listDatabases, request)
+      );
+      assert(
+        (client.descriptors.page.listDatabases.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listDatabases without error', async () => {
+      const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.alloydb.v1beta.ListDatabasesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.alloydb.v1beta.ListDatabasesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.alloydb.v1beta.Database()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.alloydb.v1beta.Database()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.alloydb.v1beta.Database()
+        ),
+      ];
+      client.descriptors.page.listDatabases.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.alloydb.v1beta.IDatabase[] = [];
+      const iterable = client.listDatabasesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listDatabases.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listDatabases.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listDatabases with error', async () => {
+      const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.alloydb.v1beta.ListDatabasesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.alloydb.v1beta.ListDatabasesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listDatabases.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listDatabasesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.alloydb.v1beta.IDatabase[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listDatabases.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listDatabases.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -7405,6 +7762,82 @@ describe('v1beta.AlloyDBAdminClient', () => {
         assert.strictEqual(result, 'instanceValue');
         assert(
           (client.pathTemplates.connectionInfoPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('database', () => {
+      const fakePath = '/rendered/path/database';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        cluster: 'clusterValue',
+        database: 'databaseValue',
+      };
+      const client = new alloydbadminModule.v1beta.AlloyDBAdminClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.databasePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.databasePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('databasePath', () => {
+        const result = client.databasePath(
+          'projectValue',
+          'locationValue',
+          'clusterValue',
+          'databaseValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.databasePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromDatabaseName', () => {
+        const result = client.matchProjectFromDatabaseName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.databasePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromDatabaseName', () => {
+        const result = client.matchLocationFromDatabaseName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.databasePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchClusterFromDatabaseName', () => {
+        const result = client.matchClusterFromDatabaseName(fakePath);
+        assert.strictEqual(result, 'clusterValue');
+        assert(
+          (client.pathTemplates.databasePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDatabaseFromDatabaseName', () => {
+        const result = client.matchDatabaseFromDatabaseName(fakePath);
+        assert.strictEqual(result, 'databaseValue');
+        assert(
+          (client.pathTemplates.databasePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

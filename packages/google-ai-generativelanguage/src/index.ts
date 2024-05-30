@@ -23,6 +23,8 @@ import * as v1beta3 from './v1beta3';
 
 const DiscussServiceClient = v1beta.DiscussServiceClient;
 type DiscussServiceClient = v1beta.DiscussServiceClient;
+const FileServiceClient = v1beta.FileServiceClient;
+type FileServiceClient = v1beta.FileServiceClient;
 const GenerativeServiceClient = v1beta.GenerativeServiceClient;
 type GenerativeServiceClient = v1beta.GenerativeServiceClient;
 const ModelServiceClient = v1beta.ModelServiceClient;
@@ -40,6 +42,7 @@ export {
   v1beta2,
   v1beta3,
   DiscussServiceClient,
+  FileServiceClient,
   GenerativeServiceClient,
   ModelServiceClient,
   PermissionServiceClient,
@@ -52,6 +55,7 @@ export default {
   v1beta2,
   v1beta3,
   DiscussServiceClient,
+  FileServiceClient,
   GenerativeServiceClient,
   ModelServiceClient,
   PermissionServiceClient,
