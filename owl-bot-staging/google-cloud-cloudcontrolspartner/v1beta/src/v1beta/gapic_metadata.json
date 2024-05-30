@@ -1,0 +1,153 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.cloudcontrolspartner.v1beta",
+  "libraryPackage": "@google-cloud/cloudcontrolspartner",
+  "services": {
+    "CloudControlsPartnerCore": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "CloudControlsPartnerCoreClient",
+          "rpcs": {
+            "GetWorkload": {
+              "methods": [
+                "getWorkload"
+              ]
+            },
+            "GetCustomer": {
+              "methods": [
+                "getCustomer"
+              ]
+            },
+            "GetEkmConnections": {
+              "methods": [
+                "getEkmConnections"
+              ]
+            },
+            "GetPartnerPermissions": {
+              "methods": [
+                "getPartnerPermissions"
+              ]
+            },
+            "GetPartner": {
+              "methods": [
+                "getPartner"
+              ]
+            },
+            "ListWorkloads": {
+              "methods": [
+                "listWorkloads",
+                "listWorkloadsStream",
+                "listWorkloadsAsync"
+              ]
+            },
+            "ListCustomers": {
+              "methods": [
+                "listCustomers",
+                "listCustomersStream",
+                "listCustomersAsync"
+              ]
+            },
+            "ListAccessApprovalRequests": {
+              "methods": [
+                "listAccessApprovalRequests",
+                "listAccessApprovalRequestsStream",
+                "listAccessApprovalRequestsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "CloudControlsPartnerCoreClient",
+          "rpcs": {
+            "GetWorkload": {
+              "methods": [
+                "getWorkload"
+              ]
+            },
+            "GetCustomer": {
+              "methods": [
+                "getCustomer"
+              ]
+            },
+            "GetEkmConnections": {
+              "methods": [
+                "getEkmConnections"
+              ]
+            },
+            "GetPartnerPermissions": {
+              "methods": [
+                "getPartnerPermissions"
+              ]
+            },
+            "GetPartner": {
+              "methods": [
+                "getPartner"
+              ]
+            },
+            "ListWorkloads": {
+              "methods": [
+                "listWorkloads",
+                "listWorkloadsStream",
+                "listWorkloadsAsync"
+              ]
+            },
+            "ListCustomers": {
+              "methods": [
+                "listCustomers",
+                "listCustomersStream",
+                "listCustomersAsync"
+              ]
+            },
+            "ListAccessApprovalRequests": {
+              "methods": [
+                "listAccessApprovalRequests",
+                "listAccessApprovalRequestsStream",
+                "listAccessApprovalRequestsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "CloudControlsPartnerMonitoring": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "CloudControlsPartnerMonitoringClient",
+          "rpcs": {
+            "GetViolation": {
+              "methods": [
+                "getViolation"
+              ]
+            },
+            "ListViolations": {
+              "methods": [
+                "listViolations",
+                "listViolationsStream",
+                "listViolationsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "CloudControlsPartnerMonitoringClient",
+          "rpcs": {
+            "GetViolation": {
+              "methods": [
+                "getViolation"
+              ]
+            },
+            "ListViolations": {
+              "methods": [
+                "listViolations",
+                "listViolationsStream",
+                "listViolationsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
