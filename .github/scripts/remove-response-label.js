@@ -9,7 +9,7 @@ module.exports = async ({ github, context }) => {
     const labels = issue.data.labels.map((e) => e.name);
   
     if (author === commenter && labels.includes("needs more info")) {
-      github.rest.issues.removeLabel({
+      await github.rest.issues.removeLabel({
         owner: context.repo.owner,
         repo: context.repo.repo,
         issue_number: context.issue.number,
