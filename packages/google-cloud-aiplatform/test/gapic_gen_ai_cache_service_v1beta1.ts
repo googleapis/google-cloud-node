@@ -21,7 +21,7 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as predictionserviceModule from '../src';
+import * as genaicacheserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
@@ -66,38 +66,41 @@ function stubSimpleCallWithCallback<ResponseType>(
     : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubServerStreamingCall<ResponseType>(
-  response?: ResponseType,
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
   error?: Error
 ) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+    }
+  }
   const transformStub = error
     ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+    : pagingStub;
   const mockStream = new PassThrough({
     objectMode: true,
     transform: transformStub,
   });
-  // write something to the stream to trigger transformStub and send the response back to the client
-  setImmediate(() => {
-    mockStream.write({});
-  });
-  setImmediate(() => {
-    mockStream.end();
-  });
-  return sinon.stub().returns(mockStream);
-}
-
-function stubBidiStreamingCall<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
+    });
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
   return sinon.stub().returns(mockStream);
 }
 
@@ -124,18 +127,18 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1beta1.PredictionServiceClient', () => {
+describe('v1beta1.GenAiCacheServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient();
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
     });
 
     it('has universeDomain', () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient();
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -147,7 +150,7 @@ describe('v1beta1.PredictionServiceClient', () => {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const servicePath =
-          predictionserviceModule.v1beta1.PredictionServiceClient.servicePath;
+          genaicacheserviceModule.v1beta1.GenAiCacheServiceClient.servicePath;
         assert.strictEqual(servicePath, 'aiplatform.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -156,7 +159,7 @@ describe('v1beta1.PredictionServiceClient', () => {
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const apiEndpoint =
-          predictionserviceModule.v1beta1.PredictionServiceClient.apiEndpoint;
+          genaicacheserviceModule.v1beta1.GenAiCacheServiceClient.apiEndpoint;
         assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -164,7 +167,7 @@ describe('v1beta1.PredictionServiceClient', () => {
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           universeDomain: 'example.com',
         });
       const servicePath = client.apiEndpoint;
@@ -173,7 +176,7 @@ describe('v1beta1.PredictionServiceClient', () => {
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           universe_domain: 'example.com',
         });
       const servicePath = client.apiEndpoint;
@@ -186,7 +189,7 @@ describe('v1beta1.PredictionServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new predictionserviceModule.v1beta1.PredictionServiceClient();
+            new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient();
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'aiplatform.example.com');
           if (saved) {
@@ -200,7 +203,7 @@ describe('v1beta1.PredictionServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new predictionserviceModule.v1beta1.PredictionServiceClient({
+            new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
               universeDomain: 'configured.example.com',
             });
           const servicePath = client.apiEndpoint;
@@ -215,7 +218,7 @@ describe('v1beta1.PredictionServiceClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           universe_domain: 'example.com',
           universeDomain: 'example.net',
         });
@@ -223,20 +226,20 @@ describe('v1beta1.PredictionServiceClient', () => {
     });
 
     it('has port', () => {
-      const port = predictionserviceModule.v1beta1.PredictionServiceClient.port;
+      const port = genaicacheserviceModule.v1beta1.GenAiCacheServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient();
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           fallback: true,
         });
       assert(client);
@@ -244,23 +247,23 @@ describe('v1beta1.PredictionServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      assert.strictEqual(client.predictionServiceStub, undefined);
+      assert.strictEqual(client.genAiCacheServiceStub, undefined);
       await client.initialize();
-      assert(client.predictionServiceStub);
+      assert(client.genAiCacheServiceStub);
     });
 
     it('has close method for the initialized client', done => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
-      assert(client.predictionServiceStub);
+      assert(client.genAiCacheServiceStub);
       client.close().then(() => {
         done();
       });
@@ -268,11 +271,11 @@ describe('v1beta1.PredictionServiceClient', () => {
 
     it('has close method for the non-initialized client', done => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      assert.strictEqual(client.predictionServiceStub, undefined);
+      assert.strictEqual(client.genAiCacheServiceStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -281,7 +284,7 @@ describe('v1beta1.PredictionServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -294,7 +297,7 @@ describe('v1beta1.PredictionServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -315,66 +318,67 @@ describe('v1beta1.PredictionServiceClient', () => {
     });
   });
 
-  describe('predict', () => {
-    it('invokes predict without error', async () => {
+  describe('createCachedContent', () => {
+    it('invokes createCachedContent without error', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.PredictRequest()
+        new protos.google.cloud.aiplatform.v1beta1.CreateCachedContentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.PredictRequest',
-        ['endpoint']
+        '.google.cloud.aiplatform.v1beta1.CreateCachedContentRequest',
+        ['parent']
       );
-      request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.PredictResponse()
+        new protos.google.cloud.aiplatform.v1beta1.CachedContent()
       );
-      client.innerApiCalls.predict = stubSimpleCall(expectedResponse);
-      const [response] = await client.predict(request);
+      client.innerApiCalls.createCachedContent =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createCachedContent(request);
       assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.predict as SinonStub).getCall(
-        0
-      ).args[0];
+      const actualRequest = (
+        client.innerApiCalls.createCachedContent as SinonStub
+      ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.predict as SinonStub
+        client.innerApiCalls.createCachedContent as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes predict without error using callback', async () => {
+    it('invokes createCachedContent without error using callback', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.PredictRequest()
+        new protos.google.cloud.aiplatform.v1beta1.CreateCachedContentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.PredictRequest',
-        ['endpoint']
+        '.google.cloud.aiplatform.v1beta1.CreateCachedContentRequest',
+        ['parent']
       );
-      request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.PredictResponse()
+        new protos.google.cloud.aiplatform.v1beta1.CachedContent()
       );
-      client.innerApiCalls.predict =
+      client.innerApiCalls.createCachedContent =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.predict(
+        client.createCachedContent(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1beta1.IPredictResponse | null
+            result?: protos.google.cloud.aiplatform.v1beta1.ICachedContent | null
           ) => {
             if (err) {
               reject(err);
@@ -386,257 +390,129 @@ describe('v1beta1.PredictionServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.predict as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.predict as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes predict with error', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.PredictRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.PredictRequest',
-        ['endpoint']
-      );
-      request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.predict = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.predict(request), expectedError);
-      const actualRequest = (client.innerApiCalls.predict as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.predict as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes predict with closed client', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.PredictRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.PredictRequest',
-        ['endpoint']
-      );
-      request.endpoint = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.predict(request), expectedError);
-    });
-  });
-
-  describe('rawPredict', () => {
-    it('invokes rawPredict without error', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.RawPredictRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.RawPredictRequest',
-        ['endpoint']
-      );
-      request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.api.HttpBody()
-      );
-      client.innerApiCalls.rawPredict = stubSimpleCall(expectedResponse);
-      const [response] = await client.rawPredict(request);
-      assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.rawPredict as SinonStub
+        client.innerApiCalls.createCachedContent as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.rawPredict as SinonStub
+        client.innerApiCalls.createCachedContent as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes rawPredict without error using callback', async () => {
+    it('invokes createCachedContent with error', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.RawPredictRequest()
+        new protos.google.cloud.aiplatform.v1beta1.CreateCachedContentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.RawPredictRequest',
-        ['endpoint']
+        '.google.cloud.aiplatform.v1beta1.CreateCachedContentRequest',
+        ['parent']
       );
-      request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.api.HttpBody()
-      );
-      client.innerApiCalls.rawPredict =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.rawPredict(
-          request,
-          (err?: Error | null, result?: protos.google.api.IHttpBody | null) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.rawPredict as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.rawPredict as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes rawPredict with error', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.RawPredictRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.RawPredictRequest',
-        ['endpoint']
-      );
-      request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.rawPredict = stubSimpleCall(
+      client.innerApiCalls.createCachedContent = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.rawPredict(request), expectedError);
+      await assert.rejects(client.createCachedContent(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.rawPredict as SinonStub
+        client.innerApiCalls.createCachedContent as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.rawPredict as SinonStub
+        client.innerApiCalls.createCachedContent as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes rawPredict with closed client', async () => {
+    it('invokes createCachedContent with closed client', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.RawPredictRequest()
+        new protos.google.cloud.aiplatform.v1beta1.CreateCachedContentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.RawPredictRequest',
-        ['endpoint']
+        '.google.cloud.aiplatform.v1beta1.CreateCachedContentRequest',
+        ['parent']
       );
-      request.endpoint = defaultValue1;
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.rawPredict(request), expectedError);
+      await assert.rejects(client.createCachedContent(request), expectedError);
     });
   });
 
-  describe('directPredict', () => {
-    it('invokes directPredict without error', async () => {
+  describe('getCachedContent', () => {
+    it('invokes getCachedContent without error', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.DirectPredictRequest()
+        new protos.google.cloud.aiplatform.v1beta1.GetCachedContentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.DirectPredictRequest',
-        ['endpoint']
+        '.google.cloud.aiplatform.v1beta1.GetCachedContentRequest',
+        ['name']
       );
-      request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.DirectPredictResponse()
+        new protos.google.cloud.aiplatform.v1beta1.CachedContent()
       );
-      client.innerApiCalls.directPredict = stubSimpleCall(expectedResponse);
-      const [response] = await client.directPredict(request);
+      client.innerApiCalls.getCachedContent = stubSimpleCall(expectedResponse);
+      const [response] = await client.getCachedContent(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.directPredict as SinonStub
+        client.innerApiCalls.getCachedContent as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.directPredict as SinonStub
+        client.innerApiCalls.getCachedContent as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes directPredict without error using callback', async () => {
+    it('invokes getCachedContent without error using callback', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.DirectPredictRequest()
+        new protos.google.cloud.aiplatform.v1beta1.GetCachedContentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.DirectPredictRequest',
-        ['endpoint']
+        '.google.cloud.aiplatform.v1beta1.GetCachedContentRequest',
+        ['name']
       );
-      request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.DirectPredictResponse()
+        new protos.google.cloud.aiplatform.v1beta1.CachedContent()
       );
-      client.innerApiCalls.directPredict =
+      client.innerApiCalls.getCachedContent =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.directPredict(
+        client.getCachedContent(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1beta1.IDirectPredictResponse | null
+            result?: protos.google.cloud.aiplatform.v1beta1.ICachedContent | null
           ) => {
             if (err) {
               reject(err);
@@ -649,128 +525,131 @@ describe('v1beta1.PredictionServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.directPredict as SinonStub
+        client.innerApiCalls.getCachedContent as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.directPredict as SinonStub
+        client.innerApiCalls.getCachedContent as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes directPredict with error', async () => {
+    it('invokes getCachedContent with error', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.DirectPredictRequest()
+        new protos.google.cloud.aiplatform.v1beta1.GetCachedContentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.DirectPredictRequest',
-        ['endpoint']
+        '.google.cloud.aiplatform.v1beta1.GetCachedContentRequest',
+        ['name']
       );
-      request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.directPredict = stubSimpleCall(
+      client.innerApiCalls.getCachedContent = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.directPredict(request), expectedError);
+      await assert.rejects(client.getCachedContent(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.directPredict as SinonStub
+        client.innerApiCalls.getCachedContent as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.directPredict as SinonStub
+        client.innerApiCalls.getCachedContent as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes directPredict with closed client', async () => {
+    it('invokes getCachedContent with closed client', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.DirectPredictRequest()
+        new protos.google.cloud.aiplatform.v1beta1.GetCachedContentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.DirectPredictRequest',
-        ['endpoint']
+        '.google.cloud.aiplatform.v1beta1.GetCachedContentRequest',
+        ['name']
       );
-      request.endpoint = defaultValue1;
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.directPredict(request), expectedError);
+      await assert.rejects(client.getCachedContent(request), expectedError);
     });
   });
 
-  describe('directRawPredict', () => {
-    it('invokes directRawPredict without error', async () => {
+  describe('updateCachedContent', () => {
+    it('invokes updateCachedContent without error', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.DirectRawPredictRequest()
+        new protos.google.cloud.aiplatform.v1beta1.UpdateCachedContentRequest()
       );
+      request.cachedContent ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.DirectRawPredictRequest',
-        ['endpoint']
+        '.google.cloud.aiplatform.v1beta1.UpdateCachedContentRequest',
+        ['cachedContent', 'name']
       );
-      request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      request.cachedContent.name = defaultValue1;
+      const expectedHeaderRequestParams = `cached_content.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.DirectRawPredictResponse()
+        new protos.google.cloud.aiplatform.v1beta1.CachedContent()
       );
-      client.innerApiCalls.directRawPredict = stubSimpleCall(expectedResponse);
-      const [response] = await client.directRawPredict(request);
+      client.innerApiCalls.updateCachedContent =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateCachedContent(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.directRawPredict as SinonStub
+        client.innerApiCalls.updateCachedContent as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.directRawPredict as SinonStub
+        client.innerApiCalls.updateCachedContent as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes directRawPredict without error using callback', async () => {
+    it('invokes updateCachedContent without error using callback', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.DirectRawPredictRequest()
+        new protos.google.cloud.aiplatform.v1beta1.UpdateCachedContentRequest()
       );
+      request.cachedContent ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.DirectRawPredictRequest',
-        ['endpoint']
+        '.google.cloud.aiplatform.v1beta1.UpdateCachedContentRequest',
+        ['cachedContent', 'name']
       );
-      request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      request.cachedContent.name = defaultValue1;
+      const expectedHeaderRequestParams = `cached_content.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.DirectRawPredictResponse()
+        new protos.google.cloud.aiplatform.v1beta1.CachedContent()
       );
-      client.innerApiCalls.directRawPredict =
+      client.innerApiCalls.updateCachedContent =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.directRawPredict(
+        client.updateCachedContent(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1beta1.IDirectRawPredictResponse | null
+            result?: protos.google.cloud.aiplatform.v1beta1.ICachedContent | null
           ) => {
             if (err) {
               reject(err);
@@ -783,128 +662,131 @@ describe('v1beta1.PredictionServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.directRawPredict as SinonStub
+        client.innerApiCalls.updateCachedContent as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.directRawPredict as SinonStub
+        client.innerApiCalls.updateCachedContent as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes directRawPredict with error', async () => {
+    it('invokes updateCachedContent with error', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.DirectRawPredictRequest()
+        new protos.google.cloud.aiplatform.v1beta1.UpdateCachedContentRequest()
       );
+      request.cachedContent ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.DirectRawPredictRequest',
-        ['endpoint']
+        '.google.cloud.aiplatform.v1beta1.UpdateCachedContentRequest',
+        ['cachedContent', 'name']
       );
-      request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      request.cachedContent.name = defaultValue1;
+      const expectedHeaderRequestParams = `cached_content.name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.directRawPredict = stubSimpleCall(
+      client.innerApiCalls.updateCachedContent = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.directRawPredict(request), expectedError);
+      await assert.rejects(client.updateCachedContent(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.directRawPredict as SinonStub
+        client.innerApiCalls.updateCachedContent as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.directRawPredict as SinonStub
+        client.innerApiCalls.updateCachedContent as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes directRawPredict with closed client', async () => {
+    it('invokes updateCachedContent with closed client', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.DirectRawPredictRequest()
+        new protos.google.cloud.aiplatform.v1beta1.UpdateCachedContentRequest()
       );
+      request.cachedContent ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.DirectRawPredictRequest',
-        ['endpoint']
+        '.google.cloud.aiplatform.v1beta1.UpdateCachedContentRequest',
+        ['cachedContent', 'name']
       );
-      request.endpoint = defaultValue1;
+      request.cachedContent.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.directRawPredict(request), expectedError);
+      await assert.rejects(client.updateCachedContent(request), expectedError);
     });
   });
 
-  describe('explain', () => {
-    it('invokes explain without error', async () => {
+  describe('deleteCachedContent', () => {
+    it('invokes deleteCachedContent without error', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ExplainRequest()
+        new protos.google.cloud.aiplatform.v1beta1.DeleteCachedContentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.ExplainRequest',
-        ['endpoint']
+        '.google.cloud.aiplatform.v1beta1.DeleteCachedContentRequest',
+        ['name']
       );
-      request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ExplainResponse()
+        new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.explain = stubSimpleCall(expectedResponse);
-      const [response] = await client.explain(request);
+      client.innerApiCalls.deleteCachedContent =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteCachedContent(request);
       assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.explain as SinonStub).getCall(
-        0
-      ).args[0];
+      const actualRequest = (
+        client.innerApiCalls.deleteCachedContent as SinonStub
+      ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.explain as SinonStub
+        client.innerApiCalls.deleteCachedContent as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes explain without error using callback', async () => {
+    it('invokes deleteCachedContent without error using callback', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ExplainRequest()
+        new protos.google.cloud.aiplatform.v1beta1.DeleteCachedContentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.ExplainRequest',
-        ['endpoint']
+        '.google.cloud.aiplatform.v1beta1.DeleteCachedContentRequest',
+        ['name']
       );
-      request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ExplainResponse()
+        new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.explain =
+      client.innerApiCalls.deleteCachedContent =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.explain(
+        client.deleteCachedContent(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1beta1.IExplainResponse | null
+            result?: protos.google.protobuf.IEmpty | null
           ) => {
             if (err) {
               reject(err);
@@ -916,126 +798,148 @@ describe('v1beta1.PredictionServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.explain as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.explain as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes explain with error', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ExplainRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.ExplainRequest',
-        ['endpoint']
-      );
-      request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.explain = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.explain(request), expectedError);
-      const actualRequest = (client.innerApiCalls.explain as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.explain as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes explain with closed client', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ExplainRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.ExplainRequest',
-        ['endpoint']
-      );
-      request.endpoint = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.explain(request), expectedError);
-    });
-  });
-
-  describe('countTokens', () => {
-    it('invokes countTokens without error', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.CountTokensRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.CountTokensRequest',
-        ['endpoint']
-      );
-      request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.CountTokensResponse()
-      );
-      client.innerApiCalls.countTokens = stubSimpleCall(expectedResponse);
-      const [response] = await client.countTokens(request);
-      assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.countTokens as SinonStub
+        client.innerApiCalls.deleteCachedContent as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.countTokens as SinonStub
+        client.innerApiCalls.deleteCachedContent as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes countTokens without error using callback', async () => {
+    it('invokes deleteCachedContent with error', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.CountTokensRequest()
+        new protos.google.cloud.aiplatform.v1beta1.DeleteCachedContentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.CountTokensRequest',
-        ['endpoint']
+        '.google.cloud.aiplatform.v1beta1.DeleteCachedContentRequest',
+        ['name']
       );
-      request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.CountTokensResponse()
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteCachedContent = stubSimpleCall(
+        undefined,
+        expectedError
       );
-      client.innerApiCalls.countTokens =
+      await assert.rejects(client.deleteCachedContent(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteCachedContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCachedContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteCachedContent with closed client', async () => {
+      const client =
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DeleteCachedContentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteCachedContentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteCachedContent(request), expectedError);
+    });
+  });
+
+  describe('listCachedContents', () => {
+    it('invokes listCachedContents without error', async () => {
+      const client =
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListCachedContentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListCachedContentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.CachedContent()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.CachedContent()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.CachedContent()
+        ),
+      ];
+      client.innerApiCalls.listCachedContents =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listCachedContents(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listCachedContents as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCachedContents as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listCachedContents without error using callback', async () => {
+      const client =
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListCachedContentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListCachedContentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.CachedContent()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.CachedContent()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.CachedContent()
+        ),
+      ];
+      client.innerApiCalls.listCachedContents =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.countTokens(
+        client.listCachedContents(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1beta1.ICountTokensResponse | null
+            result?:
+              | protos.google.cloud.aiplatform.v1beta1.ICachedContent[]
+              | null
           ) => {
             if (err) {
               reject(err);
@@ -1048,1105 +952,257 @@ describe('v1beta1.PredictionServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.countTokens as SinonStub
+        client.innerApiCalls.listCachedContents as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.countTokens as SinonStub
+        client.innerApiCalls.listCachedContents as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes countTokens with error', async () => {
+    it('invokes listCachedContents with error', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.CountTokensRequest()
+        new protos.google.cloud.aiplatform.v1beta1.ListCachedContentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.CountTokensRequest',
-        ['endpoint']
+        '.google.cloud.aiplatform.v1beta1.ListCachedContentsRequest',
+        ['parent']
       );
-      request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.countTokens = stubSimpleCall(
+      client.innerApiCalls.listCachedContents = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.countTokens(request), expectedError);
+      await assert.rejects(client.listCachedContents(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.countTokens as SinonStub
+        client.innerApiCalls.listCachedContents as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.countTokens as SinonStub
+        client.innerApiCalls.listCachedContents as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes countTokens with closed client', async () => {
+    it('invokes listCachedContentsStream without error', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.CountTokensRequest()
+        new protos.google.cloud.aiplatform.v1beta1.ListCachedContentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.CountTokensRequest',
-        ['endpoint']
+        '.google.cloud.aiplatform.v1beta1.ListCachedContentsRequest',
+        ['parent']
       );
-      request.endpoint = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.countTokens(request), expectedError);
-    });
-  });
-
-  describe('generateContent', () => {
-    it('invokes generateContent without error', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.GenerateContentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.GenerateContentRequest',
-        ['model']
-      );
-      request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.GenerateContentResponse()
-      );
-      client.innerApiCalls.generateContent = stubSimpleCall(expectedResponse);
-      const [response] = await client.generateContent(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.generateContent as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.generateContent as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes generateContent without error using callback', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.GenerateContentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.GenerateContentRequest',
-        ['model']
-      );
-      request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.GenerateContentResponse()
-      );
-      client.innerApiCalls.generateContent =
-        stubSimpleCallWithCallback(expectedResponse);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.CachedContent()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.CachedContent()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.CachedContent()
+        ),
+      ];
+      client.descriptors.page.listCachedContents.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listCachedContentsStream(request);
       const promise = new Promise((resolve, reject) => {
-        client.generateContent(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1beta1.IGenerateContentResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.generateContent as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.generateContent as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes generateContent with error', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.GenerateContentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.GenerateContentRequest',
-        ['model']
-      );
-      request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.generateContent = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.generateContent(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.generateContent as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.generateContent as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes generateContent with closed client', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.GenerateContentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.GenerateContentRequest',
-        ['model']
-      );
-      request.model = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.generateContent(request), expectedError);
-    });
-  });
-
-  describe('serverStreamingPredict', () => {
-    it('invokes serverStreamingPredict without error', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.StreamingPredictRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.StreamingPredictRequest',
-        ['endpoint']
-      );
-      request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.StreamingPredictResponse()
-      );
-      client.innerApiCalls.serverStreamingPredict =
-        stubServerStreamingCall(expectedResponse);
-      const stream = client.serverStreamingPredict(request);
-      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.CachedContent[] =
+          [];
         stream.on(
           'data',
-          (
-            response: protos.google.cloud.aiplatform.v1beta1.StreamingPredictResponse
-          ) => {
-            resolve(response);
+          (response: protos.google.cloud.aiplatform.v1beta1.CachedContent) => {
+            responses.push(response);
           }
         );
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.serverStreamingPredict as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.serverStreamingPredict as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes serverStreamingPredict without error and gaxServerStreamingRetries enabled', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          gaxServerStreamingRetries: true,
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.StreamingPredictRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.StreamingPredictRequest',
-        ['endpoint']
-      );
-      request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.StreamingPredictResponse()
-      );
-      client.innerApiCalls.serverStreamingPredict =
-        stubServerStreamingCall(expectedResponse);
-      const stream = client.serverStreamingPredict(request);
-      const promise = new Promise((resolve, reject) => {
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.aiplatform.v1beta1.StreamingPredictResponse
-          ) => {
-            resolve(response);
-          }
-        );
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.serverStreamingPredict as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.serverStreamingPredict as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes serverStreamingPredict with error', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.StreamingPredictRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.StreamingPredictRequest',
-        ['endpoint']
-      );
-      request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.serverStreamingPredict = stubServerStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.serverStreamingPredict(request);
-      const promise = new Promise((resolve, reject) => {
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.aiplatform.v1beta1.StreamingPredictResponse
-          ) => {
-            resolve(response);
-          }
-        );
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      const actualRequest = (
-        client.innerApiCalls.serverStreamingPredict as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.serverStreamingPredict as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes serverStreamingPredict with closed client', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.StreamingPredictRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.StreamingPredictRequest',
-        ['endpoint']
-      );
-      request.endpoint = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      const stream = client.serverStreamingPredict(request, {
-        retryRequestOptions: {noResponseRetries: 0},
-      });
-      const promise = new Promise((resolve, reject) => {
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.aiplatform.v1beta1.StreamingPredictResponse
-          ) => {
-            resolve(response);
-          }
-        );
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-    });
-    it('should create a client with gaxServerStreamingRetries enabled', () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          gaxServerStreamingRetries: true,
-        });
-      assert(client);
-    });
-  });
-
-  describe('streamGenerateContent', () => {
-    it('invokes streamGenerateContent without error', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.GenerateContentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.GenerateContentRequest',
-        ['model']
-      );
-      request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.GenerateContentResponse()
-      );
-      client.innerApiCalls.streamGenerateContent =
-        stubServerStreamingCall(expectedResponse);
-      const stream = client.streamGenerateContent(request);
-      const promise = new Promise((resolve, reject) => {
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.aiplatform.v1beta1.GenerateContentResponse
-          ) => {
-            resolve(response);
-          }
-        );
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.streamGenerateContent as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.streamGenerateContent as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes streamGenerateContent without error and gaxServerStreamingRetries enabled', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          gaxServerStreamingRetries: true,
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.GenerateContentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.GenerateContentRequest',
-        ['model']
-      );
-      request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.GenerateContentResponse()
-      );
-      client.innerApiCalls.streamGenerateContent =
-        stubServerStreamingCall(expectedResponse);
-      const stream = client.streamGenerateContent(request);
-      const promise = new Promise((resolve, reject) => {
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.aiplatform.v1beta1.GenerateContentResponse
-          ) => {
-            resolve(response);
-          }
-        );
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.streamGenerateContent as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.streamGenerateContent as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes streamGenerateContent with error', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.GenerateContentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.GenerateContentRequest',
-        ['model']
-      );
-      request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.streamGenerateContent = stubServerStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.streamGenerateContent(request);
-      const promise = new Promise((resolve, reject) => {
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.aiplatform.v1beta1.GenerateContentResponse
-          ) => {
-            resolve(response);
-          }
-        );
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      const actualRequest = (
-        client.innerApiCalls.streamGenerateContent as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.streamGenerateContent as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes streamGenerateContent with closed client', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.GenerateContentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.GenerateContentRequest',
-        ['model']
-      );
-      request.model = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      const stream = client.streamGenerateContent(request, {
-        retryRequestOptions: {noResponseRetries: 0},
-      });
-      const promise = new Promise((resolve, reject) => {
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.aiplatform.v1beta1.GenerateContentResponse
-          ) => {
-            resolve(response);
-          }
-        );
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-    });
-    it('should create a client with gaxServerStreamingRetries enabled', () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          gaxServerStreamingRetries: true,
-        });
-      assert(client);
-    });
-  });
-
-  describe('chatCompletions', () => {
-    it('invokes chatCompletions without error', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ChatCompletionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.ChatCompletionsRequest',
-        ['endpoint']
-      );
-      request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.api.HttpBody()
-      );
-      client.innerApiCalls.chatCompletions =
-        stubServerStreamingCall(expectedResponse);
-      const stream = client.chatCompletions(request);
-      const promise = new Promise((resolve, reject) => {
-        stream.on('data', (response: protos.google.api.HttpBody) => {
-          resolve(response);
+        stream.on('end', () => {
+          resolve(responses);
         });
         stream.on('error', (err: Error) => {
           reject(err);
         });
       });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.chatCompletions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.chatCompletions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes chatCompletions without error and gaxServerStreamingRetries enabled', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          gaxServerStreamingRetries: true,
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ChatCompletionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.ChatCompletionsRequest',
-        ['endpoint']
-      );
-      request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.api.HttpBody()
-      );
-      client.innerApiCalls.chatCompletions =
-        stubServerStreamingCall(expectedResponse);
-      const stream = client.chatCompletions(request);
-      const promise = new Promise((resolve, reject) => {
-        stream.on('data', (response: protos.google.api.HttpBody) => {
-          resolve(response);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.chatCompletions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.chatCompletions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes chatCompletions with error', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ChatCompletionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.ChatCompletionsRequest',
-        ['endpoint']
-      );
-      request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.chatCompletions = stubServerStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.chatCompletions(request);
-      const promise = new Promise((resolve, reject) => {
-        stream.on('data', (response: protos.google.api.HttpBody) => {
-          resolve(response);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      const actualRequest = (
-        client.innerApiCalls.chatCompletions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.chatCompletions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes chatCompletions with closed client', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.ChatCompletionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.ChatCompletionsRequest',
-        ['endpoint']
-      );
-      request.endpoint = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      const stream = client.chatCompletions(request, {
-        retryRequestOptions: {noResponseRetries: 0},
-      });
-      const promise = new Promise((resolve, reject) => {
-        stream.on('data', (response: protos.google.api.HttpBody) => {
-          resolve(response);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-    });
-    it('should create a client with gaxServerStreamingRetries enabled', () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          gaxServerStreamingRetries: true,
-        });
-      assert(client);
-    });
-  });
-
-  describe('streamDirectPredict', () => {
-    it('invokes streamDirectPredict without error', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.StreamDirectPredictRequest()
-      );
-
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.StreamDirectPredictResponse()
-      );
-      client.innerApiCalls.streamDirectPredict =
-        stubBidiStreamingCall(expectedResponse);
-      const stream = client.streamDirectPredict();
-      const promise = new Promise((resolve, reject) => {
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.aiplatform.v1beta1.StreamDirectPredictResponse
-          ) => {
-            resolve(response);
-          }
-        );
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-        stream.write(request);
-        stream.end();
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.innerApiCalls.streamDirectPredict as SinonStub)
+        (client.descriptors.page.listCachedContents.createStream as SinonStub)
           .getCall(0)
-          .calledWith(null)
+          .calledWith(client.innerApiCalls.listCachedContents, request)
       );
-      assert.deepStrictEqual(
-        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
-          .args[0],
-        request
+      assert(
+        (client.descriptors.page.listCachedContents.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
-    it('invokes streamDirectPredict with error', async () => {
+    it('invokes listCachedContentsStream with error', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.StreamDirectPredictRequest()
+        new protos.google.cloud.aiplatform.v1beta1.ListCachedContentsRequest()
       );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListCachedContentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.streamDirectPredict = stubBidiStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.streamDirectPredict();
+      client.descriptors.page.listCachedContents.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listCachedContentsStream(request);
       const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.CachedContent[] =
+          [];
         stream.on(
           'data',
-          (
-            response: protos.google.cloud.aiplatform.v1beta1.StreamDirectPredictResponse
-          ) => {
-            resolve(response);
+          (response: protos.google.cloud.aiplatform.v1beta1.CachedContent) => {
+            responses.push(response);
           }
         );
+        stream.on('end', () => {
+          resolve(responses);
+        });
         stream.on('error', (err: Error) => {
           reject(err);
         });
-        stream.write(request);
-        stream.end();
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.innerApiCalls.streamDirectPredict as SinonStub)
+        (client.descriptors.page.listCachedContents.createStream as SinonStub)
           .getCall(0)
-          .calledWith(null)
+          .calledWith(client.innerApiCalls.listCachedContents, request)
       );
-      assert.deepStrictEqual(
-        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
-          .args[0],
-        request
-      );
-    });
-  });
-
-  describe('streamDirectRawPredict', () => {
-    it('invokes streamDirectRawPredict without error', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.StreamDirectRawPredictRequest()
-      );
-
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.StreamDirectRawPredictResponse()
-      );
-      client.innerApiCalls.streamDirectRawPredict =
-        stubBidiStreamingCall(expectedResponse);
-      const stream = client.streamDirectRawPredict();
-      const promise = new Promise((resolve, reject) => {
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.aiplatform.v1beta1.StreamDirectRawPredictResponse
-          ) => {
-            resolve(response);
-          }
-        );
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-        stream.write(request);
-        stream.end();
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.streamDirectRawPredict as SinonStub)
+        (client.descriptors.page.listCachedContents.createStream as SinonStub)
           .getCall(0)
-          .calledWith(null)
-      );
-      assert.deepStrictEqual(
-        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
-          .args[0],
-        request
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
-    it('invokes streamDirectRawPredict with error', async () => {
+    it('uses async iteration with listCachedContents without error', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.StreamDirectRawPredictRequest()
+        new protos.google.cloud.aiplatform.v1beta1.ListCachedContentsRequest()
       );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListCachedContentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.CachedContent()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.CachedContent()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.CachedContent()
+        ),
+      ];
+      client.descriptors.page.listCachedContents.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.aiplatform.v1beta1.ICachedContent[] =
+        [];
+      const iterable = client.listCachedContentsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listCachedContents.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listCachedContents.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listCachedContents with error', async () => {
+      const client =
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListCachedContentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListCachedContentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.streamDirectRawPredict = stubBidiStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.streamDirectRawPredict();
-      const promise = new Promise((resolve, reject) => {
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.aiplatform.v1beta1.StreamDirectRawPredictResponse
-          ) => {
-            resolve(response);
-          }
-        );
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-        stream.write(request);
-        stream.end();
+      client.descriptors.page.listCachedContents.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listCachedContentsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.ICachedContent[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
       });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.innerApiCalls.streamDirectRawPredict as SinonStub)
-          .getCall(0)
-          .calledWith(null)
-      );
       assert.deepStrictEqual(
-        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
-          .args[0],
+        (
+          client.descriptors.page.listCachedContents.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
-    });
-  });
-
-  describe('streamingPredict', () => {
-    it('invokes streamingPredict without error', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.StreamingPredictRequest()
-      );
-
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.StreamingPredictResponse()
-      );
-      client.innerApiCalls.streamingPredict =
-        stubBidiStreamingCall(expectedResponse);
-      const stream = client.streamingPredict();
-      const promise = new Promise((resolve, reject) => {
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.aiplatform.v1beta1.StreamingPredictResponse
-          ) => {
-            resolve(response);
-          }
-        );
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-        stream.write(request);
-        stream.end();
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.streamingPredict as SinonStub)
+        (client.descriptors.page.listCachedContents.asyncIterate as SinonStub)
           .getCall(0)
-          .calledWith(null)
-      );
-      assert.deepStrictEqual(
-        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
-          .args[0],
-        request
-      );
-    });
-
-    it('invokes streamingPredict with error', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.StreamingPredictRequest()
-      );
-      const expectedError = new Error('expected');
-      client.innerApiCalls.streamingPredict = stubBidiStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.streamingPredict();
-      const promise = new Promise((resolve, reject) => {
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.aiplatform.v1beta1.StreamingPredictResponse
-          ) => {
-            resolve(response);
-          }
-        );
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-        stream.write(request);
-        stream.end();
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.innerApiCalls.streamingPredict as SinonStub)
-          .getCall(0)
-          .calledWith(null)
-      );
-      assert.deepStrictEqual(
-        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
-          .args[0],
-        request
-      );
-    });
-  });
-
-  describe('streamingRawPredict', () => {
-    it('invokes streamingRawPredict without error', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.StreamingRawPredictRequest()
-      );
-
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.StreamingRawPredictResponse()
-      );
-      client.innerApiCalls.streamingRawPredict =
-        stubBidiStreamingCall(expectedResponse);
-      const stream = client.streamingRawPredict();
-      const promise = new Promise((resolve, reject) => {
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.aiplatform.v1beta1.StreamingRawPredictResponse
-          ) => {
-            resolve(response);
-          }
-        );
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-        stream.write(request);
-        stream.end();
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.streamingRawPredict as SinonStub)
-          .getCall(0)
-          .calledWith(null)
-      );
-      assert.deepStrictEqual(
-        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
-          .args[0],
-        request
-      );
-    });
-
-    it('invokes streamingRawPredict with error', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.StreamingRawPredictRequest()
-      );
-      const expectedError = new Error('expected');
-      client.innerApiCalls.streamingRawPredict = stubBidiStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.streamingRawPredict();
-      const promise = new Promise((resolve, reject) => {
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.aiplatform.v1beta1.StreamingRawPredictResponse
-          ) => {
-            resolve(response);
-          }
-        );
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-        stream.write(request);
-        stream.end();
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.innerApiCalls.streamingRawPredict as SinonStub)
-          .getCall(0)
-          .calledWith(null)
-      );
-      assert.deepStrictEqual(
-        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
-          .args[0],
-        request
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2177,7 +1233,7 @@ describe('v1beta1.PredictionServiceClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2222,7 +1278,7 @@ describe('v1beta1.PredictionServiceClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2255,7 +1311,7 @@ describe('v1beta1.PredictionServiceClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2286,7 +1342,7 @@ describe('v1beta1.PredictionServiceClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2331,7 +1387,7 @@ describe('v1beta1.PredictionServiceClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2364,7 +1420,7 @@ describe('v1beta1.PredictionServiceClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2398,7 +1454,7 @@ describe('v1beta1.PredictionServiceClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2443,7 +1499,7 @@ describe('v1beta1.PredictionServiceClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2479,7 +1535,7 @@ describe('v1beta1.PredictionServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2510,7 +1566,7 @@ describe('v1beta1.PredictionServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2555,7 +1611,7 @@ describe('v1beta1.PredictionServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2591,7 +1647,7 @@ describe('v1beta1.PredictionServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2640,7 +1696,7 @@ describe('v1beta1.PredictionServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2691,7 +1747,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         annotation: 'annotationValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2779,7 +1835,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         annotation_spec: 'annotationSpecValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2857,7 +1913,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         artifact: 'artifactValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2933,7 +1989,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         batch_prediction_job: 'batchPredictionJobValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3011,7 +2067,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         cached_content: 'cachedContentValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3077,7 +2133,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         context: 'contextValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3153,7 +2209,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         custom_job: 'customJobValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3219,7 +2275,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         data_item: 'dataItemValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3295,7 +2351,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         data_labeling_job: 'dataLabelingJobValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3361,7 +2417,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         dataset: 'datasetValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3427,7 +2483,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         dataset_version: 'datasetVersionValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3504,7 +2560,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         deployment_resource_pool: 'deploymentResourcePoolValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3587,7 +2643,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3664,7 +2720,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         execution: 'executionValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3740,7 +2796,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         extension: 'extensionValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3805,7 +2861,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         feature_group: 'featureGroupValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3870,7 +2926,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         feature_online_store: 'featureOnlineStoreValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3949,7 +3005,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4027,7 +3083,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4104,7 +3160,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         featurestore: 'featurestoreValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4169,7 +3225,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4251,7 +3307,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         index: 'indexValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4316,7 +3372,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         index_endpoint: 'indexEndpointValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4373,6 +3429,56 @@ describe('v1beta1.PredictionServiceClient', () => {
       });
     });
 
+    describe('location', () => {
+      const fakePath = '/rendered/path/location';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+      };
+      const client =
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.locationPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.locationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('locationPath', () => {
+        const result = client.locationPath('projectValue', 'locationValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.locationPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromLocationName', () => {
+        const result = client.matchProjectFromLocationName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromLocationName', () => {
+        const result = client.matchLocationFromLocationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('metadataSchema', () => {
       const fakePath = '/rendered/path/metadataSchema';
       const expectedParameters = {
@@ -4382,7 +3488,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         metadata_schema: 'metadataSchemaValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4460,7 +3566,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         metadata_store: 'metadataStoreValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4525,7 +3631,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         model: 'modelValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4590,7 +3696,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4671,7 +3777,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4749,7 +3855,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         slice: 'sliceValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4857,7 +3963,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         model_monitor: 'modelMonitorValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4923,7 +4029,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         model_monitoring_job: 'modelMonitoringJobValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -5016,7 +4122,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         nas_job: 'nasJobValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -5082,7 +4188,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         nas_trial_detail: 'nasTrialDetailValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -5159,7 +4265,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         notebook_execution_job: 'notebookExecutionJobValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -5241,7 +4347,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         notebook_runtime: 'notebookRuntimeValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -5307,7 +4413,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         notebook_runtime_template: 'notebookRuntimeTemplateValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -5389,7 +4495,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         persistent_resource: 'persistentResourceValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -5467,7 +4573,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         pipeline_job: 'pipelineJobValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -5524,6 +4630,45 @@ describe('v1beta1.PredictionServiceClient', () => {
       });
     });
 
+    describe('project', () => {
+      const fakePath = '/rendered/path/project';
+      const expectedParameters = {
+        project: 'projectValue',
+      };
+      const client =
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.projectPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectPath', () => {
+        const result = client.projectPath('projectValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectName', () => {
+        const result = client.matchProjectFromProjectName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('projectLocationEndpoint', () => {
       const fakePath = '/rendered/path/projectLocationEndpoint';
       const expectedParameters = {
@@ -5532,7 +4677,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         endpoint: 'endpointValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -5613,7 +4758,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         feature: 'featureValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -5717,7 +4862,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         feature: 'featureValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -5842,7 +4987,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         model: 'modelValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -5934,7 +5079,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         model: 'modelValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -5988,7 +5133,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         rag_corpus: 'ragCorpusValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -6054,7 +5199,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         rag_file: 'ragFileValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -6130,7 +5275,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         reasoning_engine: 'reasoningEngineValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -6197,7 +5342,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         saved_query: 'savedQueryValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -6273,7 +5418,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         schedule: 'scheduleValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -6338,7 +5483,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         specialist_pool: 'specialistPoolValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -6404,7 +5549,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         study: 'studyValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -6469,7 +5614,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         tensorboard: 'tensorboardValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -6535,7 +5680,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         experiment: 'experimentValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -6632,7 +5777,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         run: 'runValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -6722,7 +5867,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         time_series: 'timeSeriesValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -6846,7 +5991,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         training_pipeline: 'trainingPipelineValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -6916,7 +6061,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         trial: 'trialValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -6992,7 +6137,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         tuning_job: 'tuningJobValue',
       };
       const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+        new genaicacheserviceModule.v1beta1.GenAiCacheServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });

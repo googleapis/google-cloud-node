@@ -376,6 +376,50 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1_generated_DatasetService_UpdateDatasetVersion_async",
+            "title": "DatasetService updateDatasetVersion Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates a DatasetVersion.",
+            "canonical": true,
+            "file": "dataset_service.update_dataset_version.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 61,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateDatasetVersion",
+                "fullName": "google.cloud.aiplatform.v1.DatasetService.UpdateDatasetVersion",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "dataset_version",
+                        "type": ".google.cloud.aiplatform.v1.DatasetVersion"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.DatasetVersion",
+                "client": {
+                    "shortName": "DatasetServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.DatasetServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateDatasetVersion",
+                    "fullName": "google.cloud.aiplatform.v1.DatasetService.UpdateDatasetVersion",
+                    "service": {
+                        "shortName": "DatasetService",
+                        "fullName": "google.cloud.aiplatform.v1.DatasetService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1_generated_DatasetService_DeleteDatasetVersion_async",
             "title": "DatasetService deleteDatasetVersion Sample",
             "origin": "API_DEFINITION",
@@ -9148,6 +9192,50 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1_generated_NotebookService_UpdateNotebookRuntimeTemplate_async",
+            "title": "DatasetService updateNotebookRuntimeTemplate Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates a NotebookRuntimeTemplate.",
+            "canonical": true,
+            "file": "notebook_service.update_notebook_runtime_template.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateNotebookRuntimeTemplate",
+                "fullName": "google.cloud.aiplatform.v1.NotebookService.UpdateNotebookRuntimeTemplate",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "notebook_runtime_template",
+                        "type": ".google.cloud.aiplatform.v1.NotebookRuntimeTemplate"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.NotebookRuntimeTemplate",
+                "client": {
+                    "shortName": "NotebookServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.NotebookServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateNotebookRuntimeTemplate",
+                    "fullName": "google.cloud.aiplatform.v1.NotebookService.UpdateNotebookRuntimeTemplate",
+                    "service": {
+                        "shortName": "NotebookService",
+                        "fullName": "google.cloud.aiplatform.v1.NotebookService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1_generated_NotebookService_AssignNotebookRuntime_async",
             "title": "DatasetService assignNotebookRuntime Sample",
             "origin": "API_DEFINITION",
@@ -10754,7 +10842,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 86,
+                    "end": 91,
                     "type": "FULL"
                 }
             ],
@@ -10778,6 +10866,10 @@
                     {
                         "name": "tools",
                         "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "tool_config",
+                        "type": ".google.cloud.aiplatform.v1.ToolConfig"
                     },
                     {
                         "name": "safety_settings",
@@ -10814,7 +10906,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 88,
+                    "end": 93,
                     "type": "FULL"
                 }
             ],
@@ -10838,6 +10930,10 @@
                     {
                         "name": "tools",
                         "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "tool_config",
+                        "type": ".google.cloud.aiplatform.v1.ToolConfig"
                     },
                     {
                         "name": "safety_settings",
