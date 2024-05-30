@@ -1,0 +1,175 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "grafeas.v1",
+  "libraryPackage": "@google-cloud/grafeas",
+  "services": {
+    "Grafeas": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "GrafeasClient",
+          "rpcs": {
+            "GetOccurrence": {
+              "methods": [
+                "getOccurrence"
+              ]
+            },
+            "DeleteOccurrence": {
+              "methods": [
+                "deleteOccurrence"
+              ]
+            },
+            "CreateOccurrence": {
+              "methods": [
+                "createOccurrence"
+              ]
+            },
+            "BatchCreateOccurrences": {
+              "methods": [
+                "batchCreateOccurrences"
+              ]
+            },
+            "UpdateOccurrence": {
+              "methods": [
+                "updateOccurrence"
+              ]
+            },
+            "GetOccurrenceNote": {
+              "methods": [
+                "getOccurrenceNote"
+              ]
+            },
+            "GetNote": {
+              "methods": [
+                "getNote"
+              ]
+            },
+            "DeleteNote": {
+              "methods": [
+                "deleteNote"
+              ]
+            },
+            "CreateNote": {
+              "methods": [
+                "createNote"
+              ]
+            },
+            "BatchCreateNotes": {
+              "methods": [
+                "batchCreateNotes"
+              ]
+            },
+            "UpdateNote": {
+              "methods": [
+                "updateNote"
+              ]
+            },
+            "ListOccurrences": {
+              "methods": [
+                "listOccurrences",
+                "listOccurrencesStream",
+                "listOccurrencesAsync"
+              ]
+            },
+            "ListNotes": {
+              "methods": [
+                "listNotes",
+                "listNotesStream",
+                "listNotesAsync"
+              ]
+            },
+            "ListNoteOccurrences": {
+              "methods": [
+                "listNoteOccurrences",
+                "listNoteOccurrencesStream",
+                "listNoteOccurrencesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "GrafeasClient",
+          "rpcs": {
+            "GetOccurrence": {
+              "methods": [
+                "getOccurrence"
+              ]
+            },
+            "DeleteOccurrence": {
+              "methods": [
+                "deleteOccurrence"
+              ]
+            },
+            "CreateOccurrence": {
+              "methods": [
+                "createOccurrence"
+              ]
+            },
+            "BatchCreateOccurrences": {
+              "methods": [
+                "batchCreateOccurrences"
+              ]
+            },
+            "UpdateOccurrence": {
+              "methods": [
+                "updateOccurrence"
+              ]
+            },
+            "GetOccurrenceNote": {
+              "methods": [
+                "getOccurrenceNote"
+              ]
+            },
+            "GetNote": {
+              "methods": [
+                "getNote"
+              ]
+            },
+            "DeleteNote": {
+              "methods": [
+                "deleteNote"
+              ]
+            },
+            "CreateNote": {
+              "methods": [
+                "createNote"
+              ]
+            },
+            "BatchCreateNotes": {
+              "methods": [
+                "batchCreateNotes"
+              ]
+            },
+            "UpdateNote": {
+              "methods": [
+                "updateNote"
+              ]
+            },
+            "ListOccurrences": {
+              "methods": [
+                "listOccurrences",
+                "listOccurrencesStream",
+                "listOccurrencesAsync"
+              ]
+            },
+            "ListNotes": {
+              "methods": [
+                "listNotes",
+                "listNotesStream",
+                "listNotesAsync"
+              ]
+            },
+            "ListNoteOccurrences": {
+              "methods": [
+                "listNoteOccurrences",
+                "listNoteOccurrencesStream",
+                "listNoteOccurrencesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
