@@ -904,6 +904,7 @@
                          * @property {string|null} [tfVersionConstraint] Deployment tfVersionConstraint
                          * @property {string|null} [tfVersion] Deployment tfVersion
                          * @property {google.cloud.config.v1.QuotaValidation|null} [quotaValidation] Deployment quotaValidation
+                         * @property {Object.<string,string>|null} [annotations] Deployment annotations
                          */
     
                         /**
@@ -917,6 +918,7 @@
                         function Deployment(properties) {
                             this.labels = {};
                             this.tfErrors = [];
+                            this.annotations = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -1099,6 +1101,14 @@
                          */
                         Deployment.prototype.quotaValidation = 0;
     
+                        /**
+                         * Deployment annotations.
+                         * @member {Object.<string,string>} annotations
+                         * @memberof google.cloud.config.v1.Deployment
+                         * @instance
+                         */
+                        Deployment.prototype.annotations = $util.emptyObject;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -1238,6 +1248,9 @@
                                 writer.uint32(/* id 22, wireType 2 =*/178).string(message.tfVersion);
                             if (message.quotaValidation != null && Object.hasOwnProperty.call(message, "quotaValidation"))
                                 writer.uint32(/* id 23, wireType 0 =*/184).int32(message.quotaValidation);
+                            if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
+                                for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 24, wireType 2 =*/194).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
                             return writer;
                         };
     
@@ -1379,6 +1392,29 @@
                                     }
                                 case 23: {
                                         message.quotaValidation = reader.int32();
+                                        break;
+                                    }
+                                case 24: {
+                                        if (message.annotations === $util.emptyObject)
+                                            message.annotations = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.annotations[key] = value;
                                         break;
                                     }
                                 default:
@@ -1552,6 +1588,14 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                                if (!$util.isObject(message.annotations))
+                                    return "annotations: object expected";
+                                var key = Object.keys(message.annotations);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.annotations[key[i]]))
+                                        return "annotations: string{k:string} expected";
+                            }
                             return null;
                         };
     
@@ -1760,6 +1804,13 @@
                                 message.quotaValidation = 2;
                                 break;
                             }
+                            if (object.annotations) {
+                                if (typeof object.annotations !== "object")
+                                    throw TypeError(".google.cloud.config.v1.Deployment.annotations: object expected");
+                                message.annotations = {};
+                                for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i)
+                                    message.annotations[keys[i]] = String(object.annotations[keys[i]]);
+                            }
                             return message;
                         };
     
@@ -1778,8 +1829,10 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.tfErrors = [];
-                            if (options.objects || options.defaults)
+                            if (options.objects || options.defaults) {
                                 object.labels = {};
+                                object.annotations = {};
+                            }
                             if (options.defaults) {
                                 object.name = "";
                                 object.createTime = null;
@@ -1865,6 +1918,11 @@
                                 object.tfVersion = message.tfVersion;
                             if (message.quotaValidation != null && message.hasOwnProperty("quotaValidation"))
                                 object.quotaValidation = options.enums === String ? $root.google.cloud.config.v1.QuotaValidation[message.quotaValidation] === undefined ? message.quotaValidation : $root.google.cloud.config.v1.QuotaValidation[message.quotaValidation] : message.quotaValidation;
+                            if (message.annotations && (keys2 = Object.keys(message.annotations)).length) {
+                                object.annotations = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.annotations[keys2[j]] = message.annotations[keys2[j]];
+                            }
                             return object;
                         };
     
@@ -11569,6 +11627,8 @@
                          * @property {string|null} [errorLogs] Preview errorLogs
                          * @property {google.cloud.config.v1.IPreviewArtifacts|null} [previewArtifacts] Preview previewArtifacts
                          * @property {string|null} [logs] Preview logs
+                         * @property {string|null} [tfVersion] Preview tfVersion
+                         * @property {string|null} [tfVersionConstraint] Preview tfVersionConstraint
                          */
     
                         /**
@@ -11724,6 +11784,22 @@
                          */
                         Preview.prototype.logs = "";
     
+                        /**
+                         * Preview tfVersion.
+                         * @member {string} tfVersion
+                         * @memberof google.cloud.config.v1.Preview
+                         * @instance
+                         */
+                        Preview.prototype.tfVersion = "";
+    
+                        /**
+                         * Preview tfVersionConstraint.
+                         * @member {string|null|undefined} tfVersionConstraint
+                         * @memberof google.cloud.config.v1.Preview
+                         * @instance
+                         */
+                        Preview.prototype.tfVersionConstraint = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -11757,6 +11833,17 @@
                          */
                         Object.defineProperty(Preview.prototype, "_workerPool", {
                             get: $util.oneOfGetter($oneOfFields = ["workerPool"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Preview _tfVersionConstraint.
+                         * @member {"tfVersionConstraint"|undefined} _tfVersionConstraint
+                         * @memberof google.cloud.config.v1.Preview
+                         * @instance
+                         */
+                        Object.defineProperty(Preview.prototype, "_tfVersionConstraint", {
+                            get: $util.oneOfGetter($oneOfFields = ["tfVersionConstraint"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -11820,6 +11907,10 @@
                                 $root.google.cloud.config.v1.PreviewArtifacts.encode(message.previewArtifacts, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
                             if (message.logs != null && Object.hasOwnProperty.call(message, "logs"))
                                 writer.uint32(/* id 17, wireType 2 =*/138).string(message.logs);
+                            if (message.tfVersion != null && Object.hasOwnProperty.call(message, "tfVersion"))
+                                writer.uint32(/* id 18, wireType 2 =*/146).string(message.tfVersion);
+                            if (message.tfVersionConstraint != null && Object.hasOwnProperty.call(message, "tfVersionConstraint"))
+                                writer.uint32(/* id 19, wireType 2 =*/154).string(message.tfVersionConstraint);
                             return writer;
                         };
     
@@ -11941,6 +12032,14 @@
                                     }
                                 case 17: {
                                         message.logs = reader.string();
+                                        break;
+                                    }
+                                case 18: {
+                                        message.tfVersion = reader.string();
+                                        break;
+                                    }
+                                case 19: {
+                                        message.tfVersionConstraint = reader.string();
                                         break;
                                     }
                                 default:
@@ -12083,6 +12182,14 @@
                             if (message.logs != null && message.hasOwnProperty("logs"))
                                 if (!$util.isString(message.logs))
                                     return "logs: string expected";
+                            if (message.tfVersion != null && message.hasOwnProperty("tfVersion"))
+                                if (!$util.isString(message.tfVersion))
+                                    return "tfVersion: string expected";
+                            if (message.tfVersionConstraint != null && message.hasOwnProperty("tfVersionConstraint")) {
+                                properties._tfVersionConstraint = 1;
+                                if (!$util.isString(message.tfVersionConstraint))
+                                    return "tfVersionConstraint: string expected";
+                            }
                             return null;
                         };
     
@@ -12247,6 +12354,10 @@
                             }
                             if (object.logs != null)
                                 message.logs = String(object.logs);
+                            if (object.tfVersion != null)
+                                message.tfVersion = String(object.tfVersion);
+                            if (object.tfVersionConstraint != null)
+                                message.tfVersionConstraint = String(object.tfVersionConstraint);
                             return message;
                         };
     
@@ -12280,6 +12391,7 @@
                                 object.previewMode = options.enums === String ? "PREVIEW_MODE_UNSPECIFIED" : 0;
                                 object.previewArtifacts = null;
                                 object.logs = "";
+                                object.tfVersion = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -12331,6 +12443,13 @@
                                 object.previewArtifacts = $root.google.cloud.config.v1.PreviewArtifacts.toObject(message.previewArtifacts, options);
                             if (message.logs != null && message.hasOwnProperty("logs"))
                                 object.logs = message.logs;
+                            if (message.tfVersion != null && message.hasOwnProperty("tfVersion"))
+                                object.tfVersion = message.tfVersion;
+                            if (message.tfVersionConstraint != null && message.hasOwnProperty("tfVersionConstraint")) {
+                                object.tfVersionConstraint = message.tfVersionConstraint;
+                                if (options.oneofs)
+                                    object._tfVersionConstraint = "tfVersionConstraint";
+                            }
                             return object;
                         };
     

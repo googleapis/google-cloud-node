@@ -14,13 +14,13 @@
     "test": "mocha --timeout 10000 --exit"
   },
   "dependencies": {
-    "@google-cloud/scheduler": "^4.2.0",
+    "@google-cloud/scheduler": "^4.3.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^8.0.0",
-    "supertest": "^6.0.0"
+    "supertest": "^7.0.0"
   }
 }

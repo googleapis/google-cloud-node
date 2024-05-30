@@ -2409,8 +2409,9 @@
                 "csharp_namespace": "Google.Apps.Chat.V1",
                 "go_package": "cloud.google.com/go/chat/apiv1/chatpb;chatpb",
                 "java_multiple_files": true,
-                "java_outer_classname": "SpaceSetupProto",
+                "java_outer_classname": "ThreadReadStateProto",
                 "java_package": "com.google.chat.v1",
+                "objc_class_prefix": "DYNAPIProto",
                 "php_namespace": "Google\\Apps\\Chat\\V1",
                 "ruby_package": "Google::Apps::Chat::V1"
               },
@@ -2753,7 +2754,7 @@
                 "ChatService": {
                   "options": {
                     "(google.api.default_host)": "chat.googleapis.com",
-                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/chat.bot,https://www.googleapis.com/auth/chat.delete,https://www.googleapis.com/auth/chat.import,https://www.googleapis.com/auth/chat.memberships,https://www.googleapis.com/auth/chat.memberships.app,https://www.googleapis.com/auth/chat.memberships.readonly,https://www.googleapis.com/auth/chat.messages,https://www.googleapis.com/auth/chat.messages.create,https://www.googleapis.com/auth/chat.messages.reactions,https://www.googleapis.com/auth/chat.messages.reactions.create,https://www.googleapis.com/auth/chat.messages.reactions.readonly,https://www.googleapis.com/auth/chat.messages.readonly,https://www.googleapis.com/auth/chat.spaces,https://www.googleapis.com/auth/chat.spaces.create,https://www.googleapis.com/auth/chat.spaces.readonly"
+                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/chat.bot,https://www.googleapis.com/auth/chat.delete,https://www.googleapis.com/auth/chat.import,https://www.googleapis.com/auth/chat.memberships,https://www.googleapis.com/auth/chat.memberships.app,https://www.googleapis.com/auth/chat.memberships.readonly,https://www.googleapis.com/auth/chat.messages,https://www.googleapis.com/auth/chat.messages.create,https://www.googleapis.com/auth/chat.messages.reactions,https://www.googleapis.com/auth/chat.messages.reactions.create,https://www.googleapis.com/auth/chat.messages.reactions.readonly,https://www.googleapis.com/auth/chat.messages.readonly,https://www.googleapis.com/auth/chat.spaces,https://www.googleapis.com/auth/chat.spaces.create,https://www.googleapis.com/auth/chat.spaces.readonly,https://www.googleapis.com/auth/chat.users.readstate,https://www.googleapis.com/auth/chat.users.readstate.readonly"
                   },
                   "methods": {
                     "CreateMessage": {
@@ -3173,6 +3174,62 @@
                         {
                           "(google.api.http)": {
                             "delete": "/v1/{name=spaces/*/messages/*/reactions/*}"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
+                    },
+                    "GetSpaceReadState": {
+                      "requestType": "GetSpaceReadStateRequest",
+                      "responseType": "SpaceReadState",
+                      "options": {
+                        "(google.api.http).get": "/v1/{name=users/*/spaces/*/spaceReadState}",
+                        "(google.api.method_signature)": "name"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1/{name=users/*/spaces/*/spaceReadState}"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
+                    },
+                    "UpdateSpaceReadState": {
+                      "requestType": "UpdateSpaceReadStateRequest",
+                      "responseType": "SpaceReadState",
+                      "options": {
+                        "(google.api.http).patch": "/v1/{space_read_state.name=users/*/spaces/*/spaceReadState}",
+                        "(google.api.http).body": "space_read_state",
+                        "(google.api.method_signature)": "space_read_state,update_mask"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "patch": "/v1/{space_read_state.name=users/*/spaces/*/spaceReadState}",
+                            "body": "space_read_state"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "space_read_state,update_mask"
+                        }
+                      ]
+                    },
+                    "GetThreadReadState": {
+                      "requestType": "GetThreadReadStateRequest",
+                      "responseType": "ThreadReadState",
+                      "options": {
+                        "(google.api.http).get": "/v1/{name=users/*/spaces/*/threads/*/threadReadState}",
+                        "(google.api.method_signature)": "name"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1/{name=users/*/spaces/*/threads/*/threadReadState}"
                           }
                         },
                         {
@@ -4321,7 +4378,10 @@
                   "fields": {
                     "uid": {
                       "type": "string",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   }
                 },
@@ -4688,6 +4748,56 @@
                     "HISTORY_ON": 2
                   }
                 },
+                "SpaceReadState": {
+                  "options": {
+                    "(google.api.resource).type": "chat.googleapis.com/SpaceReadState",
+                    "(google.api.resource).pattern": "users/{user}/spaces/{space}/spaceReadState",
+                    "(google.api.resource).singular": "spaceReadState"
+                  },
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "lastReadTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "GetSpaceReadStateRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "chat.googleapis.com/SpaceReadState"
+                      }
+                    }
+                  }
+                },
+                "UpdateSpaceReadStateRequest": {
+                  "fields": {
+                    "spaceReadState": {
+                      "type": "SpaceReadState",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "updateMask": {
+                      "type": "google.protobuf.FieldMask",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
+                },
                 "SetUpSpaceRequest": {
                   "fields": {
                     "space": {
@@ -4710,6 +4820,35 @@
                       "id": 4,
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "ThreadReadState": {
+                  "options": {
+                    "(google.api.resource).type": "chat.googleapis.com/ThreadReadState",
+                    "(google.api.resource).pattern": "users/{user}/spaces/{space}/threads/{thread}/threadReadState",
+                    "(google.api.resource).singular": "threadReadState"
+                  },
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "lastReadTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 2
+                    }
+                  }
+                },
+                "GetThreadReadStateRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "chat.googleapis.com/ThreadReadState"
                       }
                     }
                   }
@@ -4752,33 +4891,14 @@
         },
         "api": {
           "options": {
+            "cc_enable_arenas": true,
             "go_package": "google.golang.org/genproto/googleapis/api;api",
             "java_multiple_files": true,
             "java_outer_classname": "LaunchStageProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI",
-            "cc_enable_arenas": true
+            "objc_class_prefix": "GAPI"
           },
           "nested": {
-            "fieldBehavior": {
-              "rule": "repeated",
-              "type": "google.api.FieldBehavior",
-              "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "FieldBehavior": {
-              "values": {
-                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
-                "OPTIONAL": 1,
-                "REQUIRED": 2,
-                "OUTPUT_ONLY": 3,
-                "INPUT_ONLY": 4,
-                "IMMUTABLE": 5,
-                "UNORDERED_LIST": 6,
-                "NON_EMPTY_DEFAULT": 7,
-                "IDENTIFIER": 8
-              }
-            },
             "resourceReference": {
               "type": "google.api.ResourceReference",
               "id": 1055,
@@ -4854,6 +4974,25 @@
                   "type": "string",
                   "id": 2
                 }
+              }
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6,
+                "NON_EMPTY_DEFAULT": 7,
+                "IDENTIFIER": 8
               }
             },
             "http": {

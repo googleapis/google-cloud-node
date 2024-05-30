@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -128,6 +128,9 @@ message TargetSite {
 
   // Output only. This is system-generated based on the provided_uri_pattern.
   string generated_uri_pattern = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Root domain of the provided_uri_pattern.
+  string root_domain_uri = 10 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. Site ownership and validity verification status.
   SiteVerificationInfo site_verification_info = 7

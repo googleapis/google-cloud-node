@@ -310,6 +310,18 @@ export class ParallelstoreClient {
     const deleteInstanceMetadata = protoFilesRoot.lookup(
       '.google.cloud.parallelstore.v1beta.OperationMetadata'
     ) as gax.protobuf.Type;
+    const importDataResponse = protoFilesRoot.lookup(
+      '.google.cloud.parallelstore.v1beta.ImportDataResponse'
+    ) as gax.protobuf.Type;
+    const importDataMetadata = protoFilesRoot.lookup(
+      '.google.cloud.parallelstore.v1beta.ImportDataMetadata'
+    ) as gax.protobuf.Type;
+    const exportDataResponse = protoFilesRoot.lookup(
+      '.google.cloud.parallelstore.v1beta.ExportDataResponse'
+    ) as gax.protobuf.Type;
+    const exportDataMetadata = protoFilesRoot.lookup(
+      '.google.cloud.parallelstore.v1beta.ExportDataMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createInstance: new this._gaxModule.LongrunningDescriptor(
@@ -326,6 +338,16 @@ export class ParallelstoreClient {
         this.operationsClient,
         deleteInstanceResponse.decode.bind(deleteInstanceResponse),
         deleteInstanceMetadata.decode.bind(deleteInstanceMetadata)
+      ),
+      importData: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        importDataResponse.decode.bind(importDataResponse),
+        importDataMetadata.decode.bind(importDataMetadata)
+      ),
+      exportData: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        exportDataResponse.decode.bind(exportDataResponse),
+        exportDataMetadata.decode.bind(exportDataMetadata)
       ),
     };
 
@@ -384,6 +406,8 @@ export class ParallelstoreClient {
       'createInstance',
       'updateInstance',
       'deleteInstance',
+      'importData',
+      'exportData',
     ];
     for (const methodName of parallelstoreStubMethods) {
       const callPromise = this.parallelstoreStub.then(
@@ -1059,6 +1083,314 @@ export class ParallelstoreClient {
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
       protos.google.cloud.parallelstore.v1beta.OperationMetadata
+    >;
+  }
+  /**
+   * ImportData copies data from Cloud Storage to Parallelstore.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.parallelstore.v1beta.SourceGcsBucket} request.sourceGcsBucket
+   *   Cloud Storage source.
+   * @param {google.cloud.parallelstore.v1beta.DestinationParallelstore} request.destinationParallelstore
+   *   Parallelstore destination.
+   * @param {string} request.name
+   *   Required. Name of the resource.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and t
+   *   he request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/parallelstore.import_data.js</caption>
+   * region_tag:parallelstore_v1beta_generated_Parallelstore_ImportData_async
+   */
+  importData(
+    request?: protos.google.cloud.parallelstore.v1beta.IImportDataRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.parallelstore.v1beta.IImportDataResponse,
+        protos.google.cloud.parallelstore.v1beta.IImportDataMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  importData(
+    request: protos.google.cloud.parallelstore.v1beta.IImportDataRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.parallelstore.v1beta.IImportDataResponse,
+        protos.google.cloud.parallelstore.v1beta.IImportDataMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importData(
+    request: protos.google.cloud.parallelstore.v1beta.IImportDataRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.parallelstore.v1beta.IImportDataResponse,
+        protos.google.cloud.parallelstore.v1beta.IImportDataMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importData(
+    request?: protos.google.cloud.parallelstore.v1beta.IImportDataRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.parallelstore.v1beta.IImportDataResponse,
+            protos.google.cloud.parallelstore.v1beta.IImportDataMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.parallelstore.v1beta.IImportDataResponse,
+        protos.google.cloud.parallelstore.v1beta.IImportDataMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.parallelstore.v1beta.IImportDataResponse,
+        protos.google.cloud.parallelstore.v1beta.IImportDataMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.importData(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `importData()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/parallelstore.import_data.js</caption>
+   * region_tag:parallelstore_v1beta_generated_Parallelstore_ImportData_async
+   */
+  async checkImportDataProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.parallelstore.v1beta.ImportDataResponse,
+      protos.google.cloud.parallelstore.v1beta.ImportDataMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.importData,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.parallelstore.v1beta.ImportDataResponse,
+      protos.google.cloud.parallelstore.v1beta.ImportDataMetadata
+    >;
+  }
+  /**
+   * ExportData copies data from Parallelstore to Cloud Storage
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.parallelstore.v1beta.SourceParallelstore} request.sourceParallelstore
+   *   Parallelstore source.
+   * @param {google.cloud.parallelstore.v1beta.DestinationGcsBucket} request.destinationGcsBucket
+   *   Cloud Storage destination.
+   * @param {string} request.name
+   *   Required. Name of the resource.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and t
+   *   he request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/parallelstore.export_data.js</caption>
+   * region_tag:parallelstore_v1beta_generated_Parallelstore_ExportData_async
+   */
+  exportData(
+    request?: protos.google.cloud.parallelstore.v1beta.IExportDataRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.parallelstore.v1beta.IExportDataResponse,
+        protos.google.cloud.parallelstore.v1beta.IExportDataMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  exportData(
+    request: protos.google.cloud.parallelstore.v1beta.IExportDataRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.parallelstore.v1beta.IExportDataResponse,
+        protos.google.cloud.parallelstore.v1beta.IExportDataMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportData(
+    request: protos.google.cloud.parallelstore.v1beta.IExportDataRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.parallelstore.v1beta.IExportDataResponse,
+        protos.google.cloud.parallelstore.v1beta.IExportDataMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportData(
+    request?: protos.google.cloud.parallelstore.v1beta.IExportDataRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.parallelstore.v1beta.IExportDataResponse,
+            protos.google.cloud.parallelstore.v1beta.IExportDataMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.parallelstore.v1beta.IExportDataResponse,
+        protos.google.cloud.parallelstore.v1beta.IExportDataMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.parallelstore.v1beta.IExportDataResponse,
+        protos.google.cloud.parallelstore.v1beta.IExportDataMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.exportData(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `exportData()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/parallelstore.export_data.js</caption>
+   * region_tag:parallelstore_v1beta_generated_Parallelstore_ExportData_async
+   */
+  async checkExportDataProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.parallelstore.v1beta.ExportDataResponse,
+      protos.google.cloud.parallelstore.v1beta.ExportDataMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.exportData,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.parallelstore.v1beta.ExportDataResponse,
+      protos.google.cloud.parallelstore.v1beta.ExportDataMetadata
     >;
   }
   /**

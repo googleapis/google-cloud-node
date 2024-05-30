@@ -702,6 +702,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "annotations": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 24,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -1719,6 +1727,11 @@
                           "oneof": [
                             "workerPool"
                           ]
+                        },
+                        "_tfVersionConstraint": {
+                          "oneof": [
+                            "tfVersionConstraint"
+                          ]
                         }
                       },
                       "fields": {
@@ -1843,6 +1856,21 @@
                           "id": 17,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "tfVersion": {
+                          "type": "string",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "tfVersionConstraint": {
+                          "type": "string",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       },

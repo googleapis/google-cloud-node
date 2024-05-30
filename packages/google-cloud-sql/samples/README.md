@@ -25,6 +25,7 @@
   * [Sql_databases_service.patch](#sql_databases_service.patch)
   * [Sql_databases_service.update](#sql_databases_service.update)
   * [Sql_flags_service.list](#sql_flags_service.list)
+  * [Sql_instances_service.acquire_ssrs_lease](#sql_instances_service.acquire_ssrs_lease)
   * [Sql_instances_service.add_server_ca](#sql_instances_service.add_server_ca)
   * [Sql_instances_service.clone](#sql_instances_service.clone)
   * [Sql_instances_service.create_ephemeral](#sql_instances_service.create_ephemeral)
@@ -44,6 +45,7 @@
   * [Sql_instances_service.perform_disk_shrink](#sql_instances_service.perform_disk_shrink)
   * [Sql_instances_service.promote_replica](#sql_instances_service.promote_replica)
   * [Sql_instances_service.reencrypt](#sql_instances_service.reencrypt)
+  * [Sql_instances_service.release_ssrs_lease](#sql_instances_service.release_ssrs_lease)
   * [Sql_instances_service.reschedule_maintenance](#sql_instances_service.reschedule_maintenance)
   * [Sql_instances_service.reset_replica_size](#sql_instances_service.reset_replica_size)
   * [Sql_instances_service.reset_ssl_config](#sql_instances_service.reset_ssl_config)
@@ -83,6 +85,7 @@
   * [Sql_databases_service.patch](#sql_databases_service.patch)
   * [Sql_databases_service.update](#sql_databases_service.update)
   * [Sql_flags_service.list](#sql_flags_service.list)
+  * [Sql_instances_service.acquire_ssrs_lease](#sql_instances_service.acquire_ssrs_lease)
   * [Sql_instances_service.add_server_ca](#sql_instances_service.add_server_ca)
   * [Sql_instances_service.clone](#sql_instances_service.clone)
   * [Sql_instances_service.create_ephemeral](#sql_instances_service.create_ephemeral)
@@ -102,6 +105,7 @@
   * [Sql_instances_service.perform_disk_shrink](#sql_instances_service.perform_disk_shrink)
   * [Sql_instances_service.promote_replica](#sql_instances_service.promote_replica)
   * [Sql_instances_service.reencrypt](#sql_instances_service.reencrypt)
+  * [Sql_instances_service.release_ssrs_lease](#sql_instances_service.release_ssrs_lease)
   * [Sql_instances_service.reschedule_maintenance](#sql_instances_service.reschedule_maintenance)
   * [Sql_instances_service.reset_replica_size](#sql_instances_service.reset_replica_size)
   * [Sql_instances_service.reset_ssl_config](#sql_instances_service.reset_ssl_config)
@@ -359,6 +363,23 @@ __Usage:__
 
 
 `node packages/google-cloud-sql/samples/generated/v1/sql_flags_service.list.js`
+
+
+-----
+
+
+
+
+### Sql_instances_service.acquire_ssrs_lease
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.acquire_ssrs_lease.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.acquire_ssrs_lease.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-sql/samples/generated/v1/sql_instances_service.acquire_ssrs_lease.js`
 
 
 -----
@@ -682,6 +703,23 @@ __Usage:__
 
 
 `node packages/google-cloud-sql/samples/generated/v1/sql_instances_service.reencrypt.js`
+
+
+-----
+
+
+
+
+### Sql_instances_service.release_ssrs_lease
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.release_ssrs_lease.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.release_ssrs_lease.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-sql/samples/generated/v1/sql_instances_service.release_ssrs_lease.js`
 
 
 -----
@@ -1352,6 +1390,23 @@ __Usage:__
 
 
 
+### Sql_instances_service.acquire_ssrs_lease
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.acquire_ssrs_lease.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.acquire_ssrs_lease.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.acquire_ssrs_lease.js`
+
+
+-----
+
+
+
+
 ### Sql_instances_service.add_server_ca
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.add_server_ca.js).
@@ -1668,6 +1723,23 @@ __Usage:__
 
 
 `node packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.reencrypt.js`
+
+
+-----
+
+
+
+
+### Sql_instances_service.release_ssrs_lease
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.release_ssrs_lease.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.release_ssrs_lease.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.release_ssrs_lease.js`
 
 
 -----

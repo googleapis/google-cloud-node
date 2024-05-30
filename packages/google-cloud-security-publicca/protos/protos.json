@@ -8,6 +8,96 @@
               "nested": {
                 "publicca": {
                   "nested": {
+                    "v1": {
+                      "options": {
+                        "cc_enable_arenas": true,
+                        "csharp_namespace": "Google.Cloud.Security.PublicCA.V1",
+                        "go_package": "cloud.google.com/go/security/publicca/apiv1/publiccapb;publiccapb",
+                        "java_multiple_files": true,
+                        "java_outer_classname": "ServiceProto",
+                        "java_package": "com.google.cloud.security.publicca.v1",
+                        "php_namespace": "Google\\Cloud\\Security\\PublicCA\\V1",
+                        "ruby_package": "Google::Cloud::Security::PublicCA::V1"
+                      },
+                      "nested": {
+                        "ExternalAccountKey": {
+                          "options": {
+                            "(google.api.resource).type": "publicca.googleapis.com/ExternalAccountKey",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/externalAccountKeys/{external_account_key}"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "keyId": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "b64MacKey": {
+                              "type": "bytes",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "PublicCertificateAuthorityService": {
+                          "options": {
+                            "(google.api.default_host)": "publicca.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                          },
+                          "methods": {
+                            "CreateExternalAccountKey": {
+                              "requestType": "CreateExternalAccountKeyRequest",
+                              "responseType": "ExternalAccountKey",
+                              "options": {
+                                "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/externalAccountKeys",
+                                "(google.api.http).body": "external_account_key",
+                                "(google.api.method_signature)": "parent,external_account_key"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{parent=projects/*/locations/*}/externalAccountKeys",
+                                    "body": "external_account_key"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,external_account_key"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "CreateExternalAccountKeyRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "publicca.googleapis.com/ExternalAccountKey"
+                              }
+                            },
+                            "externalAccountKey": {
+                              "type": "ExternalAccountKey",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
                     "v1beta1": {
                       "options": {
                         "cc_enable_arenas": true,

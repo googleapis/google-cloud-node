@@ -4,6 +4,21 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [5.9.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.8.0...recaptcha-enterprise-v5.9.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [5.8.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.7.0...recaptcha-enterprise-v5.8.0) (2024-05-02)
+
+
+### Features
+
+* [recaptchaenterprise]Add Fraud Prevention settings field ([#5281](https://github.com/googleapis/google-cloud-node/issues/5281)) ([9a2060a](https://github.com/googleapis/google-cloud-node/commit/9a2060a6a3baca737c6a6239512977149737154a))
+
 ## [5.7.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.6.0...recaptcha-enterprise-v5.7.0) (2024-04-05)
 
 

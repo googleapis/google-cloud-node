@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -226,8 +226,8 @@ message ListDataStoresRequest {
   // INVALID_ARGUMENT error is returned.
   string page_token = 3;
 
-  // Filter by solution type. For example: filter =
-  // 'solution_type:SOLUTION_TYPE_SEARCH'
+  // Filter by solution type .
+  // For example: `filter = 'solution_type:SOLUTION_TYPE_SEARCH'`
   string filter = 4;
 }
 

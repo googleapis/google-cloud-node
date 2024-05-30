@@ -6,9 +6,6 @@
         "idempotent": [
           "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
-        ],
-        "unavailable": [
-          "UNAVAILABLE"
         ]
       },
       "retry_params": {
@@ -24,48 +21,39 @@
       },
       "methods": {
         "CreatePlaybook": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "DeletePlaybook": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "ListPlaybooks": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "GetPlaybook": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "UpdatePlaybook": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "CreatePlaybookVersion": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "GetPlaybookVersion": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "ListPlaybookVersions": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "DeletePlaybookVersion": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }
       }

@@ -95,6 +95,10 @@
                               "type": "ProductPerformanceView",
                               "id": 1
                             },
+                            "nonProductPerformanceView": {
+                              "type": "NonProductPerformanceView",
+                              "id": 7
+                            },
                             "productView": {
                               "type": "ProductView",
                               "id": 2
@@ -1321,6 +1325,20 @@
                               "options": {
                                 "proto3_optional": true
                               }
+                            },
+                            "effectiveness": {
+                              "type": "Effectiveness",
+                              "id": 22
+                            }
+                          },
+                          "nested": {
+                            "Effectiveness": {
+                              "values": {
+                                "EFFECTIVENESS_UNSPECIFIED": 0,
+                                "LOW": 1,
+                                "MEDIUM": 2,
+                                "HIGH": 3
+                              }
                             }
                           }
                         },
@@ -1665,6 +1683,56 @@
                             "relativeDemandChange": {
                               "type": "RelativeDemandChangeType.RelativeDemandChangeTypeEnum",
                               "id": 11,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "NonProductPerformanceView": {
+                          "oneofs": {
+                            "_clicks": {
+                              "oneof": [
+                                "clicks"
+                              ]
+                            },
+                            "_impressions": {
+                              "oneof": [
+                                "impressions"
+                              ]
+                            },
+                            "_clickThroughRate": {
+                              "oneof": [
+                                "clickThroughRate"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "date": {
+                              "type": "google.type.Date",
+                              "id": 1
+                            },
+                            "week": {
+                              "type": "google.type.Date",
+                              "id": 2
+                            },
+                            "clicks": {
+                              "type": "int64",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "impressions": {
+                              "type": "int64",
+                              "id": 4,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "clickThroughRate": {
+                              "type": "double",
+                              "id": 5,
                               "options": {
                                 "proto3_optional": true
                               }
@@ -2069,6 +2137,37 @@
                 "java_package": "com.google.shopping.type"
               },
               "nested": {
+                "Weight": {
+                  "oneofs": {
+                    "_amountMicros": {
+                      "oneof": [
+                        "amountMicros"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "amountMicros": {
+                      "type": "int64",
+                      "id": 1,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "unit": {
+                      "type": "WeightUnit",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "WeightUnit": {
+                      "values": {
+                        "WEIGHT_UNIT_UNSPECIFIED": 0,
+                        "POUND": 1,
+                        "KILOGRAM": 2
+                      }
+                    }
+                  }
+                },
                 "Price": {
                   "oneofs": {
                     "_amountMicros": {

@@ -223,6 +223,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "permissiveMode": {
+                          "type": "bool",
+                          "id": 28,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -336,6 +343,17 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
+                        }
+                      }
+                    },
+                    "VolumeTypeEnum": {
+                      "fields": {},
+                      "nested": {
+                        "VolumeType": {
+                          "values": {
+                            "VOLUME_TYPE_UNSPECIFIED": 0,
+                            "GCE_PERSISTENT_DISK": 1
                           }
                         }
                       }
@@ -566,6 +584,13 @@
                             "encryptionKey": {
                               "type": "EncryptionKey",
                               "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "permissiveMode": {
+                              "type": "bool",
+                              "id": 7,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -2102,6 +2127,21 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "filter": {
+                          "type": "Filter",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "volumeDataRestorePolicyOverrides": {
+                          "rule": "repeated",
+                          "type": "VolumeDataRestorePolicyOverride",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -2113,6 +2153,26 @@
                             "SUCCEEDED": 3,
                             "FAILED": 4,
                             "DELETING": 5
+                          }
+                        },
+                        "Filter": {
+                          "fields": {
+                            "inclusionFilters": {
+                              "rule": "repeated",
+                              "type": "ResourceSelector",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "exclusionFilters": {
+                              "rule": "repeated",
+                              "type": "ResourceSelector",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
                           }
                         }
                       }
@@ -2193,6 +2253,21 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "volumeDataRestorePolicyBindings": {
+                          "rule": "repeated",
+                          "type": "VolumeDataRestorePolicyBinding",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "restoreOrder": {
+                          "type": "RestoreOrder",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -2215,7 +2290,10 @@
                           "values": {
                             "NAMESPACED_RESOURCE_RESTORE_MODE_UNSPECIFIED": 0,
                             "DELETE_AND_RESTORE": 1,
-                            "FAIL_ON_CONFLICT": 2
+                            "FAIL_ON_CONFLICT": 2,
+                            "MERGE_SKIP_ON_CONFLICT": 3,
+                            "MERGE_REPLACE_VOLUME_ON_CONFLICT": 4,
+                            "MERGE_REPLACE_ON_CONFLICT": 5
                           }
                         },
                         "GroupKind": {
@@ -2408,6 +2486,115 @@
                               }
                             }
                           }
+                        },
+                        "VolumeDataRestorePolicyBinding": {
+                          "oneofs": {
+                            "scope": {
+                              "oneof": [
+                                "volumeType"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "policy": {
+                              "type": "VolumeDataRestorePolicy",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "volumeType": {
+                              "type": "VolumeTypeEnum.VolumeType",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "RestoreOrder": {
+                          "fields": {
+                            "groupKindDependencies": {
+                              "rule": "repeated",
+                              "type": "GroupKindDependency",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "GroupKindDependency": {
+                              "fields": {
+                                "satisfying": {
+                                  "type": "GroupKind",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "requiring": {
+                                  "type": "GroupKind",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ResourceSelector": {
+                      "fields": {
+                        "groupKind": {
+                          "type": "RestoreConfig.GroupKind",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "namespace": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "VolumeDataRestorePolicyOverride": {
+                      "oneofs": {
+                        "scope": {
+                          "oneof": [
+                            "selectedPvcs"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "policy": {
+                          "type": "RestoreConfig.VolumeDataRestorePolicy",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "selectedPvcs": {
+                          "type": "NamespacedNames",
+                          "id": 2
                         }
                       }
                     },

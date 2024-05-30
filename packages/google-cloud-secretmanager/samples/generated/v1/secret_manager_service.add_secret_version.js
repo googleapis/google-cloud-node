@@ -32,7 +32,7 @@ function main(parent, payload) {
    *  Required. The resource name of the
    *  Secret google.cloud.secretmanager.v1.Secret  to associate with the
    *  SecretVersion google.cloud.secretmanager.v1.SecretVersion  in the format
-   *  `projects/* /secrets/*`.
+   *  `projects/* /secrets/*` or `projects/* /locations/* /secrets/*`.
    */
   // const parent = 'abc123'
   /**

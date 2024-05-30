@@ -340,6 +340,9 @@ export class CloudDeployClient {
             {
               get: '/v1/{resource=projects/*/locations/*/targets/*}:getIamPolicy',
             },
+            {
+              get: '/v1/{resource=projects/*/locations/*/customTargetTypes/*}:getIamPolicy',
+            },
           ],
         },
         {
@@ -349,6 +352,10 @@ export class CloudDeployClient {
           additional_bindings: [
             {
               post: '/v1/{resource=projects/*/locations/*/targets/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/customTargetTypes/*}:setIamPolicy',
               body: '*',
             },
           ],

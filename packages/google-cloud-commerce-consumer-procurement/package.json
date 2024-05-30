@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/procurement",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Cloud Commerce Consumer Procurement API client for Node.js",
   "repository": {
     "type": "git",
@@ -62,7 +62,7 @@
     "mocha": "^9.2.2",
     "null-loader": "^4.0.1",
     "pack-n-play": "^2.0.0",
-    "sinon": "^17.0.0",
+    "sinon": "^18.0.0",
     "ts-loader": "^9.0.0",
     "typescript": "^5.1.6",
     "webpack": "^5.9.0",

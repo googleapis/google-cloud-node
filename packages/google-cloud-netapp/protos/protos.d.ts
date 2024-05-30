@@ -8690,7 +8690,8 @@ export namespace google {
                     SERVICE_LEVEL_UNSPECIFIED = 0,
                     PREMIUM = 1,
                     EXTREME = 2,
-                    STANDARD = 3
+                    STANDARD = 3,
+                    FLEX = 4
                 }
 
                 /** EncryptionType enum. */
@@ -8698,6 +8699,103 @@ export namespace google {
                     ENCRYPTION_TYPE_UNSPECIFIED = 0,
                     SERVICE_MANAGED = 1,
                     CLOUD_KMS = 2
+                }
+
+                /** Properties of a LocationMetadata. */
+                interface ILocationMetadata {
+
+                    /** LocationMetadata supportedServiceLevels */
+                    supportedServiceLevels?: (google.cloud.netapp.v1.ServiceLevel[]|null);
+                }
+
+                /** Represents a LocationMetadata. */
+                class LocationMetadata implements ILocationMetadata {
+
+                    /**
+                     * Constructs a new LocationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.netapp.v1.ILocationMetadata);
+
+                    /** LocationMetadata supportedServiceLevels. */
+                    public supportedServiceLevels: google.cloud.netapp.v1.ServiceLevel[];
+
+                    /**
+                     * Creates a new LocationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LocationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.netapp.v1.ILocationMetadata): google.cloud.netapp.v1.LocationMetadata;
+
+                    /**
+                     * Encodes the specified LocationMetadata message. Does not implicitly {@link google.cloud.netapp.v1.LocationMetadata.verify|verify} messages.
+                     * @param message LocationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.netapp.v1.ILocationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LocationMetadata message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.LocationMetadata.verify|verify} messages.
+                     * @param message LocationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.netapp.v1.ILocationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LocationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LocationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.netapp.v1.LocationMetadata;
+
+                    /**
+                     * Decodes a LocationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LocationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.netapp.v1.LocationMetadata;
+
+                    /**
+                     * Verifies a LocationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LocationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LocationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.netapp.v1.LocationMetadata;
+
+                    /**
+                     * Creates a plain object from a LocationMetadata message. Also converts values to other types if specified.
+                     * @param message LocationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.netapp.v1.LocationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LocationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for LocationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Protocols enum. */
@@ -9583,6 +9681,9 @@ export namespace google {
 
                     /** Volume restrictedActions */
                     restrictedActions?: (google.cloud.netapp.v1.RestrictedAction[]|null);
+
+                    /** Volume tieringPolicy */
+                    tieringPolicy?: (google.cloud.netapp.v1.ITieringPolicy|null);
                 }
 
                 /** Represents a Volume. */
@@ -9687,8 +9788,14 @@ export namespace google {
                     /** Volume restrictedActions. */
                     public restrictedActions: google.cloud.netapp.v1.RestrictedAction[];
 
+                    /** Volume tieringPolicy. */
+                    public tieringPolicy?: (google.cloud.netapp.v1.ITieringPolicy|null);
+
                     /** Volume _backupConfig. */
                     public _backupConfig?: "backupConfig";
+
+                    /** Volume _tieringPolicy. */
+                    public _tieringPolicy?: "tieringPolicy";
 
                     /**
                      * Creates a new Volume instance using the specified properties.
@@ -10919,6 +11026,9 @@ export namespace google {
 
                     /** BackupConfig scheduledBackupEnabled */
                     scheduledBackupEnabled?: (boolean|null);
+
+                    /** BackupConfig backupChainBytes */
+                    backupChainBytes?: (number|Long|string|null);
                 }
 
                 /** Represents a BackupConfig. */
@@ -10939,8 +11049,14 @@ export namespace google {
                     /** BackupConfig scheduledBackupEnabled. */
                     public scheduledBackupEnabled?: (boolean|null);
 
+                    /** BackupConfig backupChainBytes. */
+                    public backupChainBytes?: (number|Long|string|null);
+
                     /** BackupConfig _scheduledBackupEnabled. */
                     public _scheduledBackupEnabled?: "scheduledBackupEnabled";
+
+                    /** BackupConfig _backupChainBytes. */
+                    public _backupChainBytes?: "backupChainBytes";
 
                     /**
                      * Creates a new BackupConfig instance using the specified properties.
@@ -11018,6 +11134,125 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TieringPolicy. */
+                interface ITieringPolicy {
+
+                    /** TieringPolicy tierAction */
+                    tierAction?: (google.cloud.netapp.v1.TieringPolicy.TierAction|keyof typeof google.cloud.netapp.v1.TieringPolicy.TierAction|null);
+
+                    /** TieringPolicy coolingThresholdDays */
+                    coolingThresholdDays?: (number|null);
+                }
+
+                /** Represents a TieringPolicy. */
+                class TieringPolicy implements ITieringPolicy {
+
+                    /**
+                     * Constructs a new TieringPolicy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.netapp.v1.ITieringPolicy);
+
+                    /** TieringPolicy tierAction. */
+                    public tierAction?: (google.cloud.netapp.v1.TieringPolicy.TierAction|keyof typeof google.cloud.netapp.v1.TieringPolicy.TierAction|null);
+
+                    /** TieringPolicy coolingThresholdDays. */
+                    public coolingThresholdDays?: (number|null);
+
+                    /** TieringPolicy _tierAction. */
+                    public _tierAction?: "tierAction";
+
+                    /** TieringPolicy _coolingThresholdDays. */
+                    public _coolingThresholdDays?: "coolingThresholdDays";
+
+                    /**
+                     * Creates a new TieringPolicy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TieringPolicy instance
+                     */
+                    public static create(properties?: google.cloud.netapp.v1.ITieringPolicy): google.cloud.netapp.v1.TieringPolicy;
+
+                    /**
+                     * Encodes the specified TieringPolicy message. Does not implicitly {@link google.cloud.netapp.v1.TieringPolicy.verify|verify} messages.
+                     * @param message TieringPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.netapp.v1.ITieringPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TieringPolicy message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.TieringPolicy.verify|verify} messages.
+                     * @param message TieringPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.netapp.v1.ITieringPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TieringPolicy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TieringPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.netapp.v1.TieringPolicy;
+
+                    /**
+                     * Decodes a TieringPolicy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TieringPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.netapp.v1.TieringPolicy;
+
+                    /**
+                     * Verifies a TieringPolicy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TieringPolicy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TieringPolicy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.netapp.v1.TieringPolicy;
+
+                    /**
+                     * Creates a plain object from a TieringPolicy message. Also converts values to other types if specified.
+                     * @param message TieringPolicy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.netapp.v1.TieringPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TieringPolicy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TieringPolicy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace TieringPolicy {
+
+                    /** TierAction enum. */
+                    enum TierAction {
+                        TIER_ACTION_UNSPECIFIED = 0,
+                        ENABLED = 1,
+                        PAUSED = 2
+                    }
                 }
             }
         }

@@ -11364,6 +11364,7 @@
                          * @property {string|null} [serviceAccount] ExecutionConfig serviceAccount
                          * @property {string|null} [artifactStorage] ExecutionConfig artifactStorage
                          * @property {google.protobuf.IDuration|null} [executionTimeout] ExecutionConfig executionTimeout
+                         * @property {boolean|null} [verbose] ExecutionConfig verbose
                          */
     
                         /**
@@ -11438,6 +11439,14 @@
                          */
                         ExecutionConfig.prototype.executionTimeout = null;
     
+                        /**
+                         * ExecutionConfig verbose.
+                         * @member {boolean} verbose
+                         * @memberof google.cloud.deploy.v1.ExecutionConfig
+                         * @instance
+                         */
+                        ExecutionConfig.prototype.verbose = false;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -11494,6 +11503,8 @@
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.artifactStorage);
                             if (message.executionTimeout != null && Object.hasOwnProperty.call(message, "executionTimeout"))
                                 $root.google.protobuf.Duration.encode(message.executionTimeout, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.verbose != null && Object.hasOwnProperty.call(message, "verbose"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).bool(message.verbose);
                             return writer;
                         };
     
@@ -11561,6 +11572,10 @@
                                     }
                                 case 7: {
                                         message.executionTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.verbose = reader.bool();
                                         break;
                                     }
                                 default:
@@ -11647,6 +11662,9 @@
                                 if (error)
                                     return "executionTimeout." + error;
                             }
+                            if (message.verbose != null && message.hasOwnProperty("verbose"))
+                                if (typeof message.verbose !== "boolean")
+                                    return "verbose: boolean expected";
                             return null;
                         };
     
@@ -11720,6 +11738,8 @@
                                     throw TypeError(".google.cloud.deploy.v1.ExecutionConfig.executionTimeout: object expected");
                                 message.executionTimeout = $root.google.protobuf.Duration.fromObject(object.executionTimeout);
                             }
+                            if (object.verbose != null)
+                                message.verbose = Boolean(object.verbose);
                             return message;
                         };
     
@@ -11743,6 +11763,7 @@
                                 object.serviceAccount = "";
                                 object.artifactStorage = "";
                                 object.executionTimeout = null;
+                                object.verbose = false;
                             }
                             if (message.usages && message.usages.length) {
                                 object.usages = [];
@@ -11767,6 +11788,8 @@
                                 object.artifactStorage = message.artifactStorage;
                             if (message.executionTimeout != null && message.hasOwnProperty("executionTimeout"))
                                 object.executionTimeout = $root.google.protobuf.Duration.toObject(message.executionTimeout, options);
+                            if (message.verbose != null && message.hasOwnProperty("verbose"))
+                                object.verbose = message.verbose;
                             return object;
                         };
     
@@ -15841,6 +15864,7 @@
                          * @property {Array.<string>|null} [configs] SkaffoldModules configs
                          * @property {google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGitSource|null} [git] SkaffoldModules git
                          * @property {google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGCSSource|null} [googleCloudStorage] SkaffoldModules googleCloudStorage
+                         * @property {google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGCBRepoSource|null} [googleCloudBuildRepo] SkaffoldModules googleCloudBuildRepo
                          */
     
                         /**
@@ -15883,17 +15907,25 @@
                          */
                         SkaffoldModules.prototype.googleCloudStorage = null;
     
+                        /**
+                         * SkaffoldModules googleCloudBuildRepo.
+                         * @member {google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGCBRepoSource|null|undefined} googleCloudBuildRepo
+                         * @memberof google.cloud.deploy.v1.SkaffoldModules
+                         * @instance
+                         */
+                        SkaffoldModules.prototype.googleCloudBuildRepo = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * SkaffoldModules source.
-                         * @member {"git"|"googleCloudStorage"|undefined} source
+                         * @member {"git"|"googleCloudStorage"|"googleCloudBuildRepo"|undefined} source
                          * @memberof google.cloud.deploy.v1.SkaffoldModules
                          * @instance
                          */
                         Object.defineProperty(SkaffoldModules.prototype, "source", {
-                            get: $util.oneOfGetter($oneOfFields = ["git", "googleCloudStorage"]),
+                            get: $util.oneOfGetter($oneOfFields = ["git", "googleCloudStorage", "googleCloudBuildRepo"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -15928,6 +15960,8 @@
                                 $root.google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource.encode(message.git, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.googleCloudStorage != null && Object.hasOwnProperty.call(message, "googleCloudStorage"))
                                 $root.google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource.encode(message.googleCloudStorage, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.googleCloudBuildRepo != null && Object.hasOwnProperty.call(message, "googleCloudBuildRepo"))
+                                $root.google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource.encode(message.googleCloudBuildRepo, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -15974,6 +16008,10 @@
                                     }
                                 case 3: {
                                         message.googleCloudStorage = $root.google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.googleCloudBuildRepo = $root.google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -16037,6 +16075,16 @@
                                         return "googleCloudStorage." + error;
                                 }
                             }
+                            if (message.googleCloudBuildRepo != null && message.hasOwnProperty("googleCloudBuildRepo")) {
+                                if (properties.source === 1)
+                                    return "source: multiple values";
+                                properties.source = 1;
+                                {
+                                    var error = $root.google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource.verify(message.googleCloudBuildRepo);
+                                    if (error)
+                                        return "googleCloudBuildRepo." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -16068,6 +16116,11 @@
                                 if (typeof object.googleCloudStorage !== "object")
                                     throw TypeError(".google.cloud.deploy.v1.SkaffoldModules.googleCloudStorage: object expected");
                                 message.googleCloudStorage = $root.google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource.fromObject(object.googleCloudStorage);
+                            }
+                            if (object.googleCloudBuildRepo != null) {
+                                if (typeof object.googleCloudBuildRepo !== "object")
+                                    throw TypeError(".google.cloud.deploy.v1.SkaffoldModules.googleCloudBuildRepo: object expected");
+                                message.googleCloudBuildRepo = $root.google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource.fromObject(object.googleCloudBuildRepo);
                             }
                             return message;
                         };
@@ -16101,6 +16154,11 @@
                                 object.googleCloudStorage = $root.google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource.toObject(message.googleCloudStorage, options);
                                 if (options.oneofs)
                                     object.source = "googleCloudStorage";
+                            }
+                            if (message.googleCloudBuildRepo != null && message.hasOwnProperty("googleCloudBuildRepo")) {
+                                object.googleCloudBuildRepo = $root.google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource.toObject(message.googleCloudBuildRepo, options);
+                                if (options.oneofs)
+                                    object.source = "googleCloudBuildRepo";
                             }
                             return object;
                         };
@@ -16606,6 +16664,256 @@
                             };
     
                             return SkaffoldGCSSource;
+                        })();
+    
+                        SkaffoldModules.SkaffoldGCBRepoSource = (function() {
+    
+                            /**
+                             * Properties of a SkaffoldGCBRepoSource.
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules
+                             * @interface ISkaffoldGCBRepoSource
+                             * @property {string|null} [repository] SkaffoldGCBRepoSource repository
+                             * @property {string|null} [path] SkaffoldGCBRepoSource path
+                             * @property {string|null} [ref] SkaffoldGCBRepoSource ref
+                             */
+    
+                            /**
+                             * Constructs a new SkaffoldGCBRepoSource.
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules
+                             * @classdesc Represents a SkaffoldGCBRepoSource.
+                             * @implements ISkaffoldGCBRepoSource
+                             * @constructor
+                             * @param {google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGCBRepoSource=} [properties] Properties to set
+                             */
+                            function SkaffoldGCBRepoSource(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SkaffoldGCBRepoSource repository.
+                             * @member {string} repository
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource
+                             * @instance
+                             */
+                            SkaffoldGCBRepoSource.prototype.repository = "";
+    
+                            /**
+                             * SkaffoldGCBRepoSource path.
+                             * @member {string} path
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource
+                             * @instance
+                             */
+                            SkaffoldGCBRepoSource.prototype.path = "";
+    
+                            /**
+                             * SkaffoldGCBRepoSource ref.
+                             * @member {string} ref
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource
+                             * @instance
+                             */
+                            SkaffoldGCBRepoSource.prototype.ref = "";
+    
+                            /**
+                             * Creates a new SkaffoldGCBRepoSource instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource
+                             * @static
+                             * @param {google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGCBRepoSource=} [properties] Properties to set
+                             * @returns {google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource} SkaffoldGCBRepoSource instance
+                             */
+                            SkaffoldGCBRepoSource.create = function create(properties) {
+                                return new SkaffoldGCBRepoSource(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SkaffoldGCBRepoSource message. Does not implicitly {@link google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource
+                             * @static
+                             * @param {google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGCBRepoSource} message SkaffoldGCBRepoSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SkaffoldGCBRepoSource.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.repository != null && Object.hasOwnProperty.call(message, "repository"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.repository);
+                                if (message.path != null && Object.hasOwnProperty.call(message, "path"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.path);
+                                if (message.ref != null && Object.hasOwnProperty.call(message, "ref"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.ref);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SkaffoldGCBRepoSource message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource
+                             * @static
+                             * @param {google.cloud.deploy.v1.SkaffoldModules.ISkaffoldGCBRepoSource} message SkaffoldGCBRepoSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SkaffoldGCBRepoSource.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SkaffoldGCBRepoSource message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource} SkaffoldGCBRepoSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SkaffoldGCBRepoSource.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.repository = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.path = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.ref = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SkaffoldGCBRepoSource message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource} SkaffoldGCBRepoSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SkaffoldGCBRepoSource.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SkaffoldGCBRepoSource message.
+                             * @function verify
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SkaffoldGCBRepoSource.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.repository != null && message.hasOwnProperty("repository"))
+                                    if (!$util.isString(message.repository))
+                                        return "repository: string expected";
+                                if (message.path != null && message.hasOwnProperty("path"))
+                                    if (!$util.isString(message.path))
+                                        return "path: string expected";
+                                if (message.ref != null && message.hasOwnProperty("ref"))
+                                    if (!$util.isString(message.ref))
+                                        return "ref: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SkaffoldGCBRepoSource message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource} SkaffoldGCBRepoSource
+                             */
+                            SkaffoldGCBRepoSource.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource)
+                                    return object;
+                                var message = new $root.google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource();
+                                if (object.repository != null)
+                                    message.repository = String(object.repository);
+                                if (object.path != null)
+                                    message.path = String(object.path);
+                                if (object.ref != null)
+                                    message.ref = String(object.ref);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SkaffoldGCBRepoSource message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource
+                             * @static
+                             * @param {google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource} message SkaffoldGCBRepoSource
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SkaffoldGCBRepoSource.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.repository = "";
+                                    object.path = "";
+                                    object.ref = "";
+                                }
+                                if (message.repository != null && message.hasOwnProperty("repository"))
+                                    object.repository = message.repository;
+                                if (message.path != null && message.hasOwnProperty("path"))
+                                    object.path = message.path;
+                                if (message.ref != null && message.hasOwnProperty("ref"))
+                                    object.ref = message.ref;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SkaffoldGCBRepoSource to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SkaffoldGCBRepoSource.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SkaffoldGCBRepoSource
+                             * @function getTypeUrl
+                             * @memberof google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SkaffoldGCBRepoSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource";
+                            };
+    
+                            return SkaffoldGCBRepoSource;
                         })();
     
                         return SkaffoldModules;

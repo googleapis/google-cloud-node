@@ -31,9 +31,12 @@ function main(name) {
   /**
    *  Required. The resource name of the
    *  SecretVersion google.cloud.secretmanager.v1.SecretVersion  in the format
-   *  `projects/* /secrets/* /versions/*`.
-   *  `projects/* /secrets/* /versions/latest` is an alias to the most recently
-   *  created SecretVersion google.cloud.secretmanager.v1.SecretVersion.
+   *  `projects/* /secrets/* /versions/*` or
+   *  `projects/* /locations/* /secrets/* /versions/*`.
+   *  `projects/* /secrets/* /versions/latest` or
+   *  `projects/* /locations/* /secrets/* /versions/latest` is an alias to the most
+   *  recently created
+   *  SecretVersion google.cloud.secretmanager.v1.SecretVersion.
    */
   // const name = 'abc123'
 
