@@ -22,6 +22,8 @@ import * as v1beta from './v1beta';
 
 const CompletionServiceClient = v1.CompletionServiceClient;
 type CompletionServiceClient = v1.CompletionServiceClient;
+const ControlServiceClient = v1.ControlServiceClient;
+type ControlServiceClient = v1.ControlServiceClient;
 const ConversationalSearchServiceClient = v1.ConversationalSearchServiceClient;
 type ConversationalSearchServiceClient = v1.ConversationalSearchServiceClient;
 const DataStoreServiceClient = v1.DataStoreServiceClient;
@@ -30,6 +32,12 @@ const DocumentServiceClient = v1.DocumentServiceClient;
 type DocumentServiceClient = v1.DocumentServiceClient;
 const EngineServiceClient = v1.EngineServiceClient;
 type EngineServiceClient = v1.EngineServiceClient;
+const GroundedGenerationServiceClient = v1.GroundedGenerationServiceClient;
+type GroundedGenerationServiceClient = v1.GroundedGenerationServiceClient;
+const ProjectServiceClient = v1.ProjectServiceClient;
+type ProjectServiceClient = v1.ProjectServiceClient;
+const RankServiceClient = v1.RankServiceClient;
+type RankServiceClient = v1.RankServiceClient;
 const RecommendationServiceClient = v1.RecommendationServiceClient;
 type RecommendationServiceClient = v1.RecommendationServiceClient;
 const SchemaServiceClient = v1.SchemaServiceClient;
@@ -46,10 +54,14 @@ export {
   v1alpha,
   v1beta,
   CompletionServiceClient,
+  ControlServiceClient,
   ConversationalSearchServiceClient,
   DataStoreServiceClient,
   DocumentServiceClient,
   EngineServiceClient,
+  GroundedGenerationServiceClient,
+  ProjectServiceClient,
+  RankServiceClient,
   RecommendationServiceClient,
   SchemaServiceClient,
   SearchServiceClient,
@@ -61,10 +73,14 @@ export default {
   v1alpha,
   v1beta,
   CompletionServiceClient,
+  ControlServiceClient,
   ConversationalSearchServiceClient,
   DataStoreServiceClient,
   DocumentServiceClient,
   EngineServiceClient,
+  GroundedGenerationServiceClient,
+  ProjectServiceClient,
+  RankServiceClient,
   RecommendationServiceClient,
   SchemaServiceClient,
   SearchServiceClient,

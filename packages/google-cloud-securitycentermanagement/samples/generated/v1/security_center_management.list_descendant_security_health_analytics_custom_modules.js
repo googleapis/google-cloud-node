@@ -29,11 +29,11 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of parent to list custom modules. Its format is
-   *  "organizations/{organization}/locations/{location}",
-   *  "folders/{folder}/locations/{location}",
-   *  or
-   *  "projects/{project}/locations/{location}"
+   *  Required. Name of the parent organization, folder, or project in which to
+   *  list custom modules, specified in one of the following formats:
+   *  * `organizations/{organization}/locations/{location}`
+   *  * `folders/{folder}/locations/{location}`
+   *  * `projects/{project}/locations/{location}`
    */
   // const parent = 'abc123'
   /**

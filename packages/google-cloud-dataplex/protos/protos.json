@@ -3213,55 +3213,6 @@
                     },
                     "SearchEntriesResult": {
                       "fields": {
-                        "entry": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "deprecated": true
-                          }
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "deprecated": true
-                          }
-                        },
-                        "entryType": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "deprecated": true
-                          }
-                        },
-                        "modifyTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 4,
-                          "options": {
-                            "deprecated": true
-                          }
-                        },
-                        "fullyQualifiedName": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "deprecated": true
-                          }
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 6,
-                          "options": {
-                            "deprecated": true
-                          }
-                        },
-                        "relativeResource": {
-                          "type": "string",
-                          "id": 7,
-                          "options": {
-                            "deprecated": true
-                          }
-                        },
                         "linkedResource": {
                           "type": "string",
                           "id": 8
@@ -6574,6 +6525,13 @@
                         "failingRowsQuery": {
                           "type": "string",
                           "id": 10
+                        },
+                        "assertionRowCount": {
+                          "type": "int64",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -6626,7 +6584,8 @@
                             "uniquenessExpectation",
                             "statisticRangeExpectation",
                             "rowConditionExpectation",
-                            "tableConditionExpectation"
+                            "tableConditionExpectation",
+                            "sqlAssertion"
                           ]
                         }
                       },
@@ -6662,6 +6621,10 @@
                         "tableConditionExpectation": {
                           "type": "TableConditionExpectation",
                           "id": 201
+                        },
+                        "sqlAssertion": {
+                          "type": "SqlAssertion",
+                          "id": 202
                         },
                         "column": {
                           "type": "string",
@@ -6831,6 +6794,17 @@
                         "TableConditionExpectation": {
                           "fields": {
                             "sqlExpression": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "SqlAssertion": {
+                          "fields": {
+                            "sqlStatement": {
                               "type": "string",
                               "id": 1,
                               "options": {
@@ -9387,6 +9361,10 @@
                         "nullRowCount": {
                           "type": "int64",
                           "id": 12
+                        },
+                        "assertionRowCount": {
+                          "type": "int64",
+                          "id": 13
                         }
                       },
                       "nested": {
@@ -9400,7 +9378,8 @@
                             "SET_EXPECTATION": 5,
                             "STATISTIC_RANGE_EXPECTATION": 6,
                             "TABLE_CONDITION_EXPECTATION": 7,
-                            "UNIQUENESS_EXPECTATION": 8
+                            "UNIQUENESS_EXPECTATION": 8,
+                            "SQL_ASSERTION": 9
                           }
                         },
                         "EvaluationType": {

@@ -4,6 +4,28 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [4.7.0](https://github.com/googleapis/google-cloud-node/compare/compute-v4.6.0...compute-v4.7.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [4.6.0](https://github.com/googleapis/google-cloud-node/compare/compute-v4.5.0...compute-v4.6.0) (2024-05-08)
+
+
+### Features
+
+* Update Compute Engine API to revision 20240430 ([#5321](https://github.com/googleapis/google-cloud-node/issues/5321)) ([7f22a19](https://github.com/googleapis/google-cloud-node/commit/7f22a197fbb5c377bf0d0404f64ad6c0a56f803a))
+
+## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/compute-v4.4.0...compute-v4.5.0) (2024-05-02)
+
+
+### Features
+
+* [compute] Update Compute Engine API to revision 20240421 ([#899](https://github.com/googleapis/google-cloud-node/issues/899)) ([#5294](https://github.com/googleapis/google-cloud-node/issues/5294)) ([f3e0606](https://github.com/googleapis/google-cloud-node/commit/f3e0606bf7df59eb2c87b1d6743fa6a176235882))
+
 ## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/compute-v4.3.0...compute-v4.4.0) (2024-03-29)
 
 

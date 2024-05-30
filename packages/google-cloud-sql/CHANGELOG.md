@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.12.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.11.0...sql-v0.12.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [0.11.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.10.0...sql-v0.11.0) (2024-05-02)
+
+
+### Features
+
+* [sql] Support for the AcquireSsrsLease and ReleaseSsrsLease RPCs ([#5299](https://github.com/googleapis/google-cloud-node/issues/5299)) ([485ff29](https://github.com/googleapis/google-cloud-node/commit/485ff29f98a3b7d6b5c40f2bd3f4696c1a82115e))
+
 ## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.9.0...sql-v0.10.0) (2024-03-29)
 
 

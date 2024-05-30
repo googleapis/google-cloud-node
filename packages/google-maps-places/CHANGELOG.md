@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.6.0](https://github.com/googleapis/google-cloud-node/compare/places-v1.5.0...places-v1.6.0) (2024-05-23)
+
+
+### Features
+
+* [places] add `generative_summary` and `area_summary` for place summaries ([#5364](https://github.com/googleapis/google-cloud-node/issues/5364)) ([b0fbf7b](https://github.com/googleapis/google-cloud-node/commit/b0fbf7b73894284dd46aea5faa0a91f97123a194))
+
+## [1.5.0](https://github.com/googleapis/google-cloud-node/compare/places-v1.4.0...places-v1.5.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
 ## [1.4.0](https://github.com/googleapis/google-cloud-node/compare/places-v1.3.0...places-v1.4.0) (2024-03-29)
 
 

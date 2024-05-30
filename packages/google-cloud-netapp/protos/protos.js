@@ -20720,6 +20720,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             if (message.capacityGib != null && message.hasOwnProperty("capacityGib"))
@@ -20832,6 +20833,10 @@
                             case "STANDARD":
                             case 3:
                                 message.serviceLevel = 3;
+                                break;
+                            case "FLEX":
+                            case 4:
+                                message.serviceLevel = 4;
                                 break;
                             }
                             if (object.capacityGib != null)
@@ -21098,6 +21103,7 @@
                      * @property {number} PREMIUM=1 PREMIUM value
                      * @property {number} EXTREME=2 EXTREME value
                      * @property {number} STANDARD=3 STANDARD value
+                     * @property {number} FLEX=4 FLEX value
                      */
                     v1.ServiceLevel = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -21105,6 +21111,7 @@
                         values[valuesById[1] = "PREMIUM"] = 1;
                         values[valuesById[2] = "EXTREME"] = 2;
                         values[valuesById[3] = "STANDARD"] = 3;
+                        values[valuesById[4] = "FLEX"] = 4;
                         return values;
                     })();
     
@@ -21122,6 +21129,267 @@
                         values[valuesById[1] = "SERVICE_MANAGED"] = 1;
                         values[valuesById[2] = "CLOUD_KMS"] = 2;
                         return values;
+                    })();
+    
+                    v1.LocationMetadata = (function() {
+    
+                        /**
+                         * Properties of a LocationMetadata.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface ILocationMetadata
+                         * @property {Array.<google.cloud.netapp.v1.ServiceLevel>|null} [supportedServiceLevels] LocationMetadata supportedServiceLevels
+                         */
+    
+                        /**
+                         * Constructs a new LocationMetadata.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a LocationMetadata.
+                         * @implements ILocationMetadata
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.ILocationMetadata=} [properties] Properties to set
+                         */
+                        function LocationMetadata(properties) {
+                            this.supportedServiceLevels = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LocationMetadata supportedServiceLevels.
+                         * @member {Array.<google.cloud.netapp.v1.ServiceLevel>} supportedServiceLevels
+                         * @memberof google.cloud.netapp.v1.LocationMetadata
+                         * @instance
+                         */
+                        LocationMetadata.prototype.supportedServiceLevels = $util.emptyArray;
+    
+                        /**
+                         * Creates a new LocationMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.LocationMetadata
+                         * @static
+                         * @param {google.cloud.netapp.v1.ILocationMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.LocationMetadata} LocationMetadata instance
+                         */
+                        LocationMetadata.create = function create(properties) {
+                            return new LocationMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LocationMetadata message. Does not implicitly {@link google.cloud.netapp.v1.LocationMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.LocationMetadata
+                         * @static
+                         * @param {google.cloud.netapp.v1.ILocationMetadata} message LocationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LocationMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.supportedServiceLevels != null && message.supportedServiceLevels.length) {
+                                writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                                for (var i = 0; i < message.supportedServiceLevels.length; ++i)
+                                    writer.int32(message.supportedServiceLevels[i]);
+                                writer.ldelim();
+                            }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LocationMetadata message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.LocationMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.LocationMetadata
+                         * @static
+                         * @param {google.cloud.netapp.v1.ILocationMetadata} message LocationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LocationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LocationMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.LocationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.LocationMetadata} LocationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LocationMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.LocationMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.supportedServiceLevels && message.supportedServiceLevels.length))
+                                            message.supportedServiceLevels = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.supportedServiceLevels.push(reader.int32());
+                                        } else
+                                            message.supportedServiceLevels.push(reader.int32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LocationMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.LocationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.LocationMetadata} LocationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LocationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LocationMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.LocationMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LocationMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.supportedServiceLevels != null && message.hasOwnProperty("supportedServiceLevels")) {
+                                if (!Array.isArray(message.supportedServiceLevels))
+                                    return "supportedServiceLevels: array expected";
+                                for (var i = 0; i < message.supportedServiceLevels.length; ++i)
+                                    switch (message.supportedServiceLevels[i]) {
+                                    default:
+                                        return "supportedServiceLevels: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LocationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.LocationMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.LocationMetadata} LocationMetadata
+                         */
+                        LocationMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.LocationMetadata)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.LocationMetadata();
+                            if (object.supportedServiceLevels) {
+                                if (!Array.isArray(object.supportedServiceLevels))
+                                    throw TypeError(".google.cloud.netapp.v1.LocationMetadata.supportedServiceLevels: array expected");
+                                message.supportedServiceLevels = [];
+                                for (var i = 0; i < object.supportedServiceLevels.length; ++i)
+                                    switch (object.supportedServiceLevels[i]) {
+                                    default:
+                                        if (typeof object.supportedServiceLevels[i] === "number") {
+                                            message.supportedServiceLevels[i] = object.supportedServiceLevels[i];
+                                            break;
+                                        }
+                                    case "SERVICE_LEVEL_UNSPECIFIED":
+                                    case 0:
+                                        message.supportedServiceLevels[i] = 0;
+                                        break;
+                                    case "PREMIUM":
+                                    case 1:
+                                        message.supportedServiceLevels[i] = 1;
+                                        break;
+                                    case "EXTREME":
+                                    case 2:
+                                        message.supportedServiceLevels[i] = 2;
+                                        break;
+                                    case "STANDARD":
+                                    case 3:
+                                        message.supportedServiceLevels[i] = 3;
+                                        break;
+                                    case "FLEX":
+                                    case 4:
+                                        message.supportedServiceLevels[i] = 4;
+                                        break;
+                                    }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LocationMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.LocationMetadata
+                         * @static
+                         * @param {google.cloud.netapp.v1.LocationMetadata} message LocationMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LocationMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.supportedServiceLevels = [];
+                            if (message.supportedServiceLevels && message.supportedServiceLevels.length) {
+                                object.supportedServiceLevels = [];
+                                for (var j = 0; j < message.supportedServiceLevels.length; ++j)
+                                    object.supportedServiceLevels[j] = options.enums === String ? $root.google.cloud.netapp.v1.ServiceLevel[message.supportedServiceLevels[j]] === undefined ? message.supportedServiceLevels[j] : $root.google.cloud.netapp.v1.ServiceLevel[message.supportedServiceLevels[j]] : message.supportedServiceLevels[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LocationMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.LocationMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LocationMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for LocationMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.LocationMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LocationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.LocationMetadata";
+                        };
+    
+                        return LocationMetadata;
                     })();
     
                     /**
@@ -22990,6 +23258,7 @@
                          * @property {boolean|null} [hasReplication] Volume hasReplication
                          * @property {google.cloud.netapp.v1.IBackupConfig|null} [backupConfig] Volume backupConfig
                          * @property {Array.<google.cloud.netapp.v1.RestrictedAction>|null} [restrictedActions] Volume restrictedActions
+                         * @property {google.cloud.netapp.v1.ITieringPolicy|null} [tieringPolicy] Volume tieringPolicy
                          */
     
                         /**
@@ -23260,6 +23529,14 @@
                          */
                         Volume.prototype.restrictedActions = $util.emptyArray;
     
+                        /**
+                         * Volume tieringPolicy.
+                         * @member {google.cloud.netapp.v1.ITieringPolicy|null|undefined} tieringPolicy
+                         * @memberof google.cloud.netapp.v1.Volume
+                         * @instance
+                         */
+                        Volume.prototype.tieringPolicy = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -23271,6 +23548,17 @@
                          */
                         Object.defineProperty(Volume.prototype, "_backupConfig", {
                             get: $util.oneOfGetter($oneOfFields = ["backupConfig"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Volume _tieringPolicy.
+                         * @member {"tieringPolicy"|undefined} _tieringPolicy
+                         * @memberof google.cloud.netapp.v1.Volume
+                         * @instance
+                         */
+                        Object.defineProperty(Volume.prototype, "_tieringPolicy", {
+                            get: $util.oneOfGetter($oneOfFields = ["tieringPolicy"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -23374,6 +23662,8 @@
                                     writer.int32(message.restrictedActions[i]);
                                 writer.ldelim();
                             }
+                            if (message.tieringPolicy != null && Object.hasOwnProperty.call(message, "tieringPolicy"))
+                                $root.google.cloud.netapp.v1.TieringPolicy.encode(message.tieringPolicy, writer.uint32(/* id 34, wireType 2 =*/274).fork()).ldelim();
                             return writer;
                         };
     
@@ -23574,6 +23864,10 @@
                                             message.restrictedActions.push(reader.int32());
                                         break;
                                     }
+                                case 34: {
+                                        message.tieringPolicy = $root.google.cloud.netapp.v1.TieringPolicy.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -23655,6 +23949,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             if (message.capacityGib != null && message.hasOwnProperty("capacityGib"))
@@ -23794,6 +24089,14 @@
                                         break;
                                     }
                             }
+                            if (message.tieringPolicy != null && message.hasOwnProperty("tieringPolicy")) {
+                                properties._tieringPolicy = 1;
+                                {
+                                    var error = $root.google.cloud.netapp.v1.TieringPolicy.verify(message.tieringPolicy);
+                                    if (error)
+                                        return "tieringPolicy." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -23888,6 +24191,10 @@
                             case "STANDARD":
                             case 3:
                                 message.serviceLevel = 3;
+                                break;
+                            case "FLEX":
+                            case 4:
+                                message.serviceLevel = 4;
                                 break;
                             }
                             if (object.capacityGib != null)
@@ -24106,6 +24413,11 @@
                                         break;
                                     }
                             }
+                            if (object.tieringPolicy != null) {
+                                if (typeof object.tieringPolicy !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.Volume.tieringPolicy: object expected");
+                                message.tieringPolicy = $root.google.cloud.netapp.v1.TieringPolicy.fromObject(object.tieringPolicy);
+                            }
                             return message;
                         };
     
@@ -24251,6 +24563,11 @@
                                 object.restrictedActions = [];
                                 for (var j = 0; j < message.restrictedActions.length; ++j)
                                     object.restrictedActions[j] = options.enums === String ? $root.google.cloud.netapp.v1.RestrictedAction[message.restrictedActions[j]] === undefined ? message.restrictedActions[j] : $root.google.cloud.netapp.v1.RestrictedAction[message.restrictedActions[j]] : message.restrictedActions[j];
+                            }
+                            if (message.tieringPolicy != null && message.hasOwnProperty("tieringPolicy")) {
+                                object.tieringPolicy = $root.google.cloud.netapp.v1.TieringPolicy.toObject(message.tieringPolicy, options);
+                                if (options.oneofs)
+                                    object._tieringPolicy = "tieringPolicy";
                             }
                             return object;
                         };
@@ -27348,6 +27665,7 @@
                          * @property {Array.<string>|null} [backupPolicies] BackupConfig backupPolicies
                          * @property {string|null} [backupVault] BackupConfig backupVault
                          * @property {boolean|null} [scheduledBackupEnabled] BackupConfig scheduledBackupEnabled
+                         * @property {number|Long|null} [backupChainBytes] BackupConfig backupChainBytes
                          */
     
                         /**
@@ -27390,6 +27708,14 @@
                          */
                         BackupConfig.prototype.scheduledBackupEnabled = null;
     
+                        /**
+                         * BackupConfig backupChainBytes.
+                         * @member {number|Long|null|undefined} backupChainBytes
+                         * @memberof google.cloud.netapp.v1.BackupConfig
+                         * @instance
+                         */
+                        BackupConfig.prototype.backupChainBytes = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -27401,6 +27727,17 @@
                          */
                         Object.defineProperty(BackupConfig.prototype, "_scheduledBackupEnabled", {
                             get: $util.oneOfGetter($oneOfFields = ["scheduledBackupEnabled"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * BackupConfig _backupChainBytes.
+                         * @member {"backupChainBytes"|undefined} _backupChainBytes
+                         * @memberof google.cloud.netapp.v1.BackupConfig
+                         * @instance
+                         */
+                        Object.defineProperty(BackupConfig.prototype, "_backupChainBytes", {
+                            get: $util.oneOfGetter($oneOfFields = ["backupChainBytes"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -27435,6 +27772,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.backupVault);
                             if (message.scheduledBackupEnabled != null && Object.hasOwnProperty.call(message, "scheduledBackupEnabled"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.scheduledBackupEnabled);
+                            if (message.backupChainBytes != null && Object.hasOwnProperty.call(message, "backupChainBytes"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.backupChainBytes);
                             return writer;
                         };
     
@@ -27481,6 +27820,10 @@
                                     }
                                 case 3: {
                                         message.scheduledBackupEnabled = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.backupChainBytes = reader.int64();
                                         break;
                                     }
                                 default:
@@ -27534,6 +27877,11 @@
                                 if (typeof message.scheduledBackupEnabled !== "boolean")
                                     return "scheduledBackupEnabled: boolean expected";
                             }
+                            if (message.backupChainBytes != null && message.hasOwnProperty("backupChainBytes")) {
+                                properties._backupChainBytes = 1;
+                                if (!$util.isInteger(message.backupChainBytes) && !(message.backupChainBytes && $util.isInteger(message.backupChainBytes.low) && $util.isInteger(message.backupChainBytes.high)))
+                                    return "backupChainBytes: integer|Long expected";
+                            }
                             return null;
                         };
     
@@ -27560,6 +27908,15 @@
                                 message.backupVault = String(object.backupVault);
                             if (object.scheduledBackupEnabled != null)
                                 message.scheduledBackupEnabled = Boolean(object.scheduledBackupEnabled);
+                            if (object.backupChainBytes != null)
+                                if ($util.Long)
+                                    (message.backupChainBytes = $util.Long.fromValue(object.backupChainBytes)).unsigned = false;
+                                else if (typeof object.backupChainBytes === "string")
+                                    message.backupChainBytes = parseInt(object.backupChainBytes, 10);
+                                else if (typeof object.backupChainBytes === "number")
+                                    message.backupChainBytes = object.backupChainBytes;
+                                else if (typeof object.backupChainBytes === "object")
+                                    message.backupChainBytes = new $util.LongBits(object.backupChainBytes.low >>> 0, object.backupChainBytes.high >>> 0).toNumber();
                             return message;
                         };
     
@@ -27592,6 +27949,14 @@
                                 if (options.oneofs)
                                     object._scheduledBackupEnabled = "scheduledBackupEnabled";
                             }
+                            if (message.backupChainBytes != null && message.hasOwnProperty("backupChainBytes")) {
+                                if (typeof message.backupChainBytes === "number")
+                                    object.backupChainBytes = options.longs === String ? String(message.backupChainBytes) : message.backupChainBytes;
+                                else
+                                    object.backupChainBytes = options.longs === String ? $util.Long.prototype.toString.call(message.backupChainBytes) : options.longs === Number ? new $util.LongBits(message.backupChainBytes.low >>> 0, message.backupChainBytes.high >>> 0).toNumber() : message.backupChainBytes;
+                                if (options.oneofs)
+                                    object._backupChainBytes = "backupChainBytes";
+                            }
                             return object;
                         };
     
@@ -27622,6 +27987,305 @@
                         };
     
                         return BackupConfig;
+                    })();
+    
+                    v1.TieringPolicy = (function() {
+    
+                        /**
+                         * Properties of a TieringPolicy.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface ITieringPolicy
+                         * @property {google.cloud.netapp.v1.TieringPolicy.TierAction|null} [tierAction] TieringPolicy tierAction
+                         * @property {number|null} [coolingThresholdDays] TieringPolicy coolingThresholdDays
+                         */
+    
+                        /**
+                         * Constructs a new TieringPolicy.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a TieringPolicy.
+                         * @implements ITieringPolicy
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.ITieringPolicy=} [properties] Properties to set
+                         */
+                        function TieringPolicy(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TieringPolicy tierAction.
+                         * @member {google.cloud.netapp.v1.TieringPolicy.TierAction|null|undefined} tierAction
+                         * @memberof google.cloud.netapp.v1.TieringPolicy
+                         * @instance
+                         */
+                        TieringPolicy.prototype.tierAction = null;
+    
+                        /**
+                         * TieringPolicy coolingThresholdDays.
+                         * @member {number|null|undefined} coolingThresholdDays
+                         * @memberof google.cloud.netapp.v1.TieringPolicy
+                         * @instance
+                         */
+                        TieringPolicy.prototype.coolingThresholdDays = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * TieringPolicy _tierAction.
+                         * @member {"tierAction"|undefined} _tierAction
+                         * @memberof google.cloud.netapp.v1.TieringPolicy
+                         * @instance
+                         */
+                        Object.defineProperty(TieringPolicy.prototype, "_tierAction", {
+                            get: $util.oneOfGetter($oneOfFields = ["tierAction"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * TieringPolicy _coolingThresholdDays.
+                         * @member {"coolingThresholdDays"|undefined} _coolingThresholdDays
+                         * @memberof google.cloud.netapp.v1.TieringPolicy
+                         * @instance
+                         */
+                        Object.defineProperty(TieringPolicy.prototype, "_coolingThresholdDays", {
+                            get: $util.oneOfGetter($oneOfFields = ["coolingThresholdDays"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new TieringPolicy instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.TieringPolicy
+                         * @static
+                         * @param {google.cloud.netapp.v1.ITieringPolicy=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.TieringPolicy} TieringPolicy instance
+                         */
+                        TieringPolicy.create = function create(properties) {
+                            return new TieringPolicy(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TieringPolicy message. Does not implicitly {@link google.cloud.netapp.v1.TieringPolicy.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.TieringPolicy
+                         * @static
+                         * @param {google.cloud.netapp.v1.ITieringPolicy} message TieringPolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TieringPolicy.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.tierAction != null && Object.hasOwnProperty.call(message, "tierAction"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.tierAction);
+                            if (message.coolingThresholdDays != null && Object.hasOwnProperty.call(message, "coolingThresholdDays"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.coolingThresholdDays);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TieringPolicy message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.TieringPolicy.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.TieringPolicy
+                         * @static
+                         * @param {google.cloud.netapp.v1.ITieringPolicy} message TieringPolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TieringPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TieringPolicy message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.TieringPolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.TieringPolicy} TieringPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TieringPolicy.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.TieringPolicy();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.tierAction = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.coolingThresholdDays = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TieringPolicy message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.TieringPolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.TieringPolicy} TieringPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TieringPolicy.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TieringPolicy message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.TieringPolicy
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TieringPolicy.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.tierAction != null && message.hasOwnProperty("tierAction")) {
+                                properties._tierAction = 1;
+                                switch (message.tierAction) {
+                                default:
+                                    return "tierAction: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            }
+                            if (message.coolingThresholdDays != null && message.hasOwnProperty("coolingThresholdDays")) {
+                                properties._coolingThresholdDays = 1;
+                                if (!$util.isInteger(message.coolingThresholdDays))
+                                    return "coolingThresholdDays: integer expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TieringPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.TieringPolicy
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.TieringPolicy} TieringPolicy
+                         */
+                        TieringPolicy.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.TieringPolicy)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.TieringPolicy();
+                            switch (object.tierAction) {
+                            default:
+                                if (typeof object.tierAction === "number") {
+                                    message.tierAction = object.tierAction;
+                                    break;
+                                }
+                                break;
+                            case "TIER_ACTION_UNSPECIFIED":
+                            case 0:
+                                message.tierAction = 0;
+                                break;
+                            case "ENABLED":
+                            case 1:
+                                message.tierAction = 1;
+                                break;
+                            case "PAUSED":
+                            case 2:
+                                message.tierAction = 2;
+                                break;
+                            }
+                            if (object.coolingThresholdDays != null)
+                                message.coolingThresholdDays = object.coolingThresholdDays | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TieringPolicy message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.TieringPolicy
+                         * @static
+                         * @param {google.cloud.netapp.v1.TieringPolicy} message TieringPolicy
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TieringPolicy.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.tierAction != null && message.hasOwnProperty("tierAction")) {
+                                object.tierAction = options.enums === String ? $root.google.cloud.netapp.v1.TieringPolicy.TierAction[message.tierAction] === undefined ? message.tierAction : $root.google.cloud.netapp.v1.TieringPolicy.TierAction[message.tierAction] : message.tierAction;
+                                if (options.oneofs)
+                                    object._tierAction = "tierAction";
+                            }
+                            if (message.coolingThresholdDays != null && message.hasOwnProperty("coolingThresholdDays")) {
+                                object.coolingThresholdDays = message.coolingThresholdDays;
+                                if (options.oneofs)
+                                    object._coolingThresholdDays = "coolingThresholdDays";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TieringPolicy to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.TieringPolicy
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TieringPolicy.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TieringPolicy
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.TieringPolicy
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TieringPolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.TieringPolicy";
+                        };
+    
+                        /**
+                         * TierAction enum.
+                         * @name google.cloud.netapp.v1.TieringPolicy.TierAction
+                         * @enum {number}
+                         * @property {number} TIER_ACTION_UNSPECIFIED=0 TIER_ACTION_UNSPECIFIED value
+                         * @property {number} ENABLED=1 ENABLED value
+                         * @property {number} PAUSED=2 PAUSED value
+                         */
+                        TieringPolicy.TierAction = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TIER_ACTION_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ENABLED"] = 1;
+                            values[valuesById[2] = "PAUSED"] = 2;
+                            return values;
+                        })();
+    
+                        return TieringPolicy;
                     })();
     
                     return v1;

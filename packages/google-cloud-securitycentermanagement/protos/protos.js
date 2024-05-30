@@ -692,7 +692,839 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.securitycentermanagement.v1.SecurityCenterManagement|getSecurityCenterService}.
+                         * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterManagement
+                         * @typedef GetSecurityCenterServiceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.securitycentermanagement.v1.SecurityCenterService} [response] SecurityCenterService
+                         */
+    
+                        /**
+                         * Calls GetSecurityCenterService.
+                         * @function getSecurityCenterService
+                         * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterManagement
+                         * @instance
+                         * @param {google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest} request GetSecurityCenterServiceRequest message or plain object
+                         * @param {google.cloud.securitycentermanagement.v1.SecurityCenterManagement.GetSecurityCenterServiceCallback} callback Node-style callback called with the error, if any, and SecurityCenterService
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecurityCenterManagement.prototype.getSecurityCenterService = function getSecurityCenterService(request, callback) {
+                            return this.rpcCall(getSecurityCenterService, $root.google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest, $root.google.cloud.securitycentermanagement.v1.SecurityCenterService, request, callback);
+                        }, "name", { value: "GetSecurityCenterService" });
+    
+                        /**
+                         * Calls GetSecurityCenterService.
+                         * @function getSecurityCenterService
+                         * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterManagement
+                         * @instance
+                         * @param {google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest} request GetSecurityCenterServiceRequest message or plain object
+                         * @returns {Promise<google.cloud.securitycentermanagement.v1.SecurityCenterService>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.securitycentermanagement.v1.SecurityCenterManagement|listSecurityCenterServices}.
+                         * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterManagement
+                         * @typedef ListSecurityCenterServicesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse} [response] ListSecurityCenterServicesResponse
+                         */
+    
+                        /**
+                         * Calls ListSecurityCenterServices.
+                         * @function listSecurityCenterServices
+                         * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterManagement
+                         * @instance
+                         * @param {google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest} request ListSecurityCenterServicesRequest message or plain object
+                         * @param {google.cloud.securitycentermanagement.v1.SecurityCenterManagement.ListSecurityCenterServicesCallback} callback Node-style callback called with the error, if any, and ListSecurityCenterServicesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecurityCenterManagement.prototype.listSecurityCenterServices = function listSecurityCenterServices(request, callback) {
+                            return this.rpcCall(listSecurityCenterServices, $root.google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest, $root.google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse, request, callback);
+                        }, "name", { value: "ListSecurityCenterServices" });
+    
+                        /**
+                         * Calls ListSecurityCenterServices.
+                         * @function listSecurityCenterServices
+                         * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterManagement
+                         * @instance
+                         * @param {google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest} request ListSecurityCenterServicesRequest message or plain object
+                         * @returns {Promise<google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.securitycentermanagement.v1.SecurityCenterManagement|updateSecurityCenterService}.
+                         * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterManagement
+                         * @typedef UpdateSecurityCenterServiceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.securitycentermanagement.v1.SecurityCenterService} [response] SecurityCenterService
+                         */
+    
+                        /**
+                         * Calls UpdateSecurityCenterService.
+                         * @function updateSecurityCenterService
+                         * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterManagement
+                         * @instance
+                         * @param {google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest} request UpdateSecurityCenterServiceRequest message or plain object
+                         * @param {google.cloud.securitycentermanagement.v1.SecurityCenterManagement.UpdateSecurityCenterServiceCallback} callback Node-style callback called with the error, if any, and SecurityCenterService
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SecurityCenterManagement.prototype.updateSecurityCenterService = function updateSecurityCenterService(request, callback) {
+                            return this.rpcCall(updateSecurityCenterService, $root.google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest, $root.google.cloud.securitycentermanagement.v1.SecurityCenterService, request, callback);
+                        }, "name", { value: "UpdateSecurityCenterService" });
+    
+                        /**
+                         * Calls UpdateSecurityCenterService.
+                         * @function updateSecurityCenterService
+                         * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterManagement
+                         * @instance
+                         * @param {google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest} request UpdateSecurityCenterServiceRequest message or plain object
+                         * @returns {Promise<google.cloud.securitycentermanagement.v1.SecurityCenterService>} Promise
+                         * @variation 2
+                         */
+    
                         return SecurityCenterManagement;
+                    })();
+    
+                    v1.SecurityCenterService = (function() {
+    
+                        /**
+                         * Properties of a SecurityCenterService.
+                         * @memberof google.cloud.securitycentermanagement.v1
+                         * @interface ISecurityCenterService
+                         * @property {string|null} [name] SecurityCenterService name
+                         * @property {google.cloud.securitycentermanagement.v1.SecurityCenterService.EnablementState|null} [intendedEnablementState] SecurityCenterService intendedEnablementState
+                         * @property {google.cloud.securitycentermanagement.v1.SecurityCenterService.EnablementState|null} [effectiveEnablementState] SecurityCenterService effectiveEnablementState
+                         * @property {Object.<string,google.cloud.securitycentermanagement.v1.SecurityCenterService.IModuleSettings>|null} [modules] SecurityCenterService modules
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] SecurityCenterService updateTime
+                         * @property {google.protobuf.IStruct|null} [serviceConfig] SecurityCenterService serviceConfig
+                         */
+    
+                        /**
+                         * Constructs a new SecurityCenterService.
+                         * @memberof google.cloud.securitycentermanagement.v1
+                         * @classdesc Represents a SecurityCenterService.
+                         * @implements ISecurityCenterService
+                         * @constructor
+                         * @param {google.cloud.securitycentermanagement.v1.ISecurityCenterService=} [properties] Properties to set
+                         */
+                        function SecurityCenterService(properties) {
+                            this.modules = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SecurityCenterService name.
+                         * @member {string} name
+                         * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterService
+                         * @instance
+                         */
+                        SecurityCenterService.prototype.name = "";
+    
+                        /**
+                         * SecurityCenterService intendedEnablementState.
+                         * @member {google.cloud.securitycentermanagement.v1.SecurityCenterService.EnablementState} intendedEnablementState
+                         * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterService
+                         * @instance
+                         */
+                        SecurityCenterService.prototype.intendedEnablementState = 0;
+    
+                        /**
+                         * SecurityCenterService effectiveEnablementState.
+                         * @member {google.cloud.securitycentermanagement.v1.SecurityCenterService.EnablementState} effectiveEnablementState
+                         * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterService
+                         * @instance
+                         */
+                        SecurityCenterService.prototype.effectiveEnablementState = 0;
+    
+                        /**
+                         * SecurityCenterService modules.
+                         * @member {Object.<string,google.cloud.securitycentermanagement.v1.SecurityCenterService.IModuleSettings>} modules
+                         * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterService
+                         * @instance
+                         */
+                        SecurityCenterService.prototype.modules = $util.emptyObject;
+    
+                        /**
+                         * SecurityCenterService updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterService
+                         * @instance
+                         */
+                        SecurityCenterService.prototype.updateTime = null;
+    
+                        /**
+                         * SecurityCenterService serviceConfig.
+                         * @member {google.protobuf.IStruct|null|undefined} serviceConfig
+                         * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterService
+                         * @instance
+                         */
+                        SecurityCenterService.prototype.serviceConfig = null;
+    
+                        /**
+                         * Creates a new SecurityCenterService instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterService
+                         * @static
+                         * @param {google.cloud.securitycentermanagement.v1.ISecurityCenterService=} [properties] Properties to set
+                         * @returns {google.cloud.securitycentermanagement.v1.SecurityCenterService} SecurityCenterService instance
+                         */
+                        SecurityCenterService.create = function create(properties) {
+                            return new SecurityCenterService(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SecurityCenterService message. Does not implicitly {@link google.cloud.securitycentermanagement.v1.SecurityCenterService.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterService
+                         * @static
+                         * @param {google.cloud.securitycentermanagement.v1.ISecurityCenterService} message SecurityCenterService message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SecurityCenterService.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.intendedEnablementState != null && Object.hasOwnProperty.call(message, "intendedEnablementState"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.intendedEnablementState);
+                            if (message.effectiveEnablementState != null && Object.hasOwnProperty.call(message, "effectiveEnablementState"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.effectiveEnablementState);
+                            if (message.modules != null && Object.hasOwnProperty.call(message, "modules"))
+                                for (var keys = Object.keys(message.modules), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings.encode(message.modules[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.serviceConfig != null && Object.hasOwnProperty.call(message, "serviceConfig"))
+                                $root.google.protobuf.Struct.encode(message.serviceConfig, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SecurityCenterService message, length delimited. Does not implicitly {@link google.cloud.securitycentermanagement.v1.SecurityCenterService.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterService
+                         * @static
+                         * @param {google.cloud.securitycentermanagement.v1.ISecurityCenterService} message SecurityCenterService message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SecurityCenterService.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SecurityCenterService message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterService
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycentermanagement.v1.SecurityCenterService} SecurityCenterService
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SecurityCenterService.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycentermanagement.v1.SecurityCenterService(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.intendedEnablementState = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.effectiveEnablementState = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        if (message.modules === $util.emptyObject)
+                                            message.modules = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = null;
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = $root.google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings.decode(reader, reader.uint32());
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.modules[key] = value;
+                                        break;
+                                    }
+                                case 5: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.serviceConfig = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SecurityCenterService message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterService
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycentermanagement.v1.SecurityCenterService} SecurityCenterService
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SecurityCenterService.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SecurityCenterService message.
+                         * @function verify
+                         * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterService
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SecurityCenterService.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.intendedEnablementState != null && message.hasOwnProperty("intendedEnablementState"))
+                                switch (message.intendedEnablementState) {
+                                default:
+                                    return "intendedEnablementState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.effectiveEnablementState != null && message.hasOwnProperty("effectiveEnablementState"))
+                                switch (message.effectiveEnablementState) {
+                                default:
+                                    return "effectiveEnablementState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.modules != null && message.hasOwnProperty("modules")) {
+                                if (!$util.isObject(message.modules))
+                                    return "modules: object expected";
+                                var key = Object.keys(message.modules);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings.verify(message.modules[key[i]]);
+                                    if (error)
+                                        return "modules." + error;
+                                }
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.serviceConfig != null && message.hasOwnProperty("serviceConfig")) {
+                                var error = $root.google.protobuf.Struct.verify(message.serviceConfig);
+                                if (error)
+                                    return "serviceConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SecurityCenterService message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterService
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycentermanagement.v1.SecurityCenterService} SecurityCenterService
+                         */
+                        SecurityCenterService.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycentermanagement.v1.SecurityCenterService)
+                                return object;
+                            var message = new $root.google.cloud.securitycentermanagement.v1.SecurityCenterService();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            switch (object.intendedEnablementState) {
+                            default:
+                                if (typeof object.intendedEnablementState === "number") {
+                                    message.intendedEnablementState = object.intendedEnablementState;
+                                    break;
+                                }
+                                break;
+                            case "ENABLEMENT_STATE_UNSPECIFIED":
+                            case 0:
+                                message.intendedEnablementState = 0;
+                                break;
+                            case "INHERITED":
+                            case 1:
+                                message.intendedEnablementState = 1;
+                                break;
+                            case "ENABLED":
+                            case 2:
+                                message.intendedEnablementState = 2;
+                                break;
+                            case "DISABLED":
+                            case 3:
+                                message.intendedEnablementState = 3;
+                                break;
+                            }
+                            switch (object.effectiveEnablementState) {
+                            default:
+                                if (typeof object.effectiveEnablementState === "number") {
+                                    message.effectiveEnablementState = object.effectiveEnablementState;
+                                    break;
+                                }
+                                break;
+                            case "ENABLEMENT_STATE_UNSPECIFIED":
+                            case 0:
+                                message.effectiveEnablementState = 0;
+                                break;
+                            case "INHERITED":
+                            case 1:
+                                message.effectiveEnablementState = 1;
+                                break;
+                            case "ENABLED":
+                            case 2:
+                                message.effectiveEnablementState = 2;
+                                break;
+                            case "DISABLED":
+                            case 3:
+                                message.effectiveEnablementState = 3;
+                                break;
+                            }
+                            if (object.modules) {
+                                if (typeof object.modules !== "object")
+                                    throw TypeError(".google.cloud.securitycentermanagement.v1.SecurityCenterService.modules: object expected");
+                                message.modules = {};
+                                for (var keys = Object.keys(object.modules), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.modules[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.securitycentermanagement.v1.SecurityCenterService.modules: object expected");
+                                    message.modules[keys[i]] = $root.google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings.fromObject(object.modules[keys[i]]);
+                                }
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.securitycentermanagement.v1.SecurityCenterService.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.serviceConfig != null) {
+                                if (typeof object.serviceConfig !== "object")
+                                    throw TypeError(".google.cloud.securitycentermanagement.v1.SecurityCenterService.serviceConfig: object expected");
+                                message.serviceConfig = $root.google.protobuf.Struct.fromObject(object.serviceConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SecurityCenterService message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterService
+                         * @static
+                         * @param {google.cloud.securitycentermanagement.v1.SecurityCenterService} message SecurityCenterService
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SecurityCenterService.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.modules = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.intendedEnablementState = options.enums === String ? "ENABLEMENT_STATE_UNSPECIFIED" : 0;
+                                object.effectiveEnablementState = options.enums === String ? "ENABLEMENT_STATE_UNSPECIFIED" : 0;
+                                object.updateTime = null;
+                                object.serviceConfig = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.intendedEnablementState != null && message.hasOwnProperty("intendedEnablementState"))
+                                object.intendedEnablementState = options.enums === String ? $root.google.cloud.securitycentermanagement.v1.SecurityCenterService.EnablementState[message.intendedEnablementState] === undefined ? message.intendedEnablementState : $root.google.cloud.securitycentermanagement.v1.SecurityCenterService.EnablementState[message.intendedEnablementState] : message.intendedEnablementState;
+                            if (message.effectiveEnablementState != null && message.hasOwnProperty("effectiveEnablementState"))
+                                object.effectiveEnablementState = options.enums === String ? $root.google.cloud.securitycentermanagement.v1.SecurityCenterService.EnablementState[message.effectiveEnablementState] === undefined ? message.effectiveEnablementState : $root.google.cloud.securitycentermanagement.v1.SecurityCenterService.EnablementState[message.effectiveEnablementState] : message.effectiveEnablementState;
+                            var keys2;
+                            if (message.modules && (keys2 = Object.keys(message.modules)).length) {
+                                object.modules = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.modules[keys2[j]] = $root.google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings.toObject(message.modules[keys2[j]], options);
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.serviceConfig != null && message.hasOwnProperty("serviceConfig"))
+                                object.serviceConfig = $root.google.protobuf.Struct.toObject(message.serviceConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SecurityCenterService to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterService
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SecurityCenterService.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SecurityCenterService
+                         * @function getTypeUrl
+                         * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterService
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SecurityCenterService.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.securitycentermanagement.v1.SecurityCenterService";
+                        };
+    
+                        SecurityCenterService.ModuleSettings = (function() {
+    
+                            /**
+                             * Properties of a ModuleSettings.
+                             * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterService
+                             * @interface IModuleSettings
+                             * @property {google.cloud.securitycentermanagement.v1.SecurityCenterService.EnablementState|null} [intendedEnablementState] ModuleSettings intendedEnablementState
+                             * @property {google.cloud.securitycentermanagement.v1.SecurityCenterService.EnablementState|null} [effectiveEnablementState] ModuleSettings effectiveEnablementState
+                             */
+    
+                            /**
+                             * Constructs a new ModuleSettings.
+                             * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterService
+                             * @classdesc Represents a ModuleSettings.
+                             * @implements IModuleSettings
+                             * @constructor
+                             * @param {google.cloud.securitycentermanagement.v1.SecurityCenterService.IModuleSettings=} [properties] Properties to set
+                             */
+                            function ModuleSettings(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ModuleSettings intendedEnablementState.
+                             * @member {google.cloud.securitycentermanagement.v1.SecurityCenterService.EnablementState} intendedEnablementState
+                             * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings
+                             * @instance
+                             */
+                            ModuleSettings.prototype.intendedEnablementState = 0;
+    
+                            /**
+                             * ModuleSettings effectiveEnablementState.
+                             * @member {google.cloud.securitycentermanagement.v1.SecurityCenterService.EnablementState} effectiveEnablementState
+                             * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings
+                             * @instance
+                             */
+                            ModuleSettings.prototype.effectiveEnablementState = 0;
+    
+                            /**
+                             * Creates a new ModuleSettings instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings
+                             * @static
+                             * @param {google.cloud.securitycentermanagement.v1.SecurityCenterService.IModuleSettings=} [properties] Properties to set
+                             * @returns {google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings} ModuleSettings instance
+                             */
+                            ModuleSettings.create = function create(properties) {
+                                return new ModuleSettings(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ModuleSettings message. Does not implicitly {@link google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings
+                             * @static
+                             * @param {google.cloud.securitycentermanagement.v1.SecurityCenterService.IModuleSettings} message ModuleSettings message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ModuleSettings.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.intendedEnablementState != null && Object.hasOwnProperty.call(message, "intendedEnablementState"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.intendedEnablementState);
+                                if (message.effectiveEnablementState != null && Object.hasOwnProperty.call(message, "effectiveEnablementState"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.effectiveEnablementState);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ModuleSettings message, length delimited. Does not implicitly {@link google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings
+                             * @static
+                             * @param {google.cloud.securitycentermanagement.v1.SecurityCenterService.IModuleSettings} message ModuleSettings message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ModuleSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ModuleSettings message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings} ModuleSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ModuleSettings.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.intendedEnablementState = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.effectiveEnablementState = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ModuleSettings message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings} ModuleSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ModuleSettings.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ModuleSettings message.
+                             * @function verify
+                             * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ModuleSettings.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.intendedEnablementState != null && message.hasOwnProperty("intendedEnablementState"))
+                                    switch (message.intendedEnablementState) {
+                                    default:
+                                        return "intendedEnablementState: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                if (message.effectiveEnablementState != null && message.hasOwnProperty("effectiveEnablementState"))
+                                    switch (message.effectiveEnablementState) {
+                                    default:
+                                        return "effectiveEnablementState: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ModuleSettings message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings} ModuleSettings
+                             */
+                            ModuleSettings.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings)
+                                    return object;
+                                var message = new $root.google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings();
+                                switch (object.intendedEnablementState) {
+                                default:
+                                    if (typeof object.intendedEnablementState === "number") {
+                                        message.intendedEnablementState = object.intendedEnablementState;
+                                        break;
+                                    }
+                                    break;
+                                case "ENABLEMENT_STATE_UNSPECIFIED":
+                                case 0:
+                                    message.intendedEnablementState = 0;
+                                    break;
+                                case "INHERITED":
+                                case 1:
+                                    message.intendedEnablementState = 1;
+                                    break;
+                                case "ENABLED":
+                                case 2:
+                                    message.intendedEnablementState = 2;
+                                    break;
+                                case "DISABLED":
+                                case 3:
+                                    message.intendedEnablementState = 3;
+                                    break;
+                                }
+                                switch (object.effectiveEnablementState) {
+                                default:
+                                    if (typeof object.effectiveEnablementState === "number") {
+                                        message.effectiveEnablementState = object.effectiveEnablementState;
+                                        break;
+                                    }
+                                    break;
+                                case "ENABLEMENT_STATE_UNSPECIFIED":
+                                case 0:
+                                    message.effectiveEnablementState = 0;
+                                    break;
+                                case "INHERITED":
+                                case 1:
+                                    message.effectiveEnablementState = 1;
+                                    break;
+                                case "ENABLED":
+                                case 2:
+                                    message.effectiveEnablementState = 2;
+                                    break;
+                                case "DISABLED":
+                                case 3:
+                                    message.effectiveEnablementState = 3;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ModuleSettings message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings
+                             * @static
+                             * @param {google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings} message ModuleSettings
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ModuleSettings.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.intendedEnablementState = options.enums === String ? "ENABLEMENT_STATE_UNSPECIFIED" : 0;
+                                    object.effectiveEnablementState = options.enums === String ? "ENABLEMENT_STATE_UNSPECIFIED" : 0;
+                                }
+                                if (message.intendedEnablementState != null && message.hasOwnProperty("intendedEnablementState"))
+                                    object.intendedEnablementState = options.enums === String ? $root.google.cloud.securitycentermanagement.v1.SecurityCenterService.EnablementState[message.intendedEnablementState] === undefined ? message.intendedEnablementState : $root.google.cloud.securitycentermanagement.v1.SecurityCenterService.EnablementState[message.intendedEnablementState] : message.intendedEnablementState;
+                                if (message.effectiveEnablementState != null && message.hasOwnProperty("effectiveEnablementState"))
+                                    object.effectiveEnablementState = options.enums === String ? $root.google.cloud.securitycentermanagement.v1.SecurityCenterService.EnablementState[message.effectiveEnablementState] === undefined ? message.effectiveEnablementState : $root.google.cloud.securitycentermanagement.v1.SecurityCenterService.EnablementState[message.effectiveEnablementState] : message.effectiveEnablementState;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ModuleSettings to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ModuleSettings.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ModuleSettings
+                             * @function getTypeUrl
+                             * @memberof google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ModuleSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings";
+                            };
+    
+                            return ModuleSettings;
+                        })();
+    
+                        /**
+                         * EnablementState enum.
+                         * @name google.cloud.securitycentermanagement.v1.SecurityCenterService.EnablementState
+                         * @enum {number}
+                         * @property {number} ENABLEMENT_STATE_UNSPECIFIED=0 ENABLEMENT_STATE_UNSPECIFIED value
+                         * @property {number} INHERITED=1 INHERITED value
+                         * @property {number} ENABLED=2 ENABLED value
+                         * @property {number} DISABLED=3 DISABLED value
+                         */
+                        SecurityCenterService.EnablementState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ENABLEMENT_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "INHERITED"] = 1;
+                            values[valuesById[2] = "ENABLED"] = 2;
+                            values[valuesById[3] = "DISABLED"] = 3;
+                            return values;
+                        })();
+    
+                        return SecurityCenterService;
                     })();
     
                     v1.EffectiveSecurityHealthAnalyticsCustomModule = (function() {
@@ -11209,6 +12041,967 @@
                         })();
     
                         return ValidateEventThreatDetectionCustomModuleResponse;
+                    })();
+    
+                    v1.GetSecurityCenterServiceRequest = (function() {
+    
+                        /**
+                         * Properties of a GetSecurityCenterServiceRequest.
+                         * @memberof google.cloud.securitycentermanagement.v1
+                         * @interface IGetSecurityCenterServiceRequest
+                         * @property {string|null} [name] GetSecurityCenterServiceRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetSecurityCenterServiceRequest.
+                         * @memberof google.cloud.securitycentermanagement.v1
+                         * @classdesc Represents a GetSecurityCenterServiceRequest.
+                         * @implements IGetSecurityCenterServiceRequest
+                         * @constructor
+                         * @param {google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest=} [properties] Properties to set
+                         */
+                        function GetSecurityCenterServiceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetSecurityCenterServiceRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest
+                         * @instance
+                         */
+                        GetSecurityCenterServiceRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetSecurityCenterServiceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest
+                         * @static
+                         * @param {google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest} GetSecurityCenterServiceRequest instance
+                         */
+                        GetSecurityCenterServiceRequest.create = function create(properties) {
+                            return new GetSecurityCenterServiceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetSecurityCenterServiceRequest message. Does not implicitly {@link google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest
+                         * @static
+                         * @param {google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest} message GetSecurityCenterServiceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSecurityCenterServiceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetSecurityCenterServiceRequest message, length delimited. Does not implicitly {@link google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest
+                         * @static
+                         * @param {google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest} message GetSecurityCenterServiceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSecurityCenterServiceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetSecurityCenterServiceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest} GetSecurityCenterServiceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSecurityCenterServiceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetSecurityCenterServiceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest} GetSecurityCenterServiceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSecurityCenterServiceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetSecurityCenterServiceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetSecurityCenterServiceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetSecurityCenterServiceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest} GetSecurityCenterServiceRequest
+                         */
+                        GetSecurityCenterServiceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest)
+                                return object;
+                            var message = new $root.google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetSecurityCenterServiceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest
+                         * @static
+                         * @param {google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest} message GetSecurityCenterServiceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetSecurityCenterServiceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetSecurityCenterServiceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetSecurityCenterServiceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetSecurityCenterServiceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetSecurityCenterServiceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest";
+                        };
+    
+                        return GetSecurityCenterServiceRequest;
+                    })();
+    
+                    v1.ListSecurityCenterServicesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListSecurityCenterServicesRequest.
+                         * @memberof google.cloud.securitycentermanagement.v1
+                         * @interface IListSecurityCenterServicesRequest
+                         * @property {string|null} [parent] ListSecurityCenterServicesRequest parent
+                         * @property {number|null} [pageSize] ListSecurityCenterServicesRequest pageSize
+                         * @property {string|null} [pageToken] ListSecurityCenterServicesRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListSecurityCenterServicesRequest.
+                         * @memberof google.cloud.securitycentermanagement.v1
+                         * @classdesc Represents a ListSecurityCenterServicesRequest.
+                         * @implements IListSecurityCenterServicesRequest
+                         * @constructor
+                         * @param {google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest=} [properties] Properties to set
+                         */
+                        function ListSecurityCenterServicesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSecurityCenterServicesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest
+                         * @instance
+                         */
+                        ListSecurityCenterServicesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListSecurityCenterServicesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest
+                         * @instance
+                         */
+                        ListSecurityCenterServicesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListSecurityCenterServicesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest
+                         * @instance
+                         */
+                        ListSecurityCenterServicesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListSecurityCenterServicesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest
+                         * @static
+                         * @param {google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest} ListSecurityCenterServicesRequest instance
+                         */
+                        ListSecurityCenterServicesRequest.create = function create(properties) {
+                            return new ListSecurityCenterServicesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSecurityCenterServicesRequest message. Does not implicitly {@link google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest
+                         * @static
+                         * @param {google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest} message ListSecurityCenterServicesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSecurityCenterServicesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSecurityCenterServicesRequest message, length delimited. Does not implicitly {@link google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest
+                         * @static
+                         * @param {google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest} message ListSecurityCenterServicesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSecurityCenterServicesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSecurityCenterServicesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest} ListSecurityCenterServicesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSecurityCenterServicesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSecurityCenterServicesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest} ListSecurityCenterServicesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSecurityCenterServicesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSecurityCenterServicesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSecurityCenterServicesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSecurityCenterServicesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest} ListSecurityCenterServicesRequest
+                         */
+                        ListSecurityCenterServicesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest)
+                                return object;
+                            var message = new $root.google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSecurityCenterServicesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest
+                         * @static
+                         * @param {google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest} message ListSecurityCenterServicesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSecurityCenterServicesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSecurityCenterServicesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSecurityCenterServicesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListSecurityCenterServicesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSecurityCenterServicesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest";
+                        };
+    
+                        return ListSecurityCenterServicesRequest;
+                    })();
+    
+                    v1.ListSecurityCenterServicesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListSecurityCenterServicesResponse.
+                         * @memberof google.cloud.securitycentermanagement.v1
+                         * @interface IListSecurityCenterServicesResponse
+                         * @property {Array.<google.cloud.securitycentermanagement.v1.ISecurityCenterService>|null} [securityCenterServices] ListSecurityCenterServicesResponse securityCenterServices
+                         * @property {string|null} [nextPageToken] ListSecurityCenterServicesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListSecurityCenterServicesResponse.
+                         * @memberof google.cloud.securitycentermanagement.v1
+                         * @classdesc Represents a ListSecurityCenterServicesResponse.
+                         * @implements IListSecurityCenterServicesResponse
+                         * @constructor
+                         * @param {google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesResponse=} [properties] Properties to set
+                         */
+                        function ListSecurityCenterServicesResponse(properties) {
+                            this.securityCenterServices = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSecurityCenterServicesResponse securityCenterServices.
+                         * @member {Array.<google.cloud.securitycentermanagement.v1.ISecurityCenterService>} securityCenterServices
+                         * @memberof google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse
+                         * @instance
+                         */
+                        ListSecurityCenterServicesResponse.prototype.securityCenterServices = $util.emptyArray;
+    
+                        /**
+                         * ListSecurityCenterServicesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse
+                         * @instance
+                         */
+                        ListSecurityCenterServicesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListSecurityCenterServicesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse
+                         * @static
+                         * @param {google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse} ListSecurityCenterServicesResponse instance
+                         */
+                        ListSecurityCenterServicesResponse.create = function create(properties) {
+                            return new ListSecurityCenterServicesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSecurityCenterServicesResponse message. Does not implicitly {@link google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse
+                         * @static
+                         * @param {google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesResponse} message ListSecurityCenterServicesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSecurityCenterServicesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.securityCenterServices != null && message.securityCenterServices.length)
+                                for (var i = 0; i < message.securityCenterServices.length; ++i)
+                                    $root.google.cloud.securitycentermanagement.v1.SecurityCenterService.encode(message.securityCenterServices[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSecurityCenterServicesResponse message, length delimited. Does not implicitly {@link google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse
+                         * @static
+                         * @param {google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesResponse} message ListSecurityCenterServicesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSecurityCenterServicesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSecurityCenterServicesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse} ListSecurityCenterServicesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSecurityCenterServicesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.securityCenterServices && message.securityCenterServices.length))
+                                            message.securityCenterServices = [];
+                                        message.securityCenterServices.push($root.google.cloud.securitycentermanagement.v1.SecurityCenterService.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSecurityCenterServicesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse} ListSecurityCenterServicesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSecurityCenterServicesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSecurityCenterServicesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSecurityCenterServicesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.securityCenterServices != null && message.hasOwnProperty("securityCenterServices")) {
+                                if (!Array.isArray(message.securityCenterServices))
+                                    return "securityCenterServices: array expected";
+                                for (var i = 0; i < message.securityCenterServices.length; ++i) {
+                                    var error = $root.google.cloud.securitycentermanagement.v1.SecurityCenterService.verify(message.securityCenterServices[i]);
+                                    if (error)
+                                        return "securityCenterServices." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSecurityCenterServicesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse} ListSecurityCenterServicesResponse
+                         */
+                        ListSecurityCenterServicesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse)
+                                return object;
+                            var message = new $root.google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse();
+                            if (object.securityCenterServices) {
+                                if (!Array.isArray(object.securityCenterServices))
+                                    throw TypeError(".google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse.securityCenterServices: array expected");
+                                message.securityCenterServices = [];
+                                for (var i = 0; i < object.securityCenterServices.length; ++i) {
+                                    if (typeof object.securityCenterServices[i] !== "object")
+                                        throw TypeError(".google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse.securityCenterServices: object expected");
+                                    message.securityCenterServices[i] = $root.google.cloud.securitycentermanagement.v1.SecurityCenterService.fromObject(object.securityCenterServices[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSecurityCenterServicesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse
+                         * @static
+                         * @param {google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse} message ListSecurityCenterServicesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSecurityCenterServicesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.securityCenterServices = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.securityCenterServices && message.securityCenterServices.length) {
+                                object.securityCenterServices = [];
+                                for (var j = 0; j < message.securityCenterServices.length; ++j)
+                                    object.securityCenterServices[j] = $root.google.cloud.securitycentermanagement.v1.SecurityCenterService.toObject(message.securityCenterServices[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSecurityCenterServicesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSecurityCenterServicesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListSecurityCenterServicesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSecurityCenterServicesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse";
+                        };
+    
+                        return ListSecurityCenterServicesResponse;
+                    })();
+    
+                    v1.UpdateSecurityCenterServiceRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateSecurityCenterServiceRequest.
+                         * @memberof google.cloud.securitycentermanagement.v1
+                         * @interface IUpdateSecurityCenterServiceRequest
+                         * @property {google.cloud.securitycentermanagement.v1.ISecurityCenterService|null} [securityCenterService] UpdateSecurityCenterServiceRequest securityCenterService
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateSecurityCenterServiceRequest updateMask
+                         * @property {boolean|null} [validateOnly] UpdateSecurityCenterServiceRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new UpdateSecurityCenterServiceRequest.
+                         * @memberof google.cloud.securitycentermanagement.v1
+                         * @classdesc Represents an UpdateSecurityCenterServiceRequest.
+                         * @implements IUpdateSecurityCenterServiceRequest
+                         * @constructor
+                         * @param {google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest=} [properties] Properties to set
+                         */
+                        function UpdateSecurityCenterServiceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateSecurityCenterServiceRequest securityCenterService.
+                         * @member {google.cloud.securitycentermanagement.v1.ISecurityCenterService|null|undefined} securityCenterService
+                         * @memberof google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest
+                         * @instance
+                         */
+                        UpdateSecurityCenterServiceRequest.prototype.securityCenterService = null;
+    
+                        /**
+                         * UpdateSecurityCenterServiceRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest
+                         * @instance
+                         */
+                        UpdateSecurityCenterServiceRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateSecurityCenterServiceRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest
+                         * @instance
+                         */
+                        UpdateSecurityCenterServiceRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new UpdateSecurityCenterServiceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest
+                         * @static
+                         * @param {google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest} UpdateSecurityCenterServiceRequest instance
+                         */
+                        UpdateSecurityCenterServiceRequest.create = function create(properties) {
+                            return new UpdateSecurityCenterServiceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateSecurityCenterServiceRequest message. Does not implicitly {@link google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest
+                         * @static
+                         * @param {google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest} message UpdateSecurityCenterServiceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateSecurityCenterServiceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.securityCenterService != null && Object.hasOwnProperty.call(message, "securityCenterService"))
+                                $root.google.cloud.securitycentermanagement.v1.SecurityCenterService.encode(message.securityCenterService, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateSecurityCenterServiceRequest message, length delimited. Does not implicitly {@link google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest
+                         * @static
+                         * @param {google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest} message UpdateSecurityCenterServiceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateSecurityCenterServiceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateSecurityCenterServiceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest} UpdateSecurityCenterServiceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateSecurityCenterServiceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.securityCenterService = $root.google.cloud.securitycentermanagement.v1.SecurityCenterService.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateSecurityCenterServiceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest} UpdateSecurityCenterServiceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateSecurityCenterServiceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateSecurityCenterServiceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateSecurityCenterServiceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.securityCenterService != null && message.hasOwnProperty("securityCenterService")) {
+                                var error = $root.google.cloud.securitycentermanagement.v1.SecurityCenterService.verify(message.securityCenterService);
+                                if (error)
+                                    return "securityCenterService." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateSecurityCenterServiceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest} UpdateSecurityCenterServiceRequest
+                         */
+                        UpdateSecurityCenterServiceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest)
+                                return object;
+                            var message = new $root.google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest();
+                            if (object.securityCenterService != null) {
+                                if (typeof object.securityCenterService !== "object")
+                                    throw TypeError(".google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest.securityCenterService: object expected");
+                                message.securityCenterService = $root.google.cloud.securitycentermanagement.v1.SecurityCenterService.fromObject(object.securityCenterService);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateSecurityCenterServiceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest
+                         * @static
+                         * @param {google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest} message UpdateSecurityCenterServiceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateSecurityCenterServiceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.securityCenterService = null;
+                                object.updateMask = null;
+                                object.validateOnly = false;
+                            }
+                            if (message.securityCenterService != null && message.hasOwnProperty("securityCenterService"))
+                                object.securityCenterService = $root.google.cloud.securitycentermanagement.v1.SecurityCenterService.toObject(message.securityCenterService, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateSecurityCenterServiceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateSecurityCenterServiceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateSecurityCenterServiceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateSecurityCenterServiceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest";
+                        };
+    
+                        return UpdateSecurityCenterServiceRequest;
                     })();
     
                     return v1;

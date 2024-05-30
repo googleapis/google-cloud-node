@@ -4841,6 +4841,206 @@
                           }
                         }
                       }
+                    },
+                    "v1beta": {
+                      "options": {
+                        "csharp_namespace": "Google.Cloud.GkeHub.ServiceMesh.V1Beta",
+                        "go_package": "cloud.google.com/go/gkehub/servicemesh/apiv1beta/servicemeshpb;servicemeshpb",
+                        "java_multiple_files": true,
+                        "java_outer_classname": "ServiceMeshProto",
+                        "java_package": "com.google.cloud.gkehub.servicemesh.v1beta",
+                        "php_namespace": "Google\\Cloud\\GkeHub\\ServiceMesh\\V1beta",
+                        "ruby_package": "Google::Cloud::GkeHub::ServiceMesh::V1beta"
+                      },
+                      "nested": {
+                        "MembershipSpec": {
+                          "fields": {
+                            "controlPlane": {
+                              "type": "ControlPlaneManagement",
+                              "id": 1,
+                              "options": {
+                                "deprecated": true
+                              }
+                            },
+                            "management": {
+                              "type": "Management",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "ControlPlaneManagement": {
+                              "values": {
+                                "CONTROL_PLANE_MANAGEMENT_UNSPECIFIED": 0,
+                                "AUTOMATIC": 1,
+                                "MANUAL": 2
+                              }
+                            },
+                            "Management": {
+                              "values": {
+                                "MANAGEMENT_UNSPECIFIED": 0,
+                                "MANAGEMENT_AUTOMATIC": 1,
+                                "MANAGEMENT_MANUAL": 2
+                              }
+                            }
+                          }
+                        },
+                        "MembershipState": {
+                          "fields": {
+                            "controlPlaneManagement": {
+                              "type": "ControlPlaneManagement",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "dataPlaneManagement": {
+                              "type": "DataPlaneManagement",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "conditions": {
+                              "rule": "repeated",
+                              "type": "Condition",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "ControlPlaneManagement": {
+                              "fields": {
+                                "details": {
+                                  "rule": "repeated",
+                                  "type": "StatusDetails",
+                                  "id": 2
+                                },
+                                "state": {
+                                  "type": "LifecycleState",
+                                  "id": 3
+                                },
+                                "implementation": {
+                                  "type": "Implementation",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "Implementation": {
+                                  "values": {
+                                    "IMPLEMENTATION_UNSPECIFIED": 0,
+                                    "ISTIOD": 1,
+                                    "TRAFFIC_DIRECTOR": 2,
+                                    "UPDATING": 3
+                                  }
+                                }
+                              }
+                            },
+                            "DataPlaneManagement": {
+                              "fields": {
+                                "state": {
+                                  "type": "LifecycleState",
+                                  "id": 1
+                                },
+                                "details": {
+                                  "rule": "repeated",
+                                  "type": "StatusDetails",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "Condition": {
+                              "fields": {
+                                "code": {
+                                  "type": "Code",
+                                  "id": 1
+                                },
+                                "documentationLink": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "details": {
+                                  "type": "string",
+                                  "id": 3
+                                },
+                                "severity": {
+                                  "type": "Severity",
+                                  "id": 4
+                                }
+                              },
+                              "nested": {
+                                "Code": {
+                                  "values": {
+                                    "CODE_UNSPECIFIED": 0,
+                                    "MESH_IAM_PERMISSION_DENIED": 100,
+                                    "CNI_CONFIG_UNSUPPORTED": 201,
+                                    "GKE_SANDBOX_UNSUPPORTED": 202,
+                                    "NODEPOOL_WORKLOAD_IDENTITY_FEDERATION_REQUIRED": 203,
+                                    "CNI_INSTALLATION_FAILED": 204,
+                                    "CNI_POD_UNSCHEDULABLE": 205,
+                                    "UNSUPPORTED_MULTIPLE_CONTROL_PLANES": 301,
+                                    "VPCSC_GA_SUPPORTED": 302,
+                                    "CONFIG_APPLY_INTERNAL_ERROR": 401,
+                                    "CONFIG_VALIDATION_ERROR": 402,
+                                    "CONFIG_VALIDATION_WARNING": 403,
+                                    "QUOTA_EXCEEDED_BACKEND_SERVICES": 404,
+                                    "QUOTA_EXCEEDED_HEALTH_CHECKS": 405,
+                                    "QUOTA_EXCEEDED_HTTP_ROUTES": 406,
+                                    "QUOTA_EXCEEDED_TCP_ROUTES": 407,
+                                    "QUOTA_EXCEEDED_TLS_ROUTES": 408,
+                                    "QUOTA_EXCEEDED_TRAFFIC_POLICIES": 409,
+                                    "QUOTA_EXCEEDED_ENDPOINT_POLICIES": 410,
+                                    "QUOTA_EXCEEDED_GATEWAYS": 411,
+                                    "QUOTA_EXCEEDED_MESHES": 412,
+                                    "QUOTA_EXCEEDED_SERVER_TLS_POLICIES": 413,
+                                    "QUOTA_EXCEEDED_CLIENT_TLS_POLICIES": 414,
+                                    "QUOTA_EXCEEDED_SERVICE_LB_POLICIES": 415,
+                                    "QUOTA_EXCEEDED_HTTP_FILTERS": 416,
+                                    "QUOTA_EXCEEDED_TCP_FILTERS": 417,
+                                    "QUOTA_EXCEEDED_NETWORK_ENDPOINT_GROUPS": 418
+                                  }
+                                },
+                                "Severity": {
+                                  "values": {
+                                    "SEVERITY_UNSPECIFIED": 0,
+                                    "ERROR": 1,
+                                    "WARNING": 2,
+                                    "INFO": 3
+                                  }
+                                }
+                              }
+                            },
+                            "LifecycleState": {
+                              "values": {
+                                "LIFECYCLE_STATE_UNSPECIFIED": 0,
+                                "DISABLED": 1,
+                                "FAILED_PRECONDITION": 2,
+                                "PROVISIONING": 3,
+                                "ACTIVE": 4,
+                                "STALLED": 5,
+                                "NEEDS_ATTENTION": 6,
+                                "DEGRADED": 7
+                              }
+                            }
+                          }
+                        },
+                        "StatusDetails": {
+                          "fields": {
+                            "code": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "details": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
                     }
                   }
                 },
@@ -5870,7 +6070,8 @@
                       "oneofs": {
                         "featureSpec": {
                           "oneof": [
-                            "configmanagement"
+                            "configmanagement",
+                            "mesh"
                           ]
                         }
                       },
@@ -5878,6 +6079,10 @@
                         "configmanagement": {
                           "type": "google.cloud.gkehub.configmanagement.v1beta.MembershipSpec",
                           "id": 106
+                        },
+                        "mesh": {
+                          "type": "google.cloud.gkehub.servicemesh.v1beta.MembershipSpec",
+                          "id": 116
                         }
                       }
                     },
@@ -5885,12 +6090,17 @@
                       "oneofs": {
                         "featureState": {
                           "oneof": [
+                            "servicemesh",
                             "metering",
                             "configmanagement"
                           ]
                         }
                       },
                       "fields": {
+                        "servicemesh": {
+                          "type": "google.cloud.gkehub.servicemesh.v1beta.MembershipState",
+                          "id": 100
+                        },
                         "metering": {
                           "type": "google.cloud.gkehub.metering.v1beta.MembershipState",
                           "id": 104

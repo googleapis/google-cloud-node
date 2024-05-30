@@ -4812,6 +4812,143 @@ describe('v2.DlpServiceClient', () => {
     });
   });
 
+  describe('deleteTableDataProfile', () => {
+    it('invokes deleteTableDataProfile without error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.DeleteTableDataProfileRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeleteTableDataProfileRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteTableDataProfile =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteTableDataProfile(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteTableDataProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTableDataProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteTableDataProfile without error using callback', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.DeleteTableDataProfileRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeleteTableDataProfileRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteTableDataProfile =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteTableDataProfile(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteTableDataProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTableDataProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteTableDataProfile with error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.DeleteTableDataProfileRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeleteTableDataProfileRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteTableDataProfile = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.deleteTableDataProfile(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTableDataProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTableDataProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteTableDataProfile with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.DeleteTableDataProfileRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeleteTableDataProfileRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.deleteTableDataProfile(request),
+        expectedError
+      );
+    });
+  });
+
   describe('hybridInspectDlpJob', () => {
     it('invokes hybridInspectDlpJob without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
@@ -5070,6 +5207,526 @@ describe('v2.DlpServiceClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.finishDlpJob(request), expectedError);
+    });
+  });
+
+  describe('createConnection', () => {
+    it('invokes createConnection without error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.CreateConnectionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.CreateConnectionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.Connection()
+      );
+      client.innerApiCalls.createConnection = stubSimpleCall(expectedResponse);
+      const [response] = await client.createConnection(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createConnection without error using callback', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.CreateConnectionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.CreateConnectionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.Connection()
+      );
+      client.innerApiCalls.createConnection =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createConnection(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.privacy.dlp.v2.IConnection | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createConnection with error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.CreateConnectionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.CreateConnectionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createConnection = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createConnection(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createConnection with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.CreateConnectionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.CreateConnectionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createConnection(request), expectedError);
+    });
+  });
+
+  describe('getConnection', () => {
+    it('invokes getConnection without error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.GetConnectionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.GetConnectionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.Connection()
+      );
+      client.innerApiCalls.getConnection = stubSimpleCall(expectedResponse);
+      const [response] = await client.getConnection(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getConnection without error using callback', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.GetConnectionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.GetConnectionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.Connection()
+      );
+      client.innerApiCalls.getConnection =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getConnection(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.privacy.dlp.v2.IConnection | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getConnection with error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.GetConnectionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.GetConnectionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getConnection = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getConnection(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getConnection with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.GetConnectionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.GetConnectionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getConnection(request), expectedError);
+    });
+  });
+
+  describe('deleteConnection', () => {
+    it('invokes deleteConnection without error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.DeleteConnectionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeleteConnectionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteConnection = stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteConnection(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteConnection without error using callback', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.DeleteConnectionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeleteConnectionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteConnection =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteConnection(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteConnection with error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.DeleteConnectionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeleteConnectionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteConnection = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteConnection(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteConnection with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.DeleteConnectionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeleteConnectionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteConnection(request), expectedError);
+    });
+  });
+
+  describe('updateConnection', () => {
+    it('invokes updateConnection without error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.UpdateConnectionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.UpdateConnectionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.Connection()
+      );
+      client.innerApiCalls.updateConnection = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateConnection(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateConnection without error using callback', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.UpdateConnectionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.UpdateConnectionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.Connection()
+      );
+      client.innerApiCalls.updateConnection =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateConnection(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.privacy.dlp.v2.IConnection | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateConnection with error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.UpdateConnectionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.UpdateConnectionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateConnection = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateConnection(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateConnection with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.UpdateConnectionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.UpdateConnectionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateConnection(request), expectedError);
     });
   });
 
@@ -8048,6 +8705,608 @@ describe('v2.DlpServiceClient', () => {
       );
     });
   });
+
+  describe('listConnections', () => {
+    it('invokes listConnections without error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ListConnectionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.privacy.dlp.v2.Connection()),
+        generateSampleMessage(new protos.google.privacy.dlp.v2.Connection()),
+        generateSampleMessage(new protos.google.privacy.dlp.v2.Connection()),
+      ];
+      client.innerApiCalls.listConnections = stubSimpleCall(expectedResponse);
+      const [response] = await client.listConnections(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listConnections as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listConnections as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listConnections without error using callback', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ListConnectionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.privacy.dlp.v2.Connection()),
+        generateSampleMessage(new protos.google.privacy.dlp.v2.Connection()),
+        generateSampleMessage(new protos.google.privacy.dlp.v2.Connection()),
+      ];
+      client.innerApiCalls.listConnections =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listConnections(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.privacy.dlp.v2.IConnection[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listConnections as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listConnections as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listConnections with error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ListConnectionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listConnections = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listConnections(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listConnections as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listConnections as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listConnectionsStream without error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ListConnectionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.privacy.dlp.v2.Connection()),
+        generateSampleMessage(new protos.google.privacy.dlp.v2.Connection()),
+        generateSampleMessage(new protos.google.privacy.dlp.v2.Connection()),
+      ];
+      client.descriptors.page.listConnections.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listConnectionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.privacy.dlp.v2.Connection[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.privacy.dlp.v2.Connection) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listConnections.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listConnections, request)
+      );
+      assert(
+        (client.descriptors.page.listConnections.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes listConnectionsStream with error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ListConnectionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listConnections.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listConnectionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.privacy.dlp.v2.Connection[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.privacy.dlp.v2.Connection) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listConnections.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listConnections, request)
+      );
+      assert(
+        (client.descriptors.page.listConnections.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listConnections without error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ListConnectionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.privacy.dlp.v2.Connection()),
+        generateSampleMessage(new protos.google.privacy.dlp.v2.Connection()),
+        generateSampleMessage(new protos.google.privacy.dlp.v2.Connection()),
+      ];
+      client.descriptors.page.listConnections.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.privacy.dlp.v2.IConnection[] = [];
+      const iterable = client.listConnectionsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listConnections.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listConnections.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listConnections with error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ListConnectionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listConnections.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listConnectionsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.privacy.dlp.v2.IConnection[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listConnections.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listConnections.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+  });
+
+  describe('searchConnections', () => {
+    it('invokes searchConnections without error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.SearchConnectionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.SearchConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.privacy.dlp.v2.Connection()),
+        generateSampleMessage(new protos.google.privacy.dlp.v2.Connection()),
+        generateSampleMessage(new protos.google.privacy.dlp.v2.Connection()),
+      ];
+      client.innerApiCalls.searchConnections = stubSimpleCall(expectedResponse);
+      const [response] = await client.searchConnections(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.searchConnections as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.searchConnections as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes searchConnections without error using callback', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.SearchConnectionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.SearchConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.privacy.dlp.v2.Connection()),
+        generateSampleMessage(new protos.google.privacy.dlp.v2.Connection()),
+        generateSampleMessage(new protos.google.privacy.dlp.v2.Connection()),
+      ];
+      client.innerApiCalls.searchConnections =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.searchConnections(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.privacy.dlp.v2.IConnection[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.searchConnections as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.searchConnections as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes searchConnections with error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.SearchConnectionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.SearchConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.searchConnections = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.searchConnections(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.searchConnections as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.searchConnections as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes searchConnectionsStream without error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.SearchConnectionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.SearchConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.privacy.dlp.v2.Connection()),
+        generateSampleMessage(new protos.google.privacy.dlp.v2.Connection()),
+        generateSampleMessage(new protos.google.privacy.dlp.v2.Connection()),
+      ];
+      client.descriptors.page.searchConnections.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.searchConnectionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.privacy.dlp.v2.Connection[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.privacy.dlp.v2.Connection) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.searchConnections.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.searchConnections, request)
+      );
+      assert(
+        (client.descriptors.page.searchConnections.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes searchConnectionsStream with error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.SearchConnectionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.SearchConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.searchConnections.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.searchConnectionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.privacy.dlp.v2.Connection[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.privacy.dlp.v2.Connection) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.searchConnections.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.searchConnections, request)
+      );
+      assert(
+        (client.descriptors.page.searchConnections.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with searchConnections without error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.SearchConnectionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.SearchConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.privacy.dlp.v2.Connection()),
+        generateSampleMessage(new protos.google.privacy.dlp.v2.Connection()),
+        generateSampleMessage(new protos.google.privacy.dlp.v2.Connection()),
+      ];
+      client.descriptors.page.searchConnections.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.privacy.dlp.v2.IConnection[] = [];
+      const iterable = client.searchConnectionsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.searchConnections.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.searchConnections.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with searchConnections with error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.SearchConnectionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.SearchConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.searchConnections.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.searchConnectionsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.privacy.dlp.v2.IConnection[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.searchConnections.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.searchConnections.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+  });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
@@ -8248,6 +9507,70 @@ describe('v2.DlpServiceClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('connection', () => {
+      const fakePath = '/rendered/path/connection';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        connection: 'connectionValue',
+      };
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.connectionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.connectionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('connectionPath', () => {
+        const result = client.connectionPath(
+          'projectValue',
+          'locationValue',
+          'connectionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.connectionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromConnectionName', () => {
+        const result = client.matchProjectFromConnectionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.connectionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromConnectionName', () => {
+        const result = client.matchLocationFromConnectionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.connectionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConnectionFromConnectionName', () => {
+        const result = client.matchConnectionFromConnectionName(fakePath);
+        assert.strictEqual(result, 'connectionValue');
+        assert(
+          (client.pathTemplates.connectionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('discoveryConfig', () => {
       const fakePath = '/rendered/path/discoveryConfig';
       const expectedParameters = {

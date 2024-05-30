@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.5.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.4.0...generativelanguage-v2.5.0) (2024-05-21)
+
+
+### Features
+
+* [generativelanguage] Add video metadata to files API ([#5359](https://github.com/googleapis/google-cloud-node/issues/5359)) ([4185d57](https://github.com/googleapis/google-cloud-node/commit/4185d574058dea56f118cf019cd28adf89c7b5a9))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5350](https://github.com/googleapis/google-cloud-node/issues/5350)) ([6c03873](https://github.com/googleapis/google-cloud-node/commit/6c038731de1f36456042e6b4ecf2a9686be662c7))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.3.0...generativelanguage-v2.4.0) (2024-05-08)
+
+
+### Features
+
+* Add FileState to File  ([#5312](https://github.com/googleapis/google-cloud-node/issues/5312)) ([01f4b53](https://github.com/googleapis/google-cloud-node/commit/01f4b533eab40cbc0868be66418bda716b998dc3))
+
 ## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.2.0...generativelanguage-v2.3.0) (2024-04-18)
 
 

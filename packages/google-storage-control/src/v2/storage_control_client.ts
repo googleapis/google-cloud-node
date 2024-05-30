@@ -209,7 +209,7 @@ export class StorageControlClient {
         'projects/{project}/buckets/{bucket}/folders/{folder=**}'
       ),
       managedFolderPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/buckets/{bucket}/managedFolders/{managedFolder=**}'
+        'projects/{project}/buckets/{bucket}/managedFolders/{managed_folder=**}'
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
@@ -2202,14 +2202,14 @@ export class StorageControlClient {
    *
    * @param {string} project
    * @param {string} bucket
-   * @param {string} managedFolder
+   * @param {string} managed_folder
    * @returns {string} Resource name string.
    */
   managedFolderPath(project: string, bucket: string, managedFolder: string) {
     return this.pathTemplates.managedFolderPathTemplate.render({
       project: project,
       bucket: bucket,
-      managedFolder: managedFolder,
+      managed_folder: managedFolder,
     });
   }
 
@@ -2238,15 +2238,15 @@ export class StorageControlClient {
   }
 
   /**
-   * Parse the managedFolder from ManagedFolder resource.
+   * Parse the managed_folder from ManagedFolder resource.
    *
    * @param {string} managedFolderName
    *   A fully-qualified path representing ManagedFolder resource.
-   * @returns {string} A string representing the managedFolder.
+   * @returns {string} A string representing the managed_folder.
    */
   matchManagedFolderFromManagedFolderName(managedFolderName: string) {
     return this.pathTemplates.managedFolderPathTemplate.match(managedFolderName)
-      .managedFolder;
+      .managed_folder;
   }
 
   /**

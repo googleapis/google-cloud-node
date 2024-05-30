@@ -38,8 +38,8 @@ function main(parent) {
    *  Schema google.cloud.discoveryengine.v1alpha.Schema s to return. The
    *  service may return fewer than this value.
    *  If unspecified, at most 100
-   *  Schema google.cloud.discoveryengine.v1alpha.Schema s will be returned.
-   *  The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *  Schema google.cloud.discoveryengine.v1alpha.Schema s are returned.
+   *  The maximum value is 1000; values above 1000 are set to 1000.
    */
   // const pageSize = 1234
   /**

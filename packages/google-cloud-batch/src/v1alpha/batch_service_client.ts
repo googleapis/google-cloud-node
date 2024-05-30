@@ -376,6 +376,7 @@ export class BatchServiceClient {
       'createJob',
       'getJob',
       'deleteJob',
+      'updateJob',
       'listJobs',
       'getTask',
       'listTasks',
@@ -693,6 +694,110 @@ export class BatchServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.getJob(request, options, callback);
+  }
+  /**
+   * Update a Job.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.batch.v1alpha.Job} request.job
+   *   Required. The Job to update.
+   *   Only fields specified in `update_mask` are updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Mask of fields to update.
+   *
+   *   UpdateJob request now only supports update on `task_count` field in a job's
+   *   first task group. Other fields will be ignored.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.batch.v1alpha.Job|Job}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/batch_service.update_job.js</caption>
+   * region_tag:batch_v1alpha_generated_BatchService_UpdateJob_async
+   */
+  updateJob(
+    request?: protos.google.cloud.batch.v1alpha.IUpdateJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.batch.v1alpha.IJob,
+      protos.google.cloud.batch.v1alpha.IUpdateJobRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateJob(
+    request: protos.google.cloud.batch.v1alpha.IUpdateJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.batch.v1alpha.IJob,
+      protos.google.cloud.batch.v1alpha.IUpdateJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateJob(
+    request: protos.google.cloud.batch.v1alpha.IUpdateJobRequest,
+    callback: Callback<
+      protos.google.cloud.batch.v1alpha.IJob,
+      protos.google.cloud.batch.v1alpha.IUpdateJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateJob(
+    request?: protos.google.cloud.batch.v1alpha.IUpdateJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.batch.v1alpha.IJob,
+          | protos.google.cloud.batch.v1alpha.IUpdateJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.batch.v1alpha.IJob,
+      protos.google.cloud.batch.v1alpha.IUpdateJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.batch.v1alpha.IJob,
+      protos.google.cloud.batch.v1alpha.IUpdateJobRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'job.name': request.job!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateJob(request, options, callback);
   }
   /**
    * Return a single Task.

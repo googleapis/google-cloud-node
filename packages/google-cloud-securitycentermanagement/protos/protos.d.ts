@@ -297,6 +297,48 @@ export namespace google {
                      * @returns Promise
                      */
                     public validateEventThreatDetectionCustomModule(request: google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleRequest): Promise<google.cloud.securitycentermanagement.v1.ValidateEventThreatDetectionCustomModuleResponse>;
+
+                    /**
+                     * Calls GetSecurityCenterService.
+                     * @param request GetSecurityCenterServiceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SecurityCenterService
+                     */
+                    public getSecurityCenterService(request: google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest, callback: google.cloud.securitycentermanagement.v1.SecurityCenterManagement.GetSecurityCenterServiceCallback): void;
+
+                    /**
+                     * Calls GetSecurityCenterService.
+                     * @param request GetSecurityCenterServiceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getSecurityCenterService(request: google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest): Promise<google.cloud.securitycentermanagement.v1.SecurityCenterService>;
+
+                    /**
+                     * Calls ListSecurityCenterServices.
+                     * @param request ListSecurityCenterServicesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListSecurityCenterServicesResponse
+                     */
+                    public listSecurityCenterServices(request: google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest, callback: google.cloud.securitycentermanagement.v1.SecurityCenterManagement.ListSecurityCenterServicesCallback): void;
+
+                    /**
+                     * Calls ListSecurityCenterServices.
+                     * @param request ListSecurityCenterServicesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listSecurityCenterServices(request: google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest): Promise<google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse>;
+
+                    /**
+                     * Calls UpdateSecurityCenterService.
+                     * @param request UpdateSecurityCenterServiceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SecurityCenterService
+                     */
+                    public updateSecurityCenterService(request: google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest, callback: google.cloud.securitycentermanagement.v1.SecurityCenterManagement.UpdateSecurityCenterServiceCallback): void;
+
+                    /**
+                     * Calls UpdateSecurityCenterService.
+                     * @param request UpdateSecurityCenterServiceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateSecurityCenterService(request: google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest): Promise<google.cloud.securitycentermanagement.v1.SecurityCenterService>;
                 }
 
                 namespace SecurityCenterManagement {
@@ -426,6 +468,268 @@ export namespace google {
                      * @param [response] ValidateEventThreatDetectionCustomModuleResponse
                      */
                     type ValidateEventThreatDetectionCustomModuleCallback = (error: (Error|null), response?: google.cloud.securitycentermanagement.v1.ValidateEventThreatDetectionCustomModuleResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securitycentermanagement.v1.SecurityCenterManagement|getSecurityCenterService}.
+                     * @param error Error, if any
+                     * @param [response] SecurityCenterService
+                     */
+                    type GetSecurityCenterServiceCallback = (error: (Error|null), response?: google.cloud.securitycentermanagement.v1.SecurityCenterService) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securitycentermanagement.v1.SecurityCenterManagement|listSecurityCenterServices}.
+                     * @param error Error, if any
+                     * @param [response] ListSecurityCenterServicesResponse
+                     */
+                    type ListSecurityCenterServicesCallback = (error: (Error|null), response?: google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securitycentermanagement.v1.SecurityCenterManagement|updateSecurityCenterService}.
+                     * @param error Error, if any
+                     * @param [response] SecurityCenterService
+                     */
+                    type UpdateSecurityCenterServiceCallback = (error: (Error|null), response?: google.cloud.securitycentermanagement.v1.SecurityCenterService) => void;
+                }
+
+                /** Properties of a SecurityCenterService. */
+                interface ISecurityCenterService {
+
+                    /** SecurityCenterService name */
+                    name?: (string|null);
+
+                    /** SecurityCenterService intendedEnablementState */
+                    intendedEnablementState?: (google.cloud.securitycentermanagement.v1.SecurityCenterService.EnablementState|keyof typeof google.cloud.securitycentermanagement.v1.SecurityCenterService.EnablementState|null);
+
+                    /** SecurityCenterService effectiveEnablementState */
+                    effectiveEnablementState?: (google.cloud.securitycentermanagement.v1.SecurityCenterService.EnablementState|keyof typeof google.cloud.securitycentermanagement.v1.SecurityCenterService.EnablementState|null);
+
+                    /** SecurityCenterService modules */
+                    modules?: ({ [k: string]: google.cloud.securitycentermanagement.v1.SecurityCenterService.IModuleSettings }|null);
+
+                    /** SecurityCenterService updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SecurityCenterService serviceConfig */
+                    serviceConfig?: (google.protobuf.IStruct|null);
+                }
+
+                /** Represents a SecurityCenterService. */
+                class SecurityCenterService implements ISecurityCenterService {
+
+                    /**
+                     * Constructs a new SecurityCenterService.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycentermanagement.v1.ISecurityCenterService);
+
+                    /** SecurityCenterService name. */
+                    public name: string;
+
+                    /** SecurityCenterService intendedEnablementState. */
+                    public intendedEnablementState: (google.cloud.securitycentermanagement.v1.SecurityCenterService.EnablementState|keyof typeof google.cloud.securitycentermanagement.v1.SecurityCenterService.EnablementState);
+
+                    /** SecurityCenterService effectiveEnablementState. */
+                    public effectiveEnablementState: (google.cloud.securitycentermanagement.v1.SecurityCenterService.EnablementState|keyof typeof google.cloud.securitycentermanagement.v1.SecurityCenterService.EnablementState);
+
+                    /** SecurityCenterService modules. */
+                    public modules: { [k: string]: google.cloud.securitycentermanagement.v1.SecurityCenterService.IModuleSettings };
+
+                    /** SecurityCenterService updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SecurityCenterService serviceConfig. */
+                    public serviceConfig?: (google.protobuf.IStruct|null);
+
+                    /**
+                     * Creates a new SecurityCenterService instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SecurityCenterService instance
+                     */
+                    public static create(properties?: google.cloud.securitycentermanagement.v1.ISecurityCenterService): google.cloud.securitycentermanagement.v1.SecurityCenterService;
+
+                    /**
+                     * Encodes the specified SecurityCenterService message. Does not implicitly {@link google.cloud.securitycentermanagement.v1.SecurityCenterService.verify|verify} messages.
+                     * @param message SecurityCenterService message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycentermanagement.v1.ISecurityCenterService, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SecurityCenterService message, length delimited. Does not implicitly {@link google.cloud.securitycentermanagement.v1.SecurityCenterService.verify|verify} messages.
+                     * @param message SecurityCenterService message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycentermanagement.v1.ISecurityCenterService, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SecurityCenterService message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SecurityCenterService
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycentermanagement.v1.SecurityCenterService;
+
+                    /**
+                     * Decodes a SecurityCenterService message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SecurityCenterService
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycentermanagement.v1.SecurityCenterService;
+
+                    /**
+                     * Verifies a SecurityCenterService message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SecurityCenterService message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SecurityCenterService
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycentermanagement.v1.SecurityCenterService;
+
+                    /**
+                     * Creates a plain object from a SecurityCenterService message. Also converts values to other types if specified.
+                     * @param message SecurityCenterService
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycentermanagement.v1.SecurityCenterService, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SecurityCenterService to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SecurityCenterService
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SecurityCenterService {
+
+                    /** Properties of a ModuleSettings. */
+                    interface IModuleSettings {
+
+                        /** ModuleSettings intendedEnablementState */
+                        intendedEnablementState?: (google.cloud.securitycentermanagement.v1.SecurityCenterService.EnablementState|keyof typeof google.cloud.securitycentermanagement.v1.SecurityCenterService.EnablementState|null);
+
+                        /** ModuleSettings effectiveEnablementState */
+                        effectiveEnablementState?: (google.cloud.securitycentermanagement.v1.SecurityCenterService.EnablementState|keyof typeof google.cloud.securitycentermanagement.v1.SecurityCenterService.EnablementState|null);
+                    }
+
+                    /** Represents a ModuleSettings. */
+                    class ModuleSettings implements IModuleSettings {
+
+                        /**
+                         * Constructs a new ModuleSettings.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.securitycentermanagement.v1.SecurityCenterService.IModuleSettings);
+
+                        /** ModuleSettings intendedEnablementState. */
+                        public intendedEnablementState: (google.cloud.securitycentermanagement.v1.SecurityCenterService.EnablementState|keyof typeof google.cloud.securitycentermanagement.v1.SecurityCenterService.EnablementState);
+
+                        /** ModuleSettings effectiveEnablementState. */
+                        public effectiveEnablementState: (google.cloud.securitycentermanagement.v1.SecurityCenterService.EnablementState|keyof typeof google.cloud.securitycentermanagement.v1.SecurityCenterService.EnablementState);
+
+                        /**
+                         * Creates a new ModuleSettings instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ModuleSettings instance
+                         */
+                        public static create(properties?: google.cloud.securitycentermanagement.v1.SecurityCenterService.IModuleSettings): google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings;
+
+                        /**
+                         * Encodes the specified ModuleSettings message. Does not implicitly {@link google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings.verify|verify} messages.
+                         * @param message ModuleSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.securitycentermanagement.v1.SecurityCenterService.IModuleSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ModuleSettings message, length delimited. Does not implicitly {@link google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings.verify|verify} messages.
+                         * @param message ModuleSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.securitycentermanagement.v1.SecurityCenterService.IModuleSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ModuleSettings message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ModuleSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings;
+
+                        /**
+                         * Decodes a ModuleSettings message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ModuleSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings;
+
+                        /**
+                         * Verifies a ModuleSettings message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ModuleSettings message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ModuleSettings
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings;
+
+                        /**
+                         * Creates a plain object from a ModuleSettings message. Also converts values to other types if specified.
+                         * @param message ModuleSettings
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ModuleSettings to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ModuleSettings
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** EnablementState enum. */
+                    enum EnablementState {
+                        ENABLEMENT_STATE_UNSPECIFIED = 0,
+                        INHERITED = 1,
+                        ENABLED = 2,
+                        DISABLED = 3
+                    }
                 }
 
                 /** Properties of an EffectiveSecurityHealthAnalyticsCustomModule. */
@@ -4770,6 +5074,424 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+                }
+
+                /** Properties of a GetSecurityCenterServiceRequest. */
+                interface IGetSecurityCenterServiceRequest {
+
+                    /** GetSecurityCenterServiceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetSecurityCenterServiceRequest. */
+                class GetSecurityCenterServiceRequest implements IGetSecurityCenterServiceRequest {
+
+                    /**
+                     * Constructs a new GetSecurityCenterServiceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest);
+
+                    /** GetSecurityCenterServiceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetSecurityCenterServiceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetSecurityCenterServiceRequest instance
+                     */
+                    public static create(properties?: google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest): google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest;
+
+                    /**
+                     * Encodes the specified GetSecurityCenterServiceRequest message. Does not implicitly {@link google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest.verify|verify} messages.
+                     * @param message GetSecurityCenterServiceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetSecurityCenterServiceRequest message, length delimited. Does not implicitly {@link google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest.verify|verify} messages.
+                     * @param message GetSecurityCenterServiceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetSecurityCenterServiceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetSecurityCenterServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest;
+
+                    /**
+                     * Decodes a GetSecurityCenterServiceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetSecurityCenterServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest;
+
+                    /**
+                     * Verifies a GetSecurityCenterServiceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetSecurityCenterServiceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetSecurityCenterServiceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest;
+
+                    /**
+                     * Creates a plain object from a GetSecurityCenterServiceRequest message. Also converts values to other types if specified.
+                     * @param message GetSecurityCenterServiceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetSecurityCenterServiceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetSecurityCenterServiceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSecurityCenterServicesRequest. */
+                interface IListSecurityCenterServicesRequest {
+
+                    /** ListSecurityCenterServicesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListSecurityCenterServicesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListSecurityCenterServicesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListSecurityCenterServicesRequest. */
+                class ListSecurityCenterServicesRequest implements IListSecurityCenterServicesRequest {
+
+                    /**
+                     * Constructs a new ListSecurityCenterServicesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest);
+
+                    /** ListSecurityCenterServicesRequest parent. */
+                    public parent: string;
+
+                    /** ListSecurityCenterServicesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListSecurityCenterServicesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListSecurityCenterServicesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSecurityCenterServicesRequest instance
+                     */
+                    public static create(properties?: google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest): google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest;
+
+                    /**
+                     * Encodes the specified ListSecurityCenterServicesRequest message. Does not implicitly {@link google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest.verify|verify} messages.
+                     * @param message ListSecurityCenterServicesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSecurityCenterServicesRequest message, length delimited. Does not implicitly {@link google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest.verify|verify} messages.
+                     * @param message ListSecurityCenterServicesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSecurityCenterServicesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSecurityCenterServicesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest;
+
+                    /**
+                     * Decodes a ListSecurityCenterServicesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSecurityCenterServicesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest;
+
+                    /**
+                     * Verifies a ListSecurityCenterServicesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSecurityCenterServicesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSecurityCenterServicesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest;
+
+                    /**
+                     * Creates a plain object from a ListSecurityCenterServicesRequest message. Also converts values to other types if specified.
+                     * @param message ListSecurityCenterServicesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSecurityCenterServicesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSecurityCenterServicesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSecurityCenterServicesResponse. */
+                interface IListSecurityCenterServicesResponse {
+
+                    /** ListSecurityCenterServicesResponse securityCenterServices */
+                    securityCenterServices?: (google.cloud.securitycentermanagement.v1.ISecurityCenterService[]|null);
+
+                    /** ListSecurityCenterServicesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListSecurityCenterServicesResponse. */
+                class ListSecurityCenterServicesResponse implements IListSecurityCenterServicesResponse {
+
+                    /**
+                     * Constructs a new ListSecurityCenterServicesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesResponse);
+
+                    /** ListSecurityCenterServicesResponse securityCenterServices. */
+                    public securityCenterServices: google.cloud.securitycentermanagement.v1.ISecurityCenterService[];
+
+                    /** ListSecurityCenterServicesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListSecurityCenterServicesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSecurityCenterServicesResponse instance
+                     */
+                    public static create(properties?: google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesResponse): google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse;
+
+                    /**
+                     * Encodes the specified ListSecurityCenterServicesResponse message. Does not implicitly {@link google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse.verify|verify} messages.
+                     * @param message ListSecurityCenterServicesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSecurityCenterServicesResponse message, length delimited. Does not implicitly {@link google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse.verify|verify} messages.
+                     * @param message ListSecurityCenterServicesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSecurityCenterServicesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSecurityCenterServicesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse;
+
+                    /**
+                     * Decodes a ListSecurityCenterServicesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSecurityCenterServicesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse;
+
+                    /**
+                     * Verifies a ListSecurityCenterServicesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSecurityCenterServicesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSecurityCenterServicesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse;
+
+                    /**
+                     * Creates a plain object from a ListSecurityCenterServicesResponse message. Also converts values to other types if specified.
+                     * @param message ListSecurityCenterServicesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSecurityCenterServicesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSecurityCenterServicesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateSecurityCenterServiceRequest. */
+                interface IUpdateSecurityCenterServiceRequest {
+
+                    /** UpdateSecurityCenterServiceRequest securityCenterService */
+                    securityCenterService?: (google.cloud.securitycentermanagement.v1.ISecurityCenterService|null);
+
+                    /** UpdateSecurityCenterServiceRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateSecurityCenterServiceRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents an UpdateSecurityCenterServiceRequest. */
+                class UpdateSecurityCenterServiceRequest implements IUpdateSecurityCenterServiceRequest {
+
+                    /**
+                     * Constructs a new UpdateSecurityCenterServiceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest);
+
+                    /** UpdateSecurityCenterServiceRequest securityCenterService. */
+                    public securityCenterService?: (google.cloud.securitycentermanagement.v1.ISecurityCenterService|null);
+
+                    /** UpdateSecurityCenterServiceRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateSecurityCenterServiceRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new UpdateSecurityCenterServiceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateSecurityCenterServiceRequest instance
+                     */
+                    public static create(properties?: google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest): google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest;
+
+                    /**
+                     * Encodes the specified UpdateSecurityCenterServiceRequest message. Does not implicitly {@link google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest.verify|verify} messages.
+                     * @param message UpdateSecurityCenterServiceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateSecurityCenterServiceRequest message, length delimited. Does not implicitly {@link google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest.verify|verify} messages.
+                     * @param message UpdateSecurityCenterServiceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateSecurityCenterServiceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateSecurityCenterServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest;
+
+                    /**
+                     * Decodes an UpdateSecurityCenterServiceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateSecurityCenterServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest;
+
+                    /**
+                     * Verifies an UpdateSecurityCenterServiceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateSecurityCenterServiceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateSecurityCenterServiceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateSecurityCenterServiceRequest message. Also converts values to other types if specified.
+                     * @param message UpdateSecurityCenterServiceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycentermanagement.v1.UpdateSecurityCenterServiceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateSecurityCenterServiceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateSecurityCenterServiceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
         }

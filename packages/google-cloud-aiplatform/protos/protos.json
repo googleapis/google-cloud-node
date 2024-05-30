@@ -42360,6 +42360,551 @@
                         }
                       }
                     },
+                    "GenAiTuningService": {
+                      "options": {
+                        "(google.api.default_host)": "aiplatform.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "CreateTuningJob": {
+                          "requestType": "CreateTuningJobRequest",
+                          "responseType": "TuningJob",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}/tuningJobs",
+                            "(google.api.http).body": "tuning_job",
+                            "(google.api.method_signature)": "parent,tuning_job"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*}/tuningJobs",
+                                "body": "tuning_job"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,tuning_job"
+                            }
+                          ]
+                        },
+                        "GetTuningJob": {
+                          "requestType": "GetTuningJobRequest",
+                          "responseType": "TuningJob",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/tuningJobs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/tuningJobs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListTuningJobs": {
+                          "requestType": "ListTuningJobsRequest",
+                          "responseType": "ListTuningJobsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*}/tuningJobs",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/*}/tuningJobs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CancelTuningJob": {
+                          "requestType": "CancelTuningJobRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/tuningJobs/*}:cancel",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/tuningJobs/*}:cancel",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "CreateTuningJobRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "tuningJob": {
+                          "type": "TuningJob",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetTuningJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/TuningJob"
+                          }
+                        }
+                      }
+                    },
+                    "ListTuningJobsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListTuningJobsResponse": {
+                      "fields": {
+                        "tuningJobs": {
+                          "rule": "repeated",
+                          "type": "TuningJob",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CancelTuningJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/TuningJob"
+                          }
+                        }
+                      }
+                    },
+                    "TuningJob": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/TuningJob",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/tuningJobs/{tuning_job}",
+                        "(google.api.resource).plural": "tuningJobs",
+                        "(google.api.resource).singular": "tuningJob"
+                      },
+                      "oneofs": {
+                        "sourceModel": {
+                          "oneof": [
+                            "baseModel"
+                          ]
+                        },
+                        "tuningSpec": {
+                          "oneof": [
+                            "supervisedTuningSpec"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "baseModel": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "supervisedTuningSpec": {
+                          "type": "SupervisedTuningSpec",
+                          "id": 5
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "tunedModelDisplayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "state": {
+                          "type": "JobState",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "experiment": {
+                          "type": "string",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Context"
+                          }
+                        },
+                        "tunedModel": {
+                          "type": "TunedModel",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "tuningDataStats": {
+                          "type": "TuningDataStats",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 16
+                        }
+                      }
+                    },
+                    "TunedModel": {
+                      "fields": {
+                        "model": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
+                          }
+                        },
+                        "endpoint": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
+                          }
+                        }
+                      }
+                    },
+                    "SupervisedTuningDatasetDistribution": {
+                      "fields": {
+                        "sum": {
+                          "type": "int64",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "min": {
+                          "type": "double",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "max": {
+                          "type": "double",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "mean": {
+                          "type": "double",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "median": {
+                          "type": "double",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "p5": {
+                          "type": "double",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "p95": {
+                          "type": "double",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "buckets": {
+                          "rule": "repeated",
+                          "type": "DatasetBucket",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "DatasetBucket": {
+                          "fields": {
+                            "count": {
+                              "type": "double",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "left": {
+                              "type": "double",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "right": {
+                              "type": "double",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "SupervisedTuningDataStats": {
+                      "fields": {
+                        "tuningDatasetExampleCount": {
+                          "type": "int64",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "totalTuningCharacterCount": {
+                          "type": "int64",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "totalBillableCharacterCount": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "tuningStepCount": {
+                          "type": "int64",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "userInputTokenDistribution": {
+                          "type": "SupervisedTuningDatasetDistribution",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "userOutputTokenDistribution": {
+                          "type": "SupervisedTuningDatasetDistribution",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "userMessagePerExampleDistribution": {
+                          "type": "SupervisedTuningDatasetDistribution",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "userDatasetExamples": {
+                          "rule": "repeated",
+                          "type": "Content",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "TuningDataStats": {
+                      "oneofs": {
+                        "tuningDataStats": {
+                          "oneof": [
+                            "supervisedTuningDataStats"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "supervisedTuningDataStats": {
+                          "type": "SupervisedTuningDataStats",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "SupervisedHyperParameters": {
+                      "fields": {
+                        "epochCount": {
+                          "type": "int64",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "learningRateMultiplier": {
+                          "type": "double",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "adapterSize": {
+                          "type": "AdapterSize",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "AdapterSize": {
+                          "values": {
+                            "ADAPTER_SIZE_UNSPECIFIED": 0,
+                            "ADAPTER_SIZE_ONE": 1,
+                            "ADAPTER_SIZE_FOUR": 2,
+                            "ADAPTER_SIZE_EIGHT": 3,
+                            "ADAPTER_SIZE_SIXTEEN": 4
+                          }
+                        }
+                      }
+                    },
+                    "SupervisedTuningSpec": {
+                      "fields": {
+                        "trainingDatasetUri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validationDatasetUri": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "hyperParameters": {
+                          "type": "SupervisedHyperParameters",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "HyperparameterTuningJob": {
                       "options": {
                         "(google.api.resource).type": "aiplatform.googleapis.com/HyperparameterTuningJob",
