@@ -40,8 +40,8 @@ function main(parent, schema, schemaId) {
   // const schema = {}
   /**
    *  Required. The ID to use for the
-   *  Schema google.cloud.discoveryengine.v1alpha.Schema, which will become
-   *  the final component of the
+   *  Schema google.cloud.discoveryengine.v1alpha.Schema, which becomes the
+   *  final component of the
    *  Schema.name google.cloud.discoveryengine.v1alpha.Schema.name.
    *  This field should conform to
    *  RFC-1034 (https://tools.ietf.org/html/rfc1034) standard with a length

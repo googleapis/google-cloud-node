@@ -40,8 +40,8 @@ function main(parent, document, documentId) {
   // const document = {}
   /**
    *  Required. The ID to use for the
-   *  Document google.cloud.discoveryengine.v1beta.Document, which will become
-   *  the final component of the
+   *  Document google.cloud.discoveryengine.v1beta.Document, which becomes the
+   *  final component of the
    *  Document.name google.cloud.discoveryengine.v1beta.Document.name.
    *  If the caller does not have permission to create the
    *  Document google.cloud.discoveryengine.v1beta.Document, regardless of

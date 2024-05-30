@@ -2372,6 +2372,7 @@
                             "GLOBAL": 1,
                             "ARGENTINA": 2,
                             "AUSTRALIA": 3,
+                            "AZERBAIJAN": 48,
                             "BELGIUM": 4,
                             "BRAZIL": 5,
                             "CANADA": 6,
@@ -5102,7 +5103,8 @@
                         "target": {
                           "oneof": [
                             "bigQueryTarget",
-                            "cloudSqlTarget"
+                            "cloudSqlTarget",
+                            "secretsTarget"
                           ]
                         }
                       },
@@ -5114,6 +5116,10 @@
                         "cloudSqlTarget": {
                           "type": "CloudSqlDiscoveryTarget",
                           "id": 2
+                        },
+                        "secretsTarget": {
+                          "type": "SecretsDiscoveryTarget",
+                          "id": 3
                         }
                       }
                     },
@@ -5153,7 +5159,8 @@
                         "filter": {
                           "oneof": [
                             "tables",
-                            "otherTables"
+                            "otherTables",
+                            "tableReference"
                           ]
                         }
                       },
@@ -5165,6 +5172,10 @@
                         "otherTables": {
                           "type": "AllOtherBigQueryTables",
                           "id": 2
+                        },
+                        "tableReference": {
+                          "type": "TableReference",
+                          "id": 3
                         }
                       },
                       "nested": {
@@ -5399,6 +5410,20 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "database": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "databaseResource": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -5471,6 +5496,9 @@
                           }
                         }
                       }
+                    },
+                    "SecretsDiscoveryTarget": {
+                      "fields": {}
                     },
                     "DiscoveryStartingLocation": {
                       "oneofs": {
@@ -7668,6 +7696,18 @@
                         "tableId": {
                           "type": "string",
                           "id": 3
+                        }
+                      }
+                    },
+                    "TableReference": {
+                      "fields": {
+                        "datasetId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "tableId": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },

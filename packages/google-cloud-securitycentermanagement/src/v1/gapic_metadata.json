@@ -70,6 +70,16 @@
                 "validateEventThreatDetectionCustomModule"
               ]
             },
+            "GetSecurityCenterService": {
+              "methods": [
+                "getSecurityCenterService"
+              ]
+            },
+            "UpdateSecurityCenterService": {
+              "methods": [
+                "updateSecurityCenterService"
+              ]
+            },
             "ListEffectiveSecurityHealthAnalyticsCustomModules": {
               "methods": [
                 "listEffectiveSecurityHealthAnalyticsCustomModules",
@@ -110,6 +120,13 @@
                 "listDescendantEventThreatDetectionCustomModules",
                 "listDescendantEventThreatDetectionCustomModulesStream",
                 "listDescendantEventThreatDetectionCustomModulesAsync"
+              ]
+            },
+            "ListSecurityCenterServices": {
+              "methods": [
+                "listSecurityCenterServices",
+                "listSecurityCenterServicesStream",
+                "listSecurityCenterServicesAsync"
               ]
             }
           }
@@ -177,6 +194,16 @@
                 "validateEventThreatDetectionCustomModule"
               ]
             },
+            "GetSecurityCenterService": {
+              "methods": [
+                "getSecurityCenterService"
+              ]
+            },
+            "UpdateSecurityCenterService": {
+              "methods": [
+                "updateSecurityCenterService"
+              ]
+            },
             "ListEffectiveSecurityHealthAnalyticsCustomModules": {
               "methods": [
                 "listEffectiveSecurityHealthAnalyticsCustomModules",
@@ -217,6 +244,13 @@
                 "listDescendantEventThreatDetectionCustomModules",
                 "listDescendantEventThreatDetectionCustomModulesStream",
                 "listDescendantEventThreatDetectionCustomModulesAsync"
+              ]
+            },
+            "ListSecurityCenterServices": {
+              "methods": [
+                "listSecurityCenterServices",
+                "listSecurityCenterServicesStream",
+                "listSecurityCenterServicesAsync"
               ]
             }
           }

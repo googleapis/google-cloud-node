@@ -223,8 +223,14 @@ export class SecurityCenterManagementClient {
         new this._gaxModule.PathTemplate(
           'folders/{folder}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}'
         ),
+      folderLocationServicePathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/locations/{location}/securityCenterServices/{service}'
+      ),
       folderSourceFindingPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/sources/{source}/findings/{finding}'
+      ),
+      locationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}'
       ),
       organizationPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}'
@@ -248,8 +254,14 @@ export class SecurityCenterManagementClient {
         new this._gaxModule.PathTemplate(
           'organizations/{organization}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}'
         ),
+      organizationLocationServicePathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/securityCenterServices/{service}'
+      ),
       organizationSourceFindingPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/sources/{source}/findings/{finding}'
+      ),
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
       ),
       projectLocationEffectiveEventThreatDetectionCustomModulePathTemplate:
         new this._gaxModule.PathTemplate(
@@ -267,6 +279,9 @@ export class SecurityCenterManagementClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}'
         ),
+      projectLocationServicePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/securityCenterServices/{service}'
+      ),
       projectSourceFindingPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/sources/{source}/findings/{finding}'
       ),
@@ -311,6 +326,11 @@ export class SecurityCenterManagementClient {
           'nextPageToken',
           'eventThreatDetectionCustomModules'
         ),
+      listSecurityCenterServices: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'securityCenterServices'
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -382,6 +402,9 @@ export class SecurityCenterManagementClient {
       'updateEventThreatDetectionCustomModule',
       'deleteEventThreatDetectionCustomModule',
       'validateEventThreatDetectionCustomModule',
+      'getSecurityCenterService',
+      'listSecurityCenterServices',
+      'updateSecurityCenterService',
     ];
     for (const methodName of securityCenterManagementStubMethods) {
       const callPromise = this.securityCenterManagementStub.then(
@@ -502,13 +525,12 @@ export class SecurityCenterManagementClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the SHA custom module.
+   *   Required. The full resource name of the custom module, specified in one of
+   *   the following formats:
    *
-   *   Its format is:
-   *
-   *     * "organizations/{organization}/locations/{location}/effectiveSecurityHealthAnalyticsCustomModules/{module_id}".
-   *     * "folders/{folder}/locations/{location}/effectiveSecurityHealthAnalyticsCustomModules/{module_id}".
-   *     * "projects/{project}/locations/{location}/effectiveSecurityHealthAnalyticsCustomModules/{module_id}".
+   *   * `organizations/organization/{location}/effectiveSecurityHealthAnalyticsCustomModules/{effective_security_health_analytics_custom_module}`
+   *   * `folders/folder/{location}/effectiveSecurityHealthAnalyticsCustomModules/{effective_security_health_analytics_custom_module}`
+   *   * `projects/project/{location}/effectiveSecurityHealthAnalyticsCustomModules/{effective_security_health_analytics_custom_module}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -711,11 +733,12 @@ export class SecurityCenterManagementClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of the parent for the module. Its format is
-   *   "organizations/{organization}/locations/{location}",
-   *   "folders/{folder}/locations/{location}",
-   *   or
-   *   "projects/{project}/locations/{location}"
+   *   Required. Name of the parent organization, folder, or project of the
+   *   module, specified in one of the following formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
    * @param {google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule} request.securityHealthAnalyticsCustomModule
    *   Required. The resource being created
    * @param {boolean} [request.validateOnly]
@@ -950,9 +973,9 @@ export class SecurityCenterManagementClient {
    *
    *   Its format is:
    *
-   *     * "organizations/{organization}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}".
-   *     * "folders/{folder}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}".
-   *     * "projects/{project}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}".
+   *     * `organizations/{organization}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}`.
+   *     * `folders/{folder}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}`.
+   *     * `projects/{project}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}`.
    * @param {boolean} [request.validateOnly]
    *   Optional. When set to true, only validations (including IAM checks) will
    *   done for the request (module will not be deleted). An OK response indicates
@@ -1178,9 +1201,9 @@ export class SecurityCenterManagementClient {
    *
    *   Its format is:
    *
-   *     * "organizations/{organization}/locations/{location}/effectiveEventThreatDetectionCustomModules/{effective_event_threat_detection_custom_module}".
-   *     * "folders/{folder}/locations/{location}/effectiveEventThreatDetectionCustomModules/{effective_event_threat_detection_custom_module}".
-   *     * "projects/{project}/locations/{location}/effectiveEventThreatDetectionCustomModules/{effective_event_threat_detection_custom_module}".
+   *     * `organizations/{organization}/locations/{location}/effectiveEventThreatDetectionCustomModules/{effective_event_threat_detection_custom_module}`.
+   *     * `folders/{folder}/locations/{location}/effectiveEventThreatDetectionCustomModules/{effective_event_threat_detection_custom_module}`.
+   *     * `projects/{project}/locations/{location}/effectiveEventThreatDetectionCustomModules/{effective_event_threat_detection_custom_module}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1284,9 +1307,9 @@ export class SecurityCenterManagementClient {
    *
    *   Its format is:
    *
-   *     * "organizations/{organization}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}".
-   *     * "folders/{folder}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}".
-   *     * "projects/{project}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}".
+   *     * `organizations/{organization}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}`.
+   *     * `folders/{folder}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}`.
+   *     * `projects/{project}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1390,10 +1413,10 @@ export class SecurityCenterManagementClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of parent for the module. Its format is
-   *   "organizations/{organization}/locations/{location}",
-   *   "folders/{folder}/locations/{location}",
+   *   `organizations/{organization}/locations/{location}`,
+   *   `folders/{folder}/locations/{location}`,
    *   or
-   *   "projects/{project}/locations/{location}"
+   *   `projects/{project}/locations/{location}`
    * @param {google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule} request.eventThreatDetectionCustomModule
    *   Required. The module to create. The
    *   event_threat_detection_custom_module.name will be ignored and server
@@ -1631,9 +1654,9 @@ export class SecurityCenterManagementClient {
    *
    *   Its format is:
    *
-   *     * "organizations/{organization}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}".
-   *     * "folders/{folder}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}".
-   *     * "projects/{project}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}".
+   *     * `organizations/{organization}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}`.
+   *     * `folders/{folder}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}`.
+   *     * `projects/{project}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}`.
    * @param {boolean} [request.validateOnly]
    *   Optional. When set to true, only validations (including IAM checks) will
    *   done for the request (module will not be deleted). An OK response indicates
@@ -1745,7 +1768,7 @@ export class SecurityCenterManagementClient {
    *
    *   Its format is:
    *
-   *     * "organizations/{organization}/locations/{location}".
+   *     * `organizations/{organization}/locations/{location}`.
    * @param {string} request.rawText
    *   Required. The raw text of the module's contents. Used to generate error
    *   messages.
@@ -1844,6 +1867,234 @@ export class SecurityCenterManagementClient {
       callback
     );
   }
+  /**
+   * Gets service settings for the specified Security Command Center service.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The Security Command Center service to retrieve.
+   *
+   *   Formats:
+   *
+   *     * organizations/{organization}/locations/{location}/securityCenterServices/{service}
+   *     * folders/{folder}/locations/{location}/securityCenterServices/{service}
+   *     * projects/{project}/locations/{location}/securityCenterServices/{service}
+   *
+   *   The possible values for id {service} are:
+   *
+   *     * container-threat-detection
+   *     * event-threat-detection
+   *     * security-health-analytics
+   *     * vm-threat-detection
+   *     * web-security-scanner
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securitycentermanagement.v1.SecurityCenterService|SecurityCenterService}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center_management.get_security_center_service.js</caption>
+   * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_GetSecurityCenterService_async
+   */
+  getSecurityCenterService(
+    request?: protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
+      (
+        | protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getSecurityCenterService(
+    request: protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
+      | protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getSecurityCenterService(
+    request: protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest,
+    callback: Callback<
+      protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
+      | protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getSecurityCenterService(
+    request?: protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
+          | protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
+      | protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
+      (
+        | protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getSecurityCenterService(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Updates a Security Command Center service using the given update mask.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.securitycentermanagement.v1.SecurityCenterService} request.securityCenterService
+   *   Required. The updated service.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The list of fields to be updated. Possible values:
+   *
+   *     * "intended_enablement_state"
+   *     * "modules"
+   * @param {boolean} [request.validateOnly]
+   *   Optional. When set to true, only validations (including IAM checks) will
+   *   done for the request (service will not be updated). An OK response
+   *   indicates the request is valid while an error response indicates the
+   *   request is invalid. Note that a subsequent request to actually update the
+   *   service could still fail because 1. the state could have changed (e.g. IAM
+   *   permission lost) or
+   *   2. A failure occurred while trying to delete the module.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securitycentermanagement.v1.SecurityCenterService|SecurityCenterService}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center_management.update_security_center_service.js</caption>
+   * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_UpdateSecurityCenterService_async
+   */
+  updateSecurityCenterService(
+    request?: protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
+      (
+        | protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateSecurityCenterService(
+    request: protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
+      | protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateSecurityCenterService(
+    request: protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest,
+    callback: Callback<
+      protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
+      | protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateSecurityCenterService(
+    request?: protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
+          | protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
+      | protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
+      (
+        | protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'security_center_service.name':
+          request.securityCenterService!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateSecurityCenterService(
+      request,
+      options,
+      callback
+    );
+  }
 
   /**
    * Returns a list of all EffectiveSecurityHealthAnalyticsCustomModules for the
@@ -1854,11 +2105,12 @@ export class SecurityCenterManagementClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of parent to list effective custom modules. Its format is
-   *   "organizations/{organization}/locations/{location}",
-   *   "folders/{folder}/locations/{location}",
+   *   Required. Name of parent to list effective custom modules. specified in one
+   *   of the following formats:
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
    *   or
-   *   "projects/{project}/locations/{location}"
+   *   `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to return in a single response.
    *   Default is 10, minimum is 1, maximum is 1000.
@@ -1960,11 +2212,12 @@ export class SecurityCenterManagementClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of parent to list effective custom modules. Its format is
-   *   "organizations/{organization}/locations/{location}",
-   *   "folders/{folder}/locations/{location}",
+   *   Required. Name of parent to list effective custom modules. specified in one
+   *   of the following formats:
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
    *   or
-   *   "projects/{project}/locations/{location}"
+   *   `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to return in a single response.
    *   Default is 10, minimum is 1, maximum is 1000.
@@ -2012,11 +2265,12 @@ export class SecurityCenterManagementClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of parent to list effective custom modules. Its format is
-   *   "organizations/{organization}/locations/{location}",
-   *   "folders/{folder}/locations/{location}",
+   *   Required. Name of parent to list effective custom modules. specified in one
+   *   of the following formats:
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
    *   or
-   *   "projects/{project}/locations/{location}"
+   *   `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to return in a single response.
    *   Default is 10, minimum is 1, maximum is 1000.
@@ -2066,11 +2320,12 @@ export class SecurityCenterManagementClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of parent to list custom modules. Its format is
-   *   "organizations/{organization}/locations/{location}",
-   *   "folders/{folder}/locations/{location}",
-   *   or
-   *   "projects/{project}/locations/{location}"
+   *   Required. Name of parent organization, folder, or project in which to list
+   *   custom modules, specified in one of the following formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to return in a single response.
    *   Default is 10, minimum is 1, maximum is 1000.
@@ -2172,11 +2427,12 @@ export class SecurityCenterManagementClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of parent to list custom modules. Its format is
-   *   "organizations/{organization}/locations/{location}",
-   *   "folders/{folder}/locations/{location}",
-   *   or
-   *   "projects/{project}/locations/{location}"
+   *   Required. Name of parent organization, folder, or project in which to list
+   *   custom modules, specified in one of the following formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to return in a single response.
    *   Default is 10, minimum is 1, maximum is 1000.
@@ -2223,11 +2479,12 @@ export class SecurityCenterManagementClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of parent to list custom modules. Its format is
-   *   "organizations/{organization}/locations/{location}",
-   *   "folders/{folder}/locations/{location}",
-   *   or
-   *   "projects/{project}/locations/{location}"
+   *   Required. Name of parent organization, folder, or project in which to list
+   *   custom modules, specified in one of the following formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to return in a single response.
    *   Default is 10, minimum is 1, maximum is 1000.
@@ -2274,11 +2531,12 @@ export class SecurityCenterManagementClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of parent to list custom modules. Its format is
-   *   "organizations/{organization}/locations/{location}",
-   *   "folders/{folder}/locations/{location}",
-   *   or
-   *   "projects/{project}/locations/{location}"
+   *   Required. Name of the parent organization, folder, or project in which to
+   *   list custom modules, specified in one of the following formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to return in a single response.
    *   Default is 10, minimum is 1, maximum is 1000.
@@ -2380,11 +2638,12 @@ export class SecurityCenterManagementClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of parent to list custom modules. Its format is
-   *   "organizations/{organization}/locations/{location}",
-   *   "folders/{folder}/locations/{location}",
-   *   or
-   *   "projects/{project}/locations/{location}"
+   *   Required. Name of the parent organization, folder, or project in which to
+   *   list custom modules, specified in one of the following formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to return in a single response.
    *   Default is 10, minimum is 1, maximum is 1000.
@@ -2432,11 +2691,12 @@ export class SecurityCenterManagementClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Name of parent to list custom modules. Its format is
-   *   "organizations/{organization}/locations/{location}",
-   *   "folders/{folder}/locations/{location}",
-   *   or
-   *   "projects/{project}/locations/{location}"
+   *   Required. Name of the parent organization, folder, or project in which to
+   *   list custom modules, specified in one of the following formats:
+   *
+   *   * `organizations/{organization}/locations/{location}`
+   *   * `folders/{folder}/locations/{location}`
+   *   * `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to return in a single response.
    *   Default is 10, minimum is 1, maximum is 1000.
@@ -2487,10 +2747,10 @@ export class SecurityCenterManagementClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of parent to list effective custom modules. Its format is
-   *   "organizations/{organization}/locations/{location}",
-   *   "folders/{folder}/locations/{location}",
+   *   `organizations/{organization}/locations/{location}`,
+   *   `folders/{folder}/locations/{location}`,
    *   or
-   *   "projects/{project}/locations/{location}"
+   *   `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to return in a single response.
    *   Default is 10, minimum is 1, maximum is 1000.
@@ -2593,10 +2853,10 @@ export class SecurityCenterManagementClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of parent to list effective custom modules. Its format is
-   *   "organizations/{organization}/locations/{location}",
-   *   "folders/{folder}/locations/{location}",
+   *   `organizations/{organization}/locations/{location}`,
+   *   `folders/{folder}/locations/{location}`,
    *   or
-   *   "projects/{project}/locations/{location}"
+   *   `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to return in a single response.
    *   Default is 10, minimum is 1, maximum is 1000.
@@ -2645,10 +2905,10 @@ export class SecurityCenterManagementClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of parent to list effective custom modules. Its format is
-   *   "organizations/{organization}/locations/{location}",
-   *   "folders/{folder}/locations/{location}",
+   *   `organizations/{organization}/locations/{location}`,
+   *   `folders/{folder}/locations/{location}`,
    *   or
-   *   "projects/{project}/locations/{location}"
+   *   `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of results to return in a single response.
    *   Default is 10, minimum is 1, maximum is 1000.
@@ -2699,10 +2959,10 @@ export class SecurityCenterManagementClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of parent to list custom modules. Its format is
-   *   "organizations/{organization}/locations/{location}",
-   *   "folders/{folder}/locations/{location}",
+   *   `organizations/{organization}/locations/{location}`,
+   *   `folders/{folder}/locations/{location}`,
    *   or
-   *   "projects/{project}/locations/{location}"
+   *   `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of modules to return. The service may return
    *   fewer than this value. If unspecified, at most 10 configs will be returned.
@@ -2812,10 +3072,10 @@ export class SecurityCenterManagementClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of parent to list custom modules. Its format is
-   *   "organizations/{organization}/locations/{location}",
-   *   "folders/{folder}/locations/{location}",
+   *   `organizations/{organization}/locations/{location}`,
+   *   `folders/{folder}/locations/{location}`,
    *   or
-   *   "projects/{project}/locations/{location}"
+   *   `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of modules to return. The service may return
    *   fewer than this value. If unspecified, at most 10 configs will be returned.
@@ -2870,10 +3130,10 @@ export class SecurityCenterManagementClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of parent to list custom modules. Its format is
-   *   "organizations/{organization}/locations/{location}",
-   *   "folders/{folder}/locations/{location}",
+   *   `organizations/{organization}/locations/{location}`,
+   *   `folders/{folder}/locations/{location}`,
    *   or
-   *   "projects/{project}/locations/{location}"
+   *   `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of modules to return. The service may return
    *   fewer than this value. If unspecified, at most 10 configs will be returned.
@@ -2928,10 +3188,10 @@ export class SecurityCenterManagementClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of parent to list custom modules. Its format is
-   *   "organizations/{organization}/locations/{location}",
-   *   "folders/{folder}/locations/{location}",
+   *   `organizations/{organization}/locations/{location}`,
+   *   `folders/{folder}/locations/{location}`,
    *   or
-   *   "projects/{project}/locations/{location}"
+   *   `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of modules to return. The service may return
    *   fewer than this value. If unspecified, at most 10 configs will be returned.
@@ -3035,10 +3295,10 @@ export class SecurityCenterManagementClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of parent to list custom modules. Its format is
-   *   "organizations/{organization}/locations/{location}",
-   *   "folders/{folder}/locations/{location}",
+   *   `organizations/{organization}/locations/{location}`,
+   *   `folders/{folder}/locations/{location}`,
    *   or
-   *   "projects/{project}/locations/{location}"
+   *   `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of modules to return. The service may return
    *   fewer than this value. If unspecified, at most 10 configs will be returned.
@@ -3088,10 +3348,10 @@ export class SecurityCenterManagementClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of parent to list custom modules. Its format is
-   *   "organizations/{organization}/locations/{location}",
-   *   "folders/{folder}/locations/{location}",
+   *   `organizations/{organization}/locations/{location}`,
+   *   `folders/{folder}/locations/{location}`,
    *   or
-   *   "projects/{project}/locations/{location}"
+   *   `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of modules to return. The service may return
    *   fewer than this value. If unspecified, at most 10 configs will be returned.
@@ -3133,6 +3393,218 @@ export class SecurityCenterManagementClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule>;
+  }
+  /**
+   * Returns a list of all Security Command Center services for the given
+   * parent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the parent to list Security Command Center services.
+   *
+   *   Formats:
+   *
+   *     * organizations/{organization}/locations/{location}
+   *     * folders/{folder}/locations/{location}
+   *     * projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return in a single response.
+   *   Default is 10, minimum is 1, maximum is 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last call indicating a continuation.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.securitycentermanagement.v1.SecurityCenterService|SecurityCenterService}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listSecurityCenterServicesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listSecurityCenterServices(
+    request?: protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService[],
+      protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest | null,
+      protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesResponse,
+    ]
+  >;
+  listSecurityCenterServices(
+    request: protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest,
+      | protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService
+    >
+  ): void;
+  listSecurityCenterServices(
+    request: protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest,
+      | protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService
+    >
+  ): void;
+  listSecurityCenterServices(
+    request?: protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest,
+          | protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest,
+      | protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService[],
+      protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest | null,
+      protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listSecurityCenterServices(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the parent to list Security Command Center services.
+   *
+   *   Formats:
+   *
+   *     * organizations/{organization}/locations/{location}
+   *     * folders/{folder}/locations/{location}
+   *     * projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return in a single response.
+   *   Default is 10, minimum is 1, maximum is 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last call indicating a continuation.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.securitycentermanagement.v1.SecurityCenterService|SecurityCenterService} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listSecurityCenterServicesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listSecurityCenterServicesStream(
+    request?: protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listSecurityCenterServices'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listSecurityCenterServices.createStream(
+      this.innerApiCalls.listSecurityCenterServices as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listSecurityCenterServices`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the parent to list Security Command Center services.
+   *
+   *   Formats:
+   *
+   *     * organizations/{organization}/locations/{location}
+   *     * folders/{folder}/locations/{location}
+   *     * projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return in a single response.
+   *   Default is 10, minimum is 1, maximum is 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last call indicating a continuation.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.securitycentermanagement.v1.SecurityCenterService|SecurityCenterService}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center_management.list_security_center_services.js</caption>
+   * region_tag:securitycentermanagement_v1_generated_SecurityCenterManagement_ListSecurityCenterServices_async
+   */
+  listSecurityCenterServicesAsync(
+    request?: protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listSecurityCenterServices'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listSecurityCenterServices.asyncIterate(
+      this.innerApiCalls['listSecurityCenterServices'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService>;
   }
   /**
    * Gets information about a location.
@@ -3488,6 +3960,63 @@ export class SecurityCenterManagementClient {
   }
 
   /**
+   * Return a fully-qualified folderLocationService resource name string.
+   *
+   * @param {string} folder
+   * @param {string} location
+   * @param {string} service
+   * @returns {string} Resource name string.
+   */
+  folderLocationServicePath(folder: string, location: string, service: string) {
+    return this.pathTemplates.folderLocationServicePathTemplate.render({
+      folder: folder,
+      location: location,
+      service: service,
+    });
+  }
+
+  /**
+   * Parse the folder from FolderLocationService resource.
+   *
+   * @param {string} folderLocationServiceName
+   *   A fully-qualified path representing folder_location_service resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderLocationServiceName(folderLocationServiceName: string) {
+    return this.pathTemplates.folderLocationServicePathTemplate.match(
+      folderLocationServiceName
+    ).folder;
+  }
+
+  /**
+   * Parse the location from FolderLocationService resource.
+   *
+   * @param {string} folderLocationServiceName
+   *   A fully-qualified path representing folder_location_service resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFolderLocationServiceName(
+    folderLocationServiceName: string
+  ) {
+    return this.pathTemplates.folderLocationServicePathTemplate.match(
+      folderLocationServiceName
+    ).location;
+  }
+
+  /**
+   * Parse the service from FolderLocationService resource.
+   *
+   * @param {string} folderLocationServiceName
+   *   A fully-qualified path representing folder_location_service resource.
+   * @returns {string} A string representing the service.
+   */
+  matchServiceFromFolderLocationServiceName(folderLocationServiceName: string) {
+    return this.pathTemplates.folderLocationServicePathTemplate.match(
+      folderLocationServiceName
+    ).service;
+  }
+
+  /**
    * Return a fully-qualified folderSourceFinding resource name string.
    *
    * @param {string} folder
@@ -3540,6 +4069,42 @@ export class SecurityCenterManagementClient {
     return this.pathTemplates.folderSourceFindingPathTemplate.match(
       folderSourceFindingName
     ).finding;
+  }
+
+  /**
+   * Return a fully-qualified location resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  locationPath(project: string, location: string) {
+    return this.pathTemplates.locationPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).project;
+  }
+
+  /**
+   * Parse the location from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).location;
   }
 
   /**
@@ -3880,6 +4445,71 @@ export class SecurityCenterManagementClient {
   }
 
   /**
+   * Return a fully-qualified organizationLocationService resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} service
+   * @returns {string} Resource name string.
+   */
+  organizationLocationServicePath(
+    organization: string,
+    location: string,
+    service: string
+  ) {
+    return this.pathTemplates.organizationLocationServicePathTemplate.render({
+      organization: organization,
+      location: location,
+      service: service,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationService resource.
+   *
+   * @param {string} organizationLocationServiceName
+   *   A fully-qualified path representing organization_location_service resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationServiceName(
+    organizationLocationServiceName: string
+  ) {
+    return this.pathTemplates.organizationLocationServicePathTemplate.match(
+      organizationLocationServiceName
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationService resource.
+   *
+   * @param {string} organizationLocationServiceName
+   *   A fully-qualified path representing organization_location_service resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationServiceName(
+    organizationLocationServiceName: string
+  ) {
+    return this.pathTemplates.organizationLocationServicePathTemplate.match(
+      organizationLocationServiceName
+    ).location;
+  }
+
+  /**
+   * Parse the service from OrganizationLocationService resource.
+   *
+   * @param {string} organizationLocationServiceName
+   *   A fully-qualified path representing organization_location_service resource.
+   * @returns {string} A string representing the service.
+   */
+  matchServiceFromOrganizationLocationServiceName(
+    organizationLocationServiceName: string
+  ) {
+    return this.pathTemplates.organizationLocationServicePathTemplate.match(
+      organizationLocationServiceName
+    ).service;
+  }
+
+  /**
    * Return a fully-qualified organizationSourceFinding resource name string.
    *
    * @param {string} organization
@@ -3942,6 +4572,29 @@ export class SecurityCenterManagementClient {
     return this.pathTemplates.organizationSourceFindingPathTemplate.match(
       organizationSourceFindingName
     ).finding;
+  }
+
+  /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectPath(project: string) {
+    return this.pathTemplates.projectPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from Project resource.
+   *
+   * @param {string} projectName
+   *   A fully-qualified path representing Project resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectName(projectName: string) {
+    return this.pathTemplates.projectPathTemplate.match(projectName).project;
   }
 
   /**
@@ -4213,6 +4866,71 @@ export class SecurityCenterManagementClient {
     return this.pathTemplates.projectLocationSecurityHealthAnalyticsCustomModulePathTemplate.match(
       projectLocationSecurityHealthAnalyticsCustomModuleName
     ).security_health_analytics_custom_module;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationService resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} service
+   * @returns {string} Resource name string.
+   */
+  projectLocationServicePath(
+    project: string,
+    location: string,
+    service: string
+  ) {
+    return this.pathTemplates.projectLocationServicePathTemplate.render({
+      project: project,
+      location: location,
+      service: service,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationService resource.
+   *
+   * @param {string} projectLocationServiceName
+   *   A fully-qualified path representing project_location_service resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationServiceName(
+    projectLocationServiceName: string
+  ) {
+    return this.pathTemplates.projectLocationServicePathTemplate.match(
+      projectLocationServiceName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationService resource.
+   *
+   * @param {string} projectLocationServiceName
+   *   A fully-qualified path representing project_location_service resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationServiceName(
+    projectLocationServiceName: string
+  ) {
+    return this.pathTemplates.projectLocationServicePathTemplate.match(
+      projectLocationServiceName
+    ).location;
+  }
+
+  /**
+   * Parse the service from ProjectLocationService resource.
+   *
+   * @param {string} projectLocationServiceName
+   *   A fully-qualified path representing project_location_service resource.
+   * @returns {string} A string representing the service.
+   */
+  matchServiceFromProjectLocationServiceName(
+    projectLocationServiceName: string
+  ) {
+    return this.pathTemplates.projectLocationServicePathTemplate.match(
+      projectLocationServiceName
+    ).service;
   }
 
   /**

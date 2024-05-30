@@ -6651,6 +6651,7 @@ export namespace google {
                         GLOBAL = 1,
                         ARGENTINA = 2,
                         AUSTRALIA = 3,
+                        AZERBAIJAN = 48,
                         BELGIUM = 4,
                         BRAZIL = 5,
                         CANADA = 6,
@@ -21259,6 +21260,9 @@ export namespace google {
 
                     /** DiscoveryTarget cloudSqlTarget */
                     cloudSqlTarget?: (google.privacy.dlp.v2.ICloudSqlDiscoveryTarget|null);
+
+                    /** DiscoveryTarget secretsTarget */
+                    secretsTarget?: (google.privacy.dlp.v2.ISecretsDiscoveryTarget|null);
                 }
 
                 /** Represents a DiscoveryTarget. */
@@ -21276,8 +21280,11 @@ export namespace google {
                     /** DiscoveryTarget cloudSqlTarget. */
                     public cloudSqlTarget?: (google.privacy.dlp.v2.ICloudSqlDiscoveryTarget|null);
 
+                    /** DiscoveryTarget secretsTarget. */
+                    public secretsTarget?: (google.privacy.dlp.v2.ISecretsDiscoveryTarget|null);
+
                     /** DiscoveryTarget target. */
-                    public target?: ("bigQueryTarget"|"cloudSqlTarget");
+                    public target?: ("bigQueryTarget"|"cloudSqlTarget"|"secretsTarget");
 
                     /**
                      * Creates a new DiscoveryTarget instance using the specified properties.
@@ -21483,6 +21490,9 @@ export namespace google {
 
                     /** DiscoveryBigQueryFilter otherTables */
                     otherTables?: (google.privacy.dlp.v2.DiscoveryBigQueryFilter.IAllOtherBigQueryTables|null);
+
+                    /** DiscoveryBigQueryFilter tableReference */
+                    tableReference?: (google.privacy.dlp.v2.ITableReference|null);
                 }
 
                 /** Represents a DiscoveryBigQueryFilter. */
@@ -21500,8 +21510,11 @@ export namespace google {
                     /** DiscoveryBigQueryFilter otherTables. */
                     public otherTables?: (google.privacy.dlp.v2.DiscoveryBigQueryFilter.IAllOtherBigQueryTables|null);
 
+                    /** DiscoveryBigQueryFilter tableReference. */
+                    public tableReference?: (google.privacy.dlp.v2.ITableReference|null);
+
                     /** DiscoveryBigQueryFilter filter. */
-                    public filter?: ("tables"|"otherTables");
+                    public filter?: ("tables"|"otherTables"|"tableReference");
 
                     /**
                      * Creates a new DiscoveryBigQueryFilter instance using the specified properties.
@@ -22962,6 +22975,12 @@ export namespace google {
 
                     /** DatabaseResourceReference instance */
                     instance?: (string|null);
+
+                    /** DatabaseResourceReference database */
+                    database?: (string|null);
+
+                    /** DatabaseResourceReference databaseResource */
+                    databaseResource?: (string|null);
                 }
 
                 /** Represents a DatabaseResourceReference. */
@@ -22978,6 +22997,12 @@ export namespace google {
 
                     /** DatabaseResourceReference instance. */
                     public instance: string;
+
+                    /** DatabaseResourceReference database. */
+                    public database: string;
+
+                    /** DatabaseResourceReference databaseResource. */
+                    public databaseResource: string;
 
                     /**
                      * Creates a new DatabaseResourceReference instance using the specified properties.
@@ -23395,6 +23420,97 @@ export namespace google {
                             REMOVED_COLUMNS = 2
                         }
                     }
+                }
+
+                /** Properties of a SecretsDiscoveryTarget. */
+                interface ISecretsDiscoveryTarget {
+                }
+
+                /** Represents a SecretsDiscoveryTarget. */
+                class SecretsDiscoveryTarget implements ISecretsDiscoveryTarget {
+
+                    /**
+                     * Constructs a new SecretsDiscoveryTarget.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.ISecretsDiscoveryTarget);
+
+                    /**
+                     * Creates a new SecretsDiscoveryTarget instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SecretsDiscoveryTarget instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.ISecretsDiscoveryTarget): google.privacy.dlp.v2.SecretsDiscoveryTarget;
+
+                    /**
+                     * Encodes the specified SecretsDiscoveryTarget message. Does not implicitly {@link google.privacy.dlp.v2.SecretsDiscoveryTarget.verify|verify} messages.
+                     * @param message SecretsDiscoveryTarget message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.ISecretsDiscoveryTarget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SecretsDiscoveryTarget message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.SecretsDiscoveryTarget.verify|verify} messages.
+                     * @param message SecretsDiscoveryTarget message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.ISecretsDiscoveryTarget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SecretsDiscoveryTarget message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SecretsDiscoveryTarget
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.SecretsDiscoveryTarget;
+
+                    /**
+                     * Decodes a SecretsDiscoveryTarget message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SecretsDiscoveryTarget
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.SecretsDiscoveryTarget;
+
+                    /**
+                     * Verifies a SecretsDiscoveryTarget message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SecretsDiscoveryTarget message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SecretsDiscoveryTarget
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.SecretsDiscoveryTarget;
+
+                    /**
+                     * Creates a plain object from a SecretsDiscoveryTarget message. Also converts values to other types if specified.
+                     * @param message SecretsDiscoveryTarget
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.SecretsDiscoveryTarget, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SecretsDiscoveryTarget to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SecretsDiscoveryTarget
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a DiscoveryStartingLocation. */
@@ -34322,6 +34438,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for BigQueryTable
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TableReference. */
+                interface ITableReference {
+
+                    /** TableReference datasetId */
+                    datasetId?: (string|null);
+
+                    /** TableReference tableId */
+                    tableId?: (string|null);
+                }
+
+                /** Represents a TableReference. */
+                class TableReference implements ITableReference {
+
+                    /**
+                     * Constructs a new TableReference.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.ITableReference);
+
+                    /** TableReference datasetId. */
+                    public datasetId: string;
+
+                    /** TableReference tableId. */
+                    public tableId: string;
+
+                    /**
+                     * Creates a new TableReference instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TableReference instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.ITableReference): google.privacy.dlp.v2.TableReference;
+
+                    /**
+                     * Encodes the specified TableReference message. Does not implicitly {@link google.privacy.dlp.v2.TableReference.verify|verify} messages.
+                     * @param message TableReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.ITableReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TableReference message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.TableReference.verify|verify} messages.
+                     * @param message TableReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.ITableReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TableReference message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TableReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.TableReference;
+
+                    /**
+                     * Decodes a TableReference message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TableReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.TableReference;
+
+                    /**
+                     * Verifies a TableReference message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TableReference message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TableReference
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.TableReference;
+
+                    /**
+                     * Creates a plain object from a TableReference message. Also converts values to other types if specified.
+                     * @param message TableReference
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.TableReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TableReference to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TableReference
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
