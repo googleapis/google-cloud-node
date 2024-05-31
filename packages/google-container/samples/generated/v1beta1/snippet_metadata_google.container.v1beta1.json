@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-container",
-        "version": "5.12.0",
+        "version": "5.13.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -230,7 +230,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 188,
+                    "end": 200,
                     "type": "FULL"
                 }
             ],
@@ -336,6 +336,10 @@
                         "type": ".google.container.v1beta1.WindowsNodeConfig"
                     },
                     {
+                        "name": "accelerators",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
                         "name": "machine_type",
                         "type": "TYPE_STRING"
                     },
@@ -350,6 +354,10 @@
                     {
                         "name": "resource_manager_tags",
                         "type": ".google.container.v1beta1.ResourceManagerTags"
+                    },
+                    {
+                        "name": "containerd_config",
+                        "type": ".google.container.v1beta1.ContainerdConfig"
                     },
                     {
                         "name": "queued_provisioning",

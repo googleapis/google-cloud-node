@@ -3,9 +3,11 @@
   "../../protos/google/cloud/video/stitcher/v1/cdn_keys.proto",
   "../../protos/google/cloud/video/stitcher/v1/companions.proto",
   "../../protos/google/cloud/video/stitcher/v1/events.proto",
+  "../../protos/google/cloud/video/stitcher/v1/fetch_options.proto",
   "../../protos/google/cloud/video/stitcher/v1/live_configs.proto",
   "../../protos/google/cloud/video/stitcher/v1/sessions.proto",
   "../../protos/google/cloud/video/stitcher/v1/slates.proto",
   "../../protos/google/cloud/video/stitcher/v1/stitch_details.proto",
-  "../../protos/google/cloud/video/stitcher/v1/video_stitcher_service.proto"
+  "../../protos/google/cloud/video/stitcher/v1/video_stitcher_service.proto",
+  "../../protos/google/cloud/video/stitcher/v1/vod_configs.proto"
 ]

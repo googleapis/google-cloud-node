@@ -212,6 +212,9 @@ export class ControlServiceClient {
       enginePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}'
       ),
+      locationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}'
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
@@ -505,6 +508,8 @@ export class ControlServiceClient {
    * @param {string} request.parent
    *   Required. Full resource name of parent data store. Format:
    *   `projects/{project_number}/locations/{location_id}/collections/{collection_id}/dataStores/{data_store_id}`
+   *   or
+   *   `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`.
    * @param {google.cloud.discoveryengine.v1.Control} request.control
    *   Required. The Control to create.
    * @param {string} request.controlId
@@ -894,6 +899,8 @@ export class ControlServiceClient {
    * @param {string} request.parent
    *   Required. The data store resource name. Format:
    *   `projects/{project_number}/locations/{location_id}/collections/{collection_id}/dataStores/{data_store_id}`
+   *   or
+   *   `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of results to return. If unspecified, defaults
    *   to 50. Max allowed value is 1000.
@@ -1000,6 +1007,8 @@ export class ControlServiceClient {
    * @param {string} request.parent
    *   Required. The data store resource name. Format:
    *   `projects/{project_number}/locations/{location_id}/collections/{collection_id}/dataStores/{data_store_id}`
+   *   or
+   *   `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of results to return. If unspecified, defaults
    *   to 50. Max allowed value is 1000.
@@ -1054,6 +1063,8 @@ export class ControlServiceClient {
    * @param {string} request.parent
    *   Required. The data store resource name. Format:
    *   `projects/{project_number}/locations/{location_id}/collections/{collection_id}/dataStores/{data_store_id}`
+   *   or
+   *   `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of results to return. If unspecified, defaults
    *   to 50. Max allowed value is 1000.
@@ -1246,6 +1257,42 @@ export class ControlServiceClient {
    */
   matchEngineFromEngineName(engineName: string) {
     return this.pathTemplates.enginePathTemplate.match(engineName).engine;
+  }
+
+  /**
+   * Return a fully-qualified location resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  locationPath(project: string, location: string) {
+    return this.pathTemplates.locationPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).project;
+  }
+
+  /**
+   * Parse the location from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).location;
   }
 
   /**
