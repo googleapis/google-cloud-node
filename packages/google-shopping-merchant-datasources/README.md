@@ -84,7 +84,8 @@ npm install @google-cloud/datasources
 // const pageToken = 'abc123'
 
 // Imports the Datasources library
-const {DataSourcesServiceClient} = require('@google-cloud/datasources').v1beta;
+const {DataSourcesServiceClient} =
+  require('@google-cloud/datasources').v1beta;
 
 // Instantiates a client
 const datasourcesClient = new DataSourcesServiceClient();
@@ -98,7 +99,7 @@ async function callListDataSources() {
   // Run request
   const iterable = datasourcesClient.listDataSourcesAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
