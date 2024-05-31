@@ -100,7 +100,7 @@ async function callListPromotions() {
   // Run request
   const iterable = promotionsClient.listPromotionsAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
