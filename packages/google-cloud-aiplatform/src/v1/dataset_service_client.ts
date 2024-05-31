@@ -551,6 +551,12 @@ export class DatasetServiceClient {
           post: '/ui/{name=projects/*/locations/*/operations/*}:cancel',
           additional_bindings: [
             {
+              post: '/ui/{name=projects/*/locations/*/agents/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/apps/*/operations/*}:cancel',
+            },
+            {
               post: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',
             },
             {
@@ -779,6 +785,8 @@ export class DatasetServiceClient {
           selector: 'google.longrunning.Operations.DeleteOperation',
           delete: '/ui/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
+            {delete: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
+            {delete: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
             {
               delete:
                 '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',
@@ -1100,6 +1108,8 @@ export class DatasetServiceClient {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/ui/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
+            {get: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
+            {get: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
             {get: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
@@ -1332,6 +1342,8 @@ export class DatasetServiceClient {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/ui/{name=projects/*/locations/*}/operations',
           additional_bindings: [
+            {get: '/ui/{name=projects/*/locations/*/agents/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/apps/*}/operations'},
             {get: '/ui/{name=projects/*/locations/*/datasets/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',
@@ -1549,6 +1561,12 @@ export class DatasetServiceClient {
           selector: 'google.longrunning.Operations.WaitOperation',
           post: '/ui/{name=projects/*/locations/*/operations/*}:wait',
           additional_bindings: [
+            {
+              post: '/ui/{name=projects/*/locations/*/agents/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/apps/*/operations/*}:wait',
+            },
             {
               post: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}:wait',
             },
@@ -1952,6 +1970,7 @@ export class DatasetServiceClient {
       'importData',
       'exportData',
       'createDatasetVersion',
+      'updateDatasetVersion',
       'deleteDatasetVersion',
       'getDatasetVersion',
       'listDatasetVersions',
@@ -2262,6 +2281,108 @@ export class DatasetServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.updateDataset(request, options, callback);
+  }
+  /**
+   * Updates a DatasetVersion.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.aiplatform.v1.DatasetVersion} request.datasetVersion
+   *   Required. The DatasetVersion which replaces the resource on the server.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The update mask applies to the resource.
+   *   For the `FieldMask` definition, see
+   *   {@link protos.google.protobuf.FieldMask|google.protobuf.FieldMask}. Updatable fields:
+   *
+   *     * `display_name`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.DatasetVersion|DatasetVersion}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataset_service.update_dataset_version.js</caption>
+   * region_tag:aiplatform_v1_generated_DatasetService_UpdateDatasetVersion_async
+   */
+  updateDatasetVersion(
+    request?: protos.google.cloud.aiplatform.v1.IUpdateDatasetVersionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IDatasetVersion,
+      (
+        | protos.google.cloud.aiplatform.v1.IUpdateDatasetVersionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateDatasetVersion(
+    request: protos.google.cloud.aiplatform.v1.IUpdateDatasetVersionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IDatasetVersion,
+      | protos.google.cloud.aiplatform.v1.IUpdateDatasetVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateDatasetVersion(
+    request: protos.google.cloud.aiplatform.v1.IUpdateDatasetVersionRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IDatasetVersion,
+      | protos.google.cloud.aiplatform.v1.IUpdateDatasetVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateDatasetVersion(
+    request?: protos.google.cloud.aiplatform.v1.IUpdateDatasetVersionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IDatasetVersion,
+          | protos.google.cloud.aiplatform.v1.IUpdateDatasetVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.IDatasetVersion,
+      | protos.google.cloud.aiplatform.v1.IUpdateDatasetVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IDatasetVersion,
+      (
+        | protos.google.cloud.aiplatform.v1.IUpdateDatasetVersionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'dataset_version.name': request.datasetVersion!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateDatasetVersion(request, options, callback);
   }
   /**
    * Gets a Dataset version.

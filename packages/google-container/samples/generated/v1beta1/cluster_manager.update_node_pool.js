@@ -135,6 +135,12 @@ function main(projectId, zone, clusterId, nodePoolId, nodeVersion, imageType) {
    */
   // const windowsNodeConfig = {}
   /**
+   *  A list of hardware accelerators to be attached to each node.
+   *  See https://cloud.google.com/compute/docs/gpus for more information about
+   *  support for GPUs.
+   */
+  // const accelerators = [1,2,3,4]
+  /**
    *  Optional. The desired machine type for nodes in the node pool.
    *  Initiates an upgrade operation that migrates the nodes in the
    *  node pool to the specified machine type.
@@ -158,6 +164,12 @@ function main(projectId, zone, clusterId, nodePoolId, nodeVersion, imageType) {
    *  Existing tags will be replaced with new values.
    */
   // const resourceManagerTags = {}
+  /**
+   *  The desired containerd config for nodes in the node pool.
+   *  Initiates an upgrade operation that recreates the nodes with the new
+   *  config.
+   */
+  // const containerdConfig = {}
   /**
    *  Specifies the configuration of queued provisioning.
    */
