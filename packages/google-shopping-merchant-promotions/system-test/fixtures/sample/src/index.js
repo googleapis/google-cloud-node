@@ -16,10 +16,11 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import * as v1beta from './v1beta';
-const PromotionsServiceClient = v1beta.PromotionsServiceClient;
-type PromotionsServiceClient = v1beta.PromotionsServiceClient;
-export {v1beta, PromotionsServiceClient};
-export default {v1beta, PromotionsServiceClient};
-import * as protos from '../protos/protos';
-export {protos}
+/* eslint-disable node/no-missing-require, no-unused-vars */
+const promotions = require('@google-cloud/promotions');
+
+function main() {
+  const promotionsServiceClient = new promotions.PromotionsServiceClient();
+}
+
+main();
