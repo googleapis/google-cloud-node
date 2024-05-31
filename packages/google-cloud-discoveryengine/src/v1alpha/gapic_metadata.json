@@ -121,6 +121,74 @@
         }
       }
     },
+    "ControlService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ControlServiceClient",
+          "rpcs": {
+            "CreateControl": {
+              "methods": [
+                "createControl"
+              ]
+            },
+            "DeleteControl": {
+              "methods": [
+                "deleteControl"
+              ]
+            },
+            "UpdateControl": {
+              "methods": [
+                "updateControl"
+              ]
+            },
+            "GetControl": {
+              "methods": [
+                "getControl"
+              ]
+            },
+            "ListControls": {
+              "methods": [
+                "listControls",
+                "listControlsStream",
+                "listControlsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ControlServiceClient",
+          "rpcs": {
+            "CreateControl": {
+              "methods": [
+                "createControl"
+              ]
+            },
+            "DeleteControl": {
+              "methods": [
+                "deleteControl"
+              ]
+            },
+            "UpdateControl": {
+              "methods": [
+                "updateControl"
+              ]
+            },
+            "GetControl": {
+              "methods": [
+                "getControl"
+              ]
+            },
+            "ListControls": {
+              "methods": [
+                "listControls",
+                "listControlsStream",
+                "listControlsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ConversationalSearchService": {
       "clients": {
         "grpc": {
@@ -798,6 +866,11 @@
         "grpc": {
           "libraryClient": "SearchTuningServiceClient",
           "rpcs": {
+            "ListCustomModels": {
+              "methods": [
+                "listCustomModels"
+              ]
+            },
             "TrainCustomModel": {
               "methods": [
                 "trainCustomModel"
@@ -808,6 +881,11 @@
         "grpc-fallback": {
           "libraryClient": "SearchTuningServiceClient",
           "rpcs": {
+            "ListCustomModels": {
+              "methods": [
+                "listCustomModels"
+              ]
+            },
             "TrainCustomModel": {
               "methods": [
                 "trainCustomModel"
