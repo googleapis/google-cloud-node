@@ -1,5 +1,5 @@
 {
-  "name": "@google-cloud/publish",
+  "name": "@googlemaps/streetview-publish",
   "version": "0.0.0",
   "description": " client for Node.js",
   "repository": {

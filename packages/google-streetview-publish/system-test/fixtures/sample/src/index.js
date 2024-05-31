@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const publish = require('@google-cloud/publish');
+const publish = require('@googlemaps/streetview-publish');
 
 function main() {
   const streetViewPublishServiceClient =

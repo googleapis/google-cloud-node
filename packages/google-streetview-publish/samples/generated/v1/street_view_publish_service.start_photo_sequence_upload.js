@@ -30,7 +30,7 @@ function main() {
    */
 
   // Imports the Publish library
-  const {StreetViewPublishServiceClient} = require('@google-cloud/publish').v1;
+  const {StreetViewPublishServiceClient} = require('@googlemaps/streetview-publish').v1;
 
   // Instantiates a client
   const publishClient = new StreetViewPublishServiceClient();

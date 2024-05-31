@@ -60,7 +60,7 @@ function main(photo, updateMask) {
   // const updateMask = {}
 
   // Imports the Publish library
-  const {StreetViewPublishServiceClient} = require('@google-cloud/publish').v1;
+  const {StreetViewPublishServiceClient} = require('@googlemaps/streetview-publishw-publishw-publishw-publish').v1;
 
   // Instantiates a client
   const publishClient = new StreetViewPublishServiceClient();

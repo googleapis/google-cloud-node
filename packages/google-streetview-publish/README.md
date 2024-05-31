@@ -5,7 +5,7 @@
 # [: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-streetview-publish)
 
 [![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/@google-cloud/publish.svg)](https://www.npmjs.org/package/@google-cloud/publish)
+[![npm version](https://img.shields.io/npm/v/@googlemaps/streetview-publish.svg)](https://www.npmjs.org/package/@googlemaps/streetview-publish)
 
 
 
@@ -42,7 +42,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install @google-cloud/publish
+npm install @googlemaps/streetview-publish
 ```
 
 
@@ -94,7 +94,7 @@ npm install @google-cloud/publish
 // const languageCode = 'abc123'
 
 // Imports the Publish library
-const {StreetViewPublishServiceClient} = require('@google-cloud/publish').v1;
+const {StreetViewPublishServiceClient} = require('@googlemaps/streetview-publish').v1;
 
 // Instantiates a client
 const publishClient = new StreetViewPublishServiceClient();
@@ -163,7 +163,7 @@ best-efforts basis with the following warnings:
 Client libraries targeting some end-of-life versions of Node.js are available, and
 can be installed through npm [dist-tags](https://docs.npmjs.com/cli/dist-tag).
 The dist-tags follow the naming convention `legacy-(version)`.
-For example, `npm install @google-cloud/publish@legacy-8` installs client libraries
+For example, `npm install @googlemaps/streetview-publish@legacy-8` installs client libraries
 for versions compatible with Node.js 8.
 
 ## Versioning
