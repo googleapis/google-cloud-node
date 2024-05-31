@@ -8101,6 +8101,9 @@ export namespace google {
                     /** ProcessOptions ocrConfig */
                     ocrConfig?: (google.cloud.documentai.v1.IOcrConfig|null);
 
+                    /** ProcessOptions layoutConfig */
+                    layoutConfig?: (google.cloud.documentai.v1.ProcessOptions.ILayoutConfig|null);
+
                     /** ProcessOptions schemaOverride */
                     schemaOverride?: (google.cloud.documentai.v1.IDocumentSchema|null);
                 }
@@ -8125,6 +8128,9 @@ export namespace google {
 
                     /** ProcessOptions ocrConfig. */
                     public ocrConfig?: (google.cloud.documentai.v1.IOcrConfig|null);
+
+                    /** ProcessOptions layoutConfig. */
+                    public layoutConfig?: (google.cloud.documentai.v1.ProcessOptions.ILayoutConfig|null);
 
                     /** ProcessOptions schemaOverride. */
                     public schemaOverride?: (google.cloud.documentai.v1.IDocumentSchema|null);
@@ -8211,6 +8217,209 @@ export namespace google {
                 }
 
                 namespace ProcessOptions {
+
+                    /** Properties of a LayoutConfig. */
+                    interface ILayoutConfig {
+
+                        /** LayoutConfig chunkingConfig */
+                        chunkingConfig?: (google.cloud.documentai.v1.ProcessOptions.LayoutConfig.IChunkingConfig|null);
+                    }
+
+                    /** Represents a LayoutConfig. */
+                    class LayoutConfig implements ILayoutConfig {
+
+                        /**
+                         * Constructs a new LayoutConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.documentai.v1.ProcessOptions.ILayoutConfig);
+
+                        /** LayoutConfig chunkingConfig. */
+                        public chunkingConfig?: (google.cloud.documentai.v1.ProcessOptions.LayoutConfig.IChunkingConfig|null);
+
+                        /**
+                         * Creates a new LayoutConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LayoutConfig instance
+                         */
+                        public static create(properties?: google.cloud.documentai.v1.ProcessOptions.ILayoutConfig): google.cloud.documentai.v1.ProcessOptions.LayoutConfig;
+
+                        /**
+                         * Encodes the specified LayoutConfig message. Does not implicitly {@link google.cloud.documentai.v1.ProcessOptions.LayoutConfig.verify|verify} messages.
+                         * @param message LayoutConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.documentai.v1.ProcessOptions.ILayoutConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LayoutConfig message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.ProcessOptions.LayoutConfig.verify|verify} messages.
+                         * @param message LayoutConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.documentai.v1.ProcessOptions.ILayoutConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LayoutConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LayoutConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1.ProcessOptions.LayoutConfig;
+
+                        /**
+                         * Decodes a LayoutConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LayoutConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1.ProcessOptions.LayoutConfig;
+
+                        /**
+                         * Verifies a LayoutConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LayoutConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LayoutConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1.ProcessOptions.LayoutConfig;
+
+                        /**
+                         * Creates a plain object from a LayoutConfig message. Also converts values to other types if specified.
+                         * @param message LayoutConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.documentai.v1.ProcessOptions.LayoutConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LayoutConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for LayoutConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace LayoutConfig {
+
+                        /** Properties of a ChunkingConfig. */
+                        interface IChunkingConfig {
+
+                            /** ChunkingConfig chunkSize */
+                            chunkSize?: (number|null);
+
+                            /** ChunkingConfig includeAncestorHeadings */
+                            includeAncestorHeadings?: (boolean|null);
+                        }
+
+                        /** Represents a ChunkingConfig. */
+                        class ChunkingConfig implements IChunkingConfig {
+
+                            /**
+                             * Constructs a new ChunkingConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.documentai.v1.ProcessOptions.LayoutConfig.IChunkingConfig);
+
+                            /** ChunkingConfig chunkSize. */
+                            public chunkSize: number;
+
+                            /** ChunkingConfig includeAncestorHeadings. */
+                            public includeAncestorHeadings: boolean;
+
+                            /**
+                             * Creates a new ChunkingConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ChunkingConfig instance
+                             */
+                            public static create(properties?: google.cloud.documentai.v1.ProcessOptions.LayoutConfig.IChunkingConfig): google.cloud.documentai.v1.ProcessOptions.LayoutConfig.ChunkingConfig;
+
+                            /**
+                             * Encodes the specified ChunkingConfig message. Does not implicitly {@link google.cloud.documentai.v1.ProcessOptions.LayoutConfig.ChunkingConfig.verify|verify} messages.
+                             * @param message ChunkingConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.documentai.v1.ProcessOptions.LayoutConfig.IChunkingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ChunkingConfig message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.ProcessOptions.LayoutConfig.ChunkingConfig.verify|verify} messages.
+                             * @param message ChunkingConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.documentai.v1.ProcessOptions.LayoutConfig.IChunkingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ChunkingConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ChunkingConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1.ProcessOptions.LayoutConfig.ChunkingConfig;
+
+                            /**
+                             * Decodes a ChunkingConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ChunkingConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1.ProcessOptions.LayoutConfig.ChunkingConfig;
+
+                            /**
+                             * Verifies a ChunkingConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ChunkingConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ChunkingConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1.ProcessOptions.LayoutConfig.ChunkingConfig;
+
+                            /**
+                             * Creates a plain object from a ChunkingConfig message. Also converts values to other types if specified.
+                             * @param message ChunkingConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.documentai.v1.ProcessOptions.LayoutConfig.ChunkingConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ChunkingConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ChunkingConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
 
                     /** Properties of an IndividualPageSelector. */
                     interface IIndividualPageSelector {
