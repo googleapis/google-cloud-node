@@ -1,5 +1,13 @@
 const fetch = require('node-fetch');
 
+async function closeIssue() {
+    await github.rest.issues.update({
+        owner: owner,
+        repo: repo,
+        issue_number: number,
+        state: "closed",
+      });
+}
 module.exports = async ({ github, context }) => {
     const owner = context.repo.owner;
     const repo = context.repo.repo;
@@ -15,19 +23,9 @@ module.exports = async ({ github, context }) => {
         const link = issue.data.body.match(/(https?:\/\/github.com\/.*)/)[0];
         const isValidLink = (await fetch(link)).status === 200;
         if (!isValidLink) {
-            await github.rest.issues.update({
-                owner: owner,
-                repo: repo,
-                issue_number: number,
-                state: "closed",
-              });
+           await closeIssue();
         }
     } catch (err) {
-        await github.rest.issues.update({
-            owner: owner,
-            repo: repo,
-            issue_number: number,
-            state: "closed",
-          });
+        await closeIssue();
     }
 };
