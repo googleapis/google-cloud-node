@@ -51,8 +51,12 @@ const version = require('../../../package.json').version;
  *  resource is not in a Cloud Organization.
  *  For all requests, returns a `google.rpc.Status` with
  *  `google.rpc.Code.INVALID_ARGUMENT` if the request is malformed.
+ *  (== deprecation_description Resource Settings is deprecated. As of November
+ *  7, 2023, no organizations will be onboarded for any of the enabled settings,
+ *  and the service will be shut down on October 1, 2024. ==)
  * @class
  * @memberof v1
+ * @deprecated ResourceSettingsService is deprecated and may be removed in a future version.
  */
 export class ResourceSettingsServiceClient {
   private _terminated = false;
@@ -264,6 +268,11 @@ export class ResourceSettingsServiceClient {
   initialize() {
     // If the client stub promise is already initialized, return immediately.
     if (this.resourceSettingsServiceStub) {
+      this.warn(
+        'DEP$ResourceSettingsService',
+        'ResourceSettingsService is deprecated and may be removed in a future version.',
+        'DeprecationWarning'
+      );
       return this.resourceSettingsServiceStub;
     }
 
@@ -313,6 +322,11 @@ export class ResourceSettingsServiceClient {
 
       this.innerApiCalls[methodName] = apiCall;
     }
+    this.warn(
+      'DEP$ResourceSettingsService',
+      'ResourceSettingsService is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
 
     return this.resourceSettingsServiceStub;
   }
@@ -410,7 +424,8 @@ export class ResourceSettingsServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the setting to get. See {@link protos.google.cloud.resourcesettings.v1.Setting|Setting} for naming
+   *   Required. The name of the setting to get. See
+   *   {@link protos.google.cloud.resourcesettings.v1.Setting|Setting} for naming
    *   requirements.
    * @param {google.cloud.resourcesettings.v1.SettingView} request.view
    *   The SettingView for this request.
@@ -518,7 +533,8 @@ export class ResourceSettingsServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.resourcesettings.v1.Setting} request.setting
-   *   Required. The setting to update. See {@link protos.google.cloud.resourcesettings.v1.Setting|Setting} for field requirements.
+   *   Required. The setting to update. See
+   *   {@link protos.google.cloud.resourcesettings.v1.Setting|Setting} for field requirements.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -609,8 +625,8 @@ export class ResourceSettingsServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The Cloud resource that parents the setting. Must be in one of the
-   *   following forms:
+   *   Required. The Cloud resource that parents the setting. Must be in one of
+   *   the following forms:
    *
    *   * `projects/{project_number}`
    *   * `projects/{project_id}`
@@ -714,8 +730,8 @@ export class ResourceSettingsServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The Cloud resource that parents the setting. Must be in one of the
-   *   following forms:
+   *   Required. The Cloud resource that parents the setting. Must be in one of
+   *   the following forms:
    *
    *   * `projects/{project_number}`
    *   * `projects/{project_id}`
@@ -767,8 +783,8 @@ export class ResourceSettingsServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The Cloud resource that parents the setting. Must be in one of the
-   *   following forms:
+   *   Required. The Cloud resource that parents the setting. Must be in one of
+   *   the following forms:
    *
    *   * `projects/{project_number}`
    *   * `projects/{project_id}`
