@@ -12,9 +12,10 @@ body:
         Please submit an issue to the API team, either by submitting an
         issue in its issue tracker https://cloud.google.com/support/docs/issue-trackers), or by
         submitting an issue in its linked tracker in the .repo-metadata.json
-        file in the API under packages/* [example](https://github.com/googleapis/google-cloud-node/blob/58419684469e3900146c8e830543bf4dc0cbb2be/packages/google-cloud-batch/.repo-metadata.json#L6).
+        file in the API under packages/* ([example](https://github.com/googleapis/google-cloud-node/blob/58419684469e3900146c8e830543bf4dc0cbb2be/packages/google-cloud-batch/.repo-metadata.json#L6)).
         You can also submit a request to documentation on cloud.google.com itself with the "Send Feedback"
         on the bottom of the page.
+
 
         Please note that documentation requests and questions for specific APIs
         will be closed.
