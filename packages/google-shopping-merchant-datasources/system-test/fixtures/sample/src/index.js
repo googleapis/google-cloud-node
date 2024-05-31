@@ -16,10 +16,11 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import * as v1beta from './v1beta';
-const DataSourcesServiceClient = v1beta.DataSourcesServiceClient;
-type DataSourcesServiceClient = v1beta.DataSourcesServiceClient;
-export {v1beta, DataSourcesServiceClient};
-export default {v1beta, DataSourcesServiceClient};
-import * as protos from '../protos/protos';
-export {protos}
+/* eslint-disable node/no-missing-require, no-unused-vars */
+const datasources = require('@google-cloud/datasources');
+
+function main() {
+  const dataSourcesServiceClient = new datasources.DataSourcesServiceClient();
+}
+
+main();

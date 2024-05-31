@@ -182,7 +182,8 @@
     "packages/google-maps-solar": {},
     "packages/google-maps-routeoptimization": {},
     "packages/google-streetview-publish": {},
-    "packages/google-maps-fleetengine": {}
+    "packages/google-maps-fleetengine": {},
+    "packages/google-shopping-merchant-datasources": {}
   },
   "plugins": [
     {
