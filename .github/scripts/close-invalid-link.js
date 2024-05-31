@@ -1,15 +1,6 @@
 const fetch = require('node-fetch');
 
-function labeledEvent(data) {
-    return data.event === "labeled" && data.label.name === "needs more info";
-  }
-
-  const numberOfDaysLimit = 15;
-  const close_message = `This has been closed since a request for information has \
-  not been answered for ${numberOfDaysLimit} days. It can be reopened when the \
-  requested information is provided.`;
-
-  module.exports = async ({ github, context }) => {
+module.exports = async ({ github, context }) => {
     const owner = context.repo.owner;
     const repo = context.repo.repo;
     const number = context.issue_number;
@@ -39,4 +30,4 @@ function labeledEvent(data) {
             state: "closed",
           });
     }
-  };
+};
