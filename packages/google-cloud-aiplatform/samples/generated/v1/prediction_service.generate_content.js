@@ -56,6 +56,11 @@ function main(model, contents) {
    */
   // const tools = [1,2,3,4]
   /**
+   *  Optional. Tool config. This config is shared for all tools provided in the
+   *  request.
+   */
+  // const toolConfig = {}
+  /**
    *  Optional. Per request settings for blocking unsafe content.
    *  Enforced on GenerateContentResponse.candidates.
    */

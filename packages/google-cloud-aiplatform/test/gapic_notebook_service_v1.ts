@@ -480,6 +480,147 @@ describe('v1.NotebookServiceClient', () => {
     });
   });
 
+  describe('updateNotebookRuntimeTemplate', () => {
+    it('invokes updateNotebookRuntimeTemplate without error', async () => {
+      const client = new notebookserviceModule.v1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateNotebookRuntimeTemplateRequest()
+      );
+      request.notebookRuntimeTemplate ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateNotebookRuntimeTemplateRequest',
+        ['notebookRuntimeTemplate', 'name']
+      );
+      request.notebookRuntimeTemplate.name = defaultValue1;
+      const expectedHeaderRequestParams = `notebook_runtime_template.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.NotebookRuntimeTemplate()
+      );
+      client.innerApiCalls.updateNotebookRuntimeTemplate =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateNotebookRuntimeTemplate(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateNotebookRuntimeTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateNotebookRuntimeTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateNotebookRuntimeTemplate without error using callback', async () => {
+      const client = new notebookserviceModule.v1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateNotebookRuntimeTemplateRequest()
+      );
+      request.notebookRuntimeTemplate ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateNotebookRuntimeTemplateRequest',
+        ['notebookRuntimeTemplate', 'name']
+      );
+      request.notebookRuntimeTemplate.name = defaultValue1;
+      const expectedHeaderRequestParams = `notebook_runtime_template.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.NotebookRuntimeTemplate()
+      );
+      client.innerApiCalls.updateNotebookRuntimeTemplate =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateNotebookRuntimeTemplate(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1.INotebookRuntimeTemplate | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateNotebookRuntimeTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateNotebookRuntimeTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateNotebookRuntimeTemplate with error', async () => {
+      const client = new notebookserviceModule.v1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateNotebookRuntimeTemplateRequest()
+      );
+      request.notebookRuntimeTemplate ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateNotebookRuntimeTemplateRequest',
+        ['notebookRuntimeTemplate', 'name']
+      );
+      request.notebookRuntimeTemplate.name = defaultValue1;
+      const expectedHeaderRequestParams = `notebook_runtime_template.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateNotebookRuntimeTemplate = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateNotebookRuntimeTemplate(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateNotebookRuntimeTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateNotebookRuntimeTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateNotebookRuntimeTemplate with closed client', async () => {
+      const client = new notebookserviceModule.v1.NotebookServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateNotebookRuntimeTemplateRequest()
+      );
+      request.notebookRuntimeTemplate ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateNotebookRuntimeTemplateRequest',
+        ['notebookRuntimeTemplate', 'name']
+      );
+      request.notebookRuntimeTemplate.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateNotebookRuntimeTemplate(request),
+        expectedError
+      );
+    });
+  });
+
   describe('getNotebookRuntime', () => {
     it('invokes getNotebookRuntime without error', async () => {
       const client = new notebookserviceModule.v1.NotebookServiceClient({

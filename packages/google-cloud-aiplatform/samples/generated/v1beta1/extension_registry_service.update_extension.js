@@ -37,7 +37,9 @@ function main(extension, updateMask) {
    *  Supported fields:
    *     * `display_name`
    *     * `description`
+   *     * `runtime_config`
    *     * `tool_use_examples`
+   *     * `manifest.description`
    */
   // const updateMask = {}
 
