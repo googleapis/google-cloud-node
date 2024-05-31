@@ -180,8 +180,9 @@
     "packages/google-cloud-securitycentermanagement": {},
     "packages/google-shopping-merchant-conversions": {},
     "packages/google-maps-solar": {},
-    "packages/google-maps-fleetengine": {},
-    "packages/google-maps-routeoptimization": {}
+    "packages/google-maps-routeoptimization": {},
+    "packages/google-streetview-publish": {},
+    "packages/google-maps-fleetengine": {}
   },
   "plugins": [
     {
