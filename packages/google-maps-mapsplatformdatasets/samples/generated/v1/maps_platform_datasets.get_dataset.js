@@ -29,7 +29,12 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name. projects/{project}/datasets/{dataset_id}
+   *  Required. Resource name.
+   *  Format: projects/{project}/datasets/{dataset_id}
+   *  Can also fetch some special versions by appending "@" and a tag.
+   *  Format: projects/{project}/datasets/{dataset_id}@{tag}
+   *  Tag "active": The info of the latest completed version will be included,
+   *  and NOT_FOUND if the dataset does not have one.
    */
   // const name = 'abc123'
 
