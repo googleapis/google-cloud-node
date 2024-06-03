@@ -1651,6 +1651,71 @@ describe('v1beta1.ModelGardenServiceClient', () => {
       });
     });
 
+    describe('cachedContent', () => {
+      const fakePath = '/rendered/path/cachedContent';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        cached_content: 'cachedContentValue',
+      };
+      const client =
+        new modelgardenserviceModule.v1beta1.ModelGardenServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.cachedContentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.cachedContentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('cachedContentPath', () => {
+        const result = client.cachedContentPath(
+          'projectValue',
+          'locationValue',
+          'cachedContentValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.cachedContentPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromCachedContentName', () => {
+        const result = client.matchProjectFromCachedContentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.cachedContentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromCachedContentName', () => {
+        const result = client.matchLocationFromCachedContentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.cachedContentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCachedContentFromCachedContentName', () => {
+        const result = client.matchCachedContentFromCachedContentName(fakePath);
+        assert.strictEqual(result, 'cachedContentValue');
+        assert(
+          (client.pathTemplates.cachedContentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('context', () => {
       const fakePath = '/rendered/path/context';
       const expectedParameters = {

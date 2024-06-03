@@ -1,0 +1,171 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.streetview.publish.v1",
+  "libraryPackage": "@googlemaps/streetview-publish",
+  "services": {
+    "StreetViewPublishService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "StreetViewPublishServiceClient",
+          "rpcs": {
+            "StartUpload": {
+              "methods": [
+                "startUpload"
+              ]
+            },
+            "CreatePhoto": {
+              "methods": [
+                "createPhoto"
+              ]
+            },
+            "GetPhoto": {
+              "methods": [
+                "getPhoto"
+              ]
+            },
+            "BatchGetPhotos": {
+              "methods": [
+                "batchGetPhotos"
+              ]
+            },
+            "UpdatePhoto": {
+              "methods": [
+                "updatePhoto"
+              ]
+            },
+            "BatchUpdatePhotos": {
+              "methods": [
+                "batchUpdatePhotos"
+              ]
+            },
+            "DeletePhoto": {
+              "methods": [
+                "deletePhoto"
+              ]
+            },
+            "BatchDeletePhotos": {
+              "methods": [
+                "batchDeletePhotos"
+              ]
+            },
+            "StartPhotoSequenceUpload": {
+              "methods": [
+                "startPhotoSequenceUpload"
+              ]
+            },
+            "DeletePhotoSequence": {
+              "methods": [
+                "deletePhotoSequence"
+              ]
+            },
+            "CreatePhotoSequence": {
+              "methods": [
+                "createPhotoSequence"
+              ]
+            },
+            "GetPhotoSequence": {
+              "methods": [
+                "getPhotoSequence"
+              ]
+            },
+            "ListPhotos": {
+              "methods": [
+                "listPhotos",
+                "listPhotosStream",
+                "listPhotosAsync"
+              ]
+            },
+            "ListPhotoSequences": {
+              "methods": [
+                "listPhotoSequences",
+                "listPhotoSequencesStream",
+                "listPhotoSequencesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "StreetViewPublishServiceClient",
+          "rpcs": {
+            "StartUpload": {
+              "methods": [
+                "startUpload"
+              ]
+            },
+            "CreatePhoto": {
+              "methods": [
+                "createPhoto"
+              ]
+            },
+            "GetPhoto": {
+              "methods": [
+                "getPhoto"
+              ]
+            },
+            "BatchGetPhotos": {
+              "methods": [
+                "batchGetPhotos"
+              ]
+            },
+            "UpdatePhoto": {
+              "methods": [
+                "updatePhoto"
+              ]
+            },
+            "BatchUpdatePhotos": {
+              "methods": [
+                "batchUpdatePhotos"
+              ]
+            },
+            "DeletePhoto": {
+              "methods": [
+                "deletePhoto"
+              ]
+            },
+            "BatchDeletePhotos": {
+              "methods": [
+                "batchDeletePhotos"
+              ]
+            },
+            "StartPhotoSequenceUpload": {
+              "methods": [
+                "startPhotoSequenceUpload"
+              ]
+            },
+            "DeletePhotoSequence": {
+              "methods": [
+                "deletePhotoSequence"
+              ]
+            },
+            "CreatePhotoSequence": {
+              "methods": [
+                "createPhotoSequence"
+              ]
+            },
+            "GetPhotoSequence": {
+              "methods": [
+                "getPhotoSequence"
+              ]
+            },
+            "ListPhotos": {
+              "methods": [
+                "listPhotos",
+                "listPhotosStream",
+                "listPhotosAsync"
+              ]
+            },
+            "ListPhotoSequences": {
+              "methods": [
+                "listPhotoSequences",
+                "listPhotoSequencesStream",
+                "listPhotoSequencesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
