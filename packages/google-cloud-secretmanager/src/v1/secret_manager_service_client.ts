@@ -2658,6 +2658,6 @@ export class SecretManagerServiceClient {
   matchSecretVersionFromSecretVersionName(secretVersionName: string) {
     return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
       .secret_version;
-  
+  }
 }
 
