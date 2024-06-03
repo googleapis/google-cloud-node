@@ -1029,8 +1029,8 @@ export class DepServiceClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Used to specify the fields to be overwritten in the
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Used to specify the fields to be overwritten in the
    *   `LbTrafficExtension` resource by the update.
    *   The fields specified in the update_mask are relative to the resource, not
    *   the full request. A field is overwritten if it is in the mask. If the
@@ -1505,8 +1505,8 @@ export class DepServiceClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Used to specify the fields to be overwritten in the
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Used to specify the fields to be overwritten in the
    *   `LbRouteExtension` resource by the update.
    *   The fields specified in the update_mask are relative to the resource, not
    *   the full request. A field is overwritten if it is in the mask. If the

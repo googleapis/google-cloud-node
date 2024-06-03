@@ -8,7 +8,7 @@
   "language": "nodejs",
   "repo": "googleapis/google-cloud-node",
   "distribution_name": "@google-cloud/shell",
-  "api_id": "shell.googleapis.com",
+  "api_id": "cloudshell.googleapis.com",
   "default_version": "v1",
   "requires_billing": true,
   "api_shortname": "cloudshell",

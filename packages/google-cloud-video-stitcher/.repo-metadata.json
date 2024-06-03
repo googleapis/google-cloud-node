@@ -9,7 +9,7 @@
   "repo": "googleapis/google-cloud-node",
   "codeowner_team": "@googleapis/cloud-media-team",
   "distribution_name": "@google-cloud/video-stitcher",
-  "api_id": "stitcher.googleapis.com",
+  "api_id": "videostitcher.googleapis.com",
   "default_version": "v1",
   "requires_billing": true,
   "library_type": "GAPIC_AUTO",

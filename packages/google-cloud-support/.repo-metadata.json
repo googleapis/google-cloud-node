@@ -4,7 +4,7 @@
   "product_documentation": "https://cloud.google.com/support/docs/reference/support-api",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/cloudsupport/latest",
   "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
+  "release_level": "stable",
   "language": "nodejs",
   "repo": "googleapis/google-cloud-node",
   "distribution_name": "@google-cloud/support",

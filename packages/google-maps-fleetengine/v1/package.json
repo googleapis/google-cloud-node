@@ -49,7 +49,7 @@
     "jsdoc-region-tag": "^3.0.0",
     "mocha": "^10.3.0",
     "pack-n-play": "^2.0.3",
-    "sinon": "^15.2.0",
+    "sinon": "^18.0.0",
     "typescript": "5.1.6"
   },
   "engines": {
