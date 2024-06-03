@@ -566,7 +566,10 @@ export class PredictionServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/cloud-platform.read-only',
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -1149,6 +1152,9 @@ export class PredictionServiceClient {
    *   A `Tool` is a piece of code that enables the system to interact with
    *   external systems to perform an action, or set of actions, outside of
    *   knowledge and scope of the model.
+   * @param {google.cloud.aiplatform.v1.ToolConfig} [request.toolConfig]
+   *   Optional. Tool config. This config is shared for all tools provided in the
+   *   request.
    * @param {number[]} [request.safetySettings]
    *   Optional. Per request settings for blocking unsafe content.
    *   Enforced on GenerateContentResponse.candidates.
@@ -1418,6 +1424,9 @@ export class PredictionServiceClient {
    *   A `Tool` is a piece of code that enables the system to interact with
    *   external systems to perform an action, or set of actions, outside of
    *   knowledge and scope of the model.
+   * @param {google.cloud.aiplatform.v1.ToolConfig} [request.toolConfig]
+   *   Optional. Tool config. This config is shared for all tools provided in the
+   *   request.
    * @param {number[]} [request.safetySettings]
    *   Optional. Per request settings for blocking unsafe content.
    *   Enforced on GenerateContentResponse.candidates.

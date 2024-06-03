@@ -2090,6 +2090,13 @@
                           "type": "OcrConfig",
                           "id": 1
                         },
+                        "layoutConfig": {
+                          "type": "LayoutConfig",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "schemaOverride": {
                           "type": "DocumentSchema",
                           "id": 8,
@@ -2099,6 +2106,37 @@
                         }
                       },
                       "nested": {
+                        "LayoutConfig": {
+                          "fields": {
+                            "chunkingConfig": {
+                              "type": "ChunkingConfig",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "ChunkingConfig": {
+                              "fields": {
+                                "chunkSize": {
+                                  "type": "int32",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "includeAncestorHeadings": {
+                                  "type": "bool",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
                         "IndividualPageSelector": {
                           "fields": {
                             "pages": {
