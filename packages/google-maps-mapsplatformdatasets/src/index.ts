@@ -19,12 +19,10 @@
 import * as v1 from './v1';
 import * as v1alpha from './v1alpha';
 
-const MapsPlatformDatasetsV1AlphaClient =
-  v1alpha.MapsPlatformDatasetsV1AlphaClient;
-type MapsPlatformDatasetsV1AlphaClient =
-  v1alpha.MapsPlatformDatasetsV1AlphaClient;
+const MapsPlatformDatasetsClient = v1.MapsPlatformDatasetsClient;
+type MapsPlatformDatasetsClient = v1.MapsPlatformDatasetsClient;
 
-export {v1, v1alpha, MapsPlatformDatasetsV1AlphaClient};
-export default {v1, v1alpha, MapsPlatformDatasetsV1AlphaClient};
+export {v1, v1alpha, MapsPlatformDatasetsClient};
+export default {v1, v1alpha, MapsPlatformDatasetsClient};
 import * as protos from '../protos/protos';
 export {protos};
