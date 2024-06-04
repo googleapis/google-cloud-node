@@ -1459,6 +1459,10 @@
                       "options": {
                         "(google.api.field_behavior)": "REQUIRED"
                       }
+                    },
+                    "propertyMask": {
+                      "type": "PropertyMask",
+                      "id": 5
                     }
                   }
                 },
@@ -1525,6 +1529,10 @@
                     "gqlQuery": {
                       "type": "GqlQuery",
                       "id": 7
+                    },
+                    "propertyMask": {
+                      "type": "PropertyMask",
+                      "id": 10
                     },
                     "explainOptions": {
                       "type": "ExplainOptions",
@@ -1838,6 +1846,10 @@
                     "updateTime": {
                       "type": "google.protobuf.Timestamp",
                       "id": 11
+                    },
+                    "propertyMask": {
+                      "type": "PropertyMask",
+                      "id": 9
                     }
                   }
                 },
@@ -1862,6 +1874,15 @@
                     "conflictDetected": {
                       "type": "bool",
                       "id": 5
+                    }
+                  }
+                },
+                "PropertyMask": {
+                  "fields": {
+                    "paths": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 1
                     }
                   }
                 },

@@ -22,7 +22,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 68,
+          "end": 75,
           "type": "FULL"
         }
       ],
@@ -46,6 +46,10 @@
           {
             "name": "keys",
             "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "property_mask",
+            "type": ".google.datastore.v1.PropertyMask"
           }
         ],
         "resultType": ".google.datastore.v1.LookupResponse",
@@ -74,7 +78,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 83,
+          "end": 90,
           "type": "FULL"
         }
       ],
@@ -106,6 +110,10 @@
           {
             "name": "gql_query",
             "type": ".google.datastore.v1.GqlQuery"
+          },
+          {
+            "name": "property_mask",
+            "type": ".google.datastore.v1.PropertyMask"
           },
           {
             "name": "explain_options",

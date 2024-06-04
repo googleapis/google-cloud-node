@@ -5560,6 +5560,9 @@ export namespace google {
 
                 /** LookupRequest keys */
                 keys?: (google.datastore.v1.IKey[]|null);
+
+                /** LookupRequest propertyMask */
+                propertyMask?: (google.datastore.v1.IPropertyMask|null);
             }
 
             /** Represents a LookupRequest. */
@@ -5582,6 +5585,9 @@ export namespace google {
 
                 /** LookupRequest keys. */
                 public keys: google.datastore.v1.IKey[];
+
+                /** LookupRequest propertyMask. */
+                public propertyMask?: (google.datastore.v1.IPropertyMask|null);
 
                 /**
                  * Creates a new LookupRequest instance using the specified properties.
@@ -5803,6 +5809,9 @@ export namespace google {
                 /** RunQueryRequest gqlQuery */
                 gqlQuery?: (google.datastore.v1.IGqlQuery|null);
 
+                /** RunQueryRequest propertyMask */
+                propertyMask?: (google.datastore.v1.IPropertyMask|null);
+
                 /** RunQueryRequest explainOptions */
                 explainOptions?: (google.datastore.v1.IExplainOptions|null);
             }
@@ -5833,6 +5842,9 @@ export namespace google {
 
                 /** RunQueryRequest gqlQuery. */
                 public gqlQuery?: (google.datastore.v1.IGqlQuery|null);
+
+                /** RunQueryRequest propertyMask. */
+                public propertyMask?: (google.datastore.v1.IPropertyMask|null);
 
                 /** RunQueryRequest explainOptions. */
                 public explainOptions?: (google.datastore.v1.IExplainOptions|null);
@@ -7365,6 +7377,9 @@ export namespace google {
 
                 /** Mutation updateTime */
                 updateTime?: (google.protobuf.ITimestamp|null);
+
+                /** Mutation propertyMask */
+                propertyMask?: (google.datastore.v1.IPropertyMask|null);
             }
 
             /** Represents a Mutation. */
@@ -7393,6 +7408,9 @@ export namespace google {
 
                 /** Mutation updateTime. */
                 public updateTime?: (google.protobuf.ITimestamp|null);
+
+                /** Mutation propertyMask. */
+                public propertyMask?: (google.datastore.v1.IPropertyMask|null);
 
                 /** Mutation operation. */
                 public operation?: ("insert"|"update"|"upsert"|"delete");
@@ -7593,6 +7611,103 @@ export namespace google {
 
                 /**
                  * Gets the default type url for MutationResult
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a PropertyMask. */
+            interface IPropertyMask {
+
+                /** PropertyMask paths */
+                paths?: (string[]|null);
+            }
+
+            /** Represents a PropertyMask. */
+            class PropertyMask implements IPropertyMask {
+
+                /**
+                 * Constructs a new PropertyMask.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.datastore.v1.IPropertyMask);
+
+                /** PropertyMask paths. */
+                public paths: string[];
+
+                /**
+                 * Creates a new PropertyMask instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns PropertyMask instance
+                 */
+                public static create(properties?: google.datastore.v1.IPropertyMask): google.datastore.v1.PropertyMask;
+
+                /**
+                 * Encodes the specified PropertyMask message. Does not implicitly {@link google.datastore.v1.PropertyMask.verify|verify} messages.
+                 * @param message PropertyMask message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.datastore.v1.IPropertyMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified PropertyMask message, length delimited. Does not implicitly {@link google.datastore.v1.PropertyMask.verify|verify} messages.
+                 * @param message PropertyMask message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.datastore.v1.IPropertyMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a PropertyMask message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns PropertyMask
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.datastore.v1.PropertyMask;
+
+                /**
+                 * Decodes a PropertyMask message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns PropertyMask
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.datastore.v1.PropertyMask;
+
+                /**
+                 * Verifies a PropertyMask message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a PropertyMask message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns PropertyMask
+                 */
+                public static fromObject(object: { [k: string]: any }): google.datastore.v1.PropertyMask;
+
+                /**
+                 * Creates a plain object from a PropertyMask message. Also converts values to other types if specified.
+                 * @param message PropertyMask
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.datastore.v1.PropertyMask, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this PropertyMask to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for PropertyMask
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */

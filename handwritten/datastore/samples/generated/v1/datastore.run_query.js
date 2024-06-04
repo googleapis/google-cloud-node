@@ -58,6 +58,13 @@ function main(projectId) {
    */
   // const gqlQuery = {}
   /**
+   *  The properties to return.
+   *  This field must not be set for a projection query.
+   *  See
+   *  LookupRequest.property_mask google.datastore.v1.LookupRequest.property_mask.
+   */
+  // const propertyMask = {}
+  /**
    *  Optional. Explain options for the query. If set, additional query
    *  statistics will be returned. If not, only query results will be returned.
    */
