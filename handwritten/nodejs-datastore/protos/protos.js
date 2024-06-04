@@ -14055,6 +14055,7 @@
                      * @property {string|null} [databaseId] LookupRequest databaseId
                      * @property {google.datastore.v1.IReadOptions|null} [readOptions] LookupRequest readOptions
                      * @property {Array.<google.datastore.v1.IKey>|null} [keys] LookupRequest keys
+                     * @property {google.datastore.v1.IPropertyMask|null} [propertyMask] LookupRequest propertyMask
                      */
     
                     /**
@@ -14106,6 +14107,14 @@
                     LookupRequest.prototype.keys = $util.emptyArray;
     
                     /**
+                     * LookupRequest propertyMask.
+                     * @member {google.datastore.v1.IPropertyMask|null|undefined} propertyMask
+                     * @memberof google.datastore.v1.LookupRequest
+                     * @instance
+                     */
+                    LookupRequest.prototype.propertyMask = null;
+    
+                    /**
                      * Creates a new LookupRequest instance using the specified properties.
                      * @function create
                      * @memberof google.datastore.v1.LookupRequest
@@ -14134,6 +14143,8 @@
                         if (message.keys != null && message.keys.length)
                             for (var i = 0; i < message.keys.length; ++i)
                                 $root.google.datastore.v1.Key.encode(message.keys[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.propertyMask != null && Object.hasOwnProperty.call(message, "propertyMask"))
+                            $root.google.datastore.v1.PropertyMask.encode(message.propertyMask, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
                             writer.uint32(/* id 8, wireType 2 =*/66).string(message.projectId);
                         if (message.databaseId != null && Object.hasOwnProperty.call(message, "databaseId"))
@@ -14188,6 +14199,10 @@
                                     if (!(message.keys && message.keys.length))
                                         message.keys = [];
                                     message.keys.push($root.google.datastore.v1.Key.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 5: {
+                                    message.propertyMask = $root.google.datastore.v1.PropertyMask.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -14245,6 +14260,11 @@
                                     return "keys." + error;
                             }
                         }
+                        if (message.propertyMask != null && message.hasOwnProperty("propertyMask")) {
+                            var error = $root.google.datastore.v1.PropertyMask.verify(message.propertyMask);
+                            if (error)
+                                return "propertyMask." + error;
+                        }
                         return null;
                     };
     
@@ -14279,6 +14299,11 @@
                                 message.keys[i] = $root.google.datastore.v1.Key.fromObject(object.keys[i]);
                             }
                         }
+                        if (object.propertyMask != null) {
+                            if (typeof object.propertyMask !== "object")
+                                throw TypeError(".google.datastore.v1.LookupRequest.propertyMask: object expected");
+                            message.propertyMask = $root.google.datastore.v1.PropertyMask.fromObject(object.propertyMask);
+                        }
                         return message;
                     };
     
@@ -14299,6 +14324,7 @@
                             object.keys = [];
                         if (options.defaults) {
                             object.readOptions = null;
+                            object.propertyMask = null;
                             object.projectId = "";
                             object.databaseId = "";
                         }
@@ -14309,6 +14335,8 @@
                             for (var j = 0; j < message.keys.length; ++j)
                                 object.keys[j] = $root.google.datastore.v1.Key.toObject(message.keys[j], options);
                         }
+                        if (message.propertyMask != null && message.hasOwnProperty("propertyMask"))
+                            object.propertyMask = $root.google.datastore.v1.PropertyMask.toObject(message.propertyMask, options);
                         if (message.projectId != null && message.hasOwnProperty("projectId"))
                             object.projectId = message.projectId;
                         if (message.databaseId != null && message.hasOwnProperty("databaseId"))
@@ -14732,6 +14760,7 @@
                      * @property {google.datastore.v1.IReadOptions|null} [readOptions] RunQueryRequest readOptions
                      * @property {google.datastore.v1.IQuery|null} [query] RunQueryRequest query
                      * @property {google.datastore.v1.IGqlQuery|null} [gqlQuery] RunQueryRequest gqlQuery
+                     * @property {google.datastore.v1.IPropertyMask|null} [propertyMask] RunQueryRequest propertyMask
                      * @property {google.datastore.v1.IExplainOptions|null} [explainOptions] RunQueryRequest explainOptions
                      */
     
@@ -14799,6 +14828,14 @@
                     RunQueryRequest.prototype.gqlQuery = null;
     
                     /**
+                     * RunQueryRequest propertyMask.
+                     * @member {google.datastore.v1.IPropertyMask|null|undefined} propertyMask
+                     * @memberof google.datastore.v1.RunQueryRequest
+                     * @instance
+                     */
+                    RunQueryRequest.prototype.propertyMask = null;
+    
+                    /**
                      * RunQueryRequest explainOptions.
                      * @member {google.datastore.v1.IExplainOptions|null|undefined} explainOptions
                      * @memberof google.datastore.v1.RunQueryRequest
@@ -14856,6 +14893,8 @@
                             writer.uint32(/* id 8, wireType 2 =*/66).string(message.projectId);
                         if (message.databaseId != null && Object.hasOwnProperty.call(message, "databaseId"))
                             writer.uint32(/* id 9, wireType 2 =*/74).string(message.databaseId);
+                        if (message.propertyMask != null && Object.hasOwnProperty.call(message, "propertyMask"))
+                            $root.google.datastore.v1.PropertyMask.encode(message.propertyMask, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                         if (message.explainOptions != null && Object.hasOwnProperty.call(message, "explainOptions"))
                             $root.google.datastore.v1.ExplainOptions.encode(message.explainOptions, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                         return writer;
@@ -14914,6 +14953,10 @@
                                 }
                             case 7: {
                                     message.gqlQuery = $root.google.datastore.v1.GqlQuery.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 10: {
+                                    message.propertyMask = $root.google.datastore.v1.PropertyMask.decode(reader, reader.uint32());
                                     break;
                                 }
                             case 12: {
@@ -14990,6 +15033,11 @@
                                     return "gqlQuery." + error;
                             }
                         }
+                        if (message.propertyMask != null && message.hasOwnProperty("propertyMask")) {
+                            var error = $root.google.datastore.v1.PropertyMask.verify(message.propertyMask);
+                            if (error)
+                                return "propertyMask." + error;
+                        }
                         if (message.explainOptions != null && message.hasOwnProperty("explainOptions")) {
                             var error = $root.google.datastore.v1.ExplainOptions.verify(message.explainOptions);
                             if (error)
@@ -15034,6 +15082,11 @@
                                 throw TypeError(".google.datastore.v1.RunQueryRequest.gqlQuery: object expected");
                             message.gqlQuery = $root.google.datastore.v1.GqlQuery.fromObject(object.gqlQuery);
                         }
+                        if (object.propertyMask != null) {
+                            if (typeof object.propertyMask !== "object")
+                                throw TypeError(".google.datastore.v1.RunQueryRequest.propertyMask: object expected");
+                            message.propertyMask = $root.google.datastore.v1.PropertyMask.fromObject(object.propertyMask);
+                        }
                         if (object.explainOptions != null) {
                             if (typeof object.explainOptions !== "object")
                                 throw TypeError(".google.datastore.v1.RunQueryRequest.explainOptions: object expected");
@@ -15060,6 +15113,7 @@
                             object.partitionId = null;
                             object.projectId = "";
                             object.databaseId = "";
+                            object.propertyMask = null;
                             object.explainOptions = null;
                         }
                         if (message.readOptions != null && message.hasOwnProperty("readOptions"))
@@ -15080,6 +15134,8 @@
                             object.projectId = message.projectId;
                         if (message.databaseId != null && message.hasOwnProperty("databaseId"))
                             object.databaseId = message.databaseId;
+                        if (message.propertyMask != null && message.hasOwnProperty("propertyMask"))
+                            object.propertyMask = $root.google.datastore.v1.PropertyMask.toObject(message.propertyMask, options);
                         if (message.explainOptions != null && message.hasOwnProperty("explainOptions"))
                             object.explainOptions = $root.google.datastore.v1.ExplainOptions.toObject(message.explainOptions, options);
                         return object;
@@ -18650,6 +18706,7 @@
                      * @property {google.datastore.v1.IKey|null} ["delete"] Mutation delete
                      * @property {number|Long|null} [baseVersion] Mutation baseVersion
                      * @property {google.protobuf.ITimestamp|null} [updateTime] Mutation updateTime
+                     * @property {google.datastore.v1.IPropertyMask|null} [propertyMask] Mutation propertyMask
                      */
     
                     /**
@@ -18715,6 +18772,14 @@
                      */
                     Mutation.prototype.updateTime = null;
     
+                    /**
+                     * Mutation propertyMask.
+                     * @member {google.datastore.v1.IPropertyMask|null|undefined} propertyMask
+                     * @memberof google.datastore.v1.Mutation
+                     * @instance
+                     */
+                    Mutation.prototype.propertyMask = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -18774,6 +18839,8 @@
                             $root.google.datastore.v1.Key.encode(message["delete"], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                         if (message.baseVersion != null && Object.hasOwnProperty.call(message, "baseVersion"))
                             writer.uint32(/* id 8, wireType 0 =*/64).int64(message.baseVersion);
+                        if (message.propertyMask != null && Object.hasOwnProperty.call(message, "propertyMask"))
+                            $root.google.datastore.v1.PropertyMask.encode(message.propertyMask, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                         if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
                             $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                         return writer;
@@ -18832,6 +18899,10 @@
                                 }
                             case 11: {
                                     message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 9: {
+                                    message.propertyMask = $root.google.datastore.v1.PropertyMask.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -18923,6 +18994,11 @@
                                     return "updateTime." + error;
                             }
                         }
+                        if (message.propertyMask != null && message.hasOwnProperty("propertyMask")) {
+                            var error = $root.google.datastore.v1.PropertyMask.verify(message.propertyMask);
+                            if (error)
+                                return "propertyMask." + error;
+                        }
                         return null;
                     };
     
@@ -18972,6 +19048,11 @@
                                 throw TypeError(".google.datastore.v1.Mutation.updateTime: object expected");
                             message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
                         }
+                        if (object.propertyMask != null) {
+                            if (typeof object.propertyMask !== "object")
+                                throw TypeError(".google.datastore.v1.Mutation.propertyMask: object expected");
+                            message.propertyMask = $root.google.datastore.v1.PropertyMask.fromObject(object.propertyMask);
+                        }
                         return message;
                     };
     
@@ -18988,6 +19069,8 @@
                         if (!options)
                             options = {};
                         var object = {};
+                        if (options.defaults)
+                            object.propertyMask = null;
                         if (message.insert != null && message.hasOwnProperty("insert")) {
                             object.insert = $root.google.datastore.v1.Entity.toObject(message.insert, options);
                             if (options.oneofs)
@@ -19016,6 +19099,8 @@
                             if (options.oneofs)
                                 object.conflictDetectionStrategy = "baseVersion";
                         }
+                        if (message.propertyMask != null && message.hasOwnProperty("propertyMask"))
+                            object.propertyMask = $root.google.datastore.v1.PropertyMask.toObject(message.propertyMask, options);
                         if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
                             object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                             if (options.oneofs)
@@ -19376,6 +19461,225 @@
                     };
     
                     return MutationResult;
+                })();
+    
+                v1.PropertyMask = (function() {
+    
+                    /**
+                     * Properties of a PropertyMask.
+                     * @memberof google.datastore.v1
+                     * @interface IPropertyMask
+                     * @property {Array.<string>|null} [paths] PropertyMask paths
+                     */
+    
+                    /**
+                     * Constructs a new PropertyMask.
+                     * @memberof google.datastore.v1
+                     * @classdesc Represents a PropertyMask.
+                     * @implements IPropertyMask
+                     * @constructor
+                     * @param {google.datastore.v1.IPropertyMask=} [properties] Properties to set
+                     */
+                    function PropertyMask(properties) {
+                        this.paths = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * PropertyMask paths.
+                     * @member {Array.<string>} paths
+                     * @memberof google.datastore.v1.PropertyMask
+                     * @instance
+                     */
+                    PropertyMask.prototype.paths = $util.emptyArray;
+    
+                    /**
+                     * Creates a new PropertyMask instance using the specified properties.
+                     * @function create
+                     * @memberof google.datastore.v1.PropertyMask
+                     * @static
+                     * @param {google.datastore.v1.IPropertyMask=} [properties] Properties to set
+                     * @returns {google.datastore.v1.PropertyMask} PropertyMask instance
+                     */
+                    PropertyMask.create = function create(properties) {
+                        return new PropertyMask(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified PropertyMask message. Does not implicitly {@link google.datastore.v1.PropertyMask.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.datastore.v1.PropertyMask
+                     * @static
+                     * @param {google.datastore.v1.IPropertyMask} message PropertyMask message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    PropertyMask.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.paths != null && message.paths.length)
+                            for (var i = 0; i < message.paths.length; ++i)
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.paths[i]);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified PropertyMask message, length delimited. Does not implicitly {@link google.datastore.v1.PropertyMask.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.datastore.v1.PropertyMask
+                     * @static
+                     * @param {google.datastore.v1.IPropertyMask} message PropertyMask message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    PropertyMask.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a PropertyMask message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.datastore.v1.PropertyMask
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.datastore.v1.PropertyMask} PropertyMask
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    PropertyMask.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.PropertyMask();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.paths && message.paths.length))
+                                        message.paths = [];
+                                    message.paths.push(reader.string());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a PropertyMask message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.datastore.v1.PropertyMask
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.datastore.v1.PropertyMask} PropertyMask
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    PropertyMask.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a PropertyMask message.
+                     * @function verify
+                     * @memberof google.datastore.v1.PropertyMask
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    PropertyMask.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.paths != null && message.hasOwnProperty("paths")) {
+                            if (!Array.isArray(message.paths))
+                                return "paths: array expected";
+                            for (var i = 0; i < message.paths.length; ++i)
+                                if (!$util.isString(message.paths[i]))
+                                    return "paths: string[] expected";
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a PropertyMask message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.datastore.v1.PropertyMask
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.datastore.v1.PropertyMask} PropertyMask
+                     */
+                    PropertyMask.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.datastore.v1.PropertyMask)
+                            return object;
+                        var message = new $root.google.datastore.v1.PropertyMask();
+                        if (object.paths) {
+                            if (!Array.isArray(object.paths))
+                                throw TypeError(".google.datastore.v1.PropertyMask.paths: array expected");
+                            message.paths = [];
+                            for (var i = 0; i < object.paths.length; ++i)
+                                message.paths[i] = String(object.paths[i]);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a PropertyMask message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.datastore.v1.PropertyMask
+                     * @static
+                     * @param {google.datastore.v1.PropertyMask} message PropertyMask
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    PropertyMask.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.paths = [];
+                        if (message.paths && message.paths.length) {
+                            object.paths = [];
+                            for (var j = 0; j < message.paths.length; ++j)
+                                object.paths[j] = message.paths[j];
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this PropertyMask to JSON.
+                     * @function toJSON
+                     * @memberof google.datastore.v1.PropertyMask
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    PropertyMask.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for PropertyMask
+                     * @function getTypeUrl
+                     * @memberof google.datastore.v1.PropertyMask
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    PropertyMask.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.datastore.v1.PropertyMask";
+                    };
+    
+                    return PropertyMask;
                 })();
     
                 v1.ReadOptions = (function() {

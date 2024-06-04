@@ -426,6 +426,13 @@ export class DatastoreClient {
    *   The options for this lookup request.
    * @param {number[]} request.keys
    *   Required. Keys of entities to look up.
+   * @param {google.datastore.v1.PropertyMask} request.propertyMask
+   *   The properties to return. Defaults to returning all properties.
+   *
+   *   If this field is set and an entity has a property not referenced in the
+   *   mask, it will be absent from {@link protos.|LookupResponse.found.entity.properties}.
+   *
+   *   The entity's key is always returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -543,6 +550,12 @@ export class DatastoreClient {
    *   The query to run.
    * @param {google.datastore.v1.GqlQuery} request.gqlQuery
    *   The GQL query to run. This query must be a non-aggregation query.
+   * @param {google.datastore.v1.PropertyMask} request.propertyMask
+   *   The properties to return.
+   *   This field must not be set for a projection query.
+   *
+   *   See
+   *   {@link protos.google.datastore.v1.LookupRequest.property_mask|LookupRequest.property_mask}.
    * @param {google.datastore.v1.ExplainOptions} [request.explainOptions]
    *   Optional. Explain options for the query. If set, additional query
    *   statistics will be returned. If not, only query results will be returned.
