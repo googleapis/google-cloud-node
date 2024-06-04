@@ -47,7 +47,7 @@ function main(parent, pageSize, pageToken) {
   // const pageToken = 'abc123'
 
   // Imports the Promotions library
-  const {PromotionsServiceClient} = require('@google-cloud/promotions').v1beta;
+  const {PromotionsServiceClient} = require('@google-shopping/promotionsonsonsonsonsons').v1beta;
 
   // Instantiates a client
   const promotionsClient = new PromotionsServiceClient();

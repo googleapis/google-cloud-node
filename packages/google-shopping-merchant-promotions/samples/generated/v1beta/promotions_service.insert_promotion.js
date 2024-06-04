@@ -46,7 +46,7 @@ function main(parent, promotion, dataSource) {
   // const dataSource = 'abc123'
 
   // Imports the Promotions library
-  const {PromotionsServiceClient} = require('@google-cloud/promotions').v1beta;
+  const {PromotionsServiceClient} = require('@google-shopping/promotionsons').v1beta;
 
   // Instantiates a client
   const promotionsClient = new PromotionsServiceClient();

@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const promotions = require('@google-cloud/promotions');
+const promotions = require('@google-shopping/promotions');
 
 function main() {
   const promotionsServiceClient = new promotions.PromotionsServiceClient();
