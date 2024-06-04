@@ -48,7 +48,7 @@ function main(parent) {
 
   // Imports the Datasources library
   const {DataSourcesServiceClient} =
-    require('@google-cloud/datasources').v1beta;
+    require('@google-shopping/datasources').v1beta;
 
   // Instantiates a client
   const datasourcesClient = new DataSourcesServiceClient();

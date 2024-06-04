@@ -19,7 +19,7 @@
 // const path = require('path');
 // const cp = require('child_process');
 // const {describe, it, before} = require('mocha');
-// const {DataSourcesServiceClient} = require('@google-cloud/datasources').v1beta;
+// const {DataSourcesServiceClient} = require('@google-shopping/datasources').v1beta;
 // const merchantapiClient = new DataSourcesServiceClient();
 
 // const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
