@@ -72,7 +72,7 @@
     "jsdoc": "^4.0.0",
     "jsdoc-fresh": "^3.0.0",
     "jsdoc-region-tag": "^3.0.0",
-    "linkinator": "^5.0.0",
+    "linkinator": "^3.0.0",
     "mocha": "^9.2.2",
     "post-install-check": "0.0.1",
     "proxyquire": "^2.0.1",
