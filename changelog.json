@@ -5,6 +5,57 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "84adc73cb2c7aa1e87bf2d060fd99d713234c79c",
+          "message": "Add initial files for google.shopping.merchant.promotions.v1beta",
+          "issues": [
+            "5422"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "a9784ed3db6ee96d171762308bbbcd57390b6866",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5354"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5351"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/promotions",
+      "id": "a7b3e996-c2ee-4943-8eb8-e5f8c7c0b3be",
+      "createTime": "2024-06-04T23:09:06.033Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "304acc9821a8edf054952999b6e282d9d5affd8f",
+          "message": "[mapsplatformdatasets] make v1 stable/default version",
+          "issues": [
+            "5390"
+          ],
+          "breakingChangeNote": "[mapsplatformdatasets] make v1 stable/default version ([#5390](https://github.com/googleapis/google-cloud-node/issues/5390))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/maps-platform-datasets",
+      "id": "20342ea6-6662-4747-8a64-fd441ddbdc00",
+      "createTime": "2024-06-04T23:09:06.019Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "50cd4b851c9a14788a292cd27d4abb8b317091ec",
           "message": "Add initial files for google.maps.fleetengine.v1",
           "issues": [
@@ -34348,5 +34399,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-06-03T22:56:46.493Z"
+  "updateTime": "2024-06-04T23:09:06.033Z"
 }
