@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v1.8.0...contentwarehouse-v1.9.0) (2024-06-03)
+
+
+### Features
+
+* [contentwarehouse] Make Layout Parser generally available in V1 ([#5394](https://github.com/googleapis/google-cloud-node/issues/5394)) ([489b166](https://github.com/googleapis/google-cloud-node/commit/489b16633276bcc446d2936ffb75bc68e57116e8))
+
 ## [1.8.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v1.7.0...contentwarehouse-v1.8.0) (2024-05-21)
 
 
