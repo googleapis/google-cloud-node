@@ -5207,7 +5207,9 @@ export namespace google {
                         SWITCHOVER = 39,
                         ACQUIRE_SSRS_LEASE = 42,
                         RELEASE_SSRS_LEASE = 43,
-                        RECONFIGURE_OLD_PRIMARY = 44
+                        RECONFIGURE_OLD_PRIMARY = 44,
+                        CLUSTER_MAINTENANCE = 45,
+                        SELF_SERVICE_MAINTENANCE = 46
                     }
 
                     /** SqlOperationStatus enum. */
@@ -6599,6 +6601,7 @@ export namespace google {
                     MYSQL_8_0_38 = 356,
                     MYSQL_8_0_39 = 357,
                     MYSQL_8_0_40 = 358,
+                    MYSQL_8_4 = 398,
                     SQLSERVER_2019_STANDARD = 26,
                     SQLSERVER_2019_ENTERPRISE = 27,
                     SQLSERVER_2019_EXPRESS = 28,
