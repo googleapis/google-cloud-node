@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.22.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.21.0...aiplatform-v3.22.0) (2024-06-03)
+
+
+### Features
+
+* Add ValueType.STRUCT to Feature  ([#5381](https://github.com/googleapis/google-cloud-node/issues/5381)) ([6d60ea8](https://github.com/googleapis/google-cloud-node/commit/6d60ea883cd5e3759296a14057b5ee3a86962464))
+
 ## [3.21.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.20.0...aiplatform-v3.21.0) (2024-05-21)
 
 
