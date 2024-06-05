@@ -29,7 +29,8 @@ function main(setting) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The setting to update. See Setting google.cloud.resourcesettings.v1.Setting  for field requirements.
+   *  Required. The setting to update. See
+   *  Setting google.cloud.resourcesettings.v1.Setting  for field requirements.
    */
   // const setting = {}
 
