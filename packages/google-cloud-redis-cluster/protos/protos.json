@@ -841,7 +841,8 @@
                         "go_package": "cloud.google.com/go/redis/cluster/apiv1beta1/clusterpb;clusterpb",
                         "java_multiple_files": true,
                         "java_outer_classname": "CloudRedisClusterProto",
-                        "java_package": "com.google.cloud.redis.cluster.v1beta1"
+                        "java_package": "com.google.cloud.redis.cluster.v1beta1",
+                        "ruby_package": "Google::Cloud::Redis::Cluster::V1beta1"
                       },
                       "nested": {
                         "CloudRedisCluster": {
@@ -967,6 +968,24 @@
                                   }
                                 }
                               ]
+                            },
+                            "GetClusterCertificateAuthority": {
+                              "requestType": "GetClusterCertificateAuthorityRequest",
+                              "responseType": "CertificateAuthority",
+                              "options": {
+                                "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/clusters/*/certificateAuthority}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1beta1/{name=projects/*/locations/*/clusters/*/certificateAuthority}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
                             }
                           }
                         },
@@ -975,6 +994,15 @@
                             "AUTH_MODE_UNSPECIFIED": 0,
                             "AUTH_MODE_IAM_AUTH": 1,
                             "AUTH_MODE_DISABLED": 2
+                          }
+                        },
+                        "NodeType": {
+                          "values": {
+                            "NODE_TYPE_UNSPECIFIED": 0,
+                            "REDIS_SHARED_CORE_NANO": 1,
+                            "REDIS_HIGHMEM_MEDIUM": 2,
+                            "REDIS_HIGHMEM_XLARGE": 3,
+                            "REDIS_STANDARD_SMALL": 4
                           }
                         },
                         "TransitEncryptionMode": {
@@ -1102,6 +1130,18 @@
                             }
                           }
                         },
+                        "GetClusterCertificateAuthorityRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "redis.googleapis.com/CertificateAuthority"
+                              }
+                            }
+                          }
+                        },
                         "Cluster": {
                           "options": {
                             "(google.api.resource).type": "redis.googleapis.com/Cluster",
@@ -1121,6 +1161,16 @@
                             "_shardCount": {
                               "oneof": [
                                 "shardCount"
+                              ]
+                            },
+                            "_preciseSizeGb": {
+                              "oneof": [
+                                "preciseSizeGb"
+                              ]
+                            },
+                            "_deletionProtectionEnabled": {
+                              "oneof": [
+                                "deletionProtectionEnabled"
                               ]
                             }
                           },
@@ -1220,6 +1270,51 @@
                               "id": 18,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "nodeType": {
+                              "type": "NodeType",
+                              "id": 19,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "persistenceConfig": {
+                              "type": "ClusterPersistenceConfig",
+                              "id": 20,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "redisConfigs": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 21,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "preciseSizeGb": {
+                              "type": "double",
+                              "id": 22,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "zoneDistributionConfig": {
+                              "type": "ZoneDistributionConfig",
+                              "id": 23,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "deletionProtectionEnabled": {
+                              "type": "bool",
+                              "id": 25,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
                               }
                             }
                           },
@@ -1403,6 +1498,166 @@
                               "id": 7,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "CertificateAuthority": {
+                          "options": {
+                            "(google.api.resource).type": "redis.googleapis.com/CertificateAuthority",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/clusters/{cluster}/certificateAuthority"
+                          },
+                          "oneofs": {
+                            "serverCa": {
+                              "oneof": [
+                                "managedServerCa"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "managedServerCa": {
+                              "type": "ManagedCertificateAuthority",
+                              "id": 1
+                            },
+                            "name": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "IDENTIFIER"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "ManagedCertificateAuthority": {
+                              "fields": {
+                                "caCerts": {
+                                  "rule": "repeated",
+                                  "type": "CertChain",
+                                  "id": 1
+                                }
+                              },
+                              "nested": {
+                                "CertChain": {
+                                  "fields": {
+                                    "certificates": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 1
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "ClusterPersistenceConfig": {
+                          "fields": {
+                            "mode": {
+                              "type": "PersistenceMode",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "rdbConfig": {
+                              "type": "RDBConfig",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "aofConfig": {
+                              "type": "AOFConfig",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "RDBConfig": {
+                              "fields": {
+                                "rdbSnapshotPeriod": {
+                                  "type": "SnapshotPeriod",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "rdbSnapshotStartTime": {
+                                  "type": "google.protobuf.Timestamp",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "SnapshotPeriod": {
+                                  "values": {
+                                    "SNAPSHOT_PERIOD_UNSPECIFIED": 0,
+                                    "ONE_HOUR": 1,
+                                    "SIX_HOURS": 2,
+                                    "TWELVE_HOURS": 3,
+                                    "TWENTY_FOUR_HOURS": 4
+                                  }
+                                }
+                              }
+                            },
+                            "AOFConfig": {
+                              "fields": {
+                                "appendFsync": {
+                                  "type": "AppendFsync",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "AppendFsync": {
+                                  "values": {
+                                    "APPEND_FSYNC_UNSPECIFIED": 0,
+                                    "NO": 1,
+                                    "EVERYSEC": 2,
+                                    "ALWAYS": 3
+                                  }
+                                }
+                              }
+                            },
+                            "PersistenceMode": {
+                              "values": {
+                                "PERSISTENCE_MODE_UNSPECIFIED": 0,
+                                "DISABLED": 1,
+                                "RDB": 2,
+                                "AOF": 3
+                              }
+                            }
+                          }
+                        },
+                        "ZoneDistributionConfig": {
+                          "fields": {
+                            "mode": {
+                              "type": "ZoneDistributionMode",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "zone": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "ZoneDistributionMode": {
+                              "values": {
+                                "ZONE_DISTRIBUTION_MODE_UNSPECIFIED": 0,
+                                "MULTI_ZONE": 1,
+                                "SINGLE_ZONE": 2
                               }
                             }
                           }
