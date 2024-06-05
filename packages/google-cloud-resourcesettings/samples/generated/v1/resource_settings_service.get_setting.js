@@ -29,7 +29,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the setting to get. See Setting google.cloud.resourcesettings.v1.Setting  for naming
+   *  Required. The name of the setting to get. See
+   *  Setting google.cloud.resourcesettings.v1.Setting  for naming
    *  requirements.
    */
   // const name = 'abc123'

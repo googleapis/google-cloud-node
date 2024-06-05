@@ -20,6 +20,7 @@
                   "nested": {
                     "ResourceSettingsService": {
                       "options": {
+                        "deprecated": true,
                         "(google.api.default_host)": "resourcesettings.googleapis.com",
                         "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
                       },

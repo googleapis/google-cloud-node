@@ -21,7 +21,7 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as resourcesettingsserviceModule from '../src';
+import * as promotionsserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
@@ -127,18 +127,18 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1.ResourceSettingsServiceClient', () => {
+describe('v1beta.PromotionsServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
       const client =
-        new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient();
+        new promotionsserviceModule.v1beta.PromotionsServiceClient();
       const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'resourcesettings.googleapis.com');
+      assert.strictEqual(apiEndpoint, 'merchantapi.googleapis.com');
     });
 
     it('has universeDomain', () => {
       const client =
-        new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient();
+        new promotionsserviceModule.v1beta.PromotionsServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -150,9 +150,8 @@ describe('v1.ResourceSettingsServiceClient', () => {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const servicePath =
-          resourcesettingsserviceModule.v1.ResourceSettingsServiceClient
-            .servicePath;
-        assert.strictEqual(servicePath, 'resourcesettings.googleapis.com');
+          promotionsserviceModule.v1beta.PromotionsServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'merchantapi.googleapis.com');
         assert(stub.called);
         stub.restore();
       });
@@ -160,29 +159,26 @@ describe('v1.ResourceSettingsServiceClient', () => {
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const apiEndpoint =
-          resourcesettingsserviceModule.v1.ResourceSettingsServiceClient
-            .apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'resourcesettings.googleapis.com');
+          promotionsserviceModule.v1beta.PromotionsServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'merchantapi.googleapis.com');
         assert(stub.called);
         stub.restore();
       });
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client =
-        new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient({
-          universeDomain: 'example.com',
-        });
+      const client = new promotionsserviceModule.v1beta.PromotionsServiceClient(
+        {universeDomain: 'example.com'}
+      );
       const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'resourcesettings.example.com');
+      assert.strictEqual(servicePath, 'merchantapi.example.com');
     });
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client =
-        new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient({
-          universe_domain: 'example.com',
-        });
+      const client = new promotionsserviceModule.v1beta.PromotionsServiceClient(
+        {universe_domain: 'example.com'}
+      );
       const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'resourcesettings.example.com');
+      assert.strictEqual(servicePath, 'merchantapi.example.com');
     });
 
     if (typeof process === 'object' && 'env' in process) {
@@ -191,9 +187,9 @@ describe('v1.ResourceSettingsServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient();
+            new promotionsserviceModule.v1beta.PromotionsServiceClient();
           const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'resourcesettings.example.com');
+          assert.strictEqual(servicePath, 'merchantapi.example.com');
           if (saved) {
             process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
           } else {
@@ -205,14 +201,11 @@ describe('v1.ResourceSettingsServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient({
+            new promotionsserviceModule.v1beta.PromotionsServiceClient({
               universeDomain: 'configured.example.com',
             });
           const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'resourcesettings.configured.example.com'
-          );
+          assert.strictEqual(servicePath, 'merchantapi.configured.example.com');
           if (saved) {
             process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
           } else {
@@ -223,7 +216,7 @@ describe('v1.ResourceSettingsServiceClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient({
+        new promotionsserviceModule.v1beta.PromotionsServiceClient({
           universe_domain: 'example.com',
           universeDomain: 'example.net',
         });
@@ -231,57 +224,60 @@ describe('v1.ResourceSettingsServiceClient', () => {
     });
 
     it('has port', () => {
-      const port =
-        resourcesettingsserviceModule.v1.ResourceSettingsServiceClient.port;
+      const port = promotionsserviceModule.v1beta.PromotionsServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
       const client =
-        new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient();
+        new promotionsserviceModule.v1beta.PromotionsServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client =
-        new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient({
+      const client = new promotionsserviceModule.v1beta.PromotionsServiceClient(
+        {
           fallback: true,
-        });
+        }
+      );
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client =
-        new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient({
+      const client = new promotionsserviceModule.v1beta.PromotionsServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
-      assert.strictEqual(client.resourceSettingsServiceStub, undefined);
+        }
+      );
+      assert.strictEqual(client.promotionsServiceStub, undefined);
       await client.initialize();
-      assert(client.resourceSettingsServiceStub);
+      assert(client.promotionsServiceStub);
     });
 
     it('has close method for the initialized client', done => {
-      const client =
-        new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient({
+      const client = new promotionsserviceModule.v1beta.PromotionsServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
-      assert(client.resourceSettingsServiceStub);
+      assert(client.promotionsServiceStub);
       client.close().then(() => {
         done();
       });
     });
 
     it('has close method for the non-initialized client', done => {
-      const client =
-        new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient({
+      const client = new promotionsserviceModule.v1beta.PromotionsServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
-      assert.strictEqual(client.resourceSettingsServiceStub, undefined);
+        }
+      );
+      assert.strictEqual(client.promotionsServiceStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -289,11 +285,12 @@ describe('v1.ResourceSettingsServiceClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client =
-        new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient({
+      const client = new promotionsserviceModule.v1beta.PromotionsServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
       const result = await client.getProjectId();
       assert.strictEqual(result, fakeProjectId);
@@ -302,11 +299,12 @@ describe('v1.ResourceSettingsServiceClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client =
-        new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient({
+      const client = new promotionsserviceModule.v1beta.PromotionsServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.auth.getProjectId = sinon
         .stub()
         .callsArgWith(0, null, fakeProjectId);
@@ -324,66 +322,68 @@ describe('v1.ResourceSettingsServiceClient', () => {
     });
   });
 
-  describe('getSetting', () => {
-    it('invokes getSetting without error', async () => {
-      const client =
-        new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient({
+  describe('insertPromotion', () => {
+    it('invokes insertPromotion without error', async () => {
+      const client = new promotionsserviceModule.v1beta.PromotionsServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.resourcesettings.v1.GetSettingRequest()
+        new protos.google.shopping.merchant.promotions.v1beta.InsertPromotionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcesettings.v1.GetSettingRequest',
-        ['name']
+        '.google.shopping.merchant.promotions.v1beta.InsertPromotionRequest',
+        ['parent']
       );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.resourcesettings.v1.Setting()
+        new protos.google.shopping.merchant.promotions.v1beta.Promotion()
       );
-      client.innerApiCalls.getSetting = stubSimpleCall(expectedResponse);
-      const [response] = await client.getSetting(request);
+      client.innerApiCalls.insertPromotion = stubSimpleCall(expectedResponse);
+      const [response] = await client.insertPromotion(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getSetting as SinonStub
+        client.innerApiCalls.insertPromotion as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getSetting as SinonStub
+        client.innerApiCalls.insertPromotion as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getSetting without error using callback', async () => {
-      const client =
-        new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient({
+    it('invokes insertPromotion without error using callback', async () => {
+      const client = new promotionsserviceModule.v1beta.PromotionsServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.resourcesettings.v1.GetSettingRequest()
+        new protos.google.shopping.merchant.promotions.v1beta.InsertPromotionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcesettings.v1.GetSettingRequest',
-        ['name']
+        '.google.shopping.merchant.promotions.v1beta.InsertPromotionRequest',
+        ['parent']
       );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.resourcesettings.v1.Setting()
+        new protos.google.shopping.merchant.promotions.v1beta.Promotion()
       );
-      client.innerApiCalls.getSetting =
+      client.innerApiCalls.insertPromotion =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.getSetting(
+        client.insertPromotion(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.resourcesettings.v1.ISetting | null
+            result?: protos.google.shopping.merchant.promotions.v1beta.IPromotion | null
           ) => {
             if (err) {
               reject(err);
@@ -396,130 +396,288 @@ describe('v1.ResourceSettingsServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getSetting as SinonStub
+        client.innerApiCalls.insertPromotion as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getSetting as SinonStub
+        client.innerApiCalls.insertPromotion as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getSetting with error', async () => {
-      const client =
-        new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient({
+    it('invokes insertPromotion with error', async () => {
+      const client = new promotionsserviceModule.v1beta.PromotionsServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.resourcesettings.v1.GetSettingRequest()
+        new protos.google.shopping.merchant.promotions.v1beta.InsertPromotionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcesettings.v1.GetSettingRequest',
+        '.google.shopping.merchant.promotions.v1beta.InsertPromotionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.insertPromotion = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.insertPromotion(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.insertPromotion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.insertPromotion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes insertPromotion with closed client', async () => {
+      const client = new promotionsserviceModule.v1beta.PromotionsServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.merchant.promotions.v1beta.InsertPromotionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.merchant.promotions.v1beta.InsertPromotionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.insertPromotion(request), expectedError);
+    });
+  });
+
+  describe('getPromotion', () => {
+    it('invokes getPromotion without error', async () => {
+      const client = new promotionsserviceModule.v1beta.PromotionsServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.merchant.promotions.v1beta.GetPromotionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.merchant.promotions.v1beta.GetPromotionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.shopping.merchant.promotions.v1beta.Promotion()
+      );
+      client.innerApiCalls.getPromotion = stubSimpleCall(expectedResponse);
+      const [response] = await client.getPromotion(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getPromotion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPromotion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getPromotion without error using callback', async () => {
+      const client = new promotionsserviceModule.v1beta.PromotionsServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.merchant.promotions.v1beta.GetPromotionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.merchant.promotions.v1beta.GetPromotionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.shopping.merchant.promotions.v1beta.Promotion()
+      );
+      client.innerApiCalls.getPromotion =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getPromotion(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.shopping.merchant.promotions.v1beta.IPromotion | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getPromotion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPromotion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getPromotion with error', async () => {
+      const client = new promotionsserviceModule.v1beta.PromotionsServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.merchant.promotions.v1beta.GetPromotionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.merchant.promotions.v1beta.GetPromotionRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.getSetting = stubSimpleCall(
+      client.innerApiCalls.getPromotion = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.getSetting(request), expectedError);
+      await assert.rejects(client.getPromotion(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.getSetting as SinonStub
+        client.innerApiCalls.getPromotion as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getSetting as SinonStub
+        client.innerApiCalls.getPromotion as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getSetting with closed client', async () => {
-      const client =
-        new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient({
+    it('invokes getPromotion with closed client', async () => {
+      const client = new promotionsserviceModule.v1beta.PromotionsServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.resourcesettings.v1.GetSettingRequest()
+        new protos.google.shopping.merchant.promotions.v1beta.GetPromotionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcesettings.v1.GetSettingRequest',
+        '.google.shopping.merchant.promotions.v1beta.GetPromotionRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.getSetting(request), expectedError);
+      await assert.rejects(client.getPromotion(request), expectedError);
     });
   });
 
-  describe('updateSetting', () => {
-    it('invokes updateSetting without error', async () => {
-      const client =
-        new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient({
+  describe('listPromotions', () => {
+    it('invokes listPromotions without error', async () => {
+      const client = new promotionsserviceModule.v1beta.PromotionsServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.resourcesettings.v1.UpdateSettingRequest()
+        new protos.google.shopping.merchant.promotions.v1beta.ListPromotionsRequest()
       );
-      request.setting ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcesettings.v1.UpdateSettingRequest',
-        ['setting', 'name']
+        '.google.shopping.merchant.promotions.v1beta.ListPromotionsRequest',
+        ['parent']
       );
-      request.setting.name = defaultValue1;
-      const expectedHeaderRequestParams = `setting.name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.resourcesettings.v1.Setting()
-      );
-      client.innerApiCalls.updateSetting = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateSetting(request);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.shopping.merchant.promotions.v1beta.Promotion()
+        ),
+        generateSampleMessage(
+          new protos.google.shopping.merchant.promotions.v1beta.Promotion()
+        ),
+        generateSampleMessage(
+          new protos.google.shopping.merchant.promotions.v1beta.Promotion()
+        ),
+      ];
+      client.innerApiCalls.listPromotions = stubSimpleCall(expectedResponse);
+      const [response] = await client.listPromotions(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.updateSetting as SinonStub
+        client.innerApiCalls.listPromotions as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSetting as SinonStub
+        client.innerApiCalls.listPromotions as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes updateSetting without error using callback', async () => {
-      const client =
-        new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient({
+    it('invokes listPromotions without error using callback', async () => {
+      const client = new promotionsserviceModule.v1beta.PromotionsServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.resourcesettings.v1.UpdateSettingRequest()
+        new protos.google.shopping.merchant.promotions.v1beta.ListPromotionsRequest()
       );
-      request.setting ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcesettings.v1.UpdateSettingRequest',
-        ['setting', 'name']
+        '.google.shopping.merchant.promotions.v1beta.ListPromotionsRequest',
+        ['parent']
       );
-      request.setting.name = defaultValue1;
-      const expectedHeaderRequestParams = `setting.name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.resourcesettings.v1.Setting()
-      );
-      client.innerApiCalls.updateSetting =
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.shopping.merchant.promotions.v1beta.Promotion()
+        ),
+        generateSampleMessage(
+          new protos.google.shopping.merchant.promotions.v1beta.Promotion()
+        ),
+        generateSampleMessage(
+          new protos.google.shopping.merchant.promotions.v1beta.Promotion()
+        ),
+      ];
+      client.innerApiCalls.listPromotions =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.updateSetting(
+        client.listPromotions(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.resourcesettings.v1.ISetting | null
+            result?:
+              | protos.google.shopping.merchant.promotions.v1beta.IPromotion[]
+              | null
           ) => {
             if (err) {
               reject(err);
@@ -532,234 +690,87 @@ describe('v1.ResourceSettingsServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.updateSetting as SinonStub
+        client.innerApiCalls.listPromotions as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSetting as SinonStub
+        client.innerApiCalls.listPromotions as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes updateSetting with error', async () => {
-      const client =
-        new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient({
+    it('invokes listPromotions with error', async () => {
+      const client = new promotionsserviceModule.v1beta.PromotionsServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.resourcesettings.v1.UpdateSettingRequest()
-      );
-      request.setting ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcesettings.v1.UpdateSettingRequest',
-        ['setting', 'name']
-      );
-      request.setting.name = defaultValue1;
-      const expectedHeaderRequestParams = `setting.name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateSetting = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateSetting(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateSetting as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateSetting as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateSetting with closed client', async () => {
-      const client =
-        new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcesettings.v1.UpdateSettingRequest()
-      );
-      request.setting ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcesettings.v1.UpdateSettingRequest',
-        ['setting', 'name']
-      );
-      request.setting.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.updateSetting(request), expectedError);
-    });
-  });
-
-  describe('listSettings', () => {
-    it('invokes listSettings without error', async () => {
-      const client =
-        new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcesettings.v1.ListSettingsRequest()
+        new protos.google.shopping.merchant.promotions.v1beta.ListPromotionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcesettings.v1.ListSettingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.resourcesettings.v1.Setting()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.resourcesettings.v1.Setting()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.resourcesettings.v1.Setting()
-        ),
-      ];
-      client.innerApiCalls.listSettings = stubSimpleCall(expectedResponse);
-      const [response] = await client.listSettings(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listSettings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSettings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listSettings without error using callback', async () => {
-      const client =
-        new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcesettings.v1.ListSettingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcesettings.v1.ListSettingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.resourcesettings.v1.Setting()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.resourcesettings.v1.Setting()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.resourcesettings.v1.Setting()
-        ),
-      ];
-      client.innerApiCalls.listSettings =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listSettings(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.resourcesettings.v1.ISetting[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listSettings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listSettings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listSettings with error', async () => {
-      const client =
-        new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.resourcesettings.v1.ListSettingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcesettings.v1.ListSettingsRequest',
+        '.google.shopping.merchant.promotions.v1beta.ListPromotionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.listSettings = stubSimpleCall(
+      client.innerApiCalls.listPromotions = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.listSettings(request), expectedError);
+      await assert.rejects(client.listPromotions(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.listSettings as SinonStub
+        client.innerApiCalls.listPromotions as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listSettings as SinonStub
+        client.innerApiCalls.listPromotions as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listSettingsStream without error', async () => {
-      const client =
-        new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient({
+    it('invokes listPromotionsStream without error', async () => {
+      const client = new promotionsserviceModule.v1beta.PromotionsServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.resourcesettings.v1.ListSettingsRequest()
+        new protos.google.shopping.merchant.promotions.v1beta.ListPromotionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcesettings.v1.ListSettingsRequest',
+        '.google.shopping.merchant.promotions.v1beta.ListPromotionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.resourcesettings.v1.Setting()
+          new protos.google.shopping.merchant.promotions.v1beta.Promotion()
         ),
         generateSampleMessage(
-          new protos.google.cloud.resourcesettings.v1.Setting()
+          new protos.google.shopping.merchant.promotions.v1beta.Promotion()
         ),
         generateSampleMessage(
-          new protos.google.cloud.resourcesettings.v1.Setting()
+          new protos.google.shopping.merchant.promotions.v1beta.Promotion()
         ),
       ];
-      client.descriptors.page.listSettings.createStream =
+      client.descriptors.page.listPromotions.createStream =
         stubPageStreamingCall(expectedResponse);
-      const stream = client.listSettingsStream(request);
+      const stream = client.listPromotionsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.resourcesettings.v1.Setting[] = [];
+        const responses: protos.google.shopping.merchant.promotions.v1beta.Promotion[] =
+          [];
         stream.on(
           'data',
-          (response: protos.google.cloud.resourcesettings.v1.Setting) => {
+          (
+            response: protos.google.shopping.merchant.promotions.v1beta.Promotion
+          ) => {
             responses.push(response);
           }
         );
@@ -773,12 +784,12 @@ describe('v1.ResourceSettingsServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listSettings.createStream as SinonStub)
+        (client.descriptors.page.listPromotions.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listSettings, request)
+          .calledWith(client.innerApiCalls.listPromotions, request)
       );
       assert(
-        (client.descriptors.page.listSettings.createStream as SinonStub)
+        (client.descriptors.page.listPromotions.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
@@ -786,33 +797,35 @@ describe('v1.ResourceSettingsServiceClient', () => {
       );
     });
 
-    it('invokes listSettingsStream with error', async () => {
-      const client =
-        new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient({
+    it('invokes listPromotionsStream with error', async () => {
+      const client = new promotionsserviceModule.v1beta.PromotionsServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.resourcesettings.v1.ListSettingsRequest()
+        new protos.google.shopping.merchant.promotions.v1beta.ListPromotionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcesettings.v1.ListSettingsRequest',
+        '.google.shopping.merchant.promotions.v1beta.ListPromotionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.descriptors.page.listSettings.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listSettingsStream(request);
+      client.descriptors.page.listPromotions.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listPromotionsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.resourcesettings.v1.Setting[] = [];
+        const responses: protos.google.shopping.merchant.promotions.v1beta.Promotion[] =
+          [];
         stream.on(
           'data',
-          (response: protos.google.cloud.resourcesettings.v1.Setting) => {
+          (
+            response: protos.google.shopping.merchant.promotions.v1beta.Promotion
+          ) => {
             responses.push(response);
           }
         );
@@ -825,12 +838,12 @@ describe('v1.ResourceSettingsServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listSettings.createStream as SinonStub)
+        (client.descriptors.page.listPromotions.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listSettings, request)
+          .calledWith(client.innerApiCalls.listPromotions, request)
       );
       assert(
-        (client.descriptors.page.listSettings.createStream as SinonStub)
+        (client.descriptors.page.listPromotions.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
@@ -838,49 +851,51 @@ describe('v1.ResourceSettingsServiceClient', () => {
       );
     });
 
-    it('uses async iteration with listSettings without error', async () => {
-      const client =
-        new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient({
+    it('uses async iteration with listPromotions without error', async () => {
+      const client = new promotionsserviceModule.v1beta.PromotionsServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.resourcesettings.v1.ListSettingsRequest()
+        new protos.google.shopping.merchant.promotions.v1beta.ListPromotionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcesettings.v1.ListSettingsRequest',
+        '.google.shopping.merchant.promotions.v1beta.ListPromotionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.resourcesettings.v1.Setting()
+          new protos.google.shopping.merchant.promotions.v1beta.Promotion()
         ),
         generateSampleMessage(
-          new protos.google.cloud.resourcesettings.v1.Setting()
+          new protos.google.shopping.merchant.promotions.v1beta.Promotion()
         ),
         generateSampleMessage(
-          new protos.google.cloud.resourcesettings.v1.Setting()
+          new protos.google.shopping.merchant.promotions.v1beta.Promotion()
         ),
       ];
-      client.descriptors.page.listSettings.asyncIterate =
+      client.descriptors.page.listPromotions.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.resourcesettings.v1.ISetting[] = [];
-      const iterable = client.listSettingsAsync(request);
+      const responses: protos.google.shopping.merchant.promotions.v1beta.IPromotion[] =
+        [];
+      const iterable = client.listPromotionsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
         (
-          client.descriptors.page.listSettings.asyncIterate as SinonStub
+          client.descriptors.page.listPromotions.asyncIterate as SinonStub
         ).getCall(0).args[1],
         request
       );
       assert(
-        (client.descriptors.page.listSettings.asyncIterate as SinonStub)
+        (client.descriptors.page.listPromotions.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
@@ -888,28 +903,29 @@ describe('v1.ResourceSettingsServiceClient', () => {
       );
     });
 
-    it('uses async iteration with listSettings with error', async () => {
-      const client =
-        new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient({
+    it('uses async iteration with listPromotions with error', async () => {
+      const client = new promotionsserviceModule.v1beta.PromotionsServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.resourcesettings.v1.ListSettingsRequest()
+        new protos.google.shopping.merchant.promotions.v1beta.ListPromotionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.resourcesettings.v1.ListSettingsRequest',
+        '.google.shopping.merchant.promotions.v1beta.ListPromotionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.descriptors.page.listSettings.asyncIterate =
+      client.descriptors.page.listPromotions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listSettingsAsync(request);
+      const iterable = client.listPromotionsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.resourcesettings.v1.ISetting[] =
+        const responses: protos.google.shopping.merchant.promotions.v1beta.IPromotion[] =
           [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -917,12 +933,12 @@ describe('v1.ResourceSettingsServiceClient', () => {
       });
       assert.deepStrictEqual(
         (
-          client.descriptors.page.listSettings.asyncIterate as SinonStub
+          client.descriptors.page.listPromotions.asyncIterate as SinonStub
         ).getCall(0).args[1],
         request
       );
       assert(
-        (client.descriptors.page.listSettings.asyncIterate as SinonStub)
+        (client.descriptors.page.listPromotions.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
@@ -932,191 +948,51 @@ describe('v1.ResourceSettingsServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('folderSettingName', () => {
-      const fakePath = '/rendered/path/folderSettingName';
+    describe('promotion', () => {
+      const fakePath = '/rendered/path/promotion';
       const expectedParameters = {
-        folder: 'folderValue',
-        setting_name: 'settingNameValue',
+        account: 'accountValue',
+        promotion: 'promotionValue',
       };
-      const client =
-        new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient({
+      const client = new promotionsserviceModule.v1beta.PromotionsServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
-      client.pathTemplates.folderSettingNamePathTemplate.render = sinon
+      client.pathTemplates.promotionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
-      client.pathTemplates.folderSettingNamePathTemplate.match = sinon
+      client.pathTemplates.promotionPathTemplate.match = sinon
         .stub()
         .returns(expectedParameters);
 
-      it('folderSettingNamePath', () => {
-        const result = client.folderSettingNamePath(
-          'folderValue',
-          'settingNameValue'
-        );
+      it('promotionPath', () => {
+        const result = client.promotionPath('accountValue', 'promotionValue');
         assert.strictEqual(result, fakePath);
         assert(
-          (
-            client.pathTemplates.folderSettingNamePathTemplate
-              .render as SinonStub
-          )
+          (client.pathTemplates.promotionPathTemplate.render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
-      it('matchFolderFromFolderSettingNameName', () => {
-        const result = client.matchFolderFromFolderSettingNameName(fakePath);
-        assert.strictEqual(result, 'folderValue');
+      it('matchAccountFromPromotionName', () => {
+        const result = client.matchAccountFromPromotionName(fakePath);
+        assert.strictEqual(result, 'accountValue');
         assert(
-          (
-            client.pathTemplates.folderSettingNamePathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.promotionPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
-      it('matchSettingNameFromFolderSettingNameName', () => {
-        const result =
-          client.matchSettingNameFromFolderSettingNameName(fakePath);
-        assert.strictEqual(result, 'settingNameValue');
+      it('matchPromotionFromPromotionName', () => {
+        const result = client.matchPromotionFromPromotionName(fakePath);
+        assert.strictEqual(result, 'promotionValue');
         assert(
-          (
-            client.pathTemplates.folderSettingNamePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('organizationSettingName', () => {
-      const fakePath = '/rendered/path/organizationSettingName';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        setting_name: 'settingNameValue',
-      };
-      const client =
-        new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      client.pathTemplates.organizationSettingNamePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationSettingNamePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('organizationSettingNamePath', () => {
-        const result = client.organizationSettingNamePath(
-          'organizationValue',
-          'settingNameValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.organizationSettingNamePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromOrganizationSettingNameName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationSettingNameName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.organizationSettingNamePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSettingNameFromOrganizationSettingNameName', () => {
-        const result =
-          client.matchSettingNameFromOrganizationSettingNameName(fakePath);
-        assert.strictEqual(result, 'settingNameValue');
-        assert(
-          (
-            client.pathTemplates.organizationSettingNamePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectNumberSettingName', () => {
-      const fakePath = '/rendered/path/projectNumberSettingName';
-      const expectedParameters = {
-        project_number: 'projectNumberValue',
-        setting_name: 'settingNameValue',
-      };
-      const client =
-        new resourcesettingsserviceModule.v1.ResourceSettingsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      client.pathTemplates.projectNumberSettingNamePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectNumberSettingNamePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectNumberSettingNamePath', () => {
-        const result = client.projectNumberSettingNamePath(
-          'projectNumberValue',
-          'settingNameValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectNumberSettingNamePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectNumberFromProjectNumberSettingNameName', () => {
-        const result =
-          client.matchProjectNumberFromProjectNumberSettingNameName(fakePath);
-        assert.strictEqual(result, 'projectNumberValue');
-        assert(
-          (
-            client.pathTemplates.projectNumberSettingNamePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSettingNameFromProjectNumberSettingNameName', () => {
-        const result =
-          client.matchSettingNameFromProjectNumberSettingNameName(fakePath);
-        assert.strictEqual(result, 'settingNameValue');
-        assert(
-          (
-            client.pathTemplates.projectNumberSettingNamePathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.promotionPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
