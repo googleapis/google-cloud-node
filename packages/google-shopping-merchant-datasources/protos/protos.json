@@ -10,10 +10,13 @@
                   "nested": {
                     "v1beta": {
                       "options": {
+                        "csharp_namespace": "Google.Shopping.Merchant.DataSources.V1Beta",
                         "go_package": "cloud.google.com/go/shopping/merchant/datasources/apiv1beta/datasourcespb;datasourcespb",
                         "java_multiple_files": true,
                         "java_outer_classname": "FileInputsProto",
                         "java_package": "com.google.shopping.merchant.datasources.v1beta",
+                        "php_namespace": "Google\\Shopping\\Merchant\\DataSources\\V1beta",
+                        "ruby_package": "Google::Shopping::Merchant::DataSources::V1beta",
                         "(google.api.resource_definition).type": "merchantapi.googleapis.com/Datasource",
                         "(google.api.resource_definition).pattern": "accounts/{account}/dataSources/{datasource}"
                       },
