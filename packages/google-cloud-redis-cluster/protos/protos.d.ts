@@ -118,6 +118,20 @@ export namespace google {
                          * @returns Promise
                          */
                         public createCluster(request: google.cloud.redis.cluster.v1.ICreateClusterRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls GetClusterCertificateAuthority.
+                         * @param request GetClusterCertificateAuthorityRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and CertificateAuthority
+                         */
+                        public getClusterCertificateAuthority(request: google.cloud.redis.cluster.v1.IGetClusterCertificateAuthorityRequest, callback: google.cloud.redis.cluster.v1.CloudRedisCluster.GetClusterCertificateAuthorityCallback): void;
+
+                        /**
+                         * Calls GetClusterCertificateAuthority.
+                         * @param request GetClusterCertificateAuthorityRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getClusterCertificateAuthority(request: google.cloud.redis.cluster.v1.IGetClusterCertificateAuthorityRequest): Promise<google.cloud.redis.cluster.v1.CertificateAuthority>;
                     }
 
                     namespace CloudRedisCluster {
@@ -156,6 +170,13 @@ export namespace google {
                          * @param [response] Operation
                          */
                         type CreateClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|getClusterCertificateAuthority}.
+                         * @param error Error, if any
+                         * @param [response] CertificateAuthority
+                         */
+                        type GetClusterCertificateAuthorityCallback = (error: (Error|null), response?: google.cloud.redis.cluster.v1.CertificateAuthority) => void;
                     }
 
                     /** AuthorizationMode enum. */
@@ -163,6 +184,15 @@ export namespace google {
                         AUTH_MODE_UNSPECIFIED = 0,
                         AUTH_MODE_IAM_AUTH = 1,
                         AUTH_MODE_DISABLED = 2
+                    }
+
+                    /** NodeType enum. */
+                    enum NodeType {
+                        NODE_TYPE_UNSPECIFIED = 0,
+                        REDIS_SHARED_CORE_NANO = 1,
+                        REDIS_HIGHMEM_MEDIUM = 2,
+                        REDIS_HIGHMEM_XLARGE = 3,
+                        REDIS_STANDARD_SMALL = 4
                     }
 
                     /** TransitEncryptionMode enum. */
@@ -814,6 +844,103 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a GetClusterCertificateAuthorityRequest. */
+                    interface IGetClusterCertificateAuthorityRequest {
+
+                        /** GetClusterCertificateAuthorityRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetClusterCertificateAuthorityRequest. */
+                    class GetClusterCertificateAuthorityRequest implements IGetClusterCertificateAuthorityRequest {
+
+                        /**
+                         * Constructs a new GetClusterCertificateAuthorityRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IGetClusterCertificateAuthorityRequest);
+
+                        /** GetClusterCertificateAuthorityRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetClusterCertificateAuthorityRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetClusterCertificateAuthorityRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IGetClusterCertificateAuthorityRequest): google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest;
+
+                        /**
+                         * Encodes the specified GetClusterCertificateAuthorityRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest.verify|verify} messages.
+                         * @param message GetClusterCertificateAuthorityRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IGetClusterCertificateAuthorityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetClusterCertificateAuthorityRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest.verify|verify} messages.
+                         * @param message GetClusterCertificateAuthorityRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IGetClusterCertificateAuthorityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetClusterCertificateAuthorityRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetClusterCertificateAuthorityRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest;
+
+                        /**
+                         * Decodes a GetClusterCertificateAuthorityRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetClusterCertificateAuthorityRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest;
+
+                        /**
+                         * Verifies a GetClusterCertificateAuthorityRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetClusterCertificateAuthorityRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetClusterCertificateAuthorityRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest;
+
+                        /**
+                         * Creates a plain object from a GetClusterCertificateAuthorityRequest message. Also converts values to other types if specified.
+                         * @param message GetClusterCertificateAuthorityRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetClusterCertificateAuthorityRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetClusterCertificateAuthorityRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a Cluster. */
                     interface ICluster {
 
@@ -855,6 +982,24 @@ export namespace google {
 
                         /** Cluster stateInfo */
                         stateInfo?: (google.cloud.redis.cluster.v1.Cluster.IStateInfo|null);
+
+                        /** Cluster nodeType */
+                        nodeType?: (google.cloud.redis.cluster.v1.NodeType|keyof typeof google.cloud.redis.cluster.v1.NodeType|null);
+
+                        /** Cluster persistenceConfig */
+                        persistenceConfig?: (google.cloud.redis.cluster.v1.IClusterPersistenceConfig|null);
+
+                        /** Cluster redisConfigs */
+                        redisConfigs?: ({ [k: string]: string }|null);
+
+                        /** Cluster preciseSizeGb */
+                        preciseSizeGb?: (number|null);
+
+                        /** Cluster zoneDistributionConfig */
+                        zoneDistributionConfig?: (google.cloud.redis.cluster.v1.IZoneDistributionConfig|null);
+
+                        /** Cluster deletionProtectionEnabled */
+                        deletionProtectionEnabled?: (boolean|null);
                     }
 
                     /** Represents a Cluster. */
@@ -905,6 +1050,24 @@ export namespace google {
                         /** Cluster stateInfo. */
                         public stateInfo?: (google.cloud.redis.cluster.v1.Cluster.IStateInfo|null);
 
+                        /** Cluster nodeType. */
+                        public nodeType: (google.cloud.redis.cluster.v1.NodeType|keyof typeof google.cloud.redis.cluster.v1.NodeType);
+
+                        /** Cluster persistenceConfig. */
+                        public persistenceConfig?: (google.cloud.redis.cluster.v1.IClusterPersistenceConfig|null);
+
+                        /** Cluster redisConfigs. */
+                        public redisConfigs: { [k: string]: string };
+
+                        /** Cluster preciseSizeGb. */
+                        public preciseSizeGb?: (number|null);
+
+                        /** Cluster zoneDistributionConfig. */
+                        public zoneDistributionConfig?: (google.cloud.redis.cluster.v1.IZoneDistributionConfig|null);
+
+                        /** Cluster deletionProtectionEnabled. */
+                        public deletionProtectionEnabled?: (boolean|null);
+
                         /** Cluster _replicaCount. */
                         public _replicaCount?: "replicaCount";
 
@@ -913,6 +1076,12 @@ export namespace google {
 
                         /** Cluster _shardCount. */
                         public _shardCount?: "shardCount";
+
+                        /** Cluster _preciseSizeGb. */
+                        public _preciseSizeGb?: "preciseSizeGb";
+
+                        /** Cluster _deletionProtectionEnabled. */
+                        public _deletionProtectionEnabled?: "deletionProtectionEnabled";
 
                         /**
                          * Creates a new Cluster instance using the specified properties.
@@ -1674,6 +1843,768 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CertificateAuthority. */
+                    interface ICertificateAuthority {
+
+                        /** CertificateAuthority managedServerCa */
+                        managedServerCa?: (google.cloud.redis.cluster.v1.CertificateAuthority.IManagedCertificateAuthority|null);
+
+                        /** CertificateAuthority name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a CertificateAuthority. */
+                    class CertificateAuthority implements ICertificateAuthority {
+
+                        /**
+                         * Constructs a new CertificateAuthority.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.ICertificateAuthority);
+
+                        /** CertificateAuthority managedServerCa. */
+                        public managedServerCa?: (google.cloud.redis.cluster.v1.CertificateAuthority.IManagedCertificateAuthority|null);
+
+                        /** CertificateAuthority name. */
+                        public name: string;
+
+                        /** CertificateAuthority serverCa. */
+                        public serverCa?: "managedServerCa";
+
+                        /**
+                         * Creates a new CertificateAuthority instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CertificateAuthority instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.ICertificateAuthority): google.cloud.redis.cluster.v1.CertificateAuthority;
+
+                        /**
+                         * Encodes the specified CertificateAuthority message. Does not implicitly {@link google.cloud.redis.cluster.v1.CertificateAuthority.verify|verify} messages.
+                         * @param message CertificateAuthority message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.ICertificateAuthority, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CertificateAuthority message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.CertificateAuthority.verify|verify} messages.
+                         * @param message CertificateAuthority message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.ICertificateAuthority, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CertificateAuthority message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CertificateAuthority
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.CertificateAuthority;
+
+                        /**
+                         * Decodes a CertificateAuthority message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CertificateAuthority
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.CertificateAuthority;
+
+                        /**
+                         * Verifies a CertificateAuthority message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CertificateAuthority message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CertificateAuthority
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.CertificateAuthority;
+
+                        /**
+                         * Creates a plain object from a CertificateAuthority message. Also converts values to other types if specified.
+                         * @param message CertificateAuthority
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.CertificateAuthority, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CertificateAuthority to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CertificateAuthority
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace CertificateAuthority {
+
+                        /** Properties of a ManagedCertificateAuthority. */
+                        interface IManagedCertificateAuthority {
+
+                            /** ManagedCertificateAuthority caCerts */
+                            caCerts?: (google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.ICertChain[]|null);
+                        }
+
+                        /** Represents a ManagedCertificateAuthority. */
+                        class ManagedCertificateAuthority implements IManagedCertificateAuthority {
+
+                            /**
+                             * Constructs a new ManagedCertificateAuthority.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.redis.cluster.v1.CertificateAuthority.IManagedCertificateAuthority);
+
+                            /** ManagedCertificateAuthority caCerts. */
+                            public caCerts: google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.ICertChain[];
+
+                            /**
+                             * Creates a new ManagedCertificateAuthority instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ManagedCertificateAuthority instance
+                             */
+                            public static create(properties?: google.cloud.redis.cluster.v1.CertificateAuthority.IManagedCertificateAuthority): google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority;
+
+                            /**
+                             * Encodes the specified ManagedCertificateAuthority message. Does not implicitly {@link google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.verify|verify} messages.
+                             * @param message ManagedCertificateAuthority message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.redis.cluster.v1.CertificateAuthority.IManagedCertificateAuthority, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ManagedCertificateAuthority message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.verify|verify} messages.
+                             * @param message ManagedCertificateAuthority message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.redis.cluster.v1.CertificateAuthority.IManagedCertificateAuthority, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ManagedCertificateAuthority message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ManagedCertificateAuthority
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority;
+
+                            /**
+                             * Decodes a ManagedCertificateAuthority message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ManagedCertificateAuthority
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority;
+
+                            /**
+                             * Verifies a ManagedCertificateAuthority message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ManagedCertificateAuthority message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ManagedCertificateAuthority
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority;
+
+                            /**
+                             * Creates a plain object from a ManagedCertificateAuthority message. Also converts values to other types if specified.
+                             * @param message ManagedCertificateAuthority
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ManagedCertificateAuthority to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ManagedCertificateAuthority
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace ManagedCertificateAuthority {
+
+                            /** Properties of a CertChain. */
+                            interface ICertChain {
+
+                                /** CertChain certificates */
+                                certificates?: (string[]|null);
+                            }
+
+                            /** Represents a CertChain. */
+                            class CertChain implements ICertChain {
+
+                                /**
+                                 * Constructs a new CertChain.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.ICertChain);
+
+                                /** CertChain certificates. */
+                                public certificates: string[];
+
+                                /**
+                                 * Creates a new CertChain instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns CertChain instance
+                                 */
+                                public static create(properties?: google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.ICertChain): google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain;
+
+                                /**
+                                 * Encodes the specified CertChain message. Does not implicitly {@link google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain.verify|verify} messages.
+                                 * @param message CertChain message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.ICertChain, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified CertChain message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain.verify|verify} messages.
+                                 * @param message CertChain message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.ICertChain, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a CertChain message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns CertChain
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain;
+
+                                /**
+                                 * Decodes a CertChain message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns CertChain
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain;
+
+                                /**
+                                 * Verifies a CertChain message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a CertChain message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns CertChain
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain;
+
+                                /**
+                                 * Creates a plain object from a CertChain message. Also converts values to other types if specified.
+                                 * @param message CertChain
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this CertChain to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for CertChain
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+                    }
+
+                    /** Properties of a ClusterPersistenceConfig. */
+                    interface IClusterPersistenceConfig {
+
+                        /** ClusterPersistenceConfig mode */
+                        mode?: (google.cloud.redis.cluster.v1.ClusterPersistenceConfig.PersistenceMode|keyof typeof google.cloud.redis.cluster.v1.ClusterPersistenceConfig.PersistenceMode|null);
+
+                        /** ClusterPersistenceConfig rdbConfig */
+                        rdbConfig?: (google.cloud.redis.cluster.v1.ClusterPersistenceConfig.IRDBConfig|null);
+
+                        /** ClusterPersistenceConfig aofConfig */
+                        aofConfig?: (google.cloud.redis.cluster.v1.ClusterPersistenceConfig.IAOFConfig|null);
+                    }
+
+                    /** Represents a ClusterPersistenceConfig. */
+                    class ClusterPersistenceConfig implements IClusterPersistenceConfig {
+
+                        /**
+                         * Constructs a new ClusterPersistenceConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IClusterPersistenceConfig);
+
+                        /** ClusterPersistenceConfig mode. */
+                        public mode: (google.cloud.redis.cluster.v1.ClusterPersistenceConfig.PersistenceMode|keyof typeof google.cloud.redis.cluster.v1.ClusterPersistenceConfig.PersistenceMode);
+
+                        /** ClusterPersistenceConfig rdbConfig. */
+                        public rdbConfig?: (google.cloud.redis.cluster.v1.ClusterPersistenceConfig.IRDBConfig|null);
+
+                        /** ClusterPersistenceConfig aofConfig. */
+                        public aofConfig?: (google.cloud.redis.cluster.v1.ClusterPersistenceConfig.IAOFConfig|null);
+
+                        /**
+                         * Creates a new ClusterPersistenceConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ClusterPersistenceConfig instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IClusterPersistenceConfig): google.cloud.redis.cluster.v1.ClusterPersistenceConfig;
+
+                        /**
+                         * Encodes the specified ClusterPersistenceConfig message. Does not implicitly {@link google.cloud.redis.cluster.v1.ClusterPersistenceConfig.verify|verify} messages.
+                         * @param message ClusterPersistenceConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IClusterPersistenceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ClusterPersistenceConfig message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.ClusterPersistenceConfig.verify|verify} messages.
+                         * @param message ClusterPersistenceConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IClusterPersistenceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ClusterPersistenceConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ClusterPersistenceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.ClusterPersistenceConfig;
+
+                        /**
+                         * Decodes a ClusterPersistenceConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ClusterPersistenceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.ClusterPersistenceConfig;
+
+                        /**
+                         * Verifies a ClusterPersistenceConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ClusterPersistenceConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ClusterPersistenceConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.ClusterPersistenceConfig;
+
+                        /**
+                         * Creates a plain object from a ClusterPersistenceConfig message. Also converts values to other types if specified.
+                         * @param message ClusterPersistenceConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.ClusterPersistenceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ClusterPersistenceConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ClusterPersistenceConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ClusterPersistenceConfig {
+
+                        /** Properties of a RDBConfig. */
+                        interface IRDBConfig {
+
+                            /** RDBConfig rdbSnapshotPeriod */
+                            rdbSnapshotPeriod?: (google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig.SnapshotPeriod|keyof typeof google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig.SnapshotPeriod|null);
+
+                            /** RDBConfig rdbSnapshotStartTime */
+                            rdbSnapshotStartTime?: (google.protobuf.ITimestamp|null);
+                        }
+
+                        /** Represents a RDBConfig. */
+                        class RDBConfig implements IRDBConfig {
+
+                            /**
+                             * Constructs a new RDBConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.redis.cluster.v1.ClusterPersistenceConfig.IRDBConfig);
+
+                            /** RDBConfig rdbSnapshotPeriod. */
+                            public rdbSnapshotPeriod: (google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig.SnapshotPeriod|keyof typeof google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig.SnapshotPeriod);
+
+                            /** RDBConfig rdbSnapshotStartTime. */
+                            public rdbSnapshotStartTime?: (google.protobuf.ITimestamp|null);
+
+                            /**
+                             * Creates a new RDBConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RDBConfig instance
+                             */
+                            public static create(properties?: google.cloud.redis.cluster.v1.ClusterPersistenceConfig.IRDBConfig): google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig;
+
+                            /**
+                             * Encodes the specified RDBConfig message. Does not implicitly {@link google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig.verify|verify} messages.
+                             * @param message RDBConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.redis.cluster.v1.ClusterPersistenceConfig.IRDBConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RDBConfig message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig.verify|verify} messages.
+                             * @param message RDBConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.redis.cluster.v1.ClusterPersistenceConfig.IRDBConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RDBConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RDBConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig;
+
+                            /**
+                             * Decodes a RDBConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RDBConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig;
+
+                            /**
+                             * Verifies a RDBConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RDBConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RDBConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig;
+
+                            /**
+                             * Creates a plain object from a RDBConfig message. Also converts values to other types if specified.
+                             * @param message RDBConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RDBConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for RDBConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace RDBConfig {
+
+                            /** SnapshotPeriod enum. */
+                            enum SnapshotPeriod {
+                                SNAPSHOT_PERIOD_UNSPECIFIED = 0,
+                                ONE_HOUR = 1,
+                                SIX_HOURS = 2,
+                                TWELVE_HOURS = 3,
+                                TWENTY_FOUR_HOURS = 4
+                            }
+                        }
+
+                        /** Properties of a AOFConfig. */
+                        interface IAOFConfig {
+
+                            /** AOFConfig appendFsync */
+                            appendFsync?: (google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig.AppendFsync|keyof typeof google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig.AppendFsync|null);
+                        }
+
+                        /** Represents a AOFConfig. */
+                        class AOFConfig implements IAOFConfig {
+
+                            /**
+                             * Constructs a new AOFConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.redis.cluster.v1.ClusterPersistenceConfig.IAOFConfig);
+
+                            /** AOFConfig appendFsync. */
+                            public appendFsync: (google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig.AppendFsync|keyof typeof google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig.AppendFsync);
+
+                            /**
+                             * Creates a new AOFConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns AOFConfig instance
+                             */
+                            public static create(properties?: google.cloud.redis.cluster.v1.ClusterPersistenceConfig.IAOFConfig): google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig;
+
+                            /**
+                             * Encodes the specified AOFConfig message. Does not implicitly {@link google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig.verify|verify} messages.
+                             * @param message AOFConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.redis.cluster.v1.ClusterPersistenceConfig.IAOFConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified AOFConfig message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig.verify|verify} messages.
+                             * @param message AOFConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.redis.cluster.v1.ClusterPersistenceConfig.IAOFConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a AOFConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns AOFConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig;
+
+                            /**
+                             * Decodes a AOFConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns AOFConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig;
+
+                            /**
+                             * Verifies a AOFConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a AOFConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns AOFConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig;
+
+                            /**
+                             * Creates a plain object from a AOFConfig message. Also converts values to other types if specified.
+                             * @param message AOFConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this AOFConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for AOFConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace AOFConfig {
+
+                            /** AppendFsync enum. */
+                            enum AppendFsync {
+                                APPEND_FSYNC_UNSPECIFIED = 0,
+                                NO = 1,
+                                EVERYSEC = 2,
+                                ALWAYS = 3
+                            }
+                        }
+
+                        /** PersistenceMode enum. */
+                        enum PersistenceMode {
+                            PERSISTENCE_MODE_UNSPECIFIED = 0,
+                            DISABLED = 1,
+                            RDB = 2,
+                            AOF = 3
+                        }
+                    }
+
+                    /** Properties of a ZoneDistributionConfig. */
+                    interface IZoneDistributionConfig {
+
+                        /** ZoneDistributionConfig mode */
+                        mode?: (google.cloud.redis.cluster.v1.ZoneDistributionConfig.ZoneDistributionMode|keyof typeof google.cloud.redis.cluster.v1.ZoneDistributionConfig.ZoneDistributionMode|null);
+
+                        /** ZoneDistributionConfig zone */
+                        zone?: (string|null);
+                    }
+
+                    /** Represents a ZoneDistributionConfig. */
+                    class ZoneDistributionConfig implements IZoneDistributionConfig {
+
+                        /**
+                         * Constructs a new ZoneDistributionConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IZoneDistributionConfig);
+
+                        /** ZoneDistributionConfig mode. */
+                        public mode: (google.cloud.redis.cluster.v1.ZoneDistributionConfig.ZoneDistributionMode|keyof typeof google.cloud.redis.cluster.v1.ZoneDistributionConfig.ZoneDistributionMode);
+
+                        /** ZoneDistributionConfig zone. */
+                        public zone: string;
+
+                        /**
+                         * Creates a new ZoneDistributionConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ZoneDistributionConfig instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IZoneDistributionConfig): google.cloud.redis.cluster.v1.ZoneDistributionConfig;
+
+                        /**
+                         * Encodes the specified ZoneDistributionConfig message. Does not implicitly {@link google.cloud.redis.cluster.v1.ZoneDistributionConfig.verify|verify} messages.
+                         * @param message ZoneDistributionConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IZoneDistributionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ZoneDistributionConfig message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.ZoneDistributionConfig.verify|verify} messages.
+                         * @param message ZoneDistributionConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IZoneDistributionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ZoneDistributionConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ZoneDistributionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.ZoneDistributionConfig;
+
+                        /**
+                         * Decodes a ZoneDistributionConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ZoneDistributionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.ZoneDistributionConfig;
+
+                        /**
+                         * Verifies a ZoneDistributionConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ZoneDistributionConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ZoneDistributionConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.ZoneDistributionConfig;
+
+                        /**
+                         * Creates a plain object from a ZoneDistributionConfig message. Also converts values to other types if specified.
+                         * @param message ZoneDistributionConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.ZoneDistributionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ZoneDistributionConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ZoneDistributionConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ZoneDistributionConfig {
+
+                        /** ZoneDistributionMode enum. */
+                        enum ZoneDistributionMode {
+                            ZONE_DISTRIBUTION_MODE_UNSPECIFIED = 0,
+                            MULTI_ZONE = 1,
+                            SINGLE_ZONE = 2
+                        }
                     }
                 }
 

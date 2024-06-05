@@ -15,6 +15,7 @@
   * [Cloud_redis_cluster.create_cluster](#cloud_redis_cluster.create_cluster)
   * [Cloud_redis_cluster.delete_cluster](#cloud_redis_cluster.delete_cluster)
   * [Cloud_redis_cluster.get_cluster](#cloud_redis_cluster.get_cluster)
+  * [Cloud_redis_cluster.get_cluster_certificate_authority](#cloud_redis_cluster.get_cluster_certificate_authority)
   * [Cloud_redis_cluster.list_clusters](#cloud_redis_cluster.list_clusters)
   * [Cloud_redis_cluster.update_cluster](#cloud_redis_cluster.update_cluster)
   * [Cloud_redis_cluster.create_cluster](#cloud_redis_cluster.create_cluster)
@@ -83,6 +84,23 @@ __Usage:__
 
 
 `node packages/google-cloud-redis-cluster/samples/generated/v1/cloud_redis_cluster.get_cluster.js`
+
+
+-----
+
+
+
+
+### Cloud_redis_cluster.get_cluster_certificate_authority
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1/cloud_redis_cluster.get_cluster_certificate_authority.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-redis-cluster/samples/generated/v1/cloud_redis_cluster.get_cluster_certificate_authority.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-redis-cluster/samples/generated/v1/cloud_redis_cluster.get_cluster_certificate_authority.js`
 
 
 -----
