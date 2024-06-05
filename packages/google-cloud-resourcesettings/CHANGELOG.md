@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/resource-settings-v3.3.0...resource-settings-v4.0.0) (2024-06-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* [resourcesettings] Resource Settings is deprecated. As of November 7, 2023, no organizations will be onboarded for any of the enabled settings, and the service will be shut down on October 1, 2024 ([#5420](https://github.com/googleapis/google-cloud-node/issues/5420))
+
+### Documentation
+
+* [resourcesettings] Resource Settings is deprecated. As of November 7, 2023, no organizations will be onboarded for any of the enabled settings, and the service will be shut down on October 1, 2024 ([#5420](https://github.com/googleapis/google-cloud-node/issues/5420)) ([445cd4d](https://github.com/googleapis/google-cloud-node/commit/445cd4df1aa6d744f60b4dbbd769e20e7c8794c0))
+
 ## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/resource-settings-v3.2.0...resource-settings-v3.3.0) (2024-05-21)
 
 
