@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/google-cloud-node/compare/maps-platform-datasets-v1.3.0...maps-platform-datasets-v2.0.0) (2024-06-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* [mapsplatformdatasets] make v1 stable/default version ([#5390](https://github.com/googleapis/google-cloud-node/issues/5390))
+
+### Features
+
+* [mapsplatformdatasets] make v1 stable/default version ([#5390](https://github.com/googleapis/google-cloud-node/issues/5390)) ([304acc9](https://github.com/googleapis/google-cloud-node/commit/304acc9821a8edf054952999b6e282d9d5affd8f))
+
 ## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/maps-platform-datasets-v1.2.0...maps-platform-datasets-v1.3.0) (2024-05-21)
 
 
