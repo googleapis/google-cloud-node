@@ -35,7 +35,7 @@ module.exports = async ({ github, context }) => {
 
     try {
         const link = issue.data.body.match(/(https?:\/\/github.com\/.*)/)[0];
-        const isValidLink = (await fetch(link)).status >= 200 && (await fetch(link)).status < 300;
+        const isValidLink = (await fetch(link)).statusText === 'OK');
         if (!isValidLink) {
            await closeIssue();
         }
