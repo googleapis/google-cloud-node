@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const datasources = require('@google-cloud/datasources');
+const datasources = require('@google-shopping/datasources');
 
 function main() {
   const dataSourcesServiceClient = new datasources.DataSourcesServiceClient();
