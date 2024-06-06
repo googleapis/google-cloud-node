@@ -52,7 +52,7 @@ function main(parent) {
   const {DeveloperConnectClient} = require('@google-cloud/developerconnect').v1;
 
   // Instantiates a client
-  const developerconnectClient = new DeveloperConnectClient();
+  const developerconnectClient = new DeveloperConnectClient({fallback: true});
 
   async function callListConnections() {
     // Construct request
