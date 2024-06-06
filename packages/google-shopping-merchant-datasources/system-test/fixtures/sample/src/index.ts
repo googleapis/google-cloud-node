@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {DataSourcesServiceClient} from '@google-cloud/datasources';
+import {DataSourcesServiceClient} from '@google-shopping/datasources';
 
 // check that the client class type name can be used
 function doStuffWithDataSourcesServiceClient(client: DataSourcesServiceClient) {
