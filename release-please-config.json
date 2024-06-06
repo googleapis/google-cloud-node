@@ -184,6 +184,7 @@
     "packages/google-cloud-developerconnect": {},
     "packages/google-streetview-publish": {},
     "packages/google-maps-fleetengine": {},
+    "packages/google-shopping-merchant-datasources": {},
     "packages/google-shopping-merchant-promotions": {}
   },
   "plugins": [

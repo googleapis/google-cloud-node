@@ -62000,6 +62000,50 @@
                         }
                       }
                     },
+                    "RagEmbeddingModelConfig": {
+                      "oneofs": {
+                        "modelConfig": {
+                          "oneof": [
+                            "vertexPredictionEndpoint"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "vertexPredictionEndpoint": {
+                          "type": "VertexPredictionEndpoint",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "VertexPredictionEndpoint": {
+                          "fields": {
+                            "endpoint": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
+                              }
+                            },
+                            "model": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
+                              }
+                            },
+                            "modelVersionId": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
                     "RagCorpus": {
                       "options": {
                         "(google.api.resource).type": "aiplatform.googleapis.com/RagCorpus",
@@ -62027,6 +62071,13 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "ragEmbeddingModelConfig": {
+                          "type": "RagEmbeddingModelConfig",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
                           }
                         },
                         "createTime": {
@@ -62184,6 +62235,13 @@
                         "ragFileChunkingConfig": {
                           "type": "RagFileChunkingConfig",
                           "id": 4
+                        },
+                        "maxEmbeddingRequestsPerMin": {
+                          "type": "int32",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },

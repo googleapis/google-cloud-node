@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.23.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.22.0...aiplatform-v3.23.0) (2024-06-05)
+
+
+### Features
+
+* Add rag_embedding_model_config to RagCorpus ([#5430](https://github.com/googleapis/google-cloud-node/issues/5430)) ([a1aba11](https://github.com/googleapis/google-cloud-node/commit/a1aba11b9fb796f7c8abfa9930e8636bd7106d01))
+
 ## [3.22.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.21.0...aiplatform-v3.22.0) (2024-06-03)
 
 

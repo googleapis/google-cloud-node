@@ -272,6 +272,39 @@
                              * @variation 2
                              */
     
+                            /**
+                             * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|getClusterCertificateAuthority}.
+                             * @memberof google.cloud.redis.cluster.v1.CloudRedisCluster
+                             * @typedef GetClusterCertificateAuthorityCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.redis.cluster.v1.CertificateAuthority} [response] CertificateAuthority
+                             */
+    
+                            /**
+                             * Calls GetClusterCertificateAuthority.
+                             * @function getClusterCertificateAuthority
+                             * @memberof google.cloud.redis.cluster.v1.CloudRedisCluster
+                             * @instance
+                             * @param {google.cloud.redis.cluster.v1.IGetClusterCertificateAuthorityRequest} request GetClusterCertificateAuthorityRequest message or plain object
+                             * @param {google.cloud.redis.cluster.v1.CloudRedisCluster.GetClusterCertificateAuthorityCallback} callback Node-style callback called with the error, if any, and CertificateAuthority
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(CloudRedisCluster.prototype.getClusterCertificateAuthority = function getClusterCertificateAuthority(request, callback) {
+                                return this.rpcCall(getClusterCertificateAuthority, $root.google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest, $root.google.cloud.redis.cluster.v1.CertificateAuthority, request, callback);
+                            }, "name", { value: "GetClusterCertificateAuthority" });
+    
+                            /**
+                             * Calls GetClusterCertificateAuthority.
+                             * @function getClusterCertificateAuthority
+                             * @memberof google.cloud.redis.cluster.v1.CloudRedisCluster
+                             * @instance
+                             * @param {google.cloud.redis.cluster.v1.IGetClusterCertificateAuthorityRequest} request GetClusterCertificateAuthorityRequest message or plain object
+                             * @returns {Promise<google.cloud.redis.cluster.v1.CertificateAuthority>} Promise
+                             * @variation 2
+                             */
+    
                             return CloudRedisCluster;
                         })();
     
@@ -288,6 +321,26 @@
                             values[valuesById[0] = "AUTH_MODE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "AUTH_MODE_IAM_AUTH"] = 1;
                             values[valuesById[2] = "AUTH_MODE_DISABLED"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * NodeType enum.
+                         * @name google.cloud.redis.cluster.v1.NodeType
+                         * @enum {number}
+                         * @property {number} NODE_TYPE_UNSPECIFIED=0 NODE_TYPE_UNSPECIFIED value
+                         * @property {number} REDIS_SHARED_CORE_NANO=1 REDIS_SHARED_CORE_NANO value
+                         * @property {number} REDIS_HIGHMEM_MEDIUM=2 REDIS_HIGHMEM_MEDIUM value
+                         * @property {number} REDIS_HIGHMEM_XLARGE=3 REDIS_HIGHMEM_XLARGE value
+                         * @property {number} REDIS_STANDARD_SMALL=4 REDIS_STANDARD_SMALL value
+                         */
+                        v1.NodeType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "NODE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "REDIS_SHARED_CORE_NANO"] = 1;
+                            values[valuesById[2] = "REDIS_HIGHMEM_MEDIUM"] = 2;
+                            values[valuesById[3] = "REDIS_HIGHMEM_XLARGE"] = 3;
+                            values[valuesById[4] = "REDIS_STANDARD_SMALL"] = 4;
                             return values;
                         })();
     
@@ -1813,6 +1866,209 @@
                             return DeleteClusterRequest;
                         })();
     
+                        v1.GetClusterCertificateAuthorityRequest = (function() {
+    
+                            /**
+                             * Properties of a GetClusterCertificateAuthorityRequest.
+                             * @memberof google.cloud.redis.cluster.v1
+                             * @interface IGetClusterCertificateAuthorityRequest
+                             * @property {string|null} [name] GetClusterCertificateAuthorityRequest name
+                             */
+    
+                            /**
+                             * Constructs a new GetClusterCertificateAuthorityRequest.
+                             * @memberof google.cloud.redis.cluster.v1
+                             * @classdesc Represents a GetClusterCertificateAuthorityRequest.
+                             * @implements IGetClusterCertificateAuthorityRequest
+                             * @constructor
+                             * @param {google.cloud.redis.cluster.v1.IGetClusterCertificateAuthorityRequest=} [properties] Properties to set
+                             */
+                            function GetClusterCertificateAuthorityRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GetClusterCertificateAuthorityRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest
+                             * @instance
+                             */
+                            GetClusterCertificateAuthorityRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new GetClusterCertificateAuthorityRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1.IGetClusterCertificateAuthorityRequest=} [properties] Properties to set
+                             * @returns {google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest} GetClusterCertificateAuthorityRequest instance
+                             */
+                            GetClusterCertificateAuthorityRequest.create = function create(properties) {
+                                return new GetClusterCertificateAuthorityRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GetClusterCertificateAuthorityRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1.IGetClusterCertificateAuthorityRequest} message GetClusterCertificateAuthorityRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetClusterCertificateAuthorityRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GetClusterCertificateAuthorityRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1.IGetClusterCertificateAuthorityRequest} message GetClusterCertificateAuthorityRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetClusterCertificateAuthorityRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GetClusterCertificateAuthorityRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest} GetClusterCertificateAuthorityRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetClusterCertificateAuthorityRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GetClusterCertificateAuthorityRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest} GetClusterCertificateAuthorityRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetClusterCertificateAuthorityRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GetClusterCertificateAuthorityRequest message.
+                             * @function verify
+                             * @memberof google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GetClusterCertificateAuthorityRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GetClusterCertificateAuthorityRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest} GetClusterCertificateAuthorityRequest
+                             */
+                            GetClusterCertificateAuthorityRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest)
+                                    return object;
+                                var message = new $root.google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GetClusterCertificateAuthorityRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest} message GetClusterCertificateAuthorityRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GetClusterCertificateAuthorityRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GetClusterCertificateAuthorityRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GetClusterCertificateAuthorityRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GetClusterCertificateAuthorityRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GetClusterCertificateAuthorityRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest";
+                            };
+    
+                            return GetClusterCertificateAuthorityRequest;
+                        })();
+    
                         v1.Cluster = (function() {
     
                             /**
@@ -1832,6 +2088,12 @@
                              * @property {Array.<google.cloud.redis.cluster.v1.IDiscoveryEndpoint>|null} [discoveryEndpoints] Cluster discoveryEndpoints
                              * @property {Array.<google.cloud.redis.cluster.v1.IPscConnection>|null} [pscConnections] Cluster pscConnections
                              * @property {google.cloud.redis.cluster.v1.Cluster.IStateInfo|null} [stateInfo] Cluster stateInfo
+                             * @property {google.cloud.redis.cluster.v1.NodeType|null} [nodeType] Cluster nodeType
+                             * @property {google.cloud.redis.cluster.v1.IClusterPersistenceConfig|null} [persistenceConfig] Cluster persistenceConfig
+                             * @property {Object.<string,string>|null} [redisConfigs] Cluster redisConfigs
+                             * @property {number|null} [preciseSizeGb] Cluster preciseSizeGb
+                             * @property {google.cloud.redis.cluster.v1.IZoneDistributionConfig|null} [zoneDistributionConfig] Cluster zoneDistributionConfig
+                             * @property {boolean|null} [deletionProtectionEnabled] Cluster deletionProtectionEnabled
                              */
     
                             /**
@@ -1846,6 +2108,7 @@
                                 this.pscConfigs = [];
                                 this.discoveryEndpoints = [];
                                 this.pscConnections = [];
+                                this.redisConfigs = {};
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -1956,6 +2219,54 @@
                              */
                             Cluster.prototype.stateInfo = null;
     
+                            /**
+                             * Cluster nodeType.
+                             * @member {google.cloud.redis.cluster.v1.NodeType} nodeType
+                             * @memberof google.cloud.redis.cluster.v1.Cluster
+                             * @instance
+                             */
+                            Cluster.prototype.nodeType = 0;
+    
+                            /**
+                             * Cluster persistenceConfig.
+                             * @member {google.cloud.redis.cluster.v1.IClusterPersistenceConfig|null|undefined} persistenceConfig
+                             * @memberof google.cloud.redis.cluster.v1.Cluster
+                             * @instance
+                             */
+                            Cluster.prototype.persistenceConfig = null;
+    
+                            /**
+                             * Cluster redisConfigs.
+                             * @member {Object.<string,string>} redisConfigs
+                             * @memberof google.cloud.redis.cluster.v1.Cluster
+                             * @instance
+                             */
+                            Cluster.prototype.redisConfigs = $util.emptyObject;
+    
+                            /**
+                             * Cluster preciseSizeGb.
+                             * @member {number|null|undefined} preciseSizeGb
+                             * @memberof google.cloud.redis.cluster.v1.Cluster
+                             * @instance
+                             */
+                            Cluster.prototype.preciseSizeGb = null;
+    
+                            /**
+                             * Cluster zoneDistributionConfig.
+                             * @member {google.cloud.redis.cluster.v1.IZoneDistributionConfig|null|undefined} zoneDistributionConfig
+                             * @memberof google.cloud.redis.cluster.v1.Cluster
+                             * @instance
+                             */
+                            Cluster.prototype.zoneDistributionConfig = null;
+    
+                            /**
+                             * Cluster deletionProtectionEnabled.
+                             * @member {boolean|null|undefined} deletionProtectionEnabled
+                             * @memberof google.cloud.redis.cluster.v1.Cluster
+                             * @instance
+                             */
+                            Cluster.prototype.deletionProtectionEnabled = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -1989,6 +2300,28 @@
                              */
                             Object.defineProperty(Cluster.prototype, "_shardCount", {
                                 get: $util.oneOfGetter($oneOfFields = ["shardCount"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Cluster _preciseSizeGb.
+                             * @member {"preciseSizeGb"|undefined} _preciseSizeGb
+                             * @memberof google.cloud.redis.cluster.v1.Cluster
+                             * @instance
+                             */
+                            Object.defineProperty(Cluster.prototype, "_preciseSizeGb", {
+                                get: $util.oneOfGetter($oneOfFields = ["preciseSizeGb"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Cluster _deletionProtectionEnabled.
+                             * @member {"deletionProtectionEnabled"|undefined} _deletionProtectionEnabled
+                             * @memberof google.cloud.redis.cluster.v1.Cluster
+                             * @instance
+                             */
+                            Object.defineProperty(Cluster.prototype, "_deletionProtectionEnabled", {
+                                get: $util.oneOfGetter($oneOfFields = ["deletionProtectionEnabled"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -2045,6 +2378,19 @@
                                         $root.google.cloud.redis.cluster.v1.PscConnection.encode(message.pscConnections[i], writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                                 if (message.stateInfo != null && Object.hasOwnProperty.call(message, "stateInfo"))
                                     $root.google.cloud.redis.cluster.v1.Cluster.StateInfo.encode(message.stateInfo, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
+                                if (message.nodeType != null && Object.hasOwnProperty.call(message, "nodeType"))
+                                    writer.uint32(/* id 19, wireType 0 =*/152).int32(message.nodeType);
+                                if (message.persistenceConfig != null && Object.hasOwnProperty.call(message, "persistenceConfig"))
+                                    $root.google.cloud.redis.cluster.v1.ClusterPersistenceConfig.encode(message.persistenceConfig, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                                if (message.redisConfigs != null && Object.hasOwnProperty.call(message, "redisConfigs"))
+                                    for (var keys = Object.keys(message.redisConfigs), i = 0; i < keys.length; ++i)
+                                        writer.uint32(/* id 21, wireType 2 =*/170).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.redisConfigs[keys[i]]).ldelim();
+                                if (message.preciseSizeGb != null && Object.hasOwnProperty.call(message, "preciseSizeGb"))
+                                    writer.uint32(/* id 22, wireType 1 =*/177).double(message.preciseSizeGb);
+                                if (message.zoneDistributionConfig != null && Object.hasOwnProperty.call(message, "zoneDistributionConfig"))
+                                    $root.google.cloud.redis.cluster.v1.ZoneDistributionConfig.encode(message.zoneDistributionConfig, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
+                                if (message.deletionProtectionEnabled != null && Object.hasOwnProperty.call(message, "deletionProtectionEnabled"))
+                                    writer.uint32(/* id 25, wireType 0 =*/200).bool(message.deletionProtectionEnabled);
                                 return writer;
                             };
     
@@ -2075,7 +2421,7 @@
                             Cluster.decode = function decode(reader, length) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1.Cluster();
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1.Cluster(), key, value;
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
@@ -2135,6 +2481,49 @@
                                         }
                                     case 18: {
                                             message.stateInfo = $root.google.cloud.redis.cluster.v1.Cluster.StateInfo.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 19: {
+                                            message.nodeType = reader.int32();
+                                            break;
+                                        }
+                                    case 20: {
+                                            message.persistenceConfig = $root.google.cloud.redis.cluster.v1.ClusterPersistenceConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 21: {
+                                            if (message.redisConfigs === $util.emptyObject)
+                                                message.redisConfigs = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            key = "";
+                                            value = "";
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = reader.string();
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7);
+                                                    break;
+                                                }
+                                            }
+                                            message.redisConfigs[key] = value;
+                                            break;
+                                        }
+                                    case 22: {
+                                            message.preciseSizeGb = reader.double();
+                                            break;
+                                        }
+                                    case 23: {
+                                            message.zoneDistributionConfig = $root.google.cloud.redis.cluster.v1.ZoneDistributionConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 25: {
+                                            message.deletionProtectionEnabled = reader.bool();
                                             break;
                                         }
                                     default:
@@ -2259,6 +2648,45 @@
                                     var error = $root.google.cloud.redis.cluster.v1.Cluster.StateInfo.verify(message.stateInfo);
                                     if (error)
                                         return "stateInfo." + error;
+                                }
+                                if (message.nodeType != null && message.hasOwnProperty("nodeType"))
+                                    switch (message.nodeType) {
+                                    default:
+                                        return "nodeType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                if (message.persistenceConfig != null && message.hasOwnProperty("persistenceConfig")) {
+                                    var error = $root.google.cloud.redis.cluster.v1.ClusterPersistenceConfig.verify(message.persistenceConfig);
+                                    if (error)
+                                        return "persistenceConfig." + error;
+                                }
+                                if (message.redisConfigs != null && message.hasOwnProperty("redisConfigs")) {
+                                    if (!$util.isObject(message.redisConfigs))
+                                        return "redisConfigs: object expected";
+                                    var key = Object.keys(message.redisConfigs);
+                                    for (var i = 0; i < key.length; ++i)
+                                        if (!$util.isString(message.redisConfigs[key[i]]))
+                                            return "redisConfigs: string{k:string} expected";
+                                }
+                                if (message.preciseSizeGb != null && message.hasOwnProperty("preciseSizeGb")) {
+                                    properties._preciseSizeGb = 1;
+                                    if (typeof message.preciseSizeGb !== "number")
+                                        return "preciseSizeGb: number expected";
+                                }
+                                if (message.zoneDistributionConfig != null && message.hasOwnProperty("zoneDistributionConfig")) {
+                                    var error = $root.google.cloud.redis.cluster.v1.ZoneDistributionConfig.verify(message.zoneDistributionConfig);
+                                    if (error)
+                                        return "zoneDistributionConfig." + error;
+                                }
+                                if (message.deletionProtectionEnabled != null && message.hasOwnProperty("deletionProtectionEnabled")) {
+                                    properties._deletionProtectionEnabled = 1;
+                                    if (typeof message.deletionProtectionEnabled !== "boolean")
+                                        return "deletionProtectionEnabled: boolean expected";
                                 }
                                 return null;
                             };
@@ -2393,6 +2821,55 @@
                                         throw TypeError(".google.cloud.redis.cluster.v1.Cluster.stateInfo: object expected");
                                     message.stateInfo = $root.google.cloud.redis.cluster.v1.Cluster.StateInfo.fromObject(object.stateInfo);
                                 }
+                                switch (object.nodeType) {
+                                default:
+                                    if (typeof object.nodeType === "number") {
+                                        message.nodeType = object.nodeType;
+                                        break;
+                                    }
+                                    break;
+                                case "NODE_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.nodeType = 0;
+                                    break;
+                                case "REDIS_SHARED_CORE_NANO":
+                                case 1:
+                                    message.nodeType = 1;
+                                    break;
+                                case "REDIS_HIGHMEM_MEDIUM":
+                                case 2:
+                                    message.nodeType = 2;
+                                    break;
+                                case "REDIS_HIGHMEM_XLARGE":
+                                case 3:
+                                    message.nodeType = 3;
+                                    break;
+                                case "REDIS_STANDARD_SMALL":
+                                case 4:
+                                    message.nodeType = 4;
+                                    break;
+                                }
+                                if (object.persistenceConfig != null) {
+                                    if (typeof object.persistenceConfig !== "object")
+                                        throw TypeError(".google.cloud.redis.cluster.v1.Cluster.persistenceConfig: object expected");
+                                    message.persistenceConfig = $root.google.cloud.redis.cluster.v1.ClusterPersistenceConfig.fromObject(object.persistenceConfig);
+                                }
+                                if (object.redisConfigs) {
+                                    if (typeof object.redisConfigs !== "object")
+                                        throw TypeError(".google.cloud.redis.cluster.v1.Cluster.redisConfigs: object expected");
+                                    message.redisConfigs = {};
+                                    for (var keys = Object.keys(object.redisConfigs), i = 0; i < keys.length; ++i)
+                                        message.redisConfigs[keys[i]] = String(object.redisConfigs[keys[i]]);
+                                }
+                                if (object.preciseSizeGb != null)
+                                    message.preciseSizeGb = Number(object.preciseSizeGb);
+                                if (object.zoneDistributionConfig != null) {
+                                    if (typeof object.zoneDistributionConfig !== "object")
+                                        throw TypeError(".google.cloud.redis.cluster.v1.Cluster.zoneDistributionConfig: object expected");
+                                    message.zoneDistributionConfig = $root.google.cloud.redis.cluster.v1.ZoneDistributionConfig.fromObject(object.zoneDistributionConfig);
+                                }
+                                if (object.deletionProtectionEnabled != null)
+                                    message.deletionProtectionEnabled = Boolean(object.deletionProtectionEnabled);
                                 return message;
                             };
     
@@ -2414,6 +2891,8 @@
                                     object.discoveryEndpoints = [];
                                     object.pscConnections = [];
                                 }
+                                if (options.objects || options.defaults)
+                                    object.redisConfigs = {};
                                 if (options.defaults) {
                                     object.name = "";
                                     object.createTime = null;
@@ -2422,6 +2901,9 @@
                                     object.authorizationMode = options.enums === String ? "AUTH_MODE_UNSPECIFIED" : 0;
                                     object.transitEncryptionMode = options.enums === String ? "TRANSIT_ENCRYPTION_MODE_UNSPECIFIED" : 0;
                                     object.stateInfo = null;
+                                    object.nodeType = options.enums === String ? "NODE_TYPE_UNSPECIFIED" : 0;
+                                    object.persistenceConfig = null;
+                                    object.zoneDistributionConfig = null;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -2467,6 +2949,28 @@
                                 }
                                 if (message.stateInfo != null && message.hasOwnProperty("stateInfo"))
                                     object.stateInfo = $root.google.cloud.redis.cluster.v1.Cluster.StateInfo.toObject(message.stateInfo, options);
+                                if (message.nodeType != null && message.hasOwnProperty("nodeType"))
+                                    object.nodeType = options.enums === String ? $root.google.cloud.redis.cluster.v1.NodeType[message.nodeType] === undefined ? message.nodeType : $root.google.cloud.redis.cluster.v1.NodeType[message.nodeType] : message.nodeType;
+                                if (message.persistenceConfig != null && message.hasOwnProperty("persistenceConfig"))
+                                    object.persistenceConfig = $root.google.cloud.redis.cluster.v1.ClusterPersistenceConfig.toObject(message.persistenceConfig, options);
+                                var keys2;
+                                if (message.redisConfigs && (keys2 = Object.keys(message.redisConfigs)).length) {
+                                    object.redisConfigs = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.redisConfigs[keys2[j]] = message.redisConfigs[keys2[j]];
+                                }
+                                if (message.preciseSizeGb != null && message.hasOwnProperty("preciseSizeGb")) {
+                                    object.preciseSizeGb = options.json && !isFinite(message.preciseSizeGb) ? String(message.preciseSizeGb) : message.preciseSizeGb;
+                                    if (options.oneofs)
+                                        object._preciseSizeGb = "preciseSizeGb";
+                                }
+                                if (message.zoneDistributionConfig != null && message.hasOwnProperty("zoneDistributionConfig"))
+                                    object.zoneDistributionConfig = $root.google.cloud.redis.cluster.v1.ZoneDistributionConfig.toObject(message.zoneDistributionConfig, options);
+                                if (message.deletionProtectionEnabled != null && message.hasOwnProperty("deletionProtectionEnabled")) {
+                                    object.deletionProtectionEnabled = message.deletionProtectionEnabled;
+                                    if (options.oneofs)
+                                        object._deletionProtectionEnabled = "deletionProtectionEnabled";
+                                }
                                 return object;
                             };
     
@@ -4111,6 +4615,1810 @@
                             return OperationMetadata;
                         })();
     
+                        v1.CertificateAuthority = (function() {
+    
+                            /**
+                             * Properties of a CertificateAuthority.
+                             * @memberof google.cloud.redis.cluster.v1
+                             * @interface ICertificateAuthority
+                             * @property {google.cloud.redis.cluster.v1.CertificateAuthority.IManagedCertificateAuthority|null} [managedServerCa] CertificateAuthority managedServerCa
+                             * @property {string|null} [name] CertificateAuthority name
+                             */
+    
+                            /**
+                             * Constructs a new CertificateAuthority.
+                             * @memberof google.cloud.redis.cluster.v1
+                             * @classdesc Represents a CertificateAuthority.
+                             * @implements ICertificateAuthority
+                             * @constructor
+                             * @param {google.cloud.redis.cluster.v1.ICertificateAuthority=} [properties] Properties to set
+                             */
+                            function CertificateAuthority(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CertificateAuthority managedServerCa.
+                             * @member {google.cloud.redis.cluster.v1.CertificateAuthority.IManagedCertificateAuthority|null|undefined} managedServerCa
+                             * @memberof google.cloud.redis.cluster.v1.CertificateAuthority
+                             * @instance
+                             */
+                            CertificateAuthority.prototype.managedServerCa = null;
+    
+                            /**
+                             * CertificateAuthority name.
+                             * @member {string} name
+                             * @memberof google.cloud.redis.cluster.v1.CertificateAuthority
+                             * @instance
+                             */
+                            CertificateAuthority.prototype.name = "";
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * CertificateAuthority serverCa.
+                             * @member {"managedServerCa"|undefined} serverCa
+                             * @memberof google.cloud.redis.cluster.v1.CertificateAuthority
+                             * @instance
+                             */
+                            Object.defineProperty(CertificateAuthority.prototype, "serverCa", {
+                                get: $util.oneOfGetter($oneOfFields = ["managedServerCa"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new CertificateAuthority instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.redis.cluster.v1.CertificateAuthority
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1.ICertificateAuthority=} [properties] Properties to set
+                             * @returns {google.cloud.redis.cluster.v1.CertificateAuthority} CertificateAuthority instance
+                             */
+                            CertificateAuthority.create = function create(properties) {
+                                return new CertificateAuthority(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CertificateAuthority message. Does not implicitly {@link google.cloud.redis.cluster.v1.CertificateAuthority.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.redis.cluster.v1.CertificateAuthority
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1.ICertificateAuthority} message CertificateAuthority message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CertificateAuthority.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.managedServerCa != null && Object.hasOwnProperty.call(message, "managedServerCa"))
+                                    $root.google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.encode(message.managedServerCa, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CertificateAuthority message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.CertificateAuthority.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.redis.cluster.v1.CertificateAuthority
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1.ICertificateAuthority} message CertificateAuthority message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CertificateAuthority.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CertificateAuthority message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.redis.cluster.v1.CertificateAuthority
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.redis.cluster.v1.CertificateAuthority} CertificateAuthority
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CertificateAuthority.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1.CertificateAuthority();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.managedServerCa = $root.google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CertificateAuthority message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.redis.cluster.v1.CertificateAuthority
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.redis.cluster.v1.CertificateAuthority} CertificateAuthority
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CertificateAuthority.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CertificateAuthority message.
+                             * @function verify
+                             * @memberof google.cloud.redis.cluster.v1.CertificateAuthority
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CertificateAuthority.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.managedServerCa != null && message.hasOwnProperty("managedServerCa")) {
+                                    properties.serverCa = 1;
+                                    {
+                                        var error = $root.google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.verify(message.managedServerCa);
+                                        if (error)
+                                            return "managedServerCa." + error;
+                                    }
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CertificateAuthority message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.redis.cluster.v1.CertificateAuthority
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.redis.cluster.v1.CertificateAuthority} CertificateAuthority
+                             */
+                            CertificateAuthority.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.redis.cluster.v1.CertificateAuthority)
+                                    return object;
+                                var message = new $root.google.cloud.redis.cluster.v1.CertificateAuthority();
+                                if (object.managedServerCa != null) {
+                                    if (typeof object.managedServerCa !== "object")
+                                        throw TypeError(".google.cloud.redis.cluster.v1.CertificateAuthority.managedServerCa: object expected");
+                                    message.managedServerCa = $root.google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.fromObject(object.managedServerCa);
+                                }
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CertificateAuthority message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.redis.cluster.v1.CertificateAuthority
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1.CertificateAuthority} message CertificateAuthority
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CertificateAuthority.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.managedServerCa != null && message.hasOwnProperty("managedServerCa")) {
+                                    object.managedServerCa = $root.google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.toObject(message.managedServerCa, options);
+                                    if (options.oneofs)
+                                        object.serverCa = "managedServerCa";
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CertificateAuthority to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.redis.cluster.v1.CertificateAuthority
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CertificateAuthority.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CertificateAuthority
+                             * @function getTypeUrl
+                             * @memberof google.cloud.redis.cluster.v1.CertificateAuthority
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CertificateAuthority.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.redis.cluster.v1.CertificateAuthority";
+                            };
+    
+                            CertificateAuthority.ManagedCertificateAuthority = (function() {
+    
+                                /**
+                                 * Properties of a ManagedCertificateAuthority.
+                                 * @memberof google.cloud.redis.cluster.v1.CertificateAuthority
+                                 * @interface IManagedCertificateAuthority
+                                 * @property {Array.<google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.ICertChain>|null} [caCerts] ManagedCertificateAuthority caCerts
+                                 */
+    
+                                /**
+                                 * Constructs a new ManagedCertificateAuthority.
+                                 * @memberof google.cloud.redis.cluster.v1.CertificateAuthority
+                                 * @classdesc Represents a ManagedCertificateAuthority.
+                                 * @implements IManagedCertificateAuthority
+                                 * @constructor
+                                 * @param {google.cloud.redis.cluster.v1.CertificateAuthority.IManagedCertificateAuthority=} [properties] Properties to set
+                                 */
+                                function ManagedCertificateAuthority(properties) {
+                                    this.caCerts = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ManagedCertificateAuthority caCerts.
+                                 * @member {Array.<google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.ICertChain>} caCerts
+                                 * @memberof google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority
+                                 * @instance
+                                 */
+                                ManagedCertificateAuthority.prototype.caCerts = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new ManagedCertificateAuthority instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1.CertificateAuthority.IManagedCertificateAuthority=} [properties] Properties to set
+                                 * @returns {google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority} ManagedCertificateAuthority instance
+                                 */
+                                ManagedCertificateAuthority.create = function create(properties) {
+                                    return new ManagedCertificateAuthority(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ManagedCertificateAuthority message. Does not implicitly {@link google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1.CertificateAuthority.IManagedCertificateAuthority} message ManagedCertificateAuthority message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ManagedCertificateAuthority.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.caCerts != null && message.caCerts.length)
+                                        for (var i = 0; i < message.caCerts.length; ++i)
+                                            $root.google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain.encode(message.caCerts[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ManagedCertificateAuthority message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1.CertificateAuthority.IManagedCertificateAuthority} message ManagedCertificateAuthority message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ManagedCertificateAuthority.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a ManagedCertificateAuthority message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority} ManagedCertificateAuthority
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ManagedCertificateAuthority.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                if (!(message.caCerts && message.caCerts.length))
+                                                    message.caCerts = [];
+                                                message.caCerts.push($root.google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain.decode(reader, reader.uint32()));
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a ManagedCertificateAuthority message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority} ManagedCertificateAuthority
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ManagedCertificateAuthority.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a ManagedCertificateAuthority message.
+                                 * @function verify
+                                 * @memberof google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ManagedCertificateAuthority.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.caCerts != null && message.hasOwnProperty("caCerts")) {
+                                        if (!Array.isArray(message.caCerts))
+                                            return "caCerts: array expected";
+                                        for (var i = 0; i < message.caCerts.length; ++i) {
+                                            var error = $root.google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain.verify(message.caCerts[i]);
+                                            if (error)
+                                                return "caCerts." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a ManagedCertificateAuthority message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority} ManagedCertificateAuthority
+                                 */
+                                ManagedCertificateAuthority.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority)
+                                        return object;
+                                    var message = new $root.google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority();
+                                    if (object.caCerts) {
+                                        if (!Array.isArray(object.caCerts))
+                                            throw TypeError(".google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.caCerts: array expected");
+                                        message.caCerts = [];
+                                        for (var i = 0; i < object.caCerts.length; ++i) {
+                                            if (typeof object.caCerts[i] !== "object")
+                                                throw TypeError(".google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.caCerts: object expected");
+                                            message.caCerts[i] = $root.google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain.fromObject(object.caCerts[i]);
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a ManagedCertificateAuthority message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority} message ManagedCertificateAuthority
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ManagedCertificateAuthority.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.caCerts = [];
+                                    if (message.caCerts && message.caCerts.length) {
+                                        object.caCerts = [];
+                                        for (var j = 0; j < message.caCerts.length; ++j)
+                                            object.caCerts[j] = $root.google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain.toObject(message.caCerts[j], options);
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ManagedCertificateAuthority to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ManagedCertificateAuthority.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ManagedCertificateAuthority
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ManagedCertificateAuthority.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority";
+                                };
+    
+                                ManagedCertificateAuthority.CertChain = (function() {
+    
+                                    /**
+                                     * Properties of a CertChain.
+                                     * @memberof google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority
+                                     * @interface ICertChain
+                                     * @property {Array.<string>|null} [certificates] CertChain certificates
+                                     */
+    
+                                    /**
+                                     * Constructs a new CertChain.
+                                     * @memberof google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority
+                                     * @classdesc Represents a CertChain.
+                                     * @implements ICertChain
+                                     * @constructor
+                                     * @param {google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.ICertChain=} [properties] Properties to set
+                                     */
+                                    function CertChain(properties) {
+                                        this.certificates = [];
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * CertChain certificates.
+                                     * @member {Array.<string>} certificates
+                                     * @memberof google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain
+                                     * @instance
+                                     */
+                                    CertChain.prototype.certificates = $util.emptyArray;
+    
+                                    /**
+                                     * Creates a new CertChain instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain
+                                     * @static
+                                     * @param {google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.ICertChain=} [properties] Properties to set
+                                     * @returns {google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain} CertChain instance
+                                     */
+                                    CertChain.create = function create(properties) {
+                                        return new CertChain(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified CertChain message. Does not implicitly {@link google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain
+                                     * @static
+                                     * @param {google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.ICertChain} message CertChain message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    CertChain.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.certificates != null && message.certificates.length)
+                                            for (var i = 0; i < message.certificates.length; ++i)
+                                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.certificates[i]);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified CertChain message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain
+                                     * @static
+                                     * @param {google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.ICertChain} message CertChain message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    CertChain.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a CertChain message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain} CertChain
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    CertChain.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    if (!(message.certificates && message.certificates.length))
+                                                        message.certificates = [];
+                                                    message.certificates.push(reader.string());
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a CertChain message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain} CertChain
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    CertChain.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a CertChain message.
+                                     * @function verify
+                                     * @memberof google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    CertChain.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.certificates != null && message.hasOwnProperty("certificates")) {
+                                            if (!Array.isArray(message.certificates))
+                                                return "certificates: array expected";
+                                            for (var i = 0; i < message.certificates.length; ++i)
+                                                if (!$util.isString(message.certificates[i]))
+                                                    return "certificates: string[] expected";
+                                        }
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a CertChain message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain} CertChain
+                                     */
+                                    CertChain.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain)
+                                            return object;
+                                        var message = new $root.google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain();
+                                        if (object.certificates) {
+                                            if (!Array.isArray(object.certificates))
+                                                throw TypeError(".google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain.certificates: array expected");
+                                            message.certificates = [];
+                                            for (var i = 0; i < object.certificates.length; ++i)
+                                                message.certificates[i] = String(object.certificates[i]);
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a CertChain message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain
+                                     * @static
+                                     * @param {google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain} message CertChain
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    CertChain.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.arrays || options.defaults)
+                                            object.certificates = [];
+                                        if (message.certificates && message.certificates.length) {
+                                            object.certificates = [];
+                                            for (var j = 0; j < message.certificates.length; ++j)
+                                                object.certificates[j] = message.certificates[j];
+                                        }
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this CertChain to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    CertChain.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for CertChain
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    CertChain.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.redis.cluster.v1.CertificateAuthority.ManagedCertificateAuthority.CertChain";
+                                    };
+    
+                                    return CertChain;
+                                })();
+    
+                                return ManagedCertificateAuthority;
+                            })();
+    
+                            return CertificateAuthority;
+                        })();
+    
+                        v1.ClusterPersistenceConfig = (function() {
+    
+                            /**
+                             * Properties of a ClusterPersistenceConfig.
+                             * @memberof google.cloud.redis.cluster.v1
+                             * @interface IClusterPersistenceConfig
+                             * @property {google.cloud.redis.cluster.v1.ClusterPersistenceConfig.PersistenceMode|null} [mode] ClusterPersistenceConfig mode
+                             * @property {google.cloud.redis.cluster.v1.ClusterPersistenceConfig.IRDBConfig|null} [rdbConfig] ClusterPersistenceConfig rdbConfig
+                             * @property {google.cloud.redis.cluster.v1.ClusterPersistenceConfig.IAOFConfig|null} [aofConfig] ClusterPersistenceConfig aofConfig
+                             */
+    
+                            /**
+                             * Constructs a new ClusterPersistenceConfig.
+                             * @memberof google.cloud.redis.cluster.v1
+                             * @classdesc Represents a ClusterPersistenceConfig.
+                             * @implements IClusterPersistenceConfig
+                             * @constructor
+                             * @param {google.cloud.redis.cluster.v1.IClusterPersistenceConfig=} [properties] Properties to set
+                             */
+                            function ClusterPersistenceConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ClusterPersistenceConfig mode.
+                             * @member {google.cloud.redis.cluster.v1.ClusterPersistenceConfig.PersistenceMode} mode
+                             * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig
+                             * @instance
+                             */
+                            ClusterPersistenceConfig.prototype.mode = 0;
+    
+                            /**
+                             * ClusterPersistenceConfig rdbConfig.
+                             * @member {google.cloud.redis.cluster.v1.ClusterPersistenceConfig.IRDBConfig|null|undefined} rdbConfig
+                             * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig
+                             * @instance
+                             */
+                            ClusterPersistenceConfig.prototype.rdbConfig = null;
+    
+                            /**
+                             * ClusterPersistenceConfig aofConfig.
+                             * @member {google.cloud.redis.cluster.v1.ClusterPersistenceConfig.IAOFConfig|null|undefined} aofConfig
+                             * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig
+                             * @instance
+                             */
+                            ClusterPersistenceConfig.prototype.aofConfig = null;
+    
+                            /**
+                             * Creates a new ClusterPersistenceConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1.IClusterPersistenceConfig=} [properties] Properties to set
+                             * @returns {google.cloud.redis.cluster.v1.ClusterPersistenceConfig} ClusterPersistenceConfig instance
+                             */
+                            ClusterPersistenceConfig.create = function create(properties) {
+                                return new ClusterPersistenceConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ClusterPersistenceConfig message. Does not implicitly {@link google.cloud.redis.cluster.v1.ClusterPersistenceConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1.IClusterPersistenceConfig} message ClusterPersistenceConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ClusterPersistenceConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.mode != null && Object.hasOwnProperty.call(message, "mode"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.mode);
+                                if (message.rdbConfig != null && Object.hasOwnProperty.call(message, "rdbConfig"))
+                                    $root.google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig.encode(message.rdbConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.aofConfig != null && Object.hasOwnProperty.call(message, "aofConfig"))
+                                    $root.google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig.encode(message.aofConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ClusterPersistenceConfig message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.ClusterPersistenceConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1.IClusterPersistenceConfig} message ClusterPersistenceConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ClusterPersistenceConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ClusterPersistenceConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.redis.cluster.v1.ClusterPersistenceConfig} ClusterPersistenceConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ClusterPersistenceConfig.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1.ClusterPersistenceConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.mode = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.rdbConfig = $root.google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.aofConfig = $root.google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ClusterPersistenceConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.redis.cluster.v1.ClusterPersistenceConfig} ClusterPersistenceConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ClusterPersistenceConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ClusterPersistenceConfig message.
+                             * @function verify
+                             * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ClusterPersistenceConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.mode != null && message.hasOwnProperty("mode"))
+                                    switch (message.mode) {
+                                    default:
+                                        return "mode: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                if (message.rdbConfig != null && message.hasOwnProperty("rdbConfig")) {
+                                    var error = $root.google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig.verify(message.rdbConfig);
+                                    if (error)
+                                        return "rdbConfig." + error;
+                                }
+                                if (message.aofConfig != null && message.hasOwnProperty("aofConfig")) {
+                                    var error = $root.google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig.verify(message.aofConfig);
+                                    if (error)
+                                        return "aofConfig." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ClusterPersistenceConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.redis.cluster.v1.ClusterPersistenceConfig} ClusterPersistenceConfig
+                             */
+                            ClusterPersistenceConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.redis.cluster.v1.ClusterPersistenceConfig)
+                                    return object;
+                                var message = new $root.google.cloud.redis.cluster.v1.ClusterPersistenceConfig();
+                                switch (object.mode) {
+                                default:
+                                    if (typeof object.mode === "number") {
+                                        message.mode = object.mode;
+                                        break;
+                                    }
+                                    break;
+                                case "PERSISTENCE_MODE_UNSPECIFIED":
+                                case 0:
+                                    message.mode = 0;
+                                    break;
+                                case "DISABLED":
+                                case 1:
+                                    message.mode = 1;
+                                    break;
+                                case "RDB":
+                                case 2:
+                                    message.mode = 2;
+                                    break;
+                                case "AOF":
+                                case 3:
+                                    message.mode = 3;
+                                    break;
+                                }
+                                if (object.rdbConfig != null) {
+                                    if (typeof object.rdbConfig !== "object")
+                                        throw TypeError(".google.cloud.redis.cluster.v1.ClusterPersistenceConfig.rdbConfig: object expected");
+                                    message.rdbConfig = $root.google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig.fromObject(object.rdbConfig);
+                                }
+                                if (object.aofConfig != null) {
+                                    if (typeof object.aofConfig !== "object")
+                                        throw TypeError(".google.cloud.redis.cluster.v1.ClusterPersistenceConfig.aofConfig: object expected");
+                                    message.aofConfig = $root.google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig.fromObject(object.aofConfig);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ClusterPersistenceConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1.ClusterPersistenceConfig} message ClusterPersistenceConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ClusterPersistenceConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.mode = options.enums === String ? "PERSISTENCE_MODE_UNSPECIFIED" : 0;
+                                    object.rdbConfig = null;
+                                    object.aofConfig = null;
+                                }
+                                if (message.mode != null && message.hasOwnProperty("mode"))
+                                    object.mode = options.enums === String ? $root.google.cloud.redis.cluster.v1.ClusterPersistenceConfig.PersistenceMode[message.mode] === undefined ? message.mode : $root.google.cloud.redis.cluster.v1.ClusterPersistenceConfig.PersistenceMode[message.mode] : message.mode;
+                                if (message.rdbConfig != null && message.hasOwnProperty("rdbConfig"))
+                                    object.rdbConfig = $root.google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig.toObject(message.rdbConfig, options);
+                                if (message.aofConfig != null && message.hasOwnProperty("aofConfig"))
+                                    object.aofConfig = $root.google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig.toObject(message.aofConfig, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ClusterPersistenceConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ClusterPersistenceConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ClusterPersistenceConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ClusterPersistenceConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.redis.cluster.v1.ClusterPersistenceConfig";
+                            };
+    
+                            ClusterPersistenceConfig.RDBConfig = (function() {
+    
+                                /**
+                                 * Properties of a RDBConfig.
+                                 * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig
+                                 * @interface IRDBConfig
+                                 * @property {google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig.SnapshotPeriod|null} [rdbSnapshotPeriod] RDBConfig rdbSnapshotPeriod
+                                 * @property {google.protobuf.ITimestamp|null} [rdbSnapshotStartTime] RDBConfig rdbSnapshotStartTime
+                                 */
+    
+                                /**
+                                 * Constructs a new RDBConfig.
+                                 * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig
+                                 * @classdesc Represents a RDBConfig.
+                                 * @implements IRDBConfig
+                                 * @constructor
+                                 * @param {google.cloud.redis.cluster.v1.ClusterPersistenceConfig.IRDBConfig=} [properties] Properties to set
+                                 */
+                                function RDBConfig(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * RDBConfig rdbSnapshotPeriod.
+                                 * @member {google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig.SnapshotPeriod} rdbSnapshotPeriod
+                                 * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig
+                                 * @instance
+                                 */
+                                RDBConfig.prototype.rdbSnapshotPeriod = 0;
+    
+                                /**
+                                 * RDBConfig rdbSnapshotStartTime.
+                                 * @member {google.protobuf.ITimestamp|null|undefined} rdbSnapshotStartTime
+                                 * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig
+                                 * @instance
+                                 */
+                                RDBConfig.prototype.rdbSnapshotStartTime = null;
+    
+                                /**
+                                 * Creates a new RDBConfig instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1.ClusterPersistenceConfig.IRDBConfig=} [properties] Properties to set
+                                 * @returns {google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig} RDBConfig instance
+                                 */
+                                RDBConfig.create = function create(properties) {
+                                    return new RDBConfig(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified RDBConfig message. Does not implicitly {@link google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1.ClusterPersistenceConfig.IRDBConfig} message RDBConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RDBConfig.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.rdbSnapshotPeriod != null && Object.hasOwnProperty.call(message, "rdbSnapshotPeriod"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.rdbSnapshotPeriod);
+                                    if (message.rdbSnapshotStartTime != null && Object.hasOwnProperty.call(message, "rdbSnapshotStartTime"))
+                                        $root.google.protobuf.Timestamp.encode(message.rdbSnapshotStartTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified RDBConfig message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1.ClusterPersistenceConfig.IRDBConfig} message RDBConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RDBConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a RDBConfig message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig} RDBConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RDBConfig.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.rdbSnapshotPeriod = reader.int32();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.rdbSnapshotStartTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a RDBConfig message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig} RDBConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RDBConfig.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a RDBConfig message.
+                                 * @function verify
+                                 * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                RDBConfig.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.rdbSnapshotPeriod != null && message.hasOwnProperty("rdbSnapshotPeriod"))
+                                        switch (message.rdbSnapshotPeriod) {
+                                        default:
+                                            return "rdbSnapshotPeriod: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                        case 4:
+                                            break;
+                                        }
+                                    if (message.rdbSnapshotStartTime != null && message.hasOwnProperty("rdbSnapshotStartTime")) {
+                                        var error = $root.google.protobuf.Timestamp.verify(message.rdbSnapshotStartTime);
+                                        if (error)
+                                            return "rdbSnapshotStartTime." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a RDBConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig} RDBConfig
+                                 */
+                                RDBConfig.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig)
+                                        return object;
+                                    var message = new $root.google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig();
+                                    switch (object.rdbSnapshotPeriod) {
+                                    default:
+                                        if (typeof object.rdbSnapshotPeriod === "number") {
+                                            message.rdbSnapshotPeriod = object.rdbSnapshotPeriod;
+                                            break;
+                                        }
+                                        break;
+                                    case "SNAPSHOT_PERIOD_UNSPECIFIED":
+                                    case 0:
+                                        message.rdbSnapshotPeriod = 0;
+                                        break;
+                                    case "ONE_HOUR":
+                                    case 1:
+                                        message.rdbSnapshotPeriod = 1;
+                                        break;
+                                    case "SIX_HOURS":
+                                    case 2:
+                                        message.rdbSnapshotPeriod = 2;
+                                        break;
+                                    case "TWELVE_HOURS":
+                                    case 3:
+                                        message.rdbSnapshotPeriod = 3;
+                                        break;
+                                    case "TWENTY_FOUR_HOURS":
+                                    case 4:
+                                        message.rdbSnapshotPeriod = 4;
+                                        break;
+                                    }
+                                    if (object.rdbSnapshotStartTime != null) {
+                                        if (typeof object.rdbSnapshotStartTime !== "object")
+                                            throw TypeError(".google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig.rdbSnapshotStartTime: object expected");
+                                        message.rdbSnapshotStartTime = $root.google.protobuf.Timestamp.fromObject(object.rdbSnapshotStartTime);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a RDBConfig message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig} message RDBConfig
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                RDBConfig.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.rdbSnapshotPeriod = options.enums === String ? "SNAPSHOT_PERIOD_UNSPECIFIED" : 0;
+                                        object.rdbSnapshotStartTime = null;
+                                    }
+                                    if (message.rdbSnapshotPeriod != null && message.hasOwnProperty("rdbSnapshotPeriod"))
+                                        object.rdbSnapshotPeriod = options.enums === String ? $root.google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig.SnapshotPeriod[message.rdbSnapshotPeriod] === undefined ? message.rdbSnapshotPeriod : $root.google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig.SnapshotPeriod[message.rdbSnapshotPeriod] : message.rdbSnapshotPeriod;
+                                    if (message.rdbSnapshotStartTime != null && message.hasOwnProperty("rdbSnapshotStartTime"))
+                                        object.rdbSnapshotStartTime = $root.google.protobuf.Timestamp.toObject(message.rdbSnapshotStartTime, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this RDBConfig to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                RDBConfig.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for RDBConfig
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                RDBConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig";
+                                };
+    
+                                /**
+                                 * SnapshotPeriod enum.
+                                 * @name google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig.SnapshotPeriod
+                                 * @enum {number}
+                                 * @property {number} SNAPSHOT_PERIOD_UNSPECIFIED=0 SNAPSHOT_PERIOD_UNSPECIFIED value
+                                 * @property {number} ONE_HOUR=1 ONE_HOUR value
+                                 * @property {number} SIX_HOURS=2 SIX_HOURS value
+                                 * @property {number} TWELVE_HOURS=3 TWELVE_HOURS value
+                                 * @property {number} TWENTY_FOUR_HOURS=4 TWENTY_FOUR_HOURS value
+                                 */
+                                RDBConfig.SnapshotPeriod = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "SNAPSHOT_PERIOD_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "ONE_HOUR"] = 1;
+                                    values[valuesById[2] = "SIX_HOURS"] = 2;
+                                    values[valuesById[3] = "TWELVE_HOURS"] = 3;
+                                    values[valuesById[4] = "TWENTY_FOUR_HOURS"] = 4;
+                                    return values;
+                                })();
+    
+                                return RDBConfig;
+                            })();
+    
+                            ClusterPersistenceConfig.AOFConfig = (function() {
+    
+                                /**
+                                 * Properties of a AOFConfig.
+                                 * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig
+                                 * @interface IAOFConfig
+                                 * @property {google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig.AppendFsync|null} [appendFsync] AOFConfig appendFsync
+                                 */
+    
+                                /**
+                                 * Constructs a new AOFConfig.
+                                 * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig
+                                 * @classdesc Represents a AOFConfig.
+                                 * @implements IAOFConfig
+                                 * @constructor
+                                 * @param {google.cloud.redis.cluster.v1.ClusterPersistenceConfig.IAOFConfig=} [properties] Properties to set
+                                 */
+                                function AOFConfig(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * AOFConfig appendFsync.
+                                 * @member {google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig.AppendFsync} appendFsync
+                                 * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig
+                                 * @instance
+                                 */
+                                AOFConfig.prototype.appendFsync = 0;
+    
+                                /**
+                                 * Creates a new AOFConfig instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1.ClusterPersistenceConfig.IAOFConfig=} [properties] Properties to set
+                                 * @returns {google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig} AOFConfig instance
+                                 */
+                                AOFConfig.create = function create(properties) {
+                                    return new AOFConfig(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified AOFConfig message. Does not implicitly {@link google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1.ClusterPersistenceConfig.IAOFConfig} message AOFConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                AOFConfig.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.appendFsync != null && Object.hasOwnProperty.call(message, "appendFsync"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.appendFsync);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified AOFConfig message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1.ClusterPersistenceConfig.IAOFConfig} message AOFConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                AOFConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a AOFConfig message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig} AOFConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                AOFConfig.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.appendFsync = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a AOFConfig message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig} AOFConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                AOFConfig.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a AOFConfig message.
+                                 * @function verify
+                                 * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                AOFConfig.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.appendFsync != null && message.hasOwnProperty("appendFsync"))
+                                        switch (message.appendFsync) {
+                                        default:
+                                            return "appendFsync: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                            break;
+                                        }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a AOFConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig} AOFConfig
+                                 */
+                                AOFConfig.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig)
+                                        return object;
+                                    var message = new $root.google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig();
+                                    switch (object.appendFsync) {
+                                    default:
+                                        if (typeof object.appendFsync === "number") {
+                                            message.appendFsync = object.appendFsync;
+                                            break;
+                                        }
+                                        break;
+                                    case "APPEND_FSYNC_UNSPECIFIED":
+                                    case 0:
+                                        message.appendFsync = 0;
+                                        break;
+                                    case "NO":
+                                    case 1:
+                                        message.appendFsync = 1;
+                                        break;
+                                    case "EVERYSEC":
+                                    case 2:
+                                        message.appendFsync = 2;
+                                        break;
+                                    case "ALWAYS":
+                                    case 3:
+                                        message.appendFsync = 3;
+                                        break;
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a AOFConfig message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig} message AOFConfig
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                AOFConfig.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.appendFsync = options.enums === String ? "APPEND_FSYNC_UNSPECIFIED" : 0;
+                                    if (message.appendFsync != null && message.hasOwnProperty("appendFsync"))
+                                        object.appendFsync = options.enums === String ? $root.google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig.AppendFsync[message.appendFsync] === undefined ? message.appendFsync : $root.google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig.AppendFsync[message.appendFsync] : message.appendFsync;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this AOFConfig to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                AOFConfig.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for AOFConfig
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                AOFConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig";
+                                };
+    
+                                /**
+                                 * AppendFsync enum.
+                                 * @name google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig.AppendFsync
+                                 * @enum {number}
+                                 * @property {number} APPEND_FSYNC_UNSPECIFIED=0 APPEND_FSYNC_UNSPECIFIED value
+                                 * @property {number} NO=1 NO value
+                                 * @property {number} EVERYSEC=2 EVERYSEC value
+                                 * @property {number} ALWAYS=3 ALWAYS value
+                                 */
+                                AOFConfig.AppendFsync = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "APPEND_FSYNC_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "NO"] = 1;
+                                    values[valuesById[2] = "EVERYSEC"] = 2;
+                                    values[valuesById[3] = "ALWAYS"] = 3;
+                                    return values;
+                                })();
+    
+                                return AOFConfig;
+                            })();
+    
+                            /**
+                             * PersistenceMode enum.
+                             * @name google.cloud.redis.cluster.v1.ClusterPersistenceConfig.PersistenceMode
+                             * @enum {number}
+                             * @property {number} PERSISTENCE_MODE_UNSPECIFIED=0 PERSISTENCE_MODE_UNSPECIFIED value
+                             * @property {number} DISABLED=1 DISABLED value
+                             * @property {number} RDB=2 RDB value
+                             * @property {number} AOF=3 AOF value
+                             */
+                            ClusterPersistenceConfig.PersistenceMode = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "PERSISTENCE_MODE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "DISABLED"] = 1;
+                                values[valuesById[2] = "RDB"] = 2;
+                                values[valuesById[3] = "AOF"] = 3;
+                                return values;
+                            })();
+    
+                            return ClusterPersistenceConfig;
+                        })();
+    
+                        v1.ZoneDistributionConfig = (function() {
+    
+                            /**
+                             * Properties of a ZoneDistributionConfig.
+                             * @memberof google.cloud.redis.cluster.v1
+                             * @interface IZoneDistributionConfig
+                             * @property {google.cloud.redis.cluster.v1.ZoneDistributionConfig.ZoneDistributionMode|null} [mode] ZoneDistributionConfig mode
+                             * @property {string|null} [zone] ZoneDistributionConfig zone
+                             */
+    
+                            /**
+                             * Constructs a new ZoneDistributionConfig.
+                             * @memberof google.cloud.redis.cluster.v1
+                             * @classdesc Represents a ZoneDistributionConfig.
+                             * @implements IZoneDistributionConfig
+                             * @constructor
+                             * @param {google.cloud.redis.cluster.v1.IZoneDistributionConfig=} [properties] Properties to set
+                             */
+                            function ZoneDistributionConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ZoneDistributionConfig mode.
+                             * @member {google.cloud.redis.cluster.v1.ZoneDistributionConfig.ZoneDistributionMode} mode
+                             * @memberof google.cloud.redis.cluster.v1.ZoneDistributionConfig
+                             * @instance
+                             */
+                            ZoneDistributionConfig.prototype.mode = 0;
+    
+                            /**
+                             * ZoneDistributionConfig zone.
+                             * @member {string} zone
+                             * @memberof google.cloud.redis.cluster.v1.ZoneDistributionConfig
+                             * @instance
+                             */
+                            ZoneDistributionConfig.prototype.zone = "";
+    
+                            /**
+                             * Creates a new ZoneDistributionConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.redis.cluster.v1.ZoneDistributionConfig
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1.IZoneDistributionConfig=} [properties] Properties to set
+                             * @returns {google.cloud.redis.cluster.v1.ZoneDistributionConfig} ZoneDistributionConfig instance
+                             */
+                            ZoneDistributionConfig.create = function create(properties) {
+                                return new ZoneDistributionConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ZoneDistributionConfig message. Does not implicitly {@link google.cloud.redis.cluster.v1.ZoneDistributionConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.redis.cluster.v1.ZoneDistributionConfig
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1.IZoneDistributionConfig} message ZoneDistributionConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ZoneDistributionConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.mode != null && Object.hasOwnProperty.call(message, "mode"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.mode);
+                                if (message.zone != null && Object.hasOwnProperty.call(message, "zone"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.zone);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ZoneDistributionConfig message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.ZoneDistributionConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.redis.cluster.v1.ZoneDistributionConfig
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1.IZoneDistributionConfig} message ZoneDistributionConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ZoneDistributionConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ZoneDistributionConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.redis.cluster.v1.ZoneDistributionConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.redis.cluster.v1.ZoneDistributionConfig} ZoneDistributionConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ZoneDistributionConfig.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1.ZoneDistributionConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.mode = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.zone = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ZoneDistributionConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.redis.cluster.v1.ZoneDistributionConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.redis.cluster.v1.ZoneDistributionConfig} ZoneDistributionConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ZoneDistributionConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ZoneDistributionConfig message.
+                             * @function verify
+                             * @memberof google.cloud.redis.cluster.v1.ZoneDistributionConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ZoneDistributionConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.mode != null && message.hasOwnProperty("mode"))
+                                    switch (message.mode) {
+                                    default:
+                                        return "mode: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.zone != null && message.hasOwnProperty("zone"))
+                                    if (!$util.isString(message.zone))
+                                        return "zone: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ZoneDistributionConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.redis.cluster.v1.ZoneDistributionConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.redis.cluster.v1.ZoneDistributionConfig} ZoneDistributionConfig
+                             */
+                            ZoneDistributionConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.redis.cluster.v1.ZoneDistributionConfig)
+                                    return object;
+                                var message = new $root.google.cloud.redis.cluster.v1.ZoneDistributionConfig();
+                                switch (object.mode) {
+                                default:
+                                    if (typeof object.mode === "number") {
+                                        message.mode = object.mode;
+                                        break;
+                                    }
+                                    break;
+                                case "ZONE_DISTRIBUTION_MODE_UNSPECIFIED":
+                                case 0:
+                                    message.mode = 0;
+                                    break;
+                                case "MULTI_ZONE":
+                                case 1:
+                                    message.mode = 1;
+                                    break;
+                                case "SINGLE_ZONE":
+                                case 2:
+                                    message.mode = 2;
+                                    break;
+                                }
+                                if (object.zone != null)
+                                    message.zone = String(object.zone);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ZoneDistributionConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.redis.cluster.v1.ZoneDistributionConfig
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1.ZoneDistributionConfig} message ZoneDistributionConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ZoneDistributionConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.mode = options.enums === String ? "ZONE_DISTRIBUTION_MODE_UNSPECIFIED" : 0;
+                                    object.zone = "";
+                                }
+                                if (message.mode != null && message.hasOwnProperty("mode"))
+                                    object.mode = options.enums === String ? $root.google.cloud.redis.cluster.v1.ZoneDistributionConfig.ZoneDistributionMode[message.mode] === undefined ? message.mode : $root.google.cloud.redis.cluster.v1.ZoneDistributionConfig.ZoneDistributionMode[message.mode] : message.mode;
+                                if (message.zone != null && message.hasOwnProperty("zone"))
+                                    object.zone = message.zone;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ZoneDistributionConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.redis.cluster.v1.ZoneDistributionConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ZoneDistributionConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ZoneDistributionConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.redis.cluster.v1.ZoneDistributionConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ZoneDistributionConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.redis.cluster.v1.ZoneDistributionConfig";
+                            };
+    
+                            /**
+                             * ZoneDistributionMode enum.
+                             * @name google.cloud.redis.cluster.v1.ZoneDistributionConfig.ZoneDistributionMode
+                             * @enum {number}
+                             * @property {number} ZONE_DISTRIBUTION_MODE_UNSPECIFIED=0 ZONE_DISTRIBUTION_MODE_UNSPECIFIED value
+                             * @property {number} MULTI_ZONE=1 MULTI_ZONE value
+                             * @property {number} SINGLE_ZONE=2 SINGLE_ZONE value
+                             */
+                            ZoneDistributionConfig.ZoneDistributionMode = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "ZONE_DISTRIBUTION_MODE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "MULTI_ZONE"] = 1;
+                                values[valuesById[2] = "SINGLE_ZONE"] = 2;
+                                return values;
+                            })();
+    
+                            return ZoneDistributionConfig;
+                        })();
+    
                         return v1;
                     })();
     
@@ -4320,6 +6628,39 @@
                              * @variation 2
                              */
     
+                            /**
+                             * Callback as used by {@link google.cloud.redis.cluster.v1beta1.CloudRedisCluster|getClusterCertificateAuthority}.
+                             * @memberof google.cloud.redis.cluster.v1beta1.CloudRedisCluster
+                             * @typedef GetClusterCertificateAuthorityCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.redis.cluster.v1beta1.CertificateAuthority} [response] CertificateAuthority
+                             */
+    
+                            /**
+                             * Calls GetClusterCertificateAuthority.
+                             * @function getClusterCertificateAuthority
+                             * @memberof google.cloud.redis.cluster.v1beta1.CloudRedisCluster
+                             * @instance
+                             * @param {google.cloud.redis.cluster.v1beta1.IGetClusterCertificateAuthorityRequest} request GetClusterCertificateAuthorityRequest message or plain object
+                             * @param {google.cloud.redis.cluster.v1beta1.CloudRedisCluster.GetClusterCertificateAuthorityCallback} callback Node-style callback called with the error, if any, and CertificateAuthority
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(CloudRedisCluster.prototype.getClusterCertificateAuthority = function getClusterCertificateAuthority(request, callback) {
+                                return this.rpcCall(getClusterCertificateAuthority, $root.google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest, $root.google.cloud.redis.cluster.v1beta1.CertificateAuthority, request, callback);
+                            }, "name", { value: "GetClusterCertificateAuthority" });
+    
+                            /**
+                             * Calls GetClusterCertificateAuthority.
+                             * @function getClusterCertificateAuthority
+                             * @memberof google.cloud.redis.cluster.v1beta1.CloudRedisCluster
+                             * @instance
+                             * @param {google.cloud.redis.cluster.v1beta1.IGetClusterCertificateAuthorityRequest} request GetClusterCertificateAuthorityRequest message or plain object
+                             * @returns {Promise<google.cloud.redis.cluster.v1beta1.CertificateAuthority>} Promise
+                             * @variation 2
+                             */
+    
                             return CloudRedisCluster;
                         })();
     
@@ -4336,6 +6677,26 @@
                             values[valuesById[0] = "AUTH_MODE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "AUTH_MODE_IAM_AUTH"] = 1;
                             values[valuesById[2] = "AUTH_MODE_DISABLED"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * NodeType enum.
+                         * @name google.cloud.redis.cluster.v1beta1.NodeType
+                         * @enum {number}
+                         * @property {number} NODE_TYPE_UNSPECIFIED=0 NODE_TYPE_UNSPECIFIED value
+                         * @property {number} REDIS_SHARED_CORE_NANO=1 REDIS_SHARED_CORE_NANO value
+                         * @property {number} REDIS_HIGHMEM_MEDIUM=2 REDIS_HIGHMEM_MEDIUM value
+                         * @property {number} REDIS_HIGHMEM_XLARGE=3 REDIS_HIGHMEM_XLARGE value
+                         * @property {number} REDIS_STANDARD_SMALL=4 REDIS_STANDARD_SMALL value
+                         */
+                        v1beta1.NodeType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "NODE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "REDIS_SHARED_CORE_NANO"] = 1;
+                            values[valuesById[2] = "REDIS_HIGHMEM_MEDIUM"] = 2;
+                            values[valuesById[3] = "REDIS_HIGHMEM_XLARGE"] = 3;
+                            values[valuesById[4] = "REDIS_STANDARD_SMALL"] = 4;
                             return values;
                         })();
     
@@ -5861,6 +8222,209 @@
                             return DeleteClusterRequest;
                         })();
     
+                        v1beta1.GetClusterCertificateAuthorityRequest = (function() {
+    
+                            /**
+                             * Properties of a GetClusterCertificateAuthorityRequest.
+                             * @memberof google.cloud.redis.cluster.v1beta1
+                             * @interface IGetClusterCertificateAuthorityRequest
+                             * @property {string|null} [name] GetClusterCertificateAuthorityRequest name
+                             */
+    
+                            /**
+                             * Constructs a new GetClusterCertificateAuthorityRequest.
+                             * @memberof google.cloud.redis.cluster.v1beta1
+                             * @classdesc Represents a GetClusterCertificateAuthorityRequest.
+                             * @implements IGetClusterCertificateAuthorityRequest
+                             * @constructor
+                             * @param {google.cloud.redis.cluster.v1beta1.IGetClusterCertificateAuthorityRequest=} [properties] Properties to set
+                             */
+                            function GetClusterCertificateAuthorityRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GetClusterCertificateAuthorityRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest
+                             * @instance
+                             */
+                            GetClusterCertificateAuthorityRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new GetClusterCertificateAuthorityRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1beta1.IGetClusterCertificateAuthorityRequest=} [properties] Properties to set
+                             * @returns {google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest} GetClusterCertificateAuthorityRequest instance
+                             */
+                            GetClusterCertificateAuthorityRequest.create = function create(properties) {
+                                return new GetClusterCertificateAuthorityRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GetClusterCertificateAuthorityRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1beta1.IGetClusterCertificateAuthorityRequest} message GetClusterCertificateAuthorityRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetClusterCertificateAuthorityRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GetClusterCertificateAuthorityRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1beta1.IGetClusterCertificateAuthorityRequest} message GetClusterCertificateAuthorityRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetClusterCertificateAuthorityRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GetClusterCertificateAuthorityRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest} GetClusterCertificateAuthorityRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetClusterCertificateAuthorityRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GetClusterCertificateAuthorityRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest} GetClusterCertificateAuthorityRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetClusterCertificateAuthorityRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GetClusterCertificateAuthorityRequest message.
+                             * @function verify
+                             * @memberof google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GetClusterCertificateAuthorityRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GetClusterCertificateAuthorityRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest} GetClusterCertificateAuthorityRequest
+                             */
+                            GetClusterCertificateAuthorityRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest)
+                                    return object;
+                                var message = new $root.google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GetClusterCertificateAuthorityRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest} message GetClusterCertificateAuthorityRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GetClusterCertificateAuthorityRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GetClusterCertificateAuthorityRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GetClusterCertificateAuthorityRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GetClusterCertificateAuthorityRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GetClusterCertificateAuthorityRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.redis.cluster.v1beta1.GetClusterCertificateAuthorityRequest";
+                            };
+    
+                            return GetClusterCertificateAuthorityRequest;
+                        })();
+    
                         v1beta1.Cluster = (function() {
     
                             /**
@@ -5880,6 +8444,12 @@
                              * @property {Array.<google.cloud.redis.cluster.v1beta1.IDiscoveryEndpoint>|null} [discoveryEndpoints] Cluster discoveryEndpoints
                              * @property {Array.<google.cloud.redis.cluster.v1beta1.IPscConnection>|null} [pscConnections] Cluster pscConnections
                              * @property {google.cloud.redis.cluster.v1beta1.Cluster.IStateInfo|null} [stateInfo] Cluster stateInfo
+                             * @property {google.cloud.redis.cluster.v1beta1.NodeType|null} [nodeType] Cluster nodeType
+                             * @property {google.cloud.redis.cluster.v1beta1.IClusterPersistenceConfig|null} [persistenceConfig] Cluster persistenceConfig
+                             * @property {Object.<string,string>|null} [redisConfigs] Cluster redisConfigs
+                             * @property {number|null} [preciseSizeGb] Cluster preciseSizeGb
+                             * @property {google.cloud.redis.cluster.v1beta1.IZoneDistributionConfig|null} [zoneDistributionConfig] Cluster zoneDistributionConfig
+                             * @property {boolean|null} [deletionProtectionEnabled] Cluster deletionProtectionEnabled
                              */
     
                             /**
@@ -5894,6 +8464,7 @@
                                 this.pscConfigs = [];
                                 this.discoveryEndpoints = [];
                                 this.pscConnections = [];
+                                this.redisConfigs = {};
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -6004,6 +8575,54 @@
                              */
                             Cluster.prototype.stateInfo = null;
     
+                            /**
+                             * Cluster nodeType.
+                             * @member {google.cloud.redis.cluster.v1beta1.NodeType} nodeType
+                             * @memberof google.cloud.redis.cluster.v1beta1.Cluster
+                             * @instance
+                             */
+                            Cluster.prototype.nodeType = 0;
+    
+                            /**
+                             * Cluster persistenceConfig.
+                             * @member {google.cloud.redis.cluster.v1beta1.IClusterPersistenceConfig|null|undefined} persistenceConfig
+                             * @memberof google.cloud.redis.cluster.v1beta1.Cluster
+                             * @instance
+                             */
+                            Cluster.prototype.persistenceConfig = null;
+    
+                            /**
+                             * Cluster redisConfigs.
+                             * @member {Object.<string,string>} redisConfigs
+                             * @memberof google.cloud.redis.cluster.v1beta1.Cluster
+                             * @instance
+                             */
+                            Cluster.prototype.redisConfigs = $util.emptyObject;
+    
+                            /**
+                             * Cluster preciseSizeGb.
+                             * @member {number|null|undefined} preciseSizeGb
+                             * @memberof google.cloud.redis.cluster.v1beta1.Cluster
+                             * @instance
+                             */
+                            Cluster.prototype.preciseSizeGb = null;
+    
+                            /**
+                             * Cluster zoneDistributionConfig.
+                             * @member {google.cloud.redis.cluster.v1beta1.IZoneDistributionConfig|null|undefined} zoneDistributionConfig
+                             * @memberof google.cloud.redis.cluster.v1beta1.Cluster
+                             * @instance
+                             */
+                            Cluster.prototype.zoneDistributionConfig = null;
+    
+                            /**
+                             * Cluster deletionProtectionEnabled.
+                             * @member {boolean|null|undefined} deletionProtectionEnabled
+                             * @memberof google.cloud.redis.cluster.v1beta1.Cluster
+                             * @instance
+                             */
+                            Cluster.prototype.deletionProtectionEnabled = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -6037,6 +8656,28 @@
                              */
                             Object.defineProperty(Cluster.prototype, "_shardCount", {
                                 get: $util.oneOfGetter($oneOfFields = ["shardCount"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Cluster _preciseSizeGb.
+                             * @member {"preciseSizeGb"|undefined} _preciseSizeGb
+                             * @memberof google.cloud.redis.cluster.v1beta1.Cluster
+                             * @instance
+                             */
+                            Object.defineProperty(Cluster.prototype, "_preciseSizeGb", {
+                                get: $util.oneOfGetter($oneOfFields = ["preciseSizeGb"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Cluster _deletionProtectionEnabled.
+                             * @member {"deletionProtectionEnabled"|undefined} _deletionProtectionEnabled
+                             * @memberof google.cloud.redis.cluster.v1beta1.Cluster
+                             * @instance
+                             */
+                            Object.defineProperty(Cluster.prototype, "_deletionProtectionEnabled", {
+                                get: $util.oneOfGetter($oneOfFields = ["deletionProtectionEnabled"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -6093,6 +8734,19 @@
                                         $root.google.cloud.redis.cluster.v1beta1.PscConnection.encode(message.pscConnections[i], writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                                 if (message.stateInfo != null && Object.hasOwnProperty.call(message, "stateInfo"))
                                     $root.google.cloud.redis.cluster.v1beta1.Cluster.StateInfo.encode(message.stateInfo, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
+                                if (message.nodeType != null && Object.hasOwnProperty.call(message, "nodeType"))
+                                    writer.uint32(/* id 19, wireType 0 =*/152).int32(message.nodeType);
+                                if (message.persistenceConfig != null && Object.hasOwnProperty.call(message, "persistenceConfig"))
+                                    $root.google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.encode(message.persistenceConfig, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                                if (message.redisConfigs != null && Object.hasOwnProperty.call(message, "redisConfigs"))
+                                    for (var keys = Object.keys(message.redisConfigs), i = 0; i < keys.length; ++i)
+                                        writer.uint32(/* id 21, wireType 2 =*/170).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.redisConfigs[keys[i]]).ldelim();
+                                if (message.preciseSizeGb != null && Object.hasOwnProperty.call(message, "preciseSizeGb"))
+                                    writer.uint32(/* id 22, wireType 1 =*/177).double(message.preciseSizeGb);
+                                if (message.zoneDistributionConfig != null && Object.hasOwnProperty.call(message, "zoneDistributionConfig"))
+                                    $root.google.cloud.redis.cluster.v1beta1.ZoneDistributionConfig.encode(message.zoneDistributionConfig, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
+                                if (message.deletionProtectionEnabled != null && Object.hasOwnProperty.call(message, "deletionProtectionEnabled"))
+                                    writer.uint32(/* id 25, wireType 0 =*/200).bool(message.deletionProtectionEnabled);
                                 return writer;
                             };
     
@@ -6123,7 +8777,7 @@
                             Cluster.decode = function decode(reader, length) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1beta1.Cluster();
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1beta1.Cluster(), key, value;
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
@@ -6183,6 +8837,49 @@
                                         }
                                     case 18: {
                                             message.stateInfo = $root.google.cloud.redis.cluster.v1beta1.Cluster.StateInfo.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 19: {
+                                            message.nodeType = reader.int32();
+                                            break;
+                                        }
+                                    case 20: {
+                                            message.persistenceConfig = $root.google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 21: {
+                                            if (message.redisConfigs === $util.emptyObject)
+                                                message.redisConfigs = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            key = "";
+                                            value = "";
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = reader.string();
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7);
+                                                    break;
+                                                }
+                                            }
+                                            message.redisConfigs[key] = value;
+                                            break;
+                                        }
+                                    case 22: {
+                                            message.preciseSizeGb = reader.double();
+                                            break;
+                                        }
+                                    case 23: {
+                                            message.zoneDistributionConfig = $root.google.cloud.redis.cluster.v1beta1.ZoneDistributionConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 25: {
+                                            message.deletionProtectionEnabled = reader.bool();
                                             break;
                                         }
                                     default:
@@ -6307,6 +9004,45 @@
                                     var error = $root.google.cloud.redis.cluster.v1beta1.Cluster.StateInfo.verify(message.stateInfo);
                                     if (error)
                                         return "stateInfo." + error;
+                                }
+                                if (message.nodeType != null && message.hasOwnProperty("nodeType"))
+                                    switch (message.nodeType) {
+                                    default:
+                                        return "nodeType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                if (message.persistenceConfig != null && message.hasOwnProperty("persistenceConfig")) {
+                                    var error = $root.google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.verify(message.persistenceConfig);
+                                    if (error)
+                                        return "persistenceConfig." + error;
+                                }
+                                if (message.redisConfigs != null && message.hasOwnProperty("redisConfigs")) {
+                                    if (!$util.isObject(message.redisConfigs))
+                                        return "redisConfigs: object expected";
+                                    var key = Object.keys(message.redisConfigs);
+                                    for (var i = 0; i < key.length; ++i)
+                                        if (!$util.isString(message.redisConfigs[key[i]]))
+                                            return "redisConfigs: string{k:string} expected";
+                                }
+                                if (message.preciseSizeGb != null && message.hasOwnProperty("preciseSizeGb")) {
+                                    properties._preciseSizeGb = 1;
+                                    if (typeof message.preciseSizeGb !== "number")
+                                        return "preciseSizeGb: number expected";
+                                }
+                                if (message.zoneDistributionConfig != null && message.hasOwnProperty("zoneDistributionConfig")) {
+                                    var error = $root.google.cloud.redis.cluster.v1beta1.ZoneDistributionConfig.verify(message.zoneDistributionConfig);
+                                    if (error)
+                                        return "zoneDistributionConfig." + error;
+                                }
+                                if (message.deletionProtectionEnabled != null && message.hasOwnProperty("deletionProtectionEnabled")) {
+                                    properties._deletionProtectionEnabled = 1;
+                                    if (typeof message.deletionProtectionEnabled !== "boolean")
+                                        return "deletionProtectionEnabled: boolean expected";
                                 }
                                 return null;
                             };
@@ -6441,6 +9177,55 @@
                                         throw TypeError(".google.cloud.redis.cluster.v1beta1.Cluster.stateInfo: object expected");
                                     message.stateInfo = $root.google.cloud.redis.cluster.v1beta1.Cluster.StateInfo.fromObject(object.stateInfo);
                                 }
+                                switch (object.nodeType) {
+                                default:
+                                    if (typeof object.nodeType === "number") {
+                                        message.nodeType = object.nodeType;
+                                        break;
+                                    }
+                                    break;
+                                case "NODE_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.nodeType = 0;
+                                    break;
+                                case "REDIS_SHARED_CORE_NANO":
+                                case 1:
+                                    message.nodeType = 1;
+                                    break;
+                                case "REDIS_HIGHMEM_MEDIUM":
+                                case 2:
+                                    message.nodeType = 2;
+                                    break;
+                                case "REDIS_HIGHMEM_XLARGE":
+                                case 3:
+                                    message.nodeType = 3;
+                                    break;
+                                case "REDIS_STANDARD_SMALL":
+                                case 4:
+                                    message.nodeType = 4;
+                                    break;
+                                }
+                                if (object.persistenceConfig != null) {
+                                    if (typeof object.persistenceConfig !== "object")
+                                        throw TypeError(".google.cloud.redis.cluster.v1beta1.Cluster.persistenceConfig: object expected");
+                                    message.persistenceConfig = $root.google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.fromObject(object.persistenceConfig);
+                                }
+                                if (object.redisConfigs) {
+                                    if (typeof object.redisConfigs !== "object")
+                                        throw TypeError(".google.cloud.redis.cluster.v1beta1.Cluster.redisConfigs: object expected");
+                                    message.redisConfigs = {};
+                                    for (var keys = Object.keys(object.redisConfigs), i = 0; i < keys.length; ++i)
+                                        message.redisConfigs[keys[i]] = String(object.redisConfigs[keys[i]]);
+                                }
+                                if (object.preciseSizeGb != null)
+                                    message.preciseSizeGb = Number(object.preciseSizeGb);
+                                if (object.zoneDistributionConfig != null) {
+                                    if (typeof object.zoneDistributionConfig !== "object")
+                                        throw TypeError(".google.cloud.redis.cluster.v1beta1.Cluster.zoneDistributionConfig: object expected");
+                                    message.zoneDistributionConfig = $root.google.cloud.redis.cluster.v1beta1.ZoneDistributionConfig.fromObject(object.zoneDistributionConfig);
+                                }
+                                if (object.deletionProtectionEnabled != null)
+                                    message.deletionProtectionEnabled = Boolean(object.deletionProtectionEnabled);
                                 return message;
                             };
     
@@ -6462,6 +9247,8 @@
                                     object.discoveryEndpoints = [];
                                     object.pscConnections = [];
                                 }
+                                if (options.objects || options.defaults)
+                                    object.redisConfigs = {};
                                 if (options.defaults) {
                                     object.name = "";
                                     object.createTime = null;
@@ -6470,6 +9257,9 @@
                                     object.authorizationMode = options.enums === String ? "AUTH_MODE_UNSPECIFIED" : 0;
                                     object.transitEncryptionMode = options.enums === String ? "TRANSIT_ENCRYPTION_MODE_UNSPECIFIED" : 0;
                                     object.stateInfo = null;
+                                    object.nodeType = options.enums === String ? "NODE_TYPE_UNSPECIFIED" : 0;
+                                    object.persistenceConfig = null;
+                                    object.zoneDistributionConfig = null;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -6515,6 +9305,28 @@
                                 }
                                 if (message.stateInfo != null && message.hasOwnProperty("stateInfo"))
                                     object.stateInfo = $root.google.cloud.redis.cluster.v1beta1.Cluster.StateInfo.toObject(message.stateInfo, options);
+                                if (message.nodeType != null && message.hasOwnProperty("nodeType"))
+                                    object.nodeType = options.enums === String ? $root.google.cloud.redis.cluster.v1beta1.NodeType[message.nodeType] === undefined ? message.nodeType : $root.google.cloud.redis.cluster.v1beta1.NodeType[message.nodeType] : message.nodeType;
+                                if (message.persistenceConfig != null && message.hasOwnProperty("persistenceConfig"))
+                                    object.persistenceConfig = $root.google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.toObject(message.persistenceConfig, options);
+                                var keys2;
+                                if (message.redisConfigs && (keys2 = Object.keys(message.redisConfigs)).length) {
+                                    object.redisConfigs = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.redisConfigs[keys2[j]] = message.redisConfigs[keys2[j]];
+                                }
+                                if (message.preciseSizeGb != null && message.hasOwnProperty("preciseSizeGb")) {
+                                    object.preciseSizeGb = options.json && !isFinite(message.preciseSizeGb) ? String(message.preciseSizeGb) : message.preciseSizeGb;
+                                    if (options.oneofs)
+                                        object._preciseSizeGb = "preciseSizeGb";
+                                }
+                                if (message.zoneDistributionConfig != null && message.hasOwnProperty("zoneDistributionConfig"))
+                                    object.zoneDistributionConfig = $root.google.cloud.redis.cluster.v1beta1.ZoneDistributionConfig.toObject(message.zoneDistributionConfig, options);
+                                if (message.deletionProtectionEnabled != null && message.hasOwnProperty("deletionProtectionEnabled")) {
+                                    object.deletionProtectionEnabled = message.deletionProtectionEnabled;
+                                    if (options.oneofs)
+                                        object._deletionProtectionEnabled = "deletionProtectionEnabled";
+                                }
                                 return object;
                             };
     
@@ -8157,6 +10969,1810 @@
                             };
     
                             return OperationMetadata;
+                        })();
+    
+                        v1beta1.CertificateAuthority = (function() {
+    
+                            /**
+                             * Properties of a CertificateAuthority.
+                             * @memberof google.cloud.redis.cluster.v1beta1
+                             * @interface ICertificateAuthority
+                             * @property {google.cloud.redis.cluster.v1beta1.CertificateAuthority.IManagedCertificateAuthority|null} [managedServerCa] CertificateAuthority managedServerCa
+                             * @property {string|null} [name] CertificateAuthority name
+                             */
+    
+                            /**
+                             * Constructs a new CertificateAuthority.
+                             * @memberof google.cloud.redis.cluster.v1beta1
+                             * @classdesc Represents a CertificateAuthority.
+                             * @implements ICertificateAuthority
+                             * @constructor
+                             * @param {google.cloud.redis.cluster.v1beta1.ICertificateAuthority=} [properties] Properties to set
+                             */
+                            function CertificateAuthority(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CertificateAuthority managedServerCa.
+                             * @member {google.cloud.redis.cluster.v1beta1.CertificateAuthority.IManagedCertificateAuthority|null|undefined} managedServerCa
+                             * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority
+                             * @instance
+                             */
+                            CertificateAuthority.prototype.managedServerCa = null;
+    
+                            /**
+                             * CertificateAuthority name.
+                             * @member {string} name
+                             * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority
+                             * @instance
+                             */
+                            CertificateAuthority.prototype.name = "";
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * CertificateAuthority serverCa.
+                             * @member {"managedServerCa"|undefined} serverCa
+                             * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority
+                             * @instance
+                             */
+                            Object.defineProperty(CertificateAuthority.prototype, "serverCa", {
+                                get: $util.oneOfGetter($oneOfFields = ["managedServerCa"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new CertificateAuthority instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1beta1.ICertificateAuthority=} [properties] Properties to set
+                             * @returns {google.cloud.redis.cluster.v1beta1.CertificateAuthority} CertificateAuthority instance
+                             */
+                            CertificateAuthority.create = function create(properties) {
+                                return new CertificateAuthority(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CertificateAuthority message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.CertificateAuthority.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1beta1.ICertificateAuthority} message CertificateAuthority message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CertificateAuthority.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.managedServerCa != null && Object.hasOwnProperty.call(message, "managedServerCa"))
+                                    $root.google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.encode(message.managedServerCa, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CertificateAuthority message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.CertificateAuthority.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1beta1.ICertificateAuthority} message CertificateAuthority message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CertificateAuthority.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CertificateAuthority message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.redis.cluster.v1beta1.CertificateAuthority} CertificateAuthority
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CertificateAuthority.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1beta1.CertificateAuthority();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.managedServerCa = $root.google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CertificateAuthority message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.redis.cluster.v1beta1.CertificateAuthority} CertificateAuthority
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CertificateAuthority.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CertificateAuthority message.
+                             * @function verify
+                             * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CertificateAuthority.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.managedServerCa != null && message.hasOwnProperty("managedServerCa")) {
+                                    properties.serverCa = 1;
+                                    {
+                                        var error = $root.google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.verify(message.managedServerCa);
+                                        if (error)
+                                            return "managedServerCa." + error;
+                                    }
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CertificateAuthority message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.redis.cluster.v1beta1.CertificateAuthority} CertificateAuthority
+                             */
+                            CertificateAuthority.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.redis.cluster.v1beta1.CertificateAuthority)
+                                    return object;
+                                var message = new $root.google.cloud.redis.cluster.v1beta1.CertificateAuthority();
+                                if (object.managedServerCa != null) {
+                                    if (typeof object.managedServerCa !== "object")
+                                        throw TypeError(".google.cloud.redis.cluster.v1beta1.CertificateAuthority.managedServerCa: object expected");
+                                    message.managedServerCa = $root.google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.fromObject(object.managedServerCa);
+                                }
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CertificateAuthority message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1beta1.CertificateAuthority} message CertificateAuthority
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CertificateAuthority.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.managedServerCa != null && message.hasOwnProperty("managedServerCa")) {
+                                    object.managedServerCa = $root.google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.toObject(message.managedServerCa, options);
+                                    if (options.oneofs)
+                                        object.serverCa = "managedServerCa";
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CertificateAuthority to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CertificateAuthority.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CertificateAuthority
+                             * @function getTypeUrl
+                             * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CertificateAuthority.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.redis.cluster.v1beta1.CertificateAuthority";
+                            };
+    
+                            CertificateAuthority.ManagedCertificateAuthority = (function() {
+    
+                                /**
+                                 * Properties of a ManagedCertificateAuthority.
+                                 * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority
+                                 * @interface IManagedCertificateAuthority
+                                 * @property {Array.<google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.ICertChain>|null} [caCerts] ManagedCertificateAuthority caCerts
+                                 */
+    
+                                /**
+                                 * Constructs a new ManagedCertificateAuthority.
+                                 * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority
+                                 * @classdesc Represents a ManagedCertificateAuthority.
+                                 * @implements IManagedCertificateAuthority
+                                 * @constructor
+                                 * @param {google.cloud.redis.cluster.v1beta1.CertificateAuthority.IManagedCertificateAuthority=} [properties] Properties to set
+                                 */
+                                function ManagedCertificateAuthority(properties) {
+                                    this.caCerts = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ManagedCertificateAuthority caCerts.
+                                 * @member {Array.<google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.ICertChain>} caCerts
+                                 * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority
+                                 * @instance
+                                 */
+                                ManagedCertificateAuthority.prototype.caCerts = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new ManagedCertificateAuthority instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1beta1.CertificateAuthority.IManagedCertificateAuthority=} [properties] Properties to set
+                                 * @returns {google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority} ManagedCertificateAuthority instance
+                                 */
+                                ManagedCertificateAuthority.create = function create(properties) {
+                                    return new ManagedCertificateAuthority(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ManagedCertificateAuthority message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1beta1.CertificateAuthority.IManagedCertificateAuthority} message ManagedCertificateAuthority message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ManagedCertificateAuthority.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.caCerts != null && message.caCerts.length)
+                                        for (var i = 0; i < message.caCerts.length; ++i)
+                                            $root.google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.CertChain.encode(message.caCerts[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ManagedCertificateAuthority message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1beta1.CertificateAuthority.IManagedCertificateAuthority} message ManagedCertificateAuthority message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ManagedCertificateAuthority.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a ManagedCertificateAuthority message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority} ManagedCertificateAuthority
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ManagedCertificateAuthority.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                if (!(message.caCerts && message.caCerts.length))
+                                                    message.caCerts = [];
+                                                message.caCerts.push($root.google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.CertChain.decode(reader, reader.uint32()));
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a ManagedCertificateAuthority message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority} ManagedCertificateAuthority
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ManagedCertificateAuthority.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a ManagedCertificateAuthority message.
+                                 * @function verify
+                                 * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ManagedCertificateAuthority.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.caCerts != null && message.hasOwnProperty("caCerts")) {
+                                        if (!Array.isArray(message.caCerts))
+                                            return "caCerts: array expected";
+                                        for (var i = 0; i < message.caCerts.length; ++i) {
+                                            var error = $root.google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.CertChain.verify(message.caCerts[i]);
+                                            if (error)
+                                                return "caCerts." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a ManagedCertificateAuthority message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority} ManagedCertificateAuthority
+                                 */
+                                ManagedCertificateAuthority.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority)
+                                        return object;
+                                    var message = new $root.google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority();
+                                    if (object.caCerts) {
+                                        if (!Array.isArray(object.caCerts))
+                                            throw TypeError(".google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.caCerts: array expected");
+                                        message.caCerts = [];
+                                        for (var i = 0; i < object.caCerts.length; ++i) {
+                                            if (typeof object.caCerts[i] !== "object")
+                                                throw TypeError(".google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.caCerts: object expected");
+                                            message.caCerts[i] = $root.google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.CertChain.fromObject(object.caCerts[i]);
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a ManagedCertificateAuthority message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority} message ManagedCertificateAuthority
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ManagedCertificateAuthority.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.caCerts = [];
+                                    if (message.caCerts && message.caCerts.length) {
+                                        object.caCerts = [];
+                                        for (var j = 0; j < message.caCerts.length; ++j)
+                                            object.caCerts[j] = $root.google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.CertChain.toObject(message.caCerts[j], options);
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ManagedCertificateAuthority to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ManagedCertificateAuthority.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ManagedCertificateAuthority
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ManagedCertificateAuthority.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority";
+                                };
+    
+                                ManagedCertificateAuthority.CertChain = (function() {
+    
+                                    /**
+                                     * Properties of a CertChain.
+                                     * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority
+                                     * @interface ICertChain
+                                     * @property {Array.<string>|null} [certificates] CertChain certificates
+                                     */
+    
+                                    /**
+                                     * Constructs a new CertChain.
+                                     * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority
+                                     * @classdesc Represents a CertChain.
+                                     * @implements ICertChain
+                                     * @constructor
+                                     * @param {google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.ICertChain=} [properties] Properties to set
+                                     */
+                                    function CertChain(properties) {
+                                        this.certificates = [];
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * CertChain certificates.
+                                     * @member {Array.<string>} certificates
+                                     * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.CertChain
+                                     * @instance
+                                     */
+                                    CertChain.prototype.certificates = $util.emptyArray;
+    
+                                    /**
+                                     * Creates a new CertChain instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.CertChain
+                                     * @static
+                                     * @param {google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.ICertChain=} [properties] Properties to set
+                                     * @returns {google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.CertChain} CertChain instance
+                                     */
+                                    CertChain.create = function create(properties) {
+                                        return new CertChain(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified CertChain message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.CertChain.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.CertChain
+                                     * @static
+                                     * @param {google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.ICertChain} message CertChain message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    CertChain.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.certificates != null && message.certificates.length)
+                                            for (var i = 0; i < message.certificates.length; ++i)
+                                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.certificates[i]);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified CertChain message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.CertChain.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.CertChain
+                                     * @static
+                                     * @param {google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.ICertChain} message CertChain message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    CertChain.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a CertChain message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.CertChain
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.CertChain} CertChain
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    CertChain.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.CertChain();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    if (!(message.certificates && message.certificates.length))
+                                                        message.certificates = [];
+                                                    message.certificates.push(reader.string());
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a CertChain message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.CertChain
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.CertChain} CertChain
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    CertChain.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a CertChain message.
+                                     * @function verify
+                                     * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.CertChain
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    CertChain.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.certificates != null && message.hasOwnProperty("certificates")) {
+                                            if (!Array.isArray(message.certificates))
+                                                return "certificates: array expected";
+                                            for (var i = 0; i < message.certificates.length; ++i)
+                                                if (!$util.isString(message.certificates[i]))
+                                                    return "certificates: string[] expected";
+                                        }
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a CertChain message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.CertChain
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.CertChain} CertChain
+                                     */
+                                    CertChain.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.CertChain)
+                                            return object;
+                                        var message = new $root.google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.CertChain();
+                                        if (object.certificates) {
+                                            if (!Array.isArray(object.certificates))
+                                                throw TypeError(".google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.CertChain.certificates: array expected");
+                                            message.certificates = [];
+                                            for (var i = 0; i < object.certificates.length; ++i)
+                                                message.certificates[i] = String(object.certificates[i]);
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a CertChain message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.CertChain
+                                     * @static
+                                     * @param {google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.CertChain} message CertChain
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    CertChain.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.arrays || options.defaults)
+                                            object.certificates = [];
+                                        if (message.certificates && message.certificates.length) {
+                                            object.certificates = [];
+                                            for (var j = 0; j < message.certificates.length; ++j)
+                                                object.certificates[j] = message.certificates[j];
+                                        }
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this CertChain to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.CertChain
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    CertChain.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for CertChain
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.CertChain
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    CertChain.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.redis.cluster.v1beta1.CertificateAuthority.ManagedCertificateAuthority.CertChain";
+                                    };
+    
+                                    return CertChain;
+                                })();
+    
+                                return ManagedCertificateAuthority;
+                            })();
+    
+                            return CertificateAuthority;
+                        })();
+    
+                        v1beta1.ClusterPersistenceConfig = (function() {
+    
+                            /**
+                             * Properties of a ClusterPersistenceConfig.
+                             * @memberof google.cloud.redis.cluster.v1beta1
+                             * @interface IClusterPersistenceConfig
+                             * @property {google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.PersistenceMode|null} [mode] ClusterPersistenceConfig mode
+                             * @property {google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.IRDBConfig|null} [rdbConfig] ClusterPersistenceConfig rdbConfig
+                             * @property {google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.IAOFConfig|null} [aofConfig] ClusterPersistenceConfig aofConfig
+                             */
+    
+                            /**
+                             * Constructs a new ClusterPersistenceConfig.
+                             * @memberof google.cloud.redis.cluster.v1beta1
+                             * @classdesc Represents a ClusterPersistenceConfig.
+                             * @implements IClusterPersistenceConfig
+                             * @constructor
+                             * @param {google.cloud.redis.cluster.v1beta1.IClusterPersistenceConfig=} [properties] Properties to set
+                             */
+                            function ClusterPersistenceConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ClusterPersistenceConfig mode.
+                             * @member {google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.PersistenceMode} mode
+                             * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig
+                             * @instance
+                             */
+                            ClusterPersistenceConfig.prototype.mode = 0;
+    
+                            /**
+                             * ClusterPersistenceConfig rdbConfig.
+                             * @member {google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.IRDBConfig|null|undefined} rdbConfig
+                             * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig
+                             * @instance
+                             */
+                            ClusterPersistenceConfig.prototype.rdbConfig = null;
+    
+                            /**
+                             * ClusterPersistenceConfig aofConfig.
+                             * @member {google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.IAOFConfig|null|undefined} aofConfig
+                             * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig
+                             * @instance
+                             */
+                            ClusterPersistenceConfig.prototype.aofConfig = null;
+    
+                            /**
+                             * Creates a new ClusterPersistenceConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1beta1.IClusterPersistenceConfig=} [properties] Properties to set
+                             * @returns {google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig} ClusterPersistenceConfig instance
+                             */
+                            ClusterPersistenceConfig.create = function create(properties) {
+                                return new ClusterPersistenceConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ClusterPersistenceConfig message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1beta1.IClusterPersistenceConfig} message ClusterPersistenceConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ClusterPersistenceConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.mode != null && Object.hasOwnProperty.call(message, "mode"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.mode);
+                                if (message.rdbConfig != null && Object.hasOwnProperty.call(message, "rdbConfig"))
+                                    $root.google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig.encode(message.rdbConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.aofConfig != null && Object.hasOwnProperty.call(message, "aofConfig"))
+                                    $root.google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.AOFConfig.encode(message.aofConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ClusterPersistenceConfig message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1beta1.IClusterPersistenceConfig} message ClusterPersistenceConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ClusterPersistenceConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ClusterPersistenceConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig} ClusterPersistenceConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ClusterPersistenceConfig.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.mode = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.rdbConfig = $root.google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.aofConfig = $root.google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.AOFConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ClusterPersistenceConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig} ClusterPersistenceConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ClusterPersistenceConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ClusterPersistenceConfig message.
+                             * @function verify
+                             * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ClusterPersistenceConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.mode != null && message.hasOwnProperty("mode"))
+                                    switch (message.mode) {
+                                    default:
+                                        return "mode: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                if (message.rdbConfig != null && message.hasOwnProperty("rdbConfig")) {
+                                    var error = $root.google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig.verify(message.rdbConfig);
+                                    if (error)
+                                        return "rdbConfig." + error;
+                                }
+                                if (message.aofConfig != null && message.hasOwnProperty("aofConfig")) {
+                                    var error = $root.google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.AOFConfig.verify(message.aofConfig);
+                                    if (error)
+                                        return "aofConfig." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ClusterPersistenceConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig} ClusterPersistenceConfig
+                             */
+                            ClusterPersistenceConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig)
+                                    return object;
+                                var message = new $root.google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig();
+                                switch (object.mode) {
+                                default:
+                                    if (typeof object.mode === "number") {
+                                        message.mode = object.mode;
+                                        break;
+                                    }
+                                    break;
+                                case "PERSISTENCE_MODE_UNSPECIFIED":
+                                case 0:
+                                    message.mode = 0;
+                                    break;
+                                case "DISABLED":
+                                case 1:
+                                    message.mode = 1;
+                                    break;
+                                case "RDB":
+                                case 2:
+                                    message.mode = 2;
+                                    break;
+                                case "AOF":
+                                case 3:
+                                    message.mode = 3;
+                                    break;
+                                }
+                                if (object.rdbConfig != null) {
+                                    if (typeof object.rdbConfig !== "object")
+                                        throw TypeError(".google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.rdbConfig: object expected");
+                                    message.rdbConfig = $root.google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig.fromObject(object.rdbConfig);
+                                }
+                                if (object.aofConfig != null) {
+                                    if (typeof object.aofConfig !== "object")
+                                        throw TypeError(".google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.aofConfig: object expected");
+                                    message.aofConfig = $root.google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.AOFConfig.fromObject(object.aofConfig);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ClusterPersistenceConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig} message ClusterPersistenceConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ClusterPersistenceConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.mode = options.enums === String ? "PERSISTENCE_MODE_UNSPECIFIED" : 0;
+                                    object.rdbConfig = null;
+                                    object.aofConfig = null;
+                                }
+                                if (message.mode != null && message.hasOwnProperty("mode"))
+                                    object.mode = options.enums === String ? $root.google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.PersistenceMode[message.mode] === undefined ? message.mode : $root.google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.PersistenceMode[message.mode] : message.mode;
+                                if (message.rdbConfig != null && message.hasOwnProperty("rdbConfig"))
+                                    object.rdbConfig = $root.google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig.toObject(message.rdbConfig, options);
+                                if (message.aofConfig != null && message.hasOwnProperty("aofConfig"))
+                                    object.aofConfig = $root.google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.AOFConfig.toObject(message.aofConfig, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ClusterPersistenceConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ClusterPersistenceConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ClusterPersistenceConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ClusterPersistenceConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig";
+                            };
+    
+                            ClusterPersistenceConfig.RDBConfig = (function() {
+    
+                                /**
+                                 * Properties of a RDBConfig.
+                                 * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig
+                                 * @interface IRDBConfig
+                                 * @property {google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig.SnapshotPeriod|null} [rdbSnapshotPeriod] RDBConfig rdbSnapshotPeriod
+                                 * @property {google.protobuf.ITimestamp|null} [rdbSnapshotStartTime] RDBConfig rdbSnapshotStartTime
+                                 */
+    
+                                /**
+                                 * Constructs a new RDBConfig.
+                                 * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig
+                                 * @classdesc Represents a RDBConfig.
+                                 * @implements IRDBConfig
+                                 * @constructor
+                                 * @param {google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.IRDBConfig=} [properties] Properties to set
+                                 */
+                                function RDBConfig(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * RDBConfig rdbSnapshotPeriod.
+                                 * @member {google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig.SnapshotPeriod} rdbSnapshotPeriod
+                                 * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig
+                                 * @instance
+                                 */
+                                RDBConfig.prototype.rdbSnapshotPeriod = 0;
+    
+                                /**
+                                 * RDBConfig rdbSnapshotStartTime.
+                                 * @member {google.protobuf.ITimestamp|null|undefined} rdbSnapshotStartTime
+                                 * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig
+                                 * @instance
+                                 */
+                                RDBConfig.prototype.rdbSnapshotStartTime = null;
+    
+                                /**
+                                 * Creates a new RDBConfig instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.IRDBConfig=} [properties] Properties to set
+                                 * @returns {google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig} RDBConfig instance
+                                 */
+                                RDBConfig.create = function create(properties) {
+                                    return new RDBConfig(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified RDBConfig message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.IRDBConfig} message RDBConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RDBConfig.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.rdbSnapshotPeriod != null && Object.hasOwnProperty.call(message, "rdbSnapshotPeriod"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.rdbSnapshotPeriod);
+                                    if (message.rdbSnapshotStartTime != null && Object.hasOwnProperty.call(message, "rdbSnapshotStartTime"))
+                                        $root.google.protobuf.Timestamp.encode(message.rdbSnapshotStartTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified RDBConfig message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.IRDBConfig} message RDBConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RDBConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a RDBConfig message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig} RDBConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RDBConfig.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.rdbSnapshotPeriod = reader.int32();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.rdbSnapshotStartTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a RDBConfig message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig} RDBConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RDBConfig.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a RDBConfig message.
+                                 * @function verify
+                                 * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                RDBConfig.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.rdbSnapshotPeriod != null && message.hasOwnProperty("rdbSnapshotPeriod"))
+                                        switch (message.rdbSnapshotPeriod) {
+                                        default:
+                                            return "rdbSnapshotPeriod: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                        case 4:
+                                            break;
+                                        }
+                                    if (message.rdbSnapshotStartTime != null && message.hasOwnProperty("rdbSnapshotStartTime")) {
+                                        var error = $root.google.protobuf.Timestamp.verify(message.rdbSnapshotStartTime);
+                                        if (error)
+                                            return "rdbSnapshotStartTime." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a RDBConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig} RDBConfig
+                                 */
+                                RDBConfig.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig)
+                                        return object;
+                                    var message = new $root.google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig();
+                                    switch (object.rdbSnapshotPeriod) {
+                                    default:
+                                        if (typeof object.rdbSnapshotPeriod === "number") {
+                                            message.rdbSnapshotPeriod = object.rdbSnapshotPeriod;
+                                            break;
+                                        }
+                                        break;
+                                    case "SNAPSHOT_PERIOD_UNSPECIFIED":
+                                    case 0:
+                                        message.rdbSnapshotPeriod = 0;
+                                        break;
+                                    case "ONE_HOUR":
+                                    case 1:
+                                        message.rdbSnapshotPeriod = 1;
+                                        break;
+                                    case "SIX_HOURS":
+                                    case 2:
+                                        message.rdbSnapshotPeriod = 2;
+                                        break;
+                                    case "TWELVE_HOURS":
+                                    case 3:
+                                        message.rdbSnapshotPeriod = 3;
+                                        break;
+                                    case "TWENTY_FOUR_HOURS":
+                                    case 4:
+                                        message.rdbSnapshotPeriod = 4;
+                                        break;
+                                    }
+                                    if (object.rdbSnapshotStartTime != null) {
+                                        if (typeof object.rdbSnapshotStartTime !== "object")
+                                            throw TypeError(".google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig.rdbSnapshotStartTime: object expected");
+                                        message.rdbSnapshotStartTime = $root.google.protobuf.Timestamp.fromObject(object.rdbSnapshotStartTime);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a RDBConfig message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig} message RDBConfig
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                RDBConfig.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.rdbSnapshotPeriod = options.enums === String ? "SNAPSHOT_PERIOD_UNSPECIFIED" : 0;
+                                        object.rdbSnapshotStartTime = null;
+                                    }
+                                    if (message.rdbSnapshotPeriod != null && message.hasOwnProperty("rdbSnapshotPeriod"))
+                                        object.rdbSnapshotPeriod = options.enums === String ? $root.google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig.SnapshotPeriod[message.rdbSnapshotPeriod] === undefined ? message.rdbSnapshotPeriod : $root.google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig.SnapshotPeriod[message.rdbSnapshotPeriod] : message.rdbSnapshotPeriod;
+                                    if (message.rdbSnapshotStartTime != null && message.hasOwnProperty("rdbSnapshotStartTime"))
+                                        object.rdbSnapshotStartTime = $root.google.protobuf.Timestamp.toObject(message.rdbSnapshotStartTime, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this RDBConfig to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                RDBConfig.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for RDBConfig
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                RDBConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig";
+                                };
+    
+                                /**
+                                 * SnapshotPeriod enum.
+                                 * @name google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.RDBConfig.SnapshotPeriod
+                                 * @enum {number}
+                                 * @property {number} SNAPSHOT_PERIOD_UNSPECIFIED=0 SNAPSHOT_PERIOD_UNSPECIFIED value
+                                 * @property {number} ONE_HOUR=1 ONE_HOUR value
+                                 * @property {number} SIX_HOURS=2 SIX_HOURS value
+                                 * @property {number} TWELVE_HOURS=3 TWELVE_HOURS value
+                                 * @property {number} TWENTY_FOUR_HOURS=4 TWENTY_FOUR_HOURS value
+                                 */
+                                RDBConfig.SnapshotPeriod = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "SNAPSHOT_PERIOD_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "ONE_HOUR"] = 1;
+                                    values[valuesById[2] = "SIX_HOURS"] = 2;
+                                    values[valuesById[3] = "TWELVE_HOURS"] = 3;
+                                    values[valuesById[4] = "TWENTY_FOUR_HOURS"] = 4;
+                                    return values;
+                                })();
+    
+                                return RDBConfig;
+                            })();
+    
+                            ClusterPersistenceConfig.AOFConfig = (function() {
+    
+                                /**
+                                 * Properties of a AOFConfig.
+                                 * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig
+                                 * @interface IAOFConfig
+                                 * @property {google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.AOFConfig.AppendFsync|null} [appendFsync] AOFConfig appendFsync
+                                 */
+    
+                                /**
+                                 * Constructs a new AOFConfig.
+                                 * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig
+                                 * @classdesc Represents a AOFConfig.
+                                 * @implements IAOFConfig
+                                 * @constructor
+                                 * @param {google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.IAOFConfig=} [properties] Properties to set
+                                 */
+                                function AOFConfig(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * AOFConfig appendFsync.
+                                 * @member {google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.AOFConfig.AppendFsync} appendFsync
+                                 * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.AOFConfig
+                                 * @instance
+                                 */
+                                AOFConfig.prototype.appendFsync = 0;
+    
+                                /**
+                                 * Creates a new AOFConfig instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.AOFConfig
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.IAOFConfig=} [properties] Properties to set
+                                 * @returns {google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.AOFConfig} AOFConfig instance
+                                 */
+                                AOFConfig.create = function create(properties) {
+                                    return new AOFConfig(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified AOFConfig message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.AOFConfig.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.AOFConfig
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.IAOFConfig} message AOFConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                AOFConfig.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.appendFsync != null && Object.hasOwnProperty.call(message, "appendFsync"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.appendFsync);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified AOFConfig message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.AOFConfig.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.AOFConfig
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.IAOFConfig} message AOFConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                AOFConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a AOFConfig message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.AOFConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.AOFConfig} AOFConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                AOFConfig.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.AOFConfig();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.appendFsync = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a AOFConfig message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.AOFConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.AOFConfig} AOFConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                AOFConfig.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a AOFConfig message.
+                                 * @function verify
+                                 * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.AOFConfig
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                AOFConfig.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.appendFsync != null && message.hasOwnProperty("appendFsync"))
+                                        switch (message.appendFsync) {
+                                        default:
+                                            return "appendFsync: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                            break;
+                                        }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a AOFConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.AOFConfig
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.AOFConfig} AOFConfig
+                                 */
+                                AOFConfig.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.AOFConfig)
+                                        return object;
+                                    var message = new $root.google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.AOFConfig();
+                                    switch (object.appendFsync) {
+                                    default:
+                                        if (typeof object.appendFsync === "number") {
+                                            message.appendFsync = object.appendFsync;
+                                            break;
+                                        }
+                                        break;
+                                    case "APPEND_FSYNC_UNSPECIFIED":
+                                    case 0:
+                                        message.appendFsync = 0;
+                                        break;
+                                    case "NO":
+                                    case 1:
+                                        message.appendFsync = 1;
+                                        break;
+                                    case "EVERYSEC":
+                                    case 2:
+                                        message.appendFsync = 2;
+                                        break;
+                                    case "ALWAYS":
+                                    case 3:
+                                        message.appendFsync = 3;
+                                        break;
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a AOFConfig message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.AOFConfig
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.AOFConfig} message AOFConfig
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                AOFConfig.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.appendFsync = options.enums === String ? "APPEND_FSYNC_UNSPECIFIED" : 0;
+                                    if (message.appendFsync != null && message.hasOwnProperty("appendFsync"))
+                                        object.appendFsync = options.enums === String ? $root.google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.AOFConfig.AppendFsync[message.appendFsync] === undefined ? message.appendFsync : $root.google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.AOFConfig.AppendFsync[message.appendFsync] : message.appendFsync;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this AOFConfig to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.AOFConfig
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                AOFConfig.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for AOFConfig
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.AOFConfig
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                AOFConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.AOFConfig";
+                                };
+    
+                                /**
+                                 * AppendFsync enum.
+                                 * @name google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.AOFConfig.AppendFsync
+                                 * @enum {number}
+                                 * @property {number} APPEND_FSYNC_UNSPECIFIED=0 APPEND_FSYNC_UNSPECIFIED value
+                                 * @property {number} NO=1 NO value
+                                 * @property {number} EVERYSEC=2 EVERYSEC value
+                                 * @property {number} ALWAYS=3 ALWAYS value
+                                 */
+                                AOFConfig.AppendFsync = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "APPEND_FSYNC_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "NO"] = 1;
+                                    values[valuesById[2] = "EVERYSEC"] = 2;
+                                    values[valuesById[3] = "ALWAYS"] = 3;
+                                    return values;
+                                })();
+    
+                                return AOFConfig;
+                            })();
+    
+                            /**
+                             * PersistenceMode enum.
+                             * @name google.cloud.redis.cluster.v1beta1.ClusterPersistenceConfig.PersistenceMode
+                             * @enum {number}
+                             * @property {number} PERSISTENCE_MODE_UNSPECIFIED=0 PERSISTENCE_MODE_UNSPECIFIED value
+                             * @property {number} DISABLED=1 DISABLED value
+                             * @property {number} RDB=2 RDB value
+                             * @property {number} AOF=3 AOF value
+                             */
+                            ClusterPersistenceConfig.PersistenceMode = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "PERSISTENCE_MODE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "DISABLED"] = 1;
+                                values[valuesById[2] = "RDB"] = 2;
+                                values[valuesById[3] = "AOF"] = 3;
+                                return values;
+                            })();
+    
+                            return ClusterPersistenceConfig;
+                        })();
+    
+                        v1beta1.ZoneDistributionConfig = (function() {
+    
+                            /**
+                             * Properties of a ZoneDistributionConfig.
+                             * @memberof google.cloud.redis.cluster.v1beta1
+                             * @interface IZoneDistributionConfig
+                             * @property {google.cloud.redis.cluster.v1beta1.ZoneDistributionConfig.ZoneDistributionMode|null} [mode] ZoneDistributionConfig mode
+                             * @property {string|null} [zone] ZoneDistributionConfig zone
+                             */
+    
+                            /**
+                             * Constructs a new ZoneDistributionConfig.
+                             * @memberof google.cloud.redis.cluster.v1beta1
+                             * @classdesc Represents a ZoneDistributionConfig.
+                             * @implements IZoneDistributionConfig
+                             * @constructor
+                             * @param {google.cloud.redis.cluster.v1beta1.IZoneDistributionConfig=} [properties] Properties to set
+                             */
+                            function ZoneDistributionConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ZoneDistributionConfig mode.
+                             * @member {google.cloud.redis.cluster.v1beta1.ZoneDistributionConfig.ZoneDistributionMode} mode
+                             * @memberof google.cloud.redis.cluster.v1beta1.ZoneDistributionConfig
+                             * @instance
+                             */
+                            ZoneDistributionConfig.prototype.mode = 0;
+    
+                            /**
+                             * ZoneDistributionConfig zone.
+                             * @member {string} zone
+                             * @memberof google.cloud.redis.cluster.v1beta1.ZoneDistributionConfig
+                             * @instance
+                             */
+                            ZoneDistributionConfig.prototype.zone = "";
+    
+                            /**
+                             * Creates a new ZoneDistributionConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.redis.cluster.v1beta1.ZoneDistributionConfig
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1beta1.IZoneDistributionConfig=} [properties] Properties to set
+                             * @returns {google.cloud.redis.cluster.v1beta1.ZoneDistributionConfig} ZoneDistributionConfig instance
+                             */
+                            ZoneDistributionConfig.create = function create(properties) {
+                                return new ZoneDistributionConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ZoneDistributionConfig message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ZoneDistributionConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.redis.cluster.v1beta1.ZoneDistributionConfig
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1beta1.IZoneDistributionConfig} message ZoneDistributionConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ZoneDistributionConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.mode != null && Object.hasOwnProperty.call(message, "mode"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.mode);
+                                if (message.zone != null && Object.hasOwnProperty.call(message, "zone"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.zone);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ZoneDistributionConfig message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ZoneDistributionConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.redis.cluster.v1beta1.ZoneDistributionConfig
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1beta1.IZoneDistributionConfig} message ZoneDistributionConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ZoneDistributionConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ZoneDistributionConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.redis.cluster.v1beta1.ZoneDistributionConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.redis.cluster.v1beta1.ZoneDistributionConfig} ZoneDistributionConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ZoneDistributionConfig.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1beta1.ZoneDistributionConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.mode = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.zone = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ZoneDistributionConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.redis.cluster.v1beta1.ZoneDistributionConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.redis.cluster.v1beta1.ZoneDistributionConfig} ZoneDistributionConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ZoneDistributionConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ZoneDistributionConfig message.
+                             * @function verify
+                             * @memberof google.cloud.redis.cluster.v1beta1.ZoneDistributionConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ZoneDistributionConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.mode != null && message.hasOwnProperty("mode"))
+                                    switch (message.mode) {
+                                    default:
+                                        return "mode: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.zone != null && message.hasOwnProperty("zone"))
+                                    if (!$util.isString(message.zone))
+                                        return "zone: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ZoneDistributionConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.redis.cluster.v1beta1.ZoneDistributionConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.redis.cluster.v1beta1.ZoneDistributionConfig} ZoneDistributionConfig
+                             */
+                            ZoneDistributionConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.redis.cluster.v1beta1.ZoneDistributionConfig)
+                                    return object;
+                                var message = new $root.google.cloud.redis.cluster.v1beta1.ZoneDistributionConfig();
+                                switch (object.mode) {
+                                default:
+                                    if (typeof object.mode === "number") {
+                                        message.mode = object.mode;
+                                        break;
+                                    }
+                                    break;
+                                case "ZONE_DISTRIBUTION_MODE_UNSPECIFIED":
+                                case 0:
+                                    message.mode = 0;
+                                    break;
+                                case "MULTI_ZONE":
+                                case 1:
+                                    message.mode = 1;
+                                    break;
+                                case "SINGLE_ZONE":
+                                case 2:
+                                    message.mode = 2;
+                                    break;
+                                }
+                                if (object.zone != null)
+                                    message.zone = String(object.zone);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ZoneDistributionConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.redis.cluster.v1beta1.ZoneDistributionConfig
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1beta1.ZoneDistributionConfig} message ZoneDistributionConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ZoneDistributionConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.mode = options.enums === String ? "ZONE_DISTRIBUTION_MODE_UNSPECIFIED" : 0;
+                                    object.zone = "";
+                                }
+                                if (message.mode != null && message.hasOwnProperty("mode"))
+                                    object.mode = options.enums === String ? $root.google.cloud.redis.cluster.v1beta1.ZoneDistributionConfig.ZoneDistributionMode[message.mode] === undefined ? message.mode : $root.google.cloud.redis.cluster.v1beta1.ZoneDistributionConfig.ZoneDistributionMode[message.mode] : message.mode;
+                                if (message.zone != null && message.hasOwnProperty("zone"))
+                                    object.zone = message.zone;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ZoneDistributionConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.redis.cluster.v1beta1.ZoneDistributionConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ZoneDistributionConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ZoneDistributionConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.redis.cluster.v1beta1.ZoneDistributionConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ZoneDistributionConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.redis.cluster.v1beta1.ZoneDistributionConfig";
+                            };
+    
+                            /**
+                             * ZoneDistributionMode enum.
+                             * @name google.cloud.redis.cluster.v1beta1.ZoneDistributionConfig.ZoneDistributionMode
+                             * @enum {number}
+                             * @property {number} ZONE_DISTRIBUTION_MODE_UNSPECIFIED=0 ZONE_DISTRIBUTION_MODE_UNSPECIFIED value
+                             * @property {number} MULTI_ZONE=1 MULTI_ZONE value
+                             * @property {number} SINGLE_ZONE=2 SINGLE_ZONE value
+                             */
+                            ZoneDistributionConfig.ZoneDistributionMode = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "ZONE_DISTRIBUTION_MODE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "MULTI_ZONE"] = 1;
+                                values[valuesById[2] = "SINGLE_ZONE"] = 2;
+                                return values;
+                            })();
+    
+                            return ZoneDistributionConfig;
                         })();
     
                         return v1beta1;

@@ -15,6 +15,11 @@
                 "getCluster"
               ]
             },
+            "GetClusterCertificateAuthority": {
+              "methods": [
+                "getClusterCertificateAuthority"
+              ]
+            },
             "UpdateCluster": {
               "methods": [
                 "updateCluster"
@@ -45,6 +50,11 @@
             "GetCluster": {
               "methods": [
                 "getCluster"
+              ]
+            },
+            "GetClusterCertificateAuthority": {
+              "methods": [
+                "getClusterCertificateAuthority"
               ]
             },
             "UpdateCluster": {

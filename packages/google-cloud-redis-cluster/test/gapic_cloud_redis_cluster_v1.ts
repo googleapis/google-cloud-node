@@ -473,6 +473,143 @@ describe('v1.CloudRedisClusterClient', () => {
     });
   });
 
+  describe('getClusterCertificateAuthority', () => {
+    it('invokes getClusterCertificateAuthority without error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.CertificateAuthority()
+      );
+      client.innerApiCalls.getClusterCertificateAuthority =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getClusterCertificateAuthority(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getClusterCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getClusterCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getClusterCertificateAuthority without error using callback', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.CertificateAuthority()
+      );
+      client.innerApiCalls.getClusterCertificateAuthority =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getClusterCertificateAuthority(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.redis.cluster.v1.ICertificateAuthority | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getClusterCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getClusterCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getClusterCertificateAuthority with error', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getClusterCertificateAuthority = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getClusterCertificateAuthority(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.getClusterCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getClusterCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getClusterCertificateAuthority with closed client', async () => {
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.redis.cluster.v1.GetClusterCertificateAuthorityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getClusterCertificateAuthority(request),
+        expectedError
+      );
+    });
+  });
+
   describe('updateCluster', () => {
     it('invokes updateCluster without error', async () => {
       const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
@@ -1890,6 +2027,85 @@ describe('v1.CloudRedisClusterClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('certificateAuthority', () => {
+      const fakePath = '/rendered/path/certificateAuthority';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        cluster: 'clusterValue',
+      };
+      const client = new cloudredisclusterModule.v1.CloudRedisClusterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.certificateAuthorityPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.certificateAuthorityPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('certificateAuthorityPath', () => {
+        const result = client.certificateAuthorityPath(
+          'projectValue',
+          'locationValue',
+          'clusterValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.certificateAuthorityPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromCertificateAuthorityName', () => {
+        const result =
+          client.matchProjectFromCertificateAuthorityName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.certificateAuthorityPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromCertificateAuthorityName', () => {
+        const result =
+          client.matchLocationFromCertificateAuthorityName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.certificateAuthorityPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchClusterFromCertificateAuthorityName', () => {
+        const result =
+          client.matchClusterFromCertificateAuthorityName(fakePath);
+        assert.strictEqual(result, 'clusterValue');
+        assert(
+          (
+            client.pathTemplates.certificateAuthorityPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('cluster', () => {
       const fakePath = '/rendered/path/cluster';
       const expectedParameters = {
