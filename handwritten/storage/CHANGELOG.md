@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [7.11.2](https://github.com/googleapis/nodejs-storage/compare/v7.11.1...v7.11.2) (2024-06-07)
+
+
+### Bug Fixes
+
+* Support uint8array in file.save ([#2480](https://github.com/googleapis/nodejs-storage/issues/2480)) ([1477fe1](https://github.com/googleapis/nodejs-storage/commit/1477fe15e5b6dae7cdfb2a1d00121e5d674c8f7c))
+
 ## [7.11.1](https://github.com/googleapis/nodejs-storage/compare/v7.11.0...v7.11.1) (2024-05-21)
 
 
