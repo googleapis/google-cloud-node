@@ -558,7 +558,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 124,
+                    "end": 129,
                     "type": "FULL"
                 }
             ],
@@ -594,6 +594,10 @@
                     {
                         "name": "max_suggestions",
                         "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "enable_attribute_suggestions",
+                        "type": "TYPE_BOOL"
                     },
                     {
                         "name": "entity",
@@ -1528,6 +1532,54 @@
             }
         },
         {
+            "regionTag": "retail_v2_generated_ProductService_PurgeProducts_async",
+            "title": "AnalyticsService purgeProducts Sample",
+            "origin": "API_DEFINITION",
+            "description": " Permanently deletes all selected [Product][google.cloud.retail.v2.Product]s under a branch. This process is asynchronous. If the request is valid, the removal will be enqueued and processed offline. Depending on the number of [Product][google.cloud.retail.v2.Product]s, this operation could take hours to complete. Before the operation completes, some [Product][google.cloud.retail.v2.Product]s may still be returned by [ProductService.GetProduct][google.cloud.retail.v2.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2.ProductService.ListProducts]. Depending on the number of [Product][google.cloud.retail.v2.Product]s, this operation could take hours to complete. To get a sample of [Product][google.cloud.retail.v2.Product]s that would be deleted, set [PurgeProductsRequest.force][google.cloud.retail.v2.PurgeProductsRequest.force] to false.",
+            "canonical": true,
+            "file": "product_service.purge_products.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 95,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "PurgeProducts",
+                "fullName": "google.cloud.retail.v2.ProductService.PurgeProducts",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "force",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ProductServiceClient",
+                    "fullName": "google.cloud.retail.v2.ProductServiceClient"
+                },
+                "method": {
+                    "shortName": "PurgeProducts",
+                    "fullName": "google.cloud.retail.v2.ProductService.PurgeProducts",
+                    "service": {
+                        "shortName": "ProductService",
+                        "fullName": "google.cloud.retail.v2.ProductService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "retail_v2_generated_ProductService_ImportProducts_async",
             "title": "AnalyticsService importProducts Sample",
             "origin": "API_DEFINITION",
@@ -1538,7 +1590,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 90,
+                    "end": 95,
                     "type": "FULL"
                 }
             ],
@@ -1647,7 +1699,7 @@
             "regionTag": "retail_v2_generated_ProductService_AddFulfillmentPlaces_async",
             "title": "AnalyticsService addFulfillmentPlaces Sample",
             "origin": "API_DEFINITION",
-            "description": " It is recommended to use the [ProductService.AddLocalInventories][google.cloud.retail.v2.ProductService.AddLocalInventories] method instead of [ProductService.AddFulfillmentPlaces][google.cloud.retail.v2.ProductService.AddFulfillmentPlaces]. [ProductService.AddLocalInventories][google.cloud.retail.v2.ProductService.AddLocalInventories] achieves the same results but provides more fine-grained control over ingesting local inventory data. Incrementally adds place IDs to [Product.fulfillment_info.place_ids][google.cloud.retail.v2.FulfillmentInfo.place_ids]. This process is asynchronous and does not require the [Product][google.cloud.retail.v2.Product] to exist before updating fulfillment information. If the request is valid, the update will be enqueued and processed downstream. As a consequence, when a response is returned, the added place IDs are not immediately manifested in the [Product][google.cloud.retail.v2.Product] queried by [ProductService.GetProduct][google.cloud.retail.v2.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2.ProductService.ListProducts]. The returned [Operation][google.longrunning.Operation]s will be obsolete after 1 day, and [GetOperation][google.longrunning.Operations.GetOperation] API will return NOT_FOUND afterwards. If conflicting updates are issued, the [Operation][google.longrunning.Operation]s associated with the stale updates will not be marked as [done][google.longrunning.Operation.done] until being obsolete.",
+            "description": " We recommend that you use the [ProductService.AddLocalInventories][google.cloud.retail.v2.ProductService.AddLocalInventories] method instead of the [ProductService.AddFulfillmentPlaces][google.cloud.retail.v2.ProductService.AddFulfillmentPlaces] method. [ProductService.AddLocalInventories][google.cloud.retail.v2.ProductService.AddLocalInventories] achieves the same results but provides more fine-grained control over ingesting local inventory data. Incrementally adds place IDs to [Product.fulfillment_info.place_ids][google.cloud.retail.v2.FulfillmentInfo.place_ids]. This process is asynchronous and does not require the [Product][google.cloud.retail.v2.Product] to exist before updating fulfillment information. If the request is valid, the update will be enqueued and processed downstream. As a consequence, when a response is returned, the added place IDs are not immediately manifested in the [Product][google.cloud.retail.v2.Product] queried by [ProductService.GetProduct][google.cloud.retail.v2.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2.ProductService.ListProducts]. The returned [Operation][google.longrunning.Operation]s will be obsolete after 1 day, and [GetOperation][google.longrunning.Operations.GetOperation] API will return NOT_FOUND afterwards. If conflicting updates are issued, the [Operation][google.longrunning.Operation]s associated with the stale updates will not be marked as [done][google.longrunning.Operation.done] until being obsolete.",
             "canonical": true,
             "file": "product_service.add_fulfillment_places.js",
             "language": "JAVASCRIPT",
@@ -1703,7 +1755,7 @@
             "regionTag": "retail_v2_generated_ProductService_RemoveFulfillmentPlaces_async",
             "title": "AnalyticsService removeFulfillmentPlaces Sample",
             "origin": "API_DEFINITION",
-            "description": " It is recommended to use the [ProductService.RemoveLocalInventories][google.cloud.retail.v2.ProductService.RemoveLocalInventories] method instead of [ProductService.RemoveFulfillmentPlaces][google.cloud.retail.v2.ProductService.RemoveFulfillmentPlaces]. [ProductService.RemoveLocalInventories][google.cloud.retail.v2.ProductService.RemoveLocalInventories] achieves the same results but provides more fine-grained control over ingesting local inventory data. Incrementally removes place IDs from a [Product.fulfillment_info.place_ids][google.cloud.retail.v2.FulfillmentInfo.place_ids]. This process is asynchronous and does not require the [Product][google.cloud.retail.v2.Product] to exist before updating fulfillment information. If the request is valid, the update will be enqueued and processed downstream. As a consequence, when a response is returned, the removed place IDs are not immediately manifested in the [Product][google.cloud.retail.v2.Product] queried by [ProductService.GetProduct][google.cloud.retail.v2.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2.ProductService.ListProducts]. The returned [Operation][google.longrunning.Operation]s will be obsolete after 1 day, and [GetOperation][google.longrunning.Operations.GetOperation] API will return NOT_FOUND afterwards. If conflicting updates are issued, the [Operation][google.longrunning.Operation]s associated with the stale updates will not be marked as [done][google.longrunning.Operation.done] until being obsolete.",
+            "description": " We recommend that you use the [ProductService.RemoveLocalInventories][google.cloud.retail.v2.ProductService.RemoveLocalInventories] method instead of the [ProductService.RemoveFulfillmentPlaces][google.cloud.retail.v2.ProductService.RemoveFulfillmentPlaces] method. [ProductService.RemoveLocalInventories][google.cloud.retail.v2.ProductService.RemoveLocalInventories] achieves the same results but provides more fine-grained control over ingesting local inventory data. Incrementally removes place IDs from a [Product.fulfillment_info.place_ids][google.cloud.retail.v2.FulfillmentInfo.place_ids]. This process is asynchronous and does not require the [Product][google.cloud.retail.v2.Product] to exist before updating fulfillment information. If the request is valid, the update will be enqueued and processed downstream. As a consequence, when a response is returned, the removed place IDs are not immediately manifested in the [Product][google.cloud.retail.v2.Product] queried by [ProductService.GetProduct][google.cloud.retail.v2.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2.ProductService.ListProducts]. The returned [Operation][google.longrunning.Operation]s will be obsolete after 1 day, and [GetOperation][google.longrunning.Operations.GetOperation] API will return NOT_FOUND afterwards. If conflicting updates are issued, the [Operation][google.longrunning.Operation]s associated with the stale updates will not be marked as [done][google.longrunning.Operation.done] until being obsolete.",
             "canonical": true,
             "file": "product_service.remove_fulfillment_places.js",
             "language": "JAVASCRIPT",

@@ -47,6 +47,7 @@
   * [Product_service.get_product](#product_service.get_product)
   * [Product_service.import_products](#product_service.import_products)
   * [Product_service.list_products](#product_service.list_products)
+  * [Product_service.purge_products](#product_service.purge_products)
   * [Product_service.remove_fulfillment_places](#product_service.remove_fulfillment_places)
   * [Product_service.remove_local_inventories](#product_service.remove_local_inventories)
   * [Product_service.set_inventory](#product_service.set_inventory)
@@ -790,6 +791,23 @@ __Usage:__
 
 
 `node packages/google-cloud-retail/samples/generated/v2/product_service.list_products.js`
+
+
+-----
+
+
+
+
+### Product_service.purge_products
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2/product_service.purge_products.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2/product_service.purge_products.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2/product_service.purge_products.js`
 
 
 -----
