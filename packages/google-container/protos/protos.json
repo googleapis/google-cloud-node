@@ -377,7 +377,7 @@
                       "options": {
                         "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/operations",
                         "(google.api.http).additional_bindings.get": "/v1/projects/{project_id}/zones/{zone}/operations",
-                        "(google.api.method_signature)": "project_id,zone"
+                        "(google.api.method_signature)": "parent"
                       },
                       "parsedOptions": [
                         {
@@ -390,6 +390,9 @@
                         },
                         {
                           "(google.api.method_signature)": "project_id,zone"
+                        },
+                        {
+                          "(google.api.method_signature)": "parent"
                         }
                       ]
                     },
