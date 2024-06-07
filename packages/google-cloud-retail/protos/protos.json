@@ -5039,269 +5039,17 @@
                         }
                       }
                     },
-                    "ProductLevelConfig": {
-                      "fields": {
-                        "ingestionProductType": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "merchantCenterProductIdField": {
-                          "type": "string",
-                          "id": 2
-                        }
+                    "BranchView": {
+                      "values": {
+                        "BRANCH_VIEW_UNSPECIFIED": 0,
+                        "BRANCH_VIEW_BASIC": 1,
+                        "BRANCH_VIEW_FULL": 2
                       }
                     },
-                    "CatalogAttribute": {
-                      "fields": {
-                        "key": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "inUse": {
-                          "type": "bool",
-                          "id": 9,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "type": {
-                          "type": "AttributeType",
-                          "id": 10,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "indexableOption": {
-                          "type": "IndexableOption",
-                          "id": 5
-                        },
-                        "dynamicFacetableOption": {
-                          "type": "DynamicFacetableOption",
-                          "id": 6
-                        },
-                        "searchableOption": {
-                          "type": "SearchableOption",
-                          "id": 7
-                        },
-                        "recommendationsFilteringOption": {
-                          "type": "RecommendationsFilteringOption",
-                          "id": 8
-                        },
-                        "exactSearchableOption": {
-                          "type": "ExactSearchableOption",
-                          "id": 11
-                        },
-                        "retrievableOption": {
-                          "type": "RetrievableOption",
-                          "id": 12
-                        }
-                      },
-                      "nested": {
-                        "AttributeType": {
-                          "values": {
-                            "UNKNOWN": 0,
-                            "TEXTUAL": 1,
-                            "NUMERICAL": 2
-                          }
-                        },
-                        "IndexableOption": {
-                          "values": {
-                            "INDEXABLE_OPTION_UNSPECIFIED": 0,
-                            "INDEXABLE_ENABLED": 1,
-                            "INDEXABLE_DISABLED": 2
-                          }
-                        },
-                        "DynamicFacetableOption": {
-                          "values": {
-                            "DYNAMIC_FACETABLE_OPTION_UNSPECIFIED": 0,
-                            "DYNAMIC_FACETABLE_ENABLED": 1,
-                            "DYNAMIC_FACETABLE_DISABLED": 2
-                          }
-                        },
-                        "SearchableOption": {
-                          "values": {
-                            "SEARCHABLE_OPTION_UNSPECIFIED": 0,
-                            "SEARCHABLE_ENABLED": 1,
-                            "SEARCHABLE_DISABLED": 2
-                          }
-                        },
-                        "ExactSearchableOption": {
-                          "values": {
-                            "EXACT_SEARCHABLE_OPTION_UNSPECIFIED": 0,
-                            "EXACT_SEARCHABLE_ENABLED": 1,
-                            "EXACT_SEARCHABLE_DISABLED": 2
-                          }
-                        },
-                        "RetrievableOption": {
-                          "values": {
-                            "RETRIEVABLE_OPTION_UNSPECIFIED": 0,
-                            "RETRIEVABLE_ENABLED": 1,
-                            "RETRIEVABLE_DISABLED": 2
-                          }
-                        }
-                      }
-                    },
-                    "AttributesConfig": {
+                    "Branch": {
                       "options": {
-                        "(google.api.resource).type": "retail.googleapis.com/AttributesConfig",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/catalogs/{catalog}/attributesConfig"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "catalogAttributes": {
-                          "keyType": "string",
-                          "type": "CatalogAttribute",
-                          "id": 2
-                        },
-                        "attributeConfigLevel": {
-                          "type": "AttributeConfigLevel",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "CompletionConfig": {
-                      "options": {
-                        "(google.api.resource).type": "retail.googleapis.com/CompletionConfig",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/catalogs/{catalog}/completionConfig"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "matchingOrder": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "maxSuggestions": {
-                          "type": "int32",
-                          "id": 3
-                        },
-                        "minPrefixLength": {
-                          "type": "int32",
-                          "id": 4
-                        },
-                        "autoLearning": {
-                          "type": "bool",
-                          "id": 11
-                        },
-                        "suggestionsInputConfig": {
-                          "type": "CompletionDataInputConfig",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "lastSuggestionsImportOperation": {
-                          "type": "string",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "denylistInputConfig": {
-                          "type": "CompletionDataInputConfig",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "lastDenylistImportOperation": {
-                          "type": "string",
-                          "id": 8,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "allowlistInputConfig": {
-                          "type": "CompletionDataInputConfig",
-                          "id": 9,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "lastAllowlistImportOperation": {
-                          "type": "string",
-                          "id": 10,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "MerchantCenterLink": {
-                      "fields": {
-                        "merchantCenterAccountId": {
-                          "type": "int64",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "branchId": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "destinations": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 3
-                        },
-                        "regionCode": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "languageCode": {
-                          "type": "string",
-                          "id": 5
-                        },
-                        "feeds": {
-                          "rule": "repeated",
-                          "type": "MerchantCenterFeedFilter",
-                          "id": 6
-                        }
-                      }
-                    },
-                    "MerchantCenterFeedFilter": {
-                      "fields": {
-                        "primaryFeedId": {
-                          "type": "int64",
-                          "id": 1
-                        },
-                        "primaryFeedName": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "MerchantCenterLinkingConfig": {
-                      "fields": {
-                        "links": {
-                          "rule": "repeated",
-                          "type": "MerchantCenterLink",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "Catalog": {
-                      "options": {
-                        "(google.api.resource).type": "retail.googleapis.com/Catalog",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/catalogs/{catalog}"
+                        "(google.api.resource).type": "retail.googleapis.com/Branch",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}"
                       },
                       "fields": {
                         "name": {
@@ -5315,19 +5063,296 @@
                           "type": "string",
                           "id": 2,
                           "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "isDefault": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "lastProductImportTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "productCountStats": {
+                          "rule": "repeated",
+                          "type": "ProductCountStatistic",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "qualityMetrics": {
+                          "rule": "repeated",
+                          "type": "QualityMetric",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ProductCountStatistic": {
+                          "fields": {
+                            "scope": {
+                              "type": "ProductCountScope",
+                              "id": 1
+                            },
+                            "counts": {
+                              "keyType": "string",
+                              "type": "int64",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "ProductCountScope": {
+                              "values": {
+                                "PRODUCT_COUNT_SCOPE_UNSPECIFIED": 0,
+                                "ALL_PRODUCTS": 1,
+                                "LAST_24_HOUR_UPDATE": 2
+                              }
+                            }
+                          }
+                        },
+                        "QualityMetric": {
+                          "fields": {
+                            "requirementKey": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "qualifiedProductCount": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "unqualifiedProductCount": {
+                              "type": "int32",
+                              "id": 3
+                            },
+                            "suggestedQualityPercentThreshold": {
+                              "type": "double",
+                              "id": 4
+                            },
+                            "unqualifiedSampleProducts": {
+                              "rule": "repeated",
+                              "type": "Product",
+                              "id": 5
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "Product": {
+                      "options": {
+                        "(google.api.resource).type": "retail.googleapis.com/Product",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}/products/{product}"
+                      },
+                      "oneofs": {
+                        "expiration": {
+                          "oneof": [
+                            "expireTime",
+                            "ttl"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "expireTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 16
+                        },
+                        "ttl": {
+                          "type": "google.protobuf.Duration",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
                         },
-                        "productLevelConfig": {
-                          "type": "ProductLevelConfig",
-                          "id": 4,
+                        "id": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "type": {
+                          "type": "Type",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "primaryProductId": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "collectionMemberIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5
+                        },
+                        "gtin": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "categories": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7
+                        },
+                        "title": {
+                          "type": "string",
+                          "id": 8,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
-                        "merchantCenterLinkingConfig": {
-                          "type": "MerchantCenterLinkingConfig",
-                          "id": 6
+                        "brands": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 9
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 10
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 11
+                        },
+                        "attributes": {
+                          "keyType": "string",
+                          "type": "CustomAttribute",
+                          "id": 12
+                        },
+                        "tags": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 13
+                        },
+                        "priceInfo": {
+                          "type": "PriceInfo",
+                          "id": 14
+                        },
+                        "rating": {
+                          "type": "Rating",
+                          "id": 15
+                        },
+                        "availableTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 18
+                        },
+                        "availability": {
+                          "type": "Availability",
+                          "id": 19
+                        },
+                        "availableQuantity": {
+                          "type": "google.protobuf.Int32Value",
+                          "id": 20
+                        },
+                        "fulfillmentInfo": {
+                          "rule": "repeated",
+                          "type": "FulfillmentInfo",
+                          "id": 21
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 22
+                        },
+                        "images": {
+                          "rule": "repeated",
+                          "type": "Image",
+                          "id": 23
+                        },
+                        "audience": {
+                          "type": "Audience",
+                          "id": 24
+                        },
+                        "colorInfo": {
+                          "type": "ColorInfo",
+                          "id": 25
+                        },
+                        "sizes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 26
+                        },
+                        "materials": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 27
+                        },
+                        "patterns": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 28
+                        },
+                        "conditions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 29
+                        },
+                        "promotions": {
+                          "rule": "repeated",
+                          "type": "Promotion",
+                          "id": 34
+                        },
+                        "publishTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 33
+                        },
+                        "retrievableFields": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 30,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "variants": {
+                          "rule": "repeated",
+                          "type": "Product",
+                          "id": 31,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "localInventories": {
+                          "rule": "repeated",
+                          "type": "LocalInventory",
+                          "id": 35,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "PRIMARY": 1,
+                            "VARIANT": 2,
+                            "COLLECTION": 3
+                          }
+                        },
+                        "Availability": {
+                          "values": {
+                            "AVAILABILITY_UNSPECIFIED": 0,
+                            "IN_STOCK": 1,
+                            "OUT_OF_STOCK": 2,
+                            "PREORDER": 3,
+                            "BACKORDER": 4
+                          }
                         }
                       }
                     },
@@ -5370,6 +5395,11 @@
                           "rule": "repeated",
                           "type": "TimeRange",
                           "id": 3
+                        },
+                        "pageCategories": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4
                         }
                       },
                       "nested": {
@@ -5410,7 +5440,9 @@
                             "replacementAction",
                             "ignoreAction",
                             "filterAction",
-                            "twowaySynonymsAction"
+                            "twowaySynonymsAction",
+                            "forceReturnFacetAction",
+                            "removeFacetAction"
                           ]
                         }
                       },
@@ -5446,6 +5478,14 @@
                         "twowaySynonymsAction": {
                           "type": "TwowaySynonymsAction",
                           "id": 11
+                        },
+                        "forceReturnFacetAction": {
+                          "type": "ForceReturnFacetAction",
+                          "id": 12
+                        },
+                        "removeFacetAction": {
+                          "type": "RemoveFacetAction",
+                          "id": 13
                         },
                         "condition": {
                           "type": "Condition",
@@ -5551,6 +5591,38 @@
                         "IgnoreAction": {
                           "fields": {
                             "ignoreTerms": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "ForceReturnFacetAction": {
+                          "fields": {
+                            "facetPositionAdjustments": {
+                              "rule": "repeated",
+                              "type": "FacetPositionAdjustment",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "FacetPositionAdjustment": {
+                              "fields": {
+                                "attributeName": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "position": {
+                                  "type": "int32",
+                                  "id": 2
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "RemoveFacetAction": {
+                          "fields": {
+                            "attributeNames": {
                               "rule": "repeated",
                               "type": "string",
                               "id": 1
@@ -5803,6 +5875,475 @@
                           "options": {
                             "(google.api.field_behavior)": "INPUT_ONLY"
                           }
+                        }
+                      }
+                    },
+                    "Promotion": {
+                      "fields": {
+                        "promotionId": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "BranchService": {
+                      "options": {
+                        "(google.api.default_host)": "retail.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListBranches": {
+                          "requestType": "ListBranchesRequest",
+                          "responseType": "ListBranchesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v2alpha/{parent=projects/*/locations/*/catalogs/*}/branches",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2alpha/{parent=projects/*/locations/*/catalogs/*}/branches"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetBranch": {
+                          "requestType": "GetBranchRequest",
+                          "responseType": "Branch",
+                          "options": {
+                            "(google.api.http).get": "/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "ListBranchesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "retail.googleapis.com/Catalog"
+                          }
+                        },
+                        "view": {
+                          "type": "BranchView",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ListBranchesResponse": {
+                      "fields": {
+                        "branches": {
+                          "rule": "repeated",
+                          "type": "Branch",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "GetBranchRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "retail.googleapis.com/Branch"
+                          }
+                        },
+                        "view": {
+                          "type": "BranchView",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ProductLevelConfig": {
+                      "fields": {
+                        "ingestionProductType": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "merchantCenterProductIdField": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CatalogAttribute": {
+                      "fields": {
+                        "key": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "inUse": {
+                          "type": "bool",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "type": {
+                          "type": "AttributeType",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "indexableOption": {
+                          "type": "IndexableOption",
+                          "id": 5
+                        },
+                        "dynamicFacetableOption": {
+                          "type": "DynamicFacetableOption",
+                          "id": 6
+                        },
+                        "searchableOption": {
+                          "type": "SearchableOption",
+                          "id": 7
+                        },
+                        "recommendationsFilteringOption": {
+                          "type": "RecommendationsFilteringOption",
+                          "id": 8
+                        },
+                        "exactSearchableOption": {
+                          "type": "ExactSearchableOption",
+                          "id": 11
+                        },
+                        "retrievableOption": {
+                          "type": "RetrievableOption",
+                          "id": 12
+                        },
+                        "facetConfig": {
+                          "type": "FacetConfig",
+                          "id": 13
+                        }
+                      },
+                      "nested": {
+                        "FacetConfig": {
+                          "fields": {
+                            "facetIntervals": {
+                              "rule": "repeated",
+                              "type": "Interval",
+                              "id": 1
+                            },
+                            "ignoredFacetValues": {
+                              "rule": "repeated",
+                              "type": "IgnoredFacetValues",
+                              "id": 2
+                            },
+                            "mergedFacetValues": {
+                              "rule": "repeated",
+                              "type": "MergedFacetValue",
+                              "id": 3
+                            },
+                            "mergedFacet": {
+                              "type": "MergedFacet",
+                              "id": 4
+                            },
+                            "rerankConfig": {
+                              "type": "RerankConfig",
+                              "id": 5
+                            }
+                          },
+                          "nested": {
+                            "IgnoredFacetValues": {
+                              "fields": {
+                                "values": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "startTime": {
+                                  "type": "google.protobuf.Timestamp",
+                                  "id": 2
+                                },
+                                "endTime": {
+                                  "type": "google.protobuf.Timestamp",
+                                  "id": 3
+                                }
+                              }
+                            },
+                            "MergedFacetValue": {
+                              "fields": {
+                                "values": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "mergedValue": {
+                                  "type": "string",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "MergedFacet": {
+                              "fields": {
+                                "mergedFacetKey": {
+                                  "type": "string",
+                                  "id": 1
+                                }
+                              }
+                            },
+                            "RerankConfig": {
+                              "fields": {
+                                "rerankFacet": {
+                                  "type": "bool",
+                                  "id": 1
+                                },
+                                "facetValues": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 2
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "AttributeType": {
+                          "values": {
+                            "UNKNOWN": 0,
+                            "TEXTUAL": 1,
+                            "NUMERICAL": 2
+                          }
+                        },
+                        "IndexableOption": {
+                          "values": {
+                            "INDEXABLE_OPTION_UNSPECIFIED": 0,
+                            "INDEXABLE_ENABLED": 1,
+                            "INDEXABLE_DISABLED": 2
+                          }
+                        },
+                        "DynamicFacetableOption": {
+                          "values": {
+                            "DYNAMIC_FACETABLE_OPTION_UNSPECIFIED": 0,
+                            "DYNAMIC_FACETABLE_ENABLED": 1,
+                            "DYNAMIC_FACETABLE_DISABLED": 2
+                          }
+                        },
+                        "SearchableOption": {
+                          "values": {
+                            "SEARCHABLE_OPTION_UNSPECIFIED": 0,
+                            "SEARCHABLE_ENABLED": 1,
+                            "SEARCHABLE_DISABLED": 2
+                          }
+                        },
+                        "ExactSearchableOption": {
+                          "values": {
+                            "EXACT_SEARCHABLE_OPTION_UNSPECIFIED": 0,
+                            "EXACT_SEARCHABLE_ENABLED": 1,
+                            "EXACT_SEARCHABLE_DISABLED": 2
+                          }
+                        },
+                        "RetrievableOption": {
+                          "values": {
+                            "RETRIEVABLE_OPTION_UNSPECIFIED": 0,
+                            "RETRIEVABLE_ENABLED": 1,
+                            "RETRIEVABLE_DISABLED": 2
+                          }
+                        }
+                      }
+                    },
+                    "AttributesConfig": {
+                      "options": {
+                        "(google.api.resource).type": "retail.googleapis.com/AttributesConfig",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/catalogs/{catalog}/attributesConfig"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "catalogAttributes": {
+                          "keyType": "string",
+                          "type": "CatalogAttribute",
+                          "id": 2
+                        },
+                        "attributeConfigLevel": {
+                          "type": "AttributeConfigLevel",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "CompletionConfig": {
+                      "options": {
+                        "(google.api.resource).type": "retail.googleapis.com/CompletionConfig",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/catalogs/{catalog}/completionConfig"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "matchingOrder": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "maxSuggestions": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "minPrefixLength": {
+                          "type": "int32",
+                          "id": 4
+                        },
+                        "autoLearning": {
+                          "type": "bool",
+                          "id": 11
+                        },
+                        "suggestionsInputConfig": {
+                          "type": "CompletionDataInputConfig",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "lastSuggestionsImportOperation": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "denylistInputConfig": {
+                          "type": "CompletionDataInputConfig",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "lastDenylistImportOperation": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "allowlistInputConfig": {
+                          "type": "CompletionDataInputConfig",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "lastAllowlistImportOperation": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "MerchantCenterLink": {
+                      "fields": {
+                        "merchantCenterAccountId": {
+                          "type": "int64",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "branchId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "destinations": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        },
+                        "regionCode": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "feeds": {
+                          "rule": "repeated",
+                          "type": "MerchantCenterFeedFilter",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "MerchantCenterFeedFilter": {
+                      "fields": {
+                        "primaryFeedId": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "primaryFeedName": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "MerchantCenterLinkingConfig": {
+                      "fields": {
+                        "links": {
+                          "rule": "repeated",
+                          "type": "MerchantCenterLink",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Catalog": {
+                      "options": {
+                        "(google.api.resource).type": "retail.googleapis.com/Catalog",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/catalogs/{catalog}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "productLevelConfig": {
+                          "type": "ProductLevelConfig",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "merchantCenterLinkingConfig": {
+                          "type": "MerchantCenterLinkingConfig",
+                          "id": 6
                         }
                       }
                     },
@@ -6174,223 +6715,6 @@
                         "errorSamples": {
                           "rule": "repeated",
                           "type": "google.rpc.Status",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "Product": {
-                      "options": {
-                        "(google.api.resource).type": "retail.googleapis.com/Product",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}/products/{product}"
-                      },
-                      "oneofs": {
-                        "expiration": {
-                          "oneof": [
-                            "expireTime",
-                            "ttl"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "expireTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 16
-                        },
-                        "ttl": {
-                          "type": "google.protobuf.Duration",
-                          "id": 17,
-                          "options": {
-                            "(google.api.field_behavior)": "INPUT_ONLY"
-                          }
-                        },
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "id": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "type": {
-                          "type": "Type",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "primaryProductId": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "collectionMemberIds": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 5
-                        },
-                        "gtin": {
-                          "type": "string",
-                          "id": 6
-                        },
-                        "categories": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 7
-                        },
-                        "title": {
-                          "type": "string",
-                          "id": 8,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "brands": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 9
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 10
-                        },
-                        "languageCode": {
-                          "type": "string",
-                          "id": 11
-                        },
-                        "attributes": {
-                          "keyType": "string",
-                          "type": "CustomAttribute",
-                          "id": 12
-                        },
-                        "tags": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 13
-                        },
-                        "priceInfo": {
-                          "type": "PriceInfo",
-                          "id": 14
-                        },
-                        "rating": {
-                          "type": "Rating",
-                          "id": 15
-                        },
-                        "availableTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 18
-                        },
-                        "availability": {
-                          "type": "Availability",
-                          "id": 19
-                        },
-                        "availableQuantity": {
-                          "type": "google.protobuf.Int32Value",
-                          "id": 20
-                        },
-                        "fulfillmentInfo": {
-                          "rule": "repeated",
-                          "type": "FulfillmentInfo",
-                          "id": 21
-                        },
-                        "uri": {
-                          "type": "string",
-                          "id": 22
-                        },
-                        "images": {
-                          "rule": "repeated",
-                          "type": "Image",
-                          "id": 23
-                        },
-                        "audience": {
-                          "type": "Audience",
-                          "id": 24
-                        },
-                        "colorInfo": {
-                          "type": "ColorInfo",
-                          "id": 25
-                        },
-                        "sizes": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 26
-                        },
-                        "materials": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 27
-                        },
-                        "patterns": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 28
-                        },
-                        "conditions": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 29
-                        },
-                        "promotions": {
-                          "rule": "repeated",
-                          "type": "Promotion",
-                          "id": 34
-                        },
-                        "publishTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 33
-                        },
-                        "retrievableFields": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 30,
-                          "options": {
-                            "deprecated": true
-                          }
-                        },
-                        "variants": {
-                          "rule": "repeated",
-                          "type": "Product",
-                          "id": 31,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "localInventories": {
-                          "rule": "repeated",
-                          "type": "LocalInventory",
-                          "id": 35,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "Type": {
-                          "values": {
-                            "TYPE_UNSPECIFIED": 0,
-                            "PRIMARY": 1,
-                            "VARIANT": 2,
-                            "COLLECTION": 3
-                          }
-                        },
-                        "Availability": {
-                          "values": {
-                            "AVAILABILITY_UNSPECIFIED": 0,
-                            "IN_STOCK": 1,
-                            "OUT_OF_STOCK": 2,
-                            "PREORDER": 3,
-                            "BACKORDER": 4
-                          }
-                        }
-                      }
-                    },
-                    "Promotion": {
-                      "fields": {
-                        "promotionId": {
-                          "type": "string",
                           "id": 1
                         }
                       }
@@ -7139,7 +7463,10 @@
                         "recentSearchResults": {
                           "rule": "repeated",
                           "type": "RecentSearchResult",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "attributeResults": {
                           "keyType": "string",
@@ -7171,6 +7498,9 @@
                           }
                         },
                         "RecentSearchResult": {
+                          "options": {
+                            "deprecated": true
+                          },
                           "fields": {
                             "recentSearch": {
                               "type": "string",
@@ -8067,6 +8397,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "source": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -8346,6 +8683,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "modelFeaturesConfig": {
+                          "type": "ModelFeaturesConfig",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -8439,6 +8783,32 @@
                             }
                           }
                         },
+                        "FrequentlyBoughtTogetherFeaturesConfig": {
+                          "fields": {
+                            "contextProductsType": {
+                              "type": "ContextProductsType",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "ModelFeaturesConfig": {
+                          "oneofs": {
+                            "typeDedicatedConfig": {
+                              "oneof": [
+                                "frequentlyBoughtTogetherConfig"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "frequentlyBoughtTogetherConfig": {
+                              "type": "FrequentlyBoughtTogetherFeaturesConfig",
+                              "id": 1
+                            }
+                          }
+                        },
                         "ServingState": {
                           "values": {
                             "SERVING_STATE_UNSPECIFIED": 0,
@@ -8467,6 +8837,13 @@
                             "DATA_STATE_UNSPECIFIED": 0,
                             "DATA_OK": 1,
                             "DATA_ERROR": 2
+                          }
+                        },
+                        "ContextProductsType": {
+                          "values": {
+                            "CONTEXT_PRODUCTS_TYPE_UNSPECIFIED": 0,
+                            "SINGLE_CONTEXT_PRODUCT": 1,
+                            "MULTIPLE_CONTEXT_PRODUCTS": 2
                           }
                         }
                       }
@@ -9612,6 +9989,450 @@
                         }
                       }
                     },
+                    "LoggingConfig": {
+                      "options": {
+                        "(google.api.resource).type": "retail.googleapis.com/LoggingConfig",
+                        "(google.api.resource).pattern": "projects/{project}/loggingConfig"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "defaultLogGenerationRule": {
+                          "type": "LogGenerationRule",
+                          "id": 2
+                        },
+                        "serviceLogGenerationRules": {
+                          "rule": "repeated",
+                          "type": "ServiceLogGenerationRule",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "LogGenerationRule": {
+                          "oneofs": {
+                            "_infoLogSampleRate": {
+                              "oneof": [
+                                "infoLogSampleRate"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "loggingLevel": {
+                              "type": "LoggingLevel",
+                              "id": 1
+                            },
+                            "infoLogSampleRate": {
+                              "type": "float",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "ServiceLogGenerationRule": {
+                          "fields": {
+                            "serviceName": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "logGenerationRule": {
+                              "type": "LogGenerationRule",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "LoggingLevel": {
+                          "values": {
+                            "LOGGING_LEVEL_UNSPECIFIED": 0,
+                            "LOGGING_DISABLED": 1,
+                            "LOG_ERRORS_AND_ABOVE": 2,
+                            "LOG_WARNINGS_AND_ABOVE": 3,
+                            "LOG_ALL": 4
+                          }
+                        }
+                      }
+                    },
+                    "Project": {
+                      "options": {
+                        "(google.api.resource).type": "retail.googleapis.com/RetailProject",
+                        "(google.api.resource).pattern": "projects/{project}/retailProject"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "enrolledSolutions": {
+                          "rule": "repeated",
+                          "type": "SolutionType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "AlertConfig": {
+                      "options": {
+                        "(google.api.resource).type": "retail.googleapis.com/AlertConfig",
+                        "(google.api.resource).pattern": "projects/{project}/alertConfig"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "alertPolicies": {
+                          "rule": "repeated",
+                          "type": "AlertPolicy",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "AlertPolicy": {
+                          "fields": {
+                            "alertGroup": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "enrollStatus": {
+                              "type": "EnrollStatus",
+                              "id": 2
+                            },
+                            "recipients": {
+                              "rule": "repeated",
+                              "type": "Recipient",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "Recipient": {
+                              "fields": {
+                                "emailAddress": {
+                                  "type": "string",
+                                  "id": 1
+                                }
+                              }
+                            },
+                            "EnrollStatus": {
+                              "values": {
+                                "ENROLL_STATUS_UNSPECIFIED": 0,
+                                "ENROLLED": 1,
+                                "DECLINED": 2
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ProjectService": {
+                      "options": {
+                        "(google.api.default_host)": "retail.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "GetProject": {
+                          "requestType": "GetProjectRequest",
+                          "responseType": "Project",
+                          "options": {
+                            "(google.api.http).get": "/v2alpha/{name=projects/*/retailProject}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2alpha/{name=projects/*/retailProject}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "AcceptTerms": {
+                          "requestType": "AcceptTermsRequest",
+                          "responseType": "Project",
+                          "options": {
+                            "(google.api.http).post": "/v2alpha/{project=projects/*/retailProject}:acceptTerms",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "project"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2alpha/{project=projects/*/retailProject}:acceptTerms",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project"
+                            }
+                          ]
+                        },
+                        "EnrollSolution": {
+                          "requestType": "EnrollSolutionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v2alpha/{project=projects/*}:enrollSolution",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "google.cloud.retail.v2alpha.EnrollSolutionResponse",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.retail.v2alpha.EnrollSolutionMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2alpha/{project=projects/*}:enrollSolution",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.retail.v2alpha.EnrollSolutionResponse",
+                                "metadata_type": "google.cloud.retail.v2alpha.EnrollSolutionMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListEnrolledSolutions": {
+                          "requestType": "ListEnrolledSolutionsRequest",
+                          "responseType": "ListEnrolledSolutionsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v2alpha/{parent=projects/*}:enrolledSolutions",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2alpha/{parent=projects/*}:enrolledSolutions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetLoggingConfig": {
+                          "requestType": "GetLoggingConfigRequest",
+                          "responseType": "LoggingConfig",
+                          "options": {
+                            "(google.api.http).get": "/v2alpha/{name=projects/*/loggingConfig}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2alpha/{name=projects/*/loggingConfig}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateLoggingConfig": {
+                          "requestType": "UpdateLoggingConfigRequest",
+                          "responseType": "LoggingConfig",
+                          "options": {
+                            "(google.api.http).patch": "/v2alpha/{logging_config.name=projects/*/loggingConfig}",
+                            "(google.api.http).body": "logging_config",
+                            "(google.api.method_signature)": "logging_config,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v2alpha/{logging_config.name=projects/*/loggingConfig}",
+                                "body": "logging_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "logging_config,update_mask"
+                            }
+                          ]
+                        },
+                        "GetAlertConfig": {
+                          "requestType": "GetAlertConfigRequest",
+                          "responseType": "AlertConfig",
+                          "options": {
+                            "(google.api.http).get": "/v2alpha/{name=projects/*/alertConfig}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2alpha/{name=projects/*/alertConfig}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateAlertConfig": {
+                          "requestType": "UpdateAlertConfigRequest",
+                          "responseType": "AlertConfig",
+                          "options": {
+                            "(google.api.http).patch": "/v2alpha/{alert_config.name=projects/*/alertConfig}",
+                            "(google.api.http).body": "alert_config",
+                            "(google.api.method_signature)": "alert_config,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v2alpha/{alert_config.name=projects/*/alertConfig}",
+                                "body": "alert_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "alert_config,update_mask"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "GetProjectRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "retail.googleapis.com/RetailProject"
+                          }
+                        }
+                      }
+                    },
+                    "AcceptTermsRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "retail.googleapis.com/RetailProject"
+                          }
+                        }
+                      }
+                    },
+                    "EnrollSolutionRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                          }
+                        },
+                        "solution": {
+                          "type": "SolutionType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "EnrollSolutionResponse": {
+                      "fields": {
+                        "enrolledSolution": {
+                          "type": "SolutionType",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "EnrollSolutionMetadata": {
+                      "fields": {}
+                    },
+                    "ListEnrolledSolutionsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                          }
+                        }
+                      }
+                    },
+                    "ListEnrolledSolutionsResponse": {
+                      "fields": {
+                        "enrolledSolutions": {
+                          "rule": "repeated",
+                          "type": "SolutionType",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "GetLoggingConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "retail.googleapis.com/LoggingConfig"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateLoggingConfigRequest": {
+                      "fields": {
+                        "loggingConfig": {
+                          "type": "LoggingConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetAlertConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "retail.googleapis.com/AlertConfig"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateAlertConfigRequest": {
+                      "fields": {
+                        "alertConfig": {
+                          "type": "AlertConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
                     "ServingConfig": {
                       "options": {
                         "(google.api.resource).type": "retail.googleapis.com/ServingConfig",
@@ -9700,6 +10521,10 @@
                         "enableCategoryFilterLevel": {
                           "type": "string",
                           "id": 16
+                        },
+                        "ignoreRecsDenylist": {
+                          "type": "bool",
+                          "id": 24
                         },
                         "personalizationSpec": {
                           "type": "SearchRequest.PersonalizationSpec",

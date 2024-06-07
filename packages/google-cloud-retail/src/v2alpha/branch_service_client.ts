@@ -24,7 +24,6 @@ import type {
   Descriptors,
   ClientOptions,
   GrpcClientOptions,
-  LROperation,
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
@@ -34,19 +33,24 @@ import jsonProtos = require('../../protos/protos.json');
 
 /**
  * Client JSON configuration object, loaded from
- * `src/v2alpha/analytics_service_client_config.json`.
+ * `src/v2alpha/branch_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './analytics_service_client_config.json';
+import * as gapicConfig from './branch_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for managing & accessing retail search business metric.
- *  Retail recommendation business metric is currently not available.
+ *  Service for {@link protos.google.cloud.retail.v2alpha.Branch|Branch} Management
+ *
+ *  {@link protos.google.cloud.retail.v2alpha.Branch|Branch}es are automatically created when
+ *  a {@link protos.google.cloud.retail.v2alpha.Catalog|Catalog} is created. There are fixed
+ *  three branches in each catalog, and may use
+ *  {@link protos.google.cloud.retail.v2alpha.BranchService.ListBranches|ListBranches} method
+ *  to get the details of all branches.
  * @class
  * @memberof v2alpha
  */
-export class AnalyticsServiceClient {
+export class BranchServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -68,10 +72,10 @@ export class AnalyticsServiceClient {
   locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  analyticsServiceStub?: Promise<{[name: string]: Function}>;
+  branchServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of AnalyticsServiceClient.
+   * Construct an instance of BranchServiceClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -106,7 +110,7 @@ export class AnalyticsServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new AnalyticsServiceClient({fallback: true}, gax);
+   *     const client = new BranchServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -114,7 +118,7 @@ export class AnalyticsServiceClient {
     gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof AnalyticsServiceClient;
+    const staticMembers = this.constructor as typeof BranchServiceClient;
     if (
       opts?.universe_domain &&
       opts?.universeDomain &&
@@ -284,28 +288,12 @@ export class AnalyticsServiceClient {
     this.operationsClient = this._gaxModule
       .lro(lroOptions)
       .operationsClient(opts);
-    const exportAnalyticsMetricsResponse = protoFilesRoot.lookup(
-      '.google.cloud.retail.v2alpha.ExportAnalyticsMetricsResponse'
-    ) as gax.protobuf.Type;
-    const exportAnalyticsMetricsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.retail.v2alpha.ExportMetadata'
-    ) as gax.protobuf.Type;
 
-    this.descriptors.longrunning = {
-      exportAnalyticsMetrics: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        exportAnalyticsMetricsResponse.decode.bind(
-          exportAnalyticsMetricsResponse
-        ),
-        exportAnalyticsMetricsMetadata.decode.bind(
-          exportAnalyticsMetricsMetadata
-        )
-      ),
-    };
+    this.descriptors.longrunning = {};
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.retail.v2alpha.AnalyticsService',
+      'google.cloud.retail.v2alpha.BranchService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -333,28 +321,28 @@ export class AnalyticsServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.analyticsServiceStub) {
-      return this.analyticsServiceStub;
+    if (this.branchServiceStub) {
+      return this.branchServiceStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.retail.v2alpha.AnalyticsService.
-    this.analyticsServiceStub = this._gaxGrpc.createStub(
+    // google.cloud.retail.v2alpha.BranchService.
+    this.branchServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.retail.v2alpha.AnalyticsService'
+            'google.cloud.retail.v2alpha.BranchService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.retail.v2alpha.AnalyticsService,
+          (this._protos as any).google.cloud.retail.v2alpha.BranchService,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const analyticsServiceStubMethods = ['exportAnalyticsMetrics'];
-    for (const methodName of analyticsServiceStubMethods) {
-      const callPromise = this.analyticsServiceStub.then(
+    const branchServiceStubMethods = ['listBranches', 'getBranch'];
+    for (const methodName of branchServiceStubMethods) {
+      const callPromise = this.branchServiceStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -368,7 +356,7 @@ export class AnalyticsServiceClient {
         }
       );
 
-      const descriptor = this.descriptors.longrunning[methodName] || undefined;
+      const descriptor = undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -379,7 +367,7 @@ export class AnalyticsServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.analyticsServiceStub;
+    return this.branchServiceStub;
   }
 
   /**
@@ -466,112 +454,82 @@ export class AnalyticsServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-
   /**
-   * Exports analytics metrics.
-   *
-   * `Operation.response` is of type `ExportAnalyticsMetricsResponse`.
-   * `Operation.metadata` is of type `ExportMetadata`.
+   * Lists all {@link protos.google.cloud.retail.v2alpha.Branch|Branch}s under the specified
+   * parent {@link protos.google.cloud.retail.v2alpha.Catalog|Catalog}.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.catalog
-   *   Required. Full resource name of the parent catalog.
-   *   Expected format: `projects/* /locations/* /catalogs/*`
-   * @param {google.cloud.retail.v2alpha.OutputConfig} request.outputConfig
-   *   Required. The output location of the data.
-   * @param {string} request.filter
-   *   A filtering expression to specify restrictions on returned metrics.
-   *   The expression is a sequence of terms. Each term applies a restriction to
-   *   the returned metrics. Use this expression to restrict results to a
-   *   specific time range.
-   *
-   *     Currently we expect only one types of fields:
-   *
-   *      * `timestamp`: This can be specified twice, once with a
-   *        less than operator and once with a greater than operator. The
-   *        `timestamp` restriction should result in one, contiguous, valid,
-   *        `timestamp` range.
-   *
-   *     Some examples of valid filters expressions:
-   *
-   *     * Example 1: `timestamp > "2012-04-23T18:25:43.511Z"
-   *               timestamp < "2012-04-23T18:30:43.511Z"`
-   *     * Example 2: `timestamp > "2012-04-23T18:25:43.511Z"`
+   * @param {string} request.parent
+   *   Required. The parent catalog resource name.
+   * @param {google.cloud.retail.v2alpha.BranchView} request.view
+   *   The view to apply to the returned
+   *   {@link protos.google.cloud.retail.v2alpha.Branch|Branch}. Defaults to
+   *   [Branch.BranchView.BASIC] if unspecified.
+   *   See documentation of fields of {@link protos.google.cloud.retail.v2alpha.Branch|Branch}
+   *   to find what fields are excluded from BASIC view.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.ListBranchesResponse|ListBranchesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v2alpha/analytics_service.export_analytics_metrics.js</caption>
-   * region_tag:retail_v2alpha_generated_AnalyticsService_ExportAnalyticsMetrics_async
+   * @example <caption>include:samples/generated/v2alpha/branch_service.list_branches.js</caption>
+   * region_tag:retail_v2alpha_generated_BranchService_ListBranches_async
    */
-  exportAnalyticsMetrics(
-    request?: protos.google.cloud.retail.v2alpha.IExportAnalyticsMetricsRequest,
+  listBranches(
+    request?: protos.google.cloud.retail.v2alpha.IListBranchesRequest,
     options?: CallOptions
   ): Promise<
     [
-      LROperation<
-        protos.google.cloud.retail.v2alpha.IExportAnalyticsMetricsResponse,
-        protos.google.cloud.retail.v2alpha.IExportMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
+      protos.google.cloud.retail.v2alpha.IListBranchesResponse,
+      protos.google.cloud.retail.v2alpha.IListBranchesRequest | undefined,
       {} | undefined,
     ]
   >;
-  exportAnalyticsMetrics(
-    request: protos.google.cloud.retail.v2alpha.IExportAnalyticsMetricsRequest,
+  listBranches(
+    request: protos.google.cloud.retail.v2alpha.IListBranchesRequest,
     options: CallOptions,
     callback: Callback<
-      LROperation<
-        protos.google.cloud.retail.v2alpha.IExportAnalyticsMetricsResponse,
-        protos.google.cloud.retail.v2alpha.IExportMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
+      protos.google.cloud.retail.v2alpha.IListBranchesResponse,
+      | protos.google.cloud.retail.v2alpha.IListBranchesRequest
+      | null
+      | undefined,
       {} | null | undefined
     >
   ): void;
-  exportAnalyticsMetrics(
-    request: protos.google.cloud.retail.v2alpha.IExportAnalyticsMetricsRequest,
+  listBranches(
+    request: protos.google.cloud.retail.v2alpha.IListBranchesRequest,
     callback: Callback<
-      LROperation<
-        protos.google.cloud.retail.v2alpha.IExportAnalyticsMetricsResponse,
-        protos.google.cloud.retail.v2alpha.IExportMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
+      protos.google.cloud.retail.v2alpha.IListBranchesResponse,
+      | protos.google.cloud.retail.v2alpha.IListBranchesRequest
+      | null
+      | undefined,
       {} | null | undefined
     >
   ): void;
-  exportAnalyticsMetrics(
-    request?: protos.google.cloud.retail.v2alpha.IExportAnalyticsMetricsRequest,
+  listBranches(
+    request?: protos.google.cloud.retail.v2alpha.IListBranchesRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          LROperation<
-            protos.google.cloud.retail.v2alpha.IExportAnalyticsMetricsResponse,
-            protos.google.cloud.retail.v2alpha.IExportMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
+          protos.google.cloud.retail.v2alpha.IListBranchesResponse,
+          | protos.google.cloud.retail.v2alpha.IListBranchesRequest
+          | null
+          | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      LROperation<
-        protos.google.cloud.retail.v2alpha.IExportAnalyticsMetricsResponse,
-        protos.google.cloud.retail.v2alpha.IExportMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
+      protos.google.cloud.retail.v2alpha.IListBranchesResponse,
+      | protos.google.cloud.retail.v2alpha.IListBranchesRequest
+      | null
+      | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      LROperation<
-        protos.google.cloud.retail.v2alpha.IExportAnalyticsMetricsResponse,
-        protos.google.cloud.retail.v2alpha.IExportMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
+      protos.google.cloud.retail.v2alpha.IListBranchesResponse,
+      protos.google.cloud.retail.v2alpha.IListBranchesRequest | undefined,
       {} | undefined,
     ]
   > | void {
@@ -588,49 +546,107 @@ export class AnalyticsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        catalog: request.catalog ?? '',
+        parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.exportAnalyticsMetrics(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls.listBranches(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by `exportAnalyticsMetrics()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   * Retrieves a {@link protos.google.cloud.retail.v2alpha.Branch|Branch}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the branch to retrieve.
+   *   Format:
+   *   `projects/* /locations/global/catalogs/default_catalog/branches/some_branch_id`.
+   *
+   *   "default_branch" can be used as a special branch_id, it returns the
+   *   default branch that has been set for the catalog.
+   * @param {google.cloud.retail.v2alpha.BranchView} request.view
+   *   The view to apply to the returned
+   *   {@link protos.google.cloud.retail.v2alpha.Branch|Branch}. Defaults to
+   *   [Branch.BranchView.BASIC] if unspecified.
+   *   See documentation of fields of {@link protos.google.cloud.retail.v2alpha.Branch|Branch}
+   *   to find what fields are excluded from BASIC view.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.Branch|Branch}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v2alpha/analytics_service.export_analytics_metrics.js</caption>
-   * region_tag:retail_v2alpha_generated_AnalyticsService_ExportAnalyticsMetrics_async
+   * @example <caption>include:samples/generated/v2alpha/branch_service.get_branch.js</caption>
+   * region_tag:retail_v2alpha_generated_BranchService_GetBranch_async
    */
-  async checkExportAnalyticsMetricsProgress(
-    name: string
+  getBranch(
+    request?: protos.google.cloud.retail.v2alpha.IGetBranchRequest,
+    options?: CallOptions
   ): Promise<
-    LROperation<
-      protos.google.cloud.retail.v2alpha.ExportAnalyticsMetricsResponse,
-      protos.google.cloud.retail.v2alpha.ExportMetadata
+    [
+      protos.google.cloud.retail.v2alpha.IBranch,
+      protos.google.cloud.retail.v2alpha.IGetBranchRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getBranch(
+    request: protos.google.cloud.retail.v2alpha.IGetBranchRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.retail.v2alpha.IBranch,
+      protos.google.cloud.retail.v2alpha.IGetBranchRequest | null | undefined,
+      {} | null | undefined
     >
-  > {
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.exportAnalyticsMetrics,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.retail.v2alpha.ExportAnalyticsMetricsResponse,
-      protos.google.cloud.retail.v2alpha.ExportMetadata
-    >;
+  ): void;
+  getBranch(
+    request: protos.google.cloud.retail.v2alpha.IGetBranchRequest,
+    callback: Callback<
+      protos.google.cloud.retail.v2alpha.IBranch,
+      protos.google.cloud.retail.v2alpha.IGetBranchRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getBranch(
+    request?: protos.google.cloud.retail.v2alpha.IGetBranchRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.retail.v2alpha.IBranch,
+          | protos.google.cloud.retail.v2alpha.IGetBranchRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.retail.v2alpha.IBranch,
+      protos.google.cloud.retail.v2alpha.IGetBranchRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.retail.v2alpha.IBranch,
+      protos.google.cloud.retail.v2alpha.IGetBranchRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getBranch(request, options, callback);
   }
+
   /**
    * Gets information about a location.
    *
@@ -1557,8 +1573,8 @@ export class AnalyticsServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.analyticsServiceStub && !this._terminated) {
-      return this.analyticsServiceStub.then(stub => {
+    if (this.branchServiceStub && !this._terminated) {
+      return this.branchServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

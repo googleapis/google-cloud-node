@@ -21,16 +21,9 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as modelserviceModule from '../src';
+import * as branchserviceModule from '../src';
 
-import {PassThrough} from 'stream';
-
-import {
-  protobuf,
-  LROperation,
-  operationsProtos,
-  LocationProtos,
-} from 'google-gax';
+import {protobuf, operationsProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -71,76 +64,6 @@ function stubSimpleCallWithCallback<ResponseType>(
     : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
-}
-
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
-}
-
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
-    }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
-    }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
-}
-
 function stubAsyncIterationCall<ResponseType>(
   responses?: ResponseType[],
   error?: Error
@@ -164,16 +87,16 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v2alpha.ModelServiceClient', () => {
+describe('v2alpha.BranchServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient();
+      const client = new branchserviceModule.v2alpha.BranchServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'retail.googleapis.com');
     });
 
     it('has universeDomain', () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient();
+      const client = new branchserviceModule.v2alpha.BranchServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -185,7 +108,7 @@ describe('v2alpha.ModelServiceClient', () => {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const servicePath =
-          modelserviceModule.v2alpha.ModelServiceClient.servicePath;
+          branchserviceModule.v2alpha.BranchServiceClient.servicePath;
         assert.strictEqual(servicePath, 'retail.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -194,14 +117,14 @@ describe('v2alpha.ModelServiceClient', () => {
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const apiEndpoint =
-          modelserviceModule.v2alpha.ModelServiceClient.apiEndpoint;
+          branchserviceModule.v2alpha.BranchServiceClient.apiEndpoint;
         assert.strictEqual(apiEndpoint, 'retail.googleapis.com');
         assert(stub.called);
         stub.restore();
       });
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         universeDomain: 'example.com',
       });
       const servicePath = client.apiEndpoint;
@@ -209,7 +132,7 @@ describe('v2alpha.ModelServiceClient', () => {
     });
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         universe_domain: 'example.com',
       });
       const servicePath = client.apiEndpoint;
@@ -221,7 +144,7 @@ describe('v2alpha.ModelServiceClient', () => {
         it('sets apiEndpoint from environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new modelserviceModule.v2alpha.ModelServiceClient();
+          const client = new branchserviceModule.v2alpha.BranchServiceClient();
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'retail.example.com');
           if (saved) {
@@ -234,7 +157,7 @@ describe('v2alpha.ModelServiceClient', () => {
         it('value configured in code has priority over environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new modelserviceModule.v2alpha.ModelServiceClient({
+          const client = new branchserviceModule.v2alpha.BranchServiceClient({
             universeDomain: 'configured.example.com',
           });
           const servicePath = client.apiEndpoint;
@@ -249,7 +172,7 @@ describe('v2alpha.ModelServiceClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new modelserviceModule.v2alpha.ModelServiceClient({
+        new branchserviceModule.v2alpha.BranchServiceClient({
           universe_domain: 'example.com',
           universeDomain: 'example.net',
         });
@@ -257,51 +180,51 @@ describe('v2alpha.ModelServiceClient', () => {
     });
 
     it('has port', () => {
-      const port = modelserviceModule.v2alpha.ModelServiceClient.port;
+      const port = branchserviceModule.v2alpha.BranchServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient();
+      const client = new branchserviceModule.v2alpha.BranchServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         fallback: true,
       });
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      assert.strictEqual(client.modelServiceStub, undefined);
+      assert.strictEqual(client.branchServiceStub, undefined);
       await client.initialize();
-      assert(client.modelServiceStub);
+      assert(client.branchServiceStub);
     });
 
     it('has close method for the initialized client', done => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
-      assert(client.modelServiceStub);
+      assert(client.branchServiceStub);
       client.close().then(() => {
         done();
       });
     });
 
     it('has close method for the non-initialized client', done => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      assert.strictEqual(client.modelServiceStub, undefined);
+      assert.strictEqual(client.branchServiceStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -309,7 +232,7 @@ describe('v2alpha.ModelServiceClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -321,7 +244,7 @@ describe('v2alpha.ModelServiceClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -342,64 +265,64 @@ describe('v2alpha.ModelServiceClient', () => {
     });
   });
 
-  describe('getModel', () => {
-    it('invokes getModel without error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+  describe('listBranches', () => {
+    it('invokes listBranches without error', async () => {
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.GetModelRequest()
+        new protos.google.cloud.retail.v2alpha.ListBranchesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.GetModelRequest',
-        ['name']
+        '.google.cloud.retail.v2alpha.ListBranchesRequest',
+        ['parent']
       );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.Model()
+        new protos.google.cloud.retail.v2alpha.ListBranchesResponse()
       );
-      client.innerApiCalls.getModel = stubSimpleCall(expectedResponse);
-      const [response] = await client.getModel(request);
+      client.innerApiCalls.listBranches = stubSimpleCall(expectedResponse);
+      const [response] = await client.listBranches(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getModel as SinonStub
+        client.innerApiCalls.listBranches as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getModel as SinonStub
+        client.innerApiCalls.listBranches as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getModel without error using callback', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+    it('invokes listBranches without error using callback', async () => {
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.GetModelRequest()
+        new protos.google.cloud.retail.v2alpha.ListBranchesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.GetModelRequest',
-        ['name']
+        '.google.cloud.retail.v2alpha.ListBranchesRequest',
+        ['parent']
       );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.Model()
+        new protos.google.cloud.retail.v2alpha.ListBranchesResponse()
       );
-      client.innerApiCalls.getModel =
+      client.innerApiCalls.listBranches =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.getModel(
+        client.listBranches(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.retail.v2alpha.IModel | null
+            result?: protos.google.cloud.retail.v2alpha.IListBranchesResponse | null
           ) => {
             if (err) {
               reject(err);
@@ -412,1274 +335,195 @@ describe('v2alpha.ModelServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getModel as SinonStub
+        client.innerApiCalls.listBranches as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getModel as SinonStub
+        client.innerApiCalls.listBranches as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getModel with error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+    it('invokes listBranches with error', async () => {
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.GetModelRequest()
+        new protos.google.cloud.retail.v2alpha.ListBranchesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.GetModelRequest',
+        '.google.cloud.retail.v2alpha.ListBranchesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listBranches = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listBranches(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listBranches as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listBranches as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listBranches with closed client', async () => {
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.ListBranchesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.ListBranchesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.listBranches(request), expectedError);
+    });
+  });
+
+  describe('getBranch', () => {
+    it('invokes getBranch without error', async () => {
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.GetBranchRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.GetBranchRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.Branch()
+      );
+      client.innerApiCalls.getBranch = stubSimpleCall(expectedResponse);
+      const [response] = await client.getBranch(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getBranch as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getBranch as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getBranch without error using callback', async () => {
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.GetBranchRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.GetBranchRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.Branch()
+      );
+      client.innerApiCalls.getBranch =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getBranch(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.retail.v2alpha.IBranch | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getBranch as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getBranch as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getBranch with error', async () => {
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.GetBranchRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.retail.v2alpha.GetBranchRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.getModel = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getModel(request), expectedError);
+      client.innerApiCalls.getBranch = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.getBranch(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.getModel as SinonStub
+        client.innerApiCalls.getBranch as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getModel as SinonStub
+        client.innerApiCalls.getBranch as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getModel with closed client', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+    it('invokes getBranch with closed client', async () => {
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.GetModelRequest()
+        new protos.google.cloud.retail.v2alpha.GetBranchRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.GetModelRequest',
+        '.google.cloud.retail.v2alpha.GetBranchRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.getModel(request), expectedError);
-    });
-  });
-
-  describe('pauseModel', () => {
-    it('invokes pauseModel without error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.PauseModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.PauseModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.Model()
-      );
-      client.innerApiCalls.pauseModel = stubSimpleCall(expectedResponse);
-      const [response] = await client.pauseModel(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.pauseModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.pauseModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes pauseModel without error using callback', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.PauseModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.PauseModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.Model()
-      );
-      client.innerApiCalls.pauseModel =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.pauseModel(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.retail.v2alpha.IModel | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.pauseModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.pauseModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes pauseModel with error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.PauseModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.PauseModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.pauseModel = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.pauseModel(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.pauseModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.pauseModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes pauseModel with closed client', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.PauseModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.PauseModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.pauseModel(request), expectedError);
-    });
-  });
-
-  describe('resumeModel', () => {
-    it('invokes resumeModel without error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.ResumeModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.ResumeModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.Model()
-      );
-      client.innerApiCalls.resumeModel = stubSimpleCall(expectedResponse);
-      const [response] = await client.resumeModel(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.resumeModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.resumeModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes resumeModel without error using callback', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.ResumeModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.ResumeModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.Model()
-      );
-      client.innerApiCalls.resumeModel =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.resumeModel(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.retail.v2alpha.IModel | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.resumeModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.resumeModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes resumeModel with error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.ResumeModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.ResumeModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.resumeModel = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.resumeModel(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.resumeModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.resumeModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes resumeModel with closed client', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.ResumeModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.ResumeModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.resumeModel(request), expectedError);
-    });
-  });
-
-  describe('deleteModel', () => {
-    it('invokes deleteModel without error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.DeleteModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.DeleteModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteModel = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteModel(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteModel without error using callback', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.DeleteModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.DeleteModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteModel =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteModel(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteModel with error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.DeleteModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.DeleteModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteModel = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteModel(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteModel with closed client', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.DeleteModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.DeleteModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.deleteModel(request), expectedError);
-    });
-  });
-
-  describe('updateModel', () => {
-    it('invokes updateModel without error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.UpdateModelRequest()
-      );
-      request.model ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.UpdateModelRequest',
-        ['model', 'name']
-      );
-      request.model.name = defaultValue1;
-      const expectedHeaderRequestParams = `model.name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.Model()
-      );
-      client.innerApiCalls.updateModel = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateModel(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateModel without error using callback', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.UpdateModelRequest()
-      );
-      request.model ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.UpdateModelRequest',
-        ['model', 'name']
-      );
-      request.model.name = defaultValue1;
-      const expectedHeaderRequestParams = `model.name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.Model()
-      );
-      client.innerApiCalls.updateModel =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateModel(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.retail.v2alpha.IModel | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateModel with error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.UpdateModelRequest()
-      );
-      request.model ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.UpdateModelRequest',
-        ['model', 'name']
-      );
-      request.model.name = defaultValue1;
-      const expectedHeaderRequestParams = `model.name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateModel = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateModel(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateModel with closed client', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.UpdateModelRequest()
-      );
-      request.model ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.UpdateModelRequest',
-        ['model', 'name']
-      );
-      request.model.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.updateModel(request), expectedError);
-    });
-  });
-
-  describe('createModel', () => {
-    it('invokes createModel without error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.CreateModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.CreateModelRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createModel = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createModel(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createModel without error using callback', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.CreateModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.CreateModelRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createModel =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createModel(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.retail.v2alpha.IModel,
-              protos.google.cloud.retail.v2alpha.ICreateModelMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.retail.v2alpha.IModel,
-        protos.google.cloud.retail.v2alpha.ICreateModelMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createModel with call error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.CreateModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.CreateModelRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createModel = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createModel(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createModel with LRO error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.CreateModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.CreateModelRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createModel = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createModel(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateModelProgress without error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateModelProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateModelProgress with error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkCreateModelProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('tuneModel', () => {
-    it('invokes tuneModel without error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.TuneModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.TuneModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.tuneModel = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.tuneModel(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.tuneModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.tuneModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes tuneModel without error using callback', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.TuneModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.TuneModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.tuneModel =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.tuneModel(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.retail.v2alpha.ITuneModelResponse,
-              protos.google.cloud.retail.v2alpha.ITuneModelMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.retail.v2alpha.ITuneModelResponse,
-        protos.google.cloud.retail.v2alpha.ITuneModelMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.tuneModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.tuneModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes tuneModel with call error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.TuneModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.TuneModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.tuneModel = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.tuneModel(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.tuneModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.tuneModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes tuneModel with LRO error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.TuneModelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.TuneModelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.tuneModel = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.tuneModel(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.tuneModel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.tuneModel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkTuneModelProgress without error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkTuneModelProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkTuneModelProgress with error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkTuneModelProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listModels', () => {
-    it('invokes listModels without error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.ListModelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.ListModelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.retail.v2alpha.Model()),
-        generateSampleMessage(new protos.google.cloud.retail.v2alpha.Model()),
-        generateSampleMessage(new protos.google.cloud.retail.v2alpha.Model()),
-      ];
-      client.innerApiCalls.listModels = stubSimpleCall(expectedResponse);
-      const [response] = await client.listModels(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listModels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listModels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listModels without error using callback', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.ListModelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.ListModelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.retail.v2alpha.Model()),
-        generateSampleMessage(new protos.google.cloud.retail.v2alpha.Model()),
-        generateSampleMessage(new protos.google.cloud.retail.v2alpha.Model()),
-      ];
-      client.innerApiCalls.listModels =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listModels(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.retail.v2alpha.IModel[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listModels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listModels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listModels with error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.ListModelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.ListModelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listModels = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listModels(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listModels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listModels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listModelsStream without error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.ListModelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.ListModelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.retail.v2alpha.Model()),
-        generateSampleMessage(new protos.google.cloud.retail.v2alpha.Model()),
-        generateSampleMessage(new protos.google.cloud.retail.v2alpha.Model()),
-      ];
-      client.descriptors.page.listModels.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listModelsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.retail.v2alpha.Model[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.retail.v2alpha.Model) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listModels.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listModels, request)
-      );
-      assert(
-        (client.descriptors.page.listModels.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listModelsStream with error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.ListModelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.ListModelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listModels.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listModelsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.retail.v2alpha.Model[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.retail.v2alpha.Model) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listModels.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listModels, request)
-      );
-      assert(
-        (client.descriptors.page.listModels.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listModels without error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.ListModelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.ListModelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.retail.v2alpha.Model()),
-        generateSampleMessage(new protos.google.cloud.retail.v2alpha.Model()),
-        generateSampleMessage(new protos.google.cloud.retail.v2alpha.Model()),
-      ];
-      client.descriptors.page.listModels.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.retail.v2alpha.IModel[] = [];
-      const iterable = client.listModelsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listModels.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listModels.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listModels with error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.retail.v2alpha.ListModelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.retail.v2alpha.ListModelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listModels.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listModelsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.retail.v2alpha.IModel[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listModels.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listModels.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+      await assert.rejects(client.getBranch(request), expectedError);
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1709,7 +553,7 @@ describe('v2alpha.ModelServiceClient', () => {
       );
     });
     it('invokes getLocation without error using callback', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1753,7 +597,7 @@ describe('v2alpha.ModelServiceClient', () => {
       assert((client.locationsClient.getLocation as SinonStub).getCall(0));
     });
     it('invokes getLocation with error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1788,7 +632,7 @@ describe('v2alpha.ModelServiceClient', () => {
   });
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1836,7 +680,7 @@ describe('v2alpha.ModelServiceClient', () => {
       );
     });
     it('uses async iteration with listLocations with error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1877,7 +721,7 @@ describe('v2alpha.ModelServiceClient', () => {
   });
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1898,7 +742,7 @@ describe('v2alpha.ModelServiceClient', () => {
       );
     });
     it('invokes getOperation without error using callback', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1932,7 +776,7 @@ describe('v2alpha.ModelServiceClient', () => {
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
     it('invokes getOperation with error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1956,7 +800,7 @@ describe('v2alpha.ModelServiceClient', () => {
   });
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1978,7 +822,7 @@ describe('v2alpha.ModelServiceClient', () => {
       );
     });
     it('invokes cancelOperation without error using callback', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2012,7 +856,7 @@ describe('v2alpha.ModelServiceClient', () => {
       assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
     });
     it('invokes cancelOperation with error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2036,7 +880,7 @@ describe('v2alpha.ModelServiceClient', () => {
   });
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2058,7 +902,7 @@ describe('v2alpha.ModelServiceClient', () => {
       );
     });
     it('invokes deleteOperation without error using callback', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2092,7 +936,7 @@ describe('v2alpha.ModelServiceClient', () => {
       assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
     });
     it('invokes deleteOperation with error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2116,7 +960,7 @@ describe('v2alpha.ModelServiceClient', () => {
   });
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2152,7 +996,7 @@ describe('v2alpha.ModelServiceClient', () => {
       );
     });
     it('uses async iteration with listOperations with error', async () => {
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2187,7 +1031,7 @@ describe('v2alpha.ModelServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
       };
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2227,7 +1071,7 @@ describe('v2alpha.ModelServiceClient', () => {
         location: 'locationValue',
         catalog: 'catalogValue',
       };
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2295,7 +1139,7 @@ describe('v2alpha.ModelServiceClient', () => {
         catalog: 'catalogValue',
         branch: 'branchValue',
       };
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2370,7 +1214,7 @@ describe('v2alpha.ModelServiceClient', () => {
         location: 'locationValue',
         catalog: 'catalogValue',
       };
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2434,7 +1278,7 @@ describe('v2alpha.ModelServiceClient', () => {
         location: 'locationValue',
         catalog: 'catalogValue',
       };
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2502,7 +1346,7 @@ describe('v2alpha.ModelServiceClient', () => {
         catalog: 'catalogValue',
         control: 'controlValue',
       };
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2575,7 +1419,7 @@ describe('v2alpha.ModelServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
       };
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2616,7 +1460,7 @@ describe('v2alpha.ModelServiceClient', () => {
         catalog: 'catalogValue',
         merchant_center_account_link: 'merchantCenterAccountLinkValue',
       };
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2713,7 +1557,7 @@ describe('v2alpha.ModelServiceClient', () => {
         catalog: 'catalogValue',
         model: 'modelValue',
       };
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2790,7 +1634,7 @@ describe('v2alpha.ModelServiceClient', () => {
         branch: 'branchValue',
         product: 'productValue',
       };
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2874,7 +1718,7 @@ describe('v2alpha.ModelServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
       };
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2915,7 +1759,7 @@ describe('v2alpha.ModelServiceClient', () => {
         catalog: 'catalogValue',
         serving_config: 'servingConfigValue',
       };
-      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+      const client = new branchserviceModule.v2alpha.BranchServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });

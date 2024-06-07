@@ -65,6 +65,8 @@
   * [User_event_service.rejoin_user_events](#user_event_service.rejoin_user_events)
   * [User_event_service.write_user_event](#user_event_service.write_user_event)
   * [Analytics_service.export_analytics_metrics](#analytics_service.export_analytics_metrics)
+  * [Branch_service.get_branch](#branch_service.get_branch)
+  * [Branch_service.list_branches](#branch_service.list_branches)
   * [Catalog_service.add_catalog_attribute](#catalog_service.add_catalog_attribute)
   * [Catalog_service.batch_remove_catalog_attributes](#catalog_service.batch_remove_catalog_attributes)
   * [Catalog_service.get_attributes_config](#catalog_service.get_attributes_config)
@@ -108,6 +110,14 @@
   * [Product_service.remove_local_inventories](#product_service.remove_local_inventories)
   * [Product_service.set_inventory](#product_service.set_inventory)
   * [Product_service.update_product](#product_service.update_product)
+  * [Project_service.accept_terms](#project_service.accept_terms)
+  * [Project_service.enroll_solution](#project_service.enroll_solution)
+  * [Project_service.get_alert_config](#project_service.get_alert_config)
+  * [Project_service.get_logging_config](#project_service.get_logging_config)
+  * [Project_service.get_project](#project_service.get_project)
+  * [Project_service.list_enrolled_solutions](#project_service.list_enrolled_solutions)
+  * [Project_service.update_alert_config](#project_service.update_alert_config)
+  * [Project_service.update_logging_config](#project_service.update_logging_config)
   * [Search_service.search](#search_service.search)
   * [Serving_config_service.add_control](#serving_config_service.add_control)
   * [Serving_config_service.create_serving_config](#serving_config_service.create_serving_config)
@@ -1092,6 +1102,40 @@ __Usage:__
 
 
 
+### Branch_service.get_branch
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2alpha/branch_service.get_branch.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2alpha/branch_service.get_branch.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2alpha/branch_service.get_branch.js`
+
+
+-----
+
+
+
+
+### Branch_service.list_branches
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2alpha/branch_service.list_branches.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2alpha/branch_service.list_branches.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2alpha/branch_service.list_branches.js`
+
+
+-----
+
+
+
+
 ### Catalog_service.add_catalog_attribute
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2alpha/catalog_service.add_catalog_attribute.js).
@@ -1816,6 +1860,142 @@ __Usage:__
 
 
 `node packages/google-cloud-retail/samples/generated/v2alpha/product_service.update_product.js`
+
+
+-----
+
+
+
+
+### Project_service.accept_terms
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2alpha/project_service.accept_terms.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2alpha/project_service.accept_terms.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2alpha/project_service.accept_terms.js`
+
+
+-----
+
+
+
+
+### Project_service.enroll_solution
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2alpha/project_service.enroll_solution.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2alpha/project_service.enroll_solution.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2alpha/project_service.enroll_solution.js`
+
+
+-----
+
+
+
+
+### Project_service.get_alert_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2alpha/project_service.get_alert_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2alpha/project_service.get_alert_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2alpha/project_service.get_alert_config.js`
+
+
+-----
+
+
+
+
+### Project_service.get_logging_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2alpha/project_service.get_logging_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2alpha/project_service.get_logging_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2alpha/project_service.get_logging_config.js`
+
+
+-----
+
+
+
+
+### Project_service.get_project
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2alpha/project_service.get_project.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2alpha/project_service.get_project.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2alpha/project_service.get_project.js`
+
+
+-----
+
+
+
+
+### Project_service.list_enrolled_solutions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2alpha/project_service.list_enrolled_solutions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2alpha/project_service.list_enrolled_solutions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2alpha/project_service.list_enrolled_solutions.js`
+
+
+-----
+
+
+
+
+### Project_service.update_alert_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2alpha/project_service.update_alert_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2alpha/project_service.update_alert_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2alpha/project_service.update_alert_config.js`
+
+
+-----
+
+
+
+
+### Project_service.update_logging_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2alpha/project_service.update_logging_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2alpha/project_service.update_logging_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2alpha/project_service.update_logging_config.js`
 
 
 -----
