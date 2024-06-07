@@ -93,7 +93,11 @@ export interface PolicyDocument {
   signature: string;
 }
 
-export type SaveData = string | Buffer | PipelineSource<string | Buffer>;
+export type SaveData =
+  | string
+  | Buffer
+  | Uint8Array
+  | PipelineSource<string | Buffer | Uint8Array>;
 
 export type GenerateSignedPostPolicyV2Response = [PolicyDocument];
 
@@ -3916,7 +3920,11 @@ class File extends ServiceObject<File, FileMetadata> {
             return bail(err);
           };
 
-          if (typeof data === 'string' || Buffer.isBuffer(data)) {
+          if (
+            typeof data === 'string' ||
+            Buffer.isBuffer(data) ||
+            data instanceof Uint8Array
+          ) {
             writable
               .on('error', handleError)
               .on('finish', () => resolve())

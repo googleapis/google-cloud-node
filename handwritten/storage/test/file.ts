@@ -4281,6 +4281,9 @@ describe('File', () => {
   describe('save', () => {
     const DATA = 'Data!';
     const BUFFER_DATA = Buffer.from(DATA, 'utf8');
+    const UINT8_ARRAY_DATA = Uint8Array.from(
+      Array.from(DATA).map(l => l.charCodeAt(0))
+    );
 
     class DelayedStreamNoError extends Transform {
       _transform(chunk: string | Buffer, _encoding: string, done: Function) {
@@ -4316,6 +4319,22 @@ describe('File', () => {
           return new DelayedStreamNoError();
         };
         await file.save(DATA, options, assert.ifError);
+      });
+
+      it('should save a buffer with no errors', async () => {
+        const options = {resumable: false};
+        file.createWriteStream = () => {
+          return new DelayedStreamNoError();
+        };
+        await file.save(BUFFER_DATA, options, assert.ifError);
+      });
+
+      it('should save a Uint8Array with no errors', async () => {
+        const options = {resumable: false};
+        file.createWriteStream = () => {
+          return new DelayedStreamNoError();
+        };
+        await file.save(UINT8_ARRAY_DATA, options, assert.ifError);
       });
 
       it('string upload should retry on first failure', async () => {
@@ -4363,15 +4382,7 @@ describe('File', () => {
         }
       });
 
-      it('should save a buffer with no errors', async () => {
-        const options = {resumable: false};
-        file.createWriteStream = () => {
-          return new DelayedStreamNoError();
-        };
-        await file.save(DATA, options, assert.ifError);
-      });
-
-      it('should save a Readable with no errors', done => {
+      it('should save a Readable with no errors (String)', done => {
         const options = {resumable: false};
         file.createWriteStream = () => {
           const writeStream = new PassThrough();
@@ -4385,6 +4396,48 @@ describe('File', () => {
         const readable = new Readable({
           read() {
             this.push(DATA);
+            this.push(null);
+          },
+        });
+
+        void file.save(readable, options);
+      });
+
+      it('should save a Readable with no errors (Buffer)', done => {
+        const options = {resumable: false};
+        file.createWriteStream = () => {
+          const writeStream = new PassThrough();
+          writeStream.on('data', data => {
+            assert.strictEqual(data.toString(), DATA);
+          });
+          writeStream.once('finish', done);
+          return writeStream;
+        };
+
+        const readable = new Readable({
+          read() {
+            this.push(BUFFER_DATA);
+            this.push(null);
+          },
+        });
+
+        void file.save(readable, options);
+      });
+
+      it('should save a Readable with no errors (Uint8Array)', done => {
+        const options = {resumable: false};
+        file.createWriteStream = () => {
+          const writeStream = new PassThrough();
+          writeStream.on('data', data => {
+            assert.strictEqual(data.toString(), DATA);
+          });
+          writeStream.once('finish', done);
+          return writeStream;
+        };
+
+        const readable = new Readable({
+          read() {
+            this.push(UINT8_ARRAY_DATA);
             this.push(null);
           },
         });
