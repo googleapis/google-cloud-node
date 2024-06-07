@@ -11339,9 +11339,93 @@
                         "retrievableOption": {
                           "type": "RetrievableOption",
                           "id": 12
+                        },
+                        "facetConfig": {
+                          "type": "FacetConfig",
+                          "id": 13
                         }
                       },
                       "nested": {
+                        "FacetConfig": {
+                          "fields": {
+                            "facetIntervals": {
+                              "rule": "repeated",
+                              "type": "Interval",
+                              "id": 1
+                            },
+                            "ignoredFacetValues": {
+                              "rule": "repeated",
+                              "type": "IgnoredFacetValues",
+                              "id": 2
+                            },
+                            "mergedFacetValues": {
+                              "rule": "repeated",
+                              "type": "MergedFacetValue",
+                              "id": 3
+                            },
+                            "mergedFacet": {
+                              "type": "MergedFacet",
+                              "id": 4
+                            },
+                            "rerankConfig": {
+                              "type": "RerankConfig",
+                              "id": 5
+                            }
+                          },
+                          "nested": {
+                            "IgnoredFacetValues": {
+                              "fields": {
+                                "values": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "startTime": {
+                                  "type": "google.protobuf.Timestamp",
+                                  "id": 2
+                                },
+                                "endTime": {
+                                  "type": "google.protobuf.Timestamp",
+                                  "id": 3
+                                }
+                              }
+                            },
+                            "MergedFacetValue": {
+                              "fields": {
+                                "values": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "mergedValue": {
+                                  "type": "string",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "MergedFacet": {
+                              "fields": {
+                                "mergedFacetKey": {
+                                  "type": "string",
+                                  "id": 1
+                                }
+                              }
+                            },
+                            "RerankConfig": {
+                              "fields": {
+                                "rerankFacet": {
+                                  "type": "bool",
+                                  "id": 1
+                                },
+                                "facetValues": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 2
+                                }
+                              }
+                            }
+                          }
+                        },
                         "AttributeType": {
                           "values": {
                             "UNKNOWN": 0,
@@ -11612,6 +11696,11 @@
                           "rule": "repeated",
                           "type": "TimeRange",
                           "id": 3
+                        },
+                        "pageCategories": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4
                         }
                       },
                       "nested": {
@@ -11652,7 +11741,9 @@
                             "replacementAction",
                             "ignoreAction",
                             "filterAction",
-                            "twowaySynonymsAction"
+                            "twowaySynonymsAction",
+                            "forceReturnFacetAction",
+                            "removeFacetAction"
                           ]
                         }
                       },
@@ -11688,6 +11779,14 @@
                         "twowaySynonymsAction": {
                           "type": "TwowaySynonymsAction",
                           "id": 11
+                        },
+                        "forceReturnFacetAction": {
+                          "type": "ForceReturnFacetAction",
+                          "id": 12
+                        },
+                        "removeFacetAction": {
+                          "type": "RemoveFacetAction",
+                          "id": 13
                         },
                         "condition": {
                           "type": "Condition",
@@ -11793,6 +11892,38 @@
                         "IgnoreAction": {
                           "fields": {
                             "ignoreTerms": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "ForceReturnFacetAction": {
+                          "fields": {
+                            "facetPositionAdjustments": {
+                              "rule": "repeated",
+                              "type": "FacetPositionAdjustment",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "FacetPositionAdjustment": {
+                              "fields": {
+                                "attributeName": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "position": {
+                                  "type": "int32",
+                                  "id": 2
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "RemoveFacetAction": {
+                          "fields": {
+                            "attributeNames": {
                               "rule": "repeated",
                               "type": "string",
                               "id": 1
@@ -13337,6 +13468,10 @@
                           "type": "int32",
                           "id": 5
                         },
+                        "enableAttributeSuggestions": {
+                          "type": "bool",
+                          "id": 9
+                        },
                         "entity": {
                           "type": "string",
                           "id": 10
@@ -13357,7 +13492,10 @@
                         "recentSearchResults": {
                           "rule": "repeated",
                           "type": "RecentSearchResult",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "deprecated": true
+                          }
                         }
                       },
                       "nested": {
@@ -13375,6 +13513,9 @@
                           }
                         },
                         "RecentSearchResult": {
+                          "options": {
+                            "deprecated": true
+                          },
                           "fields": {
                             "recentSearch": {
                               "type": "string",
@@ -14293,6 +14434,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "modelFeaturesConfig": {
+                          "type": "ModelFeaturesConfig",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -14305,6 +14453,32 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            }
+                          }
+                        },
+                        "FrequentlyBoughtTogetherFeaturesConfig": {
+                          "fields": {
+                            "contextProductsType": {
+                              "type": "ContextProductsType",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "ModelFeaturesConfig": {
+                          "oneofs": {
+                            "typeDedicatedConfig": {
+                              "oneof": [
+                                "frequentlyBoughtTogetherConfig"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "frequentlyBoughtTogetherConfig": {
+                              "type": "FrequentlyBoughtTogetherFeaturesConfig",
+                              "id": 1
                             }
                           }
                         },
@@ -14336,6 +14510,13 @@
                             "DATA_STATE_UNSPECIFIED": 0,
                             "DATA_OK": 1,
                             "DATA_ERROR": 2
+                          }
+                        },
+                        "ContextProductsType": {
+                          "values": {
+                            "CONTEXT_PRODUCTS_TYPE_UNSPECIFIED": 0,
+                            "SINGLE_CONTEXT_PRODUCT": 1,
+                            "MULTIPLE_CONTEXT_PRODUCTS": 2
                           }
                         }
                       }
@@ -14893,6 +15074,30 @@
                             }
                           ]
                         },
+                        "PurgeProducts": {
+                          "requestType": "PurgeProductsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v2beta/{parent=projects/*/locations/*/catalogs/*/branches/*}/products:purge",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "google.cloud.retail.v2beta.PurgeProductsResponse",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.retail.v2beta.PurgeProductsMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2beta/{parent=projects/*/locations/*/catalogs/*/branches/*}/products:purge",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.retail.v2beta.PurgeProductsResponse",
+                                "metadata_type": "google.cloud.retail.v2beta.PurgeProductsMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "ImportProducts": {
                           "requestType": "ImportProductsRequest",
                           "responseType": "google.longrunning.Operation",
@@ -15355,6 +15560,65 @@
                     "PurgeMetadata": {
                       "fields": {}
                     },
+                    "PurgeProductsMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "successCount": {
+                          "type": "int64",
+                          "id": 3
+                        },
+                        "failureCount": {
+                          "type": "int64",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "PurgeProductsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "retail.googleapis.com/Branch"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "PurgeProductsResponse": {
+                      "fields": {
+                        "purgeCount": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "purgeSample": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "retail.googleapis.com/Product"
+                          }
+                        }
+                      }
+                    },
                     "PurgeUserEventsRequest": {
                       "fields": {
                         "parent": {
@@ -15474,6 +15738,10 @@
                         "enableCategoryFilterLevel": {
                           "type": "string",
                           "id": 16
+                        },
+                        "ignoreRecsDenylist": {
+                          "type": "bool",
+                          "id": 24
                         },
                         "personalizationSpec": {
                           "type": "SearchRequest.PersonalizationSpec",

@@ -282,6 +282,12 @@ export class ProductServiceClient {
     this.operationsClient = this._gaxModule
       .lro(lroOptions)
       .operationsClient(opts);
+    const purgeProductsResponse = protoFilesRoot.lookup(
+      '.google.cloud.retail.v2beta.PurgeProductsResponse'
+    ) as gax.protobuf.Type;
+    const purgeProductsMetadata = protoFilesRoot.lookup(
+      '.google.cloud.retail.v2beta.PurgeProductsMetadata'
+    ) as gax.protobuf.Type;
     const importProductsResponse = protoFilesRoot.lookup(
       '.google.cloud.retail.v2beta.ImportProductsResponse'
     ) as gax.protobuf.Type;
@@ -320,6 +326,11 @@ export class ProductServiceClient {
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
+      purgeProducts: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        purgeProductsResponse.decode.bind(purgeProductsResponse),
+        purgeProductsMetadata.decode.bind(purgeProductsMetadata)
+      ),
       importProducts: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         importProductsResponse.decode.bind(importProductsResponse),
@@ -415,6 +426,7 @@ export class ProductServiceClient {
       'listProducts',
       'updateProduct',
       'deleteProduct',
+      'purgeProducts',
       'importProducts',
       'setInventory',
       'addFulfillmentPlaces',
@@ -969,6 +981,205 @@ export class ProductServiceClient {
   }
 
   /**
+   * Permanently deletes all selected
+   * {@link protos.google.cloud.retail.v2beta.Product|Product}s under a branch.
+   *
+   * This process is asynchronous. If the request is valid, the removal will be
+   * enqueued and processed offline. Depending on the number of
+   * {@link protos.google.cloud.retail.v2beta.Product|Product}s, this operation could take
+   * hours to complete. Before the operation completes, some
+   * {@link protos.google.cloud.retail.v2beta.Product|Product}s may still be returned by
+   * {@link protos.google.cloud.retail.v2beta.ProductService.GetProduct|ProductService.GetProduct}
+   * or
+   * {@link protos.google.cloud.retail.v2beta.ProductService.ListProducts|ProductService.ListProducts}.
+   *
+   * Depending on the number of {@link protos.google.cloud.retail.v2beta.Product|Product}s,
+   * this operation could take hours to complete. To get a sample of
+   * {@link protos.google.cloud.retail.v2beta.Product|Product}s that would be deleted, set
+   * {@link protos.google.cloud.retail.v2beta.PurgeProductsRequest.force|PurgeProductsRequest.force}
+   * to false.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the branch under which the products are
+   *   created. The format is
+   *   `projects/${projectId}/locations/global/catalogs/${catalogId}/branches/${branchId}`
+   * @param {string} request.filter
+   *   Required. The filter string to specify the products to be deleted with a
+   *   length limit of 5,000 characters.
+   *
+   *   Empty string filter is not allowed. "*" implies delete all items in a
+   *   branch.
+   *
+   *   The eligible fields for filtering are:
+   *
+   *   * `availability`: Double quoted
+   *   {@link protos.google.cloud.retail.v2beta.Product.availability|Product.availability}
+   *   string.
+   *   * `create_time` : in ISO 8601 "zulu" format.
+   *
+   *   Supported syntax:
+   *
+   *   * Comparators (">", "<", ">=", "<=", "=").
+   *     Examples:
+   *     * create_time <= "2015-02-13T17:05:46Z"
+   *     * availability = "IN_STOCK"
+   *
+   *   * Conjunctions ("AND")
+   *     Examples:
+   *     * create_time <= "2015-02-13T17:05:46Z" AND availability = "PREORDER"
+   *
+   *   * Disjunctions ("OR")
+   *     Examples:
+   *     * create_time <= "2015-02-13T17:05:46Z" OR availability = "IN_STOCK"
+   *
+   *   * Can support nested queries.
+   *     Examples:
+   *     * (create_time <= "2015-02-13T17:05:46Z" AND availability = "PREORDER")
+   *     OR (create_time >= "2015-02-14T13:03:32Z" AND availability = "IN_STOCK")
+   *
+   *   * Filter Limits:
+   *     * Filter should not contain more than 6 conditions.
+   *     * Max nesting depth should not exceed 2 levels.
+   *
+   *   Examples queries:
+   *   * Delete back order products created before a timestamp.
+   *     create_time <= "2015-02-13T17:05:46Z" OR availability = "BACKORDER"
+   * @param {boolean} request.force
+   *   Actually perform the purge.
+   *   If `force` is set to false, the method will return the expected purge count
+   *   without deleting any products.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta/product_service.purge_products.js</caption>
+   * region_tag:retail_v2beta_generated_ProductService_PurgeProducts_async
+   */
+  purgeProducts(
+    request?: protos.google.cloud.retail.v2beta.IPurgeProductsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.retail.v2beta.IPurgeProductsResponse,
+        protos.google.cloud.retail.v2beta.IPurgeProductsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  purgeProducts(
+    request: protos.google.cloud.retail.v2beta.IPurgeProductsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2beta.IPurgeProductsResponse,
+        protos.google.cloud.retail.v2beta.IPurgeProductsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  purgeProducts(
+    request: protos.google.cloud.retail.v2beta.IPurgeProductsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2beta.IPurgeProductsResponse,
+        protos.google.cloud.retail.v2beta.IPurgeProductsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  purgeProducts(
+    request?: protos.google.cloud.retail.v2beta.IPurgeProductsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.retail.v2beta.IPurgeProductsResponse,
+            protos.google.cloud.retail.v2beta.IPurgeProductsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2beta.IPurgeProductsResponse,
+        protos.google.cloud.retail.v2beta.IPurgeProductsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.retail.v2beta.IPurgeProductsResponse,
+        protos.google.cloud.retail.v2beta.IPurgeProductsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.purgeProducts(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `purgeProducts()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta/product_service.purge_products.js</caption>
+   * region_tag:retail_v2beta_generated_ProductService_PurgeProducts_async
+   */
+  async checkPurgeProductsProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.retail.v2beta.PurgeProductsResponse,
+      protos.google.cloud.retail.v2beta.PurgeProductsMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.purgeProducts,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.retail.v2beta.PurgeProductsResponse,
+      protos.google.cloud.retail.v2beta.PurgeProductsMetadata
+    >;
+  }
+  /**
    * Bulk import of multiple {@link protos.google.cloud.retail.v2beta.Product|Product}s.
    *
    * Request processing may be synchronous.
@@ -993,7 +1204,8 @@ export class ProductServiceClient {
    *   The desired location of errors incurred during the Import.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Indicates which fields in the provided imported `products` to update. If
-   *   not set, all fields are updated.
+   *   not set, all fields are updated. If provided, only the existing product
+   *   fields are updated. Missing products will not be created.
    * @param {google.cloud.retail.v2beta.ImportProductsRequest.ReconciliationMode} request.reconciliationMode
    *   The mode of reconciliation between existing products and the products to be
    *   imported. Defaults to
@@ -1007,9 +1219,14 @@ export class ProductServiceClient {
    *   Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`. It has
    *   to be within the same project as
    *   {@link protos.google.cloud.retail.v2beta.ImportProductsRequest.parent|ImportProductsRequest.parent}.
-   *   Make sure that `service-<project
-   *   number>@gcp-sa-retail.iam.gserviceaccount.com` has the
-   *   `pubsub.topics.publish` IAM permission on the topic.
+   *   Make sure that both
+   *   `cloud-retail-customer-data-access@system.gserviceaccount.com` and
+   *   `service-<project number>@gcp-sa-retail.iam.gserviceaccount.com`
+   *   have the `pubsub.topics.publish` IAM permission on the topic.
+   *
+   *   Only supported when
+   *   {@link protos.google.cloud.retail.v2beta.ImportProductsRequest.reconciliation_mode|ImportProductsRequest.reconciliation_mode}
+   *   is set to `FULL`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1400,10 +1617,11 @@ export class ProductServiceClient {
     >;
   }
   /**
-   * It is recommended to use the
+   * We recommend that you use the
    * {@link protos.google.cloud.retail.v2beta.ProductService.AddLocalInventories|ProductService.AddLocalInventories}
-   * method instead of
-   * {@link protos.google.cloud.retail.v2beta.ProductService.AddFulfillmentPlaces|ProductService.AddFulfillmentPlaces}.
+   * method instead of the
+   * {@link protos.google.cloud.retail.v2beta.ProductService.AddFulfillmentPlaces|ProductService.AddFulfillmentPlaces}
+   * method.
    * {@link protos.google.cloud.retail.v2beta.ProductService.AddLocalInventories|ProductService.AddLocalInventories}
    * achieves the same results but provides more fine-grained control over
    * ingesting local inventory data.
@@ -1618,10 +1836,11 @@ export class ProductServiceClient {
     >;
   }
   /**
-   * It is recommended to use the
+   * We recommend that you use the
    * {@link protos.google.cloud.retail.v2beta.ProductService.RemoveLocalInventories|ProductService.RemoveLocalInventories}
-   * method instead of
-   * {@link protos.google.cloud.retail.v2beta.ProductService.RemoveFulfillmentPlaces|ProductService.RemoveFulfillmentPlaces}.
+   * method instead of the
+   * {@link protos.google.cloud.retail.v2beta.ProductService.RemoveFulfillmentPlaces|ProductService.RemoveFulfillmentPlaces}
+   * method.
    * {@link protos.google.cloud.retail.v2beta.ProductService.RemoveLocalInventories|ProductService.RemoveLocalInventories}
    * achieves the same results but provides more fine-grained control over
    * ingesting local inventory data.
