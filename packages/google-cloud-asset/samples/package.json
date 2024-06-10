@@ -19,7 +19,7 @@
     "@google-cloud/bigquery": "^7.0.0",
     "@google-cloud/compute": "^4.0.0",
     "@google-cloud/storage": "^7.0.0",
-    "uuid": "^9.0.0",
+    "uuid": "^10.0.0",
     "yargs": "^17.0.0"
   },
   "devDependencies": {
