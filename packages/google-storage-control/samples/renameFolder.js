@@ -42,7 +42,7 @@ function main(bucketName, sourceFolderName, destinationFolderName) {
   const controlClient = new StorageControlClient();
 
   async function callRenameFolder() {
-    const folderPath = `projects/_/buckets/${bucketName}/folders/${sourceFolderId}`
+    const folderPath = `projects/_/buckets/${bucketName}/folders/${sourceFolderName}`
 
     // Create the request
     const request = {
