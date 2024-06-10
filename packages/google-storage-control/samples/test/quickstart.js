@@ -31,3 +31,34 @@ describe('Quickstart', () => {
     assert.match(output, new RegExp(`Bucket ${bucketName} has location type`));
   });
 });
+
+describe('folders', () => {
+  const bucketName = 'storage-control-test-monorepo';
+  const folderName = 'storage-control-test-monorepo-folder';
+  const renamedFolder = 'storage-control-test-monorepo-redlof'
+
+  it('should create a folder', async () => {
+    const output = execSync(`node ./createFolder.js ${bucketName} ${folderName}`, {cwd});
+    assert.match(output, new RegExp(`Created folder: ${folderName}.`));
+  });
+
+  it('should get a folder', async () => {
+    const output = execSync(`node ./getFolder.js ${bucketName} ${folderName}`, {cwd});
+    assert.match(output, new RegExp(`Got folder: ${folderName}.`));
+  });
+
+  it('should list folders', async () => {
+    const output = execSync(`node ./listFolders.js ${bucketName}`, {cwd});
+    assert.notEqual(output.length, 0);
+  });
+
+  it('should rename a folder', async () => {
+    const output = execSync(`node ./renameFolder.js ${bucketName} ${folderName} ${renamedFolder}`, {cwd});
+    assert.match(output, new RegExp(`Renamed folder ${folderName} to ${renamedFolder}.`));
+  });
+
+  it('should delete a folder', async () => {
+    const output = execSync(`node ./deleteFolder.js ${bucketName} ${renamedFolder}`, {cwd});
+    assert.match(output, new RegExp(`Deleted folder: ${renamedFolder}.`));
+  });
+});
