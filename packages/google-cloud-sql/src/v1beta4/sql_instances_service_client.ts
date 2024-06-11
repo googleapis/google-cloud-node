@@ -1766,7 +1766,8 @@ export class SqlInstancesServiceClient {
     return this.innerApiCalls.patch(request, options, callback);
   }
   /**
-   * Promotes the read replica instance to be a stand-alone Cloud SQL instance.
+   * Promotes the read replica instance to be an independent Cloud SQL
+   * primary instance.
    * Using this operation might cause your instance to restart.
    *
    * @param {Object} request
@@ -1776,9 +1777,13 @@ export class SqlInstancesServiceClient {
    * @param {string} request.project
    *   ID of the project that contains the read replica.
    * @param {boolean} request.failover
-   *   Set to true if the promote operation should attempt to re-add the original
-   *   primary as a replica when it comes back online. Otherwise, if this value is
-   *   false or not set, the original primary will be a standalone instance.
+   *   Set to true to invoke a replica failover to the designated DR replica.
+   *   As part of replica failover, the promote operation attempts
+   *   to add the original primary instance as a replica of the promoted
+   *   DR replica when the original primary instance comes back online.
+   *   If set to false or not specified, then the original primary
+   *   instance becomes an independent Cloud SQL primary instance.
+   *   Only applicable to MySQL.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1870,7 +1875,8 @@ export class SqlInstancesServiceClient {
     return this.innerApiCalls.promoteReplica(request, options, callback);
   }
   /**
-   * Switches over from the primary instance to a replica instance.
+   * Switches over from the primary instance to the designated DR replica
+   * instance.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2982,11 +2988,12 @@ export class SqlInstancesServiceClient {
    * @param {google.cloud.sql.v1beta4.MySqlSyncConfig} [request.mysqlSyncConfig]
    *   Optional. MySQL-specific settings for start external sync.
    * @param {google.cloud.sql.v1beta4.SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType} [request.migrationType]
-   *   Optional. MigrationType field decides if the migration is a physical file
-   *   based migration or logical migration
+   *   Optional. MigrationType configures the migration to use physical files or
+   *   logical dump files. If not set, then the logical dump file configuration is
+   *   used. Valid values are `LOGICAL` or `PHYSICAL`. Only applicable to MySQL.
    * @param {google.cloud.sql.v1beta4.ExternalSyncParallelLevel} [request.syncParallelLevel]
-   *   Optional. Parallel level for initial data sync. Currently only applicable
-   *   for PostgreSQL.
+   *   Optional. Parallel level for initial data sync. Only applicable for
+   *   PostgreSQL.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3100,8 +3107,9 @@ export class SqlInstancesServiceClient {
    *   Optional. Parallel level for initial data sync. Currently only applicable
    *   for MySQL.
    * @param {google.cloud.sql.v1beta4.SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType} [request.migrationType]
-   *   Optional. MigrationType decides if the migration is a physical file based
-   *   migration or logical migration.
+   *   Optional. MigrationType configures the migration to use physical files or
+   *   logical dump files. If not set, then the logical dump file configuration is
+   *   used. Valid values are `LOGICAL` or `PHYSICAL`. Only applicable to MySQL.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
