@@ -21,7 +21,7 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as fileserviceModule from '../src';
+import * as cacheserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
@@ -127,16 +127,16 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1beta.FileServiceClient', () => {
+describe('v1beta.CacheServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
-      const client = new fileserviceModule.v1beta.FileServiceClient();
+      const client = new cacheserviceModule.v1beta.CacheServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'generativelanguage.googleapis.com');
     });
 
     it('has universeDomain', () => {
-      const client = new fileserviceModule.v1beta.FileServiceClient();
+      const client = new cacheserviceModule.v1beta.CacheServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -148,7 +148,7 @@ describe('v1beta.FileServiceClient', () => {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const servicePath =
-          fileserviceModule.v1beta.FileServiceClient.servicePath;
+          cacheserviceModule.v1beta.CacheServiceClient.servicePath;
         assert.strictEqual(servicePath, 'generativelanguage.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -157,14 +157,14 @@ describe('v1beta.FileServiceClient', () => {
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const apiEndpoint =
-          fileserviceModule.v1beta.FileServiceClient.apiEndpoint;
+          cacheserviceModule.v1beta.CacheServiceClient.apiEndpoint;
         assert.strictEqual(apiEndpoint, 'generativelanguage.googleapis.com');
         assert(stub.called);
         stub.restore();
       });
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         universeDomain: 'example.com',
       });
       const servicePath = client.apiEndpoint;
@@ -172,7 +172,7 @@ describe('v1beta.FileServiceClient', () => {
     });
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         universe_domain: 'example.com',
       });
       const servicePath = client.apiEndpoint;
@@ -184,7 +184,7 @@ describe('v1beta.FileServiceClient', () => {
         it('sets apiEndpoint from environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new fileserviceModule.v1beta.FileServiceClient();
+          const client = new cacheserviceModule.v1beta.CacheServiceClient();
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'generativelanguage.example.com');
           if (saved) {
@@ -197,7 +197,7 @@ describe('v1beta.FileServiceClient', () => {
         it('value configured in code has priority over environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new fileserviceModule.v1beta.FileServiceClient({
+          const client = new cacheserviceModule.v1beta.CacheServiceClient({
             universeDomain: 'configured.example.com',
           });
           const servicePath = client.apiEndpoint;
@@ -215,7 +215,7 @@ describe('v1beta.FileServiceClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new fileserviceModule.v1beta.FileServiceClient({
+        new cacheserviceModule.v1beta.CacheServiceClient({
           universe_domain: 'example.com',
           universeDomain: 'example.net',
         });
@@ -223,51 +223,51 @@ describe('v1beta.FileServiceClient', () => {
     });
 
     it('has port', () => {
-      const port = fileserviceModule.v1beta.FileServiceClient.port;
+      const port = cacheserviceModule.v1beta.CacheServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client = new fileserviceModule.v1beta.FileServiceClient();
+      const client = new cacheserviceModule.v1beta.CacheServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         fallback: true,
       });
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      assert.strictEqual(client.fileServiceStub, undefined);
+      assert.strictEqual(client.cacheServiceStub, undefined);
       await client.initialize();
-      assert(client.fileServiceStub);
+      assert(client.cacheServiceStub);
     });
 
     it('has close method for the initialized client', done => {
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
-      assert(client.fileServiceStub);
+      assert(client.cacheServiceStub);
       client.close().then(() => {
         done();
       });
     });
 
     it('has close method for the non-initialized client', done => {
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      assert.strictEqual(client.fileServiceStub, undefined);
+      assert.strictEqual(client.cacheServiceStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -275,7 +275,7 @@ describe('v1beta.FileServiceClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -287,7 +287,7 @@ describe('v1beta.FileServiceClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -308,44 +308,45 @@ describe('v1beta.FileServiceClient', () => {
     });
   });
 
-  describe('createFile', () => {
-    it('invokes createFile without error', async () => {
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+  describe('createCachedContent', () => {
+    it('invokes createCachedContent without error', async () => {
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.CreateFileRequest()
+        new protos.google.ai.generativelanguage.v1beta.CreateCachedContentRequest()
       );
       const expectedResponse = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.CreateFileResponse()
+        new protos.google.ai.generativelanguage.v1beta.CachedContent()
       );
-      client.innerApiCalls.createFile = stubSimpleCall(expectedResponse);
-      const [response] = await client.createFile(request);
+      client.innerApiCalls.createCachedContent =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createCachedContent(request);
       assert.deepStrictEqual(response, expectedResponse);
     });
 
-    it('invokes createFile without error using callback', async () => {
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+    it('invokes createCachedContent without error using callback', async () => {
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.CreateFileRequest()
+        new protos.google.ai.generativelanguage.v1beta.CreateCachedContentRequest()
       );
       const expectedResponse = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.CreateFileResponse()
+        new protos.google.ai.generativelanguage.v1beta.CachedContent()
       );
-      client.innerApiCalls.createFile =
+      client.innerApiCalls.createCachedContent =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.createFile(
+        client.createCachedContent(
           request,
           (
             err?: Error | null,
-            result?: protos.google.ai.generativelanguage.v1beta.ICreateFileResponse | null
+            result?: protos.google.ai.generativelanguage.v1beta.ICachedContent | null
           ) => {
             if (err) {
               reject(err);
@@ -359,96 +360,96 @@ describe('v1beta.FileServiceClient', () => {
       assert.deepStrictEqual(response, expectedResponse);
     });
 
-    it('invokes createFile with error', async () => {
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+    it('invokes createCachedContent with error', async () => {
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.CreateFileRequest()
+        new protos.google.ai.generativelanguage.v1beta.CreateCachedContentRequest()
       );
       const expectedError = new Error('expected');
-      client.innerApiCalls.createFile = stubSimpleCall(
+      client.innerApiCalls.createCachedContent = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.createFile(request), expectedError);
+      await assert.rejects(client.createCachedContent(request), expectedError);
     });
 
-    it('invokes createFile with closed client', async () => {
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+    it('invokes createCachedContent with closed client', async () => {
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.CreateFileRequest()
+        new protos.google.ai.generativelanguage.v1beta.CreateCachedContentRequest()
       );
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.createFile(request), expectedError);
+      await assert.rejects(client.createCachedContent(request), expectedError);
     });
   });
 
-  describe('getFile', () => {
-    it('invokes getFile without error', async () => {
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+  describe('getCachedContent', () => {
+    it('invokes getCachedContent without error', async () => {
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.GetFileRequest()
+        new protos.google.ai.generativelanguage.v1beta.GetCachedContentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.GetFileRequest',
+        '.google.ai.generativelanguage.v1beta.GetCachedContentRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.File()
+        new protos.google.ai.generativelanguage.v1beta.CachedContent()
       );
-      client.innerApiCalls.getFile = stubSimpleCall(expectedResponse);
-      const [response] = await client.getFile(request);
+      client.innerApiCalls.getCachedContent = stubSimpleCall(expectedResponse);
+      const [response] = await client.getCachedContent(request);
       assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.getFile as SinonStub).getCall(
-        0
-      ).args[0];
+      const actualRequest = (
+        client.innerApiCalls.getCachedContent as SinonStub
+      ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getFile as SinonStub
+        client.innerApiCalls.getCachedContent as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getFile without error using callback', async () => {
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+    it('invokes getCachedContent without error using callback', async () => {
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.GetFileRequest()
+        new protos.google.ai.generativelanguage.v1beta.GetCachedContentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.GetFileRequest',
+        '.google.ai.generativelanguage.v1beta.GetCachedContentRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.File()
+        new protos.google.ai.generativelanguage.v1beta.CachedContent()
       );
-      client.innerApiCalls.getFile =
+      client.innerApiCalls.getCachedContent =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.getFile(
+        client.getCachedContent(
           request,
           (
             err?: Error | null,
-            result?: protos.google.ai.generativelanguage.v1beta.IFile | null
+            result?: protos.google.ai.generativelanguage.v1beta.ICachedContent | null
           ) => {
             if (err) {
               reject(err);
@@ -460,107 +461,214 @@ describe('v1beta.FileServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.getFile as SinonStub).getCall(
-        0
-      ).args[0];
+      const actualRequest = (
+        client.innerApiCalls.getCachedContent as SinonStub
+      ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getFile as SinonStub
+        client.innerApiCalls.getCachedContent as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getFile with error', async () => {
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+    it('invokes getCachedContent with error', async () => {
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.GetFileRequest()
+        new protos.google.ai.generativelanguage.v1beta.GetCachedContentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.GetFileRequest',
+        '.google.ai.generativelanguage.v1beta.GetCachedContentRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.getFile = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getFile(request), expectedError);
-      const actualRequest = (client.innerApiCalls.getFile as SinonStub).getCall(
-        0
-      ).args[0];
+      client.innerApiCalls.getCachedContent = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getCachedContent(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getCachedContent as SinonStub
+      ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getFile as SinonStub
+        client.innerApiCalls.getCachedContent as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getFile with closed client', async () => {
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+    it('invokes getCachedContent with closed client', async () => {
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.GetFileRequest()
+        new protos.google.ai.generativelanguage.v1beta.GetCachedContentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.GetFileRequest',
+        '.google.ai.generativelanguage.v1beta.GetCachedContentRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.getFile(request), expectedError);
+      await assert.rejects(client.getCachedContent(request), expectedError);
     });
   });
 
-  describe('deleteFile', () => {
-    it('invokes deleteFile without error', async () => {
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+  describe('updateCachedContent', () => {
+    it('invokes updateCachedContent without error', async () => {
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.DeleteFileRequest()
+        new protos.google.ai.generativelanguage.v1beta.UpdateCachedContentRequest()
       );
+      request.cachedContent ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.DeleteFileRequest',
-        ['name']
+        '.google.ai.generativelanguage.v1beta.UpdateCachedContentRequest',
+        ['cachedContent', 'name']
       );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      request.cachedContent.name = defaultValue1;
+      const expectedHeaderRequestParams = `cached_content.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.ai.generativelanguage.v1beta.CachedContent()
       );
-      client.innerApiCalls.deleteFile = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteFile(request);
+      client.innerApiCalls.updateCachedContent =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateCachedContent(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.deleteFile as SinonStub
+        client.innerApiCalls.updateCachedContent as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteFile as SinonStub
+        client.innerApiCalls.updateCachedContent as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes deleteFile without error using callback', async () => {
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+    it('invokes updateCachedContent without error using callback', async () => {
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.DeleteFileRequest()
+        new protos.google.ai.generativelanguage.v1beta.UpdateCachedContentRequest()
+      );
+      request.cachedContent ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ai.generativelanguage.v1beta.UpdateCachedContentRequest',
+        ['cachedContent', 'name']
+      );
+      request.cachedContent.name = defaultValue1;
+      const expectedHeaderRequestParams = `cached_content.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ai.generativelanguage.v1beta.CachedContent()
+      );
+      client.innerApiCalls.updateCachedContent =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateCachedContent(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ai.generativelanguage.v1beta.ICachedContent | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateCachedContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCachedContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateCachedContent with error', async () => {
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ai.generativelanguage.v1beta.UpdateCachedContentRequest()
+      );
+      request.cachedContent ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ai.generativelanguage.v1beta.UpdateCachedContentRequest',
+        ['cachedContent', 'name']
+      );
+      request.cachedContent.name = defaultValue1;
+      const expectedHeaderRequestParams = `cached_content.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateCachedContent = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateCachedContent(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateCachedContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCachedContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateCachedContent with closed client', async () => {
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ai.generativelanguage.v1beta.UpdateCachedContentRequest()
+      );
+      request.cachedContent ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ai.generativelanguage.v1beta.UpdateCachedContentRequest',
+        ['cachedContent', 'name']
+      );
+      request.cachedContent.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateCachedContent(request), expectedError);
+    });
+  });
+
+  describe('deleteCachedContent', () => {
+    it('invokes deleteCachedContent without error', async () => {
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ai.generativelanguage.v1beta.DeleteCachedContentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.DeleteFileRequest',
+        '.google.ai.generativelanguage.v1beta.DeleteCachedContentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -568,10 +676,42 @@ describe('v1beta.FileServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteFile =
+      client.innerApiCalls.deleteCachedContent =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteCachedContent(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteCachedContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCachedContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteCachedContent without error using callback', async () => {
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ai.generativelanguage.v1beta.DeleteCachedContentRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ai.generativelanguage.v1beta.DeleteCachedContentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteCachedContent =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.deleteFile(
+        client.deleteCachedContent(
           request,
           (
             err?: Error | null,
@@ -588,120 +728,123 @@ describe('v1beta.FileServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.deleteFile as SinonStub
+        client.innerApiCalls.deleteCachedContent as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteFile as SinonStub
+        client.innerApiCalls.deleteCachedContent as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes deleteFile with error', async () => {
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+    it('invokes deleteCachedContent with error', async () => {
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.DeleteFileRequest()
+        new protos.google.ai.generativelanguage.v1beta.DeleteCachedContentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.DeleteFileRequest',
+        '.google.ai.generativelanguage.v1beta.DeleteCachedContentRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.deleteFile = stubSimpleCall(
+      client.innerApiCalls.deleteCachedContent = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.deleteFile(request), expectedError);
+      await assert.rejects(client.deleteCachedContent(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.deleteFile as SinonStub
+        client.innerApiCalls.deleteCachedContent as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteFile as SinonStub
+        client.innerApiCalls.deleteCachedContent as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes deleteFile with closed client', async () => {
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+    it('invokes deleteCachedContent with closed client', async () => {
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.DeleteFileRequest()
+        new protos.google.ai.generativelanguage.v1beta.DeleteCachedContentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.ai.generativelanguage.v1beta.DeleteFileRequest',
+        '.google.ai.generativelanguage.v1beta.DeleteCachedContentRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.deleteFile(request), expectedError);
+      await assert.rejects(client.deleteCachedContent(request), expectedError);
     });
   });
 
-  describe('listFiles', () => {
-    it('invokes listFiles without error', async () => {
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+  describe('listCachedContents', () => {
+    it('invokes listCachedContents without error', async () => {
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.ListFilesRequest()
+        new protos.google.ai.generativelanguage.v1beta.ListCachedContentsRequest()
       );
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.ai.generativelanguage.v1beta.File()
+          new protos.google.ai.generativelanguage.v1beta.CachedContent()
         ),
         generateSampleMessage(
-          new protos.google.ai.generativelanguage.v1beta.File()
+          new protos.google.ai.generativelanguage.v1beta.CachedContent()
         ),
         generateSampleMessage(
-          new protos.google.ai.generativelanguage.v1beta.File()
+          new protos.google.ai.generativelanguage.v1beta.CachedContent()
         ),
       ];
-      client.innerApiCalls.listFiles = stubSimpleCall(expectedResponse);
-      const [response] = await client.listFiles(request);
+      client.innerApiCalls.listCachedContents =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listCachedContents(request);
       assert.deepStrictEqual(response, expectedResponse);
     });
 
-    it('invokes listFiles without error using callback', async () => {
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+    it('invokes listCachedContents without error using callback', async () => {
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.ListFilesRequest()
+        new protos.google.ai.generativelanguage.v1beta.ListCachedContentsRequest()
       );
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.ai.generativelanguage.v1beta.File()
+          new protos.google.ai.generativelanguage.v1beta.CachedContent()
         ),
         generateSampleMessage(
-          new protos.google.ai.generativelanguage.v1beta.File()
+          new protos.google.ai.generativelanguage.v1beta.CachedContent()
         ),
         generateSampleMessage(
-          new protos.google.ai.generativelanguage.v1beta.File()
+          new protos.google.ai.generativelanguage.v1beta.CachedContent()
         ),
       ];
-      client.innerApiCalls.listFiles =
+      client.innerApiCalls.listCachedContents =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.listFiles(
+        client.listCachedContents(
           request,
           (
             err?: Error | null,
-            result?: protos.google.ai.generativelanguage.v1beta.IFile[] | null
+            result?:
+              | protos.google.ai.generativelanguage.v1beta.ICachedContent[]
+              | null
           ) => {
             if (err) {
               reject(err);
@@ -715,48 +858,54 @@ describe('v1beta.FileServiceClient', () => {
       assert.deepStrictEqual(response, expectedResponse);
     });
 
-    it('invokes listFiles with error', async () => {
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+    it('invokes listCachedContents with error', async () => {
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.ListFilesRequest()
+        new protos.google.ai.generativelanguage.v1beta.ListCachedContentsRequest()
       );
       const expectedError = new Error('expected');
-      client.innerApiCalls.listFiles = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.listFiles(request), expectedError);
+      client.innerApiCalls.listCachedContents = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listCachedContents(request), expectedError);
     });
 
-    it('invokes listFilesStream without error', async () => {
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+    it('invokes listCachedContentsStream without error', async () => {
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.ListFilesRequest()
+        new protos.google.ai.generativelanguage.v1beta.ListCachedContentsRequest()
       );
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.ai.generativelanguage.v1beta.File()
+          new protos.google.ai.generativelanguage.v1beta.CachedContent()
         ),
         generateSampleMessage(
-          new protos.google.ai.generativelanguage.v1beta.File()
+          new protos.google.ai.generativelanguage.v1beta.CachedContent()
         ),
         generateSampleMessage(
-          new protos.google.ai.generativelanguage.v1beta.File()
+          new protos.google.ai.generativelanguage.v1beta.CachedContent()
         ),
       ];
-      client.descriptors.page.listFiles.createStream =
+      client.descriptors.page.listCachedContents.createStream =
         stubPageStreamingCall(expectedResponse);
-      const stream = client.listFilesStream(request);
+      const stream = client.listCachedContentsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.ai.generativelanguage.v1beta.File[] = [];
+        const responses: protos.google.ai.generativelanguage.v1beta.CachedContent[] =
+          [];
         stream.on(
           'data',
-          (response: protos.google.ai.generativelanguage.v1beta.File) => {
+          (
+            response: protos.google.ai.generativelanguage.v1beta.CachedContent
+          ) => {
             responses.push(response);
           }
         );
@@ -770,32 +919,33 @@ describe('v1beta.FileServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listFiles.createStream as SinonStub)
+        (client.descriptors.page.listCachedContents.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listFiles, request)
+          .calledWith(client.innerApiCalls.listCachedContents, request)
       );
     });
 
-    it('invokes listFilesStream with error', async () => {
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+    it('invokes listCachedContentsStream with error', async () => {
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.ListFilesRequest()
+        new protos.google.ai.generativelanguage.v1beta.ListCachedContentsRequest()
       );
       const expectedError = new Error('expected');
-      client.descriptors.page.listFiles.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listFilesStream(request);
+      client.descriptors.page.listCachedContents.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listCachedContentsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.ai.generativelanguage.v1beta.File[] = [];
+        const responses: protos.google.ai.generativelanguage.v1beta.CachedContent[] =
+          [];
         stream.on(
           'data',
-          (response: protos.google.ai.generativelanguage.v1beta.File) => {
+          (
+            response: protos.google.ai.generativelanguage.v1beta.CachedContent
+          ) => {
             responses.push(response);
           }
         );
@@ -808,72 +958,73 @@ describe('v1beta.FileServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listFiles.createStream as SinonStub)
+        (client.descriptors.page.listCachedContents.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listFiles, request)
+          .calledWith(client.innerApiCalls.listCachedContents, request)
       );
     });
 
-    it('uses async iteration with listFiles without error', async () => {
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+    it('uses async iteration with listCachedContents without error', async () => {
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.ListFilesRequest()
+        new protos.google.ai.generativelanguage.v1beta.ListCachedContentsRequest()
       );
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.ai.generativelanguage.v1beta.File()
+          new protos.google.ai.generativelanguage.v1beta.CachedContent()
         ),
         generateSampleMessage(
-          new protos.google.ai.generativelanguage.v1beta.File()
+          new protos.google.ai.generativelanguage.v1beta.CachedContent()
         ),
         generateSampleMessage(
-          new protos.google.ai.generativelanguage.v1beta.File()
+          new protos.google.ai.generativelanguage.v1beta.CachedContent()
         ),
       ];
-      client.descriptors.page.listFiles.asyncIterate =
+      client.descriptors.page.listCachedContents.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.ai.generativelanguage.v1beta.IFile[] = [];
-      const iterable = client.listFilesAsync(request);
+      const responses: protos.google.ai.generativelanguage.v1beta.ICachedContent[] =
+        [];
+      const iterable = client.listCachedContentsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listFiles.asyncIterate as SinonStub).getCall(0)
-          .args[1],
+        (
+          client.descriptors.page.listCachedContents.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
     });
 
-    it('uses async iteration with listFiles with error', async () => {
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+    it('uses async iteration with listCachedContents with error', async () => {
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.ai.generativelanguage.v1beta.ListFilesRequest()
+        new protos.google.ai.generativelanguage.v1beta.ListCachedContentsRequest()
       );
       const expectedError = new Error('expected');
-      client.descriptors.page.listFiles.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listFilesAsync(request);
+      client.descriptors.page.listCachedContents.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listCachedContentsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.ai.generativelanguage.v1beta.IFile[] =
+        const responses: protos.google.ai.generativelanguage.v1beta.ICachedContent[] =
           [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listFiles.asyncIterate as SinonStub).getCall(0)
-          .args[1],
+        (
+          client.descriptors.page.listCachedContents.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
     });
@@ -885,7 +1036,7 @@ describe('v1beta.FileServiceClient', () => {
       const expectedParameters = {
         id: 'idValue',
       };
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -925,7 +1076,7 @@ describe('v1beta.FileServiceClient', () => {
         document: 'documentValue',
         chunk: 'chunkValue',
       };
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -987,7 +1138,7 @@ describe('v1beta.FileServiceClient', () => {
       const expectedParameters = {
         corpus: 'corpusValue',
       };
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1026,7 +1177,7 @@ describe('v1beta.FileServiceClient', () => {
         corpus: 'corpusValue',
         permission: 'permissionValue',
       };
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1081,7 +1232,7 @@ describe('v1beta.FileServiceClient', () => {
         corpus: 'corpusValue',
         document: 'documentValue',
       };
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1129,7 +1280,7 @@ describe('v1beta.FileServiceClient', () => {
       const expectedParameters = {
         file: 'fileValue',
       };
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1167,7 +1318,7 @@ describe('v1beta.FileServiceClient', () => {
       const expectedParameters = {
         model: 'modelValue',
       };
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1205,7 +1356,7 @@ describe('v1beta.FileServiceClient', () => {
       const expectedParameters = {
         tuned_model: 'tunedModelValue',
       };
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1244,7 +1395,7 @@ describe('v1beta.FileServiceClient', () => {
         tuned_model: 'tunedModelValue',
         permission: 'permissionValue',
       };
-      const client = new fileserviceModule.v1beta.FileServiceClient({
+      const client = new cacheserviceModule.v1beta.CacheServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
