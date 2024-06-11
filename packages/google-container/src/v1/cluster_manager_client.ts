@@ -895,6 +895,10 @@ export class ClusterManagerClient {
    *   Google Compute Engine resources.
    * @param {google.container.v1.WindowsNodeConfig} request.windowsNodeConfig
    *   Parameters that can be configured on Windows nodes.
+   * @param {number[]} request.accelerators
+   *   A list of hardware accelerators to be attached to each node.
+   *   See https://cloud.google.com/compute/docs/gpus for more information about
+   *   support for GPUs.
    * @param {string} [request.machineType]
    *   Optional. The desired [Google Compute Engine machine
    *   type](https://cloud.google.com/compute/docs/machine-types) for nodes in the
@@ -914,6 +918,10 @@ export class ClusterManagerClient {
    *   Desired resource manager tag keys and values to be attached to the nodes
    *   for managing Compute Engine firewalls using Network Firewall Policies.
    *   Existing tags will be replaced with new values.
+   * @param {google.container.v1.ContainerdConfig} request.containerdConfig
+   *   The desired containerd config for nodes in the node pool.
+   *   Initiates an upgrade operation that recreates the nodes with the new
+   *   config.
    * @param {google.container.v1.NodePool.QueuedProvisioning} request.queuedProvisioning
    *   Specifies the configuration of queued provisioning.
    * @param {object} [options]
