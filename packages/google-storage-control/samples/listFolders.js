@@ -20,7 +20,7 @@ function main(bucketName) {
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
- 
+
   // The name of your GCS bucket
   // const bucketName = 'bucketName';
 
@@ -31,11 +31,11 @@ function main(bucketName) {
   const controlClient = new StorageControlClient();
 
   async function callListFolders() {
-    const bucketPath = `projects/_/buckets/${bucketName}`
+    const bucketPath = `projects/_/buckets/${bucketName}`;
 
     // Create the request
     const request = {
-        parent: bucketPath,
+      parent: bucketPath,
     };
 
     // Run request

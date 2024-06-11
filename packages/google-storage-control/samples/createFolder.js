@@ -19,7 +19,7 @@ function main(bucketName, folderName) {
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
- 
+
   // The name of your GCS bucket
   // const bucketName = 'bucketName';
 
@@ -33,12 +33,12 @@ function main(bucketName, folderName) {
   const controlClient = new StorageControlClient();
 
   async function callCreateFolder() {
-    const bucketPath = `projects/_/buckets/${bucketName}`
+    const bucketPath = `projects/_/buckets/${bucketName}`;
 
     // Create the request
     const request = {
-        parent: bucketPath,
-        folderId: folderName,
+      parent: bucketPath,
+      folderId: folderName,
     };
 
     // Run request

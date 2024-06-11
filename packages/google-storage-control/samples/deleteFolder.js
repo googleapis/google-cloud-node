@@ -19,7 +19,7 @@ function main(bucketName, folderName) {
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
- 
+
   // The name of your GCS bucket
   // const bucketName = 'bucketName';
 
@@ -33,11 +33,11 @@ function main(bucketName, folderName) {
   const controlClient = new StorageControlClient();
 
   async function callDeleteFolder() {
-    const folderPath = `projects/_/buckets/${bucketName}/folders/${folderName}`
+    const folderPath = `projects/_/buckets/${bucketName}/folders/${folderName}`;
 
     // Create the request
     const request = {
-        name: folderPath
+      name: folderPath,
     };
 
     // Run request

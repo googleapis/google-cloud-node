@@ -20,7 +20,7 @@ function main(bucketName, sourceFolderName, destinationFolderName) {
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
- 
+
   // The name of your GCS bucket
   // const bucketName = 'bucketName';
 
@@ -37,17 +37,19 @@ function main(bucketName, sourceFolderName, destinationFolderName) {
   const controlClient = new StorageControlClient();
 
   async function callRenameFolder() {
-    const folderPath = `projects/_/buckets/${bucketName}/folders/${sourceFolderName}`
+    const folderPath = `projects/_/buckets/${bucketName}/folders/${sourceFolderName}`;
 
     // Create the request
     const request = {
-        name: folderPath,
-        destinationFolderId: destinationFolderName,
+      name: folderPath,
+      destinationFolderId: destinationFolderName,
     };
 
     // Run request
     const response = await controlClient.renameFolder(request);
-    console.log(`Renamed folder ${sourceFolderName} to ${destinationFolderName}.`);
+    console.log(
+      `Renamed folder ${sourceFolderName} to ${destinationFolderName}.`
+    );
   }
 
   callRenameFolder();
