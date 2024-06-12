@@ -30,6 +30,7 @@ const bucketNameDualRegionTurbo = `${samplesTestBucketPrefix}-c`;
 const bucketNameWithClassAndLocation = `${samplesTestBucketPrefix}-d`;
 const bucketNameAutoclass = `${samplesTestBucketPrefix}-e`;
 const bucketNameObjectRetention = `${samplesTestBucketPrefix}-f`;
+const bucketNameHierarchicalNamespace = `${samplesTestBucketPrefix}-g`;
 const defaultKmsKeyName = process.env.GOOGLE_CLOUD_KMS_KEY_ASIA;
 const bucket = storage.bucket(bucketName);
 const bucketWithClassAndLocation = storage.bucket(
@@ -333,6 +334,21 @@ it("should set a bucket's RPO to DEFAULT", async () => {
   assert.strictEqual(metadata[0].rpo, RPO_DEFAULT);
 });
 
+it('should create a hierarchical namespace enabled bucket', async () => {
+  const output = execSync(
+    `node createBucketWithHierarchicalNamespace.js ${bucketNameHierarchicalNamespace}`
+  );
+  assert.match(
+    output,
+    new RegExp(
+      `Created '${bucketNameHierarchicalNamespace}' with hierarchical namespace enabled.`
+    )
+  );
+
+  const metadata = await dualRegionBucketTurbo.getMetadata();
+  assert.strictEqual(metadata[0].rpo, RPO_DEFAULT);
+});
+
 it("should add a bucket's website configuration", async () => {
   const output = execSync(
     `node addBucketWebsiteConfiguration.js ${bucketName} http://example.com http://example.com/404.html`
@@ -427,7 +443,6 @@ it('should create a bucket with object retention enabled', async () => {
   const output = execSync(
     `node createBucketWithObjectRetention.js ${bucketNameObjectRetention}`
   );
-  console.log(output);
   assert.include(
     output,
     `Created '${bucketNameObjectRetention}' with object retention enabled setting: Enabled`

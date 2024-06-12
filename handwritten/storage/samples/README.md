@@ -34,6 +34,7 @@ objects to users via direct download.
   * [Copy File](#copy-file)
   * [Copy Old Version Of File.](#copy-old-version-of-file.)
   * [Create a Dual-Region Bucket](#create-a-dual-region-bucket)
+  * [Create a hierarchical namespace enabled bucket](#create-a-hierarchical-namespace-enabled-bucket)
   * [Create a Bucket with object retention enabled.](#create-a-bucket-with-object-retention-enabled.)
   * [Create Bucket With Storage Class and Location.](#create-bucket-with-storage-class-and-location.)
   * [Create Bucket With Turbo Replication](#create-bucket-with-turbo-replication)
@@ -436,6 +437,25 @@ __Usage:__
 
 
 `node createBucketWithDualRegion.js <BUCKET_NAME> <LOCATION> <REGION1> <REGION2>`
+
+
+-----
+
+
+
+
+### Create a hierarchical namespace enabled bucket
+
+Create a hierarchical namespace enabled bucket.
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/main/samples/createBucketWithHierarchicalNamespace.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/createBucketWithHierarchicalNamespace.js,samples/README.md)
+
+__Usage:__
+
+
+`node createBucketWithHierarchicalNamespace.js <BUCKET_NAME>`
 
 
 -----
