@@ -20,31 +20,38 @@
 
 function main(parent) {
   // [START managedkafka_quickstart]
-  /**
+   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
    * It may require correct/in-range values for request initialization.
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent cluster whose consumer groups are to be listed.
-   *  Structured like
-   *  `projects/{project}/locations/{location}/clusters/{cluster}`.
+   *  Required. The parent location whose clusters are to be listed. Structured
+   *  like `projects/{project}/locations/{location}`.
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The maximum number of consumer groups to return. The service may
-   *  return fewer than this value. If unset or zero, all consumer groups for the
-   *  parent is returned.
+   *  Optional. The maximum number of clusters to return. The service may return
+   *  fewer than this value. If unspecified, server will pick an appropriate
+   *  default.
    */
   // const pageSize = 1234
   /**
-   *  Optional. A page token, received from a previous `ListConsumerGroups` call.
+   *  Optional. A page token, received from a previous `ListClusters` call.
    *  Provide this to retrieve the subsequent page.
-   *  When paginating, all other parameters provided to `ListConsumerGroups` must
-   *  match the call that provided the page token.
+   *  When paginating, all other parameters provided to `ListClusters` must match
+   *  the call that provided the page token.
    */
   // const pageToken = 'abc123'
+  /**
+   *  Optional. Filter expression for the result.
+   */
+  // const filter = 'abc123'
+  /**
+   *  Optional. Order by fields for the result.
+   */
+  // const orderBy = 'abc123'
 
   // Imports the Managedkafka library
   const {ManagedKafkaClient} = require('@google-cloud/managedkafka').v1;
@@ -52,20 +59,20 @@ function main(parent) {
   // Instantiates a client
   const managedkafkaClient = new ManagedKafkaClient();
 
-  async function callListConsumerGroups() {
+  async function callListClusters() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const iterable = managedkafkaClient.listConsumerGroupsAsync(request);
+    const iterable = managedkafkaClient.listClustersAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 
-  callListConsumerGroups();
+  callListClusters();
   // [END managedkafka_quickstart]
 }
 
