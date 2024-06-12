@@ -181,6 +181,8 @@
     "packages/google-shopping-merchant-conversions": {},
     "packages/google-maps-solar": {},
     "packages/google-maps-routeoptimization": {},
+    "packages/google-cloud-managedkafka": {},
+    "packages/google-cloud-developerconnect": {},
     "packages/google-streetview-publish": {},
     "packages/google-maps-fleetengine": {},
     "packages/google-shopping-merchant-datasources": {},
