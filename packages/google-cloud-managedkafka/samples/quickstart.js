@@ -20,7 +20,7 @@
 
 function main(parent) {
   // [START managedkafka_quickstart]
-   /**
+  /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
    * It may require correct/in-range values for request initialization.
@@ -68,7 +68,7 @@ function main(parent) {
     // Run request
     const iterable = managedkafkaClient.listClustersAsync(request);
     for await (const response of iterable) {
-        console.log(response);
+      console.log(response);
     }
   }
 
