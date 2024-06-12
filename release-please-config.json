@@ -108,7 +108,6 @@
     "packages/google-cloud-recommender": {},
     "packages/google-cloud-redis": {},
     "packages/google-cloud-resourcemanager": {},
-    "packages/google-cloud-resourcesettings": {},
     "packages/google-cloud-retail": {},
     "packages/google-cloud-run": {},
     "packages/google-cloud-scheduler": {},
