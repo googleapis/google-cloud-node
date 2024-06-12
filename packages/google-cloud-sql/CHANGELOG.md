@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.13.0...sql-v0.14.0) (2024-06-12)
+
+
+### Features
+
+* [sql] add Cluster maintenance and Self-service maintenance to SqlOperationType ([#5452](https://github.com/googleapis/google-cloud-node/issues/5452)) ([5de5142](https://github.com/googleapis/google-cloud-node/commit/5de5142eb62d6e102e8666f2e7c6a96e8f016c00))
+
 ## [0.13.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.12.0...sql-v0.13.0) (2024-06-05)
 
 
