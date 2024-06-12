@@ -1,7 +1,7 @@
 name: invalid_link
 on:
   issues:
-    types: [opened, edited]
+    types: [opened, reopened]
 
 jobs:
   close:
