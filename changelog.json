@@ -5,6 +5,427 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "ada6ab8a7a9a0879cedaa4fab9a4d2c12b16bd74",
+          "message": "Add initial files for google.shopping.merchant.datasources.v1beta",
+          "issues": [
+            "5421"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "a9784ed3db6ee96d171762308bbbcd57390b6866",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5354"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5351"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/datasources",
+      "id": "0e81c995-4449-458d-ae92-00c6853126b3",
+      "createTime": "2024-06-05T20:50:50.793Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d6817c22178d09598d48c7fb423b1930986a2b7d",
+          "message": "[redis] Add support for different node types",
+          "issues": [
+            "5433"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis-cluster",
+      "id": "1f4b644d-2ee2-444b-a815-f1ed3322030e",
+      "createTime": "2024-06-05T20:50:50.656Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "201f11acf0cbe5b3a7f06f8d87871835cdf36bd9",
+          "message": "[sql] Support for CLUSTER_MAINTENANCE and SELF_SERVICE_MAINTENANCE operation types",
+          "issues": [
+            "5428"
+          ]
+        }
+      ],
+      "version": "0.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "4288ef94-31e2-44f5-b682-359cb25fb912",
+      "createTime": "2024-06-05T20:50:50.640Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "docs",
+          "sha": "445cd4df1aa6d744f60b4dbbd769e20e7c8794c0",
+          "message": "[resourcesettings] Resource Settings is deprecated. As of November 7, 2023, no organizations will be onboarded for any of the enabled settings, and the service will be shut down on October 1, 2024",
+          "issues": [
+            "5420"
+          ],
+          "breakingChangeNote": "[resourcesettings] Resource Settings is deprecated. As of November 7, 2023, no organizations will be onboarded for any of the enabled settings, and the service will be shut down on October 1, 2024 ([#5420](https://github.com/googleapis/google-cloud-node/issues/5420))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/resource-settings",
+      "id": "985201e6-a8c4-4e81-a45d-3386bb81ff97",
+      "createTime": "2024-06-05T20:50:50.624Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "6481ff45908281cbb91d9212918222bcbd1b2981",
+          "message": "[batch] add a install_ops_agent field to InstancePolicyOrTemplate for Ops Agent support",
+          "issues": [
+            "5426"
+          ]
+        }
+      ],
+      "version": "1.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "a477ab16-f1da-4ba1-961d-a163d125ee3d",
+      "createTime": "2024-06-05T20:50:50.609Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a1aba11b9fb796f7c8abfa9930e8636bd7106d01",
+          "message": "Add rag_embedding_model_config to RagCorpus",
+          "issues": [
+            "5430"
+          ]
+        }
+      ],
+      "version": "3.23.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "c1844f9b-eada-4b15-8a78-59a2c8219e94",
+      "createTime": "2024-06-05T20:50:50.595Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "84adc73cb2c7aa1e87bf2d060fd99d713234c79c",
+          "message": "Add initial files for google.shopping.merchant.promotions.v1beta",
+          "issues": [
+            "5422"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "a9784ed3db6ee96d171762308bbbcd57390b6866",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5354"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5351"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/promotions",
+      "id": "a7b3e996-c2ee-4943-8eb8-e5f8c7c0b3be",
+      "createTime": "2024-06-04T23:09:06.033Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "304acc9821a8edf054952999b6e282d9d5affd8f",
+          "message": "[mapsplatformdatasets] make v1 stable/default version",
+          "issues": [
+            "5390"
+          ],
+          "breakingChangeNote": "[mapsplatformdatasets] make v1 stable/default version ([#5390](https://github.com/googleapis/google-cloud-node/issues/5390))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/maps-platform-datasets",
+      "id": "20342ea6-6662-4747-8a64-fd441ddbdc00",
+      "createTime": "2024-06-04T23:09:06.019Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "50cd4b851c9a14788a292cd27d4abb8b317091ec",
+          "message": "Add initial files for google.maps.fleetengine.v1",
+          "issues": [
+            "5251"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "a9784ed3db6ee96d171762308bbbcd57390b6866",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5354"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5351"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/fleetengine",
+      "id": "0fc5b78f-4d6a-42af-a8ea-22d2b77f1b8b",
+      "createTime": "2024-06-03T22:56:46.493Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3a9774328aeebdc48ac718cdac5adcead0ed8312",
+          "message": "Add initial files for google.streetview.publish.v1",
+          "issues": [
+            "5396"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "a9784ed3db6ee96d171762308bbbcd57390b6866",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5354"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5351"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/streetview-publish",
+      "id": "a666299b-56ce-4476-8baf-3f3f770e8692",
+      "createTime": "2024-06-03T22:56:46.477Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1cb9152693f1e44877312f39b6be31080bc6efaa",
+          "message": "Add initial files for google.maps.fleetengine.delivery.v1",
+          "issues": [
+            "5252"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "a9784ed3db6ee96d171762308bbbcd57390b6866",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5354"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5351"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/fleetengine-delivery",
+      "id": "847f1b9a-35bd-4d5e-871a-6cf0e5a9c55b",
+      "createTime": "2024-06-03T22:56:46.462Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "81e759d8fc99473fc0109115e5fdd2b7ddd008f9",
+          "message": "[dlp] add secrets discovery support",
+          "issues": [
+            "5380"
+          ]
+        }
+      ],
+      "version": "5.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dlp",
+      "id": "d0636457-94d0-45a5-9fba-68c8cc6f538f",
+      "createTime": "2024-06-03T22:56:46.448Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2c879f6acf259e280043a9e845b5e9af1435f188",
+          "message": "[container] A new message `HugepagesConfig` is added",
+          "issues": [
+            "5391"
+          ]
+        }
+      ],
+      "version": "5.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "cc6c977d-58e0-4bdb-a76b-6a64148755e6",
+      "createTime": "2024-06-03T22:56:46.419Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "10d9310f765fe35d140b0465284c07b053caf8fb",
+          "message": "[video-stitcher] add apis for Create, Read, Update, Delete for VODConfigs",
+          "issues": [
+            "5378"
+          ]
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-stitcher",
+      "id": "acf51a7f-3099-4c34-9833-b2b6e9fb1ff4",
+      "createTime": "2024-06-03T22:56:46.402Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "035a7272b13ee4a44778c62d58e1aaf01924267b",
+          "message": "[networkservices] A new field `metadata` is added to message `.google.cloud.networkservices.v1.LbTrafficExtension`",
+          "issues": [
+            "5414"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/networkservices",
+      "id": "bc0b8c45-6a30-448a-8b1c-41fff0bbfd90",
+      "createTime": "2024-06-03T22:56:46.384Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "750a6ac920aa0fd3f468dc64bee5acd1b619d543",
+          "message": "[documentai] Make Layout Parser generally available in V1",
+          "issues": [
+            "5411"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "b6b04dbfa0a014b559d7093f5400187a2f7b192b",
+          "message": "[documentai] Make Layout Parser generally available in V1",
+          "issues": [
+            "5393"
+          ]
+        }
+      ],
+      "version": "8.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "baa33911-0a27-4fa9-ab22-fed956ce5b80",
+      "createTime": "2024-06-03T22:56:46.338Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "86d61047ce001f8a396a934e6bda663636219d58",
+          "message": "[discoveryengine] support multiple parent patterns for controls",
+          "issues": [
+            "5392"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "d1bee15d1460292b6c637182328d1367fca6bc62",
+          "message": "[discoveryengine] promote grounding check APIs to v1 GA",
+          "issues": [
+            "5387"
+          ]
+        }
+      ],
+      "version": "1.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "d63c9acb-e56e-4a56-bdde-c2b71de6c2d9",
+      "createTime": "2024-06-03T22:56:46.322Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "489b16633276bcc446d2936ffb75bc68e57116e8",
+          "message": "[contentwarehouse] Make Layout Parser generally available in V1",
+          "issues": [
+            "5394"
+          ]
+        }
+      ],
+      "version": "1.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contentwarehouse",
+      "id": "5a4b3ab4-7527-49aa-a484-5bc129dac53f",
+      "createTime": "2024-06-03T22:56:46.301Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "6d60ea883cd5e3759296a14057b5ee3a86962464",
+          "message": "Add ValueType.STRUCT to Feature ",
+          "issues": [
+            "5381"
+          ]
+        }
+      ],
+      "version": "3.22.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "bb1a89ce-8e44-40f9-a0d4-0f973e1ed523",
+      "createTime": "2024-06-03T22:56:46.212Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "723d429fc69717376df5ee5fcbb620311080b3fe",
           "message": "Add initial files for google.maps.routeoptimization.v1",
           "issues": [
@@ -34097,5 +34518,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-05-23T18:44:11.657Z"
+  "updateTime": "2024-06-05T20:50:50.793Z"
 }

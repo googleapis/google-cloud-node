@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/redis-cluster-v0.4.0...redis-cluster-v0.5.0) (2024-06-05)
+
+
+### Features
+
+* [redis] Add support for different node types ([#5433](https://github.com/googleapis/google-cloud-node/issues/5433)) ([d6817c2](https://github.com/googleapis/google-cloud-node/commit/d6817c22178d09598d48c7fb423b1930986a2b7d))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/redis-cluster-v0.3.0...redis-cluster-v0.4.0) (2024-05-21)
 
 

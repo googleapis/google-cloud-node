@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-aiplatform",
-        "version": "3.20.0",
+        "version": "3.23.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -1922,7 +1922,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 62,
+                    "end": 64,
                     "type": "FULL"
                 }
             ],
@@ -4407,6 +4407,222 @@
                     "service": {
                         "shortName": "FeaturestoreService",
                         "fullName": "google.cloud.aiplatform.v1beta1.FeaturestoreService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_GenAiCacheService_CreateCachedContent_async",
+            "title": "DatasetService createCachedContent Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates cached content, this call will initialize the cached content in the data storage, and users need to pay for the cache data storage.",
+            "canonical": true,
+            "file": "gen_ai_cache_service.create_cached_content.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 58,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateCachedContent",
+                "fullName": "google.cloud.aiplatform.v1beta1.GenAiCacheService.CreateCachedContent",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "cached_content",
+                        "type": ".google.cloud.aiplatform.v1beta1.CachedContent"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.CachedContent",
+                "client": {
+                    "shortName": "GenAiCacheServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.GenAiCacheServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateCachedContent",
+                    "fullName": "google.cloud.aiplatform.v1beta1.GenAiCacheService.CreateCachedContent",
+                    "service": {
+                        "shortName": "GenAiCacheService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.GenAiCacheService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_GenAiCacheService_GetCachedContent_async",
+            "title": "DatasetService getCachedContent Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets cached content configurations",
+            "canonical": true,
+            "file": "gen_ai_cache_service.get_cached_content.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetCachedContent",
+                "fullName": "google.cloud.aiplatform.v1beta1.GenAiCacheService.GetCachedContent",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.CachedContent",
+                "client": {
+                    "shortName": "GenAiCacheServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.GenAiCacheServiceClient"
+                },
+                "method": {
+                    "shortName": "GetCachedContent",
+                    "fullName": "google.cloud.aiplatform.v1beta1.GenAiCacheService.GetCachedContent",
+                    "service": {
+                        "shortName": "GenAiCacheService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.GenAiCacheService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_GenAiCacheService_UpdateCachedContent_async",
+            "title": "DatasetService updateCachedContent Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates cached content configurations",
+            "canonical": true,
+            "file": "gen_ai_cache_service.update_cached_content.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 58,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateCachedContent",
+                "fullName": "google.cloud.aiplatform.v1beta1.GenAiCacheService.UpdateCachedContent",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "cached_content",
+                        "type": ".google.cloud.aiplatform.v1beta1.CachedContent"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.CachedContent",
+                "client": {
+                    "shortName": "GenAiCacheServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.GenAiCacheServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateCachedContent",
+                    "fullName": "google.cloud.aiplatform.v1beta1.GenAiCacheService.UpdateCachedContent",
+                    "service": {
+                        "shortName": "GenAiCacheService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.GenAiCacheService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_GenAiCacheService_DeleteCachedContent_async",
+            "title": "DatasetService deleteCachedContent Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes cached content",
+            "canonical": true,
+            "file": "gen_ai_cache_service.delete_cached_content.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteCachedContent",
+                "fullName": "google.cloud.aiplatform.v1beta1.GenAiCacheService.DeleteCachedContent",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "GenAiCacheServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.GenAiCacheServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteCachedContent",
+                    "fullName": "google.cloud.aiplatform.v1beta1.GenAiCacheService.DeleteCachedContent",
+                    "service": {
+                        "shortName": "GenAiCacheService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.GenAiCacheService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_GenAiCacheService_ListCachedContents_async",
+            "title": "DatasetService listCachedContents Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists cached contents in a project",
+            "canonical": true,
+            "file": "gen_ai_cache_service.list_cached_contents.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 69,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListCachedContents",
+                "fullName": "google.cloud.aiplatform.v1beta1.GenAiCacheService.ListCachedContents",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.ListCachedContentsResponse",
+                "client": {
+                    "shortName": "GenAiCacheServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.GenAiCacheServiceClient"
+                },
+                "method": {
+                    "shortName": "ListCachedContents",
+                    "fullName": "google.cloud.aiplatform.v1beta1.GenAiCacheService.ListCachedContents",
+                    "service": {
+                        "shortName": "GenAiCacheService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.GenAiCacheService"
                     }
                 }
             }
@@ -10232,6 +10448,50 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1beta1_generated_NotebookService_UpdateNotebookRuntimeTemplate_async",
+            "title": "DatasetService updateNotebookRuntimeTemplate Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates a NotebookRuntimeTemplate.",
+            "canonical": true,
+            "file": "notebook_service.update_notebook_runtime_template.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateNotebookRuntimeTemplate",
+                "fullName": "google.cloud.aiplatform.v1beta1.NotebookService.UpdateNotebookRuntimeTemplate",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "notebook_runtime_template",
+                        "type": ".google.cloud.aiplatform.v1beta1.NotebookRuntimeTemplate"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.NotebookRuntimeTemplate",
+                "client": {
+                    "shortName": "NotebookServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.NotebookServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateNotebookRuntimeTemplate",
+                    "fullName": "google.cloud.aiplatform.v1beta1.NotebookService.UpdateNotebookRuntimeTemplate",
+                    "service": {
+                        "shortName": "NotebookService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.NotebookService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1beta1_generated_NotebookService_AssignNotebookRuntime_async",
             "title": "DatasetService assignNotebookRuntime Sample",
             "origin": "API_DEFINITION",
@@ -10496,6 +10756,54 @@
                 "method": {
                     "shortName": "StartNotebookRuntime",
                     "fullName": "google.cloud.aiplatform.v1beta1.NotebookService.StartNotebookRuntime",
+                    "service": {
+                        "shortName": "NotebookService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.NotebookService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_NotebookService_CreateNotebookExecutionJob_async",
+            "title": "DatasetService createNotebookExecutionJob Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a NotebookExecutionJob.",
+            "canonical": true,
+            "file": "notebook_service.create_notebook_execution_job.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 64,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateNotebookExecutionJob",
+                "fullName": "google.cloud.aiplatform.v1beta1.NotebookService.CreateNotebookExecutionJob",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "notebook_execution_job",
+                        "type": ".google.cloud.aiplatform.v1beta1.NotebookExecutionJob"
+                    },
+                    {
+                        "name": "notebook_execution_job_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "NotebookServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.NotebookServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateNotebookExecutionJob",
+                    "fullName": "google.cloud.aiplatform.v1beta1.NotebookService.CreateNotebookExecutionJob",
                     "service": {
                         "shortName": "NotebookService",
                         "fullName": "google.cloud.aiplatform.v1beta1.NotebookService"
@@ -11994,7 +12302,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 91,
+                    "end": 99,
                     "type": "FULL"
                 }
             ],
@@ -12014,6 +12322,10 @@
                     {
                         "name": "system_instruction",
                         "type": ".google.cloud.aiplatform.v1beta1.Content"
+                    },
+                    {
+                        "name": "cached_content",
+                        "type": "TYPE_STRING"
                     },
                     {
                         "name": "tools",
@@ -12058,7 +12370,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 93,
+                    "end": 101,
                     "type": "FULL"
                 }
             ],
@@ -12078,6 +12390,10 @@
                     {
                         "name": "system_instruction",
                         "type": ".google.cloud.aiplatform.v1beta1.Content"
+                    },
+                    {
+                        "name": "cached_content",
+                        "type": "TYPE_STRING"
                     },
                     {
                         "name": "tools",
@@ -12104,6 +12420,50 @@
                 "method": {
                     "shortName": "StreamGenerateContent",
                     "fullName": "google.cloud.aiplatform.v1beta1.PredictionService.StreamGenerateContent",
+                    "service": {
+                        "shortName": "PredictionService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.PredictionService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_PredictionService_ChatCompletions_async",
+            "title": "DatasetService chatCompletions Sample",
+            "origin": "API_DEFINITION",
+            "description": " Exposes an OpenAI-compatible endpoint for chat completions.",
+            "canonical": true,
+            "file": "prediction_service.chat_completions.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ChatCompletions",
+                "fullName": "google.cloud.aiplatform.v1beta1.PredictionService.ChatCompletions",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "endpoint",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "http_body",
+                        "type": ".google.api.HttpBody"
+                    }
+                ],
+                "resultType": ".google.api.HttpBody",
+                "client": {
+                    "shortName": "PredictionServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PredictionServiceClient"
+                },
+                "method": {
+                    "shortName": "ChatCompletions",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PredictionService.ChatCompletions",
                     "service": {
                         "shortName": "PredictionService",
                         "fullName": "google.cloud.aiplatform.v1beta1.PredictionService"
@@ -12284,6 +12644,50 @@
                 "method": {
                     "shortName": "ListReasoningEngines",
                     "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineService.ListReasoningEngines",
+                    "service": {
+                        "shortName": "ReasoningEngineService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_ReasoningEngineService_UpdateReasoningEngine_async",
+            "title": "DatasetService updateReasoningEngine Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates a reasoning engine.",
+            "canonical": true,
+            "file": "reasoning_engine_service.update_reasoning_engine.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateReasoningEngine",
+                "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineService.UpdateReasoningEngine",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "reasoning_engine",
+                        "type": ".google.cloud.aiplatform.v1beta1.ReasoningEngine"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ReasoningEngineServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateReasoningEngine",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineService.UpdateReasoningEngine",
                     "service": {
                         "shortName": "ReasoningEngineService",
                         "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineService"

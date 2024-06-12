@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(updateMask, lbTrafficExtension) {
+function main(lbTrafficExtension) {
   // [START networkservices_v1_generated_DepService_UpdateLbTrafficExtension_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -29,7 +29,7 @@ function main(updateMask, lbTrafficExtension) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Used to specify the fields to be overwritten in the
+   *  Optional. Used to specify the fields to be overwritten in the
    *  `LbTrafficExtension` resource by the update.
    *  The fields specified in the update_mask are relative to the resource, not
    *  the full request. A field is overwritten if it is in the mask. If the
@@ -64,7 +64,6 @@ function main(updateMask, lbTrafficExtension) {
   async function callUpdateLbTrafficExtension() {
     // Construct request
     const request = {
-      updateMask,
       lbTrafficExtension,
     };
 

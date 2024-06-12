@@ -17,11 +17,13 @@
 // ** All changes to this file may be overwritten. **
 
 export {CompletionServiceClient} from './completion_service_client';
+export {ControlServiceClient} from './control_service_client';
 export {ConversationalSearchServiceClient} from './conversational_search_service_client';
 export {DataStoreServiceClient} from './data_store_service_client';
 export {DocumentServiceClient} from './document_service_client';
 export {EngineServiceClient} from './engine_service_client';
 export {GroundedGenerationServiceClient} from './grounded_generation_service_client';
+export {ProjectServiceClient} from './project_service_client';
 export {RankServiceClient} from './rank_service_client';
 export {RecommendationServiceClient} from './recommendation_service_client';
 export {SchemaServiceClient} from './schema_service_client';

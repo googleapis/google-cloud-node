@@ -20,6 +20,11 @@
                 "updateDataset"
               ]
             },
+            "UpdateDatasetVersion": {
+              "methods": [
+                "updateDatasetVersion"
+              ]
+            },
             "GetDatasetVersion": {
               "methods": [
                 "getDatasetVersion"
@@ -125,6 +130,11 @@
             "UpdateDataset": {
               "methods": [
                 "updateDataset"
+              ]
+            },
+            "UpdateDatasetVersion": {
+              "methods": [
+                "updateDatasetVersion"
               ]
             },
             "GetDatasetVersion": {
@@ -2328,6 +2338,11 @@
                 "getNotebookRuntimeTemplate"
               ]
             },
+            "UpdateNotebookRuntimeTemplate": {
+              "methods": [
+                "updateNotebookRuntimeTemplate"
+              ]
+            },
             "GetNotebookRuntime": {
               "methods": [
                 "getNotebookRuntime"
@@ -2385,6 +2400,11 @@
             "GetNotebookRuntimeTemplate": {
               "methods": [
                 "getNotebookRuntimeTemplate"
+              ]
+            },
+            "UpdateNotebookRuntimeTemplate": {
+              "methods": [
+                "updateNotebookRuntimeTemplate"
               ]
             },
             "GetNotebookRuntime": {

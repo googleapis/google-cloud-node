@@ -536,6 +536,12 @@ export class PipelineServiceClient {
           post: '/ui/{name=projects/*/locations/*/operations/*}:cancel',
           additional_bindings: [
             {
+              post: '/ui/{name=projects/*/locations/*/agents/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/apps/*/operations/*}:cancel',
+            },
+            {
               post: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',
             },
             {
@@ -764,6 +770,8 @@ export class PipelineServiceClient {
           selector: 'google.longrunning.Operations.DeleteOperation',
           delete: '/ui/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
+            {delete: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
+            {delete: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
             {
               delete:
                 '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',
@@ -1085,6 +1093,8 @@ export class PipelineServiceClient {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/ui/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
+            {get: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
+            {get: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
             {get: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
@@ -1317,6 +1327,8 @@ export class PipelineServiceClient {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/ui/{name=projects/*/locations/*}/operations',
           additional_bindings: [
+            {get: '/ui/{name=projects/*/locations/*/agents/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/apps/*}/operations'},
             {get: '/ui/{name=projects/*/locations/*/datasets/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',
@@ -1534,6 +1546,12 @@ export class PipelineServiceClient {
           selector: 'google.longrunning.Operations.WaitOperation',
           post: '/ui/{name=projects/*/locations/*/operations/*}:wait',
           additional_bindings: [
+            {
+              post: '/ui/{name=projects/*/locations/*/agents/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/apps/*/operations/*}:wait',
+            },
             {
               post: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}:wait',
             },

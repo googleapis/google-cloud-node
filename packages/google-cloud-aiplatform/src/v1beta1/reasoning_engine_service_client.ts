@@ -224,6 +224,9 @@ export class ReasoningEngineServiceClient {
       batchPredictionJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/batchPredictionJobs/{batch_prediction_job}'
       ),
+      cachedContentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/cachedContents/{cached_content}'
+      ),
       contextPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/metadataStores/{metadata_store}/contexts/{context}'
       ),
@@ -585,6 +588,12 @@ export class ReasoningEngineServiceClient {
           post: '/ui/{name=projects/*/locations/*/operations/*}:cancel',
           additional_bindings: [
             {
+              post: '/ui/{name=projects/*/locations/*/agents/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/apps/*/operations/*}:cancel',
+            },
+            {
               post: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',
             },
             {
@@ -669,6 +678,15 @@ export class ReasoningEngineServiceClient {
               post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',
             },
             {
+              post: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:cancel',
+            },
+            {
               post: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
             },
             {
@@ -703,6 +721,12 @@ export class ReasoningEngineServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}:cancel',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',
@@ -789,6 +813,15 @@ export class ReasoningEngineServiceClient {
               post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',
             },
             {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:cancel',
+            },
+            {
               post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
             },
             {
@@ -836,6 +869,8 @@ export class ReasoningEngineServiceClient {
           selector: 'google.longrunning.Operations.DeleteOperation',
           delete: '/ui/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
+            {delete: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
+            {delete: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
             {
               delete:
                 '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',
@@ -943,6 +978,18 @@ export class ReasoningEngineServiceClient {
             },
             {
               delete:
+                '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
+              delete:
                 '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',
             },
             {
@@ -1002,6 +1049,14 @@ export class ReasoningEngineServiceClient {
                 '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
             {delete: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}',
+            },
             {
               delete:
                 '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}',
@@ -1120,6 +1175,18 @@ export class ReasoningEngineServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
             },
             {
@@ -1200,6 +1267,8 @@ export class ReasoningEngineServiceClient {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/ui/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
+            {get: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
+            {get: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
             {get: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
@@ -1280,6 +1349,15 @@ export class ReasoningEngineServiceClient {
               get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
             },
             {
+              get: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
               get: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',
             },
             {get: '/ui/{name=projects/*/locations/*/studies/*/operations/*}'},
@@ -1321,6 +1399,10 @@ export class ReasoningEngineServiceClient {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
             },
             {get: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}',
+            },
+            {get: '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}'},
             {
               get: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}',
             },
@@ -1409,6 +1491,15 @@ export class ReasoningEngineServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
             },
             {
@@ -1471,6 +1562,8 @@ export class ReasoningEngineServiceClient {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/ui/{name=projects/*/locations/*}/operations',
           additional_bindings: [
+            {get: '/ui/{name=projects/*/locations/*/agents/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/apps/*}/operations'},
             {get: '/ui/{name=projects/*/locations/*/datasets/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',
@@ -1539,6 +1632,15 @@ export class ReasoningEngineServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
             },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimes/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',
+            },
             {get: '/ui/{name=projects/*/locations/*/studies/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/studies/*/trials/*}/operations',
@@ -1581,6 +1683,8 @@ export class ReasoningEngineServiceClient {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
             },
             {get: '/v1beta1/{name=projects/*/locations/*}/operations'},
+            {get: '/v1beta1/{name=projects/*/locations/*/agents/*}/operations'},
+            {get: '/v1beta1/{name=projects/*/locations/*/apps/*}/operations'},
             {
               get: '/v1beta1/{name=projects/*/locations/*/datasets/*}/operations',
             },
@@ -1667,6 +1771,15 @@ export class ReasoningEngineServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*}/operations',
             },
             {
@@ -1729,6 +1842,12 @@ export class ReasoningEngineServiceClient {
           selector: 'google.longrunning.Operations.WaitOperation',
           post: '/ui/{name=projects/*/locations/*/operations/*}:wait',
           additional_bindings: [
+            {
+              post: '/ui/{name=projects/*/locations/*/agents/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/apps/*/operations/*}:wait',
+            },
             {
               post: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}:wait',
             },
@@ -1814,6 +1933,15 @@ export class ReasoningEngineServiceClient {
               post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',
             },
             {
+              post: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:wait',
+            },
+            {
               post: '/ui/{name=projects/*/locations/*/studies/*/operations/*}:wait',
             },
             {
@@ -1859,6 +1987,12 @@ export class ReasoningEngineServiceClient {
               post: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
             },
             {post: '/v1beta1/{name=projects/*/locations/*/operations/*}:wait'},
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}:wait',
+            },
             {
               post: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}:wait',
             },
@@ -1947,6 +2081,15 @@ export class ReasoningEngineServiceClient {
               post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',
             },
             {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:wait',
+            },
+            {
               post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',
             },
             {
@@ -2013,6 +2156,12 @@ export class ReasoningEngineServiceClient {
     const createReasoningEngineMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1beta1.CreateReasoningEngineOperationMetadata'
     ) as gax.protobuf.Type;
+    const updateReasoningEngineResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.ReasoningEngine'
+    ) as gax.protobuf.Type;
+    const updateReasoningEngineMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.UpdateReasoningEngineOperationMetadata'
+    ) as gax.protobuf.Type;
     const deleteReasoningEngineResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
@@ -2027,6 +2176,13 @@ export class ReasoningEngineServiceClient {
           createReasoningEngineResponse
         ),
         createReasoningEngineMetadata.decode.bind(createReasoningEngineMetadata)
+      ),
+      updateReasoningEngine: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateReasoningEngineResponse.decode.bind(
+          updateReasoningEngineResponse
+        ),
+        updateReasoningEngineMetadata.decode.bind(updateReasoningEngineMetadata)
       ),
       deleteReasoningEngine: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -2091,6 +2247,7 @@ export class ReasoningEngineServiceClient {
       'createReasoningEngine',
       'getReasoningEngine',
       'listReasoningEngines',
+      'updateReasoningEngine',
       'deleteReasoningEngine',
     ];
     for (const methodName of reasoningEngineServiceStubMethods) {
@@ -2445,6 +2602,144 @@ export class ReasoningEngineServiceClient {
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1beta1.ReasoningEngine,
       protos.google.cloud.aiplatform.v1beta1.CreateReasoningEngineOperationMetadata
+    >;
+  }
+  /**
+   * Updates a reasoning engine.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.aiplatform.v1beta1.ReasoningEngine} request.reasoningEngine
+   *   Required. The ReasoningEngine which replaces the resource on the server.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Mask specifying which fields to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/reasoning_engine_service.update_reasoning_engine.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_ReasoningEngineService_UpdateReasoningEngine_async
+   */
+  updateReasoningEngine(
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateReasoningEngineRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IReasoningEngine,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateReasoningEngineOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateReasoningEngine(
+    request: protos.google.cloud.aiplatform.v1beta1.IUpdateReasoningEngineRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IReasoningEngine,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateReasoningEngineOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateReasoningEngine(
+    request: protos.google.cloud.aiplatform.v1beta1.IUpdateReasoningEngineRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IReasoningEngine,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateReasoningEngineOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateReasoningEngine(
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateReasoningEngineRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1beta1.IReasoningEngine,
+            protos.google.cloud.aiplatform.v1beta1.IUpdateReasoningEngineOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IReasoningEngine,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateReasoningEngineOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IReasoningEngine,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateReasoningEngineOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'reasoning_engine.name': request.reasoningEngine!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateReasoningEngine(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `updateReasoningEngine()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/reasoning_engine_service.update_reasoning_engine.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_ReasoningEngineService_UpdateReasoningEngine_async
+   */
+  async checkUpdateReasoningEngineProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1beta1.ReasoningEngine,
+      protos.google.cloud.aiplatform.v1beta1.UpdateReasoningEngineOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateReasoningEngine,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1beta1.ReasoningEngine,
+      protos.google.cloud.aiplatform.v1beta1.UpdateReasoningEngineOperationMetadata
     >;
   }
   /**
@@ -3466,6 +3761,58 @@ export class ReasoningEngineServiceClient {
     return this.pathTemplates.batchPredictionJobPathTemplate.match(
       batchPredictionJobName
     ).batch_prediction_job;
+  }
+
+  /**
+   * Return a fully-qualified cachedContent resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} cached_content
+   * @returns {string} Resource name string.
+   */
+  cachedContentPath(project: string, location: string, cachedContent: string) {
+    return this.pathTemplates.cachedContentPathTemplate.render({
+      project: project,
+      location: location,
+      cached_content: cachedContent,
+    });
+  }
+
+  /**
+   * Parse the project from CachedContent resource.
+   *
+   * @param {string} cachedContentName
+   *   A fully-qualified path representing CachedContent resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCachedContentName(cachedContentName: string) {
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
+      .project;
+  }
+
+  /**
+   * Parse the location from CachedContent resource.
+   *
+   * @param {string} cachedContentName
+   *   A fully-qualified path representing CachedContent resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCachedContentName(cachedContentName: string) {
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
+      .location;
+  }
+
+  /**
+   * Parse the cached_content from CachedContent resource.
+   *
+   * @param {string} cachedContentName
+   *   A fully-qualified path representing CachedContent resource.
+   * @returns {string} A string representing the cached_content.
+   */
+  matchCachedContentFromCachedContentName(cachedContentName: string) {
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
+      .cached_content;
   }
 
   /**

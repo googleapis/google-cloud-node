@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-dlp",
-        "version": "5.5.0",
+        "version": "5.7.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -2318,7 +2318,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 70,
+                    "end": 69,
                     "type": "FULL"
                 }
             ],
@@ -2370,7 +2370,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 70,
+                    "end": 69,
                     "type": "FULL"
                 }
             ],

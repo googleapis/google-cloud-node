@@ -563,6 +563,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "metadata": {
+                          "type": "google.protobuf.Struct",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -676,7 +683,7 @@
                           "type": "google.protobuf.FieldMask",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "lbTrafficExtension": {
@@ -781,6 +788,13 @@
                           "id": 8,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "metadata": {
+                          "type": "google.protobuf.Struct",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -895,7 +909,7 @@
                           "type": "google.protobuf.FieldMask",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "lbRouteExtension": {
@@ -7190,6 +7204,69 @@
                 "paths": {
                   "rule": "repeated",
                   "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "Struct": {
+              "fields": {
+                "fields": {
+                  "keyType": "string",
+                  "type": "Value",
+                  "id": 1
+                }
+              }
+            },
+            "Value": {
+              "oneofs": {
+                "kind": {
+                  "oneof": [
+                    "nullValue",
+                    "numberValue",
+                    "stringValue",
+                    "boolValue",
+                    "structValue",
+                    "listValue"
+                  ]
+                }
+              },
+              "fields": {
+                "nullValue": {
+                  "type": "NullValue",
+                  "id": 1
+                },
+                "numberValue": {
+                  "type": "double",
+                  "id": 2
+                },
+                "stringValue": {
+                  "type": "string",
+                  "id": 3
+                },
+                "boolValue": {
+                  "type": "bool",
+                  "id": 4
+                },
+                "structValue": {
+                  "type": "Struct",
+                  "id": 5
+                },
+                "listValue": {
+                  "type": "ListValue",
+                  "id": 6
+                }
+              }
+            },
+            "NullValue": {
+              "values": {
+                "NULL_VALUE": 0
+              }
+            },
+            "ListValue": {
+              "fields": {
+                "values": {
+                  "rule": "repeated",
+                  "type": "Value",
                   "id": 1
                 }
               }

@@ -9464,6 +9464,9 @@ export namespace google {
 
                         /** InstancePolicyOrTemplate installGpuDrivers */
                         installGpuDrivers?: (boolean|null);
+
+                        /** InstancePolicyOrTemplate installOpsAgent */
+                        installOpsAgent?: (boolean|null);
                     }
 
                     /** Represents an InstancePolicyOrTemplate. */
@@ -9483,6 +9486,9 @@ export namespace google {
 
                         /** InstancePolicyOrTemplate installGpuDrivers. */
                         public installGpuDrivers: boolean;
+
+                        /** InstancePolicyOrTemplate installOpsAgent. */
+                        public installOpsAgent: boolean;
 
                         /** InstancePolicyOrTemplate policyTemplate. */
                         public policyTemplate?: ("policy"|"instanceTemplate");

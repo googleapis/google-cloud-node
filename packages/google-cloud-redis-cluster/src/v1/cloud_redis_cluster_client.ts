@@ -229,6 +229,9 @@ export class CloudRedisClusterClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      certificateAuthorityPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/clusters/{cluster}/certificateAuthority'
+      ),
       clusterPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/clusters/{cluster}'
       ),
@@ -380,6 +383,7 @@ export class CloudRedisClusterClient {
       'updateCluster',
       'deleteCluster',
       'createCluster',
+      'getClusterCertificateAuthority',
     ];
     for (const methodName of cloudRedisClusterStubMethods) {
       const callPromise = this.cloudRedisClusterStub.then(
@@ -588,6 +592,108 @@ export class CloudRedisClusterClient {
       });
     this.initialize();
     return this.innerApiCalls.getCluster(request, options, callback);
+  }
+  /**
+   * Gets the details of certificate authority information for Redis cluster.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Redis cluster certificate authority resource name using the form:
+   *       `projects/{project_id}/locations/{location_id}/clusters/{cluster_id}/certificateAuthority`
+   *   where `location_id` refers to a GCP region.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.redis.cluster.v1.CertificateAuthority|CertificateAuthority}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_redis_cluster.get_cluster_certificate_authority.js</caption>
+   * region_tag:redis_v1_generated_CloudRedisCluster_GetClusterCertificateAuthority_async
+   */
+  getClusterCertificateAuthority(
+    request?: protos.google.cloud.redis.cluster.v1.IGetClusterCertificateAuthorityRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.redis.cluster.v1.ICertificateAuthority,
+      (
+        | protos.google.cloud.redis.cluster.v1.IGetClusterCertificateAuthorityRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getClusterCertificateAuthority(
+    request: protos.google.cloud.redis.cluster.v1.IGetClusterCertificateAuthorityRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.redis.cluster.v1.ICertificateAuthority,
+      | protos.google.cloud.redis.cluster.v1.IGetClusterCertificateAuthorityRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getClusterCertificateAuthority(
+    request: protos.google.cloud.redis.cluster.v1.IGetClusterCertificateAuthorityRequest,
+    callback: Callback<
+      protos.google.cloud.redis.cluster.v1.ICertificateAuthority,
+      | protos.google.cloud.redis.cluster.v1.IGetClusterCertificateAuthorityRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getClusterCertificateAuthority(
+    request?: protos.google.cloud.redis.cluster.v1.IGetClusterCertificateAuthorityRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.redis.cluster.v1.ICertificateAuthority,
+          | protos.google.cloud.redis.cluster.v1.IGetClusterCertificateAuthorityRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.redis.cluster.v1.ICertificateAuthority,
+      | protos.google.cloud.redis.cluster.v1.IGetClusterCertificateAuthorityRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.redis.cluster.v1.ICertificateAuthority,
+      (
+        | protos.google.cloud.redis.cluster.v1.IGetClusterCertificateAuthorityRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getClusterCertificateAuthority(
+      request,
+      options,
+      callback
+    );
   }
 
   /**
@@ -1498,6 +1604,61 @@ export class CloudRedisClusterClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified certificateAuthority resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} cluster
+   * @returns {string} Resource name string.
+   */
+  certificateAuthorityPath(project: string, location: string, cluster: string) {
+    return this.pathTemplates.certificateAuthorityPathTemplate.render({
+      project: project,
+      location: location,
+      cluster: cluster,
+    });
+  }
+
+  /**
+   * Parse the project from CertificateAuthority resource.
+   *
+   * @param {string} certificateAuthorityName
+   *   A fully-qualified path representing CertificateAuthority resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCertificateAuthorityName(certificateAuthorityName: string) {
+    return this.pathTemplates.certificateAuthorityPathTemplate.match(
+      certificateAuthorityName
+    ).project;
+  }
+
+  /**
+   * Parse the location from CertificateAuthority resource.
+   *
+   * @param {string} certificateAuthorityName
+   *   A fully-qualified path representing CertificateAuthority resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCertificateAuthorityName(certificateAuthorityName: string) {
+    return this.pathTemplates.certificateAuthorityPathTemplate.match(
+      certificateAuthorityName
+    ).location;
+  }
+
+  /**
+   * Parse the cluster from CertificateAuthority resource.
+   *
+   * @param {string} certificateAuthorityName
+   *   A fully-qualified path representing CertificateAuthority resource.
+   * @returns {string} A string representing the cluster.
+   */
+  matchClusterFromCertificateAuthorityName(certificateAuthorityName: string) {
+    return this.pathTemplates.certificateAuthorityPathTemplate.match(
+      certificateAuthorityName
+    ).cluster;
+  }
 
   /**
    * Return a fully-qualified cluster resource name string.

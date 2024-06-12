@@ -7584,8 +7584,7 @@ export class DlpServiceClient {
    *   Optional. Page token from a previous page to return the next set of
    *   results. If set, all other request fields must match the original request.
    * @param {string} [request.filter]
-   *   Optional. * Supported fields/values
-   *       - `state` - MISSING|AVAILABLE|ERROR
+   *   Optional. Supported field/value: `state` - MISSING|AVAILABLE|ERROR
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -7680,8 +7679,7 @@ export class DlpServiceClient {
    *   Optional. Page token from a previous page to return the next set of
    *   results. If set, all other request fields must match the original request.
    * @param {string} [request.filter]
-   *   Optional. * Supported fields/values
-   *       - `state` - MISSING|AVAILABLE|ERROR
+   *   Optional. Supported field/value: `state` - MISSING|AVAILABLE|ERROR
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -7730,8 +7728,7 @@ export class DlpServiceClient {
    *   Optional. Page token from a previous page to return the next set of
    *   results. If set, all other request fields must match the original request.
    * @param {string} [request.filter]
-   *   Optional. * Supported fields/values
-   *       - `state` - MISSING|AVAILABLE|ERROR
+   *   Optional. Supported field/value: `state` - MISSING|AVAILABLE|ERROR
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -7779,8 +7776,7 @@ export class DlpServiceClient {
    *   Optional. Page token from a previous page to return the next set of
    *   results. If set, all other request fields must match the original request.
    * @param {string} [request.filter]
-   *   Optional. * Supported fields/values
-   *       - `state` - MISSING|AVAILABLE|ERROR
+   *   Optional. Supported field/value: - `state` - MISSING|AVAILABLE|ERROR
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -7881,8 +7877,7 @@ export class DlpServiceClient {
    *   Optional. Page token from a previous page to return the next set of
    *   results. If set, all other request fields must match the original request.
    * @param {string} [request.filter]
-   *   Optional. * Supported fields/values
-   *       - `state` - MISSING|AVAILABLE|ERROR
+   *   Optional. Supported field/value: - `state` - MISSING|AVAILABLE|ERROR
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -7931,8 +7926,7 @@ export class DlpServiceClient {
    *   Optional. Page token from a previous page to return the next set of
    *   results. If set, all other request fields must match the original request.
    * @param {string} [request.filter]
-   *   Optional. * Supported fields/values
-   *       - `state` - MISSING|AVAILABLE|ERROR
+   *   Optional. Supported field/value: - `state` - MISSING|AVAILABLE|ERROR
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
