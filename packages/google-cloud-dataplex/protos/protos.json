@@ -3215,7 +3215,10 @@
                       "fields": {
                         "linkedResource": {
                           "type": "string",
-                          "id": 8
+                          "id": 8,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "dataplexEntry": {
                           "type": "Entry",
@@ -3223,15 +3226,24 @@
                         },
                         "snippets": {
                           "type": "Snippets",
-                          "id": 12
+                          "id": 12,
+                          "options": {
+                            "deprecated": true
+                          }
                         }
                       },
                       "nested": {
                         "Snippets": {
+                          "options": {
+                            "deprecated": true
+                          },
                           "fields": {
                             "dataplexEntry": {
                               "type": "Entry",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "deprecated": true
+                              }
                             }
                           }
                         }
