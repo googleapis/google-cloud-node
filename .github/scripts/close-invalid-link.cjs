@@ -35,7 +35,7 @@ module.exports = async ({ github, context }) => {
 
     if (isBugTemplate) {
         try {
-            const link = issue.data.body.match(/(https?:\/\/github.com\/.*)/)[0];
+            const link = issue.data.body.split("\n")[18].match(/(https?:\/\/g?i?s?t\.?github.com\/.*)/);
             const isValidLink = (await fetch(link)).ok;
             if (!isValidLink) {
             await closeIssue(owner, repo, number);
