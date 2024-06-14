@@ -1,0 +1,179 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.developerconnect.v1",
+  "libraryPackage": "@google-cloud/developerconnect",
+  "services": {
+    "DeveloperConnect": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DeveloperConnectClient",
+          "rpcs": {
+            "GetConnection": {
+              "methods": [
+                "getConnection"
+              ]
+            },
+            "GetGitRepositoryLink": {
+              "methods": [
+                "getGitRepositoryLink"
+              ]
+            },
+            "FetchReadWriteToken": {
+              "methods": [
+                "fetchReadWriteToken"
+              ]
+            },
+            "FetchReadToken": {
+              "methods": [
+                "fetchReadToken"
+              ]
+            },
+            "FetchGitHubInstallations": {
+              "methods": [
+                "fetchGitHubInstallations"
+              ]
+            },
+            "CreateConnection": {
+              "methods": [
+                "createConnection"
+              ]
+            },
+            "UpdateConnection": {
+              "methods": [
+                "updateConnection"
+              ]
+            },
+            "DeleteConnection": {
+              "methods": [
+                "deleteConnection"
+              ]
+            },
+            "CreateGitRepositoryLink": {
+              "methods": [
+                "createGitRepositoryLink"
+              ]
+            },
+            "DeleteGitRepositoryLink": {
+              "methods": [
+                "deleteGitRepositoryLink"
+              ]
+            },
+            "ListConnections": {
+              "methods": [
+                "listConnections",
+                "listConnectionsStream",
+                "listConnectionsAsync"
+              ]
+            },
+            "ListGitRepositoryLinks": {
+              "methods": [
+                "listGitRepositoryLinks",
+                "listGitRepositoryLinksStream",
+                "listGitRepositoryLinksAsync"
+              ]
+            },
+            "FetchLinkableGitRepositories": {
+              "methods": [
+                "fetchLinkableGitRepositories",
+                "fetchLinkableGitRepositoriesStream",
+                "fetchLinkableGitRepositoriesAsync"
+              ]
+            },
+            "FetchGitRefs": {
+              "methods": [
+                "fetchGitRefs",
+                "fetchGitRefsStream",
+                "fetchGitRefsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DeveloperConnectClient",
+          "rpcs": {
+            "GetConnection": {
+              "methods": [
+                "getConnection"
+              ]
+            },
+            "GetGitRepositoryLink": {
+              "methods": [
+                "getGitRepositoryLink"
+              ]
+            },
+            "FetchReadWriteToken": {
+              "methods": [
+                "fetchReadWriteToken"
+              ]
+            },
+            "FetchReadToken": {
+              "methods": [
+                "fetchReadToken"
+              ]
+            },
+            "FetchGitHubInstallations": {
+              "methods": [
+                "fetchGitHubInstallations"
+              ]
+            },
+            "CreateConnection": {
+              "methods": [
+                "createConnection"
+              ]
+            },
+            "UpdateConnection": {
+              "methods": [
+                "updateConnection"
+              ]
+            },
+            "DeleteConnection": {
+              "methods": [
+                "deleteConnection"
+              ]
+            },
+            "CreateGitRepositoryLink": {
+              "methods": [
+                "createGitRepositoryLink"
+              ]
+            },
+            "DeleteGitRepositoryLink": {
+              "methods": [
+                "deleteGitRepositoryLink"
+              ]
+            },
+            "ListConnections": {
+              "methods": [
+                "listConnections",
+                "listConnectionsStream",
+                "listConnectionsAsync"
+              ]
+            },
+            "ListGitRepositoryLinks": {
+              "methods": [
+                "listGitRepositoryLinks",
+                "listGitRepositoryLinksStream",
+                "listGitRepositoryLinksAsync"
+              ]
+            },
+            "FetchLinkableGitRepositories": {
+              "methods": [
+                "fetchLinkableGitRepositories",
+                "fetchLinkableGitRepositoriesStream",
+                "fetchLinkableGitRepositoriesAsync"
+              ]
+            },
+            "FetchGitRefs": {
+              "methods": [
+                "fetchGitRefs",
+                "fetchGitRefsStream",
+                "fetchGitRefsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

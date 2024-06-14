@@ -5,6 +5,106 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "724f42c129e09a79dd0be0c87578ed0507fa19b5",
+          "message": "Add initial files for google.cloud.developerconnect.v1",
+          "issues": [
+            "5397"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "a9784ed3db6ee96d171762308bbbcd57390b6866",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5354"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5351"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/developerconnect",
+      "id": "4bf31f6f-a04f-4177-b158-137432c98dcb",
+      "createTime": "2024-06-12T19:36:15.458Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1c4766cff1e12857cca5632541ee18d854cd9f9a",
+          "message": "Add initial files for google.cloud.managedkafka.v1",
+          "issues": [
+            "5395"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "a9784ed3db6ee96d171762308bbbcd57390b6866",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5354"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5351"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/managedkafka",
+      "id": "f550562a-788a-417d-9cb0-3ec60092694d",
+      "createTime": "2024-06-12T19:36:15.444Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e62ec4df1773c683cc60cbb1adafeffc98970a61",
+          "message": "[container] A new message `HugepagesConfig` is added",
+          "issues": [
+            "5447"
+          ]
+        }
+      ],
+      "version": "5.15.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "7d47866d-f220-4ef4-9b58-d24ef8ee08bb",
+      "createTime": "2024-06-12T19:36:15.363Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5de5142eb62d6e102e8666f2e7c6a96e8f016c00",
+          "message": "[sql] add Cluster maintenance and Self-service maintenance to SqlOperationType",
+          "issues": [
+            "5452"
+          ]
+        }
+      ],
+      "version": "0.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "b01879ed-a542-4d9d-98ed-b300a8e399b3",
+      "createTime": "2024-06-12T19:36:15.280Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "ada6ab8a7a9a0879cedaa4fab9a4d2c12b16bd74",
           "message": "Add initial files for google.shopping.merchant.datasources.v1beta",
           "issues": [
@@ -34518,5 +34618,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-06-05T20:50:50.793Z"
+  "updateTime": "2024-06-12T19:36:15.458Z"
 }
