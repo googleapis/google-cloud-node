@@ -12,12 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-async function closeIssue(owner, repo, number) {
+async function closeIssue(github, owner, repo, number) {
     await github.rest.issues.update({
         owner: owner,
         repo: repo,
         issue_number: number,
-        state: "closed",
+        state: "closed"
       });
 }
 module.exports = async ({ github, context }) => {
@@ -38,10 +38,10 @@ module.exports = async ({ github, context }) => {
             const link = issue.data.body.split("\n")[18].match(/(https?:\/\/g?i?s?t\.?github.com\/.*)/);
             const isValidLink = (await fetch(link)).ok;
             if (!isValidLink) {
-            await closeIssue(owner, repo, number);
+            await closeIssue(github, owner, repo, number);
             }
         } catch (err) {
-            await closeIssue(owner, repo, number);
+            await closeIssue(github, owner, repo, number);
         }
     }
 };
