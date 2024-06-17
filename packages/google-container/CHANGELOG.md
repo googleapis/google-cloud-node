@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [5.15.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.14.0...container-v5.15.0) (2024-06-12)
+
+
+### Features
+
+* [container] A new message `HugepagesConfig` is added ([#5447](https://github.com/googleapis/google-cloud-node/issues/5447)) ([e62ec4d](https://github.com/googleapis/google-cloud-node/commit/e62ec4df1773c683cc60cbb1adafeffc98970a61))
+
 ## [5.14.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.13.0...container-v5.14.0) (2024-06-03)
 
 

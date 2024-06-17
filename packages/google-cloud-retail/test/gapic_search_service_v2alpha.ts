@@ -1143,6 +1143,44 @@ describe('v2alpha.SearchServiceClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('alertConfig', () => {
+      const fakePath = '/rendered/path/alertConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+      };
+      const client = new searchserviceModule.v2alpha.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.alertConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.alertConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('alertConfigPath', () => {
+        const result = client.alertConfigPath('projectValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.alertConfigPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromAlertConfigName', () => {
+        const result = client.matchProjectFromAlertConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.alertConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('attributesConfig', () => {
       const fakePath = '/rendered/path/attributesConfig';
       const expectedParameters = {
@@ -1569,6 +1607,44 @@ describe('v2alpha.SearchServiceClient', () => {
       });
     });
 
+    describe('loggingConfig', () => {
+      const fakePath = '/rendered/path/loggingConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+      };
+      const client = new searchserviceModule.v2alpha.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.loggingConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.loggingConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('loggingConfigPath', () => {
+        const result = client.loggingConfigPath('projectValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.loggingConfigPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromLoggingConfigName', () => {
+        const result = client.matchProjectFromLoggingConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.loggingConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('merchantCenterAccountLink', () => {
       const fakePath = '/rendered/path/merchantCenterAccountLink';
       const expectedParameters = {
@@ -1824,6 +1900,44 @@ describe('v2alpha.SearchServiceClient', () => {
         assert.strictEqual(result, 'productValue');
         assert(
           (client.pathTemplates.productPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('retailProject', () => {
+      const fakePath = '/rendered/path/retailProject';
+      const expectedParameters = {
+        project: 'projectValue',
+      };
+      const client = new searchserviceModule.v2alpha.SearchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.retailProjectPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.retailProjectPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('retailProjectPath', () => {
+        const result = client.retailProjectPath('projectValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.retailProjectPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromRetailProjectName', () => {
+        const result = client.matchProjectFromRetailProjectName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.retailProjectPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

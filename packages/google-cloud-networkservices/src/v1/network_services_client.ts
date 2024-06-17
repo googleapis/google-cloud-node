@@ -45,6 +45,7 @@ import * as gapicConfig from './network_services_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
+ *  Service describing handlers for resources.
  * @class
  * @memberof v1
  */

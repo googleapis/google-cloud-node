@@ -12,18 +12,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-async function closeIssue() {
+async function closeIssue(github, owner, repo, number) {
+    await github.rest.issues.createComment({
+          owner: owner,
+          repo: repo,
+          issue_number: number,
+          body: "Issue was opened with an invalid reproduction link. Please make sure the repository is a valid, publicly-accessible github repository, and make sure the url is complete (example: https://github.com/googleapis/google-cloud-node)"
+        });
     await github.rest.issues.update({
         owner: owner,
         repo: repo,
         issue_number: number,
-        state: "closed",
+        state: "closed"
       });
 }
 module.exports = async ({ github, context }) => {
     const owner = context.repo.owner;
     const repo = context.repo.repo;
-    const number = context.issue_number;
+    const number = context.issue.number;
 
     const issue = await github.rest.issues.get({
       owner: owner,
@@ -31,13 +37,17 @@ module.exports = async ({ github, context }) => {
       issue_number: number,
     });
 
-    try {
-        const link = issue.data.body.match(/(https?:\/\/github.com\/.*)/)[0];
-        const isValidLink = (await fetch(link)).ok;
-        if (!isValidLink) {
-           await closeIssue();
+    const isBugTemplate = issue.data.body.includes("Link to the code that reproduces this issue");
+
+    if (isBugTemplate) {
+        try {
+            const link = issue.data.body.split("\n")[18].match(/(https?:\/\/g?i?s?t\.?github.com\/.*)/);
+            const isValidLink = (await fetch(link)).ok;
+            if (!isValidLink) {
+            await closeIssue(github, owner, repo, number);
+            }
+        } catch (err) {
+            await closeIssue(github, owner, repo, number);
         }
-    } catch (err) {
-        await closeIssue();
     }
 };

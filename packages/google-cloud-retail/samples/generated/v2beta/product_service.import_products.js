@@ -45,7 +45,8 @@ function main(parent, inputConfig) {
   // const errorsConfig = {}
   /**
    *  Indicates which fields in the provided imported `products` to update. If
-   *  not set, all fields are updated.
+   *  not set, all fields are updated. If provided, only the existing product
+   *  fields are updated. Missing products will not be created.
    */
   // const updateMask = {}
   /**
@@ -62,9 +63,13 @@ function main(parent, inputConfig) {
    *  Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`. It has
    *  to be within the same project as
    *  ImportProductsRequest.parent google.cloud.retail.v2beta.ImportProductsRequest.parent.
-   *  Make sure that `service-<project
-   *  number>@gcp-sa-retail.iam.gserviceaccount.com` has the
-   *  `pubsub.topics.publish` IAM permission on the topic.
+   *  Make sure that both
+   *  `cloud-retail-customer-data-access@system.gserviceaccount.com` and
+   *  `service-<project number>@gcp-sa-retail.iam.gserviceaccount.com`
+   *  have the `pubsub.topics.publish` IAM permission on the topic.
+   *  Only supported when
+   *  ImportProductsRequest.reconciliation_mode google.cloud.retail.v2beta.ImportProductsRequest.reconciliation_mode 
+   *  is set to `FULL`.
    */
   // const notificationPubsubTopic = 'abc123'
 
