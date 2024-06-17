@@ -406,6 +406,11 @@
                 "deleteProduct"
               ]
             },
+            "PurgeProducts": {
+              "methods": [
+                "purgeProducts"
+              ]
+            },
             "ImportProducts": {
               "methods": [
                 "importProducts"
@@ -466,6 +471,11 @@
             "DeleteProduct": {
               "methods": [
                 "deleteProduct"
+              ]
+            },
+            "PurgeProducts": {
+              "methods": [
+                "purgeProducts"
               ]
             },
             "ImportProducts": {

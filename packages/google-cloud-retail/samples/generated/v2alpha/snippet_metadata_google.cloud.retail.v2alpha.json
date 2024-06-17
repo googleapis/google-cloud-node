@@ -60,6 +60,94 @@
             }
         },
         {
+            "regionTag": "retail_v2alpha_generated_BranchService_ListBranches_async",
+            "title": "AnalyticsService listBranches Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists all [Branch][google.cloud.retail.v2alpha.Branch]s under the specified parent [Catalog][google.cloud.retail.v2alpha.Catalog].",
+            "canonical": true,
+            "file": "branch_service.list_branches.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 61,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListBranches",
+                "fullName": "google.cloud.retail.v2alpha.BranchService.ListBranches",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "view",
+                        "type": ".google.cloud.retail.v2alpha.BranchView"
+                    }
+                ],
+                "resultType": ".google.cloud.retail.v2alpha.ListBranchesResponse",
+                "client": {
+                    "shortName": "BranchServiceClient",
+                    "fullName": "google.cloud.retail.v2alpha.BranchServiceClient"
+                },
+                "method": {
+                    "shortName": "ListBranches",
+                    "fullName": "google.cloud.retail.v2alpha.BranchService.ListBranches",
+                    "service": {
+                        "shortName": "BranchService",
+                        "fullName": "google.cloud.retail.v2alpha.BranchService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "retail_v2alpha_generated_BranchService_GetBranch_async",
+            "title": "AnalyticsService getBranch Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves a [Branch][google.cloud.retail.v2alpha.Branch].",
+            "canonical": true,
+            "file": "branch_service.get_branch.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 65,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetBranch",
+                "fullName": "google.cloud.retail.v2alpha.BranchService.GetBranch",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "view",
+                        "type": ".google.cloud.retail.v2alpha.BranchView"
+                    }
+                ],
+                "resultType": ".google.cloud.retail.v2alpha.Branch",
+                "client": {
+                    "shortName": "BranchServiceClient",
+                    "fullName": "google.cloud.retail.v2alpha.BranchServiceClient"
+                },
+                "method": {
+                    "shortName": "GetBranch",
+                    "fullName": "google.cloud.retail.v2alpha.BranchService.GetBranch",
+                    "service": {
+                        "shortName": "BranchService",
+                        "fullName": "google.cloud.retail.v2alpha.BranchService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "retail_v2alpha_generated_CatalogService_ListCatalogs_async",
             "title": "AnalyticsService listCatalogs Sample",
             "origin": "API_DEFINITION",
@@ -1766,7 +1854,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 99,
+                    "end": 104,
                     "type": "FULL"
                 }
             ],
@@ -1879,7 +1967,7 @@
             "regionTag": "retail_v2alpha_generated_ProductService_AddFulfillmentPlaces_async",
             "title": "AnalyticsService addFulfillmentPlaces Sample",
             "origin": "API_DEFINITION",
-            "description": " It is recommended to use the [ProductService.AddLocalInventories][google.cloud.retail.v2alpha.ProductService.AddLocalInventories] method instead of [ProductService.AddFulfillmentPlaces][google.cloud.retail.v2alpha.ProductService.AddFulfillmentPlaces]. [ProductService.AddLocalInventories][google.cloud.retail.v2alpha.ProductService.AddLocalInventories] achieves the same results but provides more fine-grained control over ingesting local inventory data. Incrementally adds place IDs to [Product.fulfillment_info.place_ids][google.cloud.retail.v2alpha.FulfillmentInfo.place_ids]. This process is asynchronous and does not require the [Product][google.cloud.retail.v2alpha.Product] to exist before updating fulfillment information. If the request is valid, the update will be enqueued and processed downstream. As a consequence, when a response is returned, the added place IDs are not immediately manifested in the [Product][google.cloud.retail.v2alpha.Product] queried by [ProductService.GetProduct][google.cloud.retail.v2alpha.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2alpha.ProductService.ListProducts]. The returned [Operation][google.longrunning.Operation]s will be obsolete after 1 day, and [GetOperation][google.longrunning.Operations.GetOperation] API will return NOT_FOUND afterwards. If conflicting updates are issued, the [Operation][google.longrunning.Operation]s associated with the stale updates will not be marked as [done][google.longrunning.Operation.done] until being obsolete.",
+            "description": " We recommend that you use the [ProductService.AddLocalInventories][google.cloud.retail.v2alpha.ProductService.AddLocalInventories] method instead of the [ProductService.AddFulfillmentPlaces][google.cloud.retail.v2alpha.ProductService.AddFulfillmentPlaces] method. [ProductService.AddLocalInventories][google.cloud.retail.v2alpha.ProductService.AddLocalInventories] achieves the same results but provides more fine-grained control over ingesting local inventory data. Incrementally adds place IDs to [Product.fulfillment_info.place_ids][google.cloud.retail.v2alpha.FulfillmentInfo.place_ids]. This process is asynchronous and does not require the [Product][google.cloud.retail.v2alpha.Product] to exist before updating fulfillment information. If the request is valid, the update will be enqueued and processed downstream. As a consequence, when a response is returned, the added place IDs are not immediately manifested in the [Product][google.cloud.retail.v2alpha.Product] queried by [ProductService.GetProduct][google.cloud.retail.v2alpha.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2alpha.ProductService.ListProducts]. The returned [Operation][google.longrunning.Operation]s will be obsolete after 1 day, and [GetOperation][google.longrunning.Operations.GetOperation] API will return NOT_FOUND afterwards. If conflicting updates are issued, the [Operation][google.longrunning.Operation]s associated with the stale updates will not be marked as [done][google.longrunning.Operation.done] until being obsolete.",
             "canonical": true,
             "file": "product_service.add_fulfillment_places.js",
             "language": "JAVASCRIPT",
@@ -1935,7 +2023,7 @@
             "regionTag": "retail_v2alpha_generated_ProductService_RemoveFulfillmentPlaces_async",
             "title": "AnalyticsService removeFulfillmentPlaces Sample",
             "origin": "API_DEFINITION",
-            "description": " It is recommended to use the [ProductService.RemoveLocalInventories][google.cloud.retail.v2alpha.ProductService.RemoveLocalInventories] method instead of [ProductService.RemoveFulfillmentPlaces][google.cloud.retail.v2alpha.ProductService.RemoveFulfillmentPlaces]. [ProductService.RemoveLocalInventories][google.cloud.retail.v2alpha.ProductService.RemoveLocalInventories] achieves the same results but provides more fine-grained control over ingesting local inventory data. Incrementally removes place IDs from a [Product.fulfillment_info.place_ids][google.cloud.retail.v2alpha.FulfillmentInfo.place_ids]. This process is asynchronous and does not require the [Product][google.cloud.retail.v2alpha.Product] to exist before updating fulfillment information. If the request is valid, the update will be enqueued and processed downstream. As a consequence, when a response is returned, the removed place IDs are not immediately manifested in the [Product][google.cloud.retail.v2alpha.Product] queried by [ProductService.GetProduct][google.cloud.retail.v2alpha.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2alpha.ProductService.ListProducts]. The returned [Operation][google.longrunning.Operation]s will be obsolete after 1 day, and [GetOperation][google.longrunning.Operations.GetOperation] API will return NOT_FOUND afterwards. If conflicting updates are issued, the [Operation][google.longrunning.Operation]s associated with the stale updates will not be marked as [done][google.longrunning.Operation.done] until being obsolete.",
+            "description": " We recommend that you use the [ProductService.RemoveLocalInventories][google.cloud.retail.v2alpha.ProductService.RemoveLocalInventories] method instead of the [ProductService.RemoveFulfillmentPlaces][google.cloud.retail.v2alpha.ProductService.RemoveFulfillmentPlaces] method. [ProductService.RemoveLocalInventories][google.cloud.retail.v2alpha.ProductService.RemoveLocalInventories] achieves the same results but provides more fine-grained control over ingesting local inventory data. Incrementally removes place IDs from a [Product.fulfillment_info.place_ids][google.cloud.retail.v2alpha.FulfillmentInfo.place_ids]. This process is asynchronous and does not require the [Product][google.cloud.retail.v2alpha.Product] to exist before updating fulfillment information. If the request is valid, the update will be enqueued and processed downstream. As a consequence, when a response is returned, the removed place IDs are not immediately manifested in the [Product][google.cloud.retail.v2alpha.Product] queried by [ProductService.GetProduct][google.cloud.retail.v2alpha.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2alpha.ProductService.ListProducts]. The returned [Operation][google.longrunning.Operation]s will be obsolete after 1 day, and [GetOperation][google.longrunning.Operations.GetOperation] API will return NOT_FOUND afterwards. If conflicting updates are issued, the [Operation][google.longrunning.Operation]s associated with the stale updates will not be marked as [done][google.longrunning.Operation.done] until being obsolete.",
             "canonical": true,
             "file": "product_service.remove_fulfillment_places.js",
             "language": "JAVASCRIPT",
@@ -2096,6 +2184,338 @@
             }
         },
         {
+            "regionTag": "retail_v2alpha_generated_ProjectService_GetProject_async",
+            "title": "AnalyticsService getProject Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets the project. Throws `NOT_FOUND` if the project wasn't initialized for the Retail API service.",
+            "canonical": true,
+            "file": "project_service.get_project.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetProject",
+                "fullName": "google.cloud.retail.v2alpha.ProjectService.GetProject",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.retail.v2alpha.Project",
+                "client": {
+                    "shortName": "ProjectServiceClient",
+                    "fullName": "google.cloud.retail.v2alpha.ProjectServiceClient"
+                },
+                "method": {
+                    "shortName": "GetProject",
+                    "fullName": "google.cloud.retail.v2alpha.ProjectService.GetProject",
+                    "service": {
+                        "shortName": "ProjectService",
+                        "fullName": "google.cloud.retail.v2alpha.ProjectService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "retail_v2alpha_generated_ProjectService_AcceptTerms_async",
+            "title": "AnalyticsService acceptTerms Sample",
+            "origin": "API_DEFINITION",
+            "description": " Accepts service terms for this project. By making requests to this API, you agree to the terms of service linked below. https://cloud.google.com/retail/data-use-terms",
+            "canonical": true,
+            "file": "project_service.accept_terms.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "AcceptTerms",
+                "fullName": "google.cloud.retail.v2alpha.ProjectService.AcceptTerms",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.retail.v2alpha.Project",
+                "client": {
+                    "shortName": "ProjectServiceClient",
+                    "fullName": "google.cloud.retail.v2alpha.ProjectServiceClient"
+                },
+                "method": {
+                    "shortName": "AcceptTerms",
+                    "fullName": "google.cloud.retail.v2alpha.ProjectService.AcceptTerms",
+                    "service": {
+                        "shortName": "ProjectService",
+                        "fullName": "google.cloud.retail.v2alpha.ProjectService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "retail_v2alpha_generated_ProjectService_EnrollSolution_async",
+            "title": "AnalyticsService enrollSolution Sample",
+            "origin": "API_DEFINITION",
+            "description": " The method enrolls a solution of type [Retail Search][google.cloud.retail.v2alpha.SolutionType.SOLUTION_TYPE_SEARCH] into a project. The [Recommendations AI solution type][google.cloud.retail.v2alpha.SolutionType.SOLUTION_TYPE_RECOMMENDATION] is enrolled by default when your project enables Retail API, so you don't need to call the enrollSolution method for recommendations.",
+            "canonical": true,
+            "file": "project_service.enroll_solution.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "EnrollSolution",
+                "fullName": "google.cloud.retail.v2alpha.ProjectService.EnrollSolution",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "solution",
+                        "type": ".google.cloud.retail.v2alpha.SolutionType"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ProjectServiceClient",
+                    "fullName": "google.cloud.retail.v2alpha.ProjectServiceClient"
+                },
+                "method": {
+                    "shortName": "EnrollSolution",
+                    "fullName": "google.cloud.retail.v2alpha.ProjectService.EnrollSolution",
+                    "service": {
+                        "shortName": "ProjectService",
+                        "fullName": "google.cloud.retail.v2alpha.ProjectService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "retail_v2alpha_generated_ProjectService_ListEnrolledSolutions_async",
+            "title": "AnalyticsService listEnrolledSolutions Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists all the retail API solutions the project has enrolled.",
+            "canonical": true,
+            "file": "project_service.list_enrolled_solutions.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListEnrolledSolutions",
+                "fullName": "google.cloud.retail.v2alpha.ProjectService.ListEnrolledSolutions",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.retail.v2alpha.ListEnrolledSolutionsResponse",
+                "client": {
+                    "shortName": "ProjectServiceClient",
+                    "fullName": "google.cloud.retail.v2alpha.ProjectServiceClient"
+                },
+                "method": {
+                    "shortName": "ListEnrolledSolutions",
+                    "fullName": "google.cloud.retail.v2alpha.ProjectService.ListEnrolledSolutions",
+                    "service": {
+                        "shortName": "ProjectService",
+                        "fullName": "google.cloud.retail.v2alpha.ProjectService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "retail_v2alpha_generated_ProjectService_GetLoggingConfig_async",
+            "title": "AnalyticsService getLoggingConfig Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets the [LoggingConfig][google.cloud.retail.v2alpha.LoggingConfig] of the requested project.",
+            "canonical": true,
+            "file": "project_service.get_logging_config.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetLoggingConfig",
+                "fullName": "google.cloud.retail.v2alpha.ProjectService.GetLoggingConfig",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.retail.v2alpha.LoggingConfig",
+                "client": {
+                    "shortName": "ProjectServiceClient",
+                    "fullName": "google.cloud.retail.v2alpha.ProjectServiceClient"
+                },
+                "method": {
+                    "shortName": "GetLoggingConfig",
+                    "fullName": "google.cloud.retail.v2alpha.ProjectService.GetLoggingConfig",
+                    "service": {
+                        "shortName": "ProjectService",
+                        "fullName": "google.cloud.retail.v2alpha.ProjectService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "retail_v2alpha_generated_ProjectService_UpdateLoggingConfig_async",
+            "title": "AnalyticsService updateLoggingConfig Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates the [LoggingConfig][google.cloud.retail.v2alpha.LoggingConfig] of the requested project.",
+            "canonical": true,
+            "file": "project_service.update_logging_config.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 68,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateLoggingConfig",
+                "fullName": "google.cloud.retail.v2alpha.ProjectService.UpdateLoggingConfig",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "logging_config",
+                        "type": ".google.cloud.retail.v2alpha.LoggingConfig"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.cloud.retail.v2alpha.LoggingConfig",
+                "client": {
+                    "shortName": "ProjectServiceClient",
+                    "fullName": "google.cloud.retail.v2alpha.ProjectServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateLoggingConfig",
+                    "fullName": "google.cloud.retail.v2alpha.ProjectService.UpdateLoggingConfig",
+                    "service": {
+                        "shortName": "ProjectService",
+                        "fullName": "google.cloud.retail.v2alpha.ProjectService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "retail_v2alpha_generated_ProjectService_GetAlertConfig_async",
+            "title": "AnalyticsService getAlertConfig Sample",
+            "origin": "API_DEFINITION",
+            "description": " Get the [AlertConfig][google.cloud.retail.v2alpha.AlertConfig] of the requested project.",
+            "canonical": true,
+            "file": "project_service.get_alert_config.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetAlertConfig",
+                "fullName": "google.cloud.retail.v2alpha.ProjectService.GetAlertConfig",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.retail.v2alpha.AlertConfig",
+                "client": {
+                    "shortName": "ProjectServiceClient",
+                    "fullName": "google.cloud.retail.v2alpha.ProjectServiceClient"
+                },
+                "method": {
+                    "shortName": "GetAlertConfig",
+                    "fullName": "google.cloud.retail.v2alpha.ProjectService.GetAlertConfig",
+                    "service": {
+                        "shortName": "ProjectService",
+                        "fullName": "google.cloud.retail.v2alpha.ProjectService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "retail_v2alpha_generated_ProjectService_UpdateAlertConfig_async",
+            "title": "AnalyticsService updateAlertConfig Sample",
+            "origin": "API_DEFINITION",
+            "description": " Update the alert config of the requested project.",
+            "canonical": true,
+            "file": "project_service.update_alert_config.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 65,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateAlertConfig",
+                "fullName": "google.cloud.retail.v2alpha.ProjectService.UpdateAlertConfig",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "alert_config",
+                        "type": ".google.cloud.retail.v2alpha.AlertConfig"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.cloud.retail.v2alpha.AlertConfig",
+                "client": {
+                    "shortName": "ProjectServiceClient",
+                    "fullName": "google.cloud.retail.v2alpha.ProjectServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateAlertConfig",
+                    "fullName": "google.cloud.retail.v2alpha.ProjectService.UpdateAlertConfig",
+                    "service": {
+                        "shortName": "ProjectService",
+                        "fullName": "google.cloud.retail.v2alpha.ProjectService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "retail_v2alpha_generated_SearchService_Search_async",
             "title": "AnalyticsService search Sample",
             "origin": "API_DEFINITION",
@@ -2106,7 +2526,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 324,
+                    "end": 323,
                     "type": "FULL"
                 }
             ],

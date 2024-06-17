@@ -31,7 +31,7 @@ function main(parent, merchantCenterAccountLink) {
   /**
    *  Required. The branch resource where this MerchantCenterAccountLink will be
    *  created. Format:
-   *  projects/{PROJECT_NUMBER}/locations/global/catalogs/{CATALOG_ID}}
+   *  `projects/{PROJECT_NUMBER}/locations/global/catalogs/{CATALOG_ID}`
    */
   // const parent = 'abc123'
   /**
