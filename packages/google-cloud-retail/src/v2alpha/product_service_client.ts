@@ -210,6 +210,9 @@ export class ProductServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      alertConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/alertConfig'
+      ),
       attributesConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/attributesConfig'
       ),
@@ -225,6 +228,9 @@ export class ProductServiceClient {
       controlPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/controls/{control}'
       ),
+      loggingConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/loggingConfig'
+      ),
       merchantCenterAccountLinkPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/merchantCenterAccountLinks/{merchant_center_account_link}'
       ),
@@ -233,6 +239,9 @@ export class ProductServiceClient {
       ),
       productPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}/products/{product}'
+      ),
+      retailProjectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/retailProject'
       ),
       servingConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/servingConfigs/{serving_config}'
@@ -1219,7 +1228,8 @@ export class ProductServiceClient {
    *   The desired location of errors incurred during the Import.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Indicates which fields in the provided imported `products` to update. If
-   *   not set, all fields are updated.
+   *   not set, all fields are updated. If provided, only the existing product
+   *   fields are updated. Missing products will not be created.
    * @param {google.cloud.retail.v2alpha.ImportProductsRequest.ReconciliationMode} request.reconciliationMode
    *   The mode of reconciliation between existing products and the products to be
    *   imported. Defaults to
@@ -1233,9 +1243,14 @@ export class ProductServiceClient {
    *   Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`. It has
    *   to be within the same project as
    *   {@link protos.google.cloud.retail.v2alpha.ImportProductsRequest.parent|ImportProductsRequest.parent}.
-   *   Make sure that `service-<project
-   *   number>@gcp-sa-retail.iam.gserviceaccount.com` has the
-   *   `pubsub.topics.publish` IAM permission on the topic.
+   *   Make sure that both
+   *   `cloud-retail-customer-data-access@system.gserviceaccount.com` and
+   *   `service-<project number>@gcp-sa-retail.iam.gserviceaccount.com`
+   *   have the `pubsub.topics.publish` IAM permission on the topic.
+   *
+   *   Only supported when
+   *   {@link protos.google.cloud.retail.v2alpha.ImportProductsRequest.reconciliation_mode|ImportProductsRequest.reconciliation_mode}
+   *   is set to `FULL`.
    * @param {boolean} request.skipDefaultBranchProtection
    *   If true, this performs the FULL import even if it would delete a large
    *   proportion of the products in the default branch, which could potentially
@@ -1634,10 +1649,11 @@ export class ProductServiceClient {
     >;
   }
   /**
-   * It is recommended to use the
+   * We recommend that you use the
    * {@link protos.google.cloud.retail.v2alpha.ProductService.AddLocalInventories|ProductService.AddLocalInventories}
-   * method instead of
-   * {@link protos.google.cloud.retail.v2alpha.ProductService.AddFulfillmentPlaces|ProductService.AddFulfillmentPlaces}.
+   * method instead of the
+   * {@link protos.google.cloud.retail.v2alpha.ProductService.AddFulfillmentPlaces|ProductService.AddFulfillmentPlaces}
+   * method.
    * {@link protos.google.cloud.retail.v2alpha.ProductService.AddLocalInventories|ProductService.AddLocalInventories}
    * achieves the same results but provides more fine-grained control over
    * ingesting local inventory data.
@@ -1852,10 +1868,11 @@ export class ProductServiceClient {
     >;
   }
   /**
-   * It is recommended to use the
+   * We recommend that you use the
    * {@link protos.google.cloud.retail.v2alpha.ProductService.RemoveLocalInventories|ProductService.RemoveLocalInventories}
-   * method instead of
-   * {@link protos.google.cloud.retail.v2alpha.ProductService.RemoveFulfillmentPlaces|ProductService.RemoveFulfillmentPlaces}.
+   * method instead of the
+   * {@link protos.google.cloud.retail.v2alpha.ProductService.RemoveFulfillmentPlaces|ProductService.RemoveFulfillmentPlaces}
+   * method.
    * {@link protos.google.cloud.retail.v2alpha.ProductService.RemoveLocalInventories|ProductService.RemoveLocalInventories}
    * achieves the same results but provides more fine-grained control over
    * ingesting local inventory data.
@@ -3128,6 +3145,30 @@ export class ProductServiceClient {
   // --------------------
 
   /**
+   * Return a fully-qualified alertConfig resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  alertConfigPath(project: string) {
+    return this.pathTemplates.alertConfigPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from AlertConfig resource.
+   *
+   * @param {string} alertConfigName
+   *   A fully-qualified path representing AlertConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAlertConfigName(alertConfigName: string) {
+    return this.pathTemplates.alertConfigPathTemplate.match(alertConfigName)
+      .project;
+  }
+
+  /**
    * Return a fully-qualified attributesConfig resource name string.
    *
    * @param {string} project
@@ -3421,6 +3462,30 @@ export class ProductServiceClient {
   }
 
   /**
+   * Return a fully-qualified loggingConfig resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  loggingConfigPath(project: string) {
+    return this.pathTemplates.loggingConfigPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from LoggingConfig resource.
+   *
+   * @param {string} loggingConfigName
+   *   A fully-qualified path representing LoggingConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLoggingConfigName(loggingConfigName: string) {
+    return this.pathTemplates.loggingConfigPathTemplate.match(loggingConfigName)
+      .project;
+  }
+
+  /**
    * Return a fully-qualified merchantCenterAccountLink resource name string.
    *
    * @param {string} project
@@ -3644,6 +3709,30 @@ export class ProductServiceClient {
    */
   matchProductFromProductName(productName: string) {
     return this.pathTemplates.productPathTemplate.match(productName).product;
+  }
+
+  /**
+   * Return a fully-qualified retailProject resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  retailProjectPath(project: string) {
+    return this.pathTemplates.retailProjectPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from RetailProject resource.
+   *
+   * @param {string} retailProjectName
+   *   A fully-qualified path representing RetailProject resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRetailProjectName(retailProjectName: string) {
+    return this.pathTemplates.retailProjectPathTemplate.match(retailProjectName)
+      .project;
   }
 
   /**

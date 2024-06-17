@@ -29,6 +29,40 @@
         }
       }
     },
+    "BranchService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "BranchServiceClient",
+          "rpcs": {
+            "ListBranches": {
+              "methods": [
+                "listBranches"
+              ]
+            },
+            "GetBranch": {
+              "methods": [
+                "getBranch"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "BranchServiceClient",
+          "rpcs": {
+            "ListBranches": {
+              "methods": [
+                "listBranches"
+              ]
+            },
+            "GetBranch": {
+              "methods": [
+                "getBranch"
+              ]
+            }
+          }
+        }
+      }
+    },
     "CatalogService": {
       "clients": {
         "grpc": {
@@ -567,6 +601,100 @@
                 "listProducts",
                 "listProductsStream",
                 "listProductsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ProjectService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ProjectServiceClient",
+          "rpcs": {
+            "GetProject": {
+              "methods": [
+                "getProject"
+              ]
+            },
+            "AcceptTerms": {
+              "methods": [
+                "acceptTerms"
+              ]
+            },
+            "ListEnrolledSolutions": {
+              "methods": [
+                "listEnrolledSolutions"
+              ]
+            },
+            "GetLoggingConfig": {
+              "methods": [
+                "getLoggingConfig"
+              ]
+            },
+            "UpdateLoggingConfig": {
+              "methods": [
+                "updateLoggingConfig"
+              ]
+            },
+            "GetAlertConfig": {
+              "methods": [
+                "getAlertConfig"
+              ]
+            },
+            "UpdateAlertConfig": {
+              "methods": [
+                "updateAlertConfig"
+              ]
+            },
+            "EnrollSolution": {
+              "methods": [
+                "enrollSolution"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ProjectServiceClient",
+          "rpcs": {
+            "GetProject": {
+              "methods": [
+                "getProject"
+              ]
+            },
+            "AcceptTerms": {
+              "methods": [
+                "acceptTerms"
+              ]
+            },
+            "ListEnrolledSolutions": {
+              "methods": [
+                "listEnrolledSolutions"
+              ]
+            },
+            "GetLoggingConfig": {
+              "methods": [
+                "getLoggingConfig"
+              ]
+            },
+            "UpdateLoggingConfig": {
+              "methods": [
+                "updateLoggingConfig"
+              ]
+            },
+            "GetAlertConfig": {
+              "methods": [
+                "getAlertConfig"
+              ]
+            },
+            "UpdateAlertConfig": {
+              "methods": [
+                "updateAlertConfig"
+              ]
+            },
+            "EnrollSolution": {
+              "methods": [
+                "enrollSolution"
               ]
             }
           }
