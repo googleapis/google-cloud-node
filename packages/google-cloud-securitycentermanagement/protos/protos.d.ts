@@ -728,7 +728,8 @@ export namespace google {
                         ENABLEMENT_STATE_UNSPECIFIED = 0,
                         INHERITED = 1,
                         ENABLED = 2,
-                        DISABLED = 3
+                        DISABLED = 3,
+                        INGEST_ONLY = 4
                     }
                 }
 

@@ -1034,6 +1034,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             if (message.effectiveEnablementState != null && message.hasOwnProperty("effectiveEnablementState"))
@@ -1044,6 +1045,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             if (message.modules != null && message.hasOwnProperty("modules")) {
@@ -1106,6 +1108,10 @@
                             case 3:
                                 message.intendedEnablementState = 3;
                                 break;
+                            case "INGEST_ONLY":
+                            case 4:
+                                message.intendedEnablementState = 4;
+                                break;
                             }
                             switch (object.effectiveEnablementState) {
                             default:
@@ -1129,6 +1135,10 @@
                             case "DISABLED":
                             case 3:
                                 message.effectiveEnablementState = 3;
+                                break;
+                            case "INGEST_ONLY":
+                            case 4:
+                                message.effectiveEnablementState = 4;
                                 break;
                             }
                             if (object.modules) {
@@ -1375,6 +1385,7 @@
                                     case 1:
                                     case 2:
                                     case 3:
+                                    case 4:
                                         break;
                                     }
                                 if (message.effectiveEnablementState != null && message.hasOwnProperty("effectiveEnablementState"))
@@ -1385,6 +1396,7 @@
                                     case 1:
                                     case 2:
                                     case 3:
+                                    case 4:
                                         break;
                                     }
                                 return null;
@@ -1425,6 +1437,10 @@
                                 case 3:
                                     message.intendedEnablementState = 3;
                                     break;
+                                case "INGEST_ONLY":
+                                case 4:
+                                    message.intendedEnablementState = 4;
+                                    break;
                                 }
                                 switch (object.effectiveEnablementState) {
                                 default:
@@ -1448,6 +1464,10 @@
                                 case "DISABLED":
                                 case 3:
                                     message.effectiveEnablementState = 3;
+                                    break;
+                                case "INGEST_ONLY":
+                                case 4:
+                                    message.effectiveEnablementState = 4;
                                     break;
                                 }
                                 return message;
@@ -1514,6 +1534,7 @@
                          * @property {number} INHERITED=1 INHERITED value
                          * @property {number} ENABLED=2 ENABLED value
                          * @property {number} DISABLED=3 DISABLED value
+                         * @property {number} INGEST_ONLY=4 INGEST_ONLY value
                          */
                         SecurityCenterService.EnablementState = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -1521,6 +1542,7 @@
                             values[valuesById[1] = "INHERITED"] = 1;
                             values[valuesById[2] = "ENABLED"] = 2;
                             values[valuesById[3] = "DISABLED"] = 3;
+                            values[valuesById[4] = "INGEST_ONLY"] = 4;
                             return values;
                         })();
     
