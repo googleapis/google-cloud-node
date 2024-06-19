@@ -2371,6 +2371,24 @@
     "support_documentation": "https://cloud.google.com/storage/docs/getting-support"
   },
   {
+    "name": "storage",
+    "name_pretty": "Storage API",
+    "product_documentation": "https://cloud.google.com/storage/docs/overview",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/storage/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "stable",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/storage-control",
+    "api_id": "storage.googleapis.com",
+    "default_version": "v2",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "storage",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-storage-control",
+    "support_documentation": "https://cloud.google.com/storage/docs/getting-support"
+  },
+  {
     "name": "storageinsights",
     "name_pretty": "Storage Insights API",
     "product_documentation": "https://cloud.google.com/storage/docs/insights/storage-insights",
@@ -2757,6 +2775,24 @@
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-bigquery-datapolicies"
   },
   {
+    "name": "managedkafka",
+    "name_pretty": "Apache Kafka for BigQuery API",
+    "product_documentation": "https://cloud.google.com/managed-kafka",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/managedkafka/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/managedkafka",
+    "api_id": "managedkafka.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "managedkafka",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-managedkafka",
+    "support_documentation": "https://cloud.google.com/managed-kafka/docs/getting-support"
+  },
+  {
     "name": "apigeeregistry",
     "name_pretty": "Apigee Registry API",
     "product_documentation": "https://cloud.google.com/apigee/docs/api-hub/get-started-registry-api",
@@ -2970,6 +3006,24 @@
     "api_shortname": "dataform",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-dataform",
     "support_documentation": "https://dataform.co/docs/getting-support"
+  },
+  {
+    "name": "developerconnect",
+    "name_pretty": "Developer Connect API",
+    "product_documentation": "https://cloud.google.com/developer-connect/docs/overview",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/developerconnect/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/developerconnect",
+    "api_id": "developerconnect.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "developerconnect",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-developerconnect",
+    "support_documentation": "https://cloud.google.com/developer-connect/docs/getting-support"
   },
   {
     "name": "generativelanguage",
@@ -3438,24 +3492,6 @@
     "api_shortname": "solar",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-maps-solar",
     "support_documentation": "https://developers.google.com/maps/documentation/solar/overview/docs/getting-support"
-  },
-  {
-    "name": "storage",
-    "name_pretty": "Storage API",
-    "product_documentation": "https://cloud.google.com/storage/docs/overview",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/storage/latest",
-    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-    "release_level": "preview",
-    "language": "nodejs",
-    "repo": "googleapis/google-cloud-node",
-    "distribution_name": "@google-cloud/storage-control",
-    "api_id": "storage.googleapis.com",
-    "default_version": "v2",
-    "requires_billing": true,
-    "library_type": "GAPIC_AUTO",
-    "api_shortname": "storage",
-    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-storage-control",
-    "support_documentation": "https://cloud.google.com/storage/docs/getting-support"
   },
   {
     "name": "trace",
