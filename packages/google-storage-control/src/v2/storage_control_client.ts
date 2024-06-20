@@ -451,7 +451,6 @@ export class StorageControlClient {
   /**
    * Creates a new folder. This operation is only applicable to a hierarchical
    * namespace enabled bucket.
-   * Hierarchical namespace buckets are in allowlist preview.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -567,7 +566,6 @@ export class StorageControlClient {
   /**
    * Permanently deletes an empty folder. This operation is only applicable to a
    * hierarchical namespace enabled bucket.
-   * Hierarchical namespace buckets are in allowlist preview.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -677,7 +675,6 @@ export class StorageControlClient {
   /**
    * Returns metadata for the specified folder. This operation is only
    * applicable to a hierarchical namespace enabled bucket.
-   * Hierarchical namespace buckets are in allowlist preview.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1247,7 +1244,6 @@ export class StorageControlClient {
    * applicable to a hierarchical namespace enabled bucket. During a rename, the
    * source and destination folders are locked until the long running operation
    * completes.
-   * Hierarchical namespace buckets are in allowlist preview.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1412,7 +1408,6 @@ export class StorageControlClient {
   /**
    * Retrieves a list of folders. This operation is only applicable to a
    * hierarchical namespace enabled bucket.
-   * Hierarchical namespace buckets are in allowlist preview.
    *
    * @param {Object} request
    *   The request object that will be sent.
