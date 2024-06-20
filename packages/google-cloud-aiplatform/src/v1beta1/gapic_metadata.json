@@ -3107,6 +3107,11 @@
                 "generateContent"
               ]
             },
+            "StreamRawPredict": {
+              "methods": [
+                "streamRawPredict"
+              ]
+            },
             "StreamDirectPredict": {
               "methods": [
                 "streamDirectPredict"
