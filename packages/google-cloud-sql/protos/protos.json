@@ -1258,7 +1258,8 @@
                             "RELEASE_SSRS_LEASE": 43,
                             "RECONFIGURE_OLD_PRIMARY": 44,
                             "CLUSTER_MAINTENANCE": 45,
-                            "SELF_SERVICE_MAINTENANCE": 46
+                            "SELF_SERVICE_MAINTENANCE": 46,
+                            "SWITCHOVER_TO_REPLICA": 47
                           }
                         },
                         "SqlOperationStatus": {
@@ -4109,6 +4110,13 @@
                     },
                     "ReplicationCluster": {
                       "fields": {
+                        "psaWriteEndpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "failoverDrReplicaName": {
                           "type": "string",
                           "id": 2,

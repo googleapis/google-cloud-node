@@ -5209,7 +5209,8 @@ export namespace google {
                         RELEASE_SSRS_LEASE = 43,
                         RECONFIGURE_OLD_PRIMARY = 44,
                         CLUSTER_MAINTENANCE = 45,
-                        SELF_SERVICE_MAINTENANCE = 46
+                        SELF_SERVICE_MAINTENANCE = 46,
+                        SWITCHOVER_TO_REPLICA = 47
                     }
 
                     /** SqlOperationStatus enum. */
@@ -15796,6 +15797,9 @@ export namespace google {
                 /** Properties of a ReplicationCluster. */
                 interface IReplicationCluster {
 
+                    /** ReplicationCluster psaWriteEndpoint */
+                    psaWriteEndpoint?: (string|null);
+
                     /** ReplicationCluster failoverDrReplicaName */
                     failoverDrReplicaName?: (string|null);
 
@@ -15811,6 +15815,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.sql.v1.IReplicationCluster);
+
+                    /** ReplicationCluster psaWriteEndpoint. */
+                    public psaWriteEndpoint: string;
 
                     /** ReplicationCluster failoverDrReplicaName. */
                     public failoverDrReplicaName: string;
