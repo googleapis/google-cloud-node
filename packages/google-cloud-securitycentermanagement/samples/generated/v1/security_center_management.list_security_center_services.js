@@ -45,6 +45,11 @@ function main(parent) {
    *  Optional. The value returned by the last call indicating a continuation.
    */
   // const pageToken = 'abc123'
+  /**
+   *  Flag that, when set, will be used to filter the ModuleSettings that are
+   *  in scope. The default setting is that all modules will be shown.
+   */
+  // const showEligibleModulesOnly = true
 
   // Imports the Securitycentermanagement library
   const {SecurityCenterManagementClient} = require('@google-cloud/securitycentermanagement').v1;

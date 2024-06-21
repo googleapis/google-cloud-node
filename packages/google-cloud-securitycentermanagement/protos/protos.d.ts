@@ -2984,7 +2984,8 @@ export namespace google {
                         MISCONFIGURATION = 3,
                         OBSERVATION = 4,
                         SCC_ERROR = 5,
-                        POSTURE_VIOLATION = 6
+                        POSTURE_VIOLATION = 6,
+                        TOXIC_COMBINATION = 7
                     }
                 }
 
@@ -5082,6 +5083,9 @@ export namespace google {
 
                     /** GetSecurityCenterServiceRequest name */
                     name?: (string|null);
+
+                    /** GetSecurityCenterServiceRequest showEligibleModulesOnly */
+                    showEligibleModulesOnly?: (boolean|null);
                 }
 
                 /** Represents a GetSecurityCenterServiceRequest. */
@@ -5095,6 +5099,9 @@ export namespace google {
 
                     /** GetSecurityCenterServiceRequest name. */
                     public name: string;
+
+                    /** GetSecurityCenterServiceRequest showEligibleModulesOnly. */
+                    public showEligibleModulesOnly: boolean;
 
                     /**
                      * Creates a new GetSecurityCenterServiceRequest instance using the specified properties.
@@ -5185,6 +5192,9 @@ export namespace google {
 
                     /** ListSecurityCenterServicesRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** ListSecurityCenterServicesRequest showEligibleModulesOnly */
+                    showEligibleModulesOnly?: (boolean|null);
                 }
 
                 /** Represents a ListSecurityCenterServicesRequest. */
@@ -5204,6 +5214,9 @@ export namespace google {
 
                     /** ListSecurityCenterServicesRequest pageToken. */
                     public pageToken: string;
+
+                    /** ListSecurityCenterServicesRequest showEligibleModulesOnly. */
+                    public showEligibleModulesOnly: boolean;
 
                     /**
                      * Creates a new ListSecurityCenterServicesRequest instance using the specified properties.
