@@ -29042,6 +29042,9 @@ export namespace google {
 
                     /** CloneContext preferredZone */
                     preferredZone?: (string|null);
+
+                    /** CloneContext preferredSecondaryZone */
+                    preferredSecondaryZone?: (string|null);
                 }
 
                 /** Represents a CloneContext. */
@@ -29077,8 +29080,14 @@ export namespace google {
                     /** CloneContext preferredZone. */
                     public preferredZone?: (string|null);
 
+                    /** CloneContext preferredSecondaryZone. */
+                    public preferredSecondaryZone?: (string|null);
+
                     /** CloneContext _preferredZone. */
                     public _preferredZone?: "preferredZone";
+
+                    /** CloneContext _preferredSecondaryZone. */
+                    public _preferredSecondaryZone?: "preferredSecondaryZone";
 
                     /**
                      * Creates a new CloneContext instance using the specified properties.
@@ -30607,6 +30616,9 @@ export namespace google {
                 /** Properties of a ReplicationCluster. */
                 interface IReplicationCluster {
 
+                    /** ReplicationCluster psaWriteEndpoint */
+                    psaWriteEndpoint?: (string|null);
+
                     /** ReplicationCluster failoverDrReplicaName */
                     failoverDrReplicaName?: (string|null);
 
@@ -30623,11 +30635,17 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.sql.v1beta4.IReplicationCluster);
 
+                    /** ReplicationCluster psaWriteEndpoint. */
+                    public psaWriteEndpoint?: (string|null);
+
                     /** ReplicationCluster failoverDrReplicaName. */
                     public failoverDrReplicaName?: (string|null);
 
                     /** ReplicationCluster drReplica. */
                     public drReplica?: (boolean|null);
+
+                    /** ReplicationCluster _psaWriteEndpoint. */
+                    public _psaWriteEndpoint?: "psaWriteEndpoint";
 
                     /** ReplicationCluster _failoverDrReplicaName. */
                     public _failoverDrReplicaName?: "failoverDrReplicaName";
@@ -36214,7 +36232,8 @@ export namespace google {
                         RELEASE_SSRS_LEASE = 43,
                         RECONFIGURE_OLD_PRIMARY = 44,
                         CLUSTER_MAINTENANCE = 45,
-                        SELF_SERVICE_MAINTENANCE = 46
+                        SELF_SERVICE_MAINTENANCE = 46,
+                        SWITCHOVER_TO_REPLICA = 47
                     }
 
                     /** SqlOperationStatus enum. */
@@ -38799,6 +38818,7 @@ export namespace google {
                     POSTGRES_13 = 23,
                     POSTGRES_14 = 110,
                     POSTGRES_15 = 172,
+                    POSTGRES_16 = 272,
                     MYSQL_8_0 = 20,
                     MYSQL_8_0_18 = 41,
                     MYSQL_8_0_26 = 85,
@@ -38817,6 +38837,7 @@ export namespace google {
                     MYSQL_8_0_39 = 357,
                     MYSQL_8_0_40 = 358,
                     MYSQL_8_4 = 398,
+                    MYSQL_8_4_0 = 399,
                     SQLSERVER_2019_STANDARD = 26,
                     SQLSERVER_2019_ENTERPRISE = 27,
                     SQLSERVER_2019_EXPRESS = 28,
