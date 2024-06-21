@@ -317,4 +317,4 @@ __Usage:__
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=samples/README.md
-[product-docs]: https://cloud.google.com/storage/docs/overview
+[product-docs]: https://cloud.google.com/storage/docs/reference/rpc

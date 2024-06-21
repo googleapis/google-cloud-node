@@ -4,7 +4,7 @@
 
 # [Cloud Storage API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-storage-control)
 
-[![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+[![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/storage-control.svg)](https://www.npmjs.org/package/@google-cloud/storage-control)
 
 
@@ -150,13 +150,14 @@ This library follows [Semantic Versioning](http://semver.org/).
 
 
 
+This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **stable** libraries
+are addressed with the highest priority.
 
 
 
 
-This library is considered to be in **preview**. This means it is still a
-work-in-progress and under active development. Any release is subject to
-backwards-incompatible changes at any time.
 
 
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
@@ -179,8 +180,8 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/storage/latest
-[product-docs]: https://cloud.google.com/storage/docs/overview
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/storage-control/latest
+[product-docs]: https://cloud.google.com/storage/docs/reference/rpc
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
