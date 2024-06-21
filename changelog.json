@@ -5,6 +5,134 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "458d04e25c339b4bce483f2535e86af8b323f169",
+          "message": "[securitycentermanagement] add `TOXIC_COMBINATION` to `FindingClass` enum",
+          "issues": [
+            "5489"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "50736554b0433c16534e771d6673dffe3efac7c9",
+          "message": "[securitycentermanagement] add an INGEST_ONLY EnablementState",
+          "issues": [
+            "5445"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/securitycentermanagement",
+      "id": "2fbd8fc4-18b4-401f-aa33-a4c17356bfad",
+      "createTime": "2024-06-21T18:05:56.946Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "616dee9c69245409909487ee9ebfd68121dab85e",
+          "message": "Update gax",
+          "issues": [
+            "5487"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "6.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/talent",
+      "id": "c22ba18e-e309-40ad-aa5e-3f7d68869fbe",
+      "createTime": "2024-06-21T18:05:56.923Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "30aef59a85ea7d9835b08694f9be482b84e30c94",
+          "message": "Avoid unhandled exception on streamingRecognize",
+          "issues": [
+            "5465"
+          ]
+        }
+      ],
+      "version": "6.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "5dce29cf-853d-489b-9957-39febca8da89",
+      "createTime": "2024-06-21T18:05:56.828Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "140597eac392a4b777c3e0fda197544b0f2912ba",
+          "message": "[retail] support merged facets",
+          "issues": [
+            "5446"
+          ]
+        }
+      ],
+      "version": "3.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/retail",
+      "id": "6d1f8a02-d637-4357-9b97-2ef7ec6fa704",
+      "createTime": "2024-06-21T18:05:56.770Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "83da16fbfb5fc37d689b72ef9d6f607d7167ae95",
+          "message": "[kmsinventory] support Key Access Justifications policy configuration",
+          "issues": [
+            "5480"
+          ]
+        }
+      ],
+      "version": "1.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms-inventory",
+      "id": "22518213-eaae-49f6-bc19-c1e5202b8561",
+      "createTime": "2024-06-21T18:05:56.750Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a6a77c9eda7428840ce2a01572ee2773b2760f36",
+          "message": "[kms] support Key Access Justifications policy configuration",
+          "issues": [
+            "5479"
+          ]
+        }
+      ],
+      "version": "4.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms",
+      "id": "edab1c40-6ad6-42df-8642-a1995e1296f5",
+      "createTime": "2024-06-21T18:05:56.733Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "00ad68517838b0e231cac523dc0cc4adbf20621e",
+          "message": "[dataplex] exposing EntrySource.location field that contains location of a resource in the source system",
+          "issues": [
+            "5483"
+          ]
+        }
+      ],
+      "version": "3.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "a6feda3b-480b-4635-8cfb-ea55783c6987",
+      "createTime": "2024-06-21T18:05:56.717Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "724f42c129e09a79dd0be0c87578ed0507fa19b5",
           "message": "Add initial files for google.cloud.developerconnect.v1",
           "issues": [
@@ -34618,5 +34746,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-06-12T19:36:15.458Z"
+  "updateTime": "2024-06-21T18:05:56.946Z"
 }

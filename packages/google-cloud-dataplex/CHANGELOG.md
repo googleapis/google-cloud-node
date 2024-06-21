@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.10.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.9.0...dataplex-v3.10.0) (2024-06-21)
+
+
+### Features
+
+* [dataplex] exposing EntrySource.location field that contains location of a resource in the source system ([#5483](https://github.com/googleapis/google-cloud-node/issues/5483)) ([00ad685](https://github.com/googleapis/google-cloud-node/commit/00ad68517838b0e231cac523dc0cc4adbf20621e))
+
 ## [3.9.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.8.0...dataplex-v3.9.0) (2024-05-21)
 
 
