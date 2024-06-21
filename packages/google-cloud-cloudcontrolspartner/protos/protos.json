@@ -1417,10 +1417,14 @@
                           "requestType": "ListAccessApprovalRequestsRequest",
                           "responseType": "ListAccessApprovalRequestsResponse",
                           "options": {
+                            "deprecated": true,
                             "(google.api.http).get": "/v1beta/{parent=organizations/*/locations/*/customers/*/workloads/*}/accessApprovalRequests",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
+                            {
+                              "deprecated": true
+                            },
                             {
                               "(google.api.http)": {
                                 "get": "/v1beta/{parent=organizations/*/locations/*/customers/*/workloads/*}/accessApprovalRequests"
