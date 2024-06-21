@@ -6,6 +6,9 @@
         "idempotent": [
           "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
+        ],
+        "unavailable": [
+          "UNAVAILABLE"
         ]
       },
       "retry_params": {
@@ -21,27 +24,33 @@
       },
       "methods": {
         "CreateTool": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "ListTools": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "ExportTools": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "GetTool": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "UpdateTool": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "DeleteTool": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         }
       }
