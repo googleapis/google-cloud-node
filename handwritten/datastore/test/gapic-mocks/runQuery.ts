@@ -14,28 +14,13 @@
 
 import * as assert from 'assert';
 import {describe} from 'mocha';
-import {DatastoreClient, Datastore} from '../../src';
+import {DatastoreClient} from '../../src';
 import * as protos from '../../protos/protos';
-import {Callback} from 'google-gax';
+import {getInitializedDatastoreClient} from './get-initialized-datastore-client';
 
 describe('Run Query', () => {
-  const PROJECT_ID = 'project-id';
-  const NAMESPACE = 'namespace';
   const clientName = 'DatastoreClient';
-  const options = {
-    projectId: PROJECT_ID,
-    namespace: NAMESPACE,
-  };
-  const datastore = new Datastore(options);
-  // By default, datastore.clients_ is an empty map.
-  // To mock out commit we need the map to contain the Gapic data client.
-  // Normally a call to the data client through the datastore object would initialize it.
-  // We don't want to make this call because it would make a grpc request.
-  // So we just add the data client to the map.
-  const gapic = Object.freeze({
-    v1: require('../../src/v1'),
-  });
-  datastore.clients_.set(clientName, new gapic.v1[clientName](options));
+  const datastore = getInitializedDatastoreClient();
 
   // This function is used for doing assertion checks.
   // The idea is to check that the right request gets passed to the commit function in the Gapic layer.
@@ -68,35 +53,13 @@ describe('Run Query', () => {
     }
   }
 
-  it('should pass read time into runQuery for transactions', async () => {
-    // First mock out beginTransaction
-    const dataClient = datastore.clients_.get(clientName);
-    const testId = Buffer.from(Array.from(Array(100).keys()));
-    if (dataClient) {
-      dataClient.beginTransaction = (
-        request: protos.google.datastore.v1.IBeginTransactionRequest,
-        options: protos.google.datastore.v1.IBeginTransactionResponse,
-        callback: Callback<
-          protos.google.datastore.v1.IBeginTransactionResponse,
-          | protos.google.datastore.v1.IBeginTransactionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      ) => {
-        callback(null, {
-          transaction: testId,
-        });
-      };
-    }
+  it('should pass new transaction into runQuery for transactions', async () => {
     setRunQueryComparison(
       (request: protos.google.datastore.v1.IRunQueryRequest) => {
         assert.deepStrictEqual(request, {
           readOptions: {
-            transaction: testId,
-            readTime: {
-              seconds: 77,
-            },
+            consistencyType: 'newTransaction',
+            newTransaction: {},
           },
           partitionId: {
             namespaceId: 'namespace',
@@ -113,6 +76,6 @@ describe('Run Query', () => {
     );
     const transaction = datastore.transaction();
     const query = datastore.createQuery('Task');
-    await transaction.runQuery(query, {readTime: 77000});
+    await transaction.runQuery(query);
   });
 });
