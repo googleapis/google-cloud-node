@@ -17,6 +17,7 @@ import arrify = require('arrify');
 import * as assert from 'assert';
 import {afterEach, beforeEach, before, describe, it} from 'mocha';
 import * as proxyquire from 'proxyquire';
+import {getTransactionRequest} from '../src/request';
 
 import {
   Datastore,
@@ -902,25 +903,25 @@ async.each(
              * be passed into the Gapic layer.
              * @private
              */
-            readonly #expectedRequests?: GapicRequestData[];
+            readonly expectedRequests?: GapicRequestData[];
             /**
              * requests are the actual order of the requests that are passed into the
              * gapic layer
              * @private
              */
-            readonly #requests: GapicRequestData[] = [];
+            readonly requests: GapicRequestData[] = [];
             /**
              * expectedEventOrder is the order the test expects different events to occur
              * such as a callback being called, Gapic functions being called or user
              * code being run.
              */
-            readonly #expectedEventOrder: TransactionEvent[] = [];
+            readonly expectedEventOrder: TransactionEvent[] = [];
             /**
              * eventOrder is the order events actually occur in the test and will be compared with
              * expectedEventOrder.
              * @private
              */
-            #eventOrder: TransactionEvent[] = [];
+            eventOrder: TransactionEvent[] = [];
             // A transaction wrapper object is used to contain the transaction and mocked Gapic functions.
             #transactionWrapper: MockedTransactionWrapper;
             // Stores the mocha done function so that it can be called from this object.
@@ -932,17 +933,17 @@ async.each(
              * happened then this function passes tests if the events happened in the
              * right order.
              */
-            #checkForCompletion() {
-              if (this.#eventOrder.length >= this.#expectedEventOrder.length) {
+            checkForCompletion() {
+              if (this.eventOrder.length >= this.expectedEventOrder.length) {
                 try {
                   assert.deepStrictEqual(
-                    this.#eventOrder,
-                    this.#expectedEventOrder
+                    this.eventOrder,
+                    this.expectedEventOrder
                   );
-                  if (this.#expectedRequests) {
+                  if (this.expectedRequests) {
                     assert.deepStrictEqual(
-                      this.#requests,
-                      this.#expectedRequests
+                      this.requests,
+                      this.expectedRequests
                     );
                   }
                   this.#done();
@@ -961,17 +962,17 @@ async.each(
                 request?: RequestType;
               }[]
             ) {
-              this.#expectedEventOrder = expectedOrder;
-              this.#expectedRequests = expectedRequests;
+              this.expectedEventOrder = expectedOrder;
+              this.expectedRequests = expectedRequests;
               this.#done = done;
               transactionWrapper.callBackSignaler = (
                 call: GapicFunctionName,
                 request?: RequestType
               ) => {
                 try {
-                  this.#requests.push({call, request});
-                  this.#eventOrder.push(call);
-                  this.#checkForCompletion();
+                  this.requests.push({call, request});
+                  this.eventOrder.push(call);
+                  this.checkForCompletion();
                 } catch (e) {
                   done(e);
                 }
@@ -988,8 +989,8 @@ async.each(
             push(event: UserCodeEvent) {
               return () => {
                 try {
-                  this.#eventOrder.push(event);
-                  this.#checkForCompletion();
+                  this.eventOrder.push(event);
+                  this.checkForCompletion();
                 } catch (e) {
                   this.#done(e);
                 }
@@ -1139,6 +1140,27 @@ async.each(
                 transaction: testRunResp.transaction,
               },
             };
+            const lookupTransactionRequestWithNewTransaction = {
+              keys: [
+                {
+                  partitionId: {
+                    namespaceId: 'run-without-mock',
+                  },
+                  path: [
+                    {
+                      kind: 'Company',
+                      name: 'Google',
+                    },
+                  ],
+                },
+              ],
+              projectId: 'project-id',
+              readOptions: {
+                newTransaction: {},
+                consistencyType: 'newTransaction',
+                transaction: testRunResp.transaction,
+              },
+            };
             describe('put, commit', () => {
               const expectedRequests = [
                 {
@@ -1188,25 +1210,25 @@ async.each(
               });
             });
             describe('lookup, lookup, put, commit', () => {
-              const expectedRequests = [
-                {
-                  call: GapicFunctionName.BEGIN_TRANSACTION,
-                  request: beginTransactionRequest,
-                },
-                {
-                  call: GapicFunctionName.COMMIT,
-                  request: commitRequest,
-                },
-                {
-                  call: GapicFunctionName.LOOKUP,
-                  request: lookupTransactionRequest,
-                },
-                {
-                  call: GapicFunctionName.LOOKUP,
-                  request: lookupTransactionRequest,
-                },
-              ];
-              it('should verify that there is a BeginTransaction call while beginning later', done => {
+              it('should verify that there is no BeginTransaction call while beginning later', done => {
+                const expectedRequests = [
+                  {
+                    call: GapicFunctionName.BEGIN_TRANSACTION,
+                    request: beginTransactionRequest,
+                  },
+                  {
+                    call: GapicFunctionName.COMMIT,
+                    request: commitRequest,
+                  },
+                  {
+                    call: GapicFunctionName.LOOKUP,
+                    request: lookupTransactionRequestWithNewTransaction,
+                  },
+                  {
+                    call: GapicFunctionName.LOOKUP,
+                    request: lookupTransactionRequestWithNewTransaction,
+                  },
+                ];
                 const tester = new TransactionOrderTester(
                   transactionWrapper,
                   done,
@@ -1230,6 +1252,24 @@ async.each(
                 transaction.commit(tester.push(UserCodeEvent.COMMIT_CALLBACK));
               });
               it('should verify that there is a BeginTransaction call while beginning early', done => {
+                const expectedRequests = [
+                  {
+                    call: GapicFunctionName.BEGIN_TRANSACTION,
+                    request: beginTransactionRequest,
+                  },
+                  {
+                    call: GapicFunctionName.COMMIT,
+                    request: commitRequest,
+                  },
+                  {
+                    call: GapicFunctionName.LOOKUP,
+                    request: lookupTransactionRequest,
+                  },
+                  {
+                    call: GapicFunctionName.LOOKUP,
+                    request: lookupTransactionRequest,
+                  },
+                ];
                 const tester = new TransactionOrderTester(
                   transactionWrapper,
                   done,
@@ -1254,6 +1294,775 @@ async.each(
                 });
                 transaction.commit(tester.push(UserCodeEvent.COMMIT_CALLBACK));
               });
+            });
+          });
+        });
+        describe('Testing requests passed into the gapic layer', () => {
+          let key: entity.Key;
+          const testCommitResp = {
+            mutationResults: [
+              {
+                key: {
+                  path: [
+                    {
+                      kind: 'some-kind',
+                    },
+                  ],
+                },
+              },
+            ],
+          };
+          const runQueryResp = {
+            batch: {
+              entityResults: [],
+              endCursor: {
+                type: 'Buffer',
+                data: Buffer.from(Array.from(Array(100).keys())),
+              },
+            },
+            transaction: testRunResp.transaction,
+          };
+          const runAggregationQueryResp = {
+            batch: {
+              aggregationResults: [
+                {
+                  aggregateProperties: {
+                    'average rating': {
+                      meaning: 0,
+                      excludeFromIndexes: false,
+                      doubleValue: 100,
+                      valueType: 'doubleValue',
+                    },
+                  },
+                },
+              ],
+              moreResults:
+                google.datastore.v1.QueryResultBatch.MoreResultsType
+                  .NO_MORE_RESULTS,
+              readTime: {seconds: '1699390681', nanos: 961667000},
+            },
+            query: null,
+            transaction: testRunResp.transaction,
+          };
+          const getResp = {
+            found: [
+              {
+                entity: {
+                  key: {
+                    path: [
+                      {
+                        kind: 'Post',
+                        name: 'post1',
+                        idType: 'name',
+                      },
+                    ],
+                    partitionId: {
+                      projectId: 'projectId',
+                      databaseId: 'databaseId',
+                      namespaceId: 'namespaceId',
+                    },
+                  },
+                  excludeFromIndexes: false,
+                  properties: {},
+                },
+              },
+            ],
+            missing: [],
+            deferred: [],
+            transaction: testRunResp.transaction,
+            readTime: {
+              seconds: '1699470605',
+              nanos: 201398000,
+            },
+          };
+          afterEach(() => {
+            transactionWrapper.resetBeginTransaction();
+            transactionWrapper.resetGapicFunctions();
+          });
+          beforeEach(async () => {
+            transactionWrapper = new MockedTransactionWrapper();
+            key = transactionWrapper.datastore.key(['Company', 'Google']);
+            transactionWrapper.mockGapicFunction(
+              GapicFunctionName.RUN_AGGREGATION_QUERY,
+              runAggregationQueryResp,
+              null
+            );
+            transactionWrapper.mockGapicFunction(
+              GapicFunctionName.LOOKUP,
+              getResp,
+              null
+            );
+            transactionWrapper.mockGapicFunction(
+              GapicFunctionName.RUN_QUERY,
+              runQueryResp,
+              null
+            );
+            transactionWrapper.mockGapicFunction(
+              GapicFunctionName.COMMIT,
+              testCommitResp,
+              null
+            );
+          });
+          describe('lookup, lookup, put, commit', () => {
+            it('without using transaction.run', done => {
+              let lookupCallCount = 0;
+              // This gets called when the program reaches the gapic layer.
+              // It ensures the data that reaches the gapic layer is correct.
+              transactionWrapper.callBackSignaler = (
+                callbackReached: GapicFunctionName,
+                request?: RequestType
+              ) => {
+                try {
+                  switch (callbackReached) {
+                    case GapicFunctionName.BEGIN_TRANSACTION:
+                      throw Error(
+                        'BeginTransaction should not have been called'
+                      );
+                    case GapicFunctionName.LOOKUP: {
+                      const lookupRequest =
+                        request as protos.google.datastore.v1.ILookupRequest;
+                      switch (lookupCallCount) {
+                        case 0:
+                          assert.deepStrictEqual(lookupRequest.readOptions, {
+                            newTransaction: {},
+                            consistencyType: 'newTransaction',
+                          });
+                          break;
+                        case 1:
+                          assert.deepStrictEqual(lookupRequest.readOptions, {
+                            transaction: testRunResp.transaction,
+                          });
+                          break;
+                        default:
+                          throw Error('Lookup was called too many times');
+                      }
+                      lookupCallCount++;
+                      break;
+                    }
+                    case GapicFunctionName.COMMIT: {
+                      const commitRequest =
+                        request as protos.google.datastore.v1.ICommitRequest;
+                      assert.deepStrictEqual(
+                        commitRequest.mode,
+                        'TRANSACTIONAL'
+                      );
+                      assert.deepStrictEqual(
+                        commitRequest.transaction,
+                        testRunResp.transaction
+                      );
+                      done();
+                      break;
+                    }
+                    default:
+                      throw Error(
+                        'A gapic function was called that should not have been called'
+                      );
+                  }
+                } catch (err: any) {
+                  done(err);
+                }
+              };
+              (async () => {
+                try {
+                  transaction = transactionWrapper.transaction;
+                  await transaction.get(key);
+                  await transaction.get(key);
+                  transaction.save({key, data: ''});
+                  await transaction.commit();
+                } catch (err: any) {
+                  done(err);
+                }
+              })();
+            });
+            it('with using transaction.run', done => {
+              let beginCount = 0;
+              // This gets called when the program reaches the gapic layer.
+              // It ensures the data that reaches the gapic layer is correct.
+              transactionWrapper.callBackSignaler = (
+                callbackReached: GapicFunctionName,
+                request?: RequestType
+              ) => {
+                try {
+                  switch (callbackReached) {
+                    case GapicFunctionName.BEGIN_TRANSACTION:
+                      assert.deepStrictEqual(request, {
+                        projectId: 'project-id',
+                        transactionOptions: {},
+                      });
+                      beginCount++;
+                      break;
+                    case GapicFunctionName.LOOKUP: {
+                      const lookupRequest =
+                        request as protos.google.datastore.v1.ILookupRequest;
+                      assert.deepStrictEqual(lookupRequest.readOptions, {
+                        transaction: testRunResp.transaction,
+                      });
+                      break;
+                    }
+                    case GapicFunctionName.COMMIT: {
+                      const commitRequest =
+                        request as protos.google.datastore.v1.ICommitRequest;
+                      assert.deepStrictEqual(
+                        commitRequest.mode,
+                        'TRANSACTIONAL'
+                      );
+                      assert.deepStrictEqual(
+                        commitRequest.transaction,
+                        testRunResp.transaction
+                      );
+                      assert.strictEqual(beginCount, 1);
+                      done();
+                      break;
+                    }
+                    default:
+                      throw Error(
+                        'A gapic function was called that should not have been called'
+                      );
+                  }
+                } catch (err: any) {
+                  done(err);
+                }
+              };
+              (async () => {
+                try {
+                  transaction = transactionWrapper.transaction;
+                  await transaction.run();
+                  await transaction.get(key);
+                  await transaction.get(key);
+                  transaction.save({key, data: ''});
+                  await transaction.commit();
+                } catch (err: any) {
+                  done(err);
+                }
+              })();
+            });
+          });
+          describe('runQuery, lookup, put, commit', () => {
+            it('without using transaction.run', done => {
+              // This gets called when the program reaches the gapic layer.
+              // It ensures the data that reaches the gapic layer is correct.
+              transactionWrapper.callBackSignaler = (
+                callbackReached: GapicFunctionName,
+                request?: RequestType
+              ) => {
+                try {
+                  switch (callbackReached) {
+                    case GapicFunctionName.BEGIN_TRANSACTION:
+                      throw Error(
+                        'BeginTransaction should not have been called'
+                      );
+                    case GapicFunctionName.LOOKUP: {
+                      const lookupRequest =
+                        request as protos.google.datastore.v1.ILookupRequest;
+                      assert.deepStrictEqual(lookupRequest.readOptions, {
+                        transaction: testRunResp.transaction,
+                      });
+                      break;
+                    }
+                    case GapicFunctionName.RUN_QUERY: {
+                      const runQueryRequest =
+                        request as protos.google.datastore.v1.IRunQueryRequest;
+                      assert.deepStrictEqual(runQueryRequest.readOptions, {
+                        newTransaction: {},
+                        consistencyType: 'newTransaction',
+                      });
+                      break;
+                    }
+                    case GapicFunctionName.COMMIT: {
+                      const commitRequest =
+                        request as protos.google.datastore.v1.ICommitRequest;
+                      assert.deepStrictEqual(
+                        commitRequest.mode,
+                        'TRANSACTIONAL'
+                      );
+                      assert.deepStrictEqual(
+                        commitRequest.transaction,
+                        testRunResp.transaction
+                      );
+                      done();
+                      break;
+                    }
+                    default:
+                      throw Error(
+                        'A gapic function was called that should not have been called'
+                      );
+                  }
+                } catch (err: any) {
+                  done(err);
+                }
+              };
+              (async () => {
+                try {
+                  transaction = transactionWrapper.transaction;
+                  const query =
+                    transactionWrapper.datastore.createQuery('Task');
+                  await transaction.runQuery(query);
+                  await transaction.get(key);
+                  transaction.save({key, data: ''});
+                  await transaction.commit();
+                } catch (err: any) {
+                  done(err);
+                }
+              })();
+            });
+            it('with using transaction.run', done => {
+              let beginCount = 0;
+              // This gets called when the program reaches the gapic layer.
+              // It ensures the data that reaches the gapic layer is correct.
+              transactionWrapper.callBackSignaler = (
+                callbackReached: GapicFunctionName,
+                request?: RequestType
+              ) => {
+                try {
+                  switch (callbackReached) {
+                    case GapicFunctionName.BEGIN_TRANSACTION:
+                      assert.deepStrictEqual(request, {
+                        projectId: 'project-id',
+                        transactionOptions: {},
+                      });
+                      beginCount++;
+                      break;
+                    case GapicFunctionName.LOOKUP: {
+                      const lookupRequest =
+                        request as protos.google.datastore.v1.ILookupRequest;
+                      assert.deepStrictEqual(lookupRequest.readOptions, {
+                        transaction: testRunResp.transaction,
+                      });
+                      break;
+                    }
+                    case GapicFunctionName.RUN_QUERY: {
+                      const runQueryRequest =
+                        request as protos.google.datastore.v1.IRunQueryRequest;
+                      assert.deepStrictEqual(runQueryRequest.readOptions, {
+                        transaction: testRunResp.transaction,
+                      });
+                      break;
+                    }
+                    case GapicFunctionName.COMMIT: {
+                      const commitRequest =
+                        request as protos.google.datastore.v1.ICommitRequest;
+                      assert.deepStrictEqual(
+                        commitRequest.mode,
+                        'TRANSACTIONAL'
+                      );
+                      assert.deepStrictEqual(
+                        commitRequest.transaction,
+                        testRunResp.transaction
+                      );
+                      assert.strictEqual(beginCount, 1);
+                      done();
+                      break;
+                    }
+                    default:
+                      throw Error(
+                        'A gapic function was called that should not have been called'
+                      );
+                  }
+                } catch (err: any) {
+                  done(err);
+                }
+              };
+              (async () => {
+                try {
+                  transaction = transactionWrapper.transaction;
+                  await transaction.run();
+                  const query =
+                    transactionWrapper.datastore.createQuery('Task');
+                  await transaction.runQuery(query);
+                  await transaction.get(key);
+                  transaction.save({key, data: ''});
+                  await transaction.commit();
+                } catch (err: any) {
+                  done(err);
+                }
+              })();
+            });
+          });
+          describe('runAggregationQuery, lookup, put, commit', () => {
+            it('without using transaction.run', done => {
+              // This gets called when the program reaches the gapic layer.
+              // It ensures the data that reaches the gapic layer is correct.
+              transactionWrapper.callBackSignaler = (
+                callbackReached: GapicFunctionName,
+                request?: RequestType
+              ) => {
+                try {
+                  switch (callbackReached) {
+                    case GapicFunctionName.BEGIN_TRANSACTION:
+                      throw Error(
+                        'BeginTransaction should not have been called'
+                      );
+                    case GapicFunctionName.LOOKUP: {
+                      const lookupRequest =
+                        request as protos.google.datastore.v1.ILookupRequest;
+                      assert.deepStrictEqual(lookupRequest.readOptions, {
+                        transaction: testRunResp.transaction,
+                      });
+                      break;
+                    }
+                    case GapicFunctionName.RUN_AGGREGATION_QUERY: {
+                      const runAggregationQueryRequest =
+                        request as protos.google.datastore.v1.IRunAggregationQueryRequest;
+                      assert.deepStrictEqual(
+                        runAggregationQueryRequest.readOptions,
+                        {
+                          newTransaction: {},
+                          consistencyType: 'newTransaction',
+                        }
+                      );
+                      break;
+                    }
+                    case GapicFunctionName.COMMIT: {
+                      const commitRequest =
+                        request as protos.google.datastore.v1.ICommitRequest;
+                      assert.deepStrictEqual(
+                        commitRequest.mode,
+                        'TRANSACTIONAL'
+                      );
+                      assert.deepStrictEqual(
+                        commitRequest.transaction,
+                        testRunResp.transaction
+                      );
+                      done();
+                      break;
+                    }
+                    default:
+                      throw Error(
+                        'A gapic function was called that should not have been called'
+                      );
+                  }
+                } catch (err: any) {
+                  done(err);
+                }
+              };
+              (async () => {
+                try {
+                  transaction = transactionWrapper.transaction;
+                  const query =
+                    transactionWrapper.datastore.createQuery('Task');
+                  const aggregate = transactionWrapper.datastore
+                    .createAggregationQuery(query)
+                    .addAggregation(AggregateField.average('appearances'));
+                  await transaction.runAggregationQuery(aggregate);
+                  await transaction.get(key);
+                  transaction.save({key, data: ''});
+                  await transaction.commit();
+                } catch (err: any) {
+                  done(err);
+                }
+              })();
+            });
+            it('with using transaction.run', done => {
+              let beginCount = 0;
+              // This gets called when the program reaches the gapic layer.
+              // It ensures the data that reaches the gapic layer is correct.
+              transactionWrapper.callBackSignaler = (
+                callbackReached: GapicFunctionName,
+                request?: RequestType
+              ) => {
+                try {
+                  switch (callbackReached) {
+                    case GapicFunctionName.BEGIN_TRANSACTION:
+                      beginCount++;
+                      assert.deepStrictEqual(request, {
+                        projectId: 'project-id',
+                        transactionOptions: {},
+                      });
+                      break;
+                    case GapicFunctionName.LOOKUP: {
+                      const lookupRequest =
+                        request as protos.google.datastore.v1.ILookupRequest;
+                      assert.deepStrictEqual(lookupRequest.readOptions, {
+                        transaction: testRunResp.transaction,
+                      });
+                      break;
+                    }
+                    case GapicFunctionName.RUN_AGGREGATION_QUERY: {
+                      const runAggregationQueryRequest =
+                        request as protos.google.datastore.v1.IRunAggregationQueryRequest;
+                      assert.deepStrictEqual(
+                        runAggregationQueryRequest.readOptions,
+                        {
+                          transaction: testRunResp.transaction,
+                        }
+                      );
+                      break;
+                    }
+                    case GapicFunctionName.COMMIT: {
+                      const commitRequest =
+                        request as protos.google.datastore.v1.ICommitRequest;
+                      assert.deepStrictEqual(
+                        commitRequest.mode,
+                        'TRANSACTIONAL'
+                      );
+                      assert.deepStrictEqual(
+                        commitRequest.transaction,
+                        testRunResp.transaction
+                      );
+                      assert.strictEqual(beginCount, 1);
+                      done();
+                      break;
+                    }
+                    default:
+                      throw Error(
+                        'A gapic function was called that should not have been called'
+                      );
+                  }
+                } catch (err: any) {
+                  done(err);
+                }
+              };
+              (async () => {
+                try {
+                  transaction = transactionWrapper.transaction;
+                  await transaction.run();
+                  const query =
+                    transactionWrapper.datastore.createQuery('Task');
+                  const aggregate = transactionWrapper.datastore
+                    .createAggregationQuery(query)
+                    .addAggregation(AggregateField.average('appearances'));
+                  await transaction.runAggregationQuery(aggregate);
+                  await transaction.get(key);
+                  transaction.save({key, data: ''});
+                  await transaction.commit();
+                } catch (err: any) {
+                  done(err);
+                }
+              })();
+            });
+          });
+          describe('put, put, lookup, commit', () => {
+            it('without using transaction.run', done => {
+              // This gets called when the program reaches the gapic layer.
+              // It ensures the data that reaches the gapic layer is correct.
+              transactionWrapper.callBackSignaler = (
+                callbackReached: GapicFunctionName,
+                request?: RequestType
+              ) => {
+                try {
+                  switch (callbackReached) {
+                    case GapicFunctionName.BEGIN_TRANSACTION:
+                      throw Error(
+                        'BeginTransaction should not have been called'
+                      );
+                    case GapicFunctionName.LOOKUP: {
+                      const lookupRequest =
+                        request as protos.google.datastore.v1.ILookupRequest;
+                      assert.deepStrictEqual(lookupRequest.readOptions, {
+                        newTransaction: {},
+                        consistencyType: 'newTransaction',
+                      });
+                      break;
+                    }
+                    case GapicFunctionName.COMMIT: {
+                      const commitRequest =
+                        request as protos.google.datastore.v1.ICommitRequest;
+                      assert.deepStrictEqual(
+                        commitRequest.mode,
+                        'TRANSACTIONAL'
+                      );
+                      assert.deepStrictEqual(
+                        commitRequest.transaction,
+                        testRunResp.transaction
+                      );
+                      done();
+                      break;
+                    }
+                    default:
+                      throw Error(
+                        'A gapic function was called that should not have been called'
+                      );
+                  }
+                } catch (err: any) {
+                  done(err);
+                }
+              };
+              (async () => {
+                try {
+                  transaction = transactionWrapper.transaction;
+                  transaction.save({key, data: ''});
+                  transaction.save({key, data: 'more-data'});
+                  await transaction.get(key);
+                  await transaction.commit();
+                } catch (err: any) {
+                  done(err);
+                }
+              })();
+            });
+            it('with using transaction.run', done => {
+              let beginCount = 0;
+              // This gets called when the program reaches the gapic layer.
+              // It ensures the data that reaches the gapic layer is correct.
+              transactionWrapper.callBackSignaler = (
+                callbackReached: GapicFunctionName,
+                request?: RequestType
+              ) => {
+                try {
+                  switch (callbackReached) {
+                    case GapicFunctionName.BEGIN_TRANSACTION:
+                      assert.deepStrictEqual(request, {
+                        projectId: 'project-id',
+                        transactionOptions: {},
+                      });
+                      beginCount++;
+                      break;
+                    case GapicFunctionName.LOOKUP: {
+                      const lookupRequest =
+                        request as protos.google.datastore.v1.ILookupRequest;
+                      assert.deepStrictEqual(lookupRequest.readOptions, {
+                        transaction: testRunResp.transaction,
+                      });
+                      break;
+                    }
+                    case GapicFunctionName.COMMIT: {
+                      const commitRequest =
+                        request as protos.google.datastore.v1.ICommitRequest;
+                      assert.deepStrictEqual(
+                        commitRequest.mode,
+                        'TRANSACTIONAL'
+                      );
+                      assert.deepStrictEqual(
+                        commitRequest.transaction,
+                        testRunResp.transaction
+                      );
+                      assert.strictEqual(beginCount, 1);
+                      done();
+                      break;
+                    }
+                    default:
+                      throw Error(
+                        'A gapic function was called that should not have been called'
+                      );
+                  }
+                } catch (err: any) {
+                  done(err);
+                }
+              };
+              (async () => {
+                try {
+                  transaction = transactionWrapper.transaction;
+                  await transaction.run();
+                  transaction.save({key, data: ''});
+                  transaction.save({key, data: 'more-data'});
+                  await transaction.get(key);
+                  await transaction.commit();
+                } catch (err: any) {
+                  done(err);
+                }
+              })();
+            });
+          });
+          describe('put, commit', () => {
+            it('without using transaction.run', done => {
+              let beginCount = 0;
+              // This gets called when the program reaches the gapic layer.
+              // It ensures the data that reaches the gapic layer is correct.
+              transactionWrapper.callBackSignaler = (
+                callbackReached: GapicFunctionName,
+                request?: RequestType
+              ) => {
+                try {
+                  switch (callbackReached) {
+                    case GapicFunctionName.BEGIN_TRANSACTION:
+                      assert.deepStrictEqual(request, {
+                        projectId: 'project-id',
+                        transactionOptions: {},
+                      });
+                      beginCount++;
+                      break;
+                    case GapicFunctionName.COMMIT: {
+                      const commitRequest =
+                        request as protos.google.datastore.v1.ICommitRequest;
+                      assert.deepStrictEqual(
+                        commitRequest.mode,
+                        'TRANSACTIONAL'
+                      );
+                      assert.deepStrictEqual(
+                        commitRequest.transaction,
+                        testRunResp.transaction
+                      );
+                      assert.strictEqual(beginCount, 1);
+                      done();
+                      break;
+                    }
+                    default:
+                      throw Error(
+                        'A gapic function was called that should not have been called'
+                      );
+                  }
+                } catch (err: any) {
+                  done(err);
+                }
+              };
+              (async () => {
+                try {
+                  transaction = transactionWrapper.transaction;
+                  transaction.save({key, data: ''});
+                  await transaction.commit();
+                } catch (err: any) {
+                  done(err);
+                }
+              })();
+            });
+            it('with using transaction.run', done => {
+              // This gets called when the program reaches the gapic layer.
+              // It ensures the data that reaches the gapic layer is correct.
+              let beginCount = 0;
+              transactionWrapper.callBackSignaler = (
+                callbackReached: GapicFunctionName,
+                request?: RequestType
+              ) => {
+                try {
+                  switch (callbackReached) {
+                    case GapicFunctionName.BEGIN_TRANSACTION:
+                      assert.deepStrictEqual(request, {
+                        projectId: 'project-id',
+                        transactionOptions: {},
+                      });
+                      beginCount++;
+                      break;
+                    case GapicFunctionName.LOOKUP: {
+                      const lookupRequest =
+                        request as protos.google.datastore.v1.ILookupRequest;
+                      assert.deepStrictEqual(lookupRequest.readOptions, {
+                        transaction: testRunResp.transaction,
+                      });
+                      break;
+                    }
+                    case GapicFunctionName.COMMIT: {
+                      const commitRequest =
+                        request as protos.google.datastore.v1.ICommitRequest;
+                      assert.deepStrictEqual(
+                        commitRequest.mode,
+                        'TRANSACTIONAL'
+                      );
+                      assert.deepStrictEqual(
+                        commitRequest.transaction,
+                        testRunResp.transaction
+                      );
+                      assert.strictEqual(beginCount, 1);
+                      done();
+                      break;
+                    }
+                    default:
+                      throw Error(
+                        'A gapic function was called that should not have been called'
+                      );
+                  }
+                } catch (err: any) {
+                  done(err);
+                }
+              };
+              (async () => {
+                try {
+                  transaction = transactionWrapper.transaction;
+                  await transaction.run();
+                  transaction.save({key, data: ''});
+                  await transaction.commit();
+                } catch (err: any) {
+                  done(err);
+                }
+              })();
             });
           });
         });
@@ -1682,8 +2491,18 @@ async.each(
       });
 
       describe('rollback', () => {
-        beforeEach(() => {
-          transaction.id = TRANSACTION_ID;
+        beforeEach(done => {
+          // The transaction state needs to be set to IN_PROGRESS in order for
+          // the rollback function to reach request_.
+          transaction.request_ = (
+            config: RequestConfig,
+            callback: RequestCallback
+          ) => {
+            callback(null, {transaction: Buffer.from(TRANSACTION_ID)});
+          };
+          transaction.run(() => {
+            done();
+          });
         });
 
         it('should rollback', done => {
@@ -1854,13 +2673,18 @@ async.each(
                 },
               },
             } as {} as TransactionOptions;
+            const inputOptions = {
+              transactionOptions: {
+                id: 'transaction-id',
+              },
+            };
 
             transaction.request_ = (config: RequestConfig) => {
               assert.deepStrictEqual(config.reqOpts, options);
               done();
             };
 
-            transaction.run(options, assert.ifError);
+            transaction.run(inputOptions, assert.ifError);
           });
         });
 
@@ -2033,3 +2857,87 @@ async.each(
     });
   }
 );
+
+describe('getTransactionRequest', () => {
+  const datastore = new Datastore();
+
+  it('should return an empty object if no options are provided', () => {
+    const transaction = new Transaction(datastore);
+    const options = {};
+    const result = getTransactionRequest(transaction, options);
+    assert.deepStrictEqual(result, {});
+  });
+
+  it('should return a readOnly object if readOnly is true', () => {
+    const transaction = new Transaction(datastore);
+    const options = {readOnly: true};
+    const result = getTransactionRequest(transaction, options);
+    assert.deepStrictEqual(result, {readOnly: {}});
+  });
+
+  it('should return a readWrite object with previousTransaction if transactionId is provided', () => {
+    const transaction = new Transaction(datastore);
+    const options = {transactionId: 'transaction-id'};
+    const result = getTransactionRequest(transaction, options);
+    assert.deepStrictEqual(result, {
+      readWrite: {previousTransaction: 'transaction-id'},
+    });
+  });
+
+  it('should return a readWrite object with previousTransaction if transaction.id is provided', () => {
+    const transaction = new Transaction(datastore, {id: 'transaction-id'});
+    const options = {};
+    const result = getTransactionRequest(transaction, options);
+    assert.deepStrictEqual(result, {
+      readWrite: {previousTransaction: 'transaction-id'},
+    });
+  });
+
+  it('should return a readOnly object if transactionOptions.readOnly is true', () => {
+    const transaction = new Transaction(datastore);
+    const options = {transactionOptions: {readOnly: true}};
+    const result = getTransactionRequest(transaction, options);
+    assert.deepStrictEqual(result, {readOnly: {}});
+  });
+
+  it('should return a readWrite object with previousTransaction if transactionOptions.id is provided', () => {
+    const transaction = new Transaction(datastore);
+    const options = {transactionOptions: {id: 'transaction-id'}};
+    const result = getTransactionRequest(transaction, options);
+    assert.deepStrictEqual(result, {
+      readWrite: {previousTransaction: 'transaction-id'},
+    });
+  });
+
+  it('should prioritize transactionOptions over other options', () => {
+    const transaction = new Transaction(datastore);
+    const options = {
+      readOnly: false,
+      transactionId: 'transaction-id-1',
+      transactionOptions: {
+        readOnly: true,
+        id: 'transaction-id-2',
+      },
+    };
+    const result = getTransactionRequest(transaction, options);
+    assert.deepStrictEqual(result, {
+      readOnly: {},
+    });
+  });
+
+  it('should return a readOnly object if transaction is constructed with readOnly: true', () => {
+    const transaction = new Transaction(datastore, {readOnly: true});
+    const options = {};
+    const result = getTransactionRequest(transaction, options);
+    assert.deepStrictEqual(result, {readOnly: {}});
+  });
+
+  it('should return a readWrite object with previousTransaction if transaction is constructed with id', () => {
+    const transaction = new Transaction(datastore, {id: 'transaction-id'});
+    const options = {};
+    const result = getTransactionRequest(transaction, options);
+    assert.deepStrictEqual(result, {
+      readWrite: {previousTransaction: 'transaction-id'},
+    });
+  });
+});
