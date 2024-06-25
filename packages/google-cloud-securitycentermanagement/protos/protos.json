@@ -1265,7 +1265,8 @@
                             "MISCONFIGURATION": 3,
                             "OBSERVATION": 4,
                             "SCC_ERROR": 5,
-                            "POSTURE_VIOLATION": 6
+                            "POSTURE_VIOLATION": 6,
+                            "TOXIC_COMBINATION": 7
                           }
                         }
                       }
@@ -1757,6 +1758,10 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "securitycentermanagement.googleapis.com/SecurityCenterService"
                           }
+                        },
+                        "showEligibleModulesOnly": {
+                          "type": "bool",
+                          "id": 2
                         }
                       }
                     },
@@ -1783,6 +1788,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "showEligibleModulesOnly": {
+                          "type": "bool",
+                          "id": 4
                         }
                       }
                     },

@@ -577,7 +577,7 @@ export class CloudCatalogClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the service.
-   *   Example: "services/DA34-426B-A397"
+   *   Example: "services/6F81-5844-456A"
    * @param {google.protobuf.Timestamp} request.startTime
    *   Optional inclusive start time of the time range for which the pricing
    *   versions will be returned. Timestamps in the future are not allowed.
@@ -687,7 +687,7 @@ export class CloudCatalogClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the service.
-   *   Example: "services/DA34-426B-A397"
+   *   Example: "services/6F81-5844-456A"
    * @param {google.protobuf.Timestamp} request.startTime
    *   Optional inclusive start time of the time range for which the pricing
    *   versions will be returned. Timestamps in the future are not allowed.
@@ -753,7 +753,7 @@ export class CloudCatalogClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the service.
-   *   Example: "services/DA34-426B-A397"
+   *   Example: "services/6F81-5844-456A"
    * @param {google.protobuf.Timestamp} request.startTime
    *   Optional inclusive start time of the time range for which the pricing
    *   versions will be returned. Timestamps in the future are not allowed.

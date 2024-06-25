@@ -1684,6 +1684,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest()
@@ -1708,6 +1709,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       client.innerApiCalls.listAccessApprovalRequests =
         stubSimpleCall(expectedResponse);
       const [response] = await client.listAccessApprovalRequests(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.listAccessApprovalRequests as SinonStub
@@ -1725,6 +1727,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest()
@@ -1766,6 +1769,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.listAccessApprovalRequests as SinonStub
@@ -1783,6 +1787,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest()
@@ -1802,6 +1807,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         client.listAccessApprovalRequests(request),
         expectedError
       );
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.listAccessApprovalRequests as SinonStub
       ).getCall(0).args[0];
@@ -1818,6 +1824,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest()
@@ -1861,6 +1868,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         });
       });
       const responses = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
         (
@@ -1888,6 +1896,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest()
@@ -1921,6 +1930,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         });
       });
       await assert.rejects(promise, expectedError);
+      assert(stub.calledOnce);
       assert(
         (
           client.descriptors.page.listAccessApprovalRequests
@@ -1947,6 +1957,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest()
@@ -1976,6 +1987,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       for await (const resource of iterable) {
         responses.push(resource!);
       }
+      assert(stub.calledOnce);
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
         (
@@ -2002,6 +2014,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest()
@@ -2023,6 +2036,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           responses.push(resource!);
         }
       });
+      assert(stub.calledOnce);
       assert.deepStrictEqual(
         (
           client.descriptors.page.listAccessApprovalRequests

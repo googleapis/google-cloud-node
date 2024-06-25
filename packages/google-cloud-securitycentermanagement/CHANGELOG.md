@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/securitycentermanagement-v0.3.0...securitycentermanagement-v0.4.0) (2024-06-21)
+
+
+### Features
+
+* [securitycentermanagement] add `TOXIC_COMBINATION` to `FindingClass` enum ([#5489](https://github.com/googleapis/google-cloud-node/issues/5489)) ([458d04e](https://github.com/googleapis/google-cloud-node/commit/458d04e25c339b4bce483f2535e86af8b323f169))
+* [securitycentermanagement] add an INGEST_ONLY EnablementState ([#5445](https://github.com/googleapis/google-cloud-node/issues/5445)) ([5073655](https://github.com/googleapis/google-cloud-node/commit/50736554b0433c16534e771d6673dffe3efac7c9))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/securitycentermanagement-v0.2.0...securitycentermanagement-v0.3.0) (2024-05-23)
 
 

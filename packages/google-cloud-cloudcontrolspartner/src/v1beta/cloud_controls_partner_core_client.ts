@@ -424,7 +424,7 @@ export class CloudControlsPartnerCoreClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Format:
-   *   organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}
+   *   `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -521,7 +521,7 @@ export class CloudControlsPartnerCoreClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Format:
-   *   organizations/{organization}/locations/{location}/customers/{customer}
+   *   `organizations/{organization}/locations/{location}/customers/{customer}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -618,7 +618,7 @@ export class CloudControlsPartnerCoreClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Format:
-   *   organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}/ekmConnections
+   *   `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}/ekmConnections`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -715,7 +715,7 @@ export class CloudControlsPartnerCoreClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Name of the resource to get in the format:
-   *   organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}/partnerPermissions
+   *   `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}/partnerPermissions`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -811,7 +811,8 @@ export class CloudControlsPartnerCoreClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Format: organizations/{organization}/locations/{location}/partner
+   *   Required. Format:
+   *   `organizations/{organization}/locations/{location}/partner`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -910,7 +911,7 @@ export class CloudControlsPartnerCoreClient {
    * @param {string} request.parent
    *   Required. Parent resource
    *   Format:
-   *   organizations/{organization}/locations/{location}/customers/{customer}
+   *   `organizations/{organization}/locations/{location}/customers/{customer}`
    * @param {number} request.pageSize
    *   The maximum number of workloads to return. The service may return fewer
    *   than this value. If unspecified, at most 500 workloads will be returned.
@@ -1015,7 +1016,7 @@ export class CloudControlsPartnerCoreClient {
    * @param {string} request.parent
    *   Required. Parent resource
    *   Format:
-   *   organizations/{organization}/locations/{location}/customers/{customer}
+   *   `organizations/{organization}/locations/{location}/customers/{customer}`
    * @param {number} request.pageSize
    *   The maximum number of workloads to return. The service may return fewer
    *   than this value. If unspecified, at most 500 workloads will be returned.
@@ -1068,7 +1069,7 @@ export class CloudControlsPartnerCoreClient {
    * @param {string} request.parent
    *   Required. Parent resource
    *   Format:
-   *   organizations/{organization}/locations/{location}/customers/{customer}
+   *   `organizations/{organization}/locations/{location}/customers/{customer}`
    * @param {number} request.pageSize
    *   The maximum number of workloads to return. The service may return fewer
    *   than this value. If unspecified, at most 500 workloads will be returned.
@@ -1119,7 +1120,7 @@ export class CloudControlsPartnerCoreClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource
-   *   Format: organizations/{organization}/locations/{location}
+   *   Format: `organizations/{organization}/locations/{location}`
    * @param {number} request.pageSize
    *   The maximum number of Customers to return. The service may return fewer
    *   than this value. If unspecified, at most 500 Customers will be returned.
@@ -1223,7 +1224,7 @@ export class CloudControlsPartnerCoreClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource
-   *   Format: organizations/{organization}/locations/{location}
+   *   Format: `organizations/{organization}/locations/{location}`
    * @param {number} request.pageSize
    *   The maximum number of Customers to return. The service may return fewer
    *   than this value. If unspecified, at most 500 Customers will be returned.
@@ -1275,7 +1276,7 @@ export class CloudControlsPartnerCoreClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource
-   *   Format: organizations/{organization}/locations/{location}
+   *   Format: `organizations/{organization}/locations/{location}`
    * @param {number} request.pageSize
    *   The maximum number of Customers to return. The service may return fewer
    *   than this value. If unspecified, at most 500 Customers will be returned.
@@ -1320,14 +1321,15 @@ export class CloudControlsPartnerCoreClient {
     ) as AsyncIterable<protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer>;
   }
   /**
-   * Lists access requests associated with a workload
+   * Deprecated: Only returns access approval requests directly associated with
+   * an assured workload folder.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource
    *   Format:
-   *   organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}
+   *   `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of access requests to return. The service may
    *   return fewer than this value. If unspecified, at most 500 access requests
@@ -1351,6 +1353,7 @@ export class CloudControlsPartnerCoreClient {
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
+   * @deprecated ListAccessApprovalRequests is deprecated and may be removed in a future version.
    */
   listAccessApprovalRequests(
     request?: protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsRequest,
@@ -1424,6 +1427,11 @@ export class CloudControlsPartnerCoreClient {
         parent: request.parent ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$CloudControlsPartnerCore-$ListAccessApprovalRequests',
+      'ListAccessApprovalRequests is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.listAccessApprovalRequests(
       request,
       options,
@@ -1438,7 +1446,7 @@ export class CloudControlsPartnerCoreClient {
    * @param {string} request.parent
    *   Required. Parent resource
    *   Format:
-   *   organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}
+   *   `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of access requests to return. The service may
    *   return fewer than this value. If unspecified, at most 500 access requests
@@ -1461,6 +1469,7 @@ export class CloudControlsPartnerCoreClient {
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
+   * @deprecated ListAccessApprovalRequests is deprecated and may be removed in a future version.
    */
   listAccessApprovalRequestsStream(
     request?: protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsRequest,
@@ -1477,6 +1486,11 @@ export class CloudControlsPartnerCoreClient {
     const defaultCallSettings = this._defaults['listAccessApprovalRequests'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this.warn(
+      'DEP$CloudControlsPartnerCore-$ListAccessApprovalRequests',
+      'ListAccessApprovalRequests is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.descriptors.page.listAccessApprovalRequests.createStream(
       this.innerApiCalls.listAccessApprovalRequests as GaxCall,
       request,
@@ -1493,7 +1507,7 @@ export class CloudControlsPartnerCoreClient {
    * @param {string} request.parent
    *   Required. Parent resource
    *   Format:
-   *   organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}
+   *   `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of access requests to return. The service may
    *   return fewer than this value. If unspecified, at most 500 access requests
@@ -1517,6 +1531,7 @@ export class CloudControlsPartnerCoreClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/cloud_controls_partner_core.list_access_approval_requests.js</caption>
    * region_tag:cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_ListAccessApprovalRequests_async
+   * @deprecated ListAccessApprovalRequests is deprecated and may be removed in a future version.
    */
   listAccessApprovalRequestsAsync(
     request?: protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsRequest,
@@ -1533,6 +1548,11 @@ export class CloudControlsPartnerCoreClient {
     const defaultCallSettings = this._defaults['listAccessApprovalRequests'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this.warn(
+      'DEP$CloudControlsPartnerCore-$ListAccessApprovalRequests',
+      'ListAccessApprovalRequests is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.descriptors.page.listAccessApprovalRequests.asyncIterate(
       this.innerApiCalls['listAccessApprovalRequests'] as GaxCall,
       request as {},

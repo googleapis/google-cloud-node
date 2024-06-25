@@ -42,6 +42,11 @@ function main(name) {
    *    * web-security-scanner
    */
   // const name = 'abc123'
+  /**
+   *  Flag that, when set, will be used to filter the ModuleSettings that are
+   *  in scope. The default setting is that all modules will be shown.
+   */
+  // const showEligibleModulesOnly = true
 
   // Imports the Securitycentermanagement library
   const {SecurityCenterManagementClient} = require('@google-cloud/securitycentermanagement').v1;
