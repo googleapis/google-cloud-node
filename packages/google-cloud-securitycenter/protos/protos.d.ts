@@ -30260,6 +30260,12 @@ export namespace google {
 
                     /** Finding loadBalancers */
                     loadBalancers?: (google.cloud.securitycenter.v2.ILoadBalancer[]|null);
+
+                    /** Finding toxicCombination */
+                    toxicCombination?: (google.cloud.securitycenter.v2.IToxicCombination|null);
+
+                    /** Finding groupMemberships */
+                    groupMemberships?: (google.cloud.securitycenter.v2.IGroupMembership[]|null);
                 }
 
                 /** Represents a Finding. */
@@ -30406,6 +30412,12 @@ export namespace google {
                     /** Finding loadBalancers. */
                     public loadBalancers: google.cloud.securitycenter.v2.ILoadBalancer[];
 
+                    /** Finding toxicCombination. */
+                    public toxicCombination?: (google.cloud.securitycenter.v2.IToxicCombination|null);
+
+                    /** Finding groupMemberships. */
+                    public groupMemberships: google.cloud.securitycenter.v2.IGroupMembership[];
+
                     /**
                      * Creates a new Finding instance using the specified properties.
                      * @param [properties] Properties to set
@@ -30518,7 +30530,120 @@ export namespace google {
                         MISCONFIGURATION = 3,
                         OBSERVATION = 4,
                         SCC_ERROR = 5,
-                        POSTURE_VIOLATION = 6
+                        POSTURE_VIOLATION = 6,
+                        TOXIC_COMBINATION = 7
+                    }
+                }
+
+                /** Properties of a GroupMembership. */
+                interface IGroupMembership {
+
+                    /** GroupMembership groupType */
+                    groupType?: (google.cloud.securitycenter.v2.GroupMembership.GroupType|keyof typeof google.cloud.securitycenter.v2.GroupMembership.GroupType|null);
+
+                    /** GroupMembership groupId */
+                    groupId?: (string|null);
+                }
+
+                /** Represents a GroupMembership. */
+                class GroupMembership implements IGroupMembership {
+
+                    /**
+                     * Constructs a new GroupMembership.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v2.IGroupMembership);
+
+                    /** GroupMembership groupType. */
+                    public groupType: (google.cloud.securitycenter.v2.GroupMembership.GroupType|keyof typeof google.cloud.securitycenter.v2.GroupMembership.GroupType);
+
+                    /** GroupMembership groupId. */
+                    public groupId: string;
+
+                    /**
+                     * Creates a new GroupMembership instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GroupMembership instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v2.IGroupMembership): google.cloud.securitycenter.v2.GroupMembership;
+
+                    /**
+                     * Encodes the specified GroupMembership message. Does not implicitly {@link google.cloud.securitycenter.v2.GroupMembership.verify|verify} messages.
+                     * @param message GroupMembership message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v2.IGroupMembership, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GroupMembership message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v2.GroupMembership.verify|verify} messages.
+                     * @param message GroupMembership message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v2.IGroupMembership, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GroupMembership message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GroupMembership
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v2.GroupMembership;
+
+                    /**
+                     * Decodes a GroupMembership message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GroupMembership
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v2.GroupMembership;
+
+                    /**
+                     * Verifies a GroupMembership message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GroupMembership message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GroupMembership
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v2.GroupMembership;
+
+                    /**
+                     * Creates a plain object from a GroupMembership message. Also converts values to other types if specified.
+                     * @param message GroupMembership
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v2.GroupMembership, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GroupMembership to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GroupMembership
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GroupMembership {
+
+                    /** GroupType enum. */
+                    enum GroupType {
+                        GROUP_TYPE_UNSPECIFIED = 0,
+                        GROUP_TYPE_TOXIC_COMBINATION = 1
                     }
                 }
 
@@ -33618,6 +33743,109 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+                }
+
+                /** Properties of a ToxicCombination. */
+                interface IToxicCombination {
+
+                    /** ToxicCombination attackExposureScore */
+                    attackExposureScore?: (number|null);
+
+                    /** ToxicCombination relatedFindings */
+                    relatedFindings?: (string[]|null);
+                }
+
+                /** Represents a ToxicCombination. */
+                class ToxicCombination implements IToxicCombination {
+
+                    /**
+                     * Constructs a new ToxicCombination.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v2.IToxicCombination);
+
+                    /** ToxicCombination attackExposureScore. */
+                    public attackExposureScore: number;
+
+                    /** ToxicCombination relatedFindings. */
+                    public relatedFindings: string[];
+
+                    /**
+                     * Creates a new ToxicCombination instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ToxicCombination instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v2.IToxicCombination): google.cloud.securitycenter.v2.ToxicCombination;
+
+                    /**
+                     * Encodes the specified ToxicCombination message. Does not implicitly {@link google.cloud.securitycenter.v2.ToxicCombination.verify|verify} messages.
+                     * @param message ToxicCombination message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v2.IToxicCombination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ToxicCombination message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v2.ToxicCombination.verify|verify} messages.
+                     * @param message ToxicCombination message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v2.IToxicCombination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ToxicCombination message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ToxicCombination
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v2.ToxicCombination;
+
+                    /**
+                     * Decodes a ToxicCombination message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ToxicCombination
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v2.ToxicCombination;
+
+                    /**
+                     * Verifies a ToxicCombination message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ToxicCombination message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ToxicCombination
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v2.ToxicCombination;
+
+                    /**
+                     * Creates a plain object from a ToxicCombination message. Also converts values to other types if specified.
+                     * @param message ToxicCombination
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v2.ToxicCombination, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ToxicCombination to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ToxicCombination
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a Vulnerability. */
