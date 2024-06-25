@@ -1058,10 +1058,7 @@ export class OsLoginServiceClient {
    * @param {string} request.sshPublicKey
    *   The SSH public key to sign.
    * @param {string} request.parent
-   *   The parent project and zone for the signing request. This is needed to
-   *   properly ensure per-organization ISS processing and potentially to provide
-   *   for the possibility of zone-specific certificates used in the signing
-   *   process.
+   *   The parent project and region for the signing request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
