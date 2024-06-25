@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+/* eslint-disable n/no-unsupported-features/node-builtins */
 import yargs from 'yargs';
 import {promises as fsp, rmSync} from 'fs';
 import {
