@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+/* eslint-disable n/no-process-exit */
+
 /**
  * This sample demonstrates how to add OpenTelemetry tracing to the
  * Google Cloud Pub/Sub API.

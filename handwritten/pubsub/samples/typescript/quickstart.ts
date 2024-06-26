@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/* eslint-disable n/no-process-exit */
+
 // sample-metadata:
 //   title: Quickstart
 //   description: A quick introduction to using the Pub/Sub client library.

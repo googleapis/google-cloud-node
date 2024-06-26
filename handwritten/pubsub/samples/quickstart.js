@@ -16,6 +16,8 @@
 // look for the source TypeScript sample (.ts) for modifications.
 'use strict';
 
+/* eslint-disable n/no-process-exit */
+
 // sample-metadata:
 //   title: Quickstart
 //   description: A quick introduction to using the Pub/Sub client library.

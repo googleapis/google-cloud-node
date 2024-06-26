@@ -31,8 +31,8 @@ import * as defer from 'p-defer';
 import {TestResources} from './testResources';
 import {commandFor} from './common';
 
-// Tests run as Node 12.
-// eslint-disable-next-line node/no-unsupported-features/node-builtins
+// Tests run as Node 14.
+// eslint-disable-next-line n/no-unsupported-features/node-builtins
 import {promises as fs} from 'fs';
 
 const execSync = (cmd: string) => cp.execSync(cmd, {encoding: 'utf-8'});
