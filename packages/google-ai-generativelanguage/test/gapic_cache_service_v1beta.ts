@@ -538,7 +538,7 @@ describe('v1beta.CacheServiceClient', () => {
         ['cachedContent', 'name']
       );
       request.cachedContent.name = defaultValue1;
-      const expectedHeaderRequestParams = `cached_content.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `cached_content.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.CachedContent()
       );
@@ -571,7 +571,7 @@ describe('v1beta.CacheServiceClient', () => {
         ['cachedContent', 'name']
       );
       request.cachedContent.name = defaultValue1;
-      const expectedHeaderRequestParams = `cached_content.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `cached_content.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta.CachedContent()
       );
@@ -619,7 +619,7 @@ describe('v1beta.CacheServiceClient', () => {
         ['cachedContent', 'name']
       );
       request.cachedContent.name = defaultValue1;
-      const expectedHeaderRequestParams = `cached_content.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `cached_content.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCachedContent = stubSimpleCall(
         undefined,
