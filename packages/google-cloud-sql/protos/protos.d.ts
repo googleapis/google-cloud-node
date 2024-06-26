@@ -5209,7 +5209,8 @@ export namespace google {
                         RELEASE_SSRS_LEASE = 43,
                         RECONFIGURE_OLD_PRIMARY = 44,
                         CLUSTER_MAINTENANCE = 45,
-                        SELF_SERVICE_MAINTENANCE = 46
+                        SELF_SERVICE_MAINTENANCE = 46,
+                        SWITCHOVER_TO_REPLICA = 47
                     }
 
                     /** SqlOperationStatus enum. */
@@ -6584,6 +6585,7 @@ export namespace google {
                     POSTGRES_13 = 23,
                     POSTGRES_14 = 110,
                     POSTGRES_15 = 172,
+                    POSTGRES_16 = 272,
                     MYSQL_8_0 = 20,
                     MYSQL_8_0_18 = 41,
                     MYSQL_8_0_26 = 85,
@@ -6602,6 +6604,7 @@ export namespace google {
                     MYSQL_8_0_39 = 357,
                     MYSQL_8_0_40 = 358,
                     MYSQL_8_4 = 398,
+                    MYSQL_8_4_0 = 399,
                     SQLSERVER_2019_STANDARD = 26,
                     SQLSERVER_2019_ENTERPRISE = 27,
                     SQLSERVER_2019_EXPRESS = 28,
@@ -15027,6 +15030,9 @@ export namespace google {
                     /** DatabaseInstance maintenanceVersion */
                     maintenanceVersion?: (string|null);
 
+                    /** DatabaseInstance upgradableDatabaseVersions */
+                    upgradableDatabaseVersions?: (google.cloud.sql.v1.IAvailableDatabaseVersion[]|null);
+
                     /** DatabaseInstance sqlNetworkArchitecture */
                     sqlNetworkArchitecture?: (google.cloud.sql.v1.DatabaseInstance.SqlNetworkArchitecture|keyof typeof google.cloud.sql.v1.DatabaseInstance.SqlNetworkArchitecture|null);
 
@@ -15165,6 +15171,9 @@ export namespace google {
 
                     /** DatabaseInstance maintenanceVersion. */
                     public maintenanceVersion: string;
+
+                    /** DatabaseInstance upgradableDatabaseVersions. */
+                    public upgradableDatabaseVersions: google.cloud.sql.v1.IAvailableDatabaseVersion[];
 
                     /** DatabaseInstance sqlNetworkArchitecture. */
                     public sqlNetworkArchitecture?: (google.cloud.sql.v1.DatabaseInstance.SqlNetworkArchitecture|keyof typeof google.cloud.sql.v1.DatabaseInstance.SqlNetworkArchitecture|null);
@@ -15796,6 +15805,9 @@ export namespace google {
                 /** Properties of a ReplicationCluster. */
                 interface IReplicationCluster {
 
+                    /** ReplicationCluster psaWriteEndpoint */
+                    psaWriteEndpoint?: (string|null);
+
                     /** ReplicationCluster failoverDrReplicaName */
                     failoverDrReplicaName?: (string|null);
 
@@ -15811,6 +15823,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.sql.v1.IReplicationCluster);
+
+                    /** ReplicationCluster psaWriteEndpoint. */
+                    public psaWriteEndpoint: string;
 
                     /** ReplicationCluster failoverDrReplicaName. */
                     public failoverDrReplicaName: string;
@@ -15890,6 +15905,124 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ReplicationCluster
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AvailableDatabaseVersion. */
+                interface IAvailableDatabaseVersion {
+
+                    /** AvailableDatabaseVersion majorVersion */
+                    majorVersion?: (string|null);
+
+                    /** AvailableDatabaseVersion name */
+                    name?: (string|null);
+
+                    /** AvailableDatabaseVersion displayName */
+                    displayName?: (string|null);
+                }
+
+                /** Represents an AvailableDatabaseVersion. */
+                class AvailableDatabaseVersion implements IAvailableDatabaseVersion {
+
+                    /**
+                     * Constructs a new AvailableDatabaseVersion.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1.IAvailableDatabaseVersion);
+
+                    /** AvailableDatabaseVersion majorVersion. */
+                    public majorVersion?: (string|null);
+
+                    /** AvailableDatabaseVersion name. */
+                    public name?: (string|null);
+
+                    /** AvailableDatabaseVersion displayName. */
+                    public displayName?: (string|null);
+
+                    /** AvailableDatabaseVersion _majorVersion. */
+                    public _majorVersion?: "majorVersion";
+
+                    /** AvailableDatabaseVersion _name. */
+                    public _name?: "name";
+
+                    /** AvailableDatabaseVersion _displayName. */
+                    public _displayName?: "displayName";
+
+                    /**
+                     * Creates a new AvailableDatabaseVersion instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AvailableDatabaseVersion instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1.IAvailableDatabaseVersion): google.cloud.sql.v1.AvailableDatabaseVersion;
+
+                    /**
+                     * Encodes the specified AvailableDatabaseVersion message. Does not implicitly {@link google.cloud.sql.v1.AvailableDatabaseVersion.verify|verify} messages.
+                     * @param message AvailableDatabaseVersion message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1.IAvailableDatabaseVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AvailableDatabaseVersion message, length delimited. Does not implicitly {@link google.cloud.sql.v1.AvailableDatabaseVersion.verify|verify} messages.
+                     * @param message AvailableDatabaseVersion message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1.IAvailableDatabaseVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AvailableDatabaseVersion message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AvailableDatabaseVersion
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1.AvailableDatabaseVersion;
+
+                    /**
+                     * Decodes an AvailableDatabaseVersion message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AvailableDatabaseVersion
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1.AvailableDatabaseVersion;
+
+                    /**
+                     * Verifies an AvailableDatabaseVersion message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AvailableDatabaseVersion message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AvailableDatabaseVersion
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1.AvailableDatabaseVersion;
+
+                    /**
+                     * Creates a plain object from an AvailableDatabaseVersion message. Also converts values to other types if specified.
+                     * @param message AvailableDatabaseVersion
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1.AvailableDatabaseVersion, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AvailableDatabaseVersion to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AvailableDatabaseVersion
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -16912,7 +17045,10 @@ export namespace google {
                         PG_SUBSCRIPTION_COUNT = 41,
                         PG_SYNC_PARALLEL_LEVEL = 42,
                         INSUFFICIENT_DISK_SIZE = 43,
-                        INSUFFICIENT_MACHINE_TIER = 44
+                        INSUFFICIENT_MACHINE_TIER = 44,
+                        UNSUPPORTED_EXTENSIONS_NOT_MIGRATED = 45,
+                        EXTENSIONS_NOT_MIGRATED = 46,
+                        PG_CRON_FLAG_ENABLED_IN_REPLICA = 47
                     }
                 }
 
@@ -29035,6 +29171,9 @@ export namespace google {
 
                     /** CloneContext preferredZone */
                     preferredZone?: (string|null);
+
+                    /** CloneContext preferredSecondaryZone */
+                    preferredSecondaryZone?: (string|null);
                 }
 
                 /** Represents a CloneContext. */
@@ -29070,8 +29209,14 @@ export namespace google {
                     /** CloneContext preferredZone. */
                     public preferredZone?: (string|null);
 
+                    /** CloneContext preferredSecondaryZone. */
+                    public preferredSecondaryZone?: (string|null);
+
                     /** CloneContext _preferredZone. */
                     public _preferredZone?: "preferredZone";
+
+                    /** CloneContext _preferredSecondaryZone. */
+                    public _preferredSecondaryZone?: "preferredSecondaryZone";
 
                     /**
                      * Creates a new CloneContext instance using the specified properties.
@@ -29828,6 +29973,9 @@ export namespace google {
                     /** DatabaseInstance maintenanceVersion */
                     maintenanceVersion?: (string|null);
 
+                    /** DatabaseInstance upgradableDatabaseVersions */
+                    upgradableDatabaseVersions?: (google.cloud.sql.v1beta4.IAvailableDatabaseVersion[]|null);
+
                     /** DatabaseInstance sqlNetworkArchitecture */
                     sqlNetworkArchitecture?: (google.cloud.sql.v1beta4.DatabaseInstance.SqlNetworkArchitecture|keyof typeof google.cloud.sql.v1beta4.DatabaseInstance.SqlNetworkArchitecture|null);
 
@@ -29966,6 +30114,9 @@ export namespace google {
 
                     /** DatabaseInstance maintenanceVersion. */
                     public maintenanceVersion: string;
+
+                    /** DatabaseInstance upgradableDatabaseVersions. */
+                    public upgradableDatabaseVersions: google.cloud.sql.v1beta4.IAvailableDatabaseVersion[];
 
                     /** DatabaseInstance sqlNetworkArchitecture. */
                     public sqlNetworkArchitecture?: (google.cloud.sql.v1beta4.DatabaseInstance.SqlNetworkArchitecture|keyof typeof google.cloud.sql.v1beta4.DatabaseInstance.SqlNetworkArchitecture|null);
@@ -30600,6 +30751,9 @@ export namespace google {
                 /** Properties of a ReplicationCluster. */
                 interface IReplicationCluster {
 
+                    /** ReplicationCluster psaWriteEndpoint */
+                    psaWriteEndpoint?: (string|null);
+
                     /** ReplicationCluster failoverDrReplicaName */
                     failoverDrReplicaName?: (string|null);
 
@@ -30616,11 +30770,17 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.sql.v1beta4.IReplicationCluster);
 
+                    /** ReplicationCluster psaWriteEndpoint. */
+                    public psaWriteEndpoint?: (string|null);
+
                     /** ReplicationCluster failoverDrReplicaName. */
                     public failoverDrReplicaName?: (string|null);
 
                     /** ReplicationCluster drReplica. */
                     public drReplica?: (boolean|null);
+
+                    /** ReplicationCluster _psaWriteEndpoint. */
+                    public _psaWriteEndpoint?: "psaWriteEndpoint";
 
                     /** ReplicationCluster _failoverDrReplicaName. */
                     public _failoverDrReplicaName?: "failoverDrReplicaName";
@@ -30700,6 +30860,124 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ReplicationCluster
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AvailableDatabaseVersion. */
+                interface IAvailableDatabaseVersion {
+
+                    /** AvailableDatabaseVersion majorVersion */
+                    majorVersion?: (string|null);
+
+                    /** AvailableDatabaseVersion name */
+                    name?: (string|null);
+
+                    /** AvailableDatabaseVersion displayName */
+                    displayName?: (string|null);
+                }
+
+                /** Represents an AvailableDatabaseVersion. */
+                class AvailableDatabaseVersion implements IAvailableDatabaseVersion {
+
+                    /**
+                     * Constructs a new AvailableDatabaseVersion.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1beta4.IAvailableDatabaseVersion);
+
+                    /** AvailableDatabaseVersion majorVersion. */
+                    public majorVersion?: (string|null);
+
+                    /** AvailableDatabaseVersion name. */
+                    public name?: (string|null);
+
+                    /** AvailableDatabaseVersion displayName. */
+                    public displayName?: (string|null);
+
+                    /** AvailableDatabaseVersion _majorVersion. */
+                    public _majorVersion?: "majorVersion";
+
+                    /** AvailableDatabaseVersion _name. */
+                    public _name?: "name";
+
+                    /** AvailableDatabaseVersion _displayName. */
+                    public _displayName?: "displayName";
+
+                    /**
+                     * Creates a new AvailableDatabaseVersion instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AvailableDatabaseVersion instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1beta4.IAvailableDatabaseVersion): google.cloud.sql.v1beta4.AvailableDatabaseVersion;
+
+                    /**
+                     * Encodes the specified AvailableDatabaseVersion message. Does not implicitly {@link google.cloud.sql.v1beta4.AvailableDatabaseVersion.verify|verify} messages.
+                     * @param message AvailableDatabaseVersion message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1beta4.IAvailableDatabaseVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AvailableDatabaseVersion message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.AvailableDatabaseVersion.verify|verify} messages.
+                     * @param message AvailableDatabaseVersion message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1beta4.IAvailableDatabaseVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AvailableDatabaseVersion message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AvailableDatabaseVersion
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1beta4.AvailableDatabaseVersion;
+
+                    /**
+                     * Decodes an AvailableDatabaseVersion message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AvailableDatabaseVersion
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1beta4.AvailableDatabaseVersion;
+
+                    /**
+                     * Verifies an AvailableDatabaseVersion message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AvailableDatabaseVersion message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AvailableDatabaseVersion
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1beta4.AvailableDatabaseVersion;
+
+                    /**
+                     * Creates a plain object from an AvailableDatabaseVersion message. Also converts values to other types if specified.
+                     * @param message AvailableDatabaseVersion
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1beta4.AvailableDatabaseVersion, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AvailableDatabaseVersion to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AvailableDatabaseVersion
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -34621,7 +34899,10 @@ export namespace google {
                         PG_SUBSCRIPTION_COUNT = 41,
                         PG_SYNC_PARALLEL_LEVEL = 42,
                         INSUFFICIENT_DISK_SIZE = 43,
-                        INSUFFICIENT_MACHINE_TIER = 44
+                        INSUFFICIENT_MACHINE_TIER = 44,
+                        UNSUPPORTED_EXTENSIONS_NOT_MIGRATED = 45,
+                        EXTENSIONS_NOT_MIGRATED = 46,
+                        PG_CRON_FLAG_ENABLED_IN_REPLICA = 47
                     }
                 }
 
@@ -36207,7 +36488,8 @@ export namespace google {
                         RELEASE_SSRS_LEASE = 43,
                         RECONFIGURE_OLD_PRIMARY = 44,
                         CLUSTER_MAINTENANCE = 45,
-                        SELF_SERVICE_MAINTENANCE = 46
+                        SELF_SERVICE_MAINTENANCE = 46,
+                        SWITCHOVER_TO_REPLICA = 47
                     }
 
                     /** SqlOperationStatus enum. */
@@ -38792,6 +39074,7 @@ export namespace google {
                     POSTGRES_13 = 23,
                     POSTGRES_14 = 110,
                     POSTGRES_15 = 172,
+                    POSTGRES_16 = 272,
                     MYSQL_8_0 = 20,
                     MYSQL_8_0_18 = 41,
                     MYSQL_8_0_26 = 85,
@@ -38810,6 +39093,7 @@ export namespace google {
                     MYSQL_8_0_39 = 357,
                     MYSQL_8_0_40 = 358,
                     MYSQL_8_4 = 398,
+                    MYSQL_8_4_0 = 399,
                     SQLSERVER_2019_STANDARD = 26,
                     SQLSERVER_2019_ENTERPRISE = 27,
                     SQLSERVER_2019_EXPRESS = 28,
