@@ -59,8 +59,8 @@ function main(space) {
    */
   // const requestId = 'abc123'
   /**
-   *  Optional. The Google Chat users to invite to join the space. Omit the
-   *  calling user, as they are added automatically.
+   *  Optional. The Google Chat users or groups to invite to join the space. Omit
+   *  the calling user, as they are added automatically.
    *  The set currently allows up to 20 memberships (in addition to the caller).
    *  For human membership, the `Membership.member` field must contain a `user`
    *  with `name` populated (format: `users/{user}`) and `type` set to
@@ -70,6 +70,9 @@ function main(space) {
    *  for {user}. For example, the `user.name` can be `users/example@gmail.com`.
    *  To invite Gmail users or users from external Google Workspace domains,
    *  user's email must be used for `{user}`.
+   *  For Google group membership, the `Membership.group_member` field must
+   *  contain a `group` with `name` populated (format `groups/{group}`). You
+   *  can only add Google groups when setting `Space.spaceType` to `SPACE`.
    *  Optional when setting `Space.spaceType` to `SPACE`.
    *  Required when setting `Space.spaceType` to `GROUP_CHAT`, along with at
    *  least two memberships.
