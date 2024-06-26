@@ -740,6 +740,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "phoneFraudAssessment": {
+                          "type": "PhoneFraudAssessment",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -1417,6 +1424,44 @@
                                 "UNEXPECTED_LOCATION": 3
                               }
                             }
+                          }
+                        }
+                      }
+                    },
+                    "SmsTollFraudVerdict": {
+                      "fields": {
+                        "risk": {
+                          "type": "float",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "reasons": {
+                          "rule": "repeated",
+                          "type": "SmsTollFraudReason",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SmsTollFraudReason": {
+                          "values": {
+                            "SMS_TOLL_FRAUD_REASON_UNSPECIFIED": 0,
+                            "INVALID_PHONE_NUMBER": 1
+                          }
+                        }
+                      }
+                    },
+                    "PhoneFraudAssessment": {
+                      "fields": {
+                        "smsTollFraudVerdict": {
+                          "type": "SmsTollFraudVerdict",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }

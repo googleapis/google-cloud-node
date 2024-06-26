@@ -3124,6 +3124,7 @@
                          * @property {google.cloud.recaptchaenterprise.v1.IFirewallPolicyAssessment|null} [firewallPolicyAssessment] Assessment firewallPolicyAssessment
                          * @property {google.cloud.recaptchaenterprise.v1.IFraudPreventionAssessment|null} [fraudPreventionAssessment] Assessment fraudPreventionAssessment
                          * @property {google.cloud.recaptchaenterprise.v1.IFraudSignals|null} [fraudSignals] Assessment fraudSignals
+                         * @property {google.cloud.recaptchaenterprise.v1.IPhoneFraudAssessment|null} [phoneFraudAssessment] Assessment phoneFraudAssessment
                          */
     
                         /**
@@ -3222,6 +3223,14 @@
                         Assessment.prototype.fraudSignals = null;
     
                         /**
+                         * Assessment phoneFraudAssessment.
+                         * @member {google.cloud.recaptchaenterprise.v1.IPhoneFraudAssessment|null|undefined} phoneFraudAssessment
+                         * @memberof google.cloud.recaptchaenterprise.v1.Assessment
+                         * @instance
+                         */
+                        Assessment.prototype.phoneFraudAssessment = null;
+    
+                        /**
                          * Creates a new Assessment instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.recaptchaenterprise.v1.Assessment
@@ -3263,6 +3272,8 @@
                                 $root.google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment.encode(message.firewallPolicyAssessment, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             if (message.fraudPreventionAssessment != null && Object.hasOwnProperty.call(message, "fraudPreventionAssessment"))
                                 $root.google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.encode(message.fraudPreventionAssessment, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.phoneFraudAssessment != null && Object.hasOwnProperty.call(message, "phoneFraudAssessment"))
+                                $root.google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment.encode(message.phoneFraudAssessment, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             if (message.fraudSignals != null && Object.hasOwnProperty.call(message, "fraudSignals"))
                                 $root.google.cloud.recaptchaenterprise.v1.FraudSignals.encode(message.fraudSignals, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                             return writer;
@@ -3337,6 +3348,10 @@
                                     }
                                 case 13: {
                                         message.fraudSignals = $root.google.cloud.recaptchaenterprise.v1.FraudSignals.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 12: {
+                                        message.phoneFraudAssessment = $root.google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -3422,6 +3437,11 @@
                                 if (error)
                                     return "fraudSignals." + error;
                             }
+                            if (message.phoneFraudAssessment != null && message.hasOwnProperty("phoneFraudAssessment")) {
+                                var error = $root.google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment.verify(message.phoneFraudAssessment);
+                                if (error)
+                                    return "phoneFraudAssessment." + error;
+                            }
                             return null;
                         };
     
@@ -3484,6 +3504,11 @@
                                     throw TypeError(".google.cloud.recaptchaenterprise.v1.Assessment.fraudSignals: object expected");
                                 message.fraudSignals = $root.google.cloud.recaptchaenterprise.v1.FraudSignals.fromObject(object.fraudSignals);
                             }
+                            if (object.phoneFraudAssessment != null) {
+                                if (typeof object.phoneFraudAssessment !== "object")
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.Assessment.phoneFraudAssessment: object expected");
+                                message.phoneFraudAssessment = $root.google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment.fromObject(object.phoneFraudAssessment);
+                            }
                             return message;
                         };
     
@@ -3510,6 +3535,7 @@
                                 object.privatePasswordLeakVerification = null;
                                 object.firewallPolicyAssessment = null;
                                 object.fraudPreventionAssessment = null;
+                                object.phoneFraudAssessment = null;
                                 object.fraudSignals = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -3530,6 +3556,8 @@
                                 object.firewallPolicyAssessment = $root.google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment.toObject(message.firewallPolicyAssessment, options);
                             if (message.fraudPreventionAssessment != null && message.hasOwnProperty("fraudPreventionAssessment"))
                                 object.fraudPreventionAssessment = $root.google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.toObject(message.fraudPreventionAssessment, options);
+                            if (message.phoneFraudAssessment != null && message.hasOwnProperty("phoneFraudAssessment"))
+                                object.phoneFraudAssessment = $root.google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment.toObject(message.phoneFraudAssessment, options);
                             if (message.fraudSignals != null && message.hasOwnProperty("fraudSignals"))
                                 object.fraudSignals = $root.google.cloud.recaptchaenterprise.v1.FraudSignals.toObject(message.fraudSignals, options);
                             return object;
@@ -8928,6 +8956,498 @@
                         })();
     
                         return FraudSignals;
+                    })();
+    
+                    v1.SmsTollFraudVerdict = (function() {
+    
+                        /**
+                         * Properties of a SmsTollFraudVerdict.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface ISmsTollFraudVerdict
+                         * @property {number|null} [risk] SmsTollFraudVerdict risk
+                         * @property {Array.<google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict.SmsTollFraudReason>|null} [reasons] SmsTollFraudVerdict reasons
+                         */
+    
+                        /**
+                         * Constructs a new SmsTollFraudVerdict.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents a SmsTollFraudVerdict.
+                         * @implements ISmsTollFraudVerdict
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.ISmsTollFraudVerdict=} [properties] Properties to set
+                         */
+                        function SmsTollFraudVerdict(properties) {
+                            this.reasons = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SmsTollFraudVerdict risk.
+                         * @member {number} risk
+                         * @memberof google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict
+                         * @instance
+                         */
+                        SmsTollFraudVerdict.prototype.risk = 0;
+    
+                        /**
+                         * SmsTollFraudVerdict reasons.
+                         * @member {Array.<google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict.SmsTollFraudReason>} reasons
+                         * @memberof google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict
+                         * @instance
+                         */
+                        SmsTollFraudVerdict.prototype.reasons = $util.emptyArray;
+    
+                        /**
+                         * Creates a new SmsTollFraudVerdict instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.ISmsTollFraudVerdict=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict} SmsTollFraudVerdict instance
+                         */
+                        SmsTollFraudVerdict.create = function create(properties) {
+                            return new SmsTollFraudVerdict(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SmsTollFraudVerdict message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.ISmsTollFraudVerdict} message SmsTollFraudVerdict message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SmsTollFraudVerdict.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.risk != null && Object.hasOwnProperty.call(message, "risk"))
+                                writer.uint32(/* id 1, wireType 5 =*/13).float(message.risk);
+                            if (message.reasons != null && message.reasons.length) {
+                                writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                                for (var i = 0; i < message.reasons.length; ++i)
+                                    writer.int32(message.reasons[i]);
+                                writer.ldelim();
+                            }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SmsTollFraudVerdict message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.ISmsTollFraudVerdict} message SmsTollFraudVerdict message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SmsTollFraudVerdict.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SmsTollFraudVerdict message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict} SmsTollFraudVerdict
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SmsTollFraudVerdict.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.risk = reader.float();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.reasons && message.reasons.length))
+                                            message.reasons = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.reasons.push(reader.int32());
+                                        } else
+                                            message.reasons.push(reader.int32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SmsTollFraudVerdict message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict} SmsTollFraudVerdict
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SmsTollFraudVerdict.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SmsTollFraudVerdict message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SmsTollFraudVerdict.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.risk != null && message.hasOwnProperty("risk"))
+                                if (typeof message.risk !== "number")
+                                    return "risk: number expected";
+                            if (message.reasons != null && message.hasOwnProperty("reasons")) {
+                                if (!Array.isArray(message.reasons))
+                                    return "reasons: array expected";
+                                for (var i = 0; i < message.reasons.length; ++i)
+                                    switch (message.reasons[i]) {
+                                    default:
+                                        return "reasons: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SmsTollFraudVerdict message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict} SmsTollFraudVerdict
+                         */
+                        SmsTollFraudVerdict.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict();
+                            if (object.risk != null)
+                                message.risk = Number(object.risk);
+                            if (object.reasons) {
+                                if (!Array.isArray(object.reasons))
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict.reasons: array expected");
+                                message.reasons = [];
+                                for (var i = 0; i < object.reasons.length; ++i)
+                                    switch (object.reasons[i]) {
+                                    default:
+                                        if (typeof object.reasons[i] === "number") {
+                                            message.reasons[i] = object.reasons[i];
+                                            break;
+                                        }
+                                    case "SMS_TOLL_FRAUD_REASON_UNSPECIFIED":
+                                    case 0:
+                                        message.reasons[i] = 0;
+                                        break;
+                                    case "INVALID_PHONE_NUMBER":
+                                    case 1:
+                                        message.reasons[i] = 1;
+                                        break;
+                                    }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SmsTollFraudVerdict message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict} message SmsTollFraudVerdict
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SmsTollFraudVerdict.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.reasons = [];
+                            if (options.defaults)
+                                object.risk = 0;
+                            if (message.risk != null && message.hasOwnProperty("risk"))
+                                object.risk = options.json && !isFinite(message.risk) ? String(message.risk) : message.risk;
+                            if (message.reasons && message.reasons.length) {
+                                object.reasons = [];
+                                for (var j = 0; j < message.reasons.length; ++j)
+                                    object.reasons[j] = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict.SmsTollFraudReason[message.reasons[j]] === undefined ? message.reasons[j] : $root.google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict.SmsTollFraudReason[message.reasons[j]] : message.reasons[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SmsTollFraudVerdict to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SmsTollFraudVerdict.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SmsTollFraudVerdict
+                         * @function getTypeUrl
+                         * @memberof google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SmsTollFraudVerdict.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict";
+                        };
+    
+                        /**
+                         * SmsTollFraudReason enum.
+                         * @name google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict.SmsTollFraudReason
+                         * @enum {number}
+                         * @property {number} SMS_TOLL_FRAUD_REASON_UNSPECIFIED=0 SMS_TOLL_FRAUD_REASON_UNSPECIFIED value
+                         * @property {number} INVALID_PHONE_NUMBER=1 INVALID_PHONE_NUMBER value
+                         */
+                        SmsTollFraudVerdict.SmsTollFraudReason = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SMS_TOLL_FRAUD_REASON_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "INVALID_PHONE_NUMBER"] = 1;
+                            return values;
+                        })();
+    
+                        return SmsTollFraudVerdict;
+                    })();
+    
+                    v1.PhoneFraudAssessment = (function() {
+    
+                        /**
+                         * Properties of a PhoneFraudAssessment.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface IPhoneFraudAssessment
+                         * @property {google.cloud.recaptchaenterprise.v1.ISmsTollFraudVerdict|null} [smsTollFraudVerdict] PhoneFraudAssessment smsTollFraudVerdict
+                         */
+    
+                        /**
+                         * Constructs a new PhoneFraudAssessment.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents a PhoneFraudAssessment.
+                         * @implements IPhoneFraudAssessment
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.IPhoneFraudAssessment=} [properties] Properties to set
+                         */
+                        function PhoneFraudAssessment(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PhoneFraudAssessment smsTollFraudVerdict.
+                         * @member {google.cloud.recaptchaenterprise.v1.ISmsTollFraudVerdict|null|undefined} smsTollFraudVerdict
+                         * @memberof google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment
+                         * @instance
+                         */
+                        PhoneFraudAssessment.prototype.smsTollFraudVerdict = null;
+    
+                        /**
+                         * Creates a new PhoneFraudAssessment instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IPhoneFraudAssessment=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment} PhoneFraudAssessment instance
+                         */
+                        PhoneFraudAssessment.create = function create(properties) {
+                            return new PhoneFraudAssessment(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PhoneFraudAssessment message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IPhoneFraudAssessment} message PhoneFraudAssessment message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PhoneFraudAssessment.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.smsTollFraudVerdict != null && Object.hasOwnProperty.call(message, "smsTollFraudVerdict"))
+                                $root.google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict.encode(message.smsTollFraudVerdict, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PhoneFraudAssessment message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IPhoneFraudAssessment} message PhoneFraudAssessment message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PhoneFraudAssessment.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PhoneFraudAssessment message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment} PhoneFraudAssessment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PhoneFraudAssessment.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.smsTollFraudVerdict = $root.google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PhoneFraudAssessment message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment} PhoneFraudAssessment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PhoneFraudAssessment.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PhoneFraudAssessment message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PhoneFraudAssessment.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.smsTollFraudVerdict != null && message.hasOwnProperty("smsTollFraudVerdict")) {
+                                var error = $root.google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict.verify(message.smsTollFraudVerdict);
+                                if (error)
+                                    return "smsTollFraudVerdict." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PhoneFraudAssessment message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment} PhoneFraudAssessment
+                         */
+                        PhoneFraudAssessment.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment();
+                            if (object.smsTollFraudVerdict != null) {
+                                if (typeof object.smsTollFraudVerdict !== "object")
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment.smsTollFraudVerdict: object expected");
+                                message.smsTollFraudVerdict = $root.google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict.fromObject(object.smsTollFraudVerdict);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PhoneFraudAssessment message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment} message PhoneFraudAssessment
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PhoneFraudAssessment.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.smsTollFraudVerdict = null;
+                            if (message.smsTollFraudVerdict != null && message.hasOwnProperty("smsTollFraudVerdict"))
+                                object.smsTollFraudVerdict = $root.google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict.toObject(message.smsTollFraudVerdict, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PhoneFraudAssessment to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PhoneFraudAssessment.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PhoneFraudAssessment
+                         * @function getTypeUrl
+                         * @memberof google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PhoneFraudAssessment.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment";
+                        };
+    
+                        return PhoneFraudAssessment;
                     })();
     
                     v1.AccountDefenderAssessment = (function() {

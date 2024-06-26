@@ -1339,6 +1339,9 @@ export namespace google {
 
                     /** Assessment fraudSignals */
                     fraudSignals?: (google.cloud.recaptchaenterprise.v1.IFraudSignals|null);
+
+                    /** Assessment phoneFraudAssessment */
+                    phoneFraudAssessment?: (google.cloud.recaptchaenterprise.v1.IPhoneFraudAssessment|null);
                 }
 
                 /** Represents an Assessment. */
@@ -1379,6 +1382,9 @@ export namespace google {
 
                     /** Assessment fraudSignals. */
                     public fraudSignals?: (google.cloud.recaptchaenterprise.v1.IFraudSignals|null);
+
+                    /** Assessment phoneFraudAssessment. */
+                    public phoneFraudAssessment?: (google.cloud.recaptchaenterprise.v1.IPhoneFraudAssessment|null);
 
                     /**
                      * Creates a new Assessment instance using the specified properties.
@@ -3524,6 +3530,215 @@ export namespace google {
                             UNEXPECTED_LOCATION = 3
                         }
                     }
+                }
+
+                /** Properties of a SmsTollFraudVerdict. */
+                interface ISmsTollFraudVerdict {
+
+                    /** SmsTollFraudVerdict risk */
+                    risk?: (number|null);
+
+                    /** SmsTollFraudVerdict reasons */
+                    reasons?: (google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict.SmsTollFraudReason[]|null);
+                }
+
+                /** Represents a SmsTollFraudVerdict. */
+                class SmsTollFraudVerdict implements ISmsTollFraudVerdict {
+
+                    /**
+                     * Constructs a new SmsTollFraudVerdict.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.ISmsTollFraudVerdict);
+
+                    /** SmsTollFraudVerdict risk. */
+                    public risk: number;
+
+                    /** SmsTollFraudVerdict reasons. */
+                    public reasons: google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict.SmsTollFraudReason[];
+
+                    /**
+                     * Creates a new SmsTollFraudVerdict instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SmsTollFraudVerdict instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.ISmsTollFraudVerdict): google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict;
+
+                    /**
+                     * Encodes the specified SmsTollFraudVerdict message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict.verify|verify} messages.
+                     * @param message SmsTollFraudVerdict message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.ISmsTollFraudVerdict, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SmsTollFraudVerdict message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict.verify|verify} messages.
+                     * @param message SmsTollFraudVerdict message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.ISmsTollFraudVerdict, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SmsTollFraudVerdict message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SmsTollFraudVerdict
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict;
+
+                    /**
+                     * Decodes a SmsTollFraudVerdict message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SmsTollFraudVerdict
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict;
+
+                    /**
+                     * Verifies a SmsTollFraudVerdict message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SmsTollFraudVerdict message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SmsTollFraudVerdict
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict;
+
+                    /**
+                     * Creates a plain object from a SmsTollFraudVerdict message. Also converts values to other types if specified.
+                     * @param message SmsTollFraudVerdict
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.SmsTollFraudVerdict, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SmsTollFraudVerdict to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SmsTollFraudVerdict
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SmsTollFraudVerdict {
+
+                    /** SmsTollFraudReason enum. */
+                    enum SmsTollFraudReason {
+                        SMS_TOLL_FRAUD_REASON_UNSPECIFIED = 0,
+                        INVALID_PHONE_NUMBER = 1
+                    }
+                }
+
+                /** Properties of a PhoneFraudAssessment. */
+                interface IPhoneFraudAssessment {
+
+                    /** PhoneFraudAssessment smsTollFraudVerdict */
+                    smsTollFraudVerdict?: (google.cloud.recaptchaenterprise.v1.ISmsTollFraudVerdict|null);
+                }
+
+                /** Represents a PhoneFraudAssessment. */
+                class PhoneFraudAssessment implements IPhoneFraudAssessment {
+
+                    /**
+                     * Constructs a new PhoneFraudAssessment.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IPhoneFraudAssessment);
+
+                    /** PhoneFraudAssessment smsTollFraudVerdict. */
+                    public smsTollFraudVerdict?: (google.cloud.recaptchaenterprise.v1.ISmsTollFraudVerdict|null);
+
+                    /**
+                     * Creates a new PhoneFraudAssessment instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PhoneFraudAssessment instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IPhoneFraudAssessment): google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment;
+
+                    /**
+                     * Encodes the specified PhoneFraudAssessment message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment.verify|verify} messages.
+                     * @param message PhoneFraudAssessment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IPhoneFraudAssessment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PhoneFraudAssessment message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment.verify|verify} messages.
+                     * @param message PhoneFraudAssessment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IPhoneFraudAssessment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PhoneFraudAssessment message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PhoneFraudAssessment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment;
+
+                    /**
+                     * Decodes a PhoneFraudAssessment message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PhoneFraudAssessment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment;
+
+                    /**
+                     * Verifies a PhoneFraudAssessment message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PhoneFraudAssessment message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PhoneFraudAssessment
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment;
+
+                    /**
+                     * Creates a plain object from a PhoneFraudAssessment message. Also converts values to other types if specified.
+                     * @param message PhoneFraudAssessment
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PhoneFraudAssessment to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PhoneFraudAssessment
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an AccountDefenderAssessment. */
