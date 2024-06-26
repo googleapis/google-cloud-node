@@ -1888,6 +1888,9 @@ export class SecurityCenterManagementClient {
    *     * security-health-analytics
    *     * vm-threat-detection
    *     * web-security-scanner
+   * @param {boolean} request.showEligibleModulesOnly
+   *   Flag that, when set, will be used to filter the ModuleSettings that are
+   *   in scope. The default setting is that all modules will be shown.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3413,6 +3416,9 @@ export class SecurityCenterManagementClient {
    *   Default is 10, minimum is 1, maximum is 1000.
    * @param {string} [request.pageToken]
    *   Optional. The value returned by the last call indicating a continuation.
+   * @param {boolean} request.showEligibleModulesOnly
+   *   Flag that, when set, will be used to filter the ModuleSettings that are
+   *   in scope. The default setting is that all modules will be shown.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3521,6 +3527,9 @@ export class SecurityCenterManagementClient {
    *   Default is 10, minimum is 1, maximum is 1000.
    * @param {string} [request.pageToken]
    *   Optional. The value returned by the last call indicating a continuation.
+   * @param {boolean} request.showEligibleModulesOnly
+   *   Flag that, when set, will be used to filter the ModuleSettings that are
+   *   in scope. The default setting is that all modules will be shown.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3573,6 +3582,9 @@ export class SecurityCenterManagementClient {
    *   Default is 10, minimum is 1, maximum is 1000.
    * @param {string} [request.pageToken]
    *   Optional. The value returned by the last call indicating a continuation.
+   * @param {boolean} request.showEligibleModulesOnly
+   *   Flag that, when set, will be used to filter the ModuleSettings that are
+   *   in scope. The default setting is that all modules will be shown.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

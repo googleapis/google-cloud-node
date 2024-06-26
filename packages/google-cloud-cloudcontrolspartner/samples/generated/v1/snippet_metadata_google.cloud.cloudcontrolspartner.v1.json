@@ -287,7 +287,7 @@
             "regionTag": "cloudcontrolspartner_v1_generated_CloudControlsPartnerCore_ListAccessApprovalRequests_async",
             "title": "CloudControlsPartnerCore listAccessApprovalRequests Sample",
             "origin": "API_DEFINITION",
-            "description": " Lists access requests associated with a workload",
+            "description": " Deprecated: Only returns access approval requests directly associated with an assured workload folder.",
             "canonical": true,
             "file": "cloud_controls_partner_core.list_access_approval_requests.js",
             "language": "JAVASCRIPT",

@@ -21,6 +21,8 @@ import * as v1beta from './v1beta';
 import * as v1beta2 from './v1beta2';
 import * as v1beta3 from './v1beta3';
 
+const CacheServiceClient = v1beta.CacheServiceClient;
+type CacheServiceClient = v1beta.CacheServiceClient;
 const DiscussServiceClient = v1beta.DiscussServiceClient;
 type DiscussServiceClient = v1beta.DiscussServiceClient;
 const FileServiceClient = v1beta.FileServiceClient;
@@ -41,6 +43,7 @@ export {
   v1beta,
   v1beta2,
   v1beta3,
+  CacheServiceClient,
   DiscussServiceClient,
   FileServiceClient,
   GenerativeServiceClient,
@@ -54,6 +57,7 @@ export default {
   v1beta,
   v1beta2,
   v1beta3,
+  CacheServiceClient,
   DiscussServiceClient,
   FileServiceClient,
   GenerativeServiceClient,
