@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v1.4.0...kms-inventory-v1.5.0) (2024-06-21)
+
+
+### Features
+
+* [kmsinventory] support Key Access Justifications policy configuration ([#5480](https://github.com/googleapis/google-cloud-node/issues/5480)) ([83da16f](https://github.com/googleapis/google-cloud-node/commit/83da16fbfb5fc37d689b72ef9d6f607d7167ae95))
+
 ## [1.4.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v1.3.0...kms-inventory-v1.4.0) (2024-05-21)
 
 

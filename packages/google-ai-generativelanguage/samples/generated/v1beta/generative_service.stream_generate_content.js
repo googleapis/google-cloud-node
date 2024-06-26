@@ -76,6 +76,13 @@ function main(model, contents) {
    *  Optional. Configuration options for model generation and outputs.
    */
   // const generationConfig = {}
+  /**
+   *  Optional. The name of the cached content used as context to serve the
+   *  prediction. Note: only used in explicit caching, where users can have
+   *  control over caching (e.g. what content to cache) and enjoy guaranteed cost
+   *  savings. Format: `cachedContents/{cachedContent}`
+   */
+  // const cachedContent = 'abc123'
 
   // Imports the Generativelanguage library
   const {GenerativeServiceClient} = require('@google-ai/generativelanguage').v1beta;

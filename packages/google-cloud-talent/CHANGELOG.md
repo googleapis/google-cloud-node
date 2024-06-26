@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+## [6.3.1](https://github.com/googleapis/google-cloud-node/compare/talent-v6.3.0...talent-v6.3.1) (2024-06-21)
+
+
+### Bug Fixes
+
+* **deps:** Update gax ([#5487](https://github.com/googleapis/google-cloud-node/issues/5487)) ([616dee9](https://github.com/googleapis/google-cloud-node/commit/616dee9c69245409909487ee9ebfd68121dab85e))
+
 ## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/talent-v6.2.0...talent-v6.3.0) (2024-05-21)
 
 

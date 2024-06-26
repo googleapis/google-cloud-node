@@ -1,10 +1,10 @@
 {
   "name": "storage",
   "name_pretty": "Cloud Storage API",
-  "product_documentation": "https://cloud.google.com/storage/docs/overview",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/storage/latest",
+  "product_documentation": "https://cloud.google.com/storage/docs/reference/rpc",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/storage-control/latest",
   "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
+  "release_level": "stable",
   "language": "nodejs",
   "repo": "googleapis/google-cloud-node",
   "distribution_name": "@google-cloud/storage-control",

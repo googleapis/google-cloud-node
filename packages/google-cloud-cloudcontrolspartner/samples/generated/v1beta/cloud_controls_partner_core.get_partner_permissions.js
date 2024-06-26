@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. Name of the resource to get in the format:
-   *  organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}/partnerPermissions
+   *  `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}/partnerPermissions`
    */
   // const name = 'abc123'
 
