@@ -1088,6 +1088,15 @@
                         "notebook": {
                           "type": "Notebook",
                           "id": 63
+                        },
+                        "toxicCombination": {
+                          "type": "ToxicCombination",
+                          "id": 64
+                        },
+                        "groupMemberships": {
+                          "rule": "repeated",
+                          "type": "GroupMembership",
+                          "id": 65
                         }
                       },
                       "nested": {
@@ -1123,7 +1132,28 @@
                             "MISCONFIGURATION": 3,
                             "OBSERVATION": 4,
                             "SCC_ERROR": 5,
-                            "POSTURE_VIOLATION": 6
+                            "POSTURE_VIOLATION": 6,
+                            "TOXIC_COMBINATION": 7
+                          }
+                        }
+                      }
+                    },
+                    "GroupMembership": {
+                      "fields": {
+                        "groupType": {
+                          "type": "GroupType",
+                          "id": 1
+                        },
+                        "groupId": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "GroupType": {
+                          "values": {
+                            "GROUP_TYPE_UNSPECIFIED": 0,
+                            "GROUP_TYPE_TOXIC_COMBINATION": 1
                           }
                         }
                       }
@@ -1797,6 +1827,19 @@
                               "id": 3
                             }
                           }
+                        }
+                      }
+                    },
+                    "ToxicCombination": {
+                      "fields": {
+                        "attackExposureScore": {
+                          "type": "double",
+                          "id": 1
+                        },
+                        "relatedFindings": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -8417,6 +8460,15 @@
                           "rule": "repeated",
                           "type": "LoadBalancer",
                           "id": 50
+                        },
+                        "toxicCombination": {
+                          "type": "ToxicCombination",
+                          "id": 56
+                        },
+                        "groupMemberships": {
+                          "rule": "repeated",
+                          "type": "GroupMembership",
+                          "id": 57
                         }
                       },
                       "nested": {
@@ -8452,7 +8504,28 @@
                             "MISCONFIGURATION": 3,
                             "OBSERVATION": 4,
                             "SCC_ERROR": 5,
-                            "POSTURE_VIOLATION": 6
+                            "POSTURE_VIOLATION": 6,
+                            "TOXIC_COMBINATION": 7
+                          }
+                        }
+                      }
+                    },
+                    "GroupMembership": {
+                      "fields": {
+                        "groupType": {
+                          "type": "GroupType",
+                          "id": 1
+                        },
+                        "groupId": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "GroupType": {
+                          "values": {
+                            "GROUP_TYPE_UNSPECIFIED": 0,
+                            "GROUP_TYPE_TOXIC_COMBINATION": 1
                           }
                         }
                       }
@@ -9127,6 +9200,19 @@
                               "id": 3
                             }
                           }
+                        }
+                      }
+                    },
+                    "ToxicCombination": {
+                      "fields": {
+                        "attackExposureScore": {
+                          "type": "double",
+                          "id": 1
+                        },
+                        "relatedFindings": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
