@@ -386,6 +386,11 @@ export class PredictionServiceClient {
     // Some of the methods on this service provide streaming responses.
     // Provide descriptors for these.
     this.descriptors.stream = {
+      streamRawPredict: new this._gaxModule.StreamDescriptor(
+        this._gaxModule.StreamType.SERVER_STREAMING,
+        !!opts.fallback,
+        !!opts.gaxServerStreamingRetries
+      ),
       streamDirectPredict: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.BIDI_STREAMING,
         !!opts.fallback,
@@ -476,6 +481,7 @@ export class PredictionServiceClient {
     const predictionServiceStubMethods = [
       'predict',
       'rawPredict',
+      'streamRawPredict',
       'directPredict',
       'directRawPredict',
       'streamDirectPredict',
@@ -1407,6 +1413,42 @@ export class PredictionServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.generateContent(request, options, callback);
+  }
+
+  /**
+   * Perform a streaming online prediction with an arbitrary HTTP payload.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.endpoint
+   *   Required. The name of the Endpoint requested to serve the prediction.
+   *   Format:
+   *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
+   * @param {google.api.HttpBody} request.httpBody
+   *   The prediction input. Supports HTTP headers and arbitrary data payload.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits {@link protos.google.api.HttpBody|HttpBody} on 'data' event.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/prediction_service.stream_raw_predict.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_PredictionService_StreamRawPredict_async
+   */
+  streamRawPredict(
+    request?: protos.google.cloud.aiplatform.v1beta1.IStreamRawPredictRequest,
+    options?: CallOptions
+  ): gax.CancellableStream {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        endpoint: request.endpoint ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.streamRawPredict(request, options);
   }
 
   /**

@@ -2622,7 +2622,8 @@
                             "OTHER": 5,
                             "BLOCKLIST": 6,
                             "PROHIBITED_CONTENT": 7,
-                            "SPII": 8
+                            "SPII": 8,
+                            "MALFORMED_FUNCTION_CALL": 9
                           }
                         }
                       }
@@ -10927,6 +10928,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 16
                         }
                       }
                     },
@@ -15914,19 +15919,13 @@
                           "responseType": "DirectPredictResponse",
                           "options": {
                             "(google.api.http).post": "/v1/{endpoint=projects/*/locations/*/endpoints/*}:directPredict",
-                            "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v1/{endpoint=projects/*/locations/*/publishers/*/models/*}:directPredict",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).body": "*"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1/{endpoint=projects/*/locations/*/endpoints/*}:directPredict",
-                                "body": "*",
-                                "additional_bindings": {
-                                  "post": "/v1/{endpoint=projects/*/locations/*/publishers/*/models/*}:directPredict",
-                                  "body": "*"
-                                }
+                                "body": "*"
                               }
                             }
                           ]
@@ -15936,19 +15935,13 @@
                           "responseType": "DirectRawPredictResponse",
                           "options": {
                             "(google.api.http).post": "/v1/{endpoint=projects/*/locations/*/endpoints/*}:directRawPredict",
-                            "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v1/{endpoint=projects/*/locations/*/publishers/*/models/*}:directRawPredict",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).body": "*"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1/{endpoint=projects/*/locations/*/endpoints/*}:directRawPredict",
-                                "body": "*",
-                                "additional_bindings": {
-                                  "post": "/v1/{endpoint=projects/*/locations/*/publishers/*/models/*}:directRawPredict",
-                                  "body": "*"
-                                }
+                                "body": "*"
                               }
                             }
                           ]
@@ -15957,49 +15950,13 @@
                           "requestType": "StreamDirectPredictRequest",
                           "requestStream": true,
                           "responseType": "StreamDirectPredictResponse",
-                          "responseStream": true,
-                          "options": {
-                            "(google.api.http).post": "/v1/{endpoint=projects/*/locations/*/endpoints/*}:streamDirectPredict",
-                            "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v1/{endpoint=projects/*/locations/*/publishers/*/models/*}:streamDirectPredict",
-                            "(google.api.http).additional_bindings.body": "*"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1/{endpoint=projects/*/locations/*/endpoints/*}:streamDirectPredict",
-                                "body": "*",
-                                "additional_bindings": {
-                                  "post": "/v1/{endpoint=projects/*/locations/*/publishers/*/models/*}:streamDirectPredict",
-                                  "body": "*"
-                                }
-                              }
-                            }
-                          ]
+                          "responseStream": true
                         },
                         "StreamDirectRawPredict": {
                           "requestType": "StreamDirectRawPredictRequest",
                           "requestStream": true,
                           "responseType": "StreamDirectRawPredictResponse",
-                          "responseStream": true,
-                          "options": {
-                            "(google.api.http).post": "/v1/{endpoint=projects/*/locations/*/endpoints/*}:streamDirectRawPredict",
-                            "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v1/{endpoint=projects/*/locations/*/publishers/*/models/*}:streamDirectRawPredict",
-                            "(google.api.http).additional_bindings.body": "*"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1/{endpoint=projects/*/locations/*/endpoints/*}:streamDirectRawPredict",
-                                "body": "*",
-                                "additional_bindings": {
-                                  "post": "/v1/{endpoint=projects/*/locations/*/publishers/*/models/*}:streamDirectRawPredict",
-                                  "body": "*"
-                                }
-                              }
-                            }
-                          ]
+                          "responseStream": true
                         },
                         "StreamingPredict": {
                           "requestType": "StreamingPredictRequest",
@@ -22346,6 +22303,13 @@
                           "id": 22,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "preflightValidations": {
+                          "type": "bool",
+                          "id": 26,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       },
@@ -31039,7 +31003,8 @@
                             "OTHER": 5,
                             "BLOCKLIST": 6,
                             "PROHIBITED_CONTENT": 7,
-                            "SPII": 8
+                            "SPII": 8,
+                            "MALFORMED_FUNCTION_CALL": 9
                           }
                         }
                       }
@@ -31066,6 +31031,123 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "text": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "GroundingChunk": {
+                      "oneofs": {
+                        "chunkType": {
+                          "oneof": [
+                            "web",
+                            "retrievedContext"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "web": {
+                          "type": "Web",
+                          "id": 1
+                        },
+                        "retrievedContext": {
+                          "type": "RetrievedContext",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Web": {
+                          "oneofs": {
+                            "_uri": {
+                              "oneof": [
+                                "uri"
+                              ]
+                            },
+                            "_title": {
+                              "oneof": [
+                                "title"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "uri": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "title": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "RetrievedContext": {
+                          "oneofs": {
+                            "_uri": {
+                              "oneof": [
+                                "uri"
+                              ]
+                            },
+                            "_title": {
+                              "oneof": [
+                                "title"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "uri": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "title": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "GroundingSupport": {
+                      "oneofs": {
+                        "_segment": {
+                          "oneof": [
+                            "segment"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "segment": {
+                          "type": "Segment",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "groundingChunkIndices": {
+                          "rule": "repeated",
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "confidenceScores": {
+                          "rule": "repeated",
+                          "type": "float",
+                          "id": 3
                         }
                       }
                     },
@@ -31190,6 +31272,19 @@
                           "rule": "repeated",
                           "type": "GroundingAttribution",
                           "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "groundingChunks": {
+                          "rule": "repeated",
+                          "type": "GroundingChunk",
+                          "id": 5
+                        },
+                        "groundingSupports": {
+                          "rule": "repeated",
+                          "type": "GroundingSupport",
+                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -56566,6 +56661,33 @@
                             }
                           ]
                         },
+                        "StreamRawPredict": {
+                          "requestType": "StreamRawPredictRequest",
+                          "responseType": "google.api.HttpBody",
+                          "responseStream": true,
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:streamRawPredict",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:streamRawPredict",
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "endpoint,http_body"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:streamRawPredict",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:streamRawPredict",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "endpoint,http_body"
+                            }
+                          ]
+                        },
                         "DirectPredict": {
                           "requestType": "DirectPredictRequest",
                           "responseType": "DirectPredictResponse",
@@ -56834,6 +56956,22 @@
                       }
                     },
                     "RawPredictRequest": {
+                      "fields": {
+                        "endpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
+                          }
+                        },
+                        "httpBody": {
+                          "type": "google.api.HttpBody",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "StreamRawPredictRequest": {
                       "fields": {
                         "endpoint": {
                           "type": "string",

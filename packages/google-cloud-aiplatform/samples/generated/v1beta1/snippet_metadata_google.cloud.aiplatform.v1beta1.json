@@ -11844,6 +11844,50 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1beta1_generated_PredictionService_StreamRawPredict_async",
+            "title": "DatasetService streamRawPredict Sample",
+            "origin": "API_DEFINITION",
+            "description": " Perform a streaming online prediction with an arbitrary HTTP payload.",
+            "canonical": true,
+            "file": "prediction_service.stream_raw_predict.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 61,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "StreamRawPredict",
+                "fullName": "google.cloud.aiplatform.v1beta1.PredictionService.StreamRawPredict",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "endpoint",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "http_body",
+                        "type": ".google.api.HttpBody"
+                    }
+                ],
+                "resultType": ".google.api.HttpBody",
+                "client": {
+                    "shortName": "PredictionServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PredictionServiceClient"
+                },
+                "method": {
+                    "shortName": "StreamRawPredict",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PredictionService.StreamRawPredict",
+                    "service": {
+                        "shortName": "PredictionService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.PredictionService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1beta1_generated_PredictionService_DirectPredict_async",
             "title": "DatasetService directPredict Sample",
             "origin": "API_DEFINITION",

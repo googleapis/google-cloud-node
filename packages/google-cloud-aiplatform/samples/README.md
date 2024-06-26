@@ -566,6 +566,7 @@
   * [Prediction_service.stream_direct_predict](#prediction_service.stream_direct_predict)
   * [Prediction_service.stream_direct_raw_predict](#prediction_service.stream_direct_raw_predict)
   * [Prediction_service.stream_generate_content](#prediction_service.stream_generate_content)
+  * [Prediction_service.stream_raw_predict](#prediction_service.stream_raw_predict)
   * [Prediction_service.streaming_predict](#prediction_service.streaming_predict)
   * [Prediction_service.streaming_raw_predict](#prediction_service.streaming_raw_predict)
   * [Reasoning_engine_execution_service.query_reasoning_engine](#reasoning_engine_execution_service.query_reasoning_engine)
@@ -10069,6 +10070,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.stream_generate_content.js`
+
+
+-----
+
+
+
+
+### Prediction_service.stream_raw_predict
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.stream_raw_predict.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.stream_raw_predict.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.stream_raw_predict.js`
 
 
 -----
