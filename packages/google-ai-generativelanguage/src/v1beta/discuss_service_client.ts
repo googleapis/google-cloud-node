@@ -200,6 +200,9 @@ export class DiscussServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      cachedContentPathTemplate: new this._gaxModule.PathTemplate(
+        'cachedContents/{id}'
+      ),
       chunkPathTemplate: new this._gaxModule.PathTemplate(
         'corpora/{corpus}/documents/{document}/chunks/{chunk}'
       ),
@@ -621,6 +624,30 @@ export class DiscussServiceClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified cachedContent resource name string.
+   *
+   * @param {string} id
+   * @returns {string} Resource name string.
+   */
+  cachedContentPath(id: string) {
+    return this.pathTemplates.cachedContentPathTemplate.render({
+      id: id,
+    });
+  }
+
+  /**
+   * Parse the id from CachedContent resource.
+   *
+   * @param {string} cachedContentName
+   *   A fully-qualified path representing CachedContent resource.
+   * @returns {string} A string representing the id.
+   */
+  matchIdFromCachedContentName(cachedContentName: string) {
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
+      .id;
+  }
 
   /**
    * Return a fully-qualified chunk resource name string.

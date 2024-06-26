@@ -1365,6 +1365,46 @@ describe('v1beta.PermissionServiceClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('cachedContent', () => {
+      const fakePath = '/rendered/path/cachedContent';
+      const expectedParameters = {
+        id: 'idValue',
+      };
+      const client = new permissionserviceModule.v1beta.PermissionServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      client.pathTemplates.cachedContentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.cachedContentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('cachedContentPath', () => {
+        const result = client.cachedContentPath('idValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.cachedContentPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchIdFromCachedContentName', () => {
+        const result = client.matchIdFromCachedContentName(fakePath);
+        assert.strictEqual(result, 'idValue');
+        assert(
+          (client.pathTemplates.cachedContentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('chunk', () => {
       const fakePath = '/rendered/path/chunk';
       const expectedParameters = {
