@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/edgenetwork-v0.5.0...edgenetwork-v0.6.0) (2024-06-26)
+
+
+### Features
+
+* [edgenetwork] A new field `bonding_type` is added to message `.google.cloud.edgenetwork.v1.Subnet` ([#5505](https://github.com/googleapis/google-cloud-node/issues/5505)) ([04e52ae](https://github.com/googleapis/google-cloud-node/commit/04e52ae670c14b47c80635a90761b3ee7fcd35c3))
+
 ## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/edgenetwork-v0.4.0...edgenetwork-v0.5.0) (2024-05-21)
 
 

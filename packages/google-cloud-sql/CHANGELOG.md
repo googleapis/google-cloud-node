@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.15.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.14.0...sql-v0.15.0) (2024-06-26)
+
+
+### Features
+
+* [sql] A new field `upgradable_database_versions` is added to message `.google.cloud.sql.v1beta4.DatabaseInstance` ([#5478](https://github.com/googleapis/google-cloud-node/issues/5478)) ([e0f0fd2](https://github.com/googleapis/google-cloud-node/commit/e0f0fd24a745bb3b072456aa012c37946f2084a4))
+
 ## [0.14.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.13.0...sql-v0.14.0) (2024-06-12)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.24.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.23.0...aiplatform-v3.24.0) (2024-06-26)
+
+
+### Features
+
+* Add MALFORMED_FUNCTION_CALL to FinishReason ([#5481](https://github.com/googleapis/google-cloud-node/issues/5481)) ([83498e9](https://github.com/googleapis/google-cloud-node/commit/83498e9a326d0640bf3654491814dc19cc479def))
+
 ## [3.23.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.22.0...aiplatform-v3.23.0) (2024-06-05)
 
 

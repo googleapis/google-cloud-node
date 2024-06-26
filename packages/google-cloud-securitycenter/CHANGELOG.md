@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [8.9.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v8.8.0...security-center-v8.9.0) (2024-06-26)
+
+
+### Features
+
+* [securitycenter] Add toxic_combination and group_memberships fields to finding ([#5495](https://github.com/googleapis/google-cloud-node/issues/5495)) ([41a96b4](https://github.com/googleapis/google-cloud-node/commit/41a96b4231d6b98fac2c06ea8686597789ef6b1c))
+
 ## [8.8.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v8.7.0...security-center-v8.8.0) (2024-05-21)
 
 
