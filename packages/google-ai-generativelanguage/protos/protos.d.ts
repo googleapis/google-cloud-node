@@ -4101,6 +4101,12 @@ export namespace google {
 
                     /** Part fileData */
                     fileData?: (google.ai.generativelanguage.v1beta.IFileData|null);
+
+                    /** Part executableCode */
+                    executableCode?: (google.ai.generativelanguage.v1beta.IExecutableCode|null);
+
+                    /** Part codeExecutionResult */
+                    codeExecutionResult?: (google.ai.generativelanguage.v1beta.ICodeExecutionResult|null);
                 }
 
                 /** Represents a Part. */
@@ -4127,8 +4133,14 @@ export namespace google {
                     /** Part fileData. */
                     public fileData?: (google.ai.generativelanguage.v1beta.IFileData|null);
 
+                    /** Part executableCode. */
+                    public executableCode?: (google.ai.generativelanguage.v1beta.IExecutableCode|null);
+
+                    /** Part codeExecutionResult. */
+                    public codeExecutionResult?: (google.ai.generativelanguage.v1beta.ICodeExecutionResult|null);
+
                     /** Part data. */
-                    public data?: ("text"|"inlineData"|"functionCall"|"functionResponse"|"fileData");
+                    public data?: ("text"|"inlineData"|"functionCall"|"functionResponse"|"fileData"|"executableCode"|"codeExecutionResult");
 
                     /**
                      * Creates a new Part instance using the specified properties.
@@ -4414,11 +4426,240 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an ExecutableCode. */
+                interface IExecutableCode {
+
+                    /** ExecutableCode language */
+                    language?: (google.ai.generativelanguage.v1beta.ExecutableCode.Language|keyof typeof google.ai.generativelanguage.v1beta.ExecutableCode.Language|null);
+
+                    /** ExecutableCode code */
+                    code?: (string|null);
+                }
+
+                /** Represents an ExecutableCode. */
+                class ExecutableCode implements IExecutableCode {
+
+                    /**
+                     * Constructs a new ExecutableCode.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.IExecutableCode);
+
+                    /** ExecutableCode language. */
+                    public language: (google.ai.generativelanguage.v1beta.ExecutableCode.Language|keyof typeof google.ai.generativelanguage.v1beta.ExecutableCode.Language);
+
+                    /** ExecutableCode code. */
+                    public code: string;
+
+                    /**
+                     * Creates a new ExecutableCode instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExecutableCode instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.IExecutableCode): google.ai.generativelanguage.v1beta.ExecutableCode;
+
+                    /**
+                     * Encodes the specified ExecutableCode message. Does not implicitly {@link google.ai.generativelanguage.v1beta.ExecutableCode.verify|verify} messages.
+                     * @param message ExecutableCode message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.IExecutableCode, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExecutableCode message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.ExecutableCode.verify|verify} messages.
+                     * @param message ExecutableCode message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.IExecutableCode, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExecutableCode message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExecutableCode
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.ExecutableCode;
+
+                    /**
+                     * Decodes an ExecutableCode message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExecutableCode
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.ExecutableCode;
+
+                    /**
+                     * Verifies an ExecutableCode message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExecutableCode message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExecutableCode
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.ExecutableCode;
+
+                    /**
+                     * Creates a plain object from an ExecutableCode message. Also converts values to other types if specified.
+                     * @param message ExecutableCode
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.ExecutableCode, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExecutableCode to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExecutableCode
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ExecutableCode {
+
+                    /** Language enum. */
+                    enum Language {
+                        LANGUAGE_UNSPECIFIED = 0,
+                        PYTHON = 1
+                    }
+                }
+
+                /** Properties of a CodeExecutionResult. */
+                interface ICodeExecutionResult {
+
+                    /** CodeExecutionResult outcome */
+                    outcome?: (google.ai.generativelanguage.v1beta.CodeExecutionResult.Outcome|keyof typeof google.ai.generativelanguage.v1beta.CodeExecutionResult.Outcome|null);
+
+                    /** CodeExecutionResult output */
+                    output?: (string|null);
+                }
+
+                /** Represents a CodeExecutionResult. */
+                class CodeExecutionResult implements ICodeExecutionResult {
+
+                    /**
+                     * Constructs a new CodeExecutionResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.ICodeExecutionResult);
+
+                    /** CodeExecutionResult outcome. */
+                    public outcome: (google.ai.generativelanguage.v1beta.CodeExecutionResult.Outcome|keyof typeof google.ai.generativelanguage.v1beta.CodeExecutionResult.Outcome);
+
+                    /** CodeExecutionResult output. */
+                    public output: string;
+
+                    /**
+                     * Creates a new CodeExecutionResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CodeExecutionResult instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.ICodeExecutionResult): google.ai.generativelanguage.v1beta.CodeExecutionResult;
+
+                    /**
+                     * Encodes the specified CodeExecutionResult message. Does not implicitly {@link google.ai.generativelanguage.v1beta.CodeExecutionResult.verify|verify} messages.
+                     * @param message CodeExecutionResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.ICodeExecutionResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CodeExecutionResult message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.CodeExecutionResult.verify|verify} messages.
+                     * @param message CodeExecutionResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.ICodeExecutionResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CodeExecutionResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CodeExecutionResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.CodeExecutionResult;
+
+                    /**
+                     * Decodes a CodeExecutionResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CodeExecutionResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.CodeExecutionResult;
+
+                    /**
+                     * Verifies a CodeExecutionResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CodeExecutionResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CodeExecutionResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.CodeExecutionResult;
+
+                    /**
+                     * Creates a plain object from a CodeExecutionResult message. Also converts values to other types if specified.
+                     * @param message CodeExecutionResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.CodeExecutionResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CodeExecutionResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CodeExecutionResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace CodeExecutionResult {
+
+                    /** Outcome enum. */
+                    enum Outcome {
+                        OUTCOME_UNSPECIFIED = 0,
+                        OUTCOME_OK = 1,
+                        OUTCOME_FAILED = 2,
+                        OUTCOME_DEADLINE_EXCEEDED = 3
+                    }
+                }
+
                 /** Properties of a Tool. */
                 interface ITool {
 
                     /** Tool functionDeclarations */
                     functionDeclarations?: (google.ai.generativelanguage.v1beta.IFunctionDeclaration[]|null);
+
+                    /** Tool codeExecution */
+                    codeExecution?: (google.ai.generativelanguage.v1beta.ICodeExecution|null);
                 }
 
                 /** Represents a Tool. */
@@ -4432,6 +4673,9 @@ export namespace google {
 
                     /** Tool functionDeclarations. */
                     public functionDeclarations: google.ai.generativelanguage.v1beta.IFunctionDeclaration[];
+
+                    /** Tool codeExecution. */
+                    public codeExecution?: (google.ai.generativelanguage.v1beta.ICodeExecution|null);
 
                     /**
                      * Creates a new Tool instance using the specified properties.
@@ -4505,6 +4749,97 @@ export namespace google {
 
                     /**
                      * Gets the default type url for Tool
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CodeExecution. */
+                interface ICodeExecution {
+                }
+
+                /** Represents a CodeExecution. */
+                class CodeExecution implements ICodeExecution {
+
+                    /**
+                     * Constructs a new CodeExecution.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.ICodeExecution);
+
+                    /**
+                     * Creates a new CodeExecution instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CodeExecution instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.ICodeExecution): google.ai.generativelanguage.v1beta.CodeExecution;
+
+                    /**
+                     * Encodes the specified CodeExecution message. Does not implicitly {@link google.ai.generativelanguage.v1beta.CodeExecution.verify|verify} messages.
+                     * @param message CodeExecution message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.ICodeExecution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CodeExecution message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.CodeExecution.verify|verify} messages.
+                     * @param message CodeExecution message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.ICodeExecution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CodeExecution message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CodeExecution
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.CodeExecution;
+
+                    /**
+                     * Decodes a CodeExecution message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CodeExecution
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.CodeExecution;
+
+                    /**
+                     * Verifies a CodeExecution message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CodeExecution message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CodeExecution
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.CodeExecution;
+
+                    /**
+                     * Creates a plain object from a CodeExecution message. Also converts values to other types if specified.
+                     * @param message CodeExecution
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.CodeExecution, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CodeExecution to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CodeExecution
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -11461,6 +11796,9 @@ export namespace google {
                     /** Model temperature */
                     temperature?: (number|null);
 
+                    /** Model maxTemperature */
+                    maxTemperature?: (number|null);
+
                     /** Model topP */
                     topP?: (number|null);
 
@@ -11504,6 +11842,9 @@ export namespace google {
                     /** Model temperature. */
                     public temperature?: (number|null);
 
+                    /** Model maxTemperature. */
+                    public maxTemperature?: (number|null);
+
                     /** Model topP. */
                     public topP?: (number|null);
 
@@ -11512,6 +11853,9 @@ export namespace google {
 
                     /** Model _temperature. */
                     public _temperature?: "temperature";
+
+                    /** Model _maxTemperature. */
+                    public _maxTemperature?: "maxTemperature";
 
                     /** Model _topP. */
                     public _topP?: "topP";

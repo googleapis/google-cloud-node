@@ -1265,7 +1265,9 @@
                             "inlineData",
                             "functionCall",
                             "functionResponse",
-                            "fileData"
+                            "fileData",
+                            "executableCode",
+                            "codeExecutionResult"
                           ]
                         }
                       },
@@ -1289,6 +1291,14 @@
                         "fileData": {
                           "type": "FileData",
                           "id": 6
+                        },
+                        "executableCode": {
+                          "type": "ExecutableCode",
+                          "id": 9
+                        },
+                        "codeExecutionResult": {
+                          "type": "CodeExecutionResult",
+                          "id": 10
                         }
                       }
                     },
@@ -1322,6 +1332,60 @@
                         }
                       }
                     },
+                    "ExecutableCode": {
+                      "fields": {
+                        "language": {
+                          "type": "Language",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "code": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Language": {
+                          "values": {
+                            "LANGUAGE_UNSPECIFIED": 0,
+                            "PYTHON": 1
+                          }
+                        }
+                      }
+                    },
+                    "CodeExecutionResult": {
+                      "fields": {
+                        "outcome": {
+                          "type": "Outcome",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "output": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Outcome": {
+                          "values": {
+                            "OUTCOME_UNSPECIFIED": 0,
+                            "OUTCOME_OK": 1,
+                            "OUTCOME_FAILED": 2,
+                            "OUTCOME_DEADLINE_EXCEEDED": 3
+                          }
+                        }
+                      }
+                    },
                     "Tool": {
                       "fields": {
                         "functionDeclarations": {
@@ -1331,8 +1395,18 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "codeExecution": {
+                          "type": "CodeExecution",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
+                    },
+                    "CodeExecution": {
+                      "fields": {}
                     },
                     "ToolConfig": {
                       "fields": {
@@ -3401,6 +3475,11 @@
                             "temperature"
                           ]
                         },
+                        "_maxTemperature": {
+                          "oneof": [
+                            "maxTemperature"
+                          ]
+                        },
                         "_topP": {
                           "oneof": [
                             "topP"
@@ -3458,6 +3537,13 @@
                         "temperature": {
                           "type": "float",
                           "id": 9,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxTemperature": {
+                          "type": "float",
+                          "id": 13,
                           "options": {
                             "proto3_optional": true
                           }
