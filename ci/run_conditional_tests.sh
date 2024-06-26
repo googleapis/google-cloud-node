@@ -45,7 +45,7 @@ elif [ ${BUILD_TYPE} == "continuous" ]; then
     GIT_DIFF_ARG="HEAD~.."
 
     # Then fetch one last commit for getting the diff.
-    git fetch origin main --deepen=1
+    git fetch origin main --deepen=0
 
 else
     # Run everything.
