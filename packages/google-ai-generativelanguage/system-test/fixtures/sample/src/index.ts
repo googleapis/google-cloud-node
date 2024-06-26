@@ -17,6 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 import {
+  CacheServiceClient,
   DiscussServiceClient,
   FileServiceClient,
   GenerativeServiceClient,
@@ -27,6 +28,9 @@ import {
 } from '@google-ai/generativelanguage';
 
 // check that the client class type name can be used
+function doStuffWithCacheServiceClient(client: CacheServiceClient) {
+  client.close();
+}
 function doStuffWithDiscussServiceClient(client: DiscussServiceClient) {
   client.close();
 }
@@ -50,6 +54,9 @@ function doStuffWithTextServiceClient(client: TextServiceClient) {
 }
 
 function main() {
+  // check that the client instance can be created
+  const cacheServiceClient = new CacheServiceClient();
+  doStuffWithCacheServiceClient(cacheServiceClient);
   // check that the client instance can be created
   const discussServiceClient = new DiscussServiceClient();
   doStuffWithDiscussServiceClient(discussServiceClient);

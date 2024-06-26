@@ -6759,6 +6759,9 @@ export namespace google {
 
                     /** EntrySource updateTime */
                     updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** EntrySource location */
+                    location?: (string|null);
                 }
 
                 /** Represents an EntrySource. */
@@ -6796,6 +6799,9 @@ export namespace google {
 
                     /** EntrySource updateTime. */
                     public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** EntrySource location. */
+                    public location: string;
 
                     /**
                      * Creates a new EntrySource instance using the specified properties.

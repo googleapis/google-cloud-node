@@ -198,6 +198,9 @@ export class GenerativeServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      cachedContentPathTemplate: new this._gaxModule.PathTemplate(
+        'cachedContents/{id}'
+      ),
       chunkPathTemplate: new this._gaxModule.PathTemplate(
         'corpora/{corpus}/documents/{document}/chunks/{chunk}'
       ),
@@ -460,6 +463,11 @@ export class GenerativeServiceClient {
    *   HARM_CATEGORY_HARASSMENT are supported.
    * @param {google.ai.generativelanguage.v1beta.GenerationConfig} [request.generationConfig]
    *   Optional. Configuration options for model generation and outputs.
+   * @param {string} [request.cachedContent]
+   *   Optional. The name of the cached content used as context to serve the
+   *   prediction. Note: only used in explicit caching, where users can have
+   *   control over caching (e.g. what content to cache) and enjoy guaranteed cost
+   *   savings. Format: `cachedContents/{cachedContent}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1060,6 +1068,11 @@ export class GenerativeServiceClient {
    *   HARM_CATEGORY_HARASSMENT are supported.
    * @param {google.ai.generativelanguage.v1beta.GenerationConfig} [request.generationConfig]
    *   Optional. Configuration options for model generation and outputs.
+   * @param {string} [request.cachedContent]
+   *   Optional. The name of the cached content used as context to serve the
+   *   prediction. Note: only used in explicit caching, where users can have
+   *   control over caching (e.g. what content to cache) and enjoy guaranteed cost
+   *   savings. Format: `cachedContents/{cachedContent}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1088,6 +1101,30 @@ export class GenerativeServiceClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified cachedContent resource name string.
+   *
+   * @param {string} id
+   * @returns {string} Resource name string.
+   */
+  cachedContentPath(id: string) {
+    return this.pathTemplates.cachedContentPathTemplate.render({
+      id: id,
+    });
+  }
+
+  /**
+   * Parse the id from CachedContent resource.
+   *
+   * @param {string} cachedContentName
+   *   A fully-qualified path representing CachedContent resource.
+   * @returns {string} A string representing the id.
+   */
+  matchIdFromCachedContentName(cachedContentName: string) {
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
+      .id;
+  }
 
   /**
    * Return a fully-qualified chunk resource name string.

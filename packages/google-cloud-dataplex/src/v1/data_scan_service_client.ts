@@ -974,15 +974,20 @@ export class DataScanServiceClient {
     return this.innerApiCalls.getDataScanJob(request, options, callback);
   }
   /**
-   * Generates recommended DataQualityRule from a data profiling DataScan.
+   * Generates recommended data quality rules based on the results of a data
+   * profiling scan.
+   *
+   * Use the recommendations to build rules for a data quality scan.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name should be either
-   *   * the name of a datascan with at least one successful completed data
-   *   profiling job, or
-   *   * the name of a successful completed data profiling datascan job.
+   *   Required. The name must be one of the following:
+   *
+   *   * The name of a data scan with at least one successful, completed data
+   *   profiling job
+   *   * The name of a successful, completed data profiling job (a data scan job
+   *   where the job type is data profiling)
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

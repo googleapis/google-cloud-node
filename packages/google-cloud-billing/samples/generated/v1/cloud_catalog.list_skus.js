@@ -30,7 +30,7 @@ function main(parent) {
    */
   /**
    *  Required. The name of the service.
-   *  Example: "services/DA34-426B-A397"
+   *  Example: "services/6F81-5844-456A"
    */
   // const parent = 'abc123'
   /**

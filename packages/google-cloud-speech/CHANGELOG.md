@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [6.6.1](https://github.com/googleapis/google-cloud-node/compare/speech-v6.6.0...speech-v6.6.1) (2024-06-21)
+
+
+### Bug Fixes
+
+* Avoid unhandled exception on streamingRecognize ([#5465](https://github.com/googleapis/google-cloud-node/issues/5465)) ([30aef59](https://github.com/googleapis/google-cloud-node/commit/30aef59a85ea7d9835b08694f9be482b84e30c94))
+
 ## [6.6.0](https://github.com/googleapis/google-cloud-node/compare/speech-v6.5.0...speech-v6.6.0) (2024-05-21)
 
 

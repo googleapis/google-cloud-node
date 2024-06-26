@@ -4969,7 +4969,8 @@ export namespace google {
                         DEPLOYMENT_STATE_UNSPECIFIED = 0,
                         NOT_INSTALLED = 1,
                         INSTALLED = 2,
-                        ERROR = 3
+                        ERROR = 3,
+                        PENDING = 4
                     }
 
                     /** Properties of a MembershipState. */
@@ -5113,6 +5114,12 @@ export namespace google {
 
                         /** MembershipSpec version */
                         version?: (string|null);
+
+                        /** MembershipSpec cluster */
+                        cluster?: (string|null);
+
+                        /** MembershipSpec management */
+                        management?: (google.cloud.gkehub.configmanagement.v1.MembershipSpec.Management|keyof typeof google.cloud.gkehub.configmanagement.v1.MembershipSpec.Management|null);
                     }
 
                     /** Represents a MembershipSpec. */
@@ -5135,6 +5142,12 @@ export namespace google {
 
                         /** MembershipSpec version. */
                         public version: string;
+
+                        /** MembershipSpec cluster. */
+                        public cluster: string;
+
+                        /** MembershipSpec management. */
+                        public management: (google.cloud.gkehub.configmanagement.v1.MembershipSpec.Management|keyof typeof google.cloud.gkehub.configmanagement.v1.MembershipSpec.Management);
 
                         /**
                          * Creates a new MembershipSpec instance using the specified properties.
@@ -5214,6 +5227,16 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    namespace MembershipSpec {
+
+                        /** Management enum. */
+                        enum Management {
+                            MANAGEMENT_UNSPECIFIED = 0,
+                            MANAGEMENT_AUTOMATIC = 1,
+                            MANAGEMENT_MANUAL = 2
+                        }
+                    }
+
                     /** Properties of a ConfigSync. */
                     interface IConfigSync {
 
@@ -5222,6 +5245,18 @@ export namespace google {
 
                         /** ConfigSync sourceFormat */
                         sourceFormat?: (string|null);
+
+                        /** ConfigSync enabled */
+                        enabled?: (boolean|null);
+
+                        /** ConfigSync preventDrift */
+                        preventDrift?: (boolean|null);
+
+                        /** ConfigSync oci */
+                        oci?: (google.cloud.gkehub.configmanagement.v1.IOciConfig|null);
+
+                        /** ConfigSync metricsGcpServiceAccountEmail */
+                        metricsGcpServiceAccountEmail?: (string|null);
                     }
 
                     /** Represents a ConfigSync. */
@@ -5238,6 +5273,21 @@ export namespace google {
 
                         /** ConfigSync sourceFormat. */
                         public sourceFormat: string;
+
+                        /** ConfigSync enabled. */
+                        public enabled?: (boolean|null);
+
+                        /** ConfigSync preventDrift. */
+                        public preventDrift: boolean;
+
+                        /** ConfigSync oci. */
+                        public oci?: (google.cloud.gkehub.configmanagement.v1.IOciConfig|null);
+
+                        /** ConfigSync metricsGcpServiceAccountEmail. */
+                        public metricsGcpServiceAccountEmail: string;
+
+                        /** ConfigSync _enabled. */
+                        public _enabled?: "enabled";
 
                         /**
                          * Creates a new ConfigSync instance using the specified properties.
@@ -5450,6 +5500,127 @@ export namespace google {
 
                         /**
                          * Gets the default type url for GitConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an OciConfig. */
+                    interface IOciConfig {
+
+                        /** OciConfig syncRepo */
+                        syncRepo?: (string|null);
+
+                        /** OciConfig policyDir */
+                        policyDir?: (string|null);
+
+                        /** OciConfig syncWaitSecs */
+                        syncWaitSecs?: (number|Long|string|null);
+
+                        /** OciConfig secretType */
+                        secretType?: (string|null);
+
+                        /** OciConfig gcpServiceAccountEmail */
+                        gcpServiceAccountEmail?: (string|null);
+                    }
+
+                    /** Represents an OciConfig. */
+                    class OciConfig implements IOciConfig {
+
+                        /**
+                         * Constructs a new OciConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.gkehub.configmanagement.v1.IOciConfig);
+
+                        /** OciConfig syncRepo. */
+                        public syncRepo: string;
+
+                        /** OciConfig policyDir. */
+                        public policyDir: string;
+
+                        /** OciConfig syncWaitSecs. */
+                        public syncWaitSecs: (number|Long|string);
+
+                        /** OciConfig secretType. */
+                        public secretType: string;
+
+                        /** OciConfig gcpServiceAccountEmail. */
+                        public gcpServiceAccountEmail: string;
+
+                        /**
+                         * Creates a new OciConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns OciConfig instance
+                         */
+                        public static create(properties?: google.cloud.gkehub.configmanagement.v1.IOciConfig): google.cloud.gkehub.configmanagement.v1.OciConfig;
+
+                        /**
+                         * Encodes the specified OciConfig message. Does not implicitly {@link google.cloud.gkehub.configmanagement.v1.OciConfig.verify|verify} messages.
+                         * @param message OciConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.gkehub.configmanagement.v1.IOciConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified OciConfig message, length delimited. Does not implicitly {@link google.cloud.gkehub.configmanagement.v1.OciConfig.verify|verify} messages.
+                         * @param message OciConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.gkehub.configmanagement.v1.IOciConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an OciConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns OciConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.configmanagement.v1.OciConfig;
+
+                        /**
+                         * Decodes an OciConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns OciConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.configmanagement.v1.OciConfig;
+
+                        /**
+                         * Verifies an OciConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an OciConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns OciConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.configmanagement.v1.OciConfig;
+
+                        /**
+                         * Creates a plain object from an OciConfig message. Also converts values to other types if specified.
+                         * @param message OciConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.gkehub.configmanagement.v1.OciConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this OciConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for OciConfig
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -6224,6 +6395,18 @@ export namespace google {
 
                         /** ConfigSyncState syncState */
                         syncState?: (google.cloud.gkehub.configmanagement.v1.ISyncState|null);
+
+                        /** ConfigSyncState errors */
+                        errors?: (google.cloud.gkehub.configmanagement.v1.IConfigSyncError[]|null);
+
+                        /** ConfigSyncState rootsyncCrd */
+                        rootsyncCrd?: (google.cloud.gkehub.configmanagement.v1.ConfigSyncState.CRDState|keyof typeof google.cloud.gkehub.configmanagement.v1.ConfigSyncState.CRDState|null);
+
+                        /** ConfigSyncState reposyncCrd */
+                        reposyncCrd?: (google.cloud.gkehub.configmanagement.v1.ConfigSyncState.CRDState|keyof typeof google.cloud.gkehub.configmanagement.v1.ConfigSyncState.CRDState|null);
+
+                        /** ConfigSyncState state */
+                        state?: (google.cloud.gkehub.configmanagement.v1.ConfigSyncState.State|keyof typeof google.cloud.gkehub.configmanagement.v1.ConfigSyncState.State|null);
                     }
 
                     /** Represents a ConfigSyncState. */
@@ -6243,6 +6426,18 @@ export namespace google {
 
                         /** ConfigSyncState syncState. */
                         public syncState?: (google.cloud.gkehub.configmanagement.v1.ISyncState|null);
+
+                        /** ConfigSyncState errors. */
+                        public errors: google.cloud.gkehub.configmanagement.v1.IConfigSyncError[];
+
+                        /** ConfigSyncState rootsyncCrd. */
+                        public rootsyncCrd: (google.cloud.gkehub.configmanagement.v1.ConfigSyncState.CRDState|keyof typeof google.cloud.gkehub.configmanagement.v1.ConfigSyncState.CRDState);
+
+                        /** ConfigSyncState reposyncCrd. */
+                        public reposyncCrd: (google.cloud.gkehub.configmanagement.v1.ConfigSyncState.CRDState|keyof typeof google.cloud.gkehub.configmanagement.v1.ConfigSyncState.CRDState);
+
+                        /** ConfigSyncState state. */
+                        public state: (google.cloud.gkehub.configmanagement.v1.ConfigSyncState.State|keyof typeof google.cloud.gkehub.configmanagement.v1.ConfigSyncState.State);
 
                         /**
                          * Creates a new ConfigSyncState instance using the specified properties.
@@ -6322,6 +6517,124 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    namespace ConfigSyncState {
+
+                        /** CRDState enum. */
+                        enum CRDState {
+                            CRD_STATE_UNSPECIFIED = 0,
+                            NOT_INSTALLED = 1,
+                            INSTALLED = 2,
+                            TERMINATING = 3,
+                            INSTALLING = 4
+                        }
+
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            CONFIG_SYNC_NOT_INSTALLED = 1,
+                            CONFIG_SYNC_INSTALLED = 2,
+                            CONFIG_SYNC_ERROR = 3,
+                            CONFIG_SYNC_PENDING = 4
+                        }
+                    }
+
+                    /** Properties of a ConfigSyncError. */
+                    interface IConfigSyncError {
+
+                        /** ConfigSyncError errorMessage */
+                        errorMessage?: (string|null);
+                    }
+
+                    /** Represents a ConfigSyncError. */
+                    class ConfigSyncError implements IConfigSyncError {
+
+                        /**
+                         * Constructs a new ConfigSyncError.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.gkehub.configmanagement.v1.IConfigSyncError);
+
+                        /** ConfigSyncError errorMessage. */
+                        public errorMessage: string;
+
+                        /**
+                         * Creates a new ConfigSyncError instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ConfigSyncError instance
+                         */
+                        public static create(properties?: google.cloud.gkehub.configmanagement.v1.IConfigSyncError): google.cloud.gkehub.configmanagement.v1.ConfigSyncError;
+
+                        /**
+                         * Encodes the specified ConfigSyncError message. Does not implicitly {@link google.cloud.gkehub.configmanagement.v1.ConfigSyncError.verify|verify} messages.
+                         * @param message ConfigSyncError message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.gkehub.configmanagement.v1.IConfigSyncError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ConfigSyncError message, length delimited. Does not implicitly {@link google.cloud.gkehub.configmanagement.v1.ConfigSyncError.verify|verify} messages.
+                         * @param message ConfigSyncError message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.gkehub.configmanagement.v1.IConfigSyncError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ConfigSyncError message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ConfigSyncError
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.configmanagement.v1.ConfigSyncError;
+
+                        /**
+                         * Decodes a ConfigSyncError message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ConfigSyncError
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.configmanagement.v1.ConfigSyncError;
+
+                        /**
+                         * Verifies a ConfigSyncError message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ConfigSyncError message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ConfigSyncError
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.configmanagement.v1.ConfigSyncError;
+
+                        /**
+                         * Creates a plain object from a ConfigSyncError message. Also converts values to other types if specified.
+                         * @param message ConfigSyncError
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.gkehub.configmanagement.v1.ConfigSyncError, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ConfigSyncError to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ConfigSyncError
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a ConfigSyncVersion. */
                     interface IConfigSyncVersion {
 
@@ -6342,6 +6655,9 @@ export namespace google {
 
                         /** ConfigSyncVersion rootReconciler */
                         rootReconciler?: (string|null);
+
+                        /** ConfigSyncVersion admissionWebhook */
+                        admissionWebhook?: (string|null);
                     }
 
                     /** Represents a ConfigSyncVersion. */
@@ -6370,6 +6686,9 @@ export namespace google {
 
                         /** ConfigSyncVersion rootReconciler. */
                         public rootReconciler: string;
+
+                        /** ConfigSyncVersion admissionWebhook. */
+                        public admissionWebhook: string;
 
                         /**
                          * Creates a new ConfigSyncVersion instance using the specified properties.
@@ -6469,6 +6788,9 @@ export namespace google {
 
                         /** ConfigSyncDeploymentState rootReconciler */
                         rootReconciler?: (google.cloud.gkehub.configmanagement.v1.DeploymentState|keyof typeof google.cloud.gkehub.configmanagement.v1.DeploymentState|null);
+
+                        /** ConfigSyncDeploymentState admissionWebhook */
+                        admissionWebhook?: (google.cloud.gkehub.configmanagement.v1.DeploymentState|keyof typeof google.cloud.gkehub.configmanagement.v1.DeploymentState|null);
                     }
 
                     /** Represents a ConfigSyncDeploymentState. */
@@ -6497,6 +6819,9 @@ export namespace google {
 
                         /** ConfigSyncDeploymentState rootReconciler. */
                         public rootReconciler: (google.cloud.gkehub.configmanagement.v1.DeploymentState|keyof typeof google.cloud.gkehub.configmanagement.v1.DeploymentState);
+
+                        /** ConfigSyncDeploymentState admissionWebhook. */
+                        public admissionWebhook: (google.cloud.gkehub.configmanagement.v1.DeploymentState|keyof typeof google.cloud.gkehub.configmanagement.v1.DeploymentState);
 
                         /**
                          * Creates a new ConfigSyncDeploymentState instance using the specified properties.

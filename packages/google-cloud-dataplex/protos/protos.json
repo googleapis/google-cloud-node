@@ -2500,6 +2500,13 @@
                         "updateTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 11
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
