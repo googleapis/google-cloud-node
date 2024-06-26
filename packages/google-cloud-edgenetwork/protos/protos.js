@@ -810,6 +810,7 @@
                          * @property {Array.<string>|null} [ipv4Cidr] Subnet ipv4Cidr
                          * @property {Array.<string>|null} [ipv6Cidr] Subnet ipv6Cidr
                          * @property {number|null} [vlanId] Subnet vlanId
+                         * @property {google.cloud.edgenetwork.v1.Subnet.BondingType|null} [bondingType] Subnet bondingType
                          * @property {google.cloud.edgenetwork.v1.ResourceState|null} [state] Subnet state
                          */
     
@@ -904,6 +905,14 @@
                         Subnet.prototype.vlanId = 0;
     
                         /**
+                         * Subnet bondingType.
+                         * @member {google.cloud.edgenetwork.v1.Subnet.BondingType} bondingType
+                         * @memberof google.cloud.edgenetwork.v1.Subnet
+                         * @instance
+                         */
+                        Subnet.prototype.bondingType = 0;
+    
+                        /**
                          * Subnet state.
                          * @member {google.cloud.edgenetwork.v1.ResourceState} state
                          * @memberof google.cloud.edgenetwork.v1.Subnet
@@ -958,6 +967,8 @@
                                 writer.uint32(/* id 9, wireType 0 =*/72).int32(message.vlanId);
                             if (message.state != null && Object.hasOwnProperty.call(message, "state"))
                                 writer.uint32(/* id 10, wireType 0 =*/80).int32(message.state);
+                            if (message.bondingType != null && Object.hasOwnProperty.call(message, "bondingType"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).int32(message.bondingType);
                             return writer;
                         };
     
@@ -1051,6 +1062,10 @@
                                         message.vlanId = reader.int32();
                                         break;
                                     }
+                                case 11: {
+                                        message.bondingType = reader.int32();
+                                        break;
+                                    }
                                 case 10: {
                                         message.state = reader.int32();
                                         break;
@@ -1134,6 +1149,15 @@
                             if (message.vlanId != null && message.hasOwnProperty("vlanId"))
                                 if (!$util.isInteger(message.vlanId))
                                     return "vlanId: integer expected";
+                            if (message.bondingType != null && message.hasOwnProperty("bondingType"))
+                                switch (message.bondingType) {
+                                default:
+                                    return "bondingType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             if (message.state != null && message.hasOwnProperty("state"))
                                 switch (message.state) {
                                 default:
@@ -1200,6 +1224,26 @@
                             }
                             if (object.vlanId != null)
                                 message.vlanId = object.vlanId | 0;
+                            switch (object.bondingType) {
+                            default:
+                                if (typeof object.bondingType === "number") {
+                                    message.bondingType = object.bondingType;
+                                    break;
+                                }
+                                break;
+                            case "BONDING_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.bondingType = 0;
+                                break;
+                            case "BONDED":
+                            case 1:
+                                message.bondingType = 1;
+                                break;
+                            case "NON_BONDED":
+                            case 2:
+                                message.bondingType = 2;
+                                break;
+                            }
                             switch (object.state) {
                             default:
                                 if (typeof object.state === "number") {
@@ -1262,6 +1306,7 @@
                                 object.network = "";
                                 object.vlanId = 0;
                                 object.state = options.enums === String ? "STATE_UNKNOWN" : 0;
+                                object.bondingType = options.enums === String ? "BONDING_TYPE_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -1293,6 +1338,8 @@
                                 object.vlanId = message.vlanId;
                             if (message.state != null && message.hasOwnProperty("state"))
                                 object.state = options.enums === String ? $root.google.cloud.edgenetwork.v1.ResourceState[message.state] === undefined ? message.state : $root.google.cloud.edgenetwork.v1.ResourceState[message.state] : message.state;
+                            if (message.bondingType != null && message.hasOwnProperty("bondingType"))
+                                object.bondingType = options.enums === String ? $root.google.cloud.edgenetwork.v1.Subnet.BondingType[message.bondingType] === undefined ? message.bondingType : $root.google.cloud.edgenetwork.v1.Subnet.BondingType[message.bondingType] : message.bondingType;
                             return object;
                         };
     
@@ -1321,6 +1368,22 @@
                             }
                             return typeUrlPrefix + "/google.cloud.edgenetwork.v1.Subnet";
                         };
+    
+                        /**
+                         * BondingType enum.
+                         * @name google.cloud.edgenetwork.v1.Subnet.BondingType
+                         * @enum {number}
+                         * @property {number} BONDING_TYPE_UNSPECIFIED=0 BONDING_TYPE_UNSPECIFIED value
+                         * @property {number} BONDED=1 BONDED value
+                         * @property {number} NON_BONDED=2 NON_BONDED value
+                         */
+                        Subnet.BondingType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "BONDING_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "BONDED"] = 1;
+                            values[valuesById[2] = "NON_BONDED"] = 2;
+                            return values;
+                        })();
     
                         return Subnet;
                     })();

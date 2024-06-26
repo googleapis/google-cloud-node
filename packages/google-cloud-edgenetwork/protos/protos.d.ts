@@ -314,6 +314,9 @@ export namespace google {
                     /** Subnet vlanId */
                     vlanId?: (number|null);
 
+                    /** Subnet bondingType */
+                    bondingType?: (google.cloud.edgenetwork.v1.Subnet.BondingType|keyof typeof google.cloud.edgenetwork.v1.Subnet.BondingType|null);
+
                     /** Subnet state */
                     state?: (google.cloud.edgenetwork.v1.ResourceState|keyof typeof google.cloud.edgenetwork.v1.ResourceState|null);
                 }
@@ -353,6 +356,9 @@ export namespace google {
 
                     /** Subnet vlanId. */
                     public vlanId: number;
+
+                    /** Subnet bondingType. */
+                    public bondingType: (google.cloud.edgenetwork.v1.Subnet.BondingType|keyof typeof google.cloud.edgenetwork.v1.Subnet.BondingType);
 
                     /** Subnet state. */
                     public state: (google.cloud.edgenetwork.v1.ResourceState|keyof typeof google.cloud.edgenetwork.v1.ResourceState);
@@ -433,6 +439,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Subnet {
+
+                    /** BondingType enum. */
+                    enum BondingType {
+                        BONDING_TYPE_UNSPECIFIED = 0,
+                        BONDED = 1,
+                        NON_BONDED = 2
+                    }
                 }
 
                 /** Properties of an Interconnect. */

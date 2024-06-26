@@ -180,11 +180,27 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "bondingType": {
+                          "type": "BondingType",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "state": {
                           "type": "ResourceState",
                           "id": 10,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "BondingType": {
+                          "values": {
+                            "BONDING_TYPE_UNSPECIFIED": 0,
+                            "BONDED": 1,
+                            "NON_BONDED": 2
                           }
                         }
                       }
