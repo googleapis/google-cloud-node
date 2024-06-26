@@ -7635,6 +7635,14 @@
                           "type": "string",
                           "id": 42
                         },
+                        "upgradableDatabaseVersions": {
+                          "rule": "repeated",
+                          "type": "AvailableDatabaseVersion",
+                          "id": 45,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "sqlNetworkArchitecture": {
                           "type": "SqlNetworkArchitecture",
                           "id": 47,
@@ -7925,6 +7933,48 @@
                           "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "AvailableDatabaseVersion": {
+                      "oneofs": {
+                        "_majorVersion": {
+                          "oneof": [
+                            "majorVersion"
+                          ]
+                        },
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        },
+                        "_displayName": {
+                          "oneof": [
+                            "displayName"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "majorVersion": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
                             "proto3_optional": true
                           }
                         }
@@ -8620,7 +8670,10 @@
                             "PG_SUBSCRIPTION_COUNT": 41,
                             "PG_SYNC_PARALLEL_LEVEL": 42,
                             "INSUFFICIENT_DISK_SIZE": 43,
-                            "INSUFFICIENT_MACHINE_TIER": 44
+                            "INSUFFICIENT_MACHINE_TIER": 44,
+                            "UNSUPPORTED_EXTENSIONS_NOT_MIGRATED": 45,
+                            "EXTENSIONS_NOT_MIGRATED": 46,
+                            "PG_CRON_FLAG_ENABLED_IN_REPLICA": 47
                           }
                         }
                       }
