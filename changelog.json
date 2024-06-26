@@ -5,6 +5,167 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "04e52ae670c14b47c80635a90761b3ee7fcd35c3",
+          "message": "[edgenetwork] A new field `bonding_type` is added to message `.google.cloud.edgenetwork.v1.Subnet`",
+          "issues": [
+            "5505"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/edgenetwork",
+      "id": "16ef638e-321c-4792-a661-22d1fc6c64ff",
+      "createTime": "2024-06-26T22:23:49.050Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e0f0fd24a745bb3b072456aa012c37946f2084a4",
+          "message": "[sql] A new field `upgradable_database_versions` is added to message `.google.cloud.sql.v1beta4.DatabaseInstance`",
+          "issues": [
+            "5478"
+          ]
+        }
+      ],
+      "version": "0.15.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "ec545c53-5a11-407b-87b5-08e2ed1d1d98",
+      "createTime": "2024-06-26T22:23:49.026Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "41a96b4231d6b98fac2c06ea8686597789ef6b1c",
+          "message": "[securitycenter] Add toxic_combination and group_memberships fields to finding",
+          "issues": [
+            "5495"
+          ]
+        }
+      ],
+      "version": "8.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-center",
+      "id": "a1fa66a1-a862-4491-845b-ec114cc8409d",
+      "createTime": "2024-06-26T22:23:48.922Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "617956910ab08fb98763da804a85a6c3e6acec8d",
+          "message": "[recaptchaenterprise] added SMS Toll Fraud assessment",
+          "issues": [
+            "5499"
+          ]
+        }
+      ],
+      "version": "5.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recaptcha-enterprise",
+      "id": "fe45174f-cdcd-4a6f-aff1-ffa745001ec4",
+      "createTime": "2024-06-26T22:23:48.897Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "dc87003cc97da35701fca6127f41cfc088c5a99d",
+          "message": "[gkehub] add a new field `PENDING` under `DeploymentState` enum",
+          "issues": [
+            "5472"
+          ]
+        }
+      ],
+      "version": "4.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-hub",
+      "id": "d17b37fc-bd24-46bc-94ab-ca02c8fe2a3f",
+      "createTime": "2024-06-26T22:23:48.883Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "910da3caf3602e360423db51ed171a42bba4f68a",
+          "message": "[dataproc] add the cohort and auto tuning configuration to the batch's RuntimeConfig",
+          "issues": [
+            "5494"
+          ]
+        }
+      ],
+      "version": "5.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "a980b2cf-d4f0-440c-89dd-215f3de85be5",
+      "createTime": "2024-06-26T22:23:48.867Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f42b77d76efc700ade152faf7e42b3abf3fb8f44",
+          "message": "[batch] add a install_ops_agent field to InstancePolicyOrTemplate for Ops Agent support",
+          "issues": [
+            "5500"
+          ]
+        }
+      ],
+      "version": "1.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "e17eb8ba-a0c4-48d7-842a-f47e59efa3f1",
+      "createTime": "2024-06-26T22:23:48.853Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "83498e9a326d0640bf3654491814dc19cc479def",
+          "message": "Add MALFORMED_FUNCTION_CALL to FinishReason",
+          "issues": [
+            "5481"
+          ]
+        }
+      ],
+      "version": "3.24.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "eb27dfdf-0a7a-4476-81e9-549f32ef5a96",
+      "createTime": "2024-06-26T22:23:48.838Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "13034af24e1d08cccab85e1f1f448a8ff24e469c",
+          "message": "[generativelanguage] Add code execution",
+          "issues": [
+            "5506"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "75c026f34b039e368c38bfb6242f01048d3bfb79",
+          "message": "[generativelanguage] Add content caching",
+          "issues": [
+            "5451"
+          ]
+        }
+      ],
+      "version": "2.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ai/generativelanguage",
+      "id": "c8d5fb6e-a376-4ca8-9494-f7e90e58be8c",
+      "createTime": "2024-06-26T22:23:48.822Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "458d04e25c339b4bce483f2535e86af8b323f169",
           "message": "[securitycentermanagement] add `TOXIC_COMBINATION` to `FindingClass` enum",
           "issues": [
@@ -34746,5 +34907,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-06-21T18:05:56.946Z"
+  "updateTime": "2024-06-26T22:23:49.050Z"
 }

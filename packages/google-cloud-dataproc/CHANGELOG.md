@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [5.7.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v5.6.0...dataproc-v5.7.0) (2024-06-26)
+
+
+### Features
+
+* [dataproc] add the cohort and auto tuning configuration to the batch's RuntimeConfig ([#5494](https://github.com/googleapis/google-cloud-node/issues/5494)) ([910da3c](https://github.com/googleapis/google-cloud-node/commit/910da3caf3602e360423db51ed171a42bba4f68a))
+
 ## [5.6.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v5.5.0...dataproc-v5.6.0) (2024-05-21)
 
 

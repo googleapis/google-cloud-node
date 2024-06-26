@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [5.10.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.9.0...recaptcha-enterprise-v5.10.0) (2024-06-26)
+
+
+### Features
+
+* [recaptchaenterprise] added SMS Toll Fraud assessment ([#5499](https://github.com/googleapis/google-cloud-node/issues/5499)) ([6179569](https://github.com/googleapis/google-cloud-node/commit/617956910ab08fb98763da804a85a6c3e6acec8d))
+
 ## [5.9.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.8.0...recaptcha-enterprise-v5.9.0) (2024-05-21)
 
 
