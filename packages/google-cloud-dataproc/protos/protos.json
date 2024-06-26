@@ -963,6 +963,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "autotuningConfig": {
+                          "type": "AutotuningConfig",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "cohort": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1417,6 +1431,28 @@
                               "type": "int32",
                               "id": 3
                             }
+                          }
+                        }
+                      }
+                    },
+                    "AutotuningConfig": {
+                      "fields": {
+                        "scenarios": {
+                          "rule": "repeated",
+                          "type": "Scenario",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Scenario": {
+                          "values": {
+                            "SCENARIO_UNSPECIFIED": 0,
+                            "SCALING": 2,
+                            "BROADCAST_HASH_JOIN": 3,
+                            "MEMORY": 4
                           }
                         }
                       }

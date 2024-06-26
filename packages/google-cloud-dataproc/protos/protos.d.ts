@@ -2682,6 +2682,12 @@ export namespace google {
 
                     /** RuntimeConfig repositoryConfig */
                     repositoryConfig?: (google.cloud.dataproc.v1.IRepositoryConfig|null);
+
+                    /** RuntimeConfig autotuningConfig */
+                    autotuningConfig?: (google.cloud.dataproc.v1.IAutotuningConfig|null);
+
+                    /** RuntimeConfig cohort */
+                    cohort?: (string|null);
                 }
 
                 /** Represents a RuntimeConfig. */
@@ -2704,6 +2710,12 @@ export namespace google {
 
                     /** RuntimeConfig repositoryConfig. */
                     public repositoryConfig?: (google.cloud.dataproc.v1.IRepositoryConfig|null);
+
+                    /** RuntimeConfig autotuningConfig. */
+                    public autotuningConfig?: (google.cloud.dataproc.v1.IAutotuningConfig|null);
+
+                    /** RuntimeConfig cohort. */
+                    public cohort: string;
 
                     /**
                      * Creates a new RuntimeConfig instance using the specified properties.
@@ -4490,6 +4502,114 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of an AutotuningConfig. */
+                interface IAutotuningConfig {
+
+                    /** AutotuningConfig scenarios */
+                    scenarios?: (google.cloud.dataproc.v1.AutotuningConfig.Scenario[]|null);
+                }
+
+                /** Represents an AutotuningConfig. */
+                class AutotuningConfig implements IAutotuningConfig {
+
+                    /**
+                     * Constructs a new AutotuningConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IAutotuningConfig);
+
+                    /** AutotuningConfig scenarios. */
+                    public scenarios: google.cloud.dataproc.v1.AutotuningConfig.Scenario[];
+
+                    /**
+                     * Creates a new AutotuningConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AutotuningConfig instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IAutotuningConfig): google.cloud.dataproc.v1.AutotuningConfig;
+
+                    /**
+                     * Encodes the specified AutotuningConfig message. Does not implicitly {@link google.cloud.dataproc.v1.AutotuningConfig.verify|verify} messages.
+                     * @param message AutotuningConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IAutotuningConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AutotuningConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.AutotuningConfig.verify|verify} messages.
+                     * @param message AutotuningConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IAutotuningConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AutotuningConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AutotuningConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.AutotuningConfig;
+
+                    /**
+                     * Decodes an AutotuningConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AutotuningConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.AutotuningConfig;
+
+                    /**
+                     * Verifies an AutotuningConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AutotuningConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AutotuningConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.AutotuningConfig;
+
+                    /**
+                     * Creates a plain object from an AutotuningConfig message. Also converts values to other types if specified.
+                     * @param message AutotuningConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.AutotuningConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AutotuningConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AutotuningConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AutotuningConfig {
+
+                    /** Scenario enum. */
+                    enum Scenario {
+                        SCENARIO_UNSPECIFIED = 0,
+                        SCALING = 2,
+                        BROADCAST_HASH_JOIN = 3,
+                        MEMORY = 4
                     }
                 }
 
