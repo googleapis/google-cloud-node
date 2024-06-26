@@ -1418,6 +1418,17 @@ export class ChatServiceClient {
    * you can add the user to the space by setting the `membership.member.name`
    * to `users/user@example.com` or `users/123456789`.
    *
+   * To specify the Google groups to add, add memberships with the
+   * appropriate `membership.group_member.name`. To add or invite a Google
+   * group, use `groups/{group}`, where `{group}` is the `id` for the group from
+   * the Cloud Identity Groups API. For example, you can use [Cloud Identity
+   * Groups lookup
+   * API](https://cloud.google.com/identity/docs/reference/rest/v1/groups/lookup)
+   * to retrieve the ID `123456789` for group email `group@example.com`, then
+   * you can add the group to the space by setting the
+   * `membership.group_member.name` to `groups/123456789`. Group email is not
+   * supported, and Google groups can only be added as members in named spaces.
+   *
    * For a named space or group chat, if the caller blocks, or is blocked
    * by some members, or doesn't have permission to add some members, then
    * those members aren't added to the created space.
@@ -1479,8 +1490,8 @@ export class ChatServiceClient {
    *   Specifying an existing request ID from the same Chat app with a different
    *   authenticated user returns an error.
    * @param {number[]} [request.memberships]
-   *   Optional. The Google Chat users to invite to join the space. Omit the
-   *   calling user, as they are added automatically.
+   *   Optional. The Google Chat users or groups to invite to join the space. Omit
+   *   the calling user, as they are added automatically.
    *
    *   The set currently allows up to 20 memberships (in addition to the caller).
    *
@@ -1492,6 +1503,10 @@ export class ChatServiceClient {
    *   for {user}. For example, the `user.name` can be `users/example@gmail.com`.
    *   To invite Gmail users or users from external Google Workspace domains,
    *   user's email must be used for `{user}`.
+   *
+   *   For Google group membership, the `Membership.group_member` field must
+   *   contain a `group` with `name` populated (format `groups/{group}`). You
+   *   can only add Google groups when setting `Space.spaceType` to `SPACE`.
    *
    *   Optional when setting `Space.spaceType` to `SPACE`.
    *
@@ -2004,7 +2019,8 @@ export class ChatServiceClient {
    * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
    *
    * To specify the member to add, set the `membership.member.name` for the
-   * human or app member.
+   * human or app member, or set the `membership.group_member.name` for the
+   * group member.
    *
    * - To add the calling app to a space or a direct message between two human
    *   users, use `users/app`. Unable to add other
@@ -2017,6 +2033,15 @@ export class ChatServiceClient {
    * profile ID for `user@example.com` is `123456789`, you can add the user to
    * the space by setting the `membership.member.name` to
    * `users/user@example.com` or `users/123456789`.
+   *
+   * - To add or invite a Google group in a named space, use
+   * `groups/{group}`, where `{group}` is the `id` for the group from the Cloud
+   * Identity Groups API. For example, you can use [Cloud Identity Groups lookup
+   * API](https://cloud.google.com/identity/docs/reference/rest/v1/groups/lookup)
+   * to retrieve the ID `123456789` for group email `group@example.com`, then
+   * you can add or invite the group to a named space by setting the
+   * `membership.group_member.name` to `groups/123456789`. Group email is not
+   * supported, and Google groups can only be added as members in named spaces.
    *
    * @param {Object} request
    *   The request object that will be sent.

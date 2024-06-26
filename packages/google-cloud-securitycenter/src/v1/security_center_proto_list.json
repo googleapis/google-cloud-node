@@ -18,6 +18,7 @@
   "../../protos/google/cloud/securitycenter/v1/file.proto",
   "../../protos/google/cloud/securitycenter/v1/finding.proto",
   "../../protos/google/cloud/securitycenter/v1/folder.proto",
+  "../../protos/google/cloud/securitycenter/v1/group_membership.proto",
   "../../protos/google/cloud/securitycenter/v1/iam_binding.proto",
   "../../protos/google/cloud/securitycenter/v1/indicator.proto",
   "../../protos/google/cloud/securitycenter/v1/kernel_rootkit.proto",
@@ -41,5 +42,6 @@
   "../../protos/google/cloud/securitycenter/v1/security_posture.proto",
   "../../protos/google/cloud/securitycenter/v1/securitycenter_service.proto",
   "../../protos/google/cloud/securitycenter/v1/source.proto",
+  "../../protos/google/cloud/securitycenter/v1/toxic_combination.proto",
   "../../protos/google/cloud/securitycenter/v1/vulnerability.proto"
 ]
