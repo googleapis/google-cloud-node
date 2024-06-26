@@ -765,6 +765,13 @@
                             "installGpuDrivers": {
                               "type": "bool",
                               "id": 3
+                            },
+                            "installOpsAgent": {
+                              "type": "bool",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
