@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [9.1.0](https://github.com/googleapis/nodejs-datastore/compare/v9.0.0...v9.1.0) (2024-06-24)
+
+
+### Features
+
+* New transaction feature ([#1239](https://github.com/googleapis/nodejs-datastore/issues/1239)) ([cdd2ee9](https://github.com/googleapis/nodejs-datastore/commit/cdd2ee98c50b48b9a2a8cfb2f66b84a5937b3783))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency sinon to v18 ([#1250](https://github.com/googleapis/nodejs-datastore/issues/1250)) ([b7ff5c8](https://github.com/googleapis/nodejs-datastore/commit/b7ff5c86306f80d93f678a0638892c58a3b2088c))
+
 ## [9.0.0](https://github.com/googleapis/nodejs-datastore/compare/v8.7.0...v9.0.0) (2024-05-09)
 
 
