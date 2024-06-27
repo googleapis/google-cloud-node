@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [8.10.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v8.9.0...security-center-v8.10.0) (2024-06-27)
+
+
+### Features
+
+* [securitycenter] added cloud provider field to list findings response ([#5507](https://github.com/googleapis/google-cloud-node/issues/5507)) ([9e8416f](https://github.com/googleapis/google-cloud-node/commit/9e8416fe9c4c401119910fb5867b5b445e8224e7))
+* Added http configuration rule to ResourceValueConfig and ValuedResource API methods ([9e8416f](https://github.com/googleapis/google-cloud-node/commit/9e8416fe9c4c401119910fb5867b5b445e8224e7))
+* Added toxic combination field to finding ([9e8416f](https://github.com/googleapis/google-cloud-node/commit/9e8416fe9c4c401119910fb5867b5b445e8224e7))
+
 ## [8.9.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v8.8.0...security-center-v8.9.0) (2024-06-26)
 
 

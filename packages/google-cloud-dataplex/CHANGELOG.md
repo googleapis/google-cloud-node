@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.11.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.10.0...dataplex-v3.11.0) (2024-06-27)
+
+
+### Features
+
+* [dataplex] expose data scan execution create time to customers ([#5510](https://github.com/googleapis/google-cloud-node/issues/5510)) ([03bfa5d](https://github.com/googleapis/google-cloud-node/commit/03bfa5d4314e3c2e97e50d0c09b98cffe3669d9b))
+
 ## [3.10.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.9.0...dataplex-v3.10.0) (2024-06-21)
 
 
