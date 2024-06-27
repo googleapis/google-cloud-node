@@ -7538,8 +7538,8 @@
                     "java_package": "com.google.cloud.securitycenter.v2",
                     "php_namespace": "Google\\Cloud\\SecurityCenter\\V2",
                     "ruby_package": "Google::Cloud::SecurityCenter::V2",
-                    "(google.api.resource_definition).type": "securitycenter.googleapis.com/FolderLocation",
-                    "(google.api.resource_definition).pattern": "folders/{folder}/locations/{location}"
+                    "(google.api.resource_definition).type": "securitycenter.googleapis.com/OrganizationValuedResource",
+                    "(google.api.resource_definition).pattern": "organizations/{organization}/locations/{location}/simulations/{simulation}/valuedResources/{valued_resource}"
                   },
                   "nested": {
                     "Access": {
@@ -7670,7 +7670,7 @@
                     "AttackPath": {
                       "options": {
                         "(google.api.resource).type": "securitycenter.googleapis.com/AttackPath",
-                        "(google.api.resource).pattern": "organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}/attackPaths/{attack_path}",
+                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/simulations/{simulation}/valuedResources/{valued_resource}/attackPaths/{attack_path}",
                         "(google.api.resource).plural": "attackPaths",
                         "(google.api.resource).singular": "attackPath"
                       },
@@ -7885,6 +7885,94 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        }
+                      }
+                    },
+                    "CloudArmor": {
+                      "fields": {
+                        "securityPolicy": {
+                          "type": "SecurityPolicy",
+                          "id": 1
+                        },
+                        "requests": {
+                          "type": "Requests",
+                          "id": 2
+                        },
+                        "adaptiveProtection": {
+                          "type": "AdaptiveProtection",
+                          "id": 3
+                        },
+                        "attack": {
+                          "type": "Attack",
+                          "id": 4
+                        },
+                        "threatVector": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "duration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "SecurityPolicy": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "type": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "preview": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "Requests": {
+                      "fields": {
+                        "ratio": {
+                          "type": "double",
+                          "id": 1
+                        },
+                        "shortTermAllowed": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "longTermAllowed": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "longTermDenied": {
+                          "type": "int32",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "AdaptiveProtection": {
+                      "fields": {
+                        "confidence": {
+                          "type": "double",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Attack": {
+                      "fields": {
+                        "volumePps": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "volumeBps": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "classification": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
@@ -8461,6 +8549,14 @@
                           "type": "LoadBalancer",
                           "id": 50
                         },
+                        "cloudArmor": {
+                          "type": "CloudArmor",
+                          "id": 51
+                        },
+                        "notebook": {
+                          "type": "Notebook",
+                          "id": 55
+                        },
                         "toxicCombination": {
                           "type": "ToxicCombination",
                           "id": 56
@@ -9002,6 +9098,7 @@
                             "PROCESS_DISCOVERY": 56,
                             "COMMAND_AND_SCRIPTING_INTERPRETER": 6,
                             "UNIX_SHELL": 7,
+                            "PYTHON": 59,
                             "PERMISSION_GROUPS_DISCOVERY": 18,
                             "CLOUD_GROUPS": 19,
                             "APPLICATION_LAYER_PROTOCOL": 45,
@@ -9051,8 +9148,31 @@
                             "OBTAIN_CAPABILITIES": 43,
                             "ACTIVE_SCANNING": 1,
                             "SCANNING_IP_BLOCKS": 2,
-                            "CONTAINER_AND_RESOURCE_DISCOVERY": 57
+                            "CONTAINER_ADMINISTRATION_COMMAND": 60,
+                            "ESCAPE_TO_HOST": 61,
+                            "CONTAINER_AND_RESOURCE_DISCOVERY": 57,
+                            "STEAL_OR_FORGE_AUTHENTICATION_CERTIFICATES": 62
                           }
+                        }
+                      }
+                    },
+                    "Notebook": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "service": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "lastAuthor": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "notebookUpdateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
                         }
                       }
                     },
@@ -9430,6 +9550,18 @@
                         }
                       }
                     },
+                    "Folder": {
+                      "fields": {
+                        "resourceFolder": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "resourceFolderDisplayName": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "MuteConfig": {
                       "options": {
                         "(google.api.resource).type": "securitycenter.googleapis.com/MuteConfig",
@@ -9568,6 +9700,15 @@
                       }
                     },
                     "Resource": {
+                      "oneofs": {
+                        "cloudProviderMetadata": {
+                          "oneof": [
+                            "gcpMetadata",
+                            "awsMetadata",
+                            "azureMetadata"
+                          ]
+                        }
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -9580,13 +9721,230 @@
                         "type": {
                           "type": "string",
                           "id": 3
+                        },
+                        "cloudProvider": {
+                          "type": "CloudProvider",
+                          "id": 4
+                        },
+                        "service": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "gcpMetadata": {
+                          "type": "GcpMetadata",
+                          "id": 7
+                        },
+                        "awsMetadata": {
+                          "type": "AwsMetadata",
+                          "id": 8
+                        },
+                        "azureMetadata": {
+                          "type": "AzureMetadata",
+                          "id": 9
+                        },
+                        "resourcePath": {
+                          "type": "ResourcePath",
+                          "id": 10
+                        },
+                        "resourcePathString": {
+                          "type": "string",
+                          "id": 11
+                        }
+                      }
+                    },
+                    "CloudProvider": {
+                      "values": {
+                        "CLOUD_PROVIDER_UNSPECIFIED": 0,
+                        "GOOGLE_CLOUD_PLATFORM": 1,
+                        "AMAZON_WEB_SERVICES": 2,
+                        "MICROSOFT_AZURE": 3
+                      }
+                    },
+                    "GcpMetadata": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "projectDisplayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "parent": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "parentDisplayName": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "folders": {
+                          "rule": "repeated",
+                          "type": "Folder",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "organization": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "AwsMetadata": {
+                      "fields": {
+                        "organization": {
+                          "type": "AwsOrganization",
+                          "id": 1
+                        },
+                        "organizationalUnits": {
+                          "rule": "repeated",
+                          "type": "AwsOrganizationalUnit",
+                          "id": 2
+                        },
+                        "account": {
+                          "type": "AwsAccount",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "AwsOrganization": {
+                          "fields": {
+                            "id": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "AwsOrganizationalUnit": {
+                          "fields": {
+                            "id": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "name": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "AwsAccount": {
+                          "fields": {
+                            "id": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "name": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "AzureMetadata": {
+                      "fields": {
+                        "managementGroups": {
+                          "rule": "repeated",
+                          "type": "AzureManagementGroup",
+                          "id": 1
+                        },
+                        "subscription": {
+                          "type": "AzureSubscription",
+                          "id": 2
+                        },
+                        "resourceGroup": {
+                          "type": "AzureResourceGroup",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "AzureManagementGroup": {
+                          "fields": {
+                            "id": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "AzureSubscription": {
+                          "fields": {
+                            "id": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "AzureResourceGroup": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ResourcePath": {
+                      "fields": {
+                        "nodes": {
+                          "rule": "repeated",
+                          "type": "ResourcePathNode",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "ResourcePathNodeType": {
+                          "values": {
+                            "RESOURCE_PATH_NODE_TYPE_UNSPECIFIED": 0,
+                            "GCP_ORGANIZATION": 1,
+                            "GCP_FOLDER": 2,
+                            "GCP_PROJECT": 3,
+                            "AWS_ORGANIZATION": 4,
+                            "AWS_ORGANIZATIONAL_UNIT": 5,
+                            "AWS_ACCOUNT": 6,
+                            "AZURE_MANAGEMENT_GROUP": 7,
+                            "AZURE_SUBSCRIPTION": 8,
+                            "AZURE_RESOURCE_GROUP": 9
+                          }
+                        },
+                        "ResourcePathNode": {
+                          "fields": {
+                            "nodeType": {
+                              "type": "ResourcePathNodeType",
+                              "id": 1
+                            },
+                            "id": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
                         }
                       }
                     },
                     "ResourceValueConfig": {
                       "options": {
                         "(google.api.resource).type": "securitycenter.googleapis.com/ResourceValueConfig",
-                        "(google.api.resource).pattern": "organizations/{organization}/resourceValueConfigs/{resource_value_config}"
+                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/resourceValueConfigs/{resource_value_config}",
+                        "(google.api.resource).plural": "resourceValueConfigs",
+                        "(google.api.resource).singular": "resourceValueConfig"
                       },
                       "fields": {
                         "name": {
@@ -9636,6 +9994,10 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "cloudProvider": {
+                          "type": "CloudProvider",
+                          "id": 10
+                        },
                         "sensitiveDataProtectionMapping": {
                           "type": "SensitiveDataProtectionMapping",
                           "id": 11
@@ -9677,13 +10039,19 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=organizations/*}/resourceValueConfigs:batchCreate",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=organizations/*/locations/*}/resourceValueConfigs:batchCreate",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "parent,requests"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v2/{parent=organizations/*}/resourceValueConfigs:batchCreate",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v2/{parent=organizations/*/locations/*}/resourceValueConfigs:batchCreate",
+                                  "body": "*"
+                                }
                               }
                             },
                             {
@@ -10032,12 +10400,16 @@
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v2/{name=organizations/*/resourceValueConfigs/*}",
+                            "(google.api.http).additional_bindings.delete": "/v2/{name=organizations/*/locations/*/resourceValueConfigs/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "delete": "/v2/{name=organizations/*/resourceValueConfigs/*}"
+                                "delete": "/v2/{name=organizations/*/resourceValueConfigs/*}",
+                                "additional_bindings": {
+                                  "delete": "/v2/{name=organizations/*/locations/*/resourceValueConfigs/*}"
+                                }
                               }
                             },
                             {
@@ -10077,12 +10449,16 @@
                           "responseType": "Simulation",
                           "options": {
                             "(google.api.http).get": "/v2/{name=organizations/*/simulations/*}",
+                            "(google.api.http).additional_bindings.get": "/v2/{name=organizations/*/locations/*/simulations/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2/{name=organizations/*/simulations/*}"
+                                "get": "/v2/{name=organizations/*/simulations/*}",
+                                "additional_bindings": {
+                                  "get": "/v2/{name=organizations/*/locations/*/simulations/*}"
+                                }
                               }
                             },
                             {
@@ -10095,12 +10471,16 @@
                           "responseType": "ValuedResource",
                           "options": {
                             "(google.api.http).get": "/v2/{name=organizations/*/simulations/*/valuedResources/*}",
+                            "(google.api.http).additional_bindings.get": "/v2/{name=organizations/*/locations/*/simulations/*/valuedResources/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2/{name=organizations/*/simulations/*/valuedResources/*}"
+                                "get": "/v2/{name=organizations/*/simulations/*/valuedResources/*}",
+                                "additional_bindings": {
+                                  "get": "/v2/{name=organizations/*/locations/*/simulations/*/valuedResources/*}"
+                                }
                               }
                             },
                             {
@@ -10216,12 +10596,16 @@
                           "responseType": "ResourceValueConfig",
                           "options": {
                             "(google.api.http).get": "/v2/{name=organizations/*/resourceValueConfigs/*}",
+                            "(google.api.http).additional_bindings.get": "/v2/{name=organizations/*/locations/*/resourceValueConfigs/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2/{name=organizations/*/resourceValueConfigs/*}"
+                                "get": "/v2/{name=organizations/*/resourceValueConfigs/*}",
+                                "additional_bindings": {
+                                  "get": "/v2/{name=organizations/*/locations/*/resourceValueConfigs/*}"
+                                }
                               }
                             },
                             {
@@ -10296,7 +10680,7 @@
                           "responseType": "ListAttackPathsResponse",
                           "options": {
                             "(google.api.http).get": "/v2/{parent=organizations/*/simulations/*}/attackPaths",
-                            "(google.api.http).additional_bindings.get": "/v2/{parent=organizations/*/simulations/*/attackExposureResults/*}/attackPaths",
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=organizations/*/locations/*/simulations/*/attackExposureResults/*}/attackPaths",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
@@ -10308,7 +10692,13 @@
                                     "get": "/v2/{parent=organizations/*/simulations/*/valuedResources/*}/attackPaths"
                                   },
                                   {
+                                    "get": "/v2/{parent=organizations/*/locations/*/simulations/*/valuedResources/*}/attackPaths"
+                                  },
+                                  {
                                     "get": "/v2/{parent=organizations/*/simulations/*/attackExposureResults/*}/attackPaths"
+                                  },
+                                  {
+                                    "get": "/v2/{parent=organizations/*/locations/*/simulations/*/attackExposureResults/*}/attackPaths"
                                   }
                                 ]
                               }
@@ -10469,12 +10859,16 @@
                           "responseType": "ListResourceValueConfigsResponse",
                           "options": {
                             "(google.api.http).get": "/v2/{parent=organizations/*}/resourceValueConfigs",
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=organizations/*/locations/*}/resourceValueConfigs",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2/{parent=organizations/*}/resourceValueConfigs"
+                                "get": "/v2/{parent=organizations/*}/resourceValueConfigs",
+                                "additional_bindings": {
+                                  "get": "/v2/{parent=organizations/*/locations/*}/resourceValueConfigs"
+                                }
                               }
                             },
                             {
@@ -10881,13 +11275,19 @@
                           "options": {
                             "(google.api.http).patch": "/v2/{resource_value_config.name=organizations/*/resourceValueConfigs/*}",
                             "(google.api.http).body": "resource_value_config",
+                            "(google.api.http).additional_bindings.patch": "/v2/{resource_value_config.name=organizations/*/locations/*/resourceValueConfigs/*}",
+                            "(google.api.http).additional_bindings.body": "resource_value_config",
                             "(google.api.method_signature)": "resource_value_config,update_mask"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "patch": "/v2/{resource_value_config.name=organizations/*/resourceValueConfigs/*}",
-                                "body": "resource_value_config"
+                                "body": "resource_value_config",
+                                "additional_bindings": {
+                                  "patch": "/v2/{resource_value_config.name=organizations/*/locations/*/resourceValueConfigs/*}",
+                                  "body": "resource_value_config"
+                                }
                               }
                             },
                             {
@@ -11491,6 +11891,15 @@
                           },
                           "nested": {
                             "Resource": {
+                              "oneofs": {
+                                "cloudProviderMetadata": {
+                                  "oneof": [
+                                    "gcpMetadata",
+                                    "awsMetadata",
+                                    "azureMetadata"
+                                  ]
+                                }
+                              },
                               "fields": {
                                 "name": {
                                   "type": "string",
@@ -11503,6 +11912,38 @@
                                 "type": {
                                   "type": "string",
                                   "id": 3
+                                },
+                                "cloudProvider": {
+                                  "type": "CloudProvider",
+                                  "id": 4
+                                },
+                                "service": {
+                                  "type": "string",
+                                  "id": 5
+                                },
+                                "location": {
+                                  "type": "string",
+                                  "id": 6
+                                },
+                                "gcpMetadata": {
+                                  "type": "GcpMetadata",
+                                  "id": 7
+                                },
+                                "awsMetadata": {
+                                  "type": "AwsMetadata",
+                                  "id": 8
+                                },
+                                "azureMetadata": {
+                                  "type": "AzureMetadata",
+                                  "id": 9
+                                },
+                                "resourcePath": {
+                                  "type": "ResourcePath",
+                                  "id": 10
+                                },
+                                "resourcePathString": {
+                                  "type": "string",
+                                  "id": 11
                                 }
                               }
                             }
@@ -11851,7 +12292,7 @@
                     "Simulation": {
                       "options": {
                         "(google.api.resource).type": "securitycenter.googleapis.com/Simulation",
-                        "(google.api.resource).pattern": "organizations/{organization}/simulations/{simulation}",
+                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/simulations/{simluation}",
                         "(google.api.resource).plural": "simulations",
                         "(google.api.resource).singular": "simulation"
                       },
@@ -11871,13 +12312,17 @@
                           "rule": "repeated",
                           "type": "ResourceValueConfigMetadata",
                           "id": 3
+                        },
+                        "cloudProvider": {
+                          "type": "CloudProvider",
+                          "id": 4
                         }
                       }
                     },
                     "ValuedResource": {
                       "options": {
                         "(google.api.resource).type": "securitycenter.googleapis.com/ValuedResource",
-                        "(google.api.resource).pattern": "organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}",
+                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/simulations/{simluation}/valuedResources/{valued_resource}",
                         "(google.api.resource).plural": "valuedResources",
                         "(google.api.resource).singular": "valuedResource"
                       },
