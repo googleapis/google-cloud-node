@@ -27,7 +27,7 @@
 // sample-metadata:
 //   title: Create Push Subscription
 //   description: Creates a new push subscription.
-//   usage: node createPushSubscription.js <topic-name-or-id> <subscription-name-or-id>
+//   usage: node createPushSubscription.js <endpoint-url> <topic-name-or-id> <subscription-name-or-id>
 
 // [START pubsub_create_push_subscription]
 /**

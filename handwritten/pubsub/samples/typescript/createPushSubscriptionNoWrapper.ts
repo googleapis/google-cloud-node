@@ -23,7 +23,7 @@
 // sample-metadata:
 //   title: Create Push Subscription With No Wrapper
 //   description: Creates a new push subscription, but disables wrapping for payloads.
-//   usage: node createPushSubscriptionNoWrapper.js <topic-name-or-id> <subscription-name-or-id>
+//   usage: node createPushSubscriptionNoWrapper.js <endpoint-url> <topic-name-or-id> <subscription-name-or-id>
 
 // [START pubsub_create_unwrapped_push_subscription]
 /**
