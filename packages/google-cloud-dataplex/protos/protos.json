@@ -8629,6 +8629,13 @@
                             "latestJobEndTime": {
                               "type": "google.protobuf.Timestamp",
                               "id": 5
+                            },
+                            "latestJobCreateTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         }
