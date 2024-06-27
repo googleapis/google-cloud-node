@@ -27692,6 +27692,9 @@ export namespace google {
 
                         /** ExecutionStatus latestJobEndTime */
                         latestJobEndTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ExecutionStatus latestJobCreateTime */
+                        latestJobCreateTime?: (google.protobuf.ITimestamp|null);
                     }
 
                     /** Represents an ExecutionStatus. */
@@ -27708,6 +27711,9 @@ export namespace google {
 
                         /** ExecutionStatus latestJobEndTime. */
                         public latestJobEndTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ExecutionStatus latestJobCreateTime. */
+                        public latestJobCreateTime?: (google.protobuf.ITimestamp|null);
 
                         /**
                          * Creates a new ExecutionStatus instance using the specified properties.
