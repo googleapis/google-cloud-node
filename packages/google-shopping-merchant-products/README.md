@@ -98,7 +98,7 @@ async function callListProducts() {
   // Run request
   const iterable = productsClient.listProductsAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
