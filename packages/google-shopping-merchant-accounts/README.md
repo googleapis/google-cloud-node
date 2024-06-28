@@ -98,7 +98,7 @@ async function callListRegions() {
   // Run request
   const iterable = accountsClient.listRegionsAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
