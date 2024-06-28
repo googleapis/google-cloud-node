@@ -19,7 +19,9 @@
 import {PrivilegedAccessManagerClient} from '@google-cloud/privilegedaccessmanager';
 
 // check that the client class type name can be used
-function doStuffWithPrivilegedAccessManagerClient(client: PrivilegedAccessManagerClient) {
+function doStuffWithPrivilegedAccessManagerClient(
+  client: PrivilegedAccessManagerClient
+) {
   client.close();
 }
 
