@@ -1,0 +1,17 @@
+{
+  "name": "privilegedaccessmanager",
+  "name_pretty": "Privileged Access Manager API",
+  "product_documentation": "https://cloud.google.com/iam/docs/pam-overview",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/privilegedaccessmanager/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "preview",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/privilegedaccessmanager",
+  "api_id": "privilegedaccessmanager.googleapis.com",
+  "default_version": "v1",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO",
+  "api_shortname": "privilegedaccessmanager"
+}
+
