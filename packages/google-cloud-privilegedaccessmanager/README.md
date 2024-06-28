@@ -86,7 +86,8 @@ npm install @google-cloud/privilegedaccessmanager
 // const orderBy = 'abc123'
 
 // Imports the Privilegedaccessmanager library
-const {PrivilegedAccessManagerClient} = require('@google-cloud/privilegedaccessmanager').v1;
+const {PrivilegedAccessManagerClient} =
+  require('@google-cloud/privilegedaccessmanager').v1;
 
 // Instantiates a client
 const privilegedaccessmanagerClient = new PrivilegedAccessManagerClient();
@@ -98,9 +99,10 @@ async function callListEntitlements() {
   };
 
   // Run request
-  const iterable = privilegedaccessmanagerClient.listEntitlementsAsync(request);
+  const iterable =
+    privilegedaccessmanagerClient.listEntitlementsAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
