@@ -1904,6 +1904,12 @@ export class DeploymentResourcePoolServiceClient {
     const createDeploymentResourcePoolMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1.CreateDeploymentResourcePoolOperationMetadata'
     ) as gax.protobuf.Type;
+    const updateDeploymentResourcePoolResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.DeploymentResourcePool'
+    ) as gax.protobuf.Type;
+    const updateDeploymentResourcePoolMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.UpdateDeploymentResourcePoolOperationMetadata'
+    ) as gax.protobuf.Type;
     const deleteDeploymentResourcePoolResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
@@ -1919,6 +1925,15 @@ export class DeploymentResourcePoolServiceClient {
         ),
         createDeploymentResourcePoolMetadata.decode.bind(
           createDeploymentResourcePoolMetadata
+        )
+      ),
+      updateDeploymentResourcePool: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateDeploymentResourcePoolResponse.decode.bind(
+          updateDeploymentResourcePoolResponse
+        ),
+        updateDeploymentResourcePoolMetadata.decode.bind(
+          updateDeploymentResourcePoolMetadata
         )
       ),
       deleteDeploymentResourcePool: new this._gaxModule.LongrunningDescriptor(
@@ -1986,6 +2001,7 @@ export class DeploymentResourcePoolServiceClient {
       'createDeploymentResourcePool',
       'getDeploymentResourcePool',
       'listDeploymentResourcePools',
+      'updateDeploymentResourcePool',
       'deleteDeploymentResourcePool',
       'queryDeployedModels',
     ];
@@ -2356,6 +2372,154 @@ export class DeploymentResourcePoolServiceClient {
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1.DeploymentResourcePool,
       protos.google.cloud.aiplatform.v1.CreateDeploymentResourcePoolOperationMetadata
+    >;
+  }
+  /**
+   * Update a DeploymentResourcePool.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.aiplatform.v1.DeploymentResourcePool} request.deploymentResourcePool
+   *   Required. The DeploymentResourcePool to update.
+   *
+   *   The DeploymentResourcePool's `name` field is used to identify the
+   *   DeploymentResourcePool to update.
+   *   Format:
+   *   `projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}`
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The list of fields to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/deployment_resource_pool_service.update_deployment_resource_pool.js</caption>
+   * region_tag:aiplatform_v1_generated_DeploymentResourcePoolService_UpdateDeploymentResourcePool_async
+   */
+  updateDeploymentResourcePool(
+    request?: protos.google.cloud.aiplatform.v1.IUpdateDeploymentResourcePoolRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IDeploymentResourcePool,
+        protos.google.cloud.aiplatform.v1.IUpdateDeploymentResourcePoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateDeploymentResourcePool(
+    request: protos.google.cloud.aiplatform.v1.IUpdateDeploymentResourcePoolRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IDeploymentResourcePool,
+        protos.google.cloud.aiplatform.v1.IUpdateDeploymentResourcePoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateDeploymentResourcePool(
+    request: protos.google.cloud.aiplatform.v1.IUpdateDeploymentResourcePoolRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IDeploymentResourcePool,
+        protos.google.cloud.aiplatform.v1.IUpdateDeploymentResourcePoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateDeploymentResourcePool(
+    request?: protos.google.cloud.aiplatform.v1.IUpdateDeploymentResourcePoolRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IDeploymentResourcePool,
+            protos.google.cloud.aiplatform.v1.IUpdateDeploymentResourcePoolOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IDeploymentResourcePool,
+        protos.google.cloud.aiplatform.v1.IUpdateDeploymentResourcePoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IDeploymentResourcePool,
+        protos.google.cloud.aiplatform.v1.IUpdateDeploymentResourcePoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'deployment_resource_pool.name':
+          request.deploymentResourcePool!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateDeploymentResourcePool(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `updateDeploymentResourcePool()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/deployment_resource_pool_service.update_deployment_resource_pool.js</caption>
+   * region_tag:aiplatform_v1_generated_DeploymentResourcePoolService_UpdateDeploymentResourcePool_async
+   */
+  async checkUpdateDeploymentResourcePoolProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1.DeploymentResourcePool,
+      protos.google.cloud.aiplatform.v1.UpdateDeploymentResourcePoolOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateDeploymentResourcePool,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1.DeploymentResourcePool,
+      protos.google.cloud.aiplatform.v1.UpdateDeploymentResourcePoolOperationMetadata
     >;
   }
   /**
